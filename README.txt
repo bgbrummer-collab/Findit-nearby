@@ -1,9 +1,9 @@
-FindIt Nearby V5 — AI Item Finder
+FindIt Nearby V6
 
-V5 adds real browser-based zero-shot image classification using CLIP through Transformers.js. No paid AI API key is placed in the public website.
+V6 improves the homepage and visual design while keeping browser-based image recognition.
 
-The first AI run downloads a model, so it can be slow and requires internet. The model chooses from many shopping categories, then the site searches relevant OpenStreetMap businesses near the user's location.
+IMPORTANT: This public GitHub Pages prototype does not invent prices or stock. OpenStreetMap provides business/location data, not live retail inventory. Exact prices and stock require legitimate retailer product catalogues/feeds.
 
-Important limitation: this is visual category recognition, not exact retail inventory. Exact product, price and live stock matching requires retailer catalogues/feeds and is the next major stage.
+Replace index.html, style.css, script.js and README.txt in the existing repository, commit to main, wait for Pages, then Ctrl+F5.
 
-Deploy by replacing index.html, style.css, script.js and README.txt in the existing GitHub Pages repository and committing to main. Do not put private API keys in GitHub Pages.
+Do not put private API keys in a public GitHub Pages repository.
