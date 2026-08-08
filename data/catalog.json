@@ -1,0 +1,50 @@
+[
+  {
+    "id": "demo-sweater-01",
+    "name": "Classic Navy Knit Sweater",
+    "brand": "FindIt Demo",
+    "category": "sweater",
+    "price": "R699",
+    "image": "https://images.unsplash.com/photo-1610652492500-ded49ceeb378?auto=format&fit=crop&w=500&q=80"
+  },
+  {
+    "id": "demo-sweater-02",
+    "name": "Cream Cable Knit Jumper",
+    "brand": "FindIt Demo",
+    "category": "sweater",
+    "price": "R749",
+    "image": "https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=500&q=80"
+  },
+  {
+    "id": "demo-shoes-01",
+    "name": "White Everyday Sneaker",
+    "brand": "FindIt Demo",
+    "category": "shoes",
+    "price": "R899",
+    "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500&q=80"
+  },
+  {
+    "id": "demo-headphones-01",
+    "name": "Wireless Over-Ear Headphones",
+    "brand": "FindIt Demo",
+    "category": "headphones",
+    "price": "R1,199",
+    "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=500&q=80"
+  },
+  {
+    "id": "demo-lamp-01",
+    "name": "Modern Ceiling Light",
+    "brand": "FindIt Demo",
+    "category": "ceiling light",
+    "price": "R599",
+    "image": "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?auto=format&fit=crop&w=500&q=80"
+  },
+  {
+    "id": "demo-chair-01",
+    "name": "Minimal Wood Chair",
+    "brand": "FindIt Demo",
+    "category": "chair",
+    "price": "R1,499",
+    "image": "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=500&q=80"
+  }
+]

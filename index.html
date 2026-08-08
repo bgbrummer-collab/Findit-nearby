@@ -1,1 +1,38 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FindIt Nearby — See it. Find it.</title><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"><link rel="stylesheet" href="style.css"></head><body><header><a class="logo" href="#"><span>F</span> FindIt <b>Nearby</b></a><div id="badge">📍 Location not set</div></header><main><section class="hero"><div><div class="eyebrow">YOUR LOCAL SHOPPING SEARCH</div><h1>See it.<br><em>Find it nearby.</em></h1><p>Snap or upload a photo of almost anything. FindIt identifies the item and helps you discover relevant shops near you.</p><div class="actions"><button class="primary" onclick="document.querySelector('#photo').click()">📷 Find an item</button><button class="secondary" id="heroLoc">📍 Use my location</button></div><div class="trust">✓ Free prototype &nbsp; ✓ Real mapped businesses &nbsp; ✓ Your location only when allowed</div></div><div class="visual"><div class="float one">💡 <b>Ceiling light</b><small>Find lighting nearby</small></div><div class="float two">🎒 <b>Pencil case</b><small>Find stationery nearby</small></div><div class="photo-card"><div class="ai">AI</div><div class="big">🔎</div><div class="caption"><b>What are you looking for?</b><small>Upload a photo and let FindIt search.</small></div></div></div></section><section class="how"><div class="eyebrow">HOW IT WORKS</div><h2>From photo to nearby shop.</h2><div class="steps"><div><b>01</b><h3>📸 Show us the item</h3><p>Take a picture or choose one from your phone.</p></div><div><b>02</b><h3>🤖 AI understands it</h3><p>FindIt matches the image to a shopping category.</p></div><div><b>03</b><h3>📍 Find nearby</h3><p>See relevant mapped businesses, distance and directions.</p></div></div></section><section class="finder"><div class="title"><div><div class="eyebrow">TRY IT</div><h2>What are you looking for?</h2></div><span id="mini">Add a photo to begin.</span></div><label class="upload" for="photo"><input id="photo" type="file" accept="image/*" capture="environment"><div id="prompt"><div class="camera">📷</div><h3>Take a photo or upload an image</h3><p>Try a pencil case, ceiling light, shoes, chair, phone, tools and more.</p></div><img id="preview" alt="Uploaded item"></label><div class="controls"><button id="loc">📍 Use my location</button><button id="find" disabled>🔎 Find it nearby</button></div><div id="status">Your photo stays in your browser for this prototype.</div></section><section id="analysis" class="section hidden"><div class="eyebrow">AI MATCH</div><h2>FindIt thinks you're looking for…</h2><div class="analysis"><div id="itemIcon">🔎</div><div><h3 id="itemName">Analysing…</h3><p id="itemDesc"></p></div><span id="confidence"></span></div><div id="chips"></div></section><section id="results" class="section hidden"><div class="title"><div><div class="eyebrow">NEAR YOU</div><h2>Places worth checking</h2><p id="resultSub"></p></div><button id="sort">Closest</button></div><div class="results"><div id="list"></div><div id="map"></div></div><div class="pricebox"><b>💰 About prices</b><span>FindIt never invents prices or stock. Verified product data will be shown when a retailer catalogue/feed is connected.</span></div></section></main><footer>FindIt Nearby • V6 AI shopping prototype</footer><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script type="module" src="script.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FindIt Nearby V9 — Product Match</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><a class="logo" href="#"><span>F</span> FindIt <b>Nearby</b></a><div class="v">V9 PRODUCT MATCH</div></header>
+<main>
+<section class="hero">
+ <div class="hero-copy">
+  <div class="kicker">VISUAL PRODUCT SEARCH</div>
+  <h1>Find the <span>thing</span><br>in your photo.</h1>
+  <p>V9 moves FindIt from “what kind of shop is this?” toward the real goal: comparing your photo with a product catalogue and finding the closest product match.</p>
+  <div class="badges"><b>🎯 Product matching</b><b>📍 Nearby filtering</b><b>🛡️ No fake prices</b></div>
+ </div>
+ <div class="visual"><div class="phone"><div class="bar">FINDIT AI <i>READY</i></div><div class="pic">🧥<span class="scan"></span></div><div class="match">🎯 <strong>Closest product</strong><small>visual match found</small><b>→</b></div></div></div>
+</section>
+<section class="finder">
+ <div class="kicker">TRY V9</div><h2>Upload the item you want</h2><p class="sub">This first V9 prototype searches a small built-in catalogue. That lets us test the product-matching engine before connecting real retailers.</p>
+ <label class="drop" for="photo"><input id="photo" type="file" accept="image/*" capture="environment"><div id="empty"><div class="plus">＋</div><h3>Upload a product photo</h3><p>Use a clear photo of the actual item.</p></div><img id="preview"></label>
+ <div class="actions"><button id="match" disabled>🎯 Match this product</button><button id="reset">↻ Reset</button></div>
+ <div id="status">Waiting for an image.</div>
+</section>
+<section id="result" class="result hidden">
+ <div class="kicker">CATALOGUE MATCH</div><h2>Closest products</h2>
+ <p class="sub">These are matches from the V9 demo catalogue. They are test catalogue entries, not claims of current real-world stock.</p>
+ <div id="cards"></div>
+</section>
+<section class="architecture">
+ <div><div class="kicker">HOW V9 GROWS</div><h2>Photo → product → store</h2><p>V9 now separates visual matching from local-store discovery. The next data layer can replace the demo catalogue with legitimate retailer catalogues and verified inventory.</p></div>
+ <div class="steps"><div><b>01</b><span>📸 Upload photo</span></div><div><b>02</b><span>🤖 Visual match</span></div><div><b>03</b><span>🛍️ Product catalogue</span></div><div><b>04</b><span>📍 Store + stock</span></div></div>
+</section>
+</main>
+<footer>FindIt Nearby V9 • Product matching prototype</footer>
+<script type="module" src="script.js"></script>
+</body></html>
