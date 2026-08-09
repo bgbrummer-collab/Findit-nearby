@@ -397,7 +397,10 @@ if (
     "shoes",
     "sports",
     "clothes",
-    "department_store"
+    "department_store",
+    "fashion",
+    "mall",
+    "general"
   ];
 }
 
