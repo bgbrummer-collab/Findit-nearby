@@ -6,7 +6,6 @@ const empty = $("#empty");
 const searchBtn = $("#search");
 const locationBtn = $("#location");
 const status = $("#status");
-
 let coords = null;
 let ready = false;
 
@@ -381,15 +380,34 @@ async function findNearbyStores(item) {
 
   fallback.classList.remove("hidden");
 
-  const radius = 15000;
+  const radius = 30000;
 
-  const categoryQueries =
-    categories
-      .map(
-        (shop) =>
-          `nwr(around:${radius},${coords.lat},${coords.lon})["shop"="${shop}"];`
-      )
-      .join("");
+let expandedCategories = [...categories];
+
+const itemText =
+  `${item.object || ""} ${item.category || ""} ${item.name || ""}`
+    .toLowerCase();
+
+if (
+  itemText.includes("shoe") ||
+  itemText.includes("sneaker") ||
+  itemText.includes("footwear")
+) {
+  expandedCategories = [
+    "shoes",
+    "sports",
+    "clothes",
+    "department_store"
+  ];
+}
+
+const categoryQueries =
+  expandedCategories
+    .map(
+      (shop) =>
+        `nwr(around:${radius},${coords.lat},${coords.lon})["shop"="${shop}"];`
+    )
+    .join("");
 
   let brandQuery = "";
 
