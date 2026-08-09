@@ -732,37 +732,45 @@ async function queryOverpass(query) {
   const servers = [
     "https://overpass.kumi.systems/api/interpreter",
     "https://overpass-api.de/api/interpreter",
-    "https://z.overpass-api.de/api/interpreter"
+    "https://overpass.private.coffee/api/interpreter"
   ];
+
+  let lastError = null;
 
   for (const server of servers) {
     try {
-      const body =
-        new URLSearchParams();
-
+      const body = new URLSearchParams();
       body.set("data", query);
 
-      const response =
-        await fetchWithTimeout(
-          server,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type":
-                "application/x-www-form-urlencoded;charset=UTF-8"
-            },
-            body
+      const response = await fetchWithTimeout(
+        server,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
           },
-          12000
-        );
+          body
+        },
+        20000
+      );
 
       if (!response.ok) {
-        continue;
+        throw new Error(
+          `Overpass returned HTTP ${response.status}`
+        );
       }
 
-      return await response.json();
+      const data = await response.json();
+
+      if (!data || !Array.isArray(data.elements)) {
+        throw new Error("Invalid Overpass response");
+      }
+
+      return data;
 
     } catch (error) {
+      lastError = error;
+
       console.warn(
         "Overpass server failed:",
         server,
@@ -772,10 +780,11 @@ async function queryOverpass(query) {
   }
 
   throw new Error(
-    "All free nearby-store servers failed."
+    `All free nearby-store servers failed: ${
+      lastError?.message || "Unknown error"
+    }`
   );
 }
-
 /* =========================================================
    STORE RELEVANCE
 ========================================================= */
