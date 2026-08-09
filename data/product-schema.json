@@ -1,0 +1,36 @@
+{
+  "product": {
+    "id": "sku-123",
+    "name": "Product",
+    "brand": "Brand",
+    "image": "https://...",
+    "category": "microphone"
+  },
+  "offer": {
+    "retailer": "Retailer",
+    "price": 1299,
+    "currency": "ZAR",
+    "url": "https://..."
+  },
+  "store": {
+    "id": "store-1",
+    "name": "Store",
+    "address": "Address",
+    "lat": -25.75,
+    "lon": 28.19
+  },
+  "inventory": {
+    "status": "IN_STOCK",
+    "quantity": 4,
+    "updatedAt": "2026-08-09T00:00:00Z"
+  },
+  "visualMatch": {
+    "score": 0.96,
+    "signals": [
+      "brand",
+      "shape",
+      "colour",
+      "model-text"
+    ]
+  }
+}

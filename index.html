@@ -1,38 +1,93 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>FindIt Nearby V9 — Product Match</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="FindIt Nearby identifies products from photos and helps you find verified nearby stores, prices and stock.">
+<meta name="robots" content="index,follow">
+<title>FindIt Nearby — V10</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header><a class="logo" href="#"><span>F</span> FindIt <b>Nearby</b></a><div class="v">V9 PRODUCT MATCH</div></header>
+<header>
+  <a class="logo" href="#"><span>F</span> FindIt <b>Nearby</b></a>
+  <nav><a href="#how">How it works</a><a href="#retailers">Retailers</a></nav>
+  <small>V10</small>
+</header>
+
 <main>
 <section class="hero">
- <div class="hero-copy">
-  <div class="kicker">VISUAL PRODUCT SEARCH</div>
-  <h1>Find the <span>thing</span><br>in your photo.</h1>
-  <p>V9 moves FindIt from “what kind of shop is this?” toward the real goal: comparing your photo with a product catalogue and finding the closest product match.</p>
-  <div class="badges"><b>🎯 Product matching</b><b>📍 Nearby filtering</b><b>🛡️ No fake prices</b></div>
- </div>
- <div class="visual"><div class="phone"><div class="bar">FINDIT AI <i>READY</i></div><div class="pic">🧥<span class="scan"></span></div><div class="match">🎯 <strong>Closest product</strong><small>visual match found</small><b>→</b></div></div></div>
+  <div>
+    <div class="kicker">VISUAL SHOPPING SEARCH</div>
+    <h1>See it.<br><span>Upload it.</span><br>Find it.</h1>
+    <p>Identify the actual item in your photo and, when connected to legitimate catalogue data, find verified retailers, prices, stock and nearby stores.</p>
+    <div class="hero-actions">
+      <a class="primary" href="#finder">📸 Find my product</a>
+      <a class="secondary" href="#how">How it works ↓</a>
+    </div>
+    <div class="badges"><b>🎯 Exact-item matching</b><b>🏷️ Brand scan</b><b>🏪 Store + distance</b><b>💰 Price + stock</b></div>
+  </div>
+  <div class="hero-card">
+    <div class="scan">SEARCH PIPELINE</div>
+    <div>📸 <b>Your photo</b><small>Object + brand + visible text</small></div>
+    <i>↓</i>
+    <div>🧠 <b>Product matching</b><small>Visual + catalogue signals</small></div>
+    <i>↓</i>
+    <div>🏪 <b>Nearby availability</b><small>Store + distance + stock</small></div>
+  </div>
 </section>
-<section class="finder">
- <div class="kicker">TRY V9</div><h2>Upload the item you want</h2><p class="sub">This first V9 prototype searches a small built-in catalogue. That lets us test the product-matching engine before connecting real retailers.</p>
- <label class="drop" for="photo"><input id="photo" type="file" accept="image/*" capture="environment"><div id="empty"><div class="plus">＋</div><h3>Upload a product photo</h3><p>Use a clear photo of the actual item.</p></div><img id="preview"></label>
- <div class="actions"><button id="match" disabled>🎯 Match this product</button><button id="reset">↻ Reset</button></div>
- <div id="status">Waiting for an image.</div>
+
+<section id="finder" class="finder">
+  <div class="kicker">TRY FINDIT</div>
+  <h2>Upload the actual item</h2>
+  <p class="sub">Choose a photo from your gallery, take a photo, or browse files.</p>
+  <label class="drop" for="photo">
+    <input id="photo" type="file" accept="image/*">
+    <div id="empty"><div class="plus">＋</div><h3>Choose a product photo</h3><p>Gallery • Camera • Files</p></div>
+    <img id="preview" alt="Selected product">
+  </label>
+  <div class="actions">
+    <button id="search" disabled>🎯 Find this product</button>
+    <button id="location">📍 Use my location</button>
+  </div>
+  <div id="status">Waiting for an image.</div>
 </section>
-<section id="result" class="result hidden">
- <div class="kicker">CATALOGUE MATCH</div><h2>Closest products</h2>
- <p class="sub">These are matches from the V9 demo catalogue. They are test catalogue entries, not claims of current real-world stock.</p>
- <div id="cards"></div>
+
+<section id="results" class="results hidden">
+  <div class="kicker">RESULTS</div>
+  <h2>Product matches</h2>
+  <p id="summary" class="sub"></p>
+  <div id="liveBanner" class="banner"></div>
+  <div id="productList"></div>
+  <div id="fallback" class="fallback hidden">
+    <h3>📍 Nearby fallback</h3>
+    <p>Nearby businesses are shown only as a fallback. They are not proof that they stock the exact item.</p>
+    <div id="shops"></div>
+  </div>
 </section>
-<section class="architecture">
- <div><div class="kicker">HOW V9 GROWS</div><h2>Photo → product → store</h2><p>V9 now separates visual matching from local-store discovery. The next data layer can replace the demo catalogue with legitimate retailer catalogues and verified inventory.</p></div>
- <div class="steps"><div><b>01</b><span>📸 Upload photo</span></div><div><b>02</b><span>🤖 Visual match</span></div><div><b>03</b><span>🛍️ Product catalogue</span></div><div><b>04</b><span>📍 Store + stock</span></div></div>
+
+<section id="how" class="how">
+  <div class="kicker">HOW IT WORKS</div>
+  <h2>From a photo to a nearby store.</h2>
+  <div class="steps">
+    <article><span>01</span><h3>Upload</h3><p>Use your gallery, camera or files.</p></article>
+    <article><span>02</span><h3>Understand</h3><p>Detect object, brand, visible text and model clues.</p></article>
+    <article><span>03</span><h3>Match</h3><p>Compare the item with connected catalogues.</p></article>
+    <article><span>04</span><h3>Find nearby</h3><p>Rank verified offers by store, distance, price and stock.</p></article>
+  </div>
+</section>
+
+<section id="retailers" class="retail">
+  <div>
+    <div class="kicker">FOR RETAILERS</div>
+    <h2>Connect real product data.</h2>
+    <p>V10 includes a backend adapter structure for authorised retailer APIs and catalogue feeds.</p>
+  </div>
+  <div class="schema"><code>Product</code><code>Brand</code><code>Offer</code><code>Store</code><code>Inventory</code><code>Visual match</code></div>
 </section>
 </main>
-<footer>FindIt Nearby V9 • Product matching prototype</footer>
+
+<footer>© 2026 FindIt Nearby. All rights reserved. Original design and software are protected works. V10.</footer>
 <script type="module" src="script.js"></script>
-</body></html>
+</body>
+</html>
