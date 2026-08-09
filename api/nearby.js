@@ -1,22 +1,34 @@
 export default {
   async fetch(request) {
     try {
-      // Only allow POST requests from FindIt
+      /* =========================================
+         ONLY POST
+      ========================================= */
+
       if (request.method !== "POST") {
         return Response.json(
           {
             ok: false,
             error: "POST requests only"
           },
-          { status: 405 }
+          {
+            status: 405
+          }
         );
       }
 
-      // Read location sent by script.js
-      const body = await request.json();
+      /* =========================================
+         LOCATION FROM FINDIT
+      ========================================= */
 
-      const lat = Number(body.lat);
-      const lon = Number(body.lon);
+      const body =
+        await request.json();
+
+      const lat =
+        Number(body.lat);
+
+      const lon =
+        Number(body.lon);
 
       if (
         !Number.isFinite(lat) ||
@@ -25,131 +37,243 @@ export default {
         return Response.json(
           {
             ok: false,
-            error: "Valid latitude and longitude are required."
+            error:
+              "Valid latitude and longitude are required."
           },
-          { status: 400 }
+          {
+            status: 400
+          }
         );
       }
 
       /*
-        Search radius: 20 km
+        20 km search radius.
 
-        We deliberately fetch ALL mapped shops nearby.
-
-        script.js will decide which stores are relevant
-        to the item Gemini identified.
+        We retrieve mapped shops.
+        script.js decides which ones
+        actually match the product.
       */
-      const radius = 20000;
 
-      const overpassQuery = `
+      const radius =
+        20000;
+
+      /* =========================================
+         OVERPASS QUERY
+      ========================================= */
+
+      const query = `
         [out:json][timeout:20];
 
         (
-          nwr(around:${radius},${lat},${lon})["shop"];
+          node(around:${radius},${lat},${lon})["shop"];
+          way(around:${radius},${lat},${lon})["shop"];
+          relation(around:${radius},${lat},${lon})["shop"];
 
-          nwr(around:${radius},${lat},${lon})
-            ["amenity"="marketplace"];
+          node(around:${radius},${lat},${lon})["amenity"="marketplace"];
+          way(around:${radius},${lat},${lon})["amenity"="marketplace"];
+          relation(around:${radius},${lat},${lon})["amenity"="marketplace"];
         );
 
         out center tags;
       `;
 
-      /*
-        Main public Overpass service first.
+      /* =========================================
+         OVERPASS SERVERS
 
-        gall and lambert are fallback instances of
-        the main Overpass infrastructure.
-      */
+         If one fails, FindIt tries the next.
+      ========================================= */
+
       const servers = [
+
         "https://overpass-api.de/api/interpreter",
-        "https://gall.openstreetmap.de/api/interpreter",
-        "https://lambert.openstreetmap.de/api/interpreter"
+
+        "https://overpass.kumi.systems/api/interpreter",
+
+        "https://overpass.private.coffee/api/interpreter"
+
       ];
 
       const failures = [];
 
-      for (const server of servers) {
-        try {
-          /*
-            GET avoids the browser CORS problem because
-            THIS request happens inside Vercel.
+      /* =========================================
+         TRY SERVERS
+      ========================================= */
 
-            It also avoids the 406 problem we saw with
-            some POST requests from the server.
-          */
-          const url =
-            server +
-            "?data=" +
-            encodeURIComponent(overpassQuery);
+      for (
+        const server
+        of servers
+      ) {
+        try {
 
           const controller =
             new AbortController();
 
-          const timeout =
-            setTimeout(() => {
-              controller.abort();
-            }, 15000);
-
-          let response;
+          const timer =
+            setTimeout(
+              () =>
+                controller.abort(),
+              15000
+            );
 
           try {
-            response = await fetch(url, {
-              method: "GET",
-              headers: {
-                Accept: "application/json"
+
+            /*
+              IMPORTANT FIX:
+
+              Send query using POST
+              application/x-www-form-urlencoded.
+
+              This is different from the
+              GET request that was giving us
+              HTTP 406.
+            */
+
+            const form =
+              new URLSearchParams();
+
+            form.set(
+              "data",
+              query
+            );
+
+            const response =
+              await fetch(
+                server,
+                {
+                  method: "POST",
+
+                  headers: {
+                    "Accept":
+                      "application/json",
+
+                    "Content-Type":
+                      "application/x-www-form-urlencoded;charset=UTF-8"
+                  },
+
+                  body:
+                    form.toString(),
+
+                  signal:
+                    controller.signal
+                }
+              );
+
+            /* =====================================
+               SERVER REJECTED REQUEST
+            ===================================== */
+
+            if (
+              !response.ok
+            ) {
+
+              let message =
+                "";
+
+              try {
+
+                message =
+                  await response.text();
+
+              } catch {
+                message = "";
+              }
+
+              failures.push(
+                `${server}: HTTP ${response.status}` +
+                (
+                  message
+                    ? ` ${message.slice(0, 120)}`
+                    : ""
+                )
+              );
+
+              continue;
+            }
+
+            /* =====================================
+               READ JSON
+            ===================================== */
+
+            let data;
+
+            try {
+
+              data =
+                await response.json();
+
+            } catch {
+
+              failures.push(
+                `${server}: Invalid JSON response`
+              );
+
+              continue;
+            }
+
+            if (
+              !data ||
+              !Array.isArray(
+                data.elements
+              )
+            ) {
+
+              failures.push(
+                `${server}: Missing elements array`
+              );
+
+              continue;
+            }
+
+            /* =====================================
+               SUCCESS
+            ===================================== */
+
+            return Response.json(
+              {
+                ok: true,
+
+                count:
+                  data.elements.length,
+
+                elements:
+                  data.elements
               },
-              signal: controller.signal
-            });
+              {
+                status: 200,
+
+                headers: {
+                  /*
+                    Nearby shop data does not
+                    need to be requested every
+                    second.
+
+                    Short caching helps protect
+                    the free public servers.
+                  */
+
+                  "Cache-Control":
+                    "public, s-maxage=120, stale-while-revalidate=300"
+                }
+              }
+            );
+
           } finally {
-            clearTimeout(timeout);
-          }
 
-          if (!response.ok) {
-            failures.push(
-              `${server}: HTTP ${response.status}`
+            clearTimeout(
+              timer
             );
-
-            continue;
           }
-
-          const data =
-            await response.json();
-
-          if (
-            !data ||
-            !Array.isArray(data.elements)
-          ) {
-            failures.push(
-              `${server}: Invalid response`
-            );
-
-            continue;
-          }
-
-          /*
-            Send raw shop data back to FindIt.
-
-            These tags can include:
-            name
-            shop type
-            phone
-            website
-            brand
-            opening hours
-            address
-            etc.
-          */
-          return Response.json({
-            ok: true,
-            count: data.elements.length,
-            elements: data.elements
-          });
 
         } catch (error) {
+
           const message =
-            error?.name === "AbortError"
+            error?.name ===
+            "AbortError"
+
               ? "Timed out"
-              : error?.message || "Request failed";
+
+              : error?.message ||
+                "Request failed";
 
           failures.push(
             `${server}: ${message}`
@@ -157,27 +281,36 @@ export default {
         }
       }
 
-      /*
-        Every Overpass attempt failed.
-        Return useful debugging information instead
-        of silently breaking the website.
-      */
+      /* =========================================
+         ALL SERVERS FAILED
+      ========================================= */
+
       console.error(
-        "Nearby-store lookup failed:",
+        "All Overpass servers failed:",
         failures
       );
 
       return Response.json(
         {
           ok: false,
+
           error:
-            "The nearby-store service could not respond.",
-          attempts: failures
+            "Nearby retailers could not be loaded right now.",
+
+          attempts:
+            failures
         },
-        { status: 502 }
+        {
+          status: 502
+        }
       );
 
     } catch (error) {
+
+      /* =========================================
+         GENERAL API ERROR
+      ========================================= */
+
       console.error(
         "FindIt nearby API error:",
         error
@@ -186,11 +319,17 @@ export default {
       return Response.json(
         {
           ok: false,
-          error: "Nearby-store search failed.",
+
+          error:
+            "Nearby retailer search failed.",
+
           details:
-            error?.message || "Unknown server error"
+            error?.message ||
+            "Unknown server error"
         },
-        { status: 500 }
+        {
+          status: 500
+        }
       );
     }
   }
