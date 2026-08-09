@@ -1,127 +1,194 @@
 export default {
   async fetch(request) {
     try {
+      // Only allow POST requests from FindIt
       if (request.method !== "POST") {
         return Response.json(
-          { error: "POST requests only" },
+          {
+            ok: false,
+            error: "POST requests only"
+          },
           { status: 405 }
         );
       }
 
+      // Read location sent by script.js
       const body = await request.json();
 
       const lat = Number(body.lat);
       const lon = Number(body.lon);
 
-      if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
+      if (
+        !Number.isFinite(lat) ||
+        !Number.isFinite(lon)
+      ) {
         return Response.json(
-          { error: "Valid latitude and longitude are required." },
+          {
+            ok: false,
+            error: "Valid latitude and longitude are required."
+          },
           { status: 400 }
         );
       }
 
+      /*
+        Search radius: 20 km
+
+        We deliberately fetch ALL mapped shops nearby.
+
+        script.js will decide which stores are relevant
+        to the item Gemini identified.
+      */
       const radius = 20000;
 
-      /*
-        Ask OSM for all mapped shops nearby.
-        FindIt will rank relevance on the frontend.
-      */
-      const query = `
+      const overpassQuery = `
         [out:json][timeout:20];
 
         (
-          nwr(
-            around:${radius},
-            ${lat},
-            ${lon}
-          )
-          ["shop"];
+          nwr(around:${radius},${lat},${lon})["shop"];
 
-          nwr(
-            around:${radius},
-            ${lat},
-            ${lon}
-          )
-          ["amenity"="marketplace"];
+          nwr(around:${radius},${lat},${lon})
+            ["amenity"="marketplace"];
         );
 
         out center tags;
       `;
 
+      /*
+        Main public Overpass service first.
+
+        gall and lambert are fallback instances of
+        the main Overpass infrastructure.
+      */
       const servers = [
-        "https://overpass.private.coffee/api/interpreter",
         "https://overpass-api.de/api/interpreter",
-        "https://lz4.overpass-api.de/api/interpreter",
-        "https://z.overpass-api.de/api/interpreter"
+        "https://gall.openstreetmap.de/api/interpreter",
+        "https://lambert.openstreetmap.de/api/interpreter"
       ];
 
-      let lastError = null;
+      const failures = [];
 
       for (const server of servers) {
         try {
-          const form = new URLSearchParams();
-          form.set("data", query);
+          /*
+            GET avoids the browser CORS problem because
+            THIS request happens inside Vercel.
 
-          const controller = new AbortController();
+            It also avoids the 406 problem we saw with
+            some POST requests from the server.
+          */
+          const url =
+            server +
+            "?data=" +
+            encodeURIComponent(overpassQuery);
 
-          const timeout = setTimeout(
-            () => controller.abort(),
-            12000
-          );
+          const controller =
+            new AbortController();
+
+          const timeout =
+            setTimeout(() => {
+              controller.abort();
+            }, 15000);
+
+          let response;
 
           try {
-            const response = await fetch(server, {
-              method: "POST",
+            response = await fetch(url, {
+              method: "GET",
               headers: {
-                "Content-Type":
-                  "application/x-www-form-urlencoded;charset=UTF-8"
+                Accept: "application/json"
               },
-              body: form,
               signal: controller.signal
             });
-
-            if (!response.ok) {
-              lastError =
-                `Server returned ${response.status}`;
-
-              continue;
-            }
-
-            const data = await response.json();
-
-            return Response.json({
-              ok: true,
-              source: server,
-              elements: data.elements || []
-            });
-
           } finally {
             clearTimeout(timeout);
           }
 
+          if (!response.ok) {
+            failures.push(
+              `${server}: HTTP ${response.status}`
+            );
+
+            continue;
+          }
+
+          const data =
+            await response.json();
+
+          if (
+            !data ||
+            !Array.isArray(data.elements)
+          ) {
+            failures.push(
+              `${server}: Invalid response`
+            );
+
+            continue;
+          }
+
+          /*
+            Send raw shop data back to FindIt.
+
+            These tags can include:
+            name
+            shop type
+            phone
+            website
+            brand
+            opening hours
+            address
+            etc.
+          */
+          return Response.json({
+            ok: true,
+            count: data.elements.length,
+            elements: data.elements
+          });
+
         } catch (error) {
-          lastError = error.message;
+          const message =
+            error?.name === "AbortError"
+              ? "Timed out"
+              : error?.message || "Request failed";
+
+          failures.push(
+            `${server}: ${message}`
+          );
         }
       }
+
+      /*
+        Every Overpass attempt failed.
+        Return useful debugging information instead
+        of silently breaking the website.
+      */
+      console.error(
+        "Nearby-store lookup failed:",
+        failures
+      );
 
       return Response.json(
         {
           ok: false,
-          elements: [],
           error:
-            lastError ||
-            "All nearby-store services failed."
+            "The nearby-store service could not respond.",
+          attempts: failures
         },
         { status: 502 }
       );
 
     } catch (error) {
-      console.error(error);
+      console.error(
+        "FindIt nearby API error:",
+        error
+      );
 
       return Response.json(
         {
+          ok: false,
           error: "Nearby-store search failed.",
-          details: error.message
+          details:
+            error?.message || "Unknown server error"
         },
         { status: 500 }
       );
