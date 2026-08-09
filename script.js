@@ -1,21 +1,46 @@
+/* =========================================================
+   FINDIT NEARBY
+   Premium Frontend + Search Engine
+========================================================= */
+
 const $ = (selector) => document.querySelector(selector);
+const $$ = (selector) => [...document.querySelectorAll(selector)];
+
+/* =========================================================
+   DOM
+========================================================= */
 
 const photo = $("#photo");
 const preview = $("#preview");
 const empty = $("#empty");
+
 const searchBtn = $("#search");
 const locationBtn = $("#location");
 const status = $("#status");
 
-let coords = null;
-let imageReady = false;
-let searching = false;
-let lastIdentification = null;
-
-const apiBase = window.FINDIT_API_BASE || "/api";
+const apiBase =
+  window.FINDIT_API_BASE || "/api";
 
 /* =========================================================
-   HELPERS
+   STATE
+========================================================= */
+
+let coords = null;
+
+let imageReady = false;
+
+let searching = false;
+
+let lastIdentification = null;
+
+let currentStores = [];
+
+let mainMap = null;
+
+let largeMap = null;
+
+/* =========================================================
+   SAFE TEXT
 ========================================================= */
 
 function esc(value) {
@@ -27,17 +52,28 @@ function esc(value) {
     .replace(/'/g, "&#039;");
 }
 
+/* =========================================================
+   URL
+========================================================= */
+
 function safeWebsite(value) {
-  if (!value) return null;
+  if (!value) {
+    return null;
+  }
 
-  let url = String(value).trim();
+  let url =
+    String(value).trim();
 
-  if (!/^https?:\/\//i.test(url)) {
-    url = "https://" + url;
+  if (
+    !/^https?:\/\//i.test(url)
+  ) {
+    url =
+      "https://" + url;
   }
 
   try {
-    const parsed = new URL(url);
+    const parsed =
+      new URL(url);
 
     if (
       parsed.protocol !== "http:" &&
@@ -47,91 +83,108 @@ function safeWebsite(value) {
     }
 
     return parsed.href;
+
   } catch {
     return null;
   }
 }
 
-function cleanPhone(value) {
-  if (!value) return null;
+/* =========================================================
+   PHONE
+========================================================= */
 
-  const phone = String(value).trim();
+function cleanPhone(value) {
+  if (!value) {
+    return null;
+  }
+
+  const phone =
+    String(value).trim();
 
   return phone || null;
 }
 
-function phoneHref(phone) {
-  return String(phone || "")
+function phoneHref(value) {
+  return String(value || "")
     .replace(/[^\d+]/g, "");
 }
 
+/* =========================================================
+   PRICE
+========================================================= */
+
 function money(product) {
-  if (product.price == null) {
+  if (
+    product.price == null
+  ) {
     return "Price not verified";
   }
 
   try {
-    return new Intl.NumberFormat("en-ZA", {
-      style: "currency",
-      currency: product.currency || "ZAR"
-    }).format(Number(product.price));
+    return new Intl.NumberFormat(
+      "en-ZA",
+      {
+        style: "currency",
+
+        currency:
+          product.currency ||
+          "ZAR"
+      }
+    ).format(
+      Number(product.price)
+    );
+
   } catch {
-    return String(product.price);
+    return String(
+      product.price
+    );
   }
-}
-
-function distanceKm(lat1, lon1, lat2, lon2) {
-  const R = 6371;
-  const p = Math.PI / 180;
-
-  const a =
-    Math.sin((lat2 - lat1) * p / 2) ** 2 +
-    Math.cos(lat1 * p) *
-    Math.cos(lat2 * p) *
-    Math.sin((lon2 - lon1) * p / 2) ** 2;
-
-  return (
-    R *
-    2 *
-    Math.atan2(
-      Math.sqrt(a),
-      Math.sqrt(1 - a)
-    )
-  );
 }
 
 /* =========================================================
    IMAGE UPLOAD
 ========================================================= */
 
-photo.addEventListener("change", () => {
-  const file = photo.files?.[0];
+photo.addEventListener(
+  "change",
+  () => {
+    const file =
+      photo.files?.[0];
 
-  if (!file) return;
+    if (!file) {
+      return;
+    }
 
-  imageReady = true;
-  lastIdentification = null;
+    imageReady = true;
 
-  preview.src =
-    URL.createObjectURL(file);
+    lastIdentification =
+      null;
 
-  preview.style.display =
-    "block";
+    currentStores = [];
 
-  if (empty) {
-    empty.style.display =
-      "none";
+    preview.src =
+      URL.createObjectURL(file);
+
+    preview.style.display =
+      "block";
+
+    if (empty) {
+      empty.style.display =
+        "none";
+    }
+
+    searchBtn.disabled =
+      false;
+
+    status.textContent =
+      "Photo ready. FindIt will identify the actual item, brand and model.";
+
+    $("#results")
+      ?.classList.add(
+        "hidden"
+      );
   }
-
-  searchBtn.disabled =
-    false;
-
-  status.textContent =
-    "Photo ready. FindIt will identify the actual item, brand and model.";
-
-  $("#results")
-    ?.classList.add("hidden");
-});
+);
 
 /* =========================================================
    LOCATION
@@ -140,12 +193,13 @@ photo.addEventListener("change", () => {
 function getLocation() {
   return new Promise(
     (resolve, reject) => {
+
       if (
         !navigator.geolocation
       ) {
         reject(
           new Error(
-            "Your browser does not support location."
+            "Location is not supported by this browser."
           )
         );
 
@@ -155,6 +209,7 @@ function getLocation() {
       navigator.geolocation
         .getCurrentPosition(
           (position) => {
+
             coords = {
               lat:
                 position.coords.latitude,
@@ -186,6 +241,7 @@ function getLocation() {
 locationBtn.addEventListener(
   "click",
   async () => {
+
     locationBtn.disabled =
       true;
 
@@ -193,39 +249,59 @@ locationBtn.addEventListener(
       "Getting your location…";
 
     try {
+
       await getLocation();
 
       locationBtn.textContent =
         "✓ Location ready";
 
-      status.textContent =
-        lastIdentification
-          ? "Location ready. Finding nearby retailers…"
-          : "Location ready.";
+      $("#locationLabel")
+        .textContent =
+          "your current location";
 
       /*
         IMPORTANT:
-        If Gemini already identified the item,
-        we can search stores without using
-        another Gemini request.
+
+        If Gemini already identified
+        the product, we can search the
+        shops WITHOUT using Gemini again.
+
+        This helps save Gemini quota.
       */
 
       if (
         lastIdentification
       ) {
+
+        status.textContent =
+          "Location ready. Finding nearby retailers…";
+
         await renderNearbyStores(
           lastIdentification
         );
 
         status.textContent =
           "Nearby retailer search complete.";
+
+      } else {
+
+        status.textContent =
+          "Location ready. Upload and identify an item.";
+
       }
 
-    } catch {
+    } catch (error) {
+
+      console.error(
+        "Location error:",
+        error
+      );
+
       status.textContent =
         "Location permission was not available. Product identification can still work.";
 
     } finally {
+
       locationBtn.disabled =
         false;
     }
@@ -233,10 +309,11 @@ locationBtn.addEventListener(
 );
 
 /* =========================================================
-   GEMINI IDENTIFICATION
+   GEMINI IMAGE IDENTIFICATION
 ========================================================= */
 
 async function identifyItem() {
+
   const file =
     photo.files?.[0];
 
@@ -255,6 +332,7 @@ async function identifyItem() {
   );
 
   if (coords) {
+
     form.append(
       "lat",
       coords.lat
@@ -278,9 +356,12 @@ async function identifyItem() {
   let data;
 
   try {
+
     data =
       await response.json();
+
   } catch {
+
     throw new Error(
       "FindIt received an unreadable AI response."
     );
@@ -290,10 +371,11 @@ async function identifyItem() {
     !response.ok ||
     data.ok === false
   ) {
+
     throw new Error(
       data.details ||
       data.error ||
-      "FindIt could not identify the image."
+      "FindIt could not identify this image."
     );
   }
 
@@ -301,10 +383,13 @@ async function identifyItem() {
 }
 
 /* =========================================================
-   IDENTIFICATION RESULT
+   SHOW IDENTIFICATION
 ========================================================= */
 
-function renderIdentification(data) {
+function renderIdentification(
+  data
+) {
+
   const item =
     data.identification || {};
 
@@ -312,10 +397,14 @@ function renderIdentification(data) {
     item;
 
   $("#results")
-    .classList.remove("hidden");
+    .classList.remove(
+      "hidden"
+    );
 
   $("#noMatch")
-    ?.classList.add("hidden");
+    ?.classList.add(
+      "hidden"
+    );
 
   $("#resultTitle")
     .textContent =
@@ -329,15 +418,95 @@ function renderIdentification(data) {
       data.message ||
       "";
 
+  /*
+    Show original uploaded image
+    in the result card.
+  */
+
+  $("#resultImage").src =
+    preview.src;
+
+  /* =========================
+     CONFIDENCE
+  ========================== */
+
   const confidence =
-    Number.isFinite(
-      Number(item.confidence)
-    )
-      ? Math.round(
-          Number(item.confidence) *
-          100
+    Math.max(
+      0,
+      Math.min(
+        100,
+        Math.round(
+          Number(
+            item.confidence || 0
+          ) * 100
         )
-      : null;
+      )
+    );
+
+  $("#confidenceNumber")
+    .textContent =
+      confidence + "%";
+
+  $("#confidenceRing")
+    .style
+    .setProperty(
+      "--score",
+      confidence + "%"
+    );
+
+  if (
+    confidence >= 90
+  ) {
+
+    $("#confidenceLabel")
+      .textContent =
+        "Very High Match";
+
+  } else if (
+    confidence >= 75
+  ) {
+
+    $("#confidenceLabel")
+      .textContent =
+        "Strong Match";
+
+  } else if (
+    confidence >= 55
+  ) {
+
+    $("#confidenceLabel")
+      .textContent =
+        "Possible Match";
+
+  } else {
+
+    $("#confidenceLabel")
+      .textContent =
+        "Low Confidence";
+  }
+
+  /* =========================
+     PRODUCT TAGS
+  ========================== */
+
+  const tags = [
+    item.brand,
+    item.model,
+    item.category
+  ].filter(Boolean);
+
+  $("#productTags")
+    .innerHTML =
+      tags
+        .map(
+          (tag) =>
+            `<span>${esc(tag)}</span>`
+        )
+        .join("");
+
+  /* =========================
+     DETAILS TAB
+  ========================== */
 
   const visibleText =
     Array.isArray(
@@ -346,111 +515,173 @@ function renderIdentification(data) {
     item.visibleText.length
 
       ? item.visibleText
-          .map(esc)
           .join(", ")
 
       : "None detected";
 
   $("#confidence")
     .innerHTML = `
-      <div class="confidence">
 
-        <strong>
-          Gemini identification
-          ${
-            confidence !== null
-              ? `— ${confidence}% confidence`
-              : ""
-          }
-        </strong>
+      <span class="kicker">
+        PRODUCT DETAILS
+      </span>
 
-        <p>
-          Object:
+      <h3>
+        ${esc(
+          item.name ||
+          item.object ||
+          "Identified item"
+        )}
+      </h3>
+
+      <div class="details-grid">
+
+        <div class="detail">
+
+          <small>
+            Object
+          </small>
+
           <b>
             ${esc(
               item.object ||
               "Unknown"
             )}
           </b>
-        </p>
 
-        <p>
-          Brand:
+        </div>
+
+
+        <div class="detail">
+
+          <small>
+            Brand
+          </small>
+
           <b>
             ${esc(
               item.brand ||
               "Not detected"
             )}
           </b>
-        </p>
 
-        <p>
-          Model:
+        </div>
+
+
+        <div class="detail">
+
+          <small>
+            Model
+          </small>
+
           <b>
             ${esc(
               item.model ||
               "Not detected"
             )}
           </b>
-        </p>
 
-        <p>
-          Category:
+        </div>
+
+
+        <div class="detail">
+
+          <small>
+            Category
+          </small>
+
           <b>
             ${esc(
               item.category ||
               "Not detected"
             )}
           </b>
-        </p>
 
-        ${
-          item.color
-            ? `
-              <p>
-                Colour:
-                <b>
-                  ${esc(item.color)}
-                </b>
-              </p>
-            `
-            : ""
-        }
+        </div>
 
-        <p>
-          Visible text:
+
+        <div class="detail">
+
+          <small>
+            Colour
+          </small>
+
           <b>
-            ${visibleText}
+            ${esc(
+              item.color ||
+              "Not detected"
+            )}
           </b>
-        </p>
 
-        ${
-          item.searchQuery
-            ? `
-              <p>
-                Search phrase:
-                <b>
-                  ${esc(
-                    item.searchQuery
-                  )}
-                </b>
-              </p>
-            `
-            : ""
-        }
+        </div>
+
+
+        <div class="detail">
+
+          <small>
+            Visible text
+          </small>
+
+          <b>
+            ${esc(
+              visibleText
+            )}
+          </b>
+
+        </div>
+
+
+        <div class="detail">
+
+          <small>
+            Search phrase
+          </small>
+
+          <b>
+            ${esc(
+              item.searchQuery ||
+              "Not available"
+            )}
+          </b>
+
+        </div>
+
+
+        <div class="detail">
+
+          <small>
+            AI confidence
+          </small>
+
+          <b>
+            ${confidence}%
+          </b>
+
+        </div>
 
       </div>
     `;
 }
 
 /* =========================================================
-   VERIFIED PRODUCT RESULTS
+   VERIFIED PRODUCT OFFERS
 ========================================================= */
 
-function renderVerifiedOffers(data) {
-  const products =
-    Array.isArray(data.offers)
+function renderVerifiedOffers(
+  data
+) {
+
+  const offers =
+    Array.isArray(
+      data.offers
+    )
       ? data.offers
+
+      : Array.isArray(
+          data.products
+        )
+      ? data.products
+
       : [];
 
   const list =
@@ -459,164 +690,112 @@ function renderVerifiedOffers(data) {
   const banner =
     $("#liveBanner");
 
-  if (!products.length) {
-    list.innerHTML = "";
+  /*
+    NO VERIFIED DATA YET
+  */
+
+  if (
+    !offers.length
+  ) {
+
+    list.innerHTML =
+      "";
 
     banner.textContent =
       "No verified price or exact stock result yet. Nearby retailers below are relevant stores, not confirmed exact-product inventory.";
 
+    $("#compareMessage")
+      .textContent =
+        "Verified prices will appear here when legitimate retailer or catalogue data is connected.";
+
     return;
   }
+
+  /*
+    VERIFIED OFFERS EXIST
+  */
 
   banner.textContent =
     "✓ Verified retailer product offers found.";
 
+  $("#compareMessage")
+    .textContent =
+      `${offers.length} verified retailer offer${offers.length === 1 ? "" : "s"} found.`;
+
   list.innerHTML =
-    products.map(
-      (product) => {
-        const store =
-          product.store || {};
+    offers
+      .map(
+        (product) => {
 
-        const phone =
-          cleanPhone(
-            store.phone ||
-            product.phone
-          );
+          const store =
+            product.store || {};
 
-        const website =
-          safeWebsite(
-            store.website ||
-            product.website
-          );
+          const website =
+            safeWebsite(
+              store.website ||
+              product.website
+            );
 
-        const productUrl =
-          safeWebsite(
-            product.url
-          );
+          const productUrl =
+            safeWebsite(
+              product.url
+            );
 
-        const stock =
-          product.stock?.status ||
-          "Stock not verified";
+          const storePhone =
+            cleanPhone(
+              store.phone ||
+              product.phone
+            );
 
-        const distance =
-          product.distanceKm != null
-            ? `${Number(
-                product.distanceKm
-              ).toFixed(1)} km`
-            : null;
+          const stock =
+            product.stock?.status ||
+            "Stock status unavailable";
 
-        return `
-          <article class="product">
+          return `
 
-            ${
-              product.image
-                ? `
-                  <img
-                    src="${esc(
-                      product.image
-                    )}"
-                    alt="${esc(
-                      product.name ||
-                      "Product"
-                    )}"
-                  />
-                `
-                : ""
-            }
+            <article class="verified-offer">
 
-            <div>
-
-              <h3>
+              <b>
                 ${esc(
                   product.name ||
-                  "Product"
+                  "Verified product"
                 )}
-              </h3>
+              </b>
 
-              <p class="retailer">
-                ${
-                  product.brand
-                    ? `${esc(
-                        product.brand
-                      )} • `
-                    : ""
-                }
-
+              <div>
                 ${esc(
                   product.retailer ||
-                  ""
-                )}
-              </p>
-
-              ${
-                product.match != null
-                  ? `
-                    <p class="match">
-                      🎯 Match:
-                      ${Math.round(
-                        Number(
-                          product.match
-                        ) * 100
-                      )}%
-                    </p>
-                  `
-                  : ""
-              }
-
-              <p>
-                🏪
-                ${esc(
                   store.name ||
-                  "Store unavailable"
+                  "Retailer"
                 )}
+              </div>
 
-                ${
-                  distance
-                    ? ` • ${esc(
-                        distance
-                      )}`
-                    : ""
-                }
-              </p>
+              <div>
+                ${esc(
+                  money(product)
+                )}
+              </div>
 
-              <p class="stock">
-                📦
+              <small>
                 ${esc(stock)}
-              </p>
+              </small>
 
               ${
-                phone
+                storePhone
                   ? `
+
+                    <br>
+
                     <a
-                      class="link"
                       href="tel:${esc(
                         phoneHref(
-                          phone
+                          storePhone
                         )
                       )}"
                     >
-                      📞
-                      ${esc(phone)}
+                      📞 ${esc(storePhone)}
                     </a>
-                  `
-                  : ""
-              }
 
-              ${
-                website
-                  ? `
-                    <br />
-
-                    <a
-                      class="link"
-                      href="${esc(
-                        website
-                      )}"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      🌐 Store website →
-                    </a>
                   `
                   : ""
               }
@@ -624,342 +803,614 @@ function renderVerifiedOffers(data) {
               ${
                 productUrl
                   ? `
-                    <br />
+
+                    <br>
 
                     <a
-                      class="link"
-                      href="${esc(
-                        productUrl
-                      )}"
+                      href="${esc(productUrl)}"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      🛍 View exact product →
+                      View exact product →
                     </a>
+
                   `
                   : ""
               }
 
               ${
-                store.lat != null &&
-                store.lon != null
+                website
                   ? `
-                    <br />
+
+                    <br>
 
                     <a
-                      class="link"
-                      href="https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
-                        `${store.lat},${store.lon}`
-                      )}"
+                      href="${esc(website)}"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      🧭 Directions →
+                      Retailer website →
                     </a>
+
                   `
                   : ""
               }
 
-            </div>
-
-            <div class="price">
-              ${esc(
-                money(product)
-              )}
-            </div>
-
-          </article>
-        `;
-      }
-    ).join("");
+            </article>
+          `;
+        }
+      )
+      .join("");
 }
 
 /* =========================================================
    UNIVERSAL STORE PROFILE
+
+   This is NOT shoe-only.
 ========================================================= */
 
-function buildStoreProfile(item) {
+function buildStoreProfile(
+  item
+) {
+
   const text = `
+
     ${item.object || ""}
+
     ${item.name || ""}
+
     ${item.category || ""}
+
     ${item.searchQuery || ""}
+
   `.toLowerCase();
 
   const profile = {
+
     shopTypes: [],
+
     keywords: [],
+
     retailerNames: []
   };
 
+  /* =========================
+     SHOES
+  ========================== */
+
   if (
-    /shoe|sneaker|footwear/.test(text)
+    /shoe|sneaker|footwear|trainer/.test(
+      text
+    )
   ) {
+
     profile.shopTypes = [
+
       "shoes",
+
       "sports",
+
       "clothes",
+
       "department_store"
     ];
 
     profile.keywords = [
+
       "shoe",
+
       "sneaker",
+
       "footwear",
+
       "sport"
     ];
   }
 
+  /* =========================
+     AUDIO
+  ========================== */
+
   else if (
-    /microphone|headphone|speaker|earphone|audio/.test(text)
+    /microphone|headphone|earphone|speaker|audio|sound/.test(
+      text
+    )
   ) {
+
     profile.shopTypes = [
+
       "electronics",
+
       "music",
+
       "hifi",
+
       "computer"
     ];
 
     profile.keywords = [
+
       "audio",
+
       "music",
+
       "sound",
+
       "electronics",
+
       "hifi"
     ];
   }
 
+  /* =========================
+     PHONES
+  ========================== */
+
   else if (
-    /smartphone|mobile phone|phone|tablet/.test(text)
+    /smartphone|mobile phone|phone|tablet/.test(
+      text
+    )
   ) {
+
     profile.shopTypes = [
+
       "mobile_phone",
+
       "electronics",
+
       "computer"
     ];
 
     profile.keywords = [
+
       "mobile",
+
       "phone",
+
       "electronics"
     ];
   }
 
+  /* =========================
+     COMPUTERS
+  ========================== */
+
   else if (
-    /computer|laptop|monitor|keyboard|mouse/.test(text)
+    /computer|laptop|monitor|keyboard|mouse|pc/.test(
+      text
+    )
   ) {
+
     profile.shopTypes = [
+
       "computer",
+
       "electronics"
     ];
 
     profile.keywords = [
+
       "computer",
+
       "technology",
+
       "electronics"
     ];
   }
 
+  /* =========================
+     CAMERA
+  ========================== */
+
   else if (
-    /camera|photography|lens/.test(text)
+    /camera|photography|lens/.test(
+      text
+    )
   ) {
+
     profile.shopTypes = [
+
       "camera",
+
       "electronics"
     ];
 
     profile.keywords = [
+
       "camera",
+
       "photography"
     ];
   }
 
+  /* =========================
+     CLOTHING
+  ========================== */
+
   else if (
-    /shirt|sweater|hoodie|jacket|pants|trousers|clothing|fashion|dress/.test(text)
+    /shirt|sweater|hoodie|jacket|pants|trousers|dress|clothing|fashion/.test(
+      text
+    )
   ) {
+
     profile.shopTypes = [
+
       "clothes",
+
       "fashion",
+
       "department_store"
     ];
 
     profile.keywords = [
+
       "clothes",
+
       "fashion",
+
       "clothing"
     ];
   }
 
+  /* =========================
+     FLOWERS
+  ========================== */
+
   else if (
-    /flower|plant|bouquet/.test(text)
+    /flower|plant|bouquet/.test(
+      text
+    )
   ) {
+
     profile.shopTypes = [
+
       "florist",
+
       "garden_centre"
     ];
 
     profile.keywords = [
+
       "flower",
+
       "florist",
+
       "plant",
+
       "garden"
     ];
   }
 
+  /* =========================
+     LIGHTING
+  ========================== */
+
   else if (
-    /lamp|light|lighting/.test(text)
+    /lamp|light|lighting/.test(
+      text
+    )
   ) {
+
     profile.shopTypes = [
+
       "lighting",
+
       "hardware",
+
       "furniture",
+
       "houseware"
     ];
 
     profile.keywords = [
+
       "lighting",
+
       "light",
+
       "home",
+
       "hardware"
     ];
   }
 
+  /* =========================
+     FURNITURE
+  ========================== */
+
   else if (
-    /chair|table|desk|sofa|couch|furniture/.test(text)
+    /chair|table|desk|sofa|couch|furniture|cabinet/.test(
+      text
+    )
   ) {
+
     profile.shopTypes = [
+
       "furniture",
+
       "houseware",
+
       "interior_decoration"
     ];
 
     profile.keywords = [
+
       "furniture",
+
       "home",
+
       "interior"
     ];
   }
 
+  /* =========================
+     BOOKS
+  ========================== */
+
   else if (
-    /book|novel/.test(text)
+    /book|novel|textbook/.test(
+      text
+    )
   ) {
+
     profile.shopTypes = [
+
       "books",
+
       "stationery"
     ];
 
     profile.keywords = [
+
       "book",
+
       "books"
     ];
   }
 
+  /* =========================
+     STATIONERY
+  ========================== */
+
   else if (
-    /pencil|pen|stationery|school supplies/.test(text)
+    /pencil|pen|stationery|school supplies|notebook/.test(
+      text
+    )
   ) {
+
     profile.shopTypes = [
+
       "stationery",
+
       "variety_store"
     ];
 
     profile.keywords = [
+
       "stationery",
+
       "school",
+
       "office"
     ];
   }
 
+  /* =========================
+     TOOLS
+  ========================== */
+
   else if (
-    /tool|hardware|hammer|drill|screwdriver/.test(text)
+    /tool|hardware|drill|hammer|screwdriver|saw/.test(
+      text
+    )
   ) {
+
     profile.shopTypes = [
+
       "hardware",
+
       "doityourself",
+
       "trade"
     ];
 
     profile.keywords = [
+
       "hardware",
+
       "tool",
+
       "tools"
     ];
   }
 
+  /* =========================
+     TOYS / GAMES
+  ========================== */
+
   else if (
-    /toy|lego|video game|game/.test(text)
+    /toy|lego|video game|game|console/.test(
+      text
+    )
   ) {
+
     profile.shopTypes = [
+
       "toys",
+
       "games",
+
       "video_games",
+
       "variety_store"
     ];
 
     profile.keywords = [
+
       "toy",
+
       "game",
+
       "games"
     ];
   }
 
+  /* =========================
+     APPLIANCES
+  ========================== */
+
   else if (
-    /appliance|microwave|kettle|toaster|fridge|refrigerator|washing machine/.test(text)
+    /appliance|microwave|kettle|toaster|fridge|refrigerator|washing machine|air fryer/.test(
+      text
+    )
   ) {
+
     profile.shopTypes = [
+
       "appliance",
+
       "electronics",
+
       "houseware"
     ];
 
     profile.keywords = [
+
       "appliance",
+
       "home",
+
       "electronics"
     ];
   }
 
+  /* =========================
+     CAR / AUTO
+  ========================== */
+
   else if (
-    /car|vehicle|automobile/.test(text)
+    /car|vehicle|automobile/.test(
+      text
+    )
   ) {
+
     profile.shopTypes = [
+
       "car",
+
       "car_parts"
     ];
 
     profile.keywords = [
+
       "car",
+
       "vehicle",
+
       "motor"
     ];
   }
 
+  /* =========================
+     GENERIC FALLBACK
+  ========================== */
+
   else {
+
     profile.keywords =
       String(
         item.category ||
         item.object ||
         ""
       )
-      .toLowerCase()
-      .split(
-        /[^a-z0-9]+/
-      )
-      .filter(
-        (word) =>
-          word.length >= 4
-      );
+        .toLowerCase()
+        .split(
+          /[^a-z0-9]+/
+        )
+        .filter(
+          (word) =>
+            word.length >= 4
+        );
   }
 
-  if (item.brand) {
+  /*
+    Product brand can help
+    prioritise branded stores.
+  */
+
+  if (
+    item.brand
+  ) {
+
     profile.retailerNames
       .push(
         String(
           item.brand
-        ).toLowerCase()
+        )
+          .toLowerCase()
       );
   }
 
   return profile;
+}
+
+/* =========================================================
+   DISTANCE
+========================================================= */
+
+function distanceKm(
+  lat1,
+  lon1,
+  lat2,
+  lon2
+) {
+
+  const R = 6371;
+
+  const p =
+    Math.PI / 180;
+
+  const a =
+
+    Math.sin(
+      (lat2 - lat1) *
+      p / 2
+    ) ** 2
+
+    +
+
+    Math.cos(
+      lat1 * p
+    )
+
+    *
+
+    Math.cos(
+      lat2 * p
+    )
+
+    *
+
+    Math.sin(
+      (lon2 - lon1) *
+      p / 2
+    ) ** 2;
+
+  return (
+
+    R *
+
+    2 *
+
+    Math.atan2(
+
+      Math.sqrt(a),
+
+      Math.sqrt(
+        1 - a
+      )
+    )
+  );
 }
 
 /* =========================================================
@@ -971,72 +1422,104 @@ function relevanceScore(
   profile,
   item
 ) {
+
   const name =
     String(
       tags.name ||
       tags.brand ||
       ""
-    ).toLowerCase();
+    )
+      .toLowerCase();
 
   const shop =
     String(
       tags.shop ||
       ""
-    ).toLowerCase();
+    )
+      .toLowerCase();
 
   const combined = `
+
     ${name}
+
     ${shop}
+
     ${tags.brand || ""}
+
     ${tags.description || ""}
+
     ${tags.operator || ""}
+
     ${tags.branch || ""}
+
   `.toLowerCase();
 
   let score = 0;
 
+  /*
+    Correct shop category
+  */
+
   if (
-    profile.shopTypes.includes(
-      shop
-    )
+    profile.shopTypes
+      .includes(shop)
   ) {
+
     score += 50;
   }
+
+  /*
+    Relevant words
+  */
 
   for (
     const keyword
     of profile.keywords
   ) {
+
     if (
       combined.includes(
-        keyword
+        keyword.toLowerCase()
       )
     ) {
+
       score += 12;
     }
   }
+
+  /*
+    Brand store
+  */
 
   for (
     const retailer
     of profile.retailerNames
   ) {
+
     if (
       name.includes(
         retailer
       )
     ) {
+
       score += 40;
     }
   }
+
+  /*
+    Exact brand in store name
+  */
 
   if (
     item.brand &&
     name.includes(
       String(
         item.brand
-      ).toLowerCase()
+      )
+        .toLowerCase()
     )
   ) {
+
     score += 60;
   }
 
@@ -1044,11 +1527,19 @@ function relevanceScore(
 }
 
 /* =========================================================
-   NEARBY API
+   LOAD NEARBY STORES
+
+   IMPORTANT:
+   Browser calls Vercel.
+   Vercel calls Overpass.
+
+   This avoids browser CORS problems.
 ========================================================= */
 
 async function loadNearbyPlaces() {
+
   if (!coords) {
+
     throw new Error(
       "Location is required."
     );
@@ -1068,6 +1559,7 @@ async function loadNearbyPlaces() {
         body:
           JSON.stringify({
             lat: coords.lat,
+
             lon: coords.lon
           })
       }
@@ -1076,9 +1568,12 @@ async function loadNearbyPlaces() {
   let data;
 
   try {
+
     data =
       await response.json();
+
   } catch {
+
     throw new Error(
       "Nearby retailer service returned an unreadable response."
     );
@@ -1088,12 +1583,14 @@ async function loadNearbyPlaces() {
     !response.ok ||
     data.ok !== true
   ) {
+
     const attempts =
       Array.isArray(
         data.attempts
       )
         ? data.attempts
             .join(" | ")
+
         : "";
 
     throw new Error(
@@ -1107,14 +1604,18 @@ async function loadNearbyPlaces() {
     data.elements
   )
     ? data.elements
+
     : [];
 }
 
 /* =========================================================
-   EXTRACT STORE DETAILS
+   STORE DATA
 ========================================================= */
 
-function extractStore(place) {
+function extractStore(
+  place
+) {
+
   const lat =
     place.lat ??
     place.center?.lat;
@@ -1127,6 +1628,7 @@ function extractStore(place) {
     lat == null ||
     lon == null
   ) {
+
     return null;
   }
 
@@ -1134,150 +1636,246 @@ function extractStore(place) {
     place.tags || {};
 
   const name =
+
     tags.name ||
+
     tags.brand ||
+
     "Unnamed retailer";
 
   const type =
+
     tags.shop ||
+
     tags.amenity ||
+
     "retail";
 
-  const phone =
+  const storePhone =
     cleanPhone(
+
       tags["contact:phone"] ||
+
       tags.phone ||
+
       tags["contact:mobile"] ||
+
       tags.mobile
     );
 
   const website =
     safeWebsite(
+
       tags["contact:website"] ||
+
       tags.website
     );
 
   const openingHours =
+
     tags.opening_hours ||
+
     null;
 
-  const address =
-    [
-      tags["addr:housenumber"],
-      tags["addr:street"],
-      tags["addr:suburb"],
-      tags["addr:city"]
-    ]
+  const address = [
+
+    tags["addr:housenumber"],
+
+    tags["addr:street"],
+
+    tags["addr:suburb"],
+
+    tags["addr:city"]
+
+  ]
     .filter(Boolean)
     .join(", ");
 
   return {
+
     name,
+
     type,
-    phone,
+
+    phone:
+      storePhone,
+
     website,
+
     openingHours,
+
     address,
+
     lat,
+
     lon,
+
     tags
   };
 }
 
 /* =========================================================
-   NEARBY RETAILER RESULTS
+   STORE WEBSITE PRODUCT SEARCH
+========================================================= */
+
+function retailerSearchUrl(
+  store,
+  item
+) {
+
+  if (
+    !store.website ||
+    !item.searchQuery
+  ) {
+
+    return null;
+  }
+
+  try {
+
+    const domain =
+      new URL(
+        store.website
+      )
+        .hostname
+        .replace(
+          /^www\./,
+          ""
+        );
+
+    const query =
+      encodeURIComponent(
+
+        `site:${domain} ${item.searchQuery}`
+      );
+
+    return (
+      "https://www.google.com/search?q=" +
+      query
+    );
+
+  } catch {
+
+    return null;
+  }
+}
+
+/* =========================================================
+   NEARBY STORES
 ========================================================= */
 
 async function renderNearbyStores(
   item
 ) {
-  const fallback =
-    $("#fallback");
 
   const shops =
     $("#shops");
 
-  if (
-    !fallback ||
-    !shops
-  ) {
+  if (!shops) {
     return;
   }
 
-  fallback
-    .classList.remove(
-      "hidden"
-    );
-
   if (!coords) {
+
     shops.innerHTML = `
-      <p>
+
+      <div class="empty-retailers">
+
+        Item identified.
+
         Press <b>Use my location</b>
+
         to see nearby relevant retailers.
-      </p>
+
+      </div>
     `;
 
     return;
   }
 
   shops.innerHTML = `
-    <p>
-      Searching for nearby relevant retailers…
-    </p>
+
+    <div class="empty-retailers">
+
+      Searching nearby retailers…
+
+    </div>
   `;
 
   try {
-    const rawPlaces =
+
+    const places =
       await loadNearbyPlaces();
 
     const profile =
-      buildStoreProfile(item);
-
-    let stores =
-      rawPlaces
-      .map(
-        extractStore
-      )
-      .filter(Boolean)
-      .map(
-        (store) => {
-          const score =
-            relevanceScore(
-              store.tags,
-              profile,
-              item
-            );
-
-          const distance =
-            distanceKm(
-              coords.lat,
-              coords.lon,
-              store.lat,
-              store.lon
-            );
-
-          return {
-            ...store,
-            score,
-            distance
-          };
-        }
-      )
-      .filter(
-        (store) =>
-          store.score > 0
+      buildStoreProfile(
+        item
       );
 
+    let stores =
+      places
+
+        .map(
+          extractStore
+        )
+
+        .filter(Boolean)
+
+        .map(
+          (store) => {
+
+            const score =
+              relevanceScore(
+
+                store.tags,
+
+                profile,
+
+                item
+              );
+
+            const distance =
+              distanceKm(
+
+                coords.lat,
+
+                coords.lon,
+
+                store.lat,
+
+                store.lon
+              );
+
+            return {
+
+              ...store,
+
+              score,
+
+              distance
+            };
+          }
+        )
+
+        .filter(
+          (store) =>
+            store.score > 0
+        );
+
     /*
-      Sort by relevance first,
-      then distance.
+      BEST relevance first.
+
+      Distance is second.
     */
 
     stores.sort(
       (a, b) => {
+
         if (
-          b.score !== a.score
+          b.score !==
+          a.score
         ) {
+
           return (
             b.score -
             a.score
@@ -1292,23 +1890,42 @@ async function renderNearbyStores(
     );
 
     /*
-      Remove duplicate map entries.
+      Remove duplicates.
     */
 
-    const unique = [];
     const seen =
       new Set();
+
+    const unique = [];
 
     for (
       const store
       of stores
     ) {
+
       const key =
-        `${store.name.toLowerCase()}|${store.lat.toFixed(5)}|${store.lon.toFixed(5)}`;
+
+        store.name
+          .toLowerCase()
+
+        +
+
+        "|" +
+
+        store.lat
+          .toFixed(5)
+
+        +
+
+        "|" +
+
+        store.lon
+          .toFixed(5);
 
       if (
         seen.has(key)
       ) {
+
         continue;
       }
 
@@ -1321,227 +1938,485 @@ async function renderNearbyStores(
       if (
         unique.length >= 12
       ) {
+
         break;
       }
     }
 
+    currentStores =
+      unique;
+
     if (
       !unique.length
     ) {
+
       shops.innerHTML = `
-        <p>
+
+        <div class="empty-retailers">
+
           FindIt reached the map service,
-          but there isn't enough mapped information
-          to identify relevant retailers for this item nearby.
-        </p>
+
+          but there was not enough mapped
+
+          retailer information for this item nearby.
+
+        </div>
       `;
+
+      updateMaps([]);
 
       return;
     }
 
     shops.innerHTML =
-      unique.map(
-        (store, index) => {
+      unique
 
-          const directionsUrl =
-            `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
-              `${store.lat},${store.lon}`
-            )}`;
+        .map(
+          (store, index) => {
 
-          let retailerSearch =
-            "";
+            const directionsUrl =
 
-          /*
-            If OpenStreetMap provides a website,
-            offer an exact-product search
-            restricted to that retailer's domain.
-          */
+              "https://www.google.com/maps/dir/?api=1&destination="
 
-          if (
-            store.website &&
-            item.searchQuery
-          ) {
-            try {
-              const domain =
-                new URL(
-                  store.website
-                )
-                .hostname
-                .replace(
-                  /^www\./,
-                  ""
-                );
+              +
 
-              const query =
-                encodeURIComponent(
-                  `site:${domain} ${item.searchQuery}`
-                );
+              encodeURIComponent(
 
-              retailerSearch = `
-                <br />
+                `${store.lat},${store.lon}`
+              );
 
-                <a
-                  class="link"
-                  href="https://www.google.com/search?q=${query}"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  🔎 Search this retailer →
-                </a>
-              `;
-            } catch {
-              retailerSearch =
-                "";
-            }
-          }
+            const searchUrl =
+              retailerSearchUrl(
+                store,
+                item
+              );
 
-          return `
-            <div class="shop">
+            return `
 
-              <div>
+              <article class="store-card">
 
-                <b>
-                  ${index + 1}.
-                  ${esc(
-                    store.name
-                  )}
-                </b>
+                <div class="rank">
 
-                <br />
+                  ${index + 1}
 
-                <small>
-                  ${esc(
-                    store.type
-                  )}
-                  • Relevant nearby retailer
-                </small>
+                </div>
 
-                <br />
 
-                <small>
-                  📍
-                  ${store.distance.toFixed(1)}
-                  km away
-                </small>
+                <div>
 
-                ${
-                  store.address
-                    ? `
-                      <br />
+                  <div class="store-name">
 
-                      <small>
-                        ${esc(
-                          store.address
-                        )}
-                      </small>
-                    `
-                    : ""
-                }
+                    ${esc(
+                      store.name
+                    )}
 
-                ${
-                  store.openingHours
-                    ? `
-                      <br />
+                  </div>
 
-                      <small>
-                        🕒
-                        ${esc(
-                          store.openingHours
-                        )}
-                      </small>
-                    `
-                    : ""
-                }
 
-                <br /><br />
+                  <div class="store-meta">
 
-                ${
-                  store.phone
-                    ? `
-                      <a
-                        class="link"
-                        href="tel:${esc(
-                          phoneHref(
-                            store.phone
+                    ${
+                      store.address
+                        ? esc(
+                            store.address
                           )
-                        )}"
-                      >
-                        📞
-                        ${esc(
-                          store.phone
-                        )}
-                      </a>
-                    `
-                    : `
-                      <small>
-                        📞 Phone unavailable
-                      </small>
-                    `
-                }
 
-                ${
-                  store.website
-                    ? `
-                      <br />
+                        : esc(
+                            store.type
+                          )
+                    }
 
-                      <a
-                        class="link"
-                        href="${esc(
-                          store.website
-                        )}"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        🌐 Website →
-                      </a>
-                    `
-                    : ""
-                }
+                    <br>
 
-                ${retailerSearch}
+                    ${store.distance.toFixed(1)}
+                    km away
 
-              </div>
+                    ${
+                      store.openingHours
+                        ? ` • ${esc(
+                            store.openingHours
+                          )}`
 
-              <div>
+                        : ""
+                    }
 
-                <a
-                  class="link"
-                  href="${esc(
-                    directionsUrl
-                  )}"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  🧭 Directions →
-                </a>
+                  </div>
 
-                <br /><br />
 
-                <small>
-                  Exact product stock
-                  not verified
-                </small>
+                  <div class="store-actions">
 
-              </div>
+                    ${
+                      store.phone
+                        ? `
 
-            </div>
-          `;
-        }
-      ).join("");
+                          <a
+                            href="tel:${esc(
+                              phoneHref(
+                                store.phone
+                              )
+                            )}"
+                          >
+
+                            ☎ Call
+
+                          </a>
+
+                        `
+                        : ""
+                    }
+
+
+                    ${
+                      store.website
+                        ? `
+
+                          <a
+                            href="${esc(
+                              store.website
+                            )}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+
+                            🌐 Website
+
+                          </a>
+
+                        `
+                        : ""
+                    }
+
+
+                    ${
+                      searchUrl
+                        ? `
+
+                          <a
+                            href="${esc(
+                              searchUrl
+                            )}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+
+                            🔎 Search retailer
+
+                          </a>
+
+                        `
+                        : ""
+                    }
+
+
+                    <a
+                      href="${esc(
+                        directionsUrl
+                      )}"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+
+                      ⌖ Directions
+
+                    </a>
+
+                  </div>
+
+                </div>
+
+
+                <div class="store-side">
+
+                  <div class="store-distance">
+
+                    ${store.distance.toFixed(1)}
+                    km
+
+                  </div>
+
+                  <div class="unverified">
+
+                    Exact stock
+                    not verified
+
+                  </div>
+
+                </div>
+
+              </article>
+            `;
+          }
+        )
+        .join("");
+
+    updateMaps(
+      unique
+    );
 
   } catch (error) {
+
     console.error(
-      "Nearby retailer search failed:",
+      "Nearby retailer error:",
       error
     );
 
     shops.innerHTML = `
-      <p>
+
+      <div class="empty-retailers">
+
         Nearby retailers could not be loaded right now.
-        Please try again shortly.
-      </p>
+
+        <br><br>
+
+        ${esc(
+          error.message
+        )}
+
+      </div>
     `;
   }
+}
+
+/* =========================================================
+   MAP
+========================================================= */
+
+function createMap(
+  id
+) {
+
+  const element =
+    document.getElementById(
+      id
+    );
+
+  if (
+    !element ||
+    typeof L === "undefined"
+  ) {
+
+    return null;
+  }
+
+  const map =
+    L.map(id);
+
+  const defaultPosition =
+
+    coords
+
+      ? [
+          coords.lat,
+          coords.lon
+        ]
+
+      : [
+          -30.5595,
+          22.9375
+        ];
+
+  map.setView(
+    defaultPosition,
+    coords ? 12 : 5
+  );
+
+  L.tileLayer(
+
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+
+    {
+      maxZoom: 19,
+
+      attribution:
+        "&copy; OpenStreetMap contributors"
+    }
+
+  ).addTo(map);
+
+  return map;
+}
+
+/* =========================================================
+   MAP UPDATE
+========================================================= */
+
+function updateMaps(
+  stores
+) {
+
+  if (
+    !coords ||
+    typeof L === "undefined"
+  ) {
+
+    return;
+  }
+
+  if (!mainMap) {
+
+    mainMap =
+      createMap(
+        "map"
+      );
+  }
+
+  if (!largeMap) {
+
+    largeMap =
+      createMap(
+        "mapLarge"
+      );
+  }
+
+  const maps = [
+
+    mainMap,
+
+    largeMap
+
+  ];
+
+  maps.forEach(
+    (map) => {
+
+      if (!map) {
+        return;
+      }
+
+      /*
+        Remove old markers.
+      */
+
+      map.eachLayer(
+        (layer) => {
+
+          if (
+            layer instanceof L.Marker ||
+            layer instanceof L.CircleMarker
+          ) {
+
+            map.removeLayer(
+              layer
+            );
+          }
+        }
+      );
+
+      /*
+        YOU ARE HERE
+      */
+
+      L.circleMarker(
+
+        [
+          coords.lat,
+          coords.lon
+        ],
+
+        {
+          radius: 8,
+
+          color: "#4d7cff",
+
+          fillColor:
+            "#4d7cff",
+
+          fillOpacity: 1
+        }
+
+      )
+        .addTo(map)
+
+        .bindPopup(
+          "You are here"
+        );
+
+      /*
+        STORE MARKERS
+      */
+
+      stores.forEach(
+        (store) => {
+
+          L.marker(
+            [
+              store.lat,
+              store.lon
+            ]
+          )
+            .addTo(map)
+
+            .bindPopup(
+
+              `<b>${esc(
+                store.name
+              )}</b>
+
+              <br>
+
+              ${store.distance.toFixed(1)}
+              km away`
+            );
+        }
+      );
+
+      /*
+        MAP BOUNDS
+      */
+
+      if (
+        stores.length
+      ) {
+
+        const points = [
+
+          [
+            coords.lat,
+            coords.lon
+          ],
+
+          ...stores.map(
+            (store) => [
+
+              store.lat,
+
+              store.lon
+            ]
+          )
+
+        ];
+
+        map.fitBounds(
+          points,
+          {
+            padding:
+              [30,30],
+
+            maxZoom:
+              14
+          }
+        );
+
+      } else {
+
+        map.setView(
+
+          [
+            coords.lat,
+            coords.lon
+          ],
+
+          13
+        );
+      }
+
+      setTimeout(
+        () =>
+          map.invalidateSize(),
+        100
+      );
+    }
+  );
 }
 
 /* =========================================================
@@ -1551,6 +2426,7 @@ async function renderNearbyStores(
 function renderLowConfidence(
   data
 ) {
+
   const item =
     data.identification || {};
 
@@ -1562,18 +2438,28 @@ function renderLowConfidence(
       "hidden"
     );
 
+  $("#noMatch")
+    .classList.remove(
+      "hidden"
+    );
+
   $("#resultTitle")
     .textContent =
+
       item.name ||
+
       item.object ||
+
       "FindIt isn't confident enough";
 
   $("#summary")
     .textContent =
-      data.message ||
-      "Try a clearer image showing the whole item.";
 
-  $("#confidence")
+      data.message ||
+
+      "Try a clearer photo showing the entire item, logo or model details.";
+
+  $("#productTags")
     .innerHTML =
       "";
 
@@ -1581,19 +2467,13 @@ function renderLowConfidence(
     .innerHTML =
       "";
 
-  $("#liveBanner")
-    .textContent =
+  $("#confidence")
+    .innerHTML =
       "";
 
-  $("#fallback")
-    ?.classList.add(
-      "hidden"
-    );
-
-  $("#noMatch")
-    ?.classList.remove(
-      "hidden"
-    );
+  $("#shops")
+    .innerHTML =
+      "";
 }
 
 /* =========================================================
@@ -1603,10 +2483,12 @@ function renderLowConfidence(
 searchBtn.addEventListener(
   "click",
   async () => {
+
     if (
       searching ||
-      !photo.files?.[0]
+      !imageReady
     ) {
+
       return;
     }
 
@@ -1622,9 +2504,10 @@ searchBtn.addEventListener(
       );
 
     status.textContent =
-      "Gemini is identifying the item…";
+      "FindIt is identifying the item…";
 
     try {
+
       const data =
         await identifyItem();
 
@@ -1634,15 +2517,26 @@ searchBtn.addEventListener(
             ?.confidence || 0
         );
 
+      /*
+        TOO WEAK
+      */
+
       if (
         confidence < 0.55
       ) {
+
         renderLowConfidence(
           data
         );
+
       }
 
+      /*
+        GOOD MATCH
+      */
+
       else {
+
         renderIdentification(
           data
         );
@@ -1652,55 +2546,69 @@ searchBtn.addEventListener(
         );
 
         if (coords) {
+
           status.textContent =
             "Item identified. Finding nearby retailers…";
 
           await renderNearbyStores(
             data.identification
           );
-        }
 
-        else {
-          $("#fallback")
-            ?.classList.remove(
-              "hidden"
-            );
+        } else {
 
-          const shops =
-            $("#shops");
+          $("#shops")
+            .innerHTML = `
 
-          if (shops) {
-            shops.innerHTML = `
-              <p>
+              <div class="empty-retailers">
+
                 Item identified successfully.
+
+                <br><br>
+
                 Press <b>Use my location</b>
+
                 to see nearby relevant retailers.
-              </p>
+
+              </div>
             `;
-          }
         }
       }
 
       $("#results")
-        .scrollIntoView({
-          behavior:
-            "smooth"
-        });
+        .scrollIntoView(
+          {
+            behavior:
+              "smooth"
+          }
+        );
 
       status.textContent =
         "Search complete.";
 
     } catch (error) {
+
       console.error(
-        "FindIt error:",
+        "FindIt search error:",
         error
       );
 
+      /*
+        If Gemini quota is exceeded,
+        this message will show the real
+        API reason instead of pretending
+        the website is broken.
+      */
+
       status.textContent =
-        "FindIt could not complete the search: " +
+
+        "FindIt could not complete the search: "
+
+        +
+
         error.message;
 
     } finally {
+
       searching =
         false;
 
@@ -1711,6 +2619,79 @@ searchBtn.addEventListener(
 );
 
 /* =========================================================
+   RESULT TABS
+========================================================= */
+
+$$(".tab")
+  .forEach(
+    (button) => {
+
+      button
+        .addEventListener(
+          "click",
+          () => {
+
+            $$(".tab")
+              .forEach(
+                (tab) =>
+                  tab.classList
+                    .remove(
+                      "active"
+                    )
+              );
+
+            $$(".tab-panel")
+              .forEach(
+                (panel) =>
+                  panel.classList
+                    .remove(
+                      "active"
+                    )
+              );
+
+            button
+              .classList
+              .add(
+                "active"
+              );
+
+            const target =
+              $(
+                "#tab-" +
+                button.dataset.tab
+              );
+
+            target
+              ?.classList
+              .add(
+                "active"
+              );
+
+            /*
+              Leaflet map needs to
+              recalculate after hidden
+              panel becomes visible.
+            */
+
+            if (
+              button.dataset.tab ===
+              "map" &&
+              largeMap
+            ) {
+
+              setTimeout(
+                () =>
+                  largeMap
+                    .invalidateSize(),
+                120
+              );
+            }
+          }
+        );
+    }
+  );
+
+/* =========================================================
    RETRY
 ========================================================= */
 
@@ -1718,6 +2699,66 @@ $("#retry")
   ?.addEventListener(
     "click",
     () => {
+
       photo.click();
+    }
+  );
+
+/* =========================================================
+   SHARE
+========================================================= */
+
+$("#shareResult")
+  ?.addEventListener(
+    "click",
+    async () => {
+
+      const title =
+        "FindIt Nearby";
+
+      const text =
+        lastIdentification
+
+          ? `FindIt identified ${
+              lastIdentification.name ||
+              lastIdentification.object
+            }`
+
+          : "FindIt Nearby";
+
+      try {
+
+        if (
+          navigator.share
+        ) {
+
+          await navigator.share(
+            {
+              title,
+
+              text,
+
+              url:
+                window.location.href
+            }
+          );
+
+        } else {
+
+          await navigator.clipboard
+            .writeText(
+              window.location.href
+            );
+
+          status.textContent =
+            "FindIt link copied.";
+        }
+
+      } catch {
+        /*
+          User may simply close
+          the share menu.
+        */
+      }
     }
   );
