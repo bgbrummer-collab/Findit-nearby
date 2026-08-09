@@ -3,7 +3,10 @@ export default {
     try {
       if (request.method !== "POST") {
         return Response.json(
-          { error: "POST requests only" },
+          {
+            ok: false,
+            error: "POST requests only"
+          },
           { status: 405 }
         );
       }
@@ -12,122 +15,222 @@ export default {
 
       if (!apiKey) {
         return Response.json(
-          { error: "GEMINI_API_KEY is not configured in Vercel." },
+          {
+            ok: false,
+            error:
+              "GEMINI_API_KEY is not configured in Vercel."
+          },
           { status: 500 }
         );
       }
 
-      const form = await request.formData();
-      const image = form.get("image");
+      const form =
+        await request.formData();
 
-      if (!image || typeof image.arrayBuffer !== "function") {
+      const image =
+        form.get("image");
+
+      if (
+        !image ||
+        typeof image.arrayBuffer !== "function"
+      ) {
         return Response.json(
-          { error: "No image was uploaded." },
+          {
+            ok: false,
+            error: "No image was uploaded."
+          },
           { status: 400 }
         );
       }
 
-      // Keep uploads small enough for the Vercel request limit.
-      if (image.size > 4_000_000) {
+      /*
+        Keep uploads reasonably small.
+
+        Gemini supports larger inline requests,
+        but a smaller limit makes FindIt faster
+        and more reliable on phones.
+      */
+      if (image.size > 8_000_000) {
         return Response.json(
-          { error: "Image is too large. Please upload an image smaller than 4 MB." },
+          {
+            ok: false,
+            error:
+              "The image is too large. Please use an image smaller than 8 MB."
+          },
           { status: 413 }
         );
       }
 
-      const bytes = new Uint8Array(await image.arrayBuffer());
+      const bytes =
+        new Uint8Array(
+          await image.arrayBuffer()
+        );
 
       let binary = "";
+
       for (const byte of bytes) {
-        binary += String.fromCharCode(byte);
+        binary +=
+          String.fromCharCode(byte);
       }
 
-      const base64Image = btoa(binary);
+      const base64Image =
+        btoa(binary);
 
       const prompt = `
-You are the visual product-identification engine for a shopping app called FindIt Nearby.
+You are the visual product-identification engine for a shopping website called FindIt Nearby.
 
-Study the uploaded image carefully.
+Analyse the uploaded image carefully.
 
-Your job is to identify the ACTUAL PHYSICAL ITEM shown in the image.
+Your job is to identify the REAL MAIN PHYSICAL ITEM shown.
 
-Do NOT force the image into an unrelated shopping category.
-Do NOT guess a brand or model if it is not visible or reasonably identifiable.
-If the image is a flower, identify it as a flower.
-If it is a car, identify it as a car and identify make/model only if reasonably possible.
-If it is a microphone, identify it as a microphone, not headphones.
-If visible text, logos, brand names, model numbers, labels or product codes appear, use them as evidence.
+Important rules:
 
-Return ONLY valid JSON with this exact structure:
+1. Do not force an image into a shopping category if it does not belong there.
+2. Do not confuse related products.
+   Example:
+   - microphone is not headphones
+   - flower is not electronics
+   - shoe is not generic clothing
+3. Look carefully for:
+   - logos
+   - visible text
+   - model numbers
+   - labels
+   - brand marks
+   - product shape
+   - colour
+   - distinctive design details
+4. Identify the brand only when there is reasonable visual evidence.
+5. Identify the exact model only when there is reasonable evidence.
+6. Never invent a model number.
+7. If the exact model is uncertain, use a broader accurate product name.
+8. Confidence must reflect how certain you actually are.
+9. The searchQuery should be the best phrase for finding the closest real product match online.
+10. category should be useful for finding the correct type of retailer.
+
+Examples:
+
+A Nike sneaker might return:
+object: sneaker
+brand: Nike
+model: Air Force 1 Low
+category: Footwear > Sneakers
+
+A branded microphone might return:
+object: microphone
+brand: the visible brand if clear
+category: Electronics > Audio > Microphones
+
+A flower might return:
+object: flower
+category: Flowers / Plants
+
+A car might return:
+object: car
+brand and model only when reasonably identifiable.
+
+Return ONLY valid JSON.
+
+Use exactly this structure:
 
 {
-  "object": "general physical object",
-  "name": "best specific name for the item",
-  "brand": "brand if identifiable, otherwise null",
-  "model": "model or product number if identifiable, otherwise null",
-  "visibleText": ["important visible text"],
-  "color": "main colour if useful",
-  "category": "accurate shopping/product category",
-  "searchQuery": "best search phrase for finding this exact item",
+  "object": "general object type",
+  "name": "best specific product/item name",
+  "brand": "brand name or null",
+  "model": "model name/number or null",
+  "visibleText": [
+    "important visible words"
+  ],
+  "color": "main useful colour or null",
+  "category": "accurate product category",
+  "searchQuery": "best exact-item search phrase",
   "confidence": 0.0,
-  "summary": "short explanation of what was identified"
+  "summary": "one short accurate description"
 }
 
-confidence must be a number from 0 to 1.
+confidence must be between 0 and 1.
 
-If uncertain, lower the confidence instead of inventing information.
+If you are uncertain, lower confidence instead of inventing details.
 `;
 
-      const geminiResponse = await fetch(
-        "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-goog-api-key": apiKey
-          },
-          body: JSON.stringify({
-            contents: [
-              {
-                parts: [
-                  { text: prompt },
-                  {
-                    inline_data: {
-                      mime_type: image.type || "image/jpeg",
-                      data: base64Image
-                    }
-                  }
-                ]
-              }
-            ],
-            generationConfig: {
-              responseMimeType: "application/json",
-          
-            }
-          })
-        }
-      );
+      const geminiResponse =
+        await fetch(
+          "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent",
+          {
+            method: "POST",
 
-      const raw = await geminiResponse.json();
+            headers: {
+              "Content-Type":
+                "application/json",
+
+              "x-goog-api-key":
+                apiKey
+            },
+
+            body: JSON.stringify({
+              contents: [
+                {
+                  parts: [
+                    {
+                      text: prompt
+                    },
+                    {
+                      inline_data: {
+                        mime_type:
+                          image.type ||
+                          "image/jpeg",
+
+                        data:
+                          base64Image
+                      }
+                    }
+                  ]
+                }
+              ],
+
+              generationConfig: {
+                responseMimeType:
+                  "application/json"
+              }
+            })
+          }
+        );
+
+      const raw =
+        await geminiResponse.json();
 
       if (!geminiResponse.ok) {
-        console.error("Gemini error:", raw);
+        console.error(
+          "Gemini API error:",
+          raw
+        );
 
         return Response.json(
           {
-            error: "Gemini could not analyse this image.",
-            details: raw?.error?.message || "Unknown Gemini error"
+            ok: false,
+            error:
+              "Gemini could not analyse this image.",
+
+            details:
+              raw?.error?.message ||
+              "Unknown Gemini error"
           },
           { status: 500 }
         );
       }
 
       const text =
-        raw?.candidates?.[0]?.content?.parts?.[0]?.text;
+        raw?.candidates?.[0]
+          ?.content?.parts?.[0]
+          ?.text;
 
       if (!text) {
         return Response.json(
-          { error: "Gemini returned no identification." },
+          {
+            ok: false,
+            error:
+              "Gemini returned no identification."
+          },
           { status: 500 }
         );
       }
@@ -135,47 +238,154 @@ If uncertain, lower the confidence instead of inventing information.
       let identification;
 
       try {
-        identification = JSON.parse(text);
-      } catch {
+        identification =
+          JSON.parse(text);
+      } catch (error) {
+        console.error(
+          "Could not parse Gemini JSON:",
+          text
+        );
+
         return Response.json(
           {
-            error: "Gemini returned an unreadable identification.",
-            raw: text
+            ok: false,
+            error:
+              "Gemini returned an unreadable identification."
           },
           { status: 500 }
         );
       }
 
-      const confidence = Number(identification.confidence || 0);
+      /*
+        Normalise the result so the frontend
+        always receives predictable fields.
+      */
 
-      // Very important: weak identifications do not become random searches.
+      const confidence =
+        Math.max(
+          0,
+          Math.min(
+            1,
+            Number(
+              identification.confidence ||
+              0
+            )
+          )
+        );
+
+      const cleaned = {
+        object:
+          identification.object ||
+          null,
+
+        name:
+          identification.name ||
+          identification.object ||
+          "Unknown item",
+
+        brand:
+          identification.brand ||
+          null,
+
+        model:
+          identification.model ||
+          null,
+
+        visibleText:
+          Array.isArray(
+            identification.visibleText
+          )
+            ? identification.visibleText
+                .filter(Boolean)
+                .slice(0, 12)
+            : [],
+
+        color:
+          identification.color ||
+          null,
+
+        category:
+          identification.category ||
+          null,
+
+        searchQuery:
+          identification.searchQuery ||
+          identification.name ||
+          identification.object ||
+          "",
+
+        confidence,
+
+        summary:
+          identification.summary ||
+          ""
+      };
+
+      /*
+        Weak identification:
+        do NOT turn it into random shops/products.
+      */
+
       if (confidence < 0.55) {
         return Response.json({
-          identification,
+          ok: true,
+
+          identification:
+            cleaned,
+
           offers: [],
+
           verified: false,
+
           message:
-            "FindIt is not confident enough to search for stores. Try a clearer photo showing the whole item, logo or model details."
+            "FindIt is not confident enough to search for retailers. Try a clearer image showing the full item, logo or model details."
         });
       }
 
-      // Retailer/catalogue connections will fill this later.
-      // For now we NEVER invent prices, stock or stores.
+      /*
+        IMPORTANT:
+
+        The real retailer layer will later fill
+        offers with legitimate product information.
+
+        Until that connection exists,
+        FindIt must NEVER invent:
+        - price
+        - stock
+        - product URL
+        - exact branch inventory
+      */
+
       return Response.json({
-        identification,
+        ok: true,
+
+        identification:
+          cleaned,
+
         offers: [],
+
         verified: false,
+
         message:
-          "The item was identified successfully. Verified retailer catalogue connections are still required for real prices, stock and store availability."
+          "Item identified successfully. Nearby retailer locations can be searched, but exact price and stock require verified retailer catalogue data."
       });
 
     } catch (error) {
-      console.error(error);
+      console.error(
+        "FindIt search API error:",
+        error
+      );
 
       return Response.json(
         {
-          error: "FindIt image analysis failed.",
-          details: error.message
+          ok: false,
+
+          error:
+            "FindIt image analysis failed.",
+
+          details:
+            error?.message ||
+            "Unknown server error"
         },
         { status: 500 }
       );
