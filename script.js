@@ -754,28 +754,72 @@ function relevanceScore(tags, profile, item) {
 ========================= */
 
 async function getNearbyData() {
-  const response = await fetch("/api/nearby", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      lat: coords.lat,
-      lon: coords.lon
-    })
-  });
+  const radius = 20000;
 
-  const data = await response.json();
-
-  if (!response.ok || !data.ok) {
-    throw new Error(
-      data.error ||
-      data.details ||
-      "Nearby search failed."
+  const query = `
+    [out:json][timeout:20];
+    (
+      nwr(around:${radius},${coords.lat},${coords.lon})["shop"];
+      nwr(around:${radius},${coords.lat},${coords.lon})["amenity"="marketplace"];
     );
+    out center tags;
+  `;
+
+  const servers = [
+    "https://overpass-api.de/api/interpreter",
+    "https://z.overpass-api.de/api/interpreter"
+  ];
+
+  let lastError = null;
+
+  for (const server of servers) {
+    try {
+      const body = new URLSearchParams();
+      body.set("data", query);
+
+      const controller = new AbortController();
+
+      const timer = setTimeout(() => {
+        controller.abort();
+      }, 15000);
+
+      try {
+        const response = await fetch(server, {
+          method: "POST",
+          headers: {
+            "Content-Type":
+              "application/x-www-form-urlencoded;charset=UTF-8"
+          },
+          body,
+          signal: controller.signal
+        });
+
+        if (!response.ok) {
+          lastError = new Error(
+            `Nearby server returned ${response.status}`
+          );
+          continue;
+        }
+
+        const data = await response.json();
+
+        return data.elements || [];
+      } finally {
+        clearTimeout(timer);
+      }
+    } catch (error) {
+      lastError = error;
+      console.warn(
+        "Nearby server failed:",
+        server,
+        error
+      );
+    }
   }
 
-  return data.elements || [];
+  throw lastError || new Error(
+    "Nearby stores could not be loaded."
+  );
 }
 
 /* =========================
