@@ -417,17 +417,41 @@ async function findNearbyStores(item) {
     "<p>Searching for relevant nearby stores…</p>";
 
   try {
-    const response = await fetch(
-      "https://overpass-api.de/api/interpreter",
-      {
+  const servers = [
+    "https://overpass-api.de/api/interpreter",
+    "https://overpass.kumi.systems/api/interpreter",
+    "https://z.overpass-api.de/api/interpreter"
+  ];
+
+  let response = null;
+
+  for (const server of servers) {
+    try {
+      const body = new URLSearchParams();
+      body.set("data", query);
+
+      const attempt = await fetch(server, {
         method: "POST",
-        body: query
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+        },
+        body
+      });
+
+      if (attempt.ok) {
+        response = attempt;
+        break;
       }
-    );
+    } catch (error) {
+      console.warn("Overpass server failed:", server);
+    }
+  }
 
-    if (!response.ok) throw new Error();
+  if (!response) {
+    throw new Error("All nearby-store servers failed");
+  }
 
-    const data = await response.json();
+  const data = await response.json();
 
     const stores = (data.elements || [])
       .map((place) => {
