@@ -1,21 +1,34 @@
 {
-  "product": {
+  "visualEvidence": {
+    "label": "a microphone",
+    "confidence": 0.91,
+    "categories": [
+      "audio",
+      "music"
+    ],
+    "signals": [
+      "object",
+      "brand",
+      "visible_text",
+      "model_text"
+    ]
+  },
+  "productMatch": {
     "id": "sku-123",
-    "name": "Product",
-    "brand": "Brand",
-    "image": "https://...",
-    "category": "microphone"
+    "name": "Example product",
+    "brand": "Example brand",
+    "match": 0.96
   },
   "offer": {
-    "retailer": "Retailer",
+    "retailer": "Authorised retailer",
     "price": 1299,
     "currency": "ZAR",
-    "url": "https://..."
+    "url": "https://example.invalid/product"
   },
   "store": {
     "id": "store-1",
-    "name": "Store",
-    "address": "Address",
+    "name": "Example Store",
+    "address": "Example address",
     "lat": -25.75,
     "lon": 28.19
   },
@@ -23,14 +36,5 @@
     "status": "IN_STOCK",
     "quantity": 4,
     "updatedAt": "2026-08-09T00:00:00Z"
-  },
-  "visualMatch": {
-    "score": 0.96,
-    "signals": [
-      "brand",
-      "shape",
-      "colour",
-      "model-text"
-    ]
   }
 }

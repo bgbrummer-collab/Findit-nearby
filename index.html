@@ -3,91 +3,46 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="FindIt Nearby identifies products from photos and helps you find verified nearby stores, prices and stock.">
-<meta name="robots" content="index,follow">
-<title>FindIt Nearby — V10</title>
+<meta name="description" content="FindIt Nearby identifies the item in your photo and finds verified matching products and nearby retailers.">
+<title>FindIt Nearby — V11</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <a class="logo" href="#"><span>F</span> FindIt <b>Nearby</b></a>
-  <nav><a href="#how">How it works</a><a href="#retailers">Retailers</a></nav>
-  <small>V10</small>
-</header>
-
+<header><a class="logo" href="#"><span>F</span> FindIt <b>Nearby</b></a><nav><a href="#how">How it works</a><a href="#finder">Find an item</a></nav><small>V11</small></header>
 <main>
 <section class="hero">
-  <div>
-    <div class="kicker">VISUAL SHOPPING SEARCH</div>
-    <h1>See it.<br><span>Upload it.</span><br>Find it.</h1>
-    <p>Identify the actual item in your photo and, when connected to legitimate catalogue data, find verified retailers, prices, stock and nearby stores.</p>
-    <div class="hero-actions">
-      <a class="primary" href="#finder">📸 Find my product</a>
-      <a class="secondary" href="#how">How it works ↓</a>
-    </div>
-    <div class="badges"><b>🎯 Exact-item matching</b><b>🏷️ Brand scan</b><b>🏪 Store + distance</b><b>💰 Price + stock</b></div>
-  </div>
-  <div class="hero-card">
-    <div class="scan">SEARCH PIPELINE</div>
-    <div>📸 <b>Your photo</b><small>Object + brand + visible text</small></div>
-    <i>↓</i>
-    <div>🧠 <b>Product matching</b><small>Visual + catalogue signals</small></div>
-    <i>↓</i>
-    <div>🏪 <b>Nearby availability</b><small>Store + distance + stock</small></div>
-  </div>
+<div><div class="kicker">EXACT-ITEM VISUAL SEARCH</div><h1>Don't search<br>the <span>category.</span><br>Find the item.</h1>
+<p>Upload a photo. FindIt first decides what is actually in the image, then searches only relevant product data. If it isn't confident, it refuses to guess.</p>
+<div class="hero-actions"><a class="primary" href="#finder">📸 Find my item</a><a class="secondary" href="#how">Why this is different ↓</a></div>
+<div class="badges"><b>🧠 Confidence gate</b><b>🎯 Exact-item first</b><b>🏷️ Brand-aware</b><b>🚫 No random stores</b></div></div>
+<div class="hero-card"><div class="scan">V11 SEARCH LOGIC</div><div>📸 <b>Photo</b><small>Object + visible text + brand clues</small></div><i>↓</i><div>🧠 <b>Confidence gate</b><small>Reject uncertain guesses</small></div><i>↓</i><div>🎯 <b>Relevant search</b><small>Never fall back to unrelated categories</small></div><i>↓</i><div>🏪 <b>Verified offers</b><small>Only show stores when evidence exists</small></div></div>
 </section>
 
 <section id="finder" class="finder">
-  <div class="kicker">TRY FINDIT</div>
-  <h2>Upload the actual item</h2>
-  <p class="sub">Choose a photo from your gallery, take a photo, or browse files.</p>
-  <label class="drop" for="photo">
-    <input id="photo" type="file" accept="image/*">
-    <div id="empty"><div class="plus">＋</div><h3>Choose a product photo</h3><p>Gallery • Camera • Files</p></div>
-    <img id="preview" alt="Selected product">
-  </label>
-  <div class="actions">
-    <button id="search" disabled>🎯 Find this product</button>
-    <button id="location">📍 Use my location</button>
-  </div>
-  <div id="status">Waiting for an image.</div>
+<div class="kicker">TRY FINDIT V11</div><h2>Upload the actual item</h2>
+<p class="sub">Gallery, camera or files. V11 will not show unrelated stores just to fill the screen.</p>
+<label class="drop" for="photo"><input id="photo" type="file" accept="image/*">
+<div id="empty"><div class="plus">＋</div><h3>Choose a product photo</h3><p>Gallery • Camera • Files</p></div><img id="preview" alt="Selected item"></label>
+<div class="actions"><button id="search" disabled>🎯 Identify this item</button><button id="location">📍 Use my location</button></div>
+<div id="status">Waiting for an image.</div>
 </section>
 
 <section id="results" class="results hidden">
-  <div class="kicker">RESULTS</div>
-  <h2>Product matches</h2>
-  <p id="summary" class="sub"></p>
-  <div id="liveBanner" class="banner"></div>
-  <div id="productList"></div>
-  <div id="fallback" class="fallback hidden">
-    <h3>📍 Nearby fallback</h3>
-    <p>Nearby businesses are shown only as a fallback. They are not proof that they stock the exact item.</p>
-    <div id="shops"></div>
-  </div>
+<div class="kicker">SEARCH RESULT</div><h2 id="resultTitle">Analysis</h2><p id="summary" class="sub"></p>
+<div id="confidence"></div><div id="liveBanner" class="banner"></div>
+<div id="productList"></div>
+<div id="noMatch" class="no-match hidden"><div class="no-icon">✓</div><h3>No verified match found</h3><p>FindIt will not invent a store, price, product or category. Try a clearer photo showing the whole item, brand and model text.</p><button id="retry">Try another photo</button></div>
+<div id="fallback" class="fallback hidden"><h3>📍 Nearby businesses</h3><p>Only relevant businesses are shown, and only when the detected object maps confidently to a real shopping category. They are not proof of stock.</p><div id="shops"></div></div>
 </section>
 
-<section id="how" class="how">
-  <div class="kicker">HOW IT WORKS</div>
-  <h2>From a photo to a nearby store.</h2>
-  <div class="steps">
-    <article><span>01</span><h3>Upload</h3><p>Use your gallery, camera or files.</p></article>
-    <article><span>02</span><h3>Understand</h3><p>Detect object, brand, visible text and model clues.</p></article>
-    <article><span>03</span><h3>Match</h3><p>Compare the item with connected catalogues.</p></article>
-    <article><span>04</span><h3>Find nearby</h3><p>Rank verified offers by store, distance, price and stock.</p></article>
-  </div>
-</section>
+<section id="how" class="how"><div class="kicker">HOW V11 WORKS</div><h2>The important change: it can say “I don't know.”</h2>
+<div class="steps"><article><span>01</span><h3>See</h3><p>Analyse the actual image rather than treating every photo as a generic shopping category.</p></article>
+<article><span>02</span><h3>Verify</h3><p>Use confidence thresholds. Weak guesses are rejected instead of becoming searches.</p></article>
+<article><span>03</span><h3>Match</h3><p>Prioritise exact product and brand signals before category-level results.</p></article>
+<article><span>04</span><h3>Show</h3><p>Only verified product offers become price/store results. Otherwise we explain why.</p></article></div></section>
 
-<section id="retailers" class="retail">
-  <div>
-    <div class="kicker">FOR RETAILERS</div>
-    <h2>Connect real product data.</h2>
-    <p>V10 includes a backend adapter structure for authorised retailer APIs and catalogue feeds.</p>
-  </div>
-  <div class="schema"><code>Product</code><code>Brand</code><code>Offer</code><code>Store</code><code>Inventory</code><code>Visual match</code></div>
-</section>
+<section class="retail"><div><div class="kicker">REAL DATA LAYER</div><h2>Built for legitimate retailer connections.</h2><p>V11 keeps the product engine separate from the user interface so authorised retailer APIs and catalogue feeds can be added without replacing the search logic.</p></div><div class="schema"><code>VisualEvidence</code><code>ProductMatch</code><code>Offer</code><code>Store</code><code>Inventory</code><code>Confidence</code></div></section>
 </main>
-
-<footer>© 2026 FindIt Nearby. All rights reserved. Original design and software are protected works. V10.</footer>
+<footer>© 2026 FindIt Nearby. All rights reserved. V11.</footer>
 <script type="module" src="script.js"></script>
-</body>
-</html>
+</body></html>
