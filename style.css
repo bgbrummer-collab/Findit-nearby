@@ -2878,3 +2878,292 @@ footer{
       18px 14px;
   }
 }
+/* =========================================================
+   FINDIT SMART PREVIEW PANEL
+   ========================================================= */
+
+.smart-preview {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  min-height: 500px;
+  margin: 0 auto;
+  padding: 48px 42px;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  background:
+    radial-gradient(circle at 75% 15%, rgba(139, 92, 246, 0.18), transparent 35%),
+    radial-gradient(circle at 10% 90%, rgba(0, 183, 255, 0.10), transparent 35%),
+    #08111f;
+
+  border: 1px solid rgba(115, 129, 255, 0.45);
+  border-radius: 32px;
+
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.35),
+    inset 0 0 40px rgba(100, 70, 255, 0.04);
+}
+
+.smart-preview::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(51, 184, 255, 0.8),
+    rgba(135, 75, 255, 0.55),
+    rgba(213, 61, 255, 0.7)
+  );
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  pointer-events: none;
+}
+
+.smart-preview-glow {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  right: -100px;
+  top: -100px;
+
+  background: rgba(146, 70, 255, 0.18);
+  filter: blur(70px);
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.smart-preview-icon {
+  width: 70px;
+  height: 70px;
+
+  display: grid;
+  place-items: center;
+
+  margin-bottom: 22px;
+
+  font-size: 30px;
+  font-weight: 900;
+  color: white;
+
+  border-radius: 22px;
+
+  background: linear-gradient(
+    135deg,
+    #2f80ff,
+    #7548ff,
+    #d13cff
+  );
+
+  box-shadow:
+    0 12px 35px rgba(102, 77, 255, 0.35);
+}
+
+.smart-preview-label {
+  margin: 0 0 12px;
+
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+
+  color: #a46cff;
+}
+
+.smart-preview h2 {
+  margin: 0;
+
+  font-size: clamp(34px, 4vw, 52px);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+
+  color: #ffffff;
+}
+
+.smart-preview-text {
+  max-width: 470px;
+  margin: 20px 0 30px;
+
+  color: #aebbd0;
+
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.smart-preview-steps {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+
+  margin-top: 4px;
+}
+
+.smart-step {
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 14px 12px;
+
+  background: rgba(13, 24, 43, 0.9);
+
+  border: 1px solid rgba(117, 136, 183, 0.22);
+  border-radius: 15px;
+}
+
+.smart-step > span {
+  flex: 0 0 30px;
+
+  width: 30px;
+  height: 30px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 10px;
+
+  color: white;
+  font-size: 12px;
+  font-weight: 900;
+
+  background: linear-gradient(
+    135deg,
+    #397cff,
+    #a443ff
+  );
+}
+
+.smart-step div {
+  min-width: 0;
+}
+
+.smart-step b {
+  display: block;
+
+  color: white;
+
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.smart-step small {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #7f91ad;
+
+  font-size: 10px;
+  line-height: 1.25;
+}
+
+.smart-preview-arrow {
+  display: grid;
+  place-items: center;
+
+  color: #7186a7;
+
+  font-size: 17px;
+}
+
+.smart-preview-message {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  margin-top: 24px;
+  padding: 15px 17px;
+
+  border: 1px solid rgba(64, 213, 255, 0.18);
+  border-radius: 15px;
+
+  background: rgba(18, 34, 55, 0.62);
+}
+
+.smart-preview-message > span {
+  font-size: 22px;
+}
+
+.smart-preview-message p {
+  margin: 0;
+
+  color: #8192ab;
+
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.smart-preview-message b {
+  display: block;
+
+  margin-bottom: 2px;
+
+  color: #ffffff;
+
+  font-size: 13px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 850px) {
+
+  .smart-preview {
+    min-height: auto;
+    padding: 32px 24px;
+    border-radius: 24px;
+  }
+
+  .smart-preview h2 {
+    font-size: 36px;
+  }
+
+  .smart-preview-steps {
+    flex-direction: column;
+  }
+
+  .smart-preview-arrow {
+    height: 8px;
+    transform: rotate(90deg);
+  }
+
+}
+
+
+@media (max-width: 520px) {
+
+  .smart-preview {
+    padding: 27px 20px;
+  }
+
+  .smart-preview-icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 18px;
+    font-size: 25px;
+  }
+
+  .smart-preview h2 {
+    font-size: 31px;
+  }
+
+  .smart-preview-text {
+    font-size: 14px;
+    margin-bottom: 22px;
+  }
+
+}
