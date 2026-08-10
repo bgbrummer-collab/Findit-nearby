@@ -1,30 +1,51 @@
-const $ = (s) => document.querySelector(s);
-const $$ = (s) => Array.from(document.querySelectorAll(s));
-
-const photo = $("#photo");
-const cameraInput = $("#cameraInput");
-const preview = $("#preview");
-const emptyState = $("#emptyState");
-const searchButton = $("#search");
-const locationButton = $("#location");
-const statusBox = $("#status");
-const overlay = $("#loadingOverlay");
-const loadingTitle = $("#loadingTitle");
-const loadingText = $("#loadingText");
+const $ = (selector) => document.querySelector(selector);
+const $$ = (selector) => Array.from(document.querySelectorAll(selector));
 
 const API_BASE = window.FINDIT_API_BASE || "/api";
 
+const els = {
+  photo: $("#photo"),
+  cameraInput: $("#cameraInput"),
+  preview: $("#preview"),
+  emptyState: $("#emptyState"),
+  search: $("#search"),
+  location: $("#location"),
+  status: $("#status"),
+  overlay: $("#loadingOverlay"),
+  loadingTitle: $("#loadingTitle"),
+  loadingText: $("#loadingText"),
+  results: $("#results"),
+  stores: $("#stores"),
+  nearbyCount: $("#nearbyCount"),
+  locationLabel: $("#locationLabel"),
+  resultImage: $("#resultImage"),
+  resultTitle: $("#resultTitle"),
+  resultSubtitle: $("#resultSubtitle"),
+  matchText: $("#matchText"),
+  confidenceNumber: $("#confidenceNumber"),
+  confidenceRing: $("#confidenceRing"),
+  confidenceLabel: $("#confidenceLabel"),
+  productTags: $("#productTags"),
+  detailsContent: $("#detailsContent"),
+  verifiedOffers: $("#verifiedOffers"),
+  verifiedNotice: $("#verifiedNotice"),
+  comparisonContent: $("#comparisonContent"),
+  lowConfidence: $("#lowConfidence"),
+  recentModal: $("#recentModal"),
+  recentList: $("#recentList")
+};
+
+let selectedFile = null;
 let coords = null;
-let imageReady = false;
 let searching = false;
 let lastResult = null;
-let currentStores = [];
 let map = null;
 let mapLarge = null;
-let selectedFile = null;
 
-function esc(v) {
-  return String(v ?? "")
+const RECENT_KEY = "findit_recent_searches";
+
+function esc(value) {
+  return String(value ?? "")
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
@@ -32,8 +53,8 @@ function esc(v) {
     .replace(/'/g, "&#039;");
 }
 
-function normalise(v) {
-  return String(v || "")
+function normalise(value) {
+  return String(value || "")
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
@@ -41,17 +62,17 @@ function normalise(v) {
     .trim();
 }
 
-function safeUrl(v) {
-  if (!v) return null;
+function safeUrl(value) {
+  if (!value) return null;
 
-  let u = String(v).trim();
+  let url = String(value).trim();
 
-  if (!/^https?:\/\//i.test(u)) {
-    u = "https://" + u;
+  if (!/^https?:\/\//i.test(url)) {
+    url = `https://${url}`;
   }
 
   try {
-    const parsed = new URL(u);
+    const parsed = new URL(url);
 
     return ["http:", "https:"].includes(parsed.protocol)
       ? parsed.href
@@ -61,73 +82,20 @@ function safeUrl(v) {
   }
 }
 
-function phoneHref(v) {
-  return String(v || "")
+function phoneHref(value) {
+  return String(value || "")
     .replace(/[^\d+]/g, "");
 }
 
-function showLoading(title, text) {
-  if (loadingTitle) {
-    loadingTitle.textContent = title;
-  }
-
-  if (loadingText) {
-    loadingText.textContent = text;
-  }
-
-  if (overlay) {
-    overlay.classList.remove("hidden");
-  }
-}
-
-function hideLoading() {
-  if (overlay) {
-    overlay.classList.add("hidden");
-  }
-}
-
-function setSearchBusy(isBusy) {
-  searching = isBusy;
-
-  if (!searchButton) {
-    return;
-  }
-
-  searchButton.disabled =
-    isBusy ||
-    !imageReady;
-
-  searchButton.textContent =
-    isBusy
-      ? "◎ Finding your item…"
-      : "◎ Identify this item";
-}
-
-function distanceKm(
-  lat1,
-  lon1,
-  lat2,
-  lon2
-) {
+function distanceKm(lat1, lon1, lat2, lon2) {
   const R = 6371;
   const p = Math.PI / 180;
 
   const a =
-    Math.sin(
-      ((lat2 - lat1) * p) / 2
-    ) ** 2
-    +
-    Math.cos(
-      lat1 * p
-    )
-    *
-    Math.cos(
-      lat2 * p
-    )
-    *
-    Math.sin(
-      ((lon2 - lon1) * p) / 2
-    ) ** 2;
+    Math.sin(((lat2 - lat1) * p) / 2) ** 2 +
+    Math.cos(lat1 * p) *
+      Math.cos(lat2 * p) *
+      Math.sin(((lon2 - lon1) * p) / 2) ** 2;
 
   return (
     R *
@@ -139,34 +107,65 @@ function distanceKm(
   );
 }
 
-const RETAILER_DIRECTORY = [
+function showLoading(title, text) {
+  if (els.loadingTitle) {
+    els.loadingTitle.textContent = title;
+  }
+
+  if (els.loadingText) {
+    els.loadingText.textContent = text;
+  }
+
+  els.overlay?.classList.remove("hidden");
+}
+
+function hideLoading() {
+  els.overlay?.classList.add("hidden");
+}
+
+function setSearchBusy(busy) {
+  searching = busy;
+
+  if (!els.search) {
+    return;
+  }
+
+  els.search.disabled =
+    busy ||
+    !selectedFile;
+
+  els.search.textContent =
+    busy
+      ? "◎ Finding your item…"
+      : "◎ Identify this item";
+}
+
+
+/* =========================================================
+   RETAILER DIRECTORY
+========================================================= */
+
+const RETAILERS = [
   {
     keys: ["pna"],
     domain: "pna.co.za",
     website: "https://www.pna.co.za"
   },
-
   {
-    keys: [
-      "totalsports",
-      "total sports"
-    ],
+    keys: ["totalsports", "total sports"],
     domain: "totalsports.co.za",
     website: "https://www.totalsports.co.za"
   },
-
   {
     keys: ["footgear"],
     domain: "footgear.co.za",
     website: "https://www.footgear.co.za"
   },
-
   {
     keys: ["sportscene"],
     domain: "sportscene.co.za",
     website: "https://www.sportscene.co.za"
   },
-
   {
     keys: [
       "sportsmans warehouse",
@@ -175,103 +174,81 @@ const RETAILER_DIRECTORY = [
     domain: "sportsmanswarehouse.co.za",
     website: "https://www.sportsmanswarehouse.co.za"
   },
-
   {
     keys: ["jd sports"],
     domain: "jdsports.co.za",
     website: "https://www.jdsports.co.za"
   },
-
   {
     keys: ["studio 88"],
     domain: "studio-88.co.za",
     website: "https://www.studio-88.co.za"
   },
-
   {
     keys: ["mr price sport"],
     domain: "mrpsport.com",
     website: "https://www.mrpsport.com"
   },
-
   {
     keys: ["nike"],
     domain: "nike.com",
     website: "https://www.nike.com"
   },
-
   {
     keys: ["adidas"],
     domain: "adidas.co.za",
     website: "https://www.adidas.co.za"
   },
-
   {
     keys: ["puma"],
     domain: "puma.com",
     website: "https://www.puma.com"
   },
-
   {
     keys: ["skechers"],
     domain: "skechers.co.za",
     website: "https://www.skechers.co.za"
   },
-
   {
     keys: ["incredible connection"],
     domain: "incredible.co.za",
     website: "https://www.incredible.co.za"
   },
-
   {
     keys: ["makro"],
     domain: "makro.co.za",
     website: "https://www.makro.co.za"
   },
-
   {
     keys: ["game"],
     domain: "game.co.za",
     website: "https://www.game.co.za"
   },
-
   {
     keys: ["clicks"],
     domain: "clicks.co.za",
     website: "https://www.clicks.co.za"
   },
-
   {
-    keys: [
-      "dis chem",
-      "dischem"
-    ],
+    keys: ["dis chem", "dischem"],
     domain: "dischem.co.za",
     website: "https://www.dischem.co.za"
   },
-
   {
     keys: ["checkers"],
     domain: "checkers.co.za",
     website: "https://www.checkers.co.za"
   },
-
   {
-    keys: [
-      "pick n pay",
-      "pnp"
-    ],
+    keys: ["pick n pay", "pnp"],
     domain: "pnp.co.za",
     website: "https://www.pnp.co.za"
   },
-
   {
     keys: ["woolworths"],
     domain: "woolworths.co.za",
     website: "https://www.woolworths.co.za"
   },
-
   {
     keys: ["spar"],
     domain: "spar.co.za",
@@ -279,64 +256,41 @@ const RETAILER_DIRECTORY = [
   }
 ];
 
-function retailerDirectoryEntry(
-  storeName
-) {
-  const n =
-    normalise(
-      storeName
-    );
+const SINGLE_BRANDS = new Set([
+  "nike",
+  "adidas",
+  "puma",
+  "reebok",
+  "converse",
+  "vans",
+  "new balance",
+  "under armour",
+  "asics",
+  "skechers",
+  "crocs",
+  "fila",
+  "salomon",
+  "hoka",
+  "apple",
+  "samsung",
+  "huawei",
+  "xiaomi",
+  "sony",
+  "lg",
+  "bose",
+  "jbl",
+  "canon",
+  "nikon",
+  "lenovo",
+  "hp",
+  "dell",
+  "acer",
+  "asus",
+  "logitech",
+  "microsoft"
+]);
 
-  return (
-    RETAILER_DIRECTORY.find(
-      (entry) =>
-        entry.keys.some(
-          (key) =>
-            n.includes(
-              key
-            )
-        )
-    ) || null
-  );
-}
-
-const KNOWN_PRODUCT_BRANDS =
-  new Set([
-    "nike",
-    "adidas",
-    "puma",
-    "reebok",
-    "converse",
-    "vans",
-    "new balance",
-    "under armour",
-    "asics",
-    "skechers",
-    "crocs",
-    "fila",
-    "salomon",
-    "hoka",
-
-    "apple",
-    "samsung",
-    "huawei",
-    "xiaomi",
-    "sony",
-    "lg",
-    "bose",
-    "jbl",
-    "canon",
-    "nikon",
-    "lenovo",
-    "hp",
-    "dell",
-    "acer",
-    "asus",
-    "logitech",
-    "microsoft"
-  ]);
-
-const KNOWN_MULTIBRAND_RETAILERS = [
+const MULTIBRAND = [
   "totalsports",
   "total sports",
   "footgear",
@@ -362,6 +316,23 @@ const KNOWN_MULTIBRAND_RETAILERS = [
   "spar"
 ];
 
+function retailerInfo(name) {
+  const n = normalise(name);
+
+  return (
+    RETAILERS.find((retailer) =>
+      retailer.keys.some((key) =>
+        n.includes(key)
+      )
+    ) || null
+  );
+}
+
+
+/* =========================================================
+   PHOTO INPUT
+========================================================= */
+
 function acceptFile(file) {
   if (!file) {
     return;
@@ -369,190 +340,145 @@ function acceptFile(file) {
 
   if (
     !file.type ||
-    !file.type.startsWith(
-      "image/"
-    )
+    !file.type.startsWith("image/")
   ) {
-    if (statusBox) {
-      statusBox.textContent =
+    if (els.status) {
+      els.status.textContent =
         "Please choose an image file.";
     }
 
     return;
   }
 
-  if (
-    file.size >
-    8000000
-  ) {
-    if (statusBox) {
-      statusBox.textContent =
+  if (file.size > 8000000) {
+    if (els.status) {
+      els.status.textContent =
         "Please use an image smaller than 8 MB.";
     }
 
     return;
   }
 
-  selectedFile =
-    file;
+  selectedFile = file;
+  lastResult = null;
 
-  if (preview) {
-    preview.src =
-      URL.createObjectURL(
-        file
-      );
+  if (els.preview) {
+    els.preview.src =
+      URL.createObjectURL(file);
 
-    preview.style.display =
+    els.preview.style.display =
       "block";
   }
 
-  if (emptyState) {
-    emptyState.style.display =
+  if (els.emptyState) {
+    els.emptyState.style.display =
       "none";
   }
 
-  imageReady =
-    true;
-
-  lastResult =
-    null;
-
-  currentStores =
-    [];
-
-  setSearchBusy(
-    false
-  );
-
-  if (statusBox) {
-    statusBox.textContent =
+  if (els.status) {
+    els.status.textContent =
       "Photo ready. Tap Identify this item once.";
   }
 
-  const results =
-    $("#results");
-
-  if (results) {
-    results.classList.add(
-      "hidden"
-    );
-  }
-}
-
-if (photo) {
-  photo.addEventListener(
-    "change",
-    () => {
-      acceptFile(
-        photo.files &&
-        photo.files[0]
-      );
-    }
+  els.results?.classList.add(
+    "hidden"
   );
+
+  setSearchBusy(false);
 }
 
-if (cameraInput) {
-  cameraInput.addEventListener(
-    "change",
-    () => {
-      acceptFile(
-        cameraInput.files &&
-        cameraInput.files[0]
-      );
-    }
+els.photo?.addEventListener(
+  "change",
+  () =>
+    acceptFile(
+      els.photo.files?.[0]
+    )
+);
+
+els.cameraInput?.addEventListener(
+  "change",
+  () =>
+    acceptFile(
+      els.cameraInput.files?.[0]
+    )
+);
+
+$("#heroUpload")
+  ?.addEventListener(
+    "click",
+    () =>
+      els.photo?.click()
   );
-}
 
-if ($("#heroUpload")) {
-  $("#heroUpload")
-    .addEventListener(
-      "click",
-      () => {
-        if (photo) {
-          photo.click();
-        }
-      }
-    );
-}
+$("#heroCamera")
+  ?.addEventListener(
+    "click",
+    () =>
+      els.cameraInput?.click()
+  );
 
-if ($("#heroCamera")) {
-  $("#heroCamera")
-    .addEventListener(
-      "click",
-      () => {
-        if (cameraInput) {
-          cameraInput.click();
-        }
-      }
-    );
-}
+
+/* =========================================================
+   DRAG AND DROP
+========================================================= */
 
 [
   $("#heroDropzone"),
   $("#finderDropzone")
 ]
   .filter(Boolean)
-  .forEach(
-    (zone) => {
+  .forEach((zone) => {
 
-      zone.addEventListener(
-        "dragover",
-        (event) => {
-          event.preventDefault();
+    zone.addEventListener(
+      "dragover",
+      (event) => {
+        event.preventDefault();
 
-          zone.classList.add(
-            "dragging"
-          );
-        }
-      );
+        zone.classList.add(
+          "dragging"
+        );
+      }
+    );
 
-      zone.addEventListener(
-        "dragleave",
-        () => {
-          zone.classList.remove(
-            "dragging"
-          );
-        }
-      );
+    zone.addEventListener(
+      "dragleave",
+      () =>
+        zone.classList.remove(
+          "dragging"
+        )
+    );
 
-      zone.addEventListener(
-        "drop",
-        (event) => {
-          event.preventDefault();
+    zone.addEventListener(
+      "drop",
+      (event) => {
+        event.preventDefault();
 
-          zone.classList.remove(
-            "dragging"
-          );
+        zone.classList.remove(
+          "dragging"
+        );
 
-          const file =
-            event.dataTransfer &&
-            event.dataTransfer.files &&
-            event.dataTransfer.files[0];
+        acceptFile(
+          event.dataTransfer
+            ?.files?.[0]
+        );
 
-          acceptFile(
-            file
-          );
+        $("#finder")
+          ?.scrollIntoView({
+            behavior:
+              "smooth"
+          });
+      }
+    );
+  });
 
-          const finder =
-            $("#finder");
 
-          if (finder) {
-            finder.scrollIntoView({
-              behavior:
-                "smooth"
-            });
-          }
-        }
-      );
-    }
-  );
+/* =========================================================
+   LOCATION
+========================================================= */
 
 function getLocation() {
   return new Promise(
-    (
-      resolve,
-      reject
-    ) => {
+    (resolve, reject) => {
 
       if (
         !navigator.geolocation
@@ -568,7 +494,6 @@ function getLocation() {
 
       navigator.geolocation
         .getCurrentPosition(
-
           (position) => {
 
             coords = {
@@ -579,9 +504,7 @@ function getLocation() {
                 position.coords.longitude
             };
 
-            resolve(
-              coords
-            );
+            resolve(coords);
           },
 
           reject,
@@ -604,168 +527,155 @@ function getLocation() {
 async function ensureLocation() {
   if (
     coords &&
-    Number.isFinite(
-      coords.lat
-    ) &&
-    Number.isFinite(
-      coords.lon
-    )
+    Number.isFinite(coords.lat) &&
+    Number.isFinite(coords.lon)
   ) {
     return coords;
   }
 
-  if (locationButton) {
-    locationButton.textContent =
+  if (els.location) {
+    els.location.textContent =
       "⌖ Getting location…";
   }
 
   const result =
     await getLocation();
 
-  if (locationButton) {
-    locationButton.textContent =
+  if (els.location) {
+    els.location.textContent =
       "✓ Location ready";
   }
 
-  if ($("#locationLabel")) {
-    $("#locationLabel")
-      .textContent =
+  if (els.locationLabel) {
+    els.locationLabel.textContent =
       "your current location";
   }
 
   return result;
 }
 
-if (locationButton) {
-  locationButton
-    .addEventListener(
-      "click",
-      async () => {
+els.location
+  ?.addEventListener(
+    "click",
+    async () => {
+
+      if (
+        els.location.disabled
+      ) {
+        return;
+      }
+
+      els.location.disabled =
+        true;
+
+      try {
+        showLoading(
+          "Getting your location…",
+          "Allow location so FindIt can show nearby retailers."
+        );
+
+        await ensureLocation();
 
         if (
-          locationButton.disabled
+          lastResult
+            ?.identification
         ) {
-          return;
-        }
-
-        locationButton.disabled =
-          true;
-
-        try {
           showLoading(
-            "Getting your location…",
-            "Allow location so FindIt can show nearby retailers."
+            "Finding nearby retailers…",
+            "Checking stores that match this product."
           );
 
-          await ensureLocation();
-
-          if (
-            lastResult &&
+          await renderNearby(
             lastResult.identification
-          ) {
-            showLoading(
-              "Finding nearby retailers…",
-              "Checking only stores that match this product."
-            );
-
-            await renderNearby(
-              lastResult.identification
-            );
-          }
-
-          if (statusBox) {
-            statusBox.textContent =
-              "Location ready.";
-          }
-
-        } catch (error) {
-          console.error(
-            error
           );
-
-          if (locationButton) {
-            locationButton.textContent =
-              "⌖ Try location again";
-          }
-
-          if (statusBox) {
-            statusBox.textContent =
-              "We couldn't get your location. Please allow location access and try again.";
-          }
-
-        } finally {
-          hideLoading();
-
-          locationButton.disabled =
-            false;
         }
+
+        if (els.status) {
+          els.status.textContent =
+            "Location ready.";
+        }
+
+      } catch (error) {
+        console.error(
+          "Location error:",
+          error
+        );
+
+        els.location.textContent =
+          "⌖ Try location again";
+
+        if (els.status) {
+          els.status.textContent =
+            "We couldn't get your location. Please allow location access and try again.";
+        }
+
+      } finally {
+        hideLoading();
+
+        els.location.disabled =
+          false;
       }
-    );
-}
+    }
+  );
 
-if ($("#changeLocation")) {
-  $("#changeLocation")
-    .addEventListener(
-      "click",
-      async () => {
+$("#changeLocation")
+  ?.addEventListener(
+    "click",
+    async () => {
 
-        coords =
-          null;
+      coords = null;
 
-        if (locationButton) {
-          locationButton.textContent =
-            "⌖ Use my location";
-        }
+      if (els.location) {
+        els.location.textContent =
+          "⌖ Use my location";
+      }
 
-        try {
+      try {
+        showLoading(
+          "Updating location…",
+          "Your browser may ask for permission."
+        );
+
+        await ensureLocation();
+
+        if (
+          lastResult
+            ?.identification
+        ) {
           showLoading(
-            "Updating location…",
-            "Your browser may ask for permission."
+            "Finding nearby retailers…",
+            "Refreshing results near you."
           );
 
-          await ensureLocation();
-
-          if (
-            lastResult &&
+          await renderNearby(
             lastResult.identification
-          ) {
-            showLoading(
-              "Finding nearby retailers…",
-              "Refreshing results near you."
-            );
-
-            await renderNearby(
-              lastResult.identification
-            );
-          }
-
-        } catch (error) {
-          console.error(
-            error
           );
-
-          if (statusBox) {
-            statusBox.textContent =
-              "Could not update location.";
-          }
-
-        } finally {
-          hideLoading();
         }
+
+      } catch (error) {
+        console.error(
+          "Change location error:",
+          error
+        );
+
+        if (els.status) {
+          els.status.textContent =
+            "Could not update location.";
+        }
+
+      } finally {
+        hideLoading();
       }
-    );
-}
+    }
+  );
+
+
+/* =========================================================
+   AI SEARCH
+========================================================= */
 
 async function identifyItem() {
-  const file =
-    selectedFile ||
-    (
-      photo &&
-      photo.files &&
-      photo.files[0]
-    );
-
-  if (!file) {
+  if (!selectedFile) {
     throw new Error(
       "Choose a photo first."
     );
@@ -776,20 +686,17 @@ async function identifyItem() {
 
   form.append(
     "image",
-    file,
-    file.name ||
-    "upload.jpg"
+    selectedFile,
+    selectedFile.name ||
+      "upload.jpg"
   );
 
   const response =
     await fetch(
       `${API_BASE}/search`,
       {
-        method:
-          "POST",
-
-        body:
-          form
+        method: "POST",
+        body: form
       }
     );
 
@@ -814,13 +721,12 @@ async function identifyItem() {
       "Image identification failed.";
 
     if (
-      /quota|rate|429/i
-        .test(
-          message
-        )
+      /quota|rate|429/i.test(
+        message
+      )
     ) {
       throw new Error(
-        "Gemini's free usage limit is temporarily reached. Try again later."
+        "The AI service is temporarily at its usage limit. Please try again later."
       );
     }
 
@@ -832,27 +738,36 @@ async function identifyItem() {
   return data;
 }
 
-async function fetchNearby() {
-  if (
-    !coords ||
-    !Number.isFinite(
-      coords.lat
-    ) ||
-    !Number.isFinite(
-      coords.lon
-    )
-  ) {
+
+/* =========================================================
+   NEARBY API
+========================================================= */
+
+async function fetchNearby(item) {
+  if (!coords) {
     throw new Error(
       "Location is required."
     );
   }
 
+  const payload = {
+    lat: coords.lat,
+    lon: coords.lon,
+    category:
+      item?.category || "",
+    object:
+      item?.object || "",
+    brand:
+      item?.brand || "",
+    searchQuery:
+      item?.searchQuery || ""
+  };
+
   const response =
     await fetch(
       `${API_BASE}/nearby`,
       {
-        method:
-          "POST",
+        method: "POST",
 
         headers: {
           "Content-Type":
@@ -861,7 +776,7 @@ async function fetchNearby() {
 
         body:
           JSON.stringify(
-            coords
+            payload
           )
       }
     );
@@ -894,119 +809,122 @@ async function fetchNearby() {
     : [];
 }
 
-function categoryProfile(item) {
-  const visible =
-    Array.isArray(
-      item.visibleText
-    )
-      ? item.visibleText.join(
-          " "
-        )
-      : "";
 
+/* =========================================================
+   PRODUCT CATEGORY MATCHING
+========================================================= */
+
+function categoryProfile(item) {
   const text =
     normalise(
-      `
-      ${item.object || ""}
-      ${item.name || ""}
-      ${item.brand || ""}
-      ${item.model || ""}
-      ${item.category || ""}
-      ${item.searchQuery || ""}
-      ${visible}
-      `
+      [
+        item?.object,
+        item?.name,
+        item?.brand,
+        item?.model,
+        item?.category,
+        item?.searchQuery,
+
+        Array.isArray(
+          item?.visibleText
+        )
+          ? item.visibleText.join(
+              " "
+            )
+          : ""
+      ]
+        .filter(Boolean)
+        .join(" ")
     );
 
+  const profile =
+    (
+      family,
+      types,
+      words,
+      blocked = []
+    ) => ({
+      family,
+      types,
+      words,
+      blocked,
+      strict: true
+    });
+
   if (
-    /shoe|shoes|sneaker|sneakers|footwear|trainer|trainers|boot|boots|sandal|sandals/
+    /shoe|sneaker|footwear|trainer|boot|sandal/
       .test(text)
   ) {
-    return {
-      family:
-        "footwear",
+    return profile(
+      "footwear",
 
-      types: [
+      [
         "shoes",
         "sports",
         "clothes",
         "department_store"
       ],
 
-      words: [
+      [
         "shoe",
         "sneaker",
         "footwear",
         "sport"
       ],
 
-      blockedTypes: [
+      [
         "florist",
         "beauty",
         "chemist",
-        "books",
         "stationery",
         "hardware",
         "furniture",
-        "car",
-        "car_repair",
-        "garden_centre",
-        "mobile_phone"
-      ],
-
-      strict:
-        true
-    };
+        "garden_centre"
+      ]
+    );
   }
 
   if (
-    /pencil case|pencil|pen|stationery|notebook|marker|stapler|school supplies|office supplies|eraser|ruler|highlighter/
+    /pencil case|pencil|pen|stationery|notebook|marker|stapler|eraser|ruler|highlighter|school supplies|office supplies/
       .test(text)
   ) {
-    return {
-      family:
-        "stationery",
+    return profile(
+      "stationery",
 
-      types: [
+      [
         "stationery",
         "books",
         "variety_store",
         "department_store"
       ],
 
-      words: [
+      [
         "stationery",
         "office",
         "school",
         "book"
       ],
 
-      blockedTypes: [
+      [
         "sports",
         "shoes",
         "florist",
         "beauty",
         "chemist",
         "hardware",
-        "furniture",
-        "car",
-        "car_repair",
-        "garden_centre"
-      ],
-
-      strict:
-        true
-    };
+        "furniture"
+      ]
+    );
   }
 
   if (
-    /food|grocery|groceries|supermarket|snack|sauce|spread|jam|butter|cream cheese|icing|frosting|buttercream|butter cream|cake cream|baking|baking ingredient|flour|sugar|milk|bread|cereal|chocolate|sweet|candy|coffee|tea|juice|drink|beverage|syrup|soup|pasta|rice|cookie|biscuit|chips|lemon curd|lemon butter/
+    /food|grocery|supermarket|snack|sauce|spread|jam|butter|icing|frosting|buttercream|butter cream|baking|flour|sugar|milk|bread|cereal|chocolate|sweet|candy|coffee|tea|juice|drink|beverage|syrup|soup|pasta|rice|cookie|biscuit|chips|lemon curd|lemon butter/
       .test(text)
   ) {
-    return {
-      family:
-        "food",
+    return profile(
+      "food",
 
-      types: [
+      [
         "supermarket",
         "convenience",
         "deli",
@@ -1015,7 +933,7 @@ function categoryProfile(item) {
         "department_store"
       ],
 
-      words: [
+      [
         "food",
         "grocery",
         "supermarket",
@@ -1023,7 +941,7 @@ function categoryProfile(item) {
         "baking"
       ],
 
-      blockedTypes: [
+      [
         "sports",
         "shoes",
         "clothes",
@@ -1032,28 +950,22 @@ function categoryProfile(item) {
         "hardware",
         "furniture",
         "florist",
-        "car",
-        "car_repair",
         "mobile_phone",
         "stationery",
         "books",
         "beauty"
-      ],
-
-      strict:
-        true
-    };
+      ]
+    );
   }
 
   if (
-    /skin care|skincare|body cream|face cream|hand cream|lotion|moisturizer|moisturiser|cosmetic|cosmetics|makeup|beauty|serum|shampoo|conditioner|soap|deodorant|perfume|fragrance|body wash|face wash/
+    /skin care|skincare|body cream|face cream|hand cream|lotion|moisturizer|moisturiser|cosmetic|makeup|beauty|serum|shampoo|conditioner|soap|deodorant|perfume|fragrance|body wash|face wash/
       .test(text)
   ) {
-    return {
-      family:
-        "beauty",
+    return profile(
+      "beauty",
 
-      types: [
+      [
         "beauty",
         "chemist",
         "cosmetics",
@@ -1062,7 +974,7 @@ function categoryProfile(item) {
         "department_store"
       ],
 
-      words: [
+      [
         "beauty",
         "cosmetic",
         "skin",
@@ -1070,45 +982,39 @@ function categoryProfile(item) {
         "chemist"
       ],
 
-      blockedTypes: [
+      [
         "sports",
         "shoes",
         "electronics",
         "computer",
         "hardware",
         "furniture",
-        "car",
-        "car_repair",
         "stationery",
         "books"
-      ],
-
-      strict:
-        true
-    };
+      ]
+    );
   }
 
   if (
-    /medicine|medication|pharmacy|chemist|vitamin|painkiller|bandage|first aid|medical supply|medical supplies/
+    /medicine|medication|pharmacy|chemist|vitamin|painkiller|bandage|first aid|medical supply/
       .test(text)
   ) {
-    return {
-      family:
-        "pharmacy",
+    return profile(
+      "pharmacy",
 
-      types: [
+      [
         "chemist",
         "pharmacy",
         "medical_supply"
       ],
 
-      words: [
+      [
         "pharmacy",
         "chemist",
         "medical"
       ],
 
-      blockedTypes: [
+      [
         "sports",
         "shoes",
         "clothes",
@@ -1117,36 +1023,32 @@ function categoryProfile(item) {
         "furniture",
         "florist",
         "stationery"
-      ],
-
-      strict:
-        true
-    };
+      ]
+    );
   }
 
   if (
-    /microphone|headphone|headphones|earphone|earphones|speaker|audio|sound|amplifier|earbud|earbuds/
+    /microphone|headphone|earphone|speaker|audio|sound|amplifier|earbud/
       .test(text)
   ) {
-    return {
-      family:
-        "audio",
+    return profile(
+      "audio",
 
-      types: [
+      [
         "electronics",
         "music",
         "hifi",
         "computer"
       ],
 
-      words: [
+      [
         "audio",
         "music",
         "sound",
         "electronics"
       ],
 
-      blockedTypes: [
+      [
         "sports",
         "shoes",
         "florist",
@@ -1155,34 +1057,30 @@ function categoryProfile(item) {
         "stationery",
         "furniture",
         "hardware"
-      ],
-
-      strict:
-        true
-    };
+      ]
+    );
   }
 
   if (
     /smartphone|mobile phone|iphone|android phone|cellphone|cell phone/
       .test(text)
   ) {
-    return {
-      family:
-        "mobile",
+    return profile(
+      "mobile",
 
-      types: [
+      [
         "mobile_phone",
         "electronics",
         "computer"
       ],
 
-      words: [
+      [
         "mobile",
         "phone",
         "electronics"
       ],
 
-      blockedTypes: [
+      [
         "sports",
         "shoes",
         "florist",
@@ -1191,65 +1089,57 @@ function categoryProfile(item) {
         "stationery",
         "furniture",
         "hardware"
-      ],
-
-      strict:
-        true
-    };
+      ]
+    );
   }
 
   if (
     /computer|laptop|monitor|keyboard|mouse|printer|desktop pc|gaming pc/
       .test(text)
   ) {
-    return {
-      family:
-        "computer",
+    return profile(
+      "computer",
 
-      types: [
+      [
         "computer",
         "electronics"
       ],
 
-      words: [
+      [
         "computer",
         "technology",
         "electronics"
       ],
 
-      blockedTypes: [
+      [
         "sports",
         "shoes",
         "florist",
         "beauty",
         "chemist",
         "furniture"
-      ],
-
-      strict:
-        true
-    };
+      ]
+    );
   }
 
   if (
     /camera|photography|camera lens|dslr|mirrorless/
       .test(text)
   ) {
-    return {
-      family:
-        "camera",
+    return profile(
+      "camera",
 
-      types: [
+      [
         "camera",
         "electronics"
       ],
 
-      words: [
+      [
         "camera",
         "photography"
       ],
 
-      blockedTypes: [
+      [
         "sports",
         "shoes",
         "florist",
@@ -1257,34 +1147,30 @@ function categoryProfile(item) {
         "chemist",
         "stationery",
         "furniture"
-      ],
-
-      strict:
-        true
-    };
+      ]
+    );
   }
 
   if (
     /shirt|t shirt|tshirt|sweater|hoodie|jacket|dress|clothing|fashion|jeans|pants|trousers|shorts|skirt|coat/
       .test(text)
   ) {
-    return {
-      family:
-        "clothing",
+    return profile(
+      "clothing",
 
-      types: [
+      [
         "clothes",
         "fashion",
         "department_store"
       ],
 
-      words: [
+      [
         "clothes",
         "fashion",
         "clothing"
       ],
 
-      blockedTypes: [
+      [
         "electronics",
         "computer",
         "chemist",
@@ -1292,34 +1178,30 @@ function categoryProfile(item) {
         "furniture",
         "florist",
         "stationery"
-      ],
-
-      strict:
-        true
-    };
+      ]
+    );
   }
 
   if (
-    /flower|flowers|plant|plants|bouquet|rose|roses|orchid|succulent/
+    /flower|plant|bouquet|rose|orchid|succulent/
       .test(text)
   ) {
-    return {
-      family:
-        "plants",
+    return profile(
+      "plants",
 
-      types: [
+      [
         "florist",
         "garden_centre"
       ],
 
-      words: [
+      [
         "flower",
         "florist",
         "plant",
         "garden"
       ],
 
-      blockedTypes: [
+      [
         "sports",
         "shoes",
         "electronics",
@@ -1327,100 +1209,88 @@ function categoryProfile(item) {
         "chemist",
         "stationery",
         "furniture"
-      ],
-
-      strict:
-        true
-    };
+      ]
+    );
   }
 
   if (
     /chair|table|desk|sofa|couch|furniture|cabinet|shelf|bookshelf|wardrobe|bed frame/
       .test(text)
   ) {
-    return {
-      family:
-        "furniture",
+    return profile(
+      "furniture",
 
-      types: [
+      [
         "furniture",
         "houseware",
         "interior_decoration"
       ],
 
-      words: [
+      [
         "furniture",
         "home",
         "interior"
       ],
 
-      blockedTypes: [
+      [
         "sports",
         "shoes",
         "electronics",
         "florist",
         "chemist",
         "stationery"
-      ],
-
-      strict:
-        true
-    };
+      ]
+    );
   }
 
   if (
     /book|novel|textbook|magazine|comic book/
       .test(text)
   ) {
-    return {
-      family:
-        "books",
+    return profile(
+      "books",
 
-      types: [
+      [
         "books",
         "stationery"
       ],
 
-      words: [
+      [
         "book",
         "books"
       ],
 
-      blockedTypes: [
+      [
         "sports",
         "shoes",
         "electronics",
         "florist",
         "chemist",
         "furniture"
-      ],
-
-      strict:
-        true
-    };
+      ]
+    );
   }
 
   if (
-    /tool|tools|drill|hammer|hardware|screwdriver|saw|spanner|wrench|pliers/
+    /tool|drill|hammer|hardware|screwdriver|saw|spanner|wrench|pliers/
       .test(text)
   ) {
-    return {
-      family:
-        "tools",
+    return profile(
+      "tools",
 
-      types: [
+      [
         "hardware",
         "doityourself",
         "trade"
       ],
 
-      words: [
+      [
         "hardware",
         "tool",
         "tools"
       ],
 
-      blockedTypes: [
+      [
         "sports",
         "shoes",
         "florist",
@@ -1428,22 +1298,18 @@ function categoryProfile(item) {
         "chemist",
         "stationery",
         "furniture"
-      ],
-
-      strict:
-        true
-    };
+      ]
+    );
   }
 
   if (
-    /toy|toys|lego|board game|video game|gaming console|playstation|xbox|nintendo/
+    /toy|lego|board game|video game|gaming console|playstation|xbox|nintendo/
       .test(text)
   ) {
-    return {
-      family:
-        "toys-games",
+    return profile(
+      "toys-games",
 
-      types: [
+      [
         "toys",
         "games",
         "video_games",
@@ -1451,64 +1317,52 @@ function categoryProfile(item) {
         "variety_store"
       ],
 
-      words: [
+      [
         "toy",
         "game",
         "games"
       ],
 
-      blockedTypes: [
+      [
         "florist",
         "beauty",
         "chemist",
         "hardware",
         "furniture"
-      ],
-
-      strict:
-        true
-    };
+      ]
+    );
   }
 
   return {
-    family:
-      "unknown",
-
-    types:
-      [],
-
-    words:
-      normalise(
-        item.category ||
-        item.object ||
-        ""
-      )
-        .split(" ")
-        .filter(
-          (word) =>
-            word.length >= 4
-        ),
-
-    blockedTypes:
-      [],
-
-    strict:
-      false
+    family: "unknown",
+    types: [],
+    words: [],
+    blocked: [],
+    strict: false
   };
 }
 
+
+/* =========================================================
+   STORE DATA
+========================================================= */
+
 function extractStore(place) {
   const lat =
-    place.lat ??
-    place.center?.lat;
+    Number(
+      place.lat ??
+      place.center?.lat
+    );
 
   const lon =
-    place.lon ??
-    place.center?.lon;
+    Number(
+      place.lon ??
+      place.center?.lon
+    );
 
   if (
-    lat == null ||
-    lon == null
+    !Number.isFinite(lat) ||
+    !Number.isFinite(lon)
   ) {
     return null;
   }
@@ -1521,20 +1375,15 @@ function extractStore(place) {
     tags.brand ||
     "Unnamed retailer";
 
-  const directory =
-    retailerDirectoryEntry(
-      name
-    );
+  const known =
+    retailerInfo(name);
 
-  const osmWebsite =
+  const website =
     safeUrl(
       tags["contact:website"] ||
       tags.website
-    );
-
-  const website =
-    osmWebsite ||
-    directory?.website ||
+    ) ||
+    known?.website ||
     null;
 
   const phone =
@@ -1544,16 +1393,20 @@ function extractStore(place) {
     tags.mobile ||
     null;
 
+  const type =
+    tags.shop ||
+    (
+      tags.amenity === "pharmacy"
+        ? "pharmacy"
+        : tags.amenity
+    ) ||
+    "retail";
+
   return {
     name,
     lat,
     lon,
-
-    type:
-      tags.shop ||
-      tags.amenity ||
-      "retail",
-
+    type,
     website,
     phone,
 
@@ -1571,30 +1424,28 @@ function extractStore(place) {
       .join(", "),
 
     tags,
-    directory
+    known
   };
 }
 
-function findKnownMaker(text) {
-  const n =
-    normalise(
-      text
-    );
+function findSingleBrand(text) {
+  const value =
+    normalise(text);
 
   for (
     const brand
-    of KNOWN_PRODUCT_BRANDS
+    of SINGLE_BRANDS
   ) {
     if (
-      n === brand ||
-      n.startsWith(
-        brand + " "
+      value === brand ||
+      value.includes(
+        ` ${brand} `
       ) ||
-      n.endsWith(
-        " " + brand
+      value.startsWith(
+        `${brand} `
       ) ||
-      n.includes(
-        " " + brand + " "
+      value.endsWith(
+        ` ${brand}`
       )
     ) {
       return brand;
@@ -1604,52 +1455,19 @@ function findKnownMaker(text) {
   return null;
 }
 
-function isMultiBrandRetailer(store) {
+function isMultiBrand(store) {
   const name =
     normalise(
       store.name
     );
 
-  return (
-    KNOWN_MULTIBRAND_RETAILERS
-      .some(
-        (retailer) =>
-          name.includes(
-            retailer
-          )
-      )
-  );
-}
-
-function isCompetingSingleBrandStore(
-  store,
-  item
-) {
-  const itemBrand =
-    normalise(
-      item.brand
+  return MULTIBRAND
+    .some(
+      (retailer) =>
+        name.includes(
+          retailer
+        )
     );
-
-  if (
-    !itemBrand ||
-    isMultiBrandRetailer(
-      store
-    )
-  ) {
-    return false;
-  }
-
-  const storeBrand =
-    findKnownMaker(
-      store.tags.brand ||
-      store.tags.name ||
-      store.name
-    );
-
-  return (
-    !!storeBrand &&
-    storeBrand !== itemBrand
-  );
 }
 
 function retailerScore(
@@ -1657,14 +1475,14 @@ function retailerScore(
   item,
   profile
 ) {
-  const name =
-    normalise(
-      store.name
-    );
-
   const type =
     normalise(
       store.type
+    );
+
+  const name =
+    normalise(
+      store.name
     );
 
   const blob =
@@ -1682,29 +1500,37 @@ function retailerScore(
 
   const itemBrand =
     normalise(
-      item.brand
+      item?.brand
     );
 
-  let score =
-    0;
-
   if (
-    isCompetingSingleBrandStore(
-      store,
-      item
+    profile.blocked.includes(
+      type
     )
   ) {
     return -9999;
   }
 
   if (
-    profile.blockedTypes
-      .includes(
-        type
-      )
+    itemBrand &&
+    !isMultiBrand(store)
   ) {
-    return -9999;
+    const storeBrand =
+      findSingleBrand(
+        store.tags.brand ||
+        store.tags.name ||
+        store.name
+      );
+
+    if (
+      storeBrand &&
+      storeBrand !== itemBrand
+    ) {
+      return -9999;
+    }
   }
+
+  let score = 0;
 
   if (
     itemBrand &&
@@ -1717,27 +1543,27 @@ function retailerScore(
       ) === itemBrand
     )
   ) {
-    score +=
-      240;
+    score += 240;
   }
 
   if (
-    isMultiBrandRetailer(
-      store
+    profile.types.includes(
+      type
     )
   ) {
-    score +=
-      35;
+    score += 110;
   }
 
   if (
-    profile.types
-      .includes(
-        type
-      )
+    isMultiBrand(store)
   ) {
-    score +=
-      100;
+    score += 35;
+  }
+
+  if (
+    store.known
+  ) {
+    score += 10;
   }
 
   for (
@@ -1745,59 +1571,92 @@ function retailerScore(
     of profile.words
   ) {
     if (
-      word &&
       blob.includes(
-        normalise(
-          word
-        )
+        normalise(word)
       )
     ) {
-      score +=
-        15;
+      score += 15;
     }
-  }
-
-  if (
-    store.directory
-  ) {
-    score +=
-      10;
   }
 
   if (
     profile.strict &&
-    !profile.types
-      .includes(
-        type
-      )
+    !profile.types.includes(type) &&
+    !profile.words.some(
+      (word) =>
+        blob.includes(
+          normalise(word)
+        )
+    )
   ) {
-    const hasKeyword =
-      profile.words
-        .some(
-          (word) =>
-            blob.includes(
-              normalise(
-                word
-              )
-            )
-        );
-
-    if (
-      !hasKeyword
-    ) {
-      score -=
-        85;
-    }
+    score -= 100;
   }
 
   return score;
 }
 
-function faviconForStore(store) {
+function dedupeStores(stores) {
+  const kept = [];
+
+  for (
+    const store
+    of stores
+  ) {
+    const duplicate =
+      kept.find(
+        (existing) =>
+          normalise(
+            existing.name
+          ) ===
+          normalise(
+            store.name
+          ) &&
+          distanceKm(
+            existing.lat,
+            existing.lon,
+            store.lat,
+            store.lon
+          ) < 1
+      );
+
+    if (
+      !duplicate
+    ) {
+      kept.push(store);
+      continue;
+    }
+
+    const informationScore =
+      (value) =>
+        Number(!!value.phone) +
+        Number(!!value.website) +
+        Number(!!value.address) +
+        Number(!!value.opening);
+
+    if (
+      informationScore(store) >
+      informationScore(
+        duplicate
+      )
+    ) {
+      kept[
+        kept.indexOf(
+          duplicate
+        )
+      ] = store;
+    }
+  }
+
+  return kept;
+}
+
+function storeLogo(store) {
   let domain =
+    store.known?.domain ||
     null;
 
   if (
+    !domain &&
     store.website
   ) {
     try {
@@ -1813,27 +1672,13 @@ function faviconForStore(store) {
     } catch {}
   }
 
-  if (
-    !domain &&
-    store.directory?.domain
-  ) {
-    domain =
-      store.directory.domain;
-  }
-
-  if (
-    !domain
-  ) {
-    return null;
-  }
-
-  return (
-    "https://www.google.com/s2/favicons?domain=" +
-    encodeURIComponent(
-      domain
-    ) +
-    "&sz=128"
-  );
+  return domain
+    ? (
+      "https://www.google.com/s2/favicons?domain=" +
+      encodeURIComponent(domain) +
+      "&sz=128"
+    )
+    : null;
 }
 
 function retailerSearchUrl(
@@ -1841,8 +1686,8 @@ function retailerSearchUrl(
   item
 ) {
   if (
-    !item.searchQuery ||
-    !store.website
+    !store.website ||
+    !item?.searchQuery
   ) {
     return null;
   }
@@ -1870,100 +1715,10 @@ function retailerSearchUrl(
   }
 }
 
-function dedupeStores(stores) {
-  const kept =
-    [];
 
-  for (
-    const store
-    of stores
-  ) {
-    const duplicate =
-      kept.find(
-        (existing) => {
-
-          if (
-            normalise(
-              existing.name
-            ) !==
-            normalise(
-              store.name
-            )
-          ) {
-            return false;
-          }
-
-          return (
-            distanceKm(
-              existing.lat,
-              existing.lon,
-              store.lat,
-              store.lon
-            ) < 1
-          );
-        }
-      );
-
-    if (
-      !duplicate
-    ) {
-      kept.push(
-        store
-      );
-
-      continue;
-    }
-
-    const oldInfo =
-      Number(
-        !!duplicate.phone
-      )
-      +
-      Number(
-        !!duplicate.website
-      )
-      +
-      Number(
-        !!duplicate.address
-      )
-      +
-      Number(
-        !!duplicate.opening
-      );
-
-    const newInfo =
-      Number(
-        !!store.phone
-      )
-      +
-      Number(
-        !!store.website
-      )
-      +
-      Number(
-        !!store.address
-      )
-      +
-      Number(
-        !!store.opening
-      );
-
-    if (
-      newInfo >
-      oldInfo
-    ) {
-      const index =
-        kept.indexOf(
-          duplicate
-        );
-
-      kept[index] =
-        store;
-    }
-  }
-
-  return kept;
-}
+/* =========================================================
+   PRODUCT RESULT
+========================================================= */
 
 function renderIdentification(data) {
   const item =
@@ -1987,68 +1742,53 @@ function renderIdentification(data) {
   lastResult =
     data;
 
-  $("#results")
+  els.results
     ?.classList
-    .remove(
-      "hidden"
-    );
+    .remove("hidden");
 
-  $("#lowConfidence")
+  els.lowConfidence
     ?.classList
-    .add(
-      "hidden"
-    );
+    .add("hidden");
 
-  if (
-    $("#resultImage")
-  ) {
-    $("#resultImage").src =
-      preview?.src || "";
+  if (els.resultImage) {
+    els.resultImage.src =
+      els.preview?.src ||
+      "";
   }
 
-  if (
-    $("#resultTitle")
-  ) {
-    $("#resultTitle").textContent =
+  if (els.resultTitle) {
+    els.resultTitle.textContent =
       item.name ||
       item.object ||
       "Item identified";
   }
 
-  if (
-    $("#resultSubtitle")
-  ) {
-    $("#resultSubtitle").textContent =
+  if (els.resultSubtitle) {
+    els.resultSubtitle.textContent =
       item.summary ||
       item.searchQuery ||
       "";
   }
 
-  if (
-    $("#matchText")
-  ) {
-    $("#matchText").textContent =
+  if (els.matchText) {
+    els.matchText.textContent =
       `${confidence}% match`;
   }
 
-  if (
-    $("#confidenceNumber")
-  ) {
-    $("#confidenceNumber").textContent =
+  if (els.confidenceNumber) {
+    els.confidenceNumber.textContent =
       `${confidence}%`;
   }
 
-  $("#confidenceRing")
+  els.confidenceRing
     ?.style
     .setProperty(
       "--score",
       `${confidence}%`
     );
 
-  if (
-    $("#confidenceLabel")
-  ) {
-    $("#confidenceLabel").textContent =
+  if (els.confidenceLabel) {
+    els.confidenceLabel.textContent =
       confidence >= 90
         ? "Very High Match"
         : confidence >= 75
@@ -2058,18 +1798,14 @@ function renderIdentification(data) {
         : "Low Confidence";
   }
 
-  if (
-    $("#productTags")
-  ) {
-    $("#productTags").innerHTML =
+  if (els.productTags) {
+    els.productTags.innerHTML =
       [
         item.brand,
         item.model,
         item.category
       ]
-        .filter(
-          Boolean
-        )
+        .filter(Boolean)
         .map(
           (tag) =>
             `<span>${esc(tag)}</span>`
@@ -2082,16 +1818,14 @@ function renderIdentification(data) {
       item.visibleText
     ) &&
     item.visibleText.length
-      ? item.visibleText.join(
-          ", "
-        )
+      ? item.visibleText.join(", ")
       : "None detected";
 
-  if (
-    $("#detailsContent")
-  ) {
-    $("#detailsContent").innerHTML = `
-      <div class="eyebrow">PRODUCT DETAILS</div>
+  if (els.detailsContent) {
+    els.detailsContent.innerHTML = `
+      <div class="eyebrow">
+        PRODUCT DETAILS
+      </div>
 
       <h3>
         ${esc(
@@ -2105,42 +1839,78 @@ function renderIdentification(data) {
 
         <div class="detail-box">
           <small>Object</small>
-          <b>${esc(item.object || "Unknown")}</b>
+          <b>
+            ${esc(
+              item.object ||
+              "Unknown"
+            )}
+          </b>
         </div>
 
         <div class="detail-box">
           <small>Brand</small>
-          <b>${esc(item.brand || "Not detected")}</b>
+          <b>
+            ${esc(
+              item.brand ||
+              "Not detected"
+            )}
+          </b>
         </div>
 
         <div class="detail-box">
           <small>Model</small>
-          <b>${esc(item.model || "Not detected")}</b>
+          <b>
+            ${esc(
+              item.model ||
+              "Not detected"
+            )}
+          </b>
         </div>
 
         <div class="detail-box">
           <small>Category</small>
-          <b>${esc(item.category || "Not detected")}</b>
+          <b>
+            ${esc(
+              item.category ||
+              "Not detected"
+            )}
+          </b>
         </div>
 
         <div class="detail-box">
           <small>Colour</small>
-          <b>${esc(item.color || "Not detected")}</b>
+          <b>
+            ${esc(
+              item.color ||
+              "Not detected"
+            )}
+          </b>
         </div>
 
         <div class="detail-box">
           <small>Visible text</small>
-          <b>${esc(visibleText)}</b>
+          <b>
+            ${esc(
+              visibleText
+            )}
+          </b>
         </div>
 
         <div class="detail-box">
           <small>Search phrase</small>
-          <b>${esc(item.searchQuery || "Not available")}</b>
+          <b>
+            ${esc(
+              item.searchQuery ||
+              "Not available"
+            )}
+          </b>
         </div>
 
         <div class="detail-box">
           <small>Confidence</small>
-          <b>${confidence}%</b>
+          <b>
+            ${confidence}%
+          </b>
         </div>
 
       </div>
@@ -2152,6 +1922,11 @@ function renderIdentification(data) {
   );
 }
 
+
+/* =========================================================
+   VERIFIED PRICES / STOCK
+========================================================= */
+
 function renderVerifiedOffers(data) {
   const offers =
     Array.isArray(
@@ -2160,22 +1935,20 @@ function renderVerifiedOffers(data) {
       ? data.offers
       : [];
 
-  const box =
-    $("#verifiedOffers");
-
-  const comparison =
-    $("#comparisonContent");
-
   if (
     !offers.length
   ) {
-    if (box) {
-      box.innerHTML =
+    if (
+      els.verifiedOffers
+    ) {
+      els.verifiedOffers.innerHTML =
         "";
     }
 
-    if (comparison) {
-      comparison.innerHTML = `
+    if (
+      els.comparisonContent
+    ) {
+      els.comparisonContent.innerHTML = `
         <div class="feature-icon">
           ⇄
         </div>
@@ -2185,8 +1958,9 @@ function renderVerifiedOffers(data) {
         </h3>
 
         <p>
-          FindIt only displays prices and exact stock when a legitimate
-          retailer catalogue or inventory connection supplies them.
+          FindIt only displays prices and exact stock
+          when a legitimate retailer catalogue or
+          inventory connection supplies them.
         </p>
       `;
     }
@@ -2195,10 +1969,9 @@ function renderVerifiedOffers(data) {
   }
 
   if (
-    $("#verifiedNotice")
+    els.verifiedNotice
   ) {
-    $("#verifiedNotice")
-      .textContent =
+    els.verifiedNotice.textContent =
       "✓ Verified retailer offers are available for this item.";
   }
 
@@ -2206,7 +1979,6 @@ function renderVerifiedOffers(data) {
     offers
       .map(
         (offer) => {
-
           const store =
             offer.store || {};
 
@@ -2273,87 +2045,78 @@ function renderVerifiedOffers(data) {
       )
       .join("");
 
-  if (box) {
-    box.innerHTML =
+  if (
+    els.verifiedOffers
+  ) {
+    els.verifiedOffers.innerHTML =
       `<div class="offer-grid">${html}</div>`;
   }
 
-  if (comparison) {
-    comparison.innerHTML =
+  if (
+    els.comparisonContent
+  ) {
+    els.comparisonContent.innerHTML =
       `<div class="offer-grid">${html}</div>`;
   }
 }
 
-async function renderNearby(item) {
-  if (
-    !coords
-  ) {
-    if (
-      $("#stores")
-    ) {
-      $("#stores").innerHTML = `
-        <div class="empty-card">
-          Item identified.
-          Please allow location to see nearby retailers.
-        </div>
-      `;
-    }
 
+/* =========================================================
+   NEARBY RESULTS
+========================================================= */
+
+async function renderNearby(item) {
+  if (!coords) {
     return;
   }
 
-  const raw =
-    await fetchNearby();
-
   const profile =
-    categoryProfile(
-      item
-    );
+    categoryProfile(item);
 
   if (
     profile.family ===
     "unknown"
   ) {
-    if (
-      $("#stores")
-    ) {
-      $("#stores").innerHTML = `
+    if (els.stores) {
+      els.stores.innerHTML = `
         <div class="empty-card">
 
-          FindIt identified the item, but isn't confident enough
-          about which type of retailer should sell it.
+          FindIt identified the item,
+          but isn't confident enough about
+          which type of retailer should sell it.
 
           <br><br>
 
-          Try a clearer image showing the label, packaging or brand.
+          Try a clearer image showing
+          the label, packaging or brand.
 
         </div>
       `;
     }
 
     if (
-      $("#nearbyCount")
+      els.nearbyCount
     ) {
-      $("#nearbyCount")
-        .textContent =
+      els.nearbyCount.textContent =
         "";
     }
 
-    updateMaps(
-      []
-    );
+    updateMaps([]);
 
     return;
   }
+
+  const raw =
+    await fetchNearby(
+      item
+    );
 
   let stores =
     raw
       .map(
         extractStore
       )
-      .filter(
-        Boolean
-      )
+      .filter(Boolean)
       .map(
         (store) => ({
           ...store,
@@ -2381,32 +2144,29 @@ async function renderNearby(item) {
       .sort(
         (a, b) =>
           b.score -
-          a.score
-          ||
+            a.score ||
           a.distance -
-          b.distance
+            b.distance
       );
 
-  const exactSeen =
+  const seen =
     new Set();
 
   stores =
     stores.filter(
       (store) => {
         const key =
-          `${normalise(store.name)}|${store.lat.toFixed(5)}|${store.lon.toFixed(5)}`;
+          `${normalise(store.name)}|` +
+          `${store.lat.toFixed(5)}|` +
+          `${store.lon.toFixed(5)}`;
 
         if (
-          exactSeen.has(
-            key
-          )
+          seen.has(key)
         ) {
           return false;
         }
 
-        exactSeen.add(
-          key
-        );
+        seen.add(key);
 
         return true;
       }
@@ -2421,14 +2181,10 @@ async function renderNearby(item) {
         12
       );
 
-  currentStores =
-    stores;
-
   if (
-    $("#nearbyCount")
+    els.nearbyCount
   ) {
-    $("#nearbyCount")
-      .textContent =
+    els.nearbyCount.textContent =
       stores.length
         ? `(${stores.length})`
         : "";
@@ -2437,36 +2193,29 @@ async function renderNearby(item) {
   if (
     !stores.length
   ) {
-    if (
-      $("#stores")
-    ) {
-      $("#stores").innerHTML = `
+    if (els.stores) {
+      els.stores.innerHTML = `
         <div class="empty-card">
 
-          FindIt couldn't find a strong nearby retailer match
-          for this item.
+          FindIt couldn't find a strong nearby
+          retailer match for this item.
 
           <br><br>
 
-          We would rather show no result than send you
-          to unrelated shops.
+          We would rather show no result than
+          send you to unrelated shops.
 
         </div>
       `;
     }
 
-    updateMaps(
-      []
-    );
+    updateMaps([]);
 
     return;
   }
 
-  if (
-    $("#stores")
-  ) {
-    $("#stores")
-      .innerHTML =
+  if (els.stores) {
+    els.stores.innerHTML =
       stores
         .map(
           (
@@ -2481,9 +2230,7 @@ async function renderNearby(item) {
               );
 
             const logo =
-              faviconForStore(
-                store
-              );
+              storeLogo(store);
 
             const searchUrl =
               retailerSearchUrl(
@@ -2500,7 +2247,13 @@ async function renderNearby(item) {
 
             const logoHtml =
               logo
-                ? `<img src="${esc(logo)}" alt="" onerror="this.parentElement.textContent='${fallback}'">`
+                ? `
+                  <img
+                    src="${esc(logo)}"
+                    alt=""
+                    onerror="this.parentElement.textContent='${fallback}'"
+                  >
+                `
                 : fallback;
 
             const relevance =
@@ -2557,19 +2310,45 @@ async function renderNearby(item) {
 
                     ${
                       store.phone
-                        ? `<a href="tel:${esc(phoneHref(store.phone))}">☎ Call</a>`
+                        ? `
+                          <a
+                            href="tel:${esc(
+                              phoneHref(
+                                store.phone
+                              )
+                            )}"
+                          >
+                            ☎ Call
+                          </a>
+                        `
                         : ""
                     }
 
                     ${
                       store.website
-                        ? `<a href="${esc(store.website)}" target="_blank" rel="noopener noreferrer">▣ Website</a>`
+                        ? `
+                          <a
+                            href="${esc(store.website)}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            ▣ Website
+                          </a>
+                        `
                         : ""
                     }
 
                     ${
                       searchUrl
-                        ? `<a href="${esc(searchUrl)}" target="_blank" rel="noopener noreferrer">⌕ Search retailer</a>`
+                        ? `
+                          <a
+                            href="${esc(searchUrl)}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            ⌕ Search retailer
+                          </a>
+                        `
                         : ""
                     }
 
@@ -2588,7 +2367,8 @@ async function renderNearby(item) {
                 <div class="store-side">
 
                   <div class="store-distance">
-                    ${store.distance.toFixed(1)} km
+                    ${store.distance.toFixed(1)}
+                    km
                   </div>
 
                   <div class="store-stock">
@@ -2609,11 +2389,14 @@ async function renderNearby(item) {
   );
 }
 
+
+/* =========================================================
+   MAP
+========================================================= */
+
 function createMap(id) {
   if (
-    typeof L ===
-      "undefined"
-    ||
+    typeof L === "undefined" ||
     !document.getElementById(
       id
     )
@@ -2632,10 +2415,8 @@ function createMap(id) {
           22.9375
         ];
 
-  const mapInstance =
-    L.map(
-      id
-    )
+  const instance =
+    L.map(id)
       .setView(
         initial,
         coords
@@ -2646,41 +2427,33 @@ function createMap(id) {
   L.tileLayer(
     "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
     {
-      maxZoom:
-        19,
+      maxZoom: 19,
 
       attribution:
         "&copy; OpenStreetMap contributors"
     }
   )
     .addTo(
-      mapInstance
+      instance
     );
 
-  return mapInstance;
+  return instance;
 }
 
 function updateMaps(stores) {
   if (
     !coords ||
-    typeof L ===
-      "undefined"
+    typeof L === "undefined"
   ) {
     return;
   }
 
-  if (
-    !map
-  ) {
+  if (!map) {
     map =
-      createMap(
-        "map"
-      );
+      createMap("map");
   }
 
-  if (
-    !mapLarge
-  ) {
+  if (!mapLarge) {
     mapLarge =
       createMap(
         "mapLarge"
@@ -2688,33 +2461,28 @@ function updateMaps(stores) {
   }
 
   for (
-    const mapInstance
+    const instance
     of [
       map,
       mapLarge
     ]
   ) {
-    if (
-      !mapInstance
-    ) {
+    if (!instance) {
       continue;
     }
 
-    mapInstance
-      .eachLayer(
-        (layer) => {
-          if (
-            layer instanceof L.Marker
-            ||
-            layer instanceof L.CircleMarker
-          ) {
-            mapInstance
-              .removeLayer(
-                layer
-              );
-          }
+    instance.eachLayer(
+      (layer) => {
+        if (
+          layer instanceof L.Marker ||
+          layer instanceof L.CircleMarker
+        ) {
+          instance.removeLayer(
+            layer
+          );
         }
-      );
+      }
+    );
 
     L.circleMarker(
       [
@@ -2722,22 +2490,13 @@ function updateMaps(stores) {
         coords.lon
       ],
       {
-        radius:
-          8,
-
-        color:
-          "#3777ff",
-
-        fillColor:
-          "#3777ff",
-
-        fillOpacity:
-          1
+        radius: 8,
+        color: "#3777ff",
+        fillColor: "#3777ff",
+        fillOpacity: 1
       }
     )
-      .addTo(
-        mapInstance
-      )
+      .addTo(instance)
       .bindPopup(
         "You are here"
       );
@@ -2753,62 +2512,61 @@ function updateMaps(stores) {
             store.lon
           ]
         )
-          .addTo(
-            mapInstance
-          )
+          .addTo(instance)
           .bindPopup(
             `<b>${index + 1}. ${esc(store.name)}</b><br>${store.distance.toFixed(1)} km away`
           );
       }
     );
 
-    const points = [
-      [
-        coords.lat,
-        coords.lon
-      ],
-
-      ...stores.map(
-        (store) => [
-          store.lat,
-          store.lon
-        ]
-      )
-    ];
-
     if (
       stores.length
     ) {
-      mapInstance
-        .fitBounds(
-          points,
-          {
-            padding:
-              [30, 30],
-
-            maxZoom:
-              14
-          }
-        );
-    } else {
-      mapInstance
-        .setView(
+      instance.fitBounds(
+        [
           [
             coords.lat,
             coords.lon
           ],
-          13
-        );
+
+          ...stores.map(
+            (store) => [
+              store.lat,
+              store.lon
+            ]
+          )
+        ],
+        {
+          padding:
+            [30,30],
+
+          maxZoom:
+            14
+        }
+      );
+
+    } else {
+      instance.setView(
+        [
+          coords.lat,
+          coords.lon
+        ],
+        13
+      );
     }
 
     setTimeout(
       () =>
-        mapInstance
-          .invalidateSize(),
+        instance.invalidateSize(),
       120
     );
   }
 }
+
+
+/* =========================================================
+   LOW CONFIDENCE
+========================================================= */
 
 function renderLowConfidence(data) {
   const item =
@@ -2817,317 +2575,285 @@ function renderLowConfidence(data) {
   lastResult =
     null;
 
-  $("#results")
+  els.results
     ?.classList
     .remove(
       "hidden"
     );
 
-  $("#lowConfidence")
+  els.lowConfidence
     ?.classList
     .remove(
       "hidden"
     );
 
   if (
-    $("#resultImage")
+    els.resultImage
   ) {
-    $("#resultImage").src =
-      preview?.src || "";
+    els.resultImage.src =
+      els.preview?.src ||
+      "";
   }
 
   if (
-    $("#resultTitle")
+    els.resultTitle
   ) {
-    $("#resultTitle")
-      .textContent =
+    els.resultTitle.textContent =
       item.name ||
       item.object ||
       "FindIt isn't confident enough";
   }
 
   if (
-    $("#resultSubtitle")
+    els.resultSubtitle
   ) {
-    $("#resultSubtitle")
-      .textContent =
+    els.resultSubtitle.textContent =
       data.message ||
       "Try another photo.";
   }
 
   if (
-    $("#matchText")
+    els.matchText
   ) {
-    $("#matchText")
-      .textContent =
+    els.matchText.textContent =
       "Low confidence";
   }
 
   if (
-    $("#productTags")
+    els.productTags
   ) {
-    $("#productTags")
-      .innerHTML =
+    els.productTags.innerHTML =
       "";
   }
 
   if (
-    $("#stores")
+    els.stores
   ) {
-    $("#stores")
-      .innerHTML =
+    els.stores.innerHTML =
       "";
   }
 }
 
-if (
-  searchButton
-) {
-  searchButton
-    .addEventListener(
-      "click",
-      async () => {
 
-        if (
-          !imageReady ||
-          searching
-        ) {
-          return;
-        }
+/* =========================================================
+   MAIN SEARCH
 
-        setSearchBusy(
-          true
+   ONE TAP:
+   identify -> location -> nearby stores
+========================================================= */
+
+els.search
+  ?.addEventListener(
+    "click",
+    async () => {
+
+      if (
+        !selectedFile ||
+        searching
+      ) {
+        return;
+      }
+
+      setSearchBusy(
+        true
+      );
+
+      if (
+        els.status
+      ) {
+        els.status.textContent =
+          "Thank you for your patience. We are looking for the best possible match.";
+      }
+
+      try {
+        showLoading(
+          "Finding the best possible match…",
+          "Thank you for your patience. We are looking for the best possible match."
         );
 
+        const data =
+          await identifyItem();
+
+        const confidence =
+          Number(
+            data.identification
+              ?.confidence ||
+            0
+          );
+
         if (
-          statusBox
+          confidence < 0.55
         ) {
-          statusBox.textContent =
-  "Thank you for your patience. We are looking for the best possible match.";
-        }
-
-        try {
-
-  showLoading(
-    "Finding the best possible match…",
-    "Thank you for your patience. We are looking for the best possible match."
-  );
-
-  const data =
-    await identifyItem();
-
-  const confidence =
-    Number(
-      data.identification
-
-          const confidence =
-            Number(
-              data.identification
-                ?.confidence ||
-              0
-            );
-
-          if (
-            confidence <
-            0.55
-          ) {
-            hideLoading();
-
-            renderLowConfidence(
-              data
-            );
-
-            $("#results")
-              ?.scrollIntoView({
-                behavior:
-                  "smooth"
-              });
-
-            if (
-              statusBox
-            ) {
-              statusBox.textContent =
-                "FindIt needs a clearer photo.";
-            }
-
-            return;
-          }
-
-          renderIdentification(
+          renderLowConfidence(
             data
           );
 
-          $("#results")
+          els.results
             ?.scrollIntoView({
               behavior:
                 "smooth"
             });
 
           if (
-            loadingTitle
+            els.status
           ) {
-            loadingTitle.textContent =
-              "Finding nearby retailers…";
+            els.status.textContent =
+              "FindIt needs a clearer photo.";
           }
 
-          if (
-            loadingText
-          ) {
-            loadingText.textContent =
-              "Allow location if your browser asks.";
-          }
+          return;
+        }
 
-          try {
-            await ensureLocation();
-          } catch (
+        renderIdentification(
+          data
+        );
+
+        els.results
+          ?.scrollIntoView({
+            behavior:
+              "smooth"
+          });
+
+        showLoading(
+          "Finding nearby retailers…",
+          "Allow location if your browser asks."
+        );
+
+        try {
+          await ensureLocation();
+
+        } catch (
+          locationError
+        ) {
+          console.error(
+            "Location permission error:",
             locationError
+          );
+
+          if (
+            els.stores
           ) {
-            console.error(
-              locationError
-            );
+            els.stores.innerHTML = `
+              <div class="empty-card">
 
-            hideLoading();
+                Your item was identified successfully.
 
-            if (
-              $("#stores")
-            ) {
-              $("#stores").innerHTML = `
-                <div class="empty-card">
+                <br><br>
 
-                  Your item was identified successfully.
+                Tap <b>Use my location</b>
+                to see nearby retailers.
 
-                  <br><br>
-
-                  Tap <b>Use my location</b>
-                  to see nearby retailers.
-
-                </div>
-              `;
-            }
-
-            if (
-              statusBox
-            ) {
-              statusBox.textContent =
-                "Item identified. Location permission is needed for nearby stores.";
-            }
-
-            saveRecent(
-              data.identification
-            );
-
-            return;
+              </div>
+            `;
           }
 
           if (
-            loadingTitle
+            els.status
           ) {
-            loadingTitle.textContent =
-              "Finding nearby retailers…";
-          }
-
-          if (
-            loadingText
-          ) {
-            loadingText.textContent =
-              "Removing unrelated shops and duplicate results.";
-          }
-
-          try {
-            await renderNearby(
-              data.identification
-            );
-
-            if (
-              statusBox
-            ) {
-              statusBox.textContent =
-                "Search complete.";
-            }
-
-          } catch (
-            nearbyError
-          ) {
-            console.error(
-              "Nearby search error:",
-              nearbyError
-            );
-
-            if (
-              $("#stores")
-            ) {
-              $("#stores").innerHTML = `
-                <div class="empty-card">
-
-                  FindIt identified your item,
-                  but the nearby retailer service
-                  could not respond right now.
-
-                  <br><br>
-
-                  Please try again shortly.
-
-                </div>
-              `;
-            }
-
-            if (
-              statusBox
-            ) {
-              statusBox.textContent =
-                "Item identified. Nearby retailer search can be retried.";
-            }
+            els.status.textContent =
+              "Item identified. Location permission is needed for nearby stores.";
           }
 
           saveRecent(
             data.identification
           );
 
-        } catch (
-          error
-        ) {
-          console.error(
-            "FindIt search error:",
-            error
+          return;
+        }
+
+        showLoading(
+          "Finding nearby retailers…",
+          "Removing unrelated shops and duplicate results."
+        );
+
+        try {
+          await renderNearby(
+            data.identification
           );
 
           if (
-            statusBox
+            els.status
           ) {
-            statusBox.textContent =
-              `FindIt could not complete the search: ${error.message}`;
+            els.status.textContent =
+              "Search complete.";
           }
 
-        } finally {
-          hideLoading();
-
-          setSearchBusy(
-            false
-          );
-        }
-      }
-    );
-}
-
-if (
-  $("#retry")
-) {
-  $("#retry")
-    .addEventListener(
-      "click",
-      () => {
-        if (
-          photo
+        } catch (
+          nearbyError
         ) {
-          photo.click();
-        }
-      }
-    );
-}
+          console.error(
+            "Nearby search error:",
+            nearbyError
+          );
 
-$$(
-  ".result-tab"
-)
+          if (
+            els.stores
+          ) {
+            els.stores.innerHTML = `
+              <div class="empty-card">
+
+                FindIt identified your item,
+                but the nearby retailer service
+                could not respond right now.
+
+                <br><br>
+
+                Please try again shortly.
+
+              </div>
+            `;
+          }
+
+          if (
+            els.status
+          ) {
+            els.status.textContent =
+              "Item identified. Nearby retailer search can be retried.";
+          }
+        }
+
+        saveRecent(
+          data.identification
+        );
+
+      } catch (
+        error
+      ) {
+        console.error(
+          "FindIt search error:",
+          error
+        );
+
+        if (
+          els.status
+        ) {
+          els.status.textContent =
+            `FindIt could not complete the search: ${error.message}`;
+        }
+
+      } finally {
+        hideLoading();
+
+        setSearchBusy(
+          false
+        );
+      }
+    }
+  );
+
+
+/* =========================================================
+   RESULT TABS
+========================================================= */
+
+$("#retry")
+  ?.addEventListener(
+    "click",
+    () =>
+      els.photo?.click()
+  );
+
+$$(".result-tab")
   .forEach(
     (button) => {
 
@@ -3138,48 +2864,39 @@ $$(
           $$(".result-tab")
             .forEach(
               (tab) =>
-                tab.classList
-                  .remove(
-                    "active"
-                  )
+                tab.classList.remove(
+                  "active"
+                )
             );
 
           $$(".result-panel")
             .forEach(
               (panel) =>
-                panel.classList
-                  .remove(
-                    "active"
-                  )
+                panel.classList.remove(
+                  "active"
+                )
             );
 
           button.classList.add(
             "active"
           );
 
-          const target =
-            $(
-              `#panel-${button.dataset.tab}`
-            );
-
-          if (
-            target
-          ) {
-            target.classList.add(
+          $(
+            `#panel-${button.dataset.tab}`
+          )
+            ?.classList
+            .add(
               "active"
             );
-          }
 
           if (
             button.dataset.tab ===
-              "map"
-            &&
+              "map" &&
             mapLarge
           ) {
             setTimeout(
               () =>
-                mapLarge
-                  .invalidateSize(),
+                mapLarge.invalidateSize(),
               120
             );
           }
@@ -3188,28 +2905,25 @@ $$(
     }
   );
 
-const RECENT_KEY =
-  "findit_recent_searches";
+
+/* =========================================================
+   RECENT / SAVED
+========================================================= */
 
 function recentSearches() {
   try {
     return JSON.parse(
-      localStorage
-        .getItem(
-          RECENT_KEY
-        )
-      ||
-      "[]"
+      localStorage.getItem(
+        RECENT_KEY
+      ) || "[]"
     );
+
   } catch {
     return [];
   }
 }
 
 function saveRecent(item) {
-  const list =
-    recentSearches();
-
   const entry = {
     name:
       item.name ||
@@ -3237,48 +2951,49 @@ function saveRecent(item) {
   };
 
   const filtered =
-    list.filter(
-      (existing) =>
-        normalise(
-          existing.searchQuery ||
-          existing.name
-        )
-        !==
-        normalise(
-          entry.searchQuery ||
-          entry.name
-        )
-    );
+    recentSearches()
+      .filter(
+        (existing) =>
+          normalise(
+            existing.searchQuery ||
+            existing.name
+          )
+          !==
+          normalise(
+            entry.searchQuery ||
+            entry.name
+          )
+      );
 
   filtered.unshift(
     entry
   );
 
-  localStorage
-    .setItem(
-      RECENT_KEY,
-      JSON.stringify(
-        filtered.slice(
-          0,
-          10
-        )
+  localStorage.setItem(
+    RECENT_KEY,
+
+    JSON.stringify(
+      filtered.slice(
+        0,
+        10
       )
-    );
+    )
+  );
 }
 
 function renderRecent() {
-  const list =
-    recentSearches();
-
   if (
-    !$("#recentList")
+    !els.recentList
   ) {
     return;
   }
 
-  $("#recentList")
-    .innerHTML =
+  const list =
+    recentSearches();
+
+  els.recentList.innerHTML =
     list.length
+
       ? list
           .map(
             (item) => `
@@ -3304,6 +3019,7 @@ function renderRecent() {
             `
           )
           .join("")
+
       : `
         <div class="empty-card">
           No recent searches yet.
@@ -3317,9 +3033,9 @@ function saveCurrentSearch() {
       ?.identification
   ) {
     if (
-      statusBox
+      els.status
     ) {
-      statusBox.textContent =
+      els.status.textContent =
         "Run a search first.";
     }
 
@@ -3331,154 +3047,138 @@ function saveCurrentSearch() {
   );
 
   if (
-    statusBox
+    els.status
   ) {
-    statusBox.textContent =
+    els.status.textContent =
       "Search saved on this device.";
   }
 }
 
-if (
-  $("#saveSearch")
-) {
-  $("#saveSearch")
-    .addEventListener(
-      "click",
-      saveCurrentSearch
-    );
-}
+$("#saveSearch")
+  ?.addEventListener(
+    "click",
+    saveCurrentSearch
+  );
 
-if (
-  $("#saveSearchBottom")
-) {
-  $("#saveSearchBottom")
-    .addEventListener(
-      "click",
-      saveCurrentSearch
-    );
-}
+$("#saveSearchBottom")
+  ?.addEventListener(
+    "click",
+    saveCurrentSearch
+  );
 
-if (
-  $("#recentButton")
-) {
-  $("#recentButton")
-    .addEventListener(
-      "click",
-      () => {
+$("#recentButton")
+  ?.addEventListener(
+    "click",
+    () => {
 
-        renderRecent();
+      renderRecent();
 
-        $("#recentModal")
-          ?.classList
-          .remove(
-            "hidden"
-          );
-      }
-    );
-}
+      els.recentModal
+        ?.classList
+        .remove(
+          "hidden"
+        );
+    }
+  );
 
-if (
-  $("#closeRecent")
-) {
-  $("#closeRecent")
-    .addEventListener(
-      "click",
-      () => {
+$("#closeRecent")
+  ?.addEventListener(
+    "click",
+    () =>
+      els.recentModal
+        ?.classList
+        .add(
+          "hidden"
+        )
+  );
 
-        $("#recentModal")
-          ?.classList
+els.recentModal
+  ?.addEventListener(
+    "click",
+    (event) => {
+
+      if (
+        event.target ===
+        els.recentModal
+      ) {
+        els.recentModal
+          .classList
           .add(
             "hidden"
           );
       }
-    );
-}
+    }
+  );
 
-if (
-  $("#recentModal")
-) {
-  $("#recentModal")
-    .addEventListener(
-      "click",
-      (event) => {
 
-        if (
-          event.target.id ===
-          "recentModal"
-        ) {
-          $("#recentModal")
-            ?.classList
-            .add(
-              "hidden"
-            );
-        }
+/* =========================================================
+   SHARE
+========================================================= */
+
+$("#shareResult")
+  ?.addEventListener(
+    "click",
+    async () => {
+
+      if (
+        !lastResult
+          ?.identification
+      ) {
+        return;
       }
-    );
-}
 
-if (
-  $("#shareResult")
-) {
-  $("#shareResult")
-    .addEventListener(
-      "click",
-      async () => {
-
-        if (
-          !lastResult
-            ?.identification
-        ) {
-          return;
-        }
-
-        const item =
+      const text =
+        `FindIt Nearby identified: ${
           lastResult
-            .identification;
+            .identification
+            .name ||
+          lastResult
+            .identification
+            .object
+        }`;
 
-        const text =
-          `FindIt Nearby identified: ${item.name || item.object}`;
+      try {
+        if (
+          navigator.share
+        ) {
+          await navigator.share({
+            title:
+              "FindIt Nearby",
 
-        try {
+            text,
+
+            url:
+              location.href
+          });
+
+        } else if (
+          navigator.clipboard
+        ) {
+          await navigator
+            .clipboard
+            .writeText(
+              location.href
+            );
+
           if (
-            navigator.share
+            els.status
           ) {
-            await navigator
-              .share({
-                title:
-                  "FindIt Nearby",
-
-                text,
-
-                url:
-                  location.href
-              });
-
-          } else if (
-            navigator.clipboard
-          ) {
-            await navigator
-              .clipboard
-              .writeText(
-                location.href
-              );
-
-            if (
-              statusBox
-            ) {
-              statusBox.textContent =
-                "Link copied.";
-            }
+            els.status.textContent =
+              "Link copied.";
           }
+        }
 
-        } catch {}
-      }
-    );
-}
+      } catch {}
+    }
+  );
 
-setSearchBusy(
-  false
-);
+
+/* =========================================================
+   STARTUP
+========================================================= */
+
+setSearchBusy(false);
 
 console.log(
-  "FindIt Nearby stable launch script loaded."
+  "FindIt Nearby clean launch script loaded."
 );
