@@ -2903,17 +2903,22 @@ if (
           statusBox
         ) {
           statusBox.textContent =
-            "FindIt is analysing your photo…";
+  "Thank you for your patience. We are looking for the best possible match.";
         }
 
         try {
-          showLoading(
-            "Identifying your item…",
-            "Looking for the object, brand, model and visible text."
-          );
 
-          const data =
-            await identifyItem();
+  showLoading(
+    "Finding the best possible match…",
+    "Thank you for your patience. We are looking for the best possible match."
+  );
+
+  const data =
+    await identifyItem();
+
+  const confidence =
+    Number(
+      data.identification
 
           const confidence =
             Number(
