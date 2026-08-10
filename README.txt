@@ -1,24 +1,35 @@
-FindIt Nearby V11
+FindIt Nearby — V12 All-In-One
 
-MAIN CHANGE FROM V10:
-V11 introduces a confidence gate and removes the unsafe behaviour of showing arbitrary nearby stores when the visual classifier is uncertain.
+Replace these files in GitHub:
+- index.html
+- style.css
+- script.js
+- api/search.js
+- api/nearby.js
 
-Search rules:
-1. Analyse the image.
-2. Require a confidence threshold AND a meaningful gap between the best and second-best class.
-3. If uncertain: show "We won't guess" and NO stores.
-4. If confident: search only the detected item's relevant categories.
-5. Exact prices, stock and store results require verified retailer/catalogue data.
-6. If no verified catalogue result exists, the UI clearly says so and may show relevant mapped businesses only as a non-stock fallback.
+Keep your Vercel environment variable:
+GEMINI_API_KEY
 
-This prevents a flower image from becoming a random electronics search.
+Optional environment variable:
+GEMINI_MODEL=gemini-3.5-flash
 
-REAL DATA:
-The backend deliberately returns no live product offers until an authorised retailer/catalogue connector is configured. Do not fabricate product, price, stock or store information.
+Included:
+- dark-neon premium homepage
+- mobile + desktop results UI
+- camera/gallery/files + drag-and-drop
+- Gemini identification
+- confidence score + product details
+- smarter nearby retailer filtering
+- obvious competing single-brand filtering (e.g. Adidas for a Nike-specific search)
+- retailer favicon/logo where a website/domain is known
+- fallback store initial when no logo is available
+- phone / website / retailer search / directions
+- Leaflet maps
+- saved/recent searches on the device
+- improved loading + quota errors
+- no invented prices or stock
+- verified retailer offer UI ready for future integrations
 
-DEPLOYMENT:
-- GitHub Pages can host the frontend.
-- backend/ must be deployed separately on an HTTPS Node host.
-- Set window.FINDIT_API_BASE in the frontend to the backend URL when the backend is connected.
-
-© 2026 FindIt Nearby. All rights reserved.
+Important:
+Nearby retailer does NOT mean exact product stock.
+Exact price and stock only appear when a legitimate retailer data source supplies them.
