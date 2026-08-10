@@ -760,7 +760,10 @@ async function fetchNearby(item) {
     brand:
       item?.brand || "",
     searchQuery:
-      item?.searchQuery || ""
+      item?.searchQuery || "",
+
+    retailerFamily:
+      item?.retailerFamily || ""
   };
 
   const response =
@@ -815,522 +818,206 @@ async function fetchNearby(item) {
 ========================================================= */
 
 function categoryProfile(item) {
-  const text =
-    normalise(
-      [
-        item?.object,
-        item?.name,
-        item?.brand,
-        item?.model,
-        item?.category,
-        item?.searchQuery,
-
-        Array.isArray(
-          item?.visibleText
-        )
-          ? item.visibleText.join(
-              " "
-            )
-          : ""
-      ]
-        .filter(Boolean)
-        .join(" ")
-    );
-
-  const profile =
-    (
-      family,
-      types,
-      words,
-      blocked = []
-    ) => ({
-      family,
-      types,
-      words,
-      blocked,
+  const FAMILY_PROFILES = {
+    grocery: {
+      family: "grocery",
+      types: ["supermarket", "convenience", "bakery", "deli", "greengrocer", "general", "department_store"],
+      words: ["food", "grocery", "supermarket", "bakery", "baking"],
+      blocked: ["sports", "shoes", "electronics", "computer", "hardware", "furniture", "florist", "mobile_phone", "stationery", "books"],
       strict: true
-    });
+    },
 
-  if (
-    /shoe|sneaker|footwear|trainer|boot|sandal/
-      .test(text)
-  ) {
-    return profile(
-      "footwear",
+    household: {
+      family: "household",
+      types: ["supermarket", "general", "department_store", "houseware", "variety_store", "chemist"],
+      words: ["household", "home", "cleaning", "paper", "tissue", "detergent"],
+      blocked: ["sports", "shoes", "electronics", "computer", "florist", "mobile_phone", "books"],
+      strict: true
+    },
 
-      [
-        "shoes",
-        "sports",
-        "clothes",
-        "department_store"
-      ],
+    beauty: {
+      family: "beauty",
+      types: ["beauty", "chemist", "cosmetics", "perfumery", "supermarket", "department_store"],
+      words: ["beauty", "cosmetic", "skin", "body", "pharmacy", "chemist"],
+      blocked: ["sports", "shoes", "electronics", "computer", "hardware", "furniture", "stationery", "books"],
+      strict: true
+    },
 
-      [
-        "shoe",
-        "sneaker",
-        "footwear",
-        "sport"
-      ],
+    pharmacy: {
+      family: "pharmacy",
+      types: ["chemist", "pharmacy", "medical_supply"],
+      words: ["pharmacy", "chemist", "medical"],
+      blocked: ["sports", "shoes", "clothes", "electronics", "hardware", "furniture", "florist", "stationery"],
+      strict: true
+    },
 
-      [
-        "florist",
-        "beauty",
-        "chemist",
-        "stationery",
-        "hardware",
-        "furniture",
-        "garden_centre"
-      ]
-    );
+    footwear: {
+      family: "footwear",
+      types: ["shoes", "sports", "clothes", "department_store"],
+      words: ["shoe", "sneaker", "footwear", "sport"],
+      blocked: ["florist", "beauty", "chemist", "stationery", "hardware", "furniture", "garden_centre"],
+      strict: true
+    },
+
+    clothing: {
+      family: "clothing",
+      types: ["clothes", "fashion", "department_store"],
+      words: ["clothes", "fashion", "clothing"],
+      blocked: ["electronics", "computer", "chemist", "hardware", "furniture", "florist", "stationery"],
+      strict: true
+    },
+
+    stationery: {
+      family: "stationery",
+      types: ["stationery", "books", "variety_store", "department_store"],
+      words: ["stationery", "office", "school", "book"],
+      blocked: ["sports", "shoes", "florist", "beauty", "chemist", "hardware", "furniture"],
+      strict: true
+    },
+
+    electronics: {
+      family: "electronics",
+      types: ["electronics", "computer", "mobile_phone", "hifi", "music", "camera"],
+      words: ["electronics", "computer", "mobile", "audio", "camera", "technology"],
+      blocked: ["sports", "shoes", "florist", "beauty", "chemist", "stationery", "furniture", "hardware"],
+      strict: true
+    },
+
+    furniture: {
+      family: "furniture",
+      types: ["furniture", "houseware", "interior_decoration"],
+      words: ["furniture", "home", "interior"],
+      blocked: ["sports", "shoes", "electronics", "florist", "chemist", "stationery"],
+      strict: true
+    },
+
+    garden: {
+      family: "garden",
+      types: ["florist", "garden_centre"],
+      words: ["flower", "florist", "plant", "garden"],
+      blocked: ["sports", "shoes", "electronics", "computer", "chemist", "stationery", "furniture"],
+      strict: true
+    },
+
+    books: {
+      family: "books",
+      types: ["books", "stationery"],
+      words: ["book", "books"],
+      blocked: ["sports", "shoes", "electronics", "florist", "chemist", "furniture"],
+      strict: true
+    },
+
+    tools: {
+      family: "tools",
+      types: ["hardware", "doityourself", "trade"],
+      words: ["hardware", "tool", "tools"],
+      blocked: ["sports", "shoes", "florist", "beauty", "chemist", "stationery", "furniture"],
+      strict: true
+    },
+
+    toys: {
+      family: "toys",
+      types: ["toys", "games", "video_games", "variety_store", "department_store"],
+      words: ["toy", "game", "games"],
+      blocked: ["florist", "beauty", "chemist", "hardware", "furniture"],
+      strict: true
+    },
+
+    pet: {
+      family: "pet",
+      types: ["pet", "supermarket", "general"],
+      words: ["pet", "dog", "cat", "animal"],
+      blocked: ["sports", "shoes", "electronics", "computer", "florist", "stationery", "furniture"],
+      strict: true
+    },
+
+    baby: {
+      family: "baby",
+      types: ["baby_goods", "clothes", "supermarket", "department_store", "chemist"],
+      words: ["baby", "infant", "nappy", "diaper"],
+      blocked: ["sports", "shoes", "electronics", "hardware", "furniture", "florist"],
+      strict: true
+    },
+
+    automotive: {
+      family: "automotive",
+      types: ["car_parts", "tyres", "car_repair"],
+      words: ["automotive", "car", "vehicle", "parts"],
+      blocked: ["florist", "beauty", "chemist", "stationery", "books", "furniture"],
+      strict: true
+    },
+
+    sports: {
+      family: "sports",
+      types: ["sports", "shoes", "clothes", "department_store"],
+      words: ["sport", "fitness", "outdoor"],
+      blocked: ["florist", "beauty", "chemist", "stationery", "books", "furniture"],
+      strict: true
+    },
+
+    jewellery: {
+      family: "jewellery",
+      types: ["jewelry", "watches", "fashion_accessories"],
+      words: ["jewelry", "jewellery", "watch", "accessory"],
+      blocked: ["florist", "chemist", "hardware", "furniture", "stationery"],
+      strict: true
+    }
+  };
+
+  const declaredFamily = normalise(item?.retailerFamily).replace(/\s+/g, "_");
+
+  if (FAMILY_PROFILES[declaredFamily]) {
+    return FAMILY_PROFILES[declaredFamily];
   }
 
-  if (
-    /pencil case|pencil|pen|stationery|notebook|marker|stapler|eraser|ruler|highlighter|school supplies|office supplies/
-      .test(text)
-  ) {
-    return profile(
-      "stationery",
-
-      [
-        "stationery",
-        "books",
-        "variety_store",
-        "department_store"
-      ],
-
-      [
-        "stationery",
-        "office",
-        "school",
-        "book"
-      ],
-
-      [
-        "sports",
-        "shoes",
-        "florist",
-        "beauty",
-        "chemist",
-        "hardware",
-        "furniture"
-      ]
-    );
+  if (declaredFamily === "unsupported" || declaredFamily === "other") {
+    return {
+      family: declaredFamily,
+      types: [],
+      words: [],
+      blocked: [],
+      strict: false
+    };
   }
 
-  if (
-    /food|grocery|supermarket|snack|sauce|spread|jam|butter|icing|frosting|buttercream|butter cream|baking|flour|sugar|milk|bread|cereal|chocolate|sweet|candy|coffee|tea|juice|drink|beverage|syrup|soup|pasta|rice|cookie|biscuit|chips|lemon curd|lemon butter/
-      .test(text)
-  ) {
-    return profile(
-      "food",
+  const text = normalise(
+    [
+      item?.object,
+      item?.name,
+      item?.brand,
+      item?.model,
+      item?.category,
+      item?.searchQuery,
+      Array.isArray(item?.visibleText) ? item.visibleText.join(" ") : ""
+    ]
+      .filter(Boolean)
+      .join(" ")
+  );
 
-      [
-        "supermarket",
-        "convenience",
-        "deli",
-        "bakery",
-        "general",
-        "department_store"
-      ],
+  const fallbackRules = [
+    ["household", /tissue|toilet paper|paper towel|kitchen towel|napkin|household paper|cleaning|detergent|dishwashing|dish soap|laundry|fabric softener|bleach|bin bag|trash bag|refuse bag|sponge|cleaner|disinfectant/],
+    ["pet", /pet food|dog food|cat food|pet toy|dog toy|cat toy|pet supplies/],
+    ["baby", /baby wipes|nappy|nappies|diaper|diapers|baby bottle|baby food|infant/],
+    ["grocery", /food|grocery|supermarket|snack|sauce|spread|jam|butter|icing|frosting|buttercream|baking|flour|sugar|milk|bread|cereal|chocolate|sweet|candy|coffee|tea|juice|drink|beverage|syrup|soup|pasta|rice|cookie|biscuit|chips|lemon curd|lemon butter/],
+    ["beauty", /skin care|skincare|body cream|face cream|hand cream|lotion|moisturizer|moisturiser|cosmetic|makeup|beauty|serum|shampoo|conditioner|soap|deodorant|perfume|fragrance|body wash|face wash/],
+    ["pharmacy", /medicine|medication|pharmacy|chemist|vitamin|painkiller|bandage|first aid|medical supply/],
+    ["footwear", /shoe|sneaker|footwear|trainer|boot|sandal/],
+    ["stationery", /pencil case|pencil|pen|stationery|notebook|marker|stapler|eraser|ruler|highlighter|school supplies|office supplies/],
+    ["electronics", /microphone|headphone|earphone|speaker|audio|sound|amplifier|earbud|smartphone|mobile phone|iphone|android phone|cellphone|computer|laptop|monitor|keyboard|mouse|printer|camera|photography|dslr|mirrorless/],
+    ["clothing", /shirt|t shirt|tshirt|sweater|hoodie|jacket|dress|clothing|fashion|jeans|pants|trousers|shorts|skirt|coat/],
+    ["garden", /flower|plant|bouquet|rose|orchid|succulent/],
+    ["furniture", /chair|table|desk|sofa|couch|furniture|cabinet|shelf|bookshelf|wardrobe|bed frame/],
+    ["books", /book|novel|textbook|magazine|comic book/],
+    ["tools", /tool|drill|hammer|hardware|screwdriver|saw|spanner|wrench|pliers/],
+    ["toys", /toy|lego|board game|video game|gaming console|playstation|xbox|nintendo/],
+    ["sports", /sports equipment|fitness|gym equipment|soccer ball|football|rugby ball|tennis racket|golf club/],
+    ["jewellery", /jewelry|jewellery|necklace|bracelet|earring|watch/]
+  ];
 
-      [
-        "food",
-        "grocery",
-        "supermarket",
-        "bakery",
-        "baking"
-      ],
-
-      [
-        "sports",
-        "shoes",
-        "clothes",
-        "electronics",
-        "computer",
-        "hardware",
-        "furniture",
-        "florist",
-        "mobile_phone",
-        "stationery",
-        "books",
-        "beauty"
-      ]
-    );
-  }
-
-  if (
-    /skin care|skincare|body cream|face cream|hand cream|lotion|moisturizer|moisturiser|cosmetic|makeup|beauty|serum|shampoo|conditioner|soap|deodorant|perfume|fragrance|body wash|face wash/
-      .test(text)
-  ) {
-    return profile(
-      "beauty",
-
-      [
-        "beauty",
-        "chemist",
-        "cosmetics",
-        "perfumery",
-        "supermarket",
-        "department_store"
-      ],
-
-      [
-        "beauty",
-        "cosmetic",
-        "skin",
-        "pharmacy",
-        "chemist"
-      ],
-
-      [
-        "sports",
-        "shoes",
-        "electronics",
-        "computer",
-        "hardware",
-        "furniture",
-        "stationery",
-        "books"
-      ]
-    );
-  }
-
-  if (
-    /medicine|medication|pharmacy|chemist|vitamin|painkiller|bandage|first aid|medical supply/
-      .test(text)
-  ) {
-    return profile(
-      "pharmacy",
-
-      [
-        "chemist",
-        "pharmacy",
-        "medical_supply"
-      ],
-
-      [
-        "pharmacy",
-        "chemist",
-        "medical"
-      ],
-
-      [
-        "sports",
-        "shoes",
-        "clothes",
-        "electronics",
-        "hardware",
-        "furniture",
-        "florist",
-        "stationery"
-      ]
-    );
-  }
-
-  if (
-    /microphone|headphone|earphone|speaker|audio|sound|amplifier|earbud/
-      .test(text)
-  ) {
-    return profile(
-      "audio",
-
-      [
-        "electronics",
-        "music",
-        "hifi",
-        "computer"
-      ],
-
-      [
-        "audio",
-        "music",
-        "sound",
-        "electronics"
-      ],
-
-      [
-        "sports",
-        "shoes",
-        "florist",
-        "beauty",
-        "chemist",
-        "stationery",
-        "furniture",
-        "hardware"
-      ]
-    );
-  }
-
-  if (
-    /smartphone|mobile phone|iphone|android phone|cellphone|cell phone/
-      .test(text)
-  ) {
-    return profile(
-      "mobile",
-
-      [
-        "mobile_phone",
-        "electronics",
-        "computer"
-      ],
-
-      [
-        "mobile",
-        "phone",
-        "electronics"
-      ],
-
-      [
-        "sports",
-        "shoes",
-        "florist",
-        "beauty",
-        "chemist",
-        "stationery",
-        "furniture",
-        "hardware"
-      ]
-    );
-  }
-
-  if (
-    /computer|laptop|monitor|keyboard|mouse|printer|desktop pc|gaming pc/
-      .test(text)
-  ) {
-    return profile(
-      "computer",
-
-      [
-        "computer",
-        "electronics"
-      ],
-
-      [
-        "computer",
-        "technology",
-        "electronics"
-      ],
-
-      [
-        "sports",
-        "shoes",
-        "florist",
-        "beauty",
-        "chemist",
-        "furniture"
-      ]
-    );
-  }
-
-  if (
-    /camera|photography|camera lens|dslr|mirrorless/
-      .test(text)
-  ) {
-    return profile(
-      "camera",
-
-      [
-        "camera",
-        "electronics"
-      ],
-
-      [
-        "camera",
-        "photography"
-      ],
-
-      [
-        "sports",
-        "shoes",
-        "florist",
-        "beauty",
-        "chemist",
-        "stationery",
-        "furniture"
-      ]
-    );
-  }
-
-  if (
-    /shirt|t shirt|tshirt|sweater|hoodie|jacket|dress|clothing|fashion|jeans|pants|trousers|shorts|skirt|coat/
-      .test(text)
-  ) {
-    return profile(
-      "clothing",
-
-      [
-        "clothes",
-        "fashion",
-        "department_store"
-      ],
-
-      [
-        "clothes",
-        "fashion",
-        "clothing"
-      ],
-
-      [
-        "electronics",
-        "computer",
-        "chemist",
-        "hardware",
-        "furniture",
-        "florist",
-        "stationery"
-      ]
-    );
-  }
-
-  if (
-    /flower|plant|bouquet|rose|orchid|succulent/
-      .test(text)
-  ) {
-    return profile(
-      "plants",
-
-      [
-        "florist",
-        "garden_centre"
-      ],
-
-      [
-        "flower",
-        "florist",
-        "plant",
-        "garden"
-      ],
-
-      [
-        "sports",
-        "shoes",
-        "electronics",
-        "computer",
-        "chemist",
-        "stationery",
-        "furniture"
-      ]
-    );
-  }
-
-  if (
-    /chair|table|desk|sofa|couch|furniture|cabinet|shelf|bookshelf|wardrobe|bed frame/
-      .test(text)
-  ) {
-    return profile(
-      "furniture",
-
-      [
-        "furniture",
-        "houseware",
-        "interior_decoration"
-      ],
-
-      [
-        "furniture",
-        "home",
-        "interior"
-      ],
-
-      [
-        "sports",
-        "shoes",
-        "electronics",
-        "florist",
-        "chemist",
-        "stationery"
-      ]
-    );
-  }
-
-  if (
-    /book|novel|textbook|magazine|comic book/
-      .test(text)
-  ) {
-    return profile(
-      "books",
-
-      [
-        "books",
-        "stationery"
-      ],
-
-      [
-        "book",
-        "books"
-      ],
-
-      [
-        "sports",
-        "shoes",
-        "electronics",
-        "florist",
-        "chemist",
-        "furniture"
-      ]
-    );
-  }
-
-  if (
-    /tool|drill|hammer|hardware|screwdriver|saw|spanner|wrench|pliers/
-      .test(text)
-  ) {
-    return profile(
-      "tools",
-
-      [
-        "hardware",
-        "doityourself",
-        "trade"
-      ],
-
-      [
-        "hardware",
-        "tool",
-        "tools"
-      ],
-
-      [
-        "sports",
-        "shoes",
-        "florist",
-        "beauty",
-        "chemist",
-        "stationery",
-        "furniture"
-      ]
-    );
-  }
-
-  if (
-    /toy|lego|board game|video game|gaming console|playstation|xbox|nintendo/
-      .test(text)
-  ) {
-    return profile(
-      "toys-games",
-
-      [
-        "toys",
-        "games",
-        "video_games",
-        "electronics",
-        "variety_store"
-      ],
-
-      [
-        "toy",
-        "game",
-        "games"
-      ],
-
-      [
-        "florist",
-        "beauty",
-        "chemist",
-        "hardware",
-        "furniture"
-      ]
-    );
+  for (const [family, pattern] of fallbackRules) {
+    if (pattern.test(text)) {
+      return FAMILY_PROFILES[family];
+    }
   }
 
   return {
@@ -1341,7 +1028,6 @@ function categoryProfile(item) {
     strict: false
   };
 }
-
 
 /* =========================================================
    STORE DATA
@@ -1772,7 +1458,7 @@ function renderIdentification(data) {
 
   if (els.matchText) {
     els.matchText.textContent =
-      `${confidence}% match`;
+      `${confidence}% AI confidence`;
   }
 
   if (els.confidenceNumber) {
@@ -1790,9 +1476,9 @@ function renderIdentification(data) {
   if (els.confidenceLabel) {
     els.confidenceLabel.textContent =
       confidence >= 90
-        ? "Very High Match"
+        ? "Very High Confidence"
         : confidence >= 75
-        ? "Strong Match"
+        ? "Strong Confidence"
         : confidence >= 55
         ? "Possible Match"
         : "Low Confidence";
@@ -2074,21 +1760,20 @@ async function renderNearby(item) {
     categoryProfile(item);
 
   if (
-    profile.family ===
-    "unknown"
+    ["unknown", "other", "unsupported"].includes(
+      profile.family
+    )
   ) {
     if (els.stores) {
       els.stores.innerHTML = `
         <div class="empty-card">
 
-          FindIt identified the item,
-          but isn't confident enough about
-          which type of retailer should sell it.
+          FindIt identified the item, but we don't have a reliable
+          nearby-retailer category for it yet.
 
           <br><br>
 
-          Try a clearer image showing
-          the label, packaging or brand.
+          Try a clearer image showing the label, packaging or brand.
 
         </div>
       `;
