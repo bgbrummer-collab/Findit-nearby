@@ -1395,7 +1395,285 @@
   <script src="script.js"></script>
 <!-- VERCEL WEB ANALYTICS -->
 <script defer src="/_vercel/insights/script.js"></script>
-  
+<!-- FINDIT FEEDBACK BUTTON + MODAL -->
+
+<button
+  id="feedbackButton"
+  type="button"
+  aria-label="Send feedback"
+  style="
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 9998;
+    border: 1px solid rgba(145, 94, 255, 0.45);
+    background: linear-gradient(135deg, #2f6fff, #9b42f4);
+    color: white;
+    font-weight: 800;
+    border-radius: 999px;
+    padding: 12px 18px;
+    box-shadow: 0 14px 35px rgba(0,0,0,0.35);
+    cursor: pointer;
+  "
+>
+  💬 Send feedback
+</button>
+
+
+<div
+  id="feedbackModal"
+  class="hidden"
+  style="
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0,0,0,0.72);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  "
+>
+
+  <div
+    style="
+      width: min(520px, 100%);
+      background: #0c1526;
+      border: 1px solid rgba(128, 94, 255, 0.35);
+      border-radius: 22px;
+      padding: 24px;
+      color: white;
+      box-shadow: 0 24px 70px rgba(0,0,0,0.45);
+    "
+  >
+
+    <div
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 18px;
+      "
+    >
+      <div>
+        <div
+          style="
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: .14em;
+            color: #a66cff;
+            margin-bottom: 6px;
+          "
+        >
+          FINDIT FEEDBACK
+        </div>
+
+        <h2
+          style="
+            margin: 0;
+            font-size: 28px;
+          "
+        >
+          Help us improve FindIt
+        </h2>
+      </div>
+
+      <button
+        id="closeFeedback"
+        type="button"
+        aria-label="Close feedback form"
+        style="
+          border: 0;
+          background: transparent;
+          color: white;
+          font-size: 28px;
+          cursor: pointer;
+        "
+      >
+        ×
+      </button>
+    </div>
+
+
+    <p
+      style="
+        margin: 0 0 20px;
+        color: #9dafc7;
+        line-height: 1.55;
+      "
+    >
+      Tell us what went wrong or what we can make better.
+    </p>
+
+
+    <form
+      action="https://formspree.io/f/xjbydbz"
+      method="POST"
+    >
+
+      <label
+        style="
+          display: block;
+          margin-bottom: 8px;
+          font-weight: 700;
+        "
+      >
+        What happened?
+      </label>
+
+      <select
+        name="problem_type"
+        required
+        style="
+          width: 100%;
+          margin-bottom: 16px;
+          padding: 12px 14px;
+          background: #101b30;
+          color: white;
+          border: 1px solid #263653;
+          border-radius: 12px;
+        "
+      >
+        <option value="">
+          Choose a problem
+        </option>
+
+        <option value="Wrong item identification">
+          Wrong item identification
+        </option>
+
+        <option value="Wrong retailer">
+          Wrong retailer
+        </option>
+
+        <option value="Missing retailer">
+          Missing retailer
+        </option>
+
+        <option value="Feature not working">
+          Feature not working
+        </option>
+
+        <option value="Other">
+          Other
+        </option>
+      </select>
+
+
+      <label
+        style="
+          display: block;
+          margin-bottom: 8px;
+          font-weight: 700;
+        "
+      >
+        What should we know?
+      </label>
+
+      <textarea
+        name="message"
+        required
+        rows="5"
+        placeholder="Describe what happened..."
+        style="
+          width: 100%;
+          resize: vertical;
+          margin-bottom: 16px;
+          padding: 12px 14px;
+          background: #101b30;
+          color: white;
+          border: 1px solid #263653;
+          border-radius: 12px;
+          font: inherit;
+        "
+      ></textarea>
+
+
+      <input
+        type="hidden"
+        name="page"
+        id="feedbackPage"
+      >
+
+
+      <button
+        type="submit"
+        style="
+          width: 100%;
+          padding: 13px 16px;
+          border: 0;
+          border-radius: 12px;
+          background: linear-gradient(135deg, #2f6fff, #a443ff);
+          color: white;
+          font-weight: 900;
+          cursor: pointer;
+        "
+      >
+        Send feedback
+      </button>
+
+    </form>
+
+  </div>
+</div>
+
+
+<script>
+  const feedbackButton =
+    document.getElementById("feedbackButton");
+
+  const feedbackModal =
+    document.getElementById("feedbackModal");
+
+  const closeFeedback =
+    document.getElementById("closeFeedback");
+
+  const feedbackPage =
+    document.getElementById("feedbackPage");
+
+
+  function openFeedback() {
+    feedbackModal.style.display =
+      "flex";
+
+    if (feedbackPage) {
+      feedbackPage.value =
+        window.location.href;
+    }
+  }
+
+
+  function closeFeedbackModal() {
+    feedbackModal.style.display =
+      "none";
+  }
+
+
+  feedbackButton.addEventListener(
+    "click",
+    openFeedback
+  );
+
+
+  closeFeedback.addEventListener(
+    "click",
+    closeFeedbackModal
+  );
+
+
+  feedbackModal.addEventListener(
+    "click",
+    function(event) {
+      if (
+        event.target ===
+        feedbackModal
+      ) {
+        closeFeedbackModal();
+      }
+    }
+  );
+</script>    
 </body>
 
 </html>
