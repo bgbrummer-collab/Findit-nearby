@@ -1,3 +1,281 @@
+const FAMILY_SHOPS = {
+  grocery: [
+    "supermarket",
+    "convenience",
+    "bakery",
+    "deli",
+    "greengrocer",
+    "general",
+    "department_store"
+  ],
+
+  household: [
+    "supermarket",
+    "general",
+    "department_store",
+    "houseware",
+    "variety_store",
+    "chemist"
+  ],
+
+  beauty: [
+    "beauty",
+    "chemist",
+    "cosmetics",
+    "perfumery",
+    "supermarket",
+    "department_store"
+  ],
+
+  pharmacy: [
+    "chemist",
+    "medical_supply"
+  ],
+
+  footwear: [
+    "shoes",
+    "sports",
+    "clothes",
+    "department_store"
+  ],
+
+  clothing: [
+    "clothes",
+    "fashion",
+    "department_store"
+  ],
+
+  stationery: [
+    "stationery",
+    "books",
+    "variety_store",
+    "department_store"
+  ],
+
+  electronics: [
+    "electronics",
+    "computer",
+    "mobile_phone",
+    "hifi",
+    "music",
+    "camera"
+  ],
+
+  furniture: [
+    "furniture",
+    "houseware",
+    "interior_decoration"
+  ],
+
+  garden: [
+    "florist",
+    "garden_centre"
+  ],
+
+  books: [
+    "books",
+    "stationery"
+  ],
+
+  tools: [
+    "hardware",
+    "doityourself",
+    "trade"
+  ],
+
+  toys: [
+    "toys",
+    "games",
+    "video_games",
+    "variety_store",
+    "department_store"
+  ],
+
+  pet: [
+    "pet",
+    "supermarket",
+    "general"
+  ],
+
+  baby: [
+    "baby_goods",
+    "clothes",
+    "supermarket",
+    "department_store",
+    "chemist"
+  ],
+
+  automotive: [
+    "car_parts",
+    "tyres",
+    "car_repair"
+  ],
+
+  sports: [
+    "sports",
+    "shoes",
+    "clothes",
+    "department_store"
+  ],
+
+  jewellery: [
+    "jewelry",
+    "watches",
+    "fashion_accessories"
+  ]
+};
+
+function normaliseFamily(value) {
+  return String(value || "")
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "_");
+}
+
+function escapeRegex(value) {
+  return String(value)
+    .replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function buildQuery(family, radius, lat, lon) {
+  const shops = FAMILY_SHOPS[family] || [];
+
+  if (!shops.length) {
+    return null;
+  }
+
+  const shopRegex =
+    `^(${shops.map(escapeRegex).join("|")})$`;
+
+  const extraAmenity =
+    family === "pharmacy"
+      ? `
+        nwr(around:${radius},${lat},${lon})["amenity"="pharmacy"];
+      `
+      : "";
+
+  return `
+    [out:json][timeout:18];
+
+    (
+      nwr(
+        around:${radius},
+        ${lat},
+        ${lon}
+      )
+      ["shop"~"${shopRegex}"];
+
+      ${extraAmenity}
+    );
+
+    out center tags qt;
+  `;
+}
+
+function usableElements(data) {
+  if (!Array.isArray(data?.elements)) {
+    return [];
+  }
+
+  return data.elements.filter((place) => {
+    const lat =
+      Number(
+        place.lat ??
+        place.center?.lat
+      );
+
+    const lon =
+      Number(
+        place.lon ??
+        place.center?.lon
+      );
+
+    return (
+      Number.isFinite(lat) &&
+      Number.isFinite(lon)
+    );
+  });
+}
+
+async function fetchOverpass(server, query, timeoutMs) {
+  const controller =
+    new AbortController();
+
+  const timer =
+    setTimeout(
+      () => controller.abort(),
+      timeoutMs
+    );
+
+  try {
+    const form =
+      new URLSearchParams();
+
+    form.set(
+      "data",
+      query
+    );
+
+    const response =
+      await fetch(
+        server,
+        {
+          method: "POST",
+          headers: {
+            Accept:
+              "application/json",
+            "Content-Type":
+              "application/x-www-form-urlencoded;charset=UTF-8",
+            "User-Agent":
+              "FindItNearby/2.0 (+https://findit-nearby.vercel.app)"
+          },
+          body:
+            form.toString(),
+          signal:
+            controller.signal
+        }
+      );
+
+    if (!response.ok) {
+      return {
+        ok: false,
+        reason:
+          `HTTP ${response.status}`
+      };
+    }
+
+    let data;
+
+    try {
+      data =
+        await response.json();
+    } catch {
+      return {
+        ok: false,
+        reason:
+          "invalid JSON"
+      };
+    }
+
+    return {
+      ok: true,
+      elements:
+        usableElements(data)
+    };
+  } catch (error) {
+    return {
+      ok: false,
+      reason:
+        error?.name === "AbortError"
+          ? "timeout"
+          : error?.message ||
+            "request failed"
+    };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 export default {
   async fetch(request) {
     try {
@@ -5,7 +283,8 @@ export default {
         return Response.json(
           {
             ok: false,
-            error: "POST requests only"
+            error:
+              "POST requests only"
           },
           {
             status: 405
@@ -16,12 +295,14 @@ export default {
       let body;
 
       try {
-        body = await request.json();
+        body =
+          await request.json();
       } catch {
         return Response.json(
           {
             ok: false,
-            error: "Invalid request body."
+            error:
+              "Invalid request body."
           },
           {
             status: 400
@@ -29,8 +310,16 @@ export default {
         );
       }
 
-      const lat = Number(body.lat);
-      const lon = Number(body.lon);
+      const lat =
+        Number(body.lat);
+
+      const lon =
+        Number(body.lon);
+
+      const family =
+        normaliseFamily(
+          body.retailerFamily
+        );
 
       if (
         !Number.isFinite(lat) ||
@@ -48,241 +337,210 @@ export default {
         );
       }
 
-      /*
-        Search close by first.
+      if (
+        family === "unsupported"
+      ) {
+        return Response.json(
+          {
+            ok: true,
+            family,
+            radius: 0,
+            count: 0,
+            elements: [],
+            message:
+              "Nearby-store discovery is not available for this product type."
+          },
+          {
+            headers: {
+              "Cache-Control":
+                "no-store"
+            }
+          }
+        );
+      }
 
-        This makes the Overpass request MUCH lighter
-        than immediately requesting every shop in 20 km.
+      if (
+        family === "other" ||
+        !FAMILY_SHOPS[family]
+      ) {
+        return Response.json(
+          {
+            ok: true,
+            family:
+              family || "other",
+            radius: 0,
+            count: 0,
+            elements: [],
+            message:
+              "No reliable retailer family is available for this item yet."
+          },
+          {
+            headers: {
+              "Cache-Control":
+                "public, s-maxage=60"
+            }
+          }
+        );
+      }
+
+      /*
+        Search close first.
+        Expand only if we do not get enough useful retailers.
       */
-      const radiuses = [
-        8000,
-        12000,
-        18000
+
+      const radii = [
+        5000,
+        9000,
+        15000
       ];
 
       /*
-        Backup Overpass providers.
-
-        If one is busy, FindIt automatically tries
-        the next one.
+        Keep the provider list short so a failed search
+        does not take forever on mobile.
       */
+
       const servers = [
         "https://overpass.kumi.systems/api/interpreter",
         "https://overpass-api.de/api/interpreter",
-        "https://overpass.nchc.org.tw/api/interpreter",
         "https://overpass.private.coffee/api/interpreter"
       ];
 
       const failures = [];
+      let bestElements = [];
+      let bestRadius = 0;
+      let bestSource = null;
 
-      /*
-        Try each radius.
-      */
-      for (const radius of radiuses) {
-        const query = `
-          [out:json][timeout:20];
-
-          (
-            nwr(around:${radius},${lat},${lon})["shop"];
-            nwr(around:${radius},${lat},${lon})["amenity"="marketplace"];
+      for (const radius of radii) {
+        const query =
+          buildQuery(
+            family,
+            radius,
+            lat,
+            lon
           );
 
-          out center tags qt;
-        `;
+        if (!query) {
+          break;
+        }
 
-        /*
-          Try each server for this radius.
-        */
         for (const server of servers) {
-          const controller =
-            new AbortController();
+          const result =
+            await fetchOverpass(
+              server,
+              query,
+              9000
+            );
+
+          if (!result.ok) {
+            failures.push(
+              `${server} radius ${radius}: ${result.reason}`
+            );
+
+            continue;
+          }
+
+          if (
+            result.elements.length >
+            bestElements.length
+          ) {
+            bestElements =
+              result.elements;
+
+            bestRadius =
+              radius;
+
+            bestSource =
+              server;
+          }
 
           /*
-            Give each provider 12 seconds.
-
-            If it hangs, FindIt automatically
-            moves to the next provider.
+            We have enough data for the frontend to rank.
+            Stop early and reduce pressure on public Overpass.
           */
-          const timer =
-            setTimeout(
-              () =>
-                controller.abort(),
-              12000
-            );
 
-          try {
-            const form =
-              new URLSearchParams();
-
-            form.set(
-              "data",
-              query
-            );
-
-            const response =
-              await fetch(
-                server,
-                {
-                  method: "POST",
-
-                  headers: {
-                    Accept:
-                      "application/json",
-
-                    "Content-Type":
-                      "application/x-www-form-urlencoded;charset=UTF-8",
-
-                    "User-Agent":
-                      "FindItNearby/1.1 https://findit-nearby.vercel.app",
-
-                    "X-Requested-With":
-                      "FindItNearby"
-                  },
-
-                  body:
-                    form.toString(),
-
-                  signal:
-                    controller.signal
+          if (
+            result.elements.length >= 8
+          ) {
+            return Response.json(
+              {
+                ok: true,
+                family,
+                source:
+                  server,
+                radius,
+                count:
+                  result.elements.length,
+                elements:
+                  result.elements
+              },
+              {
+                headers: {
+                  "Cache-Control":
+                    "public, s-maxage=300, stale-while-revalidate=900"
                 }
-              );
-
-            if (!response.ok) {
-              failures.push(
-                `${server} radius ${radius}: HTTP ${response.status}`
-              );
-
-              continue;
-            }
-
-            let data;
-
-            try {
-              data =
-                await response.json();
-            } catch {
-              failures.push(
-                `${server} radius ${radius}: invalid JSON`
-              );
-
-              continue;
-            }
-
-            if (
-              !Array.isArray(
-                data?.elements
-              )
-            ) {
-              failures.push(
-                `${server} radius ${radius}: invalid response`
-              );
-
-              continue;
-            }
-
-            /*
-              Remove elements with no usable location.
-            */
-            const usableElements =
-              data.elements.filter(
-                (place) => {
-                  const placeLat =
-                    place.lat ??
-                    place.center?.lat;
-
-                  const placeLon =
-                    place.lon ??
-                    place.center?.lon;
-
-                  return (
-                    Number.isFinite(
-                      Number(placeLat)
-                    ) &&
-                    Number.isFinite(
-                      Number(placeLon)
-                    )
-                  );
-                }
-              );
-
-            /*
-              If this radius found stores,
-              immediately return them.
-
-              No need to hammer more public servers.
-            */
-            if (
-              usableElements.length >
-              0
-            ) {
-              return Response.json(
-                {
-                  ok: true,
-
-                  source:
-                    server,
-
-                  radius,
-
-                  count:
-                    usableElements.length,
-
-                  elements:
-                    usableElements
-                },
-                {
-                  headers: {
-                    "Cache-Control":
-                      "public, s-maxage=300, stale-while-revalidate=600"
-                  }
-                }
-              );
-            }
-
-            failures.push(
-              `${server} radius ${radius}: no retailers found`
-            );
-
-          } catch (error) {
-            const reason =
-              error?.name ===
-              "AbortError"
-                ? "timeout"
-                : error?.message ||
-                  "request failed";
-
-            failures.push(
-              `${server} radius ${radius}: ${reason}`
-            );
-
-          } finally {
-            clearTimeout(
-              timer
+              }
             );
           }
         }
+
+        /*
+          A few results are still useful.
+          Return them rather than expanding endlessly.
+        */
+
+        if (
+          bestElements.length >= 3
+        ) {
+          break;
+        }
+      }
+
+      if (
+        bestElements.length
+      ) {
+        return Response.json(
+          {
+            ok: true,
+            family,
+            source:
+              bestSource,
+            radius:
+              bestRadius,
+            count:
+              bestElements.length,
+            elements:
+              bestElements
+          },
+          {
+            headers: {
+              "Cache-Control":
+                "public, s-maxage=300, stale-while-revalidate=900"
+            }
+          }
+        );
       }
 
       console.error(
-        "All FindIt nearby providers failed:",
-        failures
+        "All FindIt nearby attempts failed:",
+        {
+          family,
+          failures
+        }
       );
 
       return Response.json(
         {
           ok: false,
-
           error:
             "Nearby retailers could not be loaded right now. Please try again shortly.",
-
+          family,
           attempts:
-            failures
+            failures.slice(0, 12)
         },
         {
           status: 502
         }
       );
-
     } catch (error) {
       console.error(
         "FindIt nearby API error:",
@@ -292,10 +550,8 @@ export default {
       return Response.json(
         {
           ok: false,
-
           error:
             "Nearby retailer search failed.",
-
           details:
             error?.message ||
             "Unknown server error"
