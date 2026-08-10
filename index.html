@@ -1,157 +1,1528 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#050814">
-  <title>FindIt Nearby — See it. Snap it. Find it nearby.</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <link rel="stylesheet" href="style.css">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="theme-color"
+    content="#050814"
+  >
+
+  <meta
+    name="description"
+    content="FindIt Nearby identifies products from photos and helps you discover relevant nearby retailers."
+  >
+
+  <title>
+    FindIt Nearby — See it. Snap it. Find it nearby.
+  </title>
+
+  <!-- Leaflet map -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  >
+
+  <!-- FindIt design -->
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
 </head>
+
+
 <body>
-  <div id="loadingOverlay" class="loading-overlay hidden">
+
+
+  <!-- =====================================================
+       LOADING SCREEN
+  ====================================================== -->
+
+  <div
+    id="loadingOverlay"
+    class="loading-overlay hidden"
+  >
+
     <div class="loader-orb"></div>
-    <h3 id="loadingTitle">FindIt is looking…</h3>
-    <p id="loadingText">Understanding your image.</p>
+
+    <h3 id="loadingTitle">
+      FindIt is looking…
+    </h3>
+
+    <p id="loadingText">
+      Understanding your image.
+    </p>
+
   </div>
 
+
+
+  <!-- =====================================================
+       TOP NAVIGATION
+  ====================================================== -->
+
   <header class="topbar">
-    <a class="brand" href="#home"><span class="brand-mark">F</span><span>FindIt <b>Nearby</b></span></a>
+
+    <a
+      class="brand"
+      href="#home"
+    >
+
+      <span class="brand-mark">
+        F
+      </span>
+
+      <span>
+        FindIt <b>Nearby</b>
+      </span>
+
+    </a>
+
+
     <nav class="desktop-nav">
-      <a href="#how">How it works</a><a href="#features">Features</a><a href="#finder">Find an item</a>
-      <button id="recentButton" class="nav-text-button">Recent</button>
+
+      <a href="#how">
+        How it works
+      </a>
+
+      <a href="#features">
+        Features
+      </a>
+
+      <a href="#finder">
+        Find an item
+      </a>
+
+      <button
+        id="recentButton"
+        class="nav-text-button"
+      >
+        Recent
+      </button>
+
     </nav>
-    <a class="top-cta" href="#finder">Find an item</a>
+
+
+    <a
+      class="top-cta"
+      href="#finder"
+    >
+      Find an item
+    </a>
+
   </header>
 
+
+
   <main>
-    <section id="home" class="home-shell">
-      <div class="hero">
-        <div class="hero-copy">
-          <div class="eyebrow">VISUAL SHOPPING SEARCH</div>
-          <h1>See it.<br>Snap it.<br><span>Find it nearby.</span></h1>
-          <p class="hero-description">Upload a photo of any item and FindIt Nearby will identify it, then help you discover relevant retailers near you.</p>
-          <div class="trust-list"><span>♢ Photo used for your search</span><span>⌖ Real nearby retailers</span><span>ϟ Fast & simple</span></div>
+
+
+    <!-- =====================================================
+         PREMIUM HOME PAGE
+    ====================================================== -->
+
+    <section
+      id="home"
+      class="home-page"
+    >
+
+
+      <!-- ===================================================
+           HERO
+      ==================================================== -->
+
+      <div class="premium-hero">
+
+
+        <!-- LEFT -->
+
+        <div class="hero-left">
+
+          <div class="eyebrow">
+            VISUAL SHOPPING SEARCH
+          </div>
+
+
+          <h1>
+
+            See it.
+
+            <br>
+
+            Snap it.
+
+            <br>
+
+            <span>
+              Find it nearby.
+            </span>
+
+          </h1>
+
+
+          <div class="hero-line"></div>
+
+
+          <p class="hero-description">
+
+            Upload a photo of any item and
+            FindIt Nearby will identify it
+            and show you where to find
+            relevant retailers nearby.
+
+          </p>
+
+
+          <div class="trust-list">
+
+            <span>
+              ♢ Private & Secure
+            </span>
+
+            <span>
+              ⌖ Real Nearby Results
+            </span>
+
+            <span>
+              ϟ Fast & Easy
+            </span>
+
+          </div>
+
         </div>
 
-        <div id="heroDropzone" class="hero-upload-card">
-          <div class="neon-frame"></div><div class="camera-bubble">◉</div>
-          <h2>What are you looking for?</h2><p>Upload a photo to get started</p>
-          <div class="hero-actions">
-            <button id="heroUpload" class="button primary">↥ Upload Photo</button>
-            <button id="heroCamera" class="button secondary">▣ Take Photo</button>
+
+
+        <!-- CENTER UPLOAD CARD -->
+
+        <div
+          id="heroDropzone"
+          class="premium-upload-card"
+        >
+
+          <div class="upload-card-glow"></div>
+
+          <div class="upload-inner-border"></div>
+
+
+          <div class="camera-bubble">
+            ◉
           </div>
-          <div class="drag-copy">or drag and drop an image here</div><small>JPG, PNG, WEBP • up to 8 MB</small>
+
+
+          <h2>
+            What are you looking for?
+          </h2>
+
+
+          <p>
+            Upload a photo to get started
+          </p>
+
+
+          <div class="hero-actions">
+
+            <button
+              id="heroUpload"
+              class="button primary"
+            >
+              ↑ Upload Photo
+            </button>
+
+
+            <button
+              id="heroCamera"
+              class="button secondary"
+            >
+              ◉ Take Photo
+            </button>
+
+          </div>
+
+
+          <div class="drag-copy">
+            or drag and drop an image here
+          </div>
+
+
+          <small>
+            JPG, PNG, WEBP • up to 8 MB
+          </small>
+
         </div>
+
+
+
+        <!-- RIGHT DECORATIVE AREA -->
+
+        <div class="hero-right">
+
+
+          <!-- WORLD GRAPHIC -->
+
+          <div class="world-graphic">
+
+            <div class="world-dot dot-1"></div>
+            <div class="world-dot dot-2"></div>
+            <div class="world-dot dot-3"></div>
+            <div class="world-dot dot-4"></div>
+            <div class="world-dot dot-5"></div>
+
+          </div>
+
+
+
+          <!-- LOCATION PIN -->
+
+          <div class="location-visual">
+
+            <div class="location-pin">
+              <div class="pin-hole"></div>
+            </div>
+
+            <div class="location-rings">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+
+          </div>
+
+
+
+          <!-- PHONE PREVIEW -->
+
+          <div class="phone-preview">
+
+
+            <div class="phone-frame">
+
+
+              <div class="phone-notch"></div>
+
+
+              <div class="phone-status">
+
+                <span>
+                  9:41
+                </span>
+
+                <span>
+                  ● ◒ ▰
+                </span>
+
+              </div>
+
+
+              <div class="phone-header">
+
+                <div class="phone-logo">
+
+                  <span>
+                    F
+                  </span>
+
+                  <b>
+                    FindIt
+                    <strong>
+                      Nearby
+                    </strong>
+                  </b>
+
+                </div>
+
+
+                <div class="phone-menu">
+                  ☰
+                </div>
+
+              </div>
+
+
+
+              <div class="phone-copy">
+
+                <h3>
+
+                  See it.
+
+                  <br>
+
+                  Snap it.
+
+                  <br>
+
+                  <span>
+                    Find it nearby.
+                  </span>
+
+                </h3>
+
+                <div class="phone-line"></div>
+
+              </div>
+
+
+
+              <div class="phone-upload-box">
+
+                <div class="phone-camera">
+                  ◉
+                </div>
+
+                <b>
+                  What are you looking for?
+                </b>
+
+                <small>
+                  Upload a photo to get started
+                </small>
+
+
+                <div class="phone-buttons">
+
+                  <span>
+                    ↑ Upload Photo
+                  </span>
+
+                  <span>
+                    ◉ Take Photo
+                  </span>
+
+                </div>
+
+
+                <small class="phone-drag">
+                  or drag and drop an image here
+                </small>
+
+              </div>
+
+
+
+              <div class="phone-how">
+
+                <h4>
+                  How it works
+                </h4>
+
+
+                <div class="phone-steps">
+
+                  <div>
+
+                    <span class="mini-step purple">
+                      1
+                    </span>
+
+                    <small>
+                      Upload
+                    </small>
+
+                  </div>
+
+
+                  <div class="mini-arrow">
+                    →
+                  </div>
+
+
+                  <div>
+
+                    <span class="mini-step blue">
+                      2
+                    </span>
+
+                    <small>
+                      Identify
+                    </small>
+
+                  </div>
+
+
+                  <div class="mini-arrow">
+                    →
+                  </div>
+
+
+                  <div>
+
+                    <span class="mini-step cyan">
+                      3
+                    </span>
+
+                    <small>
+                      Find nearby
+                    </small>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+
+              <div class="phone-categories">
+
+                <h4>
+                  Try FindIt with…
+                </h4>
+
+
+                <div>
+
+                  <span>👟</span>
+                  <span>📱</span>
+                  <span>👕</span>
+                  <span>🪑</span>
+                  <span>✎</span>
+
+                </div>
+
+              </div>
+
+
+
+              <div class="phone-homebar"></div>
+
+            </div>
+
+          </div>
+
+        </div>
+
       </div>
 
-      <section id="how" class="how-card">
-        <h2>How FindIt Nearby works</h2>
+
+
+      <!-- ===================================================
+           HOW IT WORKS
+      ==================================================== -->
+
+      <section
+        id="how"
+        class="how-card"
+      >
+
+        <h2>
+          How FindIt Nearby works
+        </h2>
+
+
         <div class="how-grid">
-          <article><div class="how-number purple">1</div><div class="how-icon">▧</div><div><b>Upload</b><p>Take or choose a photo of the item.</p></div></article>
-          <div class="arrow">→</div>
-          <article><div class="how-number blue">2</div><div class="how-icon">⌕</div><div><b>Identify</b><p>FindIt detects product, brand and model when possible.</p></div></article>
-          <div class="arrow">→</div>
-          <article><div class="how-number cyan">3</div><div class="how-icon">⌖</div><div><b>Find nearby</b><p>See relevant retailers, distance and directions.</p></div></article>
+
+
+          <article>
+
+            <div class="how-number purple">
+              1
+            </div>
+
+            <div class="how-icon">
+              ▧
+            </div>
+
+            <div>
+
+              <b>
+                Upload
+              </b>
+
+              <p>
+                Take or choose a photo
+                of the item you're
+                looking for.
+              </p>
+
+            </div>
+
+          </article>
+
+
+
+          <div class="arrow">
+            →
+          </div>
+
+
+
+          <article>
+
+            <div class="how-number blue">
+              2
+            </div>
+
+            <div class="how-icon">
+              ⌕
+            </div>
+
+            <div>
+
+              <b>
+                Identify
+              </b>
+
+              <p>
+                We identify the product,
+                brand and model when possible.
+              </p>
+
+            </div>
+
+          </article>
+
+
+
+          <div class="arrow">
+            →
+          </div>
+
+
+
+          <article>
+
+            <div class="how-number cyan">
+              3
+            </div>
+
+            <div class="how-icon">
+              ⌖
+            </div>
+
+            <div>
+
+              <b>
+                Find nearby
+              </b>
+
+              <p>
+                See relevant stores
+                near you with useful
+                details and directions.
+              </p>
+
+            </div>
+
+          </article>
+
         </div>
+
       </section>
 
-      <section id="features" class="try-section">
-        <h2>Try FindIt with…</h2>
+
+
+      <!-- ===================================================
+           CATEGORIES
+      ==================================================== -->
+
+      <section
+        id="features"
+        class="try-section"
+      >
+
+        <h2>
+          Try FindIt with…
+        </h2>
+
+
         <div class="category-row">
-          <span>👟 Shoes</span><span>📱 Electronics</span><span>👕 Clothing</span><span>🪑 Furniture</span><span>✎ Stationery</span><span>🔧 Tools</span><span>＋ and more</span>
+
+          <span>
+            👟 Shoes
+          </span>
+
+          <span>
+            📱 Electronics
+          </span>
+
+          <span>
+            👕 Clothing
+          </span>
+
+          <span>
+            🪑 Furniture
+          </span>
+
+          <span>
+            ✎ Stationery
+          </span>
+
+          <span>
+            🔧 Tools
+          </span>
+
+          <span>
+            ＋ and more
+          </span>
+
         </div>
+
+
+
         <div class="benefits">
-          <div><strong>♙ For everyone</strong><small>Free to use</small></div>
-          <div><strong>♢ Privacy-aware</strong><small>Your photo is used for the search</small></div>
-          <div><strong>◎ Smart matching</strong><small>AI-assisted identification</small></div>
-          <div><strong>♡ Built for real life</strong><small>Designed to save time</small></div>
+
+
+          <div>
+
+            <strong>
+              ♙ For everyone
+            </strong>
+
+            <small>
+              Free to use
+            </small>
+
+          </div>
+
+
+
+          <div>
+
+            <strong>
+              ♢ Your privacy matters
+            </strong>
+
+            <small>
+              Your photo is used for the search
+            </small>
+
+          </div>
+
+
+
+          <div>
+
+            <strong>
+              ◎ Smart & accurate
+            </strong>
+
+            <small>
+              Powered by advanced AI
+            </small>
+
+          </div>
+
+
+
+          <div>
+
+            <strong>
+              ♡ Built for real life
+            </strong>
+
+            <small>
+              Made to help you daily
+            </small>
+
+          </div>
+
         </div>
+
       </section>
 
-      <div class="bottom-slogan"><span>⌖</span><span>Find what you want.</span><span>Save time.</span><span>Support local.</span><strong>Make smarter choices.</strong></div>
+
+
+      <!-- ===================================================
+           BOTTOM SLOGAN
+      ==================================================== -->
+
+      <div class="bottom-slogan">
+
+        <span>
+          ⌖
+        </span>
+
+        <span>
+          Find what you want.
+        </span>
+
+        <span>
+          Save time.
+        </span>
+
+        <span>
+          Support local.
+        </span>
+
+        <strong>
+          Make smarter choices.
+        </strong>
+
+      </div>
+
     </section>
 
-    <section id="finder" class="finder-section">
-      <div class="finder-heading"><div class="eyebrow">START A SEARCH</div><h2>Find something nearby.</h2><p>Choose a clear photo. FindIt handles the identification and retailer matching.</p></div>
+
+
+    <!-- =====================================================
+         REAL SEARCH AREA
+    ====================================================== -->
+
+    <section
+      id="finder"
+      class="finder-section"
+    >
+
+
+      <div class="finder-heading">
+
+        <div class="eyebrow">
+          START A SEARCH
+        </div>
+
+        <h2>
+          Find something nearby.
+        </h2>
+
+        <p>
+          Choose a clear photo.
+          FindIt handles the identification
+          and retailer matching.
+        </p>
+
+      </div>
+
+
 
       <div class="finder-grid">
+
+
+        <!-- IMAGE -->
+
         <div class="image-workspace">
-          <label id="finderDropzone" class="dropzone" for="photo">
-            <input id="photo" type="file" accept="image/*">
-            <input id="cameraInput" class="hidden-input" type="file" accept="image/*" capture="environment">
-            <div id="emptyState"><div class="camera-bubble small">◉</div><h3>Choose a product photo</h3><p>Gallery • Camera • Files</p><small>or drag and drop an image here</small></div>
-            <img id="preview" alt="Selected product">
+
+
+          <label
+            id="finderDropzone"
+            class="dropzone"
+            for="photo"
+          >
+
+
+            <input
+              id="photo"
+              type="file"
+              accept="image/*"
+            >
+
+
+            <input
+              id="cameraInput"
+              class="hidden-input"
+              type="file"
+              accept="image/*"
+              capture="environment"
+            >
+
+
+
+            <div id="emptyState">
+
+              <div class="camera-bubble small">
+                ◉
+              </div>
+
+              <h3>
+                Choose a product photo
+              </h3>
+
+              <p>
+                Gallery • Camera • Files
+              </p>
+
+              <small>
+                or drag and drop an image here
+              </small>
+
+            </div>
+
+
+
+            <img
+              id="preview"
+              alt="Selected product"
+            >
+
           </label>
-          <div class="finder-buttons"><button id="search" class="button primary full" disabled>◎ Identify this item</button><button id="location" class="button light">⌖ Use my location</button></div>
-          <div id="status" class="status">Waiting for a photo.</div>
+
+
+
+          <div class="finder-buttons">
+
+
+            <button
+              id="search"
+              class="button primary full"
+              disabled
+            >
+              ◎ Identify this item
+            </button>
+
+
+            <button
+              id="location"
+              class="button light"
+            >
+              ⌖ Use my location
+            </button>
+
+          </div>
+
+
+          <div
+            id="status"
+            class="status"
+          >
+            Waiting for a photo.
+          </div>
+
         </div>
+
+
+
+        <!-- SEARCH INFO -->
 
         <aside class="finder-info">
-          <article><span>01</span><div><b>See</b><p>Analyse the real image, not a generic category.</p></div></article>
-          <article><span>02</span><div><b>Verify</b><p>Reject weak guesses instead of forcing results.</p></div></article>
-          <article><span>03</span><div><b>Match</b><p>Prefer relevant retailers and remove obvious competing single-brand stores.</p></div></article>
-          <article><span>04</span><div><b>Show</b><p>Only verified feeds can create price or exact-stock claims.</p></div></article>
+
+
+          <article>
+
+            <span>
+              01
+            </span>
+
+            <div>
+
+              <b>
+                See
+              </b>
+
+              <p>
+                Analyse the real image,
+                not a generic category.
+              </p>
+
+            </div>
+
+          </article>
+
+
+
+          <article>
+
+            <span>
+              02
+            </span>
+
+            <div>
+
+              <b>
+                Verify
+              </b>
+
+              <p>
+                Reject weak guesses instead
+                of forcing inaccurate results.
+              </p>
+
+            </div>
+
+          </article>
+
+
+
+          <article>
+
+            <span>
+              03
+            </span>
+
+            <div>
+
+              <b>
+                Match
+              </b>
+
+              <p>
+                Prefer relevant retailers
+                and remove obvious competing
+                single-brand stores.
+              </p>
+
+            </div>
+
+          </article>
+
+
+
+          <article>
+
+            <span>
+              04
+            </span>
+
+            <div>
+
+              <b>
+                Show
+              </b>
+
+              <p>
+                Only verified data can create
+                exact price or stock claims.
+              </p>
+
+            </div>
+
+          </article>
+
         </aside>
+
       </div>
+
     </section>
 
-    <section id="results" class="results-shell hidden">
+
+
+    <!-- =====================================================
+         RESULTS PAGE
+    ====================================================== -->
+
+    <section
+      id="results"
+      class="results-shell hidden"
+    >
+
+
+      <!-- RESULTS NAV -->
+
       <header class="results-nav">
-        <div class="brand compact"><span class="brand-mark">F</span><span>FindIt <b>Nearby</b></span></div>
-        <nav><a href="#finder">New Search</a><button id="saveSearch" class="result-nav-button">Save</button><button id="shareResult" class="result-nav-button">Share</button></nav>
+
+
+        <div class="brand compact">
+
+          <span class="brand-mark">
+            F
+          </span>
+
+          <span>
+            FindIt <b>Nearby</b>
+          </span>
+
+        </div>
+
+
+
+        <nav>
+
+          <a href="#finder">
+            New Search
+          </a>
+
+          <button
+            id="saveSearch"
+            class="result-nav-button"
+          >
+            Saved
+          </button>
+
+          <button
+            id="shareResult"
+            class="result-nav-button"
+          >
+            Share
+          </button>
+
+        </nav>
+
       </header>
 
+
+
+      <!-- PRODUCT HEADER -->
+
       <div class="identified-header">
-        <div class="result-photo"><img id="resultImage" alt="Identified item"></div>
-        <div class="identified-copy">
-          <span class="best-match">★ Best Match</span><h2 id="resultTitle">Item identified</h2><p id="resultSubtitle"></p>
-          <div class="match-line"><strong id="matchText">— match</strong><span>• by FindIt AI</span></div>
-          <div id="productTags" class="product-tags"></div>
+
+
+        <div class="result-photo">
+
+          <img
+            id="resultImage"
+            alt="Identified item"
+          >
+
         </div>
-        <div class="confidence-card"><span>AI Confidence</span><div id="confidenceRing" class="confidence-ring"><strong id="confidenceNumber">—</strong></div><b id="confidenceLabel">Waiting</b><small>Based on your image</small></div>
+
+
+
+        <div class="identified-copy">
+
+
+          <span class="best-match">
+            ★ Best Match
+          </span>
+
+
+          <h2 id="resultTitle">
+            Item identified
+          </h2>
+
+
+          <p id="resultSubtitle"></p>
+
+
+          <div class="match-line">
+
+            <strong id="matchText">
+              — match
+            </strong>
+
+            <span>
+              • by FindIt AI
+            </span>
+
+          </div>
+
+
+          <div
+            id="productTags"
+            class="product-tags"
+          ></div>
+
+        </div>
+
+
+
+        <!-- CONFIDENCE -->
+
+        <div class="confidence-card">
+
+
+          <span>
+            AI Confidence
+          </span>
+
+
+          <div
+            id="confidenceRing"
+            class="confidence-ring"
+          >
+
+            <strong id="confidenceNumber">
+              —
+            </strong>
+
+          </div>
+
+
+          <b id="confidenceLabel">
+            Waiting
+          </b>
+
+
+          <small>
+            Based on your image
+          </small>
+
+        </div>
+
       </div>
+
+
+
+      <!-- ===================================================
+           RESULTS TABS
+      ==================================================== -->
 
       <div class="result-tabs">
-        <button class="result-tab active" data-tab="nearby">⌖ Best Nearby <span id="nearbyCount"></span></button>
-        <button class="result-tab" data-tab="map">♧ Map View</button>
-        <button class="result-tab" data-tab="compare">⇄ Price Comparison</button>
-        <button class="result-tab" data-tab="details">▣ Product Details</button>
+
+
+        <button
+          class="result-tab active"
+          data-tab="nearby"
+        >
+          ⌖ Best Nearby
+          <span id="nearbyCount"></span>
+        </button>
+
+
+        <button
+          class="result-tab"
+          data-tab="map"
+        >
+          ♧ Map View
+        </button>
+
+
+        <button
+          class="result-tab"
+          data-tab="compare"
+        >
+          ⇄ Price Comparison
+        </button>
+
+
+        <button
+          class="result-tab"
+          data-tab="details"
+        >
+          ▣ Product Details
+        </button>
+
       </div>
 
-      <section id="panel-nearby" class="result-panel active">
-        <div class="location-row"><div>Results near <b id="locationLabel">your current location</b></div><button id="changeLocation" class="small-outline">⌖ Change location</button></div>
-        <div class="results-grid">
-          <div class="stores-column">
-            <div id="verifiedNotice" class="verified-notice">No verified price or stock data yet. Nearby retailers are not proof that the exact item is in stock.</div>
-            <div id="verifiedOffers"></div>
-            <div id="stores" class="store-list"><div class="empty-card">Run a search to see nearby retailers.</div></div>
-            <div class="save-card"><div><strong>♡ Want to come back to this search?</strong><p>Save it on this device and open it again later.</p></div><button id="saveSearchBottom" class="button secondary">Save Search</button></div>
+
+
+      <!-- ===================================================
+           NEARBY PANEL
+      ==================================================== -->
+
+      <section
+        id="panel-nearby"
+        class="result-panel active"
+      >
+
+
+        <div class="location-row">
+
+
+          <div>
+
+            Results near
+
+            <b id="locationLabel">
+              your current location
+            </b>
+
           </div>
-          <aside class="map-side"><div class="map-title"><b>Map</b><span>Nearby retailer locations</span></div><div id="map"></div></aside>
+
+
+
+          <button
+            id="changeLocation"
+            class="small-outline"
+          >
+            ⌖ Change location
+          </button>
+
         </div>
+
+
+
+        <div class="results-grid">
+
+
+          <!-- STORES -->
+
+          <div class="stores-column">
+
+
+            <div
+              id="verifiedNotice"
+              class="verified-notice"
+            >
+
+              No verified price or stock
+              data yet. Nearby retailers
+              are not proof that the exact
+              item is in stock.
+
+            </div>
+
+
+            <div id="verifiedOffers"></div>
+
+
+
+            <div
+              id="stores"
+              class="store-list"
+            >
+
+              <div class="empty-card">
+                Run a search to see nearby retailers.
+              </div>
+
+            </div>
+
+
+
+            <div class="save-card">
+
+
+              <div>
+
+                <strong>
+                  ♡ Want to come back to this search?
+                </strong>
+
+                <p>
+                  Save it on this device
+                  and open it again later.
+                </p>
+
+              </div>
+
+
+              <button
+                id="saveSearchBottom"
+                class="button secondary"
+              >
+                Save Search
+              </button>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- MAP -->
+
+          <aside class="map-side">
+
+
+            <div class="map-title">
+
+              <b>
+                Map
+              </b>
+
+              <span>
+                Nearby retailer locations
+              </span>
+
+            </div>
+
+
+            <div id="map"></div>
+
+          </aside>
+
+        </div>
+
       </section>
 
-      <section id="panel-map" class="result-panel"><div class="full-map-card"><div id="mapLarge"></div></div></section>
 
-      <section id="panel-compare" class="result-panel">
-        <div class="comparison-head"><div><div class="eyebrow">VERIFIED RETAILER DATA</div><h3>Price comparison</h3></div></div>
-        <div id="comparisonContent" class="empty-feature"><div class="feature-icon">⇄</div><h3>Ready for real retailer prices.</h3><p>FindIt only displays prices and exact stock when a legitimate retailer catalogue or inventory connection supplies them.</p></div>
+
+      <!-- ===================================================
+           FULL MAP
+      ==================================================== -->
+
+      <section
+        id="panel-map"
+        class="result-panel"
+      >
+
+        <div class="full-map-card">
+
+          <div id="mapLarge"></div>
+
+        </div>
+
       </section>
 
-      <section id="panel-details" class="result-panel"><div id="detailsContent" class="details-card"></div></section>
 
-      <div id="lowConfidence" class="low-confidence hidden"><div class="question">?</div><h3>We won't guess.</h3><p>Try a clearer photo showing the full item, logo, label or model details.</p><button id="retry" class="button primary">Try another photo</button></div>
+
+      <!-- ===================================================
+           PRICE COMPARISON
+      ==================================================== -->
+
+      <section
+        id="panel-compare"
+        class="result-panel"
+      >
+
+
+        <div class="comparison-head">
+
+
+          <div>
+
+            <div class="eyebrow">
+              VERIFIED RETAILER DATA
+            </div>
+
+            <h3>
+              Price comparison
+            </h3>
+
+          </div>
+
+        </div>
+
+
+
+        <div
+          id="comparisonContent"
+          class="empty-feature"
+        >
+
+          <div class="feature-icon">
+            ⇄
+          </div>
+
+          <h3>
+            Ready for real retailer prices.
+          </h3>
+
+          <p>
+
+            FindIt only displays prices
+            and exact stock when a legitimate
+            retailer catalogue or inventory
+            connection supplies them.
+
+          </p>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- ===================================================
+           DETAILS
+      ==================================================== -->
+
+      <section
+        id="panel-details"
+        class="result-panel"
+      >
+
+        <div
+          id="detailsContent"
+          class="details-card"
+        ></div>
+
+      </section>
+
+
+
+      <!-- ===================================================
+           LOW CONFIDENCE
+      ==================================================== -->
+
+      <div
+        id="lowConfidence"
+        class="low-confidence hidden"
+      >
+
+        <div class="question">
+          ?
+        </div>
+
+        <h3>
+          We won't guess.
+        </h3>
+
+        <p>
+          Try a clearer photo showing
+          the full item, logo, label
+          or model details.
+        </p>
+
+        <button
+          id="retry"
+          class="button primary"
+        >
+          Try another photo
+        </button>
+
+      </div>
+
     </section>
 
-    <div id="recentModal" class="modal hidden">
-      <div class="modal-card"><div class="modal-head"><h3>Recent searches</h3><button id="closeRecent">×</button></div><div id="recentList" class="recent-list"></div></div>
+
+
+    <!-- =====================================================
+         RECENT SEARCHES
+    ====================================================== -->
+
+    <div
+      id="recentModal"
+      class="modal hidden"
+    >
+
+
+      <div class="modal-card">
+
+
+        <div class="modal-head">
+
+          <h3>
+            Recent searches
+          </h3>
+
+          <button id="closeRecent">
+            ×
+          </button>
+
+        </div>
+
+
+        <div
+          id="recentList"
+          class="recent-list"
+        ></div>
+
+      </div>
+
     </div>
+
   </main>
 
-  <footer><div class="brand compact"><span class="brand-mark">F</span><span>FindIt <b>Nearby</b></span></div><small>© 2026 FindIt Nearby • Nearby retailer ≠ exact-product stock.</small></footer>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer>
+
+
+    <div class="brand compact">
+
+      <span class="brand-mark">
+        F
+      </span>
+
+      <span>
+        FindIt <b>Nearby</b>
+      </span>
+
+    </div>
+
+
+    <small>
+      © 2026 FindIt Nearby •
+      Nearby retailer does not mean
+      exact-product stock.
+    </small>
+
+  </footer>
+
+
+
+  <!-- LEAFLET -->
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  ></script>
+
+
+  <!-- FINDIT -->
+
   <script src="script.js"></script>
+
+
 </body>
+
 </html>
