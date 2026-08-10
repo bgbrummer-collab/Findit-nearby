@@ -1,20 +1,5 @@
-/* =========================================================
-   FindIt Nearby — Launch Fix Script
-
-   Main fixes:
-   - one-click Identify
-   - prevents accidental duplicate searches
-   - automatic location after identification
-   - automatic nearby retailer search
-   - better food / beauty / stationery / electronics matching
-   - removes duplicate retailers
-   - filters unrelated/random stores
-   - retailer logos + website fallbacks
-   - clearer loading and error messages
-========================================================= */
-
 const $ = (s) => document.querySelector(s);
-const $$ = (s) => [...document.querySelectorAll(s)];
+const $$ = (s) => Array.from(document.querySelectorAll(s));
 
 const photo = $("#photo");
 const cameraInput = $("#cameraInput");
@@ -36,11 +21,7 @@ let lastResult = null;
 let currentStores = [];
 let map = null;
 let mapLarge = null;
-
-
-/* =========================================================
-   BASIC HELPERS
-========================================================= */
+let selectedFile = null;
 
 function esc(v) {
   return String(v ?? "")
@@ -81,12 +62,18 @@ function safeUrl(v) {
 }
 
 function phoneHref(v) {
-  return String(v || "").replace(/[^\d+]/g, "");
+  return String(v || "")
+    .replace(/[^\d+]/g, "");
 }
 
 function showLoading(title, text) {
-  if (loadingTitle) loadingTitle.textContent = title;
-  if (loadingText) loadingText.textContent = text;
+  if (loadingTitle) {
+    loadingTitle.textContent = title;
+  }
+
+  if (loadingText) {
+    loadingText.textContent = text;
+  }
 
   if (overlay) {
     overlay.classList.remove("hidden");
@@ -102,39 +89,55 @@ function hideLoading() {
 function setSearchBusy(isBusy) {
   searching = isBusy;
 
-  if (!searchButton) return;
+  if (!searchButton) {
+    return;
+  }
 
-  searchButton.disabled = isBusy || !imageReady;
+  searchButton.disabled =
+    isBusy ||
+    !imageReady;
 
-  searchButton.textContent = isBusy
-    ? "◎ Finding your item…"
-    : "◎ Identify this item";
+  searchButton.textContent =
+    isBusy
+      ? "◎ Finding your item…"
+      : "◎ Identify this item";
 }
 
-function distanceKm(lat1, lon1, lat2, lon2) {
+function distanceKm(
+  lat1,
+  lon1,
+  lat2,
+  lon2
+) {
   const R = 6371;
   const p = Math.PI / 180;
 
   const a =
-    Math.sin(((lat2 - lat1) * p) / 2) ** 2 +
-    Math.cos(lat1 * p) *
-      Math.cos(lat2 * p) *
-      Math.sin(((lon2 - lon1) * p) / 2) ** 2;
+    Math.sin(
+      ((lat2 - lat1) * p) / 2
+    ) ** 2
+    +
+    Math.cos(
+      lat1 * p
+    )
+    *
+    Math.cos(
+      lat2 * p
+    )
+    *
+    Math.sin(
+      ((lon2 - lon1) * p) / 2
+    ) ** 2;
 
   return (
     R *
     2 *
-    Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+    Math.atan2(
+      Math.sqrt(a),
+      Math.sqrt(1 - a)
+    )
   );
 }
-
-
-/* =========================================================
-   RETAILER DIRECTORY
-
-   This lets FindIt fill in useful website/logo information
-   when OpenStreetMap does not provide it.
-========================================================= */
 
 const RETAILER_DIRECTORY = [
   {
@@ -144,7 +147,10 @@ const RETAILER_DIRECTORY = [
   },
 
   {
-    keys: ["totalsports", "total sports"],
+    keys: [
+      "totalsports",
+      "total sports"
+    ],
     domain: "totalsports.co.za",
     website: "https://www.totalsports.co.za"
   },
@@ -237,7 +243,10 @@ const RETAILER_DIRECTORY = [
   },
 
   {
-    keys: ["dis chem", "dischem"],
+    keys: [
+      "dis chem",
+      "dischem"
+    ],
     domain: "dischem.co.za",
     website: "https://www.dischem.co.za"
   },
@@ -249,7 +258,10 @@ const RETAILER_DIRECTORY = [
   },
 
   {
-    keys: ["pick n pay", "pnp"],
+    keys: [
+      "pick n pay",
+      "pnp"
+    ],
     domain: "pnp.co.za",
     website: "https://www.pnp.co.za"
   },
@@ -267,57 +279,62 @@ const RETAILER_DIRECTORY = [
   }
 ];
 
-
-function retailerDirectoryEntry(storeName) {
-  const n = normalise(storeName);
+function retailerDirectoryEntry(
+  storeName
+) {
+  const n =
+    normalise(
+      storeName
+    );
 
   return (
-    RETAILER_DIRECTORY.find((entry) =>
-      entry.keys.some((key) => n.includes(key))
+    RETAILER_DIRECTORY.find(
+      (entry) =>
+        entry.keys.some(
+          (key) =>
+            n.includes(
+              key
+            )
+        )
     ) || null
   );
 }
 
+const KNOWN_PRODUCT_BRANDS =
+  new Set([
+    "nike",
+    "adidas",
+    "puma",
+    "reebok",
+    "converse",
+    "vans",
+    "new balance",
+    "under armour",
+    "asics",
+    "skechers",
+    "crocs",
+    "fila",
+    "salomon",
+    "hoka",
 
-/* =========================================================
-   KNOWN PRODUCT BRANDS
-========================================================= */
-
-const KNOWN_PRODUCT_BRANDS = new Set([
-  "nike",
-  "adidas",
-  "puma",
-  "reebok",
-  "converse",
-  "vans",
-  "new balance",
-  "under armour",
-  "asics",
-  "skechers",
-  "crocs",
-  "fila",
-  "salomon",
-  "hoka",
-
-  "apple",
-  "samsung",
-  "huawei",
-  "xiaomi",
-  "sony",
-  "lg",
-  "bose",
-  "jbl",
-  "canon",
-  "nikon",
-  "lenovo",
-  "hp",
-  "dell",
-  "acer",
-  "asus",
-  "logitech",
-  "microsoft"
-]);
-
+    "apple",
+    "samsung",
+    "huawei",
+    "xiaomi",
+    "sony",
+    "lg",
+    "bose",
+    "jbl",
+    "canon",
+    "nikon",
+    "lenovo",
+    "hp",
+    "dell",
+    "acer",
+    "asus",
+    "logitech",
+    "microsoft"
+  ]);
 
 const KNOWN_MULTIBRAND_RETAILERS = [
   "totalsports",
@@ -345,15 +362,17 @@ const KNOWN_MULTIBRAND_RETAILERS = [
   "spar"
 ];
 
-
-/* =========================================================
-   IMAGE INPUT
-========================================================= */
-
 function acceptFile(file) {
-  if (!file) return;
+  if (!file) {
+    return;
+  }
 
-  if (!file.type.startsWith("image/")) {
+  if (
+    !file.type ||
+    !file.type.startsWith(
+      "image/"
+    )
+  ) {
     if (statusBox) {
       statusBox.textContent =
         "Please choose an image file.";
@@ -362,7 +381,10 @@ function acceptFile(file) {
     return;
   }
 
-  if (file.size > 8_000_000) {
+  if (
+    file.size >
+    8000000
+  ) {
     if (statusBox) {
       statusBox.textContent =
         "Please use an image smaller than 8 MB.";
@@ -371,344 +393,377 @@ function acceptFile(file) {
     return;
   }
 
-
-  /*
-    Put the selected file into the main photo input.
-
-    This means camera photos and uploaded photos use the
-    exact same identification process.
-  */
-
-  try {
-    const transfer = new DataTransfer();
-
-    transfer.items.add(file);
-
-    if (photo) {
-      photo.files = transfer.files;
-    }
-  } catch (error) {
-    console.warn(
-      "Could not copy image into photo input:",
-      error
-    );
-  }
-
-
-  /*
-    Show image preview
-  */
+  selectedFile =
+    file;
 
   if (preview) {
-    preview.src = URL.createObjectURL(file);
-    preview.style.display = "block";
+    preview.src =
+      URL.createObjectURL(
+        file
+      );
+
+    preview.style.display =
+      "block";
   }
 
   if (emptyState) {
-    emptyState.style.display = "none";
+    emptyState.style.display =
+      "none";
   }
 
+  imageReady =
+    true;
 
-  /*
-    Reset previous search.
-  */
+  lastResult =
+    null;
 
-  imageReady = true;
-  lastResult = null;
-  currentStores = [];
+  currentStores =
+    [];
 
-  setSearchBusy(false);
-
+  setSearchBusy(
+    false
+  );
 
   if (statusBox) {
     statusBox.textContent =
       "Photo ready. Tap Identify this item once.";
   }
 
-
-  const results = $("#results");
+  const results =
+    $("#results");
 
   if (results) {
-    results.classList.add("hidden");
+    results.classList.add(
+      "hidden"
+    );
   }
 }
 
-
-/* =========================================================
-   FILE INPUT EVENTS
-========================================================= */
-
 if (photo) {
-  photo.addEventListener("change", () => {
-    acceptFile(photo.files?.[0]);
-  });
+  photo.addEventListener(
+    "change",
+    () => {
+      acceptFile(
+        photo.files &&
+        photo.files[0]
+      );
+    }
+  );
 }
-
 
 if (cameraInput) {
-  cameraInput.addEventListener("change", () => {
-    acceptFile(cameraInput.files?.[0]);
-  });
+  cameraInput.addEventListener(
+    "change",
+    () => {
+      acceptFile(
+        cameraInput.files &&
+        cameraInput.files[0]
+      );
+    }
+  );
 }
 
-
-const heroUpload = $("#heroUpload");
-
-if (heroUpload) {
-  heroUpload.addEventListener("click", () => {
-    photo?.click();
-  });
+if ($("#heroUpload")) {
+  $("#heroUpload")
+    .addEventListener(
+      "click",
+      () => {
+        if (photo) {
+          photo.click();
+        }
+      }
+    );
 }
 
-
-const heroCamera = $("#heroCamera");
-
-if (heroCamera) {
-  heroCamera.addEventListener("click", () => {
-    cameraInput?.click();
-  });
+if ($("#heroCamera")) {
+  $("#heroCamera")
+    .addEventListener(
+      "click",
+      () => {
+        if (cameraInput) {
+          cameraInput.click();
+        }
+      }
+    );
 }
-
-
-/* =========================================================
-   DRAG AND DROP
-========================================================= */
 
 [
   $("#heroDropzone"),
   $("#finderDropzone")
 ]
   .filter(Boolean)
-  .forEach((zone) => {
+  .forEach(
+    (zone) => {
 
-    zone.addEventListener("dragover", (event) => {
-      event.preventDefault();
+      zone.addEventListener(
+        "dragover",
+        (event) => {
+          event.preventDefault();
 
-      zone.classList.add("dragging");
-    });
-
-
-    zone.addEventListener("dragleave", () => {
-      zone.classList.remove("dragging");
-    });
-
-
-    zone.addEventListener("drop", (event) => {
-      event.preventDefault();
-
-      zone.classList.remove("dragging");
-
-      acceptFile(
-        event.dataTransfer?.files?.[0]
+          zone.classList.add(
+            "dragging"
+          );
+        }
       );
 
+      zone.addEventListener(
+        "dragleave",
+        () => {
+          zone.classList.remove(
+            "dragging"
+          );
+        }
+      );
 
-      const finder = $("#finder");
+      zone.addEventListener(
+        "drop",
+        (event) => {
+          event.preventDefault();
 
-      if (finder) {
-        finder.scrollIntoView({
-          behavior: "smooth"
-        });
-      }
-    });
-  });
+          zone.classList.remove(
+            "dragging"
+          );
 
+          const file =
+            event.dataTransfer &&
+            event.dataTransfer.files &&
+            event.dataTransfer.files[0];
 
-/* =========================================================
-   LOCATION
-========================================================= */
+          acceptFile(
+            file
+          );
+
+          const finder =
+            $("#finder");
+
+          if (finder) {
+            finder.scrollIntoView({
+              behavior:
+                "smooth"
+            });
+          }
+        }
+      );
+    }
+  );
 
 function getLocation() {
-  return new Promise((resolve, reject) => {
+  return new Promise(
+    (
+      resolve,
+      reject
+    ) => {
 
-    if (!navigator.geolocation) {
-      reject(
-        new Error(
-          "Location is not supported by this browser."
-        )
-      );
+      if (
+        !navigator.geolocation
+      ) {
+        reject(
+          new Error(
+            "Location is not supported by this browser."
+          )
+        );
 
-      return;
-    }
-
-
-    navigator.geolocation.getCurrentPosition(
-
-      (position) => {
-
-        coords = {
-          lat: position.coords.latitude,
-          lon: position.coords.longitude
-        };
-
-
-        resolve(coords);
-      },
-
-
-      (error) => {
-        reject(error);
-      },
-
-
-      {
-        enableHighAccuracy: true,
-
-        /*
-          Don't let location searching hang forever.
-        */
-        timeout: 15000,
-
-        /*
-          A location from the last 5 minutes is accurate
-          enough for nearby retailer searching.
-        */
-        maximumAge: 300000
-      }
-    );
-  });
-}
-
-
-/* =========================================================
-   LOCATION BUTTON
-========================================================= */
-
-if (locationButton) {
-
-  locationButton.addEventListener(
-    "click",
-    async () => {
-
-      if (locationButton.disabled) {
         return;
       }
 
+      navigator.geolocation
+        .getCurrentPosition(
 
-      locationButton.disabled = true;
+          (position) => {
 
-      const oldText =
-        locationButton.textContent;
+            coords = {
+              lat:
+                position.coords.latitude,
 
+              lon:
+                position.coords.longitude
+            };
 
-      locationButton.textContent =
-        "⌖ Getting location…";
+            resolve(
+              coords
+            );
+          },
 
+          reject,
 
-      try {
+          {
+            enableHighAccuracy:
+              true,
 
-        await getLocation();
+            timeout:
+              15000,
 
-
-        locationButton.textContent =
-          "✓ Location ready";
-
-
-        if (statusBox) {
-          statusBox.textContent =
-            "Location ready. Upload a photo and FindIt will search nearby.";
-        }
-
-      } catch (error) {
-
-        console.error(
-          "Location error:",
-          error
+            maximumAge:
+              300000
+          }
         );
-
-
-        locationButton.textContent =
-          "⌖ Try location again";
-
-
-        if (statusBox) {
-          statusBox.textContent =
-            "We couldn't get your location. Please allow location access and try again.";
-        }
-
-      } finally {
-
-        locationButton.disabled = false;
-
-
-        if (
-          coords &&
-          oldText &&
-          !locationButton.textContent.includes(
-            "Location ready"
-          )
-        ) {
-          locationButton.textContent =
-            oldText;
-        }
-      }
     }
   );
 }
 
-
-/* =========================================================
-   AUTOMATIC LOCATION
-
-   FindIt will request location automatically after the AI
-   has identified the item.
-
-   This removes the old problem where users had to press
-   several buttons before nearby results appeared.
-========================================================= */
-
 async function ensureLocation() {
-
-  if (coords?.lat && coords?.lon) {
+  if (
+    coords &&
+    Number.isFinite(
+      coords.lat
+    ) &&
+    Number.isFinite(
+      coords.lon
+    )
+  ) {
     return coords;
   }
-
 
   if (locationButton) {
     locationButton.textContent =
       "⌖ Getting location…";
   }
 
+  const result =
+    await getLocation();
 
-  try {
-
-    const position =
-      await getLocation();
-
-
-    if (locationButton) {
-      locationButton.textContent =
-        "✓ Location ready";
-    }
-
-
-    return position;
-
-  } catch (error) {
-
-    console.error(
-      "Automatic location error:",
-      error
-    );
-
-
-    if (locationButton) {
-      locationButton.textContent =
-        "⌖ Enable location";
-    }
-
-
-    throw new Error(
-      "FindIt identified your item, but needs your location to find nearby retailers. Please allow location access."
-    );
+  if (locationButton) {
+    locationButton.textContent =
+      "✓ Location ready";
   }
+
+  if ($("#locationLabel")) {
+    $("#locationLabel")
+      .textContent =
+      "your current location";
+  }
+
+  return result;
 }
-/* =========================================================
-   GEMINI IDENTIFICATION API
-========================================================= */
+
+if (locationButton) {
+  locationButton
+    .addEventListener(
+      "click",
+      async () => {
+
+        if (
+          locationButton.disabled
+        ) {
+          return;
+        }
+
+        locationButton.disabled =
+          true;
+
+        try {
+          showLoading(
+            "Getting your location…",
+            "Allow location so FindIt can show nearby retailers."
+          );
+
+          await ensureLocation();
+
+          if (
+            lastResult &&
+            lastResult.identification
+          ) {
+            showLoading(
+              "Finding nearby retailers…",
+              "Checking only stores that match this product."
+            );
+
+            await renderNearby(
+              lastResult.identification
+            );
+          }
+
+          if (statusBox) {
+            statusBox.textContent =
+              "Location ready.";
+          }
+
+        } catch (error) {
+          console.error(
+            error
+          );
+
+          if (locationButton) {
+            locationButton.textContent =
+              "⌖ Try location again";
+          }
+
+          if (statusBox) {
+            statusBox.textContent =
+              "We couldn't get your location. Please allow location access and try again.";
+          }
+
+        } finally {
+          hideLoading();
+
+          locationButton.disabled =
+            false;
+        }
+      }
+    );
+}
+
+if ($("#changeLocation")) {
+  $("#changeLocation")
+    .addEventListener(
+      "click",
+      async () => {
+
+        coords =
+          null;
+
+        if (locationButton) {
+          locationButton.textContent =
+            "⌖ Use my location";
+        }
+
+        try {
+          showLoading(
+            "Updating location…",
+            "Your browser may ask for permission."
+          );
+
+          await ensureLocation();
+
+          if (
+            lastResult &&
+            lastResult.identification
+          ) {
+            showLoading(
+              "Finding nearby retailers…",
+              "Refreshing results near you."
+            );
+
+            await renderNearby(
+              lastResult.identification
+            );
+          }
+
+        } catch (error) {
+          console.error(
+            error
+          );
+
+          if (statusBox) {
+            statusBox.textContent =
+              "Could not update location.";
+          }
+
+        } finally {
+          hideLoading();
+        }
+      }
+    );
+}
 
 async function identifyItem() {
-  const file = photo?.files?.[0];
+  const file =
+    selectedFile ||
+    (
+      photo &&
+      photo.files &&
+      photo.files[0]
+    );
 
   if (!file) {
     throw new Error(
@@ -716,23 +771,27 @@ async function identifyItem() {
     );
   }
 
-  const form = new FormData();
+  const form =
+    new FormData();
 
   form.append(
     "image",
-    file
+    file,
+    file.name ||
+    "upload.jpg"
   );
-
 
   const response =
     await fetch(
       `${API_BASE}/search`,
       {
-        method: "POST",
-        body: form
+        method:
+          "POST",
+
+        body:
+          form
       }
     );
-
 
   let data;
 
@@ -745,59 +804,55 @@ async function identifyItem() {
     );
   }
 
-
   if (
     !response.ok ||
     data.ok === false
   ) {
-
     const message =
       data.details ||
       data.error ||
       "Image identification failed.";
 
-
     if (
-      /quota|rate|429/i.test(
-        message
-      )
+      /quota|rate|429/i
+        .test(
+          message
+        )
     ) {
       throw new Error(
         "Gemini's free usage limit is temporarily reached. Try again later."
       );
     }
 
-
     throw new Error(
       message
     );
   }
 
-
   return data;
 }
 
-
-/* =========================================================
-   NEARBY STORE API
-========================================================= */
-
 async function fetchNearby() {
   if (
-    !coords?.lat ||
-    !coords?.lon
+    !coords ||
+    !Number.isFinite(
+      coords.lat
+    ) ||
+    !Number.isFinite(
+      coords.lon
+    )
   ) {
     throw new Error(
       "Location is required."
     );
   }
 
-
   const response =
     await fetch(
       `${API_BASE}/nearby`,
       {
-        method: "POST",
+        method:
+          "POST",
 
         headers: {
           "Content-Type":
@@ -811,7 +866,6 @@ async function fetchNearby() {
       }
     );
 
-
   let data;
 
   try {
@@ -823,7 +877,6 @@ async function fetchNearby() {
     );
   }
 
-
   if (
     !response.ok ||
     data.ok !== true
@@ -834,7 +887,6 @@ async function fetchNearby() {
     );
   }
 
-
   return Array.isArray(
     data.elements
   )
@@ -842,30 +894,15 @@ async function fetchNearby() {
     : [];
 }
 
-
-/* =========================================================
-   CATEGORY INTELLIGENCE
-
-   This is one of the most important parts.
-
-   Instead of saying:
-   "This is a product, show shops"
-
-   FindIt now tries to work out:
-   - what category the product belongs to
-   - which shop types make sense
-   - which shop types definitely do NOT make sense
-========================================================= */
-
 function categoryProfile(item) {
-
   const visible =
     Array.isArray(
       item.visibleText
     )
-      ? item.visibleText.join(" ")
+      ? item.visibleText.join(
+          " "
+        )
       : "";
-
 
   const text =
     normalise(
@@ -880,17 +917,13 @@ function categoryProfile(item) {
       `
     );
 
-
-  /* ---------------------------------------------------------
-     SHOES / SNEAKERS
-  --------------------------------------------------------- */
-
   if (
     /shoe|shoes|sneaker|sneakers|footwear|trainer|trainers|boot|boots|sandal|sandals/
       .test(text)
   ) {
     return {
-      family: "footwear",
+      family:
+        "footwear",
 
       types: [
         "shoes",
@@ -901,7 +934,6 @@ function categoryProfile(item) {
 
       words: [
         "shoe",
-        "shoes",
         "sneaker",
         "footwear",
         "sport"
@@ -917,26 +949,22 @@ function categoryProfile(item) {
         "furniture",
         "car",
         "car_repair",
-        "golf",
         "garden_centre",
         "mobile_phone"
       ],
 
-      strict: true
+      strict:
+        true
     };
   }
-
-
-  /* ---------------------------------------------------------
-     STATIONERY / PENCIL CASE
-  --------------------------------------------------------- */
 
   if (
     /pencil case|pencil|pen|stationery|notebook|marker|stapler|school supplies|office supplies|eraser|ruler|highlighter/
       .test(text)
   ) {
     return {
-      family: "stationery",
+      family:
+        "stationery",
 
       types: [
         "stationery",
@@ -949,8 +977,7 @@ function categoryProfile(item) {
         "stationery",
         "office",
         "school",
-        "book",
-        "books"
+        "book"
       ],
 
       blockedTypes: [
@@ -966,23 +993,18 @@ function categoryProfile(item) {
         "garden_centre"
       ],
 
-      strict: true
+      strict:
+        true
     };
   }
-
-
-  /* ---------------------------------------------------------
-     FOOD / GROCERIES / BAKING
-
-     This is where the lemon butter cream problem gets fixed.
-  --------------------------------------------------------- */
 
   if (
     /food|grocery|groceries|supermarket|snack|sauce|spread|jam|butter|cream cheese|icing|frosting|buttercream|butter cream|cake cream|baking|baking ingredient|flour|sugar|milk|bread|cereal|chocolate|sweet|candy|coffee|tea|juice|drink|beverage|syrup|soup|pasta|rice|cookie|biscuit|chips|lemon curd|lemon butter/
       .test(text)
   ) {
     return {
-      family: "food",
+      family:
+        "food",
 
       types: [
         "supermarket",
@@ -1018,21 +1040,18 @@ function categoryProfile(item) {
         "beauty"
       ],
 
-      strict: true
+      strict:
+        true
     };
   }
-
-
-  /* ---------------------------------------------------------
-     BEAUTY / SKINCARE / BODY CREAM
-  --------------------------------------------------------- */
 
   if (
     /skin care|skincare|body cream|face cream|hand cream|lotion|moisturizer|moisturiser|cosmetic|cosmetics|makeup|beauty|serum|shampoo|conditioner|soap|deodorant|perfume|fragrance|body wash|face wash/
       .test(text)
   ) {
     return {
-      family: "beauty",
+      family:
+        "beauty",
 
       types: [
         "beauty",
@@ -1064,21 +1083,18 @@ function categoryProfile(item) {
         "books"
       ],
 
-      strict: true
+      strict:
+        true
     };
   }
-
-
-  /* ---------------------------------------------------------
-     PHARMACY / MEDICAL
-  --------------------------------------------------------- */
 
   if (
     /medicine|medication|pharmacy|chemist|vitamin|painkiller|bandage|first aid|medical supply|medical supplies/
       .test(text)
   ) {
     return {
-      family: "pharmacy",
+      family:
+        "pharmacy",
 
       types: [
         "chemist",
@@ -1103,21 +1119,18 @@ function categoryProfile(item) {
         "stationery"
       ],
 
-      strict: true
+      strict:
+        true
     };
   }
-
-
-  /* ---------------------------------------------------------
-     AUDIO / MICROPHONES
-  --------------------------------------------------------- */
 
   if (
     /microphone|headphone|headphones|earphone|earphones|speaker|audio|sound|amplifier|earbud|earbuds/
       .test(text)
   ) {
     return {
-      family: "audio",
+      family:
+        "audio",
 
       types: [
         "electronics",
@@ -1144,21 +1157,18 @@ function categoryProfile(item) {
         "hardware"
       ],
 
-      strict: true
+      strict:
+        true
     };
   }
-
-
-  /* ---------------------------------------------------------
-     PHONES
-  --------------------------------------------------------- */
 
   if (
     /smartphone|mobile phone|iphone|android phone|cellphone|cell phone/
       .test(text)
   ) {
     return {
-      family: "mobile",
+      family:
+        "mobile",
 
       types: [
         "mobile_phone",
@@ -1183,21 +1193,18 @@ function categoryProfile(item) {
         "hardware"
       ],
 
-      strict: true
+      strict:
+        true
     };
   }
-
-
-  /* ---------------------------------------------------------
-     COMPUTERS
-  --------------------------------------------------------- */
 
   if (
     /computer|laptop|monitor|keyboard|mouse|printer|desktop pc|gaming pc/
       .test(text)
   ) {
     return {
-      family: "computer",
+      family:
+        "computer",
 
       types: [
         "computer",
@@ -1219,21 +1226,18 @@ function categoryProfile(item) {
         "furniture"
       ],
 
-      strict: true
+      strict:
+        true
     };
   }
-
-
-  /* ---------------------------------------------------------
-     CAMERAS
-  --------------------------------------------------------- */
 
   if (
     /camera|photography|camera lens|dslr|mirrorless/
       .test(text)
   ) {
     return {
-      family: "camera",
+      family:
+        "camera",
 
       types: [
         "camera",
@@ -1255,21 +1259,18 @@ function categoryProfile(item) {
         "furniture"
       ],
 
-      strict: true
+      strict:
+        true
     };
   }
-
-
-  /* ---------------------------------------------------------
-     CLOTHING
-  --------------------------------------------------------- */
 
   if (
     /shirt|t shirt|tshirt|sweater|hoodie|jacket|dress|clothing|fashion|jeans|pants|trousers|shorts|skirt|coat/
       .test(text)
   ) {
     return {
-      family: "clothing",
+      family:
+        "clothing",
 
       types: [
         "clothes",
@@ -1293,21 +1294,18 @@ function categoryProfile(item) {
         "stationery"
       ],
 
-      strict: true
+      strict:
+        true
     };
   }
-
-
-  /* ---------------------------------------------------------
-     FLOWERS / PLANTS
-  --------------------------------------------------------- */
 
   if (
     /flower|flowers|plant|plants|bouquet|rose|roses|orchid|succulent/
       .test(text)
   ) {
     return {
-      family: "plants",
+      family:
+        "plants",
 
       types: [
         "florist",
@@ -1331,21 +1329,18 @@ function categoryProfile(item) {
         "furniture"
       ],
 
-      strict: true
+      strict:
+        true
     };
   }
-
-
-  /* ---------------------------------------------------------
-     FURNITURE
-  --------------------------------------------------------- */
 
   if (
     /chair|table|desk|sofa|couch|furniture|cabinet|shelf|bookshelf|wardrobe|bed frame/
       .test(text)
   ) {
     return {
-      family: "furniture",
+      family:
+        "furniture",
 
       types: [
         "furniture",
@@ -1368,21 +1363,18 @@ function categoryProfile(item) {
         "stationery"
       ],
 
-      strict: true
+      strict:
+        true
     };
   }
-
-
-  /* ---------------------------------------------------------
-     BOOKS
-  --------------------------------------------------------- */
 
   if (
     /book|novel|textbook|magazine|comic book/
       .test(text)
   ) {
     return {
-      family: "books",
+      family:
+        "books",
 
       types: [
         "books",
@@ -1403,21 +1395,18 @@ function categoryProfile(item) {
         "furniture"
       ],
 
-      strict: true
+      strict:
+        true
     };
   }
-
-
-  /* ---------------------------------------------------------
-     TOOLS
-  --------------------------------------------------------- */
 
   if (
     /tool|tools|drill|hammer|hardware|screwdriver|saw|spanner|wrench|pliers/
       .test(text)
   ) {
     return {
-      family: "tools",
+      family:
+        "tools",
 
       types: [
         "hardware",
@@ -1441,21 +1430,18 @@ function categoryProfile(item) {
         "furniture"
       ],
 
-      strict: true
+      strict:
+        true
     };
   }
-
-
-  /* ---------------------------------------------------------
-     TOYS / GAMES
-  --------------------------------------------------------- */
 
   if (
     /toy|toys|lego|board game|video game|gaming console|playstation|xbox|nintendo/
       .test(text)
   ) {
     return {
-      family: "toys-games",
+      family:
+        "toys-games",
 
       types: [
         "toys",
@@ -1479,23 +1465,17 @@ function categoryProfile(item) {
         "furniture"
       ],
 
-      strict: true
+      strict:
+        true
     };
   }
 
-
-  /* ---------------------------------------------------------
-     UNKNOWN CATEGORY
-
-     IMPORTANT:
-     If we're not confident what shop type fits,
-     we intentionally keep this cautious.
-  --------------------------------------------------------- */
-
   return {
-    family: "unknown",
+    family:
+      "unknown",
 
-    types: [],
+    types:
+      [],
 
     words:
       normalise(
@@ -1509,28 +1489,22 @@ function categoryProfile(item) {
             word.length >= 4
         ),
 
-    blockedTypes: [],
+    blockedTypes:
+      [],
 
-    strict: false
+    strict:
+      false
   };
 }
 
-
-/* =========================================================
-   EXTRACT STORE DATA FROM OPENSTREETMAP
-========================================================= */
-
 function extractStore(place) {
-
   const lat =
     place.lat ??
     place.center?.lat;
 
-
   const lon =
     place.lon ??
     place.center?.lon;
-
 
   if (
     lat == null ||
@@ -1539,22 +1513,18 @@ function extractStore(place) {
     return null;
   }
 
-
   const tags =
     place.tags || {};
-
 
   const name =
     tags.name ||
     tags.brand ||
     "Unnamed retailer";
 
-
   const directory =
     retailerDirectoryEntry(
       name
     );
-
 
   const osmWebsite =
     safeUrl(
@@ -1562,19 +1532,10 @@ function extractStore(place) {
       tags.website
     );
 
-
   const website =
     osmWebsite ||
     directory?.website ||
     null;
-
-
-  /*
-    We NEVER make up phone numbers.
-
-    If OpenStreetMap didn't provide one,
-    the Call button simply won't show.
-  */
 
   const phone =
     tags["contact:phone"] ||
@@ -1582,18 +1543,6 @@ function extractStore(place) {
     tags["contact:mobile"] ||
     tags.mobile ||
     null;
-
-
-  const address =
-    [
-      tags["addr:housenumber"],
-      tags["addr:street"],
-      tags["addr:suburb"],
-      tags["addr:city"]
-    ]
-      .filter(Boolean)
-      .join(", ");
-
 
   return {
     name,
@@ -1612,41 +1561,38 @@ function extractStore(place) {
       tags.opening_hours ||
       null,
 
-    address,
+    address: [
+      tags["addr:housenumber"],
+      tags["addr:street"],
+      tags["addr:suburb"],
+      tags["addr:city"]
+    ]
+      .filter(Boolean)
+      .join(", "),
 
     tags,
-
     directory
   };
 }
 
-
-/* =========================================================
-   PRODUCT BRAND DETECTION
-========================================================= */
-
 function findKnownMaker(text) {
-
   const n =
-    normalise(text);
-
+    normalise(
+      text
+    );
 
   for (
     const brand
     of KNOWN_PRODUCT_BRANDS
   ) {
-
     if (
       n === brand ||
-
       n.startsWith(
         brand + " "
       ) ||
-
       n.endsWith(
         " " + brand
       ) ||
-
       n.includes(
         " " + brand + " "
       )
@@ -1655,22 +1601,14 @@ function findKnownMaker(text) {
     }
   }
 
-
   return null;
 }
 
-
-/* =========================================================
-   MULTI-BRAND STORE
-========================================================= */
-
 function isMultiBrandRetailer(store) {
-
   const name =
     normalise(
       store.name
     );
-
 
   return (
     KNOWN_MULTIBRAND_RETAILERS
@@ -1683,24 +1621,14 @@ function isMultiBrandRetailer(store) {
   );
 }
 
-
-/* =========================================================
-   COMPETING SINGLE-BRAND FILTER
-
-   Example:
-   Nike product → Adidas-only store should NOT appear.
-========================================================= */
-
 function isCompetingSingleBrandStore(
   store,
   item
 ) {
-
   const itemBrand =
     normalise(
       item.brand
     );
-
 
   if (
     !itemBrand ||
@@ -1711,7 +1639,6 @@ function isCompetingSingleBrandStore(
     return false;
   }
 
-
   const storeBrand =
     findKnownMaker(
       store.tags.brand ||
@@ -1719,39 +1646,26 @@ function isCompetingSingleBrandStore(
       store.name
     );
 
-
   return (
     !!storeBrand &&
     storeBrand !== itemBrand
   );
 }
 
-
-/* =========================================================
-   RETAILER SCORE
-
-   Higher score = more relevant store.
-
-   Obvious wrong stores get rejected completely.
-========================================================= */
-
 function retailerScore(
   store,
   item,
   profile
 ) {
-
   const name =
     normalise(
       store.name
     );
 
-
   const type =
     normalise(
       store.type
     );
-
 
   const blob =
     normalise(
@@ -1766,19 +1680,13 @@ function retailerScore(
         .join(" ")
     );
 
-
   const itemBrand =
     normalise(
       item.brand
     );
 
-
-  let score = 0;
-
-
-  /*
-    Block obvious competing brand stores.
-  */
+  let score =
+    0;
 
   if (
     isCompetingSingleBrandStore(
@@ -1789,149 +1697,110 @@ function retailerScore(
     return -9999;
   }
 
-
-  /*
-    Block store types that clearly don't match.
-  */
-
   if (
     profile.blockedTypes
-      .includes(type)
+      .includes(
+        type
+      )
   ) {
     return -9999;
   }
-
-
-  /*
-    Exact brand retailer gets a huge boost.
-
-    Example:
-    Nike product → Nike store.
-  */
 
   if (
     itemBrand &&
     (
       name.includes(
         itemBrand
-      )
-
-      ||
-
+      ) ||
       normalise(
         store.tags.brand
       ) === itemBrand
     )
   ) {
-    score += 240;
+    score +=
+      240;
   }
-
-
-  /*
-    Known legitimate multi-brand chain.
-  */
 
   if (
     isMultiBrandRetailer(
       store
     )
   ) {
-    score += 35;
+    score +=
+      35;
   }
-
-
-  /*
-    Correct store type is very important.
-  */
 
   if (
     profile.types
-      .includes(type)
+      .includes(
+        type
+      )
   ) {
-    score += 100;
+    score +=
+      100;
   }
-
-
-  /*
-    Keywords in store information.
-  */
 
   for (
     const word
     of profile.words
   ) {
-
     if (
       word &&
       blob.includes(
-        normalise(word)
+        normalise(
+          word
+        )
       )
     ) {
-      score += 15;
+      score +=
+        15;
     }
   }
-
-
-  /*
-    Known chain with public website.
-  */
 
   if (
     store.directory
   ) {
-    score += 10;
+    score +=
+      10;
   }
-
-
-  /*
-    Strict categories must have real evidence.
-
-    This is the important random-shop protection.
-  */
 
   if (
     profile.strict &&
-    !profile.types.includes(type)
+    !profile.types
+      .includes(
+        type
+      )
   ) {
-
     const hasKeyword =
       profile.words
         .some(
           (word) =>
             blob.includes(
-              normalise(word)
+              normalise(
+                word
+              )
             )
         );
-
 
     if (
       !hasKeyword
     ) {
-      score -= 85;
+      score -=
+        85;
     }
   }
-
 
   return score;
 }
 
-
-/* =========================================================
-   RETAILER LOGO
-========================================================= */
-
 function faviconForStore(store) {
-
   let domain =
     null;
-
 
   if (
     store.website
   ) {
-
     try {
-
       domain =
         new URL(
           store.website
@@ -1941,27 +1810,22 @@ function faviconForStore(store) {
             /^www\./,
             ""
           );
-
     } catch {}
   }
-
 
   if (
     !domain &&
     store.directory?.domain
   ) {
-
     domain =
       store.directory.domain;
   }
-
 
   if (
     !domain
   ) {
     return null;
   }
-
 
   return (
     "https://www.google.com/s2/favicons?domain=" +
@@ -1972,16 +1836,10 @@ function faviconForStore(store) {
   );
 }
 
-
-/* =========================================================
-   SEARCH INSIDE RETAILER WEBSITE
-========================================================= */
-
 function retailerSearchUrl(
   store,
   item
 ) {
-
   if (
     !item.searchQuery ||
     !store.website
@@ -1989,9 +1847,7 @@ function retailerSearchUrl(
     return null;
   }
 
-
   try {
-
     const domain =
       new URL(
         store.website
@@ -2002,7 +1858,6 @@ function retailerSearchUrl(
           ""
         );
 
-
     return (
       "https://www.google.com/search?q=" +
       encodeURIComponent(
@@ -2011,30 +1866,18 @@ function retailerSearchUrl(
     );
 
   } catch {
-
     return null;
   }
 }
 
-
-/* =========================================================
-   SMART STORE DEDUPLICATION
-
-   Same chain + roughly same location =
-   likely duplicate map records.
-========================================================= */
-
 function dedupeStores(stores) {
-
   const kept =
     [];
-
 
   for (
     const store
     of stores
   ) {
-
     const duplicate =
       kept.find(
         (existing) => {
@@ -2050,44 +1893,26 @@ function dedupeStores(stores) {
             return false;
           }
 
-
-          const distance =
+          return (
             distanceKm(
               existing.lat,
               existing.lon,
               store.lat,
               store.lon
-            );
-
-
-          /*
-            Under 1 km:
-            likely two OSM objects representing the same branch.
-          */
-
-          return (
-            distance < 1
+            ) < 1
           );
         }
       );
 
-
     if (
       !duplicate
     ) {
-
       kept.push(
         store
       );
 
       continue;
     }
-
-
-    /*
-      If duplicate:
-      keep whichever record contains more useful information.
-    */
 
     const oldInfo =
       Number(
@@ -2106,7 +1931,6 @@ function dedupeStores(stores) {
         !!duplicate.opening
       );
 
-
     const newInfo =
       Number(
         !!store.phone
@@ -2124,49 +1948,44 @@ function dedupeStores(stores) {
         !!store.opening
       );
 
-
     if (
       newInfo >
       oldInfo
     ) {
-
       const index =
         kept.indexOf(
           duplicate
         );
-
 
       kept[index] =
         store;
     }
   }
 
-
   return kept;
 }
-/* =========================================================
-   RENDER IDENTIFICATION
-========================================================= */
 
 function renderIdentification(data) {
   const item =
     data.identification || {};
 
-  const confidence = Math.max(
-    0,
-    Math.min(
-      100,
-      Math.round(
-        Number(
-          item.confidence || 0
-        ) * 100
+  const confidence =
+    Math.max(
+      0,
+      Math.min(
+        100,
+        Math.round(
+          Number(
+            item.confidence ||
+            0
+          ) *
+          100
+        )
       )
-    )
-  );
+    );
 
   lastResult =
     data;
-
 
   $("#results")
     ?.classList
@@ -2174,47 +1993,50 @@ function renderIdentification(data) {
       "hidden"
     );
 
-
   $("#lowConfidence")
     ?.classList
     .add(
       "hidden"
     );
 
-
-  if ($("#resultImage")) {
+  if (
+    $("#resultImage")
+  ) {
     $("#resultImage").src =
       preview?.src || "";
   }
 
-
-  if ($("#resultTitle")) {
+  if (
+    $("#resultTitle")
+  ) {
     $("#resultTitle").textContent =
       item.name ||
       item.object ||
       "Item identified";
   }
 
-
-  if ($("#resultSubtitle")) {
+  if (
+    $("#resultSubtitle")
+  ) {
     $("#resultSubtitle").textContent =
       item.summary ||
       item.searchQuery ||
       "";
   }
 
-
-  if ($("#matchText")) {
+  if (
+    $("#matchText")
+  ) {
     $("#matchText").textContent =
       `${confidence}% match`;
   }
 
-
-  if ($("#confidenceNumber")) {
+  if (
+    $("#confidenceNumber")
+  ) {
     $("#confidenceNumber").textContent =
       `${confidence}%`;
   }
-
 
   $("#confidenceRing")
     ?.style
@@ -2223,8 +2045,9 @@ function renderIdentification(data) {
       `${confidence}%`
     );
 
-
-  if ($("#confidenceLabel")) {
+  if (
+    $("#confidenceLabel")
+  ) {
     $("#confidenceLabel").textContent =
       confidence >= 90
         ? "Very High Match"
@@ -2235,15 +2058,18 @@ function renderIdentification(data) {
         : "Low Confidence";
   }
 
-
-  if ($("#productTags")) {
+  if (
+    $("#productTags")
+  ) {
     $("#productTags").innerHTML =
       [
         item.brand,
         item.model,
         item.category
       ]
-        .filter(Boolean)
+        .filter(
+          Boolean
+        )
         .map(
           (tag) =>
             `<span>${esc(tag)}</span>`
@@ -2251,22 +2077,21 @@ function renderIdentification(data) {
         .join("");
   }
 
-
   const visibleText =
     Array.isArray(
       item.visibleText
     ) &&
     item.visibleText.length
-      ? item.visibleText.join(", ")
+      ? item.visibleText.join(
+          ", "
+        )
       : "None detected";
 
-
-  if ($("#detailsContent")) {
+  if (
+    $("#detailsContent")
+  ) {
     $("#detailsContent").innerHTML = `
-
-      <div class="eyebrow">
-        PRODUCT DETAILS
-      </div>
+      <div class="eyebrow">PRODUCT DETAILS</div>
 
       <h3>
         ${esc(
@@ -2280,57 +2105,37 @@ function renderIdentification(data) {
 
         <div class="detail-box">
           <small>Object</small>
-          <b>${esc(
-            item.object ||
-            "Unknown"
-          )}</b>
+          <b>${esc(item.object || "Unknown")}</b>
         </div>
 
         <div class="detail-box">
           <small>Brand</small>
-          <b>${esc(
-            item.brand ||
-            "Not detected"
-          )}</b>
+          <b>${esc(item.brand || "Not detected")}</b>
         </div>
 
         <div class="detail-box">
           <small>Model</small>
-          <b>${esc(
-            item.model ||
-            "Not detected"
-          )}</b>
+          <b>${esc(item.model || "Not detected")}</b>
         </div>
 
         <div class="detail-box">
           <small>Category</small>
-          <b>${esc(
-            item.category ||
-            "Not detected"
-          )}</b>
+          <b>${esc(item.category || "Not detected")}</b>
         </div>
 
         <div class="detail-box">
           <small>Colour</small>
-          <b>${esc(
-            item.color ||
-            "Not detected"
-          )}</b>
+          <b>${esc(item.color || "Not detected")}</b>
         </div>
 
         <div class="detail-box">
           <small>Visible text</small>
-          <b>${esc(
-            visibleText
-          )}</b>
+          <b>${esc(visibleText)}</b>
         </div>
 
         <div class="detail-box">
           <small>Search phrase</small>
-          <b>${esc(
-            item.searchQuery ||
-            "Not available"
-          )}</b>
+          <b>${esc(item.searchQuery || "Not available")}</b>
         </div>
 
         <div class="detail-box">
@@ -2342,21 +2147,12 @@ function renderIdentification(data) {
     `;
   }
 
-
   renderVerifiedOffers(
     data
   );
 }
 
-
-/* =========================================================
-   VERIFIED OFFERS
-========================================================= */
-
-function renderVerifiedOffers(
-  data
-) {
-
+function renderVerifiedOffers(data) {
   const offers =
     Array.isArray(
       data.offers
@@ -2364,28 +2160,22 @@ function renderVerifiedOffers(
       ? data.offers
       : [];
 
-
   const box =
     $("#verifiedOffers");
-
 
   const comparison =
     $("#comparisonContent");
 
-
   if (
     !offers.length
   ) {
-
     if (box) {
       box.innerHTML =
         "";
     }
 
-
     if (comparison) {
       comparison.innerHTML = `
-
         <div class="feature-icon">
           ⇄
         </div>
@@ -2395,24 +2185,22 @@ function renderVerifiedOffers(
         </h3>
 
         <p>
-          FindIt only displays prices
-          and exact stock when a legitimate
-          retailer catalogue or inventory
-          connection supplies them.
+          FindIt only displays prices and exact stock when a legitimate
+          retailer catalogue or inventory connection supplies them.
         </p>
       `;
     }
 
-
     return;
   }
 
-
-  if ($("#verifiedNotice")) {
-    $("#verifiedNotice").textContent =
+  if (
+    $("#verifiedNotice")
+  ) {
+    $("#verifiedNotice")
+      .textContent =
       "✓ Verified retailer offers are available for this item.";
   }
-
 
   const html =
     offers
@@ -2422,33 +2210,27 @@ function renderVerifiedOffers(
           const store =
             offer.store || {};
 
-
           const price =
             offer.price == null
-
               ? "Price unavailable"
+              : new Intl.NumberFormat(
+                  "en-ZA",
+                  {
+                    style:
+                      "currency",
 
-              : new Intl
-                  .NumberFormat(
-                    "en-ZA",
-                    {
-                      style:
-                        "currency",
-
-                      currency:
-                        offer.currency ||
-                        "ZAR"
-                    }
+                    currency:
+                      offer.currency ||
+                      "ZAR"
+                  }
+                )
+                .format(
+                  Number(
+                    offer.price
                   )
-                  .format(
-                    Number(
-                      offer.price
-                    )
-                  );
-
+                );
 
           return `
-
             <article class="offer-card">
 
               <div>
@@ -2482,9 +2264,7 @@ function renderVerifiedOffers(
               </div>
 
               <div class="offer-price">
-                ${esc(
-                  price
-                )}
+                ${esc(price)}
               </div>
 
             </article>
@@ -2493,12 +2273,10 @@ function renderVerifiedOffers(
       )
       .join("");
 
-
   if (box) {
     box.innerHTML =
       `<div class="offer-grid">${html}</div>`;
   }
-
 
   if (comparison) {
     comparison.innerHTML =
@@ -2506,109 +2284,79 @@ function renderVerifiedOffers(
   }
 }
 
-
-/* =========================================================
-   NEARBY RETAILER SEARCH
-========================================================= */
-
-async function renderNearby(
-  item
-) {
-
+async function renderNearby(item) {
   if (
-    !coords?.lat ||
-    !coords?.lon
+    !coords
   ) {
-
-    if ($("#stores")) {
+    if (
+      $("#stores")
+    ) {
       $("#stores").innerHTML = `
-
         <div class="empty-card">
-
           Item identified.
-
-          Please allow location
-          to see nearby retailers.
-
+          Please allow location to see nearby retailers.
         </div>
       `;
     }
 
-
     return;
   }
 
-
   const raw =
     await fetchNearby();
-
 
   const profile =
     categoryProfile(
       item
     );
 
-
-  /*
-    If FindIt cannot work out a useful
-    shopping family, do NOT fill the page
-    with random shops.
-  */
-
   if (
     profile.family ===
     "unknown"
   ) {
-
-    if ($("#stores")) {
+    if (
+      $("#stores")
+    ) {
       $("#stores").innerHTML = `
-
         <div class="empty-card">
 
-          FindIt identified the item,
-          but isn't confident enough
-          about which type of retailer
-          should sell it.
+          FindIt identified the item, but isn't confident enough
+          about which type of retailer should sell it.
 
-          Try a clearer image showing
-          the label, packaging or brand.
+          <br><br>
+
+          Try a clearer image showing the label, packaging or brand.
 
         </div>
       `;
     }
 
-
-    if ($("#nearbyCount")) {
-      $("#nearbyCount").textContent =
+    if (
+      $("#nearbyCount")
+    ) {
+      $("#nearbyCount")
+        .textContent =
         "";
     }
-
 
     updateMaps(
       []
     );
 
-
     return;
   }
 
-
   let stores =
     raw
-
       .map(
         extractStore
       )
-
       .filter(
         Boolean
       )
-
       .map(
         (store) => ({
-
           ...store,
-
 
           score:
             retailerScore(
@@ -2617,7 +2365,6 @@ async function renderNearby(
               profile
             ),
 
-
           distance:
             distanceKm(
               coords.lat,
@@ -2625,45 +2372,29 @@ async function renderNearby(
               store.lat,
               store.lon
             )
-
         })
       )
-
       .filter(
         (store) =>
           store.score >= 40
       )
-
       .sort(
         (a, b) =>
-
           b.score -
-            a.score
-
+          a.score
           ||
-
           a.distance -
-            b.distance
+          b.distance
       );
-
-
-  /*
-    Remove exact duplicates.
-  */
 
   const exactSeen =
     new Set();
 
-
   stores =
     stores.filter(
       (store) => {
-
         const key =
-          `${normalise(store.name)}|` +
-          `${store.lat.toFixed(5)}|` +
-          `${store.lon.toFixed(5)}`;
-
+          `${normalise(store.name)}|${store.lat.toFixed(5)}|${store.lon.toFixed(5)}`;
 
         if (
           exactSeen.has(
@@ -2673,343 +2404,216 @@ async function renderNearby(
           return false;
         }
 
-
         exactSeen.add(
           key
         );
-
 
         return true;
       }
     );
 
-
-  /*
-    Remove duplicate nearby records
-    for the same chain.
-  */
-
   stores =
     dedupeStores(
       stores
-    );
-
-
-  /*
-    Limit the page to the best results.
-  */
-
-  stores =
-    stores.slice(
-      0,
-      12
-    );
-
+    )
+      .slice(
+        0,
+        12
+      );
 
   currentStores =
     stores;
 
-
-  if ($("#nearbyCount")) {
-    $("#nearbyCount").textContent =
+  if (
+    $("#nearbyCount")
+  ) {
+    $("#nearbyCount")
+      .textContent =
       stores.length
         ? `(${stores.length})`
         : "";
   }
 
-
   if (
     !stores.length
   ) {
-
-    if ($("#stores")) {
+    if (
+      $("#stores")
+    ) {
       $("#stores").innerHTML = `
-
         <div class="empty-card">
 
-          FindIt couldn't find a strong
-          nearby retailer match for this item.
+          FindIt couldn't find a strong nearby retailer match
+          for this item.
 
-          We would rather show no result
-          than send you to unrelated shops.
+          <br><br>
+
+          We would rather show no result than send you
+          to unrelated shops.
 
         </div>
       `;
     }
 
-
     updateMaps(
       []
     );
 
-
     return;
   }
 
+  if (
+    $("#stores")
+  ) {
+    $("#stores")
+      .innerHTML =
+      stores
+        .map(
+          (
+            store,
+            index
+          ) => {
 
-  if (!$("#stores")) {
-    return;
-  }
+            const directions =
+              "https://www.google.com/maps/dir/?api=1&destination=" +
+              encodeURIComponent(
+                `${store.lat},${store.lon}`
+              );
 
+            const logo =
+              faviconForStore(
+                store
+              );
 
-  $("#stores").innerHTML =
-    stores
-      .map(
-        (
-          store,
-          index
-        ) => {
+            const searchUrl =
+              retailerSearchUrl(
+                store,
+                item
+              );
 
+            const fallback =
+              esc(
+                store.name
+                  .charAt(0)
+                  .toUpperCase()
+              );
 
-          const directions =
+            const logoHtml =
+              logo
+                ? `<img src="${esc(logo)}" alt="" onerror="this.parentElement.textContent='${fallback}'">`
+                : fallback;
 
-            "https://www.google.com/maps/dir/?api=1&destination="
+            const relevance =
+              store.score >= 200
+                ? "Best brand match"
+                : store.score >= 110
+                ? "Strong retailer match"
+                : "Relevant retailer";
 
-            +
+            return `
+              <article class="store-card">
 
-            encodeURIComponent(
-              `${store.lat},${store.lon}`
-            );
+                <div class="store-logo">
+                  ${logoHtml}
+                </div>
 
+                <div>
 
-          const logo =
-            faviconForStore(
-              store
-            );
+                  <div class="store-title">
 
+                    <span class="rank-pill">
+                      ${index + 1}
+                    </span>
 
-          const searchUrl =
-            retailerSearchUrl(
-              store,
-              item
-            );
+                    ${esc(store.name)}
 
+                    <span class="relevance-chip">
+                      ${esc(relevance)}
+                    </span>
 
-          const fallback =
-            esc(
-              store.name
-                .charAt(0)
-                .toUpperCase()
-            );
+                  </div>
 
+                  <div class="store-sub">
 
-          const logoHtml =
-            logo
-
-              ? `
-
-                <img
-                  src="${esc(logo)}"
-                  alt=""
-                  onerror="this.parentElement.textContent='${fallback}'"
-                >
-
-              `
-
-              : fallback;
-
-
-          const relevance =
-            store.score >= 200
-
-              ? "Best brand match"
-
-              : store.score >= 110
-
-              ? "Strong retailer match"
-
-              : "Relevant retailer";
-
-
-          return `
-
-            <article class="store-card">
-
-
-              <div class="store-logo">
-                ${logoHtml}
-              </div>
-
-
-              <div>
-
-
-                <div class="store-title">
-
-
-                  <span class="rank-pill">
-                    ${index + 1}
-                  </span>
-
-
-                  ${esc(
-                    store.name
-                  )}
-
-
-                  <span class="relevance-chip">
                     ${esc(
-                      relevance
+                      store.address ||
+                      store.type
                     )}
-                  </span>
 
+                    <br>
 
-                </div>
+                    ${store.distance.toFixed(1)}
+                    km away
 
+                    ${
+                      store.opening
+                        ? ` • ${esc(store.opening)}`
+                        : ""
+                    }
 
-                <div class="store-sub">
+                  </div>
 
+                  <div class="store-actions">
 
-                  ${esc(
-                    store.address ||
-                    store.type
-                  )}
+                    ${
+                      store.phone
+                        ? `<a href="tel:${esc(phoneHref(store.phone))}">☎ Call</a>`
+                        : ""
+                    }
 
+                    ${
+                      store.website
+                        ? `<a href="${esc(store.website)}" target="_blank" rel="noopener noreferrer">▣ Website</a>`
+                        : ""
+                    }
 
-                  <br>
+                    ${
+                      searchUrl
+                        ? `<a href="${esc(searchUrl)}" target="_blank" rel="noopener noreferrer">⌕ Search retailer</a>`
+                        : ""
+                    }
 
+                    <a
+                      href="${esc(directions)}"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      ⌖ Directions
+                    </a>
 
-                  ${store.distance.toFixed(1)}
-                  km away
-
-
-                  ${
-                    store.opening
-
-                      ? ` • ${esc(
-                          store.opening
-                        )}`
-
-                      : ""
-                  }
-
-
-                </div>
-
-
-                <div class="store-actions">
-
-
-                  ${
-                    store.phone
-
-                      ? `
-
-                        <a
-                          href="tel:${esc(
-                            phoneHref(
-                              store.phone
-                            )
-                          )}"
-                        >
-                          ☎ Call
-                        </a>
-
-                      `
-
-                      : ""
-                  }
-
-
-                  ${
-                    store.website
-
-                      ? `
-
-                        <a
-                          href="${esc(
-                            store.website
-                          )}"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          ▣ Website
-                        </a>
-
-                      `
-
-                      : ""
-                  }
-
-
-                  ${
-                    searchUrl
-
-                      ? `
-
-                        <a
-                          href="${esc(
-                            searchUrl
-                          )}"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          ⌕ Search retailer
-                        </a>
-
-                      `
-
-                      : ""
-                  }
-
-
-                  <a
-                    href="${esc(
-                      directions
-                    )}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    ⌖ Directions
-                  </a>
-
+                  </div>
 
                 </div>
 
+                <div class="store-side">
 
-              </div>
+                  <div class="store-distance">
+                    ${store.distance.toFixed(1)} km
+                  </div>
 
+                  <div class="store-stock">
+                    Exact stock not verified
+                  </div>
 
-              <div class="store-side">
-
-
-                <div class="store-distance">
-                  ${store.distance.toFixed(1)}
-                  km
                 </div>
 
-
-                <div class="store-stock">
-                  Exact stock not verified
-                </div>
-
-
-              </div>
-
-
-            </article>
-          `;
-        }
-      )
-      .join("");
-
+              </article>
+            `;
+          }
+        )
+        .join("");
+  }
 
   updateMaps(
     stores
   );
 }
 
-
-/* =========================================================
-   CREATE MAP
-========================================================= */
-
-function createMap(
-  id
-) {
-
+function createMap(id) {
   if (
-    typeof L === "undefined" ||
+    typeof L ===
+      "undefined"
+    ||
     !document.getElementById(
       id
     )
@@ -3017,20 +2621,16 @@ function createMap(
     return null;
   }
 
-
   const initial =
     coords
-
       ? [
           coords.lat,
           coords.lon
         ]
-
       : [
           -30.5595,
           22.9375
         ];
-
 
   const mapInstance =
     L.map(
@@ -3043,11 +2643,8 @@ function createMap(
           : 5
       );
 
-
   L.tileLayer(
-
     "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-
     {
       maxZoom:
         19,
@@ -3055,48 +2652,40 @@ function createMap(
       attribution:
         "&copy; OpenStreetMap contributors"
     }
-
   )
     .addTo(
       mapInstance
     );
 
-
   return mapInstance;
 }
 
-
-/* =========================================================
-   UPDATE MAPS
-========================================================= */
-
-function updateMaps(
-  stores
-) {
-
+function updateMaps(stores) {
   if (
     !coords ||
-    typeof L === "undefined"
+    typeof L ===
+      "undefined"
   ) {
     return;
   }
 
-
-  if (!map) {
+  if (
+    !map
+  ) {
     map =
       createMap(
         "map"
       );
   }
 
-
-  if (!mapLarge) {
+  if (
+    !mapLarge
+  ) {
     mapLarge =
       createMap(
         "mapLarge"
       );
   }
-
 
   for (
     const mapInstance
@@ -3105,23 +2694,20 @@ function updateMaps(
       mapLarge
     ]
   ) {
-
     if (
       !mapInstance
     ) {
       continue;
     }
 
-
     mapInstance
       .eachLayer(
         (layer) => {
-
           if (
-            layer instanceof L.Marker ||
+            layer instanceof L.Marker
+            ||
             layer instanceof L.CircleMarker
           ) {
-
             mapInstance
               .removeLayer(
                 layer
@@ -3130,18 +2716,11 @@ function updateMaps(
         }
       );
 
-
-    /*
-      User position
-    */
-
     L.circleMarker(
-
       [
         coords.lat,
         coords.lon
       ],
-
       {
         radius:
           8,
@@ -3155,7 +2734,6 @@ function updateMaps(
         fillOpacity:
           1
       }
-
     )
       .addTo(
         mapInstance
@@ -3164,41 +2742,27 @@ function updateMaps(
         "You are here"
       );
 
-
-    /*
-      Store markers
-    */
-
     stores.forEach(
       (
         store,
         index
       ) => {
-
         L.marker(
-
           [
             store.lat,
             store.lon
           ]
-
         )
           .addTo(
             mapInstance
           )
           .bindPopup(
-
-            `<b>${index + 1}. ${esc(
-              store.name
-            )}</b><br>${store.distance.toFixed(1)} km away`
-
+            `<b>${index + 1}. ${esc(store.name)}</b><br>${store.distance.toFixed(1)} km away`
           );
       }
     );
 
-
     const points = [
-
       [
         coords.lat,
         coords.lon
@@ -3206,35 +2770,27 @@ function updateMaps(
 
       ...stores.map(
         (store) => [
-
           store.lat,
-
           store.lon
-
         ]
       )
-
     ];
-
 
     if (
       stores.length
     ) {
-
       mapInstance
         .fitBounds(
           points,
           {
             padding:
-              [30,30],
+              [30, 30],
 
             maxZoom:
               14
           }
         );
-
     } else {
-
       mapInstance
         .setView(
           [
@@ -3245,34 +2801,21 @@ function updateMaps(
         );
     }
 
-
     setTimeout(
       () =>
-
         mapInstance
           .invalidateSize(),
-
       120
     );
   }
 }
 
-
-/* =========================================================
-   LOW CONFIDENCE
-========================================================= */
-
-function renderLowConfidence(
-  data
-) {
-
+function renderLowConfidence(data) {
   const item =
     data.identification || {};
 
-
   lastResult =
     null;
-
 
   $("#results")
     ?.classList
@@ -3280,141 +2823,134 @@ function renderLowConfidence(
       "hidden"
     );
 
-
   $("#lowConfidence")
     ?.classList
     .remove(
       "hidden"
     );
 
-
-  if ($("#resultImage")) {
+  if (
+    $("#resultImage")
+  ) {
     $("#resultImage").src =
       preview?.src || "";
   }
 
-
-  if ($("#resultTitle")) {
-    $("#resultTitle").textContent =
+  if (
+    $("#resultTitle")
+  ) {
+    $("#resultTitle")
+      .textContent =
       item.name ||
       item.object ||
       "FindIt isn't confident enough";
   }
 
-
-  if ($("#resultSubtitle")) {
-    $("#resultSubtitle").textContent =
+  if (
+    $("#resultSubtitle")
+  ) {
+    $("#resultSubtitle")
+      .textContent =
       data.message ||
       "Try another photo.";
   }
 
-
-  if ($("#matchText")) {
-    $("#matchText").textContent =
+  if (
+    $("#matchText")
+  ) {
+    $("#matchText")
+      .textContent =
       "Low confidence";
   }
 
-
-  if ($("#productTags")) {
-    $("#productTags").innerHTML =
+  if (
+    $("#productTags")
+  ) {
+    $("#productTags")
+      .innerHTML =
       "";
   }
 
-
-  if ($("#stores")) {
-    $("#stores").innerHTML =
+  if (
+    $("#stores")
+  ) {
+    $("#stores")
+      .innerHTML =
       "";
   }
 }
 
-
-/* =========================================================
-   MAIN ONE-CLICK SEARCH FLOW
-
-   This is the mobile double-click fix.
-
-   ONE TAP:
-   1. identify product
-   2. render result
-   3. request/use location
-   4. find relevant stores
-========================================================= */
-
 if (
   searchButton
 ) {
-
-  searchButton.addEventListener(
-    "click",
-    async () => {
-
-
-      /*
-        Immediately stop repeat clicks.
-      */
-
-      if (
-        !imageReady ||
-        searching
-      ) {
-        return;
-      }
-
-
-      setSearchBusy(
-        true
-      );
-
-
-      if (statusBox) {
-        statusBox.textContent =
-          "FindIt is analysing your photo…";
-      }
-
-
-      try {
-
-
-        /* ---------------------------------------------------
-           STEP 1 — AI IDENTIFICATION
-        --------------------------------------------------- */
-
-        showLoading(
-
-          "Identifying your item…",
-
-          "Looking for the object, brand, model and visible text."
-
-        );
-
-
-        const data =
-          await identifyItem();
-
-
-        const confidence =
-          Number(
-            data.identification
-              ?.confidence ||
-            0
-          );
-
-
-        /* ---------------------------------------------------
-           LOW CONFIDENCE
-        --------------------------------------------------- */
+  searchButton
+    .addEventListener(
+      "click",
+      async () => {
 
         if (
-          confidence < 0.55
+          !imageReady ||
+          searching
         ) {
+          return;
+        }
 
-          hideLoading();
+        setSearchBusy(
+          true
+        );
 
+        if (
+          statusBox
+        ) {
+          statusBox.textContent =
+            "FindIt is analysing your photo…";
+        }
 
-          renderLowConfidence(
-            data
+        try {
+          showLoading(
+            "Identifying your item…",
+            "Looking for the object, brand, model and visible text."
           );
 
+          const data =
+            await identifyItem();
+
+          const confidence =
+            Number(
+              data.identification
+                ?.confidence ||
+              0
+            );
+
+          if (
+            confidence <
+            0.55
+          ) {
+            hideLoading();
+
+            renderLowConfidence(
+              data
+            );
+
+            $("#results")
+              ?.scrollIntoView({
+                behavior:
+                  "smooth"
+              });
+
+            if (
+              statusBox
+            ) {
+              statusBox.textContent =
+                "FindIt needs a clearer photo.";
+            }
+
+            return;
+          }
+
+          renderIdentification(
+            data
+          );
 
           $("#results")
             ?.scrollIntoView({
@@ -3422,346 +2958,254 @@ if (
                 "smooth"
             });
 
-
-          if (statusBox) {
-            statusBox.textContent =
-              "FindIt needs a clearer photo.";
+          if (
+            loadingTitle
+          ) {
+            loadingTitle.textContent =
+              "Finding nearby retailers…";
           }
 
-
-          return;
-        }
-
-
-        /* ---------------------------------------------------
-           SHOW PRODUCT RESULT
-        --------------------------------------------------- */
-
-        renderIdentification(
-          data
-        );
-
-
-        $("#results")
-          ?.scrollIntoView({
-            behavior:
-              "smooth"
-          );
-
-
-        /* ---------------------------------------------------
-           STEP 2 — LOCATION AUTOMATICALLY
-        --------------------------------------------------- */
-
-        if (loadingTitle) {
-          loadingTitle.textContent =
-            "Finding nearby retailers…";
-        }
-
-
-        if (loadingText) {
-          loadingText.textContent =
-            "Allow location if your browser asks.";
-        }
-
-
-        try {
-
-          await ensureLocation();
-
-        } catch (
-          locationError
-        ) {
-
-          hideLoading();
-
-
-          if ($("#stores")) {
-            $("#stores").innerHTML = `
-
-              <div class="empty-card">
-
-                Your item was identified successfully.
-
-                Tap <b>Use my location</b>
-                to see nearby retailers.
-
-              </div>
-            `;
+          if (
+            loadingText
+          ) {
+            loadingText.textContent =
+              "Allow location if your browser asks.";
           }
 
+          try {
+            await ensureLocation();
+          } catch (
+            locationError
+          ) {
+            console.error(
+              locationError
+            );
 
-          if (statusBox) {
-            statusBox.textContent =
-              "Item identified. Location permission is needed for nearby stores.";
+            hideLoading();
+
+            if (
+              $("#stores")
+            ) {
+              $("#stores").innerHTML = `
+                <div class="empty-card">
+
+                  Your item was identified successfully.
+
+                  <br><br>
+
+                  Tap <b>Use my location</b>
+                  to see nearby retailers.
+
+                </div>
+              `;
+            }
+
+            if (
+              statusBox
+            ) {
+              statusBox.textContent =
+                "Item identified. Location permission is needed for nearby stores.";
+            }
+
+            saveRecent(
+              data.identification
+            );
+
+            return;
           }
 
+          if (
+            loadingTitle
+          ) {
+            loadingTitle.textContent =
+              "Finding nearby retailers…";
+          }
+
+          if (
+            loadingText
+          ) {
+            loadingText.textContent =
+              "Removing unrelated shops and duplicate results.";
+          }
+
+          try {
+            await renderNearby(
+              data.identification
+            );
+
+            if (
+              statusBox
+            ) {
+              statusBox.textContent =
+                "Search complete.";
+            }
+
+          } catch (
+            nearbyError
+          ) {
+            console.error(
+              "Nearby search error:",
+              nearbyError
+            );
+
+            if (
+              $("#stores")
+            ) {
+              $("#stores").innerHTML = `
+                <div class="empty-card">
+
+                  FindIt identified your item,
+                  but the nearby retailer service
+                  could not respond right now.
+
+                  <br><br>
+
+                  Please try again shortly.
+
+                </div>
+              `;
+            }
+
+            if (
+              statusBox
+            ) {
+              statusBox.textContent =
+                "Item identified. Nearby retailer search can be retried.";
+            }
+          }
 
           saveRecent(
             data.identification
           );
 
-
-          return;
-        }
-
-
-        /* ---------------------------------------------------
-           STEP 3 — RETAILER SEARCH
-        --------------------------------------------------- */
-
-        if (loadingTitle) {
-          loadingTitle.textContent =
-            "Finding nearby retailers…";
-        }
-
-
-        if (loadingText) {
-          loadingText.textContent =
-            "Removing unrelated shops and duplicate results.";
-        }
-
-
-        try {
-
-          await renderNearby(
-            data.identification
-          );
-
-
-          if (statusBox) {
-            statusBox.textContent =
-              "Search complete.";
-          }
-
         } catch (
-          nearbyError
+          error
         ) {
-
           console.error(
-            "Nearby search error:",
-            nearbyError
+            "FindIt search error:",
+            error
           );
 
-
-          if ($("#stores")) {
-            $("#stores").innerHTML = `
-
-              <div class="empty-card">
-
-                FindIt identified your item,
-                but the nearby retailer service
-                could not respond right now.
-
-                Please try again shortly.
-
-              </div>
-            `;
-          }
-
-
-          if (statusBox) {
+          if (
+            statusBox
+          ) {
             statusBox.textContent =
-              "Item identified. Nearby retailer search can be retried.";
+              `FindIt could not complete the search: ${error.message}`;
           }
+
+        } finally {
+          hideLoading();
+
+          setSearchBusy(
+            false
+          );
         }
-
-
-        saveRecent(
-          data.identification
-        );
-
-
-      } catch (
-        error
-      ) {
-
-
-        console.error(
-          "FindIt search error:",
-          error
-        );
-
-
-        if (statusBox) {
-          statusBox.textContent =
-            `FindIt could not complete the search: ${error.message}`;
-        }
-
-
-      } finally {
-
-
-        /*
-          This ALWAYS runs,
-          even when API/location fails.
-
-          Therefore the button never stays permanently disabled.
-        */
-
-        hideLoading();
-
-
-        setSearchBusy(
-          false
-        );
-      }
-    }
-  );
-}
-
-
-/* =========================================================
-   RETRY PHOTO
-========================================================= */
-
-const retryButton =
-  $("#retry");
-
-
-if (
-  retryButton
-) {
-
-  retryButton
-    .addEventListener(
-      "click",
-      () => {
-
-        photo?.click();
-
       }
     );
 }
 
+if (
+  $("#retry")
+) {
+  $("#retry")
+    .addEventListener(
+      "click",
+      () => {
+        if (
+          photo
+        ) {
+          photo.click();
+        }
+      }
+    );
+}
 
-/* =========================================================
-   RESULT TABS
-========================================================= */
-
-$$(".result-tab")
+$$(
+  ".result-tab"
+)
   .forEach(
     (button) => {
 
-      button
-        .addEventListener(
-          "click",
-          () => {
+      button.addEventListener(
+        "click",
+        () => {
 
+          $$(".result-tab")
+            .forEach(
+              (tab) =>
+                tab.classList
+                  .remove(
+                    "active"
+                  )
+            );
 
-            $$(".result-tab")
-              .forEach(
-                (tab) =>
+          $$(".result-panel")
+            .forEach(
+              (panel) =>
+                panel.classList
+                  .remove(
+                    "active"
+                  )
+            );
 
-                  tab.classList
-                    .remove(
-                      "active"
-                    )
-              );
+          button.classList.add(
+            "active"
+          );
 
+          const target =
+            $(
+              `#panel-${button.dataset.tab}`
+            );
 
-            $$(".result-panel")
-              .forEach(
-                (panel) =>
-
-                  panel.classList
-                    .remove(
-                      "active"
-                    )
-              );
-
-
-            button
-              .classList
-              .add(
-                "active"
-              );
-
-
-            const target =
-              $(
-                `#panel-${button.dataset.tab}`
-              );
-
-
+          if (
             target
-              ?.classList
-              .add(
-                "active"
-              );
-
-
-            /*
-              Leaflet needs this when
-              previously hidden maps are shown.
-            */
-
-            if (
-              button.dataset.tab ===
-                "map"
-
-              &&
-
-              mapLarge
-            ) {
-
-              setTimeout(
-                () =>
-
-                  mapLarge
-                    .invalidateSize(),
-
-                120
-              );
-            }
+          ) {
+            target.classList.add(
+              "active"
+            );
           }
-        );
+
+          if (
+            button.dataset.tab ===
+              "map"
+            &&
+            mapLarge
+          ) {
+            setTimeout(
+              () =>
+                mapLarge
+                  .invalidateSize(),
+              120
+            );
+          }
+        }
+      );
     }
   );
-
-
-/* =========================================================
-   RECENT SEARCHES
-========================================================= */
 
 const RECENT_KEY =
   "findit_recent_searches";
 
-
 function recentSearches() {
-
   try {
-
     return JSON.parse(
-
       localStorage
         .getItem(
           RECENT_KEY
         )
-
       ||
-
       "[]"
     );
-
   } catch {
-
     return [];
-
   }
 }
 
-
-function saveRecent(
-  item
-) {
-
+function saveRecent(item) {
   const list =
     recentSearches();
 
-
   const entry = {
-
     name:
       item.name ||
       item.object ||
@@ -3787,40 +3231,27 @@ function saveRecent(
       Date.now()
   };
 
-
-  /*
-    Don't save the same search
-    over and over.
-  */
-
   const filtered =
     list.filter(
       (existing) =>
-
         normalise(
           existing.searchQuery ||
           existing.name
         )
-
         !==
-
         normalise(
           entry.searchQuery ||
           entry.name
         )
     );
 
-
   filtered.unshift(
     entry
   );
 
-
   localStorage
     .setItem(
-
       RECENT_KEY,
-
       JSON.stringify(
         filtered.slice(
           0,
@@ -3830,77 +3261,59 @@ function saveRecent(
     );
 }
 
-
 function renderRecent() {
-
   const list =
     recentSearches();
 
-
-  if (!$("#recentList")) {
+  if (
+    !$("#recentList")
+  ) {
     return;
   }
 
-
   $("#recentList")
     .innerHTML =
+    list.length
+      ? list
+          .map(
+            (item) => `
+              <div class="recent-item">
 
-      list.length
+                <b>
+                  ${esc(item.name)}
+                </b>
 
-        ? list
+                <small>
+                  ${esc(
+                    [
+                      item.brand,
+                      item.model,
+                      item.category
+                    ]
+                      .filter(Boolean)
+                      .join(" • ")
+                  )}
+                </small>
 
-            .map(
-              (item) => `
-
-                <div class="recent-item">
-
-                  <b>
-                    ${esc(
-                      item.name
-                    )}
-                  </b>
-
-                  <small>
-                    ${esc(
-                      [
-                        item.brand,
-                        item.model,
-                        item.category
-                      ]
-                        .filter(Boolean)
-                        .join(" • ")
-                    )}
-                  </small>
-
-                </div>
-              `
-            )
-
-            .join("")
-
-        : `
-
-          <div class="empty-card">
-
-            No recent searches yet.
-
-          </div>
-        `;
+              </div>
+            `
+          )
+          .join("")
+      : `
+        <div class="empty-card">
+          No recent searches yet.
+        </div>
+      `;
 }
 
-
-/* =========================================================
-   SAVE SEARCH
-========================================================= */
-
 function saveCurrentSearch() {
-
   if (
     !lastResult
       ?.identification
   ) {
-
-    if (statusBox) {
+    if (
+      statusBox
+    ) {
       statusBox.textContent =
         "Run a search first.";
     }
@@ -3908,77 +3321,64 @@ function saveCurrentSearch() {
     return;
   }
 
-
   saveRecent(
     lastResult.identification
   );
 
-
-  if (statusBox) {
+  if (
+    statusBox
+  ) {
     statusBox.textContent =
       "Search saved on this device.";
   }
 }
 
+if (
+  $("#saveSearch")
+) {
+  $("#saveSearch")
+    .addEventListener(
+      "click",
+      saveCurrentSearch
+    );
+}
 
-$("#saveSearch")
-  ?.addEventListener(
-    "click",
-    saveCurrentSearch
-  );
+if (
+  $("#saveSearchBottom")
+) {
+  $("#saveSearchBottom")
+    .addEventListener(
+      "click",
+      saveCurrentSearch
+    );
+}
 
+if (
+  $("#recentButton")
+) {
+  $("#recentButton")
+    .addEventListener(
+      "click",
+      () => {
 
-$("#saveSearchBottom")
-  ?.addEventListener(
-    "click",
-    saveCurrentSearch
-  );
+        renderRecent();
 
+        $("#recentModal")
+          ?.classList
+          .remove(
+            "hidden"
+          );
+      }
+    );
+}
 
-/* =========================================================
-   RECENT MODAL
-========================================================= */
-
-$("#recentButton")
-  ?.addEventListener(
-    "click",
-    () => {
-
-      renderRecent();
-
-
-      $("#recentModal")
-        ?.classList
-        .remove(
-          "hidden"
-        );
-    }
-  );
-
-
-$("#closeRecent")
-  ?.addEventListener(
-    "click",
-    () => {
-
-      $("#recentModal")
-        ?.classList
-        .add(
-          "hidden"
-        );
-    }
-  );
-
-
-$("#recentModal")
-  ?.addEventListener(
-    "click",
-    (event) => {
-
-      if (
-        event.target.id ===
-        "recentModal"
-      ) {
+if (
+  $("#closeRecent")
+) {
+  $("#closeRecent")
+    .addEventListener(
+      "click",
+      () => {
 
         $("#recentModal")
           ?.classList
@@ -3986,93 +3386,94 @@ $("#recentModal")
             "hidden"
           );
       }
-    }
-  );
+    );
+}
 
-
-/* =========================================================
-   SHARE
-========================================================= */
-
-$("#shareResult")
-  ?.addEventListener(
-    "click",
-    async () => {
-
-      if (
-        !lastResult
-          ?.identification
-      ) {
-        return;
-      }
-
-
-      const item =
-        lastResult
-          .identification;
-
-
-      const text =
-        `FindIt Nearby identified: ${item.name || item.object}`;
-
-
-      try {
-
+if (
+  $("#recentModal")
+) {
+  $("#recentModal")
+    .addEventListener(
+      "click",
+      (event) => {
 
         if (
-          navigator.share
+          event.target.id ===
+          "recentModal"
         ) {
-
-          await navigator
-            .share({
-
-              title:
-                "FindIt Nearby",
-
-              text,
-
-              url:
-                location.href
-            });
-
-        } else {
-
-          await navigator
-            .clipboard
-            .writeText(
-              location.href
+          $("#recentModal")
+            ?.classList
+            .add(
+              "hidden"
             );
+        }
+      }
+    );
+}
 
+if (
+  $("#shareResult")
+) {
+  $("#shareResult")
+    .addEventListener(
+      "click",
+      async () => {
 
-          if (statusBox) {
-            statusBox.textContent =
-              "Link copied.";
-          }
+        if (
+          !lastResult
+            ?.identification
+        ) {
+          return;
         }
 
+        const item =
+          lastResult
+            .identification;
 
-      } catch (
-        error
-      ) {
+        const text =
+          `FindIt Nearby identified: ${item.name || item.object}`;
 
-        console.log(
-          "Share cancelled:",
-          error
-        );
+        try {
+          if (
+            navigator.share
+          ) {
+            await navigator
+              .share({
+                title:
+                  "FindIt Nearby",
+
+                text,
+
+                url:
+                  location.href
+              });
+
+          } else if (
+            navigator.clipboard
+          ) {
+            await navigator
+              .clipboard
+              .writeText(
+                location.href
+              );
+
+            if (
+              statusBox
+            ) {
+              statusBox.textContent =
+                "Link copied.";
+            }
+          }
+
+        } catch {}
       }
-    }
-  );
-
-
-/* =========================================================
-   STARTUP
-========================================================= */
+    );
+}
 
 setSearchBusy(
   false
 );
 
-
 console.log(
-  "FindIt Nearby launch-fix script loaded."
+  "FindIt Nearby stable launch script loaded."
 );
