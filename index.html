@@ -1,777 +1,149 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#07111f" />
-
-  <meta
-    name="description"
-    content="FindIt Nearby identifies an item from a photo and helps you find verified products, prices, stock and nearby retailers."
-  />
-
-  <meta
-    name="robots"
-    content="index,follow,max-image-preview:large"
-  />
-
-  <link
-    rel="canonical"
-    href="https://findit-nearby.vercel.app/"
-  />
-
-  <link
-    rel="manifest"
-    href="/manifest.webmanifest"
-  />
-
-  <meta property="og:type" content="website" />
-
-  <meta
-    property="og:title"
-    content="FindIt Nearby — Find the actual item"
-  />
-
-  <meta
-    property="og:description"
-    content="Upload a photo, identify the exact item, and find verified retailer offers nearby."
-  />
-
-  <meta
-    property="og:url"
-    content="https://findit-nearby.vercel.app/"
-  />
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#050914">
+  <meta name="description" content="FindIt Nearby identifies items from photos and helps you find verified product offers and nearby retailers.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://findit-nearby.vercel.app/">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="FindIt Nearby — Find the actual item">
+  <meta property="og:description" content="Upload a photo, identify the item, and find verified retailer offers nearby.">
+  <meta property="og:url" content="https://findit-nearby.vercel.app/">
   <title>FindIt Nearby — Find the actual item</title>
-
-  <link
-    rel="stylesheet"
-    href="/style.css"
-  />
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "FindIt Nearby",
-    "url": "https://findit-nearby.vercel.app/",
-    "applicationCategory": "ShoppingApplication",
-    "operatingSystem": "Web",
-    "description": "FindIt Nearby identifies items from photos and helps users find verified retailer offers and nearby stores."
-  }
-  </script>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
 <header class="site-header">
-
-  <a class="brand" href="#top">
-
-    <span class="brand-mark">
-      F
-    </span>
-
-    <span>
-      FindIt <b>Nearby</b>
-    </span>
-
-  </a>
-
-  <nav
-    class="desktop-nav"
-    aria-label="Main navigation"
-  >
-
-    <a href="#finder">
-      Find an item
-    </a>
-
-    <a href="#how">
-      How it works
-    </a>
-
-    <a href="#premium">
-      Premium
-    </a>
-
+  <a class="brand" href="#top"><span class="brand-mark">F</span><span>FindIt <b>Nearby</b></span></a>
+  <nav class="desktop-nav" aria-label="Main navigation">
+    <a href="#finder">Find an item</a>
+    <a href="#how">How it works</a>
+    <a href="#premium">Premium</a>
   </nav>
-
-  <span class="build-badge">
-    CORE BUILD
-  </span>
-
+  <span class="build-badge">STABLE BUILD</span>
 </header>
 
-
 <main id="top">
-
-
-<section class="hero shell">
-
-  <div class="hero-copy">
-
-    <p class="eyebrow">
-      PHOTO → PRODUCT → STORE
-    </p>
-
-    <h1>
-      Find the
-      <span>actual item.</span>
-    </h1>
-
-    <p class="lead">
-
-      Upload a photo.
-
-      FindIt uses Gemini to identify the object,
-      brand, model and visible text,
-      then checks only connected,
-      legitimate retailer data for real offers.
-
-    </p>
-
-    <div class="hero-actions">
-
-      <a
-        class="button button-primary"
-        href="#finder"
-      >
-        📸 Find my item
-      </a>
-
-      <a
-        class="button button-secondary"
-        href="#how"
-      >
-        How it works
-      </a>
-
+  <section class="hero shell">
+    <div class="hero-copy">
+      <p class="eyebrow">PHOTO → PRODUCT → STORE</p>
+      <h1>Find the <span>actual item.</span></h1>
+      <p class="lead">Upload a photo. FindIt uses Gemini to identify the object, brand, model and visible text, then checks connected retailer data for real offers.</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="#finder">📸 Find my item</a>
+        <a class="button button-secondary" href="#how">How it works</a>
+      </div>
+      <div class="trust-row">
+        <span>🎯 Exact-item first</span><span>🏷️ Brand aware</span><span>💰 Real prices only</span><span>🚫 No random shops</span>
+      </div>
     </div>
 
-    <div class="trust-row">
-
-      <span>
-        🎯 Exact-item first
-      </span>
-
-      <span>
-        🏷️ Brand aware
-      </span>
-
-      <span>
-        💰 Real prices only
-      </span>
-
-      <span>
-        🚫 No random shops
-      </span>
-
+    <div class="hero-panel" aria-hidden="true">
+      <div class="pipeline-card"><strong>📸 Photo</strong><small>whole item + label + logo</small></div>
+      <div class="pipeline-arrow">↓</div>
+      <div class="pipeline-card"><strong>🧠 Gemini</strong><small>object + brand + model + text</small></div>
+      <div class="pipeline-arrow">↓</div>
+      <div class="pipeline-card"><strong>🛍️ Verified product data</strong><small>price + stock + store + URL</small></div>
+      <div class="pipeline-arrow">↓</div>
+      <div class="pipeline-card"><strong>📍 Nearby</strong><small>verified offers first</small></div>
     </div>
+  </section>
 
-  </div>
+  <section id="finder" class="shell card-section">
+    <p class="eyebrow">START SEARCHING</p>
+    <h2>What are you looking for?</h2>
+    <p class="muted">Use a clear photo showing as much of the item as possible. Logos, labels and model text help.</p>
 
-
-  <div
-    class="hero-panel"
-    aria-hidden="true"
-  >
-
-    <div class="pipeline-card">
-
-      <strong>
-        📸 Photo
-      </strong>
-
-      <small>
-        whole item + label + logo
-      </small>
-
-    </div>
-
-    <div class="pipeline-arrow">
-      ↓
-    </div>
-
-    <div class="pipeline-card">
-
-      <strong>
-        🧠 Gemini
-      </strong>
-
-      <small>
-        object + brand + model + text
-      </small>
-
-    </div>
-
-    <div class="pipeline-arrow">
-      ↓
-    </div>
-
-    <div class="pipeline-card">
-
-      <strong>
-        🛍️ Verified product data
-      </strong>
-
-      <small>
-        price + stock + store + URL
-      </small>
-
-    </div>
-
-    <div class="pipeline-arrow">
-      ↓
-    </div>
-
-    <div class="pipeline-card">
-
-      <strong>
-        📍 Nearby
-      </strong>
-
-      <small>
-        verified offer first,
-        possible retailers second
-      </small>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-
-<section
-  id="finder"
-  class="shell card-section"
->
-
-  <p class="eyebrow">
-    START SEARCHING
-  </p>
-
-  <h2>
-    What are you looking for?
-  </h2>
-
-  <p class="muted">
-
-    Use a clear photo showing
-    as much of the item as possible.
-
-    Brand logos,
-    model text and labels help.
-
-  </p>
-
-
-  <div class="upload-grid">
-
-
-    <div class="upload-box">
-
-      <img
-        id="preview"
-        class="preview hidden"
-        alt="Selected item preview"
-      />
-
-      <div
-        id="uploadPlaceholder"
-        class="upload-placeholder"
-      >
-
-        <div class="upload-icon">
-          ＋
+    <div class="upload-grid">
+      <div class="upload-box">
+        <img id="preview" class="preview hidden" alt="Selected item preview">
+        <div id="uploadPlaceholder" class="upload-placeholder">
+          <div class="upload-icon">＋</div>
+          <strong>Choose an image</strong>
+          <small>Gallery • Camera • Files</small>
         </div>
-
-        <strong>
-          Choose an image
-        </strong>
-
-        <small>
-          Gallery • Camera • Files
-        </small>
-
       </div>
 
+      <div class="upload-actions">
+        <input id="photo" class="hidden-input" type="file" accept="image/*">
+        <input id="cameraPhoto" class="hidden-input" type="file" accept="image/*" capture="environment">
+        <button id="choosePhoto" class="button button-primary" type="button">🖼️ Gallery / Files</button>
+        <button id="takePhoto" class="button button-secondary" type="button">📷 Take photo</button>
+        <button id="location" class="button button-secondary" type="button">📍 Use my location</button>
+        <button id="search" class="button button-search" type="button" disabled>🎯 Identify & find</button>
+        <p id="status" class="status" aria-live="polite">Waiting for an image.</p>
+      </div>
     </div>
+  </section>
 
-
-    <div class="upload-actions">
-
-      <input
-        id="photo"
-        class="hidden-input"
-        type="file"
-        accept="image/*"
-      />
-
-      <input
-        id="cameraPhoto"
-        class="hidden-input"
-        type="file"
-        accept="image/*"
-        capture="environment"
-      />
-
-
-      <button
-        id="choosePhoto"
-        class="button button-primary"
-        type="button"
-      >
-        🖼️ Gallery / Files
-      </button>
-
-
-      <button
-        id="takePhoto"
-        class="button button-secondary"
-        type="button"
-      >
-        📷 Take photo
-      </button>
-
-
-      <button
-        id="location"
-        class="button button-secondary"
-        type="button"
-      >
-        📍 Use my location
-      </button>
-
-
-      <button
-        id="search"
-        class="button button-search"
-        type="button"
-        disabled
-      >
-        🎯 Identify & find
-      </button>
-
-
-      <p
-        id="status"
-        class="status"
-        aria-live="polite"
-      >
-        Waiting for an image.
-      </p>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-
-<section
-  id="results"
-  class="shell card-section hidden"
-  aria-live="polite"
->
-
-  <div class="results-heading">
-
-    <div>
-
-      <p class="eyebrow">
-        SEARCH RESULT
-      </p>
-
-      <h2 id="resultTitle">
-        Analysis
-      </h2>
-
-      <p
-        id="summary"
-        class="muted"
-      ></p>
-
-    </div>
-
-
-    <button
-      id="saveFind"
-      class="button button-secondary"
-      type="button"
-    >
-      ♡ Save find
-    </button>
-
-  </div>
-
-
-  <div
-    id="analysis"
-    class="analysis-grid"
-  ></div>
-
-
-  <div
-    id="warning"
-    class="notice hidden"
-  ></div>
-
-
-
-  <section class="result-block">
-
-    <div class="section-row">
-
+  <section id="results" class="shell card-section hidden" aria-live="polite">
+    <div class="results-heading">
       <div>
-
-        <p class="eyebrow">
-          VERIFIED PRODUCT OFFERS
-        </p>
-
-        <h3>
-          Exact or close product matches
-        </h3>
-
+        <p class="eyebrow">SEARCH RESULT</p>
+        <h2 id="resultTitle">Analysis</h2>
+        <p id="summary" class="muted"></p>
       </div>
-
-
-      <div class="sort-controls">
-
-        <button
-          class="sort-btn active"
-          data-sort="best"
-          type="button"
-        >
-          Best match
-        </button>
-
-        <button
-          class="sort-btn"
-          data-sort="price"
-          type="button"
-        >
-          Cheapest
-        </button>
-
-        <button
-          class="sort-btn"
-          data-sort="distance"
-          type="button"
-        >
-          Closest
-        </button>
-
-      </div>
-
+      <button id="saveFind" class="button button-secondary" type="button">♡ Save find</button>
     </div>
 
-
-    <div
-      id="offers"
-      class="offer-list"
-    ></div>
-
-
-    <div
-      id="noOffers"
-      class="empty-state hidden"
-    >
-
-      <strong>
-        No verified retailer offer yet.
-      </strong>
-
-      <p>
-
-        FindIt will not invent a price,
-        stock status or store.
-
-        A legitimate retailer/catalogue
-        feed must provide that data.
-
-      </p>
-
-    </div>
-
-  </section>
-
-
-
-  <section
-    id="nearbyBlock"
-    class="result-block hidden"
-  >
-
-    <p class="eyebrow">
-      POSSIBLE NEARBY RETAILERS
-    </p>
-
-    <h3>
-      Relevant stores near you
-    </h3>
-
-    <p class="muted">
-
-      These are nearby businesses that may
-      sell this type of product.
-
-      They are <strong>not</strong>
-      proof that the exact item is in stock.
-
-    </p>
-
-
-    <div
-      id="nearbyStores"
-      class="nearby-list"
-    ></div>
-
-  </section>
-
-</section>
-
-
-
-<section
-  id="saved"
-  class="shell card-section"
->
-
-  <p class="eyebrow">
-    SAVED FINDS
-  </p>
-
-  <h2>
-    Your recent saved items
-  </h2>
-
-  <div
-    id="savedList"
-    class="saved-list"
-  >
-
-    <p class="muted">
-      Nothing saved yet.
-    </p>
-
-  </div>
-
-</section>
-
-
-
-<section
-  id="how"
-  class="shell card-section"
->
-
-  <p class="eyebrow">
-    HOW IT WORKS
-  </p>
-
-  <h2>
-    Accuracy before clutter.
-  </h2>
-
-
-  <div class="steps-grid">
-
-    <article>
-
-      <span>
-        01
-      </span>
-
-      <h3>
-        See
-      </h3>
-
-      <p>
-
-        Gemini analyses the whole image
-        instead of forcing it into
-        a tiny fixed list.
-
-      </p>
-
-    </article>
-
-
-    <article>
-
-      <span>
-        02
-      </span>
-
-      <h3>
-        Verify
-      </h3>
-
-      <p>
-
-        Low-confidence or restricted
-        results stop instead of becoming
-        random searches.
-
-      </p>
-
-    </article>
-
-
-    <article>
-
-      <span>
-        03
-      </span>
-
-      <h3>
-        Match
-      </h3>
-
-      <p>
-
-        Brand,
-        model,
-        visible text,
-        category and product-name evidence
-        are used to score retailer products.
-
-      </p>
-
-    </article>
-
-
-    <article>
-
-      <span>
-        04
-      </span>
-
-      <h3>
-        Prove
-      </h3>
-
-      <p>
-
-        Price,
-        stock and exact store claims
-        only appear when a connected
-        authorised source supplies them.
-
-      </p>
-
-    </article>
-
-  </div>
-
-</section>
-
-
-
-<section
-  id="premium"
-  class="shell card-section premium-section"
->
-
-  <p class="eyebrow">
-    FINDIT PREMIUM
-  </p>
-
-  <h2>
-    Premium comes after the core search is proven.
-  </h2>
-
-
-  <div class="plans-grid">
-
-
-    <article class="plan-card">
-
-      <h3>
-        Free
-      </h3>
-
-      <p class="plan-price">
-        R0
-      </p>
-
-      <p>
-
-        Useful product identification,
-        limited searches,
-        basic saved finds
-        and nearby discovery.
-
-      </p>
-
-    </article>
-
-
-    <article class="plan-card premium-card">
-
-      <div class="premium-label">
-        PLANNED
+    <div id="analysis" class="analysis-grid"></div>
+    <div id="warning" class="notice hidden"></div>
+
+    <section class="result-block">
+      <div class="section-row">
+        <div><p class="eyebrow">VERIFIED PRODUCT OFFERS</p><h3>Exact or close product matches</h3></div>
+        <div class="sort-controls">
+          <button class="sort-btn active" data-sort="best" type="button">Best match</button>
+          <button class="sort-btn" data-sort="price" type="button">Cheapest</button>
+          <button class="sort-btn" data-sort="distance" type="button">Closest</button>
+        </div>
       </div>
+      <div id="offers" class="offer-list"></div>
+      <div id="noOffers" class="empty-state hidden">
+        <strong>No verified retailer offer yet.</strong>
+        <p>FindIt will not invent a price, stock status or store. A legitimate retailer feed must provide that information.</p>
+      </div>
+    </section>
 
-      <h3>
-        Premium
-      </h3>
+    <section id="nearbyBlock" class="result-block hidden">
+      <p class="eyebrow">POSSIBLE NEARBY RETAILERS</p>
+      <h3>Relevant stores near you</h3>
+      <p class="muted">These are discovery results only. They are not proof that the exact item is in stock.</p>
+      <div id="nearbyStores" class="nearby-list"></div>
+    </section>
+  </section>
 
-      <p class="plan-price">
-        Price to be tested
-      </p>
+  <section id="saved" class="shell card-section">
+    <p class="eyebrow">SAVED FINDS</p>
+    <h2>Your recent saved items</h2>
+    <div id="savedList" class="saved-list"><p class="muted">Nothing saved yet.</p></div>
+  </section>
 
-      <p>
+  <section id="how" class="shell card-section">
+    <p class="eyebrow">HOW IT WORKS</p>
+    <h2>Accuracy before clutter.</h2>
+    <div class="steps-grid">
+      <article><span>01</span><h3>See</h3><p>Gemini analyses the real image instead of forcing it into a tiny fixed list.</p></article>
+      <article><span>02</span><h3>Verify</h3><p>Low-confidence identifications stop rather than becoming unrelated searches.</p></article>
+      <article><span>03</span><h3>Match</h3><p>Brand, model, visible text and visual clues are used to score retailer products.</p></article>
+      <article><span>04</span><h3>Prove</h3><p>Price, stock and exact-store claims only appear when a connected retailer source supplies them.</p></article>
+    </div>
+  </section>
 
-        Higher limits,
-        advanced matching,
-        price-drop alerts,
-        stock alerts,
-        full history
-        and advanced comparison.
-
-      </p>
-
-      <button
-        class="button button-secondary"
-        disabled
-      >
-        Coming later
-      </button>
-
-    </article>
-
-  </div>
-
-
-  <p class="muted">
-
-    Payments are intentionally not enabled yet.
-
-    The product-search engine
-    should be reliable first.
-
-  </p>
-
-</section>
-
-
+  <section id="premium" class="shell card-section">
+    <p class="eyebrow">FINDIT PREMIUM</p>
+    <h2>Premium comes after the core search is proven.</h2>
+    <div class="plans-grid">
+      <article class="plan-card"><h3>Free</h3><p class="plan-price">R0</p><p>Useful identification, basic saved finds and nearby discovery.</p></article>
+      <article class="plan-card premium-card"><div class="premium-label">PLANNED</div><h3>Premium</h3><p class="plan-price">Price to be tested</p><p>Higher limits, advanced matching, price alerts, stock alerts and full history.</p><button class="button button-secondary" disabled>Coming later</button></article>
+    </div>
+  </section>
 </main>
 
-
-<footer>
-  © 2026 FindIt Nearby. All rights reserved.
-</footer>
-
-
-<script
-  src="/script.js"
-  defer
-></script>
-
+<footer>© 2026 FindIt Nearby. All rights reserved.</footer>
+<script src="script.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,9 @@
+{
+  "name": "FindIt Nearby",
+  "short_name": "FindIt",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050914",
+  "theme_color": "#050914",
+  "description": "Identify an item from a photo and find verified retailer offers nearby."
+}

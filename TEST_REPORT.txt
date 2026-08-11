@@ -1,0 +1,15 @@
+FindIt Stable Build — automated checks
+========================================
+PASS: index.html contains mobile viewport meta.
+PASS: frontend CSS/JS asset URLs are relative.
+PASS: script.js syntax check.
+PASS: api/search.js syntax check.
+PASS: api/nearby.js syntax check.
+PASS: api/health.js syntax check.
+PASS: old gemini-2.5-flash model removed.
+PASS: gemini-3.6-flash primary + gemini-3.5-flash-lite fallback present.
+PASS: mobile max-width breakpoints present.
+PASS: coarse-pointer/mobile fallback present.
+PASS: uploaded preview is constrained by viewport height.
+
+External services cannot be fully exercised inside this local build because they depend on your private Vercel environment variables and live browser permissions. Use /api/health after deployment for the Gemini connection check.
