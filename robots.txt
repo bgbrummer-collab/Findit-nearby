@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://YOUR-DOMAIN.example/sitemap.xml
+
+Sitemap: https://findit-nearby.vercel.app/sitemap.xml
