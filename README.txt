@@ -34,3 +34,44 @@ ZERO-BUDGET PRODUCT SEARCH FALLBACK
   • Share find
 - These links never claim a verified price or stock amount.
 - No paid retailer account is required for these fallback tools.
+
+
+CENTRAL FEEDBACK STORAGE — SUPABASE FREE TIER
+==============================================
+1. Create a Supabase project.
+2. Open Supabase SQL Editor.
+3. Run SUPABASE_SETUP.sql.
+4. In Vercel add these PRIVATE environment variables:
+   SUPABASE_URL
+   SUPABASE_SERVICE_ROLE_KEY
+5. Redeploy FindIt.
+
+After that, every submitted rating/message is stored in:
+Supabase Dashboard -> Table Editor -> feedback
+
+IMPORTANT:
+- Never put SUPABASE_SERVICE_ROLE_KEY in index.html or script.js.
+- Never send the service-role key in chat.
+- The feedback table has RLS enabled and no public read policy.
+
+
+VERCEL NATIVE SUPABASE INTEGRATION
+==================================
+This build supports the environment variable names created by the Vercel Supabase integration.
+
+URL:
+  NEXT_PUBLIC_SUPABASE_URL
+or:
+  SUPABASE_URL
+
+SECRET:
+  SUPABASE_SERVICE_ROLE_KEY
+or:
+  SUPABASE_SECRET_KEY
+
+After deployment open:
+  /api/feedback-health
+
+Expected:
+  ok: true
+  feedbackTableReachable: true

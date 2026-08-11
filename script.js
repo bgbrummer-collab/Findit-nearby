@@ -410,3 +410,53 @@ function renderFreeActions(i){
 }
 
 renderSaved();
+
+
+const feedbackForm=$("#feedbackForm"),feedbackRating=$("#feedbackRating"),feedbackTopic=$("#feedbackTopic"),feedbackMessage=$("#feedbackMessage"),includeTechnical=$("#includeTechnical"),feedbackStatus=$("#feedbackStatus"),copyFeedback=$("#copyFeedback");
+const starButtons=[...document.querySelectorAll(".star-btn")];
+function setRating(v){const n=Number(v);feedbackRating.value=String(n);starButtons.forEach(b=>b.classList.toggle("active",Number(b.dataset.rating)<=n))}
+starButtons.forEach(b=>b.addEventListener("click",()=>setRating(b.dataset.rating)));
+
+function feedbackPayload(){
+  return {
+    rating:Number(feedbackRating?.value||0),
+    topic:feedbackTopic?.value||"general",
+    message:String(feedbackMessage?.value||"").trim(),
+    technical:includeTechnical?.checked?{
+      viewport:`${innerWidth}x${innerHeight}`,
+      language:navigator.language||"unknown",
+      online:navigator.onLine,
+      lastIdentification:latestResult?.identification||null
+    }:null,
+    createdAt:new Date().toISOString()
+  };
+}
+function feedbackText(p){return `FindIt rating: ${p.rating||"Not rated"}/5\nTopic: ${p.topic}\n\n${p.message}`}
+
+copyFeedback?.addEventListener("click",async()=>{
+  const p=feedbackPayload();
+  if(!p.message){feedbackStatus.textContent="Write a message first.";return}
+  try{await navigator.clipboard.writeText(feedbackText(p));feedbackStatus.textContent="✓ Feedback copied."}
+  catch{feedbackStatus.textContent="Copy unavailable on this device."}
+});
+
+feedbackForm?.addEventListener("submit",async e=>{
+  e.preventDefault();
+  const p=feedbackPayload();
+  if(!p.rating){feedbackStatus.textContent="Choose a star rating first.";return}
+  if(p.message.length<3){feedbackStatus.textContent="Please write a little more detail.";return}
+  feedbackStatus.textContent="Sending feedback…";
+  try{
+    const r=await fetch("/api/feedback",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(p)});
+    const d=await r.json();
+    if(!r.ok)throw new Error(d.error||"Could not send");
+    feedbackStatus.textContent=d.delivered?"✓ Thank you — your feedback was saved.":"✓ Feedback saved on this device. Central storage is not connected yet.";
+    if(!d.delivered){
+      const q=JSON.parse(localStorage.getItem("finditFeedbackQueue")||"[]");q.push(p);localStorage.setItem("finditFeedbackQueue",JSON.stringify(q.slice(-30)));
+    }
+    feedbackMessage.value="";setRating(0);
+  }catch{
+    const q=JSON.parse(localStorage.getItem("finditFeedbackQueue")||"[]");q.push(p);localStorage.setItem("finditFeedbackQueue",JSON.stringify(q.slice(-30)));
+    feedbackStatus.textContent="Could not reach the server, so feedback was saved on this device.";
+  }
+});

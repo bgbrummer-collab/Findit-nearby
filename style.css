@@ -145,3 +145,13 @@ footer{margin-top:45px;padding:38px 16px;text-align:center;border-top:1px solid 
   font-size:10px;
   line-height:1.5;
 }
+
+.feedback-form{display:grid;gap:12px;max-width:760px;margin-top:18px}
+.star-rating{display:flex;gap:6px}
+.star-btn{border:0;background:transparent;color:#44506a;font-size:32px;cursor:pointer;padding:0}
+.star-btn.active{color:#ffc857}
+.feedback-control{width:100%;border:1px solid var(--line);background:#101928;color:var(--text);border-radius:13px;padding:12px;font:inherit;font-size:12px}
+.feedback-textarea{min-height:140px;resize:vertical}
+.feedback-check{display:flex;gap:8px;align-items:center;color:#8190a7;font-size:10px}
+.feedback-actions{display:flex;gap:9px;flex-wrap:wrap}
+@media(max-width:600px){.feedback-actions{display:grid;grid-template-columns:1fr}.feedback-actions .button{width:100%}}

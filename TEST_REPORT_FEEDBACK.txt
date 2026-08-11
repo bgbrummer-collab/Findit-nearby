@@ -1,0 +1,9 @@
+PASS: star rating UI
+PASS: topic selector
+PASS: feedback message
+PASS: copy fallback
+PASS: /api/feedback
+PASS: optional FEEDBACK_WEBHOOK_URL
+PASS: local browser fallback
+PASS: copyright preserved
+PASS: JS syntax checks

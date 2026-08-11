@@ -172,6 +172,40 @@
       <article class="plan-card premium-card"><div class="premium-label">PLANNED</div><h3>Premium</h3><p class="plan-price">Price to be tested</p><p>Higher limits, advanced matching, price alerts, stock alerts and full history.</p><button class="button button-secondary" disabled>Coming later</button></article>
     </div>
   </section>
+
+<section id="feedback" class="shell card-section feedback-section">
+  <p class="eyebrow">HELP IMPROVE FINDIT</p>
+  <h2>Rate FindIt & send feedback</h2>
+  <p class="muted">Please do not include passwords, API keys, addresses, phone numbers or other private information.</p>
+  <form id="feedbackForm" class="feedback-form">
+    <div class="star-rating">
+      <button type="button" class="star-btn" data-rating="1">★</button>
+      <button type="button" class="star-btn" data-rating="2">★</button>
+      <button type="button" class="star-btn" data-rating="3">★</button>
+      <button type="button" class="star-btn" data-rating="4">★</button>
+      <button type="button" class="star-btn" data-rating="5">★</button>
+    </div>
+    <input id="feedbackRating" type="hidden">
+    <select id="feedbackTopic" class="feedback-control">
+      <option value="general">General feedback</option>
+      <option value="wrong_item">Wrong item identified</option>
+      <option value="nearby">Nearby stores / distance</option>
+      <option value="missing_product">Couldn't find product</option>
+      <option value="mobile">Phone / mobile problem</option>
+      <option value="desktop">Computer / desktop problem</option>
+      <option value="bug">Bug / error</option>
+      <option value="idea">Feature idea</option>
+    </select>
+    <textarea id="feedbackMessage" class="feedback-control feedback-textarea" maxlength="1200" placeholder="Tell us what happened…" required></textarea>
+    <label class="feedback-check"><input id="includeTechnical" type="checkbox" checked> Include anonymous technical details</label>
+    <div class="feedback-actions">
+      <button id="sendFeedback" class="button button-primary" type="submit">Send feedback</button>
+      <button id="copyFeedback" class="button button-secondary" type="button">Copy feedback</button>
+    </div>
+    <p id="feedbackStatus" class="status" aria-live="polite"></p>
+  </form>
+</section>
+
 </main>
 
 <footer>© 2026 FindIt Nearby. All rights reserved.</footer>

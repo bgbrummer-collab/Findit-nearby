@@ -1,0 +1,17 @@
+FindIt Central Feedback — Vercel Integration Build
+==================================================
+PASS: /api/feedback supports NEXT_PUBLIC_SUPABASE_URL
+PASS: /api/feedback supports SUPABASE_URL fallback
+PASS: /api/feedback supports SUPABASE_SERVICE_ROLE_KEY
+PASS: /api/feedback supports SUPABASE_SECRET_KEY fallback
+PASS: no secret is exposed to frontend code
+PASS: /api/feedback-health added
+PASS: JavaScript syntax checks passed
+PASS: existing FindIt search/nearby/copyright files preserved
+
+After deployment:
+1. Open /api/feedback-health
+2. It should say ok:true and feedbackTableReachable:true
+3. Submit a test rating on FindIt
+4. Open Supabase -> Table Editor -> feedback
+5. The new row should appear there

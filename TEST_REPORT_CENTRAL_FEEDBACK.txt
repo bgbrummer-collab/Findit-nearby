@@ -1,0 +1,16 @@
+FindIt Central Feedback Build
+=============================
+PASS: /api/feedback validates 1–5 stars
+PASS: feedback message length validation
+PASS: central Supabase insert support
+PASS: service-role key stays server-side
+PASS: SQL setup file included
+PASS: Row Level Security enabled in SQL
+PASS: no public read policy created
+PASS: local-device fallback retained until Supabase is configured
+PASS: JavaScript syntax checks passed
+PASS: existing FindIt copyright retained
+
+To actually receive other users' feedback centrally, create the free Supabase
+project, run SUPABASE_SETUP.sql, and add SUPABASE_URL +
+SUPABASE_SERVICE_ROLE_KEY to Vercel.
