@@ -63,3 +63,57 @@ footer{margin-top:45px;padding:38px 16px;text-align:center;border-top:1px solid 
   .offer-card img{width:76px;height:76px}
   .price{grid-column:2;font-size:15px}
 }
+
+
+/* Zero-cost exact-item fallback */
+.free-actions{
+  margin-top:18px;
+  padding:20px;
+  border:1px solid #7e6cff33;
+  background:linear-gradient(155deg,#12172e,#0e1726);
+  border-radius:18px
+}
+.free-actions h3{margin:5px 0 4px}
+.free-action-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  margin-top:14px
+}
+.free-action-card{
+  min-height:92px;
+  padding:15px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:6px;
+  text-decoration:none;
+  color:var(--text);
+  border:1px solid var(--line);
+  background:#121d31;
+  border-radius:15px;
+  text-align:left;
+  transition:.18s transform,.18s border-color,.18s background
+}
+.free-action-card:hover{
+  transform:translateY(-1px);
+  border-color:#8f83ff55;
+  background:#16233a
+}
+.free-action-card strong{font-size:12px}
+.free-action-card span{
+  color:#8190a7;
+  font-size:10px;
+  line-height:1.5;
+  overflow-wrap:anywhere
+}
+.free-action-button{
+  width:100%;
+  font:inherit;
+  cursor:pointer
+}
+@media(max-width:600px){
+  .free-actions{padding:16px}
+  .free-action-grid{grid-template-columns:1fr}
+  .free-action-card{min-height:82px}
+}

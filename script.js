@@ -1,4 +1,5 @@
 const $=(s)=>document.querySelector(s);
+const freeActions=$("#freeActions"),searchOnline=$("#searchOnline"),searchNearbyFree=$("#searchNearbyFree"),copyQuery=$("#copyQuery"),shareFind=$("#shareFind"),onlineQueryText=$("#onlineQueryText");
 const photo=$("#photo"),cameraPhoto=$("#cameraPhoto"),choosePhoto=$("#choosePhoto"),takePhoto=$("#takePhoto"),preview=$("#preview"),uploadPlaceholder=$("#uploadPlaceholder"),searchBtn=$("#search"),locationBtn=$("#location"),status=$("#status"),results=$("#results"),resultTitle=$("#resultTitle"),summary=$("#summary"),analysis=$("#analysis"),warning=$("#warning"),offersEl=$("#offers"),noOffers=$("#noOffers"),nearbyBlock=$("#nearbyBlock"),nearbyStores=$("#nearbyStores"),saveFind=$("#saveFind"),savedList=$("#savedList");
 let selectedFile=null,coords=null,latestResult=null,currentOffers=[],currentSort="best";
 
@@ -55,6 +56,7 @@ searchBtn.addEventListener("click",async()=>{
 
     latestResult=data;
     renderIdentification(data.identification||{});
+    renderFreeActions(data.identification||{});
     currentOffers=Array.isArray(data.offers)?data.offers:[];
     renderOffers();
 
@@ -79,7 +81,7 @@ searchBtn.addEventListener("click",async()=>{
 
 function resetResults(){
   latestResult=null;currentOffers=[];offersEl.innerHTML="";analysis.innerHTML="";nearbyStores.innerHTML="";
-  nearbyBlock.classList.add("hidden");noOffers.classList.add("hidden");warning.classList.add("hidden");warning.classList.remove("error");
+  nearbyBlock.classList.add("hidden");noOffers.classList.add("hidden");warning.classList.add("hidden");warning.classList.remove("error");if(freeActions)freeActions.classList.add("hidden");
 }
 
 function renderIdentification(i){
@@ -145,7 +147,71 @@ saveFind.addEventListener("click",()=>{
   const item={id:(crypto.randomUUID?crypto.randomUUID():String(Date.now())),name:i.name||i.object||"Saved item",brand:i.brand||"",model:i.model||"",query:i.searchQuery||"",savedAt:new Date().toISOString()};
   const saved=getSaved();saved.unshift(item);
   localStorage.setItem("finditSaved",JSON.stringify(saved.slice(0,30)));
-  renderSaved();
+  
+function renderFreeActions(i){
+  if(!freeActions)return;
+
+  const confidence=Number(i?.confidence||0);
+  const query=String(i?.searchQuery||i?.name||i?.object||"").trim();
+
+  if(!query||confidence<0.55){
+    freeActions.classList.add("hidden");
+    return;
+  }
+
+  if(searchOnline){
+    searchOnline.href=`https://www.google.com/search?q=${encodeURIComponent(query)}`;
+  }
+
+  if(onlineQueryText){
+    onlineQueryText.textContent=query;
+  }
+
+  if(searchNearbyFree){
+    const nearbyQuery=[i.brand,i.object||i.category,"store"].filter(Boolean).join(" ").trim()||`${query} store`;
+    const params=new URLSearchParams({api:"1",query:nearbyQuery});
+    searchNearbyFree.href=`https://www.google.com/maps/search/?${params.toString()}`;
+  }
+
+  if(copyQuery){
+    copyQuery.onclick=async()=>{
+      try{
+        await navigator.clipboard.writeText(query);
+        const strong=copyQuery.querySelector("strong");
+        const old=strong.textContent;
+        strong.textContent="✓ Copied";
+        setTimeout(()=>strong.textContent=old,1300);
+      }catch{
+        setStatus(`Copy unavailable. Search query: ${query}`,true);
+      }
+    };
+  }
+
+  if(shareFind){
+    shareFind.onclick=async()=>{
+      const shareText=`FindIt identified: ${i.name||i.object||query}${i.brand?` — ${i.brand}`:""}${i.model?` ${i.model}`:""}. Search: ${query}`;
+      try{
+        if(navigator.share){
+          await navigator.share({title:"FindIt Nearby",text:shareText,url:location.href});
+        }else{
+          await navigator.clipboard.writeText(shareText);
+          const strong=shareFind.querySelector("strong");
+          const old=strong.textContent;
+          strong.textContent="✓ Copied to share";
+          setTimeout(()=>strong.textContent=old,1300);
+        }
+      }catch(error){
+        if(error?.name!=="AbortError"){
+          setStatus("Sharing was unavailable on this device.",true);
+        }
+      }
+    };
+  }
+
+  freeActions.classList.remove("hidden");
+}
+
+renderSaved();
   saveFind.textContent="✓ Saved";
   setTimeout(()=>saveFind.textContent="♡ Save find",1400);
 });
@@ -168,4 +234,68 @@ function validHttpUrl(value){try{const u=new URL(value);return u.protocol==="htt
 function escapeHtml(value=""){return String(value).replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[c]))}
 function escapeAttr(value=""){return escapeHtml(value)}
 function placeholderImage(){return "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='100%25' height='100%25' fill='%23eef1f5'/%3E%3C/svg%3E"}
+
+function renderFreeActions(i){
+  if(!freeActions)return;
+
+  const confidence=Number(i?.confidence||0);
+  const query=String(i?.searchQuery||i?.name||i?.object||"").trim();
+
+  if(!query||confidence<0.55){
+    freeActions.classList.add("hidden");
+    return;
+  }
+
+  if(searchOnline){
+    searchOnline.href=`https://www.google.com/search?q=${encodeURIComponent(query)}`;
+  }
+
+  if(onlineQueryText){
+    onlineQueryText.textContent=query;
+  }
+
+  if(searchNearbyFree){
+    const nearbyQuery=[i.brand,i.object||i.category,"store"].filter(Boolean).join(" ").trim()||`${query} store`;
+    const params=new URLSearchParams({api:"1",query:nearbyQuery});
+    searchNearbyFree.href=`https://www.google.com/maps/search/?${params.toString()}`;
+  }
+
+  if(copyQuery){
+    copyQuery.onclick=async()=>{
+      try{
+        await navigator.clipboard.writeText(query);
+        const strong=copyQuery.querySelector("strong");
+        const old=strong.textContent;
+        strong.textContent="✓ Copied";
+        setTimeout(()=>strong.textContent=old,1300);
+      }catch{
+        setStatus(`Copy unavailable. Search query: ${query}`,true);
+      }
+    };
+  }
+
+  if(shareFind){
+    shareFind.onclick=async()=>{
+      const shareText=`FindIt identified: ${i.name||i.object||query}${i.brand?` — ${i.brand}`:""}${i.model?` ${i.model}`:""}. Search: ${query}`;
+      try{
+        if(navigator.share){
+          await navigator.share({title:"FindIt Nearby",text:shareText,url:location.href});
+        }else{
+          await navigator.clipboard.writeText(shareText);
+          const strong=shareFind.querySelector("strong");
+          const old=strong.textContent;
+          strong.textContent="✓ Copied to share";
+          setTimeout(()=>strong.textContent=old,1300);
+        }
+      }catch(error){
+        if(error?.name!=="AbortError"){
+          setStatus("Sharing was unavailable on this device.",true);
+        }
+      }
+    };
+  }
+
+  freeActions.classList.remove("hidden");
+}
+
 renderSaved();

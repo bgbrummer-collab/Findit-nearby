@@ -31,7 +31,7 @@
     <div class="hero-copy">
       <p class="eyebrow">PHOTO → PRODUCT → STORE</p>
       <h1>Find the <span>actual item.</span></h1>
-      <p class="lead">Upload a photo. FindIt uses Gemini to identify the object, brand, model and visible text, then checks connected retailer data for real offers.</p>
+      <p class="lead">Upload a photo. FindIt uses Gemini to identify the object, brand, model and visible text, then checks connected retailer data for real offers. If no retailer feed is connected yet, FindIt gives you useful free search actions instead of stopping.</p>
       <div class="hero-actions">
         <a class="button button-primary" href="#finder">📸 Find my item</a>
         <a class="button button-secondary" href="#how">How it works</a>
@@ -92,6 +92,36 @@
     <div id="analysis" class="analysis-grid"></div>
     <div id="warning" class="notice hidden"></div>
 
+    <section id="freeActions" class="free-actions hidden">
+      <div>
+        <p class="eyebrow">FREE SEARCH TOOLS</p>
+        <h3>Keep searching without paid retailer data</h3>
+        <p class="muted">FindIt uses Gemini's exact product query to help you continue online or nearby. These links do not claim a verified price or stock level.</p>
+      </div>
+
+      <div class="free-action-grid">
+        <a id="searchOnline" class="free-action-card" href="#" target="_blank" rel="noopener noreferrer">
+          <strong>🔎 Search exact item online</strong>
+          <span id="onlineQueryText">Use the identified product query</span>
+        </a>
+
+        <a id="searchNearbyFree" class="free-action-card" href="#" target="_blank" rel="noopener noreferrer">
+          <strong>📍 Search nearby stores</strong>
+          <span>Open a relevant Maps search</span>
+        </a>
+
+        <button id="copyQuery" class="free-action-card free-action-button" type="button">
+          <strong>📋 Copy product name</strong>
+          <span>Copy the best exact-item search query</span>
+        </button>
+
+        <button id="shareFind" class="free-action-card free-action-button" type="button">
+          <strong>↗ Share this find</strong>
+          <span>Share the identified item</span>
+        </button>
+      </div>
+    </section>
+
     <section class="result-block">
       <div class="section-row">
         <div><p class="eyebrow">VERIFIED PRODUCT OFFERS</p><h3>Exact or close product matches</h3></div>
@@ -104,7 +134,7 @@
       <div id="offers" class="offer-list"></div>
       <div id="noOffers" class="empty-state hidden">
         <strong>No verified retailer offer yet.</strong>
-        <p>FindIt will not invent a price, stock status or store. A legitimate retailer feed must provide that information.</p>
+        <p>FindIt will not invent a price, stock status or store. Use the free search tools above while no legitimate retailer feed is connected.</p>
       </div>
     </section>
 

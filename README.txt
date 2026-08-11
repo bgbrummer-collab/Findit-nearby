@@ -24,3 +24,13 @@ After deployment:
 2. It should report ok:true and modelReachable:true.
 3. Test the main site with a clear shoe, microphone, flower, clothing item and another product.
 4. Real prices/stock need authorised retailer feeds.
+
+
+ZERO-BUDGET PRODUCT SEARCH FALLBACK
+- Confident Gemini identifications now show:
+  • Search exact item online
+  • Search relevant nearby stores in Google Maps
+  • Copy exact product query
+  • Share find
+- These links never claim a verified price or stock amount.
+- No paid retailer account is required for these fallback tools.

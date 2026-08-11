@@ -1,0 +1,15 @@
+FindIt Free Search Build — automated checks
+===========================================
+PASS: script.js JavaScript syntax
+PASS: api/search.js JavaScript syntax
+PASS: api/nearby.js JavaScript syntax
+PASS: api/health.js JavaScript syntax
+PASS: mobile viewport meta present
+PASS: mobile free-action single-column CSS present
+PASS: exact-item online search action present
+PASS: nearby Maps search action present
+PASS: copy-query action present
+PASS: Web Share/fallback action present
+PASS: no fake price or stock data added
+
+Live Gemini/GPS/device permissions must still be tested after Vercel deployment because they depend on private environment variables and the user's real browser.
