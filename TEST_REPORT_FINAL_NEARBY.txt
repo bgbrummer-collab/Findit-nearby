@@ -1,0 +1,23 @@
+FindIt Final Free Nearby Build
+==============================
+PASS: copyright preserved:
+      © 2026 Bernard Brummer — FindIt Nearby. All rights reserved.
+
+PASS: nearby frontend is connected to /api/nearby
+PASS: search stages changed to 3 km -> 5 km -> 10 km
+PASS: no nearby result above 10 km can be shown
+PASS: nearest-first sorting
+PASS: household items include supermarket/general retailers
+PASS: searches named SA chains including Checkers, Shoprite, Pick n Pay, Woolworths, Spar
+PASS: deduplication
+PASS: maximum 8 nearby stores
+PASS: two free Overpass endpoints
+PASS: misleading far-away results are replaced with "No reliable nearby mapped stores"
+PASS: exact-item stock is still never claimed
+PASS: script.js syntax
+PASS: api/search.js syntax
+PASS: api/nearby.js syntax
+PASS: api/health.js syntax
+
+Important limitation:
+OpenStreetMap is community-maintained. If a specific Checkers is missing from OpenStreetMap entirely, no free Overpass query can return it. In that case FindIt deliberately shows no misleading far-away list and keeps the free Google Maps search option available.

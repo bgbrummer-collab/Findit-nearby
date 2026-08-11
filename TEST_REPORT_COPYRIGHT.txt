@@ -1,0 +1,7 @@
+FindIt Copyright Build
+======================
+PASS: visible footer added
+PASS: copyright metadata added
+PASS: exact text: © 2026 Bernard Brummer — FindIt Nearby. All rights reserved.
+PASS: existing JavaScript syntax checks passed
+PASS: nearby connected build retained

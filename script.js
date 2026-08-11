@@ -136,7 +136,9 @@ async function loadNearby(i){
     const data=await response.json().catch(()=>({}));
     if(!response.ok)throw new Error(data?.message||"Nearby search failed");
     if(!data.enabled){nearbyStores.innerHTML=`<p class="muted">${escapeHtml(data.message||"Nearby-store API is not connected yet.")}</p>`;return}
-    const stores=Array.isArray(data.stores)?data.stores:[];
+    const stores=Array.isArray(data.stores)
+      ? data.stores.filter(x=>Number(x.distanceKm)<=10)
+      : [];
     if(!stores.length){nearbyStores.innerHTML="<p class='muted'>No relevant nearby businesses were returned.</p>";return}
     nearbyStores.innerHTML=stores.map(s=>`<article class="nearby-card"><strong>${escapeHtml(s.name||"Store")}</strong><p>${escapeHtml(s.address||"Address unavailable")}</p><p>${s.distanceKm!=null?`${Number(s.distanceKm).toFixed(1)} km away`:"Distance unavailable"}</p>${validHttpUrl(s.mapsUrl)?`<a href="${escapeAttr(s.mapsUrl)}" target="_blank" rel="noopener noreferrer">Open in Maps →</a>`:""}</article>`).join("");
   }catch(error){nearbyStores.innerHTML=`<p class="muted">Nearby search unavailable: ${escapeHtml(error.message)}</p>`}
@@ -165,9 +167,12 @@ async function loadNearbyStores(i){
     const data=await r.json();
     if(!r.ok||!data.ok)throw new Error(data.error||"Nearby search failed");
 
-    const stores=Array.isArray(data.stores)?data.stores:[];
-    if(!stores.length){
-      nearbyBlock.innerHTML='<p class="muted">No relevant mapped stores were found within 20 km. The free Maps search below can still help.</p>';
+    const stores=Array.isArray(data.stores)
+      ? data.stores.filter(x=>Number(x.distanceKm)<=10)
+      : [];
+    if(!stores.length || data.reliable===false){
+      nearbyBlock.innerHTML=
+        '<p class="muted">No reliable nearby mapped stores were found within 10 km. Use the free Maps search below instead of showing misleading far-away stores.</p>';
       return;
     }
 
@@ -177,7 +182,7 @@ async function loadNearbyStores(i){
           <p class="eyebrow">NEARBY RETAILERS</p>
           <h3>Closest relevant stores</h3>
         </div>
-        <span class="radius-note">searched up to ${Number(data.radiusKm||20)} km</span>
+        <span class="radius-note">searched up to ${Number(data.radiusKm||10)} km</span>
       </div>
       <div class="nearby-list">
         ${stores.map((x,index)=>`
@@ -303,9 +308,12 @@ async function loadNearbyStores(i){
     const data=await r.json();
     if(!r.ok||!data.ok)throw new Error(data.error||"Nearby search failed");
 
-    const stores=Array.isArray(data.stores)?data.stores:[];
-    if(!stores.length){
-      nearbyBlock.innerHTML='<p class="muted">No relevant mapped stores were found within 20 km. The free Maps search below can still help.</p>';
+    const stores=Array.isArray(data.stores)
+      ? data.stores.filter(x=>Number(x.distanceKm)<=10)
+      : [];
+    if(!stores.length || data.reliable===false){
+      nearbyBlock.innerHTML=
+        '<p class="muted">No reliable nearby mapped stores were found within 10 km. Use the free Maps search below instead of showing misleading far-away stores.</p>';
       return;
     }
 
@@ -315,7 +323,7 @@ async function loadNearbyStores(i){
           <p class="eyebrow">NEARBY RETAILERS</p>
           <h3>Closest relevant stores</h3>
         </div>
-        <span class="radius-note">searched up to ${Number(data.radiusKm||20)} km</span>
+        <span class="radius-note">searched up to ${Number(data.radiusKm||10)} km</span>
       </div>
       <div class="nearby-list">
         ${stores.map((x,index)=>`
