@@ -1,0 +1,17 @@
+FindIt Nearby Fix — CONNECTED BUILD
+===================================
+PASS: frontend now calls /api/nearby
+PASS: full Gemini identification is sent to nearby categorisation
+PASS: backend searches progressively at 5 km, 10 km, then 20 km
+PASS: search stops expanding once enough close stores are found
+PASS: results are sorted nearest first
+PASS: distance is displayed in kilometres
+PASS: nearby stores link to Maps
+PASS: HTML escaping added for store data
+PASS: mobile nearby-store layout included
+PASS: script.js syntax
+PASS: api/nearby.js syntax
+PASS: api/search.js syntax
+PASS: api/health.js syntax
+
+Limitation: OpenStreetMap/Overpass is free community data. A real nearby retailer may still be absent if that location is missing or incorrectly tagged in OpenStreetMap. FindIt therefore labels these as relevant nearby retailers, not verified exact-item stock.

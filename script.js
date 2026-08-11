@@ -57,6 +57,7 @@ searchBtn.addEventListener("click",async()=>{
     latestResult=data;
     renderIdentification(data.identification||{});
     renderFreeActions(data.identification||{});
+    if(coords) loadNearbyStores(data.identification||{});
     currentOffers=Array.isArray(data.offers)?data.offers:[];
     renderOffers();
 
@@ -148,6 +149,57 @@ saveFind.addEventListener("click",()=>{
   const saved=getSaved();saved.unshift(item);
   localStorage.setItem("finditSaved",JSON.stringify(saved.slice(0,30)));
   
+
+async function loadNearbyStores(i){
+  if(!coords||!nearbyBlock)return;
+
+  nearbyBlock.classList.remove("hidden");
+  nearbyBlock.innerHTML='<p class="muted">Finding the closest relevant stores…</p>';
+
+  try{
+    const r=await fetch("/api/nearby",{
+      method:"POST",
+      headers:{"content-type":"application/json"},
+      body:JSON.stringify({lat:coords.lat,lon:coords.lon,identification:i})
+    });
+    const data=await r.json();
+    if(!r.ok||!data.ok)throw new Error(data.error||"Nearby search failed");
+
+    const stores=Array.isArray(data.stores)?data.stores:[];
+    if(!stores.length){
+      nearbyBlock.innerHTML='<p class="muted">No relevant mapped stores were found within 20 km. The free Maps search below can still help.</p>';
+      return;
+    }
+
+    nearbyBlock.innerHTML=`
+      <div class="nearby-heading">
+        <div>
+          <p class="eyebrow">NEARBY RETAILERS</p>
+          <h3>Closest relevant stores</h3>
+        </div>
+        <span class="radius-note">searched up to ${Number(data.radiusKm||20)} km</span>
+      </div>
+      <div class="nearby-list">
+        ${stores.map((x,index)=>`
+          <a class="nearby-store" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${x.name} ${x.lat},${x.lon}`)}" target="_blank" rel="noopener noreferrer">
+            <span class="nearby-rank">${index+1}</span>
+            <span class="nearby-main">
+              <strong>${escapeHtml(x.name)}</strong>
+              <small>${escapeHtml(x.type||"retail")}${x.address?` • ${escapeHtml(x.address)}`:""}</small>
+            </span>
+            <span class="nearby-distance">${Number(x.distanceKm).toFixed(1)} km</span>
+          </a>`).join("")}
+      </div>
+      <p class="nearby-disclaimer">${escapeHtml(data.disclaimer||"Nearby retailer type only; exact-item stock is not verified.")}</p>`;
+  }catch(error){
+    nearbyBlock.innerHTML='<p class="muted">Nearby mapped-store search is temporarily unavailable. Use the free Maps search below.</p>';
+  }
+}
+
+function escapeHtml(value){
+  return String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[ch]));
+}
+
 function renderFreeActions(i){
   if(!freeActions)return;
 
@@ -234,6 +286,57 @@ function validHttpUrl(value){try{const u=new URL(value);return u.protocol==="htt
 function escapeHtml(value=""){return String(value).replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[c]))}
 function escapeAttr(value=""){return escapeHtml(value)}
 function placeholderImage(){return "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='100%25' height='100%25' fill='%23eef1f5'/%3E%3C/svg%3E"}
+
+
+async function loadNearbyStores(i){
+  if(!coords||!nearbyBlock)return;
+
+  nearbyBlock.classList.remove("hidden");
+  nearbyBlock.innerHTML='<p class="muted">Finding the closest relevant stores…</p>';
+
+  try{
+    const r=await fetch("/api/nearby",{
+      method:"POST",
+      headers:{"content-type":"application/json"},
+      body:JSON.stringify({lat:coords.lat,lon:coords.lon,identification:i})
+    });
+    const data=await r.json();
+    if(!r.ok||!data.ok)throw new Error(data.error||"Nearby search failed");
+
+    const stores=Array.isArray(data.stores)?data.stores:[];
+    if(!stores.length){
+      nearbyBlock.innerHTML='<p class="muted">No relevant mapped stores were found within 20 km. The free Maps search below can still help.</p>';
+      return;
+    }
+
+    nearbyBlock.innerHTML=`
+      <div class="nearby-heading">
+        <div>
+          <p class="eyebrow">NEARBY RETAILERS</p>
+          <h3>Closest relevant stores</h3>
+        </div>
+        <span class="radius-note">searched up to ${Number(data.radiusKm||20)} km</span>
+      </div>
+      <div class="nearby-list">
+        ${stores.map((x,index)=>`
+          <a class="nearby-store" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${x.name} ${x.lat},${x.lon}`)}" target="_blank" rel="noopener noreferrer">
+            <span class="nearby-rank">${index+1}</span>
+            <span class="nearby-main">
+              <strong>${escapeHtml(x.name)}</strong>
+              <small>${escapeHtml(x.type||"retail")}${x.address?` • ${escapeHtml(x.address)}`:""}</small>
+            </span>
+            <span class="nearby-distance">${Number(x.distanceKm).toFixed(1)} km</span>
+          </a>`).join("")}
+      </div>
+      <p class="nearby-disclaimer">${escapeHtml(data.disclaimer||"Nearby retailer type only; exact-item stock is not verified.")}</p>`;
+  }catch(error){
+    nearbyBlock.innerHTML='<p class="muted">Nearby mapped-store search is temporarily unavailable. Use the free Maps search below.</p>';
+  }
+}
+
+function escapeHtml(value){
+  return String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[ch]));
+}
 
 function renderFreeActions(i){
   if(!freeActions)return;

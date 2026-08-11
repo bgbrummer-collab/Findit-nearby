@@ -1,0 +1,17 @@
+FindIt Nearby Fix Build
+========================
+PASS: script.js syntax
+PASS: api/search.js syntax
+PASS: api/nearby.js syntax
+PASS: api/health.js syntax
+PASS: progressive 5 km -> 10 km -> 20 km radius
+PASS: stops expanding after at least 5 nearby results
+PASS: household/tissue items map to supermarket-type retailers
+PASS: clothing/electronics/home/stationery/garden/automotive mappings
+PASS: calculated distance and nearest-first sorting
+PASS: deduplication and 10-result maximum
+PASS: two Overpass endpoints for resilience
+PASS: no exact-stock claim for nearby stores
+NOTE: frontend does not directly call /api/nearby; free Maps fallback remains active.
+
+OpenStreetMap coverage is community-maintained, so a real shop can still be absent if it is missing or incorrectly tagged.
