@@ -1,552 +1,61 @@
-const $=(s)=>document.querySelector(s);
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const state={file:null,coords:null,result:null,offers:[],stores:[],sort:"best",radius:Number(localStorage.getItem("finditRadius")||10),map:null,markers:[],diagnostics:{item:null,searchQuery:null,retailCategory:null,likelyStoreTypes:[],recognitionConfidence:null,exactProductMatch:false,exactOfferCount:0,nearbyStoreCount:0,closestStoreDistanceKm:null,nearbyRadiusKm:null,nearbyRetailGroup:null,nearbyReliable:null,lastError:null,lastSearchCompletedAt:null}};
+const photo=$("#photo"),cameraPhoto=$("#cameraPhoto"),preview=$("#preview"),placeholder=$("#uploadPlaceholder"),dropzone=$("#dropzone"),searchBtn=$("#search"),status=$("#status"),locationBtn=$("#location"),results=$("#results"),analysis=$("#analysis"),warning=$("#warning"),nearbyStores=$("#nearbyStores"),offersEl=$("#offers"),noOffers=$("#noOffers"),nothingFound=$("#nothingFound"),freeActions=$("#freeActions");
 
-let finditDiagnostics={
-  item:null,
-  searchQuery:null,
-  retailCategory:null,
-  likelyStoreTypes:[],
-  recognitionConfidence:null,
-  exactProductMatch:false,
-  exactOfferCount:0,
-  nearbyStoreCount:0,
-  closestStoreDistanceKm:null,
-  nearbyRadiusKm:null,
-  nearbyRetailGroup:null,
-  nearbyReliable:null,
-  lastError:null,
-  lastSearchCompletedAt:null
-};
+function esc(v=""){return String(v).replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[c]))} function safe(v,f="Not detected"){return v==null||v===""?f:String(v)} function clamp(v,a,b){return Math.max(a,Math.min(b,v))} function validUrl(v){try{const u=new URL(v);return /^https?:$/.test(u.protocol)}catch{return false}} function setStatus(t,err=false){status.textContent=t;status.style.color=err?"#ff9da7":""}
 
-const freeActions=$("#freeActions"),searchOnline=$("#searchOnline"),searchNearbyFree=$("#searchNearbyFree"),copyQuery=$("#copyQuery"),shareFind=$("#shareFind"),onlineQueryText=$("#onlineQueryText");
-const photo=$("#photo"),cameraPhoto=$("#cameraPhoto"),choosePhoto=$("#choosePhoto"),takePhoto=$("#takePhoto"),preview=$("#preview"),uploadPlaceholder=$("#uploadPlaceholder"),searchBtn=$("#search"),locationBtn=$("#location"),status=$("#status"),results=$("#results"),resultTitle=$("#resultTitle"),summary=$("#summary"),analysis=$("#analysis"),warning=$("#warning"),offersEl=$("#offers"),noOffers=$("#noOffers"),nearbyBlock=$("#nearbyBlock"),nearbyStores=$("#nearbyStores"),saveFind=$("#saveFind"),savedList=$("#savedList");
-let selectedFile=null,coords=null,latestResult=null,currentOffers=[],currentSort="best";
+const drawer=$("#drawer"),backdrop=$("#drawerBackdrop");function openDrawer(){drawer.classList.add("open");drawer.setAttribute("aria-hidden","false");backdrop.classList.remove("hidden")}function closeDrawer(){drawer.classList.remove("open");drawer.setAttribute("aria-hidden","true");backdrop.classList.add("hidden")}
+$("#menuBtn").onclick=openDrawer;$("#mobileMore").onclick=openDrawer;$("#closeMenu").onclick=closeDrawer;backdrop.onclick=closeDrawer;$$('.drawer-nav a').forEach(a=>a.onclick=closeDrawer);
 
-choosePhoto.addEventListener("click",()=>photo.click());
-takePhoto.addEventListener("click",()=>cameraPhoto.click());
-photo.addEventListener("change",()=>onFileSelected(photo.files?.[0]));
-cameraPhoto.addEventListener("change",()=>onFileSelected(cameraPhoto.files?.[0]));
+const modals=$$(".modal");function openModal(el){el.classList.remove("hidden")}function closeModals(){modals.forEach(m=>m.classList.add("hidden"))}$$('[data-close-modal]').forEach(b=>b.onclick=closeModals);modals.forEach(m=>m.onclick=e=>{if(e.target===m)closeModals()});
+$("#openSettings").onclick=()=>{closeDrawer();openModal($("#settingsModal"))};
 
-function onFileSelected(file){
-  if(!file)return;
-  if(!file.type.startsWith("image/"))return setStatus("Please choose an image file.",true);
-  if(file.size>8*1024*1024)return setStatus("Please use an image smaller than 8 MB.",true);
-  selectedFile=file;
-  preview.src=URL.createObjectURL(file);
-  preview.classList.remove("hidden");
-  uploadPlaceholder.classList.add("hidden");
-  searchBtn.disabled=false;
-  setStatus("Photo ready. FindIt will identify the actual item with Gemini.");
-}
+const challenges=["Find something you don't know the name of 👀","Find the weirdest object in your room 😂","Find something smaller than your hand 🤏","Find something with a logo you can't identify 🕵️","Find an unusual tool 🔧","Find something older than you 🕰️","Find a product you've always wondered about ✨"];
+function challenge(){openModal($("#challengeModal"));$("#challengeText").textContent=challenges[Math.floor(Math.random()*challenges.length)]}$("#challengeBtn").onclick=challenge;$("#challengeBtn2").onclick=challenge;$("#newChallenge").onclick=()=>$("#challengeText").textContent=challenges[Math.floor(Math.random()*challenges.length)];
 
-locationBtn.addEventListener("click",async()=>{
-  try{
-    coords=await getLocation();
-    locationBtn.textContent="✓ Location ready";
-    setStatus("Location ready. Nearby results can now be ranked by distance.");
-  }catch{
-    setStatus("Location permission was not granted. Image identification can still work.",true);
-  }
-});
+const exampleSets=[[['👟','Sneakers'],['🥤','Energy drink'],['🎧','Headphones'],['🌱','Plant'],['👓','Glasses'],['⌚','Watch']],[['🎮','Controller'],['🔧','Tool'],['💄','Makeup'],['🎒','Backpack'],['🔌','Charger'],['☕','Hot chocolate']],[['🦻','Hearing aid'],['🚗','Car part'],['🧸','Toy'],['🖱️','Mouse'],['👕','Clothing'],['🔬','Microscope']],[['🎸','Guitar'],['🐶','Pet product'],['💡','Ceiling light'],['🧵','Yarn'],['🚲','Bike part'],['🪴','Bonsai']]];let exampleIndex=0,exampleTimer;
+function renderExamples(animate=true){const grid=$("#exampleGrid"),set=exampleSets[exampleIndex%exampleSets.length];if(animate&&grid.children.length){[...grid.children].forEach((c,i)=>setTimeout(()=>c.classList.add("out"),i*80));setTimeout(()=>paint(),620)}else paint();function paint(){grid.innerHTML=set.map(([e,n],i)=>`<button class="example-card in" style="animation-delay:${i*70}ms" data-example="${esc(n)}"><span class="example-emoji">${e}</span><strong>${esc(n)}</strong><small>Try something like this</small></button>`).join("");$$('[data-example]').forEach(b=>b.onclick=()=>{document.querySelector('#finder').scrollIntoView({behavior:'smooth'});setStatus(`Try uploading a photo of ${b.dataset.example.toLowerCase()}.`)})}}function nextExamples(){exampleIndex=(exampleIndex+1)%exampleSets.length;renderExamples(true)}renderExamples(false);exampleTimer=setInterval(nextExamples,5000);$("#shuffleExamples").onclick=()=>{clearInterval(exampleTimer);nextExamples();exampleTimer=setInterval(nextExamples,5000)};
 
-function getLocation(){
-  return new Promise((resolve,reject)=>{
-    if(!navigator.geolocation)return reject(new Error("Geolocation unavailable"));
-    navigator.geolocation.getCurrentPosition(
-      p=>resolve({lat:p.coords.latitude,lon:p.coords.longitude}),
-      reject,
-      {enableHighAccuracy:true,timeout:15000,maximumAge:300000}
-    );
-  });
-}
+const observer=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add("visible")}),{threshold:.08});$$('.reveal').forEach(x=>observer.observe(x));
 
-searchBtn.addEventListener("click",async()=>{
-  if(!selectedFile)return;
-  resetResults();
-  searchBtn.disabled=true;
-  setStatus("Analysing object, brand, model and visible text…");
-  try{
-    const form=new FormData();
-    form.append("image",selectedFile);
-    if(coords){form.append("lat",String(coords.lat));form.append("lon",String(coords.lon))}
-    const response=await fetch("api/search",{method:"POST",body:form});
-    const data=await response.json().catch(()=>({}));
-    if(!response.ok)throw new Error(data?.message||data?.error||`Search failed (${response.status})`);
+$("#choosePhoto").onclick=()=>photo.click();$("#takePhoto").onclick=()=>cameraPhoto.click();photo.onchange=()=>selectFile(photo.files?.[0]);cameraPhoto.onchange=()=>selectFile(cameraPhoto.files?.[0]);['dragenter','dragover'].forEach(ev=>dropzone.addEventListener(ev,e=>{e.preventDefault();dropzone.classList.add('dragging')}));['dragleave','drop'].forEach(ev=>dropzone.addEventListener(ev,e=>{e.preventDefault();dropzone.classList.remove('dragging')}));dropzone.addEventListener('drop',e=>selectFile(e.dataTransfer?.files?.[0]));
+function selectFile(file){if(!file)return;if(!file.type.startsWith('image/'))return setStatus('Please choose an image file.',true);if(file.size>8*1024*1024)return setStatus('Please use an image smaller than 8 MB.',true);state.file=file;preview.src=URL.createObjectURL(file);preview.classList.remove('hidden');placeholder.classList.add('hidden');searchBtn.disabled=false;setStatus('Photo ready. Add location for nearby retailer results.')}
+function getLocation(){return new Promise((resolve,reject)=>{if(!navigator.geolocation)return reject(Error('Location unavailable'));navigator.geolocation.getCurrentPosition(p=>resolve({lat:p.coords.latitude,lon:p.coords.longitude}),reject,{enableHighAccuracy:true,timeout:15000,maximumAge:120000})})}
+locationBtn.onclick=async()=>{try{state.coords=await getLocation();locationBtn.textContent='✓ Location ready';setStatus('Location ready. Nearby search will use your selected radius.')}catch{setStatus('Location permission was not granted. Identification still works.',true)}};
 
-    latestResult=data;
-    renderIdentification(data.identification||{});
-    {
-      const di=data.identification||{};
-      finditDiagnostics.item=di.name||di.object||null;
-      finditDiagnostics.searchQuery=di.searchQuery||null;
-      finditDiagnostics.retailCategory=di.retailCategory||di.category||null;
-      finditDiagnostics.likelyStoreTypes=Array.isArray(di.likelyStoreTypes)?di.likelyStoreTypes:[];
-      finditDiagnostics.recognitionConfidence=Number.isFinite(Number(di.confidence))?Number(di.confidence):null;
-      finditDiagnostics.lastError=null;
-    }
-    renderFreeActions(data.identification||{});
-    if(coords) loadNearbyStores(data.identification||{});
-    currentOffers=Array.isArray(data.offers)?data.offers:[];
-    finditDiagnostics.exactOfferCount=currentOffers.length;
-    finditDiagnostics.exactProductMatch=currentOffers.length>0;
-    renderOffers();
+const radiusSelect=$("#radiusSelect"),settingsRadius=$("#settingsRadius");radiusSelect.value=String(state.radius);settingsRadius.value=String(state.radius);function setRadius(v){state.radius=Number(v);localStorage.setItem('finditRadius',String(state.radius));radiusSelect.value=String(state.radius);settingsRadius.value=String(state.radius)}radiusSelect.onchange=e=>setRadius(e.target.value);settingsRadius.onchange=e=>setRadius(e.target.value);
+const animationsToggle=$("#animationsToggle");animationsToggle.checked=localStorage.getItem('finditAnimations')!=='off';document.body.classList.toggle('no-animations',!animationsToggle.checked);animationsToggle.onchange=()=>{localStorage.setItem('finditAnimations',animationsToggle.checked?'on':'off');document.body.classList.toggle('no-animations',!animationsToggle.checked)};
 
-    const confidence=Number(data.identification?.confidence||0);
-    if(data.blocked)showWarning(data.message||"FindIt cannot search for this item.",true);
-    else if(confidence<0.55)showWarning("FindIt is not confident enough to guess. Try a clearer photo showing the whole item, brand or model text.");
-    else if(!currentOffers.length)showWarning(data.message||"Item identified, but no verified retailer feed has a matching offer yet.");
+const stages=[['Looking at your image…','Checking shapes, text and visible branding.',20],['Identifying the item…','Finding object, brand, model and specialist category.',45],['Understanding where it is sold…','Choosing consumer-facing retailer types.',65],['Searching nearby…','Checking the closest relevant retailers.',82],['Almost there…','Ranking the most useful results.',94]];let stageTimer;
+function showSearchOverlay(){const o=$("#searchOverlay");$("#searchOverlayImage").src=preview.src;o.classList.remove('hidden');dropzone.classList.add('scanning');let i=0;const paint=()=>{const [a,b,p]=stages[Math.min(i,stages.length-1)];$("#searchStage").textContent=a;$("#searchStageSub").textContent=b;$("#searchProgress").style.width=p+'%';i++};paint();stageTimer=setInterval(paint,900)}function hideSearchOverlay(){clearInterval(stageTimer);$("#searchProgress").style.width='100%';setTimeout(()=>$("#searchOverlay").classList.add('hidden'),180);dropzone.classList.remove('scanning')}
 
-    if(coords&&!data.blocked&&confidence>=0.55)await loadNearby(data.identification||{});
+searchBtn.onclick=async()=>{if(!state.file)return;resetResults();searchBtn.disabled=true;showSearchOverlay();try{if(!state.coords){try{state.coords=await getLocation();locationBtn.textContent='✓ Location ready'}catch{}}const fd=new FormData();fd.append('image',state.file);if(state.coords){fd.append('lat',state.coords.lat);fd.append('lon',state.coords.lon)}const r=await fetch('/api/search',{method:'POST',body:fd});const data=await r.json().catch(()=>({}));if(!r.ok)throw Error(data.message||data.error||`Search failed (${r.status})`);state.result=data;renderIdentification(data.identification||{});state.offers=Array.isArray(data.offers)?data.offers:[];state.diagnostics.exactOfferCount=state.offers.length;state.diagnostics.exactProductMatch=state.offers.length>0;renderOffers();renderFreeActions(data.identification||{});const conf=Number(data.identification?.confidence||0);if(data.blocked)showWarning(data.message||'This item cannot be searched.',true);else if(conf<.55)showWarning('FindIt is not confident enough to guess. Try a clearer photo.');if(state.coords&&conf>=.55&&!data.blocked)await loadNearby(data.identification||{},state.radius);else showNothing('Allow location to see nearby retailers.');saveRecent(data.identification||{});results.classList.remove('hidden');results.scrollIntoView({behavior:'smooth'});setStatus('Search complete.')}catch(e){state.diagnostics.lastError=String(e.message||e).slice(0,240);results.classList.remove('hidden');showWarning(`Search error: ${e.message}`,true);setStatus('Search failed. Check the message below.',true)}finally{hideSearchOverlay();searchBtn.disabled=!state.file}};
 
-    results.classList.remove("hidden");
-    results.scrollIntoView({behavior:"smooth"});
-    setStatus(currentOffers.length?"Search complete — verified offers found.":"Search complete — item identified; verified retailer data is still needed for real offers.");
-  }catch(error){
-    console.error(error);
-    results.classList.remove("hidden");
-    showWarning(`Search error: ${error.message}`,true);
-    setStatus("Search failed. Check the message below.",true);
-    results.scrollIntoView({behavior:"smooth"});
-  }finally{searchBtn.disabled=!selectedFile}
-});
+function resetResults(){state.offers=[];state.stores=[];offersEl.innerHTML='';nearbyStores.innerHTML='';analysis.innerHTML='';warning.classList.add('hidden');noOffers.classList.add('hidden');nothingFound.classList.add('hidden');freeActions.classList.add('hidden')}
+function infoCard(l,v){return `<div class="analysis-card"><span>${esc(l)}</span><strong>${esc(String(v))}</strong></div>`}
+function renderIdentification(i){$("#resultTitle").textContent=i.name||i.model||i.object||'Item identified';$("#summary").textContent=i.summary||'FindIt analysed the uploaded image.';const c=clamp(Math.round(Number(i.confidence||0)*100),0,100),text=Array.isArray(i.visibleText)&&i.visibleText.length?i.visibleText.slice(0,5).join(' • '):'None detected',stores=Array.isArray(i.likelyStoreTypes)&&i.likelyStoreTypes.length?i.likelyStoreTypes.join(' • '):safe(i.retailCategory,'General retail');analysis.innerHTML=[infoCard('Object',safe(i.object,'Unknown')),infoCard('Brand',safe(i.brand)),infoCard('Model',safe(i.model)),infoCard('Category',safe(i.category,'Unknown')),infoCard('Visible text',text),infoCard('Search query',safe(i.searchQuery,'Not generated')),infoCard('Retail channel',stores),`<div class="analysis-card"><span>Confidence</span><strong>${c}%</strong><div class="confidence-bar"><i style="width:${c}%"></i></div></div>`].join('');Object.assign(state.diagnostics,{item:i.name||i.object||null,searchQuery:i.searchQuery||null,retailCategory:i.retailCategory||i.category||null,likelyStoreTypes:Array.isArray(i.likelyStoreTypes)?i.likelyStoreTypes:[],recognitionConfidence:Number.isFinite(Number(i.confidence))?Number(i.confidence):null,lastError:null})}
+function showWarning(m,err=false){warning.textContent=m;warning.classList.remove('hidden');warning.classList.toggle('error',err)}
+function renderOffers(){const list=[...state.offers];if(state.sort==='price')list.sort((a,b)=>(Number(a.price)||Infinity)-(Number(b.price)||Infinity));if(state.sort==='distance')list.sort((a,b)=>(Number(a.distanceKm)||Infinity)-(Number(b.distanceKm)||Infinity));if(state.sort==='best')list.sort((a,b)=>Number(b.match||0)-Number(a.match||0));if(!list.length){noOffers.classList.remove('hidden');return}noOffers.classList.add('hidden');offersEl.innerHTML=list.map(p=>`<article class="offer-card"><img src="${esc(p.image||placeholderImage())}" alt=""><div><h4>${esc(p.name||'Product')}</h4><p>${esc([p.brand,p.model,p.retailer].filter(Boolean).join(' • '))}</p><p>🎯 ${Math.round(Number(p.match||0)*100)}% match • 📦 ${esc(p.stock?.status||'Stock not verified')}</p>${validUrl(p.url)?`<a href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">View product →</a>`:''}</div><div class="price">${money(p)}</div></article>`).join('')}
+$$('.sort-btn').forEach(b=>b.onclick=()=>{state.sort=b.dataset.sort;$$('.sort-btn').forEach(x=>x.classList.toggle('active',x===b));renderOffers()});
+function money(p){if(p.price==null)return 'Price unavailable';try{return new Intl.NumberFormat('en-ZA',{style:'currency',currency:p.currency||'ZAR'}).format(Number(p.price))}catch{return `${p.currency||'ZAR'} ${p.price}`}}function placeholderImage(){return "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect width='100%25' height='100%25' fill='%23eef1f5'/%3E%3C/svg%3E"}
 
-function resetResults(){
-  latestResult=null;currentOffers=[];offersEl.innerHTML="";analysis.innerHTML="";nearbyStores.innerHTML="";
-  nearbyBlock.classList.add("hidden");noOffers.classList.add("hidden");warning.classList.add("hidden");warning.classList.remove("error");if(freeActions)freeActions.classList.add("hidden");
-}
+async function loadNearby(i,radius){nearbyStores.innerHTML='<div class="empty-state">Finding the closest consumer-facing retailers…</div>';try{const r=await fetch('/api/nearby',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({lat:state.coords.lat,lon:state.coords.lon,identification:i,radiusKm:radius})});const d=await r.json();if(!r.ok||!d.ok)throw Error(d.error||'Nearby search failed');state.stores=Array.isArray(d.stores)?d.stores:[];Object.assign(state.diagnostics,{nearbyStoreCount:state.stores.length,closestStoreDistanceKm:state.stores[0]?.distanceKm??null,nearbyRadiusKm:d.radiusKm??null,nearbyRetailGroup:d.retailGroup??null,nearbyReliable:d.reliable!==false,lastSearchCompletedAt:new Date().toISOString()});renderStores();updateMap();if(!state.stores.length)showNothing(d.message||'No reliable nearby consumer retailers found.');else nothingFound.classList.add('hidden')}catch(e){state.diagnostics.lastError=String(e.message||e).slice(0,240);state.diagnostics.nearbyReliable=false;state.diagnostics.lastSearchCompletedAt=new Date().toISOString();nearbyStores.innerHTML='<div class="empty-state">Nearby retailer search is temporarily unavailable.</div>';showNothing('Nearby retailer search could not return useful results.') }}
+function renderStores(){if(!state.stores.length){nearbyStores.innerHTML='';return}nearbyStores.innerHTML=state.stores.map((s,i)=>{const directions=`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${s.lat},${s.lon}`)}`;return `<article class="store-card" data-store="${i}"><span class="store-rank">${i+1}</span><div class="store-main"><strong>${esc(s.name)}</strong><small>${esc(s.address||s.type||'Retailer')}</small><div class="store-tags"><span>${esc(s.type||'retail')}</span><span>Consumer retailer</span><span>Stock not verified</span></div></div><div class="store-side"><div class="store-distance">${Number(s.distanceKm).toFixed(1)} km</div><div class="store-actions">${s.phone?`<a href="tel:${esc(s.phone)}">Call</a>`:''}${validUrl(s.website)?`<a href="${esc(s.website)}" target="_blank" rel="noopener noreferrer">Website</a>`:''}<a href="${directions}" target="_blank" rel="noopener noreferrer">Directions</a></div></div></article>`}).join('');$$('[data-store]').forEach(card=>card.onclick=e=>{if(e.target.closest('a'))return;selectStore(Number(card.dataset.store))})}
+function ensureMap(){if(state.map||typeof L==='undefined')return;state.map=L.map('map').setView(state.coords?[state.coords.lat,state.coords.lon]:[-30.5595,22.9375],state.coords?13:5);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(state.map)}
+function updateMap(){ensureMap();if(!state.map||!state.coords)return;state.markers.forEach(m=>m.remove());state.markers=[];const me=L.circleMarker([state.coords.lat,state.coords.lon],{radius:8,color:'#27d4f2',fillColor:'#27d4f2',fillOpacity:1}).addTo(state.map).bindPopup('You are here');state.markers.push(me);state.stores.forEach((s,i)=>{const m=L.marker([s.lat,s.lon]).addTo(state.map).bindPopup(`<b>${i+1}. ${esc(s.name)}</b><br>${Number(s.distanceKm).toFixed(1)} km away`);m.on('click',()=>selectStore(i,false));state.markers.push(m)});if(state.stores.length){state.map.fitBounds([[state.coords.lat,state.coords.lon],...state.stores.map(s=>[s.lat,s.lon])],{padding:[30,30],maxZoom:14})}else state.map.setView([state.coords.lat,state.coords.lon],13);setTimeout(()=>state.map.invalidateSize(),150)}
+function selectStore(i,openPopup=true){$$('[data-store]').forEach((c,n)=>c.classList.toggle('active',n===i));const card=$(`[data-store="${i}"]`);card?.scrollIntoView({behavior:'smooth',block:'nearest'});const marker=state.markers[i+1];if(marker&&state.map){state.map.panTo(marker.getLatLng());if(openPopup)marker.openPopup()}}
+$("#listViewBtn").onclick=()=>{$("#listViewBtn").classList.add('active');$("#mapViewBtn").classList.remove('active');$("#mapWrap").classList.remove('show');nearbyStores.classList.remove('hide')};$("#mapViewBtn").onclick=()=>{$("#mapViewBtn").classList.add('active');$("#listViewBtn").classList.remove('active');$("#mapWrap").classList.add('show');nearbyStores.classList.add('hide');ensureMap();setTimeout(()=>state.map?.invalidateSize(),120)};
 
-function renderIdentification(i){
-  resultTitle.textContent=i.name||i.model||i.object||"Item identified";
-  summary.textContent=i.summary||"Gemini analysed the uploaded image.";
-  const confidence=clamp(Math.round(Number(i.confidence||0)*100),0,100);
-  const visibleText=Array.isArray(i.visibleText)&&i.visibleText.length?i.visibleText.slice(0,6).join(" • "):"None detected";
-  const features=Array.isArray(i.features)&&i.features.length?i.features.slice(0,6).join(" • "):"Not enough evidence";
-  analysis.innerHTML=[
-    infoCard("Object",safe(i.object,"Unknown")),
-    infoCard("Brand",safe(i.brand)),
-    infoCard("Model",safe(i.model)),
-    infoCard("Category",safe(i.category,"Unknown")),
-    infoCard("Visible text",visibleText),
-    infoCard("Search query",safe(i.searchQuery,"Not generated")),
-    infoCard("Visual clues",features),
-    `<div class="analysis-card"><span>Confidence</span><strong>${confidence}%</strong><div class="confidence-bar"><i style="width:${confidence}%"></i></div></div>`
-  ].join("");
-}
+function retailerQuery(i){const t=[i.retailCategory,...(i.likelyStoreTypes||[]),i.object,i.category,i.searchQuery].filter(Boolean).join(' ').toLowerCase();const routes=[['supermarket',/hot chocolate|cocoa|energy drink|beverage|food|drink|grocery|tissue|household|coffee|tea|chocolate/],['hearing aid store',/hearing aid|audiology/],['optician',/glasses|eyewear|contact lens/],['medical supply store',/wheelchair|crutch|medical supply|orthopaedic/],['shoe store',/shoe|sneaker|footwear/],['clothing store',/clothing|shirt|dress|fashion/],['electronics store',/electronics|headphone|speaker|phone|computer|camera/],['music store',/microphone|guitar|music|turntable/],['hardware store',/hardware|tool|drill|plumbing|electrical/],['stationery store',/pencil|stationery|notebook/],['pharmacy',/medicine|pharmacy|skincare/],['pet store',/pet|dog food|cat food/],['garden centre',/plant|flower|garden/],['auto parts store',/car part|tyre|battery|automotive/],['toy store',/toy|lego|puzzle/],['sports store',/sports|rugby|football|fitness/]];for(const [q,re] of routes)if(re.test(t))return q;return 'department store'}
+function renderFreeActions(i){const q=String(i.searchQuery||i.name||i.object||'').trim();if(!q||Number(i.confidence||0)<.55)return;freeActions.classList.remove('hidden');$("#searchOnline").href=`https://www.google.com/search?q=${encodeURIComponent(q)}`;$("#onlineQueryText").textContent=q;const rq=retailerQuery(i);const mp=new URLSearchParams({api:'1',query:state.coords?`${rq} near ${state.coords.lat},${state.coords.lon}`:rq});$("#searchNearbyFree").href=`https://www.google.com/maps/search/?${mp.toString()}`;$("#copyQuery").onclick=async()=>{try{await navigator.clipboard.writeText(q);setStatus('✓ Product name copied.')}catch{setStatus('Copy unavailable.',true)}};$("#shareFind").onclick=async()=>{const text=`FindIt identified: ${i.name||i.object||q}. Search: ${q}`;try{if(navigator.share)await navigator.share({title:'FindIt Nearby',text,url:location.href});else{await navigator.clipboard.writeText(text);setStatus('✓ Find copied to share.')}}catch(e){if(e.name!=='AbortError')setStatus('Sharing unavailable.',true)}};$("#similarSearch").href=`https://www.google.com/search?q=${encodeURIComponent(q+' similar products')}`}
+function showNothing(msg){nothingFound.classList.remove('hidden');nothingFound.querySelector('p').textContent=msg}$("#widenSearch").onclick=async()=>{if(!state.coords||!state.result?.identification)return;setRadius(20);await loadNearby(state.result.identification,20)};$("#retry").onclick=()=>photo.click();$("#changeItem").onclick=()=>photo.click();$("#correctSearch").onclick=()=>{const q=prompt('What should FindIt search for instead?',state.result?.identification?.searchQuery||'');if(q)window.open(`https://www.google.com/search?q=${encodeURIComponent(q)}`,'_blank')};
 
-function infoCard(label,value){return `<div class="analysis-card"><span>${escapeHtml(label)}</span><strong>${escapeHtml(String(value))}</strong></div>`}
+function getRecent(){try{return JSON.parse(localStorage.getItem('finditRecent')||'[]')}catch{return[]}}function saveRecent(i){const x={id:Date.now(),name:i.name||i.object||'Item',brand:i.brand||'',query:i.searchQuery||'',date:new Date().toISOString()};const arr=[x,...getRecent().filter(v=>v.query!==x.query)].slice(0,12);localStorage.setItem('finditRecent',JSON.stringify(arr));renderRecent()}function renderRecent(){const arr=getRecent(),el=$("#recentList");if(!arr.length){el.innerHTML='<p class="muted">Nothing here yet.</p>';return}el.innerHTML=arr.map(x=>`<article class="recent-card"><strong>${esc(x.name)}</strong><small>${esc([x.brand,x.query].filter(Boolean).join(' • '))}</small><button data-recent="${esc(x.query)}">Search online →</button></article>`).join('');$$('[data-recent]').forEach(b=>b.onclick=()=>window.open(`https://www.google.com/search?q=${encodeURIComponent(b.dataset.recent)}`,'_blank'))}function clearRecent(){localStorage.removeItem('finditRecent');renderRecent()}$("#clearRecent").onclick=clearRecent;$("#clearHistorySetting").onclick=clearRecent;$("#openRecent").onclick=()=>{closeDrawer();$("#recent").scrollIntoView({behavior:'smooth'})};renderRecent();
+function getSaved(){try{return JSON.parse(localStorage.getItem('finditSaved')||'[]')}catch{return[]}}$("#saveFind").onclick=()=>{const i=state.result?.identification;if(!i)return;const arr=[{name:i.name||i.object||'Item',query:i.searchQuery||'',savedAt:new Date().toISOString()},...getSaved()].slice(0,30);localStorage.setItem('finditSaved',JSON.stringify(arr));$("#saveFind").textContent='✓ Saved';setTimeout(()=>$("#saveFind").textContent='♡ Save',1200)};
 
-function renderOffers(){
-  const offers=[...currentOffers];
-  if(currentSort==="price")offers.sort((a,b)=>valueOrInfinity(a.price)-valueOrInfinity(b.price));
-  if(currentSort==="distance")offers.sort((a,b)=>valueOrInfinity(a.distanceKm)-valueOrInfinity(b.distanceKm));
-  if(currentSort==="best")offers.sort((a,b)=>Number(b.match||0)-Number(a.match||0));
-  if(!offers.length){offersEl.innerHTML="";noOffers.classList.remove("hidden");return}
-  noOffers.classList.add("hidden");
-  offersEl.innerHTML=offers.map(p=>{
-    const distance=p.distanceKm!=null?` • ${Number(p.distanceKm).toFixed(1)} km`:"";
-    const stock=p.stock?.status||"Stock status unavailable";
-    const match=Math.round(Number(p.match||0)*100);
-    const productLink=validHttpUrl(p.url)?`<a href="${escapeAttr(p.url)}" target="_blank" rel="noopener noreferrer">View product →</a>`:"";
-    const mapsLink=p.store?.lat!=null&&p.store?.lon!=null?`<a href="https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${p.store.lat},${p.store.lon}`)}" target="_blank" rel="noopener noreferrer">Directions →</a>`:"";
-    return `<article class="offer-card"><img src="${escapeAttr(p.image||placeholderImage())}" alt="${escapeAttr(p.name||"Product")}"><div><h4>${escapeHtml(p.name||"Product")}</h4><p>${escapeHtml([p.brand,p.model,p.retailer].filter(Boolean).join(" • "))}</p><p class="good">🎯 ${match}% match • 📦 ${escapeHtml(stock)}</p><p>🏪 ${escapeHtml(p.store?.name||"Online / store not supplied")}${escapeHtml(distance)}</p><div class="offer-links">${productLink}${mapsLink}</div></div><div class="price">${formatMoney(p)}</div></article>`;
-  }).join("");
-}
+const feedbackRating=$("#feedbackRating"),feedbackMessage=$("#feedbackMessage"),feedbackTopic=$("#feedbackTopic"),includeTechnical=$("#includeTechnical"),feedbackStatus=$("#feedbackStatus");function setRating(n){feedbackRating.value=String(n);$$('.star-btn').forEach(b=>b.classList.toggle('active',Number(b.dataset.rating)<=n))}$$('.star-btn').forEach(b=>b.onclick=()=>setRating(Number(b.dataset.rating)));
+function feedbackPayload(){return{rating:Number(feedbackRating.value||0),topic:feedbackTopic.value||'general',message:feedbackMessage.value.trim(),technical:includeTechnical.checked?{page:location.pathname,viewport:`${innerWidth}x${innerHeight}`,platform:navigator.platform||'unknown',language:navigator.language||'unknown',online:navigator.onLine,hasLocation:Boolean(state.coords),...state.diagnostics}:null,createdAt:new Date().toISOString()}}
+$("#feedbackForm").onsubmit=async e=>{e.preventDefault();const p=feedbackPayload();if(!p.rating)return feedbackStatus.textContent='Choose a star rating first.';if(p.message.length<3)return feedbackStatus.textContent='Please write a little more detail.';$("#sendFeedback").disabled=true;feedbackStatus.textContent='Sending feedback…';try{const r=await fetch('/api/feedback',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(p)}),d=await r.json();if(!r.ok)throw Error(d.error||'Could not send');feedbackStatus.textContent=d.delivered?'✓ Thank you — your feedback was saved.':'Central storage is not connected yet.';feedbackMessage.value='';setRating(0)}catch{feedbackStatus.textContent='Feedback could not be sent right now.'}finally{$("#sendFeedback").disabled=false}};$("#copyFeedback").onclick=async()=>{const p=feedbackPayload();try{await navigator.clipboard.writeText(`FindIt rating: ${p.rating}/5\nTopic: ${p.topic}\n\n${p.message}`);feedbackStatus.textContent='✓ Feedback copied.'}catch{feedbackStatus.textContent='Copy unavailable.'}};
+$("#thumbUp").onclick=()=>{feedbackTopic.value='general';setRating(5);feedbackMessage.value='FindIt got this search right.';$("#feedback").scrollIntoView({behavior:'smooth'})};$("#thumbDown").onclick=()=>{feedbackTopic.value='nearby';setRating(2);feedbackMessage.value='FindIt did not get this search fully right. ';$("#feedback").scrollIntoView({behavior:'smooth'});feedbackMessage.focus()};
 
-document.querySelectorAll(".sort-btn").forEach(button=>button.addEventListener("click",()=>{
-  currentSort=button.dataset.sort||"best";
-  document.querySelectorAll(".sort-btn").forEach(x=>x.classList.toggle("active",x===button));
-  renderOffers();
-}));
-
-async function loadNearby(i){
-  nearbyBlock.classList.remove("hidden");
-  nearbyStores.innerHTML="<p class='muted'>Checking relevant nearby retailers…</p>";
-  try{
-    const response=await fetch("api/nearby",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({lat:coords.lat,lon:coords.lon,category:i.category||"",object:i.object||"",brand:i.brand||""})});
-    const data=await response.json().catch(()=>({}));
-    if(!response.ok)throw new Error(data?.message||"Nearby search failed");
-    if(!data.enabled){nearbyStores.innerHTML=`<p class="muted">${escapeHtml(data.message||"Nearby-store API is not connected yet.")}</p>`;return}
-    const stores=Array.isArray(data.stores)
-      ? data.stores.filter(x=>Number(x.distanceKm)<=10)
-      : [];
-
-    finditDiagnostics.nearbyStoreCount=stores.length;
-    finditDiagnostics.closestStoreDistanceKm=stores.length?Number(stores[0].distanceKm):null;
-    finditDiagnostics.nearbyRadiusKm=Number.isFinite(Number(data.radiusKm))?Number(data.radiusKm):null;
-    finditDiagnostics.nearbyRetailGroup=data.retailGroup||data.categoryGroup||null;
-    finditDiagnostics.nearbyReliable=data.reliable!==false;
-    finditDiagnostics.lastSearchCompletedAt=new Date().toISOString();
-    if(!stores.length){nearbyStores.innerHTML="<p class='muted'>No relevant nearby businesses were returned.</p>";return}
-    nearbyStores.innerHTML=stores.map(s=>`<article class="nearby-card"><strong>${escapeHtml(s.name||"Store")}</strong><p>${escapeHtml(s.address||"Address unavailable")}</p><p>${s.distanceKm!=null?`${Number(s.distanceKm).toFixed(1)} km away`:"Distance unavailable"}</p>${validHttpUrl(s.mapsUrl)?`<a href="${escapeAttr(s.mapsUrl)}" target="_blank" rel="noopener noreferrer">Open in Maps →</a>`:""}</article>`).join("");
-  }catch(error){nearbyStores.innerHTML=`<p class="muted">Nearby search unavailable: ${escapeHtml(error.message)}</p>`}
-}
-
-saveFind.addEventListener("click",()=>{
-  if(!latestResult?.identification)return;
-  const i=latestResult.identification;
-  const item={id:(crypto.randomUUID?crypto.randomUUID():String(Date.now())),name:i.name||i.object||"Saved item",brand:i.brand||"",model:i.model||"",query:i.searchQuery||"",savedAt:new Date().toISOString()};
-  const saved=getSaved();saved.unshift(item);
-  localStorage.setItem("finditSaved",JSON.stringify(saved.slice(0,30)));
-  
-
-async function loadNearbyStores(i){
-  if(!coords||!nearbyBlock)return;
-
-  nearbyBlock.classList.remove("hidden");
-  nearbyBlock.innerHTML='<p class="muted">Finding the closest relevant stores…</p>';
-
-  try{
-    const r=await fetch("/api/nearby",{
-      method:"POST",
-      headers:{"content-type":"application/json"},
-      body:JSON.stringify({lat:coords.lat,lon:coords.lon,identification:i})
-    });
-    const data=await r.json();
-    if(!r.ok||!data.ok)throw new Error(data.error||"Nearby search failed");
-
-    const stores=Array.isArray(data.stores)
-      ? data.stores.filter(x=>Number(x.distanceKm)<=10)
-      : [];
-    if(!stores.length || data.reliable===false){
-      nearbyBlock.innerHTML=
-        '<p class="muted">No reliable nearby mapped stores were found within 10 km. Use the free Maps search below instead of showing misleading far-away stores.</p>';
-      return;
-    }
-
-    nearbyBlock.innerHTML=`
-      <div class="nearby-heading">
-        <div>
-          <p class="eyebrow">NEARBY RETAILERS</p>
-          <h3>Closest relevant stores</h3>
-        </div>
-        <span class="radius-note">searched up to ${Number(data.radiusKm||10)} km</span>
-      </div>
-      <div class="nearby-list">
-        ${stores.map((x,index)=>`
-          <a class="nearby-store" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${x.name} ${x.lat},${x.lon}`)}" target="_blank" rel="noopener noreferrer">
-            <span class="nearby-rank">${index+1}</span>
-            <span class="nearby-main">
-              <strong>${escapeHtml(x.name)}</strong>
-              <small>${escapeHtml(x.type||"retail")}${x.address?` • ${escapeHtml(x.address)}`:""}</small>
-            </span>
-            <span class="nearby-distance">${Number(x.distanceKm).toFixed(1)} km</span>
-          </a>`).join("")}
-      </div>
-      <p class="nearby-disclaimer">${escapeHtml(data.disclaimer||"Nearby retailer type only; exact-item stock is not verified.")}</p>`;
-  }catch(error){
-    finditDiagnostics.lastError=String(error?.message||error||"Nearby search failed").slice(0,240);
-    finditDiagnostics.nearbyReliable=false;
-    finditDiagnostics.lastSearchCompletedAt=new Date().toISOString();
-    nearbyBlock.innerHTML='<p class="muted">Nearby mapped-store search is temporarily unavailable. Use the free Maps search below.</p>';
-  }
-}
-
-function escapeHtml(value){
-  return String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[ch]));
-}
-
-function renderFreeActions(i){
-  if(!freeActions)return;
-
-  const confidence=Number(i?.confidence||0);
-  const query=String(i?.searchQuery||i?.name||i?.object||"").trim();
-
-  if(!query||confidence<0.55){
-    freeActions.classList.add("hidden");
-    return;
-  }
-
-  if(searchOnline){
-    searchOnline.href=`https://www.google.com/search?q=${encodeURIComponent(query)}`;
-  }
-
-  if(onlineQueryText){
-    onlineQueryText.textContent=query;
-  }
-
-  if(searchNearbyFree){
-    const nearbyQuery=[i.brand,i.object||i.category,"store"].filter(Boolean).join(" ").trim()||`${query} store`;
-    const params=new URLSearchParams({api:"1",query:nearbyQuery});
-    searchNearbyFree.href=`https://www.google.com/maps/search/?${params.toString()}`;
-  }
-
-  if(copyQuery){
-    copyQuery.onclick=async()=>{
-      try{
-        await navigator.clipboard.writeText(query);
-        const strong=copyQuery.querySelector("strong");
-        const old=strong.textContent;
-        strong.textContent="✓ Copied";
-        setTimeout(()=>strong.textContent=old,1300);
-      }catch{
-        setStatus(`Copy unavailable. Search query: ${query}`,true);
-      }
-    };
-  }
-
-  if(shareFind){
-    shareFind.onclick=async()=>{
-      const shareText=`FindIt identified: ${i.name||i.object||query}${i.brand?` — ${i.brand}`:""}${i.model?` ${i.model}`:""}. Search: ${query}`;
-      try{
-        if(navigator.share){
-          await navigator.share({title:"FindIt Nearby",text:shareText,url:location.href});
-        }else{
-          await navigator.clipboard.writeText(shareText);
-          const strong=shareFind.querySelector("strong");
-          const old=strong.textContent;
-          strong.textContent="✓ Copied to share";
-          setTimeout(()=>strong.textContent=old,1300);
-        }
-      }catch(error){
-        if(error?.name!=="AbortError"){
-          setStatus("Sharing was unavailable on this device.",true);
-        }
-      }
-    };
-  }
-
-  freeActions.classList.remove("hidden");
-}
-
-renderSaved();
-  saveFind.textContent="✓ Saved";
-  setTimeout(()=>saveFind.textContent="♡ Save find",1400);
-});
-
-function getSaved(){try{return JSON.parse(localStorage.getItem("finditSaved")||"[]")}catch{return[]}}
-function renderSaved(){
-  const saved=getSaved();
-  if(!saved.length){savedList.innerHTML="<p class='muted'>Nothing saved yet.</p>";return}
-  savedList.innerHTML=saved.map(x=>`<div class="saved-card"><div><strong>${escapeHtml(x.name)}</strong><br><small>${escapeHtml([x.brand,x.model].filter(Boolean).join(" • ")||x.query)}</small></div><button class="sort-btn" data-remove="${escapeAttr(x.id)}" type="button">Remove</button></div>`).join("");
-  savedList.querySelectorAll("[data-remove]").forEach(b=>b.addEventListener("click",()=>{localStorage.setItem("finditSaved",JSON.stringify(getSaved().filter(x=>x.id!==b.dataset.remove)));renderSaved()}));
-}
-
-function showWarning(message,isError=false){warning.textContent=message;warning.classList.remove("hidden");warning.classList.toggle("error",isError)}
-function setStatus(message,isError=false){status.textContent=message;status.style.color=isError?"#ff9ba5":""}
-function safe(v,fallback="Not detected"){return v==null||v===""?fallback:String(v)}
-function valueOrInfinity(v){const n=Number(v);return Number.isFinite(n)?n:Infinity}
-function clamp(v,min,max){return Math.max(min,Math.min(max,v))}
-function formatMoney(p){if(p.price==null)return"Price unavailable";try{return new Intl.NumberFormat("en-ZA",{style:"currency",currency:p.currency||"ZAR"}).format(Number(p.price))}catch{return`${p.currency||"ZAR"} ${p.price}`}}
-function validHttpUrl(value){try{const u=new URL(value);return u.protocol==="http:"||u.protocol==="https:"}catch{return false}}
-function escapeHtml(value=""){return String(value).replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[c]))}
-function escapeAttr(value=""){return escapeHtml(value)}
-function placeholderImage(){return "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='100%25' height='100%25' fill='%23eef1f5'/%3E%3C/svg%3E"}
-
-
-async function loadNearbyStores(i){
-  if(!coords||!nearbyBlock)return;
-
-  nearbyBlock.classList.remove("hidden");
-  nearbyBlock.innerHTML='<p class="muted">Finding the closest relevant stores…</p>';
-
-  try{
-    const r=await fetch("/api/nearby",{
-      method:"POST",
-      headers:{"content-type":"application/json"},
-      body:JSON.stringify({lat:coords.lat,lon:coords.lon,identification:i})
-    });
-    const data=await r.json();
-    if(!r.ok||!data.ok)throw new Error(data.error||"Nearby search failed");
-
-    const stores=Array.isArray(data.stores)
-      ? data.stores.filter(x=>Number(x.distanceKm)<=10)
-      : [];
-    if(!stores.length || data.reliable===false){
-      nearbyBlock.innerHTML=
-        '<p class="muted">No reliable nearby mapped stores were found within 10 km. Use the free Maps search below instead of showing misleading far-away stores.</p>';
-      return;
-    }
-
-    nearbyBlock.innerHTML=`
-      <div class="nearby-heading">
-        <div>
-          <p class="eyebrow">NEARBY RETAILERS</p>
-          <h3>Closest relevant stores</h3>
-        </div>
-        <span class="radius-note">searched up to ${Number(data.radiusKm||10)} km</span>
-      </div>
-      <div class="nearby-list">
-        ${stores.map((x,index)=>`
-          <a class="nearby-store" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${x.name} ${x.lat},${x.lon}`)}" target="_blank" rel="noopener noreferrer">
-            <span class="nearby-rank">${index+1}</span>
-            <span class="nearby-main">
-              <strong>${escapeHtml(x.name)}</strong>
-              <small>${escapeHtml(x.type||"retail")}${x.address?` • ${escapeHtml(x.address)}`:""}</small>
-            </span>
-            <span class="nearby-distance">${Number(x.distanceKm).toFixed(1)} km</span>
-          </a>`).join("")}
-      </div>
-      <p class="nearby-disclaimer">${escapeHtml(data.disclaimer||"Nearby retailer type only; exact-item stock is not verified.")}</p>`;
-  }catch(error){
-    finditDiagnostics.lastError=String(error?.message||error||"Nearby search failed").slice(0,240);
-    finditDiagnostics.nearbyReliable=false;
-    finditDiagnostics.lastSearchCompletedAt=new Date().toISOString();
-    nearbyBlock.innerHTML='<p class="muted">Nearby mapped-store search is temporarily unavailable. Use the free Maps search below.</p>';
-  }
-}
-
-function escapeHtml(value){
-  return String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[ch]));
-}
-
-function renderFreeActions(i){
-  if(!freeActions)return;
-
-  const confidence=Number(i?.confidence||0);
-  const query=String(i?.searchQuery||i?.name||i?.object||"").trim();
-
-  if(!query||confidence<0.55){
-    freeActions.classList.add("hidden");
-    return;
-  }
-
-  if(searchOnline){
-    searchOnline.href=`https://www.google.com/search?q=${encodeURIComponent(query)}`;
-  }
-
-  if(onlineQueryText){
-    onlineQueryText.textContent=query;
-  }
-
-  if(searchNearbyFree){
-    const nearbyQuery=[i.brand,i.object||i.category,"store"].filter(Boolean).join(" ").trim()||`${query} store`;
-    const params=new URLSearchParams({api:"1",query:nearbyQuery});
-    searchNearbyFree.href=`https://www.google.com/maps/search/?${params.toString()}`;
-  }
-
-  if(copyQuery){
-    copyQuery.onclick=async()=>{
-      try{
-        await navigator.clipboard.writeText(query);
-        const strong=copyQuery.querySelector("strong");
-        const old=strong.textContent;
-        strong.textContent="✓ Copied";
-        setTimeout(()=>strong.textContent=old,1300);
-      }catch{
-        setStatus(`Copy unavailable. Search query: ${query}`,true);
-      }
-    };
-  }
-
-  if(shareFind){
-    shareFind.onclick=async()=>{
-      const shareText=`FindIt identified: ${i.name||i.object||query}${i.brand?` — ${i.brand}`:""}${i.model?` ${i.model}`:""}. Search: ${query}`;
-      try{
-        if(navigator.share){
-          await navigator.share({title:"FindIt Nearby",text:shareText,url:location.href});
-        }else{
-          await navigator.clipboard.writeText(shareText);
-          const strong=shareFind.querySelector("strong");
-          const old=strong.textContent;
-          strong.textContent="✓ Copied to share";
-          setTimeout(()=>strong.textContent=old,1300);
-        }
-      }catch(error){
-        if(error?.name!=="AbortError"){
-          setStatus("Sharing was unavailable on this device.",true);
-        }
-      }
-    };
-  }
-
-  freeActions.classList.remove("hidden");
-}
-
-renderSaved();
-
-
-const feedbackForm=$("#feedbackForm"),feedbackRating=$("#feedbackRating"),feedbackTopic=$("#feedbackTopic"),feedbackMessage=$("#feedbackMessage"),includeTechnical=$("#includeTechnical"),feedbackStatus=$("#feedbackStatus"),copyFeedback=$("#copyFeedback");
-const starButtons=[...document.querySelectorAll(".star-btn")];
-function setRating(v){const n=Number(v);feedbackRating.value=String(n);starButtons.forEach(b=>b.classList.toggle("active",Number(b.dataset.rating)<=n))}
-starButtons.forEach(b=>b.addEventListener("click",()=>setRating(b.dataset.rating)));
-
-function feedbackPayload(){
-  return {
-    rating:Number(feedbackRating?.value||0),
-    topic:feedbackTopic?.value||"general",
-    message:String(feedbackMessage?.value||"").trim(),
-    technical:includeTechnical?.checked?{
-      viewport:`${innerWidth}x${innerHeight}`,
-      language:navigator.language||"unknown",
-      online:navigator.onLine,
-      lastIdentification:latestResult?.identification||null
-    }:null,
-    createdAt:new Date().toISOString()
-  };
-}
-function feedbackText(p){return `FindIt rating: ${p.rating||"Not rated"}/5\nTopic: ${p.topic}\n\n${p.message}`}
-
-copyFeedback?.addEventListener("click",async()=>{
-  const p=feedbackPayload();
-  if(!p.message){feedbackStatus.textContent="Write a message first.";return}
-  try{await navigator.clipboard.writeText(feedbackText(p));feedbackStatus.textContent="✓ Feedback copied."}
-  catch{feedbackStatus.textContent="Copy unavailable on this device."}
-});
-
-feedbackForm?.addEventListener("submit",async e=>{
-  e.preventDefault();
-  const p=feedbackPayload();
-  if(!p.rating){feedbackStatus.textContent="Choose a star rating first.";return}
-  if(p.message.length<3){feedbackStatus.textContent="Please write a little more detail.";return}
-  feedbackStatus.textContent="Sending feedback…";
-  try{
-    const r=await fetch("/api/feedback",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(p)});
-    const d=await r.json();
-    if(!r.ok)throw new Error(d.error||"Could not send");
-    feedbackStatus.textContent=d.delivered?"✓ Thank you — your feedback was saved.":"✓ Feedback saved on this device. Central storage is not connected yet.";
-    if(!d.delivered){
-      const q=JSON.parse(localStorage.getItem("finditFeedbackQueue")||"[]");q.push(p);localStorage.setItem("finditFeedbackQueue",JSON.stringify(q.slice(-30)));
-    }
-    feedbackMessage.value="";setRating(0);
-  }catch{
-    const q=JSON.parse(localStorage.getItem("finditFeedbackQueue")||"[]");q.push(p);localStorage.setItem("finditFeedbackQueue",JSON.stringify(q.slice(-30)));
-    feedbackStatus.textContent="Could not reach the server, so feedback was saved on this device.";
-  }
-});
-
-
-function specialistNearbyQuery(i){
-  const text=[i?.object,i?.name,i?.category,i?.searchQuery,i?.retailCategory,...(i?.likelyStoreTypes||[])].filter(Boolean).join(" ").toLowerCase();
-  const routes=[
-    ["hearing aid store",/hearing aid|audiology|hearing aid battery/],
-    ["optician",/eyeglass|glasses|spectacle|contact lens|eyewear/],
-    ["medical supply store",/wheelchair|crutch|walking frame|stethoscope|blood pressure|orthopaedic|medical supply/],
-    ["supermarket",/energy drink|beverage|monster|red bull|tissue|toilet paper|grocery|snack|food|drink|cleaning|household/],
-    ["shoe store",/shoe|sneaker|footwear|boot|sandal/],
-    ["clothing store",/shirt|sweater|hoodie|jacket|dress|clothing|fashion|apparel|uniform/],
-    ["workwear store",/ppe|safety boot|hard hat|workwear/],
-    ["sports store",/sports|football|rugby|cricket|tennis|fitness|gym/],
-    ["bicycle store",/bicycle|cycling|bike part/],
-    ["outdoor store",/camping|fishing|binocular|outdoor|tent/],
-    ["music store",/microphone|guitar|piano|music|audio interface|mixer|vinyl|turntable/],
-    ["office supply store",/printer ink|toner|label printer|barcode scanner|office supply|filing cabinet/],
-    ["security store",/security camera|alarm|cctv|smart home sensor/],
-    ["electrical supply store",/electrical component|ups|surge protector|inverter|solar panel/],
-    ["plumbing supply store",/plumbing|pipe fitting|valve/],
-    ["industrial supply store",/welding|industrial|generator|packaging supply/],
-    ["electronics store",/electronics|headphone|speaker|phone|camera|computer|laptop|tv|charger|router|projector|drone|3d printer/],
-    ["hardware store",/hardware|tool|drill|hammer|paint|lock|door hardware/],
-    ["home goods store",/homeware|furniture|appliance|cookware|bedding|curtain|mattress|vacuum|coffee machine/],
-    ["stationery store",/pencil|pen|stationery|notebook|school/],
-    ["book store",/book|novel|textbook|magazine/],
-    ["craft store",/craft|knitting|yarn|sewing|haberdashery|fabric/],
-    ["art supply store",/art supply|canvas|paint brush|easel/],
-    ["hobby store",/rc car|model kit|trading card|collectible|hobby|cosplay/],
-    ["toy store",/toy|lego|doll|puzzle|board game/],
-    ["pharmacy",/medicine|medication|pharmacy|first aid/],
-    ["beauty store",/perfume|makeup|cosmetic|skincare|hair clipper|salon tool/],
-    ["pet store",/dog food|cat food|pet|aquarium|bird supply/],
-    ["farm supply store",/horse tack|animal feed|farm tool|agrarian/],
-    ["garden centre",/flower|plant|garden|seed|bonsai|hydroponic|fertilizer|compost|irrigation/],
-    ["motorcycle store",/motorcycle|motorbike/],
-    ["auto parts store",/car battery|car part|tyre|tire|automotive|motor oil|car audio|detailing/],
-    ["jewellery store",/ring|necklace|bracelet|earring|watch|jewelry|jewellery/],
-    ["baby store",/baby|stroller|pram|maternity/],
-    ["party supply store",/party supply|costume|balloon/],
-    ["gift shop",/gift|souvenir|religious item|candle|decor/],
-    ["luggage store",/luggage|suitcase|handbag|wallet/],
-    ["scientific supply store",/microscope|telescope|laboratory|lab glassware/],
-    ["pool supply store",/pool supply|pool chemical/]
-  ];
-  for(const [q,re] of routes) if(re.test(text)) return q;
-  return "department store";
-}
+window.addEventListener('resize',()=>state.map?.invalidateSize());

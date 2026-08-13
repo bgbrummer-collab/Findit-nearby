@@ -1,0 +1,23 @@
+FindIt One Complete Build — automated/static checks
+==================================================
+PASS: frontend JavaScript syntax
+PASS: API search JavaScript syntax
+PASS: API nearby JavaScript syntax
+PASS: feedback API JavaScript syntax
+PASS: feedback-health JavaScript syntax
+PASS: health API JavaScript syntax
+PASS: required homepage sections present
+PASS: rotating examples UI present
+PASS: search/scanning overlay present
+PASS: menu + mobile navigation present
+PASS: map/list UI present
+PASS: recent finds + settings present
+PASS: feedback diagnostics retained
+PASS: retailCategory + likelyStoreTypes retained in Gemini output
+PASS: hot chocolate explicitly maps to grocery
+PASS: nearby API filters non-consumer locations
+PASS: factory/manufacturer/warehouse exclusion present
+PASS: Maps fallback maps hot chocolate to supermarket instead of factory query
+PASS: copyright present
+
+External services (Gemini, Supabase, browser GPS, live Overpass data) depend on the deployed Vercel environment and real user device. They must be rechecked after deployment.

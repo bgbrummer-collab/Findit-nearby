@@ -2,218 +2,136 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#050914">
-  <meta name="description" content="FindIt Nearby identifies items from photos and helps you find verified product offers and nearby retailers.">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#060812">
+  <meta name="description" content="FindIt Nearby identifies an item from a photo and helps you discover relevant retailers near you.">
   <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="copyright" content="© 2026 Bernard Brummer — FindIt Nearby. All rights reserved.">
   <link rel="canonical" href="https://findit-nearby.vercel.app/">
   <link rel="manifest" href="manifest.webmanifest">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="FindIt Nearby — Find the actual item">
-  <meta property="og:description" content="Upload a photo, identify the item, and find verified retailer offers nearby.">
+  <meta property="og:title" content="FindIt Nearby — You saw it. You wanted it. You found it.">
+  <meta property="og:description" content="Upload a photo. Identify the item. Find relevant retailers nearby.">
   <meta property="og:url" content="https://findit-nearby.vercel.app/">
-  <title>FindIt Nearby — Find the actual item</title>
+  <title>FindIt Nearby</title>
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="style.css">
-  <meta name="copyright" content="© 2026 Bernard Brummer — FindIt Nearby. All rights reserved.">
 </head>
 <body>
-<header class="site-header">
-  <a class="brand" href="#top"><span class="brand-mark">F</span><span>FindIt <b>Nearby</b></span></a>
-  <nav class="desktop-nav" aria-label="Main navigation">
-    <a href="#finder">Find an item</a>
-    <a href="#how">How it works</a>
-    <a href="#premium">Premium</a>
-  </nav>
-  <span class="build-badge">STABLE BUILD</span>
-</header>
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
 
-<main id="top">
-  <section class="hero shell">
-    <div class="hero-copy">
-      <p class="eyebrow">PHOTO → PRODUCT → STORE</p>
-      <h1>Find the <span>actual item.</span></h1>
-      <p class="lead">Upload a photo. FindIt uses Gemini to identify the object, brand, model and visible text, then checks connected retailer data for real offers. If no retailer feed is connected yet, FindIt gives you useful free search actions instead of stopping.</p>
-      <div class="hero-actions">
-        <a class="button button-primary" href="#finder">📸 Find my item</a>
-        <a class="button button-secondary" href="#how">How it works</a>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="FindIt Nearby home"><span class="brand-mark">F</span><span>FindIt <b>Nearby</b></span></a>
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <a href="#finder">Find</a><a href="#how">How it works</a><a href="#examples">Examples</a><a href="#feedback">Feedback</a>
+    </nav>
+    <button id="menuBtn" class="icon-btn" aria-label="Open menu">☰</button>
+  </header>
+
+  <aside id="drawer" class="drawer" aria-hidden="true">
+    <div class="drawer-head"><div class="brand"><span class="brand-mark">F</span><span>FindIt <b>Nearby</b></span></div><button id="closeMenu" class="icon-btn">×</button></div>
+    <nav class="drawer-nav"><a href="#home">⌂ Home</a><a href="#finder">📸 Find an item</a><a href="#how">✨ How it works</a><button id="openRecent">🕘 Recent finds</button><a href="#feedback">💬 Feedback</a><button id="openSettings">⚙ Settings</button></nav>
+  </aside>
+  <div id="drawerBackdrop" class="backdrop hidden"></div>
+
+  <main id="home">
+    <section class="hero shell reveal">
+      <div class="hero-copy">
+        <p class="eyebrow">PHOTO → IDENTIFY → FIND NEARBY</p>
+        <h1>You saw it.<br>You wanted it.<br><span>You found it with FindIt.</span></h1>
+        <p class="hero-text">That one item you never knew the name of? Show FindIt a photo. We’ll identify it and help you discover the right kind of retailer nearby.</p>
+        <div class="hero-actions"><a class="btn primary" href="#finder">📸 Find my item</a><button id="challengeBtn" class="btn secondary">🎲 Challenge FindIt</button></div>
+        <div class="trust-row"><span>🎯 Exact-item first</span><span>📍 Nearby first</span><span>🛍️ Consumer retailers</span><span>🧠 Specialist-aware</span></div>
       </div>
-      <div class="trust-row">
-        <span>🎯 Exact-item first</span><span>🏷️ Brand aware</span><span>💰 Real prices only</span><span>🚫 No random shops</span>
-      </div>
-    </div>
-
-    <div class="hero-panel" aria-hidden="true">
-      <div class="pipeline-card"><strong>📸 Photo</strong><small>whole item + label + logo</small></div>
-      <div class="pipeline-arrow">↓</div>
-      <div class="pipeline-card"><strong>🧠 Gemini</strong><small>object + brand + model + text</small></div>
-      <div class="pipeline-arrow">↓</div>
-      <div class="pipeline-card"><strong>🛍️ Verified product data</strong><small>price + stock + store + URL</small></div>
-      <div class="pipeline-arrow">↓</div>
-      <div class="pipeline-card"><strong>📍 Nearby</strong><small>verified offers first</small></div>
-    </div>
-  </section>
-
-  <section id="finder" class="shell card-section">
-    <p class="eyebrow">START SEARCHING</p>
-    <h2>What are you looking for?</h2>
-    <p class="muted">Use a clear photo showing as much of the item as possible. Logos, labels and model text help.</p>
-
-    <div class="upload-grid">
-      <div class="upload-box">
-        <img id="preview" class="preview hidden" alt="Selected item preview">
-        <div id="uploadPlaceholder" class="upload-placeholder">
-          <div class="upload-icon">＋</div>
-          <strong>Choose an image</strong>
-          <small>Gallery • Camera • Files</small>
+      <div class="hero-device" aria-hidden="true">
+        <div class="glow-ring"></div>
+        <div class="phone-card">
+          <div class="scan-orb">📸</div>
+          <strong>Show us the item</strong>
+          <small>No need to know its name.</small>
+          <div class="mini-actions"><span>Take Photo</span><span>Upload Image</span></div>
         </div>
       </div>
-
-      <div class="upload-actions">
-        <input id="photo" class="hidden-input" type="file" accept="image/*">
-        <input id="cameraPhoto" class="hidden-input" type="file" accept="image/*" capture="environment">
-        <button id="choosePhoto" class="button button-primary" type="button">🖼️ Gallery / Files</button>
-        <button id="takePhoto" class="button button-secondary" type="button">📷 Take photo</button>
-        <button id="location" class="button button-secondary" type="button">📍 Use my location</button>
-        <button id="search" class="button button-search" type="button" disabled>🎯 Identify & find</button>
-        <p id="status" class="status" aria-live="polite">Waiting for an image.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="results" class="shell card-section hidden" aria-live="polite">
-    <div class="results-heading">
-      <div>
-        <p class="eyebrow">SEARCH RESULT</p>
-        <h2 id="resultTitle">Analysis</h2>
-        <p id="summary" class="muted"></p>
-      </div>
-      <button id="saveFind" class="button button-secondary" type="button">♡ Save find</button>
-    </div>
-
-    <div id="analysis" class="analysis-grid"></div>
-    <div id="warning" class="notice hidden"></div>
-
-    <section id="freeActions" class="free-actions hidden">
-      <div>
-        <p class="eyebrow">FREE SEARCH TOOLS</p>
-        <h3>Keep searching without paid retailer data</h3>
-        <p class="muted">FindIt uses Gemini's exact product query to help you continue online or nearby. These links do not claim a verified price or stock level.</p>
-      </div>
-
-      <div class="free-action-grid">
-        <a id="searchOnline" class="free-action-card" href="#" target="_blank" rel="noopener noreferrer">
-          <strong>🔎 Search exact item online</strong>
-          <span id="onlineQueryText">Use the identified product query</span>
-        </a>
-
-        <a id="searchNearbyFree" class="free-action-card" href="#" target="_blank" rel="noopener noreferrer">
-          <strong>📍 Search nearby stores</strong>
-          <span>Open a relevant Maps search</span>
-        </a>
-
-        <button id="copyQuery" class="free-action-card free-action-button" type="button">
-          <strong>📋 Copy product name</strong>
-          <span>Copy the best exact-item search query</span>
-        </button>
-
-        <button id="shareFind" class="free-action-card free-action-button" type="button">
-          <strong>↗ Share this find</strong>
-          <span>Share the identified item</span>
-        </button>
-      </div>
     </section>
 
-    <section class="result-block">
-      <div class="section-row">
-        <div><p class="eyebrow">VERIFIED PRODUCT OFFERS</p><h3>Exact or close product matches</h3></div>
-        <div class="sort-controls">
-          <button class="sort-btn active" data-sort="best" type="button">Best match</button>
-          <button class="sort-btn" data-sort="price" type="button">Cheapest</button>
-          <button class="sort-btn" data-sort="distance" type="button">Closest</button>
+    <section id="finder" class="shell search-card reveal">
+      <div class="section-kicker">START SEARCHING</div>
+      <div class="section-title-row"><div><h2>What are you looking for?</h2><p>Use a clear photo. Logos, labels and model text help FindIt be more precise.</p></div><div class="radius-control"><label for="radiusSelect">Radius</label><select id="radiusSelect"><option value="3">3 km</option><option value="5">5 km</option><option value="10" selected>10 km</option></select></div></div>
+      <div class="finder-grid">
+        <div id="dropzone" class="dropzone">
+          <img id="preview" class="preview hidden" alt="Selected item preview">
+          <div id="uploadPlaceholder" class="upload-placeholder"><div class="camera-float">📸</div><strong>Drop or choose a photo</strong><span>Gallery • Camera • Files</span><small>No need to know the name. Just show us.</small></div>
+          <div class="scan-line"></div>
+        </div>
+        <div class="finder-actions">
+          <input id="photo" class="hidden-input" type="file" accept="image/*">
+          <input id="cameraPhoto" class="hidden-input" type="file" accept="image/*" capture="environment">
+          <button id="choosePhoto" class="btn primary">🖼️ Gallery / Files</button>
+          <button id="takePhoto" class="btn secondary">📷 Take photo</button>
+          <button id="location" class="btn secondary">📍 Use my location</button>
+          <button id="search" class="btn find-btn" disabled>✨ Identify & Find</button>
+          <p id="status" class="status" aria-live="polite">Waiting for an image.</p>
         </div>
       </div>
-      <div id="offers" class="offer-list"></div>
-      <div id="noOffers" class="empty-state hidden">
-        <strong>No verified retailer offer yet.</strong>
-        <p>FindIt will not invent a price, stock status or store. Use the free search tools above while no legitimate retailer feed is connected.</p>
+    </section>
+
+    <section id="examples" class="shell examples-section reveal">
+      <div class="section-title-row"><div><p class="section-kicker">TRY FINDIT WITH…</p><h2>Ordinary. Unusual. Anything in-between.</h2></div><button id="shuffleExamples" class="text-btn">Shuffle ↻</button></div>
+      <div id="exampleGrid" class="example-grid" aria-live="polite"></div>
+    </section>
+
+    <section id="how" class="shell reveal">
+      <p class="section-kicker">HOW IT WORKS</p><h2 class="section-heading">Three simple steps.</h2>
+      <div class="steps-grid">
+        <article><span class="step-no">01</span><div class="step-icon">📸</div><h3>Show It</h3><p>Take or upload a photo of the item you want.</p></article>
+        <article><span class="step-no">02</span><div class="step-icon">✨</div><h3>Find It</h3><p>Gemini identifies the item, brand, model and specialist retail type.</p></article>
+        <article><span class="step-no">03</span><div class="step-icon">📍</div><h3>Get It</h3><p>FindIt looks for relevant consumer retailers close to you.</p></article>
       </div>
     </section>
 
-    <section id="nearbyBlock" class="result-block hidden">
-      <p class="eyebrow">POSSIBLE NEARBY RETAILERS</p>
-      <h3>Relevant stores near you</h3>
-      <p class="muted">These are discovery results only. They are not proof that the exact item is in stock.</p>
-      <div id="nearbyStores" class="nearby-list"></div>
+    <section class="shell challenge-banner reveal"><div><p class="section-kicker">FINDIT CHALLENGE</p><h2>Think FindIt can’t identify it? 👀</h2><p>Find the weirdest object around you and put FindIt to the test.</p></div><button id="challengeBtn2" class="btn primary">🎲 Give me a challenge</button></section>
+
+    <section id="results" class="shell results-shell hidden" aria-live="polite">
+      <div class="foundit-banner"><span>✨</span><div><p>You saw it. You wanted it.</p><strong>You FoundIt.</strong></div></div>
+      <div class="result-header"><div><p class="section-kicker">IDENTIFICATION</p><h2 id="resultTitle">Item identified</h2><p id="summary"></p></div><div class="result-actions"><button id="saveFind" class="btn secondary">♡ Save</button><button id="changeItem" class="btn secondary">✏️ Change item</button></div></div>
+      <div id="analysis" class="analysis-grid"></div>
+      <div id="warning" class="notice hidden"></div>
+
+      <div class="quick-feedback"><span>Did FindIt get this right?</span><button id="thumbUp">👍</button><button id="thumbDown">👎</button></div>
+
+      <section class="result-section">
+        <div class="section-title-row"><div><p class="section-kicker">NEARBY RETAILERS</p><h3>Closest places that make sense for this item</h3><p>Directions only point to consumer-facing retailers. Exact stock is not claimed unless verified.</p></div><div class="view-toggle"><button id="listViewBtn" class="active">☰ List</button><button id="mapViewBtn">🗺 Map</button></div></div>
+        <div class="nearby-layout"><div id="nearbyStores" class="store-list"></div><div id="mapWrap" class="map-wrap"><div id="map"></div></div></div>
+      </section>
+
+      <section id="freeActions" class="result-section hidden">
+        <p class="section-kicker">KEEP SEARCHING</p><div class="free-action-grid"><a id="searchOnline" target="_blank" rel="noopener noreferrer">🔎 <strong>Search exact item online</strong><span id="onlineQueryText"></span></a><a id="searchNearbyFree" target="_blank" rel="noopener noreferrer">📍 <strong>Search retailer type in Maps</strong><span>Consumer shops, not factories</span></a><button id="copyQuery">📋 <strong>Copy product name</strong><span>Use the exact search query</span></button><button id="shareFind">↗ <strong>Share this find</strong><span>Send it to someone</span></button></div>
+      </section>
+
+      <section class="result-section"><div class="section-title-row"><div><p class="section-kicker">VERIFIED OFFERS</p><h3>Exact or close product matches</h3></div><div class="sort-controls"><button class="sort-btn active" data-sort="best">Best match</button><button class="sort-btn" data-sort="price">Cheapest</button><button class="sort-btn" data-sort="distance">Closest</button></div></div><div id="offers" class="offer-list"></div><div id="noOffers" class="empty-state hidden"><strong>No verified catalogue offer yet.</strong><p>FindIt won’t invent price or stock. Nearby retailer discovery still works.</p></div></section>
+
+      <section id="nothingFound" class="nothing-found hidden"><div class="nf-icon">?</div><h3>Not enough useful nearby results.</h3><p>Try one of these instead.</p><div class="nf-actions"><button id="widenSearch" class="btn primary">📍 Search wider</button><a id="similarSearch" class="btn secondary" target="_blank" rel="noopener noreferrer">🔎 Similar products</a><button id="correctSearch" class="btn secondary">✏️ Correct item</button><button id="retry" class="btn secondary">📷 Try another photo</button></div></section>
     </section>
-  </section>
 
-  <section id="saved" class="shell card-section">
-    <p class="eyebrow">SAVED FINDS</p>
-    <h2>Your recent saved items</h2>
-    <div id="savedList" class="saved-list"><p class="muted">Nothing saved yet.</p></div>
-  </section>
+    <section id="recent" class="shell recent-section reveal"><div class="section-title-row"><div><p class="section-kicker">RECENT FINDS</p><h2>Your recent searches</h2></div><button id="clearRecent" class="text-btn">Clear</button></div><div id="recentList" class="recent-grid"><p class="muted">Nothing here yet.</p></div></section>
 
-  <section id="how" class="shell card-section">
-    <p class="eyebrow">HOW IT WORKS</p>
-    <h2>Accuracy before clutter.</h2>
-    <div class="steps-grid">
-      <article><span>01</span><h3>See</h3><p>Gemini analyses the real image instead of forcing it into a tiny fixed list.</p></article>
-      <article><span>02</span><h3>Verify</h3><p>Low-confidence identifications stop rather than becoming unrelated searches.</p></article>
-      <article><span>03</span><h3>Match</h3><p>Brand, model, visible text and visual clues are used to score retailer products.</p></article>
-      <article><span>04</span><h3>Prove</h3><p>Price, stock and exact-store claims only appear when a connected retailer source supplies them.</p></article>
-    </div>
-  </section>
+    <section id="feedback" class="shell feedback-section reveal"><p class="section-kicker">HELP IMPROVE FINDIT</p><h2>Rate FindIt & send feedback</h2><p>Feedback automatically includes anonymous search diagnostics when you allow it, so problems are easier to fix.</p>
+      <form id="feedbackForm" class="feedback-form"><div class="star-rating"><button type="button" class="star-btn" data-rating="1">★</button><button type="button" class="star-btn" data-rating="2">★</button><button type="button" class="star-btn" data-rating="3">★</button><button type="button" class="star-btn" data-rating="4">★</button><button type="button" class="star-btn" data-rating="5">★</button></div><input id="feedbackRating" type="hidden"><select id="feedbackTopic"><option value="general">General feedback</option><option value="wrong_item">Wrong item identified</option><option value="nearby">Nearby stores / distance</option><option value="missing_product">Couldn’t find product</option><option value="mobile">Phone / mobile problem</option><option value="desktop">Computer / desktop problem</option><option value="bug">Bug / error</option><option value="idea">Feature idea</option></select><textarea id="feedbackMessage" maxlength="1200" placeholder="Tell us what happened…" required></textarea><label class="check-row"><input id="includeTechnical" type="checkbox" checked> Include anonymous technical details</label><div class="feedback-actions"><button id="sendFeedback" class="btn primary" type="submit">Send feedback</button><button id="copyFeedback" class="btn secondary" type="button">Copy feedback</button></div><p id="feedbackStatus" class="status"></p></form>
+    </section>
+  </main>
 
-  <section id="premium" class="shell card-section">
-    <p class="eyebrow">FINDIT PREMIUM</p>
-    <h2>Premium comes after the core search is proven.</h2>
-    <div class="plans-grid">
-      <article class="plan-card"><h3>Free</h3><p class="plan-price">R0</p><p>Useful identification, basic saved finds and nearby discovery.</p></article>
-      <article class="plan-card premium-card"><div class="premium-label">PLANNED</div><h3>Premium</h3><p class="plan-price">Price to be tested</p><p>Higher limits, advanced matching, price alerts, stock alerts and full history.</p><button class="button button-secondary" disabled>Coming later</button></article>
-    </div>
-  </section>
+  <footer><div class="brand"><span class="brand-mark">F</span><span>FindIt <b>Nearby</b></span></div><p>© 2026 Bernard Brummer — FindIt Nearby. All rights reserved.</p><small>Nearby retailer ≠ verified exact-item stock.</small></footer>
 
-<section id="feedback" class="shell card-section feedback-section">
-  <p class="eyebrow">HELP IMPROVE FINDIT</p>
-  <h2>Rate FindIt & send feedback</h2>
-  <p class="muted">Please do not include passwords, API keys, addresses, phone numbers or other private information.</p>
-  <form id="feedbackForm" class="feedback-form">
-    <div class="star-rating">
-      <button type="button" class="star-btn" data-rating="1">★</button>
-      <button type="button" class="star-btn" data-rating="2">★</button>
-      <button type="button" class="star-btn" data-rating="3">★</button>
-      <button type="button" class="star-btn" data-rating="4">★</button>
-      <button type="button" class="star-btn" data-rating="5">★</button>
-    </div>
-    <input id="feedbackRating" type="hidden">
-    <select id="feedbackTopic" class="feedback-control">
-      <option value="general">General feedback</option>
-      <option value="wrong_item">Wrong item identified</option>
-      <option value="nearby">Nearby stores / distance</option>
-      <option value="missing_product">Couldn't find product</option>
-      <option value="mobile">Phone / mobile problem</option>
-      <option value="desktop">Computer / desktop problem</option>
-      <option value="bug">Bug / error</option>
-      <option value="idea">Feature idea</option>
-    </select>
-    <textarea id="feedbackMessage" class="feedback-control feedback-textarea" maxlength="1200" placeholder="Tell us what happened…" required></textarea>
-    <label class="feedback-check"><input id="includeTechnical" type="checkbox" checked> Include anonymous technical details</label>
-    <div class="feedback-actions">
-      <button id="sendFeedback" class="button button-primary" type="submit">Send feedback</button>
-      <button id="copyFeedback" class="button button-secondary" type="button">Copy feedback</button>
-    </div>
-    <p id="feedbackStatus" class="status" aria-live="polite"></p>
-  </form>
-</section>
+  <nav class="mobile-nav"><a href="#home">⌂<span>Home</span></a><a href="#finder" class="mobile-find">📸<span>Find</span></a><a href="#recent">🕘<span>Recent</span></a><button id="mobileMore">☰<span>More</span></button></nav>
 
-</main>
+  <div id="searchOverlay" class="search-overlay hidden"><div class="search-modal"><div class="search-image-wrap"><img id="searchOverlayImage" alt="Item being analysed"><div class="overlay-scan"></div></div><p class="section-kicker">FINDIT IS WORKING</p><h2 id="searchStage">Looking at your image…</h2><div class="progress"><i id="searchProgress"></i></div><p id="searchStageSub">Checking shapes, text and visible branding.</p></div></div>
 
-<footer>© 2026 FindIt Nearby. All rights reserved.</footer>
-<script src="script.js" defer></script>
+  <div id="challengeModal" class="modal hidden"><div class="modal-card"><button class="modal-close" data-close-modal>×</button><p class="section-kicker">YOUR FINDIT CHALLENGE</p><h2 id="challengeText">Find something unusual.</h2><button id="newChallenge" class="btn primary">🎲 Another challenge</button></div></div>
+  <div id="settingsModal" class="modal hidden"><div class="modal-card"><button class="modal-close" data-close-modal>×</button><p class="section-kicker">SETTINGS</p><h2>Make FindIt yours</h2><label class="setting-row"><span>Animations</span><input id="animationsToggle" type="checkbox" checked></label><label class="setting-row"><span>Default radius</span><select id="settingsRadius"><option value="3">3 km</option><option value="5">5 km</option><option value="10" selected>10 km</option></select></label><button id="clearHistorySetting" class="btn secondary">Clear recent finds</button></div></div>
 
-<footer class="site-footer">
-  <p>© 2026 Bernard Brummer — FindIt Nearby. All rights reserved.</p>
-</footer>
-
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="script.js" defer></script>
+  <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
