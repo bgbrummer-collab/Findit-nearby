@@ -4,7 +4,7 @@ FINDIT NEARBY — ONE COMPLETE BUILD
 This build combines the current functional backend with the complete visual redesign discussed in chat.
 
 INCLUDED
-- New slogan: You saw it. You wanted it. You found it with FindIt.
+- New slogan: You saw it. You want it. You found it with FindIt.
 - Dark blue/purple/cyan visual redesign
 - Animated glowing hero/upload card
 - Rotating sets of 6 example-item cards with staggered transitions
