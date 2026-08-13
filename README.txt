@@ -45,3 +45,12 @@ HEALTH TESTS AFTER DEPLOYMENT
 
 IMPORTANT DATA RULE
 A nearby retailer is a relevant consumer-facing place that may sell that item type. It is not an exact-stock claim unless FindIt has verified retailer inventory data.
+
+UPDATE 2026-08-13 — Premium example transitions:
+- Six example cards now exit with staggered lift + blur.
+- A purple/blue light sweep crosses the example row during swaps.
+- New cards rise in with staggered glow and soft scale bounce.
+- Product icons pop in separately for a layered effect.
+- Added a 5-second gradient progress bar until the next set.
+- Desktop hover adds a subtle 3D lift/glow.
+- Reduced-motion accessibility is respected.
