@@ -1,3 +1,1 @@
-FindIt Hero Wording Fixed
-Hero: You saw it. You want it. You found it with FindIt.
-Includes Animated v2 complete build.
+FindIt Complete Beta Analytics Build

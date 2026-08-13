@@ -54,3 +54,10 @@ UPDATE 2026-08-13 — Premium example transitions:
 - Added a 5-second gradient progress bar until the next set.
 - Desktop hover adds a subtle 3D lift/glow.
 - Reduced-motion accessibility is respected.
+
+ANALYTICS SETUP
+1. Run SUPABASE_ANALYTICS_SETUP.sql once in Supabase SQL Editor.
+2. Add FINDIT_ADMIN_KEY in Vercel Environment Variables (make your own private password/value).
+3. Redeploy.
+4. Open https://findit-nearby.vercel.app/admin.html and enter that key.
+Analytics does not store users' precise coordinates.
