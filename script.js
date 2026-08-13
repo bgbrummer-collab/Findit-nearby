@@ -460,3 +460,51 @@ feedbackForm?.addEventListener("submit",async e=>{
     feedbackStatus.textContent="Could not reach the server, so feedback was saved on this device.";
   }
 });
+
+
+function specialistNearbyQuery(i){
+  const text=[i?.object,i?.name,i?.category,i?.searchQuery,i?.retailCategory,...(i?.likelyStoreTypes||[])].filter(Boolean).join(" ").toLowerCase();
+  const routes=[
+    ["hearing aid store",/hearing aid|audiology|hearing aid battery/],
+    ["optician",/eyeglass|glasses|spectacle|contact lens|eyewear/],
+    ["medical supply store",/wheelchair|crutch|walking frame|stethoscope|blood pressure|orthopaedic|medical supply/],
+    ["supermarket",/energy drink|beverage|monster|red bull|tissue|toilet paper|grocery|snack|food|drink|cleaning|household/],
+    ["shoe store",/shoe|sneaker|footwear|boot|sandal/],
+    ["clothing store",/shirt|sweater|hoodie|jacket|dress|clothing|fashion|apparel|uniform/],
+    ["workwear store",/ppe|safety boot|hard hat|workwear/],
+    ["sports store",/sports|football|rugby|cricket|tennis|fitness|gym/],
+    ["bicycle store",/bicycle|cycling|bike part/],
+    ["outdoor store",/camping|fishing|binocular|outdoor|tent/],
+    ["music store",/microphone|guitar|piano|music|audio interface|mixer|vinyl|turntable/],
+    ["office supply store",/printer ink|toner|label printer|barcode scanner|office supply|filing cabinet/],
+    ["security store",/security camera|alarm|cctv|smart home sensor/],
+    ["electrical supply store",/electrical component|ups|surge protector|inverter|solar panel/],
+    ["plumbing supply store",/plumbing|pipe fitting|valve/],
+    ["industrial supply store",/welding|industrial|generator|packaging supply/],
+    ["electronics store",/electronics|headphone|speaker|phone|camera|computer|laptop|tv|charger|router|projector|drone|3d printer/],
+    ["hardware store",/hardware|tool|drill|hammer|paint|lock|door hardware/],
+    ["home goods store",/homeware|furniture|appliance|cookware|bedding|curtain|mattress|vacuum|coffee machine/],
+    ["stationery store",/pencil|pen|stationery|notebook|school/],
+    ["book store",/book|novel|textbook|magazine/],
+    ["craft store",/craft|knitting|yarn|sewing|haberdashery|fabric/],
+    ["art supply store",/art supply|canvas|paint brush|easel/],
+    ["hobby store",/rc car|model kit|trading card|collectible|hobby|cosplay/],
+    ["toy store",/toy|lego|doll|puzzle|board game/],
+    ["pharmacy",/medicine|medication|pharmacy|first aid/],
+    ["beauty store",/perfume|makeup|cosmetic|skincare|hair clipper|salon tool/],
+    ["pet store",/dog food|cat food|pet|aquarium|bird supply/],
+    ["farm supply store",/horse tack|animal feed|farm tool|agrarian/],
+    ["garden centre",/flower|plant|garden|seed|bonsai|hydroponic|fertilizer|compost|irrigation/],
+    ["motorcycle store",/motorcycle|motorbike/],
+    ["auto parts store",/car battery|car part|tyre|tire|automotive|motor oil|car audio|detailing/],
+    ["jewellery store",/ring|necklace|bracelet|earring|watch|jewelry|jewellery/],
+    ["baby store",/baby|stroller|pram|maternity/],
+    ["party supply store",/party supply|costume|balloon/],
+    ["gift shop",/gift|souvenir|religious item|candle|decor/],
+    ["luggage store",/luggage|suitcase|handbag|wallet/],
+    ["scientific supply store",/microscope|telescope|laboratory|lab glassware/],
+    ["pool supply store",/pool supply|pool chemical/]
+  ];
+  for(const [q,re] of routes) if(re.test(text)) return q;
+  return "department store";
+}

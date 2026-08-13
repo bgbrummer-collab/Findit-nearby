@@ -53,6 +53,103 @@ If it is a flower or plant, identify it as such.
 If it is a car, identify make/model only when reasonably supported.
 searchQuery should be the best concise phrase for finding this exact item.
 features should list short visual clues useful for product matching.
+retailCategory should describe the broad retail channel most likely to sell the item.
+likelyStoreTypes should list 1 to 5 realistic store types that could sell it.
+Examples: energy drink -> supermarket/convenience/fuel-stop shop; tissues -> supermarket; microphone -> electronics/music store; sneakers -> footwear/sportswear; flower -> florist/garden centre/supermarket; car battery -> auto parts; pencil case -> stationery; ceiling light -> lighting/hardware; smartphone -> mobile/electronics; dog food -> pet store/supermarket; perfume -> beauty/department store.
+Never invent exact stock or a retailer name.
+
+Specialist-item guidance:
+- hearing aid -> audiology / hearing-aid clinic / medical supply
+- eyeglasses / sunglasses -> optician / eyewear
+- contact lenses -> optician / pharmacy
+- wheelchair / crutches / mobility aid -> medical supply / mobility store
+- stethoscope / blood pressure monitor -> medical supply / pharmacy
+- musical instrument accessories -> music store
+- sewing / knitting / craft supplies -> craft / fabric / haberdashery
+- art supplies -> art / craft / stationery
+- fishing gear -> outdoor / fishing / sports
+- camping gear -> outdoor / camping / sports
+- aquarium supplies -> pet / aquarium
+- bird supplies -> pet
+- horse tack -> equestrian / farm supply
+- farm tools / animal feed -> agrarian / farm supply
+- printer ink / toner -> computer / office supply
+- projector / AV gear -> electronics / office equipment
+- 3D printer / maker parts -> electronics / computer / specialty
+- batteries / chargers / cables -> electronics / hardware depending on item
+- security camera / alarm / smart-home sensor -> electronics / security
+- locks / door hardware -> hardware / locksmith
+- plumbing fittings -> hardware / plumbing supply
+- electrical components -> electrical supply / hardware
+- welding gear -> industrial / hardware
+- power tools -> hardware / industrial supply
+- motorcycle helmet / parts -> motorcycle / automotive
+- bicycle parts -> bicycle / sports
+- tyres / rims -> tyre / automotive
+- car audio -> automotive / electronics
+- detailing products -> automotive / general retail
+- kitchen knives / utensils -> homeware / department store
+- baking supplies -> grocery / homeware
+- cookware -> homeware
+- mattresses -> furniture / bedding
+- curtains / blinds -> homeware / interior
+- office chair / filing cabinet -> office / furniture
+- school uniform -> clothing / schoolwear
+- uniforms / workwear / PPE -> workwear / industrial
+- jewellery tools -> jewellery / craft specialty
+- watches -> jewellery / watch store
+- luggage / suitcase -> luggage / department store
+- handbags / wallets -> fashion / leather goods / department store
+- camera drone / hobby drone -> electronics / hobby specialty
+- RC cars / hobby kits -> hobby / toy
+- board-game accessories -> toy / hobby
+- collectibles / trading cards -> hobby / toy / specialty
+- cosplay / costume items -> costume / party / clothing
+- party supplies -> party / gift / general retail
+- candles / decor -> gift / homeware
+- religious items -> specialty / gift
+- hearing protection / earplugs -> safety / hardware / pharmacy depending type
+- safety boots / hard hats -> workwear / industrial / hardware
+- laboratory glassware -> scientific / industrial specialty
+- microscope / telescope -> scientific / camera / hobby specialty
+- binoculars -> outdoor / camera / sports
+- pool supplies -> pool / hardware / garden
+- irrigation parts -> garden / hardware / agrarian
+- compost / fertilizer -> garden / agrarian
+- solar panels / inverters -> electrical / solar / hardware
+- generators -> hardware / industrial
+- UPS / surge protector -> electronics / electrical
+- router / networking gear -> computer / electronics
+- server parts -> computer / specialist IT
+- barcode scanner / POS gear -> office / business equipment
+- label printer -> office / computer
+- packaging supplies -> office / industrial / general retail
+- cleaning machines -> appliance / industrial cleaning
+- vacuum parts -> appliance / home
+- coffee machine accessories -> appliance / home / specialty
+- baby formula / nappies -> supermarket / pharmacy / baby
+- maternity products -> pharmacy / baby
+- orthopaedic brace -> medical / pharmacy
+- skincare device -> beauty / electronics
+- hair clippers / trimmers -> beauty / electronics
+- salon tools -> beauty / salon supply
+- tattoo aftercare / studio supplies -> beauty / specialty
+- pet medication -> veterinary / pet / pharmacy
+- gardening power tools -> garden / hardware
+- bonsai / hydroponics -> garden / specialty
+- sewing machine -> appliance / craft / specialty
+- fabric -> fabric / haberdashery
+- yarn -> craft / haberdashery
+- baking moulds -> homeware / baking specialty
+- cake decorations -> grocery / baking specialty
+- musical sheet books -> music / books
+- vinyl records -> music / specialty
+- turntable -> audio / electronics
+- hearing-aid batteries -> audiology / pharmacy / medical supply
+
+If an item is rare or unusual, do not force it into general retail immediately.
+Use the item's function, likely buyer, and realistic retail channel to infer specialist store types.
+
 Return structured JSON only.`;
 
   const responseSchema={
@@ -62,9 +159,9 @@ Return structured JSON only.`;
       brand:{type:"STRING",nullable:true},model:{type:"STRING",nullable:true},
       category:{type:"STRING"},searchQuery:{type:"STRING"},confidence:{type:"NUMBER"},
       visibleText:{type:"ARRAY",items:{type:"STRING"}},
-      features:{type:"ARRAY",items:{type:"STRING"}},summary:{type:"STRING"}
+      features:{type:"ARRAY",items:{type:"STRING"}},retailCategory:{type:"STRING"},likelyStoreTypes:{type:"ARRAY",items:{type:"STRING"}},summary:{type:"STRING"}
     },
-    required:["object","name","category","searchQuery","confidence","visibleText","features","summary"]
+    required:["object","name","category","searchQuery","confidence","visibleText","features","retailCategory","likelyStoreTypes","summary"]
   };
 
   let lastError=null;
@@ -85,7 +182,7 @@ Return structured JSON only.`;
       parsed.confidence=clamp(Number(parsed.confidence||0),0,1);
       parsed.brand=cleanNullable(parsed.brand);parsed.model=cleanNullable(parsed.model);
       parsed.visibleText=Array.isArray(parsed.visibleText)?parsed.visibleText.filter(Boolean).slice(0,12):[];
-      parsed.features=Array.isArray(parsed.features)?parsed.features.filter(Boolean).slice(0,12):[];
+      parsed.features=Array.isArray(parsed.features)?parsed.features.filter(Boolean).slice(0,12):[];parsed.retailCategory=String(parsed.retailCategory||"general_retail").trim().toLowerCase();parsed.likelyStoreTypes=Array.isArray(parsed.likelyStoreTypes)?parsed.likelyStoreTypes.filter(Boolean).map(String).slice(0,5):[];
       parsed.modelUsed=model;
       return parsed;
     }

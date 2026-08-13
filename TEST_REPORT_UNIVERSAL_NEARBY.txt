@@ -1,0 +1,25 @@
+FindIt Universal Nearby Build
+=============================
+PASS: Gemini now suggests retailCategory + likelyStoreTypes
+PASS: Monster/energy drinks -> grocery/convenience/fuel-stop search
+PASS: grocery/household
+PASS: footwear/clothing/sports
+PASS: electronics/mobile/computer/camera/music/audio
+PASS: hardware/home/furniture/appliances/lighting
+PASS: stationery/books/toys
+PASS: beauty/pharmacy/medical
+PASS: pets/garden
+PASS: automotive
+PASS: jewellery/watches
+PASS: baby goods
+PASS: general-retail fallback for unusual items
+PASS: known South African retailer-name fallback
+PASS: 3 km -> 5 km -> 10 km search
+PASS: no result beyond 10 km
+PASS: nearest-first ordering
+PASS: feedback/Supabase/copyright preserved
+PASS: JavaScript syntax checks
+
+No system can guarantee literally every physical item ever made. This build uses two layers instead:
+Gemini chooses likely retail channels dynamically, then a broad taxonomy handles common categories.
+Unusual items fall back to general retail instead of a random unrelated category.

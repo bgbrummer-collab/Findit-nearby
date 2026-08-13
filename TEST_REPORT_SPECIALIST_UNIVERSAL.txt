@@ -1,0 +1,34 @@
+FindIt Specialist + Universal Nearby Build
+==========================================
+PASS: hearing aids / audiology
+PASS: eyeglasses / opticians / contact lenses
+PASS: mobility aids / wheelchairs / crutches
+PASS: medical supplies / orthopaedic items
+PASS: energy drinks / groceries / household goods
+PASS: clothing / footwear / uniforms / workwear / PPE
+PASS: sports / cycling / fishing / camping / outdoor
+PASS: electronics / phones / computers / networking / AV / drones / 3D printers
+PASS: music / microphones / instruments / vinyl / turntables
+PASS: hardware / plumbing / electrical / solar / security / industrial / welding
+PASS: furniture / appliances / homeware / mattresses / curtains / cleaning machines
+PASS: stationery / books / office supplies / printer ink / POS gear
+PASS: crafts / sewing / fabric / yarn / art supplies / hobby / collectibles
+PASS: toys / party supplies / gifts / religious items
+PASS: pharmacy / beauty / salon / skincare / first aid
+PASS: pets / aquarium / bird supplies / pet medication
+PASS: farm supplies / horse tack / animal feed / garden / hydroponics / irrigation
+PASS: automotive / motorcycle / tyres / car audio / detailing
+PASS: jewellery / watches / luggage / handbags
+PASS: baby / maternity
+PASS: scientific / lab / microscope / telescope
+PASS: pool supplies
+PASS: uncommon items use Gemini retailCategory + likelyStoreTypes before fallback
+PASS: general-retail fallback for truly unusual items
+PASS: 3 km -> 5 km -> 10 km nearby search retained
+PASS: feedback / Supabase / copyright retained
+PASS: JavaScript syntax checks
+
+Important:
+This greatly broadens coverage, but no system can guarantee every object ever made.
+For rare items, Gemini now suggests specialist retail channels dynamically, which is
+more scalable than relying on a fixed list alone.
