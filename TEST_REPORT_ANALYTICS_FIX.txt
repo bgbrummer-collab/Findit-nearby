@@ -1,0 +1,9 @@
+FindIt Analytics Fix
+=====================
+PASS: successful FindIt searches now record search_complete
+PASS: failed searches continue recording search_failed
+PASS: nearby searches record store count, closest distance, radius and category
+PASS: thumbs up/down tracking retained
+PASS: top item/category can populate from successful searches
+PASS: private dashboard retained
+PASS: JavaScript syntax checks passed
