@@ -99,22 +99,34 @@ export default async function handler(req,res){
 function sanitizeTechnical(value){
   if(!value||typeof value!=="object")return null;
 
-  const identification=
-    value.lastIdentification&&typeof value.lastIdentification==="object"
-      ? {
-          object:clean(value.lastIdentification.object,100),
-          name:clean(value.lastIdentification.name,150),
-          brand:clean(value.lastIdentification.brand,100),
-          model:clean(value.lastIdentification.model,120),
-          confidence:finiteOrNull(value.lastIdentification.confidence)
-        }
-      : null;
-
   return {
+    page:clean(value.page,100),
     viewport:clean(value.viewport,30),
+    platform:clean(value.platform,80),
     language:clean(value.language,30),
     online:Boolean(value.online),
-    lastIdentification:identification
+    hasLocation:Boolean(value.hasLocation),
+
+    item:clean(value.item,160),
+    searchQuery:clean(value.searchQuery,220),
+    retailCategory:clean(value.retailCategory,80),
+
+    likelyStoreTypes:Array.isArray(value.likelyStoreTypes)
+      ? value.likelyStoreTypes.slice(0,8).map(v=>clean(v,80)).filter(Boolean)
+      : [],
+
+    recognitionConfidence:finiteOrNull(value.recognitionConfidence),
+    exactProductMatch:Boolean(value.exactProductMatch),
+    exactOfferCount:intOrNull(value.exactOfferCount),
+
+    nearbyStoreCount:intOrNull(value.nearbyStoreCount),
+    closestStoreDistanceKm:finiteOrNull(value.closestStoreDistanceKm),
+    nearbyRadiusKm:finiteOrNull(value.nearbyRadiusKm),
+    nearbyRetailGroup:clean(value.nearbyRetailGroup,80),
+    nearbyReliable:value.nearbyReliable==null?null:Boolean(value.nearbyReliable),
+
+    lastError:clean(value.lastError,240),
+    lastSearchCompletedAt:clean(value.lastSearchCompletedAt,50)
   };
 }
 
@@ -126,4 +138,9 @@ function clean(value,max){
 function finiteOrNull(value){
   const n=Number(value);
   return Number.isFinite(n)?n:null;
+}
+
+function intOrNull(value){
+  const n=Number(value);
+  return Number.isInteger(n)?n:null;
 }

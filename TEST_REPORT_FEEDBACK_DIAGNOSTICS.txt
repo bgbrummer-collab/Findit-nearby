@@ -1,0 +1,20 @@
+FindIt Feedback Diagnostics Build
+=================================
+PASS: feedback now records identified item
+PASS: exact search query recorded
+PASS: retail category recorded
+PASS: likely store types recorded
+PASS: recognition confidence recorded
+PASS: exact product match true/false recorded
+PASS: exact product offer count recorded
+PASS: nearby store count recorded
+PASS: closest nearby store distance recorded
+PASS: nearby search radius recorded
+PASS: nearby retail group recorded
+PASS: nearby reliable true/false recorded
+PASS: last nearby/search error recorded
+PASS: last completed search timestamp recorded
+PASS: no user name/email/exact coordinates added
+PASS: existing Supabase feedback storage retained
+PASS: optional feedback_debug SQL view included
+PASS: JavaScript syntax checks passed

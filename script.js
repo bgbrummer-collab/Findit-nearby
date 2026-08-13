@@ -1,4 +1,22 @@
 const $=(s)=>document.querySelector(s);
+
+let finditDiagnostics={
+  item:null,
+  searchQuery:null,
+  retailCategory:null,
+  likelyStoreTypes:[],
+  recognitionConfidence:null,
+  exactProductMatch:false,
+  exactOfferCount:0,
+  nearbyStoreCount:0,
+  closestStoreDistanceKm:null,
+  nearbyRadiusKm:null,
+  nearbyRetailGroup:null,
+  nearbyReliable:null,
+  lastError:null,
+  lastSearchCompletedAt:null
+};
+
 const freeActions=$("#freeActions"),searchOnline=$("#searchOnline"),searchNearbyFree=$("#searchNearbyFree"),copyQuery=$("#copyQuery"),shareFind=$("#shareFind"),onlineQueryText=$("#onlineQueryText");
 const photo=$("#photo"),cameraPhoto=$("#cameraPhoto"),choosePhoto=$("#choosePhoto"),takePhoto=$("#takePhoto"),preview=$("#preview"),uploadPlaceholder=$("#uploadPlaceholder"),searchBtn=$("#search"),locationBtn=$("#location"),status=$("#status"),results=$("#results"),resultTitle=$("#resultTitle"),summary=$("#summary"),analysis=$("#analysis"),warning=$("#warning"),offersEl=$("#offers"),noOffers=$("#noOffers"),nearbyBlock=$("#nearbyBlock"),nearbyStores=$("#nearbyStores"),saveFind=$("#saveFind"),savedList=$("#savedList");
 let selectedFile=null,coords=null,latestResult=null,currentOffers=[],currentSort="best";
@@ -56,9 +74,20 @@ searchBtn.addEventListener("click",async()=>{
 
     latestResult=data;
     renderIdentification(data.identification||{});
+    {
+      const di=data.identification||{};
+      finditDiagnostics.item=di.name||di.object||null;
+      finditDiagnostics.searchQuery=di.searchQuery||null;
+      finditDiagnostics.retailCategory=di.retailCategory||di.category||null;
+      finditDiagnostics.likelyStoreTypes=Array.isArray(di.likelyStoreTypes)?di.likelyStoreTypes:[];
+      finditDiagnostics.recognitionConfidence=Number.isFinite(Number(di.confidence))?Number(di.confidence):null;
+      finditDiagnostics.lastError=null;
+    }
     renderFreeActions(data.identification||{});
     if(coords) loadNearbyStores(data.identification||{});
     currentOffers=Array.isArray(data.offers)?data.offers:[];
+    finditDiagnostics.exactOfferCount=currentOffers.length;
+    finditDiagnostics.exactProductMatch=currentOffers.length>0;
     renderOffers();
 
     const confidence=Number(data.identification?.confidence||0);
@@ -139,6 +168,13 @@ async function loadNearby(i){
     const stores=Array.isArray(data.stores)
       ? data.stores.filter(x=>Number(x.distanceKm)<=10)
       : [];
+
+    finditDiagnostics.nearbyStoreCount=stores.length;
+    finditDiagnostics.closestStoreDistanceKm=stores.length?Number(stores[0].distanceKm):null;
+    finditDiagnostics.nearbyRadiusKm=Number.isFinite(Number(data.radiusKm))?Number(data.radiusKm):null;
+    finditDiagnostics.nearbyRetailGroup=data.retailGroup||data.categoryGroup||null;
+    finditDiagnostics.nearbyReliable=data.reliable!==false;
+    finditDiagnostics.lastSearchCompletedAt=new Date().toISOString();
     if(!stores.length){nearbyStores.innerHTML="<p class='muted'>No relevant nearby businesses were returned.</p>";return}
     nearbyStores.innerHTML=stores.map(s=>`<article class="nearby-card"><strong>${escapeHtml(s.name||"Store")}</strong><p>${escapeHtml(s.address||"Address unavailable")}</p><p>${s.distanceKm!=null?`${Number(s.distanceKm).toFixed(1)} km away`:"Distance unavailable"}</p>${validHttpUrl(s.mapsUrl)?`<a href="${escapeAttr(s.mapsUrl)}" target="_blank" rel="noopener noreferrer">Open in Maps →</a>`:""}</article>`).join("");
   }catch(error){nearbyStores.innerHTML=`<p class="muted">Nearby search unavailable: ${escapeHtml(error.message)}</p>`}
@@ -197,6 +233,9 @@ async function loadNearbyStores(i){
       </div>
       <p class="nearby-disclaimer">${escapeHtml(data.disclaimer||"Nearby retailer type only; exact-item stock is not verified.")}</p>`;
   }catch(error){
+    finditDiagnostics.lastError=String(error?.message||error||"Nearby search failed").slice(0,240);
+    finditDiagnostics.nearbyReliable=false;
+    finditDiagnostics.lastSearchCompletedAt=new Date().toISOString();
     nearbyBlock.innerHTML='<p class="muted">Nearby mapped-store search is temporarily unavailable. Use the free Maps search below.</p>';
   }
 }
@@ -338,6 +377,9 @@ async function loadNearbyStores(i){
       </div>
       <p class="nearby-disclaimer">${escapeHtml(data.disclaimer||"Nearby retailer type only; exact-item stock is not verified.")}</p>`;
   }catch(error){
+    finditDiagnostics.lastError=String(error?.message||error||"Nearby search failed").slice(0,240);
+    finditDiagnostics.nearbyReliable=false;
+    finditDiagnostics.lastSearchCompletedAt=new Date().toISOString();
     nearbyBlock.innerHTML='<p class="muted">Nearby mapped-store search is temporarily unavailable. Use the free Maps search below.</p>';
   }
 }
