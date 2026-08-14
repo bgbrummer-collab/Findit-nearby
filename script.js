@@ -1,9 +1,38 @@
 
+function applyPremiumWorld(showWow=false){
+  document.body.classList.toggle("premium-active",premiumState.active);
+  document.getElementById("premiumWorkspaceButton")?.classList.toggle("hidden",!premiumState.active);
+  if(showWow){
+    const w=document.getElementById("premiumWow");
+    if(w){w.classList.remove("hidden");w.setAttribute("aria-hidden","false");setTimeout(()=>w.classList.add("hidden"),3400)}
+  }
+}
+function openPremiumWorkspace(){if(!premiumState.active){openPremium();return}document.getElementById("premiumWorkspace")?.classList.remove("hidden")}
+function closePremiumWorkspace(){document.getElementById("premiumWorkspace")?.classList.add("hidden")}
+document.addEventListener("DOMContentLoaded",()=>{
+  applyPremiumWorld(false);
+  document.getElementById("premiumWorkspaceButton")?.addEventListener("click",openPremiumWorkspace);
+  document.getElementById("closePremiumWorkspace")?.addEventListener("click",closePremiumWorkspace);
+  document.querySelectorAll("[data-pw]").forEach(b=>b.addEventListener("click",()=>{
+    const x=b.dataset.pw;if(x==="alerts")return;
+    closePremiumWorkspace();
+    if(x==="find")document.querySelector("#upload,#dropzone,input[type=file]")?.scrollIntoView({behavior:"smooth",block:"center"});
+    if(x==="map")document.querySelector("#map,#mapLarge")?.scrollIntoView({behavior:"smooth",block:"center"});
+    if(x==="history")document.querySelector("#recentButton,#openRecent")?.click();
+    if(x==="challenge")document.querySelector("#challengeButton,[data-challenge]")?.click();
+    if(x==="saved"){const a=JSON.parse(localStorage.getItem("findit_favourites")||"[]");alert(a.length?a.map(v=>"★ "+v.item).join("\\n"):"No saved items yet. Save a Find when you find something you like.");}
+    if(x==="radius")alert("Premium search radius: up to 25 km.");
+    if(x==="filters")alert("Premium filters are ready for closest and best-match sorting. More filters will be added as verified retailer data grows.");
+    if(x==="compare")alert("Compare Stores uses your current nearby results. Full price comparison will unlock as verified retailer price data becomes available.");
+  }));
+});
+
+
 const premiumState={active:localStorage.getItem("findit_premium_beta")==="1",freeRadiusKm:10,premiumRadiusKm:25};
 function refreshPremiumUI(){document.getElementById("premiumStatusBadge")?.classList.toggle("hidden",!premiumState.active);const b=document.getElementById("activatePremiumTester");if(b)b.textContent=premiumState.active?"Premium Beta active ✓":"Activate Premium Beta on this device"}
 function openPremium(){const m=document.getElementById("premiumModal");m?.classList.remove("hidden");m?.setAttribute("aria-hidden","false")}
 function closePremium(){const m=document.getElementById("premiumModal");m?.classList.add("hidden");m?.setAttribute("aria-hidden","true")}
-document.addEventListener("DOMContentLoaded",()=>{refreshPremiumUI();document.getElementById("premiumButton")?.addEventListener("click",openPremium);document.getElementById("closePremium")?.addEventListener("click",closePremium);document.getElementById("premiumModal")?.addEventListener("click",e=>{if(e.target.id==="premiumModal")closePremium()});document.getElementById("activatePremiumTester")?.addEventListener("click",()=>{premiumState.active=true;localStorage.setItem("findit_premium_beta","1");refreshPremiumUI();closePremium()})});
+document.addEventListener("DOMContentLoaded",()=>{refreshPremiumUI();document.getElementById("premiumButton")?.addEventListener("click",openPremium);document.getElementById("closePremium")?.addEventListener("click",closePremium);document.getElementById("premiumModal")?.addEventListener("click",e=>{if(e.target.id==="premiumModal")closePremium()});document.getElementById("activatePremiumTester")?.addEventListener("click",()=>{premiumState.active=true;localStorage.setItem("findit_premium_beta","1");refreshPremiumUI();closePremium();applyPremiumWorld(true);setTimeout(openPremiumWorkspace,3300)})});
 function recordNearbyAnalyticsFromResponse(d,i){const stores=Array.isArray(d?.stores)?d.stores:[];trackFindIt("nearby_complete",{success:stores.length>0,item:i?.name||i?.object||null,retailCategory:d?.retailGroup||i?.retailCategory||i?.category||null,nearbyStoreCount:stores.length,closestStoreDistanceKm:stores.length?Number(stores[0]?.distanceKm):null,radiusKm:Number.isFinite(Number(d?.radiusKm))?Number(d.radiusKm):null})}
 function trackFindIt(eventType,extra={}){const i=state.result?.identification||{};return fetch('/api/analytics',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({eventType,item:i.name||i.object||null,retailCategory:i.retailCategory||i.retail_category||i.category||null,confidence:Number(i.confidence||0)||null,exactOfferCount:state.offers?.length??null,nearbyStoreCount:state.stores?.length??null,closestStoreDistanceKm:state.stores?.[0]?.distanceKm??null,radiusKm:state.radius??null,...extra})}).catch(()=>null)}
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];

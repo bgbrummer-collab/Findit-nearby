@@ -1,0 +1,8 @@
+PASS: Premium unlock WOW transition
+PASS: visual Premium mode transformation
+PASS: expanded Premium Tools workspace
+PASS: Advanced Find / Saved / Compare / Map / Radius / Filters / History / Challenge menu
+PASS: future Price Alerts clearly marked coming later
+PASS: existing FindIt + analytics retained
+PASS: real payments disabled
+PASS: JavaScript syntax checks
