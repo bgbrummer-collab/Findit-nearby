@@ -2,3 +2,5 @@ User-agent: *
 Allow: /
 
 Sitemap: https://findit-nearby.vercel.app/sitemap.xml
+
+Disallow: /catalog-admin.html

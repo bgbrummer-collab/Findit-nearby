@@ -1,0 +1,10 @@
+PASS: private catalog importer added
+PASS: CSV parser supports Awin-style common fields
+PASS: product/retailer/offer upsert flow
+PASS: price history written on imports
+PASS: verified source flag
+PASS: stock quantity/status import
+PASS: online/general availability labels avoid false branch-stock claims
+PASS: original price + savings display
+PASS: Product Intelligence + FindIt Assistant retained
+PASS: JavaScript syntax checks
