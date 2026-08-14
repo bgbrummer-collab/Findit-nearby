@@ -1,4 +1,48 @@
 
+/* FINDIT GLOBAL COUNTRY + CURRENCY DISPLAY
+   Retailer-feed currency remains the source of truth.
+   Converted values are clearly labelled estimates. */
+const FINDIT_CURRENCY_BY_COUNTRY={
+  ZA:"ZAR",US:"USD",GB:"GBP",IE:"EUR",DE:"EUR",FR:"EUR",ES:"EUR",IT:"EUR",
+  NL:"EUR",BE:"EUR",PT:"EUR",AT:"EUR",FI:"EUR",GR:"EUR",LU:"EUR",
+  AU:"AUD",NZ:"NZD",CA:"CAD",CH:"CHF",JP:"JPY",IN:"INR",AE:"AED"
+};
+let finditUserCountry=localStorage.getItem("findit_country")||null;
+let finditUserCurrency=localStorage.getItem("findit_currency")||null;
+let finditFx={ZAR:1};
+
+async function finditDetectCountry(){
+  // Prefer browser locale. No precise location is sent anywhere.
+  if(!finditUserCountry){
+    const loc=(navigator.languages?.[0]||navigator.language||"en-ZA");
+    const m=loc.match(/[-_]([A-Z]{2})$/i);
+    finditUserCountry=(m?.[1]||"ZA").toUpperCase();
+  }
+  finditUserCurrency=FINDIT_CURRENCY_BY_COUNTRY[finditUserCountry]||"USD";
+  localStorage.setItem("findit_country",finditUserCountry);
+  localStorage.setItem("findit_currency",finditUserCurrency);
+  try{
+    const r=await fetch(`/api/fx?base=ZAR&symbols=${encodeURIComponent(finditUserCurrency)}`);
+    const d=await r.json();
+    if(r.ok&&d.rate) finditFx[finditUserCurrency]=Number(d.rate);
+  }catch(e){console.warn("Currency conversion unavailable",e)}
+}
+function finditFormatFeedPrice(amount,currency="ZAR"){
+  if(amount==null||!Number.isFinite(Number(amount)))return "Price unavailable";
+  try{return new Intl.NumberFormat(undefined,{style:"currency",currency}).format(Number(amount))}
+  catch{return `${currency} ${Number(amount).toFixed(2)}`}
+}
+function finditFormatLocalEstimate(amount,sourceCurrency="ZAR"){
+  if(amount==null||sourceCurrency===finditUserCurrency)return null;
+  // Current first feed is ZAR. Other source currencies stay unconverted unless a rate exists.
+  if(sourceCurrency!=="ZAR"||!finditFx[finditUserCurrency])return null;
+  const n=Number(amount)*finditFx[finditUserCurrency];
+  try{return `≈ ${new Intl.NumberFormat(undefined,{style:"currency",currency:finditUserCurrency}).format(n)}`}
+  catch{return `≈ ${finditUserCurrency} ${n.toFixed(2)}`}
+}
+document.addEventListener("DOMContentLoaded",finditDetectCountry);
+
+
 /* =========================================================
    FINDIT PREMIUM — PAYSTACK TEST MODE
    Safe override: existing search, map and directions logic
@@ -57,7 +101,7 @@ async function loadProductIntelligence(i){
     const d=await r.json();productIntelligence=d;panel.classList.remove("hidden");
     if(!r.ok||!d.matched){el.innerHTML='<div class="empty-state">No verified product price or stock data yet. FindIt will still show nearby retailers.</div>';return}
     if(!(d.offers||[]).length){el.innerHTML=`<div class="empty-state">Matched ${esc(d.bestProduct?.name||"the product")}, but no retailer offers are stored yet.</div>`;return}
-    el.innerHTML=d.offers.map(o=>{const retailer=o.retailer?.name||"Retailer";const price=o.price==null?"Price unavailable":new Intl.NumberFormat("en-ZA",{style:"currency",currency:o.currency||"ZAR"}).format(Number(o.price));const stock=o.availability||"Availability not supplied";const stockLabel=stock==="in_stock"?"In stock online/general":stock==="out_of_stock"?"Out of stock":stock==="preorder"?"Pre-order":stock==="backorder"?"Back-order":stock;const saving=(o.original_price!=null&&o.price!=null&&Number(o.original_price)>Number(o.price))?Number(o.original_price)-Number(o.price):null;return `<article class="pi-offer ${o.verified?"verified":""}"><div><h4>${esc(o.product_name||d.bestProduct?.name||"Product")}</h4><p>${esc(retailer)}</p><div class="pi-meta"><span>${o.verified?"✓ Verified listing":"Catalog listing"}</span><span>${esc(stockLabel)}</span>${saving?`<span>Save ${new Intl.NumberFormat("en-ZA",{style:"currency",currency:o.currency||"ZAR"}).format(saving)}</span>`:""}${o.source?`<span>${esc(o.source)}</span>`:""}</div><div class="pi-actions">${validUrl(o.product_url)?`<a href="${esc(o.product_url)}" target="_blank" rel="noopener noreferrer">View product</a>`:""}</div></div><div class="pi-price">${esc(price)}</div>${o.original_price!=null&&Number(o.original_price)>Number(o.price||0)?`<div class="pi-old-price">${new Intl.NumberFormat("en-ZA",{style:"currency",currency:o.currency||"ZAR"}).format(Number(o.original_price))}</div>`:""}</article>`}).join("");
+    el.innerHTML=d.offers.map(o=>{const retailer=o.retailer?.name||"Retailer";const price=finditFormatFeedPrice(o.price,o.currency||"ZAR");const localEstimate=finditFormatLocalEstimate(o.price,o.currency||"ZAR");const stock=o.availability||"Availability not supplied";const stockLabel=stock==="in_stock"?"In stock online/general":stock==="out_of_stock"?"Out of stock":stock==="preorder"?"Pre-order":stock==="backorder"?"Back-order":stock;const saving=(o.original_price!=null&&o.price!=null&&Number(o.original_price)>Number(o.price))?Number(o.original_price)-Number(o.price):null;return `<article class="pi-offer ${o.verified?"verified":""}"><div><h4>${esc(o.product_name||d.bestProduct?.name||"Product")}</h4><p>${esc(retailer)}</p><div class="pi-meta"><span>${o.verified?"✓ Verified listing":"Catalog listing"}</span><span>${esc(stockLabel)}</span>${saving?`<span>Save ${new Intl.NumberFormat("en-ZA",{style:"currency",currency:o.currency||"ZAR"}).format(saving)}</span>`:""}${o.source?`<span>${esc(o.source)}</span>`:""}</div><div class="pi-actions">${validUrl(o.product_url)?`<a href="${esc(o.product_url)}" target="_blank" rel="noopener noreferrer">View product</a>`:""}</div></div><div class="pi-price">${esc(price)}${localEstimate?`<small class="pi-local-estimate">${esc(localEstimate)} estimated</small>`:""}</div>${o.original_price!=null&&Number(o.original_price)>Number(o.price||0)?`<div class="pi-old-price">${new Intl.NumberFormat("en-ZA",{style:"currency",currency:o.currency||"ZAR"}).format(Number(o.original_price))}</div>`:""}</article>`}).join("");
   }catch{panel.classList.remove("hidden");el.innerHTML='<div class="empty-state">Product price data is temporarily unavailable.</div>'}
 }
 function assistantContext(){const i=state.result?.identification||{};return {identification:{name:i.name||i.object||null,brand:i.brand||null,model:i.model||null,category:i.retailCategory||i.category||null,confidence:i.confidence||null,searchQuery:i.searchQuery||null},nearbyStores:(state.stores||[]).slice(0,8).map(s=>({name:s.name,distanceKm:s.distanceKm,type:s.type,address:s.address})),productIntelligence:productIntelligence?{matched:productIntelligence.matched,bestProduct:productIntelligence.bestProduct,offers:(productIntelligence.offers||[]).slice(0,8).map(o=>({productName:o.product_name,price:o.price,currency:o.currency,availability:o.availability,verified:o.verified,retailer:o.retailer?.name}))}:null,premium:premiumState.active,radiusKm:state.radius}}

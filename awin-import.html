@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>FindIt • Awin Import</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#050817;color:#f6f7ff;font-family:Inter,system-ui,sans-serif}
+main{max-width:900px;margin:auto;padding:38px 18px}.card{background:#0c132c;border:1px solid #29375d;border-radius:22px;padding:22px;margin:15px 0}
+h1{font-size:clamp(38px,7vw,68px);margin:4px 0}.g{background:linear-gradient(90deg,#956fff,#2bd7ff);-webkit-background-clip:text;color:transparent}
+label{display:block;margin:12px 0 6px;color:#aab6d1}input,button{width:100%;padding:13px;border-radius:12px;border:1px solid #35446c;background:#080f24;color:#fff}
+button{border:0;background:linear-gradient(90deg,#7457ff,#168fce);font-weight:900;cursor:pointer}.muted{color:#91a0bd;font-size:13px}
+.bar{height:12px;background:#121a35;border-radius:999px;overflow:hidden;margin:12px 0}.bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,#7658ff,#25c9ff);transition:.2s}
+.ok{color:#77e6ad}.err{color:#ff9aaa}.stat{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat div{background:#081024;border:1px solid #263456;border-radius:14px;padding:13px}.stat b{display:block;font-size:24px}.stat small{color:#8f9dbb}
+@media(max-width:600px){.stat{grid-template-columns:1fr}}
+</style>
+</head><body><main>
+<p class="muted">FINDIT • PRIVATE ADMIN</p>
+<h1>Awin <span class="g">SmartBuyGlasses ZA</span></h1>
+<p class="muted">Import the Awin CSV or CSV.GZ directly from your computer. The feed is parsed in your browser and sent privately to FindIt's server in batches.</p>
+
+<div class="card">
+<label>FindIt admin key</label>
+<input id="key" type="password" autocomplete="off" placeholder="FINDIT_ADMIN_KEY">
+<label>Awin SmartBuyGlasses feed</label>
+<input id="file" type="file" accept=".csv,.gz,.csv.gz,text/csv,application/gzip">
+<p id="fileInfo" class="muted">Choose the downloaded SmartBuyGlasses ZA feed.</p>
+<button id="go" disabled>Import to FindIt</button>
+<div class="bar"><i id="progress"></i></div>
+<p id="status" class="muted">Waiting for a feed.</p>
+<div class="stat">
+<div><b id="done">0</b><small>Processed</small></div>
+<div><b id="imported">0</b><small>Imported</small></div>
+<div><b id="changes">0</b><small>Price changes</small></div>
+</div>
+</div>
+
+<div class="card">
+<h3>What this feed can verify</h3>
+<p class="muted"><b>Yes:</b> product name, image, category, ZAR price, product link, Awin affiliate deep link and source update time.</p>
+<p class="muted"><b>Not supplied by this feed:</b> live stock quantity or physical-branch stock. FindIt will not invent those values.</p>
+</div>
+
+<script>
+let rows=[];
+const $=id=>document.getElementById(id);
+
+async function readFeed(file){
+  const buf=await file.arrayBuffer();
+  const isGz=file.name.toLowerCase().endsWith(".gz") || (new Uint8Array(buf)[0]===31&&new Uint8Array(buf)[1]===139);
+  if(isGz){
+    if(!("DecompressionStream" in window)) throw Error("This browser cannot open gzip feeds. Please extract the file to CSV first.");
+    const stream=new Blob([buf]).stream().pipeThrough(new DecompressionStream("gzip"));
+    return await new Response(stream).text();
+  }
+  return new TextDecoder().decode(buf);
+}
+
+function parseCSV(text){
+  const out=[];let row=[],v="",quoted=false;
+  for(let i=0;i<text.length;i++){
+    const c=text[i],n=text[i+1];
+    if(c==='"'&&quoted&&n==='"'){v+='"';i++;continue}
+    if(c==='"'){quoted=!quoted;continue}
+    if(c===","&&!quoted){row.push(v);v="";continue}
+    if((c==="\n"||c==="\r")&&!quoted){
+      if(c==="\r"&&n==="\n")i++;
+      row.push(v);v="";
+      if(row.some(x=>String(x).trim()))out.push(row);
+      row=[];continue
+    }
+    v+=c;
+  }
+  if(v||row.length){row.push(v);out.push(row)}
+  if(out.length<2)return[];
+  const head=out[0].map(x=>x.trim());
+  return out.slice(1).map(r=>Object.fromEntries(head.map((h,i)=>[h,r[i]??""])));
+}
+
+$("file").onchange=async()=>{
+  try{
+    const f=$("file").files[0];if(!f)return;
+    $("fileInfo").textContent="Reading feed…";
+    const text=await readFeed(f);
+    rows=parseCSV(text);
+    const required=["aw_deep_link","product_name","merchant_product_id","search_price","currency"];
+    const missing=required.filter(k=>!rows[0]||!(k in rows[0]));
+    if(missing.length)throw Error("This does not look like the expected SmartBuyGlasses Awin feed. Missing: "+missing.join(", "));
+    $("fileInfo").textContent=`${rows.length.toLocaleString()} products ready from ${f.name}`;
+    $("go").disabled=!rows.length;
+    $("status").textContent="Ready to import.";
+  }catch(e){rows=[];$("go").disabled=true;$("status").className="err";$("status").textContent=e.message}
+};
+
+$("go").onclick=async()=>{
+  const key=$("key").value.trim();
+  if(!key)return alert("Enter your FindIt admin key.");
+  $("go").disabled=true;$("status").className="muted";
+  let imported=0,changes=0,done=0;
+  const batchSize=500;
+  try{
+    for(let i=0;i<rows.length;i+=batchSize){
+      const batch=rows.slice(i,i+batchSize);
+      const r=await fetch("/api/awin-feed-import",{
+        method:"POST",
+        headers:{"content-type":"application/json","x-findit-admin-key":key},
+        body:JSON.stringify({rows:batch})
+      });
+      const d=await r.json();
+      if(!r.ok)throw Error(d.details||d.error||"Import failed");
+      imported+=d.imported||0;changes+=d.priceChanges||0;done+=batch.length;
+      $("done").textContent=done.toLocaleString();
+      $("imported").textContent=imported.toLocaleString();
+      $("changes").textContent=changes.toLocaleString();
+      $("progress").style.width=((done/rows.length)*100).toFixed(1)+"%";
+      $("status").textContent=`Importing ${done.toLocaleString()} / ${rows.length.toLocaleString()}… Keep this tab open.`;
+    }
+    $("status").className="ok";
+    $("status").textContent=`Done ✓ ${imported.toLocaleString()} products imported. ${changes.toLocaleString()} new/changed prices recorded.`;
+  }catch(e){
+    $("status").className="err";$("status").textContent=e.message;
+  }finally{$("go").disabled=false}
+};
+</script>
+</main></body></html>

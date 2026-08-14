@@ -124,3 +124,5 @@ body.premium-active .premium-fab,body.premium-active .premium-workspace-button,b
 @media(max-width:600px){.assistant-fab{right:12px;bottom:12px}.assistant-panel{right:12px;bottom:68px}.pi-offer{grid-template-columns:1fr}.pi-price{text-align:left}}
 
 .pi-old-price{text-decoration:line-through;color:#7f8ba7;font-size:12px;text-align:right;margin-top:3px}
+
+.pi-local-estimate{display:block;font-size:11px;color:#91a0bd;font-weight:600;margin-top:4px}

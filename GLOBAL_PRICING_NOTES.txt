@@ -1,0 +1,10 @@
+FindIt Global Pricing
+=====================
+1. Exact retailer-feed price and currency are always shown as the primary price.
+2. Browser locale chooses a preferred display currency without requesting precise location.
+3. If the current retailer feed is ZAR and the visitor uses another supported currency,
+   FindIt may show a clearly-labelled approximate converted amount underneath.
+4. Converted prices are NEVER labelled as retailer prices.
+5. When country-specific retailer feeds are added later, FindIt should prioritize those
+   exact local feeds instead of currency conversion.
+6. SmartBuyGlasses ZA remains a South African feed; its source-of-truth price is ZAR.

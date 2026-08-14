@@ -1,0 +1,22 @@
+FindIt Awin SmartBuyGlasses ZA Integration
+===========================================
+SOURCE CHECKED:
+- Feed rows: 107,619
+- Columns: 21
+- Includes product name, image, category, search price, currency,
+  merchant product ID, merchant deep link, Awin deep link, last updated.
+- This specific feed DOES NOT include live stock quantity/status fields.
+
+BUILD:
+PASS: private CSV/CSV.GZ browser importer
+PASS: SmartBuyGlasses-specific batch endpoint
+PASS: 500-row private batches
+PASS: products upsert by merchant SKU
+PASS: offers upsert by retailer + external product ID
+PASS: verified=true for Awin feed records
+PASS: changed/new prices recorded in price_history
+PASS: affiliate Awin deep link stored as product URL
+PASS: no branch-stock claim invented
+PASS: existing directions/map/search logic retained
+PASS: Paystack TEST integration retained
+PASS: JavaScript syntax checks passed

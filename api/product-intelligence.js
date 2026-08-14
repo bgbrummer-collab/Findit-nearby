@@ -9,7 +9,7 @@ export default async function handler(req,res){
   if(!q&&!brand&&!model) return res.status(400).json({error:"Product details required"});
   const base=u.replace(/\/$/,""), headers={apikey:k,Authorization:`Bearer ${k}`};
   try{
-    const terms=[q,brand,model].filter(Boolean);
+    const compact=q.split(/\s+/).filter(x=>x.length>2).slice(0,5).join(" ");const terms=[q,compact,brand,model].filter(Boolean);
     const pu=new URL(base+"/rest/v1/products");
     pu.searchParams.set("select","id,name,brand,model,category,description,gtin,sku,image_url,search_query");
     pu.searchParams.set("limit","20");

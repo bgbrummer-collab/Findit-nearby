@@ -4,3 +4,5 @@ Allow: /
 Sitemap: https://findit-nearby.vercel.app/sitemap.xml
 
 Disallow: /catalog-admin.html
+
+Disallow: /awin-import.html
