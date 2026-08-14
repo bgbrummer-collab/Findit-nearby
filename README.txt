@@ -67,3 +67,9 @@ PREMIUM BETA
 - Run SUPABASE_PREMIUM_BETA_SETUP.sql only if you want the Premium profile foundation now.
 - Premium Beta tester activation is local-device only for now.
 - No card/payment information is collected.
+
+FINDIT PREMIUM V10 BETA
+=======================
+Premium V10 is a functional beta power workspace. Payments are disabled.
+Features that depend on verified retailer stock/price data are not represented as live if that data is unavailable.
+Personal collections/watchlist/favourite-store/stats data are stored locally on the tester's device in this beta.

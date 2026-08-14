@@ -1,0 +1,30 @@
+FindIt Premium V10 Beta
+=======================
+WORKING IN THIS BUILD
+- Distinct Premium V10 Command Centre
+- Vision+ launches FindIt image workflow
+- Manual Search
+- Exact Match web-search helper from identified query
+- AI-focused retailer query helper
+- Collections with current-Find saving
+- Watchlist (local-device Beta storage)
+- Favourite Stores from nearby results
+- Personal local stats
+- Share current Find using Web Share API / clipboard fallback
+- Searchable History+ up to Premium history limit
+- Existing Saved Items
+- Existing Compare Stores
+- Existing Nearby Map
+- Existing 25 km radius frontend/backend
+- Existing closest / A-Z / original sorting
+- Existing feedback + private analytics
+- Nearby service has three Overpass endpoint fallbacks and 18s timeout
+- Price/stock alerts are NOT falsely enabled
+- Payments remain disabled
+- No card data collected
+
+LIMITATIONS
+- Exact Match and AI Search helpers use web search; they do not prove retailer stock.
+- Watchlist does not automatically monitor price/stock yet.
+- Prices/stock are only trustworthy when verified retailer data is available.
+- Public Overpass services can still have temporary outages.

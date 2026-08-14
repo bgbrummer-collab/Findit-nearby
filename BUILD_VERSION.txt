@@ -1,3 +1,6 @@
-FindIt PREMIUM V2 — Real Tools
-Distinct Premium homepage + menu + working Premium tools + 25km backend.
-Payments disabled.
+FindIt PREMIUM V10 Beta
+Command Centre + Vision+ entry + Manual Search + Exact Match helper + AI-focused search helper
+Collections + Watchlist + Favourite Stores + My Stats + Share Find + History+
+Existing Compare Stores + Saved Items + 25 km radius + sorting + map
+Nearby endpoint fallback strengthened
+Payments disabled

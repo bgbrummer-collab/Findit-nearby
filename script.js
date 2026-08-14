@@ -1,5 +1,69 @@
 
 /* =========================================================
+   FINDIT PREMIUM V10 — FUNCTIONAL LOCAL POWER TOOLS
+========================================================= */
+const V10KEYS={collections:"findit_v10_collections",watch:"findit_v10_watchlist",stores:"findit_v10_favourite_stores"};
+function v10Read(k,f=[]){try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(f))}catch{return f}}
+function v10Write(k,v){localStorage.setItem(k,JSON.stringify(v));v10Refresh()}
+function v10Current(){const i=state.result?.identification||{};return {name:i.name||i.object||"Current Find",query:i.searchQuery||i.name||i.object||"",category:i.retailCategory||i.category||"",savedAt:new Date().toISOString()}}
+function v10Open(title,body){document.getElementById("v10ModalBody").innerHTML=`<p class="premium-home-kicker">★ PREMIUM V10</p><h2>${esc(title)}</h2>${body}`;document.getElementById("v10UniversalModal")?.classList.remove("hidden")}
+function v10Close(){document.getElementById("v10UniversalModal")?.classList.add("hidden")}
+function v10Refresh(){if(!premiumState.active)return;document.body.classList.add("premium-v10");document.getElementById("v10CommandCentre")?.classList.remove("hidden")}
+function v10Collections(){
+ let cols=v10Read(V10KEYS.collections,[{name:"Want to Buy",items:[]}]);
+ v10Open("Collections",`<input id="v10CollectionName" class="v10-input" placeholder="New collection name"><div class="v10-actions"><button id="v10AddCollection">+ Create collection</button></div><div class="v10-list" style="margin-top:15px">${cols.map((c,i)=>`<div class="v10-row"><div><b>${esc(c.name)}</b><br><small>${c.items.length} items</small></div><button data-col-add="${i}">Add current Find</button></div>`).join("")}</div>`);
+ document.getElementById("v10AddCollection").onclick=()=>{const n=document.getElementById("v10CollectionName").value.trim();if(!n)return;cols.push({name:n,items:[]});v10Write(V10KEYS.collections,cols);v10Collections()};
+ document.querySelectorAll("[data-col-add]").forEach(b=>b.onclick=()=>{const x=v10Current();if(!x.query)return;cols[+b.dataset.colAdd].items.unshift(x);v10Write(V10KEYS.collections,cols);v10Collections()});
+}
+function v10Watchlist(){
+ let a=v10Read(V10KEYS.watch);const cur=v10Current();
+ v10Open("Watchlist",`<p class="premium-tool-note">Keep products you want to revisit. Automatic price/stock monitoring is not enabled yet.</p><div class="v10-actions"><button id="v10WatchCurrent">+ Add current Find</button></div><div class="v10-list" style="margin-top:15px">${a.length?a.map((x,i)=>`<div class="v10-row"><div><b>${esc(x.name)}</b><br><small>${esc(x.category||"FindIt item")}</small></div><button data-watch-remove="${i}">Remove</button></div>`).join(""):"<p>No watched items yet.</p>"}</div>`);
+ document.getElementById("v10WatchCurrent").onclick=()=>{if(cur.query&&!a.some(x=>x.query===cur.query)){a.unshift(cur);v10Write(V10KEYS.watch,a)}v10Watchlist()};
+ document.querySelectorAll("[data-watch-remove]").forEach(b=>b.onclick=()=>{a.splice(+b.dataset.watchRemove,1);v10Write(V10KEYS.watch,a);v10Watchlist()});
+}
+function v10FavouriteStores(){
+ let a=v10Read(V10KEYS.stores);
+ v10Open("Favourite Stores",`<p class="premium-tool-note">Save retailers from your current nearby results.</p><div class="v10-list">${state.stores.map((s,i)=>`<div class="v10-row"><div><b>${esc(s.name)}</b><br><small>${Number(s.distanceKm).toFixed(1)} km</small></div><button data-fav-store="${i}">${a.some(x=>x.name===s.name)?"Saved ✓":"Save store"}</button></div>`).join("")||"<p>Run a nearby search first.</p>"}</div>${a.length?`<h3 style="margin-top:20px">Saved retailers</h3><div class="v10-list">${a.map(x=>`<div class="v10-row"><div><b>${esc(x.name)}</b><br><small>${esc(x.address||"Retailer")}</small></div></div>`).join("")}</div>`:""}`);
+ document.querySelectorAll("[data-fav-store]").forEach(b=>b.onclick=()=>{const s=state.stores[+b.dataset.favStore];if(s&&!a.some(x=>x.name===s.name)){a.unshift({name:s.name,address:s.address||"",lat:s.lat,lon:s.lon});v10Write(V10KEYS.stores,a)}v10FavouriteStores()});
+}
+function v10Stats(){
+ let recent=[];try{recent=JSON.parse(localStorage.getItem("finditRecent")||"[]")}catch{}
+ const saved=getPremiumSaved(),watch=v10Read(V10KEYS.watch),fav=v10Read(V10KEYS.stores);
+ v10Open("My FindIt Stats",`<div class="v10-stat-grid"><article><b>${recent.length}</b><small>Recent finds</small></article><article><b>${saved.length}</b><small>Saved items</small></article><article><b>${watch.length}</b><small>Watchlist</small></article><article><b>${fav.length}</b><small>Favourite stores</small></article></div><p class="premium-tool-note" style="margin-top:15px">These personal stats are stored on this device during Beta.</p>`);
+}
+function v10History(){
+ let a=[];try{a=JSON.parse(localStorage.getItem("finditRecent")||"[]")}catch{}
+ v10Open("History+",`<input id="v10HistorySearch" class="v10-input" placeholder="Search your recent finds"><div id="v10HistoryRows" class="v10-list"></div>`);
+ const draw=()=>{const q=document.getElementById("v10HistorySearch").value.toLowerCase();document.getElementById("v10HistoryRows").innerHTML=a.filter(x=>(x.name+" "+x.query).toLowerCase().includes(q)).slice(0,50).map(x=>`<div class="v10-row"><div><b>${esc(x.name)}</b><br><small>${esc(x.query||"")}</small></div><a href="https://www.google.com/search?q=${encodeURIComponent(x.query||x.name)}" target="_blank">Search again</a></div>`).join("")||"<p>No matching history.</p>"};draw();document.getElementById("v10HistorySearch").oninput=draw;
+}
+function v10Share(){
+ const x=v10Current();if(!x.query){v10Open("Share Find","<p>Run a FindIt search first.</p>");return}
+ const text=`FindIt found: ${x.name}${x.category?` (${x.category})`:""}`;
+ if(navigator.share){navigator.share({title:"FindIt Find",text}).catch(()=>{})}else{navigator.clipboard?.writeText(text);v10Open("Share Find",`<p>Copied this Find to your clipboard:</p><div class="v10-row"><b>${esc(text)}</b></div>`)}
+}
+function v10Manual(){
+ v10Open("Manual Search",`<p class="premium-tool-note">Already know the item name? Search it directly.</p><input id="v10ManualQuery" class="v10-input" placeholder="e.g. Nike Air Force 1 Low"><div class="v10-actions"><button id="v10ManualGo">Search item</button></div>`);
+ document.getElementById("v10ManualGo").onclick=()=>{const q=document.getElementById("v10ManualQuery").value.trim();if(q)window.open(`https://www.google.com/search?q=${encodeURIComponent(q+" buy near me")}`,"_blank")};
+}
+function v10Exact(){
+ const x=v10Current();if(!x.query){v10Open("Exact Match","<p>Identify an item first so FindIt has an exact product query.</p>");return}
+ window.open(`https://www.google.com/search?q=${encodeURIComponent('"'+x.query+'" buy')}`,"_blank");
+}
+function v10Assistant(){
+ const x=v10Current();if(!x.query){v10Open("AI Search","<p>Identify an item first. Then Premium can build a focused retailer search from the result.</p>");return}
+ const q=[x.query,x.category,"retailer near me"].filter(Boolean).join(" ");
+ v10Open("AI Search",`<p>Premium built this focused search from your current Find:</p><div class="v10-row"><b>${esc(q)}</b></div><div class="v10-actions" style="margin-top:12px"><button id="v10AssistantGo">Search retailers</button></div>`);
+ document.getElementById("v10AssistantGo").onclick=()=>window.open(`https://www.google.com/search?q=${encodeURIComponent(q)}`,"_blank");
+}
+function v10Handle(a){
+ if(a==="scan")document.getElementById("finder")?.scrollIntoView({behavior:"smooth"});
+ if(a==="manual")v10Manual();if(a==="exact")v10Exact();if(a==="assistant")v10Assistant();
+ if(a==="collections")v10Collections();if(a==="watchlist")v10Watchlist();if(a==="favourites")v10FavouriteStores();if(a==="stats")v10Stats();if(a==="share")v10Share();if(a==="history")v10History();
+}
+document.addEventListener("DOMContentLoaded",()=>{v10Refresh();document.querySelectorAll("[data-v10]").forEach(b=>b.onclick=()=>v10Handle(b.dataset.v10));document.getElementById("v10CloseModal")?.addEventListener("click",v10Close)});
+
+
+/* =========================================================
    PREMIUM V2 FUNCTIONAL TOOLS
 ========================================================= */
 let premiumStoreSort="original";
@@ -129,7 +193,7 @@ const premiumState={active:localStorage.getItem("findit_premium_beta")==="1",fre
 function refreshPremiumUI(){document.getElementById("premiumStatusBadge")?.classList.toggle("hidden",!premiumState.active);const b=document.getElementById("activatePremiumTester");if(b)b.textContent=premiumState.active?"Premium Beta active ✓":"Activate Premium Beta on this device"}
 function openPremium(){const m=document.getElementById("premiumModal");m?.classList.remove("hidden");m?.setAttribute("aria-hidden","false")}
 function closePremium(){const m=document.getElementById("premiumModal");m?.classList.add("hidden");m?.setAttribute("aria-hidden","true")}
-document.addEventListener("DOMContentLoaded",()=>{refreshPremiumUI();document.getElementById("premiumButton")?.addEventListener("click",openPremium);document.getElementById("closePremium")?.addEventListener("click",closePremium);document.getElementById("premiumModal")?.addEventListener("click",e=>{if(e.target.id==="premiumModal")closePremium()});document.getElementById("activatePremiumTester")?.addEventListener("click",()=>{premiumState.active=true;localStorage.setItem("findit_premium_beta","1");refreshPremiumUI();closePremium();applyPremiumWorld(true);updatePremiumDashboard();setTimeout(()=>document.getElementById("premiumHome")?.scrollIntoView({behavior:"smooth"}),3300)})});
+document.addEventListener("DOMContentLoaded",()=>{refreshPremiumUI();document.getElementById("premiumButton")?.addEventListener("click",openPremium);document.getElementById("closePremium")?.addEventListener("click",closePremium);document.getElementById("premiumModal")?.addEventListener("click",e=>{if(e.target.id==="premiumModal")closePremium()});document.getElementById("activatePremiumTester")?.addEventListener("click",()=>{premiumState.active=true;localStorage.setItem("findit_premium_beta","1");refreshPremiumUI();closePremium();applyPremiumWorld(true);updatePremiumDashboard();v10Refresh();setTimeout(()=>document.getElementById("premiumHome")?.scrollIntoView({behavior:"smooth"}),3300)})});
 function recordNearbyAnalyticsFromResponse(d,i){const stores=Array.isArray(d?.stores)?d.stores:[];trackFindIt("nearby_complete",{success:stores.length>0,item:i?.name||i?.object||null,retailCategory:d?.retailGroup||i?.retailCategory||i?.category||null,nearbyStoreCount:stores.length,closestStoreDistanceKm:stores.length?Number(stores[0]?.distanceKm):null,radiusKm:Number.isFinite(Number(d?.radiusKm))?Number(d.radiusKm):null})}
 function trackFindIt(eventType,extra={}){const i=state.result?.identification||{};return fetch('/api/analytics',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({eventType,item:i.name||i.object||null,retailCategory:i.retailCategory||i.retail_category||i.category||null,confidence:Number(i.confidence||0)||null,exactOfferCount:state.offers?.length??null,nearbyStoreCount:state.stores?.length??null,closestStoreDistanceKm:state.stores?.[0]?.distanceKm??null,radiusKm:state.radius??null,...extra})}).catch(()=>null)}
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
