@@ -1,3 +1,2 @@
-FindIt Complete Beta Analytics FIXED
-Fix: successful searches now send search_complete analytics.
-Fix: nearby analytics includes explicit store metrics.
+FindIt Premium Beta + Nearby Analytics Fix
+Payments disabled.

@@ -61,3 +61,9 @@ ANALYTICS SETUP
 3. Redeploy.
 4. Open https://findit-nearby.vercel.app/admin.html and enter that key.
 Analytics does not store users' precise coordinates.
+
+PREMIUM BETA
+- Payments are disabled.
+- Run SUPABASE_PREMIUM_BETA_SETUP.sql only if you want the Premium profile foundation now.
+- Premium Beta tester activation is local-device only for now.
+- No card/payment information is collected.

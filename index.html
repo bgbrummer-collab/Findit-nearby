@@ -134,5 +134,29 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="script.js" defer></script>
   <script defer src="/_vercel/insights/script.js"></script>
+
+<button id="premiumButton" class="premium-fab" type="button">★ Premium</button>
+<div id="premiumModal" class="premium-modal hidden" aria-hidden="true">
+  <div class="premium-card">
+    <button id="closePremium" class="premium-close" type="button">×</button>
+    <div class="premium-kicker">FINDIT PREMIUM BETA</div>
+    <h2>Find more. Save more. Search smarter.</h2>
+    <p>Premium is in beta. No real payments are enabled yet.</p>
+    <div class="premium-grid">
+      <section class="premium-plan-card">
+        <span>FREE</span><h3>FindIt Free</h3>
+        <ul><li>AI identification</li><li>Nearby retailers</li><li>Directions</li><li>10 km standard radius</li><li>Basic recent finds</li></ul>
+      </section>
+      <section class="premium-plan-card premium">
+        <span>PREMIUM BETA</span><h3>FindIt Premium</h3>
+        <ul><li>Up to 25 km search radius</li><li>Saved favourites</li><li>Closest / best-match filters</li><li>Extended recent finds</li><li>Premium badge</li><li>Price alerts later</li><li>Deeper price comparison later</li></ul>
+        <button id="activatePremiumTester" type="button">Activate Premium Beta on this device</button>
+        <small>No payment required during beta.</small>
+      </section>
+    </div>
+  </div>
+</div>
+<div id="premiumStatusBadge" class="premium-status hidden">★ Premium Beta</div>
+
 </body>
 </html>

@@ -1,0 +1,9 @@
+PASS: complete FindIt build retained
+PASS: private analytics retained
+PASS: nearby analytics direct response hook added
+PASS: Premium modal + comparison added
+PASS: Premium standalone page added
+PASS: local Premium Beta tester activation added
+PASS: premium profile SQL foundation included
+PASS: real payments disabled
+PASS: JavaScript syntax checks
