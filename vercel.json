@@ -1,0 +1,36 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/health",
+      "destination": "/api/health-router?action=health"
+    },
+    {
+      "source": "/api/feedback-health",
+      "destination": "/api/health-router?action=feedback"
+    },
+    {
+      "source": "/api/paystack-init",
+      "destination": "/api/paystack-router?action=init"
+    },
+    {
+      "source": "/api/paystack-verify",
+      "destination": "/api/paystack-router?action=verify"
+    },
+    {
+      "source": "/api/catalog-import",
+      "destination": "/api/catalog-router?action=catalog"
+    },
+    {
+      "source": "/api/awin-feed-import",
+      "destination": "/api/catalog-router?action=awin"
+    },
+    {
+      "source": "/api/analytics",
+      "destination": "/api/telemetry-router?action=analytics"
+    },
+    {
+      "source": "/api/feedback",
+      "destination": "/api/telemetry-router?action=feedback"
+    }
+  ]
+}

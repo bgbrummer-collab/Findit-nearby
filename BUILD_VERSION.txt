@@ -1,1 +1,4 @@
-FindIt V10 + Awin SmartBuyGlasses + Global Currency Display + Paystack TEST
+FindIt V10 — Vercel Hobby Serverless Limit Fix
+API functions consolidated to 9 files.
+Existing endpoint URLs preserved using vercel.json rewrites.
+Search/directions/map/Awin/Paystack/Product Intelligence retained.

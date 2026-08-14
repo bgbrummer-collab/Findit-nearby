@@ -1,0 +1,9 @@
+PASS: API functions reduced to 9
+PASS: Vercel Hobby limit <= 12
+PASS: existing API URLs preserved by rewrites
+PASS: analytics + feedback consolidated
+PASS: health endpoints consolidated
+PASS: Paystack init + verify consolidated
+PASS: catalog + Awin importer consolidated
+PASS: search / nearby / assistant / product-intelligence / fx retained
+PASS: JavaScript syntax checks passed
