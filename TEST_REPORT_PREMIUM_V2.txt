@@ -1,0 +1,20 @@
+FindIt Premium V2
+=================
+WORKING:
+- Large Premium homepage transformation
+- Completely different Premium drawer/menu
+- Premium activation visual transformation
+- Advanced Find shortcut
+- Up to 25 km nearby search (frontend + backend support)
+- Saved Items library from local FindIt saves
+- Compare Stores from current nearby search
+- Store sorting: closest, A-Z, original/best-match order
+- Nearby Map shortcut
+- Extended recent history: 50 Premium vs 12 Free
+- Premium Challenge shortcut
+- Premium dashboard counts
+- Existing feedback + private analytics retained
+- Nearby analytics retained without duplicate event call
+- Price Alerts clearly marked COMING SOON
+- Payments disabled; no card data collected
+- JavaScript syntax checks passed

@@ -32,10 +32,106 @@
   <aside id="drawer" class="drawer" aria-hidden="true">
     <div class="drawer-head"><div class="brand"><span class="brand-mark">F</span><span>FindIt <b>Nearby</b></span></div><button id="closeMenu" class="icon-btn">×</button></div>
     <nav class="drawer-nav"><a href="#home">⌂ Home</a><a href="#finder">📸 Find an item</a><a href="#how">✨ How it works</a><button id="openRecent">🕘 Recent finds</button><a href="#feedback">💬 Feedback</a><button id="openSettings">⚙ Settings</button></nav>
-  </aside>
+  
+<nav id="premiumDrawerNav" class="drawer-nav premium-drawer-nav">
+  <div class="premium-menu-title"><span>★</span><div><b>FindIt Premium</b><small>Power workspace</small></div></div>
+  <a href="#premiumHome">✦ Premium Home</a>
+  <a href="#finder">⌕ Advanced Find</a>
+  <button id="premiumSavedMenu">♡ Saved Items</button>
+  <button id="premiumCompareMenu">⇄ Compare Stores</button>
+  <a href="#nearbyPanel">⌖ Nearby Map</a>
+  <button id="premiumRadiusMenu">◎ Search Radius</button>
+  <button id="premiumFiltersMenu">≡ Smart Filters</button>
+  <button id="premiumHistoryMenu">◷ Extended History</button>
+  <button id="premiumChallengeMenu">✦ Premium Challenge</button>
+  <button class="premium-coming" disabled>♢ Price Alerts <small>COMING SOON</small></button>
+  <a href="#feedback">💬 Feedback</a>
+  <button id="openSettingsPremium">⚙ Premium Settings</button>
+</nav>
+
+</aside>
   <div id="drawerBackdrop" class="backdrop hidden"></div>
 
   <main id="home">
+
+<section id="premiumHome" class="premium-home hidden">
+  <div class="premium-home-top">
+    <div>
+      <p class="premium-home-kicker">★ FINDIT PREMIUM</p>
+      <h1>Your FindIt just got <span>bigger.</span></h1>
+      <p>Advanced search, a wider radius, saved finds, store comparison and smarter controls — all in one workspace.</p>
+    </div>
+    <div class="premium-level-card">
+      <span>PREMIUM BETA</span>
+      <strong>Unlocked</strong>
+      <small>No payment during beta</small>
+    </div>
+  </div>
+
+  <div class="premium-command-grid">
+    <button class="premium-command primary" data-premium-action="find"><span>⌕</span><div><b>Advanced Find</b><small>Photo search with Premium controls</small></div></button>
+    <button class="premium-command" data-premium-action="saved"><span>♡</span><div><b>Saved Items</b><small id="premiumSavedCount">0 saved</small></div></button>
+    <button class="premium-command" data-premium-action="compare"><span>⇄</span><div><b>Compare Stores</b><small>Compare your current results</small></div></button>
+    <button class="premium-command" data-premium-action="map"><span>⌖</span><div><b>Nearby Map</b><small>Explore retailers visually</small></div></button>
+  </div>
+
+  <div class="premium-control-deck">
+    <div>
+      <p class="deck-label">SEARCH RANGE</p>
+      <div class="radius-pills">
+        <button data-premium-radius="5">5 km</button>
+        <button data-premium-radius="10">10 km</button>
+        <button data-premium-radius="15">15 km</button>
+        <button data-premium-radius="25">25 km</button>
+      </div>
+    </div>
+    <div>
+      <p class="deck-label">STORE SORTING</p>
+      <div class="radius-pills">
+        <button data-store-sort="closest">Closest</button>
+        <button data-store-sort="name">A–Z</button>
+        <button data-store-sort="original">Best match</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="premium-insights">
+    <article><span>◷</span><div><b id="premiumHistoryCount">0</b><small>Recent finds</small></div></article>
+    <article><span>⌖</span><div><b id="premiumRadiusDisplay">10 km</b><small>Current radius</small></div></article>
+    <article><span>♡</span><div><b id="premiumFavouriteCount">0</b><small>Saved finds</small></div></article>
+    <article><span>⇄</span><div><b id="premiumStoreCount">0</b><small>Stores ready to compare</small></div></article>
+  </div>
+</section>
+
+<div id="premiumSavedModal" class="premium-tool-modal hidden">
+  <div class="premium-tool-card">
+    <button class="premium-tool-close" data-close-tool="saved">×</button>
+    <p class="premium-home-kicker">PREMIUM LIBRARY</p><h2>Saved Items</h2>
+    <div id="premiumSavedList" class="premium-saved-list"></div>
+  </div>
+</div>
+
+<div id="premiumCompareModal" class="premium-tool-modal hidden">
+  <div class="premium-tool-card premium-tool-wide">
+    <button class="premium-tool-close" data-close-tool="compare">×</button>
+    <p class="premium-home-kicker">PREMIUM COMPARE</p><h2>Compare Stores</h2>
+    <p class="premium-tool-note">Compare consumer retailers from your current search. Exact stock and prices are only shown when verified data exists.</p>
+    <div id="premiumCompareList" class="premium-compare-grid"></div>
+  </div>
+</div>
+
+<div id="premiumFiltersModal" class="premium-tool-modal hidden">
+  <div class="premium-tool-card">
+    <button class="premium-tool-close" data-close-tool="filters">×</button>
+    <p class="premium-home-kicker">SMART FILTERS</p><h2>Control your store results</h2>
+    <div class="premium-filter-options">
+      <button data-store-sort="closest">📍 Closest first</button>
+      <button data-store-sort="name">🔤 Store name A–Z</button>
+      <button data-store-sort="original">✨ Best match / original order</button>
+    </div>
+  </div>
+</div>
+
     <section class="hero shell reveal">
       <div class="hero-copy">
         <p class="eyebrow">PHOTO → IDENTIFY → FIND NEARBY</p>
@@ -57,7 +153,7 @@
 
     <section id="finder" class="shell search-card reveal">
       <div class="section-kicker">START SEARCHING</div>
-      <div class="section-title-row"><div><h2>What are you looking for?</h2><p>Use a clear photo. Logos, labels and model text help FindIt be more precise.</p></div><div class="radius-control"><label for="radiusSelect">Radius</label><select id="radiusSelect"><option value="3">3 km</option><option value="5">5 km</option><option value="10" selected>10 km</option></select></div></div>
+      <div class="section-title-row"><div><h2>What are you looking for?</h2><p>Use a clear photo. Logos, labels and model text help FindIt be more precise.</p></div><div class="radius-control"><label for="radiusSelect">Radius</label><select id="radiusSelect"><option value="3">3 km</option><option value="5">5 km</option><option value="10" selected>10 km</option><option value="15" data-premium-option>15 km ★</option><option value="25" data-premium-option>25 km ★</option></select></div></div>
       <div class="finder-grid">
         <div id="dropzone" class="dropzone">
           <img id="preview" class="preview hidden" alt="Selected item preview">
@@ -129,7 +225,7 @@
   <div id="searchOverlay" class="search-overlay hidden"><div class="search-modal"><div class="search-image-wrap"><img id="searchOverlayImage" alt="Item being analysed"><div class="overlay-scan"></div></div><p class="section-kicker">FINDIT IS WORKING</p><h2 id="searchStage">Looking at your image…</h2><div class="progress"><i id="searchProgress"></i></div><p id="searchStageSub">Checking shapes, text and visible branding.</p></div></div>
 
   <div id="challengeModal" class="modal hidden"><div class="modal-card"><button class="modal-close" data-close-modal>×</button><p class="section-kicker">YOUR FINDIT CHALLENGE</p><h2 id="challengeText">Find something unusual.</h2><button id="newChallenge" class="btn primary">🎲 Another challenge</button></div></div>
-  <div id="settingsModal" class="modal hidden"><div class="modal-card"><button class="modal-close" data-close-modal>×</button><p class="section-kicker">SETTINGS</p><h2>Make FindIt yours</h2><label class="setting-row"><span>Animations</span><input id="animationsToggle" type="checkbox" checked></label><label class="setting-row"><span>Default radius</span><select id="settingsRadius"><option value="3">3 km</option><option value="5">5 km</option><option value="10" selected>10 km</option></select></label><button id="clearHistorySetting" class="btn secondary">Clear recent finds</button></div></div>
+  <div id="settingsModal" class="modal hidden"><div class="modal-card"><button class="modal-close" data-close-modal>×</button><p class="section-kicker">SETTINGS</p><h2>Make FindIt yours</h2><label class="setting-row"><span>Animations</span><input id="animationsToggle" type="checkbox" checked></label><label class="setting-row"><span>Default radius</span><select id="settingsRadius"><option value="3">3 km</option><option value="5">5 km</option><option value="10" selected>10 km</option><option value="15" data-premium-option>15 km ★</option><option value="25" data-premium-option>25 km ★</option></select></label><button id="clearHistorySetting" class="btn secondary">Clear recent finds</button></div></div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="script.js" defer></script>
