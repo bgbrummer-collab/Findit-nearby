@@ -228,7 +228,13 @@
         <div class="nearby-layout"><div id="nearbyStores" class="store-list"></div><div id="mapWrap" class="map-wrap"><div id="map"></div></div></div>
       </section>
 
-      <section id="freeActions" class="result-section hidden">
+      
+<section id="productIntelligencePanel" class="shell product-intelligence-panel hidden">
+  <div class="section-title-row"><div><p class="section-kicker">PRODUCT INTELLIGENCE</p><h3>Verified prices & availability</h3></div><span class="premium-chip">LIVE DATABASE</span></div>
+  <p class="pi-note">FindIt only shows prices or availability when that data exists in the verified product database.</p>
+  <div id="productIntelligenceResults" class="pi-grid"></div>
+</section>
+<section id="freeActions" class="result-section hidden">
         <p class="section-kicker">KEEP SEARCHING</p><div class="free-action-grid"><a id="searchOnline" target="_blank" rel="noopener noreferrer">🔎 <strong>Search exact item online</strong><span id="onlineQueryText"></span></a><a id="searchNearbyFree" target="_blank" rel="noopener noreferrer">📍 <strong>Search retailer type in Maps</strong><span>Consumer shops, not factories</span></a><button id="copyQuery">📋 <strong>Copy product name</strong><span>Use the exact search query</span></button><button id="shareFind">↗ <strong>Share this find</strong><span>Send it to someone</span></button></div>
       </section>
 
@@ -306,5 +312,13 @@
 
 <button id="premiumWorkspaceButton" class="premium-workspace-button hidden">★ Premium Tools</button>
 
+
+<button id="assistantFab" class="assistant-fab" type="button">✦ Ask FindIt</button>
+<div id="assistantPanel" class="assistant-panel hidden" aria-hidden="true">
+  <div class="assistant-head"><div><span>✦</span><b>FindIt Assistant</b><small>Ask about your Find or the app</small></div><button id="closeAssistant">×</button></div>
+  <div id="assistantMessages" class="assistant-messages"><div class="assistant-msg bot">Hi 👋 I’m FindIt Assistant. Ask me about your item, nearby stores, prices, stock labels, Premium tools or how FindIt works.</div></div>
+  <div class="assistant-quick"><button data-assistant-quick="What did FindIt identify?">What is this?</button><button data-assistant-quick="Why are there no nearby stores?">No stores?</button><button data-assistant-quick="Explain the price and stock information.">Price & stock?</button></div>
+  <form id="assistantForm" class="assistant-form"><input id="assistantInput" maxlength="500" placeholder="Ask FindIt Assistant..."><button>Send</button></form>
+</div>
 </body>
 </html>

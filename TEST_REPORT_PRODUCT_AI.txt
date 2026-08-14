@@ -1,0 +1,9 @@
+PASS: Product Intelligence API
+PASS: Supabase products/offers/retailers lookup
+PASS: Verified price & availability panel
+PASS: Honest fallback if no verified data
+PASS: FindIt Assistant using existing GEMINI_API_KEY
+PASS: Assistant gets current Find/nearby/product context
+PASS: Assistant instructed not to invent stores/prices/stock
+PASS: Premium floating clutter hidden after activation
+PASS: JS syntax checks
