@@ -1,0 +1,9 @@
+PASS: full script.js replacement
+PASS: old search/map/directions code retained unchanged
+PASS: Premium click intercepted before old local-beta unlock
+PASS: server-side Paystack initialize
+PASS: server-side Paystack verify
+PASS: R99 / ZAR / 9900 verification
+PASS: Premium unlock only after verified test payment
+PASS: PAYSTACK_SECRET_KEY stays server-side
+PASS: JavaScript syntax checks

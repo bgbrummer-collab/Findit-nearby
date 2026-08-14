@@ -1,4 +1,54 @@
 
+/* =========================================================
+   FINDIT PREMIUM — PAYSTACK TEST MODE
+   Safe override: existing search, map and directions logic
+   below is left unchanged.
+========================================================= */
+async function finditStartPremiumPayment(){
+  const email=window.prompt("Enter the email to use for FindIt Premium:");
+  if(!email)return;
+  try{
+    const r=await fetch("/api/paystack-init",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email})});
+    const d=await r.json();
+    if(!r.ok||!d.authorization_url){alert(d.error||"Could not start payment.");return}
+    sessionStorage.setItem("findit_pending_paystack_reference",d.reference||"");
+    window.location.assign(d.authorization_url);
+  }catch(e){console.error(e);alert("Payment could not start. Please try again.")}
+}
+async function finditFinishPremiumPayment(){
+  const p=new URLSearchParams(location.search);
+  if(p.get("premium_payment")!=="return")return;
+  const ref=p.get("reference")||p.get("trxref")||sessionStorage.getItem("findit_pending_paystack_reference");
+  if(!ref){alert("Payment reference missing.");return}
+  try{
+    const r=await fetch(`/api/paystack-verify?reference=${encodeURIComponent(ref)}`);
+    const d=await r.json();
+    if(!r.ok||!d.paid){alert("The test payment was not verified. Premium was not unlocked.");return}
+    premiumState.active=true;
+    localStorage.setItem("findit_premium_beta","1");
+    localStorage.setItem("findit_premium_payment_reference",d.reference||ref);
+    sessionStorage.removeItem("findit_pending_paystack_reference");
+    if(typeof refreshPremiumUI==="function")refreshPremiumUI();
+    if(typeof applyPremiumWorld==="function")applyPremiumWorld(true);
+    if(typeof updatePremiumDashboard==="function")updatePremiumDashboard();
+    if(typeof v10Refresh==="function")v10Refresh();
+    const u=new URL(location.href);["premium_payment","reference","trxref"].forEach(k=>u.searchParams.delete(k));
+    history.replaceState({},"",u.pathname+u.search+u.hash);
+    alert("Test payment verified ✓ FindIt Premium is unlocked on this device.");
+  }catch(e){console.error(e);alert("Payment verification could not be completed.")}
+}
+document.addEventListener("DOMContentLoaded",()=>{
+  const b=document.getElementById("activatePremiumTester");
+  if(b){
+    b.textContent="Get Premium — R99";
+    b.addEventListener("click",e=>{
+      e.preventDefault();e.stopImmediatePropagation();finditStartPremiumPayment();
+    },true);
+  }
+  finditFinishPremiumPayment();
+});
+
+
 let productIntelligence=null;
 async function loadProductIntelligence(i){
   const panel=document.getElementById("productIntelligencePanel"),el=document.getElementById("productIntelligenceResults");if(!panel||!el)return;

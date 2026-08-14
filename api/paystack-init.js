@@ -1,49 +1,18 @@
-export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
 
-  try {
-    const { email } = req.body;
-
-    if (!email) {
-      return res.status(400).json({ error: "Email is required" });
-    }
-
-    const response = await fetch(
-      "https://api.paystack.co/transaction/initialize",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          amount: 9900, // R99.00
-          currency: "ZAR",
-          callback_url: "https://findit-nearby.vercel.app/",
-          metadata: {
-            product: "FindIt Premium V10",
-          },
-        }),
-      }
-    );
-
-    const data = await response.json();
-
-    if (!response.ok || !data.status) {
-      return res.status(400).json({
-        error: data.message || "Could not start payment",
-      });
-    }
-
-    return res.status(200).json({
-      authorization_url: data.data.authorization_url,
-      reference: data.data.reference,
-    });
-  } catch (error) {
-    console.error("Paystack initialization error:", error);
-    return res.status(500).json({ error: "Payment initialization failed" });
-  }
+export default async function handler(req,res){
+  if(req.method!=="POST") return res.status(405).json({error:"Method not allowed"});
+  const secret=process.env.PAYSTACK_SECRET_KEY;
+  if(!secret) return res.status(503).json({error:"Paystack is not configured."});
+  const email=String(req.body?.email||"").trim();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return res.status(400).json({error:"A valid email is required."});
+  try{
+    const r=await fetch("https://api.paystack.co/transaction/initialize",{method:"POST",headers:{Authorization:`Bearer ${secret}`,"Content-Type":"application/json"},body:JSON.stringify({
+      email,amount:9900,currency:"ZAR",
+      callback_url:"https://findit-nearby.vercel.app/?premium_payment=return",
+      metadata:{product:"FindIt Premium V10",plan:"premium_beta_test",amount_zar:99}
+    })});
+    const d=await r.json();
+    if(!r.ok||!d.status||!d.data?.authorization_url) return res.status(400).json({error:d.message||"Could not start payment."});
+    return res.json({authorization_url:d.data.authorization_url,reference:d.data.reference});
+  }catch(e){console.error(e);return res.status(500).json({error:"Payment initialization failed."})}
 }
