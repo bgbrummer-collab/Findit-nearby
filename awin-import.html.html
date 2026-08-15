@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>FindIt • SmartBuyGlasses Import</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#050817;color:#f7f8ff;font-family:Inter,system-ui,sans-serif}
+main{max-width:920px;margin:auto;padding:36px 18px}
+.card{background:#0c132c;border:1px solid #29375d;border-radius:22px;padding:22px;margin:16px 0}
+h1{font-size:clamp(38px,7vw,66px);margin:4px 0}
+.g{background:linear-gradient(90deg,#966fff,#2bd7ff);-webkit-background-clip:text;color:transparent}
+label{display:block;margin:12px 0 6px;color:#aab6d1}
+input,button{width:100%;padding:13px;border-radius:12px;border:1px solid #35446c;background:#080f24;color:#fff}
+button{border:0;background:linear-gradient(90deg,#7457ff,#168fce);font-weight:900;cursor:pointer}
+button:disabled{opacity:.45;cursor:not-allowed}
+.muted{color:#91a0bd;font-size:13px}
+.ok{color:#79e7ae}.err{color:#ff9aaa}
+.bar{height:12px;background:#121a35;border-radius:999px;overflow:hidden;margin:12px 0}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#7658ff,#25c9ff);transition:.2s}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stats div{background:#081024;border:1px solid #263456;border-radius:14px;padding:13px}
+.stats b{display:block;font-size:24px}.stats small{color:#8f9dbb}
+@media(max-width:600px){.stats{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+<p class="muted">FINDIT • PRIVATE ADMIN</p>
+<h1>Awin <span class="g">SmartBuyGlasses ZA</span></h1>
+<p class="muted">Built for the exact 21-column SmartBuyGlasses ZA Awin CSV feed.</p>
+
+<div class="card">
+<label>FindIt admin key</label>
+<input id="key" type="password" autocomplete="off" placeholder="FINDIT_ADMIN_KEY">
+
+<label>SmartBuyGlasses ZA CSV</label>
+<input id="file" type="file" accept=".csv,text/csv">
+
+<p id="fileInfo" class="muted">Choose 128561-116794-en_ZA-Default.csv</p>
+<button id="scan" disabled>Check CSV</button>
+<button id="go" disabled style="margin-top:9px">Import to FindIt</button>
+
+<div class="bar"><i id="progress"></i></div>
+<p id="status" class="muted">Waiting for a CSV.</p>
+
+<div class="stats">
+<div><b id="done">0</b><small>Processed</small></div>
+<div><b id="imported">0</b><small>Imported</small></div>
+<div><b id="changes">0</b><small>Price changes</small></div>
+</div>
+</div>
+
+<div class="card">
+<h3>Expected feed</h3>
+<p class="muted">The importer validates these exact fields: aw_deep_link, product_name, aw_product_id, merchant_product_id, merchant_image_url, description, merchant_category, search_price, merchant_name, merchant_id, category_name, category_id, aw_image_url, currency, store_price, delivery_cost, merchant_deep_link, language, last_updated, display_price and data_feed_id.</p>
+</div>
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+const expected = [
+"aw_deep_link","product_name","aw_product_id","merchant_product_id","merchant_image_url",
+"description","merchant_category","search_price","merchant_name","merchant_id",
+"category_name","category_id","aw_image_url","currency","store_price","delivery_cost",
+"merchant_deep_link","language","last_updated","display_price","data_feed_id"
+];
+
+let selectedFile = null;
+let header = [];
+let verified = false;
+
+function parseLine(line){
+  const cols=[];
+  let value="", quoted=false;
+  for(let i=0;i<line.length;i++){
+    const c=line[i], n=line[i+1];
+    if(c === '"' && quoted && n === '"'){ value+='"'; i++; continue; }
+    if(c === '"'){ quoted=!quoted; continue; }
+    if(c === ',' && !quoted){ cols.push(value); value=""; continue; }
+    value+=c;
+  }
+  cols.push(value);
+  return cols;
+}
+
+async function readFirstLine(file){
+  const chunk = file.slice(0, 256 * 1024);
+  const text = await chunk.text();
+  const idx = text.indexOf("\n");
+  return (idx >= 0 ? text.slice(0, idx) : text).replace(/\r$/,"");
+}
+
+async function* csvRows(file){
+  const reader = file.stream().pipeThrough(new TextDecoderStream()).getReader();
+  let buffer="", row=[], value="", quoted=false, headers=null;
+
+  while(true){
+    const {value:chunk,done}=await reader.read();
+    if(done) break;
+    buffer += chunk;
+
+    let i=0;
+    while(i<buffer.length){
+      const c=buffer[i], n=buffer[i+1];
+
+      if(c === '"' && quoted && n === '"'){
+        value += '"'; i += 2; continue;
+      }
+      if(c === '"'){
+        quoted = !quoted; i++; continue;
+      }
+      if(c === ',' && !quoted){
+        row.push(value); value=""; i++; continue;
+      }
+      if((c === "\n" || c === "\r") && !quoted){
+        if(c === "\r" && n === "\n") i++;
+        row.push(value); value="";
+        if(row.some(x=>String(x).trim()!=="")){
+          if(!headers){
+            headers = row.map(x=>String(x).trim().replace(/^\uFEFF/,""));
+          }else{
+            const obj={};
+            for(let j=0;j<headers.length;j++) obj[headers[j]]=row[j]??"";
+            yield obj;
+          }
+        }
+        row=[]; i++; continue;
+      }
+      value += c; i++;
+    }
+
+    buffer = "";
+  }
+
+  if(value || row.length){
+    row.push(value);
+    if(headers && row.some(x=>String(x).trim()!=="")){
+      const obj={};
+      for(let j=0;j<headers.length;j++) obj[headers[j]]=row[j]??"";
+      yield obj;
+    }
+  }
+}
+
+$("file").addEventListener("change",()=>{
+  selectedFile = $("file").files?.[0] || null;
+  verified=false;
+  $("scan").disabled=!selectedFile;
+  $("go").disabled=true;
+  $("status").className="muted";
+  $("progress").style.width="0%";
+  $("done").textContent="0";
+  $("imported").textContent="0";
+  $("changes").textContent="0";
+
+  if(selectedFile){
+    $("fileInfo").textContent = `${selectedFile.name} • ${(selectedFile.size/1024/1024).toFixed(1)} MB`;
+    $("status").textContent = "CSV selected. Click Check CSV.";
+  }
+});
+
+$("scan").addEventListener("click", async ()=>{
+  if(!selectedFile) return;
+
+  try{
+    $("scan").disabled=true;
+    $("status").className="muted";
+    $("status").textContent="Checking CSV header…";
+
+    const firstLine = await readFirstLine(selectedFile);
+    header = parseLine(firstLine).map(x=>String(x).trim().replace(/^\uFEFF/,""));
+
+    const missing = expected.filter(x=>!header.includes(x));
+    if(missing.length) throw new Error("Wrong CSV. Missing columns: "+missing.join(", "));
+
+    if(header.length !== 21){
+      throw new Error(`Expected 21 columns, found ${header.length}.`);
+    }
+
+    verified=true;
+    $("status").className="ok";
+    $("status").textContent="CSV verified ✓ Exact SmartBuyGlasses ZA format detected.";
+    $("go").disabled=false;
+  }catch(e){
+    console.error(e);
+    verified=false;
+    $("status").className="err";
+    $("status").textContent =
+      e?.name === "NotFoundError"
+      ? "Windows/browser lost access to this file. Copy the CSV to your Desktop, choose it again, then click Check CSV."
+      : (e?.message || "Could not read this CSV.");
+  }finally{
+    $("scan").disabled=!selectedFile;
+  }
+});
+
+$("go").addEventListener("click", async ()=>{
+  if(!selectedFile || !verified) return;
+
+  const key=$("key").value.trim();
+  if(!key){ alert("Enter your FindIt admin key."); return; }
+
+  $("go").disabled=true;
+  $("scan").disabled=true;
+  $("status").className="muted";
+
+  let batch=[], processed=0, imported=0, changes=0;
+  const batchSize=250;
+
+  async function sendBatch(rows){
+    const response=await fetch("/api/awin-feed-import",{
+      method:"POST",
+      headers:{
+        "content-type":"application/json",
+        "x-findit-admin-key":key
+      },
+      body:JSON.stringify({rows})
+    });
+
+    const data=await response.json();
+    if(!response.ok) throw new Error(data.details || data.error || "Import failed.");
+
+    imported += data.imported || 0;
+    changes += data.priceChanges || 0;
+    processed += rows.length;
+
+    $("done").textContent=processed.toLocaleString();
+    $("imported").textContent=imported.toLocaleString();
+    $("changes").textContent=changes.toLocaleString();
+
+    const pct = Math.min(99, (processed * 100 * 700) / Math.max(selectedFile.size,1));
+    $("progress").style.width = Math.min(99,pct).toFixed(1)+"%";
+    $("status").textContent=`Importing… ${processed.toLocaleString()} rows processed. Keep this tab open.`;
+  }
+
+  try{
+    for await (const row of csvRows(selectedFile)){
+      batch.push(row);
+      if(batch.length>=batchSize){
+        await sendBatch(batch);
+        batch=[];
+      }
+    }
+
+    if(batch.length) await sendBatch(batch);
+
+    $("progress").style.width="100%";
+    $("status").className="ok";
+    $("status").textContent=`Done ✓ ${imported.toLocaleString()} products imported. ${changes.toLocaleString()} new/changed prices recorded.`;
+  }catch(e){
+    console.error(e);
+    $("status").className="err";
+    $("status").textContent =
+      e?.name === "NotFoundError"
+      ? "Windows/browser lost access to the CSV during import. Copy the CSV to Desktop and try again."
+      : (e?.message || "Import failed.");
+  }finally{
+    $("go").disabled=false;
+    $("scan").disabled=false;
+  }
+});
+</script>
+</body>
+</html>
