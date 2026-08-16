@@ -44,6 +44,41 @@ const ALLOWED_TOPICS=new Set([
   "idea"
 ]);
 
+function getFormspreeEndpoint(){
+  const raw=String(process.env.FORMSPREE_ENDPOINT||"").trim();
+  if(!raw)return null;
+  try{
+    const url=new URL(raw);
+    if(url.protocol!=="https:"||url.hostname!=="formspree.io"||!url.pathname.startsWith("/f/"))return null;
+    return url.toString();
+  }catch{return null;}
+}
+
+async function deliverToFormspree(endpoint,payload){
+  const technical=payload.technical||null;
+  const response=await fetch(endpoint,{
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json",
+      "Accept":"application/json"
+    },
+    body:JSON.stringify({
+      _subject:`FindIt feedback: ${payload.rating}/5 — ${payload.topic}`,
+      rating:payload.rating,
+      topic:payload.topic,
+      message:payload.message,
+      source:"FindIt Nearby",
+      createdAt:payload.createdAt,
+      technical:technical?JSON.stringify(technical):"Not included"
+    })
+  });
+  if(!response.ok){
+    const details=await response.text().catch(()=>"");
+    console.error("Formspree feedback delivery failed",response.status,details);
+    throw new Error("Formspree rejected the submission.");
+  }
+}
+
 async function feedbackHandler(req,res){
   res.setHeader("Cache-Control","no-store");
 
@@ -69,6 +104,26 @@ async function feedbackHandler(req,res){
       });
     }
 
+    const technical=sanitizeTechnical(body.technical);
+    const createdAt=new Date().toISOString();
+    const formspreeEndpoint=getFormspreeEndpoint();
+
+    if(formspreeEndpoint){
+      await deliverToFormspree(formspreeEndpoint,{
+        rating,
+        topic,
+        message,
+        technical,
+        createdAt
+      });
+      return res.status(200).json({
+        ok:true,
+        delivered:true,
+        destination:"formspree",
+        message:"Feedback sent to Formspree."
+      });
+    }
+
     const supabaseUrl =
       process.env.SUPABASE_URL ||
       process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -81,11 +136,9 @@ async function feedbackHandler(req,res){
       return res.status(200).json({
         ok:true,
         delivered:false,
-        message:"Central feedback storage is not configured yet. Supabase environment variables were not found."
+        message:"Feedback storage is not configured. Add FORMSPREE_ENDPOINT in Vercel."
       });
     }
-
-    const technical=sanitizeTechnical(body.technical);
 
     const row={
       rating,
@@ -93,7 +146,7 @@ async function feedbackHandler(req,res){
       message,
       technical,
       source:"FindIt Nearby",
-      created_at:new Date().toISOString()
+      created_at:createdAt
     };
 
     const response=await fetch(
@@ -119,6 +172,7 @@ async function feedbackHandler(req,res){
     return res.status(200).json({
       ok:true,
       delivered:true,
+      destination:"supabase",
       message:"Feedback saved."
     });
 
