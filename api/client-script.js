@@ -112,15 +112,15 @@ const PATCH=`
 
   if(typeof renderStores==="function"){
     renderStores=function(){
-      if(!state.stores.length){nearbyStores.innerHTML='';if(typeof updatePremiumDashboard==="function")updatePremiumDashboard();return}
+      if(!state.stores.length){nearbyStores.innerHTML='';if(typeof updatePremiumDashboard==="function")updatePremiumDashboard();return;}
       if(premiumState.active&&premiumStoreSort!=="original")state.stores=sortedPremiumStores();
-      nearbyStores.innerHTML=state.stores.map((s,i)=>{
+      nearbyStores.innerHTML=state.stores.map(function(s,i){
         const verified=branchVerified(s);
-        const directions=verified?`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${s.lat},${s.lon}`)}`:null;
-        return `<article class="store-card" data-store="${i}"><span class="store-rank">${i+1}</span><div class="store-main"><strong>${esc(s.name)}</strong><small>${esc(s.address||s.type||'Retailer')}</small><div class="store-tags"><span>${esc(s.type||'retail')}</span><span>Consumer retailer</span><span>${verified?'Exact branch stock verified':'Exact item not verified here'}</span></div>${premiumState.active?`<label class="premium-compare-check"><input type="checkbox" data-compare-store="${i}" ${premiumCompareSelection.has(i)?"checked":""}> Compare</label>`:""}</div><div class="store-side"><div class="store-distance">${Number(s.distanceKm).toFixed(1)} km</div><div class="store-actions">${s.phone?`<a href="tel:${esc(s.phone)}">Call</a>`:''}${validUrl(s.website)?`<a href="${esc(s.website)}" target="_blank" rel="noopener noreferrer">Website</a>`:''}${directions?`<a href="${directions}" target="_blank" rel="noopener noreferrer">Directions</a>`:'<span title="Directions unlock only when exact branch stock is verified">Directions unavailable</span>'}</div></div></article>`;
+        const directions=verified?("https://www.google.com/maps/dir/?api=1&destination="+encodeURIComponent(String(s.lat)+","+String(s.lon))):null;
+        return '<article class="store-card" data-store="'+i+'"><span class="store-rank">'+(i+1)+'</span><div class="store-main"><strong>'+esc(s.name)+'</strong><small>'+esc(s.address||s.type||"Retailer")+'</small><div class="store-tags"><span>'+esc(s.type||"retail")+'</span><span>Consumer retailer</span><span>'+(verified?"Exact branch stock verified":"Exact item not verified here")+'</span></div>'+(premiumState.active?'<label class="premium-compare-check"><input type="checkbox" data-compare-store="'+i+'" '+(premiumCompareSelection.has(i)?"checked":"")+'> Compare</label>':"")+'</div><div class="store-side"><div class="store-distance">'+Number(s.distanceKm).toFixed(1)+' km</div><div class="store-actions">'+(s.phone?'<a href="tel:'+esc(s.phone)+'">Call</a>':"")+(validUrl(s.website)?'<a href="'+esc(s.website)+'" target="_blank" rel="noopener noreferrer">Website</a>':"")+(directions?'<a href="'+directions+'" target="_blank" rel="noopener noreferrer">Directions</a>':'<span title="Directions unlock only when exact branch stock is verified">Directions unavailable</span>')+'</div></div></article>';
       }).join('');
-      $$('[data-store]').forEach(card=>card.onclick=e=>{if(e.target.closest('a,input,label'))return;selectStore(Number(card.dataset.store))});
-      $$('[data-compare-store]').forEach(c=>c.onchange=e=>{e.stopPropagation();const i=Number(c.dataset.compareStore);if(c.checked)premiumCompareSelection.add(i);else premiumCompareSelection.delete(i);if(typeof updatePremiumDashboard==="function")updatePremiumDashboard()});
+      $$('[data-store]').forEach(function(card){card.onclick=function(e){if(e.target.closest('a,input,label'))return;selectStore(Number(card.dataset.store));};});
+      $$('[data-compare-store]').forEach(function(c){c.onchange=function(e){e.stopPropagation();const i=Number(c.dataset.compareStore);if(c.checked)premiumCompareSelection.add(i);else premiumCompareSelection.delete(i);if(typeof updatePremiumDashboard==="function")updatePremiumDashboard();};});
       if(typeof updatePremiumDashboard==="function")updatePremiumDashboard();
     };
   }
@@ -128,9 +128,9 @@ const PATCH=`
   if(typeof renderPremiumCompare==="function"){
     renderPremiumCompare=function(){
       const el=document.getElementById("premiumCompareList");if(!el)return;
-      const base=sortedPremiumStores(),selected=base.filter((_,i)=>premiumCompareSelection.has(i)),list=(selected.length?selected:base).slice(0,4);
-      if(!list.length){el.innerHTML='<p class="muted">Run a FindIt search first. Nearby stores from that search will appear here.</p>';return}
-      el.innerHTML=list.map((s,i)=>{const verified=branchVerified(s),dir=verified?`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${s.lat},${s.lon}`)}`:null;return `<article class="compare-card ${i===0?'best':''}"><small>${i===0?'Closest in this comparison':'Retailer'}</small><h3>${esc(s.name)}</h3><div class="compare-distance">${Number(s.distanceKm).toFixed(1)} km</div><small>${esc(s.address||s.type||'Consumer retailer')}</small><br><small>${verified?'Exact branch stock verified':'Exact item not verified at this branch'}</small><br>${dir?`<a href="${dir}" target="_blank" rel="noopener noreferrer">Directions →</a>`:'<span>Directions unavailable</span>'}</article>`}).join('');
+      const base=sortedPremiumStores(),selected=base.filter(function(_,i){return premiumCompareSelection.has(i);}),list=(selected.length?selected:base).slice(0,4);
+      if(!list.length){el.innerHTML='<p class="muted">Run a FindIt search first. Nearby stores from that search will appear here.</p>';return;}
+      el.innerHTML=list.map(function(s,i){const verified=branchVerified(s),dir=verified?("https://www.google.com/maps/dir/?api=1&destination="+encodeURIComponent(String(s.lat)+","+String(s.lon))):null;return '<article class="compare-card '+(i===0?"best":"")+'"><small>'+(i===0?"Closest in this comparison":"Retailer")+'</small><h3>'+esc(s.name)+'</h3><div class="compare-distance">'+Number(s.distanceKm).toFixed(1)+' km</div><small>'+esc(s.address||s.type||"Consumer retailer")+'</small><br><small>'+(verified?"Exact branch stock verified":"Exact item not verified at this branch")+'</small><br>'+(dir?'<a href="'+dir+'" target="_blank" rel="noopener noreferrer">Directions →</a>':'<span>Directions unavailable</span>')+'</article>';}).join('');
     };
   }
 
