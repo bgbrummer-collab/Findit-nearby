@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/script.js",
+      "destination": "/api/client-script"
+    },
+    {
       "source": "/api/health",
       "destination": "/api/health-router?action=health"
     },
