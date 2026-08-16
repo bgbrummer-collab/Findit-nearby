@@ -1,6 +1,6 @@
 const CLIENT_ENHANCEMENTS=`
 ;(()=>{
-  const cleanWords=v=>String(v||"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim().split(/\s+/).filter(Boolean);
+  const cleanWords=v=>String(v||"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim().split(/\\s+/).filter(Boolean);
   function compactProductQuery(i){
     const out=[],seen=new Set();
     const add=v=>{for(const w of cleanWords(v)){if(!seen.has(w)){seen.add(w);out.push(w)}}};
@@ -22,18 +22,9 @@ const CLIENT_ENHANCEMENTS=`
   window.finditCompactProductQuery=compactProductQuery;
   const oldRender=typeof renderIdentification==="function"?renderIdentification:null;
   if(oldRender){renderIdentification=function(i){const out=oldRender(i);setTimeout(()=>addRetailerSearches(i),0);return out}}
-  const style=document.createElement("style");style.textContent=`
-    .findit-retailer-searches{margin:18px 0;padding:16px;border:1px solid rgba(120,130,255,.24);border-radius:18px;background:rgba(15,23,42,.72)}
-    .findit-retailer-head strong,.findit-retailer-head small{display:block}.findit-retailer-head small{margin-top:5px;color:#8d9ab0;font-size:11px;line-height:1.5}
-    .findit-retailer-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}.findit-retailer-grid a{padding:11px 12px;border:1px solid rgba(255,255,255,.09);border-radius:12px;text-decoration:none;background:#111a2d;font-size:11px;font-weight:800}.findit-retailer-grid a span{float:right;color:#9b8fff}
-    @media(max-width:700px){.findit-retailer-grid{grid-template-columns:1fr}.premium-fab{right:10px!important;bottom:88px!important;padding:9px 13px!important;font-size:13px!important}.assistant-fab{right:10px!important;bottom:22px!important;padding:9px 13px!important;font-size:13px!important}.mobile-nav{padding-right:145px!important}.results-shell{padding-bottom:110px!important}}
-    @media(max-width:430px){.premium-fab,.assistant-fab{max-width:138px!important}.assistant-fab{font-size:12px!important}.mobile-nav{padding-right:140px!important}}
-  `;document.head.appendChild(style);
-
-  const subscriptionScript=document.createElement("script");
-  subscriptionScript.src="/subscription.js?v=1";
-  subscriptionScript.defer=true;
-  document.head.appendChild(subscriptionScript);
+  const style=document.createElement("style");
+  style.textContent='.findit-retailer-searches{margin:18px 0;padding:16px;border:1px solid rgba(120,130,255,.24);border-radius:18px;background:rgba(15,23,42,.72)} .findit-retailer-head strong,.findit-retailer-head small{display:block}.findit-retailer-head small{margin-top:5px;color:#8d9ab0;font-size:11px;line-height:1.5}.findit-retailer-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}.findit-retailer-grid a{padding:11px 12px;border:1px solid rgba(255,255,255,.09);border-radius:12px;text-decoration:none;background:#111a2d;font-size:11px;font-weight:800}.findit-retailer-grid a span{float:right;color:#9b8fff}@media(max-width:700px){.findit-retailer-grid{grid-template-columns:1fr}.premium-fab{right:10px!important;bottom:88px!important;padding:9px 13px!important;font-size:13px!important}.assistant-fab{right:10px!important;bottom:22px!important;padding:9px 13px!important;font-size:13px!important}.mobile-nav{padding-right:145px!important}.results-shell{padding-bottom:110px!important}}@media(max-width:430px){.premium-fab,.assistant-fab{max-width:138px!important}.assistant-fab{font-size:12px!important}.mobile-nav{padding-right:140px!important}}';
+  document.head.appendChild(style);
 })();
 `;
 
@@ -60,12 +51,12 @@ async function feedbackHealthHandler(req,res){
   const supabaseUrl=process.env.SUPABASE_URL||process.env.NEXT_PUBLIC_SUPABASE_URL;
   const serviceKey=process.env.SUPABASE_SERVICE_ROLE_KEY||process.env.SUPABASE_SECRET_KEY;
   if(endpoint){
-    let valid=false;try{const u=new URL(endpoint);valid=u.protocol==="https:"&&/^(formspree\.io|www\.formspree\.io)$/i.test(u.hostname)&&/^\/f\/[A-Za-z0-9_-]+\/?$/.test(u.pathname)}catch{}
+    let valid=false;try{const u=new URL(endpoint);valid=u.protocol==="https:"&&/^(formspree\\.io|www\\.formspree\\.io)$/i.test(u.hostname)&&/^\\/f\\/[A-Za-z0-9_-]+\\/?$/.test(u.pathname)}catch{}
     return res.status(valid?200:500).json({ok:valid,provider:"formspree",formspreeConfigured:true,message:valid?"Formspree feedback delivery is configured.":"FORMSPREE_ENDPOINT is present but does not look like a valid Formspree form endpoint."});
   }
   if(!supabaseUrl||!serviceKey)return res.status(500).json({ok:false,provider:null,formspreeConfigured:false,supabaseConfigured:false,message:"No central feedback destination is configured."});
   try{
-    const response=await fetch(`${supabaseUrl.replace(/\/$/,"")}/rest/v1/feedback?select=id&limit=1`,{method:"GET",headers:{apikey:serviceKey,Authorization:`Bearer ${serviceKey}`}});
+    const response=await fetch(`${supabaseUrl.replace(/\\/$/,"")}/rest/v1/feedback?select=id&limit=1`,{method:"GET",headers:{apikey:serviceKey,Authorization:`Bearer ${serviceKey}`}});
     return res.status(response.ok?200:502).json({ok:response.ok,provider:"supabase",formspreeConfigured:false,supabaseConfigured:true,feedbackTableReachable:response.ok,message:response.ok?"Supabase feedback storage is ready.":"Supabase is configured, but the feedback table could not be reached."});
   }catch(error){return res.status(502).json({ok:false,provider:"supabase",formspreeConfigured:false,supabaseConfigured:true,feedbackTableReachable:false,message:error?.message||"Feedback storage check failed."})}
 }
