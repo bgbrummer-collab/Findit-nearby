@@ -28,8 +28,33 @@ const PATCH=`
     document.getElementById("v10CommandCentre")?.scrollIntoView({behavior:"smooth",block:"start"});
   }
 
+  function refineIdentification(i){
+    if(!i||typeof i!=="object")return i;
+    const text=[i.object,i.name,i.category,i.searchQuery,i.summary,...(Array.isArray(i.features)?i.features:[])].filter(Boolean).join(" ").toLowerCase();
+    const visible=(Array.isArray(i.visibleText)?i.visibleText:[]).join(" ").toLowerCase();
+    const eyewear=/\b(glasses|eyeglasses|spectacles|sunglasses|eyewear|frames?)\b/.test(text);
+    const certifiedSafety=/\b(ansi|z87|en166|ce certified|ppe|safety rated|impact rated)\b/.test(visible);
+    if(eyewear&&!certifiedSafety){
+      const wasSafety=/\b(safety|protective|ppe|industrial|side shields?)\b/.test(text);
+      i.object="eyeglasses";
+      if(wasSafety||!i.name)i.name="Eyeglasses / optical glasses";
+      i.category="Eyewear";
+      i.retailCategory="eyewear";
+      i.likelyStoreTypes=["optician","eyewear store"];
+      if(wasSafety||!/\b(glasses|eyeglasses|spectacles|sunglasses)\b/.test(String(i.searchQuery||"").toLowerCase()))i.searchQuery="eyeglasses optical frames";
+      if(wasSafety)i.summary="A pair of optical-style glasses. FindIt avoids classifying eyewear as industrial safety equipment unless visible certification or safety markings support that claim.";
+    }
+    return i;
+  }
+
   window.finditUseFreeMode=freeMode;
   window.finditUsePremiumMode=premiumMode;
+  window.finditRefineIdentification=refineIdentification;
+
+  if(typeof renderIdentification==="function"){
+    const originalRenderIdentification=renderIdentification;
+    renderIdentification=function(i){return originalRenderIdentification(refineIdentification(i));};
+  }
 
   document.addEventListener("DOMContentLoaded",()=>{
     freeMode();
