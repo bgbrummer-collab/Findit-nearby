@@ -1,0 +1,24 @@
+name: FindIt smoke checks
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check JavaScript syntax
+        run: |
+          node --check api/client-script.js
+          node --check api/product-intelligence.js
+          node --check api/nearby.js
+          node --check api/search.js
+          node --check script.js
+      - name: Check Vercel config JSON
+        run: node -e "JSON.parse(require('fs').readFileSync('vercel.json','utf8')); console.log('vercel.json OK')"
