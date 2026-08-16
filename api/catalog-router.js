@@ -1,5 +1,10 @@
 
 async function catalogImportHandler(req,res){
+    res.setHeader("Access-Control-Allow-Origin","*");
+  res.setHeader("Access-Control-Allow-Methods","POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers","Content-Type, x-findit-admin-key");
+
+  if(req.method==="OPTIONS") return res.status(204).end();
   if(req.method!=="POST") return res.status(405).json({error:"Method not allowed"});
   const admin=process.env.FINDIT_ADMIN_KEY;
   if(!admin || req.headers["x-findit-admin-key"]!==admin) return res.status(401).json({error:"Unauthorized"});
@@ -131,6 +136,11 @@ function iso(v){if(!v)return null;const d=new Date(v);return Number.isNaN(d.getT
 
 async function awinImportHandler(req,res){
   res.setHeader("Cache-Control","no-store");
+    res.setHeader("Access-Control-Allow-Origin","*");
+  res.setHeader("Access-Control-Allow-Methods","POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers","Content-Type, x-findit-admin-key");
+
+  if(req.method==="OPTIONS") return res.status(204).end();
   if(req.method!=="POST") return res.status(405).json({error:"Method not allowed"});
 
   const admin=process.env.FINDIT_ADMIN_KEY;
