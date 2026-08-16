@@ -1,40 +1,49 @@
-const ENDPOINTS=["https://overpass.kumi.systems/api/interpreter","https://overpass-api.de/api/interpreter","https://overpass.nchc.org.tw/api/interpreter"];
-
-const TAXONOMY={
-  grocery:{shops:["supermarket","convenience","general","department_store","variety_store"],amenities:["fuel"]},
-  clothing:{shops:["clothes","fashion","department_store","variety_store"]},footwear:{shops:["shoes","clothes","sports","department_store"]},sports:{shops:["sports","outdoor","bicycle","clothes","shoes","department_store"]},
-  electronics:{shops:["electronics","hifi","computer","mobile_phone","camera","department_store"]},music:{shops:["musical_instrument","hifi","electronics","music"]},
-  hardware:{shops:["hardware","doityourself","trade","department_store"]},home:{shops:["houseware","doityourself","hardware","furniture","lighting","department_store"]},
-  stationery:{shops:["stationery","books","variety_store","department_store"]},books:{shops:["books","stationery","department_store"]},toys:{shops:["toys","variety_store","department_store"]},
-  beauty:{shops:["beauty","cosmetics","perfumery","chemist","department_store"],amenities:["pharmacy"]},pharmacy:{shops:["chemist","medical_supply"],amenities:["pharmacy"]},
-  medical:{shops:["medical_supply","chemist","hearing_aids","optician"],amenities:["pharmacy","clinic"]},hearing:{shops:["hearing_aids","medical_supply","chemist"],amenities:["clinic"]},optical:{shops:["optician","chemist","medical_supply"]},
-  pet:{shops:["pet","supermarket"]},garden:{shops:["florist","garden_centre","agrarian","supermarket"]},agrarian:{shops:["agrarian","garden_centre","hardware"]},
-  automotive:{shops:["car_parts","tyres","motorcycle"],amenities:["fuel"]},motorcycle:{shops:["motorcycle","car_parts","tyres"]},bicycle:{shops:["bicycle","sports","outdoor"]},
-  jewellery:{shops:["jewelry","watches","department_store"]},baby:{shops:["baby_goods","clothes","toys","department_store","supermarket","chemist"]},
-  art:{shops:["art","craft","stationery","variety_store"]},craft:{shops:["craft","fabric","sewing","stationery","variety_store"]},hobby:{shops:["hobby","toys","sports"]},outdoor:{shops:["outdoor","sports","fishing","bicycle"]},
-  office:{shops:["stationery","computer","electronics","furniture"]},industrial:{shops:["trade","hardware","electrical"]},electrical:{shops:["electronics","hardware","doityourself"]},plumbing:{shops:["hardware","doityourself"]},security:{shops:["electronics","hardware"]},
-  party:{shops:["gift","variety_store","department_store"]},gift:{shops:["gift","variety_store","department_store"]},luggage:{shops:["bag","leather","department_store","clothes"]},workwear:{shops:["clothes","hardware"]},scientific:{shops:["camera","electronics","hobby"]},pool:{shops:["swimming_pool","hardware","garden_centre"]},
-  general_retail:{shops:["department_store","mall","general","variety_store","supermarket","convenience"]}
-};
 const norm=v=>String(v||"").trim().toLowerCase();
-function infer(i={}){
-  const declared=norm(i.retailCategory).replace(/\s+/g,"_"); if(TAXONOMY[declared]) return declared;
-  const x=norm([i.object,i.name,i.category,i.searchQuery,i.brand,...(i.visibleText||[]),...(i.likelyStoreTypes||[])].join(" "));
-  const rules=[
-    ["hearing",/hearing aid|audiology|hearing-aid/],["optical",/eyeglass|glasses|spectacle|sunglasses|contact lens|optician|eyewear/],["medical",/wheelchair|crutch|stethoscope|blood pressure|orthopaedic|medical supply|first aid/],
-    ["grocery",/hot chocolate|cocoa|energy drink|soft drink|soda|beverage|juice|monster|red bull|tissue|toilet paper|grocery|snack|food|drink|cleaning|soap|shampoo|household|coffee|tea|milk|cereal|chocolate/],
-    ["footwear",/shoe|sneaker|boot|sandal|footwear/],["clothing",/shirt|sweater|hoodie|jacket|dress|jeans|clothing|fashion|apparel|uniform/],["sports",/football|soccer|rugby|cricket|tennis|gym|fitness|sports/],["bicycle",/bicycle|cycling|bike part/],["outdoor",/camping|fishing|binocular|outdoor|tent/],
-    ["music",/microphone|guitar|piano|music|audio interface|mixer|vinyl|turntable/],["office",/printer ink|toner|label printer|barcode scanner|office supply/],["security",/security camera|alarm|cctv|smart home sensor/],["electrical",/electrical component|ups|surge protector|inverter|solar panel/],["plumbing",/plumbing|pipe fitting|valve/],["industrial",/welding|industrial|generator/],
-    ["electronics",/headphone|headset|speaker|phone|smartphone|camera|computer|laptop|television|tv|earbud|electronics|charger|power bank|router|projector|drone|3d printer/],["hardware",/tool|drill|hammer|screwdriver|hardware|paint|lock|door hardware/],["home",/ceiling light|lamp|bulb|lighting|chair|table|sofa|furniture|fridge|microwave|kettle|appliance|cookware|bedding|curtain|mattress|vacuum/],
-    ["stationery",/pencil|pen|pencil case|stationery|notebook|school/],["books",/book|novel|textbook|magazine/],["craft",/craft|knitting|yarn|sewing|fabric|haberdashery/],["art",/art supply|canvas|paint brush/],["hobby",/rc car|model kit|trading card|collectible|hobby|cosplay/],["toys",/toy|lego|doll|puzzle|board game/],
-    ["pharmacy",/medicine|medication|tablet|capsule|pharmacy/],["beauty",/perfume|fragrance|makeup|cosmetic|skincare|salon/],["pet",/dog food|cat food|pet|aquarium|bird supply/],["agrarian",/horse tack|animal feed|farm tool|agrarian/],["garden",/flower|plant|seed|garden|bonsai|hydroponic|fertilizer|compost|irrigation/],
-    ["motorcycle",/motorcycle|motorbike/],["automotive",/car battery|tyre|tire|car part|vehicle part|automotive|motor oil|car audio|detailing/],["jewellery",/ring|necklace|bracelet|earring|watch|jewelry|jewellery/],["baby",/baby|stroller|pram|maternity/],["party",/party supply|costume|balloon/],["gift",/gift|souvenir|candle|decor/],["luggage",/luggage|suitcase|handbag|wallet/],["scientific",/microscope|telescope|laboratory/],["pool",/pool supply|pool chemical/]
-  ]; for(const [k,re] of rules) if(re.test(x)) return k; return "general_retail";
+
+export default async function handler(req,res){
+  res.setHeader("Cache-Control","no-store");
+  if(req.method!=="POST") return res.status(405).json({error:"Method not allowed"});
+
+  try{
+    const {lat,lon,identification={},radiusKm:requested}=req.body||{};
+    const a=Number(lat),b=Number(lon);
+    if(!Number.isFinite(a)||!Number.isFinite(b)) return res.status(400).json({error:"Valid location required"});
+
+    const radiusKm=Math.min(25,Math.max(3,Number(requested)||10));
+    const item=identification.name||identification.model||identification.object||"this product";
+    const brand=identification.brand||null;
+
+    /*
+      IMPORTANT PRODUCT-TRUTH RULE
+      ----------------------------
+      FindIt must not turn a product search into directions to a random shop that
+      merely sells the same CATEGORY. A shoe shop is not proof that it has the
+      exact Nike shoe; an optician is not proof that it has the exact frame.
+
+      This endpoint therefore returns map/direction stores ONLY when branch-level
+      product availability is verified by an authorised retailer source.
+
+      The current imported Awin/SmartBuyGlasses catalogue contains product-level
+      prices/listings, but does not provide reliable physical branch coordinates
+      plus branch stock. Until a retailer feed supplies that data, exact-store
+      directions stay hidden instead of being invented.
+    */
+
+    return res.status(200).json({
+      ok:true,
+      retailGroup:norm(identification.retailCategory||identification.category||"product"),
+      radiusKm,
+      stores:[],
+      reliable:true,
+      exactProductOnly:true,
+      branchStockVerified:false,
+      item,
+      brand,
+      message:`${brand?brand+" ":""}${item}: no verified physical branch with confirmed stock is connected yet. FindIt will not send you to a random category store.`,
+      disclaimer:"Directions are shown only when an authorised retailer source confirms the exact product at a specific physical branch."
+    });
+  }catch(e){
+    console.error("nearby",e);
+    return res.status(503).json({ok:false,reliable:false,stores:[],error:"Exact-store availability is temporarily unavailable."});
+  }
 }
-function dist(a,b,c,d){const R=6371,p=Math.PI/180,x=Math.sin((c-a)*p/2)**2+Math.cos(a*p)*Math.cos(c*p)*Math.sin((d-b)*p/2)**2;return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x))}
-function query(lat,lon,r,key){const c=TAXONOMY[key]||TAXONOMY.general_retail;const shops=(c.shops||[]).map(v=>`nwr(around:${r},${lat},${lon})["shop"="${v}"];`).join("");const am=(c.amenities||[]).map(v=>`nwr(around:${r},${lat},${lon})["amenity"="${v}"];`).join("");return `[out:json][timeout:18];(${shops}${am});out center tags;`}
-async function overpass(q){let last;for(const url of ENDPOINTS){try{const c=new AbortController(),t=setTimeout(()=>c.abort(),18000);const r=await fetch(url,{method:"POST",headers:{"content-type":"application/x-www-form-urlencoded;charset=UTF-8"},body:"data="+encodeURIComponent(q),signal:c.signal});clearTimeout(t);if(!r.ok)throw Error(`Overpass ${r.status}`);return await r.json()}catch(e){last=e}}throw last||Error("Nearby unavailable")}
-const BAD_PLACE=/factory|manufacturer|manufacturing|industrial|warehouse|distribution|distribution centre|distribution center|head office|corporate office|plant\b|works\b/i;
-function consumerFacing(tags){const shop=norm(tags.shop),amenity=norm(tags.amenity),office=norm(tags.office),industrial=norm(tags.industrial),craft=norm(tags.craft);if(shop)return true;if(["pharmacy","clinic","fuel","veterinary"].includes(amenity))return true;if(office||industrial||craft)return false;return false}
-function normalize(elements,lat,lon,max){const m=new Map();for(const x of elements||[]){const t=x.tags||{},a=Number(x.lat??x.center?.lat),b=Number(x.lon??x.center?.lon);if(!Number.isFinite(a)||!Number.isFinite(b)||!consumerFacing(t))continue;const name=t.name||t.brand||t.operator;if(!name||BAD_PLACE.test(`${name} ${t.description||""} ${t.industrial||""}`))continue;const d=dist(lat,lon,a,b);if(d>max+.05)continue;const k=norm(name)+"|"+Math.round(a*1000)+"|"+Math.round(b*1000);const v={name,type:t.shop||t.amenity||"retail",distanceKm:d,lat:a,lon:b,address:[t["addr:housenumber"],t["addr:street"],t["addr:suburb"],t["addr:city"]].filter(Boolean).join(" "),openingHours:t.opening_hours||null,phone:t.phone||t["contact:phone"]||null,website:t.website||t["contact:website"]||null};if(!m.has(k)||d<m.get(k).distanceKm)m.set(k,v)}return[...m.values()].sort((a,b)=>a.distanceKm-b.distanceKm)}
-export default async function handler(req,res){res.setHeader("Cache-Control","s-maxage=180, stale-while-revalidate=600");if(req.method!=="POST")return res.status(405).json({error:"Method not allowed"});try{const {lat,lon,identification={},radiusKm:requested}=req.body||{},a=Number(lat),b=Number(lon);if(!Number.isFinite(a)||!Number.isFinite(b))return res.status(400).json({error:"Valid location required"});const g=infer(identification),limit=Math.min(25,Math.max(3,Number(requested)||10)),stages=[3,5,10,15,20,25].filter(r=>r<=limit);if(!stages.includes(limit))stages.push(limit);let stores=[],used=stages[0];for(const r of stages){used=r;const data=await overpass(query(a,b,r*1000,g));stores=normalize(data.elements,a,b,r);if(stores.length>=4)break}stores=stores.slice(0,10);return res.status(200).json({ok:true,retailGroup:g,radiusKm:used,stores,reliable:stores.length>0,message:stores.length?`Showing closest consumer-facing retailers within ${used} km.`:`No reliable consumer-facing retailers were found within ${limit} km.`,disclaimer:"Nearby retailer type only. Exact product stock is not verified. Factories and manufacturers are excluded."})}catch(e){console.error(e);return res.status(503).json({ok:false,reliable:false,stores:[],error:"Nearby retailer search is temporarily unavailable."})}}
