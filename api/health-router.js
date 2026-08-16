@@ -29,6 +29,11 @@ const CLIENT_ENHANCEMENTS=`
     @media(max-width:700px){.findit-retailer-grid{grid-template-columns:1fr}.premium-fab{right:10px!important;bottom:88px!important;padding:9px 13px!important;font-size:13px!important}.assistant-fab{right:10px!important;bottom:22px!important;padding:9px 13px!important;font-size:13px!important}.mobile-nav{padding-right:145px!important}.results-shell{padding-bottom:110px!important}}
     @media(max-width:430px){.premium-fab,.assistant-fab{max-width:138px!important}.assistant-fab{font-size:12px!important}.mobile-nav{padding-right:140px!important}}
   `;document.head.appendChild(style);
+
+  const subscriptionScript=document.createElement("script");
+  subscriptionScript.src="/subscription.js?v=1";
+  subscriptionScript.defer=true;
+  document.head.appendChild(subscriptionScript);
 })();
 `;
 
