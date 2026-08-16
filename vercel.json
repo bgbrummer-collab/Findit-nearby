@@ -1,40 +1,14 @@
 {
-  "rewrites": [
-    {
-      "source": "/script.js",
-      "destination": "/api/client-script"
-    },
-    {
-      "source": "/api/health",
-      "destination": "/api/health-router?action=health"
-    },
-    {
-      "source": "/api/feedback-health",
-      "destination": "/api/health-router?action=feedback"
-    },
-    {
-      "source": "/api/paystack-init",
-      "destination": "/api/paystack-router?action=init"
-    },
-    {
-      "source": "/api/paystack-verify",
-      "destination": "/api/paystack-router?action=verify"
-    },
-    {
-      "source": "/api/catalog-import",
-      "destination": "/api/catalog-router?action=catalog"
-    },
-    {
-      "source": "/api/awin-feed-import",
-      "destination": "/api/catalog-router?action=awin"
-    },
-    {
-      "source": "/api/analytics",
-      "destination": "/api/telemetry-router?action=analytics"
-    },
-    {
-      "source": "/api/feedback",
-      "destination": "/api/telemetry-router?action=feedback"
-    }
+  "routes": [
+    { "src": "/script\\.js", "dest": "/api/client-script" },
+    { "handle": "filesystem" },
+    { "src": "/api/health", "dest": "/api/health-router?action=health" },
+    { "src": "/api/feedback-health", "dest": "/api/health-router?action=feedback" },
+    { "src": "/api/paystack-init", "dest": "/api/paystack-router?action=init" },
+    { "src": "/api/paystack-verify", "dest": "/api/paystack-router?action=verify" },
+    { "src": "/api/catalog-import", "dest": "/api/catalog-router?action=catalog" },
+    { "src": "/api/awin-feed-import", "dest": "/api/catalog-router?action=awin" },
+    { "src": "/api/analytics", "dest": "/api/telemetry-router?action=analytics" },
+    { "src": "/api/feedback", "dest": "/api/telemetry-router?action=feedback" }
   ]
 }
