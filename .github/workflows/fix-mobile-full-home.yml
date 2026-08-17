@@ -1,0 +1,72 @@
+name: Restore FindIt mobile home
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-mobile-full-home.yml'
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch mobile layout
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          css = Path('style.css')
+          s = css.read_text()
+          patch = r'''
+
+/* === FINAL MOBILE HOME + MENU FIX === */
+@media (max-width:600px){
+  main{display:block!important;visibility:visible!important;opacity:1!important;min-height:100vh!important}
+  .reveal{opacity:1!important;transform:none!important;visibility:visible!important}
+  .hero,.search-card,.examples-section,#how,.challenge-banner,.feedback-section,.recent-section{visibility:visible!important;opacity:1!important}
+  .assistant-fab,.premium-fab{display:none!important}
+  .mobile-nav{z-index:120!important}
+  body{padding-bottom:78px}
+}
+'''
+          if 'FINAL MOBILE HOME + MENU FIX' not in s:
+              s += patch
+          css.write_text(s)
+
+          html = Path('index.html')
+          h = html.read_text()
+          old = '<nav class="drawer-nav"><a href="#home">⌂ Home</a><a href="#finder">📸 Find an item</a><a href="#how">✨ How it works</a><button id="openRecent">🕘 Recent finds</button><a href="#feedback">💬 Feedback</a><button id="openSettings">⚙ Settings</button></nav>'
+          new = '<nav class="drawer-nav"><a href="#home">⌂ Home</a><a href="#finder">📸 Find an item</a><a href="#how">✨ How it works</a><button id="openRecent">🕘 Recent finds</button><button id="drawerAskFindIt">✦ Ask FindIt</button><button id="drawerPremium">★ Premium</button><a href="#feedback">💬 Feedback</a><button id="openSettings">⚙ Settings</button></nav>'
+          if old in h:
+              h = h.replace(old,new,1)
+          html.write_text(h)
+
+          js = Path('script.js')
+          j = js.read_text()
+          add = r'''
+
+/* Mobile drawer shortcuts */
+document.addEventListener("DOMContentLoaded",()=>{
+  document.getElementById("drawerAskFindIt")?.addEventListener("click",()=>{
+    if(typeof closeDrawer==="function")closeDrawer();
+    if(typeof openAssistant==="function")openAssistant();
+  });
+  document.getElementById("drawerPremium")?.addEventListener("click",()=>{
+    if(typeof closeDrawer==="function")closeDrawer();
+    if(typeof openPremium==="function")openPremium();
+  });
+  if(window.matchMedia("(max-width:600px)").matches){
+    document.querySelectorAll(".reveal").forEach(el=>el.classList.add("visible"));
+  }
+});
+'''
+          if 'Mobile drawer shortcuts' not in j:
+              j += add
+          js.write_text(j)
+          PY
+          rm .github/workflows/fix-mobile-full-home.yml
+          git config user.name "FindIt Fix Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add style.css index.html script.js .github/workflows/fix-mobile-full-home.yml
+          git commit -m "Restore mobile homepage and move floating actions into menu"
+          git push
