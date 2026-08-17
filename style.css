@@ -126,3 +126,20 @@ body.premium-active .premium-fab,body.premium-active .premium-workspace-button,b
 .pi-old-price{text-decoration:line-through;color:#7f8ba7;font-size:12px;text-align:right;margin-top:3px}
 
 .pi-local-estimate{display:block;font-size:11px;color:#91a0bd;font-weight:600;margin-top:4px}
+
+/* === Mobile floating controls overlap fix === */
+@media (max-width:600px){
+  .assistant-fab{
+    right:12px;
+    bottom:84px;
+    z-index:65;
+  }
+  .premium-fab{
+    right:12px;
+    bottom:142px;
+    z-index:65;
+  }
+  .mobile-nav{
+    z-index:70;
+  }
+}
