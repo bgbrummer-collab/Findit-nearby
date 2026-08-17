@@ -1,0 +1,71 @@
+name: Full FindIt client repair
+on:
+  push:
+    paths:
+      - '.github/workflows/full-client-repair.yml'
+permissions:
+  contents: write
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Repair client wiring
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          # 1) Remove the obsolete Paystack UI override from the core client.
+          p = Path('script.js')
+          s = p.read_text()
+          old = '''document.addEventListener("DOMContentLoaded",()=>{
+  const b=document.getElementById("activatePremiumTester");
+  if(b){
+    b.textContent="Get Premium — R99";
+    b.addEventListener("click",e=>{
+      e.preventDefault();
+    },true);
+  }
+  finditFinishPremiumPayment();
+});'''
+          if old in s:
+              s = s.replace(old, '''// Premium Beta is activated locally during beta.\n// Legacy Paystack return verification remains available only for old test return URLs.\ndocument.addEventListener("DOMContentLoaded",()=>{ finditFinishPremiumPayment(); });''', 1)
+          p.write_text(s)
+
+          # 2) Cache-bust all local client scripts so phones do not keep a broken cached copy.
+          p = Path('index.html')
+          s = p.read_text()
+          s = s.replace('src="script.js"', 'src="script.js?v=20260817-fullfix"')
+          s = s.replace('src="mobile-menu-fix.js"', 'src="mobile-menu-fix.js?v=20260817-fullfix"')
+          s = s.replace('src="premium-beta-fix.js"', 'src="premium-beta-fix.js?v=20260817-fullfix"')
+          p.write_text(s)
+          PY
+
+      - name: Validate JavaScript syntax
+        run: |
+          set -e
+          node --check script.js
+          node --check mobile-menu-fix.js
+          node --check premium-beta-fix.js
+          for f in api/*.js; do node --check "$f"; done
+
+      - name: Validate required UI wiring
+        run: |
+          set -e
+          grep -q 'id="choosePhoto"' index.html
+          grep -q 'id="photo"' index.html
+          grep -q 'id="activatePremiumTester"' index.html
+          grep -q 'script.js?v=20260817-fullfix' index.html
+          grep -q 'mobile-menu-fix.js?v=20260817-fullfix' index.html
+          grep -q 'premium-beta-fix.js?v=20260817-fullfix' index.html
+          grep -q 'choosePhoto.*photo.click' script.js
+          grep -q 'findit_premium_beta' premium-beta-fix.js
+
+      - name: Commit repaired client
+        run: |
+          rm .github/workflows/full-client-repair.yml
+          git config user.name "FindIt Repair Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add script.js index.html .github/workflows/full-client-repair.yml
+          git commit -m "Repair FindIt client controls and validate all JavaScript"
+          git push
