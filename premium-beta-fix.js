@@ -100,7 +100,7 @@
     applyPremium(false);
     if (!token) { productionCopy(); return; }
     try {
-      const response = await fetch('/api/paystack-status', { headers: { Authorization: `Bearer ${token}` } });
+      const response = await fetch('/api/paystack-router?action=status', { headers: { Authorization: `Bearer ${token}` } });
       const data = await response.json().catch(() => ({}));
       if (response.status === 401) {
         localStorage.removeItem(TOKEN_KEY);
@@ -117,7 +117,7 @@
     const token = localStorage.getItem(TOKEN_KEY);
     if (!token) return startCheckout();
     try {
-      const response = await fetch('/api/paystack-manage', { method: 'POST', headers: { Authorization: `Bearer ${token}` } });
+      const response = await fetch('/api/paystack-router?action=manage', { method: 'POST', headers: { Authorization: `Bearer ${token}` } });
       const data = await response.json().catch(() => ({}));
       if (!response.ok || !data.management_url) throw new Error(data.error || 'Could not open subscription management.');
       window.location.assign(data.management_url);
