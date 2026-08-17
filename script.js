@@ -370,3 +370,18 @@ $("#feedbackForm").onsubmit=async e=>{e.preventDefault();const p=feedbackPayload
 $("#thumbUp").onclick=()=>{trackFindIt("feedback_up",{success:true});feedbackTopic.value='general';setRating(5);feedbackMessage.value='FindIt got this search right.';$("#feedback").scrollIntoView({behavior:'smooth'})};$("#thumbDown").onclick=()=>{trackFindIt("feedback_down",{success:false});feedbackTopic.value='nearby';setRating(2);feedbackMessage.value='FindIt did not get this search fully right. ';$("#feedback").scrollIntoView({behavior:'smooth'});feedbackMessage.focus()};
 
 window.addEventListener('resize',()=>state.map?.invalidateSize());
+
+/* Mobile drawer shortcuts + visibility fallback */
+document.addEventListener("DOMContentLoaded",()=>{
+  document.getElementById("drawerAskFindIt")?.addEventListener("click",()=>{
+    if(typeof closeDrawer==="function")closeDrawer();
+    if(typeof openAssistant==="function")openAssistant();
+  });
+  document.getElementById("drawerPremium")?.addEventListener("click",()=>{
+    if(typeof closeDrawer==="function")closeDrawer();
+    if(typeof openPremium==="function")openPremium();
+  });
+  if(window.matchMedia("(max-width:600px)").matches){
+    document.querySelectorAll(".reveal").forEach(el=>el.classList.add("visible"));
+  }
+});

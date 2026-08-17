@@ -143,3 +143,13 @@ body.premium-active .premium-fab,body.premium-active .premium-workspace-button,b
     z-index:70;
   }
 }
+
+/* === FINAL MOBILE HOME + MENU FIX === */
+@media (max-width:600px){
+  main{display:block!important;visibility:visible!important;opacity:1!important;min-height:100vh!important}
+  .reveal{opacity:1!important;transform:none!important;visibility:visible!important}
+  .hero,.search-card,.examples-section,#how,.challenge-banner,.feedback-section,.recent-section{visibility:visible!important;opacity:1!important}
+  .assistant-fab,.premium-fab{display:none!important}
+  .mobile-nav{z-index:120!important}
+  body{padding-bottom:78px}
+}
