@@ -1,0 +1,48 @@
+name: Fix mobile menu overlap
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-mobile-menu.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix-mobile-layout:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Add mobile layout override
+        shell: bash
+        run: |
+          cat >> style.css <<'EOF'
+
+          /* === Mobile floating controls overlap fix === */
+          @media (max-width:600px){
+            .assistant-fab{
+              right:12px;
+              bottom:84px;
+              z-index:65;
+            }
+            .premium-fab{
+              right:12px;
+              bottom:142px;
+              z-index:65;
+            }
+            .mobile-nav{
+              z-index:70;
+            }
+          }
+          EOF
+
+      - name: Commit fix
+        shell: bash
+        run: |
+          git config user.name "FindIt Fix Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add style.css
+          git commit -m "Fix mobile menu button overlap" || exit 0
+          git push
