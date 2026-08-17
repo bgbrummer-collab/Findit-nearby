@@ -45,7 +45,7 @@ async function findSubscription(secret,customerCode,planCode){
 }
 function entitlementStatus(subscription){
   const status=String(subscription?.status||'').toLowerCase();
-  return {status,active:status==='active'||status==='non-renewing'};
+  return {status,active:status==='active'||status==='non-renewing'||status==='attention'};
 }
 
 async function init(req,res,secret){
@@ -75,7 +75,7 @@ async function verify(req,res,secret){
   const plan=await ensureMonthlyPlan(secret);
   const subscription=await findSubscription(secret,customerCode,plan.plan_code);
   const ent=entitlementStatus(subscription);
-  if(!ent.active&&ent.status!=='attention')return res.status(409).json({error:'Payment succeeded but the recurring subscription is not active yet. Please refresh shortly.'});
+  if(!ent.active)return res.status(409).json({error:'Payment succeeded but the recurring subscription is not active yet. Please refresh shortly.'});
   const token=signPayload({v:TOKEN_VERSION,customerCode,email,iat:Date.now(),exp:Date.now()+1000*60*60*24*365},secret);
   return res.json({paid:true,token,email,reference:tx.reference,status:ent.status||'active',active:true,billing:'monthly',amount:99,currency:CURRENCY});
 }
