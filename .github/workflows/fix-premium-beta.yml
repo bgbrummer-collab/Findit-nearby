@@ -1,0 +1,52 @@
+name: Fix Premium Beta activation
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-premium-beta.yml'
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove old Paystack click override
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('script.js')
+          s = p.read_text()
+          old = '''document.addEventListener("DOMContentLoaded",()=>{
+            const b=document.getElementById("activatePremiumTester");
+            if(b){
+              b.textContent="Get Premium — R99";
+              b.addEventListener("click",e=>{
+                e.preventDefault();e.stopImmediatePropagation();finditStartPremiumPayment();
+              },true);
+            }
+            finditFinishPremiumPayment();
+          });'''
+          # Match the exact current block regardless of indentation from source formatting.
+          old = '''document.addEventListener("DOMContentLoaded",()=>{
+  const b=document.getElementById("activatePremiumTester");
+  if(b){
+    b.textContent="Get Premium — R99";
+    b.addEventListener("click",e=>{
+      e.preventDefault();e.stopImmediatePropagation();finditStartPremiumPayment();
+    },true);
+  }
+  finditFinishPremiumPayment();
+});'''
+          new = '''// Premium Beta uses the local on-device activation handler below.
+// The old Paystack click override is intentionally disabled during beta.'''
+          if old not in s:
+              raise SystemExit('Expected Premium Paystack override block was not found; no changes made.')
+          s = s.replace(old, new, 1)
+          p.write_text(s)
+          PY
+          rm .github/workflows/fix-premium-beta.yml
+          git config user.name "FindIt Fix Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add script.js .github/workflows/fix-premium-beta.yml
+          git commit -m "Fix Premium Beta activation button"
+          git push
