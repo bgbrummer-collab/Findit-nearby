@@ -385,3 +385,18 @@ document.addEventListener("DOMContentLoaded",()=>{
     document.querySelectorAll(".reveal").forEach(el=>el.classList.add("visible"));
   }
 });
+
+/* Mobile drawer shortcuts + visibility fallback V2 */
+document.addEventListener("DOMContentLoaded",()=>{
+  document.getElementById("drawerAskFindIt")?.addEventListener("click",()=>{
+    if(typeof closeDrawer==="function")closeDrawer();
+    if(typeof openAssistant==="function")openAssistant();
+  });
+  document.getElementById("drawerPremium")?.addEventListener("click",()=>{
+    if(typeof closeDrawer==="function")closeDrawer();
+    if(typeof openPremium==="function")openPremium();
+  });
+  if(window.matchMedia("(max-width:600px)").matches){
+    document.querySelectorAll(".reveal").forEach(el=>el.classList.add("visible"));
+  }
+});
