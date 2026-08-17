@@ -15,27 +15,49 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Add mobile layout override
+      - name: Restore full mobile homepage and clean floating controls
         shell: bash
         run: |
           cat >> style.css <<'EOF'
 
-          /* === Mobile floating controls overlap fix === */
+          /* === FINAL MOBILE HOME + MENU FIX V2 === */
           @media (max-width:600px){
-            .assistant-fab{
-              right:12px;
-              bottom:84px;
-              z-index:65;
-            }
-            .premium-fab{
-              right:12px;
-              bottom:142px;
-              z-index:65;
-            }
-            .mobile-nav{
-              z-index:70;
-            }
+            main{display:block!important;visibility:visible!important;opacity:1!important;min-height:100vh!important}
+            .reveal{opacity:1!important;transform:none!important;visibility:visible!important}
+            .hero,.search-card,.examples-section,#how,.challenge-banner,.feedback-section,.recent-section{visibility:visible!important;opacity:1!important}
+            .assistant-fab,.premium-fab{display:none!important}
+            .mobile-nav{z-index:120!important}
+            body{padding-bottom:78px}
           }
+          EOF
+
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          old='<nav class="drawer-nav"><a href="#home">⌂ Home</a><a href="#finder">📸 Find an item</a><a href="#how">✨ How it works</a><button id="openRecent">🕘 Recent finds</button><a href="#feedback">💬 Feedback</a><button id="openSettings">⚙ Settings</button></nav>'
+          new='<nav class="drawer-nav"><a href="#home">⌂ Home</a><a href="#finder">📸 Find an item</a><a href="#how">✨ How it works</a><button id="openRecent">🕘 Recent finds</button><button id="drawerAskFindIt">✦ Ask FindIt</button><button id="drawerPremium">★ Premium</button><a href="#feedback">💬 Feedback</a><button id="openSettings">⚙ Settings</button></nav>'
+          if old in s:
+              s=s.replace(old,new,1)
+          p.write_text(s)
+          PY
+
+          cat >> script.js <<'EOF'
+
+          /* Mobile drawer shortcuts + visibility fallback V2 */
+          document.addEventListener("DOMContentLoaded",()=>{
+            document.getElementById("drawerAskFindIt")?.addEventListener("click",()=>{
+              if(typeof closeDrawer==="function")closeDrawer();
+              if(typeof openAssistant==="function")openAssistant();
+            });
+            document.getElementById("drawerPremium")?.addEventListener("click",()=>{
+              if(typeof closeDrawer==="function")closeDrawer();
+              if(typeof openPremium==="function")openPremium();
+            });
+            if(window.matchMedia("(max-width:600px)").matches){
+              document.querySelectorAll(".reveal").forEach(el=>el.classList.add("visible"));
+            }
+          });
           EOF
 
       - name: Commit fix
@@ -43,6 +65,6 @@ jobs:
         run: |
           git config user.name "FindIt Fix Bot"
           git config user.email "actions@users.noreply.github.com"
-          git add style.css
-          git commit -m "Fix mobile menu button overlap" || exit 0
+          git add style.css index.html script.js
+          git commit -m "Restore full FindIt mobile homepage and clean menu" || exit 0
           git push
