@@ -1,4 +1,5 @@
-FindIt V10 — Vercel Hobby Serverless Limit Fix
-API functions consolidated to 9 files.
-Existing endpoint URLs preserved using vercel.json rewrites.
-Search/directions/map/Awin/Paystack/Product Intelligence retained.
+FindIt Production Readiness — Premium Payments Security Pass
+Premium no longer unlocks from local browser state alone.
+Paystack checkout is monthly at R99, with verified subscription status and secure manage/cancel links.
+Production routes include init, verify, status and manage endpoints.
+Search, directions, map, feedback, Assistant and product intelligence remain enabled.
