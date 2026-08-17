@@ -1,6 +1,5 @@
 {
   "routes": [
-    { "src": "/script\\.js", "dest": "/api/health-router?action=client" },
     { "handle": "filesystem" },
     { "src": "/api/health", "dest": "/api/health-router?action=health" },
     { "src": "/api/feedback-health", "dest": "/api/health-router?action=feedback" },
