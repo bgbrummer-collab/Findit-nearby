@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   if(b){
     b.textContent="Get Premium — R99";
     b.addEventListener("click",e=>{
-      e.preventDefault();e.stopImmediatePropagation();finditStartPremiumPayment();
+      e.preventDefault();
     },true);
   }
   finditFinishPremiumPayment();
