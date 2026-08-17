@@ -1,7 +1,7 @@
 const PRIMARY_MODEL='gemini-3.6-flash';
 const FALLBACK_MODEL='gemini-3.5-flash-lite';
 const CONFIDENCE_MIN=.55;
-const RESTRICTED=['firearm','gun','rifle','pistol','ammunition','ammo','weapon','switchblade','taser','pepper spray','vape','nicotine','cigarette','cigar','alcohol','beer','wine','liquor','cannabis','marijuana','thc','gambling','sports betting','casino','pornography','adult sex toy'];
+const RESTRICTED=['firearm','gun','rifle','pistol','ammunition','ammo','weapon','knife','knives','machete','sword','switchblade','taser','stun gun','pepper spray','mace','brass knuckles','fireworks','explosive','vape','nicotine','cigarette','cigar','alcohol','beer','wine','liquor','cannabis','marijuana','thc','cbd','psilocybin','magic mushroom','gambling','sports betting','casino','pornography','adult sex toy'];
 
 export default{async fetch(request){
  if(request.method!=='POST')return json({error:'POST only'},405);
@@ -10,7 +10,7 @@ export default{async fetch(request){
   const form=await request.formData(),image=form.get('image');if(!image||typeof image.arrayBuffer!=='function')return json({error:'No image uploaded.'},400);if(!String(image.type||'').startsWith('image/'))return json({error:'Uploaded file must be an image.'},400);if(image.size>8*1024*1024)return json({error:'Image must be smaller than 8 MB.'},413);
   const lat=num(form.get('lat')),lon=num(form.get('lon')),base64=Buffer.from(await image.arrayBuffer()).toString('base64');
   const identification=postProcess(await identify(key,base64,image.type||'image/jpeg'));
-  if(isRestricted(identification))return json({identification,offers:[],blocked:true,verified:false,message:'FindIt cannot help search for restricted or age-limited products.'});
+  if(isRestricted(identification))return json({identification,offers:[],blocked:true,verified:false,message:'FindIt cannot help search for restricted, dangerous or age-limited products.'});
   if(Number(identification.confidence||0)<CONFIDENCE_MIN)return json({identification,offers:[],blocked:false,verified:false,message:'The image was not identified confidently enough. Try a clearer photo showing the whole item, logo or model text.'});
   const products=await loadFeeds(),offers=matchProducts(identification,products,lat,lon);
   return json({identification,offers,blocked:false,verified:offers.length>0,message:offers.length?'Verified retailer offers found from connected authorised product data.':'The item was identified, but no connected authorised retailer feed returned a verified matching offer yet.'});
