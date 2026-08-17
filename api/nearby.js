@@ -1,49 +1,133 @@
-const norm=v=>String(v||"").trim().toLowerCase();
+const norm=v=>String(v||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+const toks=v=>[...new Set(norm(v).split(/\s+/).filter(x=>x.length>1))];
+const clean=v=>String(v??'').trim();
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+
+function overlap(a,b){
+  const A=new Set(toks(a)),B=new Set(toks(b));
+  if(!A.size||!B.size)return 0;
+  let hit=0;for(const x of A)if(B.has(x))hit++;
+  return hit/Math.max(A.size,B.size);
+}
+function haversine(a,b,c,d){
+  const R=6371,p=Math.PI/180;
+  const x=Math.sin((c-a)*p/2)**2+Math.cos(a*p)*Math.cos(c*p)*Math.sin((d-b)*p/2)**2;
+  return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x));
+}
+function number(v){const n=Number(v);return Number.isFinite(n)?n:null}
+
+function branchAvailable(store){
+  if(!store)return false;
+  if(store.in_stock===true||store.available===true)return true;
+  if(Number(store.stock_quantity)>0||Number(store.quantity)>0)return true;
+  const raw=typeof store.stock==='string'?store.stock:(store.stock?.status||store.availability||store.status||'');
+  const s=norm(raw).replace(/\s+/g,'_');
+  return ['in_stock','available','instock','low_stock','limited_stock'].includes(s);
+}
+
+function scoreProduct(i,p){
+  const left=norm([i.name,i.object,i.searchQuery,i.brand,i.model].join(' '));
+  const right=norm([p.name,p.brand,p.model,p.category,(p.keywords||[]).join(' ')].join(' '));
+  const brand=i.brand&&p.brand?norm(i.brand)===norm(p.brand):null;
+  const model=i.model&&p.model?norm(i.model)===norm(p.model):null;
+  let score=.55*overlap(left,right);
+  if(brand===true)score+=.28;
+  if(brand===false)score-=.2;
+  if(model===true)score+=.42;
+  return clamp(score,0,1);
+}
+
+function strongEnough(i,p,score){
+  if(i.model)return score>=.62 && (!p.model||norm(i.model)===norm(p.model));
+  if(i.brand)return score>=.54 && (!p.brand||norm(i.brand)===norm(p.brand));
+  const q=toks([i.name,i.object,i.searchQuery].join(' '));
+  const text=norm([p.name,p.category,(p.keywords||[]).join(' ')].join(' '));
+  const hits=q.filter(t=>text.includes(t)).length;
+  return score>=.5&&hits>=2;
+}
+
+async function loadFeeds(){
+  let cfg=[];try{cfg=JSON.parse(process.env.RETAILER_FEEDS_JSON||'[]')}catch{}
+  if(!Array.isArray(cfg))return[];
+  const settled=await Promise.allSettled(cfg.filter(x=>x?.url&&x?.name).map(fetchFeed));
+  return settled.flatMap(x=>x.status==='fulfilled'?x.value:[]);
+}
+
+async function fetchFeed(c){
+  const headers={Accept:'application/json'};
+  if(c.tokenEnv&&process.env[c.tokenEnv])headers.Authorization=`Bearer ${process.env[c.tokenEnv]}`;
+  const r=await fetch(c.url,{headers});
+  if(!r.ok)throw new Error(`${c.name} feed returned ${r.status}`);
+  const d=await r.json();
+  const products=Array.isArray(d)?d:Array.isArray(d.products)?d.products:[];
+  return products.map(p=>({
+    id:String(p.id||p.sku||p.url||p.name||''),
+    name:clean(p.name),brand:clean(p.brand),model:clean(p.model||p.sku),category:clean(p.category),
+    keywords:Array.isArray(p.keywords)?p.keywords.map(String):[],url:clean(p.url),price:number(p.price),currency:p.currency||'ZAR',
+    retailer:c.name,stores:Array.isArray(p.stores)?p.stores:[]
+  })).filter(p=>p.name);
+}
 
 export default async function handler(req,res){
-  res.setHeader("Cache-Control","no-store");
-  if(req.method!=="POST") return res.status(405).json({error:"Method not allowed"});
+  res.setHeader('Cache-Control','no-store');
+  if(req.method!=='POST')return res.status(405).json({error:'Method not allowed'});
 
   try{
     const {lat,lon,identification={},radiusKm:requested}=req.body||{};
-    const a=Number(lat),b=Number(lon);
-    if(!Number.isFinite(a)||!Number.isFinite(b)) return res.status(400).json({error:"Valid location required"});
-
-    const radiusKm=Math.min(25,Math.max(3,Number(requested)||10));
-    const item=identification.name||identification.model||identification.object||"this product";
+    const a=number(lat),b=number(lon);
+    if(a==null||b==null)return res.status(400).json({error:'Valid location required'});
+    const radiusKm=Math.min(25,Math.max(3,number(requested)||10));
+    const item=identification.name||identification.model||identification.object||'this product';
     const brand=identification.brand||null;
 
-    /*
-      IMPORTANT PRODUCT-TRUTH RULE
-      ----------------------------
-      FindIt must not turn a product search into directions to a random shop that
-      merely sells the same CATEGORY. A shoe shop is not proof that it has the
-      exact Nike shoe; an optician is not proof that it has the exact frame.
+    const products=await loadFeeds();
+    const stores=[];
+    for(const p of products){
+      const match=scoreProduct(identification,p);
+      if(!strongEnough(identification,p,match))continue;
+      for(const s of p.stores||[]){
+        const slat=number(s.lat??s.latitude),slon=number(s.lon??s.lng??s.longitude);
+        if(slat==null||slon==null||!branchAvailable(s))continue;
+        const distanceKm=haversine(a,b,slat,slon);
+        if(distanceKm>radiusKm)continue;
+        stores.push({
+          id:String(s.id||`${p.id}:${s.name||slat+','+slon}`),
+          name:clean(s.name)||p.retailer,
+          address:clean(s.address||s.formatted_address),
+          lat:slat,lon:slon,distanceKm,
+          phone:clean(s.phone),website:clean(s.website||p.url),
+          type:'Verified product branch',
+          stockVerified:true,
+          stockStatus:'In stock',
+          productName:p.name,productUrl:p.url,retailer:p.retailer,
+          price:p.price,currency:p.currency,match
+        });
+      }
+    }
 
-      This endpoint therefore returns map/direction stores ONLY when branch-level
-      product availability is verified by an authorised retailer source.
-
-      The current imported Awin/SmartBuyGlasses catalogue contains product-level
-      prices/listings, but does not provide reliable physical branch coordinates
-      plus branch stock. Until a retailer feed supplies that data, exact-store
-      directions stay hidden instead of being invented.
-    */
+    const deduped=[];const seen=new Set();
+    for(const s of stores.sort((x,y)=>x.distanceKm-y.distanceKm||y.match-x.match)){
+      const key=norm(`${s.name}|${s.address}|${s.lat.toFixed(5)}|${s.lon.toFixed(5)}`);
+      if(seen.has(key))continue;seen.add(key);deduped.push(s);
+      if(deduped.length>=20)break;
+    }
 
     return res.status(200).json({
       ok:true,
-      retailGroup:norm(identification.retailCategory||identification.category||"product"),
+      retailGroup:norm(identification.retailCategory||identification.category||'product'),
       radiusKm,
-      stores:[],
+      stores:deduped,
       reliable:true,
       exactProductOnly:true,
-      branchStockVerified:false,
-      item,
-      brand,
-      message:`${brand?brand+" ":""}${item}: no verified physical branch with confirmed stock is connected yet. FindIt will not send you to a random category store.`,
-      disclaimer:"Directions are shown only when an authorised retailer source confirms the exact product at a specific physical branch."
+      branchStockVerified:deduped.length>0,
+      item,brand,
+      message:deduped.length
+        ?`Found ${deduped.length} nearby branch${deduped.length===1?'':'es'} with retailer-supplied stock for ${brand?brand+' ':''}${item}.`
+        :`${brand?brand+' ':''}${item}: no verified physical branch with confirmed stock is connected in this radius yet. FindIt will not send you to a random category store.`,
+      disclaimer:'Directions are shown only when an authorised retailer source confirms the exact product at a specific physical branch.'
     });
   }catch(e){
-    console.error("nearby",e);
-    return res.status(503).json({ok:false,reliable:false,stores:[],error:"Exact-store availability is temporarily unavailable."});
+    console.error('nearby',e);
+    return res.status(503).json({ok:false,reliable:false,stores:[],error:'Exact-store availability is temporarily unavailable.'});
   }
 }
