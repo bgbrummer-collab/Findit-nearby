@@ -203,22 +203,44 @@
     });
   }
 
-  function repairExactNearbySearch() {
+  function repairNearbyRetailerSearch() {
     const link = qs('#searchNearbyFree');
-    if (!link || link.dataset.exactSearchFixed === '1') return;
-    link.dataset.exactSearchFixed = '1';
+    if (!link || link.dataset.retailerSearchFixed === '1') return;
+    link.dataset.retailerSearchFixed = '1';
     const title = link.querySelector('strong');
     const note = link.querySelector('span');
-    if (title) title.textContent = 'Search exact item near me';
-    if (note) note.textContent = 'Web results • verify branch stock before travelling';
+    if (title) title.textContent = 'Search retailers near me';
+    if (note) note.textContent = 'Nearby shop types • verify exact stock before travelling';
     link.addEventListener('click', (event) => {
       event.preventDefault();
       event.stopImmediatePropagation();
       const item = typeof state !== 'undefined' ? (state.result?.identification || {}) : {};
-      const q = String(item.searchQuery || item.name || item.object || '').trim();
-      if (!q) return;
-      window.open(`https://www.google.com/search?q=${encodeURIComponent(q + ' near me')}`, '_blank', 'noopener');
+      const rq = typeof retailerQuery === 'function' ? retailerQuery(item) : String(item.retailCategory || item.category || 'store');
+      const query = (typeof state !== 'undefined' && state.coords)
+        ? `${rq} near ${state.coords.lat},${state.coords.lon}`
+        : `${rq} near me`;
+      const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+      window.open(url, '_blank', 'noopener');
     }, true);
+  }
+
+  function ensureTakealotSearch() {
+    const grid = qs('#freeActions .free-action-grid');
+    if (!grid || qs('#searchTakealot')) return;
+    const link = document.createElement('a');
+    link.id = 'searchTakealot';
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.innerHTML = '🛒 <strong>Search Takealot</strong><span>Online marketplace • stock not verified by FindIt</span>';
+    link.href = 'https://www.takealot.com/all';
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      const item = typeof state !== 'undefined' ? (state.result?.identification || {}) : {};
+      const q = String(item.searchQuery || item.name || item.object || '').trim();
+      const url = q ? `https://www.takealot.com/all?q=${encodeURIComponent(q)}` : 'https://www.takealot.com/all';
+      window.open(url, '_blank', 'noopener');
+    });
+    grid.appendChild(link);
   }
 
   function repairOfferRendering() {
@@ -304,7 +326,8 @@
 
     repairSorting();
     repairCompareCheckboxes();
-    repairExactNearbySearch();
+    repairNearbyRetailerSearch();
+    ensureTakealotSearch();
     repairOfferRendering();
   }
 
