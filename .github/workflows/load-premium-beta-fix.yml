@@ -1,0 +1,29 @@
+name: Load Premium Beta controller
+on:
+  push:
+    paths:
+      - '.github/workflows/load-premium-beta-fix.yml'
+permissions:
+  contents: write
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add Premium Beta controller to page
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text()
+          tag = '  <script src="premium-beta-fix.js" defer></script>\n'
+          if 'premium-beta-fix.js' not in s:
+              s = s.replace('</body>', tag + '</body>')
+              p.write_text(s)
+          PY
+          rm .github/workflows/load-premium-beta-fix.yml
+          git config user.name "FindIt Fix Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html .github/workflows/load-premium-beta-fix.yml
+          git commit -m "Load Premium Beta activation controller"
+          git push
