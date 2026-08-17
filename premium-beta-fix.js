@@ -182,9 +182,74 @@
       if (mode === 'closest') state.stores.sort((a, b) => Number(a.distanceKm) - Number(b.distanceKm));
       else if (mode === 'name') state.stores.sort((a, b) => String(a.name || '').localeCompare(String(b.name || '')));
       else state.stores.sort((a, b) => Number(a.__finditOriginalRank) - Number(b.__finditOriginalRank));
+      if (typeof premiumCompareSelection !== 'undefined') premiumCompareSelection.clear();
       if (typeof renderStores === 'function') renderStores();
       if (typeof updateMap === 'function') updateMap();
       if (typeof updatePremiumDashboard === 'function') updatePremiumDashboard();
+    };
+  }
+
+  function repairCompareCheckboxes() {
+    if (window.__finditCompareDelegated) return;
+    window.__finditCompareDelegated = true;
+    document.addEventListener('change', (event) => {
+      const input = event.target?.closest?.('[data-compare-store]');
+      if (!input || typeof premiumCompareSelection === 'undefined') return;
+      const index = Number(input.dataset.compareStore);
+      if (!Number.isFinite(index)) return;
+      if (input.checked) premiumCompareSelection.add(index);
+      else premiumCompareSelection.delete(index);
+      if (typeof updatePremiumDashboard === 'function') updatePremiumDashboard();
+    });
+  }
+
+  function repairExactNearbySearch() {
+    const link = qs('#searchNearbyFree');
+    if (!link || link.dataset.exactSearchFixed === '1') return;
+    link.dataset.exactSearchFixed = '1';
+    const title = link.querySelector('strong');
+    const note = link.querySelector('span');
+    if (title) title.textContent = 'Search exact item near me';
+    if (note) note.textContent = 'Web results • verify branch stock before travelling';
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      const item = typeof state !== 'undefined' ? (state.result?.identification || {}) : {};
+      const q = String(item.searchQuery || item.name || item.object || '').trim();
+      if (!q) return;
+      window.open(`https://www.google.com/search?q=${encodeURIComponent(q + ' near me')}`, '_blank', 'noopener');
+    }, true);
+  }
+
+  function repairOfferRendering() {
+    if (window.__finditOfferRendererFixed || typeof renderOffers !== 'function') return;
+    window.__finditOfferRendererFixed = true;
+    renderOffers = function() {
+      const list = [...state.offers];
+      if (state.sort === 'price') list.sort((a, b) => (Number(a.price) || Infinity) - (Number(b.price) || Infinity));
+      if (state.sort === 'distance') list.sort((a, b) => (Number(a.distanceKm) || Infinity) - (Number(b.distanceKm) || Infinity));
+      if (state.sort === 'best') list.sort((a, b) => Number(b.match || 0) - Number(a.match || 0));
+      if (!list.length) {
+        noOffers.classList.remove('hidden');
+        offersEl.innerHTML = '';
+        return;
+      }
+      noOffers.classList.add('hidden');
+      const stockText = (p) => {
+        const s = p?.stock;
+        const raw = typeof s === 'string' ? s : (s?.status || s?.availability || '');
+        const x = String(raw || '').toLowerCase().replace(/[_-]+/g, ' ').trim();
+        if (!x) return 'Stock not verified';
+        if (x === 'in stock' || x === 'available') return 'In stock';
+        if (x === 'out of stock' || x === 'unavailable') return 'Out of stock';
+        if (x === 'preorder' || x === 'pre order') return 'Pre-order';
+        return raw;
+      };
+      offersEl.innerHTML = list.map((p) => {
+        const distance = Number.isFinite(Number(p.distanceKm)) ? ` • 📍 ${Number(p.distanceKm).toFixed(1)} km` : '';
+        const store = p.store?.name ? ` • ${p.store.name}` : '';
+        return `<article class="offer-card"><img src="${esc(p.image || placeholderImage())}" alt=""><div><h4>${esc(p.name || 'Product')}</h4><p>${esc([p.brand,p.model,p.retailer].filter(Boolean).join(' • '))}${esc(store)}</p><p>🎯 ${Math.round(Number(p.match || 0) * 100)}% match • 📦 ${esc(stockText(p))}${esc(distance)}</p>${validUrl(p.url)?`<a href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">View product →</a>`:''}</div><div class="price">${money(p)}</div></article>`;
+      }).join('');
     };
   }
 
@@ -238,6 +303,9 @@
     });
 
     repairSorting();
+    repairCompareCheckboxes();
+    repairExactNearbySearch();
+    repairOfferRendering();
   }
 
   clearLegacyUnlocks();
