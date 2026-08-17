@@ -1,0 +1,94 @@
+name: FindIt Production Smoke Test
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Wait for Vercel deployment
+        run: sleep 18
+
+      - name: Test live FindIt production
+        env:
+          BASE_URL: https://findit-nearby.vercel.app
+        run: |
+          node <<'NODE'
+          const base = process.env.BASE_URL;
+          const failures = [];
+          const ok = (cond, msg) => { if (!cond) failures.push(msg); else console.log('PASS', msg); };
+          const get = async (path, opts={}) => {
+            let last;
+            for (let i=0;i<5;i++) {
+              try {
+                const r = await fetch(base + path, opts);
+                if (r.status < 500) return r;
+                last = new Error(`${path} returned ${r.status}`);
+              } catch (e) { last = e; }
+              await new Promise(r=>setTimeout(r, 5000));
+            }
+            throw last || new Error(`Failed ${path}`);
+          };
+
+          try {
+            const home = await get('/');
+            const html = await home.text();
+            ok(home.status === 200, 'Homepage returns 200');
+            const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
+            const dupes = ids.filter((id,i)=>ids.indexOf(id)!==i);
+            ok(dupes.length === 0, `No duplicate HTML ids${dupes.length ? ': '+[...new Set(dupes)].join(', ') : ''}`);
+            for (const id of ['finder','photo','cameraPhoto','location','search','results','nearbyStores','map','feedbackForm','premiumModal','assistantPanel','mobileMore','drawer']) {
+              ok(ids.includes(id), `Critical element #${id} exists`);
+            }
+
+            for (const asset of ['/script.js','/style.css','/mobile-menu-fix.js','/premium-beta-fix.js','/manifest.webmanifest']) {
+              const r = await get(asset);
+              ok(r.status === 200, `${asset} returns 200`);
+            }
+
+            const premium = await (await get('/premium-beta-fix.js')).text();
+            ok(premium.includes('clearLegacyUnlocks'), 'Legacy free-Premium unlock is neutralized');
+            ok(premium.includes('repairCompareCheckboxes'), 'Premium compare repair is deployed');
+            ok(premium.includes('enforceFreeLimits'), 'Free radius guard is deployed');
+
+            const health = await get('/api/health');
+            const healthJson = await health.json();
+            ok(health.status === 200 && healthJson.ok === true && healthJson.modelReachable === true, 'Gemini health check passes');
+
+            const feedback = await get('/api/feedback-health');
+            const feedbackJson = await feedback.json();
+            ok(feedback.status === 200 && feedbackJson.ok === true, 'Feedback health check passes');
+
+            const premiumStatus = await get('/api/paystack-router?action=status');
+            ok(premiumStatus.status === 401, 'Premium status rejects missing token');
+
+            const nearby = await get('/api/nearby', {
+              method: 'POST',
+              headers: {'content-type':'application/json'},
+              body: JSON.stringify({
+                lat: -25.7479,
+                lon: 28.2293,
+                radiusKm: 10,
+                identification: {name:'running shoes',object:'shoes',searchQuery:'running shoes',category:'footwear',retailCategory:'footwear'}
+              })
+            });
+            const nearbyJson = await nearby.json().catch(()=>({}));
+            ok(nearby.status === 200 && nearbyJson.ok === true && nearbyJson.exactProductOnly === true && Array.isArray(nearbyJson.stores), 'Exact-store nearby endpoint responds safely');
+
+            const nearbyGet = await get('/api/nearby');
+            ok(nearbyGet.status === 405, 'Nearby endpoint rejects wrong HTTP method');
+          } catch (e) {
+            failures.push(`Smoke test crashed: ${e.message}`);
+          }
+
+          if (failures.length) {
+            console.error('\nFAILURES');
+            failures.forEach(f=>console.error('-',f));
+            process.exit(1);
+          }
+          console.log('\nAll FindIt production smoke checks passed.');
+          NODE
