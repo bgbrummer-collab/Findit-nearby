@@ -6,12 +6,13 @@
 
   const qs = (s) => document.querySelector(s);
 
+  function clearLegacyUnlocks() {
+    LEGACY_KEYS.forEach((key) => localStorage.removeItem(key));
+  }
+
   function applyPremium(active) {
     verifiedActive = Boolean(active);
-    LEGACY_KEYS.forEach((key) => {
-      if (verifiedActive) localStorage.setItem(key, key === 'finditPremium' ? 'true' : '1');
-      else localStorage.removeItem(key);
-    });
+    clearLegacyUnlocks();
     if (typeof premiumState !== 'undefined') premiumState.active = verifiedActive;
     document.body.classList.toggle('premium-active', verifiedActive);
     document.body.classList.toggle('premium-v10', verifiedActive);
@@ -28,6 +29,8 @@
       ['FINDIT PREMIUM BETA', 'FINDIT PREMIUM'],
       ['PREMIUM BETA', 'PREMIUM'],
       ['Premium Beta', 'Premium'],
+      ['Premium Beta active ✓', 'Premium active ✓'],
+      ['Activate Premium Beta on this device', 'Get Premium — R99/month'],
       ['No payment during beta', 'R99/month • Cancel anytime'],
       ['No payment required during beta.', 'R99/month • Cancel anytime.'],
       ['These personal stats are stored on this device during Beta.', 'These personal stats are stored on this device.']
@@ -40,7 +43,12 @@
     const intro = qs('#premiumModal p');
     if (intro) intro.textContent = 'Upgrade to FindIt Premium for R99/month. Cancel anytime through Paystack.';
     const button = qs('#activatePremiumTester');
-    if (button) button.textContent = verifiedActive ? 'Premium active ✓' : 'Get Premium — R99/month';
+    if (button) {
+      button.disabled = false;
+      button.textContent = verifiedActive ? 'Manage Premium' : 'Get Premium — R99/month';
+    }
+    const manage = qs('#managePremiumSubscription');
+    if (manage) manage.classList.toggle('hidden', !verifiedActive);
   }
 
   async function startCheckout() {
@@ -90,15 +98,22 @@
       history.replaceState({}, '', url.pathname + url.search + url.hash);
       alert('Payment verified ✓ FindIt Premium is active.');
     } catch (error) {
+      localStorage.removeItem(TOKEN_KEY);
+      localStorage.removeItem(EMAIL_KEY);
       applyPremium(false);
+      productionCopy();
       alert(error.message || 'Payment verification failed. Premium was not unlocked.');
     }
   }
 
   async function syncStatus() {
     const token = localStorage.getItem(TOKEN_KEY);
-    applyPremium(false);
-    if (!token) { productionCopy(); return; }
+    clearLegacyUnlocks();
+    if (!token) {
+      applyPremium(false);
+      productionCopy();
+      return;
+    }
     try {
       const response = await fetch('/api/paystack-router?action=status', { headers: { Authorization: `Bearer ${token}` } });
       const data = await response.json().catch(() => ({}));
@@ -117,7 +132,10 @@
     const token = localStorage.getItem(TOKEN_KEY);
     if (!token) return startCheckout();
     try {
-      const response = await fetch('/api/paystack-router?action=manage', { method: 'POST', headers: { Authorization: `Bearer ${token}` } });
+      const response = await fetch('/api/paystack-router?action=manage', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` }
+      });
       const data = await response.json().catch(() => ({}));
       if (!response.ok || !data.management_url) throw new Error(data.error || 'Could not open subscription management.');
       window.location.assign(data.management_url);
@@ -126,8 +144,47 @@
     }
   }
 
+  function repairControls() {
+    const brokenMapLink = document.querySelector('a[href="#nearbyPanel"]');
+    if (brokenMapLink && !brokenMapLink.dataset.productionWired) {
+      brokenMapLink.dataset.productionWired = '1';
+      brokenMapLink.removeAttribute('href');
+      brokenMapLink.setAttribute('role', 'button');
+      brokenMapLink.tabIndex = 0;
+      const openMap = () => {
+        if (typeof closeDrawer === 'function') closeDrawer();
+        const results = qs('#results');
+        if (!results || results.classList.contains('hidden')) {
+          qs('#finder')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return;
+        }
+        results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setTimeout(() => qs('#mapViewBtn')?.click(), 250);
+      };
+      brokenMapLink.addEventListener('click', openMap);
+      brokenMapLink.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openMap(); }
+      });
+    }
+
+    const widen = qs('#widenSearch');
+    if (widen && !widen.dataset.productionWired) {
+      widen.dataset.productionWired = '1';
+      widen.addEventListener('click', (event) => {
+        if (!verifiedActive) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          if (typeof openPremium === 'function') openPremium();
+        }
+      }, true);
+    }
+  }
+
   function wire() {
+    clearLegacyUnlocks();
     productionCopy();
+    repairControls();
+
     const button = qs('#activatePremiumTester');
     if (button && !button.dataset.productionWired) {
       button.dataset.productionWired = '1';
@@ -145,6 +202,7 @@
       manage.type = 'button';
       manage.textContent = 'Manage / cancel subscription';
       manage.style.marginTop = '10px';
+      manage.classList.add('hidden');
       manage.addEventListener('click', (event) => {
         event.preventDefault();
         event.stopPropagation();
@@ -153,22 +211,11 @@
       card.appendChild(manage);
     }
 
-    const widen = qs('#widenSearch');
-    if (widen && !widen.dataset.productionWired) {
-      widen.dataset.productionWired = '1';
-      widen.addEventListener('click', (event) => {
-        if (!verifiedActive) {
-          event.preventDefault();
-          event.stopImmediatePropagation();
-          if (typeof openPremium === 'function') openPremium();
-        }
-      }, true);
-    }
-
     finishCheckout().then(syncStatus);
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', wire);
   else wire();
+  window.addEventListener('pageshow', () => syncStatus());
   window.finditManagePremium = manageSubscription;
 })();
