@@ -122,7 +122,14 @@
       close();
     });
     backdrop.addEventListener('click', close);
-    drawer.querySelectorAll('a').forEach(link => link.addEventListener('click', close));
+
+    // Every actionable drawer control must release the mobile scroll lock.
+    // The main app handles where the action goes; this controller guarantees
+    // the drawer/backdrop/body state is always cleaned up afterward.
+    drawer.querySelectorAll('.drawer-nav a, .drawer-nav button').forEach(control => {
+      if (control.disabled) return;
+      control.addEventListener('click', () => close());
+    });
 
     document.getElementById('drawerAskFindIt')?.addEventListener('click', () => {
       close();
