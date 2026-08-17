@@ -2,11 +2,12 @@
   const KEY = 'findit_premium_beta';
 
   function isPremium() {
-    return localStorage.getItem(KEY) === 'true' || localStorage.getItem('finditPremium') === 'true';
+    return localStorage.getItem(KEY) === '1' || localStorage.getItem(KEY) === 'true' || localStorage.getItem('finditPremium') === 'true';
   }
 
   function applyPremium(active) {
     document.body.classList.toggle('premium-active', active);
+    document.body.classList.toggle('premium-v10', active);
     const badge = document.getElementById('premiumStatusBadge');
     const workspaceButton = document.getElementById('premiumWorkspaceButton');
     const premiumHome = document.getElementById('premiumHome');
@@ -15,10 +16,14 @@
     if (workspaceButton) workspaceButton.classList.toggle('hidden', !active);
     if (premiumHome) premiumHome.classList.toggle('hidden', !active);
     if (command) command.classList.toggle('hidden', !active);
+    if (typeof premiumState !== 'undefined') premiumState.active = active;
+    if (typeof refreshPremiumUI === 'function') refreshPremiumUI();
+    if (typeof updatePremiumDashboard === 'function') updatePremiumDashboard();
+    if (typeof v10Refresh === 'function' && active) v10Refresh();
   }
 
   function activate() {
-    localStorage.setItem(KEY, 'true');
+    localStorage.setItem(KEY, '1');
     localStorage.setItem('finditPremium', 'true');
     applyPremium(true);
 
@@ -39,7 +44,7 @@
     }
 
     setTimeout(() => {
-      const home = document.getElementById('premiumHome') || document.getElementById('v10CommandCentre');
+      const home = document.getElementById('v10CommandCentre') || document.getElementById('premiumHome');
       if (home) home.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 250);
   }
@@ -49,13 +54,13 @@
     const btn = document.getElementById('activatePremiumTester');
     if (!btn || btn.dataset.betaFixed === '1') return;
     btn.dataset.betaFixed = '1';
-    btn.textContent = isPremium() ? 'Premium Beta Active ✓' : 'Activate Premium Beta on this device';
+    btn.textContent = isPremium() ? 'Premium Beta active ✓' : 'Activate Premium Beta on this device';
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
       activate();
-      btn.textContent = 'Premium Beta Active ✓';
-    });
+      btn.textContent = 'Premium Beta active ✓';
+    }, true);
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', wire);
