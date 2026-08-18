@@ -14,8 +14,6 @@
   <meta property="og:description" content="Upload a photo. Identify the item. Find relevant retailers nearby.">
   <meta property="og:url" content="https://findit-nearby.vercel.app/">
   <title>FindIt Nearby</title>
-  <link rel="preconnect" href="https://unpkg.com">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -259,9 +257,28 @@
   <div id="challengeModal" class="modal hidden"><div class="modal-card"><button class="modal-close" data-close-modal>×</button><p class="section-kicker">YOUR FINDIT CHALLENGE</p><h2 id="challengeText">Find something unusual.</h2><button id="newChallenge" class="btn primary">🎲 Another challenge</button></div></div>
   <div id="settingsModal" class="modal hidden"><div class="modal-card"><button class="modal-close" data-close-modal>×</button><p class="section-kicker">SETTINGS</p><h2>Make FindIt yours</h2><label class="setting-row"><span>Animations</span><input id="animationsToggle" type="checkbox" checked></label><label class="setting-row"><span>Default radius</span><select id="settingsRadius"><option value="3">3 km</option><option value="5">5 km</option><option value="10" selected>10 km</option><option value="15" data-premium-option>15 km ★</option><option value="25" data-premium-option>25 km ★</option></select></label><button id="clearHistorySetting" class="btn secondary">Clear recent finds</button></div></div>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    (()=>{
+      let leafletPromise=null;
+      window.finditLoadLeaflet=()=>{
+        if(window.L)return Promise.resolve(window.L);
+        if(leafletPromise)return leafletPromise;
+        leafletPromise=new Promise((resolve,reject)=>{
+          if(!document.querySelector('link[data-findit-leaflet]')){
+            const css=document.createElement('link');css.rel='stylesheet';css.href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';css.dataset.finditLeaflet='1';document.head.appendChild(css);
+          }
+          const s=document.createElement('script');s.src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';s.async=true;s.onload=()=>resolve(window.L);s.onerror=reject;document.head.appendChild(s);
+        });
+        return leafletPromise;
+      };
+      document.addEventListener('click',e=>{
+        const hit=e.target.closest?.('#mapViewBtn,[data-premium-action="map"],[data-pw="map"],a[href="#nearbyPanel"]');
+        if(!hit||window.L)return;
+        window.finditLoadLeaflet().then(()=>{try{if(typeof ensureMap==='function')ensureMap();if(typeof updateMap==='function')updateMap();setTimeout(()=>window.state?.map?.invalidateSize?.(),80)}catch{}}).catch(()=>{});
+      },true);
+    })();
+  </script>
   <script src="script.js" defer></script>
-  <script defer src="/_vercel/insights/script.js"></script>
 
 <button id="premiumButton" class="premium-fab" type="button">★ Premium</button>
 <div id="premiumModal" class="premium-modal hidden" aria-hidden="true">
