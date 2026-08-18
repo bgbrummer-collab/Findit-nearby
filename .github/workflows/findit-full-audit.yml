@@ -18,6 +18,7 @@ on:
       - 'release-polish.js'
       - 'api/**'
       - 'tests/full-site-audit.mjs'
+      - 'tests/final-audit-runner.mjs'
       - '.github/workflows/findit-full-audit.yml'
   pull_request:
     branches: [main]
@@ -48,7 +49,7 @@ jobs:
         run: |
           set -e
           for i in $(seq 1 30); do
-            if curl -fsS --max-time 10 'https://findit-nearby.vercel.app/release-polish.js?qa=1' | grep -q 'Manual fallback'; then
+            if curl -fsS --max-time 10 'https://findit-nearby.vercel.app/release-polish.js?qa=1' | grep -q 'Copying feedback'; then
               echo 'Latest release polish is live.'
               exit 0
             fi
@@ -65,7 +66,7 @@ jobs:
           p=Path('tests/full-site-audit.mjs')
           s=p.read_text()
           s=s.replace("await safe('Product intelligence shows no fake zero price',async()=>{await expectVisible(page,'#productIntelligencePanel:not(.hidden)');const t=await page.locator('#productIntelligenceResults').innerText();if(/(?:ZAR|R)\\s*0\\.00/.test(t))throw Error('fake zero price');return t.slice(0,180)});", "await safe('Product intelligence shows no fake zero price',async()=>{const panel=page.locator('#productIntelligencePanel:not(.hidden)');if(!await panel.isVisible())return 'not applicable: panel hidden for this result';const t=await page.locator('#productIntelligenceResults').innerText();if(/(?:ZAR|R)\\s*0\\.00/.test(t))throw Error('fake zero price');return t.slice(0,180)});")
-          s=s.replace("await safe('Feedback copy works',async()=>{await page.locator('#feedbackMessage').fill('QA test only - not submitted');await page.locator('#copyFeedback').click();const t=await page.locator('#feedbackStatus').innerText();if(!/copied/i.test(t))throw Error(t);return t});", "await safe('Feedback copy works',async()=>{await page.locator('#feedbackMessage').fill('QA test only - not submitted');await page.locator('#copyFeedback').click();await page.waitForTimeout(500);const t=await page.locator('#feedbackStatus').innerText();if(!/copied|selected/i.test(t))throw Error(t||'no copy status');return t});")
+          s=s.replace("await safe('Feedback copy works',async()=>{await page.locator('#feedbackMessage').fill('QA test only - not submitted');await page.locator('#copyFeedback').click();const t=await page.locator('#feedbackStatus').innerText();if(!/copied/i.test(t))throw Error(t);return t});", "await safe('Feedback copy works',async()=>{await page.locator('#feedbackMessage').fill('QA test only - not submitted');await page.locator('#copyFeedback').click();await page.waitForTimeout(700);const t=await page.locator('#feedbackStatus').innerText();if(!/copied|selected/i.test(t))throw Error(t||'no copy status');return t});")
           s=s.replace("const bad=networkFailures.filter(x=>!/tile|analytics|fonts|google|jsdelivr/i.test(x));", "const bad=networkFailures.filter(x=>!/tile|analytics|fonts|google|jsdelivr|blob:/i.test(x));")
           p.write_text(s)
           PY
@@ -76,7 +77,7 @@ jobs:
         env:
           FINDIT_URL: https://findit-nearby.vercel.app/
           AUDIT_OUT: audit-output
-        run: node tests/full-site-audit.mjs
+        run: node tests/final-audit-runner.mjs
 
       - name: Publish latest audit report into repository
         if: always() && github.event_name == 'push'
