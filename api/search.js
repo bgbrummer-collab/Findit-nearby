@@ -12,6 +12,7 @@ const RETAIL_RULES=[
  {test:/\b(sneaker|sneakers|shoe|shoes|trainer|trainers|running shoe|football boot)\b/i,category:'footwear',stores:['shoe store','sportswear store','authorised brand store']},
  {test:/\b(shirt|t shirt|t-shirt|hoodie|jacket|jeans|dress|clothing|apparel)\b/i,category:'clothing',stores:['clothing store','fashion retailer','authorised brand store']},
  {test:/\b(eyeglasses|glasses|spectacles|sunglasses|eyewear|frames)\b/i,category:'eyewear',stores:['optician','eyewear store']},
+ {test:/\b(toiletry bag|wash bag|travel pouch|cosmetic bag|makeup bag|travel bag|luggage|suitcase|backpack|rucksack|duffel|handbag|purse|wallet)\b/i,category:'bags & travel accessories',stores:['luggage store','bag store','department store','travel accessories store']},
  {test:/\b(toilet paper|tissue|detergent|cleaner|soap|shampoo|toothpaste|grocery|food|snack|drink|cereal|milk|bread)\b/i,category:'grocery/household',stores:['supermarket','grocery store','pharmacy']},
  {test:/\b(perfume|fragrance|makeup|cosmetic|skincare|moisturizer|serum|foundation|mascara|lipstick)\b/i,category:'beauty',stores:['beauty store','pharmacy','department store']},
  {test:/\b(fridge|refrigerator|washing machine|dishwasher|microwave|oven|air fryer|kettle|toaster|vacuum)\b/i,category:'home appliances',stores:['appliance store','electronics store','home retailer']},
@@ -38,7 +39,10 @@ export default{async fetch(request){
   if(isRestricted(identification))return json({identification,offers:[],blocked:true,verified:false,message:'FindIt cannot help search for restricted, dangerous or age-limited products.'});
   if(Number(identification.confidence||0)<CONFIDENCE_MIN)return json({identification,offers:[],blocked:false,verified:false,message:'The image was not identified confidently enough. Try a clearer photo showing the whole item, logo, packaging or model text.'});
   const products=await loadFeeds(),offers=matchProducts(identification,products,lat,lon);
-  return json({identification,offers,blocked:false,verified:offers.length>0,visualVerification:true,message:offers.length?'Verified retailer offers found from connected authorised product data.':'The item was identified, but no connected authorised retailer feed returned a verified matching offer yet.'});
+  const exactOffers=offers.filter(o=>o.exactProductMatch);
+  identification.exactProductMatch=exactOffers.length>0;
+  identification.matchLevel=exactOffers.length?'exact':(identification.modelEvidence?'model-unverified':identification.brandEvidence?'brand-level':'category-level');
+  return json({identification,offers,blocked:false,verified:exactOffers.length>0,visualVerification:true,message:exactOffers.length?'Verified exact retailer offer found from connected authorised product data.':offers.length?'Possible retailer matches found, but FindIt could not verify that they are the exact photographed product.':'The item was identified, but no connected authorised retailer feed returned a verified exact matching offer yet.'});
  }catch(e){console.error('FindIt /api/search error',e);return json({error:'FindIt image search failed.',message:e.message||'Unknown error'},500)}
 }};
 
@@ -48,16 +52,17 @@ async function generateStructured(key,model,prompt,b64,mime){
 }
 
 async function identifyDraft(key,b64,mime){
- const prompt=`You are FindIt Nearby's first-pass product vision engine. Identify the ACTUAL physical item in the image, not merely words or branding visible in the scene.
+ const prompt=`You are FindIt Nearby's first-pass product vision engine. Identify the ACTUAL physical item in the image, not merely words, artwork, branding, or another object depicted on it.
 Accuracy is more important than being specific. Never invent a brand or exact model. If an exact model is not visually supported, set model to null and use a broader truthful name.
-Before answering, explicitly distinguish the real photographed object from a toy, miniature, model, replica, packaging image, poster, screen image, accessory or branded merchandise. A full-size tractor must never be identified as a toy tractor just because toy listings exist online, and a toy tractor must never be identified as a real agricultural tractor.
-Use object scale, surroundings, wheels, cabin, controls, proportions, material, packaging, labels, visible logos/text, model numbers, ports and distinctive geometry.
-brandEvidence=true only when the brand is directly visible or unmistakably supported by strong visual evidence. modelEvidence=true only when the exact model name/number is directly visible or the visual design is uniquely diagnostic; otherwise model must be null.
+CRITICAL OBJECT RULE: decide what the user could physically pick up and buy. If a toiletry bag has a vintage map printed on it, the item is a toiletry bag, NOT a map. If a shirt has a car printed on it, the item is a shirt, NOT a car. If packaging shows a product, distinguish the package from the product. Decorative artwork, logos and printed subjects are evidence/features, not the physical item unless the image actually shows that object itself.
+Before answering, explicitly distinguish the real photographed object from a toy, miniature, model, replica, packaging image, poster, screen image, accessory or branded merchandise.
+Use object scale, surroundings, seams, zippers, handles, straps, openings, wheels, cabin, controls, proportions, material, packaging, labels, visible logos/text, model numbers, ports and distinctive geometry.
+brandEvidence=true only when the PRODUCT brand is directly visible or unmistakably supported by strong visual evidence. A printed place name, artwork label, map text, character or decorative logo must not automatically become the product brand. modelEvidence=true only when the exact model name/number is directly visible or the visual design is uniquely diagnostic; otherwise model must be null.
 productKind should be one of: real_product, toy, miniature, replica, packaging, image_of_product, accessory, unknown. scaleClass should be one of: full_size, handheld, wearable, tabletop, miniature, unknown.
-Retail relevance is critical. A tractor maps to agricultural/farm machinery dealers, not clothing, grocery, pharmacy or general retail. Heavy machinery maps to specialist machinery dealers. Phones map to mobile/electronics. Shoes to footwear/sportswear. Groceries to supermarkets. Eyewear to opticians.
-When a specialist branded product is recognised, likelyStoreTypes should prioritise an authorised dealer for that brand. Example: John Deere tractor -> retailCategory "agricultural machinery" and likelyStoreTypes ["John Deere dealer","agricultural equipment dealer","tractor dealer"].
+Retail relevance is critical. Bags, toiletry bags, wash bags and travel pouches map to luggage/bag/travel-accessory retailers. A printed map on a bag does not make it a map/poster product. Phones map to mobile/electronics. Shoes to footwear/sportswear. Groceries to supermarkets. Eyewear to opticians.
+When a specialist branded product is recognised, likelyStoreTypes should prioritise an authorised dealer for that brand.
 Do not call ordinary eyeglasses safety/PPE without direct certification evidence.
-searchQuery must describe the physical item itself. Return structured JSON only.`;
+searchQuery must describe the physical purchasable item itself. Include brand/model only when supported. Return structured JSON only.`;
  let last;for(const model of [PRIMARY_MODEL,FALLBACK_MODEL]){try{const x=await generateStructured(key,model,prompt,b64,mime);x.modelUsed=model;return x}catch(e){last=e}}throw last||Error('Gemini request failed');
 }
 
@@ -68,13 +73,14 @@ FIRST-PASS DRAFT:
 ${JSON.stringify(draft)}
 
 Your job is to protect users from confident wrong matches. Check especially:
-1. Is this the actual physical product, or a toy/miniature/replica/accessory/package/photo of a product?
-2. Is the scale plausible from the surroundings? A real tractor, car or heavy machine must look full-size; a boxed or handheld branded toy is not the real machine.
-3. Is the brand truly visible? If not, set brand=null and brandEvidence=false.
-4. Is the exact model truly supported? If no readable model text or uniquely diagnostic design exists, set model=null and modelEvidence=false. Never guess an exact model because it is popular online.
-5. Does searchQuery describe the actual photographed object, including words like toy/miniature/replica when appropriate?
-6. Are retailCategory and likelyStoreTypes places that genuinely sell this exact physical product type?
-7. If the first pass was too specific, become less specific and lower confidence. Uncertainty is better than a wrong answer.
+1. What is the actual physical purchasable object? Do not mistake artwork, a map print, photo, logo, character, vehicle picture or other decoration ON the item for the item itself.
+2. Look for construction clues such as zippers, seams, handles, straps, fabric edges, packaging and scale. Example: a pouch with map artwork is a pouch/toiletry bag, not a map.
+3. Is this the actual product, or a toy/miniature/replica/accessory/package/photo of a product?
+4. Is the brand truly the product brand? If not, set brand=null and brandEvidence=false.
+5. Is the exact model truly supported? If no readable model text or uniquely diagnostic design exists, set model=null and modelEvidence=false. Never guess.
+6. Does searchQuery describe the actual physical item rather than its decoration?
+7. Are retailCategory and likelyStoreTypes places that genuinely sell this physical product type?
+8. If the first pass was too specific, become less specific and lower confidence. Uncertainty is better than a wrong answer.
 
 Use evidence[] to list the strongest visible reasons for the final answer. Set draftChanged=true if you corrected any meaningful field. verificationNote should briefly explain what you checked. Return structured JSON only.`;
  let last;for(const model of [PRIMARY_MODEL,FALLBACK_MODEL]){try{const x=await generateStructured(key,model,prompt,b64,mime);x.verifierModel=model;return x}catch(e){last=e}}throw last||Error('Verification failed');
@@ -93,14 +99,17 @@ function postProcess(i,draft={}){
  if(eyewear&&safetyClaim&&!proof){const side=/side shield|side guard|wraparound/.test(all);i.object='eyeglasses';i.name=side?'Eyeglasses with Side Shields':'Eyeglasses';i.category='Eyewear';i.retailCategory='eyewear';i.likelyStoreTypes=['optician','eyewear store'];i.searchQuery=side?'eyeglasses with side shields':'eyeglasses';i.summary=side?'Eyeglasses with side-shield styling. No visible safety certification was detected, so FindIt is treating them as eyewear rather than confirmed PPE.':'Eyeglasses. No visible evidence supports classifying them as industrial safety equipment.';i.confidence=Math.min(i.confidence,.82);i.classificationAdjusted=true}
  const rule=RETAIL_RULES.find(r=>r.test.test(all));
  if(rule){i.retailCategory=rule.category;const brand=i.brand?String(i.brand).trim():'';const priority=[];if(rule.dealerBrand&&brand)priority.push(`${brand} dealer`);for(const s of rule.stores)if(!priority.some(x=>norm(x)===norm(s)))priority.push(s);i.likelyStoreTypes=priority.slice(0,5);i.retailRuleApplied=true}
+ i.exactProductMatch=false;
+ i.matchLevel=i.modelEvidence?'model-unverified':i.brandEvidence?'brand-level':'category-level';
  return i;
 }
 
 async function loadFeeds(){let cfg=[];try{cfg=JSON.parse(process.env.RETAILER_FEEDS_JSON||'[]')}catch{}if(!Array.isArray(cfg))return[];const settled=await Promise.allSettled(cfg.filter(x=>x?.url&&x?.name).map(fetchFeed));return settled.flatMap(x=>x.status==='fulfilled'?x.value:[])}
 async function fetchFeed(c){const h={Accept:'application/json'};if(c.tokenEnv&&process.env[c.tokenEnv])h.Authorization=`Bearer ${process.env[c.tokenEnv]}`;const r=await fetch(c.url,{headers:h});if(!r.ok)throw Error(`${c.name} feed returned ${r.status}`);const d=await r.json(),a=Array.isArray(d)?d:Array.isArray(d.products)?d.products:[];return a.map(p=>({id:String(p.id||p.sku||p.url||p.name),name:String(p.name||''),brand:clean(p.brand),model:clean(p.model||p.sku),category:clean(p.category),keywords:Array.isArray(p.keywords)?p.keywords.map(String):[],image:clean(p.image),url:clean(p.url),retailer:c.name,price:num(p.price),currency:p.currency||'ZAR',stock:p.stock||null,stores:Array.isArray(p.stores)?p.stores:[]})).filter(p=>p.name)}
-function matchProducts(i,products,lat,lon){const out=[];for(const p of products){const m=score(i,p);if(m<.62)continue;if(p.stores?.length){for(const s of p.stores)out.push(make(p,s,m,lat,lon))}else out.push(make(p,null,m,lat,lon))}return out.sort((a,b)=>b.match-a.match).slice(0,20)}
+function matchProducts(i,products,lat,lon){const out=[];for(const p of products){const m=score(i,p);if(m<.62)continue;const exact=isExact(i,p);if(p.stores?.length){for(const s of p.stores)out.push(make(p,s,m,lat,lon,exact))}else out.push(make(p,null,m,lat,lon,exact))}return out.sort((a,b)=>(Number(b.exactProductMatch)-Number(a.exactProductMatch))||b.match-a.match).slice(0,20)}
+function isExact(i,p){if(!i.modelEvidence||!i.model||!p.model)return false;if(norm(i.model)!==norm(p.model))return false;if(i.brandEvidence&&i.brand){if(!p.brand||norm(i.brand)!==norm(p.brand))return false}return true}
 function score(i,p){const a=norm([i.name,i.object,i.searchQuery,i.brand,i.model,i.productKind,i.scaleClass].join(' ')),b=norm([p.name,p.brand,p.model,p.category,p.keywords?.join(' ')].join(' '));let s=overlap(a,b)*.55;if(i.brand&&p.brand)s+=norm(i.brand)===norm(p.brand)?.25:-.15;if(i.model&&p.model)s+=norm(i.model)===norm(p.model)?.35:0;const realMachine=/\b(tractor|harvester|excavator|bulldozer|loader|backhoe|grader)\b/.test(a)&&i.productKind==='real_product';if(realMachine&&/\b(toy|miniature|replica|model kit|build a|ride on)\b/.test(b))s-=.8;return clamp(s,0,1)}
-function make(p,s,m,lat,lon){const d=s&&lat!=null&&lon!=null&&num(s.lat)!=null&&num(s.lon)!=null?haversine(lat,lon,num(s.lat),num(s.lon)):null;return{id:`${p.id}:${s?.name||'online'}`,name:p.name,brand:p.brand,model:p.model,image:p.image,url:p.url,retailer:p.retailer,price:p.price,currency:p.currency,match:m,stock:s?.stock||p.stock,store:s||null,distanceKm:d}}
+function make(p,s,m,lat,lon,exact=false){const d=s&&lat!=null&&lon!=null&&num(s.lat)!=null&&num(s.lon)!=null?haversine(lat,lon,num(s.lat),num(s.lon)):null;return{id:`${p.id}:${s?.name||'online'}`,name:p.name,brand:p.brand,model:p.model,image:p.image,url:p.url,retailer:p.retailer,price:p.price,currency:p.currency,match:m,exactProductMatch:exact,stock:s?.stock||p.stock,store:s||null,distanceKm:d}}
 function overlap(a,b){const A=new Set(norm(a).split(/\W+/).filter(x=>x.length>1)),B=new Set(norm(b).split(/\W+/).filter(x=>x.length>1));if(!A.size||!B.size)return 0;let h=0;for(const x of A)if(B.has(x))h++;return h/Math.max(A.size,B.size)}
 function isRestricted(i){const x=norm([i.object,i.name,i.brand,i.model,i.category,i.searchQuery,...(i.visibleText||[])].join(' '));return RESTRICTED.some(t=>x.includes(t))}
 function clean(v){const s=String(v??'').trim();return !s||/^(null|unknown|not detected|n\/a)$/i.test(s)?null:s}function norm(v){return String(v||'').toLowerCase().trim()}function num(v){const n=Number(v);return Number.isFinite(n)?n:null}function clamp(v,a,b){return Math.max(a,Math.min(b,v))}function haversine(a,b,c,d){const R=6371,p=Math.PI/180,x=Math.sin((c-a)*p/2)**2+Math.cos(a*p)*Math.cos(c*p)*Math.sin((d-b)*p/2)**2;return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x))}function json(body,status=200){return new Response(JSON.stringify(body),{status,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'}})}
