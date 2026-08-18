@@ -1,10 +1,10 @@
 # FindIt Full Production Audit
 
-Generated: 2026-08-18T19:23:41.014Z
+Generated: 2026-08-18T19:26:00.648Z
 
-**Passes:** 88  
+**Passes:** 86  
 **Warnings:** 0  
-**Failures:** 1
+**Failures:** 3
 
 - ✅ **Production homepage loads** — HTTP 200
 - ✅ **Desktop has no horizontal overflow** — {"sw":1440,"cw":1440}
@@ -19,7 +19,7 @@ Generated: 2026-08-18T19:23:41.014Z
 - ✅ **Open Challenge**
 - ✅ **Challenge modal visible**
 - ✅ **New challenge**
-- ✅ **Challenge text populated** — Find an unusual tool 🔧
+- ✅ **Challenge text populated** — Find a product you've always wondered about ✨
 - ✅ **Examples render** — 6 cards
 - ✅ **Shuffle examples**
 - ✅ **Open drawer for settings**
@@ -30,7 +30,7 @@ Generated: 2026-08-18T19:23:41.014Z
 - ✅ **Image picker accepts a real raster image**
 - ✅ **Use my location**
 - ✅ **Location becomes ready** — ✓ Location ready
-- ✅ **Identify & Find completes** — Graphic Art Print
+- ✅ **Identify & Find completes** — Running Shoe Illustration
 - ✅ **Identification analysis cards render** — 8
 - ✅ **Map view**
 - ✅ **Map view opens** — map-wrap show
@@ -39,12 +39,7 @@ Generated: 2026-08-18T19:23:41.014Z
 - ✅ **Offer sort Cheapest**
 - ✅ **Offer sort Closest**
 - ✅ **Free result actions are truthful** — search/copy/share available
-- ✅ **Product intelligence shows no fake zero price** — Verified price not connected yet
-
-Continue with the exact item now. Premium unlocks deeper comparison and advanced search tools.
-
-Search exact product →
-★ Unlock the best FindIt to
+- ❌ **Product intelligence shows no fake zero price** — not visible
 - ✅ **Thumbs up**
 - ✅ **Thumbs up sets rating 5**
 - ✅ **Thumbs down**
@@ -95,8 +90,8 @@ Search exact product →
 - ✅ **Mobile More opens drawer**
 - ✅ **Health API live** — {"ok":true,"geminiKeyConfigured":true,"model":"gemini-3.6-flash","modelReachable":true,"message":"Gemini connection is ready."}
 - ✅ **Feedback health API live** — {"ok":true,"provider":"formspree","formspreeConfigured":true,"message":"Formspree feedback delivery is configured."}
-- ✅ **Built-in FindIt QA report passes** — {"time":"2026-08-18T19:23:41.013Z","missingElements":[],"missingPremiumFunctions":[],"premiumButtons":["scan","manual","exact","assistant","collections","watchlist","favourites","stats","history"],"ok":true}
+- ✅ **Built-in FindIt QA report passes** — {"time":"2026-08-18T19:26:00.646Z","missingElements":[],"missingPremiumFunctions":[],"premiumButtons":["scan","manual","exact","assistant","collections","watchlist","favourites","stats","history"],"ok":true}
 - ✅ **No uncaught desktop JavaScript errors** — none
 - ✅ **No uncaught mobile JavaScript errors** — none
 - ✅ **No meaningful console errors** — none
-- ✅ **No unexpected network failures** — none
+- ❌ **No unexpected network failures** — GET blob:https://findit-nearby.vercel.app/2d5814e9-d620-4124-a6c7-5c7fbb6e6425 net::ERR_ABORTED
