@@ -16,12 +16,58 @@
   function isPremium(){try{if(premiumState?.active)return true}catch{}return document.body.classList.contains('premium-active')||document.body.classList.contains('premium-v10')}
   function premiumBox(){if(isPremium())return '<div class="findit-premium-badge">★ Premium deep-search tools unlocked</div>';return `<div class="findit-premium-upsell"><b>★ Unlock the best FindIt tools</b>Premium adds deeper exact-match search, 25 km radius, store comparison, smart filters, saved finds, watchlist, favourite stores, History+ and FindIt Assistant.<br><button type="button" data-findit-premium>Explore Premium</button></div>`}
   function fallback(title,body){return `<div class="findit-useful-fallback"><h4>${title}</h4><p>${body}</p><div class="findit-fallback-actions"><a href="${onlineUrl()}" target="_blank" rel="noopener">Search exact item online →</a><a href="${mapsUrl()}" target="_blank" rel="noopener">Find ${brandTerm()} near me</a><button type="button" data-findit-correct>Correct item</button></div><div class="findit-free-note">FindIt only claims price or branch stock when it can verify it.</div>${premiumBox()}</div>`}
-  function wire(root=document){root.querySelectorAll('[data-findit-correct]').forEach(b=>{if(b.dataset.wired)return;b.dataset.wired='1';b.onclick=()=>document.getElementById('correctSearch')?.click()});root.querySelectorAll('[data-findit-premium]').forEach(b=>{if(b.dataset.wired)return;b.dataset.wired='1';b.onclick=()=>{const p=document.getElementById('premiumFab')||document.getElementById('drawerPremium');p?.click()}})}
+  function wire(root=document){root.querySelectorAll('[data-findit-correct]').forEach(b=>{if(b.dataset.wired)return;b.dataset.wired='1';b.onclick=()=>document.getElementById('correctSearch')?.click()});root.querySelectorAll('[data-findit-premium]').forEach(b=>{if(b.dataset.wired)return;b.dataset.wired='1';b.onclick=()=>{const p=document.getElementById('premiumButton')||document.getElementById('drawerPremium');p?.click()}})}
   function setFallback(el,title,body){if(!el||el.classList.contains('hidden'))return;const key=cleanQuery()+'|'+String(isPremium());if(el.dataset.finditKey===key)return;el.dataset.finditKey=key;el.innerHTML=fallback(title,body);wire(el)}
   function removeDuplicateBrandText(){const i=ident(),brand=cleanText(i.brand);if(!brand)return;const re=new RegExp('\\b'+regexEsc(brand)+'\\s+'+regexEsc(brand)+'\\b','gi');document.querySelectorAll('#results p,#results h1,#results h2,#results h3,#results h4,#results span').forEach(el=>{if(el.children.length===0&&re.test(el.textContent||''))el.textContent=(el.textContent||'').replace(re,brand)})}
   function polishPI(){const panel=document.getElementById('productIntelligencePanel'),el=document.getElementById('productIntelligenceResults');if(!panel||!el||panel.classList.contains('hidden'))return;const txt=cleanText(el.textContent).toLowerCase();if(!txt.includes('no verified product price')&&!txt.includes('product price data is temporarily unavailable')&&!txt.includes('no retailer offers'))return;const key=cleanQuery()+'|'+String(isPremium());if(el.dataset.finditPiKey===key)return;el.dataset.finditPiKey=key;el.innerHTML=`<div class="findit-pi-helper"><strong>${isPremium()?'★ Premium exact-product tools ready':'Verified price not connected yet'}</strong><p>${isPremium()?'Use exact-product search plus Premium comparison, filters and saved tools while FindIt keeps unverified prices honest.':'Continue with the exact item now. Premium unlocks deeper comparison and advanced search tools.'}</p><a href="${onlineUrl()}" target="_blank" rel="noopener">Search exact product →</a>${premiumBox()}</div>`;wire(el)}
   function polish(){const no=document.getElementById('noOffers'),nothing=document.getElementById('nothingFound');if(no&&!no.classList.contains('hidden')&&nothing&&!nothing.classList.contains('hidden'))no.classList.add('hidden');else setFallback(no,'Continue with exact-product results','A verified catalogue offer is not connected yet. Continue with the identified item instead of a dead end.');setFallback(nothing,'No verified branch stock yet','FindIt has not confirmed this exact item at a physical branch in your radius. Use the exact-brand or specialist-dealer search instead of random category stores.');polishPI();removeDuplicateBrandText()}
   function watch(){const r=document.getElementById('results');if(!r)return;let timer;new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(polish,180)}).observe(r,{subtree:true,childList:true,attributes:true,attributeFilter:['class']});polish()}
   function finderRecovery(){const choose=document.getElementById('choosePhoto'),take=document.getElementById('takePhoto'),photo=document.getElementById('photo'),camera=document.getElementById('cameraPhoto'),preview=document.getElementById('preview'),placeholder=document.getElementById('uploadPlaceholder'),search=document.getElementById('search'),status=document.getElementById('status'),location=document.getElementById('location');if(!choose||!take||!photo||!camera)return;const st=(t,e=false)=>{if(status){status.textContent=t;status.style.color=e?'#ff9da7':''}};const file=f=>{if(!f)return;if(!String(f.type||'').startsWith('image/'))return st('Please choose an image file.',true);if(f.size>8*1024*1024)return st('Please use an image smaller than 8 MB.',true);window.__finditSelectedFile=f;try{state.file=f}catch{}if(preview){preview.src=URL.createObjectURL(f);preview.classList.remove('hidden')}placeholder?.classList.add('hidden');if(search)search.disabled=false;st('Photo ready. Tap Identify & Find.')};choose.addEventListener('click',e=>{e.preventDefault();e.stopImmediatePropagation();photo.value='';photo.click()},true);take.addEventListener('click',e=>{e.preventDefault();e.stopImmediatePropagation();camera.value='';camera.click()},true);photo.addEventListener('change',()=>file(photo.files?.[0]),true);camera.addEventListener('change',()=>file(camera.files?.[0]),true);if(location)location.addEventListener('click',e=>{if(!navigator.geolocation)return st('Location is unavailable in this browser.',true);e.preventDefault();e.stopImmediatePropagation();location.disabled=true;location.textContent='Finding location…';navigator.geolocation.getCurrentPosition(p=>{const c={lat:p.coords.latitude,lon:p.coords.longitude};window.__finditCoords=c;try{state.coords=c}catch{}location.disabled=false;location.textContent='✓ Location ready';st('Location ready.')},()=>{location.disabled=false;location.textContent='📍 Use my location';st('Location permission was not granted. Identification still works.',true)},{enableHighAccuracy:true,timeout:15000,maximumAge:120000})},true);search?.addEventListener('click',()=>{try{if(!state.file&&window.__finditSelectedFile)state.file=window.__finditSelectedFile;if(!state.coords&&window.__finditCoords)state.coords=window.__finditCoords}catch{}},true)}
-  function init(){injectStyles();watch();finderRecovery()}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+
+  /* Premium Beta test-access override. Runs after the older Paystack listener so Beta testing never asks for email or drops back to Free. */
+  const BETA_ACCESS_KEY='findit_beta_access_v2';
+  function applyBetaAccess(showWow=false){
+    localStorage.setItem(BETA_ACCESS_KEY,'1');
+    try{premiumState.active=true}catch{}
+    document.body.classList.add('premium-active','premium-v10');
+    document.getElementById('premiumStatusBadge')?.classList.remove('hidden');
+    document.getElementById('premiumWorkspaceButton')?.classList.remove('hidden');
+    document.getElementById('premiumHome')?.classList.remove('hidden');
+    document.getElementById('v10CommandCentre')?.classList.remove('hidden');
+    if(typeof refreshPremiumUI==='function')refreshPremiumUI();
+    if(typeof applyPremiumWorld==='function')applyPremiumWorld(showWow);
+    if(typeof updatePremiumDashboard==='function')updatePremiumDashboard();
+    if(typeof v10Refresh==='function')v10Refresh();
+  }
+  function updatePremiumFeatureList(){
+    const card=document.querySelector('#premiumModal .premium-plan-card.premium');
+    if(!card)return;
+    const ul=card.querySelector('ul');
+    if(ul)ul.innerHTML=[
+      'Vision+ photo identification','Manual product search','Exact Match search','AI Search assistant','Up to 25 km search radius','Saved items & Collections','Watchlist','Favourite Stores','Compare Stores','Closest / A–Z / best-match filters','Nearby Map','History+ up to 50 finds','My FindIt Stats','Share Find','Premium workspace & badge','Price alerts — coming later','Deeper verified price comparison — expanding as retailer data grows'
+    ].map(x=>`<li>${x}</li>`).join('');
+    const intro=document.querySelector('#premiumModal .premium-card > p');if(intro)intro.textContent='Premium is free to test during Beta. Unlock the full Premium workspace on this device — no payment or email required.';
+    const kicker=document.querySelector('#premiumModal .premium-kicker');if(kicker)kicker.textContent='FINDIT PREMIUM BETA';
+    const small=card.querySelector('small');if(small)small.textContent='Free during Beta testing • No payment required.';
+  }
+  function installBetaButton(){
+    const old=document.getElementById('activatePremiumTester');if(!old)return;
+    const btn=old.cloneNode(true);old.replaceWith(btn);
+    btn.disabled=false;
+    btn.textContent=localStorage.getItem(BETA_ACCESS_KEY)==='1'?'Premium Beta active ✓':'Activate Premium Beta — Free';
+    btn.addEventListener('click',e=>{
+      e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
+      applyBetaAccess(true);btn.textContent='Premium Beta active ✓';
+      document.getElementById('premiumModal')?.classList.add('hidden');
+      setTimeout(()=>document.getElementById('v10CommandCentre')?.scrollIntoView({behavior:'smooth',block:'start'}),250);
+    },true);
+  }
+  function premiumBetaInit(){
+    updatePremiumFeatureList();
+    installBetaButton();
+    if(localStorage.getItem(BETA_ACCESS_KEY)==='1')applyBetaAccess(false);
+  }
+
+  function init(){injectStyles();watch();finderRecovery();setTimeout(premiumBetaInit,80)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+  window.addEventListener('pageshow',()=>setTimeout(()=>{if(localStorage.getItem(BETA_ACCESS_KEY)==='1')applyBetaAccess(false);installBetaButton();updatePremiumFeatureList()},120));
 })();
