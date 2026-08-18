@@ -1,0 +1,55 @@
+name: FindIt Full Production Audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'style.css'
+      - 'script.js'
+      - 'mobile-menu-fix.js'
+      - 'premium-beta-fix.js'
+      - 'premium-upgrades.js'
+      - 'qa-hardening.js'
+      - 'qa-menu-routes.js'
+      - 'api/**'
+      - 'tests/full-site-audit.mjs'
+      - '.github/workflows/findit-full-audit.yml'
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install Playwright
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --save-dev playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Wait for production deployment
+        run: sleep 25
+
+      - name: Run every-interaction production audit
+        env:
+          FINDIT_URL: https://findit-nearby.vercel.app/
+          AUDIT_OUT: audit-output
+        run: node tests/full-site-audit.mjs
+
+      - name: Upload audit report and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: findit-full-production-audit
+          path: audit-output/
+          if-no-files-found: warn
+          retention-days: 14
