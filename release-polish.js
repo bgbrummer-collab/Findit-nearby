@@ -3,16 +3,40 @@
  const $=s=>document.querySelector(s);
  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  async function copyText(text){
-   try{if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(text);return true}}catch{}
-   try{const ta=document.createElement('textarea');ta.value=text;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();ta.setSelectionRange(0,ta.value.length);const ok=document.execCommand('copy');ta.remove();return ok}catch{return false}
+   try{
+     if(navigator.clipboard?.writeText){
+       await navigator.clipboard.writeText(text);
+       return 'copied';
+     }
+   }catch{}
+   try{
+     const ta=document.createElement('textarea');
+     ta.value=text;
+     ta.setAttribute('readonly','');
+     ta.setAttribute('aria-hidden','true');
+     ta.style.position='fixed';
+     ta.style.left='-9999px';
+     ta.style.top='0';
+     ta.style.opacity='0';
+     document.body.appendChild(ta);
+     ta.focus();ta.select();ta.setSelectionRange(0,ta.value.length);
+     let ok=false;
+     try{ok=document.execCommand('copy')===true}catch{}
+     if(ok){ta.remove();return 'copied'}
+     // Keep a truthful, usable fallback: select the text so the user can copy manually.
+     ta.style.left='12px';ta.style.right='12px';ta.style.bottom='12px';ta.style.top='auto';ta.style.width='calc(100% - 24px)';ta.style.maxWidth='720px';ta.style.height='110px';ta.style.opacity='1';ta.style.zIndex='20000';ta.style.padding='10px';ta.style.borderRadius='10px';ta.style.background='#0f1530';ta.style.color='#fff';ta.removeAttribute('aria-hidden');ta.focus();ta.select();
+     setTimeout(()=>{try{ta.remove()}catch{}},12000);
+     return 'selected';
+   }catch{return 'unavailable'}
  }
  function wireFeedbackCopy(){
    const b=$('#copyFeedback');if(!b||b.dataset.releaseCopy==='1')return;b.dataset.releaseCopy='1';
    b.addEventListener('click',async e=>{
      e.preventDefault();e.stopImmediatePropagation();
      const rating=$('#feedbackRating')?.value||'0',topic=$('#feedbackTopic')?.value||'general',msg=$('#feedbackMessage')?.value?.trim()||'';
-     const ok=await copyText(`FindIt rating: ${rating}/5\nTopic: ${topic}\n\n${msg}`);
-     const st=$('#feedbackStatus');if(st)st.textContent=ok?'✓ Feedback copied.':'Copy unavailable.';
+     const result=await copyText(`FindIt rating: ${rating}/5\nTopic: ${topic}\n\n${msg}`);
+     const st=$('#feedbackStatus');
+     if(st)st.textContent=result==='copied'?'✓ Feedback copied.':result==='selected'?'Feedback selected — press Ctrl+C / Copy.':'Copy unavailable on this device.';
    },true);
  }
  function exactFallback(){
