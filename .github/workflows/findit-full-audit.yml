@@ -13,9 +13,12 @@ on:
       - 'premium-upgrades.js'
       - 'qa-hardening.js'
       - 'qa-menu-routes.js'
+      - 'qa-final-polish.js'
       - 'api/**'
       - 'tests/full-site-audit.mjs'
       - '.github/workflows/findit-full-audit.yml'
+  pull_request:
+    branches: [main]
 
 permissions:
   contents: write
@@ -51,7 +54,7 @@ jobs:
         run: node tests/full-site-audit.mjs
 
       - name: Publish latest audit report into repository
-        if: always()
+        if: always() && github.event_name == 'push'
         run: |
           mkdir -p qa-results
           if [ -f audit-output/findit-full-audit.json ]; then cp audit-output/findit-full-audit.json qa-results/latest.json; fi
