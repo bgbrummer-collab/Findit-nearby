@@ -23,6 +23,7 @@ on:
 permissions:
   contents: write
 
+# Hardened final production audit trigger: 2026-08-18
 jobs:
   audit:
     runs-on: ubuntu-latest
