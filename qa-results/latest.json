@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-18T19:26:00.648Z",
+  "generatedAt": "2026-08-18T19:30:53.231Z",
   "url": "https://findit-nearby.vercel.app/",
   "summary": {
     "passes": 86,
@@ -130,7 +130,7 @@
     {
       "name": "Identify & Find completes",
       "status": "PASS",
-      "detail": "Running Shoe Illustration"
+      "detail": "Running Shoe Diagram"
     },
     {
       "name": "Identification analysis cards render",
@@ -430,7 +430,7 @@
     {
       "name": "Built-in FindIt QA report passes",
       "status": "PASS",
-      "detail": "{\"time\":\"2026-08-18T19:26:00.646Z\",\"missingElements\":[],\"missingPremiumFunctions\":[],\"premiumButtons\":[\"scan\",\"manual\",\"exact\",\"assistant\",\"collections\",\"watchlist\",\"favourites\",\"stats\",\"history\"],\"ok\":true}"
+      "detail": "{\"time\":\"2026-08-18T19:30:53.230Z\",\"missingElements\":[],\"missingPremiumFunctions\":[],\"premiumButtons\":[\"scan\",\"manual\",\"exact\",\"assistant\",\"collections\",\"watchlist\",\"favourites\",\"stats\",\"history\"],\"ok\":true}"
     },
     {
       "name": "No uncaught desktop JavaScript errors",
@@ -450,7 +450,7 @@
     {
       "name": "No unexpected network failures",
       "status": "FAIL",
-      "detail": "GET blob:https://findit-nearby.vercel.app/2d5814e9-d620-4124-a6c7-5c7fbb6e6425 net::ERR_ABORTED"
+      "detail": "GET blob:https://findit-nearby.vercel.app/25293cde-a41e-40f3-99d4-6dfdefee3fb3 net::ERR_ABORTED"
     }
   ]
 }

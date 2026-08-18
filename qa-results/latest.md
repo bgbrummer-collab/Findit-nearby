@@ -1,6 +1,6 @@
 # FindIt Full Production Audit
 
-Generated: 2026-08-18T19:26:00.648Z
+Generated: 2026-08-18T19:30:53.231Z
 
 **Passes:** 86  
 **Warnings:** 0  
@@ -30,7 +30,7 @@ Generated: 2026-08-18T19:26:00.648Z
 - ✅ **Image picker accepts a real raster image**
 - ✅ **Use my location**
 - ✅ **Location becomes ready** — ✓ Location ready
-- ✅ **Identify & Find completes** — Running Shoe Illustration
+- ✅ **Identify & Find completes** — Running Shoe Diagram
 - ✅ **Identification analysis cards render** — 8
 - ✅ **Map view**
 - ✅ **Map view opens** — map-wrap show
@@ -90,8 +90,8 @@ Generated: 2026-08-18T19:26:00.648Z
 - ✅ **Mobile More opens drawer**
 - ✅ **Health API live** — {"ok":true,"geminiKeyConfigured":true,"model":"gemini-3.6-flash","modelReachable":true,"message":"Gemini connection is ready."}
 - ✅ **Feedback health API live** — {"ok":true,"provider":"formspree","formspreeConfigured":true,"message":"Formspree feedback delivery is configured."}
-- ✅ **Built-in FindIt QA report passes** — {"time":"2026-08-18T19:26:00.646Z","missingElements":[],"missingPremiumFunctions":[],"premiumButtons":["scan","manual","exact","assistant","collections","watchlist","favourites","stats","history"],"ok":true}
+- ✅ **Built-in FindIt QA report passes** — {"time":"2026-08-18T19:30:53.230Z","missingElements":[],"missingPremiumFunctions":[],"premiumButtons":["scan","manual","exact","assistant","collections","watchlist","favourites","stats","history"],"ok":true}
 - ✅ **No uncaught desktop JavaScript errors** — none
 - ✅ **No uncaught mobile JavaScript errors** — none
 - ✅ **No meaningful console errors** — none
-- ❌ **No unexpected network failures** — GET blob:https://findit-nearby.vercel.app/2d5814e9-d620-4124-a6c7-5c7fbb6e6425 net::ERR_ABORTED
+- ❌ **No unexpected network failures** — GET blob:https://findit-nearby.vercel.app/25293cde-a41e-40f3-99d4-6dfdefee3fb3 net::ERR_ABORTED
