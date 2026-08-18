@@ -17,6 +17,9 @@ on:
       - 'tests/full-site-audit.mjs'
       - '.github/workflows/findit-full-audit.yml'
 
+permissions:
+  contents: write
+
 jobs:
   audit:
     runs-on: ubuntu-latest
@@ -40,10 +43,26 @@ jobs:
         run: sleep 25
 
       - name: Run every-interaction production audit
+        id: audit
+        continue-on-error: true
         env:
           FINDIT_URL: https://findit-nearby.vercel.app/
           AUDIT_OUT: audit-output
         run: node tests/full-site-audit.mjs
+
+      - name: Publish latest audit report into repository
+        if: always()
+        run: |
+          mkdir -p qa-results
+          if [ -f audit-output/findit-full-audit.json ]; then cp audit-output/findit-full-audit.json qa-results/latest.json; fi
+          if [ -f audit-output/findit-full-audit.md ]; then cp audit-output/findit-full-audit.md qa-results/latest.md; fi
+          git config user.name "findit-qa-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add qa-results/latest.json qa-results/latest.md || true
+          if ! git diff --cached --quiet; then
+            git commit -m "Update automated FindIt production audit report"
+            git push
+          fi
 
       - name: Upload audit report and screenshots
         if: always()
@@ -53,3 +72,7 @@ jobs:
           path: audit-output/
           if-no-files-found: warn
           retention-days: 14
+
+      - name: Fail workflow if audit found broken interactions
+        if: steps.audit.outcome == 'failure'
+        run: exit 1
