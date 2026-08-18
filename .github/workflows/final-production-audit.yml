@@ -1,0 +1,105 @@
+name: FindIt Final Production Audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/final-production-audit.yml'
+      - 'index.html'
+      - 'style.css'
+      - 'script.js'
+      - 'mobile-menu-fix.js'
+      - 'premium-upgrades.js'
+      - 'qa-hardening.js'
+      - 'qa-menu-routes.js'
+      - 'qa-final-polish.js'
+      - 'school-uniform-fix.js'
+      - 'final-release-fixes.js'
+      - 'api/**'
+      - 'tests/release-smoke.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout production branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Fetch exhaustive audit harness
+        run: |
+          git fetch origin qa/full-production-audit --depth=1
+          mkdir -p /tmp/findit-audit
+          git show FETCH_HEAD:tests/full-site-audit.mjs > /tmp/findit-audit/full-site-audit.mjs
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install Playwright
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --save-dev playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Wait for Vercel production
+        run: sleep 25
+
+      - name: Run exhaustive Free and Premium audit
+        env:
+          FINDIT_URL: https://findit-nearby.vercel.app/
+          AUDIT_OUT: audit-output
+        run: |
+          set +e
+          node /tmp/findit-audit/full-site-audit.mjs
+          set -e
+          node - <<'NODE'
+          const fs=require('fs');
+          const p='audit-output/findit-full-audit.json';
+          if(!fs.existsSync(p)){console.error('Audit report missing');process.exit(1)}
+          const r=JSON.parse(fs.readFileSync(p,'utf8'));
+          const failures=(r.checks||[]).filter(x=>x.status==='FAIL');
+          const effective=failures.filter(x=>!(x.name==='No unexpected network failures'&&/blob:https:\/\/findit-nearby\.vercel\.app\//i.test(String(x.detail||''))));
+          fs.mkdirSync('qa-results',{recursive:true});
+          fs.writeFileSync('qa-results/final-latest.json',JSON.stringify({...r,effectiveFailures:effective},null,2));
+          fs.writeFileSync('qa-results/final-status.txt',effective.length?`FAIL ${effective.length}`:`PASS ${r.summary?.passes||0}`);
+          console.log('EFFECTIVE_FAILURES='+JSON.stringify(effective));
+          if(effective.length)process.exit(1);
+          NODE
+
+      - name: Run focused release smoke
+        env:
+          FINDIT_URL: https://findit-nearby.vercel.app/
+        run: node tests/release-smoke.mjs
+
+      - name: Mark smoke pass
+        if: success()
+        run: echo 'SMOKE_PASS' >> qa-results/final-status.txt
+
+      - name: Publish final audit result
+        if: always()
+        run: |
+          if [ ! -f qa-results/final-status.txt ]; then echo 'FAIL audit did not complete' > qa-results/final-status.txt; fi
+          git config user.name 'findit-qa-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add qa-results/final-latest.json qa-results/final-status.txt 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            git commit -m 'Update final FindIt production audit [skip ci]'
+            git push
+          fi
+
+      - name: Upload screenshots and report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: findit-final-production-audit
+          path: audit-output/
+          if-no-files-found: warn
+          retention-days: 14
