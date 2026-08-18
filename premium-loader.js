@@ -1,0 +1,1 @@
+(()=>{const load=src=>new Promise((resolve,reject)=>{const s=document.createElement('script');s.src=src;s.defer=true;s.onload=resolve;s.onerror=reject;document.head.appendChild(s)});load('/mobile-menu-base.js').catch(()=>{}).then(()=>load('/premium-upgrades.js').catch(()=>{}));})();
