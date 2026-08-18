@@ -1,0 +1,177 @@
+# FindIt full production audit
+
+- URL: https://findit-nearby.vercel.app/
+- Run: 2026-08-18T17:10:31.300Z
+- PASS: 123
+- WARN: 1
+- FAIL: 45
+
+- **PASS** — Production homepage loads — HTTP 200
+- **PASS** — No horizontal page overflow on desktop — {"sw":1440,"cw":1440}
+- **PASS** — Desktop nav: Find — #finder
+- **PASS** — Desktop nav: How it works — #how
+- **PASS** — Desktop nav: Examples — #examples
+- **PASS** — Desktop nav: Feedback — #feedback
+- **PASS** — Open main drawer
+- **PASS** — Main drawer is visible
+- **PASS** — Desktop drawer items are vertical and readable — 8 controls
+- **PASS** — Close main drawer
+- **PASS** — Open FindIt Challenge
+- **PASS** — Challenge modal appears
+- **PASS** — Generate another challenge
+- **PASS** — Challenge text exists — Find the weirdest object in your room 😂
+- **PASS** — Close Challenge
+- **PASS** — Open second Challenge entry point
+- **PASS** — Second Challenge entry works
+- **PASS** — Close second Challenge
+- **PASS** — Examples render — 6 cards
+- **PASS** — Shuffle examples
+- **PASS** — Open drawer for Settings
+- **PASS** — Open Settings
+- **PASS** — Settings modal appears
+- **PASS** — Animations setting toggles — true -> false
+- **PASS** — Free default radius options work — 3/5/10 km
+- **PASS** — Close Settings
+- **PASS** — Gallery / Files input accepts image
+- **PASS** — Use my location
+- **PASS** — Location reaches ready state — ✓ Location ready
+- **PASS** — Identify & Find completes with live backend — Blank Image
+- **PASS** — Identification cards render — 8 cards
+- **PASS** — Results list view
+- **PASS** — Results map view
+- **PASS** — Map container can be shown — map-wrap show
+- **PASS** — Return to list view
+- **PASS** — Sort verified offers: Best match
+- **PASS** — Sort verified offers: Cheapest
+- **PASS** — Sort verified offers: Closest
+- **FAIL** — Copy product name — locator.scrollIntoViewIfNeeded: Timeout 29995.037ms exceeded. Call log:   - attempting scroll into view action     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action     - waiting 20ms     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action       - waiting 100ms     58 × waiting for element to be stable        - element is not visible      - retrying scroll into view action        - waiting 500ms 
+- **FAIL** — Exact-item web link is valid — null
+- **FAIL** — Nearby retailer Maps link is valid — null
+- **FAIL** — Share this find / clipboard fallback — locator.scrollIntoViewIfNeeded: Timeout 29996.678ms exceeded. Call log:   - attempting scroll into view action     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action     - waiting 20ms     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action       - waiting 100ms     58 × waiting for element to be stable        - element is not visible      - retrying scroll into view action        - waiting 500ms 
+- **PASS** — Positive quick feedback shortcut
+- **PASS** — Positive shortcut populates feedback
+- **PASS** — Negative quick feedback shortcut
+- **PASS** — Negative shortcut populates feedback
+- **PASS** — Product Intelligence panel renders a truthful state — Verified price not connected yet  Continue with the exact item now. Premium unlocks deeper comparison and advanced search tools.  Search exact product → ★ Unlock the best FindIt tools Premium adds deeper exact-match search, 25 km radius, store comparison, smart filters, saved finds, watchlist, favou
+- **PASS** — Recent find is automatically stored — 1 recent
+- **PASS** — Feedback stars work
+- **PASS** — Feedback topic selector works
+- **PASS** — Technical-details checkbox works
+- **FAIL** — Feedback validation prevents empty submission — unexpected validation: 
+- **PASS** — Copy feedback works without sending — ✓ Feedback copied.
+- **PASS** — Free user selecting 25 km is gated by Premium — radius=10
+- **PASS** — Close Premium gate
+- **PASS** — Free Save attempt opens Premium
+- **PASS** — Free Save is Premium-gated
+- **PASS** — Close Free Save gate
+- **PASS** — Open Premium plan modal
+- **PASS** — Free/Premium comparison is visible
+- **PASS** — Activate Premium Beta
+- **PASS** — Premium activates without email/payment — Premium active
+- **PASS** — Premium command centre has no horizontal overflow — {"sw":1218,"cw":1218}
+- **PASS** — Premium heading fits desktop layout — What are we finding today? width=820
+- **PASS** — Every Premium V10 tile includes How-to guidance — 9 guided tools
+- **PASS** — Full Premium guide button exists
+- **PASS** — Open full Premium how-to guide
+- **PASS** — Premium how-to guide opens — 13 guide entries
+- **PASS** — Close Premium guide
+- **PASS** — V10 Vision+
+- **FAIL** — Vision+ routes to finder — finder top=628.71875
+- **PASS** — V10 Manual Search
+- **PASS** — Manual Search interaction is wired — true
+- **FAIL** — V10 Exact Match — locator.click: Timeout 4000ms exceeded. Call log:   - waiting for locator('[data-v10="exact"]').first()     - locator resolved to <button data-v10="exact" title="Exact Match — First run a photo search. Exact Match reuses the identified brand/model/search query to look for that exact product.">…</button>   - attempting click action     2 × waiting for element to be visible, enabled and stable       - element is visible, enabled and stable       - scrolling into view if needed       - done scrolling       - <div id="v10ModalBody">…</div> from <div id="v10UniversalModal" class="premium-tool-modal">…</div> subtree intercepts pointer events     - retrying click action     - waiting 20ms     - waiting for element to be visible, enabled and stable     - element is not stable   - retrying click ac
+- **PASS** — Exact Match interaction is wired — true
+- **FAIL** — V10 AI Search — locator.click: Timeout 4000ms exceeded. Call log:   - waiting for locator('[data-v10="assistant"]').first()     - locator resolved to <button data-v10="assistant" title="AI Search — First identify an item. AI Search uses the current item to build a smarter retailer/product query.">…</button>   - attempting click action     2 × waiting for element to be visible, enabled and stable       - element is visible, enabled and stable       - scrolling into view if needed       - done scrolling       - <div id="v10ModalBody">…</div> from <div id="v10UniversalModal" class="premium-tool-modal">…</div> subtree intercepts pointer events     - retrying click action     - waiting 20ms     - waiting for element to be visible, enabled and stable     - element is not stable   - retrying click action     - w
+- **PASS** — AI Search opens assistant or performs search action — assistant available
+- **FAIL** — Open Collections — locator.click: Timeout 4000ms exceeded. Call log:   - waiting for locator('[data-v10="collections"]').first()     - locator resolved to <button data-v10="collections" title="Collections — Search and save an item, open Collections, create a collection, then add the current Find to it.">…</button>   - attempting click action     2 × waiting for element to be visible, enabled and stable       - element is visible, enabled and stable       - scrolling into view if needed       - done scrolling       - <div id="v10UniversalModal" class="premium-tool-modal">…</div> intercepts pointer events     - retrying click action     - waiting 20ms     - waiting for element to be visible, enabled and stable     - element is not stable   - retrying click action     - waiting 100ms     - waiting for element t
+- **FAIL** — Collections modal is usable — name input missing
+- **PASS** — Close Collections
+- **PASS** — Premium Save current Find
+- **PASS** — Premium Save stores item — 1 saved
+- **FAIL** — Open Saved Items — locator.scrollIntoViewIfNeeded: Timeout 29996.161999999997ms exceeded. Call log:   - attempting scroll into view action     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action     - waiting 20ms     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action       - waiting 100ms     58 × waiting for element to be stable        - element is not visible      - retrying scroll into view action        - waiting 500ms 
+- **FAIL** — Saved Items modal opens — hidden
+- **FAIL** — Saved Items have individual Delete buttons — delete button missing
+- **FAIL** — Delete one Saved Item works — locator.click: Timeout 30000ms exceeded. Call log:   - waiting for locator('#premiumSavedList .findit-delete-btn,[data-premium-saved-delete],[data-qa-saved-delete]').first() 
+- **FAIL** — Close Saved Items — locator.scrollIntoViewIfNeeded: Timeout 29995.303000000014ms exceeded. Call log:   - attempting scroll into view action     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action     - waiting 20ms     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action       - waiting 100ms     58 × waiting for element to be stable        - element is not visible      - retrying scroll into view action        - waiting 500ms 
+- **PASS** — Open Price & Stock Watchlist
+- **PASS** — Watchlist opens with clear instructions — ★ PREMIUM LOCAL WATCH  Exact price & stock tracker  FindIt prioritises the nearest relevant retailer and exact product listing. Store-level stock is only labelled verified when the
+- **PASS** — Watchlist Add current product works — Blank Image
+- **PASS** — Watchlist target price works — R1500 target saved
+- **PASS** — Watchlist Check now completes — No verified exact price or stock update yet | retailer=none | price=unverified | stock=unverified
+- **PASS** — Watchlist never displays fake zero price — no zero fake price
+- **PASS** — Close Watchlist
+- **PASS** — Open Favourite Stores
+- **PASS** — Favourite Stores opens — ★ PREMIUM V10  Favourite Stores  Save retailers from your current nearby results. Delete favourites any time to make space.  Run a nearby search first to see re
+- **WARN** — Favourite Store can be saved when nearby stores exist — No nearby retailer was available to save
+- **PASS** — Favourite Stores support individual Delete — delete present
+- **PASS** — Close Favourite Stores
+- **PASS** — Open My Stats
+- **PASS** — My Stats shows real local counts — ★ PREMIUM V10  My FindIt Stats 1 Recent finds 1 Saved items 1 Watchlist 0 Favourite stores  These personal stats are stored on this device during Beta.
+- **PASS** — Close My Stats
+- **PASS** — Open History+
+- **PASS** — History+ opens and is searchable — search input works
+- **FAIL** — History+ has per-item Delete — delete button missing
+- **FAIL** — History+ individual delete works — locator.click: Timeout 30000ms exceeded. Call log:   - waiting for locator('[data-qa-history-delete],[data-history-delete]').first() 
+- **PASS** — Close History+
+- **FAIL** — Premium Advanced Find — locator.scrollIntoViewIfNeeded: Timeout 29995.947999999975ms exceeded. Call log:   - attempting scroll into view action     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action     - waiting 20ms     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action       - waiting 100ms     58 × waiting for element to be stable        - element is not visible      - retrying scroll into view action        - waiting 500ms 
+- **FAIL** — Premium Compare Stores — locator.scrollIntoViewIfNeeded: Timeout 29996.139000000025ms exceeded. Call log:   - attempting scroll into view action     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action     - waiting 20ms     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action       - waiting 100ms     58 × waiting for element to be stable        - element is not visible      - retrying scroll into view action        - waiting 500ms 
+- **FAIL** — Compare Stores modal opens — hidden
+- **FAIL** — Close Compare Stores — locator.scrollIntoViewIfNeeded: Timeout 29996.65299999999ms exceeded. Call log:   - attempting scroll into view action     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action     - waiting 20ms     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action       - waiting 100ms     58 × waiting for element to be stable        - element is not visible      - retrying scroll into view action        - waiting 500ms 
+- **FAIL** — Premium Nearby Map — locator.scrollIntoViewIfNeeded: Timeout 29996.170999999973ms exceeded. Call log:   - attempting scroll into view action     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action     - waiting 20ms     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action       - waiting 100ms     58 × waiting for element to be stable        - element is not visible      - retrying scroll into view action        - waiting 500ms 
+- **FAIL** — Premium radius 5 km — locator.scrollIntoViewIfNeeded: Timeout 29995.916000000027ms exceeded. Call log:   - attempting scroll into view action     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action     - waiting 20ms     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action       - waiting 100ms     58 × waiting for element to be stable        - element is not visible      - retrying scroll into view action        - waiting 500ms 
+- **FAIL** — Premium radius 10 km — locator.scrollIntoViewIfNeeded: Timeout 29995.925999999978ms exceeded. Call log:   - attempting scroll into view action     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action     - waiting 20ms     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action       - waiting 100ms     58 × waiting for element to be stable        - element is not visible      - retrying scroll into view action        - waiting 500ms 
+- **FAIL** — Premium radius 15 km — locator.scrollIntoViewIfNeeded: Timeout 29996.267999999982ms exceeded. Call log:   - attempting scroll into view action     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action     - waiting 20ms     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action       - waiting 100ms     58 × waiting for element to be stable        - element is not visible      - retrying scroll into view action        - waiting 500ms 
+- **FAIL** — Premium radius 25 km — locator.scrollIntoViewIfNeeded: Timeout 29996.168000000005ms exceeded. Call log:   - attempting scroll into view action     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action     - waiting 20ms     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action       - waiting 100ms     58 × waiting for element to be stable        - element is not visible      - retrying scroll into view action        - waiting 500ms 
+- **FAIL** — Premium 25 km radius is retained — radius=10
+- **FAIL** — Premium store sorting closest — locator.scrollIntoViewIfNeeded: Timeout 29996.428000000014ms exceeded. Call log:   - attempting scroll into view action     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action     - waiting 20ms     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action       - waiting 100ms     58 × waiting for element to be stable        - element is not visible      - retrying scroll into view action        - waiting 500ms 
+- **FAIL** — Premium store sorting name — locator.scrollIntoViewIfNeeded: Timeout 29995.692000000097ms exceeded. Call log:   - attempting scroll into view action     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action     - waiting 20ms     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action       - waiting 100ms     58 × waiting for element to be stable        - element is not visible      - retrying scroll into view action        - waiting 500ms 
+- **FAIL** — Premium store sorting original — locator.scrollIntoViewIfNeeded: Timeout 29995.89500000002ms exceeded. Call log:   - attempting scroll into view action     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action     - waiting 20ms     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action       - waiting 100ms     58 × waiting for element to be stable        - element is not visible      - retrying scroll into view action        - waiting 500ms 
+- **FAIL** — Open Premium Tools workspace — locator.scrollIntoViewIfNeeded: Timeout 29995.88399999996ms exceeded. Call log:   - attempting scroll into view action     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action     - waiting 20ms     2 × waiting for element to be stable       - element is not visible     - retrying scroll into view action       - waiting 100ms     58 × waiting for element to be stable        - element is not visible      - retrying scroll into view action        - waiting 500ms 
+- **FAIL** — Premium workspace opens — hidden
+- **FAIL** — Premium workspace: find — locator.click: Timeout 30000ms exceeded. Call log:   - waiting for locator('#premiumWorkspaceButton')     - locator resolved to <button id="premiumWorkspaceButton" class="premium-workspace-button">★ Premium Tools</button>   - attempting click action     2 × waiting for element to be visible, enabled and stable       - element is not visible     - retrying click action     - waiting 20ms     2 × waiting for element to be visible, enabled and stable       - element is not visible     - retrying click action       - waiting 100ms     58 × waiting for element to be visible, enabled and stable        - element is not visible      - retrying click action        - waiting 500ms 
+- **FAIL** — Premium workspace: saved — locator.click: Timeout 30000ms exceeded. Call log:   - waiting for locator('#premiumWorkspaceButton')     - locator resolved to <button id="premiumWorkspaceButton" class="premium-workspace-button">★ Premium Tools</button>   - attempting click action     2 × waiting for element to be visible, enabled and stable       - element is not visible     - retrying click action     - waiting 20ms     2 × waiting for element to be visible, enabled and stable       - element is not visible     - retrying click action       - waiting 100ms     58 × waiting for element to be visible, enabled and stable        - element is not visible      - retrying click action        - waiting 500ms 
+- **FAIL** — Premium workspace: compare — locator.click: Timeout 30000ms exceeded. Call log:   - waiting for locator('#premiumWorkspaceButton')     - locator resolved to <button id="premiumWorkspaceButton" class="premium-workspace-button">★ Premium Tools</button>   - attempting click action     2 × waiting for element to be visible, enabled and stable       - element is not visible     - retrying click action     - waiting 20ms     2 × waiting for element to be visible, enabled and stable       - element is not visible     - retrying click action       - waiting 100ms     58 × waiting for element to be visible, enabled and stable        - element is not visible      - retrying click action        - waiting 500ms 
+- **FAIL** — Premium workspace: map — locator.click: Timeout 30000ms exceeded. Call log:   - waiting for locator('#premiumWorkspaceButton')     - locator resolved to <button id="premiumWorkspaceButton" class="premium-workspace-button">★ Premium Tools</button>   - attempting click action     2 × waiting for element to be visible, enabled and stable       - element is not visible     - retrying click action     - waiting 20ms     2 × waiting for element to be visible, enabled and stable       - element is not visible     - retrying click action       - waiting 100ms     58 × waiting for element to be visible, enabled and stable        - element is not visible      - retrying click action        - waiting 500ms 
+- **FAIL** — Premium workspace: radius — locator.click: Timeout 30000ms exceeded. Call log:   - waiting for locator('#premiumWorkspaceButton')     - locator resolved to <button id="premiumWorkspaceButton" class="premium-workspace-button">★ Premium Tools</button>   - attempting click action     2 × waiting for element to be visible, enabled and stable       - element is not visible     - retrying click action     - waiting 20ms     2 × waiting for element to be visible, enabled and stable       - element is not visible     - retrying click action       - waiting 100ms     58 × waiting for element to be visible, enabled and stable        - element is not visible      - retrying click action        - waiting 500ms 
+- **FAIL** — Premium workspace: filters — locator.click: Timeout 30000ms exceeded. Call log:   - waiting for locator('#premiumWorkspaceButton')     - locator resolved to <button id="premiumWorkspaceButton" class="premium-workspace-button">★ Premium Tools</button>   - attempting click action     2 × waiting for element to be visible, enabled and stable       - element is not visible     - retrying click action     - waiting 20ms     2 × waiting for element to be visible, enabled and stable       - element is not visible     - retrying click action       - waiting 100ms     58 × waiting for element to be visible, enabled and stable        - element is not visible      - retrying click action        - waiting 500ms 
+- **FAIL** — Premium workspace: history — locator.click: Timeout 30000ms exceeded. Call log:   - waiting for locator('#premiumWorkspaceButton')     - locator resolved to <button id="premiumWorkspaceButton" class="premium-workspace-button">★ Premium Tools</button>   - attempting click action     2 × waiting for element to be visible, enabled and stable       - element is not visible     - retrying click action     - waiting 20ms     2 × waiting for element to be visible, enabled and stable       - element is not visible     - retrying click action       - waiting 100ms     58 × waiting for element to be visible, enabled and stable        - element is not visible      - retrying click action        - waiting 500ms 
+- **FAIL** — Premium workspace: challenge — locator.click: Timeout 30000ms exceeded. Call log:   - waiting for locator('#premiumWorkspaceButton')     - locator resolved to <button id="premiumWorkspaceButton" class="premium-workspace-button">★ Premium Tools</button>   - attempting click action     2 × waiting for element to be visible, enabled and stable       - element is not visible     - retrying click action     - waiting 20ms     2 × waiting for element to be visible, enabled and stable       - element is not visible     - retrying click action       - waiting 100ms     58 × waiting for element to be visible, enabled and stable        - element is not visible      - retrying click action        - waiting 500ms 
+- **FAIL** — Premium workspace: alerts — locator.click: Timeout 30000ms exceeded. Call log:   - waiting for locator('#premiumWorkspaceButton')     - locator resolved to <button id="premiumWorkspaceButton" class="premium-workspace-button">★ Premium Tools</button>   - attempting click action     2 × waiting for element to be visible, enabled and stable       - element is not visible     - retrying click action     - waiting 20ms     2 × waiting for element to be visible, enabled and stable       - element is not visible     - retrying click action       - waiting 100ms     58 × waiting for element to be visible, enabled and stable        - element is not visible      - retrying click action        - waiting 500ms 
+- **PASS** — Open drawer for Premium route audit
+- **PASS** — Premium drawer layout is vertical on desktop — 12 controls
+- **PASS** — Premium drawer: Premium Home — wired
+- **PASS** — Premium drawer: Advanced Find — wired
+- **PASS** — Premium drawer: Saved Items — wired
+- **PASS** — Premium drawer: Compare Stores — wired
+- **PASS** — Premium drawer: Nearby Map — wired
+- **PASS** — Premium drawer: Search Radius — wired
+- **PASS** — Premium drawer: Smart Filters — wired
+- **PASS** — Premium drawer: Extended History — wired
+- **PASS** — Premium drawer: Premium Challenge — wired
+- **PASS** — Premium drawer: Price & Stock Watchlist — wired
+- **PASS** — Premium drawer: Premium Settings — wired
+- **PASS** — Open Ask FindIt
+- **PASS** — Assistant panel opens
+- **PASS** — Assistant quick: What did FindIt identify? — 3 messages
+- **PASS** — Assistant quick: Why are there no nearby stores? — 5 messages
+- **PASS** — Assistant quick: Explain the price and stock information. — 7 messages
+- **PASS** — Assistant custom question — To use the **FindIt Premium Watchlist**:  1. Tap the bookmark or watchlist icon on any product page to save an item. 2. Access your saved items from your profile or the Watchlist tab. 3. Enable notifications to receive i
+- **PASS** — Close Ask FindIt
+- **PASS** — Open drawer for remaining Free routes
+- **FAIL** — Drawer Ask FindIt works — locator.click: Timeout 30000ms exceeded. Call log:   - waiting for locator('#drawerAskFindIt')     - locator resolved to <button id="drawerAskFindIt">✦ Ask FindIt</button>   - attempting click action     2 × waiting for element to be visible, enabled and stable       - element is not visible     - retrying click action     - waiting 20ms     2 × waiting for element to be visible, enabled and stable       - element is not visible     - retrying click action       - waiting 100ms     58 × waiting for element to be visible, enabled and stable        - element is not visible      - retrying click action        - waiting 500ms 
+- **PASS** — Reopen drawer for Recent
+- **FAIL** — Drawer Recent Finds route works — locator.click: Timeout 30000ms exceeded. Call log:   - waiting for locator('#openRecent')     - locator resolved to <button id="openRecent">🕘 Recent finds</button>   - attempting click action     2 × waiting for element to be visible, enabled and stable       - element is not visible     - retrying click action     - waiting 20ms     2 × waiting for element to be visible, enabled and stable       - element is not visible     - retrying click action       - waiting 100ms     58 × waiting for element to be visible, enabled and stable        - element is not visible      - retrying click action        - waiting 500ms 
+- **PASS** — Mobile production homepage loads
+- **PASS** — No horizontal page overflow on mobile — {"sw":390,"cw":390}
+- **PASS** — Mobile menu opens
+- **PASS** — Mobile drawer controls are vertical and full-width — 8 controls
+- **PASS** — Mobile bottom navigation is visible — 4 controls
+- **PASS** — Mobile More button
+- **PASS** — Mobile More opens drawer
+- **FAIL** — Health API live — URL is not a constructor
+- **FAIL** — Feedback health API live — URL is not a constructor
+- **PASS** — Built-in FindIt QA report passes — {"time":"2026-08-18T17:10:30.366Z","missingElements":[],"missingPremiumFunctions":[],"premiumButtons":["scan","manual","exact","assistant","collections","watchlist","favourites","stats","history"],"ok":true}
+- **PASS** — No uncaught JavaScript page errors
+- **PASS** — No mobile JavaScript page errors
+- **PASS** — No meaningful console errors
+- **PASS** — No unexpected network request failures
