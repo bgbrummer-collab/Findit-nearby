@@ -3,6 +3,24 @@ const FALLBACK_MODEL='gemini-3.5-flash-lite';
 const CONFIDENCE_MIN=.55;
 const RESTRICTED=['firearm','gun','rifle','pistol','ammunition','ammo','weapon','knife','knives','machete','sword','switchblade','taser','stun gun','pepper spray','mace','brass knuckles','fireworks','explosive','vape','nicotine','cigarette','cigar','alcohol','beer','wine','liquor','cannabis','marijuana','thc','cbd','psilocybin','magic mushroom','gambling','sports betting','casino','pornography','adult sex toy'];
 
+const RETAIL_RULES=[
+ {test:/\b(tractor|combine harvester|harvester|agricultural machinery|farm machinery|farm equipment|john deere|massey ferguson|new holland|case ih|kubota)\b/i,category:'agricultural machinery',stores:['agricultural equipment dealer','farm machinery dealer','tractor dealer'],dealerBrand:true},
+ {test:/\b(car|suv|bakkie|pickup truck|motorcycle|motorbike|vehicle)\b/i,category:'vehicle',stores:['authorised vehicle dealer','motor dealer'],dealerBrand:true},
+ {test:/\b(excavator|bulldozer|loader|backhoe|grader|construction machinery|heavy equipment)\b/i,category:'heavy machinery',stores:['heavy equipment dealer','construction machinery dealer'],dealerBrand:true},
+ {test:/\b(phone|smartphone|iphone|galaxy|pixel|mobile phone)\b/i,category:'mobile electronics',stores:['mobile phone store','electronics store','authorised brand store']},
+ {test:/\b(laptop|computer|desktop|monitor|keyboard|mouse|router|wi fi router|wifi router|headphones|earbuds|speaker|microphone|camera|television|\btv\b)\b/i,category:'electronics',stores:['electronics store','computer store','authorised brand store']},
+ {test:/\b(sneaker|sneakers|shoe|shoes|trainer|trainers|running shoe|football boot)\b/i,category:'footwear',stores:['shoe store','sportswear store','authorised brand store']},
+ {test:/\b(shirt|t shirt|t-shirt|hoodie|jacket|jeans|dress|clothing|apparel)\b/i,category:'clothing',stores:['clothing store','fashion retailer','authorised brand store']},
+ {test:/\b(eyeglasses|glasses|spectacles|sunglasses|eyewear|frames)\b/i,category:'eyewear',stores:['optician','eyewear store']},
+ {test:/\b(toilet paper|tissue|detergent|cleaner|soap|shampoo|toothpaste|grocery|food|snack|drink|cereal|milk|bread)\b/i,category:'grocery/household',stores:['supermarket','grocery store','pharmacy']},
+ {test:/\b(perfume|fragrance|makeup|cosmetic|skincare|moisturizer|serum|foundation|mascara|lipstick)\b/i,category:'beauty',stores:['beauty store','pharmacy','department store']},
+ {test:/\b(fridge|refrigerator|washing machine|dishwasher|microwave|oven|air fryer|kettle|toaster|vacuum)\b/i,category:'home appliances',stores:['appliance store','electronics store','home retailer']},
+ {test:/\b(drill|saw|hammer|screwdriver|power tool|toolbox|paint|cement|plumbing|hardware)\b/i,category:'hardware',stores:['hardware store','building supply store','tool retailer']},
+ {test:/\b(pencil case|pen|pencil|notebook|stationery|printer paper|school supplies)\b/i,category:'stationery',stores:['stationery store','office supply store','bookstore']},
+ {test:/\b(flower|flowers|plant|pot plant|garden plant|seedling)\b/i,category:'garden/florist',stores:['florist','garden centre','nursery']},
+ {test:/\b(toy|lego|doll|action figure|board game|puzzle)\b/i,category:'toys',stores:['toy store','department store']}
+];
+
 export default{async fetch(request){
  if(request.method!=='POST')return json({error:'POST only'},405);
  try{
@@ -19,11 +37,11 @@ export default{async fetch(request){
 
 async function identify(key,b64,mime){
  const prompt=`You are FindIt Nearby's product-identification engine. Identify the ACTUAL physical product in the photo as accurately as possible.
-Use visible logos, text, model numbers, shape, materials, lens/frame shape, controls, ports and other distinctive features. Never invent a brand/model.
+Use visible logos, text, model numbers, shape, materials, controls, ports and other distinctive features. Never invent a brand/model.
+Retail relevance is critical. Never return a generic store type that obviously would not sell the identified product. A tractor must map to agricultural/farm machinery dealers, not clothing, department, grocery or general retail stores. Heavy machinery must map to specialist machinery dealers. A phone must map to mobile/electronics stores. Shoes must map to footwear/sportswear. Groceries must map to supermarkets/grocery stores. Eyewear must map to opticians/eyewear stores.
+When a specialist branded product is recognised, likelyStoreTypes should prioritise an authorised dealer for that brand. Example: John Deere tractor -> retailCategory "agricultural machinery" and likelyStoreTypes ["John Deere dealer","agricultural equipment dealer","tractor dealer"].
 Important: do NOT call ordinary eyeglasses, sports/cycling glasses or fashion eyewear "safety glasses" or PPE just because they wrap around or have side shields. Only classify eyewear as safety/PPE when there is direct evidence such as visible safety-standard markings, explicit PPE/safety text, industrial packaging, or unmistakable protective equipment context. If uncertain, use neutral terms such as "eyeglasses", "sports eyewear" or "eyeglasses with side shields" and lower confidence.
-Likewise, do not turn any product into a random broad category merely because a store type could sell it.
-searchQuery must describe the photographed item itself, not a guessed retailer. retailCategory and likelyStoreTypes must be realistic places that sell that item.
-Examples: eyeglasses/sunglasses -> optician/eyewear; sneakers -> footwear/sportswear; microphone -> electronics/music; flower -> florist/garden; pencil case -> stationery; phone -> mobile/electronics.
+searchQuery must describe the photographed item itself, not a guessed retailer. retailCategory and likelyStoreTypes must be realistic places that sell that exact type of item.
 Return structured JSON only.`;
  const schema={type:'OBJECT',properties:{object:{type:'STRING'},name:{type:'STRING'},brand:{type:'STRING',nullable:true},model:{type:'STRING',nullable:true},category:{type:'STRING'},searchQuery:{type:'STRING'},confidence:{type:'NUMBER'},visibleText:{type:'ARRAY',items:{type:'STRING'}},features:{type:'ARRAY',items:{type:'STRING'}},retailCategory:{type:'STRING'},likelyStoreTypes:{type:'ARRAY',items:{type:'STRING'}},summary:{type:'STRING'}},required:['object','name','category','searchQuery','confidence','visibleText','features','retailCategory','likelyStoreTypes','summary']};
  let last;for(const model of [PRIMARY_MODEL,FALLBACK_MODEL]){const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':key},body:JSON.stringify({contents:[{parts:[{text:prompt},{inlineData:{mimeType:mime,data:b64}}]}],generationConfig:{responseMimeType:'application/json',responseSchema:schema}})});const raw=await r.json().catch(()=>({}));if(r.ok){const text=raw?.candidates?.[0]?.content?.parts?.find(p=>typeof p.text==='string')?.text;if(!text)throw Error(`${model} returned no identification text`);const x=JSON.parse(text);x.modelUsed=model;return x}last=Error(raw?.error?.message||`${model} failed`)}throw last||Error('Gemini request failed');
@@ -31,10 +49,20 @@ Return structured JSON only.`;
 
 function postProcess(i){
  i.confidence=clamp(Number(i.confidence||0),0,1);i.brand=clean(i.brand);i.model=clean(i.model);i.visibleText=Array.isArray(i.visibleText)?i.visibleText.filter(Boolean).slice(0,12):[];i.features=Array.isArray(i.features)?i.features.filter(Boolean).slice(0,12):[];i.likelyStoreTypes=Array.isArray(i.likelyStoreTypes)?i.likelyStoreTypes.filter(Boolean).map(String).slice(0,5):[];
- const all=norm([i.object,i.name,i.category,i.searchQuery,i.summary,...i.visibleText,...i.features].join(' '));
+ const all=norm([i.object,i.name,i.brand,i.model,i.category,i.searchQuery,i.summary,...i.visibleText,...i.features].join(' '));
  const eyewear=/\b(glasses|eyeglasses|sunglasses|spectacles|eyewear|frames?)\b/.test(all),safetyClaim=/\b(safety|protective|ppe|industrial|laboratory|workshop)\b/.test(all),proof=/\b(ansi|z87|en166|en 166|ce marked|ppe|safety standard|impact rated|protective eyewear)\b/.test(norm(i.visibleText.join(' ')));
  if(eyewear&&safetyClaim&&!proof){
   const side=/side shield|side guard|wraparound/.test(all);i.object='eyeglasses';i.name=side?'Eyeglasses with Side Shields':'Eyeglasses';i.category='Eyewear';i.retailCategory='eyewear';i.likelyStoreTypes=['optician','eyewear store'];i.searchQuery=side?'eyeglasses with side shields':'eyeglasses';i.summary=side?'Eyeglasses with side-shield styling. No visible safety certification was detected, so FindIt is treating them as eyewear rather than confirmed PPE.':'Eyeglasses. No visible evidence supports classifying them as industrial safety equipment.';i.confidence=Math.min(i.confidence,.82);i.classificationAdjusted=true;
+ }
+ const rule=RETAIL_RULES.find(r=>r.test.test(all));
+ if(rule){
+  i.retailCategory=rule.category;
+  const brand=i.brand?String(i.brand).trim():'';
+  const priority=[];
+  if(rule.dealerBrand&&brand)priority.push(`${brand} dealer`);
+  for(const s of rule.stores)if(!priority.some(x=>norm(x)===norm(s)))priority.push(s);
+  i.likelyStoreTypes=priority.slice(0,5);
+  i.retailRuleApplied=true;
  }
  return i;
 }
