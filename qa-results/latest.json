@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-08-18T19:30:53.231Z",
+  "generatedAt": "2026-08-18T19:38:50.580Z",
   "url": "https://findit-nearby.vercel.app/",
   "summary": {
-    "passes": 86,
+    "passes": 89,
     "warnings": 0,
-    "failures": 3
+    "failures": 0
   },
   "checks": [
     {
@@ -75,7 +75,7 @@
     {
       "name": "Challenge text populated",
       "status": "PASS",
-      "detail": "Find a product you've always wondered about ✨"
+      "detail": "Find something older than you 🕰️"
     },
     {
       "name": "Examples render",
@@ -130,7 +130,7 @@
     {
       "name": "Identify & Find completes",
       "status": "PASS",
-      "detail": "Running Shoe Diagram"
+      "detail": "Running Shoe Graphic Print"
     },
     {
       "name": "Identification analysis cards render",
@@ -174,8 +174,8 @@
     },
     {
       "name": "Product intelligence shows no fake zero price",
-      "status": "FAIL",
-      "detail": "not visible"
+      "status": "PASS",
+      "detail": "No verified product price or stock data yet. FindIt will still show nearby retailers.\nKeep searching for the exact item\nThese links help you continue when verified price or branch "
     },
     {
       "name": "Thumbs up",
@@ -204,8 +204,8 @@
     },
     {
       "name": "Feedback copy works",
-      "status": "FAIL",
-      "detail": "Error"
+      "status": "PASS",
+      "detail": "✓ Feedback copied."
     },
     {
       "name": "Free 25 km radius is Premium-gated",
@@ -430,7 +430,7 @@
     {
       "name": "Built-in FindIt QA report passes",
       "status": "PASS",
-      "detail": "{\"time\":\"2026-08-18T19:30:53.230Z\",\"missingElements\":[],\"missingPremiumFunctions\":[],\"premiumButtons\":[\"scan\",\"manual\",\"exact\",\"assistant\",\"collections\",\"watchlist\",\"favourites\",\"stats\",\"history\"],\"ok\":true}"
+      "detail": "{\"time\":\"2026-08-18T19:38:50.578Z\",\"missingElements\":[],\"missingPremiumFunctions\":[],\"premiumButtons\":[\"scan\",\"manual\",\"exact\",\"assistant\",\"collections\",\"watchlist\",\"favourites\",\"stats\",\"history\"],\"ok\":true}"
     },
     {
       "name": "No uncaught desktop JavaScript errors",
@@ -449,8 +449,9 @@
     },
     {
       "name": "No unexpected network failures",
-      "status": "FAIL",
-      "detail": "GET blob:https://findit-nearby.vercel.app/25293cde-a41e-40f3-99d4-6dfdefee3fb3 net::ERR_ABORTED"
+      "status": "PASS",
+      "detail": "none"
     }
-  ]
+  ],
+  "finalGate": true
 }
