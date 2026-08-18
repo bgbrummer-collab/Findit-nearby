@@ -14,6 +14,8 @@ on:
       - 'qa-hardening.js'
       - 'qa-menu-routes.js'
       - 'qa-final-polish.js'
+      - 'final-release-fixes.js'
+      - 'release-polish.js'
       - 'api/**'
       - 'tests/full-site-audit.mjs'
       - '.github/workflows/findit-full-audit.yml'
