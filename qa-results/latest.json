@@ -1,10 +1,10 @@
 {
+  "generatedAt": "2026-08-18T19:23:41.014Z",
   "url": "https://findit-nearby.vercel.app/",
-  "runAt": "2026-08-18T17:10:31.300Z",
   "summary": {
-    "passes": 123,
-    "warnings": 1,
-    "failures": 45
+    "passes": 88,
+    "warnings": 0,
+    "failures": 1
   },
   "checks": [
     {
@@ -13,29 +13,29 @@
       "detail": "HTTP 200"
     },
     {
-      "name": "No horizontal page overflow on desktop",
+      "name": "Desktop has no horizontal overflow",
       "status": "PASS",
       "detail": "{\"sw\":1440,\"cw\":1440}"
     },
     {
-      "name": "Desktop nav: Find",
+      "name": "Desktop nav Find",
       "status": "PASS",
-      "detail": "#finder"
+      "detail": ""
     },
     {
-      "name": "Desktop nav: How it works",
+      "name": "Desktop nav How",
       "status": "PASS",
-      "detail": "#how"
+      "detail": ""
     },
     {
-      "name": "Desktop nav: Examples",
+      "name": "Desktop nav Examples",
       "status": "PASS",
-      "detail": "#examples"
+      "detail": ""
     },
     {
-      "name": "Desktop nav: Feedback",
+      "name": "Desktop nav Feedback",
       "status": "PASS",
-      "detail": "#feedback"
+      "detail": ""
     },
     {
       "name": "Open main drawer",
@@ -43,14 +43,14 @@
       "detail": ""
     },
     {
-      "name": "Main drawer is visible",
+      "name": "Main drawer opens",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "Desktop drawer items are vertical and readable",
+      "name": "Main drawer controls do not overlap",
       "status": "PASS",
-      "detail": "8 controls"
+      "detail": "9 visible controls"
     },
     {
       "name": "Close main drawer",
@@ -58,44 +58,24 @@
       "detail": ""
     },
     {
-      "name": "Open FindIt Challenge",
+      "name": "Open Challenge",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "Challenge modal appears",
+      "name": "Challenge modal visible",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "Generate another challenge",
+      "name": "New challenge",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "Challenge text exists",
+      "name": "Challenge text populated",
       "status": "PASS",
-      "detail": "Find the weirdest object in your room 😂"
-    },
-    {
-      "name": "Close Challenge",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Open second Challenge entry point",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Second Challenge entry works",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Close second Challenge",
-      "status": "PASS",
-      "detail": ""
+      "detail": "Find an unusual tool 🔧"
     },
     {
       "name": "Examples render",
@@ -108,7 +88,7 @@
       "detail": ""
     },
     {
-      "name": "Open drawer for Settings",
+      "name": "Open drawer for settings",
       "status": "PASS",
       "detail": ""
     },
@@ -118,27 +98,22 @@
       "detail": ""
     },
     {
-      "name": "Settings modal appears",
+      "name": "Settings visible",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "Animations setting toggles",
-      "status": "PASS",
-      "detail": "true -> false"
-    },
-    {
-      "name": "Free default radius options work",
-      "status": "PASS",
-      "detail": "3/5/10 km"
-    },
-    {
-      "name": "Close Settings",
+      "name": "Animations toggle works",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "Gallery / Files input accepts image",
+      "name": "Free radius options 3/5/10 work",
+      "status": "PASS",
+      "detail": "3,5,10"
+    },
+    {
+      "name": "Image picker accepts a real raster image",
       "status": "PASS",
       "detail": ""
     },
@@ -148,162 +123,112 @@
       "detail": ""
     },
     {
-      "name": "Location reaches ready state",
+      "name": "Location becomes ready",
       "status": "PASS",
       "detail": "✓ Location ready"
     },
     {
-      "name": "Identify & Find completes with live backend",
+      "name": "Identify & Find completes",
       "status": "PASS",
-      "detail": "Blank Image"
+      "detail": "Graphic Art Print"
     },
     {
-      "name": "Identification cards render",
+      "name": "Identification analysis cards render",
       "status": "PASS",
-      "detail": "8 cards"
+      "detail": "8"
     },
     {
-      "name": "Results list view",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Results map view",
+      "name": "Map view",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "Map container can be shown",
+      "name": "Map view opens",
       "status": "PASS",
       "detail": "map-wrap show"
     },
     {
-      "name": "Return to list view",
+      "name": "List view",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "Sort verified offers: Best match",
+      "name": "Offer sort Best",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "Sort verified offers: Cheapest",
+      "name": "Offer sort Cheapest",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "Sort verified offers: Closest",
+      "name": "Offer sort Closest",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "Copy product name",
+      "name": "Free result actions are truthful",
+      "status": "PASS",
+      "detail": "search/copy/share available"
+    },
+    {
+      "name": "Product intelligence shows no fake zero price",
+      "status": "PASS",
+      "detail": "Verified price not connected yet\n\nContinue with the exact item now. Premium unlocks deeper comparison and advanced search tools.\n\nSearch exact product →\n★ Unlock the best FindIt to"
+    },
+    {
+      "name": "Thumbs up",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Thumbs up sets rating 5",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Thumbs down",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Thumbs down sets rating 2",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Feedback form has empty-message validation",
+      "status": "PASS",
+      "detail": "browser required validation active"
+    },
+    {
+      "name": "Feedback copy works",
       "status": "FAIL",
-      "detail": "locator.scrollIntoViewIfNeeded: Timeout 29995.037ms exceeded.\nCall log:\n  - attempting scroll into view action\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n    - waiting 20ms\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n      - waiting 100ms\n    58 × waiting for element to be stable\n       - element is not visible\n     - retrying scroll into view action\n       - waiting 500ms\n"
+      "detail": "Error"
     },
     {
-      "name": "Exact-item web link is valid",
-      "status": "FAIL",
-      "detail": "null"
+      "name": "Free 25 km radius is Premium-gated",
+      "status": "PASS",
+      "detail": "gated"
     },
     {
-      "name": "Nearby retailer Maps link is valid",
-      "status": "FAIL",
-      "detail": "null"
-    },
-    {
-      "name": "Share this find / clipboard fallback",
-      "status": "FAIL",
-      "detail": "locator.scrollIntoViewIfNeeded: Timeout 29996.678ms exceeded.\nCall log:\n  - attempting scroll into view action\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n    - waiting 20ms\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n      - waiting 100ms\n    58 × waiting for element to be stable\n       - element is not visible\n     - retrying scroll into view action\n       - waiting 500ms\n"
-    },
-    {
-      "name": "Positive quick feedback shortcut",
+      "name": "Free Save opens Premium",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "Positive shortcut populates feedback",
+      "name": "Free Save gate visible",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "Negative quick feedback shortcut",
+      "name": "Open Premium modal",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "Negative shortcut populates feedback",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Product Intelligence panel renders a truthful state",
-      "status": "PASS",
-      "detail": "Verified price not connected yet\n\nContinue with the exact item now. Premium unlocks deeper comparison and advanced search tools.\n\nSearch exact product →\n★ Unlock the best FindIt tools\nPremium adds deeper exact-match search, 25 km radius, store comparison, smart filters, saved finds, watchlist, favou"
-    },
-    {
-      "name": "Recent find is automatically stored",
-      "status": "PASS",
-      "detail": "1 recent"
-    },
-    {
-      "name": "Feedback stars work",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Feedback topic selector works",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Technical-details checkbox works",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Feedback validation prevents empty submission",
-      "status": "FAIL",
-      "detail": "unexpected validation: "
-    },
-    {
-      "name": "Copy feedback works without sending",
-      "status": "PASS",
-      "detail": "✓ Feedback copied."
-    },
-    {
-      "name": "Free user selecting 25 km is gated by Premium",
-      "status": "PASS",
-      "detail": "radius=10"
-    },
-    {
-      "name": "Close Premium gate",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Free Save attempt opens Premium",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Free Save is Premium-gated",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Close Free Save gate",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Open Premium plan modal",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Free/Premium comparison is visible",
+      "name": "Free/Premium comparison visible",
       "status": "PASS",
       "detail": ""
     },
@@ -313,417 +238,132 @@
       "detail": ""
     },
     {
-      "name": "Premium activates without email/payment",
+      "name": "Premium activates",
       "status": "PASS",
-      "detail": "Premium active"
+      "detail": "active"
     },
     {
-      "name": "Premium command centre has no horizontal overflow",
+      "name": "Premium command centre fits desktop",
       "status": "PASS",
       "detail": "{\"sw\":1218,\"cw\":1218}"
     },
     {
-      "name": "Premium heading fits desktop layout",
+      "name": "Premium heading fits",
       "status": "PASS",
-      "detail": "What are we finding today? width=820"
+      "detail": "width=820"
     },
     {
-      "name": "Every Premium V10 tile includes How-to guidance",
+      "name": "All visible V10 tools include How guidance",
       "status": "PASS",
-      "detail": "9 guided tools"
+      "detail": "9 tools"
     },
     {
-      "name": "Full Premium guide button exists",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Open full Premium how-to guide",
+      "name": "Open Premium guide",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "Premium how-to guide opens",
+      "name": "Premium guide has full help",
       "status": "PASS",
-      "detail": "13 guide entries"
+      "detail": "13 entries"
     },
     {
-      "name": "Close Premium guide",
+      "name": "V10 scan opens",
       "status": "PASS",
-      "detail": ""
+      "detail": "routed to finder"
     },
     {
-      "name": "V10 Vision+",
+      "name": "V10 manual opens",
       "status": "PASS",
-      "detail": ""
+      "detail": "Manual Search"
     },
     {
-      "name": "Vision+ routes to finder",
-      "status": "FAIL",
-      "detail": "finder top=628.71875"
-    },
-    {
-      "name": "V10 Manual Search",
+      "name": "V10 exact opens",
       "status": "PASS",
-      "detail": ""
+      "detail": "performed external exact-match action"
     },
     {
-      "name": "Manual Search interaction is wired",
+      "name": "V10 assistant opens",
       "status": "PASS",
-      "detail": "true"
+      "detail": "AI Search"
     },
     {
-      "name": "V10 Exact Match",
-      "status": "FAIL",
-      "detail": "locator.click: Timeout 4000ms exceeded.\nCall log:\n  - waiting for locator('[data-v10=\"exact\"]').first()\n    - locator resolved to <button data-v10=\"exact\" title=\"Exact Match — First run a photo search. Exact Match reuses the identified brand/model/search query to look for that exact product.\">…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div id=\"v10ModalBody\">…</div> from <div id=\"v10UniversalModal\" class=\"premium-tool-modal\">…</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    - waiting for element to be visible, enabled and stable\n    - element is not stable\n  - retrying click ac"
-    },
-    {
-      "name": "Exact Match interaction is wired",
+      "name": "V10 collections opens",
       "status": "PASS",
-      "detail": "true"
+      "detail": "Collections"
     },
     {
-      "name": "V10 AI Search",
-      "status": "FAIL",
-      "detail": "locator.click: Timeout 4000ms exceeded.\nCall log:\n  - waiting for locator('[data-v10=\"assistant\"]').first()\n    - locator resolved to <button data-v10=\"assistant\" title=\"AI Search — First identify an item. AI Search uses the current item to build a smarter retailer/product query.\">…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div id=\"v10ModalBody\">…</div> from <div id=\"v10UniversalModal\" class=\"premium-tool-modal\">…</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    - waiting for element to be visible, enabled and stable\n    - element is not stable\n  - retrying click action\n    - w"
-    },
-    {
-      "name": "AI Search opens assistant or performs search action",
+      "name": "Collections create control works",
       "status": "PASS",
-      "detail": "assistant available"
+      "detail": "created"
     },
     {
-      "name": "Open Collections",
-      "status": "FAIL",
-      "detail": "locator.click: Timeout 4000ms exceeded.\nCall log:\n  - waiting for locator('[data-v10=\"collections\"]').first()\n    - locator resolved to <button data-v10=\"collections\" title=\"Collections — Search and save an item, open Collections, create a collection, then add the current Find to it.\">…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div id=\"v10UniversalModal\" class=\"premium-tool-modal\">…</div> intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    - waiting for element to be visible, enabled and stable\n    - element is not stable\n  - retrying click action\n    - waiting 100ms\n    - waiting for element t"
-    },
-    {
-      "name": "Collections modal is usable",
-      "status": "FAIL",
-      "detail": "name input missing"
-    },
-    {
-      "name": "Close Collections",
+      "name": "V10 watchlist opens",
       "status": "PASS",
-      "detail": ""
+      "detail": "Exact price & stock tracker"
     },
     {
-      "name": "Premium Save current Find",
+      "name": "V10 favourites opens",
       "status": "PASS",
-      "detail": ""
+      "detail": "Favourite Stores"
     },
     {
-      "name": "Premium Save stores item",
+      "name": "V10 stats opens",
       "status": "PASS",
-      "detail": "1 saved"
+      "detail": "My FindIt Stats"
     },
     {
-      "name": "Open Saved Items",
-      "status": "FAIL",
-      "detail": "locator.scrollIntoViewIfNeeded: Timeout 29996.161999999997ms exceeded.\nCall log:\n  - attempting scroll into view action\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n    - waiting 20ms\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n      - waiting 100ms\n    58 × waiting for element to be stable\n       - element is not visible\n     - retrying scroll into view action\n       - waiting 500ms\n"
-    },
-    {
-      "name": "Saved Items modal opens",
-      "status": "FAIL",
-      "detail": "hidden"
-    },
-    {
-      "name": "Saved Items have individual Delete buttons",
-      "status": "FAIL",
-      "detail": "delete button missing"
-    },
-    {
-      "name": "Delete one Saved Item works",
-      "status": "FAIL",
-      "detail": "locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('#premiumSavedList .findit-delete-btn,[data-premium-saved-delete],[data-qa-saved-delete]').first()\n"
-    },
-    {
-      "name": "Close Saved Items",
-      "status": "FAIL",
-      "detail": "locator.scrollIntoViewIfNeeded: Timeout 29995.303000000014ms exceeded.\nCall log:\n  - attempting scroll into view action\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n    - waiting 20ms\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n      - waiting 100ms\n    58 × waiting for element to be stable\n       - element is not visible\n     - retrying scroll into view action\n       - waiting 500ms\n"
-    },
-    {
-      "name": "Open Price & Stock Watchlist",
+      "name": "V10 history opens",
       "status": "PASS",
-      "detail": ""
+      "detail": "History+"
     },
     {
-      "name": "Watchlist opens with clear instructions",
+      "name": "History+ supports per-item delete when entries exist",
       "status": "PASS",
-      "detail": "★ PREMIUM LOCAL WATCH\n\nExact price & stock tracker\n\nFindIt prioritises the nearest relevant retailer and exact product listing. Store-level stock is only labelled verified when the"
+      "detail": "1 -> 0"
     },
     {
-      "name": "Watchlist Add current product works",
+      "name": "Premium drawer has visible, vertical controls",
       "status": "PASS",
-      "detail": "Blank Image"
+      "detail": "13 controls"
     },
     {
-      "name": "Watchlist target price works",
-      "status": "PASS",
-      "detail": "R1500 target saved"
-    },
-    {
-      "name": "Watchlist Check now completes",
-      "status": "PASS",
-      "detail": "No verified exact price or stock update yet | retailer=none | price=unverified | stock=unverified"
-    },
-    {
-      "name": "Watchlist never displays fake zero price",
-      "status": "PASS",
-      "detail": "no zero fake price"
-    },
-    {
-      "name": "Close Watchlist",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Open Favourite Stores",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Favourite Stores opens",
-      "status": "PASS",
-      "detail": "★ PREMIUM V10\n\nFavourite Stores\n\nSave retailers from your current nearby results. Delete favourites any time to make space.\n\nRun a nearby search first to see re"
-    },
-    {
-      "name": "Favourite Store can be saved when nearby stores exist",
-      "status": "WARN",
-      "detail": "No nearby retailer was available to save"
-    },
-    {
-      "name": "Favourite Stores support individual Delete",
-      "status": "PASS",
-      "detail": "delete present"
-    },
-    {
-      "name": "Close Favourite Stores",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Open My Stats",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "My Stats shows real local counts",
-      "status": "PASS",
-      "detail": "★ PREMIUM V10\n\nMy FindIt Stats\n1\nRecent finds\n1\nSaved items\n1\nWatchlist\n0\nFavourite stores\n\nThese personal stats are stored on this device during Beta."
-    },
-    {
-      "name": "Close My Stats",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Open History+",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "History+ opens and is searchable",
-      "status": "PASS",
-      "detail": "search input works"
-    },
-    {
-      "name": "History+ has per-item Delete",
-      "status": "FAIL",
-      "detail": "delete button missing"
-    },
-    {
-      "name": "History+ individual delete works",
-      "status": "FAIL",
-      "detail": "locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('[data-qa-history-delete],[data-history-delete]').first()\n"
-    },
-    {
-      "name": "Close History+",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Premium Advanced Find",
-      "status": "FAIL",
-      "detail": "locator.scrollIntoViewIfNeeded: Timeout 29995.947999999975ms exceeded.\nCall log:\n  - attempting scroll into view action\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n    - waiting 20ms\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n      - waiting 100ms\n    58 × waiting for element to be stable\n       - element is not visible\n     - retrying scroll into view action\n       - waiting 500ms\n"
-    },
-    {
-      "name": "Premium Compare Stores",
-      "status": "FAIL",
-      "detail": "locator.scrollIntoViewIfNeeded: Timeout 29996.139000000025ms exceeded.\nCall log:\n  - attempting scroll into view action\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n    - waiting 20ms\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n      - waiting 100ms\n    58 × waiting for element to be stable\n       - element is not visible\n     - retrying scroll into view action\n       - waiting 500ms\n"
-    },
-    {
-      "name": "Compare Stores modal opens",
-      "status": "FAIL",
-      "detail": "hidden"
-    },
-    {
-      "name": "Close Compare Stores",
-      "status": "FAIL",
-      "detail": "locator.scrollIntoViewIfNeeded: Timeout 29996.65299999999ms exceeded.\nCall log:\n  - attempting scroll into view action\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n    - waiting 20ms\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n      - waiting 100ms\n    58 × waiting for element to be stable\n       - element is not visible\n     - retrying scroll into view action\n       - waiting 500ms\n"
-    },
-    {
-      "name": "Premium Nearby Map",
-      "status": "FAIL",
-      "detail": "locator.scrollIntoViewIfNeeded: Timeout 29996.170999999973ms exceeded.\nCall log:\n  - attempting scroll into view action\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n    - waiting 20ms\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n      - waiting 100ms\n    58 × waiting for element to be stable\n       - element is not visible\n     - retrying scroll into view action\n       - waiting 500ms\n"
-    },
-    {
-      "name": "Premium radius 5 km",
-      "status": "FAIL",
-      "detail": "locator.scrollIntoViewIfNeeded: Timeout 29995.916000000027ms exceeded.\nCall log:\n  - attempting scroll into view action\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n    - waiting 20ms\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n      - waiting 100ms\n    58 × waiting for element to be stable\n       - element is not visible\n     - retrying scroll into view action\n       - waiting 500ms\n"
-    },
-    {
-      "name": "Premium radius 10 km",
-      "status": "FAIL",
-      "detail": "locator.scrollIntoViewIfNeeded: Timeout 29995.925999999978ms exceeded.\nCall log:\n  - attempting scroll into view action\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n    - waiting 20ms\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n      - waiting 100ms\n    58 × waiting for element to be stable\n       - element is not visible\n     - retrying scroll into view action\n       - waiting 500ms\n"
-    },
-    {
-      "name": "Premium radius 15 km",
-      "status": "FAIL",
-      "detail": "locator.scrollIntoViewIfNeeded: Timeout 29996.267999999982ms exceeded.\nCall log:\n  - attempting scroll into view action\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n    - waiting 20ms\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n      - waiting 100ms\n    58 × waiting for element to be stable\n       - element is not visible\n     - retrying scroll into view action\n       - waiting 500ms\n"
-    },
-    {
-      "name": "Premium radius 25 km",
-      "status": "FAIL",
-      "detail": "locator.scrollIntoViewIfNeeded: Timeout 29996.168000000005ms exceeded.\nCall log:\n  - attempting scroll into view action\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n    - waiting 20ms\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n      - waiting 100ms\n    58 × waiting for element to be stable\n       - element is not visible\n     - retrying scroll into view action\n       - waiting 500ms\n"
-    },
-    {
-      "name": "Premium 25 km radius is retained",
-      "status": "FAIL",
-      "detail": "radius=10"
-    },
-    {
-      "name": "Premium store sorting closest",
-      "status": "FAIL",
-      "detail": "locator.scrollIntoViewIfNeeded: Timeout 29996.428000000014ms exceeded.\nCall log:\n  - attempting scroll into view action\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n    - waiting 20ms\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n      - waiting 100ms\n    58 × waiting for element to be stable\n       - element is not visible\n     - retrying scroll into view action\n       - waiting 500ms\n"
-    },
-    {
-      "name": "Premium store sorting name",
-      "status": "FAIL",
-      "detail": "locator.scrollIntoViewIfNeeded: Timeout 29995.692000000097ms exceeded.\nCall log:\n  - attempting scroll into view action\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n    - waiting 20ms\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n      - waiting 100ms\n    58 × waiting for element to be stable\n       - element is not visible\n     - retrying scroll into view action\n       - waiting 500ms\n"
-    },
-    {
-      "name": "Premium store sorting original",
-      "status": "FAIL",
-      "detail": "locator.scrollIntoViewIfNeeded: Timeout 29995.89500000002ms exceeded.\nCall log:\n  - attempting scroll into view action\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n    - waiting 20ms\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n      - waiting 100ms\n    58 × waiting for element to be stable\n       - element is not visible\n     - retrying scroll into view action\n       - waiting 500ms\n"
-    },
-    {
-      "name": "Open Premium Tools workspace",
-      "status": "FAIL",
-      "detail": "locator.scrollIntoViewIfNeeded: Timeout 29995.88399999996ms exceeded.\nCall log:\n  - attempting scroll into view action\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n    - waiting 20ms\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n      - waiting 100ms\n    58 × waiting for element to be stable\n       - element is not visible\n     - retrying scroll into view action\n       - waiting 500ms\n"
-    },
-    {
-      "name": "Premium workspace opens",
-      "status": "FAIL",
-      "detail": "hidden"
-    },
-    {
-      "name": "Premium workspace: find",
-      "status": "FAIL",
-      "detail": "locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('#premiumWorkspaceButton')\n    - locator resolved to <button id=\"premiumWorkspaceButton\" class=\"premium-workspace-button\">★ Premium Tools</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n      - waiting 100ms\n    58 × waiting for element to be visible, enabled and stable\n       - element is not visible\n     - retrying click action\n       - waiting 500ms\n"
-    },
-    {
-      "name": "Premium workspace: saved",
-      "status": "FAIL",
-      "detail": "locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('#premiumWorkspaceButton')\n    - locator resolved to <button id=\"premiumWorkspaceButton\" class=\"premium-workspace-button\">★ Premium Tools</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n      - waiting 100ms\n    58 × waiting for element to be visible, enabled and stable\n       - element is not visible\n     - retrying click action\n       - waiting 500ms\n"
-    },
-    {
-      "name": "Premium workspace: compare",
-      "status": "FAIL",
-      "detail": "locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('#premiumWorkspaceButton')\n    - locator resolved to <button id=\"premiumWorkspaceButton\" class=\"premium-workspace-button\">★ Premium Tools</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n      - waiting 100ms\n    58 × waiting for element to be visible, enabled and stable\n       - element is not visible\n     - retrying click action\n       - waiting 500ms\n"
-    },
-    {
-      "name": "Premium workspace: map",
-      "status": "FAIL",
-      "detail": "locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('#premiumWorkspaceButton')\n    - locator resolved to <button id=\"premiumWorkspaceButton\" class=\"premium-workspace-button\">★ Premium Tools</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n      - waiting 100ms\n    58 × waiting for element to be visible, enabled and stable\n       - element is not visible\n     - retrying click action\n       - waiting 500ms\n"
-    },
-    {
-      "name": "Premium workspace: radius",
-      "status": "FAIL",
-      "detail": "locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('#premiumWorkspaceButton')\n    - locator resolved to <button id=\"premiumWorkspaceButton\" class=\"premium-workspace-button\">★ Premium Tools</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n      - waiting 100ms\n    58 × waiting for element to be visible, enabled and stable\n       - element is not visible\n     - retrying click action\n       - waiting 500ms\n"
-    },
-    {
-      "name": "Premium workspace: filters",
-      "status": "FAIL",
-      "detail": "locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('#premiumWorkspaceButton')\n    - locator resolved to <button id=\"premiumWorkspaceButton\" class=\"premium-workspace-button\">★ Premium Tools</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n      - waiting 100ms\n    58 × waiting for element to be visible, enabled and stable\n       - element is not visible\n     - retrying click action\n       - waiting 500ms\n"
-    },
-    {
-      "name": "Premium workspace: history",
-      "status": "FAIL",
-      "detail": "locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('#premiumWorkspaceButton')\n    - locator resolved to <button id=\"premiumWorkspaceButton\" class=\"premium-workspace-button\">★ Premium Tools</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n      - waiting 100ms\n    58 × waiting for element to be visible, enabled and stable\n       - element is not visible\n     - retrying click action\n       - waiting 500ms\n"
-    },
-    {
-      "name": "Premium workspace: challenge",
-      "status": "FAIL",
-      "detail": "locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('#premiumWorkspaceButton')\n    - locator resolved to <button id=\"premiumWorkspaceButton\" class=\"premium-workspace-button\">★ Premium Tools</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n      - waiting 100ms\n    58 × waiting for element to be visible, enabled and stable\n       - element is not visible\n     - retrying click action\n       - waiting 500ms\n"
-    },
-    {
-      "name": "Premium workspace: alerts",
-      "status": "FAIL",
-      "detail": "locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('#premiumWorkspaceButton')\n    - locator resolved to <button id=\"premiumWorkspaceButton\" class=\"premium-workspace-button\">★ Premium Tools</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n      - waiting 100ms\n    58 × waiting for element to be visible, enabled and stable\n       - element is not visible\n     - retrying click action\n       - waiting 500ms\n"
-    },
-    {
-      "name": "Open drawer for Premium route audit",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Premium drawer layout is vertical on desktop",
-      "status": "PASS",
-      "detail": "12 controls"
-    },
-    {
-      "name": "Premium drawer: Premium Home",
+      "name": "Premium drawer route: Saved Items",
       "status": "PASS",
       "detail": "wired"
     },
     {
-      "name": "Premium drawer: Advanced Find",
+      "name": "Premium drawer route: Compare Stores",
       "status": "PASS",
       "detail": "wired"
     },
     {
-      "name": "Premium drawer: Saved Items",
+      "name": "Premium drawer route: Smart Filters",
       "status": "PASS",
       "detail": "wired"
     },
     {
-      "name": "Premium drawer: Compare Stores",
+      "name": "Premium drawer route: Search Radius",
       "status": "PASS",
       "detail": "wired"
     },
     {
-      "name": "Premium drawer: Nearby Map",
+      "name": "Premium drawer route: Extended History",
       "status": "PASS",
       "detail": "wired"
     },
     {
-      "name": "Premium drawer: Search Radius",
+      "name": "Premium drawer route: Premium Challenge",
       "status": "PASS",
       "detail": "wired"
     },
     {
-      "name": "Premium drawer: Smart Filters",
+      "name": "Premium drawer route: Premium Settings",
       "status": "PASS",
       "detail": "wired"
     },
     {
-      "name": "Premium drawer: Extended History",
-      "status": "PASS",
-      "detail": "wired"
-    },
-    {
-      "name": "Premium drawer: Premium Challenge",
-      "status": "PASS",
-      "detail": "wired"
-    },
-    {
-      "name": "Premium drawer: Price & Stock Watchlist",
-      "status": "PASS",
-      "detail": "wired"
-    },
-    {
-      "name": "Premium drawer: Premium Settings",
+      "name": "Price & Stock Watchlist route visible and wired",
       "status": "PASS",
       "detail": "wired"
     },
@@ -733,62 +373,22 @@
       "detail": ""
     },
     {
-      "name": "Assistant panel opens",
+      "name": "Assistant opens",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "Assistant quick: What did FindIt identify?",
+      "name": "Assistant quick prompt responds",
       "status": "PASS",
       "detail": "3 messages"
     },
     {
-      "name": "Assistant quick: Why are there no nearby stores?",
-      "status": "PASS",
-      "detail": "5 messages"
-    },
-    {
-      "name": "Assistant quick: Explain the price and stock information.",
-      "status": "PASS",
-      "detail": "7 messages"
-    },
-    {
-      "name": "Assistant custom question",
-      "status": "PASS",
-      "detail": "To use the **FindIt Premium Watchlist**:\n\n1. Tap the bookmark or watchlist icon on any product page to save an item.\n2. Access your saved items from your profile or the Watchlist tab.\n3. Enable notifications to receive i"
-    },
-    {
-      "name": "Close Ask FindIt",
+      "name": "Mobile homepage loads",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "Open drawer for remaining Free routes",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Drawer Ask FindIt works",
-      "status": "FAIL",
-      "detail": "locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('#drawerAskFindIt')\n    - locator resolved to <button id=\"drawerAskFindIt\">✦ Ask FindIt</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n      - waiting 100ms\n    58 × waiting for element to be visible, enabled and stable\n       - element is not visible\n     - retrying click action\n       - waiting 500ms\n"
-    },
-    {
-      "name": "Reopen drawer for Recent",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Drawer Recent Finds route works",
-      "status": "FAIL",
-      "detail": "locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('#openRecent')\n    - locator resolved to <button id=\"openRecent\">🕘 Recent finds</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n      - waiting 100ms\n    58 × waiting for element to be visible, enabled and stable\n       - element is not visible\n     - retrying click action\n       - waiting 500ms\n"
-    },
-    {
-      "name": "Mobile production homepage loads",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "No horizontal page overflow on mobile",
+      "name": "Mobile has no horizontal overflow",
       "status": "PASS",
       "detail": "{\"sw\":390,\"cw\":390}"
     },
@@ -798,17 +398,17 @@
       "detail": ""
     },
     {
-      "name": "Mobile drawer controls are vertical and full-width",
+      "name": "Mobile drawer controls vertical",
       "status": "PASS",
-      "detail": "8 controls"
+      "detail": "9"
     },
     {
-      "name": "Mobile bottom navigation is visible",
+      "name": "Mobile bottom nav visible",
       "status": "PASS",
-      "detail": "4 controls"
+      "detail": "4"
     },
     {
-      "name": "Mobile More button",
+      "name": "Mobile More",
       "status": "PASS",
       "detail": ""
     },
@@ -819,41 +419,38 @@
     },
     {
       "name": "Health API live",
-      "status": "FAIL",
-      "detail": "URL is not a constructor"
+      "status": "PASS",
+      "detail": "{\"ok\":true,\"geminiKeyConfigured\":true,\"model\":\"gemini-3.6-flash\",\"modelReachable\":true,\"message\":\"Gemini connection is ready.\"}"
     },
     {
       "name": "Feedback health API live",
-      "status": "FAIL",
-      "detail": "URL is not a constructor"
+      "status": "PASS",
+      "detail": "{\"ok\":true,\"provider\":\"formspree\",\"formspreeConfigured\":true,\"message\":\"Formspree feedback delivery is configured.\"}"
     },
     {
       "name": "Built-in FindIt QA report passes",
       "status": "PASS",
-      "detail": "{\"time\":\"2026-08-18T17:10:30.366Z\",\"missingElements\":[],\"missingPremiumFunctions\":[],\"premiumButtons\":[\"scan\",\"manual\",\"exact\",\"assistant\",\"collections\",\"watchlist\",\"favourites\",\"stats\",\"history\"],\"ok\":true}"
+      "detail": "{\"time\":\"2026-08-18T19:23:41.013Z\",\"missingElements\":[],\"missingPremiumFunctions\":[],\"premiumButtons\":[\"scan\",\"manual\",\"exact\",\"assistant\",\"collections\",\"watchlist\",\"favourites\",\"stats\",\"history\"],\"ok\":true}"
     },
     {
-      "name": "No uncaught JavaScript page errors",
+      "name": "No uncaught desktop JavaScript errors",
       "status": "PASS",
-      "detail": ""
+      "detail": "none"
     },
     {
-      "name": "No mobile JavaScript page errors",
+      "name": "No uncaught mobile JavaScript errors",
       "status": "PASS",
-      "detail": ""
+      "detail": "none"
     },
     {
       "name": "No meaningful console errors",
       "status": "PASS",
-      "detail": ""
+      "detail": "none"
     },
     {
-      "name": "No unexpected network request failures",
+      "name": "No unexpected network failures",
       "status": "PASS",
-      "detail": ""
+      "detail": "none"
     }
-  ],
-  "pageErrors": [],
-  "consoleErrors": [],
-  "networkFailures": []
+  ]
 }
