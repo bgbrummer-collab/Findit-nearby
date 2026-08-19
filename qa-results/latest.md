@@ -1,10 +1,10 @@
 # FindIt Full Production Audit
 
-Generated: 2026-08-18T20:29:48.572Z
+Generated: 2026-08-19T12:56:40.856Z
 
-**Passes:** 89  
+**Passes:** 80  
 **Warnings:** 0  
-**Failures:** 0
+**Failures:** 9
 
 - ✅ **Production homepage loads** — HTTP 200
 - ✅ **Desktop has no horizontal overflow** — {"sw":1440,"cw":1440}
@@ -30,20 +30,23 @@ Generated: 2026-08-18T20:29:48.572Z
 - ✅ **Image picker accepts a real raster image**
 - ✅ **Use my location**
 - ✅ **Location becomes ready** — ✓ Location ready
-- ✅ **Identify & Find completes** — Running Shoe Graphic Illustration
-- ✅ **Identification analysis cards render** — 8
-- ✅ **Map view**
-- ✅ **Map view opens** — map-wrap show
-- ✅ **List view**
-- ✅ **Offer sort Best**
-- ✅ **Offer sort Cheapest**
-- ✅ **Offer sort Closest**
-- ✅ **Free result actions are truthful** — search/copy/share available
+- ❌ **Identify & Find completes** — page.waitForSelector: Timeout 50000ms exceeded.
+Call log:
+  - waiting for locator('#results:not(.hidden)') to be visible
+
+- ❌ **Identification analysis cards render** — 0
+- ❌ **Map view** — control is not visible
+- ❌ **Map view opens** — map-wrap
+- ❌ **List view** — control is not visible
+- ✅ **Offer sort Best** — not applicable: no verified offers
+- ✅ **Offer sort Cheapest** — not applicable: no verified offers
+- ✅ **Offer sort Closest** — not applicable: no verified offers
+- ✅ **Free result actions are truthful** — low-confidence/result fallback shown instead of fake actions: Item identified
 - ✅ **Product intelligence shows no fake zero price** — not applicable: panel hidden for this result
-- ✅ **Thumbs up**
-- ✅ **Thumbs up sets rating 5**
-- ✅ **Thumbs down**
-- ✅ **Thumbs down sets rating 2**
+- ❌ **Thumbs up** — control is not visible
+- ❌ **Thumbs up sets rating 5** — not 5
+- ❌ **Thumbs down** — control is not visible
+- ❌ **Thumbs down sets rating 2** — not 2
 - ✅ **Feedback form has empty-message validation** — browser required validation active
 - ✅ **Feedback copy works** — ✓ Feedback copied.
 - ✅ **Free 25 km radius is Premium-gated** — gated
@@ -90,7 +93,7 @@ Generated: 2026-08-18T20:29:48.572Z
 - ✅ **Mobile More opens drawer**
 - ✅ **Health API live** — {"ok":true,"geminiKeyConfigured":true,"model":"gemini-3.6-flash","modelReachable":true,"message":"Gemini connection is ready."}
 - ✅ **Feedback health API live** — {"ok":true,"provider":"formspree","formspreeConfigured":true,"message":"Formspree feedback delivery is configured."}
-- ✅ **Built-in FindIt QA report passes** — {"time":"2026-08-18T20:29:48.570Z","missingElements":[],"missingPremiumFunctions":[],"premiumButtons":["scan","manual","exact","assistant","collections","watchlist","favourites","stats","history"],"ok":true}
+- ✅ **Built-in FindIt QA report passes** — {"time":"2026-08-19T12:56:40.854Z","missingElements":[],"missingPremiumFunctions":[],"premiumButtons":["scan","manual","exact","assistant","collections","watchlist","favourites","stats","history"],"ok":true}
 - ✅ **No uncaught desktop JavaScript errors** — none
 - ✅ **No uncaught mobile JavaScript errors** — none
 - ✅ **No meaningful console errors** — none
