@@ -16,22 +16,40 @@
   const b=e.target?.closest?.('#activatePremiumTester');
   if(b&&localStorage.getItem(KEY)!=='1')startPremiumCheckout(e);
  },true);
- const load=src=>new Promise((resolve,reject)=>{const s=document.createElement('script');s.src=src;s.defer=true;s.onload=resolve;s.onerror=reject;document.head.appendChild(s)});
- // IMPORTANT: never load mobile-menu-fix.js from inside itself. That caused an
- // unbounded recursive script-loading loop and could make browsers continually
- // reload/fail the page.
- Promise.resolve()
- .then(()=>load('/premium-upgrades.js').catch(()=>{}))
- .then(()=>load('/qa-hardening.js').catch(()=>{}))
- .then(()=>load('/qa-menu-routes.js').catch(()=>{}))
- .then(()=>load('/qa-final-polish.js').catch(()=>{}))
- .then(()=>load('/school-uniform-fix.js').catch(()=>{}))
- .then(()=>load('/final-release-fixes.js').catch(()=>{}))
- .then(()=>load('/release-polish.js').catch(()=>{}))
- .then(()=>load('/exact-retailer-fix.js').catch(()=>{}))
- .then(()=>load('/official-brand-client.js').catch(()=>{}))
- .then(()=>load('/feature-suggestions.js').catch(()=>{}))
- .then(()=>load('/premium-test-controls.js').catch(()=>{}))
- .then(()=>load('/premium-checkout-fix.js').catch(()=>{}))
- .then(()=>load('/v10-overlap-fix.js').catch(()=>{}));
+
+ // Load optional patch scripts only AFTER the page has fully loaded.
+ // This prevents Chrome from keeping the tab in a permanent loading state
+ // if one optional script is slow or unavailable.
+ const load=(src,timeout=3500)=>new Promise(resolve=>{
+  const s=document.createElement('script');
+  let done=false;
+  const finish=()=>{if(done)return;done=true;clearTimeout(t);resolve()};
+  const t=setTimeout(()=>{try{s.remove()}catch{}finish()},timeout);
+  s.src=src;
+  s.async=true;
+  s.onload=finish;
+  s.onerror=finish;
+  document.body.appendChild(s);
+ });
+ const patches=[
+  '/premium-upgrades.js',
+  '/qa-hardening.js',
+  '/qa-menu-routes.js',
+  '/qa-final-polish.js',
+  '/school-uniform-fix.js',
+  '/final-release-fixes.js',
+  '/release-polish.js',
+  '/exact-retailer-fix.js',
+  '/official-brand-client.js',
+  '/feature-suggestions.js',
+  '/premium-test-controls.js',
+  '/premium-checkout-fix.js',
+  '/v10-overlap-fix.js'
+ ];
+ async function bootPatches(){
+  for(const src of patches) await load(src);
+ }
+ const schedule=()=>setTimeout(bootPatches,700);
+ if(document.readyState==='complete')schedule();
+ else window.addEventListener('load',schedule,{once:true});
 })();
