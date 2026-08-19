@@ -17,7 +17,10 @@
   if(b&&localStorage.getItem(KEY)!=='1')startPremiumCheckout(e);
  },true);
  const load=src=>new Promise((resolve,reject)=>{const s=document.createElement('script');s.src=src;s.defer=true;s.onload=resolve;s.onerror=reject;document.head.appendChild(s)});
- load('https://cdn.jsdelivr.net/gh/bgbrummer-collab/Findit-nearby@f510ae6c231c45e9c2e6137d6296c14efa2c57ac/mobile-menu-fix.js').catch(()=>{})
+ // IMPORTANT: never load mobile-menu-fix.js from inside itself. That caused an
+ // unbounded recursive script-loading loop and could make browsers continually
+ // reload/fail the page.
+ Promise.resolve()
  .then(()=>load('/premium-upgrades.js').catch(()=>{}))
  .then(()=>load('/qa-hardening.js').catch(()=>{}))
  .then(()=>load('/qa-menu-routes.js').catch(()=>{}))
