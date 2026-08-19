@@ -1,1 +1,33 @@
-(()=>{const load=src=>new Promise((resolve,reject)=>{const s=document.createElement('script');s.src=src;s.defer=true;s.onload=resolve;s.onerror=reject;document.head.appendChild(s)});load('https://cdn.jsdelivr.net/gh/bgbrummer-collab/Findit-nearby@f510ae6c231c45e9c2e6137d6296c14efa2c57ac/mobile-menu-fix.js').catch(()=>{}).then(()=>load('/premium-upgrades.js').catch(()=>{})).then(()=>load('/qa-hardening.js').catch(()=>{})).then(()=>load('/qa-menu-routes.js').catch(()=>{})).then(()=>load('/qa-final-polish.js').catch(()=>{})).then(()=>load('/school-uniform-fix.js').catch(()=>{})).then(()=>load('/final-release-fixes.js').catch(()=>{})).then(()=>load('/release-polish.js').catch(()=>{})).then(()=>load('/exact-retailer-fix.js').catch(()=>{})).then(()=>load('/official-brand-client.js').catch(()=>{})).then(()=>load('/feature-suggestions.js').catch(()=>{})).then(()=>load('/premium-test-controls.js').catch(()=>{})).then(()=>load('/premium-checkout-fix.js').catch(()=>{}));})();
+(()=>{
+ const KEY='findit_premium_beta';
+ async function startPremiumCheckout(e){
+  if(localStorage.getItem(KEY)==='1')return;
+  e?.preventDefault?.();e?.stopImmediatePropagation?.();
+  const email=prompt('Enter the email to use for FindIt Premium:');if(!email)return;
+  try{
+   const r=await fetch('/api/paystack-init',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({email})});
+   const d=await r.json().catch(()=>({}));
+   if(!r.ok||!d.authorization_url)throw Error(d.error||'Could not start Paystack checkout.');
+   sessionStorage.setItem('findit_pending_paystack_reference',d.reference||'');
+   location.assign(d.authorization_url);
+  }catch(err){alert(err.message||'Could not start Paystack checkout.')}
+ }
+ window.addEventListener('click',e=>{
+  const b=e.target?.closest?.('#activatePremiumTester');
+  if(b&&localStorage.getItem(KEY)!=='1')startPremiumCheckout(e);
+ },true);
+ const load=src=>new Promise((resolve,reject)=>{const s=document.createElement('script');s.src=src;s.defer=true;s.onload=resolve;s.onerror=reject;document.head.appendChild(s)});
+ load('https://cdn.jsdelivr.net/gh/bgbrummer-collab/Findit-nearby@f510ae6c231c45e9c2e6137d6296c14efa2c57ac/mobile-menu-fix.js').catch(()=>{})
+ .then(()=>load('/premium-upgrades.js').catch(()=>{}))
+ .then(()=>load('/qa-hardening.js').catch(()=>{}))
+ .then(()=>load('/qa-menu-routes.js').catch(()=>{}))
+ .then(()=>load('/qa-final-polish.js').catch(()=>{}))
+ .then(()=>load('/school-uniform-fix.js').catch(()=>{}))
+ .then(()=>load('/final-release-fixes.js').catch(()=>{}))
+ .then(()=>load('/release-polish.js').catch(()=>{}))
+ .then(()=>load('/exact-retailer-fix.js').catch(()=>{}))
+ .then(()=>load('/official-brand-client.js').catch(()=>{}))
+ .then(()=>load('/feature-suggestions.js').catch(()=>{}))
+ .then(()=>load('/premium-test-controls.js').catch(()=>{}))
+ .then(()=>load('/premium-checkout-fix.js').catch(()=>{}));
+})();
