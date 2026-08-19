@@ -60,6 +60,30 @@
     }
     #v10CommandCentre .v10-how b{display:inline!important;margin:0!important;font-size:inherit!important;line-height:inherit!important}
 
+    /* Premium uses its own command centre. The old landing hero was still taking
+       650px of vertical space while its contents were effectively not useful here,
+       which looked like the whole bottom of FindIt had disappeared. */
+    body.premium-active main>.hero{
+      display:none!important;
+      min-height:0!important;
+      height:0!important;
+      padding:0!important;
+      margin:0!important;
+    }
+
+    /* Never leave the real lower FindIt sections invisible because of reveal
+       animation state after Premium content is inserted above them. */
+    body.premium-active main>.reveal,
+    body.premium-active #finder,
+    body.premium-active #examples,
+    body.premium-active #how,
+    body.premium-active #recent,
+    body.premium-active #feedback{
+      opacity:1!important;
+      visibility:visible!important;
+      transform:none!important;
+    }
+
     #premiumExperience{padding-bottom:0!important;margin-bottom:18px!important}
     #premiumExperience .px-grid,
     #premiumExperience .px-flow,
