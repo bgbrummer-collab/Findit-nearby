@@ -29,5 +29,6 @@
  .then(()=>load('/official-brand-client.js').catch(()=>{}))
  .then(()=>load('/feature-suggestions.js').catch(()=>{}))
  .then(()=>load('/premium-test-controls.js').catch(()=>{}))
- .then(()=>load('/premium-checkout-fix.js').catch(()=>{}));
+ .then(()=>load('/premium-checkout-fix.js').catch(()=>{}))
+ .then(()=>load('/v10-overlap-fix.js').catch(()=>{}));
 })();
