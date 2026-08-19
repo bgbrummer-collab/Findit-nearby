@@ -10,6 +10,8 @@ function auth(secret){return {Authorization:`Bearer ${secret}`,'Content-Type':'a
 function safeEmail(v){const email=String(v||'').trim().toLowerCase();return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)?email:null}
 function makeBetaReference(email){const stamp=Date.now().toString(36);const hash=crypto.createHash('sha256').update(`${email}|${stamp}|findit-beta`).digest('hex').slice(0,18);return `beta_${stamp}_${hash}`}
 function isBetaReference(ref){return /^beta_[a-z0-9]+_[a-f0-9]{18}$/i.test(String(ref||''))}
+function isTestSecret(secret){return /^sk_test_/i.test(String(secret||''))}
+function usePaystackCheckout(secret){return LIVE_PAYMENTS || isTestSecret(secret)}
 
 async function paystack(secret,path,options={}){
   const r=await fetch(API+path,{...options,headers:{...auth(secret),...(options.headers||{})}});
@@ -55,35 +57,39 @@ async function subscriptionFromReference(secret,reference){
 async function init(req,res,secret){
   if(req.method!=='POST')return res.status(405).json({error:'Method not allowed'});
   const email=safeEmail(req.body?.email);if(!email)return res.status(400).json({error:'A valid email is required.'});
-  if(!LIVE_PAYMENTS){const reference=makeBetaReference(email);const callback=`https://findit-nearby.vercel.app/?premium_payment=return&reference=${encodeURIComponent(reference)}`;return res.json({authorization_url:callback,reference,beta:true,free:true,billing:'beta-test',amount:0,currency:CURRENCY})}
+  if(!usePaystackCheckout(secret)){
+    const reference=makeBetaReference(email);
+    const callback=`https://findit-nearby.vercel.app/?premium_payment=return&reference=${encodeURIComponent(reference)}`;
+    return res.json({authorization_url:callback,reference,beta:true,free:true,billing:'beta-test',amount:0,currency:CURRENCY});
+  }
   if(!secret)return res.status(503).json({error:'Payments are not configured yet.'});
   const plan=await ensureMonthlyPlan(secret);
-  const d=await paystack(secret,'/transaction/initialize',{method:'POST',body:JSON.stringify({email,amount:PRICE_SUBUNITS,plan:plan.plan_code,currency:CURRENCY,callback_url:'https://findit-nearby.vercel.app/?premium_payment=return',metadata:{product:'FindIt Premium',billing:'monthly',amount_zar:99,cancel_anytime:true}})});
+  const d=await paystack(secret,'/transaction/initialize',{method:'POST',body:JSON.stringify({email,amount:PRICE_SUBUNITS,plan:plan.plan_code,currency:CURRENCY,callback_url:'https://findit-nearby.vercel.app/?premium_payment=return',metadata:{product:'FindIt Premium',billing:'monthly',amount_zar:99,cancel_anytime:true,test_mode:isTestSecret(secret)}})});
   if(!d.data?.authorization_url)return res.status(502).json({error:'Could not start subscription checkout.'});
-  return res.json({authorization_url:d.data.authorization_url,reference:d.data.reference,billing:'monthly',amount:99,currency:CURRENCY,planCode:plan.plan_code});
+  return res.json({authorization_url:d.data.authorization_url,reference:d.data.reference,billing:'monthly',amount:99,currency:CURRENCY,planCode:plan.plan_code,testMode:isTestSecret(secret)});
 }
 
 async function verify(req,res,secret){
   if(req.method!=='GET')return res.status(405).json({error:'Method not allowed'});
   const reference=String(req.query?.reference||'').trim();if(!reference)return res.status(400).json({error:'Reference required.'});
-  if(!LIVE_PAYMENTS&&isBetaReference(reference))return res.json({paid:true,active:true,beta:true,free:true,reference,status:'beta_active',billing:'beta-test',amount:0,currency:CURRENCY});
+  if(!usePaystackCheckout(secret)&&isBetaReference(reference))return res.json({paid:true,active:true,beta:true,free:true,reference,status:'beta_active',billing:'beta-test',amount:0,currency:CURRENCY});
   if(!secret)return res.status(503).json({error:'Payments are not configured yet.'});
-  const x=await subscriptionFromReference(secret,reference);const s=x.subscription;
-  return res.json({paid:x.paid,active:x.paid&&(!s||['active','attention','non-renewing'].includes(String(s.status||'').toLowerCase())),reference:x.tx?.reference||reference,status:x.paid?(s?.status||'paid'):'not_paid',billing:'monthly',amount:99,currency:CURRENCY,subscriptionCode:s?.subscription_code||null,nextPaymentDate:s?.next_payment_date||null});
+  const x=await subscriptionFromReference(secret,reference),s=x.subscription;
+  return res.json({paid:x.paid,active:x.paid&&(!s||['active','attention','non-renewing'].includes(String(s.status||'').toLowerCase())),reference:x.tx?.reference||reference,status:x.paid?(s?.status||'paid'):'not_paid',billing:'monthly',amount:99,currency:CURRENCY,subscriptionCode:s?.subscription_code||null,nextPaymentDate:s?.next_payment_date||null,testMode:isTestSecret(secret)});
 }
 
 async function status(req,res,secret){
   if(req.method!=='GET')return res.status(405).json({error:'Method not allowed'});
-  if(!LIVE_PAYMENTS)return res.json({active:true,beta:true,free:true,status:'beta_active',billing:'beta-test',amount:0,currency:CURRENCY});
+  if(!usePaystackCheckout(secret))return res.json({active:true,beta:true,free:true,status:'beta_active',billing:'beta-test',amount:0,currency:CURRENCY});
   if(!secret)return res.status(503).json({active:false,error:'Payments are not configured yet.'});
   const reference=String(req.query?.reference||'').trim();if(!reference)return res.status(400).json({active:false,error:'Payment reference required.'});
-  const x=await subscriptionFromReference(secret,reference);const s=x.subscription,statusText=String(s?.status||'').toLowerCase();
-  return res.json({active:x.paid&&(!s||['active','attention','non-renewing'].includes(statusText)),paid:x.paid,status:s?.status||(x.paid?'paid':'not_paid'),billing:'monthly',amount:99,currency:CURRENCY,subscriptionCode:s?.subscription_code||null,nextPaymentDate:s?.next_payment_date||null,cancelled:statusText==='non-renewing'||statusText==='complete'});
+  const x=await subscriptionFromReference(secret,reference),s=x.subscription,statusText=String(s?.status||'').toLowerCase();
+  return res.json({active:x.paid&&(!s||['active','attention','non-renewing'].includes(statusText)),paid:x.paid,status:s?.status||(x.paid?'paid':'not_paid'),billing:'monthly',amount:99,currency:CURRENCY,subscriptionCode:s?.subscription_code||null,nextPaymentDate:s?.next_payment_date||null,cancelled:statusText==='non-renewing'||statusText==='complete',testMode:isTestSecret(secret)});
 }
 
 async function manage(req,res,secret){
   if(req.method!=='POST')return res.status(405).json({error:'Method not allowed'});
-  if(!LIVE_PAYMENTS)return res.json({ok:true,beta:true,free:true,message:'Premium is free during beta, so there is no paid subscription to cancel.'});
+  if(!usePaystackCheckout(secret))return res.json({ok:true,beta:true,free:true,message:'Premium is free during beta, so there is no paid subscription to cancel.'});
   if(!secret)return res.status(503).json({error:'Payments are not configured yet.'});
   const reference=String(req.body?.reference||'').trim();if(!reference)return res.status(400).json({error:'Payment reference required.'});
   const x=await subscriptionFromReference(secret,reference);if(!x.paid)return res.status(402).json({error:'A paid Premium subscription could not be verified.'});
@@ -92,11 +98,11 @@ async function manage(req,res,secret){
   if(mode==='cancel'){
     const token=s.email_token;if(!token)return res.status(409).json({error:'Cancellation token is not available yet. Use the manage-subscription link instead.'});
     await paystack(secret,'/subscription/disable',{method:'POST',body:JSON.stringify({code:s.subscription_code,token})});
-    return res.json({ok:true,cancelled:true,status:'non-renewing',message:'Premium will not renew on the next billing date.'});
+    return res.json({ok:true,cancelled:true,status:'non-renewing',message:'Premium will not renew on the next billing date.',testMode:isTestSecret(secret)});
   }
   const d=await paystack(secret,`/subscription/${encodeURIComponent(s.subscription_code)}/manage/link`,{method:'GET'});
   const link=d.data?.link;if(!link)return res.status(502).json({error:'Could not create the subscription management link.'});
-  return res.json({ok:true,manage_url:link,subscriptionCode:s.subscription_code,status:s.status||null});
+  return res.json({ok:true,manage_url:link,subscriptionCode:s.subscription_code,status:s.status||null,testMode:isTestSecret(secret)});
 }
 
 export default async function handler(req,res){
