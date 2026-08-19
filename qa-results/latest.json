@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T13:20:01.637Z",
+  "generatedAt": "2026-08-19T13:27:20.426Z",
   "url": "https://findit-nearby.vercel.app/",
   "summary": {
     "passes": 89,
@@ -75,7 +75,7 @@
     {
       "name": "Challenge text populated",
       "status": "PASS",
-      "detail": "Find something older than you 🕰️"
+      "detail": "Find something you don't know the name of 👀"
     },
     {
       "name": "Examples render",
@@ -130,7 +130,7 @@
     {
       "name": "Identify & Find completes",
       "status": "PASS",
-      "detail": "Running Shoe Graphic Illustration"
+      "detail": "Graphic Illustration of a Running Shoe"
     },
     {
       "name": "Identification analysis cards render",
@@ -175,7 +175,7 @@
     {
       "name": "Product intelligence shows no fake zero price",
       "status": "PASS",
-      "detail": "not applicable: panel hidden for this result"
+      "detail": "Verified price not connected yet\n\nContinue with the exact item now. Premium unlocks deeper comparison and advanced search tools.\n\nSearch exact product →\n★ Unlock the best FindIt to"
     },
     {
       "name": "Thumbs up",
@@ -430,7 +430,7 @@
     {
       "name": "Built-in FindIt QA report passes",
       "status": "PASS",
-      "detail": "{\"time\":\"2026-08-19T13:20:01.636Z\",\"missingElements\":[],\"missingPremiumFunctions\":[],\"premiumButtons\":[\"scan\",\"manual\",\"exact\",\"assistant\",\"collections\",\"watchlist\",\"favourites\",\"stats\",\"history\"],\"ok\":true}"
+      "detail": "{\"time\":\"2026-08-19T13:27:20.424Z\",\"missingElements\":[],\"missingPremiumFunctions\":[],\"premiumButtons\":[\"scan\",\"manual\",\"exact\",\"assistant\",\"collections\",\"watchlist\",\"favourites\",\"stats\",\"history\"],\"ok\":true}"
     },
     {
       "name": "No uncaught desktop JavaScript errors",
