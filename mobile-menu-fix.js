@@ -7,6 +7,8 @@
   try{typeof applyPremiumWorld==='function'&&applyPremiumWorld(false)}catch{}
   try{typeof updatePremiumDashboard==='function'&&updatePremiumDashboard()}catch{}
   try{typeof v10Refresh==='function'&&v10Refresh()}catch{}
+  try{typeof closePremium==='function'&&closePremium()}catch{}
+  const modal=document.getElementById('premiumModal');if(modal){modal.classList.add('hidden');modal.setAttribute('aria-hidden','true')}
  };
  async function startPremiumCheckout(e){
   if(localStorage.getItem(KEY)==='1')return;
