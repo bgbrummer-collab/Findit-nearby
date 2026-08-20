@@ -40,7 +40,7 @@
   '/premium-upgrades.js','/qa-hardening.js','/qa-menu-routes.js','/qa-final-polish.js',
   '/school-uniform-fix.js','/final-release-fixes.js','/release-polish.js','/exact-retailer-fix.js',
   '/official-brand-client.js','/feature-suggestions.js','/premium-test-controls.js',
-  '/premium-checkout-fix.js','/v10-overlap-fix.js'
+  '/premium-checkout-fix.js','/v10-overlap-fix.js','/likely-retailer-ui-fix.js'
  ];
  async function bootPatches(){for(const src of patches)await load(src)}
  const schedule=()=>setTimeout(bootPatches,700);
