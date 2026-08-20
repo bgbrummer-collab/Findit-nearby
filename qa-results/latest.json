@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-08-20T16:11:33.862Z",
+  "generatedAt": "2026-08-20T16:18:36.235Z",
   "url": "https://findit-nearby.vercel.app/",
   "summary": {
-    "passes": 66,
+    "passes": 87,
     "warnings": 0,
-    "failures": 21
+    "failures": 2
   },
   "checks": [
     {
@@ -75,7 +75,7 @@
     {
       "name": "Challenge text populated",
       "status": "PASS",
-      "detail": "Find something you don't know the name of 👀"
+      "detail": "Find the weirdest object in your room 😂"
     },
     {
       "name": "Examples render",
@@ -130,7 +130,7 @@
     {
       "name": "Identify & Find completes",
       "status": "PASS",
-      "detail": "Running Shoe Graphic Illustration"
+      "detail": "Blue and White Running Shoe Graphic"
     },
     {
       "name": "Identification analysis cards render",
@@ -239,18 +239,18 @@
     },
     {
       "name": "Premium activates",
-      "status": "FAIL",
-      "detail": "local premium flag missing"
+      "status": "PASS",
+      "detail": "active"
     },
     {
       "name": "Premium command centre fits desktop",
       "status": "PASS",
-      "detail": "{\"sw\":0,\"cw\":0}"
+      "detail": "{\"sw\":1218,\"cw\":1218}"
     },
     {
       "name": "Premium heading fits",
-      "status": "FAIL",
-      "detail": "null"
+      "status": "PASS",
+      "detail": "width=820"
     },
     {
       "name": "All visible V10 tools include How guidance",
@@ -260,7 +260,7 @@
     {
       "name": "Open Premium guide",
       "status": "FAIL",
-      "detail": "control is not visible"
+      "detail": "locator.click: Timeout 4000ms exceeded.\nCall log:\n  - waiting for locator('#finditOpenGuide').first()\n    - locator resolved to <button type=\"button\" id=\"finditOpenGuide\">How to use Premium</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div id=\"premiumModal\" aria-hidden=\"false\" class=\"premium-modal\" data-guard-installed=\"1\">…</div> intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    - waiting for element to be visible, enabled and stable\n    - element is visible, enabled and stable\n    - scrolling int"
     },
     {
       "name": "Premium guide has full help",
@@ -269,48 +269,58 @@
     },
     {
       "name": "V10 scan opens",
-      "status": "FAIL",
-      "detail": "locator.scrollIntoViewIfNeeded: Timeout 29997.112ms exceeded.\nCall log:\n  - attempting scroll into view action\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n    - waiting 20ms\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n      - waiting 100ms\n    58 × waiting for element to be stable\n       - element is not visible\n     - retrying scroll into view action\n       - waiting 500ms\n"
+      "status": "PASS",
+      "detail": "routed to finder"
     },
     {
       "name": "V10 manual opens",
-      "status": "FAIL",
-      "detail": "locator.scrollIntoViewIfNeeded: Timeout 29997.346999999994ms exceeded.\nCall log:\n  - attempting scroll into view action\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n    - waiting 20ms\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n      - waiting 100ms\n    58 × waiting for element to be stable\n       - element is not visible\n     - retrying scroll into view action\n       - waiting 500ms\n"
+      "status": "PASS",
+      "detail": "Manual Search"
     },
     {
       "name": "V10 exact opens",
-      "status": "FAIL",
-      "detail": "locator.scrollIntoViewIfNeeded: Timeout 29997.39200000002ms exceeded.\nCall log:\n  - attempting scroll into view action\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n    - waiting 20ms\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n      - waiting 100ms\n    58 × waiting for element to be stable\n       - element is not visible\n     - retrying scroll into view action\n       - waiting 500ms\n"
+      "status": "PASS",
+      "detail": "performed external exact-match action"
     },
     {
       "name": "V10 assistant opens",
-      "status": "FAIL",
-      "detail": "locator.scrollIntoViewIfNeeded: Timeout 29997.388000000006ms exceeded.\nCall log:\n  - attempting scroll into view action\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n    - waiting 20ms\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n      - waiting 100ms\n    58 × waiting for element to be stable\n       - element is not visible\n     - retrying scroll into view action\n       - waiting 500ms\n"
+      "status": "PASS",
+      "detail": "AI Search"
     },
     {
       "name": "V10 collections opens",
-      "status": "FAIL",
-      "detail": "locator.scrollIntoViewIfNeeded: Timeout 29997.435999999987ms exceeded.\nCall log:\n  - attempting scroll into view action\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n    - waiting 20ms\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n      - waiting 100ms\n    58 × waiting for element to be stable\n       - element is not visible\n     - retrying scroll into view action\n       - waiting 500ms\n"
+      "status": "PASS",
+      "detail": "Collections"
+    },
+    {
+      "name": "Collections create control works",
+      "status": "PASS",
+      "detail": "created"
     },
     {
       "name": "V10 watchlist opens",
-      "status": "FAIL",
-      "detail": "locator.scrollIntoViewIfNeeded: Timeout 29997.378999999986ms exceeded.\nCall log:\n  - attempting scroll into view action\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n    - waiting 20ms\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n      - waiting 100ms\n    58 × waiting for element to be stable\n       - element is not visible\n     - retrying scroll into view action\n       - waiting 500ms\n"
+      "status": "PASS",
+      "detail": "Exact price & stock tracker"
     },
     {
       "name": "V10 favourites opens",
-      "status": "FAIL",
-      "detail": "locator.scrollIntoViewIfNeeded: Timeout 29996.46299999999ms exceeded.\nCall log:\n  - attempting scroll into view action\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n    - waiting 20ms\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n      - waiting 100ms\n    58 × waiting for element to be stable\n       - element is not visible\n     - retrying scroll into view action\n       - waiting 500ms\n"
+      "status": "PASS",
+      "detail": "Favourite Stores"
     },
     {
       "name": "V10 stats opens",
-      "status": "FAIL",
-      "detail": "locator.scrollIntoViewIfNeeded: Timeout 29997.572999999975ms exceeded.\nCall log:\n  - attempting scroll into view action\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n    - waiting 20ms\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n      - waiting 100ms\n    58 × waiting for element to be stable\n       - element is not visible\n     - retrying scroll into view action\n       - waiting 500ms\n"
+      "status": "PASS",
+      "detail": "My FindIt Stats"
     },
     {
       "name": "V10 history opens",
-      "status": "FAIL",
-      "detail": "locator.scrollIntoViewIfNeeded: Timeout 29997.52000000002ms exceeded.\nCall log:\n  - attempting scroll into view action\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n    - waiting 20ms\n    2 × waiting for element to be stable\n      - element is not visible\n    - retrying scroll into view action\n      - waiting 100ms\n    58 × waiting for element to be stable\n       - element is not visible\n     - retrying scroll into view action\n       - waiting 500ms\n"
+      "status": "PASS",
+      "detail": "History+"
+    },
+    {
+      "name": "History+ supports per-item delete when entries exist",
+      "status": "PASS",
+      "detail": "1 -> 0"
     },
     {
       "name": "Premium drawer has visible, vertical controls",
@@ -319,43 +329,43 @@
     },
     {
       "name": "Premium drawer route: Saved Items",
-      "status": "FAIL",
-      "detail": "not visible"
+      "status": "PASS",
+      "detail": "wired"
     },
     {
       "name": "Premium drawer route: Compare Stores",
-      "status": "FAIL",
-      "detail": "not visible"
+      "status": "PASS",
+      "detail": "wired"
     },
     {
       "name": "Premium drawer route: Smart Filters",
-      "status": "FAIL",
-      "detail": "not visible"
+      "status": "PASS",
+      "detail": "wired"
     },
     {
       "name": "Premium drawer route: Search Radius",
-      "status": "FAIL",
-      "detail": "not visible"
+      "status": "PASS",
+      "detail": "wired"
     },
     {
       "name": "Premium drawer route: Extended History",
-      "status": "FAIL",
-      "detail": "not visible"
+      "status": "PASS",
+      "detail": "wired"
     },
     {
       "name": "Premium drawer route: Premium Challenge",
-      "status": "FAIL",
-      "detail": "not visible"
+      "status": "PASS",
+      "detail": "wired"
     },
     {
       "name": "Premium drawer route: Premium Settings",
-      "status": "FAIL",
-      "detail": "not visible"
+      "status": "PASS",
+      "detail": "wired"
     },
     {
       "name": "Price & Stock Watchlist route visible and wired",
-      "status": "FAIL",
-      "detail": "not visible"
+      "status": "PASS",
+      "detail": "wired"
     },
     {
       "name": "Open Ask FindIt",
@@ -420,7 +430,7 @@
     {
       "name": "Built-in FindIt QA report passes",
       "status": "PASS",
-      "detail": "{\"time\":\"2026-08-20T16:11:33.861Z\",\"missingElements\":[],\"missingPremiumFunctions\":[],\"premiumButtons\":[\"scan\",\"manual\",\"exact\",\"assistant\",\"collections\",\"watchlist\",\"favourites\",\"stats\",\"history\"],\"ok\":true}"
+      "detail": "{\"time\":\"2026-08-20T16:18:36.233Z\",\"missingElements\":[],\"missingPremiumFunctions\":[],\"premiumButtons\":[\"scan\",\"manual\",\"exact\",\"assistant\",\"collections\",\"watchlist\",\"favourites\",\"stats\",\"history\"],\"ok\":true}"
     },
     {
       "name": "No uncaught desktop JavaScript errors",
