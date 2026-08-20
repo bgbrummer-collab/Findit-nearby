@@ -1,10 +1,10 @@
 # FindIt Full Production Audit
 
-Generated: 2026-08-20T18:49:07.811Z
+Generated: 2026-08-20T19:07:00.146Z
 
-**Passes:** 31  
-**Warnings:** 1  
-**Failures:** 55
+**Passes:** 87  
+**Warnings:** 0  
+**Failures:** 2
 
 - ✅ **Production homepage loads** — HTTP 200
 - ✅ **Desktop has no horizontal overflow** — {"sw":1440,"cw":1440}
@@ -13,68 +13,29 @@ Generated: 2026-08-20T18:49:07.811Z
 - ✅ **Desktop nav Examples**
 - ✅ **Desktop nav Feedback**
 - ✅ **Open main drawer**
-- ❌ **Main drawer opens** — not visible
+- ✅ **Main drawer opens**
 - ✅ **Main drawer controls do not overlap** — 9 visible controls
-- ❌ **Close main drawer** — locator.click: Timeout 4000ms exceeded.
-Call log:
-  - waiting for locator('#closeMenu').first()
-    - locator resolved to <button id="closeMenu" class="icon-btn">×</button>
-  - attempting click action
-    2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - element is outside of the viewport
-    - retrying click action
-    - waiting 20ms
-    2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - element is outside of the viewport
-    - retrying click actio
+- ✅ **Close main drawer**
 - ✅ **Open Challenge**
-- ❌ **Challenge modal visible** — not visible
-- ❌ **New challenge** — control is not visible
-- ✅ **Challenge text populated** — Find something unusual.
-- ❌ **Examples render** — 0
+- ✅ **Challenge modal visible**
+- ✅ **New challenge**
+- ✅ **Challenge text populated** — Find something older than you 🕰️
+- ✅ **Examples render** — 6 cards
 - ✅ **Shuffle examples**
 - ✅ **Open drawer for settings**
-- ❌ **Open Settings** — locator.click: Timeout 4000ms exceeded.
-Call log:
-  - waiting for locator('#openSettings').first()
-    - locator resolved to <button id="openSettings">⚙ Settings</button>
-  - attempting click action
-    2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - element is outside of the viewport
-    - retrying click action
-    - waiting 20ms
-    2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - element is outside of the viewport
-    - retrying click action
-
-- ❌ **Settings visible** — not visible
-- ❌ **Animations toggle works** — locator.isChecked: Timeout 30000ms exceeded.
-Call log:
-  - waiting for locator('#animationsToggle')
-
-- ❌ **Free radius options 3/5/10 work** — locator.selectOption: Timeout 30000ms exceeded.
-Call log:
-  - waiting for locator('#settingsRadius')
-
-- ❌ **Image picker accepts a real raster image** — Identify disabled
+- ✅ **Open Settings**
+- ✅ **Settings visible**
+- ✅ **Animations toggle works**
+- ✅ **Free radius options 3/5/10 work** — 3,5,10
+- ✅ **Image picker accepts a real raster image**
 - ✅ **Use my location**
-- ❌ **Location becomes ready** — 📍 Use my location
-- ❌ **Identify & Find completes** — locator.click: Timeout 30000ms exceeded.
+- ✅ **Location becomes ready** — ✓ Location ready
+- ✅ **Identify & Find completes** — Graphic Illustration of a Running Shoe
+- ✅ **Identification analysis cards render** — 8
+- ❌ **Map view** — locator.click: Timeout 4000ms exceeded.
 Call log:
-  - waiting for locator('#search')
-    - locator resolved to <button disabled id="search" class="btn find-btn">✨ Identify & Find</button>
+  - waiting for locator('#mapViewBtn').first()
+    - locator resolved to <button disabled id="mapViewBtn" title="No exact physical branch verified">🗺 Map</button>
   - attempting click action
     2 × waiting for element to be visible, enabled and stable
       - element is not enabled
@@ -84,239 +45,71 @@ Call log:
       - element is not enabled
     - retrying click action
       - waiting 100ms
-    56 × waiting for element to be visible, enabled and stable
-       - element is not enabled
-     - retrying click action
-       - waiting 500ms
+    8 × waiting for element to be visible, enabled and stable
+      - element is not enabled
+    - retrying click action
+      - waiting 500ms
 
-- ❌ **Identification analysis cards render** — 0
-- ❌ **Map view** — control is not visible
-- ❌ **Map view opens** — locator.getAttribute: Timeout 30000ms exceeded.
-Call log:
-  - waiting for locator('#mapWrap')
-
-- ❌ **List view** — control is not visible
-- ✅ **Offer sort Best** — not applicable: no verified offers
-- ✅ **Offer sort Cheapest** — not applicable: no verified offers
-- ✅ **Offer sort Closest** — not applicable: no verified offers
-- ❌ **Free result actions are truthful** — locator.innerText: Timeout 30000ms exceeded.
-Call log:
-  - waiting for locator('#resultTitle')
-
-- ✅ **Product intelligence shows no fake zero price** — not applicable: panel hidden for this result
-- ❌ **Thumbs up** — control is not visible
-- ❌ **Thumbs up sets rating 5** — locator.inputValue: Timeout 30000ms exceeded.
-Call log:
-  - waiting for locator('#feedbackRating')
-
-- ❌ **Thumbs down** — control is not visible
-- ❌ **Thumbs down sets rating 2** — locator.inputValue: Timeout 30000ms exceeded.
-Call log:
-  - waiting for locator('#feedbackRating')
-
-- ❌ **Feedback form has empty-message validation** — locator.fill: Timeout 30000ms exceeded.
-Call log:
-  - waiting for locator('#feedbackMessage')
-
-- ❌ **Feedback copy works** — locator.fill: Timeout 30000ms exceeded.
-Call log:
-  - waiting for locator('#feedbackMessage')
-
-- ❌ **Free 25 km radius is Premium-gated** — not visible
-- ❌ **Free Save opens Premium** — control is not visible
-- ❌ **Free Save gate visible** — not visible
-- ❌ **Open Premium modal** — control is not visible
-- ❌ **Free/Premium comparison visible** — comparison missing
-- ❌ **Activate Premium Beta** — control is not visible
-- ❌ **Premium activates** — local premium flag missing
-- ✅ **Premium command centre fits desktop** — {"sw":0,"cw":0}
-- ❌ **Premium heading fits** — null
+- ❌ **Map view opens** — map-wrap
+- ✅ **List view**
+- ✅ **Offer sort Best**
+- ✅ **Offer sort Cheapest**
+- ✅ **Offer sort Closest**
+- ✅ **Free result actions are truthful** — low-confidence/result fallback shown instead of fake actions: Graphic Illustration of a Running Shoe
+- ✅ **Product intelligence shows no fake zero price** — No connected catalogue offer yet. The live exact-product search below is still checking real web listings.
+Keep searching for the exact item
+These links help you continue when veri
+- ✅ **Thumbs up**
+- ✅ **Thumbs up sets rating 5**
+- ✅ **Thumbs down**
+- ✅ **Thumbs down sets rating 2**
+- ✅ **Feedback form has empty-message validation** — browser required validation active
+- ✅ **Feedback copy works** — ✓ Feedback copied.
+- ✅ **Free 25 km radius is Premium-gated** — gated
+- ✅ **Free Save opens Premium**
+- ✅ **Free Save gate visible**
+- ✅ **Open Premium modal**
+- ✅ **Free/Premium comparison visible**
+- ✅ **Activate Premium Beta**
+- ✅ **Premium activates** — active
+- ✅ **Premium command centre fits desktop** — {"sw":1218,"cw":1218}
+- ✅ **Premium heading fits** — width=820
 - ✅ **All visible V10 tools include How guidance** — 9 tools
-- ❌ **Open Premium guide** — control is not visible
-- ❌ **Premium guide has full help** — not visible
-- ❌ **V10 scan opens** — locator.scrollIntoViewIfNeeded: Timeout 29996.13399999996ms exceeded.
-Call log:
-  - attempting scroll into view action
-    2 × waiting for element to be stable
-      - element is not visible
-    - retrying scroll into view action
-    - waiting 20ms
-    2 × waiting for element to be stable
-      - element is not visible
-    - retrying scroll into view action
-      - waiting 100ms
-    56 × waiting for element to be stable
-       - element is not visible
-     - retrying scroll into view action
-       - waiting 500ms
-
-- ❌ **V10 manual opens** — locator.scrollIntoViewIfNeeded: Timeout 29996.045999999973ms exceeded.
-Call log:
-  - attempting scroll into view action
-    2 × waiting for element to be stable
-      - element is not visible
-    - retrying scroll into view action
-    - waiting 20ms
-    2 × waiting for element to be stable
-      - element is not visible
-    - retrying scroll into view action
-      - waiting 100ms
-    56 × waiting for element to be stable
-       - element is not visible
-     - retrying scroll into view action
-       - waiting 500ms
-
-- ❌ **V10 exact opens** — locator.scrollIntoViewIfNeeded: Timeout 29995.820000000007ms exceeded.
-Call log:
-  - attempting scroll into view action
-    2 × waiting for element to be stable
-      - element is not visible
-    - retrying scroll into view action
-    - waiting 20ms
-    2 × waiting for element to be stable
-      - element is not visible
-    - retrying scroll into view action
-      - waiting 100ms
-    56 × waiting for element to be stable
-       - element is not visible
-     - retrying scroll into view action
-       - waiting 500ms
-
-- ❌ **V10 assistant opens** — locator.scrollIntoViewIfNeeded: Timeout 29996.301000000036ms exceeded.
-Call log:
-  - attempting scroll into view action
-    2 × waiting for element to be stable
-      - element is not visible
-    - retrying scroll into view action
-    - waiting 20ms
-    2 × waiting for element to be stable
-      - element is not visible
-    - retrying scroll into view action
-      - waiting 100ms
-    56 × waiting for element to be stable
-       - element is not visible
-     - retrying scroll into view action
-       - waiting 500ms
-
-- ❌ **V10 collections opens** — locator.scrollIntoViewIfNeeded: Timeout 29995.94199999998ms exceeded.
-Call log:
-  - attempting scroll into view action
-    2 × waiting for element to be stable
-      - element is not visible
-    - retrying scroll into view action
-    - waiting 20ms
-    2 × waiting for element to be stable
-      - element is not visible
-    - retrying scroll into view action
-      - waiting 100ms
-    56 × waiting for element to be stable
-       - element is not visible
-     - retrying scroll into view action
-       - waiting 500ms
-
-- ❌ **V10 watchlist opens** — locator.scrollIntoViewIfNeeded: Timeout 29995.975999999966ms exceeded.
-Call log:
-  - attempting scroll into view action
-    2 × waiting for element to be stable
-      - element is not visible
-    - retrying scroll into view action
-    - waiting 20ms
-    2 × waiting for element to be stable
-      - element is not visible
-    - retrying scroll into view action
-      - waiting 100ms
-    56 × waiting for element to be stable
-       - element is not visible
-     - retrying scroll into view action
-       - waiting 500ms
-
-- ❌ **V10 favourites opens** — locator.scrollIntoViewIfNeeded: Timeout 29996.236000000034ms exceeded.
-Call log:
-  - attempting scroll into view action
-    2 × waiting for element to be stable
-      - element is not visible
-    - retrying scroll into view action
-    - waiting 20ms
-    2 × waiting for element to be stable
-      - element is not visible
-    - retrying scroll into view action
-      - waiting 100ms
-    56 × waiting for element to be stable
-       - element is not visible
-     - retrying scroll into view action
-       - waiting 500ms
-
-- ❌ **V10 stats opens** — locator.scrollIntoViewIfNeeded: Timeout 29996.25900000002ms exceeded.
-Call log:
-  - attempting scroll into view action
-    2 × waiting for element to be stable
-      - element is not visible
-    - retrying scroll into view action
-    - waiting 20ms
-    2 × waiting for element to be stable
-      - element is not visible
-    - retrying scroll into view action
-      - waiting 100ms
-    56 × waiting for element to be stable
-       - element is not visible
-     - retrying scroll into view action
-       - waiting 500ms
-
-- ❌ **V10 history opens** — locator.scrollIntoViewIfNeeded: Timeout 29996.448999999964ms exceeded.
-Call log:
-  - attempting scroll into view action
-    2 × waiting for element to be stable
-      - element is not visible
-    - retrying scroll into view action
-    - waiting 20ms
-    2 × waiting for element to be stable
-      - element is not visible
-    - retrying scroll into view action
-      - waiting 100ms
-    56 × waiting for element to be stable
-       - element is not visible
-     - retrying scroll into view action
-       - waiting 500ms
-
+- ✅ **Open Premium guide**
+- ✅ **Premium guide has full help** — 13 entries
+- ✅ **V10 scan opens** — routed to finder
+- ✅ **V10 manual opens** — Manual Search
+- ✅ **V10 exact opens** — performed external exact-match action
+- ✅ **V10 assistant opens** — AI Search
+- ✅ **V10 collections opens** — Collections
+- ✅ **Collections create control works** — created
+- ✅ **V10 watchlist opens** — Exact price & stock tracker
+- ✅ **V10 favourites opens** — Favourite Stores
+- ✅ **V10 stats opens** — My FindIt Stats
+- ✅ **V10 history opens** — History+
+- ✅ **History+ supports per-item delete when entries exist** — 1 -> 0
 - ✅ **Premium drawer has visible, vertical controls** — 13 controls
-- ❌ **Premium drawer route: Saved Items** — not visible
-- ❌ **Premium drawer route: Compare Stores** — not visible
-- ❌ **Premium drawer route: Smart Filters** — not visible
-- ❌ **Premium drawer route: Search Radius** — not visible
-- ❌ **Premium drawer route: Extended History** — not visible
-- ❌ **Premium drawer route: Premium Challenge** — not visible
-- ❌ **Premium drawer route: Premium Settings** — not visible
-- ❌ **Price & Stock Watchlist route visible and wired** — not visible
+- ✅ **Premium drawer route: Saved Items** — wired
+- ✅ **Premium drawer route: Compare Stores** — wired
+- ✅ **Premium drawer route: Smart Filters** — wired
+- ✅ **Premium drawer route: Search Radius** — wired
+- ✅ **Premium drawer route: Extended History** — wired
+- ✅ **Premium drawer route: Premium Challenge** — wired
+- ✅ **Premium drawer route: Premium Settings** — wired
+- ✅ **Price & Stock Watchlist route visible and wired** — wired
 - ✅ **Open Ask FindIt**
-- ❌ **Assistant opens** — not visible
-- ⚠️ **Assistant quick prompt responds** — locator.click: Timeout 30000ms exceeded.
-Call log:
-  - waiting for locator('[data-assistant-quick]').first()
-    - locator resolved to <button data-assistant-quick="What did FindIt identify?">What is this?</button>
-  - attempting click action
-    2 × waiting for element to be visible, enabled and stable
-      - element is not visible
-    - retrying click action
-    - waiting 20ms
-    2 × waiting for element to be visible, enabled and stable
-      - element is not visible
-    - retrying click action
-      - waiting 100ms
-    56 × waiting for element to be visible, enabled and stable
-       - element is not visible
-     - retrying click action
-       - waiting 500ms
-
+- ✅ **Assistant opens**
+- ✅ **Assistant quick prompt responds** — 3 messages
 - ✅ **Mobile homepage loads**
 - ✅ **Mobile has no horizontal overflow** — {"sw":390,"cw":390}
 - ✅ **Mobile menu opens**
 - ✅ **Mobile drawer controls vertical** — 9
-- ❌ **Mobile bottom nav visible** — 0
-- ❌ **Mobile More** — control is not visible
-- ❌ **Mobile More opens drawer** — not visible
+- ✅ **Mobile bottom nav visible** — 4
+- ✅ **Mobile More**
+- ✅ **Mobile More opens drawer**
 - ✅ **Health API live** — {"ok":true,"geminiKeyConfigured":true,"model":"gemini-3.6-flash","modelReachable":true,"message":"Gemini connection is ready."}
 - ✅ **Feedback health API live** — {"ok":true,"provider":"formspree","formspreeConfigured":true,"message":"Formspree feedback delivery is configured."}
-- ❌ **Built-in FindIt QA report passes** — {"time":"2026-08-20T18:49:07.809Z","missingElements":["premiumButton","copyFeedback","clearRecent","mobileMore"],"missingPremiumFunctions":["v10Manual","v10Exact","v10Assistant","v10Collections","v10FavouriteStores","v10Stats","openTool","premiumRadius","applyPremiumStoreSort"],"premiumButtons":["scan","manual","exact","assistant","collections","watchlist","favourites","stats","history"],"ok":false}
+- ✅ **Built-in FindIt QA report passes** — {"time":"2026-08-20T19:07:00.144Z","missingElements":[],"missingPremiumFunctions":[],"premiumButtons":["scan","manual","exact","assistant","collections","watchlist","favourites","stats","history"],"ok":true}
 - ✅ **No uncaught desktop JavaScript errors** — none
 - ✅ **No uncaught mobile JavaScript errors** — none
 - ✅ **No meaningful console errors** — none
