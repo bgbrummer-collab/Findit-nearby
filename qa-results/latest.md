@@ -1,6 +1,6 @@
 # FindIt Full Production Audit
 
-Generated: 2026-08-20T17:35:45.688Z
+Generated: 2026-08-20T17:38:01.008Z
 
 **Passes:** 89  
 **Warnings:** 0  
@@ -30,7 +30,7 @@ Generated: 2026-08-20T17:35:45.688Z
 - ✅ **Image picker accepts a real raster image**
 - ✅ **Use my location**
 - ✅ **Location becomes ready** — ✓ Location ready
-- ✅ **Identify & Find completes** — Graphic Illustration
+- ✅ **Identify & Find completes** — Running Shoe Graphic Illustration
 - ✅ **Identification analysis cards render** — 8
 - ✅ **Map view**
 - ✅ **Map view opens** — map-wrap show
@@ -38,10 +38,8 @@ Generated: 2026-08-20T17:35:45.688Z
 - ✅ **Offer sort Best**
 - ✅ **Offer sort Cheapest**
 - ✅ **Offer sort Closest**
-- ✅ **Free result actions are truthful** — low-confidence/result fallback shown instead of fake actions: Graphic Illustration
-- ✅ **Product intelligence shows no fake zero price** — No verified product price or stock data yet. FindIt will still show nearby retailers.
-Keep searching for the exact item
-These links help you continue when verified price or branch 
+- ✅ **Free result actions are truthful** — search/copy/share available
+- ✅ **Product intelligence shows no fake zero price** — not applicable: panel hidden for this result
 - ✅ **Thumbs up**
 - ✅ **Thumbs up sets rating 5**
 - ✅ **Thumbs down**
@@ -92,7 +90,7 @@ These links help you continue when verified price or branch
 - ✅ **Mobile More opens drawer**
 - ✅ **Health API live** — {"ok":true,"geminiKeyConfigured":true,"model":"gemini-3.6-flash","modelReachable":true,"message":"Gemini connection is ready."}
 - ✅ **Feedback health API live** — {"ok":true,"provider":"formspree","formspreeConfigured":true,"message":"Formspree feedback delivery is configured."}
-- ✅ **Built-in FindIt QA report passes** — {"time":"2026-08-20T17:35:45.686Z","missingElements":[],"missingPremiumFunctions":[],"premiumButtons":["scan","manual","exact","assistant","collections","watchlist","favourites","stats","history"],"ok":true}
+- ✅ **Built-in FindIt QA report passes** — {"time":"2026-08-20T17:38:01.007Z","missingElements":[],"missingPremiumFunctions":[],"premiumButtons":["scan","manual","exact","assistant","collections","watchlist","favourites","stats","history"],"ok":true}
 - ✅ **No uncaught desktop JavaScript errors** — none
 - ✅ **No uncaught mobile JavaScript errors** — none
 - ✅ **No meaningful console errors** — none
