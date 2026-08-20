@@ -36,7 +36,8 @@ export default async function handler(req,res){
   // during onboarding. We intentionally do not guess undocumented endpoint paths or
   // payload fields. Once the supplied API documentation is available, this router
   // becomes the single FindIt payment integration point for checkout, verification,
-  // subscription status and cancellation.
+  // subscription status and cancellation. This file also sits in the production-audit
+  // trigger set so payment-flow changes re-run the complete Free/Premium QA harness.
   if(action==='init'){
     if(req.method!=='POST')return res.status(405).json({error:'Method not allowed'});
     const email=safeEmail(req.body?.email);if(!email)return res.status(400).json({error:'A valid email is required.'});
