@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-20T17:10:40.633Z",
+  "generatedAt": "2026-08-20T17:30:42.838Z",
   "url": "https://findit-nearby.vercel.app/",
   "summary": {
     "passes": 89,
@@ -175,7 +175,7 @@
     {
       "name": "Product intelligence shows no fake zero price",
       "status": "PASS",
-      "detail": "No verified product price or stock data yet. FindIt will still show nearby retailers.\nKeep searching for the exact item\nThese links help you continue when verified price or branch "
+      "detail": "not applicable: panel hidden for this result"
     },
     {
       "name": "Thumbs up",
@@ -430,7 +430,7 @@
     {
       "name": "Built-in FindIt QA report passes",
       "status": "PASS",
-      "detail": "{\"time\":\"2026-08-20T17:10:40.632Z\",\"missingElements\":[],\"missingPremiumFunctions\":[],\"premiumButtons\":[\"scan\",\"manual\",\"exact\",\"assistant\",\"collections\",\"watchlist\",\"favourites\",\"stats\",\"history\"],\"ok\":true}"
+      "detail": "{\"time\":\"2026-08-20T17:30:42.837Z\",\"missingElements\":[],\"missingPremiumFunctions\":[],\"premiumButtons\":[\"scan\",\"manual\",\"exact\",\"assistant\",\"collections\",\"watchlist\",\"favourites\",\"stats\",\"history\"],\"ok\":true}"
     },
     {
       "name": "No uncaught desktop JavaScript errors",
