@@ -1,6 +1,6 @@
 (()=>{
  const KEY='findit_premium_beta';
- const PATCH_VERSION='20260820-exact-retailer-v2';
+ const PATCH_VERSION='20260820-exact-retailer-v3';
  const activateForQa=()=>{
   localStorage.setItem(KEY,'1');
   try{if(typeof premiumState!=='undefined')premiumState.active=true}catch{}
@@ -29,20 +29,17 @@
   const b=e.target?.closest?.('#activatePremiumTester');
   if(b&&localStorage.getItem(KEY)!=='1')startPremiumCheckout(e);
  },true);
-
  const load=(src,timeout=3500)=>new Promise(resolve=>{
-  const s=document.createElement('script');
-  let done=false;
+  const s=document.createElement('script');let done=false;
   const finish=()=>{if(done)return;done=true;clearTimeout(t);resolve()};
   const t=setTimeout(()=>{try{s.remove()}catch{}finish()},timeout);
-  s.src=src+(src.includes('?')?'&':'?')+'v='+encodeURIComponent(PATCH_VERSION);
-  s.async=true;s.onload=finish;s.onerror=finish;document.body.appendChild(s);
+  s.src=src+(src.includes('?')?'&':'?')+'v='+encodeURIComponent(PATCH_VERSION);s.async=true;s.onload=finish;s.onerror=finish;document.body.appendChild(s);
  });
  const patches=[
   '/premium-upgrades.js','/qa-hardening.js','/qa-menu-routes.js','/qa-final-polish.js',
   '/exact-product-grounding.js','/school-uniform-fix.js','/final-release-fixes.js','/release-polish.js','/exact-retailer-fix.js',
   '/official-brand-client.js','/feature-suggestions.js','/premium-test-controls.js',
-  '/premium-checkout-fix.js','/v10-overlap-fix.js','/likely-retailer-ui-fix.js'
+  '/premium-checkout-fix.js','/v10-overlap-fix.js'
  ];
  async function bootPatches(){for(const src of patches)await load(src)}
  const schedule=()=>setTimeout(bootPatches,700);
