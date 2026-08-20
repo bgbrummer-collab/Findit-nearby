@@ -1,10 +1,10 @@
 # FindIt Full Production Audit
 
-Generated: 2026-08-20T16:18:36.235Z
+Generated: 2026-08-20T16:20:16.900Z
 
-**Passes:** 87  
+**Passes:** 89  
 **Warnings:** 0  
-**Failures:** 2
+**Failures:** 0
 
 - ✅ **Production homepage loads** — HTTP 200
 - ✅ **Desktop has no horizontal overflow** — {"sw":1440,"cw":1440}
@@ -19,7 +19,7 @@ Generated: 2026-08-20T16:18:36.235Z
 - ✅ **Open Challenge**
 - ✅ **Challenge modal visible**
 - ✅ **New challenge**
-- ✅ **Challenge text populated** — Find the weirdest object in your room 😂
+- ✅ **Challenge text populated** — Find a product you've always wondered about ✨
 - ✅ **Examples render** — 6 cards
 - ✅ **Shuffle examples**
 - ✅ **Open drawer for settings**
@@ -30,7 +30,7 @@ Generated: 2026-08-20T16:18:36.235Z
 - ✅ **Image picker accepts a real raster image**
 - ✅ **Use my location**
 - ✅ **Location becomes ready** — ✓ Location ready
-- ✅ **Identify & Find completes** — Blue and White Running Shoe Graphic
+- ✅ **Identify & Find completes** — Running Shoe Graphic Print
 - ✅ **Identification analysis cards render** — 8
 - ✅ **Map view**
 - ✅ **Map view opens** — map-wrap show
@@ -39,7 +39,9 @@ Generated: 2026-08-20T16:18:36.235Z
 - ✅ **Offer sort Cheapest**
 - ✅ **Offer sort Closest**
 - ✅ **Free result actions are truthful** — search/copy/share available
-- ✅ **Product intelligence shows no fake zero price** — not applicable: panel hidden for this result
+- ✅ **Product intelligence shows no fake zero price** — No verified product price or stock data yet. FindIt will still show nearby retailers.
+Keep searching for the exact item
+These links help you continue when verified price or branch 
 - ✅ **Thumbs up**
 - ✅ **Thumbs up sets rating 5**
 - ✅ **Thumbs down**
@@ -56,22 +58,8 @@ Generated: 2026-08-20T16:18:36.235Z
 - ✅ **Premium command centre fits desktop** — {"sw":1218,"cw":1218}
 - ✅ **Premium heading fits** — width=820
 - ✅ **All visible V10 tools include How guidance** — 9 tools
-- ❌ **Open Premium guide** — locator.click: Timeout 4000ms exceeded.
-Call log:
-  - waiting for locator('#finditOpenGuide').first()
-    - locator resolved to <button type="button" id="finditOpenGuide">How to use Premium</button>
-  - attempting click action
-    2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> intercepts pointer events
-    - retrying click action
-    - waiting 20ms
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling int
-- ❌ **Premium guide has full help** — not visible
+- ✅ **Open Premium guide**
+- ✅ **Premium guide has full help** — 13 entries
 - ✅ **V10 scan opens** — routed to finder
 - ✅ **V10 manual opens** — Manual Search
 - ✅ **V10 exact opens** — performed external exact-match action
@@ -104,7 +92,7 @@ Call log:
 - ✅ **Mobile More opens drawer**
 - ✅ **Health API live** — {"ok":true,"geminiKeyConfigured":true,"model":"gemini-3.6-flash","modelReachable":true,"message":"Gemini connection is ready."}
 - ✅ **Feedback health API live** — {"ok":true,"provider":"formspree","formspreeConfigured":true,"message":"Formspree feedback delivery is configured."}
-- ✅ **Built-in FindIt QA report passes** — {"time":"2026-08-20T16:18:36.233Z","missingElements":[],"missingPremiumFunctions":[],"premiumButtons":["scan","manual","exact","assistant","collections","watchlist","favourites","stats","history"],"ok":true}
+- ✅ **Built-in FindIt QA report passes** — {"time":"2026-08-20T16:20:16.898Z","missingElements":[],"missingPremiumFunctions":[],"premiumButtons":["scan","manual","exact","assistant","collections","watchlist","favourites","stats","history"],"ok":true}
 - ✅ **No uncaught desktop JavaScript errors** — none
 - ✅ **No uncaught mobile JavaScript errors** — none
 - ✅ **No meaningful console errors** — none

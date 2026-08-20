@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-08-20T16:18:36.235Z",
+  "generatedAt": "2026-08-20T16:20:16.900Z",
   "url": "https://findit-nearby.vercel.app/",
   "summary": {
-    "passes": 87,
+    "passes": 89,
     "warnings": 0,
-    "failures": 2
+    "failures": 0
   },
   "checks": [
     {
@@ -75,7 +75,7 @@
     {
       "name": "Challenge text populated",
       "status": "PASS",
-      "detail": "Find the weirdest object in your room 😂"
+      "detail": "Find a product you've always wondered about ✨"
     },
     {
       "name": "Examples render",
@@ -130,7 +130,7 @@
     {
       "name": "Identify & Find completes",
       "status": "PASS",
-      "detail": "Blue and White Running Shoe Graphic"
+      "detail": "Running Shoe Graphic Print"
     },
     {
       "name": "Identification analysis cards render",
@@ -175,7 +175,7 @@
     {
       "name": "Product intelligence shows no fake zero price",
       "status": "PASS",
-      "detail": "not applicable: panel hidden for this result"
+      "detail": "No verified product price or stock data yet. FindIt will still show nearby retailers.\nKeep searching for the exact item\nThese links help you continue when verified price or branch "
     },
     {
       "name": "Thumbs up",
@@ -259,13 +259,13 @@
     },
     {
       "name": "Open Premium guide",
-      "status": "FAIL",
-      "detail": "locator.click: Timeout 4000ms exceeded.\nCall log:\n  - waiting for locator('#finditOpenGuide').first()\n    - locator resolved to <button type=\"button\" id=\"finditOpenGuide\">How to use Premium</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div id=\"premiumModal\" aria-hidden=\"false\" class=\"premium-modal\" data-guard-installed=\"1\">…</div> intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    - waiting for element to be visible, enabled and stable\n    - element is visible, enabled and stable\n    - scrolling int"
+      "status": "PASS",
+      "detail": ""
     },
     {
       "name": "Premium guide has full help",
-      "status": "FAIL",
-      "detail": "not visible"
+      "status": "PASS",
+      "detail": "13 entries"
     },
     {
       "name": "V10 scan opens",
@@ -430,7 +430,7 @@
     {
       "name": "Built-in FindIt QA report passes",
       "status": "PASS",
-      "detail": "{\"time\":\"2026-08-20T16:18:36.233Z\",\"missingElements\":[],\"missingPremiumFunctions\":[],\"premiumButtons\":[\"scan\",\"manual\",\"exact\",\"assistant\",\"collections\",\"watchlist\",\"favourites\",\"stats\",\"history\"],\"ok\":true}"
+      "detail": "{\"time\":\"2026-08-20T16:20:16.898Z\",\"missingElements\":[],\"missingPremiumFunctions\":[],\"premiumButtons\":[\"scan\",\"manual\",\"exact\",\"assistant\",\"collections\",\"watchlist\",\"favourites\",\"stats\",\"history\"],\"ok\":true}"
     },
     {
       "name": "No uncaught desktop JavaScript errors",
