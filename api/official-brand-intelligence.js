@@ -1,15 +1,30 @@
 const MODELS=['gemini-3.6-flash','gemini-3.5-flash-lite'];
-const RESTRICTED=/\b(firearm|gun|rifle|pistol|ammunition|ammo|weapon|knife|switchblade|taser|pepper spray|mace|fireworks|explosive|vape|nicotine|cigarette|cigar|alcohol|beer|wine|liquor|cannabis|marijuana|thc|cbd|gambling|casino|betting|pornography|adult sex toy)\b/i;
-const clean=v=>String(v||'').trim().slice(0,180);
+const RESTRICTED=/\b(firearm|gun|rifle|pistol|ammunition|ammo|weapon|knife|knives|machete|sword|switchblade|taser|stun gun|pepper spray|mace|brass knuckles|fireworks|explosive|vape|nicotine|cigarette|cigar|alcohol|beer|wine|liquor|cannabis|marijuana|thc|cbd|psilocybin|magic mushroom|gambling|sports betting|casino|pornography|adult sex toy)\b/i;
+const clean=v=>String(v||'').trim().slice(0,240);
 const norm=v=>clean(v).toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
 const json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:{'content-type':'application/json','cache-control':'no-store'}});
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 function extractJson(text){const s=String(text||'').replace(/^```(?:json)?/i,'').replace(/```$/,'').trim();try{return JSON.parse(s)}catch{}const a=s.indexOf('{'),b=s.lastIndexOf('}');if(a>=0&&b>a)try{return JSON.parse(s.slice(a,b+1))}catch{}return null}
-function sources(raw){const gm=raw?.candidates?.[0]?.groundingMetadata||raw?.candidates?.[0]?.grounding_metadata||{};const chunks=gm.groundingChunks||gm.grounding_chunks||[];return chunks.map(x=>x?.web||x).filter(x=>x?.uri).map(x=>({title:clean(x.title)||'Web source',url:x.uri})).slice(0,8)}
-async function grounded(key,model,prompt){const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':key},body:JSON.stringify({contents:[{parts:[{text:prompt}]}],tools:[{googleSearch:{}}],generationConfig:{temperature:.05}})});const raw=await r.json().catch(()=>({}));if(!r.ok)throw Error(raw?.error?.message||`${model} grounding failed`);const text=(raw?.candidates?.[0]?.content?.parts||[]).map(p=>p.text||'').join('\n');return{text,raw}}
+function sources(raw){const gm=raw?.candidates?.[0]?.groundingMetadata||raw?.candidates?.[0]?.grounding_metadata||{};const chunks=gm.groundingChunks||gm.grounding_chunks||[];const seen=new Set(),out=[];for(const x of chunks){const w=x?.web||x;if(!w?.uri||seen.has(w.uri))continue;seen.add(w.uri);out.push({title:clean(w.title)||'Web source',url:w.uri});if(out.length>=8)break}return out}
+async function grounded(key,model,prompt,extraParts=[]){const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':key},body:JSON.stringify({contents:[{parts:[{text:prompt},...extraParts]}],tools:[{googleSearch:{}}],generationConfig:{temperature:.05}})});const raw=await r.json().catch(()=>({}));if(!r.ok)throw Error(raw?.error?.message||`${model} grounding failed`);const text=(raw?.candidates?.[0]?.content?.parts||[]).map(p=>p.text||'').join('\n');return{text,raw}}
+
+async function exactProduct(request,key){
+ const form=await request.formData(),image=form.get('image');if(!image||typeof image.arrayBuffer!=='function')return json({error:'No image'},400);if(!String(image.type||'').startsWith('image/'))return json({error:'Image required'},400);if(image.size>8*1024*1024)return json({error:'Image too large'},413);
+ const base=clean(form.get('baseIdentification')||'');if(RESTRICTED.test(base))return json({exactFound:false,blocked:true});
+ const b64=Buffer.from(await image.arrayBuffer()).toString('base64'),mime=image.type||'image/jpeg';
+ const prompt=`You are FindIt Nearby's exact-product web verifier. Inspect the uploaded product photo and use Google Search to try to identify the EXACT purchasable product, not merely its category. Existing vision result: ${base||'none'}.
+Rules: search using visible text, logo, shape, colour pattern, construction, packaging, distinctive components and model markings. exactFound=true only if live web evidence supports the same product or a uniquely matching retail listing. A category match is never enough. Prefer brand + model/SKU/product-title evidence. For unbranded items, require a distinctive matching product title/design and at least two independent matching clues. If the photo lacks enough evidence, exactFound=false. Never invent brand, model, SKU, retailer, price or stock. productName must be the most precise truthful retail name. searchQuery must target the exact product when verified; otherwise make it a detailed descriptive query, not a broad category. Return JSON only with exactFound, confidence (0-1), productName, brand, model, sku, searchQuery, evidence (array), note.`;
+ let got,last;for(const m of MODELS){try{got=await grounded(key,m,prompt,[{inlineData:{mimeType:mime,data:b64}}]);break}catch(e){last=e}}if(!got)throw last||Error('Exact-product grounding failed');
+ const d=extractJson(got.text)||{},src=sources(got.raw),confidence=clamp(Number(d.confidence||0),0,1),exactFound=Boolean(d.exactFound)&&confidence>=.76&&src.length>0;
+ const result={exactFound,confidence,productName:clean(d.productName),brand:clean(d.brand)||null,model:clean(d.model)||null,sku:clean(d.sku)||null,searchQuery:clean(d.searchQuery),evidence:Array.isArray(d.evidence)?d.evidence.map(clean).filter(Boolean).slice(0,8):[],note:clean(d.note),sources:src,grounded:src.length>0};
+ if(RESTRICTED.test([result.productName,result.brand,result.model,result.searchQuery].join(' ')))return json({exactFound:false,blocked:true});if(!exactFound){result.brand=null;result.model=null;result.sku=null}return json(result);
+}
+
 export default{async fetch(request){
  if(request.method!=='POST')return json({error:'POST only'},405);
  try{
   const key=process.env.GEMINI_API_KEY;if(!key)return json({error:'GEMINI_API_KEY missing'},500);
+  const action=new URL(request.url).searchParams.get('action')||'official';if(action==='exact')return await exactProduct(request,key);
   const b=await request.json().catch(()=>({})),brand=clean(b.brand),modelName=clean(b.model),name=clean(b.name||b.object),query=clean(b.query||[brand,modelName,name].filter(Boolean).join(' '));
   if(!query)return json({error:'Product query required'},400);if(RESTRICTED.test(query))return json({blocked:true,verified:false,officialFound:false});
   const location=(Number.isFinite(Number(b.lat))&&Number.isFinite(Number(b.lon)))?`The user is near latitude ${Number(b.lat).toFixed(4)}, longitude ${Number(b.lon).toFixed(4)}.`:'The user location is unavailable.';
