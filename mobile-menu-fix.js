@@ -1,5 +1,6 @@
 (()=>{
  const KEY='findit_premium_beta';
+ const PATCH_VERSION='20260820-exact-retailer-v2';
  const activateForQa=()=>{
   localStorage.setItem(KEY,'1');
   try{if(typeof premiumState!=='undefined')premiumState.active=true}catch{}
@@ -34,7 +35,8 @@
   let done=false;
   const finish=()=>{if(done)return;done=true;clearTimeout(t);resolve()};
   const t=setTimeout(()=>{try{s.remove()}catch{}finish()},timeout);
-  s.src=src;s.async=true;s.onload=finish;s.onerror=finish;document.body.appendChild(s);
+  s.src=src+(src.includes('?')?'&':'?')+'v='+encodeURIComponent(PATCH_VERSION);
+  s.async=true;s.onload=finish;s.onerror=finish;document.body.appendChild(s);
  });
  const patches=[
   '/premium-upgrades.js','/qa-hardening.js','/qa-menu-routes.js','/qa-final-polish.js',
