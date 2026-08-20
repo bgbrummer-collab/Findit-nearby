@@ -1,6 +1,6 @@
 # FindIt Full Production Audit
 
-Generated: 2026-08-20T15:44:23.619Z
+Generated: 2026-08-20T16:11:33.862Z
 
 **Passes:** 66  
 **Warnings:** 0  
@@ -19,7 +19,7 @@ Generated: 2026-08-20T15:44:23.619Z
 - ✅ **Open Challenge**
 - ✅ **Challenge modal visible**
 - ✅ **New challenge**
-- ✅ **Challenge text populated** — Find something older than you 🕰️
+- ✅ **Challenge text populated** — Find something you don't know the name of 👀
 - ✅ **Examples render** — 6 cards
 - ✅ **Shuffle examples**
 - ✅ **Open drawer for settings**
@@ -30,7 +30,7 @@ Generated: 2026-08-20T15:44:23.619Z
 - ✅ **Image picker accepts a real raster image**
 - ✅ **Use my location**
 - ✅ **Location becomes ready** — ✓ Location ready
-- ✅ **Identify & Find completes** — Running Shoe
+- ✅ **Identify & Find completes** — Running Shoe Graphic Illustration
 - ✅ **Identification analysis cards render** — 8
 - ✅ **Map view**
 - ✅ **Map view opens** — map-wrap show
@@ -58,7 +58,7 @@ Generated: 2026-08-20T15:44:23.619Z
 - ✅ **All visible V10 tools include How guidance** — 9 tools
 - ❌ **Open Premium guide** — control is not visible
 - ❌ **Premium guide has full help** — not visible
-- ❌ **V10 scan opens** — locator.scrollIntoViewIfNeeded: Timeout 29996.147ms exceeded.
+- ❌ **V10 scan opens** — locator.scrollIntoViewIfNeeded: Timeout 29997.112ms exceeded.
 Call log:
   - attempting scroll into view action
     2 × waiting for element to be stable
@@ -74,7 +74,7 @@ Call log:
      - retrying scroll into view action
        - waiting 500ms
 
-- ❌ **V10 manual opens** — locator.scrollIntoViewIfNeeded: Timeout 29996.520000000004ms exceeded.
+- ❌ **V10 manual opens** — locator.scrollIntoViewIfNeeded: Timeout 29997.346999999994ms exceeded.
 Call log:
   - attempting scroll into view action
     2 × waiting for element to be stable
@@ -90,7 +90,7 @@ Call log:
      - retrying scroll into view action
        - waiting 500ms
 
-- ❌ **V10 exact opens** — locator.scrollIntoViewIfNeeded: Timeout 29996.721999999994ms exceeded.
+- ❌ **V10 exact opens** — locator.scrollIntoViewIfNeeded: Timeout 29997.39200000002ms exceeded.
 Call log:
   - attempting scroll into view action
     2 × waiting for element to be stable
@@ -106,7 +106,7 @@ Call log:
      - retrying scroll into view action
        - waiting 500ms
 
-- ❌ **V10 assistant opens** — locator.scrollIntoViewIfNeeded: Timeout 29996.536000000022ms exceeded.
+- ❌ **V10 assistant opens** — locator.scrollIntoViewIfNeeded: Timeout 29997.388000000006ms exceeded.
 Call log:
   - attempting scroll into view action
     2 × waiting for element to be stable
@@ -122,7 +122,7 @@ Call log:
      - retrying scroll into view action
        - waiting 500ms
 
-- ❌ **V10 collections opens** — locator.scrollIntoViewIfNeeded: Timeout 29996.805999999982ms exceeded.
+- ❌ **V10 collections opens** — locator.scrollIntoViewIfNeeded: Timeout 29997.435999999987ms exceeded.
 Call log:
   - attempting scroll into view action
     2 × waiting for element to be stable
@@ -138,7 +138,7 @@ Call log:
      - retrying scroll into view action
        - waiting 500ms
 
-- ❌ **V10 watchlist opens** — locator.scrollIntoViewIfNeeded: Timeout 29996.872999999992ms exceeded.
+- ❌ **V10 watchlist opens** — locator.scrollIntoViewIfNeeded: Timeout 29997.378999999986ms exceeded.
 Call log:
   - attempting scroll into view action
     2 × waiting for element to be stable
@@ -154,7 +154,7 @@ Call log:
      - retrying scroll into view action
        - waiting 500ms
 
-- ❌ **V10 favourites opens** — locator.scrollIntoViewIfNeeded: Timeout 29996.204999999987ms exceeded.
+- ❌ **V10 favourites opens** — locator.scrollIntoViewIfNeeded: Timeout 29996.46299999999ms exceeded.
 Call log:
   - attempting scroll into view action
     2 × waiting for element to be stable
@@ -170,7 +170,7 @@ Call log:
      - retrying scroll into view action
        - waiting 500ms
 
-- ❌ **V10 stats opens** — locator.scrollIntoViewIfNeeded: Timeout 29996.943ms exceeded.
+- ❌ **V10 stats opens** — locator.scrollIntoViewIfNeeded: Timeout 29997.572999999975ms exceeded.
 Call log:
   - attempting scroll into view action
     2 × waiting for element to be stable
@@ -186,7 +186,7 @@ Call log:
      - retrying scroll into view action
        - waiting 500ms
 
-- ❌ **V10 history opens** — locator.scrollIntoViewIfNeeded: Timeout 29993.984999999986ms exceeded.
+- ❌ **V10 history opens** — locator.scrollIntoViewIfNeeded: Timeout 29997.52000000002ms exceeded.
 Call log:
   - attempting scroll into view action
     2 × waiting for element to be stable
@@ -223,7 +223,7 @@ Call log:
 - ✅ **Mobile More opens drawer**
 - ✅ **Health API live** — {"ok":true,"geminiKeyConfigured":true,"model":"gemini-3.6-flash","modelReachable":true,"message":"Gemini connection is ready."}
 - ✅ **Feedback health API live** — {"ok":true,"provider":"formspree","formspreeConfigured":true,"message":"Formspree feedback delivery is configured."}
-- ✅ **Built-in FindIt QA report passes** — {"time":"2026-08-20T15:44:23.617Z","missingElements":[],"missingPremiumFunctions":[],"premiumButtons":["scan","manual","exact","assistant","collections","watchlist","favourites","stats","history"],"ok":true}
+- ✅ **Built-in FindIt QA report passes** — {"time":"2026-08-20T16:11:33.861Z","missingElements":[],"missingPremiumFunctions":[],"premiumButtons":["scan","manual","exact","assistant","collections","watchlist","favourites","stats","history"],"ok":true}
 - ✅ **No uncaught desktop JavaScript errors** — none
 - ✅ **No uncaught mobile JavaScript errors** — none
 - ✅ **No meaningful console errors** — none
