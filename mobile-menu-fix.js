@@ -1,6 +1,6 @@
 (()=>{
  const KEY='findit_premium_beta';
- const PATCH_VERSION='20260821-settings-cleanup-v4';
+ const PATCH_VERSION='20260821-settings-behaviour-v5';
  const activateForQa=()=>{
   localStorage.setItem(KEY,'1');
   try{if(typeof premiumState!=='undefined')premiumState.active=true}catch{}
@@ -39,7 +39,7 @@
   '/premium-upgrades.js','/qa-hardening.js','/qa-menu-routes.js','/qa-final-polish.js',
   '/school-uniform-fix.js','/final-release-fixes.js','/release-polish.js','/exact-retailer-fix.js',
   '/feature-suggestions.js','/premium-test-controls.js','/premium-checkout-fix.js','/v10-overlap-fix.js',
-  '/product-intelligence-v2-client.js','/premium-experience-v2.js','/settings-visible-v3.js'
+  '/product-intelligence-v2-client.js','/premium-experience-v2.js','/settings-visible-v3.js','/premium-settings-behaviour-v3.js'
  ];
  async function bootPatches(){for(const src of patches)await load(src)}
  const schedule=()=>setTimeout(bootPatches,700);
