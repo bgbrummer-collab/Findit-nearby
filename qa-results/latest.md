@@ -1,10 +1,10 @@
 # FindIt Full Production Audit
 
-Generated: 2026-08-21T15:12:24.324Z
+Generated: 2026-08-21T16:08:37.787Z
 
-**Passes:** 87  
+**Passes:** 89  
 **Warnings:** 0  
-**Failures:** 2
+**Failures:** 0
 
 - ✅ **Production homepage loads** — HTTP 200
 - ✅ **Desktop has no horizontal overflow** — {"sw":1440,"cw":1440}
@@ -30,35 +30,21 @@ Generated: 2026-08-21T15:12:24.324Z
 - ✅ **Image picker accepts a real raster image**
 - ✅ **Use my location**
 - ✅ **Location becomes ready** — ✓ Location ready
-- ✅ **Identify & Find completes** — Running Shoe Graphic Art Print
+- ✅ **Identify & Find completes** — Minimalist Running Shoe Graphic Illustration
 - ✅ **Identification analysis cards render** — 8
-- ❌ **Map view** — locator.click: Timeout 4000ms exceeded.
-Call log:
-  - waiting for locator('#mapViewBtn').first()
-    - locator resolved to <button disabled id="mapViewBtn" title="No exact physical branch verified">🗺 Map</button>
-  - attempting click action
-    2 × waiting for element to be visible, enabled and stable
-      - element is not enabled
-    - retrying click action
-    - waiting 20ms
-    2 × waiting for element to be visible, enabled and stable
-      - element is not enabled
-    - retrying click action
-      - waiting 100ms
-    8 × waiting for element to be visible, enabled and stable
-      - element is not enabled
-    - retrying click action
-      - waiting 500ms
-
-- ❌ **Map view opens** — map-wrap
+- ✅ **Map view**
+- ✅ **Map view opens** — map-wrap show
 - ✅ **List view**
 - ✅ **Offer sort Best**
 - ✅ **Offer sort Cheapest**
 - ✅ **Offer sort Closest**
 - ✅ **Free result actions are truthful** — search/copy/share available
-- ✅ **Product intelligence shows no fake zero price** — No connected catalogue offer yet. The live exact-product search below is still checking real web listings.
-Keep searching for the exact item
-These links help you continue when veri
+- ✅ **Product intelligence shows no fake zero price** — No verified exact price yet.
+
+FindIt did not invent a price or local stock level. Use the exact-item retailer searches below while live verification is unavailable.
+
+PriceCheck
+Sea
 - ✅ **Thumbs up**
 - ✅ **Thumbs up sets rating 5**
 - ✅ **Thumbs down**
@@ -109,7 +95,7 @@ These links help you continue when veri
 - ✅ **Mobile More opens drawer**
 - ✅ **Health API live** — {"ok":true,"geminiKeyConfigured":true,"model":"gemini-3.6-flash","modelReachable":true,"message":"Gemini connection is ready."}
 - ✅ **Feedback health API live** — {"ok":true,"provider":"formspree","formspreeConfigured":true,"message":"Formspree feedback delivery is configured."}
-- ✅ **Built-in FindIt QA report passes** — {"time":"2026-08-21T15:12:24.322Z","missingElements":[],"missingPremiumFunctions":[],"premiumButtons":["scan","manual","exact","assistant","collections","watchlist","favourites","stats","history"],"ok":true}
+- ✅ **Built-in FindIt QA report passes** — {"time":"2026-08-21T16:08:37.785Z","missingElements":[],"missingPremiumFunctions":[],"premiumButtons":["scan","manual","exact","assistant","collections","watchlist","favourites","stats","history"],"ok":true}
 - ✅ **No uncaught desktop JavaScript errors** — none
 - ✅ **No uncaught mobile JavaScript errors** — none
 - ✅ **No meaningful console errors** — none

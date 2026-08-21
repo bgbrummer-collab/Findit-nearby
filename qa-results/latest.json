@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-08-21T15:12:24.324Z",
+  "generatedAt": "2026-08-21T16:08:37.787Z",
   "url": "https://findit-nearby.vercel.app/",
   "summary": {
-    "passes": 87,
+    "passes": 89,
     "warnings": 0,
-    "failures": 2
+    "failures": 0
   },
   "checks": [
     {
@@ -130,7 +130,7 @@
     {
       "name": "Identify & Find completes",
       "status": "PASS",
-      "detail": "Running Shoe Graphic Art Print"
+      "detail": "Minimalist Running Shoe Graphic Illustration"
     },
     {
       "name": "Identification analysis cards render",
@@ -139,13 +139,13 @@
     },
     {
       "name": "Map view",
-      "status": "FAIL",
-      "detail": "locator.click: Timeout 4000ms exceeded.\nCall log:\n  - waiting for locator('#mapViewBtn').first()\n    - locator resolved to <button disabled id=\"mapViewBtn\" title=\"No exact physical branch verified\">🗺 Map</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is not enabled\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not enabled\n    - retrying click action\n      - waiting 100ms\n    8 × waiting for element to be visible, enabled and stable\n      - element is not enabled\n    - retrying click action\n      - waiting 500ms\n"
+      "status": "PASS",
+      "detail": ""
     },
     {
       "name": "Map view opens",
-      "status": "FAIL",
-      "detail": "map-wrap"
+      "status": "PASS",
+      "detail": "map-wrap show"
     },
     {
       "name": "List view",
@@ -175,7 +175,7 @@
     {
       "name": "Product intelligence shows no fake zero price",
       "status": "PASS",
-      "detail": "No connected catalogue offer yet. The live exact-product search below is still checking real web listings.\nKeep searching for the exact item\nThese links help you continue when veri"
+      "detail": "No verified exact price yet.\n\nFindIt did not invent a price or local stock level. Use the exact-item retailer searches below while live verification is unavailable.\n\nPriceCheck\nSea"
     },
     {
       "name": "Thumbs up",
@@ -430,7 +430,7 @@
     {
       "name": "Built-in FindIt QA report passes",
       "status": "PASS",
-      "detail": "{\"time\":\"2026-08-21T15:12:24.322Z\",\"missingElements\":[],\"missingPremiumFunctions\":[],\"premiumButtons\":[\"scan\",\"manual\",\"exact\",\"assistant\",\"collections\",\"watchlist\",\"favourites\",\"stats\",\"history\"],\"ok\":true}"
+      "detail": "{\"time\":\"2026-08-21T16:08:37.785Z\",\"missingElements\":[],\"missingPremiumFunctions\":[],\"premiumButtons\":[\"scan\",\"manual\",\"exact\",\"assistant\",\"collections\",\"watchlist\",\"favourites\",\"stats\",\"history\"],\"ok\":true}"
     },
     {
       "name": "No uncaught desktop JavaScript errors",
