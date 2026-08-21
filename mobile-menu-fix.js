@@ -1,6 +1,6 @@
 (()=>{
  const KEY='findit_premium_beta';
- const PATCH_VERSION='20260820-exact-retailer-v3';
+ const PATCH_VERSION='20260821-product-intelligence-v2';
  const activateForQa=()=>{
   localStorage.setItem(KEY,'1');
   try{if(typeof premiumState!=='undefined')premiumState.active=true}catch{}
@@ -37,9 +37,9 @@
  });
  const patches=[
   '/premium-upgrades.js','/qa-hardening.js','/qa-menu-routes.js','/qa-final-polish.js',
-  '/exact-product-grounding.js','/school-uniform-fix.js','/final-release-fixes.js','/release-polish.js','/exact-retailer-fix.js',
-  '/official-brand-client.js','/feature-suggestions.js','/premium-test-controls.js',
-  '/premium-checkout-fix.js','/v10-overlap-fix.js'
+  '/school-uniform-fix.js','/final-release-fixes.js','/release-polish.js','/exact-retailer-fix.js',
+  '/feature-suggestions.js','/premium-test-controls.js','/premium-checkout-fix.js','/v10-overlap-fix.js',
+  '/product-intelligence-v2-client.js'
  ];
  async function bootPatches(){for(const src of patches)await load(src)}
  const schedule=()=>setTimeout(bootPatches,700);
