@@ -1,10 +1,10 @@
 # FindIt Full Production Audit
 
-Generated: 2026-08-21T17:46:34.068Z
+Generated: 2026-08-21T19:41:12.228Z
 
-**Passes:** 89  
+**Passes:** 87  
 **Warnings:** 0  
-**Failures:** 0
+**Failures:** 2
 
 - ✅ **Production homepage loads** — HTTP 200
 - ✅ **Desktop has no horizontal overflow** — {"sw":1440,"cw":1440}
@@ -19,7 +19,7 @@ Generated: 2026-08-21T17:46:34.068Z
 - ✅ **Open Challenge**
 - ✅ **Challenge modal visible**
 - ✅ **New challenge**
-- ✅ **Challenge text populated** — Find something smaller than your hand 🤏
+- ✅ **Challenge text populated** — Find an unusual tool 🔧
 - ✅ **Examples render** — 6 cards
 - ✅ **Shuffle examples**
 - ✅ **Open drawer for settings**
@@ -30,7 +30,7 @@ Generated: 2026-08-21T17:46:34.068Z
 - ✅ **Image picker accepts a real raster image**
 - ✅ **Use my location**
 - ✅ **Location becomes ready** — ✓ Location ready
-- ✅ **Identify & Find completes** — Running Shoe Graphic Art
+- ✅ **Identify & Find completes** — Running Shoe Graphic Illustration
 - ✅ **Identification analysis cards render** — 8
 - ✅ **Map view**
 - ✅ **Map view opens** — map-wrap show
@@ -39,12 +39,10 @@ Generated: 2026-08-21T17:46:34.068Z
 - ✅ **Offer sort Cheapest**
 - ✅ **Offer sort Closest**
 - ✅ **Free result actions are truthful** — search/copy/share available
-- ✅ **Product intelligence shows no fake zero price** — No verified exact price yet.
-
-FindIt did not invent a price or local stock level. Use the exact-item retailer searches below while live verification is unavailable.
-
-PriceCheck
-Sea
+- ✅ **Product intelligence shows no fake zero price** — Checking exact product listings and retailer prices…
+Keep searching for the exact item
+These links help you continue when verified price or branch stock is not connected yet.
+Searc
 - ✅ **Thumbs up**
 - ✅ **Thumbs up sets rating 5**
 - ✅ **Thumbs down**
@@ -95,8 +93,8 @@ Sea
 - ✅ **Mobile More opens drawer**
 - ✅ **Health API live** — {"ok":true,"geminiKeyConfigured":true,"model":"gemini-3.6-flash","modelReachable":true,"message":"Gemini connection is ready."}
 - ✅ **Feedback health API live** — {"ok":true,"provider":"formspree","formspreeConfigured":true,"message":"Formspree feedback delivery is configured."}
-- ✅ **Built-in FindIt QA report passes** — {"time":"2026-08-21T17:46:34.066Z","missingElements":[],"missingPremiumFunctions":[],"premiumButtons":["scan","manual","exact","assistant","collections","watchlist","favourites","stats","history"],"ok":true}
-- ✅ **No uncaught desktop JavaScript errors** — none
-- ✅ **No uncaught mobile JavaScript errors** — none
+- ✅ **Built-in FindIt QA report passes** — {"time":"2026-08-21T19:41:12.227Z","missingElements":[],"missingPremiumFunctions":[],"premiumButtons":["scan","manual","exact","assistant","collections","watchlist","favourites","stats","history"],"ok":true}
+- ❌ **No uncaught desktop JavaScript errors** — TypeError: Cannot read properties of null (reading 'length') | TypeError: Cannot read properties of null (reading 'length') | TypeError: Cannot read properties of null (reading 'length') | TypeError: Cannot read properties of null (reading 'length') | TypeError: Cannot read properties of null (reading 'length') | TypeError: Cannot read properties of null (reading 'length') | TypeError: Cannot read properties of null (reading 'length') | TypeError: Cannot read properties of null (reading 'length') | TypeError: Cannot read properties of null (reading 'length') | TypeError: Cannot read properties of null (reading 'length') | TypeError: Cannot read properties of null (reading 'length') | TypeErr
+- ❌ **No uncaught mobile JavaScript errors** — TypeError: Cannot read properties of null (reading 'length') | TypeError: Cannot read properties of null (reading 'length')
 - ✅ **No meaningful console errors** — none
 - ✅ **No unexpected network failures** — none
