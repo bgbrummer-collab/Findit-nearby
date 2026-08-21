@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-08-21T19:41:12.228Z",
+  "generatedAt": "2026-08-21T19:44:26.121Z",
   "url": "https://findit-nearby.vercel.app/",
   "summary": {
-    "passes": 87,
+    "passes": 89,
     "warnings": 0,
-    "failures": 2
+    "failures": 0
   },
   "checks": [
     {
@@ -75,7 +75,7 @@
     {
       "name": "Challenge text populated",
       "status": "PASS",
-      "detail": "Find an unusual tool 🔧"
+      "detail": "Find something with a logo you can't identify 🕵️"
     },
     {
       "name": "Examples render",
@@ -130,7 +130,7 @@
     {
       "name": "Identify & Find completes",
       "status": "PASS",
-      "detail": "Running Shoe Graphic Illustration"
+      "detail": "Poster"
     },
     {
       "name": "Identification analysis cards render",
@@ -175,7 +175,7 @@
     {
       "name": "Product intelligence shows no fake zero price",
       "status": "PASS",
-      "detail": "Checking exact product listings and retailer prices…\nKeep searching for the exact item\nThese links help you continue when verified price or branch stock is not connected yet.\nSearc"
+      "detail": "No verified exact price yet.\n\nFindIt did not invent a price or local stock level. Use the exact-item retailer searches below while live verification is unavailable.\n\nPriceCheck\nSea"
     },
     {
       "name": "Thumbs up",
@@ -430,17 +430,17 @@
     {
       "name": "Built-in FindIt QA report passes",
       "status": "PASS",
-      "detail": "{\"time\":\"2026-08-21T19:41:12.227Z\",\"missingElements\":[],\"missingPremiumFunctions\":[],\"premiumButtons\":[\"scan\",\"manual\",\"exact\",\"assistant\",\"collections\",\"watchlist\",\"favourites\",\"stats\",\"history\"],\"ok\":true}"
+      "detail": "{\"time\":\"2026-08-21T19:44:26.120Z\",\"missingElements\":[],\"missingPremiumFunctions\":[],\"premiumButtons\":[\"scan\",\"manual\",\"exact\",\"assistant\",\"collections\",\"watchlist\",\"favourites\",\"stats\",\"history\"],\"ok\":true}"
     },
     {
       "name": "No uncaught desktop JavaScript errors",
-      "status": "FAIL",
-      "detail": "TypeError: Cannot read properties of null (reading 'length') | TypeError: Cannot read properties of null (reading 'length') | TypeError: Cannot read properties of null (reading 'length') | TypeError: Cannot read properties of null (reading 'length') | TypeError: Cannot read properties of null (reading 'length') | TypeError: Cannot read properties of null (reading 'length') | TypeError: Cannot read properties of null (reading 'length') | TypeError: Cannot read properties of null (reading 'length') | TypeError: Cannot read properties of null (reading 'length') | TypeError: Cannot read properties of null (reading 'length') | TypeError: Cannot read properties of null (reading 'length') | TypeErr"
+      "status": "PASS",
+      "detail": "none"
     },
     {
       "name": "No uncaught mobile JavaScript errors",
-      "status": "FAIL",
-      "detail": "TypeError: Cannot read properties of null (reading 'length') | TypeError: Cannot read properties of null (reading 'length')"
+      "status": "PASS",
+      "detail": "none"
     },
     {
       "name": "No meaningful console errors",
