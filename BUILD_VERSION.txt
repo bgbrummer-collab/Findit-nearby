@@ -1,5 +1,4 @@
-FindIt Production Readiness — Premium Payments Security Pass
-Premium no longer unlocks from local browser state alone.
-Paystack checkout is monthly at R99, with verified subscription status and secure manage/cancel links.
-Production routes include init, verify, status and manage endpoints.
+FindIt Production Readiness — Clean Redeploy
+Core FindIt interface restored after rollback.
 Search, directions, map, feedback, Assistant and product intelligence remain enabled.
+This commit forces a fresh Vercel production deployment so browsers receive the restored page instead of the broken search-experience build.
