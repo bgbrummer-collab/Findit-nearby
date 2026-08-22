@@ -59,3 +59,101 @@
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});else install();
 })();
+
+/* FINDIT IDENTIFY BUTTON COMPATIBILITY FIX
+   The current index.html uses the new results UI while the older script.js
+   still references removed result nodes. This handler bypasses those stale
+   nodes and renders directly into the current UI. */
+(()=>{
+ const $=s=>document.querySelector(s);
+ const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+ const getState=()=>{try{return state}catch{return null}};
+ const setText=(sel,text)=>{const el=$(sel);if(el)el.textContent=text??''};
+ const show=(sel)=>$(sel)?.classList.remove('hidden');
+ const hide=(sel)=>$(sel)?.classList.add('hidden');
+ function status(text,error=false){const el=$('#status');if(!el)return;el.textContent=text;el.style.color=error?'#ff9da7':''}
+ function currentRadius(){const s=getState();const n=Number(s?.radius||$('#radiusSelect')?.value||10);return Number.isFinite(n)?n:10}
+ function getLocation(){return new Promise((resolve,reject)=>{
+  if(!navigator.geolocation)return reject(new Error('Location unavailable'));
+  navigator.geolocation.getCurrentPosition(p=>resolve({lat:p.coords.latitude,lon:p.coords.longitude}),reject,{enableHighAccuracy:true,timeout:12000,maximumAge:120000});
+ })}
+ function clearCurrentResults(){
+  const s=getState();if(s){s.result=null;s.offers=[];s.stores=[]}
+  setText('#resultName','Item');setText('#resultDescription','');setText('#confidenceValue','—');
+  const meta=$('#resultMeta');if(meta)meta.innerHTML='';
+  const note=$('#resultNote');if(note){note.innerHTML='';note.classList.remove('error')}
+  const nearby=$('#nearbyStores');if(nearby)nearby.innerHTML='';
+  setText('#nearbySummary','');hide('#results');
+ }
+ function renderIdentification(i){
+  const name=i?.name||i?.model||i?.object||'Item identified';
+  const summary=i?.summary||'FindIt analysed the uploaded image.';
+  const confidence=Math.max(0,Math.min(100,Math.round(Number(i?.confidence||0)*100)));
+  setText('#resultName',name);setText('#resultDescription',summary);setText('#confidenceValue',`${confidence}%`);
+  const meta=$('#resultMeta');if(meta){
+   const visible=Array.isArray(i?.visibleText)&&i.visibleText.length?i.visibleText.slice(0,4).join(' • '):'';
+   const rows=[['Object',i?.object],['Brand',i?.brand],['Model',i?.model],['Category',i?.retailCategory||i?.category],['Search',i?.searchQuery],['Visible text',visible]].filter(([,v])=>v);
+   meta.innerHTML=rows.map(([k,v])=>`<div class="analysis-card"><span>${esc(k)}</span><strong>${esc(v)}</strong></div>`).join('');
+  }
+  const note=$('#resultNote');if(note){note.textContent=confidence<55?'FindIt is not confident enough to guess. Try a clearer photo.':'';note.classList.toggle('error',confidence<55)}
+ }
+ function exactDirections(s){
+  return s?.exactProductMatch===true&&s?.stockVerified===true&&Number.isFinite(Number(s?.lat))&&Number.isFinite(Number(s?.lon))
+   ?`https://www.google.com/maps/dir/?${new URLSearchParams({api:'1',destination:`${Number(s.lat)},${Number(s.lon)}`})}`:'';
+ }
+ function mapsSearch(s){
+  const q=[s?.name,s?.address].filter(Boolean).join(' ');return q?`https://www.google.com/maps/search/?${new URLSearchParams({api:'1',query:q})}`:'';
+ }
+ function renderStores(stores,message=''){
+  const el=$('#nearbyStores');if(!el)return;
+  if(!stores.length){el.innerHTML=`<div class="empty-state">${esc(message||'No reliable nearby retailers found.')}</div>`;setText('#nearbySummary',message||'No nearby results yet.');return}
+  setText('#nearbySummary',`${stores.length} relevant retailer${stores.length===1?'':'s'} found within your search area.`);
+  el.innerHTML=stores.map((s,i)=>{
+   const distance=Number.isFinite(Number(s.distanceKm))?`${Number(s.distanceKm).toFixed(1)} km`:'Distance unavailable';
+   const d=exactDirections(s),m=mapsSearch(s);
+   const action=d?`<a href="${esc(d)}" target="_blank" rel="noopener noreferrer">Directions</a>`:m?`<a href="${esc(m)}" target="_blank" rel="noopener noreferrer">View on Maps</a>`:'';
+   return `<article class="store-card" data-store="${i}"><span class="store-rank">${i+1}</span><div class="store-main"><strong>${esc(s.name||'Retailer')}</strong><small>${esc(s.address||s.type||'Retailer')}</small><div class="store-tags"><span>${esc(s.type||'retail')}</span><span>Nearby retailer</span><span>${s.stockVerified===true?'Stock verified':'Stock not verified'}</span></div></div><div class="store-side"><div class="store-distance">${esc(distance)}</div><div class="store-actions">${s.phone?`<a href="tel:${esc(s.phone)}">Call</a>`:''}${s.website?`<a href="${esc(s.website)}" target="_blank" rel="noopener noreferrer">Website</a>`:''}${action}</div></div></article>`;
+  }).join('');
+ }
+ async function loadNearbyCompat(i,coords){
+  const el=$('#nearbyStores');if(el)el.innerHTML='<div class="empty-state">Finding relevant nearby retailers…</div>';
+  try{
+   const r=await fetch('/api/nearby',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({lat:coords.lat,lon:coords.lon,identification:i,radiusKm:currentRadius()})});
+   const d=await r.json().catch(()=>({}));if(!r.ok||d.ok===false)throw new Error(d.error||'Nearby search failed');
+   const list=Array.isArray(d.stores)?d.stores:[];const s=getState();if(s)s.stores=list;
+   renderStores(list,d.message||'');
+  }catch(e){renderStores([],`Nearby retailer search is temporarily unavailable: ${e.message}`)}
+ }
+ function saveRecentCompat(i){
+  try{
+   const key='finditRecent',old=JSON.parse(localStorage.getItem(key)||'[]');
+   const item={id:Date.now(),name:i?.name||i?.object||'Item',brand:i?.brand||'',query:i?.searchQuery||'',date:new Date().toISOString()};
+   const arr=[item,...old.filter(x=>x.query!==item.query)].slice(0,20);localStorage.setItem(key,JSON.stringify(arr));
+   const grid=$('#recentGrid');if(grid)grid.innerHTML=arr.slice(0,8).map(x=>`<article class="recent-card"><strong>${esc(x.name)}</strong><small>${esc([x.brand,x.query].filter(Boolean).join(' • '))}</small></article>`).join('');
+  }catch{}
+ }
+ function install(){
+  const btn=$('#search');if(!btn)return;
+  btn.onclick=async e=>{
+   e.preventDefault();
+   const s=getState();if(!s?.file){status('Choose a photo first.',true);return}
+   clearCurrentResults();btn.disabled=true;status('Identifying your item…');
+   try{
+    if(!s.coords){try{s.coords=await getLocation();const lb=$('#location');if(lb)lb.textContent='✓ Location ready'}catch{}}
+    const fd=new FormData();fd.append('image',s.file);if(s.coords){fd.append('lat',s.coords.lat);fd.append('lon',s.coords.lon)}
+    const r=await fetch('/api/search',{method:'POST',body:fd});const data=await r.json().catch(()=>({}));
+    if(!r.ok)throw new Error(data.message||data.error||`Search failed (${r.status})`);
+    s.result=data;const i=data.identification||{};renderIdentification(i);show('#results');
+    if(data.blocked){const note=$('#resultNote');if(note){note.textContent=data.message||'This item cannot be searched.';note.classList.add('error')}}
+    if(s.coords&&Number(i.confidence||0)>=.55&&!data.blocked)await loadNearbyCompat(i,s.coords);else renderStores([],s.coords?'Try a clearer photo to search nearby retailers.':'Identification worked. Allow location to see nearby retailers.');
+    saveRecentCompat(i);status('Search complete.');
+    $('#results')?.scrollIntoView({behavior:'smooth',block:'start'});
+    document.dispatchEvent(new CustomEvent('findit:results-rendered'));
+   }catch(err){
+    show('#results');const note=$('#resultNote');if(note){note.textContent=`Search error: ${err.message}`;note.classList.add('error')}
+    status('Search failed. Please try again.',true);
+   }finally{btn.disabled=!s?.file}
+  };
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});else install();
+})();
