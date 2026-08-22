@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-22T08:40:29.237Z",
+  "generatedAt": "2026-08-22T09:04:38.003Z",
   "url": "https://findit-nearby.vercel.app/",
   "summary": {
     "passes": 89,
@@ -75,7 +75,7 @@
     {
       "name": "Challenge text populated",
       "status": "PASS",
-      "detail": "Find the weirdest object in your room 😂"
+      "detail": "Find something with a logo you can't identify 🕵️"
     },
     {
       "name": "Examples render",
@@ -130,7 +130,7 @@
     {
       "name": "Identify & Find completes",
       "status": "PASS",
-      "detail": "Running Shoe Vector Graphic Illustration"
+      "detail": "Running Shoe Diagram Illustration"
     },
     {
       "name": "Identification analysis cards render",
@@ -430,7 +430,7 @@
     {
       "name": "Built-in FindIt QA report passes",
       "status": "PASS",
-      "detail": "{\"time\":\"2026-08-22T08:40:29.236Z\",\"missingElements\":[],\"missingPremiumFunctions\":[],\"premiumButtons\":[\"scan\",\"manual\",\"exact\",\"assistant\",\"collections\",\"watchlist\",\"favourites\",\"stats\",\"history\"],\"ok\":true}"
+      "detail": "{\"time\":\"2026-08-22T09:04:38.002Z\",\"missingElements\":[],\"missingPremiumFunctions\":[],\"premiumButtons\":[\"scan\",\"manual\",\"exact\",\"assistant\",\"collections\",\"watchlist\",\"favourites\",\"stats\",\"history\"],\"ok\":true}"
     },
     {
       "name": "No uncaught desktop JavaScript errors",
