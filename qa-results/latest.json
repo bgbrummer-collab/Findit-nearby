@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-08-22T09:04:38.003Z",
+  "generatedAt": "2026-08-22T10:02:47.496Z",
   "url": "https://findit-nearby.vercel.app/",
   "summary": {
-    "passes": 89,
+    "passes": 69,
     "warnings": 0,
-    "failures": 0
+    "failures": 19
   },
   "checks": [
     {
@@ -50,7 +50,7 @@
     {
       "name": "Main drawer controls do not overlap",
       "status": "PASS",
-      "detail": "9 visible controls"
+      "detail": "8 visible controls"
     },
     {
       "name": "Close main drawer",
@@ -75,7 +75,7 @@
     {
       "name": "Challenge text populated",
       "status": "PASS",
-      "detail": "Find something with a logo you can't identify 🕵️"
+      "detail": "Find something you don't know the name of 👀"
     },
     {
       "name": "Examples render",
@@ -129,73 +129,73 @@
     },
     {
       "name": "Identify & Find completes",
-      "status": "PASS",
-      "detail": "Running Shoe Diagram Illustration"
+      "status": "FAIL",
+      "detail": "page.waitForSelector: Timeout 50000ms exceeded.\nCall log:\n  - waiting for locator('#results:not(.hidden)') to be visible\n"
     },
     {
       "name": "Identification analysis cards render",
-      "status": "PASS",
-      "detail": "8"
+      "status": "FAIL",
+      "detail": "0"
     },
     {
       "name": "Map view",
-      "status": "PASS",
-      "detail": ""
+      "status": "FAIL",
+      "detail": "control is not visible"
     },
     {
       "name": "Map view opens",
-      "status": "PASS",
-      "detail": "map-wrap show"
+      "status": "FAIL",
+      "detail": "map-wrap"
     },
     {
       "name": "List view",
-      "status": "PASS",
-      "detail": ""
+      "status": "FAIL",
+      "detail": "control is not visible"
     },
     {
       "name": "Offer sort Best",
       "status": "PASS",
-      "detail": ""
+      "detail": "not applicable: no verified offers"
     },
     {
       "name": "Offer sort Cheapest",
       "status": "PASS",
-      "detail": ""
+      "detail": "not applicable: no verified offers"
     },
     {
       "name": "Offer sort Closest",
       "status": "PASS",
-      "detail": ""
+      "detail": "not applicable: no verified offers"
     },
     {
       "name": "Free result actions are truthful",
       "status": "PASS",
-      "detail": "search/copy/share available"
+      "detail": "low-confidence/result fallback shown instead of fake actions: Item identified"
     },
     {
       "name": "Product intelligence shows no fake zero price",
       "status": "PASS",
-      "detail": "No verified exact price yet.\n\nFindIt did not invent a price or local stock level. Use the exact-item retailer searches below while live verification is unavailable.\n\nPriceCheck\nSea"
+      "detail": "not applicable: panel hidden for this result"
     },
     {
       "name": "Thumbs up",
-      "status": "PASS",
-      "detail": ""
+      "status": "FAIL",
+      "detail": "control is not visible"
     },
     {
       "name": "Thumbs up sets rating 5",
-      "status": "PASS",
-      "detail": ""
+      "status": "FAIL",
+      "detail": "not 5"
     },
     {
       "name": "Thumbs down",
-      "status": "PASS",
-      "detail": ""
+      "status": "FAIL",
+      "detail": "control is not visible"
     },
     {
       "name": "Thumbs down sets rating 2",
-      "status": "PASS",
-      "detail": ""
+      "status": "FAIL",
+      "detail": "not 2"
     },
     {
       "name": "Feedback form has empty-message validation",
@@ -204,8 +204,8 @@
     },
     {
       "name": "Feedback copy works",
-      "status": "PASS",
-      "detail": "✓ Feedback copied."
+      "status": "FAIL",
+      "detail": "locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('#copyFeedback')\n    - locator resolved to <button type=\"button\" id=\"copyFeedback\" class=\"btn secondary\" data-release-copy=\"1\">Copy feedback</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is not stable\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not stable\n    - retrying click action\n      - waiting 100ms\n    - waiting for element to be visible, enabled and stable\n    - element is not stable\n  - retrying click action\n    - waiting 500ms\n    - waiting for element to be "
     },
     {
       "name": "Free 25 km radius is Premium-gated",
@@ -214,13 +214,13 @@
     },
     {
       "name": "Free Save opens Premium",
-      "status": "PASS",
-      "detail": ""
+      "status": "FAIL",
+      "detail": "control is not visible"
     },
     {
       "name": "Free Save gate visible",
-      "status": "PASS",
-      "detail": ""
+      "status": "FAIL",
+      "detail": "not visible"
     },
     {
       "name": "Open Premium modal",
@@ -250,37 +250,37 @@
     {
       "name": "Premium heading fits",
       "status": "PASS",
-      "detail": "width=820"
+      "detail": "width=958"
     },
     {
       "name": "All visible V10 tools include How guidance",
-      "status": "PASS",
-      "detail": "9 tools"
+      "status": "FAIL",
+      "detail": "scan,manual,exact,assistant,collections,watchlist,favourites,stats,history"
     },
     {
       "name": "Open Premium guide",
-      "status": "PASS",
-      "detail": ""
+      "status": "FAIL",
+      "detail": "control is not visible"
     },
     {
       "name": "Premium guide has full help",
-      "status": "PASS",
-      "detail": "13 entries"
+      "status": "FAIL",
+      "detail": "not visible"
     },
     {
       "name": "V10 scan opens",
-      "status": "PASS",
-      "detail": "routed to finder"
+      "status": "FAIL",
+      "detail": "locator.click: Timeout 4000ms exceeded.\nCall log:\n  - waiting for locator('[data-v10=\"scan\"]').first()\n    - locator resolved to <button type=\"button\" data-v10=\"scan\" class=\"v10-launch-main\">…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div id=\"searchOverlay\" class=\"search-overlay\">…</div> intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    - waiting for element to be visible, enabled and stable\n    - element is not stable\n  - retrying click action\n    - waiting 100ms\n    - waiting for element to b"
     },
     {
       "name": "V10 manual opens",
-      "status": "PASS",
-      "detail": "Manual Search"
+      "status": "FAIL",
+      "detail": "locator.click: Timeout 4000ms exceeded.\nCall log:\n  - waiting for locator('[data-v10=\"manual\"]').first()\n    - locator resolved to <button type=\"button\" data-v10=\"manual\">…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div id=\"searchOverlay\" class=\"search-overlay\">…</div> intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not stable\n    - retrying click action\n      - waiting 100ms\n    - waiting for element to be visible, e"
     },
     {
       "name": "V10 exact opens",
-      "status": "PASS",
-      "detail": "performed external exact-match action"
+      "status": "FAIL",
+      "detail": "locator.click: Timeout 4000ms exceeded.\nCall log:\n  - waiting for locator('[data-v10=\"exact\"]').first()\n    - locator resolved to <button type=\"button\" data-v10=\"exact\">…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div id=\"searchOverlay\" class=\"search-overlay\">…</div> intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    - waiting for element to be visible, enabled and stable\n    - element is not stable\n  - retrying click action\n    - waiting 100ms\n    - waiting for element to be visible, enabled and"
     },
     {
       "name": "V10 assistant opens",
@@ -318,14 +318,9 @@
       "detail": "History+"
     },
     {
-      "name": "History+ supports per-item delete when entries exist",
-      "status": "PASS",
-      "detail": "1 -> 0"
-    },
-    {
       "name": "Premium drawer has visible, vertical controls",
       "status": "PASS",
-      "detail": "13 controls"
+      "detail": "12 controls"
     },
     {
       "name": "Premium drawer route: Saved Items",
@@ -400,7 +395,7 @@
     {
       "name": "Mobile drawer controls vertical",
       "status": "PASS",
-      "detail": "9"
+      "detail": "8"
     },
     {
       "name": "Mobile bottom nav visible",
@@ -429,8 +424,8 @@
     },
     {
       "name": "Built-in FindIt QA report passes",
-      "status": "PASS",
-      "detail": "{\"time\":\"2026-08-22T09:04:38.002Z\",\"missingElements\":[],\"missingPremiumFunctions\":[],\"premiumButtons\":[\"scan\",\"manual\",\"exact\",\"assistant\",\"collections\",\"watchlist\",\"favourites\",\"stats\",\"history\"],\"ok\":true}"
+      "status": "FAIL",
+      "detail": "Error"
     },
     {
       "name": "No uncaught desktop JavaScript errors",
