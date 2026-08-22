@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-08-22T10:05:39.220Z",
+  "generatedAt": "2026-08-22T10:32:13.249Z",
   "url": "https://findit-nearby.vercel.app/",
   "summary": {
-    "passes": 89,
+    "passes": 74,
     "warnings": 0,
-    "failures": 0
+    "failures": 15
   },
   "checks": [
     {
@@ -75,7 +75,7 @@
     {
       "name": "Challenge text populated",
       "status": "PASS",
-      "detail": "Find something smaller than your hand 🤏"
+      "detail": "Find something older than you 🕰️"
     },
     {
       "name": "Examples render",
@@ -129,58 +129,58 @@
     },
     {
       "name": "Identify & Find completes",
-      "status": "PASS",
-      "detail": "Running Shoe Diagram"
+      "status": "FAIL",
+      "detail": "page.waitForSelector: Timeout 50000ms exceeded.\nCall log:\n  - waiting for locator('#results:not(.hidden)') to be visible\n"
     },
     {
       "name": "Identification analysis cards render",
-      "status": "PASS",
-      "detail": "8"
+      "status": "FAIL",
+      "detail": "0"
     },
     {
       "name": "Map view",
-      "status": "PASS",
-      "detail": ""
+      "status": "FAIL",
+      "detail": "control is not visible"
     },
     {
       "name": "Map view opens",
-      "status": "PASS",
-      "detail": "map-wrap show"
+      "status": "FAIL",
+      "detail": "locator.getAttribute: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('#mapWrap')\n"
     },
     {
       "name": "List view",
-      "status": "PASS",
-      "detail": ""
+      "status": "FAIL",
+      "detail": "control is not visible"
     },
     {
       "name": "Offer sort Best",
       "status": "PASS",
-      "detail": ""
+      "detail": "not applicable: no verified offers"
     },
     {
       "name": "Offer sort Cheapest",
       "status": "PASS",
-      "detail": ""
+      "detail": "not applicable: no verified offers"
     },
     {
       "name": "Offer sort Closest",
       "status": "PASS",
-      "detail": ""
+      "detail": "not applicable: no verified offers"
     },
     {
       "name": "Free result actions are truthful",
-      "status": "PASS",
-      "detail": "search/copy/share available"
+      "status": "FAIL",
+      "detail": "locator.innerText: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('#resultTitle')\n"
     },
     {
       "name": "Product intelligence shows no fake zero price",
       "status": "PASS",
-      "detail": "No verified exact price yet.\n\nFindIt did not invent a price or local stock level. Use the exact-item retailer searches below while live verification is unavailable.\n\nPriceCheck\nSea"
+      "detail": "not applicable: panel hidden for this result"
     },
     {
       "name": "Thumbs up",
-      "status": "PASS",
-      "detail": ""
+      "status": "FAIL",
+      "detail": "control is not visible"
     },
     {
       "name": "Thumbs up sets rating 5",
@@ -189,13 +189,13 @@
     },
     {
       "name": "Thumbs down",
-      "status": "PASS",
-      "detail": ""
+      "status": "FAIL",
+      "detail": "control is not visible"
     },
     {
       "name": "Thumbs down sets rating 2",
-      "status": "PASS",
-      "detail": ""
+      "status": "FAIL",
+      "detail": "not 2"
     },
     {
       "name": "Feedback form has empty-message validation",
@@ -204,8 +204,8 @@
     },
     {
       "name": "Feedback copy works",
-      "status": "PASS",
-      "detail": "✓ Feedback copied."
+      "status": "FAIL",
+      "detail": "locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('#copyFeedback')\n"
     },
     {
       "name": "Free 25 km radius is Premium-gated",
@@ -214,13 +214,13 @@
     },
     {
       "name": "Free Save opens Premium",
-      "status": "PASS",
-      "detail": ""
+      "status": "FAIL",
+      "detail": "control is not visible"
     },
     {
       "name": "Free Save gate visible",
-      "status": "PASS",
-      "detail": ""
+      "status": "FAIL",
+      "detail": "not visible"
     },
     {
       "name": "Open Premium modal",
@@ -280,7 +280,7 @@
     {
       "name": "V10 exact opens",
       "status": "PASS",
-      "detail": "performed external exact-match action"
+      "detail": "Exact Match"
     },
     {
       "name": "V10 assistant opens",
@@ -320,7 +320,7 @@
     {
       "name": "History+ supports per-item delete when entries exist",
       "status": "PASS",
-      "detail": "1 -> 0"
+      "detail": "no history row available to delete"
     },
     {
       "name": "Premium drawer has visible, vertical controls",
@@ -429,18 +429,18 @@
     },
     {
       "name": "Built-in FindIt QA report passes",
-      "status": "PASS",
-      "detail": "{\"time\":\"2026-08-22T10:05:39.218Z\",\"missingElements\":[],\"missingPremiumFunctions\":[],\"premiumButtons\":[\"scan\",\"manual\",\"exact\",\"assistant\",\"collections\",\"watchlist\",\"favourites\",\"stats\",\"history\"],\"ok\":true}"
+      "status": "FAIL",
+      "detail": "{\"time\":\"2026-08-22T10:32:13.247Z\",\"missingElements\":[\"copyFeedback\",\"clearRecent\"],\"missingPremiumFunctions\":[],\"premiumButtons\":[\"scan\",\"manual\",\"exact\",\"assistant\",\"collections\",\"watchlist\",\"favourites\",\"stats\",\"history\"],\"ok\":false}"
     },
     {
       "name": "No uncaught desktop JavaScript errors",
-      "status": "PASS",
-      "detail": "none"
+      "status": "FAIL",
+      "detail": "TypeError: Cannot set properties of null (setting 'onclick') | TypeError: Cannot set properties of null (setting 'innerHTML')"
     },
     {
       "name": "No uncaught mobile JavaScript errors",
-      "status": "PASS",
-      "detail": "none"
+      "status": "FAIL",
+      "detail": "TypeError: Cannot set properties of null (setting 'onclick')"
     },
     {
       "name": "No meaningful console errors",
