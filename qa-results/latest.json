@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-22T20:15:19.984Z",
+  "generatedAt": "2026-08-22T20:31:33.829Z",
   "url": "https://findit-nearby.vercel.app/",
   "summary": {
     "passes": 77,
@@ -75,7 +75,7 @@
     {
       "name": "Challenge text populated",
       "status": "PASS",
-      "detail": "Find something smaller than your hand 🤏"
+      "detail": "Find an unusual tool 🔧"
     },
     {
       "name": "Examples render",
@@ -430,7 +430,7 @@
     {
       "name": "Built-in FindIt QA report passes",
       "status": "FAIL",
-      "detail": "{\"time\":\"2026-08-22T20:15:19.983Z\",\"missingElements\":[\"copyFeedback\",\"clearRecent\"],\"missingPremiumFunctions\":[],\"premiumButtons\":[\"scan\",\"manual\",\"exact\",\"assistant\",\"collections\",\"watchlist\",\"favourites\",\"stats\",\"history\"],\"ok\":false}"
+      "detail": "{\"time\":\"2026-08-22T20:31:33.828Z\",\"missingElements\":[\"copyFeedback\",\"clearRecent\"],\"missingPremiumFunctions\":[],\"premiumButtons\":[\"scan\",\"manual\",\"exact\",\"assistant\",\"collections\",\"watchlist\",\"favourites\",\"stats\",\"history\"],\"ok\":false}"
     },
     {
       "name": "No uncaught desktop JavaScript errors",
