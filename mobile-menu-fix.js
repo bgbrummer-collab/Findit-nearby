@@ -1,6 +1,6 @@
 (()=>{
  const KEY='findit_premium_beta';
- const PATCH_VERSION='20260822-results-experience-v3';
+ const PATCH_VERSION='20260822-results-controls-v4';
  const activateForQa=()=>{
   localStorage.setItem(KEY,'1');
   try{if(typeof premiumState!=='undefined')premiumState.active=true}catch{}
