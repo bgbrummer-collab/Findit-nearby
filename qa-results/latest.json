@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-08-22T21:50:28.239Z",
+  "generatedAt": "2026-08-22T22:01:55.135Z",
   "url": "https://findit-nearby.vercel.app/",
   "summary": {
-    "passes": 77,
+    "passes": 74,
     "warnings": 0,
-    "failures": 12
+    "failures": 15
   },
   "checks": [
     {
@@ -75,7 +75,7 @@
     {
       "name": "Challenge text populated",
       "status": "PASS",
-      "detail": "Find an unusual tool 🔧"
+      "detail": "Find a product you've always wondered about ✨"
     },
     {
       "name": "Examples render",
@@ -130,7 +130,7 @@
     {
       "name": "Identify & Find completes",
       "status": "FAIL",
-      "detail": "locator.innerText: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('#resultTitle')\n"
+      "detail": "page.waitForSelector: Timeout 50000ms exceeded.\nCall log:\n  - waiting for locator('#results:not(.hidden)') to be visible\n"
     },
     {
       "name": "Identification analysis cards render",
@@ -139,8 +139,8 @@
     },
     {
       "name": "Map view",
-      "status": "PASS",
-      "detail": ""
+      "status": "FAIL",
+      "detail": "control is not visible"
     },
     {
       "name": "Map view opens",
@@ -214,13 +214,13 @@
     },
     {
       "name": "Free Save opens Premium",
-      "status": "PASS",
-      "detail": ""
+      "status": "FAIL",
+      "detail": "control is not visible"
     },
     {
       "name": "Free Save gate visible",
-      "status": "PASS",
-      "detail": ""
+      "status": "FAIL",
+      "detail": "not visible"
     },
     {
       "name": "Open Premium modal",
@@ -280,7 +280,7 @@
     {
       "name": "V10 exact opens",
       "status": "PASS",
-      "detail": "performed external exact-match action"
+      "detail": "Exact Match"
     },
     {
       "name": "V10 assistant opens",
@@ -320,7 +320,7 @@
     {
       "name": "History+ supports per-item delete when entries exist",
       "status": "PASS",
-      "detail": "1 -> 0"
+      "detail": "no history row available to delete"
     },
     {
       "name": "Premium drawer has visible, vertical controls",
@@ -430,7 +430,7 @@
     {
       "name": "Built-in FindIt QA report passes",
       "status": "FAIL",
-      "detail": "{\"time\":\"2026-08-22T21:50:28.237Z\",\"missingElements\":[\"copyFeedback\",\"clearRecent\"],\"missingPremiumFunctions\":[],\"premiumButtons\":[\"scan\",\"manual\",\"exact\",\"assistant\",\"collections\",\"watchlist\",\"favourites\",\"stats\",\"history\"],\"ok\":false}"
+      "detail": "{\"time\":\"2026-08-22T22:01:55.133Z\",\"missingElements\":[\"copyFeedback\",\"clearRecent\"],\"missingPremiumFunctions\":[],\"premiumButtons\":[\"scan\",\"manual\",\"exact\",\"assistant\",\"collections\",\"watchlist\",\"favourites\",\"stats\",\"history\"],\"ok\":false}"
     },
     {
       "name": "No uncaught desktop JavaScript errors",

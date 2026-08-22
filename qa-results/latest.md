@@ -1,10 +1,10 @@
 # FindIt Full Production Audit
 
-Generated: 2026-08-22T21:50:28.239Z
+Generated: 2026-08-22T22:01:55.135Z
 
-**Passes:** 77  
+**Passes:** 74  
 **Warnings:** 0  
-**Failures:** 12
+**Failures:** 15
 
 - ✅ **Production homepage loads** — HTTP 200
 - ✅ **Desktop has no horizontal overflow** — {"sw":1440,"cw":1440}
@@ -19,7 +19,7 @@ Generated: 2026-08-22T21:50:28.239Z
 - ✅ **Open Challenge**
 - ✅ **Challenge modal visible**
 - ✅ **New challenge**
-- ✅ **Challenge text populated** — Find an unusual tool 🔧
+- ✅ **Challenge text populated** — Find a product you've always wondered about ✨
 - ✅ **Examples render** — 6 cards
 - ✅ **Shuffle examples**
 - ✅ **Open drawer for settings**
@@ -30,12 +30,12 @@ Generated: 2026-08-22T21:50:28.239Z
 - ✅ **Image picker accepts a real raster image**
 - ✅ **Use my location**
 - ✅ **Location becomes ready** — ✓ Location ready
-- ❌ **Identify & Find completes** — locator.innerText: Timeout 30000ms exceeded.
+- ❌ **Identify & Find completes** — page.waitForSelector: Timeout 50000ms exceeded.
 Call log:
-  - waiting for locator('#resultTitle')
+  - waiting for locator('#results:not(.hidden)') to be visible
 
 - ❌ **Identification analysis cards render** — 0
-- ✅ **Map view**
+- ❌ **Map view** — control is not visible
 - ❌ **Map view opens** — locator.getAttribute: Timeout 30000ms exceeded.
 Call log:
   - waiting for locator('#mapWrap')
@@ -59,8 +59,8 @@ Call log:
   - waiting for locator('#copyFeedback')
 
 - ✅ **Free 25 km radius is Premium-gated** — gated
-- ✅ **Free Save opens Premium**
-- ✅ **Free Save gate visible**
+- ❌ **Free Save opens Premium** — control is not visible
+- ❌ **Free Save gate visible** — not visible
 - ✅ **Open Premium modal**
 - ✅ **Free/Premium comparison visible**
 - ✅ **Activate Premium Beta**
@@ -72,7 +72,7 @@ Call log:
 - ✅ **Premium guide has full help** — 13 entries
 - ✅ **V10 scan opens** — routed to finder
 - ✅ **V10 manual opens** — Manual Search
-- ✅ **V10 exact opens** — performed external exact-match action
+- ✅ **V10 exact opens** — Exact Match
 - ✅ **V10 assistant opens** — AI Search
 - ✅ **V10 collections opens** — Collections
 - ✅ **Collections create control works** — created
@@ -80,7 +80,7 @@ Call log:
 - ✅ **V10 favourites opens** — Favourite Stores
 - ✅ **V10 stats opens** — My FindIt Stats
 - ✅ **V10 history opens** — History+
-- ✅ **History+ supports per-item delete when entries exist** — 1 -> 0
+- ✅ **History+ supports per-item delete when entries exist** — no history row available to delete
 - ✅ **Premium drawer has visible, vertical controls** — 13 controls
 - ✅ **Premium drawer route: Saved Items** — wired
 - ✅ **Premium drawer route: Compare Stores** — wired
@@ -102,7 +102,7 @@ Call log:
 - ✅ **Mobile More opens drawer**
 - ✅ **Health API live** — {"ok":true,"geminiKeyConfigured":true,"model":"gemini-3.6-flash","modelReachable":true,"message":"Gemini connection is ready."}
 - ✅ **Feedback health API live** — {"ok":true,"provider":"formspree","formspreeConfigured":true,"message":"Formspree feedback delivery is configured."}
-- ❌ **Built-in FindIt QA report passes** — {"time":"2026-08-22T21:50:28.237Z","missingElements":["copyFeedback","clearRecent"],"missingPremiumFunctions":[],"premiumButtons":["scan","manual","exact","assistant","collections","watchlist","favourites","stats","history"],"ok":false}
+- ❌ **Built-in FindIt QA report passes** — {"time":"2026-08-22T22:01:55.133Z","missingElements":["copyFeedback","clearRecent"],"missingPremiumFunctions":[],"premiumButtons":["scan","manual","exact","assistant","collections","watchlist","favourites","stats","history"],"ok":false}
 - ❌ **No uncaught desktop JavaScript errors** — TypeError: Cannot set properties of null (setting 'onclick')
 - ❌ **No uncaught mobile JavaScript errors** — TypeError: Cannot set properties of null (setting 'onclick')
 - ✅ **No meaningful console errors** — none
