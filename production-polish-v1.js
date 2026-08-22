@@ -64,6 +64,32 @@ function improvePremiumCopy(){
  $$('.premium-coming,[data-pw="alerts"]').forEach(b=>{b.disabled=false;b.classList.remove('coming','premium-coming');const label=$('b',b),small=$('small',b);if(label)label.textContent='Price & Stock Watchlist';if(small)small.textContent='Track verified changes';});
 }
 function verifiedUrl(v){try{const u=new URL(v,location.href);return /^https?:$/.test(u.protocol)}catch{return false}}
+function isMakro(v){try{return /(^|\.)makro\.co\.za$/i.test(new URL(v,location.href).hostname)}catch{return false}}
+function isDirectMakroProduct(v){
+ try{
+  const u=new URL(v,location.href);if(!/(^|\.)makro\.co\.za$/i.test(u.hostname))return false;
+  const p=u.pathname.replace(/\/+$/,'').toLowerCase();
+  if(!p||p==='/'||/^\/search(?:\/|$)/.test(p)||/\/pr$/.test(p)||/^\/(?:pantry-store|load-up-store|pages)(?:\/|$)/.test(p))return false;
+  return p.split('/').filter(Boolean).length>=2;
+ }catch{return false}
+}
+function fixMakroLinks(){
+ const pi=(typeof productIntelligence!=='undefined'&&productIntelligence)||null;
+ const direct=(pi?.offers||[]).filter(o=>/makro/i.test(String(o?.retailer?.name||''))&&o?.verified&&isDirectMakroProduct(o.product_url)).sort((a,b)=>Number(b.matchScore||0)-Number(a.matchScore||0))[0]?.product_url||null;
+ $$('a[href]').forEach(a=>{
+  if(!isMakro(a.href))return;
+  if(isDirectMakroProduct(a.href))return;
+  if(direct){a.href=direct;a.dataset.finditMakroDirect='1';return}
+  const card=a.closest('.pi-offer,.offer-card,[data-web-retailer],.web-retailer-card,.retailer-check-card,.v10-row');
+  if(card)card.classList.add('fi-unverified-search');else a.classList.add('fi-unverified-search');
+ });
+ $$('.pi-offer,.offer-card,[data-web-retailer],.web-retailer-card,.retailer-check-card').forEach(card=>{
+  if(!/\bmakro\b/i.test(card.textContent||''))return;
+  const links=$$('a[href]',card);if(!links.length||links.every(a=>isMakro(a.href)&&!isDirectMakroProduct(a.href))){
+   if(direct){links.forEach(a=>{if(isMakro(a.href))a.href=direct})}else card.classList.add('fi-unverified-search');
+  }
+ });
+}
 function cleanRetailerCards(){
  const pi=(typeof productIntelligence!=='undefined'&&productIntelligence)||null;
  const verifiedNames=new Set((pi?.offers||[]).filter(o=>o?.verified&&verifiedUrl(o.product_url)).map(o=>String(o.retailer?.name||'').toLowerCase()).filter(Boolean));
@@ -71,6 +97,7 @@ function cleanRetailerCards(){
  $$('a[target="_blank"]').forEach(a=>{a.rel='noopener noreferrer'});
  const webCards=$$('[data-web-retailer],.web-retailer-card,.retailer-check-card');
  webCards.forEach(card=>{const name=(card.dataset.webRetailer||$('strong,b,h4',card)?.textContent||'').trim().toLowerCase();if(verifiedNames.size&&name&&!verifiedNames.has(name))card.classList.add('fi-unverified-search')});
+ fixMakroLinks();
 }
 function improveEmptyStates(){
  const panel=$('#productIntelligenceResults');if(!panel)return;
