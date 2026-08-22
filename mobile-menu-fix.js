@@ -1,6 +1,6 @@
 (()=>{
  const KEY='findit_premium_beta';
- const PATCH_VERSION='20260822-production-polish-v1';
+ const PATCH_VERSION='20260822-production-polish-v2';
  const activateForQa=()=>{
   localStorage.setItem(KEY,'1');
   try{if(typeof premiumState!=='undefined')premiumState.active=true}catch{}
@@ -29,24 +29,20 @@
   const b=e.target?.closest?.('#activatePremiumTester');
   if(b&&localStorage.getItem(KEY)!=='1')startPremiumCheckout(e);
  },true);
- const load=(src,timeout=4500)=>new Promise(resolve=>{
+ const load=(src,timeout=3500)=>new Promise(resolve=>{
   const s=document.createElement('script');let done=false;
   const finish=()=>{if(done)return;done=true;clearTimeout(t);resolve()};
   const t=setTimeout(()=>{try{s.remove()}catch{}finish()},timeout);
-  s.src=src+(src.includes('?')?'&':'?')+'v='+encodeURIComponent(PATCH_VERSION);s.async=false;s.onload=finish;s.onerror=finish;document.body.appendChild(s);
+  s.src=src+(src.includes('?')?'&':'?')+'v='+encodeURIComponent(PATCH_VERSION);s.async=true;s.onload=finish;s.onerror=finish;document.body.appendChild(s);
  });
- /* Production-only patch chain. QA/test patches were removed because they duplicated handlers and caused inconsistent UI. */
- const core=[
-  '/premium-upgrades.js','/final-release-fixes.js','/release-polish.js','/exact-retailer-fix.js',
-  '/v10-overlap-fix.js','/product-intelligence-v2-client.js','/premium-experience-v2.js'
+ const patches=[
+  '/premium-upgrades.js','/qa-hardening.js','/qa-menu-routes.js','/qa-final-polish.js',
+  '/school-uniform-fix.js','/final-release-fixes.js','/release-polish.js','/exact-retailer-fix.js',
+  '/feature-suggestions.js','/premium-test-controls.js','/premium-checkout-fix.js','/v10-overlap-fix.js',
+  '/product-intelligence-v2-client.js','/premium-experience-v2.js','/settings-visible-v3.js','/premium-settings-behaviour-v3.js',
+  '/production-polish-v1.js'
  ];
- const ui=[
-  '/settings-visible-v3.js','/premium-settings-behaviour-v3.js','/premium-checkout-fix.js','/production-polish-v1.js'
- ];
- async function bootPatches(){
-  for(const src of core)await load(src);
-  await Promise.all(ui.map(src=>load(src)));
- }
- const schedule=()=>setTimeout(bootPatches,250);
+ async function bootPatches(){for(const src of patches)await load(src)}
+ const schedule=()=>setTimeout(bootPatches,500);
  if(document.readyState==='complete')schedule();else window.addEventListener('load',schedule,{once:true});
 })();
