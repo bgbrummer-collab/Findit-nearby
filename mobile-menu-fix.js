@@ -1,6 +1,6 @@
 (()=>{
  const KEY='findit_premium_beta';
- const PATCH_VERSION='20260822-likely-nearby-v7';
+ const PATCH_VERSION='20260822-likely-nearby-v8-merged';
  const activateForQa=()=>{
   localStorage.setItem(KEY,'1');
   try{if(typeof premiumState!=='undefined')premiumState.active=true}catch{}
