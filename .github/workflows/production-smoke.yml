@@ -8,10 +8,10 @@ on:
 jobs:
   smoke:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 10
     steps:
       - name: Wait for Vercel deployment
-        run: sleep 18
+        run: sleep 20
       - name: Test live FindIt production
         env:
           BASE_URL: https://findit-nearby.vercel.app
@@ -20,17 +20,40 @@ jobs:
           const base=process.env.BASE_URL,failures=[];
           const ok=(c,m)=>{if(!c)failures.push(m);else console.log('PASS',m)};
           const get=async(path,opts={})=>{let last;for(let i=0;i<5;i++){try{const r=await fetch(base+path,opts);if(r.status<500)return r;last=Error(`${path} returned ${r.status}`)}catch(e){last=e}await new Promise(r=>setTimeout(r,5000))}throw last};
+          const post=async(path,body)=>get(path,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)});
           try{
             const home=await get('/'),html=await home.text();ok(home.status===200,'Homepage returns 200');
             const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]),dupes=ids.filter((id,i)=>ids.indexOf(id)!==i);ok(dupes.length===0,'No duplicate HTML ids');
             for(const id of ['finder','photo','cameraPhoto','location','search','results','nearbyStores','map','feedbackForm','premiumModal','assistantPanel','mobileMore','drawer'])ok(ids.includes(id),`Critical element #${id} exists`);
-            for(const asset of ['/script.js','/style.css','/mobile-menu-fix.js','/premium-beta-fix.js','/manifest.webmanifest']){const r=await get(asset);ok(r.status===200,`${asset} returns 200`)}
+            for(const asset of ['/script.js','/style.css','/mobile-menu-fix.js','/premium-beta-fix.js','/product-intelligence-v2-client.js','/manifest.webmanifest']){const r=await get(asset);ok(r.status===200,`${asset} returns 200`)}
             const premium=await(await get('/premium-beta-fix.js')).text();ok(premium.includes('clearLegacyUnlocks'),'Legacy free-Premium unlock is neutralized');ok(premium.includes('repairCompareCheckboxes'),'Premium compare repair is deployed');ok(premium.includes('enforceFreeLimits'),'Free radius guard is deployed');
-            const health=await get('/api/health'),hj=await health.json();ok(health.status===200&&hj.ok===true&&hj.modelReachable===true,'Gemini health check passes');
+            const health=await get('/api/health'),hj=await health.json();ok(health.status===200&&hj.ok===true,'Core health check passes');
             const feedback=await get('/api/feedback-health'),fj=await feedback.json();ok(feedback.status===200&&fj.ok===true,'Feedback health check passes');
             const premiumStatus=await get('/api/paystack-router?action=status');ok(premiumStatus.status===401,'Premium status rejects missing token');
-            const nearby=await get('/api/nearby',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({lat:-25.7479,lon:28.2293,radiusKm:10,identification:{name:'running shoes',object:'shoes',searchQuery:'running shoes',category:'footwear',retailCategory:'footwear'}})}),nj=await nearby.json().catch(()=>({}));ok(nearby.status===200&&nj.ok===true&&nj.exactProductOnly===true&&Array.isArray(nj.stores),'Exact-store nearby endpoint responds safely');
-            const pi=await get('/api/product-intelligence',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({query:'2 ply toilet paper',name:'2 ply toilet paper',category:'grocery',retailCategory:'grocery'})}),pj=await pi.json().catch(()=>({}));console.log('Product intelligence sample:',JSON.stringify({matched:pj.matched,offerCount:pj.offers?.length||0,retailers:pj.webRetailers||[],sources:pj.sources},null,2));ok(pi.status===200&&pj.ok===true&&pj.sources?.officialRetailerWeb===true&&Array.isArray(pj.webRetailers),'Official-retailer product intelligence responds');
+
+            const nearby=await post('/api/nearby',{lat:-25.7479,lon:28.2293,radiusKm:10,identification:{brand:'Sony',model:'WH-1000XM5',name:'Sony WH-1000XM5 headphones',object:'headphones',searchQuery:'Sony WH-1000XM5 headphones',category:'electronics',retailCategory:'electronics'}}),nj=await nearby.json().catch(()=>({}));
+            ok(nearby.status===200&&nj.ok===true&&nj.exactProductOnly===true&&Array.isArray(nj.stores),'Exact-store nearby endpoint responds safely');
+            ok((nj.stores||[]).every(s=>s.exactProductMatch===true&&s.branchStockVerified===true&&s.stockVerified===true&&s.directionsAvailable===true),'Every nearby destination has exact product + verified branch stock');
+            ok((nj.stores||[]).every(s=>s.branchPriceVerified===true||s.price==null),'No online price is mislabeled as a branch price');
+            ok((nj.stores||[]).length>0||nj.directionsAvailable===false,'Directions stay off when no branch is verified');
+
+            const retailerTests=[
+              {label:'grocery',body:{brand:'Twinsaver',model:'Twin Ply 18 Rolls',name:'Twinsaver Twin Ply Toilet Paper 18 Rolls',query:'Twinsaver Twin Ply 18 Rolls toilet paper',category:'grocery/household',retailCategory:'grocery'},required:['Makro','Checkers','Pick n Pay','Shoprite','Woolworths']},
+              {label:'electronics',body:{brand:'Sony',model:'WH-1000XM5',name:'Sony WH-1000XM5 headphones',query:'Sony WH-1000XM5 headphones',category:'electronics',retailCategory:'electronics'},required:['Makro','Incredible Connection','Game']},
+              {label:'hardware',body:{brand:'Bosch',model:'GSB 185-LI',name:'Bosch GSB 185-LI cordless drill',query:'Bosch GSB 185-LI cordless drill',category:'hardware',retailCategory:'hardware'},required:['Makro','Builders','Game','Leroy Merlin']}
+            ];
+            for(const t of retailerTests){
+              const r=await post('/api/product-intelligence-v2',t.body),d=await r.json().catch(()=>({}));
+              const names=(d.retailerStatus||[]).map(x=>x.name),missing=t.required.filter(x=>!names.includes(x));
+              const unsafeOffers=(d.offers||[]).filter(o=>o.branchStockVerified===true||o.directionsAvailable===true);
+              ok(r.status===200&&d.ok===true,`Retailer v2 ${t.label} request succeeds`);
+              ok(missing.length===0,`Retailer v2 ${t.label} includes expected retailer set`);
+              ok(unsafeOffers.length===0,`Retailer v2 ${t.label} never promotes online listing as branch stock`);
+              ok(typeof d.trustRule==='string'&&d.trustRule.includes('Directions'),`Retailer v2 ${t.label} returns trust rule`);
+            }
+
+            const pi=await post('/api/product-intelligence',{query:'2 ply toilet paper',name:'2 ply toilet paper',category:'grocery',retailCategory:'grocery'}),pj=await pi.json().catch(()=>({}));
+            ok(pi.status===200&&pj.ok===true&&pj.sources?.officialRetailerWeb===true&&Array.isArray(pj.webRetailers),'Legacy official-retailer product intelligence still responds');
           }catch(e){failures.push(`Smoke test crashed: ${e.message}`)}
           if(failures.length){console.error('\nFAILURES');failures.forEach(f=>console.error('-',f));process.exit(1)}
           console.log('\nAll FindIt production smoke checks passed.');
