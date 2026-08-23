@@ -1,0 +1,54 @@
+name: Retailer live verification
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/retailer-live-qa.yml']
+permissions:
+  contents: write
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Wait for production
+        run: sleep 20
+      - name: Test retailer flows
+        run: |
+          node <<'NODE'
+          const base='https://findit-nearby.vercel.app';
+          const tests=[
+            {label:'Makro / Sony',body:{brand:'Sony',model:'WH-1000XM5',name:'Sony WH-1000XM5 headphones',query:'Sony WH-1000XM5 headphones',category:'electronics'},required:['Makro','Incredible Connection','Game']},
+            {label:'Groceries / Twinsaver',body:{brand:'Twinsaver',model:'Twin Ply 18 Rolls',name:'Twinsaver Twin Ply Toilet Paper 18 Rolls',query:'Twinsaver Twin Ply 18 Rolls toilet paper',category:'grocery/household'},required:['Makro','Checkers','Pick n Pay','Shoprite','Woolworths']},
+            {label:'Nike footwear',body:{brand:'Nike',model:'Air Force 1 Low',name:'Nike Air Force 1 Low sneaker',query:'Nike Air Force 1 Low sneaker',category:'footwear'},required:['Makro','Nike','Sportscene','Totalsports']},
+            {label:'adidas footwear',body:{brand:'adidas',model:'Samba OG',name:'adidas Samba OG shoes',query:'adidas Samba OG shoes',category:'footwear'},required:['Makro','adidas','Sportscene','Totalsports']},
+            {label:'Hardware / Bosch',body:{brand:'Bosch',model:'GSB 185-LI',name:'Bosch GSB 185-LI cordless drill',query:'Bosch GSB 185-LI cordless drill',category:'hardware'},required:['Makro','Builders','Game','Leroy Merlin']}
+          ];
+          const rows=[];
+          for(const t of tests){
+            let status=0,data={},error='';
+            try{const r=await fetch(base+'/api/product-intelligence-v2',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(t.body),signal:AbortSignal.timeout(50000)});status=r.status;data=await r.json()}catch(e){error=e.message}
+            const names=(data.retailerStatus||[]).map(x=>x.name);
+            const missing=t.required.filter(x=>!names.includes(x));
+            const unsafe=(data.offers||[]).filter(o=>o.branchStockVerified===true||o.directionsAvailable===true);
+            const ok=status===200&&data.ok===true&&missing.length===0&&unsafe.length===0&&typeof data.trustRule==='string';
+            rows.push({label:t.label,ok,status,missing,offers:(data.offers||[]).length,verifiedBranches:data.verifiedBranchCount||0,directions:data.directionsAvailable,unsafe:unsafe.length,message:data.message||error});
+          }
+          let nearStatus=0,near={},nearError='';
+          try{const r=await fetch(base+'/api/nearby',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({lat:-25.7479,lon:28.2293,radiusKm:15,identification:{brand:'Sony',model:'WH-1000XM5',name:'Sony WH-1000XM5 headphones',searchQuery:'Sony WH-1000XM5 headphones',category:'electronics'}}),signal:AbortSignal.timeout(40000)});nearStatus=r.status;near=await r.json()}catch(e){nearError=e.message}
+          const nearOk=nearStatus===200&&near.ok===true&&(!(near.stores||[]).length||((near.stores||[]).every(s=>s.branchStockVerified===true&&s.stockVerified===true&&s.directionsAvailable===true)));
+          rows.push({label:'Nearby exact-branch safety',ok:nearOk,status:nearStatus,stores:(near.stores||[]).length,branchStockVerified:near.branchStockVerified,directions:near.directionsAvailable,message:near.message||nearError});
+          const fs=require('fs');fs.mkdirSync('qa-results',{recursive:true});const report={generated:new Date().toISOString(),passed:rows.filter(x=>x.ok).length,total:rows.length,rows};fs.writeFileSync('qa-results/retailer-live-latest.json',JSON.stringify(report,null,2));fs.writeFileSync('qa-results/retailer-live-latest.md',['# Retailer Live QA','',`Generated: ${report.generated}`,'',...rows.map(x=>`${x.ok?'✅':'❌'} **${x.label}** — ${JSON.stringify(x)}`),'',`Passed: ${report.passed}/${report.total}`].join('\n'));if(rows.some(x=>!x.ok))process.exitCode=1;
+          NODE
+      - name: Publish report and remove one-shot workflow
+        if: always()
+        run: |
+          rm .github/workflows/retailer-live-qa.yml
+          git config user.name 'FindIt Retailer QA Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add qa-results/retailer-live-latest.json qa-results/retailer-live-latest.md .github/workflows/retailer-live-qa.yml
+          git commit -m 'Publish retailer live QA [skip ci]' || true
+          git pull --rebase origin main || true
+          git push || true
