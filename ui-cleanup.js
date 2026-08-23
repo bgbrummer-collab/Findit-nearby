@@ -39,6 +39,8 @@
         if(head) head.textContent='Verified nearby sellers';
         if(summary) summary.textContent='These branches have the exact product and branch stock verified.';
         const map=q('#mapViewBtn'); if(map) map.style.display='';
+      }else if(cards.length===0){
+        q('#finditNoVerifiedNearby')?.remove();
       }
     }
 
@@ -75,9 +77,10 @@
     // Remove any visible control that is explicitly disabled/coming-soon from active navigation.
     qa('button[disabled].premium-coming').forEach(remove);
   }
+
+  // Run once on load, and once after a completed FindIt result.
+  // Do NOT observe the result DOM: cleanup changes the DOM itself and an observer here
+  // can recursively schedule more cleanup, causing layout/scroll jumping.
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',clean,{once:true});else clean();
-  document.addEventListener('findit:results-rendered',()=>setTimeout(clean,0));
-  // Result panels are rendered asynchronously by several search modules, so keep the trust-first cleanup synced.
-  const startObserver=()=>{const root=q('#results')||document.body;new MutationObserver(()=>{clearTimeout(window.__finditUiCleanTimer);window.__finditUiCleanTimer=setTimeout(clean,40)}).observe(root,{childList:true,subtree:true});};
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',startObserver,{once:true});else startObserver();
+  document.addEventListener('findit:results-rendered',()=>requestAnimationFrame(clean));
 })();
