@@ -1,0 +1,84 @@
+name: FindIt trust-first production QA
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/trust-results-qa.yml']
+permissions:
+  contents: write
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: |
+          npm init -y >/dev/null 2>&1
+          npm i -D playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Wait for production
+        run: sleep 20
+      - name: Audit current production UI and product flows
+        run: |
+          cat >/tmp/trust-qa.mjs <<'NODE'
+          import {chromium} from 'playwright';
+          import fs from 'node:fs';
+          const base='https://findit-nearby.vercel.app/';
+          const products=[
+            {label:'Nike Air Force 1 Low',a:'NIKE AIR FORCE 1 LOW',b:'WHITE BLUE SNEAKER',expect:/Nike|Takealot|Makro|Bash|Sportscene|Totalsports/i},
+            {label:'Twinsaver Twin Ply 18 Rolls',a:'TWINSAVER TWIN PLY 18 ROLLS',b:'TOILET PAPER',expect:/Checkers|Pick n Pay|Woolworths|Shoprite|Takealot|Makro/i},
+            {label:'Sony WH-1000XM5',a:'SONY WH-1000XM5',b:'HEADPHONES',expect:/Incredible|Game|Takealot|Makro|HiFi/i},
+            {label:'Bosch cordless drill',a:'BOSCH CORDLESS DRILL',b:'POWER TOOL',expect:/Builders|Takealot|Makro|Leroy/i}
+          ];
+          const browser=await chromium.launch({headless:true});
+          const ctx=await browser.newContext({viewport:{width:1280,height:900},geolocation:{latitude:-25.7479,longitude:28.2293},permissions:['geolocation','clipboard-read','clipboard-write']});
+          const checks=[];const add=(label,ok,detail='')=>checks.push({label,ok,detail});
+          for(let n=0;n<products.length;n++){
+            const x=products[n],p=await ctx.newPage(),errors=[];p.on('pageerror',e=>errors.push(String(e)));
+            try{
+              await p.goto(base,{waitUntil:'domcontentloaded',timeout:35000});await p.waitForTimeout(1500);
+              const img=`/tmp/trust-${n}.png`;const g=await ctx.newPage();
+              await g.setContent(`<canvas id=c width=1200 height=800></canvas><script>const c=document.querySelector('#c'),z=c.getContext('2d');z.fillStyle='#fff';z.fillRect(0,0,1200,800);z.fillStyle='#111';z.font='bold 70px Arial';z.fillText(${JSON.stringify(x.a)},70,260);z.font='bold 52px Arial';z.fillText(${JSON.stringify(x.b)},70,370);z.strokeStyle='#222';z.lineWidth=8;z.strokeRect(50,120,1100,390)</script>`);await g.locator('#c').screenshot({path:img});await g.close();
+              await p.locator('#photo').setInputFiles(img);await p.locator('#location').click();await p.waitForTimeout(500);await p.locator('#search').click();
+              await p.waitForSelector('#results:not(.hidden)',{timeout:55000});await p.waitForTimeout(6500);
+              const result=(await p.locator('#resultName').innerText()).trim();
+              const seller=await p.locator('#exactSellerResults').innerText().catch(()=> '');
+              const nearby=await p.locator('#nearbyPanel').innerText().catch(()=> '');
+              add(`${x.label}: identification returned`,!!result&&!/^Item$/i.test(result),result);
+              add(`${x.label}: exact-seller section exists`,seller.length>15,seller.slice(0,150));
+              add(`${x.label}: relevant retailer search path exists`,x.expect.test(seller),seller.slice(-250));
+              add(`${x.label}: duplicate stat strip removed`,await p.locator('#finditV3Strip').count()===0);
+              add(`${x.label}: duplicate seller stats removed`,await p.locator('#exactSellerResults .premium-insights').count()===0);
+              const unsafeCards=await p.locator('#nearbyStores [data-exact-branch="0"],#nearbyStores .store-card:not([data-exact-branch="1"])').count();
+              add(`${x.label}: no unverified trip cards`,unsafeCards===0,`unsafeCards=${unsafeCards}`);
+              const unsafeDir=await p.locator('#nearbyStores [data-exact-branch="0"] a:has-text("Directions"),#nearbyStores [data-exact-branch="0"] button:has-text("Directions")').count();
+              add(`${x.label}: no unsafe Directions`,unsafeDir===0,`unsafeDirections=${unsafeDir}`);
+              const disabledClosest=await p.locator('#finditV3Actions [aria-disabled="true"]:has-text("Closest directions")').count();
+              add(`${x.label}: no useless disabled Closest directions`,disabledClosest===0);
+              const offers=await p.locator('#exactSellerResults .offer-card').count();
+              if(offers){
+                add(`${x.label}: exact offers have match badge`,await p.locator('#exactSellerResults .offer-card .findit-exact-badge').count()===offers,`offers=${offers}`);
+                add(`${x.label}: exact offers show checked time`,await p.locator('#exactSellerResults .offer-card .findit-checked').count()===offers);
+              }else add(`${x.label}: honest no-match fallback shown`,/No exact seller verified yet|SEARCH MORE RETAILERS/i.test(seller));
+              const heights=[];for(let k=0;k<6;k++){await p.evaluate(k=>window.scrollTo(0,(document.documentElement.scrollHeight-window.innerHeight)*(k/5)),k);await p.waitForTimeout(250);heights.push(await p.evaluate(()=>document.documentElement.scrollHeight));}
+              add(`${x.label}: scroll layout stable`,Math.max(...heights)-Math.min(...heights)<80,`heights=${heights.join(',')}`);
+              add(`${x.label}: no page JavaScript errors`,errors.length===0,errors.join(' | ').slice(0,300));
+              const copy=p.locator('[data-fi3="copy"]');if(await copy.count()){await copy.click();await p.waitForTimeout(150);add(`${x.label}: Copy product name works`,/Copied/i.test(await copy.innerText()));}
+            }catch(e){add(`${x.label}: flow completed`,false,e.message+' | '+errors.join(' | '));}
+            await p.close();
+          }
+          await browser.close();
+          const failed=checks.filter(c=>!c.ok);const out=['# FindIt trust-first production QA','',`Generated: ${new Date().toISOString()}`,'',...checks.map(c=>`${c.ok?'✅':'❌'} ${c.label}${c.detail?' — '+c.detail:''}`),'',`Passed: ${checks.length-failed.length}/${checks.length}`,`Failed: ${failed.length}`].join('\n');
+          fs.mkdirSync('qa-results',{recursive:true});fs.writeFileSync('qa-results/trust-results-latest.md',out);console.log(out);
+          if(failed.length)process.exitCode=1;
+          NODE
+          node /tmp/trust-qa.mjs || true
+      - name: Publish report and remove one-shot workflow
+        run: |
+          rm .github/workflows/trust-results-qa.yml
+          git config user.name 'FindIt Trust QA Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add qa-results/trust-results-latest.md .github/workflows/trust-results-qa.yml
+          git commit -m 'Publish trust-first production QA report [skip ci]'
+          git push
