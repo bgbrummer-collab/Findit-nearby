@@ -131,3 +131,18 @@
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});else install();
 })();
+
+
+/* CURRENT MAP VIEW BRIDGE — current UI uses #map directly. */
+(()=>{
+  document.addEventListener('click',e=>{
+    const b=e.target.closest?.('#mapViewBtn');if(!b)return;
+    const map=document.getElementById('map');if(!map)return;
+    e.preventDefault();
+    map.classList.toggle('hidden');
+    if(!map.classList.contains('hidden')){
+      Promise.resolve(window.finditLoadLeaflet?.()).then(()=>{try{if(typeof ensureMap==='function')ensureMap();if(typeof updateMap==='function')updateMap();setTimeout(()=>window.state?.map?.invalidateSize?.(),120)}catch{}});
+      b.textContent='Hide map';
+    }else b.textContent='Map view';
+  },true);
+})();
