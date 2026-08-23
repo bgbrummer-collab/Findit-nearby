@@ -33,8 +33,9 @@ jobs:
             const names=(data.retailerStatus||[]).map(x=>x.name);
             const missing=t.required.filter(x=>!names.includes(x));
             const unsafe=(data.offers||[]).filter(o=>o.branchStockVerified===true||o.directionsAvailable===true);
-            const ok=status===200&&data.ok===true&&missing.length===0&&unsafe.length===0&&typeof data.trustRule==='string';
-            rows.push({label:t.label,ok,status,missing,offers:(data.offers||[]).length,verifiedBranches:data.verifiedBranchCount||0,directions:data.directionsAvailable,unsafe:unsafe.length,message:data.message||error});
+            const makro=(data.retailerStatus||[]).find(x=>x.name==='Makro');
+            const ok=status===200&&data.ok===true&&missing.length===0&&unsafe.length===0&&typeof data.trustRule==='string'&&!!makro;
+            rows.push({label:t.label,ok,status,missing,offers:(data.offers||[]).length,verifiedBranches:data.verifiedBranchCount||0,directions:data.directionsAvailable,unsafe:unsafe.length,makro:makro?{exact:makro.exactListingFound,branchMode:makro.capability?.branchStock,priceMode:makro.capability?.branchPrice}:null,message:data.message||error});
           }
           let nearStatus=0,near={},nearError='';
           try{const r=await fetch(base+'/api/nearby',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({lat:-25.7479,lon:28.2293,radiusKm:15,identification:{brand:'Sony',model:'WH-1000XM5',name:'Sony WH-1000XM5 headphones',searchQuery:'Sony WH-1000XM5 headphones',category:'electronics'}}),signal:AbortSignal.timeout(40000)});nearStatus=r.status;near=await r.json()}catch(e){nearError=e.message}
