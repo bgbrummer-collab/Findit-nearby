@@ -1,0 +1,77 @@
+name: Multi-product FindIt production QA
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/product-flow-qa.yml'
+permissions:
+  contents: write
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          npm init -y >/dev/null 2>&1
+          npm i -D playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Wait for production
+        run: sleep 20
+      - name: Run four product flows
+        run: |
+          cat > /tmp/product-qa.mjs <<'NODE'
+          import {chromium} from 'playwright';
+          import fs from 'node:fs';
+          const base='https://findit-nearby.vercel.app/';
+          const products=[
+            ['Nike Air Force 1 Low','NIKE AIR FORCE 1 LOW','FOOTWEAR'],
+            ['Twinsaver Twin Ply 18 Rolls','TWINSAVER TWIN PLY 18 ROLLS','TOILET PAPER'],
+            ['Sony WH-1000XM5','SONY WH-1000XM5','HEADPHONES'],
+            ['Bosch cordless drill','BOSCH CORDLESS DRILL','POWER TOOL']
+          ];
+          const browser=await chromium.launch({headless:true});
+          const ctx=await browser.newContext({viewport:{width:1280,height:900},geolocation:{latitude:-25.7479,longitude:28.2293},permissions:['geolocation']});
+          const rows=[];
+          for(let n=0;n<products.length;n++){
+            const [label,line1,line2]=products[n];
+            const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(String(e)));
+            await p.goto(base,{waitUntil:'domcontentloaded',timeout:35000});await p.waitForTimeout(1400);
+            const img=`/tmp/qa-${n}.png`;
+            const g=await ctx.newPage();await g.setContent(`<canvas id=c width=1200 height=800></canvas><script>const c=document.querySelector('#c'),x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,1200,800);x.fillStyle='#111';x.font='bold 72px Arial';x.fillText(${JSON.stringify(line1)},90,250);x.font='bold 54px Arial';x.fillText(${JSON.stringify(line2)},90,360);x.strokeStyle='#333';x.lineWidth=8;x.strokeRect(70,120,1060,420);</script>`);await g.locator('#c').screenshot({path:img});await g.close();
+            let result='';let sellers='';let nearby='';let badDirections=0;let ok=true;let detail='';
+            try{
+              await p.locator('#photo').setInputFiles(img);
+              await p.locator('#location').click();await p.waitForTimeout(500);
+              await p.locator('#search').click();
+              await p.waitForSelector('#results:not(.hidden)',{timeout:55000});await p.waitForTimeout(5000);
+              result=(await p.locator('#resultName').innerText()).trim();
+              sellers=await p.locator('#exactSellerResults').innerText().catch(()=> 'seller section missing');
+              nearby=await p.locator('#nearbyStores').innerText().catch(()=> 'nearby section missing');
+              badDirections=await p.locator('#nearbyStores [data-exact-branch="0"] a:has-text("Directions"),#nearbyStores [data-exact-branch="0"] button:has-text("Directions")').count();
+              if(!result||/\bItem\b/.test(result)&&result.length<8)throw Error('result name missing');
+              if(!sellers.trim())throw Error('exact seller section missing');
+              if(!nearby.trim())throw Error('nearby section missing');
+              if(badDirections)throw Error('unverified nearby store exposes Directions');
+              if(errs.length)throw Error('page error: '+errs[0]);
+              detail=`identified=${result}; sellerSection=yes; nearbySection=yes; unsafeDirections=${badDirections}`;
+            }catch(e){ok=false;detail=e.message+'; result='+result+'; seller='+sellers.slice(0,120)+'; nearby='+nearby.slice(0,120)+'; errors='+errs.join(' | ')}
+            rows.push({label,ok,detail});await p.close();
+          }
+          await browser.close();
+          const out=['# FindIt multi-product production QA','',`Generated: ${new Date().toISOString()}`,'',...rows.map(r=>`${r.ok?'✅':'❌'} **${r.label}** — ${r.detail}`),'',`**Passed: ${rows.filter(r=>r.ok).length}/${rows.length}**`].join('\n');
+          fs.mkdirSync('qa-results',{recursive:true});fs.writeFileSync('qa-results/product-flow-latest.md',out);console.log(out);
+          if(rows.some(r=>!r.ok))process.exitCode=1;
+          NODE
+          node /tmp/product-qa.mjs || true
+      - name: Publish report
+        run: |
+          rm .github/workflows/product-flow-qa.yml
+          git config user.name "FindIt Product QA Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add qa-results/product-flow-latest.md .github/workflows/product-flow-qa.yml
+          git commit -m "Publish multi-product FindIt production QA report"
+          git push
