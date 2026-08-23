@@ -12,6 +12,36 @@
     // Remove result actions that are duplicated elsewhere or are not part of the current exact-product flow.
     remove(q('#widenSearch'));
 
+    // The exact-seller section already owns seller/offer/price/radius stats. Never show a second copy.
+    if(q('#exactSellerResults')) remove(q('#finditV3Strip'));
+
+    // Trust-first nearby policy: do not encourage a trip to a shop unless this exact product AND branch stock are verified.
+    const nearby=q('#nearbyStores');
+    if(nearby){
+      const cards=qa('#nearbyStores .store-card, #nearbyStores [data-store]');
+      const verified=cards.filter(card=>card.dataset?.exactBranch==='1');
+      cards.filter(card=>card.dataset?.exactBranch!=='1').forEach(remove);
+      const head=q('#nearbyPanel .nearby-head h3')||q('#nearbyPanel h3');
+      const summary=q('#nearbySummary');
+      if(cards.length && verified.length===0){
+        if(head) head.textContent='No verified nearby seller yet';
+        if(summary) summary.textContent='FindIt found nearby retailers for this product type, but none have verified this exact item at a branch. We will not suggest driving there until exact branch stock is verified.';
+        if(!q('#finditNoVerifiedNearby')){
+          const note=document.createElement('div');
+          note.id='finditNoVerifiedNearby';
+          note.className='empty-state';
+          note.innerHTML='<strong>No trip suggested yet.</strong><p>Use the exact-product seller links above. Nearby directions will appear only when FindIt can verify the exact item at that branch.</p>';
+          nearby.appendChild(note);
+        }
+        const map=q('#mapViewBtn'); if(map) map.style.display='none';
+      }else if(verified.length){
+        q('#finditNoVerifiedNearby')?.remove();
+        if(head) head.textContent='Verified nearby sellers';
+        if(summary) summary.textContent='These branches have the exact product and branch stock verified.';
+        const map=q('#mapViewBtn'); if(map) map.style.display='';
+      }
+    }
+
     // Keep one Recent clear control and wire it to the current recent list.
     const clear=q('#clearHistory');
     if(clear){
@@ -47,4 +77,7 @@
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',clean,{once:true});else clean();
   document.addEventListener('findit:results-rendered',()=>setTimeout(clean,0));
+  // Result panels are rendered asynchronously by several search modules, so keep the trust-first cleanup synced.
+  const startObserver=()=>{const root=q('#results')||document.body;new MutationObserver(()=>{clearTimeout(window.__finditUiCleanTimer);window.__finditUiCleanTimer=setTimeout(clean,40)}).observe(root,{childList:true,subtree:true});};
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',startObserver,{once:true});else startObserver();
 })();
