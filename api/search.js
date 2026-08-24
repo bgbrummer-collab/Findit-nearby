@@ -91,6 +91,10 @@ function postProcess(i,draft={}){
  i.productKind=clean(i.productKind)||'unknown';i.scaleClass=clean(i.scaleClass)||'unknown';i.brandEvidence=Boolean(i.brandEvidence);i.modelEvidence=Boolean(i.modelEvidence);
  if(i.brand&&!i.brandEvidence){i.brand=null;i.confidence=Math.min(i.confidence,.72);i.brandRemovedForEvidence=true}
  if(i.model&&!i.modelEvidence){i.model=null;i.confidence=Math.min(i.confidence,.68);i.modelRemovedForEvidence=true}
+ const labelFamily=norm([i.category,i.retailCategory,i.object].join(' '));
+ const labelDriven=/grocery|food|bread|beverage|beauty|personal care|conditioner|shampoo|hair care|skincare|cosmetic|toiletr|household|cleaner|detergent/.test(labelFamily);
+ const readableLabel=norm((i.visibleText||[]).join(' '));
+ if(labelDriven&&readableLabel&&i.name){const brandText=norm(i.brand),objectText=norm(i.object);const generic=new Set(['product','item','pack','bottle','tube','loaf','hair','care','beauty','personal','food','white','black','conditioner','shampoo','bread']);const unsupported=norm(i.name).split(' ').filter(t=>t.length>3&&!generic.has(t)&&!readableLabel.includes(t)&&!brandText.includes(t)&&!objectText.includes(t));if(unsupported.length){i.name=[i.brand,i.object].filter(Boolean).join(' ')||i.object||i.name;i.searchQuery=i.name;i.model=null;i.modelEvidence=false;i.confidence=Math.min(i.confidence,.82);i.labelVariantReduced=true;i.verificationNote=(i.verificationNote?i.verificationNote+' ':'')+'FindIt removed unsupported variant wording that was not present in readable label text.'}}
  const draftName=norm([draft.object,draft.name,draft.brand,draft.model].join(' ')),finalName=norm([i.object,i.name,i.brand,i.model].join(' '));
  if(draftName&&finalName&&overlap(draftName,finalName)<.45){i.confidence=Math.min(i.confidence,.66);i.verifierDisagreement=true}
  if(/^(unknown|image_of_product|packaging)$/i.test(i.productKind))i.confidence=Math.min(i.confidence,.62);
