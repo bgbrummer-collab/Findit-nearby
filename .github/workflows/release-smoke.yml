@@ -1,50 +1,51 @@
 name: FindIt Release Smoke
+
 on:
   push:
-    branches: [main]
+    branches: [main, stabilize-results-20260824]
   pull_request:
     branches: [main]
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   smoke:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: |
+      - name: Install Playwright
+        run: |
           npm init -y >/dev/null 2>&1
+          npm pkg set type=module
           npm install --save-dev playwright@1.55.0
           npx playwright install --with-deps chromium
-      - run: sleep 25
-      - name: Run current production smoke
+      - name: Start local branch build
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/findit-http.log 2>&1 &
+          echo $! > /tmp/findit-http.pid
+          sleep 2
+      - name: Run stable FindIt smoke suite
         env:
-          FINDIT_URL: https://findit-nearby.vercel.app/
+          FINDIT_URL: http://127.0.0.1:4173/
         run: |
           mkdir -p qa-results
           set +e
           node tests/release-smoke.mjs 2>&1 | tee qa-results/live-smoke.log
           code=${PIPESTATUS[0]}
           set -e
-          if [ "$code" -eq 0 ]; then
-            echo "PASS $(date -u +%Y-%m-%dT%H:%M:%SZ)" > qa-results/live-smoke-status.txt
-          else
-            echo "FAIL $(date -u +%Y-%m-%dT%H:%M:%SZ)" > qa-results/live-smoke-status.txt
-          fi
+          if [ "$code" -eq 0 ]; then echo "PASS $(date -u +%Y-%m-%dT%H:%M:%SZ)" > qa-results/live-smoke-status.txt; else echo "FAIL $(date -u +%Y-%m-%dT%H:%M:%SZ)" > qa-results/live-smoke-status.txt; fi
           exit "$code"
-      - name: Publish smoke result
-        if: always() && github.event_name == 'push'
-        run: |
-          if [ ! -f qa-results/live-smoke-status.txt ]; then echo "FAIL smoke did not complete" > qa-results/live-smoke-status.txt; fi
-          git config user.name 'findit-qa-bot'
-          git config user.email 'actions@users.noreply.github.com'
-          git add qa-results/live-smoke-status.txt qa-results/live-smoke.log 2>/dev/null || true
-          if ! git diff --cached --quiet; then
-            git commit -m 'Publish live FindIt smoke result [skip ci]'
-            git push
-          fi
+      - name: Upload smoke results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: findit-release-smoke-${{ github.run_id }}
+          path: qa-results/
+          if-no-files-found: warn
+          retention-days: 7

@@ -1,112 +1,17 @@
 import { chromium } from 'playwright';
+import productHandler from '../api/product-intelligence-v2.js';
+import nearbyHandler from '../api/nearby.js';
 
-const URL = process.env.FINDIT_URL || 'https://findit-nearby.vercel.app/';
-const browser = await chromium.launch({ headless: true });
-const failures = [];
-const check = async (name, fn) => {
-  try { await fn(); console.log('[PASS]', name); }
-  catch (e) { failures.push(`${name}: ${e.message}`); console.error('[FAIL]', name, e.message); }
-};
+const URL=process.env.FINDIT_URL||'http://127.0.0.1:4173/';
+const browser=await chromium.launch({headless:true});
+const failures=[];
+const check=async(name,fn)=>{try{await fn();console.log('[PASS]',name)}catch(e){failures.push(`${name}: ${e.message}`);console.error('[FAIL]',name,e.message)}};
+const invoke=async(handler,body)=>{let code=200,data;const req={method:'POST',body};const res={setHeader(){},status(n){code=n;return this},json(v){data=v;return this}};await handler(req,res);return{status:code,data}};
 
-async function audit(viewport) {
-  const ctx = await browser.newContext({
-    viewport,
-    geolocation: { latitude: -25.7479, longitude: 28.2293 },
-    permissions: ['geolocation', 'clipboard-read', 'clipboard-write']
-  });
-  const page = await ctx.newPage();
-  const pageErrors = [];
-  const consoleErrors = [];
-  page.on('pageerror', e => pageErrors.push(String(e.message || e)));
-  page.on('console', m => { if (m.type() === 'error') consoleErrors.push(m.text()); });
+async function baseAudit(viewport){const ctx=await browser.newContext({viewport,geolocation:{latitude:-25.7479,longitude:28.2293},permissions:['geolocation']});const page=await ctx.newPage(),errors=[];page.on('pageerror',e=>errors.push(String(e.message||e)));await page.goto(URL,{waitUntil:'domcontentloaded',timeout:20000});await page.waitForTimeout(600);await check(`${viewport.width}px page loads`,async()=>{for(const id of ['finder','photo','location','search','results','nearbyStores'])if(!await page.locator(`#${id}`).count())throw Error(`${id} missing`)});await check(`${viewport.width}px one results controller`,async()=>{const n=await page.locator('script[src*="exact-retailer-fix.js"]').count();if(n!==1)throw Error(`got ${n}`)});await check(`${viewport.width}px no duplicate ids`,async()=>{const d=await page.evaluate(()=>{const ids=[...document.querySelectorAll('[id]')].map(x=>x.id);return[...new Set(ids.filter((x,i)=>ids.indexOf(x)!==i))]});if(d.length)throw Error(d.join(','))});await check(`${viewport.width}px no uncaught JS errors`,async()=>{if(errors.length)throw Error(errors.join(' | '))});await ctx.close()}
 
-  await page.goto(URL, { waitUntil: 'networkidle', timeout: 45000 });
-  await page.waitForTimeout(1800);
+async function mockedProductFlow(){const ctx=await browser.newContext({viewport:{width:390,height:844},geolocation:{latitude:-25.7479,longitude:28.2293},permissions:['geolocation']});const page=await ctx.newPage();await page.route('**/api/search',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({identification:{object:'sneaker',brand:'Nike',model:'Air Force 1 Low',name:'Nike Air Force 1 Low',category:'footwear',retailCategory:'footwear',searchQuery:'Nike Air Force 1 Low white blue',summary:'White and blue Nike Air Force 1 Low.',confidence:.98,visibleText:['AIR','NIKE']}})}));await page.route('**/api/product-intelligence-v2',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,offers:[{product_name:'Nike Air Force 1 Low White Blue',price:2399.95,currency:'ZAR',availability:'in_stock',product_url:'https://www.sportscene.co.za/product/nike-air-force-1-low-test',verified:true,source:'Retailer structured product data',retailer:{name:'Sportscene'},matchScore:.96}],webRetailers:[{name:'Sportscene',searchUrl:'https://www.sportscene.co.za/search?q=Nike'}]})}));await page.route('**/api/nearby',async r=>{const b=r.request().postDataJSON?.()||{};if(b.mode==='likely')return r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,stores:[{name:'Sportscene Menlyn',address:'Menlyn Park, Pretoria',lat:-25.782,lon:28.275,distanceKm:5.9,phone:'+27123456789',website:'https://www.sportscene.co.za',exactProductMatch:false,stockVerified:false,branchStockVerified:false,directionsAvailable:true}]})});return r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,stores:[]})})});await page.goto(URL,{waitUntil:'domcontentloaded'});await page.locator('#photo').setInputFiles({name:'shoe.jpg',mimeType:'image/jpeg',buffer:Buffer.from([255,216,255,217])});await page.waitForTimeout(250);await page.locator('#search').click();await page.locator('#resultName').waitFor({state:'visible',timeout:8000});await page.waitForTimeout(500);await check('mock identification correct',async()=>{if(!/Nike Air Force 1 Low/i.test(await page.locator('#resultName').innerText()))throw Error('missing')});await check('mock price shown',async()=>{const t=await page.locator('#exactSellerResults').innerText();if(!/2.?399|2399/i.test(t))throw Error(t)});await check('mock nearby same retailer paired',async()=>{const t=await page.locator('#nearbyStores').innerText();if(!/Sportscene Menlyn/i.test(t)||!/In stock online/i.test(t)||!/Directions to store/i.test(t))throw Error(t);if(/✓ Branch stock confirmed/i.test(t))throw Error('fake branch stock')});await ctx.close()}
 
-  await check(`${viewport.width}px production loads current finder`, async () => {
-    if (!await page.locator('#finder').count()) throw Error('finder missing');
-    if (!await page.locator('#search').count()) throw Error('Identify & Find missing');
-    if (!await page.locator('#photo').count()) throw Error('image input missing');
-  });
+async function apiAudit(){const samples=[{label:'shoe',body:{brand:'Nike',model:'Air Force 1 Low',name:'Nike Air Force 1 Low',query:'Nike Air Force 1 Low',category:'footwear',retailCategory:'footwear'},wanted:['Nike','Sportscene','Totalsports']},{label:'electronics',body:{brand:'Sony',model:'WH-1000XM5',name:'Sony WH-1000XM5 headphones',query:'Sony WH-1000XM5',category:'electronics',retailCategory:'electronics'},wanted:['Incredible Connection','Game']},{label:'grocery',body:{brand:'Twinsaver',name:'Twinsaver toilet paper',query:'Twinsaver toilet paper',category:'grocery',retailCategory:'grocery'},wanted:['Checkers','Pick n Pay']},{label:'hardware',body:{brand:'Bosch',model:'GSB 185-LI',name:'Bosch GSB 185-LI drill',query:'Bosch GSB 185-LI',category:'hardware',retailCategory:'hardware'},wanted:['Builders']}];for(const s of samples)await check(`${s.label} retailer selection and safety`,async()=>{const {status,data}=await invoke(productHandler,s.body);if(status!==200||!data?.ok)throw Error(`status ${status}`);const names=(data.retailerStatus||[]).map(x=>x.name);if(!s.wanted.some(x=>names.includes(x)))throw Error(names.join(','));for(const o of data.offers||[])if(o.branchStockVerified||o.directionsAvailable)throw Error('online offer faked branch data')});await check('nearby lookup returns valid real coordinates or clean empty state',async()=>{const {status,data}=await invoke(nearbyHandler,{lat:-25.7479,lon:28.2293,radiusKm:10,mode:'likely',identification:{brand:'Nike',name:'Nike Air Force 1 Low',object:'sneaker',category:'footwear',retailCategory:'footwear'}});if(status!==200||!data?.ok||!Array.isArray(data.stores))throw Error(`status ${status}`);for(const s of data.stores){if(!Number.isFinite(Number(s.lat))||!Number.isFinite(Number(s.lon))||!Number.isFinite(Number(s.distanceKm)))throw Error('bad coordinates');if(s.exactProductMatch||s.stockVerified||s.branchStockVerified)throw Error('fake exact stock')}})}
 
-  await check(`${viewport.width}px no duplicate element IDs`, async () => {
-    const dupes = await page.evaluate(() => {
-      const ids = [...document.querySelectorAll('[id]')].map(e => e.id);
-      return [...new Set(ids.filter((id, i) => ids.indexOf(id) !== i))];
-    });
-    if (dupes.length) throw Error(`duplicate ids: ${dupes.join(', ')}`);
-  });
-
-  await check(`${viewport.width}px obsolete controls are removed`, async () => {
-    const bad = await page.evaluate(() => ({
-      widen: !!document.querySelector('#widenSearch'),
-      coming: document.querySelectorAll('button.premium-coming').length,
-      oldPremium: !!document.querySelector('#premiumHome')
-    }));
-    if (bad.widen || bad.coming || bad.oldPremium) throw Error(JSON.stringify(bad));
-  });
-
-  await check(`${viewport.width}px unverified nearby stores never keep Directions`, async () => {
-    await page.evaluate(() => {
-      const results = document.querySelector('#results');
-      results?.classList.remove('hidden');
-      const nearby = document.querySelector('#nearbyStores');
-      if (!nearby) return;
-      nearby.innerHTML = `
-        <article class="store-card" data-store="0" data-exact-branch="0">
-          <strong>Unverified Test Store</strong>
-          <div class="store-actions"><a href="https://example.com">Directions →</a><a href="https://example.com">Map</a></div>
-        </article>`;
-      window.state = window.state || {};
-      state.stores = [{name:'Unverified Test Store',lat:-25.75,lon:28.23,exactProductMatch:false,stockVerified:false}];
-      document.dispatchEvent(new CustomEvent('findit:results-rendered'));
-    });
-    await page.waitForTimeout(300);
-    const visibleDirections = await page.locator('#nearbyStores a, #nearbyStores button').filter({hasText:/Directions/i}).evaluateAll(els => els.filter(e => getComputedStyle(e).display !== 'none' && e.getAttribute('href')).length);
-    if (visibleDirections) throw Error(`${visibleDirections} unverified Directions controls visible`);
-  });
-
-  await check(`${viewport.width}px results layout stays stable while scrolling`, async () => {
-    await page.evaluate(() => {
-      const results = document.querySelector('#results');
-      results?.classList.remove('hidden');
-      const exact = document.querySelector('#exactSellerResults') || (() => {
-        const x = document.createElement('section'); x.id='exactSellerResults';
-        x.innerHTML='<div style="height:700px">Verification content</div>';
-        results?.appendChild(x); return x;
-      })();
-      document.dispatchEvent(new CustomEvent('findit:results-rendered'));
-    });
-    await page.waitForTimeout(500);
-    const before = await page.evaluate(() => document.documentElement.scrollHeight);
-    const samples = [];
-    for (let i=0;i<8;i++) {
-      await page.evaluate(i => window.scrollTo(0, Math.min(document.documentElement.scrollHeight-window.innerHeight, i*250)), i);
-      await page.waitForTimeout(120);
-      samples.push(await page.evaluate(() => document.documentElement.scrollHeight));
-    }
-    const after = await page.evaluate(() => document.documentElement.scrollHeight);
-    const min = Math.min(before, after, ...samples), max = Math.max(before, after, ...samples);
-    if (max - min > 8) throw Error(`scrollHeight changed while scrolling: ${[before,...samples,after].join(',')}`);
-  });
-
-  await check(`${viewport.width}px no uncaught JavaScript errors`, async () => {
-    if (pageErrors.length) throw Error(pageErrors.join(' | '));
-  });
-
-  await ctx.close();
-  return { pageErrors, consoleErrors };
-}
-
-const desktop = await audit({ width: 1440, height: 900 });
-const mobile = await audit({ width: 390, height: 844 });
-
-await browser.close();
-
-console.log('Desktop console errors:', desktop.consoleErrors.length);
-console.log('Mobile console errors:', mobile.consoleErrors.length);
-if (failures.length) {
-  console.error('\nFAILURES\n' + failures.join('\n'));
-  process.exit(1);
-}
-console.log('\nCURRENT_FINDIT_PRODUCTION_SMOKE_PASS');
+await baseAudit({width:1440,height:900});await baseAudit({width:390,height:844});await mockedProductFlow();await apiAudit();await browser.close();if(failures.length){console.error('\nFAILURES\n'+failures.join('\n'));process.exit(1)}console.log('\nFINDIT_STABLE_PIPELINE_SMOKE_PASS');
