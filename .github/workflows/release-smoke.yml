@@ -22,18 +22,19 @@ jobs:
       - name: Install Playwright
         run: |
           npm init -y >/dev/null 2>&1
+          npm pkg set type=module
           npm install --save-dev playwright@1.55.0
           npx playwright install --with-deps chromium
-      - name: Wait for Vercel deployment
-        run: sleep 25
+      - name: Start local branch build
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/findit-http.log 2>&1 &
+          echo $! > /tmp/findit-http.pid
+          sleep 2
       - name: Run stable FindIt smoke suite
         env:
-          MAIN_URL: https://findit-nearby.vercel.app/
-          PREVIEW_URL: https://findit-nearby-git-stabilize-results-20260824-findit-nearby1.vercel.app/
+          FINDIT_URL: http://127.0.0.1:4173/
         run: |
           mkdir -p qa-results
-          if [ "${GITHUB_REF_NAME}" = "main" ]; then export FINDIT_URL="$MAIN_URL"; else export FINDIT_URL="$PREVIEW_URL"; fi
-          echo "Testing $FINDIT_URL"
           set +e
           node tests/release-smoke.mjs 2>&1 | tee qa-results/live-smoke.log
           code=${PIPESTATUS[0]}
@@ -44,7 +45,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: findit-release-smoke-${{ github.ref_name }}
+          name: findit-release-smoke-${{ github.run_id }}
           path: qa-results/
           if-no-files-found: warn
           retention-days: 7
