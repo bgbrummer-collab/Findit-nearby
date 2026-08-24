@@ -1,0 +1,60 @@
+name: FindIt Nine Item Real-World Audit
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Wait for production deployment
+        run: sleep 25
+      - name: Test the nine real-world item categories
+        env:
+          BASE_URL: https://findit-nearby.vercel.app
+        run: |
+          node <<'NODE'
+          const base=process.env.BASE_URL,fail=[];
+          const ok=(x,m)=>{if(!x)fail.push(m);else console.log('PASS',m)};
+          const post=async(path,body)=>{for(let i=0;i<4;i++){try{const r=await fetch(base+path,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)});if(r.status<500)return r}catch{}await new Promise(r=>setTimeout(r,4000))}throw Error(path+' unavailable')};
+          const tests=[
+            {label:'Mercedes SUV',body:{brand:'Mercedes-Benz',model:'',name:'Mercedes-Benz SUV',query:'Mercedes-Benz SUV',category:'vehicle',retailCategory:'vehicle'},must:['AutoTrader','Cars.co.za','WeBuyCars','Mercedes-Benz South Africa'],not:['Clicks','Dis-Chem','PriceCheck']},
+            {label:'JBL speaker',body:{brand:'JBL',model:'',name:'JBL portable Bluetooth speaker',query:'JBL portable Bluetooth speaker',category:'electronics',retailCategory:'electronics'},must:['Incredible Connection','Game'],not:['AutoTrader','Clicks']},
+            {label:'Albany bread',body:{brand:'Albany',model:'Superior White Bread',name:'Albany Superior White Bread',query:'Albany Superior White Bread',category:'grocery',retailCategory:'grocery'},must:['Checkers','Pick n Pay','Shoprite','Woolworths'],not:['AutoTrader']},
+            {label:'adidas Samba',body:{brand:'adidas',model:'Samba',name:'adidas Samba',query:'adidas Samba',category:'footwear',retailCategory:'footwear'},must:['adidas','Sportscene','Totalsports'],not:['Clicks','AutoTrader']},
+            {label:'adjustable wrench',body:{brand:'',model:'',name:'adjustable wrench',query:'adjustable wrench spanner',category:'hardware',retailCategory:'hardware'},must:['Builders','Game','Leroy Merlin'],not:['Clicks','AutoTrader']},
+            {label:'toaster',body:{brand:'Retro',model:'',name:'2 slice toaster',query:'2 slice toaster',category:'appliances',retailCategory:'appliances'},must:['Game','HiFi Corp'],not:['AutoTrader','Clicks']},
+            {label:'salt pepper shakers',body:{brand:'',model:'',name:'salt and pepper shakers',query:'salt and pepper shaker set',category:'kitchenware',retailCategory:'kitchenware'},must:['Game','Woolworths'],not:['AutoTrader','Clicks']},
+            {label:'Marc Anthony conditioner',body:{brand:'Marc Anthony',model:'Strictly Curls Triple Blend Conditioner 250ml',name:'Marc Anthony Strictly Curls Triple Blend Conditioner 250ml',query:'Marc Anthony Strictly Curls Triple Blend Conditioner 250ml',category:'beauty',retailCategory:'beauty'},must:['Clicks','Dis-Chem'],not:['AutoTrader']},
+            {label:'multi plug adaptor',body:{brand:'',model:'',name:'South African multi plug adaptor',query:'South African multi plug adaptor',category:'electrical accessories',retailCategory:'electrical'},must:['Builders','Game','Leroy Merlin'],not:['AutoTrader','Clicks']}
+          ];
+          for(const t of tests){
+            const r=await post('/api/product-intelligence-v2',t.body),d=await r.json().catch(()=>({}));
+            const names=(d.retailerStatus||[]).map(x=>x.name);
+            ok(r.status===200&&d.ok===true,`${t.label}: retailer API works`);
+            for(const n of t.must)ok(names.includes(n),`${t.label}: routes to ${n}`);
+            for(const n of t.not)ok(!names.includes(n),`${t.label}: excludes ${n}`);
+            ok((d.offers||[]).every(o=>!o.directionsAvailable&&!o.branchStockVerified),`${t.label}: online results never fake branch stock or directions`);
+          }
+          const nearby=[
+            ['Mercedes SUV',{name:'Mercedes-Benz SUV',object:'car',brand:'Mercedes-Benz',category:'vehicle',retailCategory:'vehicle'}],
+            ['JBL speaker',{name:'JBL portable Bluetooth speaker',object:'speaker',category:'electronics',retailCategory:'electronics'}],
+            ['Albany bread',{name:'Albany Superior White Bread',object:'bread',category:'grocery',retailCategory:'grocery'}],
+            ['adidas Samba',{name:'adidas Samba',object:'shoe',brand:'adidas',category:'footwear',retailCategory:'footwear'}],
+            ['adjustable wrench',{name:'adjustable wrench',object:'wrench',category:'hardware',retailCategory:'hardware'}],
+            ['toaster',{name:'2 slice toaster',object:'toaster',category:'appliances',retailCategory:'appliances'}],
+            ['salt pepper shakers',{name:'salt and pepper shakers',object:'shakers',category:'kitchenware',retailCategory:'kitchenware'}],
+            ['conditioner',{name:'Marc Anthony conditioner',object:'conditioner',category:'beauty',retailCategory:'beauty'}],
+            ['multi plug adaptor',{name:'multi plug adaptor',object:'plug adaptor',category:'electrical accessories',retailCategory:'electrical'}]
+          ];
+          for(const [label,id] of nearby){
+            const r=await post('/api/nearby',{lat:-25.7479,lon:28.2293,radiusKm:10,mode:'likely',identification:id}),d=await r.json().catch(()=>({}));
+            ok(r.status===200&&d.ok===true&&Array.isArray(d.stores),`${label}: nearby fallback works`);
+            ok((d.stores||[]).every(s=>s.exactProductMatch===false&&s.stockVerified===false&&s.directionsAvailable===false),`${label}: nearby fallback remains unverified and has no Directions`);
+          }
+          if(fail.length){console.error('\nFAILURES');for(const f of fail)console.error('-',f);process.exit(1)}
+          console.log('\nAll nine real-world routing checks passed.');
+          NODE
