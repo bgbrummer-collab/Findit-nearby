@@ -1,60 +1,103 @@
-name: FindIt Nine Item Real-World Audit
+name: FindIt Nine Image Real-World Audit
 
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - '.github/qa-results/**'
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 18
     steps:
+      - uses: actions/checkout@v4
+
       - name: Wait for production deployment
         run: sleep 25
-      - name: Test the nine real-world item categories
+
+      - name: Test actual user images against live FindIt
         env:
           BASE_URL: https://findit-nearby.vercel.app
         run: |
           node <<'NODE'
-          const base=process.env.BASE_URL,fail=[];
-          const ok=(x,m)=>{if(!x)fail.push(m);else console.log('PASS',m)};
-          const post=async(path,body)=>{for(let i=0;i<4;i++){try{const r=await fetch(base+path,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)});if(r.status<500)return r}catch{}await new Promise(r=>setTimeout(r,4000))}throw Error(path+' unavailable')};
-          const tests=[
-            {label:'Mercedes SUV',body:{brand:'Mercedes-Benz',model:'',name:'Mercedes-Benz SUV',query:'Mercedes-Benz SUV',category:'vehicle',retailCategory:'vehicle'},must:['AutoTrader','Cars.co.za','WeBuyCars','Mercedes-Benz South Africa'],not:['Clicks','Dis-Chem','PriceCheck']},
-            {label:'JBL speaker',body:{brand:'JBL',model:'',name:'JBL portable Bluetooth speaker',query:'JBL portable Bluetooth speaker',category:'electronics',retailCategory:'electronics'},must:['Incredible Connection','Game'],not:['AutoTrader','Clicks']},
-            {label:'Albany bread',body:{brand:'Albany',model:'Superior White Bread',name:'Albany Superior White Bread',query:'Albany Superior White Bread',category:'grocery',retailCategory:'grocery'},must:['Checkers','Pick n Pay','Shoprite','Woolworths'],not:['AutoTrader']},
-            {label:'adidas Samba',body:{brand:'adidas',model:'Samba',name:'adidas Samba',query:'adidas Samba',category:'footwear',retailCategory:'footwear'},must:['adidas','Sportscene','Totalsports'],not:['Clicks','AutoTrader']},
-            {label:'adjustable wrench',body:{brand:'',model:'',name:'adjustable wrench',query:'adjustable wrench spanner',category:'hardware',retailCategory:'hardware'},must:['Builders','Game','Leroy Merlin'],not:['Clicks','AutoTrader']},
-            {label:'toaster',body:{brand:'Retro',model:'',name:'2 slice toaster',query:'2 slice toaster',category:'appliances',retailCategory:'appliances'},must:['Game','HiFi Corp'],not:['AutoTrader','Clicks']},
-            {label:'salt pepper shakers',body:{brand:'',model:'',name:'salt and pepper shakers',query:'salt and pepper shaker set',category:'kitchenware',retailCategory:'kitchenware'},must:['Game','Woolworths'],not:['AutoTrader','Clicks']},
-            {label:'Marc Anthony conditioner',body:{brand:'Marc Anthony',model:'Strictly Curls Triple Blend Conditioner 250ml',name:'Marc Anthony Strictly Curls Triple Blend Conditioner 250ml',query:'Marc Anthony Strictly Curls Triple Blend Conditioner 250ml',category:'beauty',retailCategory:'beauty'},must:['Clicks','Dis-Chem'],not:['AutoTrader']},
-            {label:'multi plug adaptor',body:{brand:'',model:'',name:'South African multi plug adaptor',query:'South African multi plug adaptor',category:'electrical accessories',retailCategory:'electrical'},must:['Builders','Game','Leroy Merlin'],not:['AutoTrader','Clicks']}
+          const fs=require('fs');
+          const base=process.env.BASE_URL;
+          const failures=[];
+          const results=[];
+          const ok=(cond,msg)=>{if(!cond){failures.push(msg);console.error('FAIL',msg)}else console.log('PASS',msg)};
+          const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+          async function fetchRetry(url,opts={}){let last;for(let i=0;i<4;i++){try{const r=await fetch(url,opts);if(r.status<500)return r;last=Error(`${url} returned ${r.status}`)}catch(e){last=e}await sleep(3500)}throw last||Error(url+' unavailable')}
+          const postJson=(path,body)=>fetchRetry(base+path,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)});
+          const specs=[
+            {key:'mercedes',label:'Mercedes SUV',accept:/\b(car|vehicle|suv|automotive|mercedes)\b/i,brand:/mercedes/i,must:['AutoTrader','Cars.co.za','WeBuyCars','Mercedes-Benz South Africa'],not:['Clicks','Dis-Chem','PriceCheck']},
+            {key:'jbl',label:'JBL speaker',accept:/\b(speaker|audio|bluetooth|electronics?)\b/i,brand:/\bjbl\b/i,must:['Incredible Connection','Game'],not:['AutoTrader','Clicks']},
+            {key:'albany',label:'Albany bread',accept:/\b(bread|grocery|food)\b/i,brand:/\balbany\b/i,must:['Checkers','Pick n Pay','Shoprite','Woolworths'],not:['AutoTrader']},
+            {key:'samba',label:'adidas Samba',accept:/\b(shoe|sneaker|footwear|trainer|samba)\b/i,brand:/adidas/i,model:/samba/i,must:['adidas','Sportscene','Totalsports'],not:['Clicks','AutoTrader']},
+            {key:'wrench',label:'adjustable wrench',accept:/\b(wrench|spanner|tool|hardware)\b/i,must:['Builders','Game','Leroy Merlin'],not:['Clicks','AutoTrader']},
+            {key:'toaster',label:'toaster',accept:/\b(toaster|appliance)\b/i,must:['Game','HiFi Corp'],not:['AutoTrader','Clicks']},
+            {key:'salt_pepper',label:'salt and pepper shakers',accept:/\b(salt|pepper|shaker|kitchenware|tableware)\b/i,must:['Game','Woolworths'],not:['AutoTrader','Clicks']},
+            {key:'conditioner',label:'Marc Anthony conditioner',accept:/\b(conditioner|hair care|beauty|strictly curls)\b/i,brand:/marc anthony/i,must:['Clicks','Dis-Chem'],not:['AutoTrader']},
+            {key:'multiplug',label:'multi-plug adaptor',accept:/\b(plug|adaptor|adapter|power strip|electrical|socket)\b/i,must:['Builders','Game','Leroy Merlin'],not:['AutoTrader','Clicks']}
           ];
-          for(const t of tests){
-            const r=await post('/api/product-intelligence-v2',t.body),d=await r.json().catch(()=>({}));
-            const names=(d.retailerStatus||[]).map(x=>x.name);
-            ok(r.status===200&&d.ok===true,`${t.label}: retailer API works`);
-            for(const n of t.must)ok(names.includes(n),`${t.label}: routes to ${n}`);
-            for(const n of t.not)ok(!names.includes(n),`${t.label}: excludes ${n}`);
-            ok((d.offers||[]).every(o=>!o.directionsAvailable&&!o.branchStockVerified),`${t.label}: online results never fake branch stock or directions`);
+
+          for(const s of specs){
+            try{
+              const b64=fs.readFileSync(`.github/qa-fixtures/${s.key}.b64`,'utf8').trim();
+              const fd=new FormData();
+              fd.append('image',new Blob([Buffer.from(b64,'base64')],{type:'image/jpeg'}),`${s.key}.jpg`);
+              fd.append('lat','-25.7479');fd.append('lon','28.2293');
+              const ir=await fetchRetry(base+'/api/search',{method:'POST',body:fd});
+              const idata=await ir.json().catch(()=>({}));
+              const id=idata.identification||{};
+              const text=[id.object,id.name,id.brand,id.model,id.category,id.retailCategory,id.searchQuery,id.summary,...(id.visibleText||[]),...(id.features||[]),...(id.evidence||[])].filter(Boolean).join(' ');
+              console.log('IMAGE_RESULT',JSON.stringify({label:s.label,status:ir.status,blocked:idata.blocked,object:id.object,name:id.name,brand:id.brand,model:id.model,category:id.category,retailCategory:id.retailCategory,confidence:id.confidence,searchQuery:id.searchQuery,verificationNote:id.verificationNote}));
+              ok(ir.status===200&&idata.blocked!==true&&id&&Number(id.confidence||0)>=0.55,`${s.label}: image identification returns a usable result`);
+              ok(s.accept.test(text),`${s.label}: physical product family is correct`);
+              if(s.brand)ok(s.brand.test([id.brand,id.name,(id.visibleText||[]).join(' ')].filter(Boolean).join(' ')),`${s.label}: visible brand is retained`);
+              if(s.model)ok(s.model.test([id.model,id.name,id.searchQuery,(id.visibleText||[]).join(' ')].filter(Boolean).join(' ')),`${s.label}: visible model/family is retained`);
+
+              const piBody={...id,query:id.searchQuery||id.name||id.object};
+              const pr=await postJson('/api/product-intelligence-v2',piBody),pd=await pr.json().catch(()=>({}));
+              const names=(pd.retailerStatus||[]).map(x=>x.name);
+              ok(pr.status===200&&pd.ok===true,`${s.label}: retailer intelligence succeeds`);
+              for(const n of s.must)ok(names.includes(n),`${s.label}: routes to ${n}`);
+              for(const n of s.not)ok(!names.includes(n),`${s.label}: excludes irrelevant ${n}`);
+              ok((pd.offers||[]).every(o=>o.branchStockVerified!==true&&o.directionsAvailable!==true),`${s.label}: online listings never fake branch stock or directions`);
+
+              const nr=await postJson('/api/nearby',{lat:-25.7479,lon:28.2293,radiusKm:10,mode:'likely',identification:id}),nd=await nr.json().catch(()=>({}));
+              ok(nr.status===200&&nd.ok===true&&Array.isArray(nd.stores),`${s.label}: nearby category lookup succeeds`);
+              ok((nd.stores||[]).every(x=>x.exactProductMatch===false&&x.stockVerified===false&&x.directionsAvailable===false),`${s.label}: unverified nearby results never get Directions`);
+              results.push({label:s.label,identification:{object:id.object||null,name:id.name||null,brand:id.brand||null,model:id.model||null,category:id.category||null,retailCategory:id.retailCategory||null,confidence:Number(id.confidence||0),searchQuery:id.searchQuery||null,verificationNote:id.verificationNote||null},retailers:names,offerCount:(pd.offers||[]).length,nearbyCount:(nd.stores||[]).length});
+            }catch(e){failures.push(`${s.label}: test crashed: ${e.message}`);results.push({label:s.label,error:e.message});}
           }
-          const nearby=[
-            ['Mercedes SUV',{name:'Mercedes-Benz SUV',object:'car',brand:'Mercedes-Benz',category:'vehicle',retailCategory:'vehicle'}],
-            ['JBL speaker',{name:'JBL portable Bluetooth speaker',object:'speaker',category:'electronics',retailCategory:'electronics'}],
-            ['Albany bread',{name:'Albany Superior White Bread',object:'bread',category:'grocery',retailCategory:'grocery'}],
-            ['adidas Samba',{name:'adidas Samba',object:'shoe',brand:'adidas',category:'footwear',retailCategory:'footwear'}],
-            ['adjustable wrench',{name:'adjustable wrench',object:'wrench',category:'hardware',retailCategory:'hardware'}],
-            ['toaster',{name:'2 slice toaster',object:'toaster',category:'appliances',retailCategory:'appliances'}],
-            ['salt pepper shakers',{name:'salt and pepper shakers',object:'shakers',category:'kitchenware',retailCategory:'kitchenware'}],
-            ['conditioner',{name:'Marc Anthony conditioner',object:'conditioner',category:'beauty',retailCategory:'beauty'}],
-            ['multi plug adaptor',{name:'multi plug adaptor',object:'plug adaptor',category:'electrical accessories',retailCategory:'electrical'}]
-          ];
-          for(const [label,id] of nearby){
-            const r=await post('/api/nearby',{lat:-25.7479,lon:28.2293,radiusKm:10,mode:'likely',identification:id}),d=await r.json().catch(()=>({}));
-            ok(r.status===200&&d.ok===true&&Array.isArray(d.stores),`${label}: nearby fallback works`);
-            ok((d.stores||[]).every(s=>s.exactProductMatch===false&&s.stockVerified===false&&s.directionsAvailable===false),`${label}: nearby fallback remains unverified and has no Directions`);
-          }
-          if(fail.length){console.error('\nFAILURES');for(const f of fail)console.error('-',f);process.exit(1)}
-          console.log('\nAll nine real-world routing checks passed.');
+
+          try{
+            const qr=await fetchRetry(base+'/results-data-quality-fix.js'),qt=await qr.text();
+            ok(qr.status===200,'Price/data-quality guard is deployed');
+            ok(qt.includes('structured product data|connected retailer feed'),'Only strong structured/feed sources are trusted for displayed prices');
+            ok(qt.includes('Price changed — verify retailer'),'Conflicting recent prices are visibly withheld');
+            ok(qt.includes('exactProductMatch===true')&&qt.includes('stockVerified===true'),'Directions guard requires exact product and verified stock');
+          }catch(e){failures.push(`Data-quality guard check crashed: ${e.message}`)}
+
+          fs.mkdirSync('.github/qa-results',{recursive:true});
+          fs.writeFileSync('.github/qa-results/nine-image-latest.json',JSON.stringify({testedAt:new Date().toISOString(),production:base,passed:failures.length===0,failures,results},null,2));
+          if(failures.length){console.error('\nAUDIT FAILURES');failures.forEach(f=>console.error('-',f));process.exit(1)}
+          console.log('\nAll nine actual-image FindIt production checks passed.');
           NODE
+
+      - name: Publish latest nine-image QA result
+        if: always()
+        run: |
+          if [ ! -f .github/qa-results/nine-image-latest.json ]; then exit 0; fi
+          git config user.name "findit-qa-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add .github/qa-results/nine-image-latest.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Publish nine-image QA result [skip ci]"
+          git pull --rebase origin main
+          git push origin HEAD:main
