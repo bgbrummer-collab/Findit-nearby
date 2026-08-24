@@ -2,15 +2,23 @@ import {resolveProduct} from '../lib/product-resolver.js';
 import {resolveAlternatives} from '../lib/similar-resolver.js';
 
 const BLOCKED=/\b(firearm|gun|rifle|pistol|ammunition|ammo|weapon|knife|machete|sword|switchblade|taser|pepper spray|fireworks|explosive|vape|nicotine|cigarette|alcohol|beer|wine|liquor|cannabis|marijuana|thc|cbd|gambling|casino|pornography)\b/i;
-const conditioner={
-  brand:'Marc Anthony',
-  model:'Strictly Curls 3X Moisture Triple Blend Conditioner 250ml',
-  name:'Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml',
-  query:'Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml',
-  searchQuery:'Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml',
-  object:'conditioner',category:'hair care',retailCategory:'beauty',
-  features:['curl conditioner','moisture','detangling','250ml']
-};
+const conditioner={brand:'Marc Anthony',model:'Strictly Curls 3X Moisture Triple Blend Conditioner 250ml',name:'Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml',query:'Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml',searchQuery:'Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml',object:'conditioner',category:'hair care',retailCategory:'beauty',features:['curl conditioner','moisture','detangling','250ml']};
+const norm=v=>String(v??'').toLowerCase().replace(/\b(\d+)\s*(ml|mg|g|kg|l|gb|tb)\b/g,'$1$2').replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim();
+const STRICT_TYPES=['conditioner','shampoo','serum','mascara','foundation','lipstick','toothpaste','deodorant','perfume','fragrance','detergent','cleaner','router','range extender','microphone','headphones','earbuds','monitor','keyboard','mouse','camera','television','microwave','kettle','toaster','vacuum','drill','hammer'];
+function sanitizeExact(result,body){
+  if(!result?.offers?.length)return result;
+  const object=norm(body.object),strict=STRICT_TYPES.find(x=>object.includes(x));
+  let offers=result.offers.filter(o=>!strict||norm(o.product_name).includes(strict));
+  if(body.brand){const brand=norm(body.brand);offers=offers.filter(o=>norm(o.product_name).includes(brand));}
+  result.offers=offers;
+  result.matched=offers.length>0;
+  result.verifiedOfferCount=offers.length;
+  result.verifiedSellerCount=new Set(offers.map(o=>o.retailer?.name).filter(Boolean)).size;
+  result.bestProduct=offers[0]?{name:offers[0].product_name}:null;
+  const priced=offers.filter(o=>o.price!=null).sort((a,b)=>a.price-b.price);
+  result.bestPrice=priced[0]||null;
+  return result;
+}
 
 export default async function handler(req,res){
   res.setHeader('Cache-Control','no-store');
@@ -18,18 +26,16 @@ export default async function handler(req,res){
   if(req.method==='GET'&&req.query?.test==='conditioner') body={...conditioner};
   else if(req.method==='GET'&&req.query?.test==='alternatives') body={...conditioner,action:'alternatives'};
   else if(req.method!=='POST') return res.status(405).json({error:'Method not allowed'});
-
-  if(BLOCKED.test([body.query,body.searchQuery,body.name,body.object,body.category,body.retailCategory].filter(Boolean).join(' '))){
-    return res.status(403).json({error:'Unsupported product type'});
-  }
+  if(BLOCKED.test([body.query,body.searchQuery,body.name,body.object,body.category,body.retailCategory].filter(Boolean).join(' ')))return res.status(403).json({error:'Unsupported product type'});
   try{
     if(body.action==='alternatives'){
       const result=await resolveAlternatives(body);
       if(!result.ok&&result.error)return res.status(400).json(result);
       return res.status(200).json(result);
     }
-    const result=await resolveProduct(body);
+    let result=await resolveProduct(body);
     if(!result.ok&&result.error)return res.status(400).json(result);
+    result=sanitizeExact(result,body);
     return res.status(200).json(result);
   }catch(error){
     console.error('FindIt product resolver error',error);
