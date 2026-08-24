@@ -24,7 +24,7 @@ on:
     branches: [main]
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   audit:
@@ -33,44 +33,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-
       - name: Install Playwright
         run: |
           npm init -y >/dev/null 2>&1
           npm install --save-dev playwright@1.55.0
           npx playwright install --with-deps chromium
-
       - name: Wait for production rollout
-        run: |
-          set -e
-          for i in $(seq 1 30); do
-            if curl -fsS --max-time 10 'https://findit-nearby.vercel.app/release-polish.js?qa=1' | grep -q 'Copying feedback'; then
-              echo 'Latest release polish is live.'
-              exit 0
-            fi
-            echo "Production not updated yet ($i/30)"
-            sleep 10
-          done
-          echo 'Production rollout marker did not appear in time.' >&2
-          exit 1
-
-      - name: Harden browser-only audit guards
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          p=Path('tests/full-site-audit.mjs')
-          s=p.read_text()
-          s=s.replace("await safe('Product intelligence shows no fake zero price',async()=>{await expectVisible(page,'#productIntelligencePanel:not(.hidden)');const t=await page.locator('#productIntelligenceResults').innerText();if(/(?:ZAR|R)\\s*0\\.00/.test(t))throw Error('fake zero price');return t.slice(0,180)});", "await safe('Product intelligence shows no fake zero price',async()=>{const panel=page.locator('#productIntelligencePanel:not(.hidden)');if(!await panel.isVisible())return 'not applicable: panel hidden for this result';const t=await page.locator('#productIntelligenceResults').innerText();if(/(?:ZAR|R)\\s*0\\.00/.test(t))throw Error('fake zero price');return t.slice(0,180)});")
-          s=s.replace("await safe('Feedback copy works',async()=>{await page.locator('#feedbackMessage').fill('QA test only - not submitted');await page.locator('#copyFeedback').click();const t=await page.locator('#feedbackStatus').innerText();if(!/copied/i.test(t))throw Error(t);return t});", "await safe('Feedback copy works',async()=>{await page.locator('#feedbackMessage').fill('QA test only - not submitted');await page.locator('#copyFeedback').click();await page.waitForTimeout(700);const t=await page.locator('#feedbackStatus').innerText();if(!/copied|selected/i.test(t))throw Error(t||'no copy status');return t});")
-          s=s.replace("const bad=networkFailures.filter(x=>!/tile|analytics|fonts|google|jsdelivr/i.test(x));", "const bad=networkFailures.filter(x=>!/tile|analytics|fonts|google|jsdelivr|blob:/i.test(x));")
-          p.write_text(s)
-          PY
-
+        if: github.event_name != 'pull_request'
+        run: sleep 25
       - name: Run every-interaction production audit
         id: audit
         continue-on-error: true
@@ -78,30 +52,14 @@ jobs:
           FINDIT_URL: https://findit-nearby.vercel.app/
           AUDIT_OUT: audit-output
         run: node tests/final-audit-runner.mjs
-
-      - name: Publish latest audit report into repository
-        if: always() && github.event_name == 'push'
-        run: |
-          mkdir -p qa-results
-          if [ -f audit-output/findit-full-audit.json ]; then cp audit-output/findit-full-audit.json qa-results/latest.json; fi
-          if [ -f audit-output/findit-full-audit.md ]; then cp audit-output/findit-full-audit.md qa-results/latest.md; fi
-          git config user.name "findit-qa-bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add qa-results/latest.json qa-results/latest.md || true
-          if ! git diff --cached --quiet; then
-            git commit -m "Update automated FindIt production audit report"
-            git push
-          fi
-
       - name: Upload audit report and screenshots
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: findit-full-production-audit
+          name: findit-full-production-audit-${{ github.run_id }}
           path: audit-output/
           if-no-files-found: warn
           retention-days: 14
-
       - name: Fail workflow if audit found broken interactions
         if: steps.audit.outcome == 'failure'
         run: exit 1
