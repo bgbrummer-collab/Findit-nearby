@@ -22,6 +22,8 @@
       #finditNoVerifiedNearby p{margin:0;color:#97a6bd;line-height:1.5}
       #exactSellerResults .offer-card{border:1px solid #45d6a52f!important}
       #exactSellerResults .offer-card a{display:inline-block;margin-top:8px}
+      .reveal{opacity:1!important;transform:none!important;visibility:visible!important}
+      @media(max-width:760px){main,main>section,main>.shell,footer{opacity:1!important;visibility:visible!important}.shell{min-height:0!important}.steps-grid article,.example-card,.challenge-banner,.search-card,.examples-section{opacity:1!important;visibility:visible!important;transform:none!important}}
     `;document.head.appendChild(s);
   }
 
@@ -113,10 +115,19 @@
     };
   }
 
-  function clean(){ensureStyle();cleanNavigation();simplifyActions();simplifyExactSeller();cleanNearby();wireUtilityButtons()}
-  function settle(){requestAnimationFrame(clean);setTimeout(clean,450);setTimeout(clean,1400);setTimeout(clean,3200)}
+  function forceVisible(){
+    qa('.reveal').forEach(el=>{el.classList.add('visible');el.style.opacity='1';el.style.transform='none';el.style.visibility='visible'});
+    qa('main>section,main>.shell,footer').forEach(el=>{if(!el.classList.contains('hidden')){el.style.visibility='visible';if(getComputedStyle(el).opacity==='0')el.style.opacity='1'}});
+  }
+  function loadCommercePolish(){
+    if(document.querySelector('script[data-findit-commerce-polish]'))return;
+    const s=document.createElement('script');s.src='/pricecheck-source.js?v=20260824-mobilefix1';s.defer=true;s.dataset.finditCommercePolish='1';document.head.appendChild(s);
+  }
+  function clean(){ensureStyle();cleanNavigation();simplifyActions();simplifyExactSeller();cleanNearby();wireUtilityButtons();forceVisible();loadCommercePolish()}
+  function settle(){requestAnimationFrame(clean);setTimeout(clean,250);setTimeout(clean,900);setTimeout(clean,2200)}
 
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',clean,{once:true});else clean();
+  window.addEventListener('load',()=>{forceVisible();setTimeout(forceVisible,300)});
   document.addEventListener('findit:results-rendered',settle);
 })();
 (()=>{if(document.querySelector('script[data-findit-quality-fix]'))return;const s=document.createElement('script');s.src='/results-data-quality-fix.js?v=20260824-1';s.defer=true;s.dataset.finditQualityFix='1';document.head.appendChild(s)})();
