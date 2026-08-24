@@ -119,3 +119,4 @@
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',clean,{once:true});else clean();
   document.addEventListener('findit:results-rendered',settle);
 })();
+(()=>{if(document.querySelector('script[data-findit-quality-fix]'))return;const s=document.createElement('script');s.src='/results-data-quality-fix.js?v=20260824-1';s.defer=true;s.dataset.finditQualityFix='1';document.head.appendChild(s)})();
