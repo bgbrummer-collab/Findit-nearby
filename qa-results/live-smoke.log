@@ -2,7 +2,7 @@
 [PASS] 1440px no duplicate element IDs
 [PASS] 1440px obsolete controls are removed
 [PASS] 1440px unverified nearby stores never keep Directions
-[PASS] 1440px results layout stays stable while scrolling
+[FAIL] 1440px results layout stays stable while scrolling scrollHeight changed while scrolling: 4358,4358,4358,4435,4435,4435,4435,4428,4435,4435
 [PASS] 1440px no uncaught JavaScript errors
 [PASS] 390px production loads current finder
 [PASS] 390px no duplicate element IDs
@@ -13,4 +13,5 @@
 Desktop console errors: 0
 Mobile console errors: 0
 
-CURRENT_FINDIT_PRODUCTION_SMOKE_PASS
+FAILURES
+1440px results layout stays stable while scrolling: scrollHeight changed while scrolling: 4358,4358,4358,4435,4435,4435,4435,4428,4435,4435
