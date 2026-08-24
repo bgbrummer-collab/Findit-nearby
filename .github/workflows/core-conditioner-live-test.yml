@@ -1,0 +1,30 @@
+name: Core conditioner live test
+on:
+  push:
+    branches: [core-pipeline-fix-20260824]
+permissions:
+  contents: read
+jobs:
+  conditioner:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Vercel preview
+        run: sleep 45
+      - name: Test exact conditioner resolution
+        shell: bash
+        run: |
+          set -euo pipefail
+          URL="https://findit-nearby-git-core-pipeline-fix-20260824-findit-nearby1.vercel.app/api/product-intelligence-v2"
+          BODY='{"brand":"Marc Anthony","model":"Strictly Curls 3X Moisture Triple Blend Conditioner 250ml","name":"Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml","query":"Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml","searchQuery":"Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml","object":"conditioner","category":"hair care","retailCategory":"beauty"}'
+          for i in 1 2 3 4 5 6; do
+            code=$(curl -sS -o result.json -w '%{http_code}' -X POST "$URL" -H 'content-type: application/json' --data "$BODY" || true)
+            if [ "$code" = "200" ]; then break; fi
+            echo "Attempt $i returned HTTP $code"
+            sleep 15
+          done
+          cat result.json
+          test "$(jq -r '.matched' result.json)" = "true"
+          jq -e '.offers | length > 0' result.json >/dev/null
+          jq -e '.offers[] | select(.retailer.name=="Clicks") | select(.product_url|contains("/p/")) | select(.price != null)' result.json >/dev/null
+          jq -e '.offers[] | select(.retailer.name=="Clicks") | select((.product_name|ascii_downcase|contains("marc anthony")) and ((.product_name|ascii_downcase|contains("conditioner"))))' result.json >/dev/null
+          echo "FINDIT_CONDITIONER_CORE_PASS"
