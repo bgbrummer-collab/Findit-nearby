@@ -60,3 +60,4 @@ let timer;function sync(){clearTimeout(timer);timer=setTimeout(()=>{repairOfferP
 function init(){document.addEventListener('findit:results-rendered',sync);new MutationObserver(sync).observe(document.body,{childList:true,subtree:true});setTimeout(sync,700);setTimeout(sync,1800)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
+(()=>{if(document.querySelector('script[data-findit-pricecheck]'))return;const s=document.createElement('script');s.src='/pricecheck-source.js?v=20260824-1';s.defer=true;s.dataset.finditPricecheck='1';document.head.appendChild(s)})();
