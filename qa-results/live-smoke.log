@@ -1,14 +1,18 @@
-node:internal/modules/run_main:123
-    triggerUncaughtException(
-    ^
+[PASS] 1440px production loads current finder
+[PASS] 1440px no duplicate element IDs
+[FAIL] 1440px obsolete controls are removed {"widen":false,"coming":0,"oldPremium":true}
+[PASS] 1440px unverified nearby stores never keep Directions
+[PASS] 1440px results layout stays stable while scrolling
+[PASS] 1440px no uncaught JavaScript errors
+[PASS] 390px production loads current finder
+[PASS] 390px no duplicate element IDs
+[FAIL] 390px obsolete controls are removed {"widen":false,"coming":0,"oldPremium":true}
+[PASS] 390px unverified nearby stores never keep Directions
+[PASS] 390px results layout stays stable while scrolling
+[PASS] 390px no uncaught JavaScript errors
+Desktop console errors: 0
+Mobile console errors: 0
 
-page.goto: Timeout 45000ms exceeded.
-Call log:
-  - navigating to "https://findit-nearby.vercel.app/", waiting until "networkidle"
-
-    at audit (/home/runner/work/Findit-nearby/Findit-nearby/tests/release-smoke.mjs:23:14)
-    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/release-smoke.mjs:101:17 {
-  name: 'TimeoutError'
-}
-
-Node.js v22.23.2
+FAILURES
+1440px obsolete controls are removed: {"widen":false,"coming":0,"oldPremium":true}
+390px obsolete controls are removed: {"widen":false,"coming":0,"oldPremium":true}
