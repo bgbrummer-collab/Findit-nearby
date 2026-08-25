@@ -1,5 +1,6 @@
 import {resolveProduct} from '../lib/product-resolver.js';
 import {searchSimilar} from '../lib/similar-search.js';
+import {augmentRetailerCoverage} from '../lib/retailer-coverage.js';
 
 const BLOCKED=/\b(firearm|gun|rifle|pistol|ammunition|ammo|weapon|knife|machete|sword|switchblade|taser|pepper spray|fireworks|explosive|vape|nicotine|cigarette|alcohol|beer|wine|liquor|cannabis|marijuana|thc|cbd|gambling|casino|pornography)\b/i;
 const conditioner={brand:'Marc Anthony',model:'Strictly Curls 3X Moisture Triple Blend Conditioner 250ml',name:'Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml',query:'Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml',searchQuery:'Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml',object:'conditioner',category:'hair care',retailCategory:'beauty',features:['curl conditioner','moisture','detangling','250ml']};
@@ -35,6 +36,7 @@ export default async function handler(req,res){
     }
     let result=await resolveProduct(body);
     if(!result.ok&&result.error)return res.status(400).json(result);
+    result=await augmentRetailerCoverage(result,body);
     result=sanitizeExact(result,body);
     return res.status(200).json(result);
   }catch(error){
