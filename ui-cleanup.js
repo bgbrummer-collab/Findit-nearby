@@ -1,3 +1,6 @@
+/* Load the retailer-offer stability layer immediately. This script sits at the end of the page before deferred result code executes. */
+(()=>{if(window.__finditOfferStabilityLoader)return;window.__finditOfferStabilityLoader=true;const s=document.createElement('script');s.src='offer-stability-fix.js?v=20260825-stable1';s.async=false;document.head.appendChild(s)})();
+
 /* FindIt critical UI cleanup. Intentionally network-free so initial page load can finish. */
 (()=>{
   'use strict';
@@ -94,6 +97,11 @@
       .feature-suggest-card{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:15px;border:1px solid #7b68ff55;border-radius:16px;background:linear-gradient(135deg,#715cff12,#27d4f20d)}
       .feature-suggest-card strong,.feature-suggest-card span{display:block}.feature-suggest-card span{color:#91a0b7;font-size:11px;margin-top:4px;line-height:1.45}
       .feature-suggest-card button{flex:0 0 auto;border:1px solid #7667ff88;border-radius:11px;background:#181d3b;color:#fff;padding:10px 12px;font-weight:850;cursor:pointer}
+      #exactSellerResults .offer-list{display:grid!important;grid-template-columns:1fr!important;gap:12px!important;width:100%!important}
+      #exactSellerResults .offer-card{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:18px!important;align-items:center!important;width:100%!important;min-width:0!important;padding:18px!important}
+      #exactSellerResults .offer-card>div:first-child{min-width:0!important;width:100%!important}
+      #exactSellerResults .offer-card h4,#exactSellerResults .offer-card p,#exactSellerResults .offer-card a{white-space:normal!important;overflow-wrap:anywhere!important;word-break:normal!important;max-width:none!important}
+      #exactSellerResults .offer-card .price{min-width:120px!important;text-align:right!important;white-space:nowrap!important;font-size:18px!important;font-weight:900!important}
       #nearbyStores .store-card{min-width:0}
       #nearbyStores .store-main{min-width:0;width:100%}
       #nearbyStores .store-main>small{white-space:normal;overflow-wrap:anywhere;word-break:normal;line-height:1.45}
@@ -103,6 +111,8 @@
         main,main>section,main>.shell,footer{opacity:1!important;visibility:visible!important}
         .shell{min-height:0!important}
         .steps-grid article,.example-card,.challenge-banner,.search-card,.examples-section{opacity:1!important;visibility:visible!important;transform:none!important}
+        #exactSellerResults .offer-card{grid-template-columns:1fr!important;gap:10px!important;padding:16px!important}
+        #exactSellerResults .offer-card .price{text-align:left!important;min-width:0!important;font-size:17px!important}
         #nearbyStores{display:grid!important;gap:12px!important}
         #nearbyStores .store-card{display:block!important;width:100%!important;padding:18px!important;border-radius:18px!important}
         #nearbyStores .store-main{display:block!important;width:100%!important;max-width:none!important}
