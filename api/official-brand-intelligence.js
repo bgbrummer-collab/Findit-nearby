@@ -1,4 +1,4 @@
-const MODELS=['gemini-2.5-flash','gemini-2.5-flash-lite'];
+const MODELS=['gemini-3.5-flash-lite','gemini-2.5-flash','gemini-3.6-flash'];
 const RESTRICTED=/\b(firearm|gun|rifle|pistol|ammunition|ammo|weapon|knife|knives|machete|sword|switchblade|taser|stun gun|pepper spray|mace|brass knuckles|fireworks|explosive|vape|nicotine|cigarette|cigar|alcohol|beer|wine|liquor|cannabis|marijuana|thc|cbd|psilocybin|magic mushroom|gambling|sports betting|casino|betting|pornography|adult sex toy)\b/i;
 const clean=v=>String(v||'').trim().slice(0,300), clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const norm=v=>clean(v).toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
