@@ -3,6 +3,8 @@
   'use strict';
   const q=s=>document.querySelector(s), qa=s=>[...document.querySelectorAll(s)];
   const remove=el=>{if(el?.parentNode)el.parentNode.removeChild(el)};
+  const norm=v=>String(v??'').toLowerCase().replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim();
+  const money=(n,c='ZAR')=>{if(n==null||!Number.isFinite(Number(n)))return'';try{return new Intl.NumberFormat('en-ZA',{style:'currency',currency:c||'ZAR'}).format(Number(n))}catch{return`${c||'ZAR'} ${Number(n).toFixed(2)}`}};
 
   function ensureFeedbackUi(){
     const form=q('#feedbackForm');
@@ -59,6 +61,23 @@
     });
   }
 
+  function enhanceStorePrices(){
+    let st=null;try{st=window.state}catch{}
+    const stores=Array.isArray(st?.stores)?st.stores:[],offers=Array.isArray(st?.offers)?st.offers:[];
+    qa('#nearbyStores .store-card').forEach(card=>{
+      const i=Number(card.dataset.store),store=stores[i];if(!store)return;
+      const main=card.querySelector('.store-main');if(!main)return;
+      const branchPrice=store.branchPriceVerified===true&&Number.isFinite(Number(store.price))?Number(store.price):null;
+      const sn=norm(store.retailer||store.name),offer=offers.find(o=>{const rn=norm(o?.retailer?.name||o?.retailer);return rn&&sn&&(sn.includes(rn)||rn.includes(sn))});
+      const onlinePrice=offer&&Number.isFinite(Number(offer.price))?Number(offer.price):null;
+      const value=branchPrice??onlinePrice;if(value==null)return;
+      let box=main.querySelector('.findit-price-scope');if(!box){box=document.createElement('div');box.className='result-note findit-price-scope';const actions=main.querySelector('.store-actions');main.insertBefore(box,actions||null)}
+      const currency=branchPrice!=null?(store.currency||'ZAR'):(offer?.currency||'ZAR'),label=branchPrice!=null?'Verified branch price':`${offer?.retailer?.name||offer?.retailer||store.name} online price`;
+      const stock=branchPrice!=null?(store.stockVerified?' • branch stock confirmed':''):(offer?.availability==='in_stock'?' • in stock online':offer?.availability==='out_of_stock'?' • out of stock online':'');
+      box.innerHTML=`<strong>${money(value,currency)}</strong> • ${label}${stock}`;
+    });
+  }
+
   function ensureStyle(){
     if(q('#finditTrustUiStyle'))return;
     const s=document.createElement('style');
@@ -79,6 +98,7 @@
       #nearbyStores .store-main{min-width:0;width:100%}
       #nearbyStores .store-main>small{white-space:normal;overflow-wrap:anywhere;word-break:normal;line-height:1.45}
       #nearbyStores .store-trust-note{display:block;white-space:normal;overflow-wrap:anywhere;line-height:1.45;margin-top:10px}
+      .findit-price-scope{margin-top:12px}
       @media(max-width:760px){
         main,main>section,main>.shell,footer{opacity:1!important;visibility:visible!important}
         .shell{min-height:0!important}
@@ -104,6 +124,7 @@
   function clean(){
     ensureFeedbackUi();
     ensureStyle();
+    enhanceStorePrices();
     qa('.reveal').forEach(el=>{
       el.classList.add('visible');
       el.style.opacity='1';
@@ -117,8 +138,6 @@
     q('#exactSellerResults .premium-insights')?.remove();
   }
 
-  /* This file is parsed after the feedback markup but before deferred script.js executes.
-     Build the controls immediately so script.js can bind safely to their IDs. */
   ensureFeedbackUi();
   ensureStyle();
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',clean,{once:true});
