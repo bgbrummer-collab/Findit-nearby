@@ -32,6 +32,37 @@
   `;
   document.head.appendChild(style);
  }
+ function installResultsRepair(){
+  if(document.getElementById('findit-results-repair-style'))return;
+  const style=document.createElement('style');
+  style.id='findit-results-repair-style';
+  style.textContent=`
+   #nearbyPanel,#nearbyStores,.nearby-stores{width:100%!important;max-width:100%!important;min-width:0!important}
+   #nearbyStores,.nearby-stores{display:grid!important;grid-template-columns:1fr!important;gap:14px!important}
+   #nearbyStores .store-card,.nearby-stores .store-card{display:block!important;width:100%!important;max-width:100%!important;min-width:0!important;height:auto!important;min-height:0!important;padding:22px!important;overflow:visible!important}
+   #nearbyStores .store-main,.nearby-stores .store-main{display:block!important;width:100%!important;max-width:100%!important;min-width:0!important;text-align:left!important;writing-mode:horizontal-tb!important;white-space:normal!important}
+   #nearbyStores .store-main>strong,.nearby-stores .store-main>strong{display:block!important;width:auto!important;font-size:20px!important;line-height:1.25!important;margin:0 0 8px!important;white-space:normal!important;overflow-wrap:break-word!important;word-break:normal!important}
+   #nearbyStores .store-main>small,.nearby-stores .store-main>small{display:block!important;width:100%!important;max-width:850px!important;font-size:14px!important;line-height:1.55!important;margin:0!important;white-space:normal!important;overflow-wrap:break-word!important;word-break:normal!important}
+   #nearbyStores .store-tags,.nearby-stores .store-tags{display:flex!important;flex-wrap:wrap!important;gap:8px!important;margin:16px 0!important;width:100%!important}
+   #nearbyStores .store-tags span,.nearby-stores .store-tags span{display:inline-flex!important;width:auto!important;max-width:100%!important;font-size:12px!important;line-height:1.3!important;padding:8px 12px!important;white-space:normal!important;writing-mode:horizontal-tb!important}
+   #nearbyStores .result-note,.nearby-stores .result-note{margin:14px 0!important;font-size:14px!important;line-height:1.5!important;white-space:normal!important}
+   #nearbyStores .store-actions,.nearby-stores .store-actions{display:flex!important;flex-wrap:wrap!important;justify-content:flex-start!important;align-items:center!important;gap:10px!important;width:100%!important;margin-top:14px!important}
+   #nearbyStores .store-actions a,.nearby-stores .store-actions a{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:auto!important;min-width:110px!important;max-width:100%!important;min-height:42px!important;padding:10px 14px!important;font-size:12px!important;line-height:1.2!important;white-space:normal!important;writing-mode:horizontal-tb!important;text-align:center!important;word-break:normal!important;overflow-wrap:normal!important}
+   #nearbyStores .store-trust-note,.nearby-stores .store-trust-note{display:block!important;width:100%!important;max-width:850px!important;margin-top:14px!important;font-size:13px!important;line-height:1.5!important;white-space:normal!important;writing-mode:horizontal-tb!important;word-break:normal!important;overflow-wrap:break-word!important}
+   @media(min-width:801px){
+    #nearbyStores,.nearby-stores{grid-template-columns:repeat(2,minmax(0,1fr))!important;align-items:start!important}
+    #nearbyStores .store-card,.nearby-stores .store-card{align-self:start!important}
+   }
+   @media(max-width:800px){
+    #nearbyStores .store-card,.nearby-stores .store-card{padding:18px!important}
+    #nearbyStores .store-main>strong,.nearby-stores .store-main>strong{font-size:18px!important}
+    #nearbyStores .store-main>small,.nearby-stores .store-main>small{font-size:13px!important}
+    #nearbyStores .store-actions,.nearby-stores .store-actions{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important}
+    #nearbyStores .store-actions a,.nearby-stores .store-actions a{width:100%!important;min-width:0!important}
+   }
+  `;
+  document.head.appendChild(style);
+ }
  function openSettingsFromPremium(e){
   const b=e.target?.closest?.('#openSettingsPremium');if(!b)return;
   e.preventDefault();
@@ -56,7 +87,8 @@
   }catch(err){alert(err.message||'RealPay checkout is not available yet.')}
  }
  installMenuRepair();
- document.addEventListener('DOMContentLoaded',installMenuRepair,{once:true});
+ installResultsRepair();
+ document.addEventListener('DOMContentLoaded',()=>{installMenuRepair();installResultsRepair()},{once:true});
  window.addEventListener('click',e=>{
   openSettingsFromPremium(e);
   const b=e.target?.closest?.('#activatePremiumTester');
