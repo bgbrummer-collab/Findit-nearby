@@ -43,7 +43,7 @@
   function strongLabelIdentity(init,d){
     if(d?.exactFound===true)return null;
     const b=parseBaseIdentification(init);if(!b?.name||!b.brand||!b.model||!b.visible||!LABEL_DRIVEN.test(`${b.name} ${b.model} ${b.features}`))return null;
-    const visible=norm(`${b.visible} ${b.name}`),brand=norm(b.brand);
+    const visible=norm(b.visible),brand=norm(b.brand);
     const keys=toks(b.model).filter(t=>!MODEL_GENERIC.has(t)&&t!==brand&&t.length>3);
     if(!keys.length)return null;
     const hits=keys.filter(t=>visible.includes(t));
