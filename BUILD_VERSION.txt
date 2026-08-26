@@ -1,4 +1,6 @@
 FindIt Production Readiness — Clean Redeploy
 Core FindIt interface restored after rollback.
 Search, directions, map, feedback, Assistant and product intelligence remain enabled.
-This commit forces a fresh Vercel production deployment so browsers receive the restored page instead of the broken search-experience build.
+White-screen redirect removed from main branch.
+This commit forces a fresh Vercel production deployment so browsers receive the restored full page.
+Redeploy marker: 2026-08-26 11:33 SAST
