@@ -1,21 +1,24 @@
 {
-  "testedAt": "2026-08-26T18:40:08.295Z",
+  "testedAt": "2026-08-26T19:18:42.724Z",
   "production": "https://findit-nearby.vercel.app",
-  "passed": true,
-  "failures": [],
+  "passed": false,
+  "failures": [
+    "toaster: routes to Game",
+    "toaster: routes to HiFi Corp"
+  ],
   "results": [
     {
       "label": "Mercedes SUV",
       "identification": {
-        "object": "Car",
+        "object": "car",
         "name": "Mercedes-Benz GLC SUV",
         "brand": "Mercedes-Benz",
         "model": "GLC",
-        "category": "Vehicles",
+        "category": "Motor Vehicles",
         "retailCategory": "vehicle",
         "confidence": 0.95,
-        "searchQuery": "Mercedes-Benz GLC SUV white",
-        "verificationNote": "Checked the vehicle type, brand emblem, and design cues confirming it is a Mercedes-Benz GLC SUV."
+        "searchQuery": "Mercedes-Benz GLC SUV",
+        "verificationNote": "Verified first-pass draft; all details match the vehicle correctly."
       },
       "retailers": [
         "Mercedes-Benz South Africa",
@@ -35,9 +38,9 @@
         "model": "Flip 6",
         "category": "Electronics",
         "retailCategory": "electronics",
-        "confidence": 0.98,
-        "searchQuery": "JBL Flip 6 Portable Bluetooth Speaker",
-        "verificationNote": "Checked the first pass identification. The product is clearly a JBL portable speaker with a cylindrical shape and logo matching the Flip series design."
+        "confidence": 0.95,
+        "searchQuery": "JBL Flip 6 portable Bluetooth speaker",
+        "verificationNote": "Checked the first pass against the image details. The bold JBL logo and the specific side radiator design with the exclamation mark confirm it is indeed the JBL Flip 6."
       },
       "retailers": [
         "Incredible Connection",
@@ -53,15 +56,15 @@
     {
       "label": "Albany bread",
       "identification": {
-        "object": "packaged bread loaf",
+        "object": "Loaf of white bread in plastic packaging",
         "name": "Albany Superior White Bread",
         "brand": "Albany",
         "model": "Superior White Bread",
-        "category": "Bakery & Bread",
+        "category": "Groceries",
         "retailCategory": "grocery/household",
-        "confidence": 0.95,
+        "confidence": 0.98,
         "searchQuery": "Albany Superior White Bread",
-        "verificationNote": "Checked the first-pass identification and confirmed brand, model, and item categorization are accurate and clearly supported by visible packaging text."
+        "verificationNote": "Checked the brand and variant text which are both clearly readable on the packaging."
       },
       "retailers": [
         "Checkers",
@@ -86,7 +89,7 @@
         "retailCategory": "footwear",
         "confidence": 0.98,
         "searchQuery": "Adidas Samba OG white black",
-        "verificationNote": "Checked the first-pass draft and confirmed all details including brand, model text 'SAMBA', and iconic features."
+        "verificationNote": "Checked the first-pass identification and confirmed the product, brand, and model are accurate with clear visible evidence."
       },
       "retailers": [
         "adidas",
@@ -113,7 +116,7 @@
         "retailCategory": "hardware",
         "confidence": 0.95,
         "searchQuery": "adjustable wrench",
-        "verificationNote": "Checked the first pass against the image; the identification as an adjustable wrench is correct and accurately verified."
+        "verificationNote": "Checked the first-pass identification against the image. The object is indeed an adjustable wrench, no specific brand or model is legible."
       },
       "retailers": [
         "Game",
@@ -129,38 +132,40 @@
     {
       "label": "toaster",
       "identification": {
-        "object": "Toaster",
+        "object": "toaster",
         "name": "Retro 2-Slice Toaster",
         "brand": null,
         "model": null,
-        "category": "Home & Kitchen",
-        "retailCategory": "home appliances",
+        "category": "Home & Kitchen > Kitchen Appliances > Toasters",
+        "retailCategory": "grocery/household",
         "confidence": 0.95,
         "searchQuery": "turquoise retro 2 slice toaster",
-        "verificationNote": "Reviewed first-pass draft and confirmed all details match the physical product correctly."
+        "verificationNote": "Checked the first pass and confirmed it is a real kitchen toaster with standard slots, lever, and countertop geometry. Brand logo is unreadable so brand and model remain null."
       },
       "retailers": [
-        "Game",
-        "HiFi Corp",
+        "Checkers",
+        "Pick n Pay",
+        "Shoprite",
+        "Woolworths",
         "Takealot",
         "Makro",
         "PriceCheck"
       ],
       "offerCount": 0,
-      "nearbyCount": 2
+      "nearbyCount": 5
     },
     {
       "label": "salt and pepper shakers",
       "identification": {
         "object": "Salt and Pepper Shakers",
-        "name": "Glass Salt and Pepper Shaker Set",
+        "name": "Glass Salt and Pepper Shakers Set",
         "brand": null,
         "model": null,
         "category": "Home & Kitchen",
         "retailCategory": "Kitchenware",
         "confidence": 0.98,
-        "searchQuery": "glass salt and pepper shaker set with metal lids",
-        "verificationNote": "Classic restaurant-style salt and pepper shakers identified accurately based on shape and contents. First-pass draft verified and confirmed correct."
+        "searchQuery": "glass salt and pepper shakers set with metal lids",
+        "verificationNote": "Checked the first-pass draft and confirmed all details accurately describe the glass salt and pepper shakers shown."
       },
       "retailers": [
         "Checkers",
@@ -177,15 +182,15 @@
     {
       "label": "Marc Anthony conditioner",
       "identification": {
-        "object": "Hair Conditioner Tube",
-        "name": "Marc Anthony Strictly Curls Curl Defining Conditioner",
+        "object": "hair conditioner tube",
+        "name": "Marc Anthony Strictly Curls Curl Envy Conditioner",
         "brand": "Marc Anthony",
-        "model": "Strictly Curls Curl Defining Conditioner",
+        "model": "Strictly Curls Curl Envy Conditioner",
         "category": "Beauty & Personal Care",
         "retailCategory": "Hair Care",
-        "confidence": 0.98,
-        "searchQuery": "Marc Anthony Strictly Curls Conditioner",
-        "verificationNote": "Checked the first pass and confirmed the physical product, branding, and text are accurately read from the image."
+        "confidence": 0.95,
+        "searchQuery": "Marc Anthony Strictly Curls Curl Envy Conditioner",
+        "verificationNote": "Checked the first pass, all details including brand, product line, variant, and volume are correctly identified from the readable text on the squeeze tube."
       },
       "retailers": [
         "Woolworths",
@@ -201,15 +206,15 @@
     {
       "label": "multi-plug adaptor",
       "identification": {
-        "object": "extension block",
-        "name": "Multi-Plug Extension Socket",
+        "object": "extension socket",
+        "name": "Multi-Plug Adapter / Extension Socket",
         "brand": null,
         "model": null,
-        "category": "Electronics & Electrical",
-        "retailCategory": "Electrical Accessories",
+        "category": "Electronics",
+        "retailCategory": "Electronics & Electrical",
         "confidence": 0.95,
-        "searchQuery": "multi plug extension socket adapter",
-        "verificationNote": "Checked the first pass, confirmed it correctly identifies the multi-plug electrical adapter block with no visible brand or model number."
+        "searchQuery": "multi plug adapter extension socket white",
+        "verificationNote": "Checked the first pass draft and verified that the item is indeed a multi-plug electrical socket adapter. No brand or model markings visible."
       },
       "retailers": [
         "Game",
