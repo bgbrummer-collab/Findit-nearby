@@ -1,0 +1,226 @@
+{
+  "testedAt": "2026-08-26T06:09:57.466Z",
+  "production": "https://findit-nearby.vercel.app",
+  "passed": true,
+  "failures": [],
+  "results": [
+    {
+      "label": "Mercedes SUV",
+      "identification": {
+        "object": "SUV",
+        "name": "Mercedes-Benz GLC SUV",
+        "brand": "Mercedes-Benz",
+        "model": "GLC",
+        "category": "Motor Vehicles",
+        "retailCategory": "vehicle",
+        "confidence": 0.95,
+        "searchQuery": "Mercedes-Benz GLC SUV white",
+        "verificationNote": "Checked the first pass, brand and model identification are accurate based on the distinctive grille and emblem. Draft remains unchanged."
+      },
+      "retailers": [
+        "Mercedes-Benz South Africa",
+        "AutoTrader",
+        "Cars.co.za",
+        "WeBuyCars"
+      ],
+      "offerCount": 0,
+      "nearbyCount": 3
+    },
+    {
+      "label": "JBL speaker",
+      "identification": {
+        "object": "Portable Bluetooth Speaker",
+        "name": "JBL Portable Bluetooth Speaker",
+        "brand": "JBL",
+        "model": null,
+        "category": "Electronics",
+        "retailCategory": "electronics",
+        "confidence": 0.95,
+        "searchQuery": "JBL Portable Bluetooth Speaker",
+        "verificationNote": "Checked the first pass and confirmed the brand JBL, but removed the specific model 'Flip 6' as the exact model number is not explicitly visible in the compressed image text, keeping it to general portable speaker."
+      },
+      "retailers": [
+        "Incredible Connection",
+        "Game",
+        "HiFi Corp",
+        "Takealot",
+        "Makro",
+        "PriceCheck"
+      ],
+      "offerCount": 0,
+      "nearbyCount": 3
+    },
+    {
+      "label": "Albany bread",
+      "identification": {
+        "object": "bread",
+        "name": "Albany Superior White Bread",
+        "brand": "Albany",
+        "model": "Superior White Bread",
+        "category": "Groceries",
+        "retailCategory": "grocery/household",
+        "confidence": 0.98,
+        "searchQuery": "Albany Superior White Bread",
+        "verificationNote": "Checked the first pass draft and verified that the brand Albany and product name Superior White Bread are correctly identified and clearly visible on the packaging."
+      },
+      "retailers": [
+        "Checkers",
+        "Pick n Pay",
+        "Shoprite",
+        "Woolworths",
+        "Takealot",
+        "Makro",
+        "PriceCheck"
+      ],
+      "offerCount": 0,
+      "nearbyCount": 4
+    },
+    {
+      "label": "adidas Samba",
+      "identification": {
+        "object": "shoe",
+        "name": "adidas Samba Shoes",
+        "brand": "adidas",
+        "model": "Samba",
+        "category": "Footwear",
+        "retailCategory": "footwear",
+        "confidence": 0.98,
+        "searchQuery": "adidas Samba white black sneakers",
+        "verificationNote": "Verified brand and model name clearly visible on the shoe lateral quarter and matched by signature silhouette features. First pass is accurate."
+      },
+      "retailers": [
+        "adidas",
+        "Sportscene",
+        "Totalsports",
+        "Bash",
+        "Superbalist",
+        "Sportsmans Warehouse",
+        "Takealot",
+        "Makro",
+        "PriceCheck"
+      ],
+      "offerCount": 0,
+      "nearbyCount": 4
+    },
+    {
+      "label": "adjustable wrench",
+      "identification": {
+        "object": "adjustable wrench",
+        "name": "Adjustable Wrench",
+        "brand": null,
+        "model": null,
+        "category": "Tools & Hardware",
+        "retailCategory": "hardware",
+        "confidence": 0.95,
+        "searchQuery": "adjustable wrench",
+        "verificationNote": "Checked the image; it is clearly an adjustable wrench. No brand or model text is legible enough to reliably extract."
+      },
+      "retailers": [
+        "Game",
+        "Builders",
+        "Leroy Merlin",
+        "Takealot",
+        "Makro",
+        "PriceCheck"
+      ],
+      "offerCount": 0,
+      "nearbyCount": 2
+    },
+    {
+      "label": "toaster",
+      "identification": {
+        "object": "Toaster",
+        "name": "Retro 2-Slice Toaster",
+        "brand": null,
+        "model": null,
+        "category": "Home & Kitchen",
+        "retailCategory": "home appliances",
+        "confidence": 0.95,
+        "searchQuery": "Retro 2-slice turquoise toaster",
+        "verificationNote": "Checked the first pass, brand logo is cursive and illegible so brand remains null. The identification is solid."
+      },
+      "retailers": [
+        "Game",
+        "HiFi Corp",
+        "Takealot",
+        "Makro",
+        "PriceCheck"
+      ],
+      "offerCount": 0,
+      "nearbyCount": 2
+    },
+    {
+      "label": "salt and pepper shakers",
+      "identification": {
+        "object": "Salt and Pepper Shakers",
+        "name": "Glass Salt and Pepper Shakers Set",
+        "brand": null,
+        "model": null,
+        "category": "Home & Kitchen",
+        "retailCategory": "Kitchenware",
+        "confidence": 0.98,
+        "searchQuery": "glass salt and pepper shakers set",
+        "verificationNote": "Checked the first-pass draft and confirmed all identification details for the salt and pepper shakers set are accurate."
+      },
+      "retailers": [
+        "Checkers",
+        "Pick n Pay",
+        "Game",
+        "Woolworths",
+        "Takealot",
+        "Makro",
+        "PriceCheck"
+      ],
+      "offerCount": 0,
+      "nearbyCount": 5
+    },
+    {
+      "label": "Marc Anthony conditioner",
+      "identification": {
+        "object": "hair conditioner",
+        "name": "Marc Anthony Strictly Curls Curl Defining Conditioner",
+        "brand": "Marc Anthony",
+        "model": "Strictly Curls Curl Defining Conditioner",
+        "category": "Beauty & Personal Care",
+        "retailCategory": "Hair Care",
+        "confidence": 0.98,
+        "searchQuery": "Marc Anthony Strictly Curls Conditioner",
+        "verificationNote": "Inspected the image from scratch and confirmed the first-pass identification is accurate."
+      },
+      "retailers": [
+        "Woolworths",
+        "Clicks",
+        "Dis-Chem",
+        "Takealot",
+        "Makro",
+        "PriceCheck"
+      ],
+      "offerCount": 0,
+      "nearbyCount": 4
+    },
+    {
+      "label": "multi-plug adaptor",
+      "identification": {
+        "object": "power strip",
+        "name": "Multi-plug socket adapter",
+        "brand": null,
+        "model": null,
+        "category": "Electronics",
+        "retailCategory": "Electronics",
+        "confidence": 0.95,
+        "searchQuery": "multi plug socket adapter wall outlet multi adapter",
+        "verificationNote": "Checked the first pass, object is accurately identified as a multi-plug socket adapter with no visible branding or model numbers."
+      },
+      "retailers": [
+        "Game",
+        "Builders",
+        "Leroy Merlin",
+        "Takealot",
+        "Makro",
+        "PriceCheck"
+      ],
+      "offerCount": 0,
+      "nearbyCount": 2
+    }
+  ]
+}
