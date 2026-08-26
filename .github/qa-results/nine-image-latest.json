@@ -1,5 +1,5 @@
 {
-  "testedAt": "2026-08-26T17:28:26.770Z",
+  "testedAt": "2026-08-26T17:43:18.223Z",
   "production": "https://findit-nearby.vercel.app",
   "passed": false,
   "failures": [
@@ -11,14 +11,14 @@
       "label": "Mercedes SUV",
       "identification": {
         "object": "Car",
-        "name": "Mercedes-Benz GLC SUV",
+        "name": "Mercedes-Benz SUV",
         "brand": "Mercedes-Benz",
-        "model": "GLC",
-        "category": "Automotive",
+        "model": null,
+        "category": "Vehicles",
         "retailCategory": "vehicle",
-        "confidence": 0.95,
-        "searchQuery": "Mercedes-Benz GLC SUV white",
-        "verificationNote": "Checked the first pass draft and verified that the vehicle is correctly identified as a Mercedes-Benz GLC SUV with clear branding."
+        "confidence": 0.9,
+        "searchQuery": "Mercedes Benz SUV",
+        "verificationNote": "The first-pass identification was accurate and verified. Brand is clearly visible via the Mercedes-Benz emblem, but exact model designation is not definitively legible."
       },
       "retailers": [
         "Mercedes-Benz South Africa",
@@ -32,15 +32,15 @@
     {
       "label": "JBL speaker",
       "identification": {
-        "object": "portable bluetooth speaker",
+        "object": "Portable Bluetooth Speaker",
         "name": "JBL Portable Bluetooth Speaker",
         "brand": "JBL",
         "model": null,
-        "category": "Electronics > Audio > Speakers",
+        "category": "Electronics > Audio > Speakers > Portable Speakers",
         "retailCategory": "electronics",
-        "confidence": 0.95,
-        "searchQuery": "JBL portable bluetooth speaker",
-        "verificationNote": "Checked the first pass, confirmed brand JBL is clearly visible and model is correctly set to null as exact variant cannot be read."
+        "confidence": 0.85,
+        "searchQuery": "JBL portable Bluetooth speaker",
+        "verificationNote": "Checked model specificity; exact model Flip 6 is not readable as text, so model is set to null and confidence slightly reduced."
       },
       "retailers": [
         "Incredible Connection",
@@ -56,7 +56,7 @@
     {
       "label": "Albany bread",
       "identification": {
-        "object": "Loaf of Bread",
+        "object": "Albany Superior White Bread Loaf",
         "name": "Albany Superior White Bread",
         "brand": "Albany",
         "model": "Superior White Bread",
@@ -64,7 +64,7 @@
         "retailCategory": "grocery/household",
         "confidence": 0.98,
         "searchQuery": "Albany Superior White Bread",
-        "verificationNote": "Checked packaging, brand name, and variant text. All details from the first pass are correct."
+        "verificationNote": "Checked the first pass, confirmed that the brand and variant text are clearly readable and accurately identified. No changes needed."
       },
       "retailers": [
         "Checkers",
@@ -81,15 +81,15 @@
     {
       "label": "adidas Samba",
       "identification": {
-        "object": "Sneaker",
+        "object": "sneaker",
         "name": "Adidas Samba OG",
         "brand": "Adidas",
         "model": "Samba OG",
         "category": "Footwear",
         "retailCategory": "footwear",
-        "confidence": 0.98,
-        "searchQuery": "Adidas Samba OG white black gum sole sneakers",
-        "verificationNote": "Checked the first-pass identification against the image. The branding, model name 'SAMBA', and iconic silhouette features are all clearly visible and correctly identified. No changes needed."
+        "confidence": 0.99,
+        "searchQuery": "Adidas Samba OG white black sneaker",
+        "verificationNote": "The product is clearly an Adidas Samba sneaker with visible branding and model name on the side. First pass is accurate."
       },
       "retailers": [
         "adidas",
@@ -116,7 +116,7 @@
         "retailCategory": "hardware",
         "confidence": 0.95,
         "searchQuery": "adjustable wrench",
-        "verificationNote": "Checked the first pass, item is indeed a standard adjustable wrench. No brand or model text is clearly readable, so they remain null. First pass is accurate."
+        "verificationNote": "Checked the first-pass draft and confirmed the item is clearly an adjustable hand tool. No brand or model is legibly supported in the image."
       },
       "retailers": [
         "Game",
@@ -132,15 +132,15 @@
     {
       "label": "toaster",
       "identification": {
-        "object": "Toaster",
+        "object": "2-slice toaster",
         "name": "Retro 2-Slice Toaster",
         "brand": null,
         "model": null,
         "category": "Home & Kitchen",
         "retailCategory": "grocery/household",
         "confidence": 0.95,
-        "searchQuery": "turquoise retro 2 slice toaster",
-        "verificationNote": "Verified first-pass draft is completely accurate. The item is a turquoise retro 2-slice toaster. Brand and model are left as null due to lack of definitive readable branding."
+        "searchQuery": "retro 2 slice toaster turquoise chrome",
+        "verificationNote": "Checked the first pass against the image. The object is correctly identified as a standard countertop retro-style toaster. The cursive brand script is stylized and unreadable enough to avoid guessing, so brand and model remain null."
       },
       "retailers": [
         "Checkers",
@@ -157,15 +157,15 @@
     {
       "label": "salt and pepper shakers",
       "identification": {
-        "object": "salt and pepper shakers",
-        "name": "Salt and Pepper Shaker Set",
+        "object": "Salt and Pepper Shakers",
+        "name": "Glass Salt and Pepper Shakers",
         "brand": null,
         "model": null,
         "category": "Home & Kitchen",
-        "retailCategory": "Kitchenware & Tabletop",
-        "confidence": 0.96,
-        "searchQuery": "salt and pepper shaker set glass metal top",
-        "verificationNote": "Checked the first-pass identification against the image; classic diner-style salt and pepper shakers are accurately identified, no changes needed."
+        "retailCategory": "Kitchenware & Tableware",
+        "confidence": 0.95,
+        "searchQuery": "glass salt and pepper shakers set",
+        "verificationNote": "Checked the first-pass draft and confirmed all details are accurate. No brand or model markings exist."
       },
       "retailers": [
         "Checkers",
@@ -182,15 +182,15 @@
     {
       "label": "Marc Anthony conditioner",
       "identification": {
-        "object": "Hair Conditioner",
-        "name": "Marc Anthony Strictly Curls Curl Envy Conditioner",
+        "object": "Hair Conditioner Tube",
+        "name": "Marc Anthony Strictly Curls Curl's Best Conditioner",
         "brand": "Marc Anthony",
-        "model": "Strictly Curls Curl Envy Conditioner",
+        "model": "Strictly Curls Curl's Best Conditioner",
         "category": "Beauty & Personal Care",
         "retailCategory": "Hair Care",
         "confidence": 0.95,
-        "searchQuery": "Marc Anthony Strictly Curls Curl Envy Conditioner",
-        "verificationNote": "Checked brand and variant text on the tube. The first pass correctly identified the product."
+        "searchQuery": "Marc Anthony Strictly Curls Curls Best Conditioner",
+        "verificationNote": "Checked the exact product variant wording on the label and corrected 'Styling Curl Styling Foam' to 'Curl's Best' based on the visible text."
       },
       "retailers": [
         "Woolworths",
@@ -206,15 +206,15 @@
     {
       "label": "multi-plug adaptor",
       "identification": {
-        "object": "Multi-plug adapter",
-        "name": "Multi-plug wall adapter",
+        "object": "power strip adapter",
+        "name": "Multi-plug socket adapter",
         "brand": null,
         "model": null,
         "category": "Electronics",
-        "retailCategory": "Electronics & Electrical",
-        "confidence": 0.95,
-        "searchQuery": "multi plug wall adapter socket converter",
-        "verificationNote": "Checked the first-pass draft against visual evidence. The item is indeed a multi-plug electrical adapter with no visible brand or model markings."
+        "retailCategory": "Electrical & Electronics",
+        "confidence": 0.9,
+        "searchQuery": "multi plug socket adapter",
+        "verificationNote": "Checked the first pass, confirmed it is an electrical socket adapter with no visible branding or model. Draft remains unchanged."
       },
       "retailers": [
         "Game",
