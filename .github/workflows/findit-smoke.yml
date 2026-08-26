@@ -15,10 +15,11 @@ jobs:
           node-version: 22
       - name: Check JavaScript syntax
         run: |
-          node --check api/client-script.js
           node --check api/product-intelligence.js
           node --check api/nearby.js
           node --check api/search.js
+          node --check api/official-brand-intelligence.js
+          node --check exact-retailer-fix.js
           node --check script.js
       - name: Check Vercel config JSON
         run: node -e "JSON.parse(require('fs').readFileSync('vercel.json','utf8')); console.log('vercel.json OK')"
