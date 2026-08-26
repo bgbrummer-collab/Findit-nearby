@@ -25,7 +25,7 @@ jobs:
           BASE_URL: https://findit-nearby.vercel.app
         run: |
           node <<'NODE'
-          const fs=require('fs');
+          const fs=await import('node:fs').then(m=>m.default);
           const base=process.env.BASE_URL;
           const failures=[];
           const results=[];
@@ -71,7 +71,7 @@ jobs:
 
               const nr=await postJson('/api/nearby',{lat:-25.7479,lon:28.2293,radiusKm:10,mode:'likely',identification:id}),nd=await nr.json().catch(()=>({}));
               ok(nr.status===200&&nd.ok===true&&Array.isArray(nd.stores),`${s.label}: nearby category lookup succeeds`);
-              ok((nd.stores||[]).every(x=>x.exactProductMatch===false&&x.stockVerified===false&&x.directionsAvailable===false),`${s.label}: unverified nearby results never get Directions`);
+              ok((nd.stores||[]).every(x=>x.exactProductMatch===false&&x.stockVerified===false&&x.directionsAvailable===false),`${s.label}: unverified nearby API results never fake exact-item directions`);
               results.push({label:s.label,identification:{object:id.object||null,name:id.name||null,brand:id.brand||null,model:id.model||null,category:id.category||null,retailCategory:id.retailCategory||null,confidence:Number(id.confidence||0),searchQuery:id.searchQuery||null,verificationNote:id.verificationNote||null},retailers:names,offerCount:(pd.offers||[]).length,nearbyCount:(nd.stores||[]).length});
             }catch(e){failures.push(`${s.label}: test crashed: ${e.message}`);results.push({label:s.label,error:e.message});}
           }
@@ -81,7 +81,7 @@ jobs:
             ok(qr.status===200,'Price/data-quality guard is deployed');
             ok(qt.includes('structured product data|connected retailer feed'),'Only strong structured/feed sources are trusted for displayed prices');
             ok(qt.includes('Price changed — verify retailer'),'Conflicting recent prices are visibly withheld');
-            ok(qt.includes('exactProductMatch===true')&&qt.includes('stockVerified===true'),'Directions guard requires exact product and verified stock');
+            ok(qt.includes('exactProductMatch===true')&&qt.includes('stockVerified===true'),'Exact-item directions guard requires exact product and verified stock');
           }catch(e){failures.push(`Data-quality guard check crashed: ${e.message}`)}
 
           fs.mkdirSync('.github/qa-results',{recursive:true});
