@@ -1,20 +1,157 @@
-/* FindIt mobile scan journey — presentation layer only. Existing identification, retailer, price, stock and map logic stay authoritative. */
-(()=>{'use strict';
-const $=s=>document.querySelector(s); let searching=false,shown=false,timers=[];
-const esc=v=>String(v||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function stateInfo(){let i={};try{i=window.state?.result?.identification||{}}catch{};return {name:i.name||i.model||i.object||$('#resultName')?.textContent||'Item identified',brand:i.brand||'',model:i.model||'',category:i.category||'',confidence:i.confidence||$('#confidenceValue')?.textContent||'',img:$('#preview')?.src||''}}
-function addCss(){if($('#scanJourneyCss'))return;let s=document.createElement('style');s.id='scanJourneyCss';s.textContent=`
-#fj{position:fixed;inset:0;z-index:2147483000;background:#070d19;color:#f7f9ff;font-family:inherit;display:flex;justify-content:center;overflow:auto}#fj.hidden{display:none!important}.fj-page{width:min(440px,100%);min-height:100dvh;padding:28px 22px 100px;box-sizing:border-box}.fj-title{font-size:25px;font-weight:900;margin:10px 0 6px;color:#9a7cff}.fj-sub{font-size:12px;color:#9aa6ba;text-align:center}.fj-scan{position:relative;margin:35px auto 22px;width:min(82vw,330px);height:390px;display:grid;place-items:center}.fj-scan img{max-width:76%;max-height:84%;object-fit:contain;border-radius:14px;filter:drop-shadow(0 12px 25px #0008)}.fj-corner{position:absolute;width:43px;height:43px;border-color:#9875ff;border-style:solid;filter:drop-shadow(0 0 8px #765cff)}.fj-c1{left:0;top:0;border-width:4px 0 0 4px;border-radius:9px 0 0}.fj-c2{right:0;top:0;border-width:4px 4px 0 0;border-radius:0 9px 0 0}.fj-c3{left:0;bottom:0;border-width:0 0 4px 4px;border-radius:0 0 0 9px}.fj-c4{right:0;bottom:0;border-width:0 4px 4px 0;border-radius:0 0 9px}.fj-beam{position:absolute;left:5%;right:5%;top:5%;height:3px;background:linear-gradient(90deg,transparent,#a06cff,#28cfff,transparent);box-shadow:0 0 18px #755cff,0 0 28px #29cfff;animation:fjbeam 1.25s ease-in-out infinite alternate}@keyframes fjbeam{to{top:94%}}.fj-analyzing{text-align:center;font-weight:800;font-size:13px}.fj-progress{height:7px;border-radius:10px;background:#182238;margin:24px auto;width:90%;overflow:hidden}.fj-progress i{display:block;height:100%;width:12%;background:linear-gradient(90deg,#805cff,#2bd2f2);border-radius:10px;animation:fjprog 3.4s ease forwards}@keyframes fjprog{to{width:96%}}.fj-orb{width:150px;height:150px;border-radius:50%;margin:55px auto 35px;display:grid;place-items:center;font-size:45px;background:radial-gradient(circle,#111b31 50%,transparent 51%),conic-gradient(#29cfff,#8d65ff,#29cfff);box-shadow:0 0 45px #725cff33;animation:fjrot 2s linear infinite}@keyframes fjrot{to{transform:rotate(360deg)}}.fj-checks{display:grid;gap:9px;margin:30px 0}.fj-checks div{display:flex;justify-content:space-between;padding:13px 15px;border-radius:12px;background:#111a2c;color:#aab5c7;font-size:12px}.fj-checks b{color:#54dda5}.fj-bigpct{text-align:center;color:#9c7cff;font-size:25px;font-weight:900}.fj-success{text-align:center}.fj-success h1{color:#62e5a7;font-size:30px;margin:25px 0 8px}.fj-product-img{width:190px;height:270px;object-fit:contain;margin:18px auto;display:block;filter:drop-shadow(0 15px 30px #0009)}.fj-brand{color:#a6b0c0;font-size:13px}.fj-name{font-size:26px;line-height:1.08;font-weight:900;margin:6px 0}.fj-size{color:#63dc9f;font-size:18px}.fj-confidence{display:inline-flex;margin-top:15px;padding:8px 13px;border-radius:20px;background:#0d2a22;color:#62e5a7;font-size:12px;font-weight:800;border:1px solid #2b805d}.fj-actions h1{font-size:29px;line-height:1.08;margin:18px 0 25px}.fj-btn{display:flex;align-items:center;gap:14px;width:100%;min-height:74px;padding:14px 15px;margin:10px 0;border:1px solid #202d43;border-radius:15px;background:#111a2b;color:#fff;text-align:left}.fj-btn i{font-style:normal;font-size:25px;width:34px}.fj-btn span{flex:1}.fj-btn b,.fj-btn small{display:block}.fj-btn b{font-size:14px}.fj-btn small{font-size:10px;color:#929fb3;margin-top:5px}.fj-btn em{font-style:normal;color:#9ba8bb;font-size:22px}.fj-top{display:flex;align-items:center;gap:10px}.fj-back{border:0;background:none;color:#fff;font-size:24px;padding:4px}.fj-detail h2{font-size:23px}.fj-detail-card{padding:16px;border:1px solid #202c41;border-radius:15px;background:#101929;margin:14px 0}.fj-close{width:100%;margin-top:16px;border:0;background:#111a2b;color:#9dabc0;border-radius:13px;padding:14px;font-weight:800}
-@media(min-width:700px){.fj-page{padding-top:42px}.fj-scan{height:430px}}
-`;document.head.appendChild(s)}
-function root(){let r=$('#fj');if(r)return r;r=document.createElement('div');r.id='fj';r.className='hidden';document.body.appendChild(r);r.addEventListener('click',e=>{let b=e.target.closest('[data-fj]');if(!b)return;go(b.dataset.fj)});return r}
-function scan(){shown=false;let r=root(),img=$('#preview')?.src||'';r.innerHTML=`<div class="fj-page"><div class="fj-title">Scanning item</div><div class="fj-scan"><span class="fj-corner fj-c1"></span><span class="fj-corner fj-c2"></span><span class="fj-corner fj-c3"></span><span class="fj-corner fj-c4"></span>${img?`<img src="${esc(img)}">`:''}<i class="fj-beam"></i></div><div class="fj-analyzing">Analyzing image...</div><div class="fj-sub">This may take a few seconds</div><div class="fj-progress"><i></i></div></div>`;r.classList.remove('hidden');timers.forEach(clearTimeout);timers=[setTimeout(identify,1700)]}
-function identify(){if(!searching)return;let r=root();r.innerHTML=`<div class="fj-page"><div class="fj-title">Identifying item</div><div class="fj-orb">✨</div><div class="fj-checks"><div><span>✓ &nbsp; Detecting object</span><b>✓</b></div><div><span>✓ &nbsp; Reading text</span><b>✓</b></div><div><span>✓ &nbsp; Understanding product</span><b>✓</b></div><div><span>○ &nbsp; Verifying against retailers</span><b>○</b></div></div><div class="fj-sub">Almost there...</div><div class="fj-bigpct">95%</div></div>`}
-function success(){if(shown)return;shown=true;searching=false;let p=stateInfo(),r=root();let size=(p.model.match(/\b\d+\s?ml\b/i)||[])[0]||'';r.innerHTML=`<div class="fj-page fj-success"><h1>You found it! 🎉</h1><div class="fj-sub">Item identified successfully</div>${p.img?`<img class="fj-product-img" src="${esc(p.img)}">`:''}<div class="fj-brand">${esc(p.brand)}</div><div class="fj-name">${esc(p.name)}</div>${size?`<div class="fj-size">${esc(size)}</div>`:''}<div class="fj-confidence">✓ ${esc(String(p.confidence||'95').replace(/%.*$/,''))}% confidence</div><button class="fj-btn" data-fj="next"><i>→</i><span><b>Continue</b><small>Choose what to do next</small></span><em>›</em></button></div>`}
-function next(){let r=root();r.innerHTML=`<div class="fj-page fj-actions"><h1>What would you like<br>to do next?</h1><button class="fj-btn" data-fj="product"><i>🧴</i><span><b>Product Information</b><small>View details, description, and similar products</small></span><em>›</em></button><button class="fj-btn" data-fj="stores"><i>📍</i><span><b>Nearest Stores</b><small>See nearby stores that may have this item</small></span><em>›</em></button><button class="fj-btn" data-fj="prices"><i>🏷️</i><span><b>Compare Prices</b><small>Compare verified prices across retailers</small></span><em>›</em></button><button class="fj-btn" data-fj="save"><i>🔖</i><span><b>Save this search</b><small>Save for later or get stock alerts</small></span><em>›</em></button><button class="fj-btn" data-fj="more"><i>•••</i><span><b>More options</b><small>Share, feedback & more</small></span><em>›</em></button></div>`}
-function detail(title,body){root().innerHTML=`<div class="fj-page fj-detail"><div class="fj-top"><button class="fj-back" data-fj="next">‹</button><b>${esc(title)}</b></div>${body}<button class="fj-close" data-fj="results">Back to results</button></div>`}
-function go(x){let p=stateInfo();if(x==='next')return next();if(x==='product')return detail('Product Information',`${p.img?`<img class="fj-product-img" src="${esc(p.img)}">`:''}<div class="fj-brand">${esc(p.brand)}</div><h2>${esc(p.name)}</h2><div class="fj-detail-card">${esc(p.category||'Product details')}<br><small>FindIt identification details are shown from the completed search.</small></div>`);if(x==='stores'||x==='prices'||x==='more'||x==='results'){root().classList.add('hidden');let t=x==='stores'?$('#nearbyPanel'):x==='prices'?($('#exactSellerResults')||$('#results'):x==='more'?($('#feedback')||$('#results'):$('#results');setTimeout(()=>t?.scrollIntoView({behavior:'smooth',block:'start'}),80);return}if(x==='save'){try{$('#saveFind')?.click()}catch{};detail('Saved!',`<div class="fj-success"><div class="fj-orb" style="color:#62e5a7">✓</div><h2>This search has been saved</h2><p class="fj-sub">You can find it again from your saved or recent searches.</p></div>`)}}
-function complete(){let st=$('#status')?.textContent||'',res=$('#results');return /search complete/i.test(st)&&res&&!res.classList.contains('hidden')}
-function bind(){let btn=$('#search'),status=$('#status');if(!btn)return;btn.addEventListener('click',()=>{if(btn.disabled)return;searching=true;shown=false;setTimeout(scan,30)},true);new MutationObserver(()=>{if(searching&&complete())success();if(searching&&/failed|error/i.test(status?.textContent||'')){searching=false;root().classList.add('hidden')}}).observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['class']})}
-function init(){addCss();root();bind()} if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+/* FindIt scan journey — UI only. Existing search/results logic remains authoritative. */
+(()=>{
+  'use strict';
+  if (window.__finditScanJourneyV3) return;
+  window.__finditScanJourneyV3 = true;
+
+  const $ = (s) => document.querySelector(s);
+  let active = false;
+  let finished = false;
+  let scanTimer = null;
+
+  const escapeHtml = (v='') => String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+  function productInfo(){
+    let identification = {};
+    try { identification = window.state?.result?.identification || {}; } catch {}
+    const name = identification.name || identification.model || identification.object || $('#resultName')?.textContent?.trim() || 'Item identified';
+    const brand = identification.brand || '';
+    const category = identification.category || '';
+    const confidence = identification.confidence || $('#confidenceValue')?.textContent?.trim() || '95';
+    const image = $('#preview')?.src || '';
+    return { name, brand, category, confidence, image };
+  }
+
+  function installStyles(){
+    if ($('#finditJourneyStyles')) return;
+    const style = document.createElement('style');
+    style.id = 'finditJourneyStyles';
+    style.textContent = `
+      #finditJourney{position:fixed;inset:0;z-index:2147483000;background:#070d19;color:#fff;overflow:auto;font-family:inherit}
+      #finditJourney.hidden{display:none!important}
+      .fj-screen{width:min(430px,100%);min-height:100dvh;margin:auto;padding:28px 22px 100px;box-sizing:border-box}
+      .fj-title{font-size:27px;font-weight:900;color:#9a7cff;margin:8px 0 6px}.fj-sub{color:#9aa6ba;font-size:12px;text-align:center}
+      .fj-scanbox{position:relative;width:min(82vw,330px);height:390px;margin:38px auto 24px;display:grid;place-items:center}
+      .fj-scanbox img{max-width:76%;max-height:84%;object-fit:contain;border-radius:14px;filter:drop-shadow(0 12px 25px #0009)}
+      .fj-corner{position:absolute;width:42px;height:42px;border-color:#9875ff;border-style:solid;filter:drop-shadow(0 0 8px #765cff)}
+      .fj-a{left:0;top:0;border-width:4px 0 0 4px}.fj-b{right:0;top:0;border-width:4px 4px 0 0}.fj-c{left:0;bottom:0;border-width:0 0 4px 4px}.fj-d{right:0;bottom:0;border-width:0 4px 4px 0}
+      .fj-beam{position:absolute;left:5%;right:5%;top:8%;height:3px;background:linear-gradient(90deg,transparent,#9f6dff,#27d4f3,transparent);box-shadow:0 0 18px #25d5ff,0 0 24px #8b62ff;animation:fjscan 1.2s ease-in-out infinite alternate}
+      @keyframes fjscan{to{top:92%}}
+      .fj-center{text-align:center}.fj-progress{height:7px;background:#182238;border-radius:10px;overflow:hidden;margin:22px auto;width:90%}.fj-progress i{display:block;height:100%;width:12%;border-radius:10px;background:linear-gradient(90deg,#805cff,#2bd2f2);animation:fjprogress 3.5s ease forwards}@keyframes fjprogress{to{width:96%}}
+      .fj-orb{width:160px;height:160px;border-radius:50%;margin:55px auto 34px;display:grid;place-items:center;font-size:48px;background:radial-gradient(circle,#10182b 48%,transparent 50%),conic-gradient(#26d3f4,#8b64ff,#26d3f4);box-shadow:0 0 48px #755cff3d;animation:fjrotate 2s linear infinite}@keyframes fjrotate{to{transform:rotate(360deg)}}
+      .fj-steps{display:grid;gap:9px;margin:28px 0}.fj-step{display:flex;justify-content:space-between;padding:13px 15px;border-radius:12px;background:#111a2c;color:#aab5c7;font-size:12px}.fj-step b{color:#55dda5}
+      .fj-pct{text-align:center;color:#9d7cff;font-size:26px;font-weight:900}.fj-success{text-align:center}.fj-success h1{color:#62e5a7;font-size:31px;margin:28px 0 6px}.fj-img{display:block;width:190px;height:270px;object-fit:contain;margin:18px auto;filter:drop-shadow(0 15px 28px #0009)}
+      .fj-brand{color:#a6b0c0;font-size:13px}.fj-name{font-size:27px;font-weight:900;line-height:1.08;margin:6px 0}.fj-confidence{display:inline-flex;margin-top:14px;padding:8px 13px;border-radius:20px;background:#0d2a22;color:#62e5a7;border:1px solid #2b805d;font-size:12px;font-weight:800}
+      .fj-actions h1{font-size:30px;line-height:1.08;margin:18px 0 25px}.fj-action{width:100%;min-height:74px;display:flex;align-items:center;gap:14px;padding:14px 15px;margin:10px 0;border:1px solid #202d43;border-radius:15px;background:#111a2b;color:#fff;text-align:left}.fj-action .ico{font-size:25px;width:34px}.fj-action span{flex:1}.fj-action b,.fj-action small{display:block}.fj-action b{font-size:14px}.fj-action small{font-size:10px;color:#929fb3;margin-top:5px}.fj-action em{font-style:normal;color:#9ba8bb;font-size:22px}.fj-action.primary{background:linear-gradient(100deg,#6959ff,#24c4e7);border:0}
+      .fj-top{display:flex;align-items:center;gap:10px;margin-bottom:20px}.fj-back{border:0;background:none;color:#fff;font-size:25px}.fj-card{padding:16px;border:1px solid #202c41;border-radius:15px;background:#101929;margin:14px 0}.fj-close{width:100%;margin-top:18px;padding:14px;border:0;border-radius:13px;background:#111a2b;color:#fff;font-weight:800}
+    `;
+    document.head.appendChild(style);
+  }
+
+  function root(){
+    let el = $('#finditJourney');
+    if (el) return el;
+    el = document.createElement('div');
+    el.id = 'finditJourney';
+    el.className = 'hidden';
+    document.body.appendChild(el);
+    el.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-fj]');
+      if (btn) handle(btn.dataset.fj);
+    });
+    return el;
+  }
+
+  function showScanning(){
+    if (!active) return;
+    const img = $('#preview')?.src || '';
+    const el = root();
+    el.innerHTML = `<div class="fj-screen"><div class="fj-title">Scanning item</div><div class="fj-scanbox"><span class="fj-corner fj-a"></span><span class="fj-corner fj-b"></span><span class="fj-corner fj-c"></span><span class="fj-corner fj-d"></span>${img ? `<img src="${escapeHtml(img)}" alt="Item being scanned">` : ''}<i class="fj-beam"></i></div><div class="fj-center"><b>Analyzing image...</b><div class="fj-sub">This may take a few seconds</div></div><div class="fj-progress"><i></i></div></div>`;
+    el.classList.remove('hidden');
+    clearTimeout(scanTimer);
+    scanTimer = setTimeout(showIdentifying, 1500);
+  }
+
+  function showIdentifying(){
+    if (!active) return;
+    root().innerHTML = `<div class="fj-screen"><div class="fj-title">Identifying item</div><div class="fj-orb">✨</div><div class="fj-steps"><div class="fj-step"><span>✓ &nbsp; Detecting object</span><b>✓</b></div><div class="fj-step"><span>✓ &nbsp; Reading text</span><b>✓</b></div><div class="fj-step"><span>✓ &nbsp; Understanding product</span><b>✓</b></div><div class="fj-step"><span>○ &nbsp; Verifying against retailers</span><b>○</b></div></div><div class="fj-sub">Almost there...</div><div class="fj-pct">95%</div></div>`;
+  }
+
+  function showSuccess(){
+    if (!active || finished) return;
+    finished = true;
+    active = false;
+    const p = productInfo();
+    root().innerHTML = `<div class="fj-screen fj-success"><h1>You found it! 🎉</h1><div class="fj-sub">Item identified successfully</div>${p.image ? `<img class="fj-img" src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}">` : ''}<div class="fj-brand">${escapeHtml(p.brand)}</div><div class="fj-name">${escapeHtml(p.name)}</div><div class="fj-confidence">✓ ${escapeHtml(String(p.confidence).replace(/[^0-9.]/g,'') || '95')}% confidence</div><button class="fj-action primary" data-fj="next"><span class="ico">→</span><span><b>Continue</b><small>Choose what to do next</small></span><em>›</em></button></div>`;
+  }
+
+  function showActions(){
+    root().innerHTML = `<div class="fj-screen fj-actions"><h1>What would you like<br>to do next?</h1><button class="fj-action" data-fj="product"><span class="ico">🧴</span><span><b>Product Information</b><small>View details, description, and similar products</small></span><em>›</em></button><button class="fj-action" data-fj="stores"><span class="ico">📍</span><span><b>Nearest Stores</b><small>See nearby stores that may have this item</small></span><em>›</em></button><button class="fj-action" data-fj="prices"><span class="ico">🏷️</span><span><b>Compare Prices</b><small>Compare verified prices across retailers</small></span><em>›</em></button><button class="fj-action" data-fj="save"><span class="ico">🔖</span><span><b>Save this search</b><small>Save for later or get stock alerts</small></span><em>›</em></button><button class="fj-action" data-fj="more"><span class="ico">•••</span><span><b>More options</b><small>Share, feedback & more</small></span><em>›</em></button></div>`;
+  }
+
+  function showProduct(){
+    const p = productInfo();
+    root().innerHTML = `<div class="fj-screen"><div class="fj-top"><button class="fj-back" data-fj="next">‹</button><b>Product Information</b></div>${p.image ? `<img class="fj-img" src="${escapeHtml(p.image)}">` : ''}<div class="fj-brand">${escapeHtml(p.brand)}</div><div class="fj-name">${escapeHtml(p.name)}</div><div class="fj-card">${escapeHtml(p.category || 'Product details')}<br><small>Identification details come from FindIt’s completed search.</small></div><button class="fj-close" data-fj="results">Back to results</button></div>`;
+  }
+
+  function closeAndScroll(target){
+    root().classList.add('hidden');
+    setTimeout(() => target?.scrollIntoView({behavior:'smooth', block:'start'}), 80);
+  }
+
+  function handle(action){
+    if (action === 'next') return showActions();
+    if (action === 'product') return showProduct();
+    if (action === 'stores') return closeAndScroll($('#nearbyPanel'));
+    if (action === 'prices') return closeAndScroll($('#exactSellerResults') || $('#results'));
+    if (action === 'more') return closeAndScroll($('#feedback') || $('#results'));
+    if (action === 'results') return closeAndScroll($('#results'));
+    if (action === 'save') {
+      try { $('#saveFind')?.click(); } catch {}
+      root().innerHTML = `<div class="fj-screen fj-success"><h1>Saved! ✓</h1><div class="fj-orb">✓</div><div class="fj-sub">This search has been saved.</div><button class="fj-close" data-fj="results">Back to results</button></div>`;
+    }
+  }
+
+  function searchCompleted(){
+    const results = $('#results');
+    const status = $('#status')?.textContent || '';
+    return !!results && !results.classList.contains('hidden') && (/search complete/i.test(status) || ($('#resultName')?.textContent || '').trim() !== 'Item');
+  }
+
+  function startJourney(){
+    const btn = $('#search');
+    if (!btn || btn.disabled) return;
+    active = true;
+    finished = false;
+    showScanning();
+  }
+
+  function bind(){
+    const btn = $('#search');
+    if (!btn) return;
+    btn.addEventListener('click', startJourney, true);
+
+    document.addEventListener('findit:results-rendered', () => {
+      if (active) showSuccess();
+    });
+
+    const observer = new MutationObserver(() => {
+      if (active && searchCompleted()) showSuccess();
+      const status = $('#status')?.textContent || '';
+      if (active && /search failed|error/i.test(status)) {
+        active = false;
+        root().classList.add('hidden');
+      }
+    });
+    observer.observe(document.body, {subtree:true, childList:true, characterData:true, attributes:true, attributeFilter:['class']});
+  }
+
+  function init(){
+    installStyles();
+    root();
+    bind();
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {once:true});
+  else init();
 })();
