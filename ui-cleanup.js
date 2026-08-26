@@ -1,7 +1,7 @@
 /* Load the retailer-offer stability layer immediately. This script sits at the end of the page before deferred result code executes. */
 (()=>{if(window.__finditOfferStabilityLoader)return;window.__finditOfferStabilityLoader=true;const s=document.createElement('script');s.src='offer-stability-fix.js?v=20260825-stable1';s.async=false;document.head.appendChild(s)})();
-/* Load cinematic scanner/action flow. UI-only; search and retailer logic remain untouched. */
-(()=>{if(window.__finditScannerFlowLoader)return;window.__finditScannerFlowLoader=true;const s=document.createElement('script');s.src='scanner-flow.js?v=20260826-scan2';s.async=false;document.head.appendChild(s)})();
+/* Load the current FindIt identifying experience. Versioned URL prevents phones from reusing the old cached scanner script. */
+(()=>{if(window.__finditScannerFlowLoader)return;window.__finditScannerFlowLoader=true;const s=document.createElement('script');s.src='scanner-flow.js?v=20260826-scan5';s.async=false;s.onload=()=>{window.__finditScannerFlowLoaded=true};s.onerror=()=>console.error('FindIt identifying UI failed to load');document.head.appendChild(s)})();
 
 /* FindIt critical UI cleanup. Intentionally network-free so initial page load can finish. */
 (()=>{
