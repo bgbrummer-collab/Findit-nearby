@@ -1,54 +1,226 @@
 {
-  "testedAt": "2026-08-27T19:22:08.483Z",
+  "testedAt": "2026-08-27T19:39:28.380Z",
   "production": "https://findit-nearby.vercel.app",
-  "passed": false,
-  "failures": [
-    "Mercedes SUV: test crashed: https://findit-nearby.vercel.app/api/search returned 503",
-    "JBL speaker: test crashed: https://findit-nearby.vercel.app/api/search returned 503",
-    "Albany bread: test crashed: https://findit-nearby.vercel.app/api/search returned 503",
-    "adidas Samba: test crashed: https://findit-nearby.vercel.app/api/search returned 503",
-    "adjustable wrench: test crashed: https://findit-nearby.vercel.app/api/search returned 503",
-    "toaster: test crashed: https://findit-nearby.vercel.app/api/search returned 503",
-    "salt and pepper shakers: test crashed: https://findit-nearby.vercel.app/api/search returned 503",
-    "Marc Anthony conditioner: test crashed: https://findit-nearby.vercel.app/api/search returned 503",
-    "multi-plug adaptor: test crashed: https://findit-nearby.vercel.app/api/search returned 503"
-  ],
+  "passed": true,
+  "failures": [],
   "results": [
     {
       "label": "Mercedes SUV",
-      "error": "https://findit-nearby.vercel.app/api/search returned 503"
+      "identification": {
+        "object": "Car",
+        "name": "Mercedes-Benz GLC SUV",
+        "brand": "Mercedes-Benz",
+        "model": "GLC",
+        "category": "Vehicles",
+        "retailCategory": "vehicle",
+        "confidence": 0.95,
+        "searchQuery": "Mercedes-Benz GLC SUV white",
+        "verificationNote": "Checked the first-pass identification, confirmed the vehicle branding and model characteristics accurately."
+      },
+      "retailers": [
+        "Mercedes-Benz South Africa",
+        "AutoTrader",
+        "Cars.co.za",
+        "WeBuyCars"
+      ],
+      "offerCount": 0,
+      "nearbyCount": 3
     },
     {
       "label": "JBL speaker",
-      "error": "https://findit-nearby.vercel.app/api/search returned 503"
+      "identification": {
+        "object": "Portable Bluetooth Speaker",
+        "name": "JBL Flip 6 Portable Bluetooth Speaker",
+        "brand": "JBL",
+        "model": "Flip 6",
+        "category": "Electronics",
+        "retailCategory": "electronics",
+        "confidence": 0.95,
+        "searchQuery": "JBL Flip 6 Portable Bluetooth Speaker black",
+        "verificationNote": "Checked the first pass against physical item characteristics, confirming brand and model features including the signature side badge and end caps."
+      },
+      "retailers": [
+        "Incredible Connection",
+        "Game",
+        "HiFi Corp",
+        "Takealot",
+        "Makro",
+        "PriceCheck"
+      ],
+      "offerCount": 0,
+      "nearbyCount": 3
     },
     {
       "label": "Albany bread",
-      "error": "https://findit-nearby.vercel.app/api/search returned 503"
+      "identification": {
+        "object": "packaged sliced bread",
+        "name": "Albany Superior White Bread",
+        "brand": "Albany",
+        "model": "Superior White Bread",
+        "category": "Groceries",
+        "retailCategory": "grocery/household",
+        "confidence": 0.98,
+        "searchQuery": "Albany Superior White Bread",
+        "verificationNote": "Checked the first-pass draft and confirmed all extracted brand and variant fields are accurate and directly supported by visible text."
+      },
+      "retailers": [
+        "Checkers",
+        "Pick n Pay",
+        "Shoprite",
+        "Woolworths",
+        "Takealot",
+        "Makro",
+        "PriceCheck"
+      ],
+      "offerCount": 0,
+      "nearbyCount": 4
     },
     {
       "label": "adidas Samba",
-      "error": "https://findit-nearby.vercel.app/api/search returned 503"
+      "identification": {
+        "object": "sneaker",
+        "name": "Adidas Samba OG",
+        "brand": "Adidas",
+        "model": "Samba OG",
+        "category": "Footwear",
+        "retailCategory": "footwear",
+        "confidence": 0.98,
+        "searchQuery": "Adidas Samba OG white black",
+        "verificationNote": "Checked the first-pass identification; the product is clearly an Adidas Samba sneaker with visible branding and model text, so the initial details are accurate."
+      },
+      "retailers": [
+        "adidas",
+        "Sportscene",
+        "Totalsports",
+        "Bash",
+        "Superbalist",
+        "Sportsmans Warehouse",
+        "Takealot",
+        "Makro",
+        "PriceCheck"
+      ],
+      "offerCount": 0,
+      "nearbyCount": 4
     },
     {
       "label": "adjustable wrench",
-      "error": "https://findit-nearby.vercel.app/api/search returned 503"
+      "identification": {
+        "object": "adjustable wrench",
+        "name": "Adjustable Wrench",
+        "brand": null,
+        "model": null,
+        "category": "Tools & Hardware",
+        "retailCategory": "hardware",
+        "confidence": 0.98,
+        "searchQuery": "adjustable wrench",
+        "verificationNote": "Checked the first-pass identification, confirmed it is a standard adjustable wrench with no legible brand or model, so brand and model remain null."
+      },
+      "retailers": [
+        "Game",
+        "Builders",
+        "Leroy Merlin",
+        "Takealot",
+        "Makro",
+        "PriceCheck"
+      ],
+      "offerCount": 0,
+      "nearbyCount": 2
     },
     {
       "label": "toaster",
-      "error": "https://findit-nearby.vercel.app/api/search returned 503"
+      "identification": {
+        "object": "Retro Toaster",
+        "name": "Turquoise 2-Slice Toaster",
+        "brand": null,
+        "model": null,
+        "category": "Home & Kitchen",
+        "retailCategory": "grocery/household",
+        "confidence": 0.95,
+        "searchQuery": "turquoise 2 slice retro toaster",
+        "verificationNote": "Checked the first-pass draft and confirmed all details are accurate. The toaster is clearly a standard 2-slice retro turquoise model."
+      },
+      "retailers": [
+        "Game",
+        "HiFi Corp",
+        "Takealot",
+        "Makro",
+        "PriceCheck"
+      ],
+      "offerCount": 0,
+      "nearbyCount": 2
     },
     {
       "label": "salt and pepper shakers",
-      "error": "https://findit-nearby.vercel.app/api/search returned 503"
+      "identification": {
+        "object": "salt and pepper shaker set",
+        "name": "Salt and Pepper Shaker Set",
+        "brand": null,
+        "model": null,
+        "category": "Home & Kitchen",
+        "retailCategory": "Kitchenware",
+        "confidence": 0.98,
+        "searchQuery": "salt and pepper shaker set glass",
+        "verificationNote": "Checked the first-pass identification, features, and object nature; verified it is an accurate description of standard glass salt and pepper shakers."
+      },
+      "retailers": [
+        "Checkers",
+        "Pick n Pay",
+        "Game",
+        "Woolworths",
+        "Takealot",
+        "Makro",
+        "PriceCheck"
+      ],
+      "offerCount": 0,
+      "nearbyCount": 5
     },
     {
       "label": "Marc Anthony conditioner",
-      "error": "https://findit-nearby.vercel.app/api/search returned 503"
+      "identification": {
+        "object": "Hair Conditioner Tube",
+        "name": "Marc Anthony Strictly Curls Curl Envy Conditioner",
+        "brand": "Marc Anthony",
+        "model": "Strictly Curls Curl Envy Conditioner",
+        "category": "Beauty & Personal Care",
+        "retailCategory": "Hair Care",
+        "confidence": 0.95,
+        "searchQuery": "Marc Anthony Strictly Curls Curl Envy Conditioner",
+        "verificationNote": "Checked the first-pass draft against visible text on the tube. The brand, product line, and variant are fully supported."
+      },
+      "retailers": [
+        "Woolworths",
+        "Clicks",
+        "Dis-Chem",
+        "Takealot",
+        "Makro",
+        "PriceCheck"
+      ],
+      "offerCount": 0,
+      "nearbyCount": 4
     },
     {
       "label": "multi-plug adaptor",
-      "error": "https://findit-nearby.vercel.app/api/search returned 503"
+      "identification": {
+        "object": "Multi-plug socket adapter",
+        "name": "Multi-plug socket adapter",
+        "brand": null,
+        "model": null,
+        "category": "Electronics",
+        "retailCategory": "Electronics & Electrical",
+        "confidence": 0.95,
+        "searchQuery": "multi plug wall socket adapter",
+        "verificationNote": "Checked the first pass identification. The item is indeed a multi-plug socket adapter. First pass is accurate."
+      },
+      "retailers": [
+        "Game",
+        "Builders",
+        "Leroy Merlin",
+        "Takealot",
+        "Makro",
+        "PriceCheck"
+      ],
+      "offerCount": 0,
+      "nearbyCount": 2
     }
   ]
 }
