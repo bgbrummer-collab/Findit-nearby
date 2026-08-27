@@ -1,21 +1,26 @@
 {
-  "testedAt": "2026-08-27T18:51:29.324Z",
+  "testedAt": "2026-08-27T19:13:02.414Z",
   "production": "https://findit-nearby.vercel.app",
-  "passed": true,
-  "failures": [],
+  "passed": false,
+  "failures": [
+    "toaster: test crashed: https://findit-nearby.vercel.app/api/search returned 503",
+    "salt and pepper shakers: test crashed: https://findit-nearby.vercel.app/api/search returned 503",
+    "Marc Anthony conditioner: test crashed: https://findit-nearby.vercel.app/api/search returned 503",
+    "multi-plug adaptor: test crashed: https://findit-nearby.vercel.app/api/search returned 503"
+  ],
   "results": [
     {
       "label": "Mercedes SUV",
       "identification": {
         "object": "SUV",
-        "name": "Mercedes-Benz GLC SUV",
+        "name": "Mercedes-Benz GLC",
         "brand": "Mercedes-Benz",
         "model": "GLC",
-        "category": "Vehicles & Parts > Motor Vehicles > Cars",
+        "category": "Automotive",
         "retailCategory": "vehicle",
-        "confidence": 0.95,
-        "searchQuery": "Mercedes-Benz GLC SUV white",
-        "verificationNote": "Checked the first-pass draft and confirmed the identification of the Mercedes-Benz GLC SUV as accurate based on visible styling and brand emblem."
+        "confidence": 0.9,
+        "searchQuery": "Mercedes-Benz GLC SUV",
+        "verificationNote": "The image shows a full-size luxury SUV with distinct Mercedes-Benz styling elements."
       },
       "retailers": [
         "Mercedes-Benz South Africa",
@@ -29,15 +34,15 @@
     {
       "label": "JBL speaker",
       "identification": {
-        "object": "portable bluetooth speaker",
-        "name": "JBL Flip 6 Portable Bluetooth Speaker",
+        "object": "Portable Bluetooth Speaker",
+        "name": "JBL Portable Bluetooth Speaker",
         "brand": "JBL",
-        "model": "Flip 6",
-        "category": "Audio Equipment",
+        "model": null,
+        "category": "Electronics",
         "retailCategory": "electronics",
         "confidence": 0.9,
-        "searchQuery": "JBL Flip 6 portable bluetooth speaker",
-        "verificationNote": "Checked the brand, shape, and design features. The large centered JBL logo combined with the end cap design strongly supports the JBL Flip model line."
+        "searchQuery": "JBL Portable Bluetooth Speaker",
+        "verificationNote": "Checked the first-pass identification. The brand JBL is clearly visible, but the exact model number (Flip 6) is not explicitly printed in readable text on the unit shown in this image, so model is set to null."
       },
       "retailers": [
         "Incredible Connection",
@@ -59,9 +64,9 @@
         "model": "Superior White Bread",
         "category": "Groceries",
         "retailCategory": "grocery/household",
-        "confidence": 0.98,
+        "confidence": 0.95,
         "searchQuery": "Albany Superior White Bread loaf",
-        "verificationNote": "Checked the first-pass draft and confirmed all details including brand and exact variant wording are clearly supported by visible text on the packaging."
+        "verificationNote": "Checked the package labeling and brand name. The first-pass identification is completely accurate."
       },
       "retailers": [
         "Checkers",
@@ -85,8 +90,8 @@
         "category": "Footwear",
         "retailCategory": "footwear",
         "confidence": 0.98,
-        "searchQuery": "Adidas Samba OG white black sneakers",
-        "verificationNote": "Checked the first-pass draft and confirmed the model text SAMBA and distinct features match the product accurately."
+        "searchQuery": "Adidas Samba OG white black",
+        "verificationNote": "Checked the physical features and visible text; the first-pass identification is accurate."
       },
       "retailers": [
         "adidas",
@@ -105,7 +110,7 @@
     {
       "label": "adjustable wrench",
       "identification": {
-        "object": "adjustable wrench",
+        "object": "Adjustable Wrench",
         "name": "Adjustable Wrench",
         "brand": null,
         "model": null,
@@ -113,7 +118,7 @@
         "retailCategory": "hardware",
         "confidence": 0.95,
         "searchQuery": "adjustable wrench",
-        "verificationNote": "Checked the first-pass identification, confirmed the object is correctly identified as an adjustable wrench. Brand and model remain null as exact text is not readable."
+        "verificationNote": "Checked the first-pass identification, confirmed the object is an adjustable wrench, and verified that brand and model are correctly set to null due to lack of readable markings."
       },
       "retailers": [
         "Game",
@@ -128,99 +133,19 @@
     },
     {
       "label": "toaster",
-      "identification": {
-        "object": "Toaster",
-        "name": "Turquoise 2-Slice Toaster",
-        "brand": null,
-        "model": null,
-        "category": "Home & Kitchen",
-        "retailCategory": "home appliances",
-        "confidence": 0.92,
-        "searchQuery": "turquoise 2 slice toaster",
-        "verificationNote": "Checked the first pass draft and verified it is correct. The script logo on the side is blurry and unreadable, so brand and model remain null."
-      },
-      "retailers": [
-        "Game",
-        "HiFi Corp",
-        "Takealot",
-        "Makro",
-        "PriceCheck"
-      ],
-      "offerCount": 0,
-      "nearbyCount": 2
+      "error": "https://findit-nearby.vercel.app/api/search returned 503"
     },
     {
       "label": "salt and pepper shakers",
-      "identification": {
-        "object": "Salt and Pepper Shakers",
-        "name": "Salt and Pepper Shaker Set",
-        "brand": null,
-        "model": null,
-        "category": "Kitchen & Dining",
-        "retailCategory": "Kitchenware & Tableware",
-        "confidence": 0.98,
-        "searchQuery": "glass salt and pepper shakers set",
-        "verificationNote": "Checked the first pass against the image; physical object is accurately identified as a standard salt and pepper shaker pair. No brand or model text is present, so they remain null."
-      },
-      "retailers": [
-        "Checkers",
-        "Pick n Pay",
-        "Game",
-        "Woolworths",
-        "Takealot",
-        "Makro",
-        "PriceCheck"
-      ],
-      "offerCount": 0,
-      "nearbyCount": 5
+      "error": "https://findit-nearby.vercel.app/api/search returned 503"
     },
     {
       "label": "Marc Anthony conditioner",
-      "identification": {
-        "object": "Hair Conditioner",
-        "name": "Marc Anthony Strictly Curls Curl Defining Conditioner",
-        "brand": "Marc Anthony",
-        "model": "Strictly Curls Conditioner",
-        "category": "Beauty & Personal Care",
-        "retailCategory": "Hair Care",
-        "confidence": 0.98,
-        "searchQuery": "Marc Anthony Strictly Curls Conditioner",
-        "verificationNote": "Checked the brand name, product line, and variant wording on the bottle label. The first pass was accurate."
-      },
-      "retailers": [
-        "Woolworths",
-        "Clicks",
-        "Dis-Chem",
-        "Takealot",
-        "Makro",
-        "PriceCheck"
-      ],
-      "offerCount": 0,
-      "nearbyCount": 4
+      "error": "https://findit-nearby.vercel.app/api/search returned 503"
     },
     {
       "label": "multi-plug adaptor",
-      "identification": {
-        "object": "power adapter",
-        "name": "Multi-Plug Socket Adapter",
-        "brand": null,
-        "model": null,
-        "category": "Electronics",
-        "retailCategory": "Electronics",
-        "confidence": 0.95,
-        "searchQuery": "multi-plug socket adapter",
-        "verificationNote": "Checked the first pass, object is correctly identified as a multi-plug socket adapter with no branding or model number present."
-      },
-      "retailers": [
-        "Game",
-        "Builders",
-        "Leroy Merlin",
-        "Takealot",
-        "Makro",
-        "PriceCheck"
-      ],
-      "offerCount": 0,
-      "nearbyCount": 2
+      "error": "https://findit-nearby.vercel.app/api/search returned 503"
     }
   ]
 }
