@@ -25,7 +25,7 @@ jobs:
         run: |
           git config user.name "findit-hotfix-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add api/search.js exact-retailer-fix.js index.html .github/workflows/real-world-nine-item-audit.yml
+          git add api/search.js exact-retailer-fix.js index.html
           git diff --cached --quiet && exit 0
           git commit -m "Align live search flow and cache bust [skip ci]"
           git push origin HEAD:main
