@@ -1,5 +1,5 @@
 const PRIMARY_MODEL='gemini-3.5-flash-lite';
-const FALLBACK_MODEL='gemini-2.5-flash';
+const FALLBACK_MODEL='gemini-3.6-flash';
 const CONFIDENCE_MIN=.55;
 const GEMINI_TIMEOUT_MS=12000;
 const QUOTA_RE=/quota|rate.?limit|resource.?exhausted|too many requests/i;
