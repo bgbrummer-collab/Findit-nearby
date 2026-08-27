@@ -1,5 +1,5 @@
-const PRIMARY_MODEL='gemini-3.6-flash';
-const FALLBACK_MODEL='gemini-3.5-flash-lite';
+const PRIMARY_MODEL='gemini-3.5-flash-lite';
+const FALLBACK_MODEL='gemini-2.5-flash';
 const CONFIDENCE_MIN=.55;
 const GEMINI_TIMEOUT_MS=12000;
 const QUOTA_RE=/quota|rate.?limit|resource.?exhausted|too many requests/i;
@@ -70,7 +70,7 @@ Retail relevance is critical. Bags, toiletry bags, wash bags and travel pouches 
 When a specialist branded product is recognised, likelyStoreTypes should prioritise an authorised dealer for that brand.
 Do not call ordinary eyeglasses safety/PPE without direct certification evidence.
 searchQuery must describe the physical purchasable item itself. Include brand/model only when supported. Return structured JSON only.`;
- let last;for(const model of [PRIMARY_MODEL,FALLBACK_MODEL]){try{const x=await generateStructured(key,model,prompt,b64,mime);x.modelUsed=model;return x}catch(e){last=e;if(e?.fastFail)throw e}}throw last||Error('Gemini request failed');
+ let last;for(const model of [PRIMARY_MODEL,FALLBACK_MODEL]){try{const x=await generateStructured(key,model,prompt,b64,mime);x.modelUsed=model;return x}catch(e){last=e}}throw last||Error('Gemini request failed');
 }
 
 async function verifyDraft(key,b64,mime,draft){
@@ -90,7 +90,7 @@ Your job is to protect users from confident wrong matches. Check especially:
 8. If the first pass was too specific, become less specific and lower confidence. Uncertainty is better than a wrong answer.
 
 Use evidence[] to list the strongest visible reasons for the final answer. Set draftChanged=true if you corrected any meaningful field. verificationNote should briefly explain what you checked. Return structured JSON only.`;
- let last;for(const model of [PRIMARY_MODEL,FALLBACK_MODEL]){try{const x=await generateStructured(key,model,prompt,b64,mime);x.verifierModel=model;return x}catch(e){last=e;if(e?.fastFail)throw e}}throw last||Error('Verification failed');
+ let last;for(const model of [PRIMARY_MODEL,FALLBACK_MODEL]){try{const x=await generateStructured(key,model,prompt,b64,mime);x.verifierModel=model;return x}catch(e){last=e}}throw last||Error('Verification failed');
 }
 
 function postProcess(i,draft={}){
