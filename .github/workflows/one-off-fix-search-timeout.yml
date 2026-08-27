@@ -1,4 +1,4 @@
-name: One-off FindIt Search Timeout Hotfix
+name: One-off FindIt Search Flow Hotfix
 
 on:
   push:
@@ -15,15 +15,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Patch image search
+      - name: Patch search flow
         run: python3 .github/scripts/hotfix_search.py
       - name: Check syntax
-        run: node --check api/search.js
+        run: |
+          node --check api/search.js
+          node --check exact-retailer-fix.js
       - name: Commit hotfix
         run: |
           git config user.name "findit-hotfix-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add api/search.js
+          git add api/search.js exact-retailer-fix.js index.html .github/workflows/real-world-nine-item-audit.yml
           git diff --cached --quiet && exit 0
-          git commit -m "Tune image identification timeout [skip ci]"
+          git commit -m "Align live search flow and cache bust [skip ci]"
           git push origin HEAD:main
