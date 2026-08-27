@@ -25,3 +25,5 @@ fs.writeFileSync(jsonPath,JSON.stringify(report,null,2));
 fs.writeFileSync(mdPath,`# FindIt Full Production Audit\n\nGenerated: ${report.generatedAt}\n\n**Passes:** ${passes.length}  \n**Warnings:** ${warnings.length}  \n**Failures:** ${failures.length}\n\n${report.checks.map(x=>`- ${x.status==='PASS'?'✅':x.status==='WARN'?'⚠️':'❌'} **${x.name}**${x.detail?` — ${x.detail}`:''}`).join('\n')}\n`);
 console.log('FINAL_AUDIT_SUMMARY='+JSON.stringify(report.summary));
 process.exit(failures.length?1:0);
+
+// Full production audit trigger: 2026-08-27
