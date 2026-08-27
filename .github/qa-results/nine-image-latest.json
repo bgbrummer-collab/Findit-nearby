@@ -1,5 +1,5 @@
 {
-  "testedAt": "2026-08-26T19:26:00.571Z",
+  "testedAt": "2026-08-27T13:34:43.683Z",
   "production": "https://findit-nearby.vercel.app",
   "passed": true,
   "failures": [],
@@ -7,15 +7,15 @@
     {
       "label": "Mercedes SUV",
       "identification": {
-        "object": "SUV",
-        "name": "Mercedes-Benz Luxury SUV",
+        "object": "car",
+        "name": "Mercedes-Benz GLC-Class SUV",
         "brand": "Mercedes-Benz",
-        "model": null,
-        "category": "Vehicles & Automotive",
+        "model": "GLC-Class",
+        "category": "Vehicles & Parts > Motor Vehicles > Cars",
         "retailCategory": "vehicle",
-        "confidence": 0.85,
-        "searchQuery": "Mercedes-Benz Luxury SUV",
-        "verificationNote": "Checked the vehicle brand via the grille emblem; removed the specific GLC model name from the main title and query since exact trim is not readable, setting model to null."
+        "confidence": 0.75,
+        "searchQuery": "Mercedes-Benz GLC SUV white",
+        "verificationNote": "Confirmed brand and model from front fascia and logo."
       },
       "retailers": [
         "Mercedes-Benz South Africa",
@@ -29,15 +29,15 @@
     {
       "label": "JBL speaker",
       "identification": {
-        "object": "Portable Bluetooth Speaker",
+        "object": "portable bluetooth speaker",
         "name": "JBL Flip 6 Portable Bluetooth Speaker",
         "brand": "JBL",
         "model": "Flip 6",
-        "category": "Electronics > Audio > Speakers",
+        "category": "Electronics",
         "retailCategory": "electronics",
-        "confidence": 0.9,
-        "searchQuery": "JBL Flip 6 Portable Bluetooth Speaker",
-        "verificationNote": "Checked the first-pass draft, confirmed branding and design features accurately match the JBL Flip 6 portable speaker."
+        "confidence": 0.95,
+        "searchQuery": "JBL Flip 6 portable bluetooth speaker",
+        "verificationNote": "Verified as a JBL Flip 6 portable Bluetooth speaker based on the large centered metallic-trimmed logo badge, cylinder shape, and passive radiator cap styling."
       },
       "retailers": [
         "Incredible Connection",
@@ -53,15 +53,15 @@
     {
       "label": "Albany bread",
       "identification": {
-        "object": "Loaf of white bread",
+        "object": "packaged loaf of white bread",
         "name": "Albany Superior White Bread",
         "brand": "Albany",
         "model": "Superior White Bread",
-        "category": "Groceries",
+        "category": "Food & Beverages",
         "retailCategory": "grocery/household",
-        "confidence": 0.98,
+        "confidence": 0.95,
         "searchQuery": "Albany Superior White Bread",
-        "verificationNote": "Checked the first pass draft and confirmed all details are accurate."
+        "verificationNote": "Verified brand (Albany) and product model/variant (Superior White Bread) directly from legible packaging text. Draft identification is accurate."
       },
       "retailers": [
         "Checkers",
@@ -79,14 +79,14 @@
       "label": "adidas Samba",
       "identification": {
         "object": "sneaker",
-        "name": "Adidas Samba OG",
-        "brand": "Adidas",
-        "model": "Samba OG",
+        "name": "adidas Samba Sneaker",
+        "brand": "adidas",
+        "model": "Samba",
         "category": "Footwear",
         "retailCategory": "footwear",
         "confidence": 0.98,
-        "searchQuery": "Adidas Samba OG white black sneakers",
-        "verificationNote": "Checked the first pass against the image, verified branding and model text are legible, confirmed object type and features."
+        "searchQuery": "adidas Samba sneakers white black",
+        "verificationNote": "The physical item is an authentic adidas Samba sneaker, identified by visible model branding text and distinctive design elements."
       },
       "retailers": [
         "adidas",
@@ -106,14 +106,14 @@
       "label": "adjustable wrench",
       "identification": {
         "object": "adjustable wrench",
-        "name": "Adjustable Wrench",
-        "brand": null,
+        "name": "Bahco Adjustable Wrench",
+        "brand": "Bahco",
         "model": null,
-        "category": "Tools & Hardware",
-        "retailCategory": "hardware",
+        "category": "Hand Tools",
+        "retailCategory": "Hardware & Hand Tools",
         "confidence": 0.95,
-        "searchQuery": "adjustable wrench",
-        "verificationNote": "Checked the first pass against the image; the identification as an adjustable wrench is accurate and all properties are correct."
+        "searchQuery": "Bahco adjustable wrench",
+        "verificationNote": "Brand identified as Bahco from the logo on the handle. Model/size markings are blurry and not fully legible, so model is set to null per instructions."
       },
       "retailers": [
         "Game",
@@ -124,20 +124,20 @@
         "PriceCheck"
       ],
       "offerCount": 0,
-      "nearbyCount": 0
+      "nearbyCount": 2
     },
     {
       "label": "toaster",
       "identification": {
-        "object": "Toaster",
-        "name": "Retro 2-Slice Toaster",
-        "brand": null,
+        "object": "toaster",
+        "name": "Redmond Retro 2-Slice Toaster",
+        "brand": "Redmond",
         "model": null,
-        "category": "Appliances",
-        "retailCategory": "home appliances",
+        "category": "Kitchen Appliances",
+        "retailCategory": "grocery/household",
         "confidence": 0.95,
-        "searchQuery": "retro 2 slice toaster turquoise chrome",
-        "verificationNote": "Checked the first pass, object is correctly identified as a toaster. Brand text is cursive and unverified, keeping brand as null."
+        "searchQuery": "Redmond retro 2 slice toaster turquoise",
+        "verificationNote": "Checked first-pass draft details against the image. Brand logo is clearly visible, item is correctly identified as a retro 2-slice toaster."
       },
       "retailers": [
         "Game",
@@ -147,20 +147,20 @@
         "PriceCheck"
       ],
       "offerCount": 0,
-      "nearbyCount": 0
+      "nearbyCount": 2
     },
     {
       "label": "salt and pepper shakers",
       "identification": {
-        "object": "Salt and Pepper Shakers",
-        "name": "Glass Salt and Pepper Shaker Set",
+        "object": "salt and pepper shakers",
+        "name": "Glass Salt and Pepper Shakers Set",
         "brand": null,
         "model": null,
-        "category": "Home & Kitchen",
-        "retailCategory": "Kitchenware & Tabletop",
-        "confidence": 0.98,
-        "searchQuery": "glass salt and pepper shaker set",
-        "verificationNote": "Checked the first pass draft against image; identification is accurate and requires no changes."
+        "category": "Kitchen & Dining",
+        "retailCategory": "Kitchenware",
+        "confidence": 0.95,
+        "searchQuery": "glass salt and pepper shakers set",
+        "verificationNote": "Generic kitchen tabletop salt and pepper shakers. No brand or model logo visible."
       },
       "retailers": [
         "Checkers",
@@ -177,15 +177,15 @@
     {
       "label": "Marc Anthony conditioner",
       "identification": {
-        "object": "Hair Conditioner",
+        "object": "hair conditioner tube",
         "name": "Marc Anthony Strictly Curls Curl Envy Conditioner",
         "brand": "Marc Anthony",
         "model": "Strictly Curls Curl Envy Conditioner",
-        "category": "Beauty & Personal Care",
-        "retailCategory": "Hair Care",
+        "category": "Hair Care",
+        "retailCategory": "Beauty & Personal Care",
         "confidence": 0.95,
         "searchQuery": "Marc Anthony Strictly Curls Curl Envy Conditioner",
-        "verificationNote": "Checked the image from scratch and confirmed the brand and product text on the yellow squeeze tube match the first pass draft accurately."
+        "verificationNote": "Verified the brand Marc Anthony and product name Strictly Curls Curl Envy Conditioner from the readable label text on the yellow squeeze tube."
       },
       "retailers": [
         "Woolworths",
@@ -196,20 +196,20 @@
         "PriceCheck"
       ],
       "offerCount": 0,
-      "nearbyCount": 0
+      "nearbyCount": 4
     },
     {
       "label": "multi-plug adaptor",
       "identification": {
-        "object": "power strip adapter",
-        "name": "Multi-plug socket adapter",
+        "object": "multi-plug extension block",
+        "name": "Multi-Plug Extension Socket Block",
         "brand": null,
         "model": null,
-        "category": "Electronics",
-        "retailCategory": "Electronics and Electrical",
+        "category": "Electrical Supplies",
+        "retailCategory": "Hardware & Electrical Supplies",
         "confidence": 0.95,
-        "searchQuery": "multi plug socket adapter multi adapter",
-        "verificationNote": "The item is a physical electrical socket adapter shown on a plain background. No brand or model text is visible. First-pass draft is accurate."
+        "searchQuery": "multi plug extension socket block white",
+        "verificationNote": "Checked the first pass draft and verified that all identifications align with the physical object shown without introducing unverified text or brand names."
       },
       "retailers": [
         "Game",
@@ -220,7 +220,7 @@
         "PriceCheck"
       ],
       "offerCount": 0,
-      "nearbyCount": 0
+      "nearbyCount": 2
     }
   ]
 }
