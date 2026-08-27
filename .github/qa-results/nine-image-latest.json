@@ -1,8 +1,13 @@
 {
-  "testedAt": "2026-08-27T19:13:02.414Z",
+  "testedAt": "2026-08-27T19:22:08.483Z",
   "production": "https://findit-nearby.vercel.app",
   "passed": false,
   "failures": [
+    "Mercedes SUV: test crashed: https://findit-nearby.vercel.app/api/search returned 503",
+    "JBL speaker: test crashed: https://findit-nearby.vercel.app/api/search returned 503",
+    "Albany bread: test crashed: https://findit-nearby.vercel.app/api/search returned 503",
+    "adidas Samba: test crashed: https://findit-nearby.vercel.app/api/search returned 503",
+    "adjustable wrench: test crashed: https://findit-nearby.vercel.app/api/search returned 503",
     "toaster: test crashed: https://findit-nearby.vercel.app/api/search returned 503",
     "salt and pepper shakers: test crashed: https://findit-nearby.vercel.app/api/search returned 503",
     "Marc Anthony conditioner: test crashed: https://findit-nearby.vercel.app/api/search returned 503",
@@ -11,125 +16,23 @@
   "results": [
     {
       "label": "Mercedes SUV",
-      "identification": {
-        "object": "SUV",
-        "name": "Mercedes-Benz GLC",
-        "brand": "Mercedes-Benz",
-        "model": "GLC",
-        "category": "Automotive",
-        "retailCategory": "vehicle",
-        "confidence": 0.9,
-        "searchQuery": "Mercedes-Benz GLC SUV",
-        "verificationNote": "The image shows a full-size luxury SUV with distinct Mercedes-Benz styling elements."
-      },
-      "retailers": [
-        "Mercedes-Benz South Africa",
-        "AutoTrader",
-        "Cars.co.za",
-        "WeBuyCars"
-      ],
-      "offerCount": 0,
-      "nearbyCount": 3
+      "error": "https://findit-nearby.vercel.app/api/search returned 503"
     },
     {
       "label": "JBL speaker",
-      "identification": {
-        "object": "Portable Bluetooth Speaker",
-        "name": "JBL Portable Bluetooth Speaker",
-        "brand": "JBL",
-        "model": null,
-        "category": "Electronics",
-        "retailCategory": "electronics",
-        "confidence": 0.9,
-        "searchQuery": "JBL Portable Bluetooth Speaker",
-        "verificationNote": "Checked the first-pass identification. The brand JBL is clearly visible, but the exact model number (Flip 6) is not explicitly printed in readable text on the unit shown in this image, so model is set to null."
-      },
-      "retailers": [
-        "Incredible Connection",
-        "Game",
-        "HiFi Corp",
-        "Takealot",
-        "Makro",
-        "PriceCheck"
-      ],
-      "offerCount": 0,
-      "nearbyCount": 3
+      "error": "https://findit-nearby.vercel.app/api/search returned 503"
     },
     {
       "label": "Albany bread",
-      "identification": {
-        "object": "Loaf of Bread",
-        "name": "Albany Superior White Bread",
-        "brand": "Albany",
-        "model": "Superior White Bread",
-        "category": "Groceries",
-        "retailCategory": "grocery/household",
-        "confidence": 0.95,
-        "searchQuery": "Albany Superior White Bread loaf",
-        "verificationNote": "Checked the package labeling and brand name. The first-pass identification is completely accurate."
-      },
-      "retailers": [
-        "Checkers",
-        "Pick n Pay",
-        "Shoprite",
-        "Woolworths",
-        "Takealot",
-        "Makro",
-        "PriceCheck"
-      ],
-      "offerCount": 0,
-      "nearbyCount": 4
+      "error": "https://findit-nearby.vercel.app/api/search returned 503"
     },
     {
       "label": "adidas Samba",
-      "identification": {
-        "object": "sneaker",
-        "name": "Adidas Samba OG",
-        "brand": "Adidas",
-        "model": "Samba OG",
-        "category": "Footwear",
-        "retailCategory": "footwear",
-        "confidence": 0.98,
-        "searchQuery": "Adidas Samba OG white black",
-        "verificationNote": "Checked the physical features and visible text; the first-pass identification is accurate."
-      },
-      "retailers": [
-        "adidas",
-        "Sportscene",
-        "Totalsports",
-        "Bash",
-        "Superbalist",
-        "Sportsmans Warehouse",
-        "Takealot",
-        "Makro",
-        "PriceCheck"
-      ],
-      "offerCount": 0,
-      "nearbyCount": 4
+      "error": "https://findit-nearby.vercel.app/api/search returned 503"
     },
     {
       "label": "adjustable wrench",
-      "identification": {
-        "object": "Adjustable Wrench",
-        "name": "Adjustable Wrench",
-        "brand": null,
-        "model": null,
-        "category": "Tools & Hardware",
-        "retailCategory": "hardware",
-        "confidence": 0.95,
-        "searchQuery": "adjustable wrench",
-        "verificationNote": "Checked the first-pass identification, confirmed the object is an adjustable wrench, and verified that brand and model are correctly set to null due to lack of readable markings."
-      },
-      "retailers": [
-        "Game",
-        "Builders",
-        "Leroy Merlin",
-        "Takealot",
-        "Makro",
-        "PriceCheck"
-      ],
-      "offerCount": 0,
-      "nearbyCount": 2
+      "error": "https://findit-nearby.vercel.app/api/search returned 503"
     },
     {
       "label": "toaster",
