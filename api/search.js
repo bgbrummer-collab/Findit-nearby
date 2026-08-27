@@ -1,7 +1,7 @@
 const PRIMARY_MODEL='gemini-3.6-flash';
 const FALLBACK_MODEL='gemini-3.5-flash-lite';
 const CONFIDENCE_MIN=.55;
-const GEMINI_TIMEOUT_MS=5000;
+const GEMINI_TIMEOUT_MS=12000;
 const QUOTA_RE=/quota|rate.?limit|resource.?exhausted|too many requests/i;
 const RESTRICTED=['firearm','gun','rifle','pistol','ammunition','ammo','weapon','knife','knives','machete','sword','switchblade','taser','stun gun','pepper spray','mace','brass knuckles','fireworks','explosive','vape','nicotine','cigarette','cigar','alcohol','beer','wine','liquor','cannabis','marijuana','thc','cbd','psilocybin','magic mushroom','gambling','sports betting','casino','pornography','adult sex toy'];
 
