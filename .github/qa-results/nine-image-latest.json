@@ -1,5 +1,5 @@
 {
-  "testedAt": "2026-08-27T16:27:45.051Z",
+  "testedAt": "2026-08-27T16:42:47.204Z",
   "production": "https://findit-nearby.vercel.app",
   "passed": true,
   "failures": [],
@@ -7,15 +7,15 @@
     {
       "label": "Mercedes SUV",
       "identification": {
-        "object": "car",
+        "object": "Car",
         "name": "Mercedes-Benz GLC SUV",
         "brand": "Mercedes-Benz",
         "model": "GLC",
-        "category": "Vehicles & Parts > Motor Vehicles > Cars",
+        "category": "Vehicles",
         "retailCategory": "vehicle",
         "confidence": 0.95,
-        "searchQuery": "Mercedes-Benz GLC SUV",
-        "verificationNote": "Checked the first-pass identification against the image; the Mercedes-Benz logo and vehicle styling clearly confirm the brand and model accurately."
+        "searchQuery": "Mercedes-Benz GLC SUV white",
+        "verificationNote": "The first-pass draft is accurate. Verified the Mercedes-Benz brand logo and model characteristics."
       },
       "retailers": [
         "Mercedes-Benz South Africa",
@@ -29,7 +29,7 @@
     {
       "label": "JBL speaker",
       "identification": {
-        "object": "portable bluetooth speaker",
+        "object": "JBL Portable Bluetooth Speaker",
         "name": "JBL Portable Bluetooth Speaker",
         "brand": "JBL",
         "model": null,
@@ -37,7 +37,7 @@
         "retailCategory": "electronics",
         "confidence": 0.95,
         "searchQuery": "JBL portable bluetooth speaker",
-        "verificationNote": "Checked the first pass draft. The brand JBL is clearly visible and accurate, but the exact model cannot be verified solely from this angle, so model is correctly set to null."
+        "verificationNote": "Checked the first-pass draft and confirmed all details are accurate. The brand JBL is clearly visible, and the exact model number is correctly set to null."
       },
       "retailers": [
         "Incredible Connection",
@@ -61,7 +61,7 @@
         "retailCategory": "grocery/household",
         "confidence": 0.98,
         "searchQuery": "Albany Superior White Bread",
-        "verificationNote": "Checked the first pass, confirmed product brand and variant text match the visible packaging exactly."
+        "verificationNote": "Checked the first-pass draft and confirmed the brand and model text are clearly visible on the packaging."
       },
       "retailers": [
         "Checkers",
@@ -78,15 +78,15 @@
     {
       "label": "adidas Samba",
       "identification": {
-        "object": "Sneaker",
-        "name": "Adidas Samba OG White Black",
+        "object": "sneaker",
+        "name": "Adidas Samba OG",
         "brand": "Adidas",
         "model": "Samba OG",
         "category": "Footwear",
         "retailCategory": "footwear",
         "confidence": 0.98,
-        "searchQuery": "Adidas Samba OG white black sneakers",
-        "verificationNote": "Checked the product features, visible text 'SAMBA', and brand styling; the first-pass identification is accurate and requires no changes."
+        "searchQuery": "Adidas Samba OG white black",
+        "verificationNote": "Checked the first-pass draft against visual evidence; branding and model text are clearly visible and accurate."
       },
       "retailers": [
         "adidas",
@@ -105,15 +105,15 @@
     {
       "label": "adjustable wrench",
       "identification": {
-        "object": "adjustable wrench",
+        "object": "Adjustable Wrench",
         "name": "Adjustable Wrench",
         "brand": null,
         "model": null,
         "category": "Tools & Hardware",
         "retailCategory": "hardware",
-        "confidence": 0.95,
+        "confidence": 0.98,
         "searchQuery": "adjustable wrench",
-        "verificationNote": "Checked the first pass draft and verified that the item is indeed an adjustable wrench. No clear brand or model text is visible, so they are kept as null. Draft details are accurate."
+        "verificationNote": "Checked the image from scratch. Confirmed it is an adjustable wrench. Visible text on the handle shows partial markings, but no definitive brand name or model number to extract, so brand and model remain null."
       },
       "retailers": [
         "Game",
@@ -131,13 +131,13 @@
       "identification": {
         "object": "Toaster",
         "name": "Turquoise 2-Slice Toaster",
-        "brand": "RosHuni",
+        "brand": null,
         "model": null,
-        "category": "Appliances",
+        "category": "Home & Kitchen",
         "retailCategory": "home appliances",
-        "confidence": 0.95,
+        "confidence": 0.92,
         "searchQuery": "turquoise 2 slice toaster",
-        "verificationNote": "Checked the physical object, confirms to be a standard 2-slice kitchen toaster with visible branding text RosHuni on the side."
+        "verificationNote": "Checked the first pass against the image. The object is correctly identified as a turquoise 2-slice toaster. The script text on the side is illegible, so brand and model remain null."
       },
       "retailers": [
         "Game",
@@ -152,15 +152,15 @@
     {
       "label": "salt and pepper shakers",
       "identification": {
-        "object": "Salt and pepper shaker set",
-        "name": "Glass Salt and Pepper Shakers",
+        "object": "Salt and Pepper Shakers",
+        "name": "Glass Salt and Pepper Shakers Set",
         "brand": null,
         "model": null,
         "category": "Home & Kitchen",
-        "retailCategory": "Kitchenware",
+        "retailCategory": "Kitchenware & Tableware",
         "confidence": 0.98,
-        "searchQuery": "glass salt and pepper shaker set",
-        "verificationNote": "Checked physical product and confirmed it's a standard glass salt and pepper shaker set. First-pass draft is accurate."
+        "searchQuery": "glass salt and pepper shakers set with metal lids",
+        "verificationNote": "Classic diner-style salt and pepper shakers. No brand logos visible. First-pass identification is accurate."
       },
       "retailers": [
         "Checkers",
@@ -177,15 +177,15 @@
     {
       "label": "Marc Anthony conditioner",
       "identification": {
-        "object": "Hair Conditioner Tube",
-        "name": "Marc Anthony Strictly Curls Curl's Best Friend Conditioner",
+        "object": "Hair Conditioner",
+        "name": "Marc Anthony Strictly Curls Curl Envy Conditioner",
         "brand": "Marc Anthony",
-        "model": "Strictly Curls Curl's Best Friend Conditioner",
-        "category": "Beauty & Personal Care > Hair Care > Conditioner",
+        "model": "Strictly Curls Curl Envy Conditioner",
+        "category": "Beauty & Personal Care",
         "retailCategory": "Hair Care",
         "confidence": 0.95,
-        "searchQuery": "Marc Anthony Strictly Curls Curl's Best Friend Conditioner",
-        "verificationNote": "Checked the first-pass draft and confirmed all brand and product variant text matches the visible packaging accurately."
+        "searchQuery": "Marc Anthony Strictly Curls Curl Envy Conditioner",
+        "verificationNote": "Checked the first pass against the image; all text, brand, and model details match accurately."
       },
       "retailers": [
         "Woolworths",
@@ -201,15 +201,15 @@
     {
       "label": "multi-plug adaptor",
       "identification": {
-        "object": "power strip adapter",
-        "name": "Multi-plug socket adapter",
+        "object": "extension block",
+        "name": "multi-plug adapter",
         "brand": null,
         "model": null,
         "category": "Electronics",
-        "retailCategory": "Electronics & Electrical",
+        "retailCategory": "Electrical & Electronics",
         "confidence": 0.95,
-        "searchQuery": "multi plug socket adapter electrical adapter",
-        "verificationNote": "Checked the first pass, item is indeed a multi-plug electrical adapter. No brand or model text is visible, so they remain null."
+        "searchQuery": "multi plug adapter extension block",
+        "verificationNote": "Checked the first pass identification. The physical object is indeed a multi-plug electrical socket adapter. No brand or model is visible, so they are correctly null."
       },
       "retailers": [
         "Game",
