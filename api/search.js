@@ -1,7 +1,7 @@
 const PRIMARY_MODEL='gemini-3.6-flash';
 const FAST_MODEL='gemini-3.5-flash-lite';
 const CONFIDENCE_MIN=.58;
-const GEMINI_TIMEOUT_MS=10000;
+const GEMINI_TIMEOUT_MS=14000;
 const QUOTA_RE=/quota|rate.?limit|resource.?exhausted|too many requests/i;
 const RESTRICTED=['firearm','gun','rifle','pistol','ammunition','ammo','weapon','knife','knives','machete','sword','switchblade','taser','stun gun','pepper spray','mace','brass knuckles','fireworks','explosive','vape','nicotine','cigarette','cigar','alcohol','beer','wine','liquor','cannabis','marijuana','thc','cbd','psilocybin','magic mushroom','gambling','sports betting','casino','pornography','adult sex toy'];
 
@@ -42,8 +42,12 @@ export default{async fetch(request){
   const lat=num(form.get('lat')),lon=num(form.get('lon')),base64=Buffer.from(await image.arrayBuffer()).toString('base64'),mime=image.type||'image/jpeg';
 
   const primaryPromise=identifyDraft(key,base64,mime);
-  const checkerPromise=independentCheck(key,base64,mime).catch(()=>null);
-  const [draft,checker]=await Promise.all([primaryPromise,checkerPromise]);
+  const checkerPromise=independentCheck(key,base64,mime);
+  const [primaryResult,checkerResult]=await Promise.allSettled([primaryPromise,checkerPromise]);
+  let draft=primaryResult.status==='fulfilled'?primaryResult.value:null;
+  let checker=checkerResult.status==='fulfilled'?checkerResult.value:null;
+  if(!draft&&checker){draft={...checker,modelUsed:checker.verifierModel||FAST_MODEL,verificationNote:'Primary identification timed out; independent vision result used safely.',draftChanged:false};checker=null}
+  if(!draft)throw (primaryResult.reason||checkerResult.reason||Error('Gemini request failed'));
   let verified=mergeIndependent(draft,checker),verificationMode=checker?'parallel-two-pass':'single-pass-degraded';
   if(checker&&needsTieBreak(draft,checker)){
    const adjudicated=await tieBreak(key,base64,mime,draft,checker).catch(()=>null);
@@ -83,7 +87,7 @@ Use multiple signals together: object shape, materials, construction, scale, pac
 productKind must be one of real_product,toy,miniature,replica,packaging,image_of_product,accessory,unknown. scaleClass must be one of full_size,handheld,wearable,tabletop,miniature,unknown.
 searchQuery must be the strongest truthful shopping query supported by the image. Include brand/model/size only when supported. retailCategory and likelyStoreTypes must match stores that genuinely sell the physical item.
 If uncertain between two objects, choose the broader truthful object and lower confidence. Return structured JSON only.`;
- let last;for(const model of [PRIMARY_MODEL,FAST_MODEL]){try{const x=await generateStructured(key,model,prompt,b64,mime);x.modelUsed=model;return x}catch(e){last=e}}throw last||Error('Gemini request failed');
+ let last;for(const model of [FAST_MODEL,PRIMARY_MODEL]){try{const x=await generateStructured(key,model,prompt,b64,mime);x.modelUsed=model;return x}catch(e){last=e}}throw last||Error('Gemini request failed');
 }
 
 async function independentCheck(key,b64,mime){
