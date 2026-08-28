@@ -1,25 +1,29 @@
 from pathlib import Path
 
-# 1) Keep the image API resilient when one Gemini model is rate-limited.
+# Keep image search alive if one parallel Gemini pass times out.
 p=Path('api/search.js')
 s=p.read_text()
-s=s.replace("const PRIMARY_MODEL='gemini-3.6-flash';", "const PRIMARY_MODEL='gemini-3.5-flash-lite';")
-s=s.replace("const FALLBACK_MODEL='gemini-3.5-flash-lite';", "const FALLBACK_MODEL='gemini-3.6-flash';")
-s=s.replace("const FALLBACK_MODEL='gemini-2.5-flash';", "const FALLBACK_MODEL='gemini-3.6-flash';")
-s=s.replace("catch(e){last=e;if(e?.fastFail)throw e}}throw last||Error('Gemini request failed');", "catch(e){last=e}}throw last||Error('Gemini request failed');")
-s=s.replace("catch(e){last=e;if(e?.fastFail)throw e}}throw last||Error('Verification failed');", "catch(e){last=e}}throw last||Error('Verification failed');")
-s=s.replace('const GEMINI_TIMEOUT_MS=5000;', 'const GEMINI_TIMEOUT_MS=12000;')
+s=s.replace("const GEMINI_TIMEOUT_MS=10000;", "const GEMINI_TIMEOUT_MS=14000;")
+old="""  const primaryPromise=identifyDraft(key,base64,mime);\n  const checkerPromise=independentCheck(key,base64,mime).catch(()=>null);\n  const [draft,checker]=await Promise.all([primaryPromise,checkerPromise]);\n  let verified=mergeIndependent(draft,checker),verificationMode=checker?'parallel-two-pass':'single-pass-degraded';\n"""
+new="""  const primaryPromise=identifyDraft(key,base64,mime);\n  const checkerPromise=independentCheck(key,base64,mime);\n  const [primaryResult,checkerResult]=await Promise.allSettled([primaryPromise,checkerPromise]);\n  let draft=primaryResult.status==='fulfilled'?primaryResult.value:null;\n  let checker=checkerResult.status==='fulfilled'?checkerResult.value:null;\n  if(!draft&&checker){draft={...checker,modelUsed:checker.verifierModel||FAST_MODEL,verificationNote:'Primary identification timed out; independent vision result used safely.',draftChanged:false};checker=null}\n  if(!draft)throw (primaryResult.reason||checkerResult.reason||Error('Gemini request failed'));\n  let verified=mergeIndependent(draft,checker),verificationMode=checker?'parallel-two-pass':'single-pass-degraded';\n"""
+if old not in s:
+    raise SystemExit('Could not find parallel search block')
+s=s.replace(old,new,1)
+# Try the fast model first on phones; if it fails, still fall back to the stronger model.
+s=s.replace("for(const model of [PRIMARY_MODEL,FAST_MODEL])", "for(const model of [FAST_MODEL,PRIMARY_MODEL])", 1)
 p.write_text(s)
 
-# 2) The browser controller must allow enough time for model fallback.
+# Give the browser enough time for the server-side fallback path.
 p=Path('exact-retailer-fix.js')
 s=p.read_text()
 s=s.replace("setTimeout(()=>c.abort(),55000)", "setTimeout(()=>c.abort(),75000)")
+s=s.replace("setTimeout(()=>c.abort(),65000)", "setTimeout(()=>c.abort(),75000)")
 p.write_text(s)
 
-# 3) Force phones to load the newest search code instead of a cached bundle.
+# Force phones to fetch the newest search controller.
 p=Path('index.html')
 s=p.read_text()
-s=s.replace('<script src="script.js" defer></script>', '<script src="script.js?v=20260827-search4" defer></script>')
-s=s.replace('<script src="exact-retailer-fix.js" defer></script>', '<script src="exact-retailer-fix.js?v=20260827-search4" defer></script>')
+import re
+s=re.sub(r'script\\.js(?:\\?v=[^\"\\']+)?', 'script.js?v=20260828-mobile-timeout', s)
+s=re.sub(r'exact-retailer-fix\\.js(?:\\?v=[^\"\\']+)?', 'exact-retailer-fix.js?v=20260828-mobile-timeout', s)
 p.write_text(s)
