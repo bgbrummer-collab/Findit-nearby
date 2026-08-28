@@ -358,8 +358,55 @@ function renderOffers(){const list=[...state.offers];if(state.sort==='price')lis
 $$('.sort-btn').forEach(b=>b.onclick=()=>{state.sort=b.dataset.sort;$$('.sort-btn').forEach(x=>x.classList.toggle('active',x===b));renderOffers()});
 function money(p){if(p.price==null)return 'Price unavailable';try{return new Intl.NumberFormat('en-ZA',{style:'currency',currency:p.currency||'ZAR'}).format(Number(p.price))}catch{return `${p.currency||'ZAR'} ${p.price}`}}function placeholderImage(){return "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect width='100%25' height='100%25' fill='%23eef1f5'/%3E%3C/svg%3E"}
 
-async function loadNearby(i,radius){nearbyStores.innerHTML='<div class="empty-state">Finding the closest consumer-facing retailers…</div>';try{const r=await fetch('/api/nearby',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({lat:state.coords.lat,lon:state.coords.lon,identification:i,radiusKm:radius})});const d=await r.json();recordNearbyAnalyticsFromResponse(d,i);if(!r.ok||!d.ok)throw Error(d.error||'Nearby search failed');state.stores=Array.isArray(d.stores)?d.stores:[];Object.assign(state.diagnostics,{nearbyStoreCount:state.stores.length,closestStoreDistanceKm:state.stores[0]?.distanceKm??null,nearbyRadiusKm:d.radiusKm??null,nearbyRetailGroup:d.retailGroup??null,nearbyReliable:d.reliable!==false,lastSearchCompletedAt:new Date().toISOString()});renderStores();updateMap();if(!state.stores.length)showNothing(d.message||'No reliable nearby consumer retailers found.');else nothingFound.classList.add('hidden')}catch(e){state.diagnostics.lastError=String(e.message||e).slice(0,240);state.diagnostics.nearbyReliable=false;state.diagnostics.lastSearchCompletedAt=new Date().toISOString();trackFindIt('nearby_failed',{success:false});nearbyStores.innerHTML='<div class="empty-state">Nearby retailer search is temporarily unavailable.</div>';showNothing('Nearby retailer search could not return useful results.') }}
-function renderStores(){if(!state.stores.length){nearbyStores.innerHTML='';updatePremiumDashboard?.();return}if(premiumState.active&&premiumStoreSort!=="original")state.stores=sortedPremiumStores();nearbyStores.innerHTML=state.stores.map((s,i)=>{const directions=`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${s.lat},${s.lon}`)}`;return `<article class="store-card" data-store="${i}"><span class="store-rank">${i+1}</span><div class="store-main"><strong>${esc(s.name)}</strong><small>${esc(s.address||s.type||'Retailer')}</small><div class="store-tags"><span>${esc(s.type||'retail')}</span><span>Consumer retailer</span><span>Stock not verified</span></div>${premiumState.active?`<label class="premium-compare-check"><input type="checkbox" data-compare-store="${i}" ${premiumCompareSelection.has(i)?"checked":""}> Compare</label>`:""}</div><div class="store-side"><div class="store-distance">${Number(s.distanceKm).toFixed(1)} km</div><div class="store-actions">${s.phone?`<a href="tel:${esc(s.phone)}">Call</a>`:''}${validUrl(s.website)?`<a href="${esc(s.website)}" target="_blank" rel="noopener noreferrer">Website</a>`:''}<a href="${directions}" target="_blank" rel="noopener noreferrer">Directions</a></div></div></article>`}).join('');$$('[data-store]').forEach(card=>card.onclick=e=>{if(e.target.closest('a'))return;selectStore(Number(card.dataset.store))})};$$('[data-compare-store]').forEach(c=>c.onchange=e=>{e.stopPropagation();const i=Number(c.dataset.compareStore);if(c.checked)premiumCompareSelection.add(i);else premiumCompareSelection.delete(i);updatePremiumDashboard()});updatePremiumDashboard()
+async function loadNearby(i,radius){
+  nearbyStores.innerHTML='<div class="empty-state">Finding the closest relevant retailers…</div>';
+  try{
+    const payload={lat:state.coords.lat,lon:state.coords.lon,identification:i,radiusKm:radius};
+    let r=await fetch('/api/nearby',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)});
+    let d=await r.json();
+    recordNearbyAnalyticsFromResponse(d,i);
+    if(!r.ok||!d.ok)throw Error(d.error||'Nearby search failed');
+
+    let rows=Array.isArray(d.stores)?d.stores:[];
+    if(!rows.length){
+      const c=new AbortController(),t=setTimeout(()=>c.abort(),9000);
+      try{
+        const rr=await fetch('/api/nearby',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({...payload,mode:'likely'}),signal:c.signal});
+        const dd=await rr.json();
+        if(rr.ok&&dd.ok&&Array.isArray(dd.stores)){d=dd;rows=dd.stores;recordNearbyAnalyticsFromResponse(dd,i)}
+      }finally{clearTimeout(t)}
+    }
+
+    state.stores=rows.map(x=>({
+      ...x,
+      exactProductMatch:x.exactProductMatch===true,
+      stockVerified:x.stockVerified===true,
+      branchStockVerified:x.branchStockVerified===true,
+      branchPriceVerified:x.branchPriceVerified===true,
+      directionsAvailable:x.directionsAvailable===true&&x.exactProductMatch===true&&(x.branchStockVerified===true||x.stockVerified===true)
+    }));
+    Object.assign(state.diagnostics,{nearbyStoreCount:state.stores.length,closestStoreDistanceKm:state.stores[0]?.distanceKm??null,nearbyRadiusKm:d.radiusKm??radius,nearbyRetailGroup:d.retailGroup??null,nearbyReliable:d.reliable!==false,lastSearchCompletedAt:new Date().toISOString()});
+    renderStores();updateMap();
+    if(!state.stores.length)showNothing(d.message||'No relevant nearby retailers found in this radius.');else nothingFound.classList.add('hidden');
+    document.dispatchEvent(new CustomEvent('findit:nearby-updated',{detail:{stores:state.stores}}));
+  }catch(e){
+    state.diagnostics.lastError=String(e.message||e).slice(0,240);state.diagnostics.nearbyReliable=false;state.diagnostics.lastSearchCompletedAt=new Date().toISOString();trackFindIt('nearby_failed',{success:false});nearbyStores.innerHTML='<div class="empty-state">Nearby retailer search is temporarily unavailable.</div>';showNothing('Nearby retailer search could not return useful results.');
+  }
+}
+function renderStores(){
+  if(!state.stores.length){nearbyStores.innerHTML='';updatePremiumDashboard?.();return}
+  if(premiumState.active&&premiumStoreSort!=="original")state.stores=sortedPremiumStores();
+  nearbyStores.innerHTML=state.stores.map((s,i)=>{
+    const canDirections=s.directionsAvailable===true&&s.exactProductMatch===true&&(s.branchStockVerified===true||s.stockVerified===true);
+    const mapUrl=`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${s.lat},${s.lon}`)}`;
+    const directions=`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${s.lat},${s.lon}`)}`;
+    const stockLabel=(s.branchStockVerified===true||s.stockVerified===true)?'Branch stock verified':'Branch stock not verified';
+    return `<article class="store-card" data-store="${i}" data-exact-branch="${canDirections?'1':'0'}"><span class="store-rank">${i+1}</span><div class="store-main"><strong>${esc(s.name)}</strong><small>${esc(s.address||s.type||'Retailer')}</small><div class="store-tags"><span>${esc(s.type||'retail')}</span><span>Consumer retailer</span><span>${esc(stockLabel)}</span></div>${premiumState.active?`<label class="premium-compare-check"><input type="checkbox" data-compare-store="${i}" ${premiumCompareSelection.has(i)?"checked":""}> Compare</label>`:""}</div><div class="store-side"><div class="store-distance">${Number(s.distanceKm).toFixed(1)} km</div><div class="store-actions">${s.phone?`<a href="tel:${esc(s.phone)}">Call</a>`:''}${validUrl(s.website)?`<a href="${esc(s.website)}" target="_blank" rel="noopener noreferrer">Website</a>`:''}${canDirections?`<a href="${directions}" target="_blank" rel="noopener noreferrer">Directions</a>`:`<a href="${mapUrl}" target="_blank" rel="noopener noreferrer">Map</a>`}</div></div></article>`
+  }).join('');
+  $$('[data-store]').forEach(card=>card.onclick=e=>{if(e.target.closest('a'))return;selectStore(Number(card.dataset.store))});
+  $$('[data-compare-store]').forEach(c=>c.onchange=e=>{e.stopPropagation();const i=Number(c.dataset.compareStore);if(c.checked)premiumCompareSelection.add(i);else premiumCompareSelection.delete(i);updatePremiumDashboard()});
+  updatePremiumDashboard()
+}
 function ensureMap(){if(state.map||typeof L==='undefined')return;state.map=L.map('map').setView(state.coords?[state.coords.lat,state.coords.lon]:[-30.5595,22.9375],state.coords?13:5);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(state.map)}
 function updateMap(){ensureMap();if(!state.map||!state.coords)return;state.markers.forEach(m=>m.remove());state.markers=[];const me=L.circleMarker([state.coords.lat,state.coords.lon],{radius:8,color:'#27d4f2',fillColor:'#27d4f2',fillOpacity:1}).addTo(state.map).bindPopup('You are here');state.markers.push(me);state.stores.forEach((s,i)=>{const m=L.marker([s.lat,s.lon]).addTo(state.map).bindPopup(`<b>${i+1}. ${esc(s.name)}</b><br>${Number(s.distanceKm).toFixed(1)} km away`);m.on('click',()=>selectStore(i,false));state.markers.push(m)});if(state.stores.length){state.map.fitBounds([[state.coords.lat,state.coords.lon],...state.stores.map(s=>[s.lat,s.lon])],{padding:[30,30],maxZoom:14})}else state.map.setView([state.coords.lat,state.coords.lon],13);setTimeout(()=>state.map.invalidateSize(),150)}
 function selectStore(i,openPopup=true){$$('[data-store]').forEach((c,n)=>c.classList.toggle('active',n===i));const card=$(`[data-store="${i}"]`);card?.scrollIntoView({behavior:'smooth',block:'nearest'});const marker=state.markers[i+1];if(marker&&state.map){state.map.panTo(marker.getLatLng());if(openPopup)marker.openPopup()}}
