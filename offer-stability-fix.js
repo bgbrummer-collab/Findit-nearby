@@ -1,10 +1,11 @@
-/* FindIt stability/evidence layer — retries transient retailer lookups, preserves recent verified offers, and safely upgrades strong on-label identities. */
+/* FindIt stability/evidence layer — fast-path version.
+   User-facing requests return immediately. Any recovery refresh happens in the background,
+   so retailer stability no longer makes buttons/search feel frozen. */
 (()=>{
   'use strict';
-  if(window.__finditOfferStabilityV2)return;window.__finditOfferStabilityV2=true;
+  if(window.__finditOfferStabilityV3)return;window.__finditOfferStabilityV3=true;
   const originalFetch=window.fetch.bind(window);
   const MAX_AGE=20*60*1000;
-  const sleep=ms=>new Promise(r=>setTimeout(r,ms));
   const norm=v=>String(v??'').toLowerCase().replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim();
   const toks=v=>[...new Set(norm(v).split(' ').filter(x=>x.length>2))];
   const safeParse=s=>{try{return JSON.parse(s)}catch{return null}};
@@ -15,7 +16,7 @@
   const keyFor=(path,b)=>{
     if(!b)return'';
     const q=[b.query,b.name,b.object,b.brand,b.model,b.category,b.retailCategory].map(norm).filter(Boolean).join('|');
-    return q?`findit_offer_cache_v2:${path}:${q}`:'';
+    return q?`findit_offer_cache_v3:${path}:${q}`:'';
   };
   const useful=(path,d,exactAction=false)=>{
     if(!d||typeof d!=='object')return false;
@@ -49,18 +50,20 @@
     const hits=keys.filter(t=>visible.includes(t));
     const needed=keys.length===1?1:Math.min(2,keys.length);
     if(hits.length<needed)return null;
-    return{
-      ...(d&&typeof d==='object'?d:{}),
-      exactFound:true,
-      confidence:Math.max(.86,Number(d?.confidence||0)),
-      productName:b.name,
-      brand:b.brand,
-      model:b.model,
-      searchQuery:b.name,
-      evidence:[...(Array.isArray(d?.evidence)?d.evidence:[]),'Brand and model/variant are supported by readable text on the photographed product label.'],
-      note:'Exact identity accepted from strong on-product label evidence. Retailer prices and stock still require retailer-page verification.',
-      exactIdentitySource:'visual-label-evidence'
-    };
+    return{...(d&&typeof d==='object'?d:{}),exactFound:true,confidence:Math.max(.86,Number(d?.confidence||0)),productName:b.name,brand:b.brand,model:b.model,searchQuery:b.name,evidence:[...(Array.isArray(d?.evidence)?d.evidence:[]),'Brand and model/variant are supported by readable text on the photographed product label.'],note:'Exact identity accepted from strong on-product label evidence. Retailer prices and stock still require retailer-page verification.',exactIdentitySource:'visual-label-evidence'};
+  }
+
+  function backgroundRefresh(input,init,path,key,exactAction){
+    // Never block a click/search for a retry. A quiet refresh can improve the next request.
+    if(exactAction||!key)return;
+    setTimeout(async()=>{
+      try{
+        const r=await originalFetch(input,init);
+        if(!r.ok)return;
+        const d=await r.clone().json().catch(()=>null);
+        if(useful(path,d,false))writeCache(key,d);
+      }catch{}
+    },0);
   }
 
   window.fetch=async function(input,init){
@@ -68,32 +71,22 @@
     if(!['/api/product-intelligence-v2','/api/official-brand-intelligence'].includes(path)||method!=='POST')return originalFetch(input,init);
     const exactAction=path==='/api/official-brand-intelligence'&&isExactAction(input);
     const body=bodyFromInit(init),key=exactAction?'':keyFor(path,body);
-    let first=null,firstData=null;
     try{
-      first=await originalFetch(input,init);
-      firstData=await first.clone().json().catch(()=>null);
+      const first=await originalFetch(input,init);
+      const data=await first.clone().json().catch(()=>null);
       if(first.ok&&exactAction){
-        if(useful(path,firstData,true))return first;
-        const promoted=strongLabelIdentity(init,firstData);if(promoted)return jsonResponse(promoted,200,'visual-label-evidence');
+        if(useful(path,data,true))return first;
+        const promoted=strongLabelIdentity(init,data);if(promoted)return jsonResponse(promoted,200,'visual-label-evidence');
+        return first;
       }
-      if(first.ok&&useful(path,firstData,false)){writeCache(key,firstData);return first}
-      await sleep(450);
-      const second=await originalFetch(input,init);
-      const secondData=await second.clone().json().catch(()=>null);
-      if(second.ok&&exactAction){
-        if(useful(path,secondData,true))return second;
-        const promoted=strongLabelIdentity(init,secondData);if(promoted)return jsonResponse(promoted,200,'visual-label-evidence');
-        return second;
-      }
-      if(second.ok&&useful(path,secondData,false)){writeCache(key,secondData);return second}
+      if(first.ok&&useful(path,data,false)){writeCache(key,data);return first}
       const cached=readCache(key);
-      if(cached)return jsonResponse({...cached,recoveredFromRecentVerifiedResult:true,recoveredAt:new Date().toISOString()});
-      return second.ok?second:(first||second);
+      if(cached){backgroundRefresh(input,init,path,key,false);return jsonResponse({...cached,recoveredFromRecentVerifiedResult:true,recoveredAt:new Date().toISOString()})}
+      backgroundRefresh(input,init,path,key,false);
+      return first;
     }catch(err){
-      if(exactAction){const promoted=strongLabelIdentity(init,firstData);if(promoted)return jsonResponse(promoted,200,'visual-label-evidence')}
       const cached=readCache(key);
       if(cached)return jsonResponse({...cached,recoveredFromRecentVerifiedResult:true,recoveredAt:new Date().toISOString()});
-      if(first)return first;
       throw err;
     }
   };
@@ -105,14 +98,18 @@
       const map=[...actions.querySelectorAll('a')].find(a=>/\bmap\b/i.test(a.textContent||''));if(!map)return;
       try{
         const u=new URL(map.href,location.href),query=u.searchParams.get('query');if(!query||!/,/.test(query))return;
+        const exact=card.dataset.exactBranch==='1';
+        if(!exact)return;
         const a=document.createElement('a');a.dataset.finditDirections='1';a.target='_blank';a.rel='noopener noreferrer';a.textContent='Directions to store →';
         a.href=`https://www.google.com/maps/dir/?${new URLSearchParams({api:'1',destination:query})}`;actions.appendChild(a);
       }catch{}
     });
   }
-  document.addEventListener('findit:results-rendered',()=>requestAnimationFrame(addNearbyDirections));
+  let directionsQueued=false;
+  const queueDirections=()=>{if(directionsQueued)return;directionsQueued=true;requestAnimationFrame(()=>{directionsQueued=false;addNearbyDirections()})};
+  document.addEventListener('findit:results-rendered',queueDirections);
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',addNearbyDirections,{once:true});else addNearbyDirections();
-  const mo=new MutationObserver(()=>requestAnimationFrame(addNearbyDirections));
+  const mo=new MutationObserver(queueDirections);
   const startObserver=()=>{const root=document.querySelector('#nearbyStores');if(root)mo.observe(root,{childList:true,subtree:true})};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',startObserver,{once:true});else startObserver();
 })();
