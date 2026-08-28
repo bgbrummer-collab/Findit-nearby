@@ -1,7 +1,7 @@
 const PRIMARY_MODEL='gemini-3.6-flash';
 const FAST_MODEL='gemini-3.5-flash-lite';
 const CONFIDENCE_MIN=.58;
-const GEMINI_TIMEOUT_MS=12000;
+const GEMINI_TIMEOUT_MS=10000;
 const QUOTA_RE=/quota|rate.?limit|resource.?exhausted|too many requests/i;
 const RESTRICTED=['firearm','gun','rifle','pistol','ammunition','ammo','weapon','knife','knives','machete','sword','switchblade','taser','stun gun','pepper spray','mace','brass knuckles','fireworks','explosive','vape','nicotine','cigarette','cigar','alcohol','beer','wine','liquor','cannabis','marijuana','thc','cbd','psilocybin','magic mushroom','gambling','sports betting','casino','pornography','adult sex toy'];
 
@@ -32,6 +32,7 @@ const ID_SCHEMA={type:'OBJECT',properties:{
 
 export default{async fetch(request){
  if(request.method!=='POST')return json({error:'POST only'},405);
+ const started=Date.now();
  try{
   const key=process.env.GEMINI_API_KEY;if(!key)return json({error:'GEMINI_API_KEY is missing in Vercel.'},500);
   const form=await request.formData(),image=form.get('image');
@@ -40,9 +41,17 @@ export default{async fetch(request){
   if(image.size>8*1024*1024)return json({error:'Image must be smaller than 8 MB.'},413);
   const lat=num(form.get('lat')),lon=num(form.get('lon')),base64=Buffer.from(await image.arrayBuffer()).toString('base64'),mime=image.type||'image/jpeg';
 
-  const draft=await identifyDraft(key,base64,mime);
-  const verified=await verifyDraft(key,base64,mime,draft).catch(()=>({...draft,verificationNote:'Independent verification was unavailable; first-pass result retained with reduced confidence.',draftChanged:false,confidence:Math.min(Number(draft.confidence||0),.76)}));
+  const primaryPromise=identifyDraft(key,base64,mime);
+  const checkerPromise=independentCheck(key,base64,mime).catch(()=>null);
+  const [draft,checker]=await Promise.all([primaryPromise,checkerPromise]);
+  let verified=mergeIndependent(draft,checker),verificationMode=checker?'parallel-two-pass':'single-pass-degraded';
+  if(checker&&needsTieBreak(draft,checker)){
+   const adjudicated=await tieBreak(key,base64,mime,draft,checker).catch(()=>null);
+   if(adjudicated){verified=adjudicated;verificationMode='parallel-plus-tiebreak'}
+  }
   const identification=postProcess(verified,draft);
+  identification.analysisMs=Date.now()-started;
+  identification.verificationMode=verificationMode;
 
   if(isRestricted(identification))return json({identification,offers:[],blocked:true,verified:false,message:'FindIt cannot help search for restricted, dangerous or age-limited products.'});
   if(Number(identification.confidence||0)<CONFIDENCE_MIN)return json({identification,offers:[],blocked:false,verified:false,message:'The image was not identified confidently enough. Try a clearer photo showing the whole item, logo, package label or model text.'});
@@ -77,13 +86,30 @@ If uncertain between two objects, choose the broader truthful object and lower c
  let last;for(const model of [PRIMARY_MODEL,FAST_MODEL]){try{const x=await generateStructured(key,model,prompt,b64,mime);x.modelUsed=model;return x}catch(e){last=e}}throw last||Error('Gemini request failed');
 }
 
-async function verifyDraft(key,b64,mime,draft){
- const prompt=`You are FindIt Nearby's independent second-pass visual verifier. Inspect the image again from scratch and challenge the first pass.
-FIRST PASS: ${JSON.stringify(draft)}
-Check every claim: actual object, product-versus-artwork, brand, exact model/variant, size/pack count, visible text, retail category and shopping query.
-Reject any detail not supported by visible evidence. For packaged products, exact variant/size/pack count must appear in readable label text. For tools, exact size must be readable. For vehicles, only name a precise model when the badge/design evidence is strong enough; otherwise use make + body style or a broader model family.
-If the first pass and your inspection disagree, correct it and lower confidence. Use evidence[] for the strongest visible reasons. verificationNote must state what was independently checked. Return structured JSON only.`;
- let last;for(const model of [PRIMARY_MODEL,FAST_MODEL]){try{const x=await generateStructured(key,model,prompt,b64,mime);x.verifierModel=model;return x}catch(e){last=e}}throw last||Error('Verification failed');
+async function independentCheck(key,b64,mime){
+ const prompt=`Independently inspect this product photo for FindIt Nearby. Do not rely on any previous answer. Identify the real physical purchasable object, brand only when visibly supported, exact model/variant only when genuinely supported, and readable size/pack count only when visible. Be especially strict about packaged goods, vehicles, tools, artwork printed on products, toys/replicas and accessories. Choose the broader truthful answer rather than guessing. Return the complete structured JSON schema only.`;
+ const x=await generateStructured(key,FAST_MODEL,prompt,b64,mime);x.verifierModel=FAST_MODEL;return x;
+}
+
+function needsTieBreak(a,b){
+ const wholeA=norm([a.object,a.name,a.brand,a.model].join(' ')),wholeB=norm([b.object,b.name,b.brand,b.model].join(' '));
+ const agreement=overlap(wholeA,wholeB),brandA=norm(a.brand),brandB=norm(b.brand),modelA=norm(a.model),modelB=norm(b.model);
+ const brandConflict=Boolean(brandA&&brandB&&brandA!==brandB),modelConflict=Boolean(modelA&&modelB&&modelA!==modelB),objectConflict=overlap(a.object||a.name,b.object||b.name)<.35;
+ return agreement<.52||brandConflict||modelConflict||objectConflict;
+}
+
+function mergeIndependent(primary,checker){
+ if(!checker)return {...primary,verificationNote:'Independent verification was unavailable; strong primary result retained with conservative evidence rules.',draftChanged:false,confidence:Math.min(Number(primary.confidence||0),.88)};
+ const agreement=overlap([primary.object,primary.name,primary.brand,primary.model].join(' '),[checker.object,checker.name,checker.brand,checker.model].join(' '));
+ return {...primary,visibleText:[...new Set([...(primary.visibleText||[]),...(checker.visibleText||[])])].slice(0,14),evidence:[...new Set([...(primary.evidence||[]),...(checker.evidence||[])])].slice(0,10),verificationNote:`Independent parallel verifier agreement ${Math.round(agreement*100)}%. ${checker.verificationNote||''}`.trim(),draftChanged:false,confidence:Math.min(1,Math.max(Number(primary.confidence||0),agreement>=.7?Number(checker.confidence||0)*.98:0))};
+}
+
+async function tieBreak(key,b64,mime,primary,checker){
+ const prompt=`You are the final adjudicator for FindIt Nearby. Two independent vision passes disagree. Inspect the image yourself and return the most defensible product identity. Never average guesses. Remove unsupported brand/model/variant/size claims and use a broader truthful identity when evidence is insufficient.
+PRIMARY: ${JSON.stringify(primary)}
+INDEPENDENT CHECKER: ${JSON.stringify(checker)}
+For packaged products exact label details must be readable. For vehicles an exact model needs strong badge/design evidence. For tools exact size must be readable. Return complete structured JSON only.`;
+ const x=await generateStructured(key,PRIMARY_MODEL,prompt,b64,mime);x.verifierModel=PRIMARY_MODEL;x.draftChanged=true;return x;
 }
 
 function postProcess(i,draft={}){
@@ -115,7 +141,7 @@ function postProcess(i,draft={}){
 
 function extractLabelSpecific(xs=[]){const out=[];for(const raw of xs){const s=String(raw||'').trim();if(!s)continue;if(/\b\d+(?:\.\d+)?\s?(?:ml|l|g|kg|mg|gb|tb|cm|mm|inch|in|pack|packs|roll|rolls|ply)\b/i.test(s)||/\b(classic|luxury|superior|strictly curls|triple blend|twin ply|2-ply|3-ply)\b/i.test(s))out.push(s)}return [...new Set(out)].slice(0,5)}
 async function loadFeeds(){let cfg=[];try{cfg=JSON.parse(process.env.RETAILER_FEEDS_JSON||'[]')}catch{}if(!Array.isArray(cfg))return[];const settled=await Promise.allSettled(cfg.filter(x=>x?.url&&x?.name).map(fetchFeed));return settled.flatMap(x=>x.status==='fulfilled'?x.value:[])}
-async function fetchFeed(c){const h={Accept:'application/json'};if(c.tokenEnv&&process.env[c.tokenEnv])h.Authorization=`Bearer ${process.env[c.tokenEnv]}`;const r=await fetch(c.url,{headers:h,signal:AbortSignal.timeout(6500)});if(!r.ok)throw Error(`${c.name} feed returned ${r.status}`);const d=await r.json(),a=Array.isArray(d)?d:Array.isArray(d.products)?d.products:[];return a.map(p=>({id:String(p.id||p.sku||p.url||p.name),name:String(p.name||''),brand:clean(p.brand),model:clean(p.model||p.sku),category:clean(p.category),keywords:Array.isArray(p.keywords)?p.keywords.map(String):[],image:clean(p.image),url:clean(p.url),retailer:c.name,price:num(p.price),currency:p.currency||'ZAR',stock:p.stock||null,stores:Array.isArray(p.stores)?p.stores:[]})).filter(p=>p.name)}
+async function fetchFeed(c){const h={Accept:'application/json'};if(c.tokenEnv&&process.env[c.tokenEnv])h.Authorization=`Bearer ${process.env[c.tokenEnv]}`;const r=await fetch(c.url,{headers:h,signal:AbortSignal.timeout(5000)});if(!r.ok)throw Error(`${c.name} feed returned ${r.status}`);const d=await r.json(),a=Array.isArray(d)?d:Array.isArray(d.products)?d.products:[];return a.map(p=>({id:String(p.id||p.sku||p.url||p.name),name:String(p.name||''),brand:clean(p.brand),model:clean(p.model||p.sku),category:clean(p.category),keywords:Array.isArray(p.keywords)?p.keywords.map(String):[],image:clean(p.image),url:clean(p.url),retailer:c.name,price:num(p.price),currency:p.currency||'ZAR',stock:p.stock||null,stores:Array.isArray(p.stores)?p.stores:[]})).filter(p=>p.name)}
 function matchProducts(i,products,lat,lon){const out=[];for(const p of products){const m=score(i,p);if(m<.64)continue;const exact=isExact(i,p,m);if(p.stores?.length){for(const s of p.stores)out.push(make(p,s,m,lat,lon,exact))}else out.push(make(p,null,m,lat,lon,exact))}return out.sort((a,b)=>(Number(b.exactProductMatch)-Number(a.exactProductMatch))||b.match-a.match).slice(0,20)}
 function isExact(i,p,m){const hay=norm([p.name,p.brand,p.model,p.category,p.keywords?.join(' ')].join(' ')),brand=norm(i.brand),model=norm(i.model),q=terms(i.canonicalQuery||i.searchQuery||i.name||i.object),sizes=q.filter(isSizeToken);
  if(i.brandEvidence&&brand&&!hay.includes(brand))return false;
