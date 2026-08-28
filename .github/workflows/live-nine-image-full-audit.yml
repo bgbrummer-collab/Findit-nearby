@@ -1,0 +1,39 @@
+name: Live Nine Image Full Audit
+
+on:
+  push:
+    branches: [qa-nine-images-20260828]
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install HTTP client
+        run: pip install requests
+      - name: Run exact nine-image and out-of-sample audit
+        id: audit
+        continue-on-error: true
+        run: python qa/live-nine-image-full-audit.py
+      - name: Show report
+        if: always()
+        run: cat qa-results/live-nine-image-full-audit.md || true
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-nine-image-full-audit
+          path: qa-results/
+      - name: Enforce genuine failures
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,sys
+          d=json.load(open("qa-results/live-nine-image-full-audit.json"))
+          sys.exit(0 if d.get("passed") else 1)
+          PY
