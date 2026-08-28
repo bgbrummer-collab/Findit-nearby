@@ -1,0 +1,48 @@
+/* FindIt result UX v3: remove dead-end compare screens and make stock status useful without inventing branch availability. */
+(()=>{
+'use strict';
+if(window.__finditJourneyResultsV3)return;window.__finditJourneyResultsV3=true;
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=(v='')=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const root=()=>$('#finditJourneyV5');
+const id=()=>{try{return window.state?.result?.identification||{}}catch{return{}}};
+const query=()=>{const i=id();return [i.brand,i.model,i.searchQuery||i.query||i.name||i.object].filter(Boolean).join(' ').replace(/\s+/g,' ').trim()||$('#resultName')?.textContent?.trim()||'product'};
+const money=(n,c='ZAR')=>{if(n==null||!Number.isFinite(Number(n)))return'';try{return new Intl.NumberFormat('en-ZA',{style:'currency',currency:c||'ZAR'}).format(Number(n))}catch{return `${c||'ZAR'} ${Number(n).toFixed(2)}`}};
+function safeSearch(name,domain){const q=`${query()} ${name||''}`.trim();return `https://www.google.com/search?q=${encodeURIComponent(domain?`site:${domain} ${q}`:q)}`}
+const retailerDomains={checkers:'checkers.co.za','pick n pay':'pnp.co.za',pnp:'pnp.co.za',shoprite:'shoprite.co.za',woolworths:'woolworths.co.za',makro:'makro.co.za',game:'game.co.za',clicks:'clicks.co.za','dis chem':'dischem.co.za',builders:'builders.co.za','leroy merlin':'leroymerlin.co.za',adidas:'adidas.co.za',sportscene:'sportscene.co.za',totalsports:'totalsports.co.za','incredible connection':'incredible.co.za','hifi corp':'hificorp.co.za'};
+function domainFor(name=''){const n=String(name).toLowerCase();return Object.entries(retailerDomains).find(([k])=>n.includes(k))?.[1]||''}
+function stateStores(){try{return Array.isArray(window.state?.stores)?window.state.stores:[]}catch{return[]}}
+function domStores(){return $$('#nearbyStores .store-card,.nearby-stores .store-card').map((c,n)=>{const name=c.querySelector('strong,h3,h4')?.textContent?.trim()||`Store ${n+1}`;const txt=c.textContent.replace(/\s+/g,' ').trim();const addr=c.querySelector('small')?.textContent?.trim()||'';const map=[...c.querySelectorAll('a[href]')].find(a=>/map/i.test(a.textContent||''))?.href||'';return{name,address:addr,detail:txt,map,stockVerified:/branch stock verified|stock verified/i.test(txt),branchPriceVerified:/verified branch price/i.test(txt)}}).filter(x=>x.name)}
+function stores(){const s=stateStores();return s.length?s:domStores()}
+function verifiedOffers(){const rows=[];try{if(Array.isArray(window.state?.offers))rows.push(...window.state.offers)}catch{}try{if(Array.isArray(window.productIntelligence?.offers))rows.push(...window.productIntelligence.offers)}catch{}const seen=new Set();return rows.filter(o=>{if(!o||!Number.isFinite(Number(o.price))||!(o.verified===true||o.sourcePageVerified===true))return false;const k=`${o.retailer?.name||o.retailer||''}|${o.product_url||o.url||''}|${o.price}`;if(seen.has(k))return false;seen.add(k);return true}).sort((a,b)=>Number(a.price)-Number(b.price))}
+function relevantRetailers(){const out=[];for(const s of stores()){const name=s.name||'Retailer',domain=domainFor(name);out.push({name,url:s.website||safeSearch(name,domain)})}try{for(const x of window.productIntelligence?.webRetailers||[])if(x?.name)out.push({name:x.name,url:x.searchUrl||safeSearch(x.name,domainFor(x.name))})}catch{}const seen=new Set();return out.filter(x=>{const k=x.name.toLowerCase();if(seen.has(k))return false;seen.add(k);return true}).slice(0,8)}
+function style(){if($('#finditJourneyV3Style'))return;const s=document.createElement('style');s.id='finditJourneyV3Style';s.textContent=`
+#finditJourneyV5 .fj-price-helper{display:grid;gap:10px;margin:10px 0}
+#finditJourneyV5 .fj-price-helper .fj-card{margin:0}
+#finditJourneyV5 .fj-stock-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;flex-wrap:wrap}
+#finditJourneyV5 .fj-stock-unknown{display:inline-flex;padding:5px 8px;border-radius:99px;background:#172238;color:#a9b7ca;font-size:10px}
+#finditJourneyV5 .fj-check-stock{border:0;border-radius:10px;background:#15233a;color:#7ee5b4;padding:9px 11px;font-weight:800;cursor:pointer}
+#finditJourneyV5 .fj-empty-help{padding:12px 13px;border:1px solid #202d43;border-radius:13px;background:#0d1728;color:#a8b4c7;font-size:11px;line-height:1.5}
+`;document.head.appendChild(s)}
+function replaceEmptyCompare(){const r=root();if(!r||r.classList.contains('hidden'))return;const head=$('.fj-head b',r);if(!head||head.textContent.trim()!=='Compare Prices')return;const page=$('.fj-page',r),back=$('.fj-secondary[data-fj="actions"]',r);if(!page)return;const active=$('.fj-tabs .active',r)?.textContent?.trim().toLowerCase()||'online';const mode=active.includes('in-store')||active.includes('in store')?'store':'online';
+ if(mode==='online'){
+   if(verifiedOffers().length)return;
+   const note=$$('.fj-fix-note,.fj-card',r).find(x=>/no trustworthy current price|no verified price comparison/i.test(x.textContent||''));
+   const existing=$('.fj-price-helper',r);if(existing)return;
+   const retailers=relevantRetailers();const box=document.createElement('div');box.className='fj-price-helper';box.innerHTML=`<div class="fj-empty-help"><b>Current price is still being verified.</b><br>FindIt will not guess a price. You can check the identified product at relevant retailers now.</div>${retailers.map(x=>`<div class="fj-card"><div class="fj-row"><div><h3>${esc(x.name)}</h3><div class="fj-muted">Price not verified by FindIt yet</div></div></div><button class="fj-link fj-check-stock" data-v3-open="${esc(x.url)}">Check current price</button></div>`).join('')}`;if(note)note.remove();page.insertBefore(box,back||null);
+ }else{
+   const cards=$$('.fj-card',r);if(cards.some(c=>!/no in-store price data yet/i.test(c.textContent||'')))return;
+   cards.forEach(c=>{if(/no in-store price data yet/i.test(c.textContent||''))c.remove()});
+   const all=stores();const box=document.createElement('div');box.className='fj-price-helper';
+   if(all.length){box.innerHTML=`<div class="fj-empty-help"><b>No verified branch price yet.</b><br>These nearby retailers are relevant to the item. Branch stock and branch price remain unverified until the retailer confirms them.</div>${all.slice(0,8).map(s=>{const name=s.name||'Store',verifiedPrice=s.branchPriceVerified===true&&Number.isFinite(Number(s.price)),stock=s.stockVerified===true;const link=s.website||safeSearch(name,domainFor(name));return `<div class="fj-card"><div class="fj-row"><div><h3>${esc(name)}</h3><div class="fj-muted">${esc([Number.isFinite(Number(s.distanceKm))?`${Number(s.distanceKm).toFixed(1)} km`:'',s.address||''].filter(Boolean).join(' • '))}</div></div>${verifiedPrice?`<div class="fj-price">${esc(money(s.price,s.currency||'ZAR'))}</div>`:''}</div><div class="fj-stock-row"><span class="fj-stock-unknown">${stock?'✓ Branch stock verified':'Stock unknown'}</span><button class="fj-check-stock" data-v3-open="${esc(link)}">Check stock / price</button></div></div>`}).join('')}`}
+   else box.innerHTML='<div class="fj-empty-help"><b>No nearby branch data was returned yet.</b><br>Try Nearest Stores, or use the Online tab to check relevant retailers.</div>';
+   page.insertBefore(box,back||null);
+ }
+}
+function patchStockCards(){const r=root();if(!r||r.classList.contains('hidden'))return;const head=$('.fj-head b',r);if(!head||head.textContent.trim()!=='Nearest Stores')return;$$('.fj-card',r).forEach(card=>{const badge=[...card.querySelectorAll('.fj-badge')].find(x=>/stock not verified|stock unknown/i.test(x.textContent||''));if(!badge)return;badge.textContent='Stock unknown';if(card.querySelector('.fj-stock-row'))return;const name=card.querySelector('h3,strong')?.textContent?.trim()||'Store';const row=document.createElement('div');row.className='fj-stock-row';row.innerHTML=`<span class="fj-stock-unknown">Branch stock not verified</span><button class="fj-check-stock" data-v3-open="${esc(safeSearch(name,domainFor(name)))}">Check stock</button>`;badge.replaceWith(row)})}
+let retrying=false;async function tryPriceRefresh(){if(retrying||verifiedOffers().length)return;retrying=true;try{const i=id();const body={...i,query:i.searchQuery||i.query||i.name||i.model||i.object,searchQuery:i.searchQuery||i.query||i.name||i.model||i.object};const c=new AbortController(),t=setTimeout(()=>c.abort(),14000);const res=await fetch('/api/product-intelligence-v2',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body),signal:c.signal});clearTimeout(t);if(res.ok){const data=await res.json();window.productIntelligence=data;if(Array.isArray(data.offers)){try{window.state.offers=data.offers}catch{}}replaceEmptyCompare()}}catch{}finally{retrying=false}}
+function sync(){style();replaceEmptyCompare();patchStockCards();const r=root();if(r&&!r.classList.contains('hidden')&&$('.fj-head b',r)?.textContent.trim()==='Compare Prices'&&($('.fj-tabs .active',r)?.textContent||'').toLowerCase().includes('online'))tryPriceRefresh()}
+document.addEventListener('click',e=>{const o=e.target.closest?.('[data-v3-open]');if(o){e.preventDefault();e.stopImmediatePropagation();window.open(o.dataset.v3Open,'_blank','noopener');return}if(e.target.closest?.('#finditJourneyV5 .fj-tabs'))setTimeout(sync,0)},true);
+const mo=new MutationObserver(()=>requestAnimationFrame(sync));function init(){style();mo.observe(document.body,{childList:true,subtree:true});sync();document.addEventListener('findit:results-rendered',()=>requestAnimationFrame(sync))}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();
