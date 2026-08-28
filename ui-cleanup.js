@@ -1,7 +1,7 @@
-/* Load the retailer-offer stability layer immediately. This script sits at the end of the page before deferred result code executes. */
-(()=>{if(window.__finditOfferStabilityLoader)return;window.__finditOfferStabilityLoader=true;const s=document.createElement('script');s.src='offer-stability-fix.js?v=20260825-stable1';s.async=false;document.head.appendChild(s)})();
-/* Load the current FindIt identifying experience. Versioned URL prevents phones from reusing the old cached scanner script. */
-(()=>{if(window.__finditScannerFlowLoader)return;window.__finditScannerFlowLoader=true;const s=document.createElement('script');s.src='scanner-flow.js?v=20260826-scan5';s.async=false;s.onload=()=>{window.__finditScannerFlowLoaded=true};s.onerror=()=>console.error('FindIt identifying UI failed to load');document.head.appendChild(s)})();
+/* Load the retailer-offer stability layer without blocking the page. */
+(()=>{if(window.__finditOfferStabilityLoader)return;window.__finditOfferStabilityLoader=true;const s=document.createElement('script');s.src='offer-stability-fix.js?v=20260828-fast1';s.async=true;document.head.appendChild(s)})();
+/* Load the current FindIt identifying experience without blocking interaction. */
+(()=>{if(window.__finditScannerFlowLoader)return;window.__finditScannerFlowLoader=true;const s=document.createElement('script');s.src='scanner-flow.js?v=20260828-fast1';s.async=true;s.onload=()=>{window.__finditScannerFlowLoaded=true};s.onerror=()=>console.error('FindIt identifying UI failed to load');document.head.appendChild(s)})();
 
 /* FindIt critical UI cleanup. Intentionally network-free so initial page load can finish. */
 (()=>{
@@ -58,7 +58,7 @@
       const topic=q('#feedbackTopic'),msg=q('#feedbackMessage');
       if(topic)topic.value='feature';
       if(msg){msg.placeholder='Describe the feature you want FindIt to add…';msg.focus()}
-      form.scrollIntoView({behavior:'smooth',block:'center'});
+      form.scrollIntoView({behavior:'auto',block:'center'});
     });
     q('#feedbackTopic')?.addEventListener('change',e=>{
       const msg=q('#feedbackMessage');if(!msg)return;
@@ -88,6 +88,8 @@
     const s=document.createElement('style');
     s.id='finditTrustUiStyle';
     s.textContent=`
+      html{scroll-behavior:auto!important}
+      button,a,[role="button"]{touch-action:manipulation}
       .reveal{opacity:1!important;transform:none!important;visibility:visible!important}
       #finditV3Strip{display:none!important}
       #finditV3Actions [aria-disabled="true"]{display:none!important}
@@ -137,12 +139,7 @@
     ensureFeedbackUi();
     ensureStyle();
     enhanceStorePrices();
-    qa('.reveal').forEach(el=>{
-      el.classList.add('visible');
-      el.style.opacity='1';
-      el.style.transform='none';
-      el.style.visibility='visible';
-    });
+    qa('.reveal').forEach(el=>{el.classList.add('visible');el.style.opacity='1';el.style.transform='none';el.style.visibility='visible'});
     remove(q('#finditV3Strip'));
     remove(q('#widenSearch'));
     qa('button[disabled].premium-coming').forEach(remove);
@@ -150,12 +147,11 @@
     q('#exactSellerResults .premium-insights')?.remove();
   }
 
-  ensureFeedbackUi();
-  ensureStyle();
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',clean,{once:true});
-  else clean();
+  ensureFeedbackUi();ensureStyle();
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',clean,{once:true});else clean();
+  let resultsCleanupQueued=false;
   document.addEventListener('findit:results-rendered',()=>{
-    requestAnimationFrame(clean);
-    setTimeout(clean,250);
+    if(resultsCleanupQueued)return;resultsCleanupQueued=true;
+    requestAnimationFrame(()=>{resultsCleanupQueued=false;clean()});
   });
 })();
