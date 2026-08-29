@@ -19,13 +19,21 @@ jobs:
         run: python3 .github/scripts/hotfix_search.py
       - name: Check syntax
         run: |
+          node --check script.js
           node --check api/search.js
           node --check exact-retailer-fix.js
+          node --check mobile-menu-fix.js
+      - name: Verify controller alignment
+        run: |
+          grep -q 'window.finditState=state' script.js
+          grep -q 'const S=()=>window.finditState||null' exact-retailer-fix.js
+          grep -q 'window.finditState?.result' mobile-menu-fix.js
+          grep -q '20260830-searchlineup1' index.html
       - name: Commit hotfix
         run: |
           git config user.name "findit-hotfix-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add api/search.js exact-retailer-fix.js index.html
+          git add script.js exact-retailer-fix.js mobile-menu-fix.js index.html
           git diff --cached --quiet && exit 0
-          git commit -m "Align live search flow and cache bust [skip ci]"
+          git commit -m "Align live search controllers and refresh mobile cache [skip ci]"
           git push origin HEAD:main
