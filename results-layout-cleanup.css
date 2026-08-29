@@ -1,0 +1,26 @@
+/* FindIt result-screen organization pass. Visual-only: no JS, no click handlers, no data changes. */
+#results.results-shell{max-width:1180px;margin:34px auto 70px;padding:24px 28px 30px;border:1px solid rgba(125,145,185,.18);border-radius:28px;background:linear-gradient(180deg,rgba(9,15,31,.96),rgba(8,14,27,.94));box-shadow:0 22px 70px rgba(0,0,0,.22)}
+#results .foundit-banner{margin-bottom:22px}
+#results .result-header{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;gap:22px;padding-bottom:22px;margin-bottom:20px;border-bottom:1px solid rgba(125,145,185,.14)}
+#results .result-header h2{margin:4px 0 8px;font-size:clamp(28px,4vw,44px);line-height:1.05}
+#results .result-header p{max-width:760px;line-height:1.6}
+#results .result-meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:0 0 14px}
+#results .result-meta>*{min-width:0}
+#results .result-note{margin:0 0 20px;padding:14px 16px;border-radius:14px;background:rgba(15,25,44,.72);border:1px solid rgba(125,145,185,.12);line-height:1.55}
+#results .free-actions{display:grid;gap:12px;margin:0 0 26px;padding:20px;border:1px solid rgba(125,145,185,.14);border-radius:20px;background:rgba(10,18,34,.58)}
+#results .free-actions:empty{display:none}
+#results .free-actions .section-kicker,#results .nearby-panel .section-kicker{margin-bottom:8px}
+#results .free-actions h3,#results .free-actions h2{margin:0 0 8px}
+#results .free-actions p{margin:0;line-height:1.55}
+#results .nearby-panel{margin-top:0;padding:22px;border:1px solid rgba(125,145,185,.14);border-radius:22px;background:rgba(10,18,34,.5)}
+#results .nearby-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:end;margin-bottom:16px}
+#results .nearby-head h3{margin:2px 0 7px;font-size:24px}
+#results #nearbySummary{max-width:760px;line-height:1.55}
+#results .nearby-stores{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+#results .store-card{height:100%;padding:18px;border:1px solid rgba(125,145,185,.16);border-radius:18px;background:rgba(15,24,42,.76);box-shadow:none}
+#results .store-card strong,#results .store-card h3,#results .store-card h4{font-size:17px;line-height:1.25}
+#results .store-card small,#results .store-card p{line-height:1.45}
+#results .store-card .btn,#results .store-card button,#results .store-card a{min-height:38px}
+#results .result-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;padding-top:18px;border-top:1px solid rgba(125,145,185,.12)}
+#results .result-actions .btn{min-width:118px}
+@media (max-width:820px){#results.results-shell{margin:18px 10px 56px;padding:18px 14px 22px;border-radius:22px}#results .result-header{grid-template-columns:1fr;gap:12px}#results .confidence-ring{justify-self:start}#results .free-actions,#results .nearby-panel{padding:16px}#results .nearby-head{grid-template-columns:1fr;align-items:start}#results .nearby-head #mapViewBtn{width:100%}#results .nearby-stores{grid-template-columns:1fr}#results .result-actions{display:grid;grid-template-columns:1fr 1fr}#results .result-actions .btn{width:100%;min-width:0}#results .result-actions .btn:last-child:nth-child(odd){grid-column:1/-1}}
