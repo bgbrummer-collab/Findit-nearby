@@ -8,7 +8,7 @@
   const norm=v=>clean(v).toLowerCase().replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim();
   const toks=v=>[...new Set(norm(v).split(' ').filter(x=>x.length>2))];
   const validUrl=v=>{try{const u=new URL(v);return /^https?:$/.test(u.protocol)}catch{return false}};
-  const S=()=>{try{return state}catch{return null}};
+  const S=()=>window.finditState||null;
   const hasCoords=s=>Boolean(s&&Number.isFinite(Number(s.lat))&&Number.isFinite(Number(s.lon)));
   let running=false,runId=0,exactIdentity=null;
 
