@@ -7,6 +7,13 @@ on:
       - 'index.html'
       - 'style.css'
       - 'script.js'
+      - 'redesign-v4.css'
+      - 'redesign-v4.js'
+      - 'dashboard-runtime-fix.js'
+      - 'scanner-flow.js'
+      - 'journey-results-fix.js'
+      - 'journey-results-v3-fix.js'
+      - 'store-live-check.js'
       - 'mobile-menu-fix.js'
       - 'premium-upgrades.js'
       - 'qa-hardening.js'
@@ -16,6 +23,7 @@ on:
       - 'final-release-fixes.js'
       - 'api/**'
       - 'tests/release-smoke.mjs'
+      - 'tests/dashboard-readiness.mjs'
   workflow_dispatch:
 
 permissions:
@@ -24,7 +32,7 @@ permissions:
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 45
     steps:
       - name: Checkout production branch
         uses: actions/checkout@v4
@@ -40,11 +48,15 @@ jobs:
           npm install --save-dev playwright@1.55.0
           npx playwright install --with-deps chromium
       - name: Wait for Vercel production
-        run: sleep 25
-      - name: Run focused stable release smoke
+        run: sleep 35
+      - name: Run stable pipeline smoke
         env:
           FINDIT_URL: https://findit-nearby.vercel.app/
         run: node tests/release-smoke.mjs
+      - name: Run redesigned dashboard readiness audit
+        env:
+          FINDIT_URL: https://findit-nearby.vercel.app/
+        run: node tests/dashboard-readiness.mjs
       - name: Upload audit output
         if: always()
         uses: actions/upload-artifact@v4
