@@ -6,7 +6,6 @@
   const PREMIUM_ACTIONS='[data-v10],[data-premium-action],[data-premium-radius],[data-store-sort],[data-pw],#premiumSavedMenu,#premiumCompareMenu,#premiumRadiusMenu,#premiumFiltersMenu,#premiumHistoryMenu,#premiumChallengeMenu,#openSettingsPremium';
   const PREMIUM_FN_NAMES=['v10Collections','v10Watchlist','v10FavouriteStores','v10Stats','v10History','v10ManualSearch','v10ExactMatch','v10Assistant','openTool','premiumRadius','openPremiumWorkspace'];
   let currentMode='free';
-  let applying=false;
 
   function premiumActive(){
     try{return typeof premiumState!=='undefined'&&premiumState.active===true}
@@ -14,43 +13,43 @@
   }
   function inPremium(){return premiumActive()&&currentMode==='premium'}
 
-  function hidePremiumSurface(el){
+  function setHidden(el,hidden){
     if(!el)return;
-    el.classList.add('hidden');
-    if(el.matches('.premium-modal,.premium-wow,.premium-tool-modal'))el.setAttribute('aria-hidden','true');
+    el.classList.toggle('hidden',hidden);
+    if(el.matches('.premium-modal,.premium-wow,.premium-tool-modal'))el.setAttribute('aria-hidden',hidden?'true':'false');
   }
 
   function applyMode(){
-    if(applying)return; applying=true;
     const premium=inPremium();
     document.body.dataset.finditPlan=premium?'premium':'free';
     document.body.classList.toggle('findit-premium-mode',premium);
     document.body.classList.toggle('findit-free-mode',!premium);
 
     const standardDrawer=document.querySelector('#drawer > nav.drawer-nav:not(#premiumDrawerNav)');
-    if(standardDrawer)standardDrawer.style.display=premium?'none':'';
+    if(standardDrawer&&standardDrawer.style.display!==(premium?'none':''))standardDrawer.style.display=premium?'none':'';
     const premiumDrawer=document.querySelector('#premiumDrawerNav');
-    if(premiumDrawer)premiumDrawer.style.display=premium?'':'none';
+    if(premiumDrawer&&premiumDrawer.style.display!==(premium?'':'none'))premiumDrawer.style.display=premium?'':'none';
 
     for(const sel of PREMIUM_ROOTS){
       const el=document.querySelector(sel); if(!el)continue;
       if(premium){
-        if(['#premiumHome','#v10CommandCentre','#premiumWorkspaceButton','#premiumStatusBadge'].includes(sel))el.classList.remove('hidden');
-      }else hidePremiumSurface(el);
+        if(['#premiumHome','#v10CommandCentre','#premiumWorkspaceButton','#premiumStatusBadge'].includes(sel))setHidden(el,false);
+      }else setHidden(el,true);
     }
 
-    // Premium-only controls must not leak into ordinary result cards.
-    document.querySelectorAll('.premium-compare-check').forEach(el=>{el.style.display=premium?'':'none'});
+    document.querySelectorAll('.premium-compare-check').forEach(el=>{
+      const wanted=premium?'':'none';
+      if(el.style.display!==wanted)el.style.display=wanted;
+    });
     document.querySelectorAll('[data-premium-option]').forEach(o=>{o.disabled=!premium});
 
-    // Saved favourites are a Premium feature. Share remains available in Free.
-    const save=document.querySelector('#saveFind'); if(save)save.style.display=premium?'':'none';
+    const save=document.querySelector('#saveFind');
+    if(save){const wanted=premium?'':'none';if(save.style.display!==wanted)save.style.display=wanted;}
 
     const pbtn=document.querySelector('#premiumButton');
     if(pbtn)pbtn.textContent=premium?'← FindIt':'★ Premium';
     const badge=document.querySelector('#premiumStatusBadge');
-    if(badge&&premium)badge.classList.remove('hidden');
-    applying=false;
+    if(badge&&premium)setHidden(badge,false);
   }
 
   function enterPremium(){
@@ -74,13 +73,12 @@
   window.finditEnterFree=enterFree;
   window.finditIsPremiumContext=inPremium;
 
-  // Gate Premium actions before older click handlers can run.
   document.addEventListener('click',e=>{
     const premiumButton=e.target.closest?.('#premiumButton');
     if(premiumButton){
       if(inPremium()){e.preventDefault();e.stopImmediatePropagation();enterFree();return}
       if(premiumActive()){e.preventDefault();e.stopImmediatePropagation();enterPremium();return}
-      return; // allow the existing upgrade modal for Free users
+      return;
     }
     const drawerPremium=e.target.closest?.('#drawerPremium');
     if(drawerPremium&&premiumActive()){
@@ -100,8 +98,6 @@
     }
   },true);
 
-  // Standard FindIt is always capped to the Free radius, even for a Premium
-  // account, until the user explicitly enters the Premium workspace.
   document.addEventListener('change',e=>{
     const s=e.target.closest?.('#radiusSelect,#settingsRadius');
     if(!s)return;
@@ -111,8 +107,6 @@
     }
   },true);
 
-  // Add logic-level guards around the main Premium entry points as a second
-  // layer, not just visual hiding.
   function installFunctionGuards(){
     PREMIUM_FN_NAMES.forEach(name=>{
       const original=window[name];
@@ -134,8 +128,9 @@
     currentMode='free';
     installFunctionGuards();
     applyMode();
-    // Keep isolation intact if legacy UI code tries to reveal Premium widgets.
-    const mo=new MutationObserver(()=>applyMode());
-    mo.observe(document.body,{subtree:true,attributes:true,attributeFilter:['class','style']});
   });
+
+  // Re-apply only after events that can legitimately change Premium state.
+  window.addEventListener('pageshow',applyMode);
+  document.addEventListener('findit:premium-state-changed',applyMode);
 })();
