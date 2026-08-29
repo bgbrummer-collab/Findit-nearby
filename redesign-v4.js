@@ -27,3 +27,4 @@ function syncAll(){const s=$('#status')?.textContent?.trim()||'Waiting for an im
 function init(){document.body.classList.add('findit-exact-dashboard');createShell();setTimeout(syncAll,500)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
+(()=>{const s=document.createElement('script');s.src='/dashboard-runtime-fix.js?v=20260829-readiness1';s.defer=true;document.head.appendChild(s)})();
