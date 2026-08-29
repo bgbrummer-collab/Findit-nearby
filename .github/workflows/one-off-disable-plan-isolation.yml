@@ -1,0 +1,32 @@
+name: One-off Disable Plan Isolation
+on:
+  push:
+    paths:
+      - '.github/workflows/one-off-disable-plan-isolation.yml'
+permissions:
+  contents: write
+jobs:
+  rollback:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Remove isolation loader
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          old='<script src="plan-isolation.js?v=20260829-plan1" defer></script>'
+          if old not in s:
+              raise SystemExit('isolation loader not found')
+          p.write_text(s.replace(old,''))
+          PY
+      - name: Commit rollback
+        run: |
+          git config user.name findit-emergency-bot
+          git config user.email actions@users.noreply.github.com
+          git add index.html
+          git commit -m "Emergency disable Free Premium isolation [skip ci]"
+          git push origin main
