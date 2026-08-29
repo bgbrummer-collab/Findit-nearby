@@ -36,7 +36,7 @@ function close(){root().classList.add('hidden');document.body.classList.remove('
 function home(){active=false;clearTimeout(phaseTimer);clearInterval(pollTimer);close();setTimeout(()=>{const target=$('#finder')||document.body;target?.scrollIntoView?.({behavior:'smooth',block:'start'});window.scrollTo?.({top:0,behavior:'smooth'})},60)}
 
 function info(){
- let i={};try{i=window.state?.result?.identification||{}}catch{}
+ let i={};try{i=window.finditState?.result?.identification||{}}catch{}
  return{
    img:$('#preview')?.src||'',
    name:i.name||i.model||i.object||$('#resultName')?.textContent?.trim()||'Item identified',
@@ -51,7 +51,7 @@ function info(){
 }
 
 function collect(){
- let stores=[];try{stores=Array.isArray(window.state?.stores)?window.state.stores:[]}catch{}
+ let stores=[];try{stores=Array.isArray(window.finditState?.stores)?window.state.stores:[]}catch{}
  current.stores=stores.map((s,n)=>({
    name:s.name||`Store ${n+1}`,
    detail:[Number.isFinite(Number(s.distanceKm))?`${Number(s.distanceKm).toFixed(1)} km`:'',s.address||''].filter(Boolean).join(' • '),
@@ -63,7 +63,7 @@ function collect(){
  if(!current.stores.length){
    current.stores=$$('#nearbyStores .store-card,.nearby-stores .store-card').map((c,n)=>{const strong=c.querySelector('strong')?.textContent?.trim()||`Store ${n+1}`,small=c.querySelector('small')?.textContent?.trim()||'',links=[...c.querySelectorAll('a[href]')];return{name:strong,detail:small,address:small,distanceKm:null,directions:links.find(a=>/direction/i.test(a.textContent))?.href||'',map:links.find(a=>/map/i.test(a.textContent))?.href||''}}).filter((x,i,a)=>a.findIndex(y=>y.name===x.name&&y.detail===x.detail)===i).slice(0,8);
  }
- let offers=[];try{offers=Array.isArray(window.state?.offers)?window.state.offers:[]}catch{}
+ let offers=[];try{offers=Array.isArray(window.finditState?.offers)?window.state.offers:[]}catch{}
  current.prices=offers.map(o=>({
    name:o.retailer?.name||o.retailer||'Retailer',
    price:o.price!=null?fmtMoney(o.price,o.currency||'ZAR'):'',

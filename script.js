@@ -311,6 +311,7 @@ function recordNearbyAnalyticsFromResponse(d,i){const stores=Array.isArray(d?.st
 function trackFindIt(eventType,extra={}){const i=state.result?.identification||{};return fetch('/api/analytics',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({eventType,item:i.name||i.object||null,retailCategory:i.retailCategory||i.retail_category||i.category||null,confidence:Number(i.confidence||0)||null,exactOfferCount:state.offers?.length??null,nearbyStoreCount:state.stores?.length??null,closestStoreDistanceKm:state.stores?.[0]?.distanceKm??null,radiusKm:state.radius??null,...extra})}).catch(()=>null)}
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const state={file:null,coords:null,result:null,offers:[],stores:[],sort:"best",radius:Number(localStorage.getItem("finditRadius")||10),map:null,markers:[],diagnostics:{item:null,searchQuery:null,retailCategory:null,likelyStoreTypes:[],recognitionConfidence:null,exactProductMatch:false,exactOfferCount:0,nearbyStoreCount:0,closestStoreDistanceKm:null,nearbyRadiusKm:null,nearbyRetailGroup:null,nearbyReliable:null,lastError:null,lastSearchCompletedAt:null}};
+window.finditState=state;
 /* CURRENT UI LEGACY DOM GUARD — prevents obsolete result handlers from crashing the app. */
 const __finditLegacyIds=[
   ["resultTitle","h2"],["summary","p"],["analysis","div"],["warning","div"],["offers","div"],["noOffers","div"],["nothingFound","div"],
