@@ -1,0 +1,33 @@
+name: One-off Free Premium Isolation
+on:
+  push:
+    paths:
+      - '.github/workflows/one-off-plan-isolation.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add isolation script
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          tag='<script src="plan-isolation.js?v=20260829-plan1" defer></script>'
+          if 'plan-isolation.js' not in s:
+              s=s.replace('</body>',tag+'\n</body>')
+              p.write_text(s)
+          PY
+      - name: Check script syntax
+        run: node --check plan-isolation.js
+      - name: Commit isolation hook
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name "findit-plan-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html
+          git commit -m "Load strict Free Premium isolation [skip ci]"
+          git push
