@@ -1,0 +1,18 @@
+/* FindIt dashboard runtime hardening: direct file pickers, drag/drop, and post-scan return. */
+(()=>{
+'use strict';
+if(window.__finditDashboardRuntimeFix)return;window.__finditDashboardRuntimeFix=true;
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+function hasResult(){try{return !!window.state?.result?.identification&&Object.keys(window.state.result.identification).length>0}catch{return false}}
+function syncNativeFile(input,files){if(!input||!files?.length)return false;try{const dt=new DataTransfer();[...files].forEach(f=>dt.items.add(f));input.files=dt.files;input.dispatchEvent(new Event('change',{bubbles:true}));return true}catch{return false}}
+function openPicker(id){const input=$(id);if(!input)return false;try{input.value=''}catch{}input.click();return true}
+function closeLegacyJourney(){const root=$('#finditJourney');if(root){root.hidden=true;root.style.setProperty('display','none','important');root.setAttribute('aria-hidden','true')}$$('#finditJourneyV5,.journey-overlay,.journey-screen,.fj-overlay,.fj-screen').forEach(el=>{el.hidden=true;el.style.setProperty('display','none','important');el.setAttribute('aria-hidden','true')});document.body.classList.remove('findit-journey-open','findit-journey-v5-open','journey-open','fj-open','modal-open');document.documentElement.classList.remove('findit-journey-open','findit-journey-v5-open','journey-open','fj-open','modal-open')}
+function syncDashboard(){try{document.dispatchEvent(new CustomEvent('findit:dashboard-sync'))}catch{}const shell=$('#finditExactShell');if(shell){shell.hidden=false;shell.style.removeProperty('display')}}
+function returnToDashboard(){closeLegacyJourney();syncDashboard();window.scrollTo({top:0,behavior:'auto'});setTimeout(()=>{closeLegacyJourney();syncDashboard()},100);setTimeout(()=>{closeLegacyJourney();syncDashboard()},500)}
+document.addEventListener('click',e=>{const b=e.target.closest?.('#finditExactShell [data-fx]');if(!b)return;const act=b.dataset.fx;if(act==='upload'){e.preventDefault();e.stopImmediatePropagation();openPicker('#photo')}else if(act==='camera'){e.preventDefault();e.stopImmediatePropagation();openPicker('#cameraPhoto')}},true);
+function bindDrop(){const drop=$('#finditExactShell .fx-drop');if(!drop||drop.dataset.uploadFix==='1')return;drop.dataset.uploadFix='1';['dragenter','dragover'].forEach(type=>drop.addEventListener(type,e=>{e.preventDefault();drop.classList.add('is-dragging')}));['dragleave','drop'].forEach(type=>drop.addEventListener(type,e=>{e.preventDefault();drop.classList.remove('is-dragging')}));drop.addEventListener('drop',e=>{if(syncNativeFile($('#photo'),e.dataTransfer?.files))return;});}
+['#photo','#cameraPhoto'].forEach(sel=>$(sel)?.addEventListener('change',()=>setTimeout(syncDashboard,30)));
+document.addEventListener('findit:results-rendered',()=>{if(hasResult())returnToDashboard()});document.addEventListener('findit:nearby-updated',()=>{if(hasResult()){closeLegacyJourney();syncDashboard()}});
+const obs=new MutationObserver(()=>{bindDrop();if(!hasResult())return;const journey=$('#finditJourney');const text=journey&&!journey.hidden?journey.textContent||'':'';if(/what would you like\s*to do next/i.test(text)||/you found it/i.test(text))returnToDashboard()});obs.observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:['hidden','style','class']});
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bindDrop,{once:true});else bindDrop();
+})();
