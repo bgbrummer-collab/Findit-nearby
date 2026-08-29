@@ -1,0 +1,31 @@
+name: One-off Results Layout Cleanup
+on:
+  push:
+    paths:
+      - '.github/workflows/one-off-results-layout-cleanup.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Load organized results layout
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          tag='<link rel="stylesheet" href="results-layout-cleanup.css?v=20260829-organized1">'
+          if tag not in s:
+              s=s.replace('<link rel="stylesheet" href="style.css">','<link rel="stylesheet" href="style.css">'+tag)
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit
+        run: |
+          git config user.name findit-layout-bot
+          git config user.email actions@users.noreply.github.com
+          git add index.html
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Load organized result screen layout [skip ci]"
+          git push
