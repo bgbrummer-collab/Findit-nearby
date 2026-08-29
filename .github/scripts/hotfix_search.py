@@ -1,27 +1,36 @@
 from pathlib import Path
 import re
 
-# Keep image search alive if one parallel Gemini pass times out.
-p=Path('api/search.js')
+# Align the browser's shared search state with every controller script.
+p=Path('script.js')
 s=p.read_text()
-s=s.replace("const GEMINI_TIMEOUT_MS=10000;", "const GEMINI_TIMEOUT_MS=14000;")
-old="""  const primaryPromise=identifyDraft(key,base64,mime);\n  const checkerPromise=independentCheck(key,base64,mime).catch(()=>null);\n  const [draft,checker]=await Promise.all([primaryPromise,checkerPromise]);\n  let verified=mergeIndependent(draft,checker),verificationMode=checker?'parallel-two-pass':'single-pass-degraded';\n"""
-new="""  const primaryPromise=identifyDraft(key,base64,mime);\n  const checkerPromise=independentCheck(key,base64,mime);\n  const [primaryResult,checkerResult]=await Promise.allSettled([primaryPromise,checkerPromise]);\n  let draft=primaryResult.status==='fulfilled'?primaryResult.value:null;\n  let checker=checkerResult.status==='fulfilled'?checkerResult.value:null;\n  if(!draft&&checker){draft={...checker,modelUsed:checker.verifierModel||FAST_MODEL,verificationNote:'Primary identification timed out; independent vision result used safely.',draftChanged:false};checker=null}\n  if(!draft)throw (primaryResult.reason||checkerResult.reason||Error('Gemini request failed'));\n  let verified=mergeIndependent(draft,checker),verificationMode=checker?'parallel-two-pass':'single-pass-degraded';\n"""
-if old in s:
-    s=s.replace(old,new,1)
-s=s.replace("for(const model of [PRIMARY_MODEL,FAST_MODEL])", "for(const model of [FAST_MODEL,PRIMARY_MODEL])", 1)
+needle='const state={file:null,coords:null,result:null,offers:[],stores:[],sort:"best",radius:Number(localStorage.getItem("finditRadius")||10),map:null,markers:[],diagnostics:'
+if needle in s and 'window.finditState=state;' not in s:
+    # Add the export immediately after the complete state declaration.
+    start=s.index(needle)
+    end=s.find('\n', start)
+    if end!=-1:
+        s=s[:end+1]+'window.finditState=state;\n'+s[end+1:]
 p.write_text(s)
 
-# Give the browser enough time for server-side fallback.
-p=Path('exact-retailer-fix.js')
-s=p.read_text()
-s=s.replace("setTimeout(()=>c.abort(),55000)", "setTimeout(()=>c.abort(),75000)")
-s=s.replace("setTimeout(()=>c.abort(),65000)", "setTimeout(()=>c.abort(),75000)")
-p.write_text(s)
+# Make all secondary controllers read the same exported state instead of relying on
+# a top-level const becoming a window property (it does not).
+for name in ['mobile-menu-fix.js','exact-retailer-fix.js']:
+    p=Path(name)
+    s=p.read_text()
+    if name=='mobile-menu-fix.js':
+        s=s.replace('window.state?.result?.identification', 'window.finditState?.result?.identification')
+        s=s.replace('window.state?.stores', 'window.finditState?.stores')
+        s=s.replace('window.state?.offers', 'window.finditState?.offers')
+    else:
+        s=s.replace("const S=()=>{try{return state}catch{return null}};", "const S=()=>window.finditState||null;")
+    p.write_text(s)
 
-# Force phones to fetch the newest controllers without brittle quote-heavy regexes.
+# Force every phone/browser to fetch this exact controller set.
 p=Path('index.html')
 s=p.read_text()
-s=re.sub(r'script\.js(?:\?v=[^\"]+)?', 'script.js?v=20260828-mobile-timeout2', s)
-s=re.sub(r'exact-retailer-fix\.js(?:\?v=[^\"]+)?', 'exact-retailer-fix.js?v=20260828-mobile-timeout2', s)
+stamp='20260830-searchlineup1'
+s=re.sub(r'script\.js(?:\?v=[^\"]+)?', f'script.js?v={stamp}', s)
+s=re.sub(r'exact-retailer-fix\.js(?:\?v=[^\"]+)?', f'exact-retailer-fix.js?v={stamp}', s)
+s=re.sub(r'mobile-menu-fix\.js(?:\?v=[^\"]+)?', f'mobile-menu-fix.js?v={stamp}', s)
 p.write_text(s)
