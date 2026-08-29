@@ -28,7 +28,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   audit:
@@ -50,24 +50,45 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Wait for Vercel production
         run: sleep 40
-      - name: Run stable pipeline smoke
-        env:
-          FINDIT_URL: https://findit-nearby.vercel.app/
-        run: node tests/release-smoke.mjs
-      - name: Run redesigned dashboard readiness audit
-        env:
-          FINDIT_URL: https://findit-nearby.vercel.app/
-        run: node tests/dashboard-readiness.mjs
-      - name: Test every functional dashboard control
-        env:
-          FINDIT_URL: https://findit-nearby.vercel.app/
-        run: node tests/dashboard-all-functions.mjs
+      - name: Run all production audits and record result
+        shell: bash
+        run: |
+          set +e
+          FINDIT_URL=https://findit-nearby.vercel.app/ node tests/release-smoke.mjs > /tmp/release.log 2>&1
+          RELEASE=$?
+          FINDIT_URL=https://findit-nearby.vercel.app/ node tests/dashboard-readiness.mjs > /tmp/readiness.log 2>&1
+          READY=$?
+          FINDIT_URL=https://findit-nearby.vercel.app/ node tests/dashboard-all-functions.mjs > /tmp/functions.log 2>&1
+          FUNCTIONS=$?
+          {
+            echo "FindIt production audit"
+            echo "Commit: $GITHUB_SHA"
+            echo "Release smoke: $([ $RELEASE -eq 0 ] && echo PASS || echo FAIL)"
+            echo "Dashboard readiness: $([ $READY -eq 0 ] && echo PASS || echo FAIL)"
+            echo "Every dashboard function: $([ $FUNCTIONS -eq 0 ] && echo PASS || echo FAIL)"
+            echo
+            echo "--- release smoke ---"
+            tail -n 40 /tmp/release.log
+            echo
+            echo "--- dashboard readiness ---"
+            tail -n 60 /tmp/readiness.log
+            echo
+            echo "--- every dashboard function ---"
+            tail -n 100 /tmp/functions.log
+          } > AUDIT_LATEST.txt
+          git config user.name "findit-audit-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add AUDIT_LATEST.txt
+          git commit -m "Record latest production audit [skip ci]" || true
+          git push || true
+          if [ $RELEASE -ne 0 ] || [ $READY -ne 0 ] || [ $FUNCTIONS -ne 0 ]; then exit 1; fi
       - name: Upload audit output
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: findit-final-production-audit-${{ github.run_id }}
           path: |
+            AUDIT_LATEST.txt
             audit-output/
             qa-results/
           if-no-files-found: warn
