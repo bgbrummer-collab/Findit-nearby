@@ -1,0 +1,44 @@
+name: One-off FindIt Redesign V4
+on:
+  push:
+    paths:
+      - '.github/workflows/one-off-redesign-v4.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Load redesign without replacing app logic
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          css='<link rel="stylesheet" href="redesign-v4.css?v=20260829-dashboard4">'
+          js='<script src="redesign-v4.js?v=20260829-dashboard4" defer></script>'
+          if css not in s:
+              s=s.replace('</head>', css+'\n</head>')
+          if js not in s:
+              s=s.replace('</body>', js+'\n</body>')
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Verify critical app hooks still exist
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          s=Path('index.html').read_text(encoding='utf-8')
+          required=['id="choosePhoto"','id="takePhoto"','id="location"','id="search"','id="nearbyPanel"','id="mapViewBtn"','id="saveFind"','id="shareFind"','id="premiumButton"','redesign-v4.css','redesign-v4.js']
+          missing=[x for x in required if x not in s]
+          if missing: raise SystemExit('Missing critical hooks: '+', '.join(missing))
+          print('Critical hooks preserved')
+          PY
+      - name: Commit
+        run: |
+          git config user.name findit-redesign-bot
+          git config user.email actions@users.noreply.github.com
+          git add index.html
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Enable full FindIt dashboard redesign [skip ci]"
+          git push
