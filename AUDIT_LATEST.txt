@@ -1,0 +1,85 @@
+FindIt production audit
+Commit: b535ce421246da45d76420c2399d4deda27368da
+Release smoke: FAIL
+Dashboard readiness: FAIL
+Every dashboard function: FAIL
+
+--- release smoke ---
+[PASS] 390px one results controller
+[PASS] 390px no duplicate ids
+[PASS] 390px no uncaught JS errors
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator('#search')
+    - locator resolved to <button id="search" class="btn find-btn">✨ Identify & Find</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - element is outside of the viewport
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - element is outside of the viewport
+    - retrying click action
+      - waiting 100ms
+    58 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - element is outside of the viewport
+     - retrying click action
+       - waiting 500ms
+
+    at mockedProductFlow (/home/runner/work/Findit-nearby/Findit-nearby/tests/release-smoke.mjs:19:237)
+    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/release-smoke.mjs:41:82 {
+  name: 'TimeoutError'
+}
+
+Node.js v22.23.2
+
+--- dashboard readiness ---
+[PASS] 1440px dashboard shell visible
+node:internal/process/promises:394
+    triggerUncaughtException(err, true /* fromPromise */);
+    ^
+
+page.waitForEvent: Timeout 5000ms exceeded while waiting for event "filechooser"
+=========================== logs ===========================
+waiting for event "filechooser"
+============================================================
+    at /home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-readiness.mjs:13:103
+    at check (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-readiness.mjs:5:38)
+    at run (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-readiness.mjs:13:8)
+    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-readiness.mjs:19:1 {
+  name: 'TimeoutError'
+}
+
+Node.js v22.23.2
+
+--- every dashboard function ---
+[PASS] 1440px dashboard visible
+node:internal/process/promises:394
+    triggerUncaughtException(err, true /* fromPromise */);
+    ^
+
+page.waitForEvent: Timeout 5000ms exceeded while waiting for event "filechooser"
+=========================== logs ===========================
+waiting for event "filechooser"
+============================================================
+    at /home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:14:91
+    at check (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:5:41)
+    at audit (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:14:7)
+    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:27:1 {
+  name: 'TimeoutError'
+}
+
+Node.js v22.23.2
