@@ -1,7 +1,7 @@
 FindIt production audit
-Commit: 00191ef3f09b375d01640f28eab65a0cb2322449
+Commit: db82df8d4c4209a1cf4a3877d14d361c35903e4b
 Release smoke: PASS (exit 0)
-Dashboard readiness: PASS (exit 0)
+Dashboard readiness: FAIL (exit 1)
 Every dashboard function: FAIL (exit 1)
 
 --- release smoke ---
@@ -33,97 +33,99 @@ FINDIT_STABLE_PIPELINE_SMOKE_PASS
 [PASS] 1440px selected image enables search
 [PASS] 1440px location control works
 [PASS] 1440px identify returns to dashboard not action menu
-[PASS] 1440px result mirrors into dashboard
+[FAIL] 1440px result mirrors into dashboard page.waitForFunction: Timeout 30000ms exceeded.
 [PASS] 1440px no uncaught JS errors
 [PASS] 390px dashboard shell visible
 [PASS] 390px native upload control opens chooser and transfers file
 [PASS] 390px selected image enables search
 [PASS] 390px location control works
 [PASS] 390px identify returns to dashboard not action menu
-[PASS] 390px result mirrors into dashboard
+[FAIL] 390px result mirrors into dashboard page.waitForFunction: Timeout 30000ms exceeded.
 [PASS] 390px no uncaught JS errors
 
-FINDIT_DASHBOARD_READINESS_PASS
+READINESS FAILURES
+1440px result mirrors into dashboard: page.waitForFunction: Timeout 30000ms exceeded.
+390px result mirrors into dashboard: page.waitForFunction: Timeout 30000ms exceeded.
 
 --- every dashboard function ---
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="fx-modal" id="fxPanelModal" aria-hidden="false">…</div> intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="fx-info-cell">No verified branch price is available yet.</div> from <div class="fx-modal" id="fxPanelModal" aria-hidden="false">…</div> subtree intercepts pointer events
   - retrying click action
     - waiting 500ms
 
-390px premium opens: locator.click: Timeout 6000ms exceeded.
+390px action assistant responds: locator.click: Timeout 6000ms exceeded.
 Call log:
-  - waiting for locator('#finditExactShell [data-fx="premium"]:visible').first()
-    - locator resolved to <button data-fx="premium" class="fx-avatar" aria-label="Premium">F</button>
+  - waiting for locator('#finditExactShell [data-fx="assistant"]:visible').first()
+    - locator resolved to <button data-fx="assistant">⌕ Search Product</button>
   - attempting click action
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <h2>Find more. Save more. Search smarter.</h2> from <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> subtree intercepts pointer events
-  - retrying click action
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <div class="premium-card">…</div> from <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> subtree intercepts pointer events
-  - retrying click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fx-offer">…</div> from <div class="fx-modal" id="fxPanelModal" aria-hidden="false">…</div> subtree intercepts pointer events
+    - retrying click action
     - waiting 20ms
     - waiting for element to be visible, enabled and stable
     - element is visible, enabled and stable
     - scrolling into view if needed
     - done scrolling
-    - <h2>Find more. Save more. Search smarter.</h2> from <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> subtree intercepts pointer events
+    - <div class="fx-offer">…</div> from <div class="fx-modal" id="fxPanelModal" aria-hidden="false">…</div> subtree intercepts pointer events
   2 × retrying click action
       - waiting 100ms
       - waiting for element to be visible, enabled and stable
       - element is visible, enabled and stable
       - scrolling into view if needed
       - done scrolling
-      - <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> intercepts pointer events
+      - <div class="fx-modal" id="fxPanelModal" aria-hidden="false">…</div> intercepts pointer events
   2 × retrying click action
       - waiting 500ms
       - waiting for element to be visible, enabled and stable
       - element is visible, enabled and stable
       - scrolling into view if needed
       - done scrolling
-      - <div class="premium-card">…</div> from <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> subtree intercepts pointer events
+      - <div class="fx-offer">…</div> from <div class="fx-modal" id="fxPanelModal" aria-hidden="false">…</div> subtree intercepts pointer events
     - retrying click action
       - waiting 500ms
       - waiting for element to be visible, enabled and stable
       - element is visible, enabled and stable
       - scrolling into view if needed
       - done scrolling
-      - <h2>Find more. Save more. Search smarter.</h2> from <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> subtree intercepts pointer events
+      - <div class="fx-offer">…</div> from <div class="fx-modal" id="fxPanelModal" aria-hidden="false">…</div> subtree intercepts pointer events
     - retrying click action
       - waiting 500ms
       - waiting for element to be visible, enabled and stable
       - element is visible, enabled and stable
       - scrolling into view if needed
       - done scrolling
-      - <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> intercepts pointer events
+      - <div class="fx-modal" id="fxPanelModal" aria-hidden="false">…</div> intercepts pointer events
     - retrying click action
       - waiting 500ms
       - waiting for element to be visible, enabled and stable
       - element is visible, enabled and stable
       - scrolling into view if needed
       - done scrolling
-      - <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> intercepts pointer events
-  - retrying click action
-    - waiting 500ms
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <div class="premium-card">…</div> from <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> subtree intercepts pointer events
-  - retrying click action
-    - waiting 500ms
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <h2>Find more. Save more. Search smarter.</h2> from <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> subtree intercepts pointer events
+      - <div class="fx-modal" id="fxPanelModal" aria-hidden="false">…</div> intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fx-offer">…</div> from <div class="fx-modal" id="fxPanelModal" aria-hidden="false">…</div> subtree intercepts pointer events
   - retrying click action
     - waiting 500ms
 
+390px action premium responds: visible button missing
+390px premium opens: no visible premium entry point
 390px assistant opens: locator.click: Timeout 6000ms exceeded.
 Call log:
   - waiting for locator('#finditExactShell [data-fx="assistant"]:visible').first()
@@ -133,56 +135,56 @@ Call log:
       - element is visible, enabled and stable
       - scrolling into view if needed
       - done scrolling
-      - <section class="premium-plan-card">…</section> from <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> subtree intercepts pointer events
+      - <div class="fx-offer">…</div> from <div class="fx-modal" id="fxPanelModal" aria-hidden="false">…</div> subtree intercepts pointer events
     - retrying click action
     - waiting 20ms
     - waiting for element to be visible, enabled and stable
     - element is visible, enabled and stable
     - scrolling into view if needed
     - done scrolling
-    - <section class="premium-plan-card">…</section> from <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> subtree intercepts pointer events
+    - <div class="fx-offer">…</div> from <div class="fx-modal" id="fxPanelModal" aria-hidden="false">…</div> subtree intercepts pointer events
   2 × retrying click action
       - waiting 100ms
       - waiting for element to be visible, enabled and stable
       - element is visible, enabled and stable
       - scrolling into view if needed
       - done scrolling
-      - <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> intercepts pointer events
+      - <div class="fx-modal" id="fxPanelModal" aria-hidden="false">…</div> intercepts pointer events
   2 × retrying click action
       - waiting 500ms
       - waiting for element to be visible, enabled and stable
       - element is visible, enabled and stable
       - scrolling into view if needed
       - done scrolling
-      - <section class="premium-plan-card">…</section> from <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> subtree intercepts pointer events
+      - <div class="fx-offer">…</div> from <div class="fx-modal" id="fxPanelModal" aria-hidden="false">…</div> subtree intercepts pointer events
     - retrying click action
       - waiting 500ms
       - waiting for element to be visible, enabled and stable
       - element is visible, enabled and stable
       - scrolling into view if needed
       - done scrolling
-      - <section class="premium-plan-card">…</section> from <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> subtree intercepts pointer events
+      - <div class="fx-offer">…</div> from <div class="fx-modal" id="fxPanelModal" aria-hidden="false">…</div> subtree intercepts pointer events
     - retrying click action
       - waiting 500ms
       - waiting for element to be visible, enabled and stable
       - element is visible, enabled and stable
       - scrolling into view if needed
       - done scrolling
-      - <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> intercepts pointer events
+      - <div class="fx-modal" id="fxPanelModal" aria-hidden="false">…</div> intercepts pointer events
     - retrying click action
       - waiting 500ms
       - waiting for element to be visible, enabled and stable
       - element is visible, enabled and stable
       - scrolling into view if needed
       - done scrolling
-      - <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> intercepts pointer events
+      - <div class="fx-modal" id="fxPanelModal" aria-hidden="false">…</div> intercepts pointer events
   2 × retrying click action
       - waiting 500ms
       - waiting for element to be visible, enabled and stable
       - element is visible, enabled and stable
       - scrolling into view if needed
       - done scrolling
-      - <section class="premium-plan-card">…</section> from <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> subtree intercepts pointer events
+      - <div class="fx-offer">…</div> from <div class="fx-modal" id="fxPanelModal" aria-hidden="false">…</div> subtree intercepts pointer events
   - retrying click action
     - waiting 500ms
 
