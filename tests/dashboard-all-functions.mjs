@@ -26,3 +26,5 @@ await check(`${tag} no duplicate ids`,async()=>{const d=await page.evaluate(()=>
 await check(`${tag} no uncaught JS errors`,async()=>{if(errors.length)throw Error(errors.join(' | '))});await ctx.close()}
 await audit({width:1440,height:900});await audit({width:390,height:844});
 await browser.close();console.log(`\n${results.filter(x=>x[0]==='PASS').length} PASS / ${failures.length} FAIL`);if(failures.length){console.error('\nFUNCTION FAILURES\n'+failures.join('\n'));process.exit(1)}console.log('\nFINDIT_ALL_DASHBOARD_FUNCTIONS_PASS');
+
+// Fresh production audit trigger after controller/cache alignment.
