@@ -38,7 +38,7 @@ concurrency:
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 15
     steps:
       - name: Checkout production branch
         uses: actions/checkout@v4
@@ -53,9 +53,9 @@ jobs:
           npm init -y >/dev/null 2>&1
           npm install --save-dev playwright@1.55.0
           npx playwright install --with-deps chromium
-      - name: Wait for Vercel production
-        run: sleep 40
-      - name: Run all production audits and record result
+      - name: Wait briefly for Vercel production
+        run: sleep 20
+      - name: Run production audits in parallel and record result
         shell: bash
         run: |
           set +e
@@ -64,32 +64,40 @@ jobs:
             local name="$1"
             local script="$2"
             local logfile="$3"
+            local codefile="$4"
             echo ""
             echo "============================================================"
             echo "START: $name at $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
             echo "Script: $script"
-            echo "Hard timeout: 10 minutes"
+            echo "Hard timeout: 4 minutes"
             echo "============================================================"
 
-            timeout --signal=TERM --kill-after=30s 10m \
+            timeout --signal=TERM --kill-after=15s 4m \
               env FINDIT_URL=https://findit-nearby.vercel.app/ node "$script" 2>&1 | tee "$logfile"
             local code=${PIPESTATUS[0]}
 
             if [ "$code" -eq 124 ] || [ "$code" -eq 137 ]; then
-              echo "TIMEOUT: $name exceeded its 10-minute hard limit (exit $code)." | tee -a "$logfile"
+              echo "TIMEOUT: $name exceeded its 4-minute hard limit (exit $code)." | tee -a "$logfile"
             fi
+            echo "$code" > "$codefile"
             echo "FINISH: $name at $(date -u +'%Y-%m-%dT%H:%M:%SZ') with exit $code"
-            return "$code"
           }
 
-          run_suite "Release smoke" "tests/release-smoke.mjs" "/tmp/release.log"
-          RELEASE=$?
+          # These suites are independent, so run them together instead of serially.
+          run_suite "Release smoke" "tests/release-smoke.mjs" "/tmp/release.log" "/tmp/release.code" &
+          P1=$!
+          run_suite "Dashboard readiness" "tests/dashboard-readiness.mjs" "/tmp/readiness.log" "/tmp/readiness.code" &
+          P2=$!
+          run_suite "Every dashboard function" "tests/dashboard-all-functions.mjs" "/tmp/functions.log" "/tmp/functions.code" &
+          P3=$!
 
-          run_suite "Dashboard readiness" "tests/dashboard-readiness.mjs" "/tmp/readiness.log"
-          READY=$?
+          wait "$P1"
+          wait "$P2"
+          wait "$P3"
 
-          run_suite "Every dashboard function" "tests/dashboard-all-functions.mjs" "/tmp/functions.log"
-          FUNCTIONS=$?
+          RELEASE=$(cat /tmp/release.code 2>/dev/null || echo 125)
+          READY=$(cat /tmp/readiness.code 2>/dev/null || echo 125)
+          FUNCTIONS=$(cat /tmp/functions.code 2>/dev/null || echo 125)
 
           status_text() {
             if [ "$1" -eq 0 ]; then
