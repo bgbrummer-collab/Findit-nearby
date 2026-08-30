@@ -1,5 +1,5 @@
 FindIt production audit
-Commit: 125a321f82881b8b45bc9aea5070038d0eeaf75d
+Commit: 65029125e10c147a6b583c174ff3fa5f872f474d
 Release smoke: TIMEOUT (exit 124)
 Dashboard readiness: TIMEOUT (exit 124)
 Every dashboard function: TIMEOUT (exit 124)
@@ -13,18 +13,7 @@ Every dashboard function: TIMEOUT (exit 124)
 [PASS] 390px one results controller
 [PASS] 390px no duplicate ids
 [PASS] 390px no uncaught JS errors
-node:internal/modules/run_main:123
-    triggerUncaughtException(
-    ^
-
-page.waitForFunction: Timeout 30000ms exceeded.
-    at mockedProductFlow (/home/runner/work/Findit-nearby/Findit-nearby/tests/release-smoke.mjs:20:252)
-    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/release-smoke.mjs:42:82 {
-  name: 'TimeoutError'
-}
-
-Node.js v22.23.2
-TIMEOUT: Release smoke exceeded its 10-minute hard limit (exit 124).
+TIMEOUT: Release smoke exceeded its 4-minute hard limit (exit 124).
 
 --- dashboard readiness ---
 [PASS] 1440px dashboard shell visible
@@ -38,12 +27,12 @@ node:internal/modules/run_main:123
     triggerUncaughtException(
     ^
 
-browserContext.close: Target page, context or browser has been closed
-    at async run (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-readiness.mjs:18:119)
-    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-readiness.mjs:19:1
+browser.newContext: Target page, context or browser has been closed
+    at async run (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-readiness.mjs:6:40)
+    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-readiness.mjs:19:36
 
 Node.js v22.23.2
-TIMEOUT: Dashboard readiness exceeded its 10-minute hard limit (exit 124).
+TIMEOUT: Dashboard readiness exceeded its 4-minute hard limit (exit 124).
 
 --- every dashboard function ---
 [PASS] 1440px dashboard visible
@@ -82,4 +71,4 @@ browser.newContext: Target page, context or browser has been closed
     at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:27:38
 
 Node.js v22.23.2
-TIMEOUT: Every dashboard function exceeded its 10-minute hard limit (exit 124).
+TIMEOUT: Every dashboard function exceeded its 4-minute hard limit (exit 124).
