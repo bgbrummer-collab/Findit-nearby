@@ -3,7 +3,7 @@
 'use strict';
 if(window.__finditExactDashboard)return;window.__finditExactDashboard=true;
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
-const esc=(v='')=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const esc=(v='')=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c]));
 const originalMain=()=>$('#home');
 function state(){try{return window.finditState||window.state||null}catch{return null}}
 function result(){try{return state()?.result?.identification||{}}catch{return{}}}
@@ -46,4 +46,4 @@ function init(){document.body.classList.add('findit-exact-dashboard');createShel
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
 (()=>{const s=document.createElement('script');s.src='/dashboard-runtime-fix.js?v=20260830-fullreference3';s.defer=true;document.head.appendChild(s)})();
-(()=>{const s=document.createElement('script');s.src='/modal-nav-fix.js?v=20260830-modalnav1';s.defer=true;document.head.appendChild(s)})();
+(()=>{const s=document.createElement('script');s.src='/modal-nav-fix.js?v=20260830-unified7';s.defer=true;document.head.appendChild(s)})();
