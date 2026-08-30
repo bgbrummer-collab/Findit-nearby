@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
     paths:
+      - '.github/workflows/final-production-audit.yml'
       - 'index.html'
       - 'style.css'
       - 'script.js'
@@ -30,10 +31,14 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: findit-final-production-audit
+  cancel-in-progress: true
+
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 50
+    timeout-minutes: 40
     steps:
       - name: Checkout production branch
         uses: actions/checkout@v4
@@ -54,34 +59,76 @@ jobs:
         shell: bash
         run: |
           set +e
-          FINDIT_URL=https://findit-nearby.vercel.app/ node tests/release-smoke.mjs > /tmp/release.log 2>&1
+
+          run_suite() {
+            local name="$1"
+            local script="$2"
+            local logfile="$3"
+            echo ""
+            echo "============================================================"
+            echo "START: $name at $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+            echo "Script: $script"
+            echo "Hard timeout: 10 minutes"
+            echo "============================================================"
+
+            timeout --signal=TERM --kill-after=30s 10m \
+              env FINDIT_URL=https://findit-nearby.vercel.app/ node "$script" 2>&1 | tee "$logfile"
+            local code=${PIPESTATUS[0]}
+
+            if [ "$code" -eq 124 ] || [ "$code" -eq 137 ]; then
+              echo "TIMEOUT: $name exceeded its 10-minute hard limit (exit $code)." | tee -a "$logfile"
+            fi
+            echo "FINISH: $name at $(date -u +'%Y-%m-%dT%H:%M:%SZ') with exit $code"
+            return "$code"
+          }
+
+          run_suite "Release smoke" "tests/release-smoke.mjs" "/tmp/release.log"
           RELEASE=$?
-          FINDIT_URL=https://findit-nearby.vercel.app/ node tests/dashboard-readiness.mjs > /tmp/readiness.log 2>&1
+
+          run_suite "Dashboard readiness" "tests/dashboard-readiness.mjs" "/tmp/readiness.log"
           READY=$?
-          FINDIT_URL=https://findit-nearby.vercel.app/ node tests/dashboard-all-functions.mjs > /tmp/functions.log 2>&1
+
+          run_suite "Every dashboard function" "tests/dashboard-all-functions.mjs" "/tmp/functions.log"
           FUNCTIONS=$?
+
+          status_text() {
+            if [ "$1" -eq 0 ]; then
+              echo PASS
+            elif [ "$1" -eq 124 ] || [ "$1" -eq 137 ]; then
+              echo TIMEOUT
+            else
+              echo FAIL
+            fi
+          }
+
           {
             echo "FindIt production audit"
             echo "Commit: $GITHUB_SHA"
-            echo "Release smoke: $([ $RELEASE -eq 0 ] && echo PASS || echo FAIL)"
-            echo "Dashboard readiness: $([ $READY -eq 0 ] && echo PASS || echo FAIL)"
-            echo "Every dashboard function: $([ $FUNCTIONS -eq 0 ] && echo PASS || echo FAIL)"
+            echo "Release smoke: $(status_text "$RELEASE") (exit $RELEASE)"
+            echo "Dashboard readiness: $(status_text "$READY") (exit $READY)"
+            echo "Every dashboard function: $(status_text "$FUNCTIONS") (exit $FUNCTIONS)"
             echo
             echo "--- release smoke ---"
-            tail -n 40 /tmp/release.log
+            tail -n 80 /tmp/release.log
             echo
             echo "--- dashboard readiness ---"
-            tail -n 60 /tmp/readiness.log
+            tail -n 100 /tmp/readiness.log
             echo
             echo "--- every dashboard function ---"
-            tail -n 100 /tmp/functions.log
+            tail -n 140 /tmp/functions.log
           } > AUDIT_LATEST.txt
+
+          cat AUDIT_LATEST.txt
+
           git config user.name "findit-audit-bot"
           git config user.email "actions@users.noreply.github.com"
           git add AUDIT_LATEST.txt
           git commit -m "Record latest production audit [skip ci]" || true
           git push || true
-          if [ $RELEASE -ne 0 ] || [ $READY -ne 0 ] || [ $FUNCTIONS -ne 0 ]; then exit 1; fi
+
+          if [ "$RELEASE" -ne 0 ] || [ "$READY" -ne 0 ] || [ "$FUNCTIONS" -ne 0 ]; then
+            exit 1
+          fi
       - name: Upload audit output
         if: always()
         uses: actions/upload-artifact@v4
