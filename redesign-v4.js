@@ -46,3 +46,4 @@ function init(){document.body.classList.add('findit-exact-dashboard');createShel
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
 (()=>{const s=document.createElement('script');s.src='/dashboard-runtime-fix.js?v=20260830-fullreference3';s.defer=true;document.head.appendChild(s)})();
+(()=>{const s=document.createElement('script');s.src='/modal-nav-fix.js?v=20260830-modalnav1';s.defer=true;document.head.appendChild(s)})();
