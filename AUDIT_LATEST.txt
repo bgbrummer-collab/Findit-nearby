@@ -1,5 +1,5 @@
 FindIt production audit
-Commit: 94ef8e157d4ed81e9aba66892d3c1b74f22a0ed4
+Commit: f5dd7329d366472ec2eda646e518f45bc37125d8
 Release smoke: TIMEOUT (exit 124)
 Dashboard readiness: TIMEOUT (exit 124)
 Every dashboard function: TIMEOUT (exit 124)
@@ -13,17 +13,6 @@ Every dashboard function: TIMEOUT (exit 124)
 [PASS] 390px one results controller
 [PASS] 390px no duplicate ids
 [PASS] 390px no uncaught JS errors
-node:internal/modules/run_main:123
-    triggerUncaughtException(
-    ^
-
-page.waitForFunction: Timeout 30000ms exceeded.
-    at mockedProductFlow (/home/runner/work/Findit-nearby/Findit-nearby/tests/release-smoke.mjs:20:252)
-    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/release-smoke.mjs:42:82 {
-  name: 'TimeoutError'
-}
-
-Node.js v22.23.2
 TIMEOUT: Release smoke exceeded its 4-minute hard limit (exit 124).
 
 --- dashboard readiness ---
