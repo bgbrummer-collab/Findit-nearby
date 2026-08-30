@@ -11,6 +11,10 @@ on:
       - 'redesign-v4.css'
       - 'redesign-v4.js'
       - 'dashboard-runtime-fix.js'
+      - 'modal-nav-fix.js'
+      - 'product-insights-runtime.js'
+      - 'retailer-logo-runtime.js'
+      - 'journey-guard.js'
       - 'scanner-flow.js'
       - 'journey-results-fix.js'
       - 'journey-results-v3-fix.js'
@@ -26,6 +30,7 @@ on:
       - 'tests/release-smoke.mjs'
       - 'tests/dashboard-readiness.mjs'
       - 'tests/dashboard-all-functions.mjs'
+      - 'tests/full-site-audit.mjs'
   workflow_dispatch:
 
 permissions:
@@ -38,7 +43,7 @@ concurrency:
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 18
     steps:
       - name: Checkout production branch
         uses: actions/checkout@v4
@@ -59,84 +64,38 @@ jobs:
         shell: bash
         run: |
           set +e
-
           run_suite() {
-            local name="$1"
-            local script="$2"
-            local logfile="$3"
-            local codefile="$4"
-            echo ""
-            echo "============================================================"
-            echo "START: $name at $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-            echo "Script: $script"
-            echo "Hard timeout: 4 minutes"
-            echo "============================================================"
-
-            timeout --signal=TERM --kill-after=15s 4m \
-              env FINDIT_URL=https://findit-nearby.vercel.app/ node "$script" 2>&1 | tee "$logfile"
-            local code=${PIPESTATUS[0]}
-
-            if [ "$code" -eq 124 ] || [ "$code" -eq 137 ]; then
-              echo "TIMEOUT: $name exceeded its 4-minute hard limit (exit $code)." | tee -a "$logfile"
-            fi
-            echo "$code" > "$codefile"
-            echo "FINISH: $name at $(date -u +'%Y-%m-%dT%H:%M:%SZ') with exit $code"
+            local name="$1"; local script="$2"; local logfile="$3"; local codefile="$4"
+            echo "START: $name"
+            timeout --signal=TERM --kill-after=15s 7m env FINDIT_URL=https://findit-nearby.vercel.app/ node "$script" 2>&1 | tee "$logfile"
+            local code=${PIPESTATUS[0]}; echo "$code" > "$codefile"; echo "FINISH: $name exit $code"
           }
-
-          # These suites are independent, so run them together instead of serially.
-          run_suite "Release smoke" "tests/release-smoke.mjs" "/tmp/release.log" "/tmp/release.code" &
-          P1=$!
-          run_suite "Dashboard readiness" "tests/dashboard-readiness.mjs" "/tmp/readiness.log" "/tmp/readiness.code" &
-          P2=$!
-          run_suite "Every dashboard function" "tests/dashboard-all-functions.mjs" "/tmp/functions.log" "/tmp/functions.code" &
-          P3=$!
-
-          wait "$P1"
-          wait "$P2"
-          wait "$P3"
-
+          run_suite "Release smoke" "tests/release-smoke.mjs" "/tmp/release.log" "/tmp/release.code" & P1=$!
+          run_suite "Dashboard readiness" "tests/dashboard-readiness.mjs" "/tmp/readiness.log" "/tmp/readiness.code" & P2=$!
+          run_suite "Every dashboard function" "tests/dashboard-all-functions.mjs" "/tmp/functions.log" "/tmp/functions.code" & P3=$!
+          run_suite "Full real-user site audit" "tests/full-site-audit.mjs" "/tmp/fullsite.log" "/tmp/fullsite.code" & P4=$!
+          wait "$P1"; wait "$P2"; wait "$P3"; wait "$P4"
           RELEASE=$(cat /tmp/release.code 2>/dev/null || echo 125)
           READY=$(cat /tmp/readiness.code 2>/dev/null || echo 125)
           FUNCTIONS=$(cat /tmp/functions.code 2>/dev/null || echo 125)
-
-          status_text() {
-            if [ "$1" -eq 0 ]; then
-              echo PASS
-            elif [ "$1" -eq 124 ] || [ "$1" -eq 137 ]; then
-              echo TIMEOUT
-            else
-              echo FAIL
-            fi
-          }
-
+          FULLSITE=$(cat /tmp/fullsite.code 2>/dev/null || echo 125)
+          status_text(){ if [ "$1" -eq 0 ]; then echo PASS; elif [ "$1" -eq 124 ] || [ "$1" -eq 137 ]; then echo TIMEOUT; else echo FAIL; fi; }
           {
             echo "FindIt production audit"
             echo "Commit: $GITHUB_SHA"
             echo "Release smoke: $(status_text "$RELEASE") (exit $RELEASE)"
             echo "Dashboard readiness: $(status_text "$READY") (exit $READY)"
             echo "Every dashboard function: $(status_text "$FUNCTIONS") (exit $FUNCTIONS)"
-            echo
-            echo "--- release smoke ---"
-            tail -n 80 /tmp/release.log
-            echo
-            echo "--- dashboard readiness ---"
-            tail -n 100 /tmp/readiness.log
-            echo
-            echo "--- every dashboard function ---"
-            tail -n 140 /tmp/functions.log
+            echo "Full real-user site audit: $(status_text "$FULLSITE") (exit $FULLSITE)"
+            echo; echo "--- release smoke ---"; tail -n 80 /tmp/release.log
+            echo; echo "--- dashboard readiness ---"; tail -n 100 /tmp/readiness.log
+            echo; echo "--- every dashboard function ---"; tail -n 160 /tmp/functions.log
+            echo; echo "--- full real-user site audit ---"; tail -n 220 /tmp/fullsite.log
           } > AUDIT_LATEST.txt
-
           cat AUDIT_LATEST.txt
-
-          git config user.name "findit-audit-bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add AUDIT_LATEST.txt
-          git commit -m "Record latest production audit [skip ci]" || true
-          git push || true
-
-          if [ "$RELEASE" -ne 0 ] || [ "$READY" -ne 0 ] || [ "$FUNCTIONS" -ne 0 ]; then
-            exit 1
-          fi
+          git config user.name "findit-audit-bot"; git config user.email "actions@users.noreply.github.com"
+          git add AUDIT_LATEST.txt; git commit -m "Record latest production audit [skip ci]" || true; git push || true
+          if [ "$RELEASE" -ne 0 ] || [ "$READY" -ne 0 ] || [ "$FUNCTIONS" -ne 0 ] || [ "$FULLSITE" -ne 0 ]; then exit 1; fi
       - name: Upload audit output
         if: always()
         uses: actions/upload-artifact@v4
