@@ -1,8 +1,8 @@
 FindIt production audit
-Commit: cdc93864af0292571e32dbb041d52f993017d1fc
-Release smoke: PASS
-Dashboard readiness: FAIL
-Every dashboard function: FAIL
+Commit: 125a321f82881b8b45bc9aea5070038d0eeaf75d
+Release smoke: TIMEOUT (exit 124)
+Dashboard readiness: TIMEOUT (exit 124)
+Every dashboard function: TIMEOUT (exit 124)
 
 --- release smoke ---
 [PASS] 1440px page loads
@@ -13,138 +13,73 @@ Every dashboard function: FAIL
 [PASS] 390px one results controller
 [PASS] 390px no duplicate ids
 [PASS] 390px no uncaught JS errors
-[PASS] mock exact identity correct
-[PASS] mock exact price shown
-[PASS] mock nearby same retailer paired without fake branch stock
-[PASS] label evidence promotes supported packaged-product identity
-[PASS] label evidence allows retailer-page verified price
-[PASS] label flow keeps physical branch stock unconfirmed and no Directions
-[PASS] shoe retailer selection and safety
-[PASS] electronics retailer selection and safety
-[PASS] grocery retailer selection and safety
-[PASS] hardware retailer selection and safety
-[PASS] nearby lookup returns valid real coordinates or clean empty state
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
 
-FINDIT_STABLE_PIPELINE_SMOKE_PASS
+page.waitForFunction: Timeout 30000ms exceeded.
+    at mockedProductFlow (/home/runner/work/Findit-nearby/Findit-nearby/tests/release-smoke.mjs:20:252)
+    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/release-smoke.mjs:42:82 {
+  name: 'TimeoutError'
+}
+
+Node.js v22.23.2
+TIMEOUT: Release smoke exceeded its 10-minute hard limit (exit 124).
 
 --- dashboard readiness ---
 [PASS] 1440px dashboard shell visible
 [PASS] 1440px native upload control opens chooser and transfers file
 [PASS] 1440px selected image enables search
 [PASS] 1440px location control works
-[PASS] 1440px identify returns to dashboard not action menu
-[FAIL] 1440px result mirrors into dashboard Use your location and search for an item to see nearby stores.
+[FAIL] 1440px identify returns to dashboard not action menu page.waitForFunction: Timeout 30000ms exceeded.
+[FAIL] 1440px result mirrors into dashboard page.waitForFunction: Target page, context or browser has been closed
 [PASS] 1440px no uncaught JS errors
-[PASS] 390px dashboard shell visible
-[PASS] 390px native upload control opens chooser and transfers file
-[PASS] 390px selected image enables search
-[PASS] 390px location control works
-[PASS] 390px identify returns to dashboard not action menu
-[FAIL] 390px result mirrors into dashboard Use your location and search for an item to see nearby stores.
-[PASS] 390px no uncaught JS errors
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
 
-READINESS FAILURES
-1440px result mirrors into dashboard: Use your location and search for an item to see nearby stores.
-390px result mirrors into dashboard: Use your location and search for an item to see nearby stores.
+browserContext.close: Target page, context or browser has been closed
+    at async run (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-readiness.mjs:18:119)
+    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-readiness.mjs:19:1
+
+Node.js v22.23.2
+TIMEOUT: Dashboard readiness exceeded its 10-minute hard limit (exit 124).
 
 --- every dashboard function ---
-    - scrolling into view if needed
-    - done scrolling
-    - <img class="fj-img" src="blob:https://findit-nearby.vercel.app/5b82b6b5-3b9e-4436-8ac8-5e8f0dba0bb1"/> from <div class="" id="finditJourneyV5">…</div> subtree intercepts pointer events
-  - retrying click action
-    - waiting 500ms
+[PASS] 1440px dashboard visible
+[PASS] 1440px upload chooser opens and transfers file
+[PASS] 1440px camera chooser opens and transfers file
+[PASS] 1440px location action works
+[FAIL] 1440px identify action works page.waitForFunction: Timeout 6000ms exceeded.
+[FAIL] 1440px scan returns directly to dashboard locator.isVisible: Target page, context or browser has been closed
+[FAIL] 1440px product result mirrors into dashboard page.waitForFunction: Target page, context or browser has been closed
+[FAIL] 1440px nav home responds locator.count: Target page, context or browser has been closed
+[FAIL] 1440px nav search responds locator.count: Target page, context or browser has been closed
+[FAIL] 1440px nav nearby responds locator.count: Target page, context or browser has been closed
+[FAIL] 1440px nav compare responds locator.count: Target page, context or browser has been closed
+[FAIL] 1440px nav deals responds locator.count: Target page, context or browser has been closed
+[FAIL] 1440px nav saved responds locator.count: Target page, context or browser has been closed
+[FAIL] 1440px nav history responds locator.count: Target page, context or browser has been closed
+[FAIL] 1440px nav alerts responds locator.count: Target page, context or browser has been closed
+[FAIL] 1440px nav feedback responds locator.count: Target page, context or browser has been closed
+[FAIL] 1440px action product responds locator.count: Target page, context or browser has been closed
+[FAIL] 1440px action compare responds locator.count: Target page, context or browser has been closed
+[FAIL] 1440px action nearby responds locator.count: Target page, context or browser has been closed
+[FAIL] 1440px action assistant responds locator.count: Target page, context or browser has been closed
+[FAIL] 1440px action premium responds locator.count: Target page, context or browser has been closed
+[FAIL] 1440px premium opens locator.count: Target page, context or browser has been closed
+[FAIL] 1440px assistant opens locator.count: Target page, context or browser has been closed
+[FAIL] 1440px feedback form present and usable locator.count: Target page, context or browser has been closed
+[FAIL] 1440px no duplicate ids page.evaluate: Target page, context or browser has been closed
+[PASS] 1440px no uncaught JS errors
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
 
-390px action premium responds: locator.click: Timeout 30000ms exceeded.
-Call log:
-  - waiting for locator('#finditExactShell [data-fx="premium"]').first()
-    - locator resolved to <button data-fx="premium">Upgrade Now</button>
-  - attempting click action
-    2 × waiting for element to be visible, enabled and stable
-      - element is not visible
-    - retrying click action
-    - waiting 20ms
-    2 × waiting for element to be visible, enabled and stable
-      - element is not visible
-    - retrying click action
-      - waiting 100ms
-    57 × waiting for element to be visible, enabled and stable
-       - element is not visible
-     - retrying click action
-       - waiting 500ms
-    - waiting for element to be visible, enabled and stable
+browser.newContext: Target page, context or browser has been closed
+    at async setup (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:6:42)
+    at async audit (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:12:88)
+    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:27:38
 
-390px premium opens: locator.click: Timeout 30000ms exceeded.
-Call log:
-  - waiting for locator('#finditExactShell [data-fx="premium"]').first()
-    - locator resolved to <button data-fx="premium">Upgrade Now</button>
-  - attempting click action
-    2 × waiting for element to be visible, enabled and stable
-      - element is not visible
-    - retrying click action
-    - waiting 20ms
-    2 × waiting for element to be visible, enabled and stable
-      - element is not visible
-    - retrying click action
-      - waiting 100ms
-    57 × waiting for element to be visible, enabled and stable
-       - element is not visible
-     - retrying click action
-       - waiting 500ms
-    - waiting for element to be visible, enabled and stable
-
-390px assistant opens: locator.click: Timeout 30000ms exceeded.
-Call log:
-  - waiting for locator('#finditExactShell [data-fx="assistant"]').first()
-    - locator resolved to <button data-fx="assistant">⌕ Search Product</button>
-  - attempting click action
-    2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <img class="fj-img" src="blob:https://findit-nearby.vercel.app/5b82b6b5-3b9e-4436-8ac8-5e8f0dba0bb1"/> from <div class="" id="finditJourneyV5">…</div> subtree intercepts pointer events
-    - retrying click action
-    - waiting 20ms
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <img class="fj-img" src="blob:https://findit-nearby.vercel.app/5b82b6b5-3b9e-4436-8ac8-5e8f0dba0bb1"/> from <div class="" id="finditJourneyV5">…</div> subtree intercepts pointer events
-  2 × retrying click action
-      - waiting 100ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div class="fj-topbar">…</div> from <div class="" id="finditJourneyV5">…</div> subtree intercepts pointer events
-  14 × retrying click action
-       - waiting 500ms
-       - waiting for element to be visible, enabled and stable
-       - element is visible, enabled and stable
-       - scrolling into view if needed
-       - done scrolling
-       - <img class="fj-img" src="blob:https://findit-nearby.vercel.app/5b82b6b5-3b9e-4436-8ac8-5e8f0dba0bb1"/> from <div class="" id="finditJourneyV5">…</div> subtree intercepts pointer events
-     - retrying click action
-       - waiting 500ms
-       - waiting for element to be visible, enabled and stable
-       - element is visible, enabled and stable
-       - scrolling into view if needed
-       - done scrolling
-       - <img class="fj-img" src="blob:https://findit-nearby.vercel.app/5b82b6b5-3b9e-4436-8ac8-5e8f0dba0bb1"/> from <div class="" id="finditJourneyV5">…</div> subtree intercepts pointer events
-     - retrying click action
-       - waiting 500ms
-       - waiting for element to be visible, enabled and stable
-       - element is visible, enabled and stable
-       - scrolling into view if needed
-       - done scrolling
-       - <div class="fj-topbar">…</div> from <div class="" id="finditJourneyV5">…</div> subtree intercepts pointer events
-     - retrying click action
-       - waiting 500ms
-       - waiting for element to be visible, enabled and stable
-       - element is visible, enabled and stable
-       - scrolling into view if needed
-       - done scrolling
-       - <div class="fj-topbar">…</div> from <div class="" id="finditJourneyV5">…</div> subtree intercepts pointer events
-  - retrying click action
-    - waiting 500ms
-    - waiting for element to be visible, enabled and stable
-
+Node.js v22.23.2
+TIMEOUT: Every dashboard function exceeded its 10-minute hard limit (exit 124).
