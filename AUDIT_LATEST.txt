@@ -1,9 +1,9 @@
 FindIt production audit
-Commit: 3d8f81eb69e73e3302e035325009124c3ecaa894
+Commit: f35d0caf9e051bcf9b98cda3b62e21a2e36da72c
 Release smoke: PASS (exit 0)
 Dashboard readiness: PASS (exit 0)
 Every dashboard function: FAIL (exit 1)
-Full real-user site audit: FAIL (exit 1)
+Current dashboard real-user audit: FAIL (exit 1)
 
 --- release smoke ---
 [PASS] 1440px page loads
@@ -47,6 +47,26 @@ FINDIT_STABLE_PIPELINE_SMOKE_PASS
 FINDIT_DASHBOARD_READINESS_PASS
 
 --- every dashboard function ---
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="premium-card">…</div> from <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <h2>Find more. Save more. Search smarter.</h2> from <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> intercepts pointer events
+    - retrying click action
       - waiting 500ms
       - waiting for element to be visible, enabled and stable
       - element is visible, enabled and stable
@@ -208,185 +228,123 @@ Call log:
     - waiting 500ms
 
 
---- full real-user site audit ---
+--- current dashboard real-user audit ---
+PASS: desktop shell is visible
+PASS: desktop active Premium overlay cannot block dashboard
+PASS: desktop old journey stays hidden
+PASS: desktop unique element ids
+PASS: desktop product result mirrors into dashboard
+PASS: desktop nearby store list has no duplicate retailer rows
+PASS: desktop Product Info opens
+PASS: desktop Compare Prices opens
+PASS: desktop Settings opens full settings
+PASS: desktop Ask FindIt opens
+FAIL: desktop Save Find persists current product locator.click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('#fxSaveFind')
+    - locator resolved to <button id="fxSaveFind">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="assistantMessages" class="assistant-messages">…</div> from <div id="assistantPanel" class="assistant-panel">…</div> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div id="assistantMessages" class="assistant-messages">…</div> from <div id="assistantPanel" class="assistant-panel">…</div> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="assistant-msg bot">Hi 👋 I’m FindIt Assistant. Ask me about your item…</div> from <div id="assistantPanel" class="assistant-panel">…</div> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="assistantMessages" class="assistant-messages">…</div> from <div id="assistantPanel" class="assistant-panel">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="assistantMessages" class="assistant-messages">…</div> from <div id="assistantPanel" class="assistant-panel">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="assistant-msg bot">Hi 👋 I’m FindIt Assistant. Ask me about your item…</div> from <div id="assistantPanel" class="assistant-panel">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="assistant-msg bot">Hi 👋 I’m FindIt Assistant. Ask me about your item…</div> from <div id="assistantPanel" class="assistant-panel">…</div> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
 
-[PASS] Open Premium modal
-[PASS] Free/Premium comparison visible — comparison visible
-[PASS] Activate Premium Beta
-[PASS] Premium activates — active
-[FAIL] Premium command centre fits desktop — {"sw":298,"cw":60}
-[FAIL] Premium heading is visible — {"x":-100030,"y":105,"width":0,"height":395}
-[FAIL] Visible Premium V10 tools include guidance — scan,manual,exact,assistant,collections,watchlist,favourites,stats,history
-[FAIL] V10 scan opens — locator.click: Timeout 5000ms exceeded.
+PASS: desktop Saved navigation opens saved finds
+PASS: desktop Home responds without blocked click
+PASS: desktop Search responds without blocked click
+PASS: desktop Nearby responds without blocked click
+PASS: desktop Compare nav responds without blocked click
+PASS: desktop Deals responds without blocked click
+PASS: desktop History responds without blocked click
+PASS: desktop Alerts responds without blocked click
+PASS: desktop Feedback responds without blocked click
+PASS: desktop feature shortcuts are interactive
+PASS: desktop bottom-card buttons respond
+PASS: desktop no uncaught JS errors
+PASS: mobile shell is visible
+PASS: mobile active Premium overlay cannot block dashboard
+PASS: mobile old journey stays hidden
+PASS: mobile unique element ids
+PASS: mobile product result mirrors into dashboard
+PASS: mobile nearby store list has no duplicate retailer rows
+PASS: mobile Product Info opens
+PASS: mobile Compare Prices opens
+PASS: mobile Settings opens full settings
+PASS: mobile Ask FindIt opens
+PASS: mobile Save Find persists current product
+PASS: mobile Saved navigation opens saved finds
+PASS: mobile Home responds without blocked click
+PASS: mobile Search responds without blocked click
+PASS: mobile Nearby responds without blocked click
+PASS: mobile Compare nav responds without blocked click
+PASS: mobile Deals responds without blocked click
+FAIL: mobile History responds without blocked click locator.click: Timeout 5000ms exceeded.
 Call log:
-  - waiting for locator('[data-v10="scan"]').first()
-    - locator resolved to <button data-v10="scan" class="v10-launch-main">…</button>
+  - waiting for locator('#finditExactShell [data-fxnav="history"]').first()
+    - locator resolved to <button data-fxnav="history">…</button>
   - attempting click action
     2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - element is outside of the viewport
+      - element is not visible
     - retrying click action
     - waiting 20ms
     2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - element is outside of the viewport
-    - retry
-[FAIL] V10 manual opens — locator.click: Timeout 5000ms exceeded.
+      - element is not visible
+    - retrying click action
+      - waiting 100ms
+    10 × waiting for element to be visible, enabled and stable
+       - element is not visible
+     - retrying click action
+       - waiting 500ms
+
+FAIL: mobile Alerts responds without blocked click locator.click: Timeout 5000ms exceeded.
 Call log:
-  - waiting for locator('[data-v10="manual"]').first()
-    - locator resolved to <button data-v10="manual">…</button>
-  - attempting click action
-    2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - element is outside of the viewport
-    - retrying click action
-    - waiting 20ms
-    2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - element is outside of the viewport
-    - retrying click action
-   
-[FAIL] V10 exact opens — locator.click: Timeout 5000ms exceeded.
-Call log:
-  - waiting for locator('[data-v10="exact"]').first()
-    - locator resolved to <button data-v10="exact">…</button>
-  - attempting click action
-    2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - element is outside of the viewport
-    - retrying click action
-    - waiting 20ms
-    2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - element is outside of the viewport
-    - retrying click action
-     
-[FAIL] V10 assistant opens — locator.click: Timeout 5000ms exceeded.
-Call log:
-  - waiting for locator('[data-v10="assistant"]').first()
-    - locator resolved to <button data-v10="assistant">…</button>
-  - attempting click action
-    2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - element is outside of the viewport
-    - retrying click action
-    - waiting 20ms
-    2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - element is outside of the viewport
-    - retrying click acti
-[FAIL] V10 collections opens — locator.click: Timeout 5000ms exceeded.
-Call log:
-  - waiting for locator('[data-v10="collections"]').first()
-    - locator resolved to <button data-v10="collections">…</button>
-  - attempting click action
-    2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - element is outside of the viewport
-    - retrying click action
-    - waiting 20ms
-    2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - element is outside of the viewport
-    - retrying click 
-[FAIL] V10 watchlist opens — locator.click: Timeout 5000ms exceeded.
-Call log:
-  - waiting for locator('[data-v10="watchlist"]').first()
-    - locator resolved to <button data-v10="watchlist">…</button>
-  - attempting click action
-    2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - element is outside of the viewport
-    - retrying click action
-    - waiting 20ms
-    2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - element is outside of the viewport
-    - retrying click acti
-[FAIL] V10 favourites opens — locator.click: Timeout 5000ms exceeded.
-Call log:
-  - waiting for locator('[data-v10="favourites"]').first()
-    - locator resolved to <button data-v10="favourites">…</button>
-  - attempting click action
-    2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - element is outside of the viewport
-    - retrying click action
-    - waiting 20ms
-    2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - element is outside of the viewport
-    - retrying click ac
-[FAIL] V10 stats opens — locator.click: Timeout 5000ms exceeded.
-Call log:
-  - waiting for locator('[data-v10="stats"]').first()
-    - locator resolved to <button data-v10="stats">…</button>
-  - attempting click action
-    2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - element is outside of the viewport
-    - retrying click action
-    - waiting 20ms
-    2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - element is outside of the viewport
-    - retrying click action
-     
-[FAIL] V10 history opens — locator.click: Timeout 5000ms exceeded.
-Call log:
-  - waiting for locator('[data-v10="history"]').first()
-    - locator resolved to <button data-v10="history">…</button>
-  - attempting click action
-    2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - element is outside of the viewport
-    - retrying click action
-    - waiting 20ms
-    2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - element is outside of the viewport
-    - retrying click action
- 
-[FAIL] Premium drawer has visible vertical controls — locator.click: Timeout 5000ms exceeded.
-Call log:
-  - waiting for locator('#menuBtn')
-    - locator resolved to <button id="menuBtn" class="icon-btn">☰</button>
+  - waiting for locator('#finditExactShell [data-fxnav="alerts"]').first()
+    - locator resolved to <button data-fxnav="alerts">…</button>
   - attempting click action
     2 × waiting for element to be visible, enabled and stable
       - element is not visible
@@ -402,14 +360,10 @@ Call log:
       - waiting 500ms
     - waiting for element to be visible, enabled and stable
 
-node:internal/modules/run_main:123
-    triggerUncaughtException(
-    ^
-
-locator.click: Timeout 4000ms exceeded.
+FAIL: mobile Feedback responds without blocked click locator.click: Timeout 5000ms exceeded.
 Call log:
-  - waiting for locator('#menuBtn')
-    - locator resolved to <button id="menuBtn" class="icon-btn">☰</button>
+  - waiting for locator('#finditExactShell [data-fxnav="feedback"]').first()
+    - locator resolved to <button data-fxnav="feedback">…</button>
   - attempting click action
     2 × waiting for element to be visible, enabled and stable
       - element is not visible
@@ -419,13 +373,30 @@ Call log:
       - element is not visible
     - retrying click action
       - waiting 100ms
-    8 × waiting for element to be visible, enabled and stable
+    9 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+      - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+
+FAIL: mobile feature shortcuts are interactive locator.click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('.fx-feature-row article').nth(3)
+    - locator resolved to <article data-wired="1">…</article>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+      - waiting 100ms
+    9 × waiting for element to be visible, enabled and stable
       - element is not visible
     - retrying click action
       - waiting 500ms
 
-    at /home/runner/work/Findit-nearby/Findit-nearby/tests/full-site-audit.mjs:85:94 {
-  name: 'TimeoutError'
-}
-
-Node.js v22.23.2
+FAIL: mobile bottom-card buttons respond only 3 visible bottom actions
+PASS: mobile no uncaught JS errors
+CURRENT_DASHBOARD_REAL_USER_RESULT 40 PASS / 6 FAIL
