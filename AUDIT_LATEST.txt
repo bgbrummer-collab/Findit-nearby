@@ -1,5 +1,5 @@
 FindIt production audit
-Commit: 345542df1f856eef65ddbdc5adf9fdca0ca68f64
+Commit: 4bbb2a6b15e2870eb4b4461549863517539d99a4
 Release smoke: PASS (exit 0)
 Dashboard readiness: PASS (exit 0)
 Every dashboard function: TIMEOUT (exit 124)
@@ -148,6 +148,7 @@ Call log:
       - <div class="assistant-msg bot">Hi 👋 I’m FindIt Assistant. Ask me about your item…</div> from <div id="assistantPanel" class="assistant-panel">…</div> subtree intercepts pointer events
   - retrying click action
     - waiting 500ms
+    - waiting for element to be visible, enabled and stable
 
 PASS: desktop Saved navigation opens saved finds
 PASS: desktop Home responds without blocked click
