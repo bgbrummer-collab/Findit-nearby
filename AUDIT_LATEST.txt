@@ -1,75 +1,13 @@
 FindIt production audit
-Commit: 4bbb2a6b15e2870eb4b4461549863517539d99a4
-Release smoke: PASS (exit 0)
-Dashboard readiness: PASS (exit 0)
-Every dashboard function: TIMEOUT (exit 124)
+Commit: da6647227a3508a6feeca7b6fd0f0641ba4dba4f
+Release smoke: TIMEOUT (exit 124)
+Dashboard readiness: FAIL (exit 1)
+Every dashboard function: FAIL (exit 1)
 Current dashboard real-user audit: FAIL (exit 1)
 
 --- release smoke ---
-[PASS] 1440px page loads
-[PASS] 1440px one results controller
-[PASS] 1440px no duplicate ids
-[PASS] 1440px no uncaught JS errors
-[PASS] 390px page loads
-[PASS] 390px one results controller
-[PASS] 390px no duplicate ids
-[PASS] 390px no uncaught JS errors
-[PASS] mock exact identity correct
-[PASS] mock exact price shown
-[PASS] mock nearby same retailer paired without fake branch stock
-[PASS] label evidence promotes supported packaged-product identity
-[PASS] label evidence allows retailer-page verified price
-[PASS] label flow keeps physical branch stock unconfirmed and no Directions
-[PASS] shoe retailer selection and safety
-[PASS] electronics retailer selection and safety
-[PASS] grocery retailer selection and safety
-[PASS] hardware retailer selection and safety
-[PASS] nearby lookup returns valid real coordinates or clean empty state
-
-FINDIT_STABLE_PIPELINE_SMOKE_PASS
-
---- dashboard readiness ---
-[PASS] 1440px dashboard shell visible
-[PASS] 1440px native upload control opens chooser and transfers file
-[PASS] 1440px selected image enables search
-[PASS] 1440px location control works
-[PASS] 1440px identify returns to dashboard not action menu
-[PASS] 1440px result mirrors into dashboard
-[PASS] 1440px no uncaught JS errors
-[PASS] 390px dashboard shell visible
-[PASS] 390px native upload control opens chooser and transfers file
-[PASS] 390px selected image enables search
-[PASS] 390px location control works
-[PASS] 390px identify returns to dashboard not action menu
-[PASS] 390px result mirrors into dashboard
-[PASS] 390px no uncaught JS errors
-
-FINDIT_DASHBOARD_READINESS_PASS
-
---- every dashboard function ---
-[PASS] 1440px dashboard visible
-[PASS] 1440px upload chooser opens and transfers file
-[PASS] 1440px camera chooser opens and transfers file
-[PASS] 1440px location action works
-[PASS] 1440px identify action works
-[PASS] 1440px scan returns directly to dashboard
-[PASS] 1440px product result mirrors into dashboard
-[PASS] 1440px nav home responds
-[PASS] 1440px nav search responds
-[PASS] 1440px nav nearby responds
-[PASS] 1440px nav compare responds
-[PASS] 1440px nav deals responds
-[PASS] 1440px nav saved responds
-[PASS] 1440px nav history responds
-[PASS] 1440px nav alerts responds
-[FAIL] 1440px nav feedback responds page.waitForTimeout: Target page, context or browser has been closed
-[FAIL] 1440px action product responds page.waitForTimeout: Target page, context or browser has been closed
-[FAIL] 1440px action compare responds page.waitForTimeout: Target page, context or browser has been closed
-[FAIL] 1440px action nearby responds page.waitForTimeout: Target page, context or browser has been closed
-[FAIL] 1440px action assistant responds page.waitForTimeout: Target page, context or browser has been closed
-[FAIL] 1440px premium opens and closes for Free user page.waitForTimeout: Target page, context or browser has been closed
-[FAIL] 1440px assistant opens and closes page.waitForTimeout: Target page, context or browser has been closed
-[FAIL] 1440px feedback form present and usable locator.count: Target page, context or browser has been closed
+[FAIL] 1440px page loads locator.count: Target page, context or browser has been closed
+[FAIL] 1440px one results controller locator.count: Target page, context or browser has been closed
 [FAIL] 1440px no duplicate ids page.evaluate: Target page, context or browser has been closed
 [PASS] 1440px no uncaught JS errors
 node:internal/modules/run_main:123
@@ -77,183 +15,56 @@ node:internal/modules/run_main:123
     ^
 
 browser.newContext: Target page, context or browser has been closed
-    at async setup (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:6:42)
+    at async baseAudit (/home/runner/work/Findit-nearby/Findit-nearby/tests/release-smoke.mjs:12:46)
+    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/release-smoke.mjs:42:42
+
+Node.js v22.23.2
+
+--- dashboard readiness ---
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator('#finditExactShell') to be visible
+
+    at run (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-readiness.mjs:11:79)
+    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-readiness.mjs:19:1 {
+  name: 'TimeoutError'
+}
+
+Node.js v22.23.2
+
+--- every dashboard function ---
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+page.waitForSelector: Timeout 12000ms exceeded.
+Call log:
+  - waiting for locator('#finditExactShell') to be visible
+
+    at setup (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:11:78)
     at async audit (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:13:88)
-    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:28:38
+    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:28:1 {
+  name: 'TimeoutError'
+}
 
 Node.js v22.23.2
 
 --- current dashboard real-user audit ---
-PASS: desktop shell is visible
-PASS: desktop active Premium overlay cannot block dashboard
-PASS: desktop old journey stays hidden
-PASS: desktop unique element ids
-PASS: desktop product result mirrors into dashboard
-PASS: desktop nearby store list has no duplicate retailer rows
-PASS: desktop Product Info opens
-PASS: desktop Compare Prices opens
-PASS: desktop Settings opens full settings
-PASS: desktop Ask FindIt opens
-FAIL: desktop Save Find persists current product locator.click: Timeout 5000ms exceeded.
-Call log:
-  - waiting for locator('#fxSaveFind')
-    - locator resolved to <button id="fxSaveFind">…</button>
-  - attempting click action
-    2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="assistantMessages" class="assistant-messages">…</div> from <div id="assistantPanel" class="assistant-panel">…</div> subtree intercepts pointer events
-    - retrying click action
-    - waiting 20ms
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <div id="assistantMessages" class="assistant-messages">…</div> from <div id="assistantPanel" class="assistant-panel">…</div> subtree intercepts pointer events
-  2 × retrying click action
-      - waiting 100ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div class="assistant-msg bot">Hi 👋 I’m FindIt Assistant. Ask me about your item…</div> from <div id="assistantPanel" class="assistant-panel">…</div> subtree intercepts pointer events
-  2 × retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="assistantMessages" class="assistant-messages">…</div> from <div id="assistantPanel" class="assistant-panel">…</div> subtree intercepts pointer events
-    - retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="assistantMessages" class="assistant-messages">…</div> from <div id="assistantPanel" class="assistant-panel">…</div> subtree intercepts pointer events
-    - retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div class="assistant-msg bot">Hi 👋 I’m FindIt Assistant. Ask me about your item…</div> from <div id="assistantPanel" class="assistant-panel">…</div> subtree intercepts pointer events
-    - retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div class="assistant-msg bot">Hi 👋 I’m FindIt Assistant. Ask me about your item…</div> from <div id="assistantPanel" class="assistant-panel">…</div> subtree intercepts pointer events
-  - retrying click action
-    - waiting 500ms
-    - waiting for element to be visible, enabled and stable
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
 
-PASS: desktop Saved navigation opens saved finds
-PASS: desktop Home responds without blocked click
-PASS: desktop Search responds without blocked click
-PASS: desktop Nearby responds without blocked click
-PASS: desktop Compare nav responds without blocked click
-PASS: desktop Deals responds without blocked click
-PASS: desktop History responds without blocked click
-PASS: desktop Alerts responds without blocked click
-PASS: desktop Feedback responds without blocked click
-PASS: desktop feature shortcuts are interactive
-PASS: desktop bottom-card buttons respond
-PASS: desktop no uncaught JS errors
-PASS: mobile shell is visible
-PASS: mobile active Premium overlay cannot block dashboard
-PASS: mobile old journey stays hidden
-PASS: mobile unique element ids
-PASS: mobile product result mirrors into dashboard
-PASS: mobile nearby store list has no duplicate retailer rows
-PASS: mobile Product Info opens
-PASS: mobile Compare Prices opens
-PASS: mobile Settings opens full settings
-PASS: mobile Ask FindIt opens
-PASS: mobile Save Find persists current product
-PASS: mobile Saved navigation opens saved finds
-PASS: mobile Home responds without blocked click
-PASS: mobile Search responds without blocked click
-PASS: mobile Nearby responds without blocked click
-PASS: mobile Compare nav responds without blocked click
-PASS: mobile Deals responds without blocked click
-FAIL: mobile History responds without blocked click locator.click: Timeout 5000ms exceeded.
+page.waitForSelector: Timeout 30000ms exceeded.
 Call log:
-  - waiting for locator('#finditExactShell [data-fxnav="history"]').first()
-    - locator resolved to <button data-fxnav="history">…</button>
-  - attempting click action
-    2 × waiting for element to be visible, enabled and stable
-      - element is not visible
-    - retrying click action
-    - waiting 20ms
-    2 × waiting for element to be visible, enabled and stable
-      - element is not visible
-    - retrying click action
-      - waiting 100ms
-    9 × waiting for element to be visible, enabled and stable
-      - element is not visible
-    - retrying click action
-      - waiting 500ms
-    - waiting for element to be visible, enabled and stable
+  - waiting for locator('#finditExactShell') to be visible
 
-FAIL: mobile Alerts responds without blocked click locator.click: Timeout 5000ms exceeded.
-Call log:
-  - waiting for locator('#finditExactShell [data-fxnav="alerts"]').first()
-    - locator resolved to <button data-fxnav="alerts">…</button>
-  - attempting click action
-    2 × waiting for element to be visible, enabled and stable
-      - element is not visible
-    - retrying click action
-    - waiting 20ms
-    2 × waiting for element to be visible, enabled and stable
-      - element is not visible
-    - retrying click action
-      - waiting 100ms
-    9 × waiting for element to be visible, enabled and stable
-      - element is not visible
-    - retrying click action
-      - waiting 500ms
-    - waiting for element to be visible, enabled and stable
+    at run (/home/runner/work/Findit-nearby/Findit-nearby/tests/current-dashboard-real-user.mjs:19:13)
+    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/current-dashboard-real-user.mjs:57:1 {
+  name: 'TimeoutError'
+}
 
-FAIL: mobile Feedback responds without blocked click locator.click: Timeout 5000ms exceeded.
-Call log:
-  - waiting for locator('#finditExactShell [data-fxnav="feedback"]').first()
-    - locator resolved to <button data-fxnav="feedback">…</button>
-  - attempting click action
-    2 × waiting for element to be visible, enabled and stable
-      - element is not visible
-    - retrying click action
-    - waiting 20ms
-    2 × waiting for element to be visible, enabled and stable
-      - element is not visible
-    - retrying click action
-      - waiting 100ms
-    9 × waiting for element to be visible, enabled and stable
-      - element is not visible
-    - retrying click action
-      - waiting 500ms
-    - waiting for element to be visible, enabled and stable
-
-FAIL: mobile feature shortcuts are interactive locator.click: Timeout 5000ms exceeded.
-Call log:
-  - waiting for locator('.fx-feature-row article').nth(3)
-    - locator resolved to <article data-wired="1">…</article>
-  - attempting click action
-    2 × waiting for element to be visible, enabled and stable
-      - element is not visible
-    - retrying click action
-    - waiting 20ms
-    2 × waiting for element to be visible, enabled and stable
-      - element is not visible
-    - retrying click action
-      - waiting 100ms
-    9 × waiting for element to be visible, enabled and stable
-      - element is not visible
-    - retrying click action
-      - waiting 500ms
-
-FAIL: mobile bottom-card buttons respond only 3 visible bottom actions
-PASS: mobile no uncaught JS errors
-CURRENT_DASHBOARD_REAL_USER_RESULT 40 PASS / 6 FAIL
+Node.js v22.23.2
