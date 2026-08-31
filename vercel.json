@@ -11,6 +11,7 @@
     { "src": "/api/awin-feed-import", "dest": "/api/catalog-router?action=awin" },
     { "src": "/api/exact-product-identify", "dest": "/api/official-brand-intelligence?action=exact" },
     { "src": "/api/analytics", "dest": "/api/telemetry-router?action=analytics" },
-    { "src": "/api/feedback", "dest": "/api/telemetry-router?action=feedback" }
+    { "src": "/api/feedback", "dest": "/api/telemetry-router?action=feedback" },
+    { "src": "/api/product-insights", "dest": "/api/assistant?action=product-insights" }
   ]
 }
