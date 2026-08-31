@@ -1,8 +1,8 @@
 FindIt production audit
-Commit: f35d0caf9e051bcf9b98cda3b62e21a2e36da72c
+Commit: 987c3f9dae0992635b1440c527e430d2ac8766d1
 Release smoke: PASS (exit 0)
 Dashboard readiness: PASS (exit 0)
-Every dashboard function: FAIL (exit 1)
+Every dashboard function: TIMEOUT (exit 124)
 Current dashboard real-user audit: FAIL (exit 1)
 
 --- release smoke ---
@@ -47,186 +47,41 @@ FINDIT_STABLE_PIPELINE_SMOKE_PASS
 FINDIT_DASHBOARD_READINESS_PASS
 
 --- every dashboard function ---
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div class="premium-card">…</div> from <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> subtree intercepts pointer events
-    - retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <h2>Find more. Save more. Search smarter.</h2> from <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> subtree intercepts pointer events
-    - retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> intercepts pointer events
-    - retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> intercepts pointer events
-  - retrying click action
-    - waiting 500ms
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <div class="premium-card">…</div> from <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> subtree intercepts pointer events
-  - retrying click action
-    - waiting 500ms
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <h2>Find more. Save more. Search smarter.</h2> from <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> subtree intercepts pointer events
-  - retrying click action
-    - waiting 500ms
+[PASS] 1440px dashboard visible
+[PASS] 1440px upload chooser opens and transfers file
+[PASS] 1440px camera chooser opens and transfers file
+[PASS] 1440px location action works
+[PASS] 1440px identify action works
+[PASS] 1440px scan returns directly to dashboard
+[PASS] 1440px product result mirrors into dashboard
+[PASS] 1440px nav home responds
+[PASS] 1440px nav search responds
+[PASS] 1440px nav nearby responds
+[PASS] 1440px nav compare responds
+[PASS] 1440px nav deals responds
+[PASS] 1440px nav saved responds
+[PASS] 1440px nav history responds
+[PASS] 1440px nav alerts responds
+[FAIL] 1440px nav feedback responds page.waitForTimeout: Target page, context or browser has been closed
+[FAIL] 1440px action product responds page.waitForTimeout: Target page, context or browser has been closed
+[FAIL] 1440px action compare responds page.waitForTimeout: Target page, context or browser has been closed
+[FAIL] 1440px action nearby responds page.waitForTimeout: Target page, context or browser has been closed
+[FAIL] 1440px action assistant responds page.waitForTimeout: Target page, context or browser has been closed
+[FAIL] 1440px premium opens and closes for Free user page.waitForTimeout: Target page, context or browser has been closed
+[FAIL] 1440px assistant opens and closes page.waitForTimeout: Target page, context or browser has been closed
+[FAIL] 1440px feedback form present and usable locator.count: Target page, context or browser has been closed
+[FAIL] 1440px no duplicate ids page.evaluate: Target page, context or browser has been closed
+[PASS] 1440px no uncaught JS errors
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
 
-390px premium opens: locator.click: Timeout 6000ms exceeded.
-Call log:
-  - waiting for locator('#finditExactShell [data-fx="premium"]:visible').first()
-    - locator resolved to <button data-fx="premium" class="fx-avatar" aria-label="Profile">F</button>
-  - attempting click action
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <h2>Find more. Save more. Search smarter.</h2> from <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> subtree intercepts pointer events
-  - retrying click action
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <div class="premium-card">…</div> from <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> subtree intercepts pointer events
-  - retrying click action
-    - waiting 20ms
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <h2>Find more. Save more. Search smarter.</h2> from <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> subtree intercepts pointer events
-  2 × retrying click action
-      - waiting 100ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> intercepts pointer events
-  2 × retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div class="premium-card">…</div> from <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> subtree intercepts pointer events
-    - retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <h2>Find more. Save more. Search smarter.</h2> from <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> subtree intercepts pointer events
-    - retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> intercepts pointer events
-    - retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> intercepts pointer events
-  - retrying click action
-    - waiting 500ms
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <div class="premium-card">…</div> from <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> subtree intercepts pointer events
-  - retrying click action
-    - waiting 500ms
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <h2>Find more. Save more. Search smarter.</h2> from <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> subtree intercepts pointer events
-  - retrying click action
-    - waiting 500ms
+browser.newContext: Target page, context or browser has been closed
+    at async setup (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:6:42)
+    at async audit (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:13:88)
+    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:28:38
 
-390px assistant opens: locator.click: Timeout 6000ms exceeded.
-Call log:
-  - waiting for locator('#finditExactShell [data-fx="assistant"]:visible').first()
-    - locator resolved to <button data-fx="assistant">⌕ Search Product</button>
-  - attempting click action
-    2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <li>AI photo identification</li> from <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> subtree intercepts pointer events
-    - retrying click action
-    - waiting 20ms
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <li>AI photo identification</li> from <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> subtree intercepts pointer events
-  2 × retrying click action
-      - waiting 100ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> intercepts pointer events
-  2 × retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <li>AI photo identification</li> from <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> subtree intercepts pointer events
-    - retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <li>AI photo identification</li> from <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> subtree intercepts pointer events
-    - retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> intercepts pointer events
-    - retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> intercepts pointer events
-  2 × retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <li>AI photo identification</li> from <div id="premiumModal" aria-hidden="false" class="premium-modal" data-guard-installed="1">…</div> subtree intercepts pointer events
-  - retrying click action
-    - waiting 500ms
-
+Node.js v22.23.2
 
 --- current dashboard real-user audit ---
 PASS: desktop shell is visible
@@ -336,10 +191,11 @@ Call log:
       - element is not visible
     - retrying click action
       - waiting 100ms
-    10 × waiting for element to be visible, enabled and stable
-       - element is not visible
-     - retrying click action
-       - waiting 500ms
+    9 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+      - waiting 500ms
+    - waiting for element to be visible, enabled and stable
 
 FAIL: mobile Alerts responds without blocked click locator.click: Timeout 5000ms exceeded.
 Call log:
