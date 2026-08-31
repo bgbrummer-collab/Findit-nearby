@@ -1,24 +1,63 @@
 FindIt production audit
-Commit: 4a515b20c0ee9968c931a94fe32de2ad93eab6c4
-Release smoke: TIMEOUT (exit 124)
+Commit: c89d0fe4ea111fd6da969fcc9313f396aebe1f78
+Release smoke: FAIL (exit 1)
 Dashboard readiness: FAIL (exit 1)
 Every dashboard function: FAIL (exit 1)
 Current dashboard real-user audit: FAIL (exit 1)
 
 --- release smoke ---
-[FAIL] 1440px page loads locator.count: Target page, context or browser has been closed
-[FAIL] 1440px one results controller locator.count: Target page, context or browser has been closed
-[FAIL] 1440px no duplicate ids page.evaluate: Target page, context or browser has been closed
+[PASS] 1440px page loads
+[PASS] 1440px one results controller
+[PASS] 1440px no duplicate ids
 [PASS] 1440px no uncaught JS errors
-node:internal/modules/run_main:123
-    triggerUncaughtException(
-    ^
+[PASS] 390px page loads
+[PASS] 390px one results controller
+[PASS] 390px no duplicate ids
+[PASS] 390px no uncaught JS errors
+[PASS] mock exact identity correct
+[PASS] mock exact price shown
+[PASS] mock nearby same retailer paired without fake branch stock
+[FAIL] label evidence promotes supported packaged-product identity FindIt identified the product family, but it will not call a retailer listing exact until the photo-level identity is verified.
+[FAIL] label evidence allows retailer-page verified price WHERE TO BUY
 
-browser.newContext: Target page, context or browser has been closed
-    at async baseAudit (/home/runner/work/Findit-nearby/Findit-nearby/tests/release-smoke.mjs:12:46)
-    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/release-smoke.mjs:42:42
+Exact product identity not verified yet
 
-Node.js v22.23.2
+FindIt will not label similar products as exact. Use the retailer searches below while it keeps the exact-match result honest.
+
+🛍️
+Clicks
+Search this product
+[FAIL] label flow keeps physical branch stock unconfirmed and no Directions Clicks
+4.2 km • Menlyn, Pretoria
+Relevant retailer
+Branch stock not confirmed
+Website
+Map
+Exact product not confirmed at this branch.
+[PASS] shoe retailer selection and safety
+[PASS] electronics retailer selection and safety
+[PASS] grocery retailer selection and safety
+[PASS] hardware retailer selection and safety
+[PASS] nearby lookup returns valid real coordinates or clean empty state
+
+FAILURES
+label evidence promotes supported packaged-product identity: FindIt identified the product family, but it will not call a retailer listing exact until the photo-level identity is verified.
+label evidence allows retailer-page verified price: WHERE TO BUY
+
+Exact product identity not verified yet
+
+FindIt will not label similar products as exact. Use the retailer searches below while it keeps the exact-match result honest.
+
+🛍️
+Clicks
+Search this product
+label flow keeps physical branch stock unconfirmed and no Directions: Clicks
+4.2 km • Menlyn, Pretoria
+Relevant retailer
+Branch stock not confirmed
+Website
+Map
+Exact product not confirmed at this branch.
 
 --- dashboard readiness ---
 node:internal/modules/run_main:123
@@ -27,9 +66,9 @@ node:internal/modules/run_main:123
 
 page.waitForSelector: Timeout 10000ms exceeded.
 Call log:
-  - waiting for locator('#finditExactShell') to be visible
+  - waiting for locator('#fxPhotoDirect') to be visible
 
-    at run (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-readiness.mjs:11:79)
+    at run (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-readiness.mjs:11:143)
     at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-readiness.mjs:19:1 {
   name: 'TimeoutError'
 }
@@ -43,9 +82,9 @@ node:internal/modules/run_main:123
 
 page.waitForSelector: Timeout 12000ms exceeded.
 Call log:
-  - waiting for locator('#finditExactShell') to be visible
+  - waiting for locator('#fxPhotoDirect') to be visible
 
-    at setup (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:11:78)
+    at setup (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:11:142)
     at async audit (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:13:88)
     at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:28:1 {
   name: 'TimeoutError'
@@ -54,17 +93,243 @@ Call log:
 Node.js v22.23.2
 
 --- current dashboard real-user audit ---
-node:internal/modules/run_main:123
-    triggerUncaughtException(
-    ^
 
-page.waitForSelector: Timeout 30000ms exceeded.
+FAIL: mobile Deals responds without blocked click locator.click: Timeout 5000ms exceeded.
 Call log:
-  - waiting for locator('#finditExactShell') to be visible
+  - waiting for locator('#finditExactShell [data-fxnav="deals"]').first()
+    - locator resolved to <button data-fxnav="deals">…</button>
+  - attempting click action
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
+  - retrying click action
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <button type="button" aria-label="Close" class="fx-stable-close">×</button> from <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> subtree intercepts pointer events
+  - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="fx-stable-card">…</div> from <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <button type="button" aria-label="Close" class="fx-stable-close">×</button> from <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fx-stable-card">…</div> from <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
+  - retrying click action
+    - waiting 500ms
 
-    at run (/home/runner/work/Findit-nearby/Findit-nearby/tests/current-dashboard-real-user.mjs:19:13)
-    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/current-dashboard-real-user.mjs:57:1 {
-  name: 'TimeoutError'
-}
+FAIL: mobile History responds without blocked click locator.click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('#finditExactShell [data-fxnav="history"]').first()
+    - locator resolved to <button data-fxnav="history">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+      - waiting 100ms
+    9 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+      - waiting 500ms
 
-Node.js v22.23.2
+FAIL: mobile Alerts responds without blocked click locator.click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('#finditExactShell [data-fxnav="alerts"]').first()
+    - locator resolved to <button data-fxnav="alerts">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+      - waiting 100ms
+    9 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+      - waiting 500ms
+
+FAIL: mobile Feedback responds without blocked click locator.click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('#finditExactShell [data-fxnav="feedback"]').first()
+    - locator resolved to <button data-fxnav="feedback">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+      - waiting 100ms
+    9 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+      - waiting 500ms
+
+FAIL: mobile feature shortcuts are interactive locator.click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('.fx-feature-row article').first()
+    - locator resolved to <article tabindex="0" role="button" data-fx="product" data-stable-action="product">…</article>
+  - attempting click action
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div>…</div> from <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> subtree intercepts pointer events
+  - retrying click action
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="fx-stable-row">…</div> from <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> subtree intercepts pointer events
+  - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <b>footwear</b> from <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fx-stable-row">…</div> from <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <b>footwear</b> from <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+FAIL: mobile bottom-card buttons respond locator.click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('.fx-bottom-row button:visible').first()
+    - locator resolved to <button data-fx="deals">View Deals →</button>
+  - attempting click action
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="fx-stable-row">…</div> from <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> subtree intercepts pointer events
+  - retrying click action
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
+  - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <b>footwear</b> from <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <b>footwear</b> from <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+
+PASS: mobile no uncaught JS errors
+CURRENT_DASHBOARD_REAL_USER_RESULT 14 PASS / 32 FAIL
