@@ -39,14 +39,13 @@ function init(){document.body.classList.add('findit-exact-dashboard');createShel
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
 
-/* Keep only the one dashboard interaction runtime needed by this shell.
-   Older modal/journey/guard runtimes were overlapping the same events and could freeze Chrome. */
+/* Use one stable dashboard interaction runtime only. */
 (()=>{
  const load=()=>setTimeout(()=>{
   if(window.__finditDashboardRuntimeLoader)return;
   window.__finditDashboardRuntimeLoader=true;
   const s=document.createElement('script');
-  s.src='/dashboard-runtime-fix.js?v=20260831-stable1';
+  s.src='/dashboard-runtime-stable.js?v=20260831-controls1';
   s.async=true;
   document.head.appendChild(s);
  },0);
