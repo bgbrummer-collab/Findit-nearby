@@ -1,31 +1,15 @@
-/* FindIt richer Product Information panel.
-   Replaces the older supplemental Product details block so information is not duplicated.
-   Uses identification evidence already returned by FindIt and avoids inventing specs. */
+/* FindIt Product Information bootstrap.
+   Loads the web-grounded product research runtime used for What it does, Pros and Cons. */
 (()=>{
-'use strict';
-if(window.__finditProductInfoEnhance)return;window.__finditProductInfoEnhance=true;
-const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
-const esc=(v='')=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const root=()=>$('#finditJourneyV5');
-const id=()=>{try{return window.state?.result?.identification||{}}catch{return{}}};
-const clean=v=>String(v||'').replace(/\s+/g,' ').trim();
-function visibleProductInfo(){const r=root();return !!(r&&!r.classList.contains('hidden')&&$('.fj-head b',r)?.textContent?.trim()==='Product Information')}
-function uniq(arr){const seen=new Set();return arr.map(clean).filter(Boolean).filter(x=>{const k=x.toLowerCase();if(seen.has(k))return false;seen.add(k);return true})}
-function category(i){const s=clean(i.retailCategory||i.category).toLowerCase();if(s&&!/^(product|item|general)$/.test(s))return clean(i.retailCategory||i.category);const q=[i.object,i.name,i.model,i.searchQuery,$('#resultName')?.textContent].filter(Boolean).join(' ').toLowerCase();if(/toilet paper|bread|milk|cereal|food|grocery|detergent|cleaning/.test(q))return'Grocery / household';if(/speaker|headphone|phone|computer|camera|router|bluetooth/.test(q))return'Electronics';if(/toaster|kettle|microwave|vacuum|fridge/.test(q))return'Appliances';if(/shoe|sneaker|footwear|trainer/.test(q))return'Footwear';if(/wrench|spanner|drill|hammer|screwdriver|pliers|tool/.test(q))return'Hardware / tools';if(/plug|adaptor|adapter|power strip|extension lead/.test(q))return'Electrical';if(/conditioner|shampoo|skincare|cosmetic|beauty/.test(q))return'Beauty / personal care';if(/car|vehicle|suv|sedan|coupe/.test(q))return'Automotive';return'Product'}
-function extractPack(text){const t=clean(text);const patterns=[/\b(\d+)\s*(?:rolls?|pack|pk|pieces?|pcs|count|ct)\b/i,/\bpack\s+of\s+(\d+)\b/i,/\b(\d+)\s*[x×]\s*(\d+(?:\.\d+)?\s*(?:ml|l|g|kg))\b/i];for(const re of patterns){const m=t.match(re);if(m)return m[0]}return''}
-function extractSize(text){const t=clean(text);const m=t.match(/\b\d+(?:\.\d+)?\s*(?:ml|l|g|kg|mg|cm|mm|m|inch|inches|gb|tb)\b/i);return m?m[0]:''}
-function inferUse(cat,name){const q=`${cat} ${name}`.toLowerCase();if(/toilet paper/.test(q))return'Household bathroom tissue';if(/conditioner/.test(q))return'Hair care / conditioning';if(/shampoo/.test(q))return'Hair cleansing';if(/bread/.test(q))return'Food / pantry staple';if(/speaker/.test(q))return'Portable or home audio';if(/shoe|footwear|sneaker/.test(q))return'Footwear';if(/toaster/.test(q))return'Kitchen appliance';if(/wrench|spanner/.test(q))return'Hand tool';if(/adapter|adaptor|plug/.test(q))return'Electrical connection / power accessory';return''}
-function detailRows(i){const title=clean(i.name||i.model||i.searchQuery||$('#resultName')?.textContent||i.object);const q=clean([i.name,i.model,i.searchQuery,i.query,$('#resultName')?.textContent].filter(Boolean).join(' '));const cat=category(i);const pack=extractPack(q),size=extractSize(q),use=inferUse(cat,title);const rows=[['Brand',i.brand],['Product / model',i.model||i.name],['Product type',i.object],['Category',cat],['Pack / quantity',pack],['Size',size],['Typical use',use],['Search identity',i.searchQuery||i.query],['Identity status',i.exactIdentityVerified===true?'Photo identity verified':'AI identification — retailer verification separate']];return rows.filter(([,v])=>clean(v))}
-function evidence(i){return uniq([...(Array.isArray(i.features)?i.features:[]),...(Array.isArray(i.evidence)?i.evidence:[])]).slice(0,12)}
-function visibleText(i){return uniq(Array.isArray(i.visibleText)?i.visibleText:[]).slice(0,12)}
-function offersSummary(){const rows=[];try{if(Array.isArray(window.productIntelligence?.offers))rows.push(...window.productIntelligence.offers)}catch{}try{if(Array.isArray(window.state?.offers))rows.push(...window.state.offers)}catch{}const verified=rows.filter(o=>o&&(o.verified===true||o.sourcePageVerified===true));const sellers=uniq(verified.map(o=>o?.retailer?.name||o?.retailer));const priced=verified.filter(o=>Number.isFinite(Number(o.price)));return{verified:verified.length,sellers:sellers.length,priced:priced.length}}
-function style(){if($('#finditProductInfoEnhanceStyle'))return;const s=document.createElement('style');s.id='finditProductInfoEnhanceStyle';s.textContent=`#finditJourneyV5 .fpi-rich{display:grid;gap:10px;margin:10px 0}#finditJourneyV5 .fpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}#finditJourneyV5 .fpi-cell{padding:11px;border:1px solid #202d43;border-radius:11px;background:#0d1728;min-width:0}#finditJourneyV5 .fpi-cell span{display:block;color:#8292aa;font-size:10px;margin-bottom:4px}#finditJourneyV5 .fpi-cell strong{display:block;font-size:12px;overflow-wrap:anywhere}#finditJourneyV5 .fpi-list{display:grid;gap:7px;margin-top:8px}#finditJourneyV5 .fpi-line{padding:8px 10px;border-radius:9px;background:#0d1728;color:#aebbd0;font-size:11px;line-height:1.4}#finditJourneyV5 .fpi-status{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}#finditJourneyV5 .fpi-pill{padding:6px 8px;border-radius:99px;background:#15233a;color:#9fb0c9;font-size:10px}`;document.head.appendChild(s)}
-function render(){if(!visibleProductInfo())return;const r=root(),page=$('.fj-page',r);if(!page)return;
-  /* Remove only the old supplemental details block created by journey-results-v3-fix.
-     Keep the original About this item and FindIt details cards. */
-  $$('.findit-product-extra',page).forEach(x=>x.remove());
-  const old=$('.fpi-rich',page);if(old)old.remove();
-  const i=id(),rows=detailRows(i),ev=evidence(i),vt=visibleText(i),os=offersSummary();const wrap=document.createElement('div');wrap.className='fpi-rich';wrap.innerHTML=`<div class="fj-card"><h3>Product details</h3><div class="fpi-grid">${rows.map(([k,v])=>`<div class="fpi-cell"><span>${esc(k)}</span><strong>${esc(v)}</strong></div>`).join('')}</div></div>${ev.length?`<div class="fj-card"><h3>Identified details</h3><div class="fpi-list">${ev.map(x=>`<div class="fpi-line">✓ ${esc(x)}</div>`).join('')}</div></div>`:''}${vt.length?`<div class="fj-card"><h3>Text / markings detected</h3><div class="fpi-list">${vt.map(x=>`<div class="fpi-line">${esc(x)}</div>`).join('')}</div></div>`:''}<div class="fj-card"><h3>Verification</h3><div class="fpi-status"><span class="fpi-pill">${os.verified} verified listing${os.verified===1?'':'s'}</span><span class="fpi-pill">${os.sellers} verified retailer${os.sellers===1?'':'s'}</span><span class="fpi-pill">${os.priced} verified price${os.priced===1?'':'s'}</span></div><div class="fj-muted" style="margin-top:9px">Unknown specifications are left out rather than guessed.</div></div>`;const back=$('.fj-secondary[data-fj="actions"]',page);page.insertBefore(wrap,back||null)}
-function schedule(){setTimeout(render,60)}
-document.addEventListener('click',e=>{if(e.target.closest?.('#finditJourneyV5'))schedule()},true);document.addEventListener('findit:results-rendered',schedule);document.addEventListener('findit:nearby-updated',schedule);if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{style();schedule()},{once:true});else{style();schedule()}
+  'use strict';
+  if(window.__finditProductInfoEnhance)return;
+  window.__finditProductInfoEnhance=true;
+  if(window.__finditAiProductInsightsV3)return;
+  if(document.querySelector('script[data-findit-product-insights-runtime]'))return;
+  const s=document.createElement('script');
+  s.src='product-insights-runtime.js?v=20260831-webresearch3';
+  s.defer=true;
+  s.dataset.finditProductInsightsRuntime='1';
+  s.onload=()=>document.dispatchEvent(new CustomEvent('findit:dashboard-sync'));
+  document.head.appendChild(s);
 })();
