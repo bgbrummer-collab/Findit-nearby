@@ -1,7 +1,7 @@
 (()=>{
 'use strict';
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const esc=(v='')=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const esc=(v='')=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c]));
 const validUrl=v=>{try{const u=new URL(v,location.href);return /^https?:$/.test(u.protocol)}catch{return false}};
 const fmtMoney=(n,c='ZAR')=>{if(n==null||!Number.isFinite(Number(n)))return'';try{return new Intl.NumberFormat('en-ZA',{style:'currency',currency:c||'ZAR'}).format(Number(n))}catch{return `${c||'ZAR'} ${Number(n).toFixed(2)}`}};
 const mapsUrl=s=>{if(Number.isFinite(Number(s?.lat))&&Number.isFinite(Number(s?.lon)))return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${s.lat},${s.lon}`)}`;const q=[s?.name,s?.address].filter(Boolean).join(' ');return q?`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`:''};
@@ -86,7 +86,7 @@ function resultsReady(){const t=($('#status')?.textContent||'').toLowerCase();re
 function failed(){const t=($('#status')?.textContent||'').toLowerCase();return /search failed|please try again/.test(t)}
 function check(){if(!active)return;if(resultsReady())return success();if(failed()&&Date.now()-startedAt>1800)return abort();if(Date.now()-startedAt>48000&&identificationReady())return success();if(Date.now()-startedAt>55000)return abort()}
 function abort(){active=false;clearTimeout(phaseTimer);clearInterval(pollTimer);close()}
-function success(){if(!active)return;active=false;clearTimeout(phaseTimer);clearInterval(pollTimer);collect();const d=info();render(`<div class="fj-page fj-success">${topbar('You found it')}<h1>You found it! 🎉</h1><div class="fj-sub">Item identified successfully</div>${d.img?`<img class="fj-img" src="${esc(d.img)}">`:''}<div class="fj-brand">${esc(d.brand)}</div><div class="fj-name">${esc(d.name)}</div>${d.model&&d.model!==d.name?`<div class="fj-green">${esc(d.model)}</div>`:''}<div class="fj-conf">✓ ${esc(d.confidence)}% confidence</div><button class="fj-primary" data-fj="actions">What’s next? →</button></div>`)}
+function success(){if(!active)return;active=false;clearTimeout(phaseTimer);clearInterval(pollTimer);collect();close();const overlay=$('#searchOverlay');if(overlay)overlay.classList.add('hidden');requestAnimationFrame(()=>{try{document.dispatchEvent(new CustomEvent('findit:results-rendered'))}catch{}const shell=$('#finditExactShell');if(shell){shell.hidden=false;shell.style.removeProperty('display')}window.scrollTo({top:0,behavior:'auto'})})}
 
 function actions(){render(`<div class="fj-page fj-actions">${topbar('FindIt')}<h1>What would you like<br>to do next?</h1><button class="fj-action" data-fj="product"><i>🧴</i><span><b>Product Information</b><small>View details, description, and similar products</small></span>›</button><button class="fj-action" data-fj="stores"><i>📍</i><span><b>Nearest Stores</b><small>See nearby stores relevant to this item</small></span>›</button><button class="fj-action" data-fj="prices"><i>🏷️</i><span><b>Compare Prices</b><small>Compare verified prices across retailers</small></span>›</button><button class="fj-action" data-fj="save"><i>🔖</i><span><b>Save this search</b><small>Save for later</small></span>›</button><button class="fj-action" data-fj="more"><i>•••</i><span><b>More options</b><small>Share, feedback & more</small></span>›</button></div>`)}
 
