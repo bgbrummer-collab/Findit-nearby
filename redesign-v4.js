@@ -39,14 +39,16 @@ function init(){document.body.classList.add('findit-exact-dashboard');createShel
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
 
-/* Non-critical dashboard helpers must not participate in the initial page load. */
+/* Keep only the one dashboard interaction runtime needed by this shell.
+   Older modal/journey/guard runtimes were overlapping the same events and could freeze Chrome. */
 (()=>{
- const helpers=[
-  '/dashboard-runtime-fix.js?v=20260830-fullreference3',
-  '/modal-nav-fix.js?v=20260830-unified7',
-  '/journey-guard.js?v=20260830-journey1',
-  '/final-interaction-guard.js?v=20260831-final1'
- ];
- const load=()=>setTimeout(()=>helpers.forEach(src=>{const s=document.createElement('script');s.src=src;s.async=true;document.head.appendChild(s)}),0);
+ const load=()=>setTimeout(()=>{
+  if(window.__finditDashboardRuntimeLoader)return;
+  window.__finditDashboardRuntimeLoader=true;
+  const s=document.createElement('script');
+  s.src='/dashboard-runtime-fix.js?v=20260831-stable1';
+  s.async=true;
+  document.head.appendChild(s);
+ },0);
  if(document.readyState==='complete')load();else window.addEventListener('load',load,{once:true});
 })();
