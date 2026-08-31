@@ -1,14 +1,5 @@
-/* Load non-critical helper scripts only after the browser has completed the initial page load. */
-(()=>{
-  const load=()=>setTimeout(()=>{
-    if(!window.__finditOfferStabilityLoader){window.__finditOfferStabilityLoader=true;const s=document.createElement('script');s.src='offer-stability-fix.js?v=20260828-fast1';s.async=true;document.head.appendChild(s)}
-    if(!window.__finditScannerFlowLoader){window.__finditScannerFlowLoader=true;const s=document.createElement('script');s.src='scanner-flow.js?v=20260828-fast1';s.async=true;s.onload=()=>{window.__finditScannerFlowLoaded=true};s.onerror=()=>console.error('FindIt identifying UI failed to load');document.head.appendChild(s)}
-    if(!window.__finditJourneyResultsFixLoader){window.__finditJourneyResultsFixLoader=true;const s=document.createElement('script');s.src='journey-results-fix.js?v=20260828-results1';s.async=true;document.head.appendChild(s)}
-  },0);
-  if(document.readyState==='complete')load();else window.addEventListener('load',load,{once:true});
-})();
-
-/* FindIt critical UI cleanup. Intentionally network-free so initial page load can finish. */
+/* FindIt critical UI cleanup. Legacy helper runtimes are intentionally not auto-loaded here.
+   Core search, dashboard and result handling are provided by the current runtime files. */
 (()=>{
   'use strict';
   const q=s=>document.querySelector(s), qa=s=>[...document.querySelectorAll(s)];
