@@ -1,5 +1,5 @@
 FindIt production audit
-Commit: 863da710b3dc02e36aee2502269dd27913c3a29a
+Commit: d179a465d37d22c7caaafbb5795b92dd9ded01d5
 Release smoke: FAIL (exit 1)
 Dashboard readiness: FAIL (exit 1)
 Every dashboard function: FAIL (exit 1)
@@ -93,7 +93,6 @@ Call log:
 Node.js v22.23.2
 
 --- current dashboard real-user audit ---
-FAIL: mobile Deals responds without blocked click locator.click: Timeout 5000ms exceeded.
 Call log:
   - waiting for locator('#finditExactShell [data-fxnav="deals"]').first()
     - locator resolved to <button data-fxnav="deals">…</button>
@@ -153,6 +152,7 @@ Call log:
       - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
   - retrying click action
     - waiting 500ms
+    - waiting for element to be visible, enabled and stable
 
 FAIL: mobile History responds without blocked click locator.click: Timeout 5000ms exceeded.
 Call log:
