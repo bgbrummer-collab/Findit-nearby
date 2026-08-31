@@ -42,3 +42,4 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 (()=>{const s=document.createElement('script');s.src='/modal-nav-fix.js?v=20260830-unified7';s.defer=true;document.head.appendChild(s)})();
 (()=>{const s=document.createElement('script');s.src='/product-insights-runtime.js?v=20260830-ai1';s.defer=true;document.head.appendChild(s)})();
 (()=>{const s=document.createElement('script');s.src='/journey-guard.js?v=20260830-journey1';s.defer=true;document.head.appendChild(s)})();
+(()=>{const s=document.createElement('script');s.src='/final-interaction-guard.js?v=20260831-final1';s.defer=true;document.head.appendChild(s)})();
