@@ -1,5 +1,5 @@
-const PRIMARY_MODEL='gemini-2.5-flash-lite';
-const FALLBACK_MODEL='gemini-2.5-flash';
+const PRIMARY_MODEL='gemini-3.6-flash';
+const FALLBACK_MODEL='gemini-3.5-flash-lite';
 const clean=(v,n=3000)=>String(v||'').slice(0,n);
 function parseJson(text){const raw=String(text||'').trim().replace(/^```(?:json)?\s*/i,'').replace(/\s*```$/,'');try{return JSON.parse(raw)}catch{}const m=raw.match(/\{[\s\S]*\}/);if(m)try{return JSON.parse(m[0])}catch{}return null}
 function sources(candidate){const out=[];for(const c of candidate?.groundingMetadata?.groundingChunks||[]){const w=c?.web;if(!w?.uri)continue;const x={title:clean(w.title||'Web source',180),url:clean(w.uri,900)};if(!out.some(y=>y.url===x.url))out.push(x)}return out.slice(0,8)}
