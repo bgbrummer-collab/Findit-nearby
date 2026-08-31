@@ -38,8 +38,15 @@ function syncAll(){const s=$('#status')?.textContent?.trim()||'Waiting for an im
 function init(){document.body.classList.add('findit-exact-dashboard');createShell();setTimeout(syncAll,500);document.addEventListener('findit:results-rendered',syncAll);document.addEventListener('findit:nearby-updated',syncAll);window.addEventListener('storage',syncPremium)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
-(()=>{const s=document.createElement('script');s.src='/dashboard-runtime-fix.js?v=20260830-fullreference3';s.defer=true;document.head.appendChild(s)})();
-(()=>{const s=document.createElement('script');s.src='/modal-nav-fix.js?v=20260830-unified7';s.defer=true;document.head.appendChild(s)})();
-(()=>{const s=document.createElement('script');s.src='/product-insights-runtime.js?v=20260830-ai1';s.defer=true;document.head.appendChild(s)})();
-(()=>{const s=document.createElement('script');s.src='/journey-guard.js?v=20260830-journey1';s.defer=true;document.head.appendChild(s)})();
-(()=>{const s=document.createElement('script');s.src='/final-interaction-guard.js?v=20260831-final1';s.defer=true;document.head.appendChild(s)})();
+
+/* Non-critical dashboard helpers must not participate in the initial page load. */
+(()=>{
+ const helpers=[
+  '/dashboard-runtime-fix.js?v=20260830-fullreference3',
+  '/modal-nav-fix.js?v=20260830-unified7',
+  '/journey-guard.js?v=20260830-journey1',
+  '/final-interaction-guard.js?v=20260831-final1'
+ ];
+ const load=()=>setTimeout(()=>helpers.forEach(src=>{const s=document.createElement('script');s.src=src;s.async=true;document.head.appendChild(s)}),0);
+ if(document.readyState==='complete')load();else window.addEventListener('load',load,{once:true});
+})();
