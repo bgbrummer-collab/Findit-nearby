@@ -1,5 +1,5 @@
 FindIt production audit
-Commit: 369422aad4bacd2ca69aad096142e75a966bf6c4
+Commit: 86960c11a057ebf796dbac5617634a6c53e54884
 Release smoke: FAIL (exit 1)
 Dashboard readiness: FAIL (exit 1)
 Every dashboard function: FAIL (exit 1)
@@ -93,8 +93,6 @@ Call log:
 Node.js v22.23.2
 
 --- current dashboard real-user audit ---
-      - scrolling into view if needed
-      - done scrolling
       - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
     - retrying click action
     - waiting 20ms
@@ -202,6 +200,7 @@ Call log:
       - element is not visible
     - retrying click action
       - waiting 500ms
+    - waiting for element to be visible, enabled and stable
 
 FAIL: mobile Feedback responds without blocked click locator.click: Timeout 5000ms exceeded.
 Call log:
@@ -275,6 +274,7 @@ Call log:
       - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
   - retrying click action
     - waiting 500ms
+    - waiting for element to be visible, enabled and stable
 
 FAIL: mobile bottom-card buttons respond locator.click: Timeout 5000ms exceeded.
 Call log:
