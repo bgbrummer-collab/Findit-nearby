@@ -1,5 +1,5 @@
 FindIt production audit
-Commit: 120a660afff1845e9ce6dd9ece496cf0d8c8ee79
+Commit: 369422aad4bacd2ca69aad096142e75a966bf6c4
 Release smoke: FAIL (exit 1)
 Dashboard readiness: FAIL (exit 1)
 Every dashboard function: FAIL (exit 1)
@@ -93,6 +93,9 @@ Call log:
 Node.js v22.23.2
 
 --- current dashboard real-user audit ---
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
     - retrying click action
     - waiting 20ms
     2 × waiting for element to be visible, enabled and stable
@@ -109,7 +112,6 @@ Node.js v22.23.2
       - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
     - retrying click action
       - waiting 500ms
-    - waiting for element to be visible, enabled and stable
 
 FAIL: mobile Compare nav responds without blocked click locator.click: Timeout 5000ms exceeded.
 Call log:
@@ -137,7 +139,6 @@ Call log:
       - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
     - retrying click action
       - waiting 500ms
-    - waiting for element to be visible, enabled and stable
 
 FAIL: mobile Deals responds without blocked click locator.click: Timeout 5000ms exceeded.
 Call log:
@@ -329,7 +330,6 @@ Call log:
       - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
   - retrying click action
     - waiting 500ms
-    - waiting for element to be visible, enabled and stable
 
 PASS: mobile no uncaught JS errors
 CURRENT_DASHBOARD_REAL_USER_RESULT 14 PASS / 32 FAIL
