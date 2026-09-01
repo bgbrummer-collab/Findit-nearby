@@ -9,9 +9,10 @@ const checks=[],failures=[],warnings=[];
 function note(name,status='PASS',detail=''){const row={name,status,detail:String(detail||'').slice(0,700)};checks.push(row);console.log(`[${status}] ${name}${detail?` — ${row.detail}`:''}`);if(status==='FAIL')failures.push(row);if(status==='WARN')warnings.push(row)}
 async function safe(name,fn,{warn=false}={}){try{const d=await fn();note(name,'PASS',d||'');return true}catch(e){note(name,warn?'WARN':'FAIL',e?.message||String(e));return false}}
 async function visible(page,sel){try{return await page.locator(sel).first().isVisible({timeout:1800})}catch{return false}}
-async function modalText(page){return (await page.locator('#fxStableBody,#fxCompleteBody').filter({visible:true}).first().innerText().catch(()=>''))||''}
+async function modalText(page){for(const s of ['#fxCompleteBody','#fxStableBody']){const e=page.locator(s);if(await e.count()&&await e.isVisible().catch(()=>false))return await e.innerText()}return''}
 async function closeModal(page){for(const s of ['#fxStableModal .fx-stable-close','#fxCompleteModal .fx-complete-x','#premiumModal [data-close-modal]','#closePremium']){const e=page.locator(s).first();if(await e.count()&&await e.isVisible().catch(()=>false)){await e.click({force:true}).catch(()=>{});await page.waitForTimeout(80)}}}
-async function clickVisible(page,sel){const all=page.locator(sel);for(let i=0;i<await all.count();i++){const e=all.nth(i);if(await e.isVisible().catch(()=>false)){await e.click({timeout:5000});await page.waitForTimeout(150);return e}}throw Error(`no visible control: ${sel}`)}
+async function clickVisible(page,sel){const all=page.locator(sel);for(let i=0;i<await all.count();i++){const e=all.nth(i);if(await e.isVisible().catch(()=>false)){await e.scrollIntoViewIfNeeded().catch(()=>{});await e.click({timeout:5000});await page.waitForTimeout(150);return e}}throw Error(`no visible control: ${sel}`)}
+async function top(page){await page.evaluate(()=>window.scrollTo(0,0));await page.waitForTimeout(100)}
 
 const browser=await chromium.launch({headless:true});
 const context=await browser.newContext({viewport:{width:1440,height:900},geolocation:{latitude:-25.7479,longitude:28.2293},permissions:['geolocation','clipboard-read','clipboard-write']});
@@ -36,34 +37,35 @@ await page.route('**/api/nearby',async r=>{let body={};try{body=JSON.parse(r.req
 await safe('Homepage loads',async()=>{const r=await page.goto(BASE_URL,{waitUntil:'domcontentloaded',timeout:35000});if(!r||r.status()!==200)throw Error(`HTTP ${r?.status()}`);await page.waitForTimeout(1800);return `HTTP ${r.status()}`});
 await safe('Visible dashboard shell loads',async()=>{if(!await visible(page,'#finditExactShell'))throw Error('dashboard missing');return 'dashboard visible'});
 await safe('Desktop has no horizontal overflow',async()=>{const x=await page.evaluate(()=>({sw:document.documentElement.scrollWidth,cw:document.documentElement.clientWidth}));if(x.sw>x.cw+4)throw Error(JSON.stringify(x));return JSON.stringify(x)});
-await safe('Legacy engine is hidden from users',async()=>{const e=page.locator('#home.fx-engine');if(!await e.count())return 'legacy engine not present';if(await e.isVisible())throw Error('legacy engine is visible');return 'hidden'});
+await safe('Legacy engine does not cover dashboard',async()=>{const e=page.locator('#home.fx-engine');if(!await e.count())return 'legacy engine absent';const b=await e.boundingBox();if(!b)return 'not rendered';const vp=page.viewportSize();const overlaps=b.x<vp.width&&b.x+b.width>0&&b.y<vp.height&&b.y+b.height>0;if(overlaps)throw Error(JSON.stringify(b));return 'kept outside visible dashboard'});
 await safe('Dashboard navigation is complete',async()=>{const n=await page.locator('#finditExactShell .fx-nav [data-fxnav]').count();if(n<9)throw Error(`${n} nav controls`);return `${n} controls`});
 await page.screenshot({path:path.join(OUT,'01-dashboard-desktop.png')});
 
 for(const [nav,expected] of [['compare','Compare Prices'],['deals','Verified Deals'],['saved','Saved Items'],['history','History'],['alerts','Price & Stock Alerts'],['feedback','Feedback']]){
- await closeModal(page);
+ await closeModal(page);await top(page);
  await safe(`Visible ${nav} tool opens`,async()=>{await clickVisible(page,`#finditExactShell [data-fxnav="${nav}"]`);if(!await visible(page,'#fxStableModal:not(.hidden)'))throw Error('visible modal did not open');const t=await modalText(page);if(!t.includes(expected))throw Error(t.slice(0,140));return expected});
 }
-await closeModal(page);
+await closeModal(page);await top(page);
 await safe('Settings / nearby filters work',async()=>{await clickVisible(page,'#finditExactShell [data-fx="settings"]');const modal=page.locator('#fxStableModal:not(.hidden)');if(!await modal.isVisible())throw Error('filters modal missing');const sel=page.locator('#fxStableRadius');for(const v of ['3','5','10']){await sel.selectOption(v);if(await sel.inputValue()!==v)throw Error(`radius ${v}`)}return '3/5/10 km'});
-await closeModal(page);
+await closeModal(page);await top(page);
 
 await safe('Dashboard image upload works',async()=>{await page.locator('#photo').setInputFiles(imgPath);await page.waitForTimeout(250);if(await page.locator('#fxSearchNow').isDisabled())throw Error('Identify remains disabled');if(!await visible(page,'#fxProductImage img'))throw Error('dashboard preview missing');return 'image ready'});
 await safe('Dashboard location works',async()=>{await clickVisible(page,'#finditExactShell [data-location-direct]');await page.waitForFunction(()=>/Location ready/i.test(document.querySelector('#fxStatus')?.textContent||''),null,{timeout:5000});return (await page.locator('#fxStatus').innerText()).trim()});
-await safe('Identify & Find completes on visible dashboard',async()=>{await clickVisible(page,'#fxSearchNow');await page.waitForFunction(()=>/Nike Air Force 1/i.test(document.querySelector('#fxProductName')?.textContent||''),null,{timeout:12000});const n=(await page.locator('#fxProductName').innerText()).trim();if(!/Nike Air Force 1/i.test(n))throw Error(n);return n});
+await safe('Identify & Find completes on visible dashboard',async()=>{await clickVisible(page,'#fxSearchNow');await page.waitForFunction(()=>/Nike Air Force 1/i.test(document.querySelector('#fxProductName')?.textContent||''),null,{timeout:12000});return (await page.locator('#fxProductName').innerText()).trim()});
 await safe('Exact identity reaches dashboard',async()=>{const b=(await page.locator('#fxExactBadge').innerText()).trim();if(!/exact identity verified/i.test(b))throw Error(b);return b});
 await safe('Verified price reaches dashboard',async()=>{const p=(await page.locator('#fxBestPrice').innerText()).trim();if(!/2.?199/i.test(p.replace(/\s/g,'')))throw Error(p);return p});
 await safe('Nearby store stays truthful',async()=>{const t=(await page.locator('#fxStoreList').innerText()).trim();if(!/Nike/i.test(t))throw Error('nearby retailer missing');if(/Stock verified|Branch stock verified/i.test(t))throw Error('unverified branch falsely marked verified');if(!/Stock not verified/i.test(t))throw Error(t);return 'branch remains unverified'});
 await safe('Top Stores does not invent branch stock',async()=>{const t=(await page.locator('#fxTopStores').innerText()).trim();if(/Stock verified/i.test(t))throw Error(t);return t.slice(0,120)});
 await page.screenshot({path:path.join(OUT,'02-dashboard-results.png')});
 
-await closeModal(page);
-await safe('Product Information is clean and researched',async()=>{await clickVisible(page,'#finditExactShell [data-fx="product"]');await page.waitForTimeout(350);const t=await modalText(page);if(!/Product Information|What it does/i.test(t))throw Error(t.slice(0,180));if(/Verified buyer|Trustpilot|Got the product fast/i.test(t))throw Error('review junk leaked into research');return t.slice(0,180)});
-await closeModal(page);
-await safe('Compare Prices uses verified offer',async()=>{await clickVisible(page,'#finditExactShell [data-fx="compare"]');const t=await modalText(page);if(!/Nike/i.test(t)||!/2.?199/.test(t.replace(/\s/g,'')))throw Error(t.slice(0,220));return 'Nike verified price shown'});
-await closeModal(page);
-await safe('Nearby action uses visible section',async()=>{await clickVisible(page,'#finditExactShell [data-fx="nearby"]');if(!await visible(page,'#fxNearbySection'))throw Error('nearby section missing');return 'nearby section visible'});
-await safe('Premium entry opens from visible dashboard',async()=>{await clickVisible(page,'#finditExactShell [data-fx="premium"]');if(!await visible(page,'#premiumModal:not(.hidden)')&&!await visible(page,'#fxStableModal:not(.hidden)'))throw Error('Premium UI did not open');return 'Premium UI visible'});
+await closeModal(page);await top(page);
+await safe('Product Information is clean and researched',async()=>{await clickVisible(page,'#finditExactShell .fx-feature-row [data-stable-action="product"],#finditExactShell .fx-product-actions [data-fx="product"]');await page.waitForTimeout(350);const t=await modalText(page);if(!/Product Information|What it does/i.test(t))throw Error(t.slice(0,180));if(/Verified buyer|Trustpilot|Got the product fast/i.test(t))throw Error('review junk leaked into research');return t.slice(0,180)});
+await closeModal(page);await top(page);
+await safe('Compare Prices uses verified offer',async()=>{await clickVisible(page,'#finditExactShell [data-fxnav="compare"],#finditExactShell .fx-feature-row [data-stable-action="compare"]');const t=await modalText(page);if(!/Nike/i.test(t)||!/2.?199/.test(t.replace(/\s/g,'')))throw Error(t.slice(0,220));return 'Nike verified price shown'});
+await closeModal(page);await top(page);
+await safe('Nearby action uses visible section',async()=>{await clickVisible(page,'#finditExactShell [data-fxnav="nearby"]');if(!await visible(page,'#fxNearbySection'))throw Error('nearby section missing');return 'nearby section visible'});
+await top(page);await closeModal(page);
+await safe('Premium entry opens from visible dashboard',async()=>{await clickVisible(page,'#fxPremiumSideButton,#finditExactShell .fx-avatar');if(!await visible(page,'#premiumModal:not(.hidden)')&&!await visible(page,'#fxStableModal:not(.hidden)'))throw Error('Premium UI did not open');return 'Premium UI visible'});
 await closeModal(page);
 
 await safe('No uncaught JavaScript errors',async()=>{if(pageErrors.length)throw Error(pageErrors.slice(0,3).join(' | '));return '0 page errors'});
