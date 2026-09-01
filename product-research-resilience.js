@@ -33,3 +33,5 @@ window.fetch=async function(input,init){let url='';try{url=typeof input==='strin
  return (await job).clone();
 };
 })();
+
+(()=>{if(!document.querySelector('script[data-findit-paid-tool-audit]')){const s=document.createElement('script');s.src='/premium-tool-audit-fix.js?v=20260901-audit1';s.defer=true;s.dataset.finditPaidToolAudit='1';document.head.appendChild(s)}})();
