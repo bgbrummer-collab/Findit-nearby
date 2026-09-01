@@ -33,7 +33,7 @@ permissions:
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -55,7 +55,7 @@ jobs:
         env:
           FINDIT_URL: https://findit-nearby.vercel.app/
           AUDIT_OUT: audit-output
-        run: node tests/final-audit-runner.mjs
+        run: timeout 150s node tests/final-audit-runner.mjs
       - name: Upload audit report and screenshots
         if: always()
         uses: actions/upload-artifact@v4
