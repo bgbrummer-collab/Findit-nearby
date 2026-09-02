@@ -1,5 +1,5 @@
 FindIt production audit
-Commit: db70227be3da347ee56d26879a696e401650721f
+Commit: 218df4243c9c22d7e4703ad9655de3ed2c388703
 Release smoke: PASS (exit 0)
 Dashboard readiness: FAIL (exit 1)
 Every dashboard function: FAIL (exit 1)
@@ -62,6 +62,8 @@ Call log:
 Node.js v22.23.2
 
 --- current dashboard real-user audit ---
+Call log:
+  - waiting for locator('#finditExactShell [data-fxnav="deals"]').first()
     - locator resolved to <button data-fxnav="deals">…</button>
   - attempting click action
     - waiting for element to be visible, enabled and stable
@@ -119,6 +121,7 @@ Node.js v22.23.2
       - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
   - retrying click action
     - waiting 500ms
+    - waiting for element to be visible, enabled and stable
 
 FAIL: mobile History responds without blocked click locator.click: Timeout 5000ms exceeded.
 Call log:
@@ -156,7 +159,6 @@ Call log:
       - element is not visible
     - retrying click action
       - waiting 500ms
-    - waiting for element to be visible, enabled and stable
 
 FAIL: mobile Feedback responds without blocked click locator.click: Timeout 5000ms exceeded.
 Call log:
@@ -175,7 +177,6 @@ Call log:
       - element is not visible
     - retrying click action
       - waiting 500ms
-    - waiting for element to be visible, enabled and stable
 
 FAIL: mobile feature shortcuts are interactive locator.click: Timeout 5000ms exceeded.
 Call log:
@@ -237,7 +238,6 @@ Call log:
       - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
   - retrying click action
     - waiting 500ms
-    - waiting for element to be visible, enabled and stable
 
 FAIL: mobile bottom-card buttons respond locator.click: Timeout 5000ms exceeded.
 Call log:
