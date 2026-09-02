@@ -33,7 +33,7 @@ permissions:
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -46,16 +46,28 @@ jobs:
           npm init -y >/dev/null 2>&1
           npm install --save-dev playwright@1.55.0
           npx playwright install --with-deps chromium
+      - name: Start pull-request branch preview
+        if: github.event_name == 'pull_request'
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/findit-http.log 2>&1 &
+          for i in {1..20}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then
+              exit 0
+            fi
+            sleep 0.5
+          done
+          cat /tmp/findit-http.log
+          exit 1
       - name: Wait for production rollout
         if: github.event_name != 'pull_request'
         run: sleep 25
-      - name: Run every-interaction production audit
+      - name: Run every-interaction audit
         id: audit
         continue-on-error: true
         env:
-          FINDIT_URL: https://findit-nearby.vercel.app/
+          FINDIT_URL: ${{ github.event_name == 'pull_request' && 'http://127.0.0.1:4173/' || 'https://findit-nearby.vercel.app/' }}
           AUDIT_OUT: audit-output
-        run: node tests/final-audit-runner.mjs
+        run: timeout 150s node tests/final-audit-runner.mjs
       - name: Upload audit report and screenshots
         if: always()
         uses: actions/upload-artifact@v4
