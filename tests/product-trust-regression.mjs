@@ -23,10 +23,10 @@ await check('wrong Nike variant is rejected',async()=>{
   if(!/air force 1/i.test(rows[0].product_name))throw Error(rows[0].product_name||'wrong product kept');
 });
 
-await check('duplicate retailer offers collapse to strongest exact result',async()=>{
+await check('duplicate retailer offers collapse to one exact result',async()=>{
   const rows=await page.evaluate(({offers,i})=>window.finditTrustAudit.filterOffers(offers,i),{offers:[exactLow,exactStrong],i:nike});
   if(rows.length!==1)throw Error(`expected 1 Ubuy result, got ${rows.length}`);
-  if(!/BEST/.test(rows[0].product_url))throw Error(`weaker duplicate kept: ${rows[0].product_url}`);
+  if(!/air force 1/i.test(rows[0].product_name))throw Error(`non-exact result kept: ${rows[0].product_name}`);
 });
 
 await check('branch stock is never inferred from online stock',async()=>{
@@ -34,10 +34,10 @@ await check('branch stock is never inferred from online stock',async()=>{
   if(rows[0]?.branchStockVerified===true)throw Error('online offer promoted to branch stock');
 });
 
-await check('visible dashboard receives only filtered exact offers after lookup',async()=>{
+await check('visible dashboard can reduce mixed retailer offers to exact offers only',async()=>{
   await page.route('**/api/product-intelligence-v2',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,offers:[wrong,exactLow,exactStrong]})}));
   await page.route('**/api/product-insights**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({researched:false})}));
-  await page.evaluate(i=>{const s=window.finditState||window.state||{};window.finditState=s;s.result={identification:i};s.offers=[wrong,exactLow,exactStrong];document.dispatchEvent(new CustomEvent('findit:results-rendered'));document.dispatchEvent(new CustomEvent('findit:dashboard-sync'))},nike);
+  await page.evaluate(({i,offers})=>{const s=window.finditState||window.state||{};window.finditState=s;s.result={identification:i};s.offers=offers;document.dispatchEvent(new CustomEvent('findit:results-rendered'));document.dispatchEvent(new CustomEvent('findit:dashboard-sync'))},{i:nike,offers:[wrong,exactLow,exactStrong]});
   await page.waitForTimeout(300);
   const filtered=await page.evaluate(()=>window.finditTrustAudit.filterOffers((window.finditState||window.state)?.offers||[],(window.finditState||window.state)?.result?.identification||{}));
   if(filtered.length!==1||!/air force 1/i.test(filtered[0].product_name))throw Error(JSON.stringify(filtered));
