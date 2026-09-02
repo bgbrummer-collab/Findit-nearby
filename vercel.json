@@ -14,6 +14,6 @@
     { "src": "/api/product-intelligence", "dest": "/api/product-intelligence-v2" },
     { "src": "/api/analytics", "dest": "/api/telemetry-router?action=analytics" },
     { "src": "/api/feedback", "dest": "/api/telemetry-router?action=feedback" },
-    { "src": "/api/product-insights", "dest": "/api/assistant?action=product-insights" }
+    { "src": "/api/product-insights", "dest": "/api/product-intelligence?action=research" }
   ]
 }

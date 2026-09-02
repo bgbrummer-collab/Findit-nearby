@@ -1,0 +1,16 @@
+import handler from '../api/product-intelligence.js';
+const originalFetch=global.fetch;
+global.fetch=async url=>new Response(`<!doctype html><html><head><title>Nike Air Force 1 '07 Low White</title><meta property="og:title" content="Nike Air Force 1 '07 Low White"><meta property="og:description" content="The Nike Air Force 1 '07 Low combines durable leather with classic cushioning for everyday footwear."></head><body><ul><li>Nike Air cushioning helps provide comfortable everyday wear.</li><li>Durable leather upper gives the Nike Air Force 1 a structured feel.</li><li>Shipping and delivery terms apply at checkout.</li></ul><p>The Nike Air Force 1 may require separate care products for leather maintenance.</p></body></html>`,{status:200,headers:{'content-type':'text/html'}});
+let status=200,payload=null;
+const req={method:'GET',query:{name:"Nike Air Force 1 '07 Low",brand:'Nike',model:"Air Force 1 '07 Low",searchQuery:"Nike Air Force 1 '07 Low White",sources:JSON.stringify([{url:'https://example-retailer.test/product/nike-air-force-1-07-low-white',title:"Nike Air Force 1 '07 Low White",retailer:'Example Retailer'}])}};
+const res={setHeader(){},status(n){status=n;return this},json(v){payload=v;return this}};
+await handler(req,res);
+global.fetch=originalFetch;
+if(status!==200)throw new Error(`status ${status}`);
+if(!payload?.researched)throw new Error('research not produced');
+if(!/durable leather|classic cushioning/i.test(payload.whatItDoes||''))throw new Error(`bad whatItDoes: ${payload.whatItDoes}`);
+if(!(payload.pros||[]).some(x=>/air cushioning|durable leather/i.test(x)))throw new Error(`missing source-backed pros: ${JSON.stringify(payload.pros)}`);
+if((payload.pros||[]).some(x=>/shipping|delivery|checkout/i.test(x)))throw new Error('retailer-policy junk leaked into pros');
+if(!(payload.cons||[]).some(x=>/require separate care products/i.test(x)))throw new Error(`missing source-backed consideration: ${JSON.stringify(payload.cons)}`);
+if(payload.sources?.length!==1)throw new Error(`unexpected sources ${JSON.stringify(payload.sources)}`);
+console.log('VERIFIED_PRODUCT_RESEARCH_REGRESSION_PASS');

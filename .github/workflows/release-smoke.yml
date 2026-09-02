@@ -42,12 +42,14 @@ jobs:
           trust=${PIPESTATUS[0]}
           node tests/product-intelligence-route-regression.mjs 2>&1 | tee qa-results/product-intelligence-route-regression.log
           route=${PIPESTATUS[0]}
+          node tests/verified-product-research-regression.mjs 2>&1 | tee qa-results/verified-product-research-regression.log
+          research=${PIPESTATUS[0]}
           set -e
-          if [ "$smoke" -eq 0 ] && [ "$trust" -eq 0 ] && [ "$route" -eq 0 ]; then
+          if [ "$smoke" -eq 0 ] && [ "$trust" -eq 0 ] && [ "$route" -eq 0 ] && [ "$research" -eq 0 ]; then
             echo "PASS $(date -u +%Y-%m-%dT%H:%M:%SZ)" > qa-results/live-smoke-status.txt
             exit 0
           fi
-          echo "FAIL $(date -u +%Y-%m-%dT%H:%M:%SZ) smoke=$smoke trust=$trust route=$route" > qa-results/live-smoke-status.txt
+          echo "FAIL $(date -u +%Y-%m-%dT%H:%M:%SZ) smoke=$smoke trust=$trust route=$route research=$research" > qa-results/live-smoke-status.txt
           exit 1
       - name: Upload smoke results
         if: always()
