@@ -31,7 +31,7 @@ async function fillIfNeeded(){
 function schedule(){const token=++runToken;setTimeout(()=>{if(token===runToken)fillIfNeeded()},700)}
 
 const RETAILER_DOMAINS={
- 'woolworths':'woolworths.co.za','clicks':'clicks.co.za','dis chem':'dischem.co.za','makro':'makro.co.za','checkers':'checkers.co.za','shoprite':'shoprite.co.za','pick n pay':'pnp.co.za','takealot':'takealot.com','game':'game.co.za','incredible connection':'incredible.co.za','computer mania':'computermania.co.za','builders':'builders.co.za','leroy merlin':'leroymerlin.co.za','buco':'buco.co.za','nike':'nike.com','adidas':'adidas.co.za','sportscene':'sportscene.co.za','totalsports':'totalsports.co.za','jd sports south africa':'jdsports.co.za','bash':'bash.com','superbalist':'superbalist.com','dischem':'dischem.co.za'
+ 'pna':'pna.co.za','waltons':'waltons.co.za','woolworths':'woolworths.co.za','clicks':'clicks.co.za','dis chem':'dischem.co.za','makro':'makro.co.za','checkers':'checkers.co.za','shoprite':'shoprite.co.za','pick n pay':'pnp.co.za','takealot':'takealot.com','game':'game.co.za','incredible connection':'incredible.co.za','computer mania':'computermania.co.za','builders':'builders.co.za','leroy merlin':'leroymerlin.co.za','buco':'buco.co.za','nike':'nike.com','adidas':'adidas.co.za','sportscene':'sportscene.co.za','totalsports':'totalsports.co.za','jd sports south africa':'jdsports.co.za','bash':'bash.com','superbalist':'superbalist.com','dischem':'dischem.co.za'
 };
 function domainForStore(name){const n=norm(name);for(const [k,d] of Object.entries(RETAILER_DOMAINS))if(n===k||n.includes(k)||k.includes(n))return d;return''}
 function applyLogos(){
