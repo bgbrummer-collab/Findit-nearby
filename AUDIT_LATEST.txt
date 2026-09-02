@@ -1,9 +1,9 @@
 FindIt production audit
-Commit: 7554a68092e4064b21d8ba4d470b7cb635f96dca
+Commit: 54fbdddf4e425fb7258de33666f148444059b1d7
 Release smoke: PASS (exit 0)
 Dashboard readiness: PASS (exit 0)
 Every dashboard function: PASS (exit 0)
-Current dashboard real-user audit: TIMEOUT (exit 137)
+Current dashboard real-user audit: PASS (exit 0)
 
 --- release smoke ---
 [PASS] 1440px page loads
@@ -121,7 +121,7 @@ PASS: desktop History responds without blocked click
 PASS: desktop Alerts responds without blocked click
 PASS: desktop Feedback responds without blocked click
 PASS: desktop feature shortcuts are interactive
-FAIL: desktop bottom-card buttons respond locator.count: Target page, context or browser has been closed
+PASS: desktop bottom-card buttons respond
 PASS: desktop no uncaught JS errors
 PASS: mobile shell is visible
 PASS: mobile active Premium overlay cannot block dashboard
@@ -133,3 +133,17 @@ PASS: mobile Product Info opens
 PASS: mobile Compare Prices opens
 PASS: mobile Settings responds
 PASS: mobile Ask FindIt entry point responds
+PASS: mobile Saved navigation stores current product
+PASS: mobile Home responds without blocked click
+PASS: mobile Search responds without blocked click
+PASS: mobile Nearby responds without blocked click
+PASS: mobile Compare nav responds without blocked click
+PASS: mobile Deals responds without blocked click
+PASS: mobile History responds without blocked click
+PASS: mobile Alerts responds without blocked click
+PASS: mobile Feedback responds without blocked click
+PASS: mobile feature shortcuts are interactive
+PASS: mobile bottom-card buttons respond
+PASS: mobile no uncaught JS errors
+CURRENT_DASHBOARD_REAL_USER_RESULT 44 PASS / 0 FAIL
+FINDIT_CURRENT_DASHBOARD_REAL_USER_PASS
