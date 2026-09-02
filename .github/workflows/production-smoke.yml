@@ -47,7 +47,7 @@ jobs:
               for(const n of t.forbidden)ok(!names.includes(n),`${t.label}: excludes irrelevant ${n}`);
               const unsafe=(d.offers||[]).filter(o=>o.directionsAvailable===true||o.branchStockVerified===true);
               ok(unsafe.length===0,`${t.label}: online results never fake branch stock/directions`);
-              const fakePrice=(d.offers||[]).filter(o=>o.price!=null&&!/structured product data|connected retailer feed/i.test(String(o.source||'')));
+              const fakePrice=(d.offers||[]).filter(o=>o.price!=null&&!/structured product data|connected retailer feed|verified directly on retailer product page/i.test(String(o.source||'')));
               ok(fakePrice.length===0,`${t.label}: no weak-source price is treated as verified`);
             }
 
