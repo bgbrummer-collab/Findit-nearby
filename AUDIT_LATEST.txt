@@ -1,8 +1,8 @@
 FindIt production audit
-Commit: 4f8f060c20d2248e8df23733decd8a9650fd31e8
+Commit: b5286dd143d675b0ed5e35e95f713941bb2b2602
 Release smoke: PASS (exit 0)
-Dashboard readiness: FAIL (exit 1)
-Every dashboard function: FAIL (exit 1)
+Dashboard readiness: PASS (exit 0)
+Every dashboard function: PASS (exit 0)
 Current dashboard real-user audit: FAIL (exit 1)
 
 --- release smoke ---
@@ -29,37 +29,76 @@ Current dashboard real-user audit: FAIL (exit 1)
 FINDIT_STABLE_PIPELINE_SMOKE_PASS
 
 --- dashboard readiness ---
-node:internal/modules/run_main:123
-    triggerUncaughtException(
-    ^
+[PASS] 1440px dashboard shell visible
+[PASS] 1440px upload control opens chooser and transfers file
+[PASS] 1440px selected image enables search
+[PASS] 1440px location control works
+[PASS] 1440px identify returns to dashboard not action menu
+[PASS] 1440px result mirrors into dashboard
+[PASS] 1440px no uncaught JS errors
+[PASS] 390px dashboard shell visible
+[PASS] 390px upload control opens chooser and transfers file
+[PASS] 390px selected image enables search
+[PASS] 390px location control works
+[PASS] 390px identify returns to dashboard not action menu
+[PASS] 390px result mirrors into dashboard
+[PASS] 390px no uncaught JS errors
 
-page.waitForSelector: Timeout 12000ms exceeded.
-Call log:
-  - waiting for locator('label[data-native-upload="1"]') to be visible
-
-    at run (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-readiness.mjs:11:159)
-    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-readiness.mjs:19:1 {
-  name: 'TimeoutError'
-}
-
-Node.js v22.23.2
+FINDIT_DASHBOARD_READINESS_PASS
 
 --- every dashboard function ---
-node:internal/modules/run_main:123
-    triggerUncaughtException(
-    ^
+[PASS] 1440px dashboard visible
+[PASS] 1440px upload chooser opens and transfers file
+[PASS] 1440px camera chooser opens and transfers file
+[PASS] 1440px location action works
+[PASS] 1440px identify action works
+[PASS] 1440px scan returns directly to dashboard
+[PASS] 1440px product result mirrors into dashboard
+[PASS] 1440px nav home responds
+[PASS] 1440px nav search responds
+[PASS] 1440px nav nearby responds
+[PASS] 1440px nav compare responds
+[PASS] 1440px nav deals responds
+[PASS] 1440px nav saved responds
+[PASS] 1440px nav history responds
+[PASS] 1440px nav alerts responds
+[PASS] 1440px nav feedback responds
+[PASS] 1440px action product responds
+[PASS] 1440px action compare responds
+[PASS] 1440px action nearby responds
+[PASS] 1440px Ask FindIt entry point responds
+[PASS] 1440px premium entry point responds
+[PASS] 1440px feedback form present and usable
+[PASS] 1440px no duplicate ids
+[PASS] 1440px no uncaught JS errors
+[PASS] 390px dashboard visible
+[PASS] 390px upload chooser opens and transfers file
+[PASS] 390px camera chooser opens and transfers file
+[PASS] 390px location action works
+[PASS] 390px identify action works
+[PASS] 390px scan returns directly to dashboard
+[PASS] 390px product result mirrors into dashboard
+[PASS] 390px nav home responds
+[PASS] 390px nav search responds
+[PASS] 390px nav nearby responds
+[PASS] 390px nav compare responds
+[PASS] 390px nav deals responds
+[PASS] 390px nav saved responds
+[PASS] 390px nav history responds
+[PASS] 390px nav alerts responds
+[PASS] 390px nav feedback responds
+[PASS] 390px action product responds
+[PASS] 390px action compare responds
+[PASS] 390px action nearby responds
+[PASS] 390px Ask FindIt entry point responds
+[PASS] 390px premium entry point responds
+[PASS] 390px feedback form present and usable
+[PASS] 390px no duplicate ids
+[PASS] 390px no uncaught JS errors
 
-page.waitForSelector: Timeout 12000ms exceeded.
-Call log:
-  - waiting for locator('label[data-native-upload="1"]') to be visible
+48 PASS / 0 FAIL
 
-    at setup (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:11:158)
-    at async audit (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:13:88)
-    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:27:1 {
-  name: 'TimeoutError'
-}
-
-Node.js v22.23.2
+FINDIT_ALL_DASHBOARD_FUNCTIONS_PASS
 
 --- current dashboard real-user audit ---
 PASS: desktop shell is visible
@@ -71,7 +110,7 @@ PASS: desktop nearby store list has no duplicate retailer rows
 PASS: desktop Product Info opens
 PASS: desktop Compare Prices opens
 PASS: desktop Settings responds
-FAIL: desktop Ask FindIt opens assistant did not open
+FAIL: desktop Ask FindIt entry point responds assistant/search entry point produced no usable UI
 PASS: desktop Saved navigation stores current product
 PASS: desktop Home responds without blocked click
 PASS: desktop Search responds without blocked click
@@ -93,7 +132,7 @@ PASS: mobile nearby store list has no duplicate retailer rows
 PASS: mobile Product Info opens
 PASS: mobile Compare Prices opens
 PASS: mobile Settings responds
-FAIL: mobile Ask FindIt opens assistant did not open
+FAIL: mobile Ask FindIt entry point responds assistant/search entry point produced no usable UI
 PASS: mobile Saved navigation stores current product
 PASS: mobile Home responds without blocked click
 PASS: mobile Search responds without blocked click
