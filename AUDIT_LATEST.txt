@@ -1,6 +1,6 @@
 FindIt production audit
-Commit: 37f8b2e9e46daee794431db3cc3a14b866d38f3f
-Release smoke: FAIL (exit 1)
+Commit: ce206b5cf96c3f8bf5f8836364b7d10ce9800726
+Release smoke: PASS (exit 0)
 Dashboard readiness: FAIL (exit 1)
 Every dashboard function: FAIL (exit 1)
 Current dashboard real-user audit: FAIL (exit 1)
@@ -17,47 +17,16 @@ Current dashboard real-user audit: FAIL (exit 1)
 [PASS] mock exact identity correct
 [PASS] mock exact price shown
 [PASS] mock nearby same retailer paired without fake branch stock
-[FAIL] label evidence promotes supported packaged-product identity FindIt identified the product family, but it will not call a retailer listing exact until the photo-level identity is verified.
-[FAIL] label evidence allows retailer-page verified price WHERE TO BUY
-
-Exact product identity not verified yet
-
-FindIt will not label similar products as exact. Use the retailer searches below while it keeps the exact-match result honest.
-
-🛍️
-Clicks
-Search this product
-[FAIL] label flow keeps physical branch stock unconfirmed and no Directions Clicks
-4.2 km • Menlyn, Pretoria
-Relevant retailer
-Branch stock not confirmed
-Website
-Map
-Exact product not confirmed at this branch.
+[PASS] label evidence promotes supported packaged-product identity
+[PASS] label evidence allows retailer-page verified price
+[PASS] label flow keeps physical branch stock unconfirmed and no Directions
 [PASS] shoe retailer selection and safety
 [PASS] electronics retailer selection and safety
 [PASS] grocery retailer selection and safety
 [PASS] hardware retailer selection and safety
 [PASS] nearby lookup returns valid real coordinates or clean empty state
 
-FAILURES
-label evidence promotes supported packaged-product identity: FindIt identified the product family, but it will not call a retailer listing exact until the photo-level identity is verified.
-label evidence allows retailer-page verified price: WHERE TO BUY
-
-Exact product identity not verified yet
-
-FindIt will not label similar products as exact. Use the retailer searches below while it keeps the exact-match result honest.
-
-🛍️
-Clicks
-Search this product
-label flow keeps physical branch stock unconfirmed and no Directions: Clicks
-4.2 km • Menlyn, Pretoria
-Relevant retailer
-Branch stock not confirmed
-Website
-Map
-Exact product not confirmed at this branch.
+FINDIT_STABLE_PIPELINE_SMOKE_PASS
 
 --- dashboard readiness ---
 node:internal/modules/run_main:123
@@ -93,6 +62,9 @@ Call log:
 Node.js v22.23.2
 
 --- current dashboard real-user audit ---
+      - done scrolling
+      - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
+    - retrying click action
     - waiting 20ms
     2 × waiting for element to be visible, enabled and stable
       - element is visible, enabled and stable
@@ -108,6 +80,7 @@ Node.js v22.23.2
       - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
     - retrying click action
       - waiting 500ms
+    - waiting for element to be visible, enabled and stable
 
 FAIL: mobile Compare nav responds without blocked click locator.click: Timeout 5000ms exceeded.
 Call log:
@@ -180,7 +153,6 @@ Call log:
       - element is not visible
     - retrying click action
       - waiting 500ms
-    - waiting for element to be visible, enabled and stable
 
 FAIL: mobile Alerts responds without blocked click locator.click: Timeout 5000ms exceeded.
 Call log:
@@ -199,7 +171,6 @@ Call log:
       - element is not visible
     - retrying click action
       - waiting 500ms
-    - waiting for element to be visible, enabled and stable
 
 FAIL: mobile Feedback responds without blocked click locator.click: Timeout 5000ms exceeded.
 Call log:
@@ -218,7 +189,6 @@ Call log:
       - element is not visible
     - retrying click action
       - waiting 500ms
-    - waiting for element to be visible, enabled and stable
 
 FAIL: mobile feature shortcuts are interactive locator.click: Timeout 5000ms exceeded.
 Call log:
@@ -274,7 +244,6 @@ Call log:
       - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
   - retrying click action
     - waiting 500ms
-    - waiting for element to be visible, enabled and stable
 
 FAIL: mobile bottom-card buttons respond locator.click: Timeout 5000ms exceeded.
 Call log:
