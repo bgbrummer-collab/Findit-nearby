@@ -1,5 +1,5 @@
 FindIt production audit
-Commit: 218df4243c9c22d7e4703ad9655de3ed2c388703
+Commit: 4f8f060c20d2248e8df23733decd8a9650fd31e8
 Release smoke: PASS (exit 0)
 Dashboard readiness: FAIL (exit 1)
 Every dashboard function: FAIL (exit 1)
@@ -33,11 +33,11 @@ node:internal/modules/run_main:123
     triggerUncaughtException(
     ^
 
-page.waitForSelector: Timeout 10000ms exceeded.
+page.waitForSelector: Timeout 12000ms exceeded.
 Call log:
-  - waiting for locator('#fxPhotoDirect') to be visible
+  - waiting for locator('label[data-native-upload="1"]') to be visible
 
-    at run (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-readiness.mjs:11:143)
+    at run (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-readiness.mjs:11:159)
     at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-readiness.mjs:19:1 {
   name: 'TimeoutError'
 }
@@ -51,254 +51,59 @@ node:internal/modules/run_main:123
 
 page.waitForSelector: Timeout 12000ms exceeded.
 Call log:
-  - waiting for locator('#fxPhotoDirect') to be visible
+  - waiting for locator('label[data-native-upload="1"]') to be visible
 
-    at setup (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:11:142)
+    at setup (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:11:158)
     at async audit (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:13:88)
-    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:28:1 {
+    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:27:1 {
   name: 'TimeoutError'
 }
 
 Node.js v22.23.2
 
 --- current dashboard real-user audit ---
-Call log:
-  - waiting for locator('#finditExactShell [data-fxnav="deals"]').first()
-    - locator resolved to <button data-fxnav="deals">…</button>
-  - attempting click action
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
-  - retrying click action
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <button type="button" aria-label="Close" class="fx-stable-close">×</button> from <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> subtree intercepts pointer events
-  - retrying click action
-    - waiting 20ms
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <div class="fx-stable-card">…</div> from <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> subtree intercepts pointer events
-  2 × retrying click action
-      - waiting 100ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
-  2 × retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <button type="button" aria-label="Close" class="fx-stable-close">×</button> from <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> subtree intercepts pointer events
-    - retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div class="fx-stable-card">…</div> from <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> subtree intercepts pointer events
-    - retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
-    - retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
-  - retrying click action
-    - waiting 500ms
-    - waiting for element to be visible, enabled and stable
-
-FAIL: mobile History responds without blocked click locator.click: Timeout 5000ms exceeded.
-Call log:
-  - waiting for locator('#finditExactShell [data-fxnav="history"]').first()
-    - locator resolved to <button data-fxnav="history">…</button>
-  - attempting click action
-    2 × waiting for element to be visible, enabled and stable
-      - element is not visible
-    - retrying click action
-    - waiting 20ms
-    2 × waiting for element to be visible, enabled and stable
-      - element is not visible
-    - retrying click action
-      - waiting 100ms
-    9 × waiting for element to be visible, enabled and stable
-      - element is not visible
-    - retrying click action
-      - waiting 500ms
-    - waiting for element to be visible, enabled and stable
-
-FAIL: mobile Alerts responds without blocked click locator.click: Timeout 5000ms exceeded.
-Call log:
-  - waiting for locator('#finditExactShell [data-fxnav="alerts"]').first()
-    - locator resolved to <button data-fxnav="alerts">…</button>
-  - attempting click action
-    2 × waiting for element to be visible, enabled and stable
-      - element is not visible
-    - retrying click action
-    - waiting 20ms
-    2 × waiting for element to be visible, enabled and stable
-      - element is not visible
-    - retrying click action
-      - waiting 100ms
-    9 × waiting for element to be visible, enabled and stable
-      - element is not visible
-    - retrying click action
-      - waiting 500ms
-
-FAIL: mobile Feedback responds without blocked click locator.click: Timeout 5000ms exceeded.
-Call log:
-  - waiting for locator('#finditExactShell [data-fxnav="feedback"]').first()
-    - locator resolved to <button data-fxnav="feedback">…</button>
-  - attempting click action
-    2 × waiting for element to be visible, enabled and stable
-      - element is not visible
-    - retrying click action
-    - waiting 20ms
-    2 × waiting for element to be visible, enabled and stable
-      - element is not visible
-    - retrying click action
-      - waiting 100ms
-    9 × waiting for element to be visible, enabled and stable
-      - element is not visible
-    - retrying click action
-      - waiting 500ms
-
-FAIL: mobile feature shortcuts are interactive locator.click: Timeout 5000ms exceeded.
-Call log:
-  - waiting for locator('.fx-feature-row article').first()
-    - locator resolved to <article tabindex="0" role="button" data-fx="product" data-stable-action="product">…</article>
-  - attempting click action
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <div>…</div> from <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> subtree intercepts pointer events
-  - retrying click action
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <div class="fx-stable-row">…</div> from <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> subtree intercepts pointer events
-  - retrying click action
-    - waiting 20ms
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <b>footwear</b> from <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> subtree intercepts pointer events
-  2 × retrying click action
-      - waiting 100ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
-  2 × retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div class="fx-stable-row">…</div> from <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> subtree intercepts pointer events
-    - retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <b>footwear</b> from <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> subtree intercepts pointer events
-    - retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
-    - retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
-  - retrying click action
-    - waiting 500ms
-
-FAIL: mobile bottom-card buttons respond locator.click: Timeout 5000ms exceeded.
-Call log:
-  - waiting for locator('.fx-bottom-row button:visible').first()
-    - locator resolved to <button data-fx="deals">View Deals →</button>
-  - attempting click action
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <div class="fx-stable-row">…</div> from <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> subtree intercepts pointer events
-  - retrying click action
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
-  - retrying click action
-    - waiting 20ms
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <b>footwear</b> from <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> subtree intercepts pointer events
-  2 × retrying click action
-      - waiting 100ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
-  2 × retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
-    - retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <b>footwear</b> from <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> subtree intercepts pointer events
-    - retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
-    - retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
-  - retrying click action
-    - waiting 500ms
-
+PASS: desktop shell is visible
+PASS: desktop active Premium overlay cannot block dashboard
+PASS: desktop old journey stays hidden
+PASS: desktop unique element ids
+PASS: desktop product result mirrors into dashboard
+PASS: desktop nearby store list has no duplicate retailer rows
+PASS: desktop Product Info opens
+PASS: desktop Compare Prices opens
+PASS: desktop Settings responds
+FAIL: desktop Ask FindIt opens assistant did not open
+PASS: desktop Saved navigation stores current product
+PASS: desktop Home responds without blocked click
+PASS: desktop Search responds without blocked click
+PASS: desktop Nearby responds without blocked click
+PASS: desktop Compare nav responds without blocked click
+PASS: desktop Deals responds without blocked click
+PASS: desktop History responds without blocked click
+PASS: desktop Alerts responds without blocked click
+PASS: desktop Feedback responds without blocked click
+PASS: desktop feature shortcuts are interactive
+PASS: desktop bottom-card buttons respond
+PASS: desktop no uncaught JS errors
+PASS: mobile shell is visible
+PASS: mobile active Premium overlay cannot block dashboard
+PASS: mobile old journey stays hidden
+PASS: mobile unique element ids
+PASS: mobile product result mirrors into dashboard
+PASS: mobile nearby store list has no duplicate retailer rows
+PASS: mobile Product Info opens
+PASS: mobile Compare Prices opens
+PASS: mobile Settings responds
+FAIL: mobile Ask FindIt opens assistant did not open
+PASS: mobile Saved navigation stores current product
+PASS: mobile Home responds without blocked click
+PASS: mobile Search responds without blocked click
+PASS: mobile Nearby responds without blocked click
+PASS: mobile Compare nav responds without blocked click
+PASS: mobile Deals responds without blocked click
+PASS: mobile History responds without blocked click
+PASS: mobile Alerts responds without blocked click
+PASS: mobile Feedback responds without blocked click
+PASS: mobile feature shortcuts are interactive
+PASS: mobile bottom-card buttons respond
 PASS: mobile no uncaught JS errors
-CURRENT_DASHBOARD_REAL_USER_RESULT 14 PASS / 32 FAIL
+CURRENT_DASHBOARD_REAL_USER_RESULT 42 PASS / 2 FAIL
