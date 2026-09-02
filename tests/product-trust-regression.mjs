@@ -1,4 +1,5 @@
 import { chromium } from 'playwright';
+import { __finditProductTrust } from '../api/product-intelligence.js';
 
 const URL=process.env.FINDIT_URL||'http://127.0.0.1:4173/';
 const browser=await chromium.launch({headless:true});
@@ -7,17 +8,43 @@ const pass=m=>console.log('[PASS]',m);
 const fail=(m,e='')=>{failures++;console.error('[FAIL]',m,e||'')};
 async function check(name,fn){try{await fn();pass(name)}catch(e){fail(name,e?.message||e)}}
 
-const page=await browser.newPage({viewport:{width:390,height:844}});
-await page.goto(URL,{waitUntil:'domcontentloaded',timeout:30000});
-await page.waitForSelector('#finditExactShell',{state:'visible',timeout:30000});
-await page.waitForFunction(()=>window.finditTrustAudit?.filterOffers,{timeout:10000});
-
 const nike={name:"Nike Air Force 1 '07 Low",brand:'Nike',model:"Air Force 1 '07 Low",object:'sneaker',category:'footwear',retailCategory:'footwear',searchQuery:"Nike Air Force 1 '07 Low white"};
 const wrong={retailer:{name:'Ubuy'},product_name:"Nike Women's Modern Classic Basketball Shoe",product_url:'https://www.ubuy.co.za/product/WRONG/nike-womens-modern-classic-basketball-shoe',price:27240,currency:'ZAR',availability:'in_stock',verified:true,sourcePageVerified:true,matchScore:.99};
 const exactLow={retailer:{name:'Ubuy'},product_name:"Nike Men's Air Force 1 '07 Low White",product_url:'https://www.ubuy.co.za/product/RIGHT/nike-air-force-1-07-low-white',price:4684,currency:'ZAR',availability:'in_stock',verified:true,sourcePageVerified:true,matchScore:.96};
 const exactStrong={retailer:{name:'Ubuy'},product_name:"Nike Air Force 1 '07 Low White",product_url:'https://www.ubuy.co.za/product/BEST/nike-air-force-1-07-low-white',price:4599,currency:'ZAR',availability:'in_stock',verified:true,sourcePageVerified:true,matchScore:.99};
 const blackWhite={retailer:{name:'Ubuy'},product_name:"Nike Air Force 1 Low '07 Black White Pebbled Leather",product_url:'https://www.ubuy.co.za/product/BLACKWHITE/nike-air-force-1-07-black-white',price:3509,currency:'ZAR',availability:'in_stock',verified:true,sourcePageVerified:true,matchScore:.99};
 const brown={retailer:{name:'Ubuy'},product_name:"Nike Air Force 1 Low '07 Brown",product_url:'https://www.ubuy.co.za/product/BROWN/nike-air-force-1-low-07-brown',price:4459,currency:'ZAR',availability:'in_stock',verified:true,sourcePageVerified:true,matchScore:.99};
+
+await check('backend keeps the more specific search identity',async()=>{
+  const q=__finditProductTrust.queryFrom(nike);
+  if(!/white/i.test(q))throw Error(`specific qualifier lost: ${q}`);
+});
+
+await check('backend rejects conflicting Air Force 1 variants',async()=>{
+  const q=__finditProductTrust.queryFrom(nike);
+  const good=__finditProductTrust.identityScore(exactStrong.product_name,exactStrong.product_url,'Nike Air Force 1 white leather',q,nike);
+  const badBlack=__finditProductTrust.identityScore(blackWhite.product_name,blackWhite.product_url,'Nike Air Force 1 black white leather',q,nike);
+  const badBrown=__finditProductTrust.identityScore(brown.product_name,brown.product_url,'Nike Air Force 1 brown leather',q,nike);
+  if(good<.68)throw Error(`exact white result rejected: ${good}`);
+  if(badBlack!==0||badBrown!==0)throw Error(`conflicting variants accepted: ${badBlack}/${badBrown}`);
+});
+
+await check('backend collapses duplicate retailer variants',async()=>{
+  const rows=__finditProductTrust.dedupe([blackWhite,brown,exactLow,exactStrong]);
+  if(rows.length!==1)throw Error(`expected one Ubuy result, got ${rows.length}`);
+  if(!/white/i.test(rows[0].product_name))throw Error(`wrong Ubuy result kept: ${rows[0].product_name}`);
+});
+
+await check('backend research cleaner rejects retailer policy junk',async()=>{
+  const cleaned=__finditProductTrust.cleanWhat("UBUY WARRANTY PLATINUM PLAN TERMS & CONDITIONS. Select Years 1 Year 2 Years. When ordering from Ubuy, the recipient is the importer of record and must pay shipping and custom charges. Nike Air Force 1 '07 Low uses a leather upper with cushioned construction for everyday wear.","Nike Air Force 1 '07 Low White");
+  if(/warranty|importer of record|shipping|custom charges|select years/i.test(cleaned))throw Error(cleaned);
+  if(!/air force 1/i.test(cleaned))throw Error(`useful product sentence lost: ${cleaned}`);
+});
+
+const page=await browser.newPage({viewport:{width:390,height:844}});
+await page.goto(URL,{waitUntil:'domcontentloaded',timeout:30000});
+await page.waitForSelector('#finditExactShell',{state:'visible',timeout:30000});
+await page.waitForFunction(()=>window.finditTrustAudit?.filterOffers,{timeout:10000});
 
 await check('wrong Nike variant is rejected',async()=>{
   const rows=await page.evaluate(({offers,i})=>window.finditTrustAudit.filterOffers(offers,i),{offers:[wrong,exactLow],i:nike});
