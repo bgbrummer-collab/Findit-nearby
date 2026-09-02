@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/final-production-audit.yml'
+      - '.github/workflows/production-smoke.yml'
       - 'index.html'
       - 'style.css'
       - 'script.js'
