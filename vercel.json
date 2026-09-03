@@ -1,7 +1,7 @@
 {
   "routes": [
     { "src": "/api/product-intelligence", "dest": "/api/product-intelligence-v2" },
-    { "src": "/api/product-insights", "dest": "/api/product-intelligence?action=research" },
+    { "src": "/api/fx", "dest": "/api/product-insights?action=fx" },
     { "handle": "filesystem" },
     { "src": "/api/health", "dest": "/api/health-router?action=health" },
     { "src": "/api/feedback-health", "dest": "/api/health-router?action=feedback" },
