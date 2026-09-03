@@ -102,20 +102,32 @@ function queryVariants(i){
 async function discoverPages(i,offers=[]){
  const candidates=[],seen=new Set(),add=u=>{const x=unwrap(u);if(x&&!seen.has(x)&&likelyProductUrl(x)){seen.add(x);candidates.push(x)}};
  for(const o of offers)add(o.url);
- const variants=queryVariants(i),searchUrls=[];
- for(const v of variants.slice(0,3)){
-  searchUrls.push(...directSearches(i,v));
-  searchUrls.push(`https://www.google.com/search?num=12&hl=en&q=${encodeURIComponent(v)}`);
-  searchUrls.push(`https://www.bing.com/search?q=${encodeURIComponent(v)}`);
-  searchUrls.push(`https://html.duckduckgo.com/html/?q=${encodeURIComponent(v)}`);
+ const variants=queryVariants(i),primary=[];
+ for(const v of variants.slice(0,2)){
+  primary.push(...directSearches(i,v));
+  primary.push(`https://www.google.com/search?num=10&hl=en&q=${encodeURIComponent(v)}`);
+  primary.push(`https://www.bing.com/search?q=${encodeURIComponent(v)}`);
+  primary.push(`https://html.duckduckgo.com/html/?q=${encodeURIComponent(v)}`);
  }
- for(const site of searchSites(i).slice(0,8)){
-  const sq=`site:${site} "${clean([i.brand,i.model||i.name].filter(Boolean).join(' '),300)}"`;
-  searchUrls.push(`https://www.google.com/search?num=10&hl=en&q=${encodeURIComponent(sq)}`);
-  searchUrls.push(`https://www.bing.com/search?q=${encodeURIComponent(sq)}`);
+ const collect=async urls=>{
+  const batch=[...new Set(urls)].slice(0,16);
+  const docs=await Promise.allSettled(batch.map(s=>searchDoc(s).then(d=>({s,d}))));
+  for(const r of docs){if(r.status!=='fulfilled'||!r.value.d)continue;const {s,d}=r.value;for(const u of extractLinks(d.text,d.url||s)){add(u);if(candidates.length>=24)break}if(candidates.length>=24)break}
+ };
+ await collect(primary);
+ if(candidates.length<4){
+  const targeted=[];
+  const core=clean([i.brand,i.model||i.name].filter(Boolean).join(' '),300);
+  for(const site of searchSites(i).slice(0,6)){
+   const sq=`site:${site} "${core}"`;
+   targeted.push(`https://www.google.com/search?num=10&hl=en&q=${encodeURIComponent(sq)}`);
+   targeted.push(`https://www.bing.com/search?q=${encodeURIComponent(sq)}`);
+  }
+  await collect(targeted);
  }
- for(const s of [...new Set(searchUrls)]){if(candidates.length>=36)break;const d=await searchDoc(s);if(!d)continue;for(const u of extractLinks(d.text,d.url||s)){add(u);if(candidates.length>=36)break}}
- const pages=[];for(const u of candidates.slice(0,36)){const p=await productPage(u,i);if(!p)continue;if(pages.some(x=>x.url===p.url))continue;pages.push(p);if(pages.length>=5)break}
+ const pageResults=await Promise.allSettled(candidates.slice(0,14).map(u=>productPage(u,i)));
+ const pages=[];
+ for(const r of pageResults){if(r.status!=='fulfilled'||!r.value)continue;const p=r.value;if(pages.some(x=>x.url===p.url))continue;pages.push(p);if(pages.length>=5)break}
  return pages
 }
 
