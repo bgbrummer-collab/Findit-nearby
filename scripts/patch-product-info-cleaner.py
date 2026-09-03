@@ -10,7 +10,7 @@ if 'const DISPLAY_JUNK =' not in s:
         raise SystemExit('DETAIL marker missing')
     extra = r'''
 const DISPLAY_JUNK = /accessible version|data-testid|picturehighquality|\bsrc\s*=|\bhref\s*=|\balt\s*=|\bclass\s*=|\bstyle\s*=|javascript:|webpack|aria-|\bhttps?:\/\/|\\[nrt]|<[^>]+>/i;
-const NEGATIVE_FACT = /static noise|background noise|breaks?|broke|broken|stability issues?|unstable|issue|problem|drawback|limitation|difficult|tricky|struggle|poor|weak|fragile|hiss|crackle|distortion|latency|may not|cannot|doesn.t|does not|requires?|not included|sold separately|only compatible|heavy|bulky|short battery|limited|warning|not suitable|disappoint|inconsistent/i;
+const NEGATIVE_FACT = /static noise|background noise|breaks?|broke|broken|stability issues?|unstable|\bissues?\b|\bproblems?\b|drawback|limitation|difficult|tricky|struggle|\bpoor\b|\bweak\b|fragile|hiss|crackle|distortion|latency|may not|cannot|doesn.t|does not|requires?|not included|sold separately|only compatible|\bheavy\b|bulky|short battery|\blimited\b|warning|not suitable|disappoint|inconsistent/i;
 const POSITIVE_FACT = /plug.?and.?play|compatible|clear|cardioid|noise cancel|monitor|gain|stand|adapter|durab|soft|strong|absorb|moistur|detang|cushion|battery|wireless|bluetooth|usb|easy|support|adjustable|portable|reliable|quality|stream|record|included|includes?|fast|comfort|protect|capacity|variable speed/i;
 const PURPOSE_FACT = /\b(is|are|designed|made|used|helps?|provides?|formulated|records?|recording|streaming|connects?|supports?|for voice|for gaming|for calls?|for podcast|for household|for bathroom|for school|for drilling|for listening)\b/i;
 '''
