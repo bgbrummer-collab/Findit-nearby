@@ -58,8 +58,10 @@ await check('Compare Prices can actively verify and render a price',async()=>{
 });
 
 await check('Live Stock opens the stock tool and renders verified stock',async()=>{
-  const live=page.locator('#finditExactShell article').filter({hasText:'Live Stock'}).first();
+  const live=page.locator('#finditExactShell [data-fx="stock"]:visible').first();
+  await live.waitFor({state:'visible',timeout:5000});
   await live.click();
+  await page.waitForSelector('#fxRefreshStock',{state:'visible',timeout:5000});
   await page.click('#fxRefreshStock');
   await page.waitForFunction(()=>document.querySelector('#fxStockRows')?.textContent?.includes('Test Retailer'),{timeout:5000});
   const text=await page.locator('#fxStableBody').innerText();
