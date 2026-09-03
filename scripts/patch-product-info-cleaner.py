@@ -53,8 +53,7 @@ function bestPurpose(i, pages) {
 function sanitizeAnswer(i, answer, pages) {
   const out = { ...answer };
   let what = cleanVisible(out.whatItDoes, i);
-  const objectMention = what && identityParts(i).objects.some(t => norm(what).includes(t));
-  if (!what || NEGATIVE_FACT.test(what) || (!PURPOSE_FACT.test(what) && !objectMention)) what = bestPurpose(i, pages);
+  if (!what || NEGATIVE_FACT.test(what)) what = bestPurpose(i, pages);
   const pros = [], cons = [];
   const addUnique = (arr, x) => { if (x && !arr.some(y => norm(y) === norm(x))) arr.push(x); };
   for (const raw of Array.isArray(out.pros) ? out.pros : []) {
