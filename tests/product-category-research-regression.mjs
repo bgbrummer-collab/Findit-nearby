@@ -38,5 +38,24 @@ for(const c of cases){
  console.log(`[PASS] ${c.label} exact-product research`);
 }
 
+// A search page may contain the user's query at the top while the actual results are unrelated.
+// The backend must not treat the whole noisy search page as exact-product evidence.
+current=null;
+delete process.env.GEMINI_API_KEY;
+const noise=`Title: Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner - Search\n${'navigation '.repeat(60)}\n[MARC Standards](https://www.loc.gov/marc/) Bibliographic data formats and cataloguing standards for libraries.\n${'other '.repeat(30)}\n[Marc's Stores](https://www.marcs.com/store/) Fresh savings, pharmacy and grocery store information.\n${'other '.repeat(30)}\n[Marcus](https://www.marcus.com/) Banking accounts, savings and financial services.`;
+global.fetch=async(url)=>{
+ const u=String(url);
+ if(u.startsWith('https://r.jina.ai/'))return new Response(noise,{status:200,headers:{'content-type':'text/plain'}});
+ if(/google\.com\/search|bing\.com\/search|duckduckgo\.com\/html/i.test(u))return new Response(noise,{status:200,headers:{'content-type':'text/plain'}});
+ return new Response('Not found',{status:404});
+};
+let noiseStatus=200,noisePayload=null;
+const noiseReq={method:'POST',query:{},body:{identification:{brand:'Marc Anthony',model:'Strictly Curls 3X Moisture Triple Blend Conditioner',name:'Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml',object:'conditioner',retailCategory:'beauty',searchQuery:'Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml'},offers:[]}};
+const noiseRes={setHeader(){},status(n){noiseStatus=n;return this},json(v){noisePayload=v;return this}};
+await handler(noiseReq,noiseRes);
+if(noiseStatus!==200)throw new Error(`noise: status ${noiseStatus}`);
+if(noisePayload?.researched)throw new Error(`noise search page was incorrectly accepted: ${JSON.stringify(noisePayload)}`);
+console.log('[PASS] unrelated search-page noise is rejected');
+
 global.fetch=oldFetch;if(oldKey===undefined)delete process.env.GEMINI_API_KEY;else process.env.GEMINI_API_KEY=oldKey;
 console.log('PRODUCT_CATEGORY_RESEARCH_REGRESSION_PASS');
