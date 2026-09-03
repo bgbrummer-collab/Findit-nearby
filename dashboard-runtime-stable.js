@@ -44,4 +44,23 @@
     e.stopImmediatePropagation();
     window.finditDashboardAction?.('stock');
   },true);
+
+  window.addEventListener('click',e=>{
+    const el=e.target?.closest?.('#finditExactShell [data-fx="product"]');
+    if(!el)return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    const run=()=>{
+      if(typeof window.finditDashboardAction==='function'){
+        window.finditDashboardAction('product');
+        return true;
+      }
+      return false;
+    };
+    if(run())return;
+    let tries=0;
+    const timer=setInterval(()=>{
+      if(run()||++tries>20)clearInterval(timer);
+    },50);
+  },true);
 })();
