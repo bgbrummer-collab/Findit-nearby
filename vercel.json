@@ -1,6 +1,5 @@
 {
   "routes": [
-    { "src": "/dashboard-runtime-stable.js", "dest": "/dashboard-runtime-v8.js" },
     { "src": "/api/product-intelligence", "dest": "/api/product-intelligence-v2" },
     { "src": "/api/product-insights", "dest": "/api/product-intelligence?action=research" },
     { "handle": "filesystem" },
