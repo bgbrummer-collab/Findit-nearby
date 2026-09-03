@@ -1,0 +1,20 @@
+import handler from '../api/product-insights.js';
+const oldFetch=global.fetch,oldKey=process.env.GEMINI_API_KEY;
+process.env.GEMINI_API_KEY='test-key';
+global.fetch=async(url,opts={})=>{
+ if(String(url).includes('generativelanguage.googleapis.com'))return new Response(JSON.stringify({candidates:[{content:{parts:[{text:JSON.stringify({researched:true,whatItDoes:'Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner is designed to moisturize, detangle and smooth curly hair while helping reduce frizz. Its formula uses marula oil, coconut and shea butter for added moisture and manageability.',pros:['Helps restore moisture and makes detangling easier for curls.','Helps reduce frizz while adding shine and manageability.'],cons:['Contains fragrance, which can be a consideration for fragrance-sensitive users.'],bestFor:'Dry or frizz-prone curly hair that needs extra moisture.',standOut:'Uses a marula oil, coconut and shea butter moisture blend.'})}]},groundingMetadata:{groundingChunks:[{web:{title:'Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner',uri:'https://marcanthony.com/products/strictly-curls-conditioner'}},{web:{title:'Clicks Marc Anthony 3X Moisture Conditioner',uri:'https://clicks.co.za/marc-anthony/p/335689'}}]}}]}),{status:200,headers:{'content-type':'application/json'}});
+ throw new Error(`unexpected fetch ${url}`);
+};
+let status=200,payload=null;
+const req={method:'POST',body:{identification:{brand:'Marc Anthony',model:'Strictly Curls 3X Moisture Triple Blend Conditioner',name:'Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml',object:'conditioner',retailCategory:'beauty',searchQuery:'Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml'},offers:[]}};
+const res={setHeader(){},status(n){status=n;return this},json(v){payload=v;return this}};
+await handler(req,res);
+global.fetch=oldFetch;if(oldKey===undefined)delete process.env.GEMINI_API_KEY;else process.env.GEMINI_API_KEY=oldKey;
+if(status!==200)throw new Error(`status ${status}`);
+if(!payload?.researched)throw new Error('research not produced');
+if(!/moisturize|detangle|frizz/i.test(payload.whatItDoes||''))throw new Error(`bad whatItDoes ${payload.whatItDoes}`);
+if((payload.pros||[]).length<2)throw new Error(`pros missing ${JSON.stringify(payload.pros)}`);
+if(!(payload.cons||[]).some(x=>/fragrance/i.test(x)))throw new Error(`cons missing ${JSON.stringify(payload.cons)}`);
+if(payload.researchMethod!=='Google Search grounded AI research')throw new Error(`wrong method ${payload.researchMethod}`);
+if((payload.sources||[]).length<2)throw new Error(`grounding sources missing ${JSON.stringify(payload.sources)}`);
+console.log('PRODUCT_WEB_RESEARCH_REGRESSION_PASS');
