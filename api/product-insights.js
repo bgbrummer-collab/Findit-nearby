@@ -437,7 +437,7 @@ function cleanVisible(v, i) {
     .replace(/[\u{1F000}-\u{1FAFF}]/gu, ' '));
   if (!x) return '';
   const n = norm(x), words = n.split(' ').filter(Boolean);
-  if ((x.match(/,/g) || []).length >= 5 && !PURPOSE_FACT.test(x)) return '';
+  if ((x.match(/,/g) || []).length >= 5) return '';
   if (words.length >= 16 && !/[.!?]$/.test(x) && !PURPOSE_FACT.test(x)) return '';
   const id = norm(exactName(i));
   if (id && (n === id || (n.startsWith(id) && words.length < id.split(' ').length + 5))) return '';
@@ -464,13 +464,16 @@ function bestPurpose(i, pages) {
     }
   }
   candidates.sort((a, b) => sentenceScore(b, i) - sentenceScore(a, i));
-  return candidates[0] || '';
+  const parts = identityParts(i);
+  const branded = candidates.filter(x => !parts.brand || brandMatchScore(norm(x), parts) >= 0);
+  return branded[0] || candidates[0] || '';
 }
 
 function sanitizeAnswer(i, answer, pages) {
   const out = { ...answer };
   let what = cleanVisible(out.whatItDoes, i);
-  if (!what || isNegativeEvidence(what)) what = bestPurpose(i, pages);
+  const fallbackNeedsBrand = out.researchMethod === 'Exact-product web evidence' && what && identityParts(i).brand && brandMatchScore(norm(what), identityParts(i)) < 0;
+  if (!what || isNegativeEvidence(what) || fallbackNeedsBrand) what = bestPurpose(i, pages);
   const pros = [], cons = [];
   const addUnique = (arr, x) => { if (x && !arr.some(y => norm(y) === norm(x))) arr.push(x); };
   for (const raw of Array.isArray(out.pros) ? out.pros : []) {
