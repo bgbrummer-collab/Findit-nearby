@@ -14,5 +14,5 @@ async function product(){const i=id();openModal(`<h2 class="fx-stable-title">Pro
 pat=re.compile(r'function product\(\)\{.*?\}\nfunction priceRow',re.S)
 if not pat.search(s):
     raise SystemExit('product() block not found')
-s=pat.sub(new+'function priceRow',s,count=1)
+s=pat.sub(lambda _: new+'function priceRow',s,count=1)
 p.write_text(s)
