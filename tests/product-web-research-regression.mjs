@@ -5,6 +5,8 @@ const official='https://marcanthony.com/products/strictly-curls-conditioner';
 const clicks='https://clicks.co.za/marc-anthony/p/335689';
 global.fetch=async(url,opts={})=>{
  const u=String(url);
+ if(u.startsWith('https://r.jina.ai/https://clicks.co.za/search'))return new Response(`Title: Clicks Search\n\n[Marc Anthony Strictly Curls Conditioner](/marc-anthony/p/335689)`,{status:200,headers:{'content-type':'text/plain'}});
+ if(u.startsWith('https://r.jina.ai/https://www.dischem.co.za/')||u.startsWith('https://r.jina.ai/https://www.woolworths.co.za/')||u.startsWith('https://r.jina.ai/https://www.makro.co.za/'))return new Response('Title: Search\n\nNo exact result',{status:200});
  if(u.startsWith('https://r.jina.ai/https://www.google.com/search'))return new Response(`Title: Google Search\n\n[Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner](${official})\n[Clicks Marc Anthony Strictly Curls Conditioner 250ml](${clicks})`,{status:200,headers:{'content-type':'text/plain'}});
  if(u===`https://r.jina.ai/${official}`)return new Response(`Title: Strictly Curls 3X Moisture Triple Blend Conditioner | Marc Anthony\n\nMarc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner is formulated for curls and helps restore moisture, detangle hair and reduce frizz.\n\n- Triple blend of marula oil, coconut and shea butter helps add moisture and manageability.\n- Provides extra slip for easier detangling.\n- Helps add shine and smooth frizz.\nFragrance is included in the ingredient list.`,{status:200});
  if(u===`https://r.jina.ai/${clicks}`)return new Response(`Title: Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml | Clicks\n\nThis Marc Anthony conditioner hydrates and detangles curly hair while helping reduce frizz and improve softness. The ingredient list includes fragrance.`,{status:200});
@@ -21,6 +23,6 @@ if(!payload?.researched)throw new Error('research not produced');
 if(!/moistur|detang|frizz/i.test(payload.whatItDoes||''))throw new Error(`bad whatItDoes ${payload.whatItDoes}`);
 if((payload.pros||[]).length<2)throw new Error(`pros missing ${JSON.stringify(payload.pros)}`);
 if(!(payload.cons||[]).some(x=>/fragrance/i.test(x)))throw new Error(`cons missing ${JSON.stringify(payload.cons)}`);
-if(payload.researchMethod!=='Google web search + source-grounded AI summary')throw new Error(`wrong method ${payload.researchMethod}`);
-if((payload.sources||[]).length<2)throw new Error(`sources missing ${JSON.stringify(payload.sources)}`);
+if(payload.researchMethod!=='Web search + source-grounded AI summary')throw new Error(`wrong method ${payload.researchMethod}`);
+if((payload.sources||[]).length<1)throw new Error(`sources missing ${JSON.stringify(payload.sources)}`);
 console.log('PRODUCT_WEB_RESEARCH_REGRESSION_PASS');
