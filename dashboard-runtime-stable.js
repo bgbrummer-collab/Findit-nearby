@@ -1,30 +1,43 @@
-/* FindIt dashboard action runtime — direct, resilient controls. */
+/* Compatibility loader: maintained controls live in dashboard-runtime-v8.js. */
 (()=>{
-'use strict';
-const FLAG='__finditDashboardRuntimeV7';
-if(window[FLAG])return;window[FLAG]=true;
-const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
-const esc=(v='')=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const st=()=>{try{return window.finditState||window.state||{}}catch{return{}}};
-const id=()=>st()?.result?.identification||{};
-const stores=()=>Array.isArray(st()?.stores)?st().stores:[];
-const offers=()=>{const a=[];if(Array.isArray(st()?.offers))a.push(...st().offers);if(Array.isArray(window.productIntelligence?.offers))a.push(...window.productIntelligence.offers);return a};
-const verifiedOffers=()=>{const seen=new Set();return offers().filter(o=>{if(!((o?.verified===true||o?.sourcePageVerified===true)&&Number.isFinite(Number(o.price))))return false;const k=[o?.retailer?.name||o?.retailer,o?.product_url||o?.url,o.price].join('|');if(seen.has(k))return false;seen.add(k);return true}).sort((a,b)=>Number(a.price)-Number(b.price))};
-const money=(n,c='ZAR')=>{try{return new Intl.NumberFormat('en-ZA',{style:'currency',currency:c||'ZAR'}).format(Number(n))}catch{return`${c||'ZAR'} ${Number(n).toFixed(2)}`}};
-function ensureModal(){let m=$('#fxStableModal');if(m)return m;m=document.createElement('div');m.id='fxStableModal';m.className='fx-stable-modal hidden';m.setAttribute('aria-hidden','true');m.innerHTML='<div class="fx-stable-card"><button type="button" class="fx-stable-close" aria-label="Close">×</button><div id="fxStableBody"></div></div>';document.body.appendChild(m);const s=document.createElement('style');s.id='fxStableStyleV7';s.textContent='.fx-stable-modal{position:fixed;inset:0;z-index:2147483647;background:#020711dc;display:grid;place-items:center;padding:18px}.fx-stable-modal.hidden{display:none!important}.fx-stable-card{position:relative;width:min(820px,calc(100vw - 28px));max-height:88vh;overflow:auto;background:#081425;color:#fff;border:1px solid #29445f;border-radius:18px;padding:24px;box-shadow:0 30px 90px #000a}.fx-stable-close{position:absolute;right:12px;top:8px;border:0;background:transparent;color:#fff;font-size:30px;cursor:pointer}.fx-stable-title{margin:0 40px 8px 0}.fx-stable-sub{color:#93a4ba}.fx-stable-list{display:grid;gap:10px}.fx-stable-row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:12px;border:1px solid #1f3853;border-radius:12px;background:#0a1829}.fx-stable-row small{display:block;color:#91a1b8;margin-top:4px}.fx-stable-row a,.fx-stable-row button,.fx-stable-actions button{border:1px solid #315274;background:#0d2036;color:#fff;border-radius:9px;padding:9px 11px;text-decoration:none;cursor:pointer}.fx-stable-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.fx-chat{display:grid;gap:10px}.fx-chat textarea,.fx-stable-card select{width:100%;box-sizing:border-box;background:#06111f;color:#fff;border:1px solid #29445f;border-radius:10px;padding:11px}.fx-chat textarea{min-height:110px}.fx-answer{white-space:pre-wrap;line-height:1.5}@media(max-width:620px){.fx-stable-row{grid-template-columns:1fr}}';document.head.appendChild(s);m.addEventListener('click',e=>{if(e.target===m||e.target.closest('.fx-stable-close'))closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});return m}
-function openModal(html){const m=ensureModal();$('#fxStableBody').innerHTML=html;m.classList.remove('hidden');m.setAttribute('aria-hidden','false')}
-function closeModal(){const m=$('#fxStableModal');if(!m)return;m.classList.add('hidden');m.setAttribute('aria-hidden','true')}
-function product(){const i=id();openModal(`<h2 class="fx-stable-title">Product Information</h2><p class="fx-stable-sub">Verified identification and researched product information.</p><div class="fx-stable-list">${[['Brand',i.brand],['Model',i.model],['Category',i.retailCategory||i.category],['Search identity',i.searchQuery||i.name||i.object]].filter(([,v])=>v).map(([k,v])=>`<div class="fx-stable-row"><div><small>${esc(k)}</small><b>${esc(v)}</b></div></div>`).join('')||'<div class="fx-stable-row"><div>No product selected yet.</div></div>'}</div><div id="fxStableResearch" class="fx-stable-row" style="margin-top:12px"><div>Loading researched product information…</div></div>`);const box=$('#fxStableResearch');if(!i.name&&!i.object){box.innerHTML='<div>Search for a product first.</div>';return}fetch('/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:i,offers:verifiedOffers().slice(0,5),name:i.name||i.object||'',brand:i.brand||'',model:i.model||'',category:i.retailCategory||i.category||'',searchQuery:i.searchQuery||''})}).then(r=>r.json()).then(d=>{if(!box)return;if(!d?.researched){box.innerHTML='<div><b>Research not available yet</b><small>FindIt will not invent product facts.</small></div>';return}box.innerHTML=`<div><b>What it does</b><small>${esc(d.whatItDoes||'')}</small><h4>Pros</h4><ul>${(d.pros||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul><h4>Cons / considerations</h4><ul>${(d.cons||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`}).catch(()=>{if(box)box.innerHTML='<div>Research service is temporarily unavailable.</div>'})}
-function compare(title='Compare Prices'){const on=verifiedOffers(),br=stores().filter(s=>s.branchPriceVerified===true&&Number.isFinite(Number(s.price))).sort((a,b)=>Number(a.price)-Number(b.price));openModal(`<h2 class="fx-stable-title">${esc(title)}</h2><p class="fx-stable-sub">Only verified prices are shown.</p><h3>Online</h3><div class="fx-stable-list">${on.length?on.slice(0,12).map(o=>`<div class="fx-stable-row"><div><b>${esc(o?.retailer?.name||o?.retailer||'Retailer')}</b><small>${esc(String(o.availability||'Verified listing').replace(/_/g,' '))}</small></div><div><b>${esc(money(o.price,o.currency||'ZAR'))}</b>${o.product_url||o.url?`<br><a target="_blank" rel="noopener" href="${esc(o.product_url||o.url)}">View deal</a>`:''}</div></div>`).join(''):'<div class="fx-stable-row"><div>No trustworthy online price has been verified yet.</div></div>'}</div><h3>In-store</h3><div class="fx-stable-list">${br.length?br.map(s=>`<div class="fx-stable-row"><div><b>${esc(s.name||'Store')}</b><small>${esc(s.address||'')}</small></div><b>${esc(money(s.price,s.currency||'ZAR'))}</b></div>`).join(''):'<div class="fx-stable-row"><div>No verified branch price is available yet.</div></div>'}</div>`)}
-function nearby(){closeModal();const sec=$('#fxNearbySection')||$('#nearbyPanel');if(sec){sec.scrollIntoView({behavior:'auto',block:'start'});sec.animate?.([{outline:'2px solid #6c63ff'},{outline:'2px solid transparent'}],{duration:700})}}
-function ask(){const i=id();openModal(`<h2 class="fx-stable-title">Ask FindIt</h2><p class="fx-stable-sub">Ask about the identified product, nearby retailers, prices or FindIt.</p><div class="fx-chat"><textarea id="fxAskQuestion" placeholder="Ask FindIt anything about this product…"></textarea><button id="fxAskSend">Ask FindIt</button><div id="fxAskAnswer" class="fx-answer"></div></div>`);$('#fxAskSend').onclick=async()=>{const q=$('#fxAskQuestion').value.trim(),out=$('#fxAskAnswer');if(!q)return;out.textContent='Thinking…';try{const r=await fetch('/api/assistant',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({message:q,context:{identification:i,stores:stores().slice(0,8),offers:verifiedOffers().slice(0,8)}})}),d=await r.json();out.textContent=d.answer||d.error||'No answer returned.'}catch{out.textContent='Ask FindIt is temporarily unavailable.'}}}
-function simple(title,copy){openModal(`<h2 class="fx-stable-title">${esc(title)}</h2><p class="fx-stable-sub">${esc(copy)}</p>`)}
-function settings(){const cur=Number(st()?.radius||localStorage.getItem('finditRadius')||10);openModal(`<h2 class="fx-stable-title">Nearby Filters</h2><p class="fx-stable-sub">Change the radius used for nearby retailer searches.</p><label>Search radius<select id="fxStableRadius"><option value="3">3 km</option><option value="5">5 km</option><option value="10">10 km</option><option value="15">15 km</option><option value="25">25 km</option></select></label><div class="fx-stable-actions"><button id="fxStableApplyRadius">Apply</button></div>`);const sel=$('#fxStableRadius');sel.value=String([3,5,10,15,25].includes(cur)?cur:10);$('#fxStableApplyRadius').onclick=()=>{const n=Number(sel.value);if(st())st().radius=n;localStorage.setItem('finditRadius',String(n));const old=$('#radiusSelect');if(old)old.value=String(n);closeModal();nearby()}}
-function premium(){closeModal();const b=$('#premiumButton')||$('#drawerPremium');if(b){b.click();return}simple('FindIt Premium','Premium controls are available from the Premium section.')}
-function search(){closeModal();const b=$('#search');if(b&&!b.disabled){b.click();return}const card=$('#finder')||$('.fx-search-card');card?.scrollIntoView({behavior:'auto',block:'center'})}
-function route(a){if(a==='product')product();else if(a==='compare')compare();else if(a==='deals')compare('Verified Deals');else if(a==='pricehistory')compare('Price History');else if(a==='nearby')nearby();else if(a==='map'||a==='settings')settings();else if(a==='location')nearby();else if(a==='assistant')ask();else if(a==='alerts')simple('Price & Stock Alerts','Alerts only use verified price or stock updates. FindIt will not invent changes.');else if(a==='premium')premium();else if(a==='search')search();else if(a==='saved')simple('Saved Items','Your saved Finds are available here.');else if(a==='history')simple('History','Your recent FindIt searches are available here.');else if(a==='feedback')simple('Feedback','Send feedback from the FindIt feedback section.')}
-window.finditDashboardAction=route;
-function capture(e){const el=e.target.closest?.('#finditExactShell [data-fx],#finditExactShell [data-fxnav]');if(!el)return;const a=el.dataset.fx||el.dataset.fxnav;if(!a||['upload','camera','home'].includes(a))return;e.preventDefault();e.stopImmediatePropagation();route(a)}
-document.addEventListener('click',capture,true);
-document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target?.matches?.('#finditExactShell article[data-fx]')){e.preventDefault();route(e.target.dataset.fx)}});
+  if(window.__finditDashboardV8Loader)return;
+  window.__finditDashboardV8Loader=true;
+  const s=document.createElement('script');
+  s.src='/dashboard-runtime-v8.js?v=20260903-tools5';
+  s.async=false;
+  document.head.appendChild(s);
+
+  const hasLiveStock=el=>/\bLive Stock\b/i.test(el?.textContent||'');
+
+  // Legacy dashboard layouts do not always render Live Stock with the same
+  // element type or data-fx value. Find the deepest label node and promote its
+  // nearest interactive/card container to the maintained stock action.
+  const wireLiveStock=()=>{
+    const shell=document.querySelector('#finditExactShell');
+    if(!shell)return;
+    const labels=[...shell.querySelectorAll('*')].filter(el=>{
+      if(!hasLiveStock(el))return false;
+      return ![...el.children].some(hasLiveStock);
+    });
+    labels.forEach(label=>{
+      const target=label.closest('[data-fx],button,[role="button"],article')||label.parentElement||label;
+      target.dataset.fx='stock';
+    });
+  };
+  wireLiveStock();
+  document.addEventListener('findit:dashboard-sync',wireLiveStock);
+  const observer=new MutationObserver(wireLiveStock);
+  observer.observe(document.documentElement,{childList:true,subtree:true});
+  setTimeout(wireLiveStock,100);
+  setTimeout(wireLiveStock,700);
+
+  // Catch the explicitly wired stock control at window capture before older
+  // document-level dashboard handlers can swallow the click.
+  window.addEventListener('click',e=>{
+    const el=e.target?.closest?.('#finditExactShell [data-fx="stock"]');
+    if(!el)return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    window.finditDashboardAction?.('stock');
+  },true);
 })();

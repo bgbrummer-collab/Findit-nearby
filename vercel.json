@@ -1,6 +1,7 @@
 {
   "routes": [
-    { "src": "/dashboard-runtime-stable.js", "dest": "/api/assistant?action=dashboard-runtime" },
+    { "src": "/api/product-intelligence", "dest": "/api/product-intelligence-v2" },
+    { "src": "/api/product-insights", "dest": "/api/product-intelligence?action=research" },
     { "handle": "filesystem" },
     { "src": "/api/health", "dest": "/api/health-router?action=health" },
     { "src": "/api/feedback-health", "dest": "/api/health-router?action=feedback" },
@@ -11,9 +12,7 @@
     { "src": "/api/catalog-import", "dest": "/api/catalog-router?action=catalog" },
     { "src": "/api/awin-feed-import", "dest": "/api/catalog-router?action=awin" },
     { "src": "/api/exact-product-identify", "dest": "/api/official-brand-intelligence?action=exact" },
-    { "src": "/api/product-intelligence", "dest": "/api/product-intelligence-v2" },
     { "src": "/api/analytics", "dest": "/api/telemetry-router?action=analytics" },
-    { "src": "/api/feedback", "dest": "/api/telemetry-router?action=feedback" },
-    { "src": "/api/product-insights", "dest": "/api/product-intelligence?action=research" }
+    { "src": "/api/feedback", "dest": "/api/telemetry-router?action=feedback" }
   ]
 }
