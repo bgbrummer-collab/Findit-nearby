@@ -38,10 +38,23 @@
   setTimeout(wireLiveStock,700);
 
   window.addEventListener('click',e=>{
-    const el=e.target?.closest?.('#finditExactShell [data-fx="stock"]');
-    if(!el)return;
+    const actionEl=e.target?.closest?.('#finditExactShell [data-fx="stock"], #finditExactShell [data-fx="product"]');
+    if(!actionEl)return;
+    const action=actionEl.dataset.fx;
+    if(action!=='stock'&&action!=='product')return;
     e.preventDefault();
     e.stopImmediatePropagation();
-    window.finditDashboardAction?.('stock');
+    const run=()=>{
+      if(typeof window.finditDashboardAction==='function'){
+        window.finditDashboardAction(action);
+        return true;
+      }
+      return false;
+    };
+    if(run())return;
+    let tries=0;
+    const timer=setInterval(()=>{
+      if(run()||++tries>20)clearInterval(timer);
+    },50);
   },true);
 })();
