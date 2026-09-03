@@ -278,6 +278,7 @@ async function productPage(url, i) {
     ? htmlToText(d.text)
     : String(d.text).replace(/\r/g, '').replace(/[ \t]+/g, ' ').replace(/\n\s*\n+/g, '\n').trim();
   if (BLOCKPAGE.test(`${title} ${text.slice(0, 6000)}`)) return null;
+  if (/\b(search|search results|results for)\b/i.test(title)) return null;
   const score = identityScore(text, i, title);
   const quality = evidenceQuality(text, i);
   return score >= 5 && quality >= 6 ? { title, url: d.url || url, text: text.slice(0, 30000), score: score + quality, evidenceType: 'product-page' } : null;
