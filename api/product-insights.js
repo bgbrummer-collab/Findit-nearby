@@ -234,6 +234,28 @@ function resultEvidenceScore(text, i) {
   return Math.max(0, b) + kh * 2 + oh + nh * 2 + Math.min(4, Math.floor(extras.length / 4));
 }
 
+function variantMeasures(v) {
+  const n = norm(v), out = { ply: new Set(), rolls: new Set(), ml: new Set(), gb: new Set(), tb: new Set(), oz: new Set() };
+  if (/\b(?:twin|two) ply\b/.test(n)) out.ply.add('2');
+  for (const m of n.matchAll(/\b(\d+)ply\b/g)) out.ply.add(m[1]);
+  for (const m of n.matchAll(/\b(\d+)rolls?\b/g)) out.rolls.add(m[1]);
+  for (const m of n.matchAll(/\b(\d+)ml\b/g)) out.ml.add(m[1]);
+  for (const m of n.matchAll(/\b(\d+)gb\b/g)) out.gb.add(m[1]);
+  for (const m of n.matchAll(/\b(\d+)tb\b/g)) out.tb.add(m[1]);
+  for (const m of n.matchAll(/\b(\d+)oz\b/g)) out.oz.add(m[1]);
+  return out;
+}
+
+function titleVariantConflict(title, i) {
+  const wanted = variantMeasures(`${i.model || ''} ${i.name || ''} ${i.searchQuery || ''}`);
+  const found = variantMeasures(title || '');
+  for (const key of Object.keys(wanted)) {
+    if (!wanted[key].size || !found[key].size) continue;
+    if (![...wanted[key]].some(v => found[key].has(v))) return true;
+  }
+  return false;
+}
+
 function titleOf(raw, url) {
   const s = String(raw || ''), m = s.match(/^Title:\s*(.+)$/mi) || s.match(/<title[^>]*>([^<]+)<\/title>/i);
   try { return clean(m?.[1] || new URL(url).hostname, 180); } catch { return clean(m?.[1] || 'Product source', 180); }
@@ -284,6 +306,7 @@ async function productPage(url, i) {
     : String(d.text).replace(/\r/g, '').replace(/[ \t]+/g, ' ').replace(/\n\s*\n+/g, '\n').trim();
   if (BLOCKPAGE.test(`${title} ${text.slice(0, 6000)}`)) return null;
   if (/\b(search|search results|results for)\b/i.test(title)) return null;
+  if (titleVariantConflict(title, i)) return null;
   const score = identityScore(text, i, title);
   const quality = evidenceQuality(text, i);
   return score >= 5 && quality >= 6 ? { title, url: d.url || url, text: text.slice(0, 30000), score: score + quality, evidenceType: 'product-page' } : null;
@@ -332,6 +355,7 @@ function snippetCandidates(raw, base, i) {
     if (!u || seen.has(u)) return;
     const text = htmlToText(s.slice(Math.max(0, start - 120), Math.min(s.length, end + 1100)));
     if (BLOCKPAGE.test(`${title} ${text}`)) return;
+    if (titleVariantConflict(title, i)) return;
     const score = resultEvidenceScore(`${title} ${text}`, i);
     const quality = evidenceQuality(`${title}\n${text}`, i);
     if (score < 7 || quality < 6) return;
