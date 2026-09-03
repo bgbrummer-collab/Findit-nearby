@@ -28,6 +28,11 @@ const toks = v => [...new Set(norm(v).split(' ').filter(x => x.length > 2 && !ST
 const JUNK = /\b(shipping|delivery|refund|return policy|checkout|seller review|customer service|cookie policy|privacy policy|sign in|log in|login|newsletter|loyalty|rewards|menu|where to buy|our story|press coverage|featured products|top sellers|view all)\b/i;
 const BLOCKPAGE = /\b(captcha|robot or human|verify you are human|are you a human|access denied|access blocked|security check|challenge page|temporarily blocked|request blocked|unusual traffic|enable javascript and cookies|page maybe requiring captcha|forbidden)\b/i;
 const DETAIL = /\b(designed|formulated|features?|includes?|contains?|provides?|helps?|offers?|made|uses?|supports?|compatible|connects?|records?|recording|streaming|podcast|gaming|calls?|noise|monitoring|cardioid|sampling|frequency|battery|bluetooth|wireless|usb|plug.?and.?play|soft|strong|absorb|ply|rolls?|cushion|leather|rubber|variable speed|drilling|scientific|statistics|fraction|moistur|detang|frizz)\b/i;
+const DISPLAY_JUNK = /accessible version|data-testid|picturehighquality|\bsrc\s*=|\bhref\s*=|\balt\s*=|\bclass\s*=|\bstyle\s*=|javascript:|webpack|aria-|\bhttps?:\/\/|\\[nrt]|<[^>]+>/i;
+const NEGATIVE_FACT = /static noise|background noise|breaks?|broke|broken|stability issues?|unstable|\bissues?\b|\bproblems?\b|drawback|limitation|difficult|tricky|struggle|\bpoor\b|\bweak\b|fragile|hiss|crackle|distortion|latency|may not|cannot|doesn.t|does not|requires?|not included|sold separately|only compatible|\bheavy\b|bulky|short battery|\blimited\b|warning|not suitable|disappoint|inconsistent|fragrance|sensitive/i;
+const POSITIVE_FACT = /plug.?and.?play|compatible|clear|cardioid|noise cancel|monitor|gain|stand|adapter|durab|soft|strong|absorb|moistur|detang|frizz|shine|manageab|cushion|battery|wireless|bluetooth|usb|easy|support|adjustable|portable|reliable|quality|stream|record|included|includes?|fast|comfort|protect|capacity|variable speed|leather|rubber|structured|construction|forward|reverse|control|scientific|fraction|statistics|calculation|function|two.?ply|2.?ply|rolls?/i;
+const PURPOSE_FACT = /\b(is|are|designed|made|used|helps?|provides?|formulated|records?|recording|streaming|connects?|supports?|for voice|for gaming|for calls?|for podcast|for household|for bathroom|for school|for drilling|for listening)\b/i;
+
 
 function identity(b = {}) {
   const i = b.identification || b;
@@ -422,6 +427,79 @@ function fallback(i, pages) {
   };
 }
 
+function cleanVisible(v, i) {
+  const original = String(v || '');
+  if (DISPLAY_JUNK.test(original)) return '';
+  const x = point(original
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\b(?:data-testid|src|href|alt|class|style)\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi, ' ')
+    .replace(/\\[nrt]/g, ' ')
+    .replace(/[\u{1F000}-\u{1FAFF}]/gu, ' '));
+  if (!x) return '';
+  const n = norm(x), words = n.split(' ').filter(Boolean);
+  if ((x.match(/,/g) || []).length >= 5) return '';
+  if (words.length >= 16 && !/[.!?]$/.test(x) && !PURPOSE_FACT.test(x)) return '';
+  const id = norm(exactName(i));
+  if (id && (n === id || (n.startsWith(id) && words.length < id.split(' ').length + 5))) return '';
+  return x.replace(/\s+([,.;:!?])/g, '$1').replace(/([.!?])\1+/g, '$1').trim();
+}
+
+function isNegativeEvidence(x) {
+  const text = String(x || '');
+  if (!text) return false;
+  const positiveNoise = /(?:reduce|minimiz|cancel|filter|remove|isolate|reject|suppress).{0,45}(?:background |ambient |unwanted )?noise|noise (?:reduction|cancellation|canceling|cancelling)|zero[- ]latency|without (?:noticeable )?latency/i;
+  const explicitNegative = /(?:users? )?(?:report|complain|experience|notice)|breaks?|broke|broken|stability issues?|unstable|\bissues?\b|\bproblems?\b|drawback|limitation|difficult|tricky|struggle|\bpoor\b|\bweak\b|fragile|hiss|crackle|distortion|may not|cannot|doesn.t|does not|requires?|not included|sold separately|only compatible|\bheavy\b|bulky|short battery|\blimited\b|warning|not suitable|disappoint|inconsistent|not withstand|despite|fragrance[- ]sensitive/i;
+  if (explicitNegative.test(text)) return true;
+  if (positiveNoise.test(text)) return false;
+  return /(?:creates?|causes?|produces?|has|with) (?:noticeable )?(?:static|background) noise|high latency/i.test(text);
+}
+
+function bestPurpose(i, pages) {
+  const candidates = [];
+  for (const p of pages || []) {
+    for (const line of evidenceLines(p.text)) {
+      const x = cleanVisible(line, i);
+      if (!x || isNegativeEvidence(x) || !PURPOSE_FACT.test(x)) continue;
+      candidates.push(x);
+    }
+  }
+  candidates.sort((a, b) => sentenceScore(b, i) - sentenceScore(a, i));
+  const parts = identityParts(i);
+  const branded = candidates.filter(x => !parts.brand || brandMatchScore(norm(x), parts) >= 0);
+  return branded[0] || candidates[0] || '';
+}
+
+function sanitizeAnswer(i, answer, pages) {
+  const out = { ...answer };
+  let what = cleanVisible(out.whatItDoes, i);
+  const fallbackNeedsBrand = out.researchMethod === 'Exact-product web evidence' && what && identityParts(i).brand && brandMatchScore(norm(what), identityParts(i)) < 0;
+  if (!what || isNegativeEvidence(what) || fallbackNeedsBrand) what = bestPurpose(i, pages);
+  const pros = [], cons = [];
+  const addUnique = (arr, x) => { if (x && !arr.some(y => norm(y) === norm(x))) arr.push(x); };
+  for (const raw of Array.isArray(out.pros) ? out.pros : []) {
+    const x = cleanVisible(raw, i);
+    if (!x) continue;
+    if (isNegativeEvidence(x)) addUnique(cons, x);
+    else if (POSITIVE_FACT.test(x)) addUnique(pros, x);
+  }
+  for (const raw of Array.isArray(out.cons) ? out.cons : []) {
+    const x = cleanVisible(raw, i);
+    if (x && isNegativeEvidence(x)) addUnique(cons, x);
+  }
+  out.whatItDoes = what;
+  out.pros = pros.slice(0, 4);
+  out.cons = cons.slice(0, 4);
+  out.bestFor = cleanVisible(out.bestFor, i);
+  out.standOut = cleanVisible(out.standOut, i);
+  out.valueVerdict = cleanVisible(out.valueVerdict, i);
+  out.sources = (Array.isArray(out.sources) ? out.sources : []).map(src => ({
+    ...src,
+    title: clean(String(src?.title || 'Product source').replace(/<[^>]+>/g, ' ').replace(/&lt;[^&]+&gt;/gi, ' '), 180) || 'Product source'
+  })).slice(0, 6);
+  out.researched = !!(out.whatItDoes || out.pros.length || out.cons.length);
+  return out;
+}
+
 function parseJson(v) {
   try { return JSON.parse(String(v || '').replace(/^```json\s*/i, '').replace(/```\s*$/, '').trim()); } catch { return null; }
 }
@@ -482,7 +560,7 @@ export default async function handler(req, res) {
     const pages = await discoverPages(i, offerSources(body));
     if (!pages.length) return res.status(200).json({ researched: false, whatItDoes: '', pros: [], cons: [], sources: [], researchMethod: 'No exact-product web evidence verified', checkedAt: new Date().toISOString() });
     const answer = await summarize(process.env.GEMINI_API_KEY, i, pages) || fallback(i, pages);
-    return res.status(200).json(answer);
+    return res.status(200).json(sanitizeAnswer(i, answer, pages));
   } catch (e) {
     console.error('product insights error', e);
     return res.status(200).json({ researched: false, whatItDoes: '', pros: [], cons: [], sources: [], error: 'Exact-product research temporarily unavailable' });
