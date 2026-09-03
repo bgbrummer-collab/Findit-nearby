@@ -444,12 +444,22 @@ function cleanVisible(v, i) {
   return x.replace(/\s+([,.;:!?])/g, '$1').replace(/([.!?])\1+/g, '$1').trim();
 }
 
+function isNegativeEvidence(x) {
+  const text = String(x || '');
+  if (!text) return false;
+  const positiveNoise = /(?:reduce|minimiz|cancel|filter|remove|isolate|reject|suppress).{0,45}(?:background |ambient |unwanted )?noise|noise (?:reduction|cancellation|canceling|cancelling)|zero[- ]latency|without (?:noticeable )?latency/i;
+  const explicitNegative = /(?:users? )?(?:report|complain|experience|notice)|breaks?|broke|broken|stability issues?|unstable|\bissues?\b|\bproblems?\b|drawback|limitation|difficult|tricky|struggle|\bpoor\b|\bweak\b|fragile|hiss|crackle|distortion|may not|cannot|doesn.t|does not|requires?|not included|sold separately|only compatible|\bheavy\b|bulky|short battery|\blimited\b|warning|not suitable|disappoint|inconsistent|not withstand|despite|fragrance[- ]sensitive/i;
+  if (explicitNegative.test(text)) return true;
+  if (positiveNoise.test(text)) return false;
+  return /(?:creates?|causes?|produces?|has|with) (?:noticeable )?(?:static|background) noise|high latency/i.test(text);
+}
+
 function bestPurpose(i, pages) {
   const candidates = [];
   for (const p of pages || []) {
     for (const line of evidenceLines(p.text)) {
       const x = cleanVisible(line, i);
-      if (!x || NEGATIVE_FACT.test(x) || !PURPOSE_FACT.test(x)) continue;
+      if (!x || isNegativeEvidence(x) || !PURPOSE_FACT.test(x)) continue;
       candidates.push(x);
     }
   }
@@ -460,18 +470,18 @@ function bestPurpose(i, pages) {
 function sanitizeAnswer(i, answer, pages) {
   const out = { ...answer };
   let what = cleanVisible(out.whatItDoes, i);
-  if (!what || NEGATIVE_FACT.test(what)) what = bestPurpose(i, pages);
+  if (!what || isNegativeEvidence(what)) what = bestPurpose(i, pages);
   const pros = [], cons = [];
   const addUnique = (arr, x) => { if (x && !arr.some(y => norm(y) === norm(x))) arr.push(x); };
   for (const raw of Array.isArray(out.pros) ? out.pros : []) {
     const x = cleanVisible(raw, i);
     if (!x) continue;
-    if (NEGATIVE_FACT.test(x)) addUnique(cons, x);
+    if (isNegativeEvidence(x)) addUnique(cons, x);
     else if (POSITIVE_FACT.test(x)) addUnique(pros, x);
   }
   for (const raw of Array.isArray(out.cons) ? out.cons : []) {
     const x = cleanVisible(raw, i);
-    if (x && NEGATIVE_FACT.test(x)) addUnique(cons, x);
+    if (x && isNegativeEvidence(x)) addUnique(cons, x);
   }
   out.whatItDoes = what;
   out.pros = pros.slice(0, 4);
