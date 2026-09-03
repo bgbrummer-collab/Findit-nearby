@@ -469,6 +469,7 @@ function cleanVisible(v, i) {
 }
 
 function isNegativeEvidence(x) {
+  if (/\b(septic(?: tank)? safe|breaks down easily in water|biodegradable|recyclable)\b/i.test(String(x || ''))) return false;
   const text = String(x || '');
   if (!text) return false;
   const positiveNoise = /(?:reduce|minimiz|cancel|filter|remove|isolate|reject|suppress).{0,45}(?:background |ambient |unwanted )?noise|noise (?:reduction|cancellation|canceling|cancelling)|zero[- ]latency|without (?:noticeable )?latency/i;
