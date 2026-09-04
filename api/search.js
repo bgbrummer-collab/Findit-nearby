@@ -1,5 +1,6 @@
 const PRIMARY_MODEL='gemini-3.6-flash';
 const FAST_MODEL='gemini-3.5-flash-lite';
+const FALLBACK_MODEL='gemini-2.5-flash-lite';
 const CONFIDENCE_MIN=.58;
 const GEMINI_TIMEOUT_MS=14000;
 const QUOTA_RE=/quota|rate.?limit|resource.?exhausted|too many requests/i;
@@ -87,12 +88,12 @@ Use multiple signals together: object shape, materials, construction, scale, pac
 productKind must be one of real_product,toy,miniature,replica,packaging,image_of_product,accessory,unknown. scaleClass must be one of full_size,handheld,wearable,tabletop,miniature,unknown.
 searchQuery must be the strongest truthful shopping query supported by the image. Include brand/model/size only when supported. retailCategory and likelyStoreTypes must match stores that genuinely sell the physical item.
 If uncertain between two objects, choose the broader truthful object and lower confidence. Return structured JSON only.`;
- let last;for(const model of [FAST_MODEL,PRIMARY_MODEL]){try{const x=await generateStructured(key,model,prompt,b64,mime);x.modelUsed=model;return x}catch(e){last=e}}throw last||Error('Gemini request failed');
+ let last;for(const model of [FAST_MODEL,FALLBACK_MODEL,PRIMARY_MODEL]){try{const x=await generateStructured(key,model,prompt,b64,mime);x.modelUsed=model;return x}catch(e){last=e}}throw last||Error('Gemini request failed');
 }
 
 async function independentCheck(key,b64,mime){
  const prompt=`Independently inspect this product photo for FindIt Nearby. Do not rely on any previous answer. Identify the real physical purchasable object, brand only when visibly supported, exact model/variant only when genuinely supported, and readable size/pack count only when visible. Be especially strict about packaged goods, vehicles, tools, artwork printed on products, toys/replicas and accessories. Choose the broader truthful answer rather than guessing. Return the complete structured JSON schema only.`;
- const x=await generateStructured(key,FAST_MODEL,prompt,b64,mime);x.verifierModel=FAST_MODEL;return x;
+ let last;for(const model of [FALLBACK_MODEL,FAST_MODEL]){try{const x=await generateStructured(key,model,prompt,b64,mime);x.verifierModel=model;return x}catch(e){last=e}}throw last||Error('Independent verification failed');
 }
 
 function needsTieBreak(a,b){
