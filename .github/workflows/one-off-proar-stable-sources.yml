@@ -22,21 +22,24 @@ jobs:
           p=Path('api/product-insights.js')
           s=p.read_text()
           marker="async function discoverPages(i, offers = []) {\n  const candidates = [], seen = new Set();\n  const add = u => { const x = unwrap(u); if (x && !seen.has(x) && likelyProductUrl(x)) { seen.add(x); candidates.push(x); } };\n  for (const o of offers) add(o.url);"
-          repl="""function stableSourceHints(i) {
-  const b = norm(i.brand), p = norm(`${i.name} ${i.model} ${i.object} ${i.category} ${i.searchQuery}`);
-  if (/^pro+a?r$/.test(b.replace(/\\s+/g, '')) && /microphone|condenser|usb/.test(p)) return [
-    'https://www.amazon.com/Microphone-Condenser-Computer-Streaming-Recording/dp/B09CYMCC1T',
-    'https://gradeonetools.com/electronics/proar-professional-condenser-microphone',
-    'https://theproar.com/xlr-microphone'
-  ];
-  return [];
-}
-
-async function discoverPages(i, offers = []) {
-  const candidates = [], seen = new Set();
-  const add = u => { const x = unwrap(u); if (x && !seen.has(x) && likelyProductUrl(x)) { seen.add(x); candidates.push(x); } };
-  for (const u of stableSourceHints(i)) add(u);
-  for (const o of offers) add(o.url);"""
+          lines=[
+            "function stableSourceHints(i) {",
+            "  const b = norm(i.brand), p = norm(`${i.name} ${i.model} ${i.object} ${i.category} ${i.searchQuery}`);",
+            "  if (/^pro+a?r$/.test(b.replace(/\\s+/g, '')) && /microphone|condenser|usb/.test(p)) return [",
+            "    'https://www.amazon.com/Microphone-Condenser-Computer-Streaming-Recording/dp/B09CYMCC1T',",
+            "    'https://gradeonetools.com/electronics/proar-professional-condenser-microphone',",
+            "    'https://theproar.com/xlr-microphone'",
+            "  ];",
+            "  return [];",
+            "}",
+            "",
+            "async function discoverPages(i, offers = []) {",
+            "  const candidates = [], seen = new Set();",
+            "  const add = u => { const x = unwrap(u); if (x && !seen.has(x) && likelyProductUrl(x)) { seen.add(x); candidates.push(x); } };",
+            "  for (const u of stableSourceHints(i)) add(u);",
+            "  for (const o of offers) add(o.url);"
+          ]
+          repl='\n'.join(lines)
           if marker not in s:
               raise SystemExit('discoverPages target not found')
           p.write_text(s.replace(marker,repl,1))
