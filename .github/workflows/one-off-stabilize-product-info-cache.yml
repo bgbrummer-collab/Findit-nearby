@@ -1,0 +1,56 @@
+name: One-off stabilize Product Information cache
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/one-off-stabilize-product-info-cache.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch Product Information transport and cache policy
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          dash = Path('dashboard-runtime-v8.js')
+          s = dash.read_text()
+          old = "async function requestResearch(payload){const r=await fetch('/api/product-insights',{method:'POST',cache:'no-store',headers:{'content-type':'application/json','cache-control':'no-cache'},body:JSON.stringify(payload)});const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d?.error||`Research request failed (${r.status})`);return d}"
+          new = "async function requestResearch(payload){const q=new URLSearchParams();for(const k of ['name','brand','model','category','searchQuery']){const v=payload?.[k];if(v!==undefined&&v!==null&&String(v).trim())q.set(k,String(v).trim())}const r=await fetch(`/api/product-insights?${q.toString()}`,{method:'GET',headers:{accept:'application/json'}});const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d?.error||`Research request failed (${r.status})`);return d}"
+          if old not in s:
+              raise SystemExit('dashboard requestResearch target not found')
+          dash.write_text(s.replace(old,new,1))
+
+          api = Path('api/product-insights.js')
+          s = api.read_text()
+          old = "  res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400');\n"
+          new = "  res.setHeader('Cache-Control', 'no-store');\n"
+          if old not in s:
+              raise SystemExit('handler cache header target not found')
+          s = s.replace(old,new,1)
+          old = "    const answer = await summarize(process.env.GEMINI_API_KEY, i, pages) || fallback(i, pages);\n    return res.status(200).json(sanitizeAnswer(i, answer, pages));"
+          new = "    const answer = await summarize(process.env.GEMINI_API_KEY, i, pages) || fallback(i, pages);\n    const output = sanitizeAnswer(i, answer, pages);\n    if (req.method === 'GET' && output?.researched) res.setHeader('Cache-Control', 'public, s-maxage=21600, stale-while-revalidate=86400');\n    return res.status(200).json(output);"
+          if old not in s:
+              raise SystemExit('handler success target not found')
+          api.write_text(s.replace(old,new,1))
+          PY
+      - name: Validate patched files
+        run: |
+          node --check dashboard-runtime-v8.js
+          node --check api/product-insights.js
+          node tests/product-web-research-regression.mjs
+      - name: Commit patch and remove one-off workflow
+        run: |
+          git config user.name "findit-reliability-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git rm .github/workflows/one-off-stabilize-product-info-cache.yml
+          git add dashboard-runtime-v8.js api/product-insights.js
+          git commit -m "Stabilize Product Information with success-only edge cache"
+          git push
