@@ -1,0 +1,26 @@
+name: Apply Dashboard Sync Root Fix
+on:
+  push:
+    branches: [fix-dashboard-sync-root-20260904]
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/fix-dashboard-sync-root.py
+      - run: node --check script.js
+      - name: Verify payload-based dashboard sync
+        run: |
+          grep -q "CustomEvent('findit:results-rendered',{detail:{result:data}})" script.js
+          grep -q "function syncAll(resultOverride)" script.js
+          grep -q "syncAll(e.detail?.result)" script.js
+      - name: Commit fix
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name "findit-dashboard-sync-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add script.js
+          git commit -m "Pass identified result directly to dashboard sync [skip root sync patch]"
+          git push
