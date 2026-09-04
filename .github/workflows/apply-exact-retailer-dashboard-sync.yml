@@ -1,0 +1,30 @@
+name: Apply Exact Retailer Dashboard Sync
+on:
+  push:
+    branches: [fix-exact-retailer-dashboard-sync-20260904]
+permissions:
+  contents: write
+jobs:
+  patch:
+    if: ${{ !contains(github.event.head_commit.message, '[skip exact retailer sync]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/apply-exact-retailer-dashboard-sync.py
+      - run: node --check exact-retailer-fix.js
+      - name: Verify exact-retailer owns dashboard sync safely
+        run: |
+          grep -q "function syncExactDashboard" exact-retailer-fix.js
+          grep -q "#fxProductName" exact-retailer-fix.js
+          grep -q "#fxStatus" exact-retailer-fix.js
+          grep -q "detail:{result:data" exact-retailer-fix.js
+          grep -q "const RESTRICTED=" api/search.js
+          grep -q "Find anything." redesign-v4.js
+      - name: Commit patch
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name "findit-exact-sync-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add exact-retailer-fix.js
+          git commit -m "Sync exact-retailer results into dashboard immediately [skip exact retailer sync]"
+          git push
