@@ -1,8 +1,8 @@
 FindIt production audit
-Commit: 64a9a6916f285b0dccbc884eb9876987f91c22c4
+Commit: 95930dd37e11b7f23a5de6cd6e3de5c2bf5644b8
 Release smoke: PASS (exit 0)
-Dashboard readiness: PASS (exit 0)
-Every dashboard function: PASS (exit 0)
+Dashboard readiness: FAIL (exit 1)
+Every dashboard function: FAIL (exit 1)
 Current dashboard real-user audit: FAIL (exit 1)
 
 --- release smoke ---
@@ -29,120 +29,50 @@ Current dashboard real-user audit: FAIL (exit 1)
 FINDIT_STABLE_PIPELINE_SMOKE_PASS
 
 --- dashboard readiness ---
-[PASS] 1440px dashboard shell visible
-[PASS] 1440px upload control opens chooser and transfers file
-[PASS] 1440px selected image enables search
-[PASS] 1440px location control works
-[PASS] 1440px identify returns to dashboard not action menu
-[PASS] 1440px result mirrors into dashboard
-[PASS] 1440px no uncaught JS errors
-[PASS] 390px dashboard shell visible
-[PASS] 390px upload control opens chooser and transfers file
-[PASS] 390px selected image enables search
-[PASS] 390px location control works
-[PASS] 390px identify returns to dashboard not action menu
-[PASS] 390px result mirrors into dashboard
-[PASS] 390px no uncaught JS errors
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
 
-FINDIT_DASHBOARD_READINESS_PASS
+page.waitForSelector: Timeout 12000ms exceeded.
+Call log:
+  - waiting for locator('#finditExactShell') to be visible
+
+    at run (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-readiness.mjs:11:79)
+    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-readiness.mjs:19:1 {
+  name: 'TimeoutError'
+}
+
+Node.js v22.23.2
 
 --- every dashboard function ---
-[PASS] 1440px dashboard visible
-[PASS] 1440px upload chooser opens and transfers file
-[PASS] 1440px camera chooser opens and transfers file
-[PASS] 1440px location action works
-[PASS] 1440px identify action works
-[PASS] 1440px scan returns directly to dashboard
-[PASS] 1440px product result mirrors into dashboard
-[PASS] 1440px nav home responds
-[PASS] 1440px nav search responds
-[PASS] 1440px nav nearby responds
-[PASS] 1440px nav compare responds
-[PASS] 1440px nav deals responds
-[PASS] 1440px nav saved responds
-[PASS] 1440px nav history responds
-[PASS] 1440px nav alerts responds
-[PASS] 1440px nav feedback responds
-[PASS] 1440px action product responds
-[PASS] 1440px action compare responds
-[PASS] 1440px action nearby responds
-[PASS] 1440px Ask FindIt entry point responds
-[PASS] 1440px premium entry point responds
-[PASS] 1440px feedback form present and usable
-[PASS] 1440px no duplicate ids
-[PASS] 1440px no uncaught JS errors
-[PASS] 390px dashboard visible
-[PASS] 390px upload chooser opens and transfers file
-[PASS] 390px camera chooser opens and transfers file
-[PASS] 390px location action works
-[PASS] 390px identify action works
-[PASS] 390px scan returns directly to dashboard
-[PASS] 390px product result mirrors into dashboard
-[PASS] 390px nav home responds
-[PASS] 390px nav search responds
-[PASS] 390px nav nearby responds
-[PASS] 390px nav compare responds
-[PASS] 390px nav deals responds
-[PASS] 390px nav saved responds
-[PASS] 390px nav history responds
-[PASS] 390px nav alerts responds
-[PASS] 390px nav feedback responds
-[PASS] 390px action product responds
-[PASS] 390px action compare responds
-[PASS] 390px action nearby responds
-[PASS] 390px Ask FindIt entry point responds
-[PASS] 390px premium entry point responds
-[PASS] 390px feedback form present and usable
-[PASS] 390px no duplicate ids
-[PASS] 390px no uncaught JS errors
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
 
-48 PASS / 0 FAIL
+page.waitForSelector: Timeout 12000ms exceeded.
+Call log:
+  - waiting for locator('#finditExactShell') to be visible
 
-FINDIT_ALL_DASHBOARD_FUNCTIONS_PASS
+    at setup (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:11:78)
+    at async audit (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:13:88)
+    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:28:1 {
+  name: 'TimeoutError'
+}
+
+Node.js v22.23.2
 
 --- current dashboard real-user audit ---
-PASS: desktop shell is visible
-PASS: desktop active Premium overlay cannot block dashboard
-PASS: desktop old journey stays hidden
-PASS: desktop unique element ids
-PASS: desktop product result mirrors into dashboard
-PASS: desktop nearby store list has no duplicate retailer rows
-PASS: desktop Product Info opens
-PASS: desktop Compare Prices opens
-PASS: desktop Settings responds
-PASS: desktop Ask FindIt entry point responds
-PASS: desktop Saved navigation stores current product
-PASS: desktop Home responds without blocked click
-PASS: desktop Search responds without blocked click
-PASS: desktop Nearby responds without blocked click
-PASS: desktop Compare nav responds without blocked click
-PASS: desktop Deals responds without blocked click
-PASS: desktop History responds without blocked click
-PASS: desktop Alerts responds without blocked click
-PASS: desktop Feedback responds without blocked click
-PASS: desktop feature shortcuts are interactive
-FAIL: desktop bottom-card buttons respond bottom action 5 blocked by premium modal
-PASS: desktop no uncaught JS errors
-PASS: mobile shell is visible
-PASS: mobile active Premium overlay cannot block dashboard
-PASS: mobile old journey stays hidden
-PASS: mobile unique element ids
-PASS: mobile product result mirrors into dashboard
-PASS: mobile nearby store list has no duplicate retailer rows
-PASS: mobile Product Info opens
-PASS: mobile Compare Prices opens
-PASS: mobile Settings responds
-PASS: mobile Ask FindIt entry point responds
-PASS: mobile Saved navigation stores current product
-PASS: mobile Home responds without blocked click
-PASS: mobile Search responds without blocked click
-PASS: mobile Nearby responds without blocked click
-PASS: mobile Compare nav responds without blocked click
-PASS: mobile Deals responds without blocked click
-PASS: mobile History responds without blocked click
-PASS: mobile Alerts responds without blocked click
-PASS: mobile Feedback responds without blocked click
-PASS: mobile feature shortcuts are interactive
-FAIL: mobile bottom-card buttons respond bottom action 4 blocked by premium modal
-PASS: mobile no uncaught JS errors
-CURRENT_DASHBOARD_REAL_USER_RESULT 42 PASS / 2 FAIL
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+page.waitForSelector: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator('#finditExactShell') to be visible
+
+    at run (/home/runner/work/Findit-nearby/Findit-nearby/tests/current-dashboard-real-user.mjs:19:13)
+    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/current-dashboard-real-user.mjs:40:1 {
+  name: 'TimeoutError'
+}
+
+Node.js v22.23.2
