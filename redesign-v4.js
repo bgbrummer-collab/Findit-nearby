@@ -48,7 +48,8 @@ function applySelectedFile(file){
  const fx=$('#fxSearchNow');if(fx)fx.disabled=false;
  const status=st?.coords?'New image and location ready. Identify it now.':'New image ready. Identify it now.';
  if($('#status'))$('#status').textContent=status;if($('#fxStatus'))$('#fxStatus').textContent=status;
- for(const input of [$('#photo'),$('#cameraPhoto')]){if(input&&input!==document.activeElement){try{input.value=''}catch{}}}
+ // Keep the selected file on the native input until identification finishes.
+ // The picker is already cleared immediately before opening, so the same file can still be selected again later.
  try{document.dispatchEvent(new CustomEvent('findit:new-photo-selected',{detail:{name:file.name,type:file.type,size:file.size}}))}catch{}
 }
 function wireUploads(){
