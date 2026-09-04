@@ -1,0 +1,33 @@
+name: Apply Real Search State Fix
+
+on:
+  push:
+    branches:
+      - fix-real-search-state-20260904
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply patch
+        run: python3 scripts/fix-real-search-state.py
+      - name: Validate JavaScript
+        run: |
+          node --check script.js
+          node --check api/search.js
+      - name: Verify targeted changes
+        run: |
+          grep -q "findit:results-rendered" script.js
+          grep -q "gemini-2.5-flash-lite" api/search.js
+      - name: Commit patched files
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name "findit-real-search-fix-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add script.js api/search.js
+          git commit -m "Fix real image search state and Gemini fallback [skip real search patch]"
+          git push
