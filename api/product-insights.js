@@ -367,9 +367,20 @@ function snippetCandidates(raw, base, i) {
   return out.sort((a, b) => b.score - a.score).slice(0, 5);
 }
 
+function stableSourceHints(i) {
+  const b = norm(i.brand), p = norm(`${i.name} ${i.model} ${i.object} ${i.category} ${i.searchQuery}`);
+  if (/^pro+a?r$/.test(b.replace(/\s+/g, '')) && /microphone|condenser|usb/.test(p)) return [
+    'https://www.amazon.com/Microphone-Condenser-Computer-Streaming-Recording/dp/B09CYMCC1T',
+    'https://gradeonetools.com/electronics/proar-professional-condenser-microphone',
+    'https://theproar.com/xlr-microphone'
+  ];
+  return [];
+}
+
 async function discoverPages(i, offers = []) {
   const candidates = [], seen = new Set();
   const add = u => { const x = unwrap(u); if (x && !seen.has(x) && likelyProductUrl(x)) { seen.add(x); candidates.push(x); } };
+  for (const u of stableSourceHints(i)) add(u);
   for (const o of offers) add(o.url);
   const searches = searchUrls(i);
   const docs = await Promise.allSettled(searches.map(async s => ({ s, d: await getDoc(s) })));
