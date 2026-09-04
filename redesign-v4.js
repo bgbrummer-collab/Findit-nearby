@@ -15,17 +15,41 @@ function productPreview(){const p=$('#preview');return p?.src&&p.src!==location.
 function confidence(){const t=$('#confidenceValue')?.textContent?.trim();if(t&&t!=='—')return t;const n=Number(result().confidence);return Number.isFinite(n)?`${Math.round(n*100)}%`:'—'}
 function storeRows(){return stores().slice(0,5).map(x=>({name:x.name||'Retailer',distance:Number.isFinite(Number(x.distanceKm))?`${Number(x.distanceKm).toFixed(1)} km`:'',address:x.address||'',price:(x.branchPriceVerified&&Number.isFinite(Number(x.price)))?`R ${Math.round(Number(x.price)).toLocaleString('en-ZA')}`:'',stock:x.branchStockVerified||x.stockVerified?'Branch stock verified':'Stock not verified',exact:x.exactProductMatch===true}))}
 let previewUrl='';
+function resetForNewPhoto(st){
+ if(!st)return;
+ st.result=null;st.stores=[];st.offers=[];
+ try{window.productIntelligence=null}catch{}
+ const results=$('#results');if(results)results.classList.add('hidden');
+ const resultName=$('#resultName');if(resultName)resultName.textContent='Item';
+ const resultDescription=$('#resultDescription');if(resultDescription)resultDescription.textContent='';
+ const resultMeta=$('#resultMeta');if(resultMeta)resultMeta.innerHTML='';
+ const resultNote=$('#resultNote');if(resultNote)resultNote.innerHTML='';
+ const confidence=$('#confidenceValue');if(confidence)confidence.textContent='—';
+ const nearby=$('#nearbyStores');if(nearby)nearby.innerHTML='';
+ if($('#fxProductName'))$('#fxProductName').textContent='No item selected';
+ if($('#fxProductMeta'))$('#fxProductMeta').textContent='';
+ if($('#fxProductDesc'))$('#fxProductDesc').textContent='New photo selected. Ready to identify.';
+ if($('#fxConfidence'))$('#fxConfidence').textContent='— Match';
+ if($('#fxExactBadge'))$('#fxExactBadge').textContent='Waiting for result';
+ if($('#fxBestPrice'))$('#fxBestPrice').textContent='Not verified yet';
+ if($('#fxStoreList'))$('#fxStoreList').innerHTML='<div class="fx-empty">Use your location and identify this photo to see nearby stores.</div>';
+ if($('#fxTopStores'))$('#fxTopStores').innerHTML='<div class="fx-empty">Nearby stores will appear here after a search.</div>';
+}
 function applySelectedFile(file){
  if(!file)return;
- const st=state();if(st)st.file=file;
+ const st=state();
+ resetForNewPhoto(st);
+ if(st)st.file=file;
  const p=$('#preview');
  if(p){try{if(previewUrl)URL.revokeObjectURL(previewUrl);previewUrl=URL.createObjectURL(file);p.src=previewUrl;p.classList.remove('hidden')}catch{}}
  const ph=$('#uploadPlaceholder');if(ph)ph.classList.add('hidden');
  const box=$('#fxProductImage');if(box&&p?.src)box.innerHTML=`<img src="${esc(p.src)}" alt="Selected product">`;
  const search=$('#search');if(search)search.disabled=false;
  const fx=$('#fxSearchNow');if(fx)fx.disabled=false;
- const status=st?.coords?'Image and location ready. Identify it now.':'Image ready. You can identify it now.';
+ const status=st?.coords?'New image and location ready. Identify it now.':'New image ready. Identify it now.';
  if($('#status'))$('#status').textContent=status;if($('#fxStatus'))$('#fxStatus').textContent=status;
+ for(const input of [$('#photo'),$('#cameraPhoto')]){if(input&&input!==document.activeElement){try{input.value=''}catch{}}}
+ try{document.dispatchEvent(new CustomEvent('findit:new-photo-selected',{detail:{name:file.name,type:file.type,size:file.size}}))}catch{}
 }
 function wireUploads(){
  const photo=$('#photo'),camera=$('#cameraPhoto');
@@ -51,6 +75,8 @@ function useLocationDirect(btn){
  },{enableHighAccuracy:false,timeout:12000,maximumAge:300000});
 }
 function createShell(){
+ try{if('scrollRestoration' in history)history.scrollRestoration='manual'}catch{}
+ try{window.scrollTo(0,0);requestAnimationFrame(()=>window.scrollTo(0,0));setTimeout(()=>window.scrollTo(0,0),60)}catch{}
  const wrap=document.createElement('div');wrap.id='finditExactShell';wrap.innerHTML=`
  <aside class="fx-side">
   <div class="fx-brand"><span class="fx-logo">F</span><div><b>Find<span>It</span></b><small>Find it. Compare it. Get it.</small></div></div>
