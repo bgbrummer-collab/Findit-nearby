@@ -36,7 +36,28 @@ function settings(){const cur=Number(st()?.radius||localStorage.getItem('finditR
 function simple(title,copy){openModal(`<h2 class="fx-stable-title">${esc(title)}</h2><p class="fx-stable-sub">${esc(copy)}</p>`)}
 function premium(){closeModal();const b=$('#premiumButton')||$('#drawerPremium');if(b){b.click();return}simple('FindIt Premium','Premium controls are available from the Premium section.')}
 function search(){closeModal();const b=$('#search');if(b&&!b.disabled){b.click();return}const card=$('#finder')||$('.fx-search-card');card?.scrollIntoView({behavior:'auto',block:'center'})}
-function route(a){if(a==='product')product();else if(a==='compare')compare();else if(a==='stock')stock();else if(a==='deals')compare('Verified Deals');else if(a==='pricehistory')compare('Price History');else if(a==='nearby')nearby();else if(a==='map'||a==='settings')settings();else if(a==='location')nearby();else if(a==='assistant')ask();else if(a==='alerts')simple('Price & Stock Alerts','Alerts only use verified price or stock updates. FindIt will not invent changes.');else if(a==='premium')premium();else if(a==='search')search();else if(a==='saved')simple('Saved Items','Your saved Finds are available here.');else if(a==='history')simple('History','Your recent FindIt searches are available here.');else if(a==='feedback')simple('Feedback','Send feedback from the FindIt feedback section.')}
+const identityActions=new Set(['product','compare','stock','deals','pricehistory','nearby','assistant']);
+let pendingIdentityAction='';
+function hasCurrentIdentity(){const i=id();return !!(i?.name||i?.object||i?.searchQuery||i?.model)}
+function identifyThen(action){
+ if(hasCurrentIdentity()||!st()?.file)return false;
+ pendingIdentityAction=action;
+ closeModal();
+ const b=$('#search');
+ if(b&&!b.disabled)b.click();
+ let tries=0;
+ const timer=setInterval(()=>{
+  if(hasCurrentIdentity()){
+   clearInterval(timer);
+   const next=pendingIdentityAction;pendingIdentityAction='';
+   if(next)route(next);
+   return;
+  }
+  if(++tries>=80){clearInterval(timer);pendingIdentityAction=''}
+ },250);
+ return true;
+}
+function route(a){if(identityActions.has(a)&&identifyThen(a))return;if(a==='product')product();else if(a==='compare')compare();else if(a==='stock')stock();else if(a==='deals')compare('Verified Deals');else if(a==='pricehistory')compare('Price History');else if(a==='nearby')nearby();else if(a==='map'||a==='settings')settings();else if(a==='location')nearby();else if(a==='assistant')ask();else if(a==='alerts')simple('Price & Stock Alerts','Alerts only use verified price or stock updates. FindIt will not invent changes.');else if(a==='premium')premium();else if(a==='search')search();else if(a==='saved')simple('Saved Items','Your saved Finds are available here.');else if(a==='history')simple('History','Your recent FindIt searches are available here.');else if(a==='feedback')simple('Feedback','Send feedback from the FindIt feedback section.')}
 window.finditDashboardAction=route;
 function wireSpecialCards(){const run=()=>{$$('#finditExactShell [data-fx="nearby"]').forEach(el=>{if(/\bLive Stock\b/i.test(el.textContent||''))el.dataset.fx='stock'})};run();document.addEventListener('findit:dashboard-sync',run);setTimeout(run,100);setTimeout(run,700)}
 function capture(e){const el=e.target.closest?.('#finditExactShell [data-fx],#finditExactShell [data-fxnav]');if(!el)return;let a=el.dataset.fx||el.dataset.fxnav;if(a==='nearby'&&/\bLive Stock\b/i.test(el.textContent||''))a='stock';if(!a||['upload','camera','home'].includes(a))return;e.preventDefault();e.stopImmediatePropagation();route(a)}
