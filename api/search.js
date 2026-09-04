@@ -1,4 +1,4 @@
-const PRIMARY_MODEL='gemini-3.6-flash';
+const PRIMARY_MODEL='gemini-3.1-flash-lite';
 const FAST_MODEL='gemini-3.5-flash-lite';
 const FALLBACK_MODEL='gemini-2.5-flash-lite';
 const CONFIDENCE_MIN=.58;
@@ -42,17 +42,20 @@ export default{async fetch(request){
   if(image.size>8*1024*1024)return json({error:'Image must be smaller than 8 MB.'},413);
   const lat=num(form.get('lat')),lon=num(form.get('lon')),base64=Buffer.from(await image.arrayBuffer()).toString('base64'),mime=image.type||'image/jpeg';
 
-  const primaryPromise=identifyDraft(key,base64,mime);
-  const checkerPromise=independentCheck(key,base64,mime);
-  const [primaryResult,checkerResult]=await Promise.allSettled([primaryPromise,checkerPromise]);
-  let draft=primaryResult.status==='fulfilled'?primaryResult.value:null;
-  let checker=checkerResult.status==='fulfilled'?checkerResult.value:null;
-  if(!draft&&checker){draft={...checker,modelUsed:checker.verifierModel||FAST_MODEL,verificationNote:'Primary identification timed out; independent vision result used safely.',draftChanged:false};checker=null}
-  if(!draft)throw (primaryResult.reason||checkerResult.reason||Error('Gemini request failed'));
-  let verified=mergeIndependent(draft,checker),verificationMode=checker?'parallel-two-pass':'single-pass-degraded';
+  // Quota-safe path: one current stable multimodal pass first. A second pass is only used
+  // when the first result is genuinely uncertain, instead of spending 2-3 requests per photo.
+  let draft=await identifyDraft(key,base64,mime);
+  let checker=null,verificationMode='single-pass-quota-safe';
+  const draftConfidence=Number(draft?.confidence||0);
+  const needsChecker=draftConfidence<.72||(!draft?.object&&!draft?.name)||(draft?.modelEvidence===true&&draft?.brandEvidence!==true);
+  if(needsChecker){
+   checker=await independentCheck(key,base64,mime).catch(()=>null);
+   if(checker)verificationMode='selective-two-pass';
+  }
+  let verified=mergeIndependent(draft,checker);
   if(checker&&needsTieBreak(draft,checker)){
    const adjudicated=await tieBreak(key,base64,mime,draft,checker).catch(()=>null);
-   if(adjudicated){verified=adjudicated;verificationMode='parallel-plus-tiebreak'}
+   if(adjudicated){verified=adjudicated;verificationMode='selective-plus-tiebreak'}
   }
   const identification=postProcess(verified,draft);
   identification.analysisMs=Date.now()-started;
@@ -88,7 +91,7 @@ Use multiple signals together: object shape, materials, construction, scale, pac
 productKind must be one of real_product,toy,miniature,replica,packaging,image_of_product,accessory,unknown. scaleClass must be one of full_size,handheld,wearable,tabletop,miniature,unknown.
 searchQuery must be the strongest truthful shopping query supported by the image. Include brand/model/size only when supported. retailCategory and likelyStoreTypes must match stores that genuinely sell the physical item.
 If uncertain between two objects, choose the broader truthful object and lower confidence. Return structured JSON only.`;
- let last;for(const model of [FAST_MODEL,FALLBACK_MODEL,PRIMARY_MODEL]){try{const x=await generateStructured(key,model,prompt,b64,mime);x.modelUsed=model;return x}catch(e){last=e}}throw last||Error('Gemini request failed');
+ let last;for(const model of [PRIMARY_MODEL,FALLBACK_MODEL,FAST_MODEL]){try{const x=await generateStructured(key,model,prompt,b64,mime);x.modelUsed=model;return x}catch(e){last=e}}throw last||Error('Gemini request failed');
 }
 
 async function independentCheck(key,b64,mime){
