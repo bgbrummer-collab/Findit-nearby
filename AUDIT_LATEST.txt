@@ -1,5 +1,5 @@
 FindIt production audit
-Commit: 6b7b0957ea22a9b0fd9044d891031cc3ee43c3e6
+Commit: a4ca3fd548854bafed1e4cfb7614a4168fa6a6b0
 Release smoke: PASS (exit 0)
 Dashboard readiness: PASS (exit 0)
 Every dashboard function: PASS (exit 0)
@@ -105,7 +105,7 @@ PASS: desktop shell is visible
 PASS: desktop active Premium overlay cannot block dashboard
 PASS: desktop old journey stays hidden
 PASS: desktop unique element ids
-PASS: desktop product result mirrors into dashboard
+FAIL: desktop product result mirrors into dashboard product not synced
 PASS: desktop nearby store list has no duplicate retailer rows
 PASS: desktop Product Info opens
 PASS: desktop Compare Prices opens
@@ -127,7 +127,7 @@ PASS: mobile shell is visible
 PASS: mobile active Premium overlay cannot block dashboard
 PASS: mobile old journey stays hidden
 PASS: mobile unique element ids
-PASS: mobile product result mirrors into dashboard
+FAIL: mobile product result mirrors into dashboard product not synced
 PASS: mobile nearby store list has no duplicate retailer rows
 PASS: mobile Product Info opens
 PASS: mobile Compare Prices opens
@@ -145,4 +145,4 @@ PASS: mobile Feedback responds without blocked click
 PASS: mobile feature shortcuts are interactive
 FAIL: mobile bottom-card buttons respond bottom action 4 blocked by premium modal
 PASS: mobile no uncaught JS errors
-CURRENT_DASHBOARD_REAL_USER_RESULT 42 PASS / 2 FAIL
+CURRENT_DASHBOARD_REAL_USER_RESULT 40 PASS / 4 FAIL
