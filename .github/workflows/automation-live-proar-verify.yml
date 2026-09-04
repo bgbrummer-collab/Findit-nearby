@@ -1,0 +1,32 @@
+name: Automation Live PROAR Verify
+
+on:
+  push:
+    branches:
+      - automation-live-proar-verify-20260904
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify live Product Information repeatedly
+        shell: bash
+        run: |
+          set -euo pipefail
+          payload='{"identification":{"name":"PROAR USB Condenser Microphone","brand":"PROAR","model":"","object":"USB condenser microphone","category":"microphone","retailCategory":"microphone","searchQuery":"PROAR USB Condenser Microphone"},"offers":[],"name":"PROAR USB Condenser Microphone","brand":"PROAR","model":"","category":"microphone","searchQuery":"PROAR USB Condenser Microphone"}'
+          for i in 1 2 3 4 5; do
+            echo "Run $i"
+            out="$(curl --fail-with-body --silent --show-error --max-time 45 \
+              -H 'content-type: application/json' \
+              -H 'cache-control: no-cache' \
+              --data "$payload" \
+              https://findit-nearby.vercel.app/api/product-insights)"
+            echo "$out" | jq .
+            test "$(echo "$out" | jq -r '.researched // false')" = "true"
+            what="$(echo "$out" | jq -r '.whatItDoes // empty')"
+            test -n "$what"
+            sleep 2
+          done
