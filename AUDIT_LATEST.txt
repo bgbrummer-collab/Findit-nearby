@@ -1,8 +1,8 @@
 FindIt production audit
-Commit: 2bf1f257dd7c169d10678d3a1ce197ba6ad48d11
+Commit: e0b45243a67f40d40a72b13940e9df9c984fff56
 Release smoke: PASS (exit 0)
-Dashboard readiness: PASS (exit 0)
-Every dashboard function: PASS (exit 0)
+Dashboard readiness: FAIL (exit 1)
+Every dashboard function: FAIL (exit 1)
 Current dashboard real-user audit: FAIL (exit 1)
 
 --- release smoke ---
@@ -30,26 +30,28 @@ FINDIT_STABLE_PIPELINE_SMOKE_PASS
 
 --- dashboard readiness ---
 [PASS] 1440px dashboard shell visible
-[PASS] 1440px upload control opens chooser and transfers file
+[FAIL] 1440px upload control opens chooser and transfers file page.waitForFunction: Timeout 30000ms exceeded.
 [PASS] 1440px selected image enables search
 [PASS] 1440px location control works
 [PASS] 1440px identify returns to dashboard not action menu
 [PASS] 1440px result mirrors into dashboard
 [PASS] 1440px no uncaught JS errors
 [PASS] 390px dashboard shell visible
-[PASS] 390px upload control opens chooser and transfers file
+[FAIL] 390px upload control opens chooser and transfers file page.waitForFunction: Timeout 30000ms exceeded.
 [PASS] 390px selected image enables search
 [PASS] 390px location control works
 [PASS] 390px identify returns to dashboard not action menu
 [PASS] 390px result mirrors into dashboard
 [PASS] 390px no uncaught JS errors
 
-FINDIT_DASHBOARD_READINESS_PASS
+READINESS FAILURES
+1440px upload control opens chooser and transfers file: page.waitForFunction: Timeout 30000ms exceeded.
+390px upload control opens chooser and transfers file: page.waitForFunction: Timeout 30000ms exceeded.
 
 --- every dashboard function ---
 [PASS] 1440px dashboard visible
-[PASS] 1440px upload chooser opens and transfers file
-[PASS] 1440px camera chooser opens and transfers file
+[FAIL] 1440px upload chooser opens and transfers file page.waitForFunction: Timeout 6000ms exceeded.
+[FAIL] 1440px camera chooser opens and transfers file page.waitForFunction: Timeout 6000ms exceeded.
 [PASS] 1440px location action works
 [PASS] 1440px identify action works
 [PASS] 1440px scan returns directly to dashboard
@@ -72,8 +74,8 @@ FINDIT_DASHBOARD_READINESS_PASS
 [PASS] 1440px no duplicate ids
 [PASS] 1440px no uncaught JS errors
 [PASS] 390px dashboard visible
-[PASS] 390px upload chooser opens and transfers file
-[PASS] 390px camera chooser opens and transfers file
+[FAIL] 390px upload chooser opens and transfers file page.waitForFunction: Timeout 6000ms exceeded.
+[FAIL] 390px camera chooser opens and transfers file page.waitForFunction: Timeout 6000ms exceeded.
 [PASS] 390px location action works
 [PASS] 390px identify action works
 [PASS] 390px scan returns directly to dashboard
@@ -96,9 +98,13 @@ FINDIT_DASHBOARD_READINESS_PASS
 [PASS] 390px no duplicate ids
 [PASS] 390px no uncaught JS errors
 
-48 PASS / 0 FAIL
+44 PASS / 4 FAIL
 
-FINDIT_ALL_DASHBOARD_FUNCTIONS_PASS
+FUNCTION FAILURES
+1440px upload chooser opens and transfers file: page.waitForFunction: Timeout 6000ms exceeded.
+1440px camera chooser opens and transfers file: page.waitForFunction: Timeout 6000ms exceeded.
+390px upload chooser opens and transfers file: page.waitForFunction: Timeout 6000ms exceeded.
+390px camera chooser opens and transfers file: page.waitForFunction: Timeout 6000ms exceeded.
 
 --- current dashboard real-user audit ---
 PASS: desktop shell is visible
