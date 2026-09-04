@@ -1,0 +1,27 @@
+name: Apply Dashboard Cache Bust
+on:
+  push:
+    branches: [restore-exact-dashboard-20260904]
+permissions:
+  contents: write
+jobs:
+  patch:
+    if: ${{ !contains(github.event.head_commit.message, '[skip dashboard cache bust]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/cache-bust-dashboard-restore.py
+      - run: node --check redesign-v4.js
+      - name: Verify exact dashboard and fresh script URL
+        run: |
+          grep -q 'Find anything.' redesign-v4.js
+          grep -q 'data-fxnav="home"' redesign-v4.js
+          grep -q 'redesign-v4.js?v=20260904-dashboardrestore1' index.html
+      - name: Commit
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name "findit-dashboard-restore-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html
+          git commit -m "Force browsers to load restored dashboard [skip dashboard cache bust]"
+          git push
