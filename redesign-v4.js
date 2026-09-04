@@ -108,8 +108,8 @@ function suppressPostIdentifyJourney(){
  };
  hide();[50,250,700,1500,3000].forEach(ms=>setTimeout(hide,ms));
 }
-function syncAll(){const s=$('#status')?.textContent?.trim()||'Waiting for an image.';if($('#fxStatus'))$('#fxStatus').textContent=s;const src=$('#search'),dst=$('#fxSearchNow');if(dst)dst.disabled=state()?.file?false:!!src?.disabled;syncPremium();syncProduct();syncStores()}
-function init(){document.body.classList.add('findit-exact-dashboard');createShell();setTimeout(()=>{wireUploads();syncAll()},500);document.addEventListener('findit:results-rendered',()=>{syncAll();suppressPostIdentifyJourney()});document.addEventListener('findit:nearby-updated',syncAll);window.addEventListener('storage',syncPremium)}
+function syncAll(resultOverride){const st=state();if(resultOverride&&st)st.result=resultOverride;const s=$('#status')?.textContent?.trim()||'Waiting for an image.';if($('#fxStatus'))$('#fxStatus').textContent=s;const src=$('#search'),dst=$('#fxSearchNow');if(dst)dst.disabled=st?.file?false:!!src?.disabled;syncPremium();syncProduct();syncStores()}
+function init(){document.body.classList.add('findit-exact-dashboard');createShell();setTimeout(()=>{wireUploads();syncAll()},500);document.addEventListener('findit:results-rendered',e=>{syncAll(e.detail?.result);suppressPostIdentifyJourney()});document.addEventListener('findit:nearby-updated',syncAll);window.addEventListener('storage',syncPremium)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
 
