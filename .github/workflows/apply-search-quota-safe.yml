@@ -1,0 +1,30 @@
+name: Apply Quota Safe Search Fix
+
+on:
+  push:
+    branches:
+      - fix-search-quota-safe-20260904
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/fix-search-quota-safe.py
+      - run: node --check api/search.js
+      - name: Verify quota-safe model path
+        run: |
+          grep -q "PRIMARY_MODEL='gemini-3.1-flash-lite'" api/search.js
+          grep -q "single-pass-quota-safe" api/search.js
+          ! grep -q "const primaryPromise=identifyDraft" api/search.js
+      - name: Commit backend change
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name "findit-quota-safe-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add api/search.js
+          git commit -m "Make image identification quota-safe [skip quota patch]"
+          git push
