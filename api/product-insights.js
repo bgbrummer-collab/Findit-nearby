@@ -576,7 +576,7 @@ async function fx(req, res) {
 
 export default async function handler(req, res) {
   if (String(req.query?.action || '') === 'fx') return fx(req, res);
-  res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400');
+  res.setHeader('Cache-Control', 'no-store');
   if (req.method !== 'POST' && req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
   const body = req.method === 'POST' ? (req.body || {}) : (req.query || {}), i = identity(body), id = exactName(i);
   if (!id) return res.status(200).json({ researched: false, whatItDoes: '', pros: [], cons: [], sources: [] });
@@ -585,7 +585,9 @@ export default async function handler(req, res) {
     const pages = await discoverPages(i, offerSources(body));
     if (!pages.length) return res.status(200).json({ researched: false, whatItDoes: '', pros: [], cons: [], sources: [], researchMethod: 'No exact-product web evidence verified', checkedAt: new Date().toISOString() });
     const answer = await summarize(process.env.GEMINI_API_KEY, i, pages) || fallback(i, pages);
-    return res.status(200).json(sanitizeAnswer(i, answer, pages));
+    const output = sanitizeAnswer(i, answer, pages);
+    if (req.method === 'GET' && output?.researched) res.setHeader('Cache-Control', 'public, s-maxage=21600, stale-while-revalidate=86400');
+    return res.status(200).json(output);
   } catch (e) {
     console.error('product insights error', e);
     return res.status(200).json({ researched: false, whatItDoes: '', pros: [], cons: [], sources: [], error: 'Exact-product research temporarily unavailable' });
