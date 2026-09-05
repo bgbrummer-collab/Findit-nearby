@@ -13,6 +13,8 @@ await page.route('**/api/product-intelligence-v2',r=>r.fulfill({status:200,conte
 await page.route('**/api/product-intelligence',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,offers:[]})}));
 await page.route('**/api/assistant',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,answer:'This is a test answer.'})}));
 
+// This regression exercises Premium-only dashboard tools, so explicitly run as Premium.
+await page.addInitScript(()=>localStorage.setItem('findit_premium_beta','1'));
 await page.goto(URL,{waitUntil:'domcontentloaded',timeout:30000});
 await page.waitForSelector('#finditExactShell',{state:'visible',timeout:30000});
 await page.waitForFunction(()=>typeof window.finditDashboardAction==='function',{timeout:10000});
