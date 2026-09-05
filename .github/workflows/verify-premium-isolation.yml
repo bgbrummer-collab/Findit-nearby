@@ -1,0 +1,17 @@
+name: Verify Free Premium Isolation
+on:
+  push:
+    branches:
+      - verify-premium-isolation-20260905
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: python3 -m http.server 4173 >/tmp/findit-plan-http.log 2>&1 &
+      - run: node tests/verify-premium-isolation.mjs
