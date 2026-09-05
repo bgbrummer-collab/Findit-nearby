@@ -1,0 +1,51 @@
+name: One-off final production sync
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    if: ${{ !contains(github.event.head_commit.message, '[final-sync-done]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify current production-critical code before touching HTML
+        run: |
+          node --check script.js
+          node --check exact-retailer-fix.js
+          node --check redesign-v4.js
+          grep -q "function syncExactDashboard" exact-retailer-fix.js
+          grep -q "#fxProductName" exact-retailer-fix.js
+          grep -q "#fxStatus" exact-retailer-fix.js
+          grep -q "detail:{result:data" exact-retailer-fix.js
+          grep -q "const RESTRICTED=" api/search.js
+          grep -q "Find anything." redesign-v4.js
+          grep -q 'exact-retailer-fix.js?v=20260830-searchlineup1' index.html
+      - name: Cache-bust only the fixed exact-retailer controller
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          old='exact-retailer-fix.js?v=20260830-searchlineup1'
+          new='exact-retailer-fix.js?v=20260905-finalsync1'
+          if s.count(old) != 1:
+              raise SystemExit(f'Expected exactly one old script reference, found {s.count(old)}')
+          p.write_text(s.replace(old,new,1))
+          PY
+          grep -q 'exact-retailer-fix.js?v=20260905-finalsync1' index.html
+          grep -q 'redesign-v4.js?v=20260904-dashboardrestore1' index.html
+      - name: Commit the one-line production cache bust
+        run: |
+          git config user.name "findit-final-sync-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html
+          git diff --cached --stat
+          test "$(git diff --cached --name-only | wc -l)" -eq 1
+          test "$(git diff --cached --name-only)" = "index.html"
+          git commit -m "Load final dashboard sync in production [final-sync-done]"
+          git push
