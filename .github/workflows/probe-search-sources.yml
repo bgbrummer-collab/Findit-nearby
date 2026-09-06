@@ -1,0 +1,17 @@
+name: Probe Search Sources
+on:
+  push:
+    branches: [verify-user-images-20260906]
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe Jina search for exact conditioner retailer pages
+        run: |
+          set -x
+          curl --max-time 30 -L -sS -D /tmp/h 'https://s.jina.ai/Marc%20Anthony%203X%20Moisture%20Conditioner%20250ml%20Clicks%20Dis-Chem%20South%20Africa' -o /tmp/jina.txt || true
+          cat /tmp/h
+          echo '---JINA---'
+          head -c 12000 /tmp/jina.txt || true
+          echo
+          grep -Eio 'https?://[^ )]+' /tmp/jina.txt | head -30 || true
