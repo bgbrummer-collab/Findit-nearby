@@ -2,11 +2,11 @@ import { chromium } from 'playwright';
 import fs from 'node:fs';
 const URL=process.env.FINDIT_URL||'https://findit-nearby.vercel.app/';
 const fixtures=[
- {id:'marc',src:'tests/user-images/marc-anthony.jpg.b64',ext:'jpg',expect:/marc|anthony|curl|hair|lotion|condition/i},
- {id:'twinsaver',src:'tests/user-images/twinsaver.webp.b64',ext:'webp',expect:/twinsaver|toilet|tissue|paper|roll/i},
- {id:'nike',src:'tests/user-images/nike.jpg.b64',ext:'jpg',expect:/nike|air force|sneaker|shoe|footwear/i},
- {id:'mic',src:'tests/user-images/mic.jpg.b64',ext:'jpg',expect:/proar|microphone|mic|usb|audio/i},
- {id:'glasses',src:'tests/user-images/glasses.jpg.b64',ext:'jpg',expect:/glass|eyeglass|spectacle|frame|optical|eyewear/i}
+ {id:'marc',src:'tests/user-images/marc-anthony.jpg.b64',ext:'jpg',category:'beauty',expect:/marc|anthony|curl|hair|lotion|condition/i},
+ {id:'twinsaver',src:'tests/user-images/twinsaver.webp.b64',ext:'webp',category:'grocery/household',expect:/twinsaver|toilet|tissue|paper|roll/i},
+ {id:'nike',src:'tests/user-images/nike.jpg.b64',ext:'jpg',category:'footwear',expect:/nike|air force|sneaker|shoe|footwear/i},
+ {id:'mic',src:'tests/user-images/mic.jpg.b64',ext:'jpg',category:'electronics',expect:/proar|microphone|mic|usb|audio/i},
+ {id:'glasses',src:'tests/user-images/glasses.jpg.b64',ext:'jpg',category:'eyewear',expect:/glass|eyeglass|spectacle|frame|optical|eyewear/i}
 ];
 for(const f of fixtures){f.file=`/tmp/findit-${f.id}.${f.ext}`;fs.writeFileSync(f.file,Buffer.from(fs.readFileSync(f.src,'utf8').trim(),'base64'))}
 const browser=await chromium.launch({headless:true});
@@ -29,7 +29,7 @@ for(const f of fixtures){
  await page.waitForFunction(prev=>{const i=window.finditState?.result?.identification;const n=i?.name||i?.object||'';return !!n&&n!==prev},before,{timeout:75000});
  await waitForSearchComplete(f.id);await page.waitForTimeout(250);
  const snap=await snapshot();
- const label=[snap.name,snap.object,snap.brand,snap.model,snap.category,snap.query].join(' ');if(!f.expect.test(label))fail(`${f.id}: implausible identification ${label}`);if(!snap.fxName||/No item selected/i.test(snap.fxName))fail(`${f.id}: dashboard stale`);
+ const label=[snap.name,snap.object,snap.brand,snap.model,snap.category,snap.query].join(' ');if(!f.expect.test(label))fail(`${f.id}: implausible identification ${label}`);if(snap.category!==f.category)fail(`${f.id}: wrong retail category ${snap.category}; expected ${f.category}`);if(!snap.fxName||/No item selected/i.test(snap.fxName))fail(`${f.id}: dashboard stale`);
  if(snap.offers.some(o=>o.price!=null&&(!Number.isFinite(Number(o.price))||Number(o.price)<0)))fail(`${f.id}: invalid price`);if(snap.offers.some(o=>!o.verified))fail(`${f.id}: unverified offer leaked`);if(snap.offers.some(o=>o.url&&!/^https?:\/\//.test(o.url)))fail(`${f.id}: invalid retailer URL`);
  if(snap.stores.some(s=>Number.isFinite(s.distance)&&(s.distance<0||s.distance>snap.radius+1.1)))fail(`${f.id}: store outside radius`);
  if(snap.stores.some(s=>s.branchPriceVerified&&(!Number.isFinite(Number(s.price))||Number(s.price)<0)))fail(`${f.id}: invalid verified branch price`);

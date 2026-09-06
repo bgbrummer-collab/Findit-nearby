@@ -134,8 +134,9 @@ function postProcess(i,draft={}){
  if(draftName&&finalName&&agreement<.45){i.confidence=Math.min(i.confidence,.64);i.verifierDisagreement=true}
  if(/^(unknown|image_of_product)$/i.test(i.productKind))i.confidence=Math.min(i.confidence,.60);
 
- const all=norm([i.object,i.name,i.brand,i.model,i.category,i.searchQuery,i.summary,i.productKind,i.scaleClass,...i.visibleText,...i.features,...i.evidence].join(' '));
- const rule=RETAIL_RULES.find(r=>r.test.test(all));if(rule){i.retailCategory=rule.category;const priority=[];if(rule.dealerBrand&&i.brand)priority.push(`${i.brand} dealer`);for(const s of rule.stores)if(!priority.some(x=>norm(x)===norm(s)))priority.push(s);i.likelyStoreTypes=priority.slice(0,6);i.retailRuleApplied=true}
+ const productIdentity=norm([i.object,i.name,i.brand,i.model,i.searchQuery,...i.visibleText].join(' '));
+ const categoryContext=norm([i.category,i.retailCategory,i.summary,i.productKind,i.scaleClass,...i.features,...i.evidence].join(' '));
+ const rule=RETAIL_RULES.find(r=>r.test.test(productIdentity))||RETAIL_RULES.find(r=>r.test.test(categoryContext));if(rule){i.retailCategory=rule.category;const priority=[];if(rule.dealerBrand&&i.brand)priority.push(`${i.brand} dealer`);for(const s of rule.stores)if(!priority.some(x=>norm(x)===norm(s)))priority.push(s);i.likelyStoreTypes=priority.slice(0,6);i.retailRuleApplied=true}
 
  const canonicalParts=[];if(i.brandEvidence&&i.brand)canonicalParts.push(i.brand);if(i.modelEvidence&&i.model)canonicalParts.push(i.model);canonicalParts.push(i.object||i.name);const labelSpecific=extractLabelSpecific(i.visibleText);for(const x of labelSpecific)if(!norm(canonicalParts.join(' ')).includes(norm(x)))canonicalParts.push(x);
  i.canonicalQuery=canonicalParts.filter(Boolean).join(' ').replace(/\s+/g,' ').trim()||i.searchQuery||i.name||i.object;
