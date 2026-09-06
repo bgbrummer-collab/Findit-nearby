@@ -1,12 +1,36 @@
 /* FindIt Product Information bootstrap.
-   Loads the web-grounded product research runtime only when it is actually needed,
-   so FindIt's initial page load is never held open by the research bundle. */
+   Loads the maintained dashboard controls once the exact shell exists, and loads
+   web-grounded product research only when it is actually needed. */
 (()=>{
   'use strict';
   if(window.__finditProductInfoEnhance)return;
   window.__finditProductInfoEnhance=true;
 
   let loading=false;
+  let dashboardLoading=false;
+  function loadDashboardRuntime(){
+    if(window.__finditDashboardV8Loader||dashboardLoading)return;
+    if(!document.querySelector('#finditExactShell'))return;
+    if(document.querySelector('script[data-findit-dashboard-stable]'))return;
+    dashboardLoading=true;
+    const s=document.createElement('script');
+    s.src='dashboard-runtime-stable.js?v=20260906-askfix1';
+    s.async=false;
+    s.dataset.finditDashboardStable='1';
+    s.onload=()=>{dashboardLoading=false;try{document.dispatchEvent(new CustomEvent('findit:dashboard-sync'))}catch{}};
+    s.onerror=()=>{dashboardLoading=false};
+    document.head.appendChild(s);
+  }
+  const dashboardObserver=new MutationObserver(()=>{
+    if(document.querySelector('#finditExactShell')){
+      loadDashboardRuntime();
+      dashboardObserver.disconnect();
+    }
+  });
+  dashboardObserver.observe(document.documentElement,{childList:true,subtree:true});
+  setTimeout(loadDashboardRuntime,0);
+  setTimeout(loadDashboardRuntime,800);
+
   function loadResearchRuntime(){
     if(window.__finditAiProductInsightsV3)return Promise.resolve();
     const existing=document.querySelector('script[data-findit-product-insights-runtime]');
