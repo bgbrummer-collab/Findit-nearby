@@ -22,5 +22,7 @@ jobs:
           npm pkg set type=module
           npm install --save-dev playwright@1.55.0
           npx playwright install --with-deps chromium
-      - name: Test five real user images against production
+      - name: Test five real user images against branch preview
+        env:
+          FINDIT_URL: https://findit-nearby-git-finish-premium-workspac-306c1e-findit-nearby1.vercel.app/
         run: node tests/live-user-image-production-matrix.mjs
