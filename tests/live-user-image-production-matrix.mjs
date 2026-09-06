@@ -1,0 +1,38 @@
+import { chromium } from 'playwright';
+import fs from 'node:fs';
+const URL=process.env.FINDIT_URL||'https://findit-nearby.vercel.app/';
+const fixtures=[
+ {id:'marc',src:'tests/user-images/marc-anthony.jpg.b64',ext:'jpg',expect:/marc|anthony|curl|hair|lotion|condition/i},
+ {id:'twinsaver',src:'tests/user-images/twinsaver.webp.b64',ext:'webp',expect:/twinsaver|toilet|tissue|paper|roll/i},
+ {id:'nike',src:'tests/user-images/nike.jpg.b64',ext:'jpg',expect:/nike|air force|sneaker|shoe|footwear/i},
+ {id:'mic',src:'tests/user-images/mic.jpg.b64',ext:'jpg',expect:/proar|microphone|mic|usb|audio/i},
+ {id:'glasses',src:'tests/user-images/glasses.jpg.b64',ext:'jpg',expect:/glass|eyeglass|spectacle|frame|optical|eyewear/i}
+];
+for(const f of fixtures){f.file=`/tmp/findit-${f.id}.${f.ext}`;fs.writeFileSync(f.file,Buffer.from(fs.readFileSync(f.src,'utf8').trim(),'base64'))}
+const browser=await chromium.launch({headless:true});
+const ctx=await browser.newContext({viewport:{width:1440,height:900},geolocation:{latitude:-25.7479,longitude:28.2293},permissions:['geolocation','clipboard-read','clipboard-write']});
+const page=await ctx.newPage();page.setDefaultTimeout(90000);const pageErrors=[];page.on('pageerror',e=>{pageErrors.push(e.message);console.log('PAGE_ERROR',e.message)});
+const reqs=[];page.on('response',r=>{if(/\/api\/(search|fx|nearby|product-insights)/.test(r.url()))reqs.push([r.status(),r.url()])});
+function fail(m){throw new Error(m)}
+async function closeModal(){for(const s of ['#fxStableModal .fx-stable-close','#fxCompleteModal .fx-complete-x','#closePremium','[data-close-modal]']){const e=page.locator(s).first();if(await e.count()&&await e.isVisible().catch(()=>false))await e.click({force:true}).catch(()=>{})}await page.keyboard.press('Escape').catch(()=>{});await page.waitForTimeout(100)}
+async function openAction(action){await closeModal();const e=page.locator(`#finditExactShell [data-fx="${action}"]:visible,#finditExactShell [data-fxnav="${action}"]:visible`).first();if(!await e.count())fail(`missing visible ${action} action`);await e.click({force:true});await page.waitForTimeout(250)}
+await page.goto(URL,{waitUntil:'domcontentloaded',timeout:60000});await page.waitForSelector('#finditExactShell',{state:'visible'});
+const hero=await page.locator('#finditExactShell').innerText();if(!/Find anything\./i.test(hero)||!/Anywhere\./i.test(hero))fail('exact dashboard not visible');if(await page.locator('#v10CommandCentre').isVisible().catch(()=>false))fail('old V10 dashboard visible');
+await page.evaluate(()=>localStorage.removeItem('findit_premium_beta'));await page.reload({waitUntil:'domcontentloaded'});await page.waitForSelector('#finditExactShell',{state:'visible'});await openAction('compare');if(!await page.locator('#premiumModal:not(.hidden)').isVisible().catch(()=>false)&&!/premium/i.test(await page.locator('body').innerText()))fail('Free compare did not route to Premium');console.log('FREE_GATE_PASS');
+await page.evaluate(()=>localStorage.setItem('findit_premium_beta','1'));await page.reload({waitUntil:'domcontentloaded'});await page.waitForSelector('#finditExactShell',{state:'visible'});
+await page.locator('#finditExactShell [data-location-direct]').click();await page.waitForFunction(()=>Number.isFinite(Number(window.finditState?.coords?.lat))&&Number.isFinite(Number(window.finditState?.coords?.lon)),null,{timeout:20000});const loc=await page.evaluate(()=>window.finditState.coords);if(Math.abs(loc.lat+25.7479)>.05||Math.abs(loc.lon-28.2293)>.05)fail(`bad coordinates ${JSON.stringify(loc)}`);console.log('LOCATION_PASS',JSON.stringify(loc));
+for(const f of fixtures){
+ await closeModal();await page.locator('#photo').setInputFiles(f.file);await page.waitForTimeout(350);if(await page.locator('#fxSearchNow').isDisabled())fail(`${f.id}: identify disabled after upload`);
+ const before=await page.locator('#fxProductName').innerText().catch(()=> '');await page.locator('#fxSearchNow').click();
+ await page.waitForFunction(prev=>{const i=window.finditState?.result?.identification;const n=i?.name||i?.object||'';return !!n&&n!==prev},before,{timeout:60000});await page.waitForTimeout(1200);
+ const snap=await page.evaluate(()=>{const s=window.finditState||{};const i=s.result?.identification||{};return{name:i.name||'',object:i.object||'',brand:i.brand||'',model:i.model||'',category:i.retailCategory||i.category||'',query:i.searchQuery||'',confidence:i.confidence,exact:i.exactIdentityVerified===true,fxName:document.querySelector('#fxProductName')?.textContent||'',status:document.querySelector('#fxStatus')?.textContent||'',radius:Number(s.radius||10),stores:(s.stores||[]).map(x=>({name:x.name,distance:Number(x.distanceKm??x.distance),lat:x.lat,lon:x.lon??x.lng,branchStockVerified:x.branchStockVerified===true,stock:x.stockStatus||x.stock||x.availability||null})),offers:(s.offers||[]).map(x=>({retailer:x.retailer?.name||x.retailer,title:x.title||x.product_name||x.name,price:x.price,currency:x.currency,url:x.url||x.product_url,verified:x.verified===true,branchStockVerified:x.branchStockVerified===true,availability:x.availability||null}))}});
+ const label=[snap.name,snap.object,snap.brand,snap.model,snap.category,snap.query].join(' ');if(!f.expect.test(label))fail(`${f.id}: implausible identification ${label}`);if(!snap.fxName||/No item selected/i.test(snap.fxName))fail(`${f.id}: dashboard stale`);
+ if(snap.offers.some(o=>o.price!=null&&(!Number.isFinite(Number(o.price))||Number(o.price)<0)))fail(`${f.id}: invalid price`);if(snap.offers.some(o=>!o.verified))fail(`${f.id}: unverified offer leaked`);if(snap.offers.some(o=>o.url&&!/^https?:\/\//.test(o.url)))fail(`${f.id}: invalid retailer URL`);
+ if(snap.stores.some(s=>Number.isFinite(s.distance)&&(s.distance<0||s.distance>snap.radius+1.1)))fail(`${f.id}: store outside radius`);
+ await openAction('product');const productBody=await page.locator('#fxStableBody').innerText().catch(()=> '');if(/Search for a product first|No product selected/i.test(productBody))fail(`${f.id}: Product Info lost current product`);if(!/Product Information/i.test(productBody))fail(`${f.id}: Product Info did not open`);
+ await openAction('compare');const compareBody=await page.locator('#fxStableBody').innerText().catch(()=> '');if(/Search for a product first|No product selected/i.test(compareBody))fail(`${f.id}: Compare lost current product`);if(!/Compare Prices|verified retailer|price/i.test(compareBody))fail(`${f.id}: Compare did not open`);
+ await openAction('stock');const stockBody=await page.locator('#fxStableBody').innerText().catch(()=> '');if(/Search for a product first|No product selected/i.test(stockBody))fail(`${f.id}: Stock lost current product`);if(!/Stock|availability/i.test(stockBody))fail(`${f.id}: Stock did not open`);
+ console.log('USER_IMAGE_PASS',JSON.stringify({id:f.id,name:snap.name||snap.object,brand:snap.brand,model:snap.model,category:snap.category,confidence:snap.confidence,exact:snap.exact,stores:snap.stores.length,offers:snap.offers.length,price:snap.offers.find(x=>x.price!=null)?.price??null}));
+}
+await closeModal();await page.setViewportSize({width:390,height:844});if((await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth))>4)fail('mobile horizontal overflow');if(!await page.locator('#fxSearchNow').isVisible())fail('mobile Identify control hidden');
+if(pageErrors.length)fail(`page errors: ${pageErrors.join(' | ')}`);const bad=reqs.filter(([s])=>s>=500);if(bad.length)fail(`5xx responses: ${JSON.stringify(bad.slice(0,8))}`);console.log('LIVE_USER_IMAGE_MATRIX_PASS',JSON.stringify({url:URL,images:fixtures.length,requests:reqs.length,serverErrors:bad.length}));await browser.close();
