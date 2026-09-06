@@ -1,0 +1,31 @@
+name: Apply retailer discovery fix
+on:
+  push:
+    branches: [fix-retailer-discovery-20260906]
+permissions:
+  contents: write
+jobs:
+  patch:
+    if: ${{ !contains(github.event.head_commit.message, '[retailer-discovery-done]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix-retailer-discovery-20260906
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Patch retailer discovery
+        run: |
+          python3 scripts/apply-retailer-discovery-fix.py
+          node --check lib/retailer-coverage.js
+          node --check api/product-intelligence-v2.js
+          grep -q "BLOCKED" api/product-intelligence-v2.js
+      - name: Commit patch
+        run: |
+          git config user.name "findit-retailer-fix-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add lib/retailer-coverage.js
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Add public web fallback for exact retailer discovery [retailer-discovery-done]"
+          git push origin HEAD:fix-retailer-discovery-20260906
