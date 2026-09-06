@@ -2,7 +2,8 @@
 (()=>{
   if(window.__finditDashboardV8Loader)return;
   window.__finditDashboardV8Loader=true;
-  const loadPlanGuard=()=>{if(document.querySelector('script[data-findit-plan-guard]'))return;const g=document.createElement('script');g.src='/premium-dashboard-guard.js?v=20260905-plans1';g.async=false;g.dataset.finditPlanGuard='1';document.head.appendChild(g)};
+  const loadBigClean=()=>{if(document.querySelector('script[data-findit-big-clean]'))return;const b=document.createElement('script');b.src='/big-clean-fix.js?v=20260906-clean1';b.async=false;b.dataset.finditBigClean='1';document.head.appendChild(b)};
+  const loadPlanGuard=()=>{if(document.querySelector('script[data-findit-plan-guard]')){loadBigClean();return}const g=document.createElement('script');g.src='/premium-dashboard-guard.js?v=20260905-plans1';g.async=false;g.dataset.finditPlanGuard='1';g.onload=loadBigClean;g.onerror=loadBigClean;document.head.appendChild(g)};
   const loadPolish=()=>{if(!document.querySelector('script[data-findit-polish-v9]')){const p=document.createElement('script');p.src='/dashboard-polish-v9.js?v=20260903-fixes1';p.async=false;p.dataset.finditPolishV9='1';document.head.appendChild(p)}loadPlanGuard()};
   const s=document.createElement('script');s.src='/dashboard-runtime-v8.js?v=20260903-tools5';s.async=false;s.onload=loadPolish;s.onerror=loadPolish;document.head.appendChild(s);
   const hasLiveStock=el=>/\bLive Stock\b/i.test(el?.textContent||'');
