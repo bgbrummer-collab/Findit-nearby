@@ -1,0 +1,29 @@
+name: Apply live commerce verification fix
+on:
+  push:
+    branches: [verify-user-images-20260906]
+permissions:
+  contents: write
+jobs:
+  patch:
+    if: ${{ !contains(github.event.head_commit.message, '[commerce-fix-done]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: verify-user-images-20260906
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Patch verifier
+        run: |
+          python3 scripts/apply-live-commerce-verification-fix.py
+          node --check api/product-intelligence-v2.js
+      - name: Commit patch
+        run: |
+          git config user.name "findit-commerce-fix-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add api/product-intelligence-v2.js
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Add retailer reader fallback for live price and stock verification [commerce-fix-done]"
+          git push origin HEAD:verify-user-images-20260906
