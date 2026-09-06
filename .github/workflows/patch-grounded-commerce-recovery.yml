@@ -1,0 +1,41 @@
+name: Patch grounded commerce recovery
+on:
+  push:
+    branches: [fix-grounded-commerce-recovery-20260906]
+permissions:
+  contents: write
+jobs:
+  patch:
+    if: "!contains(github.event.head_commit.message, '[grounded-commerce-patched]')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix-grounded-commerce-recovery-20260906
+      - name: Preserve exact grounded price and availability recovery
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('api/product-intelligence-v2.js')
+          s=p.read_text()
+          old='Price and stock values are hints only because FindIt will independently verify the retailer page.'
+          new='Return current ONLINE price and ONLINE availability only when Google Search grounding supports them for that exact direct retailer product page. Never claim physical branch stock.'
+          assert old in s
+          s=s.replace(old,new,1)
+          old="if(!p||Number(x.confidence||0)<.62||!directProductUrl(x.url,p.domain))continue;out.push({product_name:String(x.title||q),price:null,currency:x.currency||'ZAR',availability:null,product_url:x.url,verified:false,source:'Grounded discovery candidate — source page verification required',retailer:{name:p.name,country:'ZA',source:'retailer_site'},matchScore:Number(x.confidence||0),branchStockVerified:false,branchPriceVerified:false,stockScope:'online',priceScope:'online',directionsAvailable:false,listingType:'retailer_candidate',onlineListing:true,checkedAt:new Date().toISOString()})"
+          new="if(!p||Number(x.confidence||0)<.84||!directProductUrl(x.url,p.domain)||!exactEnough(x.title||q,x.url,body,p))continue;const pv=parsePrice(x.price),av=parseStock(x.availability);if(pv==null&&av==null)continue;out.push({product_name:String(x.title||q),price:pv,currency:x.currency||'ZAR',availability:av,product_url:x.url,verified:true,searchGroundedVerified:true,evidenceLevel:'google_grounded_retailer',source:'Google-grounded exact retailer recovery',retailer:{name:p.name,country:'ZA',source:'retailer_site'},matchScore:Number(x.confidence||0),branchStockVerified:false,branchPriceVerified:false,stockScope:'online',priceScope:'online',directionsAvailable:false,listingType:'retailer_verified',onlineListing:true,checkedAt:new Date().toISOString()})"
+          assert old in s
+          s=s.replace(old,new,1)
+          p.write_text(s)
+          PY
+          node --check api/product-intelligence-v2.js
+          grep -q "Google-grounded exact retailer recovery" api/product-intelligence-v2.js
+          grep -q "branchStockVerified:false" api/product-intelligence-v2.js
+          grep -q "const BLOCKED" api/product-intelligence-v2.js
+      - name: Commit
+        run: |
+          git config user.name findit-commerce-recovery-bot
+          git config user.email actions@users.noreply.github.com
+          git add api/product-intelligence-v2.js
+          git commit -m "Preserve strict grounded exact price and availability recovery [grounded-commerce-patched]"
+          git push origin HEAD:fix-grounded-commerce-recovery-20260906
