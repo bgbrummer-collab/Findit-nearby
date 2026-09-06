@@ -91,7 +91,11 @@ Use multiple signals together: object shape, materials, construction, scale, pac
 productKind must be one of real_product,toy,miniature,replica,packaging,image_of_product,accessory,unknown. scaleClass must be one of full_size,handheld,wearable,tabletop,miniature,unknown.
 searchQuery must be the strongest truthful shopping query supported by the image. Include brand/model/size only when supported. retailCategory and likelyStoreTypes must match stores that genuinely sell the physical item.
 If uncertain between two objects, choose the broader truthful object and lower confidence. Return structured JSON only.`;
- let last;for(const model of [PRIMARY_MODEL,FALLBACK_MODEL,FAST_MODEL]){try{const x=await generateStructured(key,model,prompt,b64,mime);x.modelUsed=model;return x}catch(e){last=e}}throw last||Error('Gemini request failed');
+ let last;for(const model of [PRIMARY_MODEL,FALLBACK_MODEL,FAST_MODEL]){try{const x=await generateStructured(key,model,prompt,b64,mime);x.modelUsed=model;return x}catch(e){last=e}}
+ // A single transient model timeout should not turn an otherwise valid photo into a hard failure.
+ // Retry the primary vision model once after the normal model rotation; never fabricate an identity.
+ try{await new Promise(r=>setTimeout(r,180));const x=await generateStructured(key,PRIMARY_MODEL,prompt,b64,mime);x.modelUsed=PRIMARY_MODEL;x.retriedAfterProviderFailure=true;return x}catch(e){last=e}
+ if(last)last.fastFail=true;throw last||Error('Gemini request failed');
 }
 
 async function independentCheck(key,b64,mime){
