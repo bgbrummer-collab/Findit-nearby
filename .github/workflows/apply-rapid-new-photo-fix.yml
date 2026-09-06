@@ -1,0 +1,33 @@
+name: Apply rapid new-photo search fix
+on:
+  push:
+    branches: [fix-rapid-new-photo-search-20260906]
+permissions:
+  contents: write
+jobs:
+  patch:
+    if: "!contains(github.event.head_commit.message, '[rapid-search-done]')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix-rapid-new-photo-search-20260906
+      - name: Patch exact retailer search controller
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('exact-retailer-fix.js')
+          s=p.read_text()
+          needle="  document.addEventListener('click',runSearch,true);\n})();"
+          repl="  document.addEventListener('findit:new-photo-selected',()=>{if(!running)return;runId++;running=false;const target=$('#search');if(target)target.disabled=!S()?.file;status(S()?.coords?'New image and location ready. Identify it now.':'New image ready. Identify it now.');});\n  document.addEventListener('click',runSearch,true);\n})();"
+          if needle not in s: raise SystemExit('patch anchor not found')
+          p.write_text(s.replace(needle,repl,1))
+          PY
+          node --check exact-retailer-fix.js
+      - name: Commit patch
+        run: |
+          git config user.name findit-rapid-search-bot
+          git config user.email actions@users.noreply.github.com
+          git add exact-retailer-fix.js
+          git commit -m "Allow a new photo search while previous enrichment finishes [rapid-search-done]"
+          git push origin HEAD:fix-rapid-new-photo-search-20260906
