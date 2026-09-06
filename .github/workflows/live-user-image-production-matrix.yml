@@ -2,6 +2,8 @@ name: Live User Image Production Matrix
 on:
   push:
     branches: [finish-premium-workspace-20260905]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
