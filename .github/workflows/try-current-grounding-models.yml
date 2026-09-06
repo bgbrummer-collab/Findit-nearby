@@ -1,0 +1,30 @@
+name: Try current Gemini grounding models
+on:
+  push:
+    branches: [debug-commerce-grounding-20260906]
+permissions:
+  contents: write
+jobs:
+  patch:
+    if: "!contains(github.event.head_commit.message, '[current-grounding-models]')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: debug-commerce-grounding-20260906
+      - run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('api/product-intelligence-v2.js')
+          s=p.read_text()
+          old="for(const model of ['gemini-2.5-flash','gemini-2.5-flash-lite'])"
+          new="for(const model of ['gemini-3.6-flash','gemini-3.5-flash-lite'])"
+          assert old in s
+          p.write_text(s.replace(old,new,1))
+          PY
+          node --check api/product-intelligence-v2.js
+          git config user.name findit-debug-bot
+          git config user.email actions@users.noreply.github.com
+          git add api/product-intelligence-v2.js
+          git commit -m "Try current Gemini grounding models [current-grounding-models]"
+          git push origin HEAD:debug-commerce-grounding-20260906
