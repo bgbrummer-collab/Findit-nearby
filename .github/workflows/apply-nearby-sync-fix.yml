@@ -1,0 +1,33 @@
+name: Apply nearby sync fix
+on:
+  push:
+    branches: [fix-final-nearby-sync-20260906]
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix-final-nearby-sync-20260906
+      - name: Patch event listener safely
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('redesign-v4.js')
+          s=p.read_text()
+          old="document.addEventListener('findit:nearby-updated',syncAll);"
+          new="document.addEventListener('findit:nearby-updated',()=>syncAll());"
+          if old not in s:
+              print('Already fixed')
+              raise SystemExit(0)
+          p.write_text(s.replace(old,new,1))
+          PY
+          node --check redesign-v4.js
+          git config user.name findit-sync-fix-bot
+          git config user.email actions@users.noreply.github.com
+          git add redesign-v4.js
+          git diff --cached --quiet && exit 0
+          git commit -m "Prevent nearby event from overwriting product result [nearby-sync-fix]"
+          git push
