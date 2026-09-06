@@ -1,0 +1,30 @@
+name: Apply Search Timeout Retry
+on:
+  push:
+    branches: [fix-postverify-grounded-recovery-20260906]
+permissions:
+  contents: write
+jobs:
+  patch:
+    if: ${{ !contains(github.event.head_commit.message, '[search-retry-done]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix-postverify-grounded-recovery-20260906
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: python3 scripts/patch-search-timeout-retry.py
+      - run: node --check api/search.js
+      - name: Verify safety guard remains
+        run: |
+          grep -q "const RESTRICTED=" api/search.js
+          grep -q "retriedAfterProviderFailure" api/search.js
+      - name: Commit patch
+        run: |
+          git config user.name "findit-search-retry-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add api/search.js
+          git commit -m "Retry primary image model after transient provider failures [search-retry-done]"
+          git push
