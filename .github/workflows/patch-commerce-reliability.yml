@@ -1,0 +1,56 @@
+name: Patch commerce source reliability
+on:
+  push:
+    branches: [fix-commerce-source-reliability-20260906]
+permissions:
+  contents: write
+jobs:
+  patch:
+    if: "!contains(github.event.head_commit.message, '[commerce-reliability-patched]')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix-commerce-source-reliability-20260906
+      - name: Improve exact retailer discovery without weakening verification
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          p=Path('lib/product-resolver.js')
+          s=p.read_text()
+          # Current Gemini grounding models. Keep strict exact-match filtering unchanged.
+          s=s.replace("for(const model of ['gemini-2.5-flash','gemini-2.5-flash-lite'])","for(const model of ['gemini-3.6-flash','gemini-3.5-flash-lite'])")
+
+          marker="function offerFromCandidate(c,q,b,p){"
+          idx=s.index(marker)
+          helper="""function retailerQueryVariants(q,b){const size=toks(q).filter(t=>/^\\d+(?:\\.\\d+)?(?:ml|mg|g|kg|l|gb|tb)$/.test(t));const visible=[...(Array.isArray(b.visibleText)?b.visibleText:[])].flatMap(toks);const model=toks(b.model);const raw=[q,[clean(b.brand),...visible.slice(0,7),clean(b.object),...size].filter(Boolean).join(' '),[clean(b.brand),...model.slice(0,7),clean(b.object),...size].filter(Boolean).join(' ')];const out=[],seen=new Set();for(const x of raw){const v=clean(x).replace(/\\s+/g,' ').slice(0,180),k=norm(v);if(!v||seen.has(k))continue;seen.add(k);out.push(v)}return out.slice(0,3)}\n"""
+          s=s[:idx]+helper+s[idx:]
+
+          pat=r"async function resolveRetailer\(p,q,b\)\{.*?\}\nfunction parseJson"
+          m=re.search(pat,s,flags=re.S)
+          assert m, 'resolveRetailer function not found'
+          repl="""async function resolveRetailer(p,q,b){const terms=retailerQueryVariants(q,b),search=directSearch(p,q),cands=[];const collect=async(u,term,retry=true)=>{const t=retry?await readerRetry(u,9000):await reader(u,6500);for(const c of urlsFrom(t,term,b,p))if(!cands.some(x=>x.url===c.url))cands.push(c)};const primary=[search,`https://www.bing.com/search?q=${encodeURIComponent(`site:${p.domain} \"${q}\"`)}`,`https://www.google.com/search?q=${encodeURIComponent(`site:${p.domain} \"${q}\"`)}`];for(const u of primary){await collect(u,q,true);if(cands.length>=4)break}if(!cands.length&&terms[1]){const alt=terms[1];await collect(directSearch(p,alt),alt,false);if(!cands.length)await collect(`https://www.bing.com/search?q=${encodeURIComponent(`site:${p.domain} \"${alt}\"`)}`,alt,false)}const offers=[];for(const c of cands.slice(0,4)){const t=await readerRetry(c.url,10500);let o=offerFromText(t,c.url,q,b,p,c.label);if(!o)o=offerFromCandidate(c,q,b,p);if(o)offers.push(o)}return{status:{name:p.name,checked:true,searchUrl:search,exactListingFound:cands.length>0,verifiedOfferFound:offers.length>0,branchDataConnected:false,capability:capabilitySummary(p,false),error:offers.length?'':(cands.length?'product_page_unreadable':'search_unavailable')},offers}}\nfunction parseJson"""
+          s=s[:m.start()]+repl+s[m.end():]
+          p.write_text(s)
+
+          p=Path('api/product-intelligence-v2.js')
+          s=p.read_text()
+          s=s.replace("for(const model of ['gemini-2.5-flash','gemini-2.5-flash-lite'])","for(const model of ['gemini-3.6-flash','gemini-3.5-flash-lite'])")
+          p.write_text(s)
+          PY
+          node --check lib/product-resolver.js
+          node --check api/product-intelligence-v2.js
+          grep -q 'retailerQueryVariants' lib/product-resolver.js
+          grep -q 'gemini-3.6-flash' lib/product-resolver.js
+          grep -q 'gemini-3.6-flash' api/product-intelligence-v2.js
+          grep -q 'branchStockVerified:false' lib/product-resolver.js
+          grep -q 'const BLOCKED' api/product-intelligence-v2.js
+      - name: Commit
+        run: |
+          git config user.name findit-commerce-reliability-bot
+          git config user.email actions@users.noreply.github.com
+          git add lib/product-resolver.js api/product-intelligence-v2.js
+          git commit -m "Improve exact commerce source reliability [commerce-reliability-patched]"
+          git push origin HEAD:fix-commerce-source-reliability-20260906
