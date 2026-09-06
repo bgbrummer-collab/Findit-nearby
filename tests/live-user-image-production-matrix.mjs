@@ -1,7 +1,6 @@
 import { chromium } from 'playwright';
 import fs from 'node:fs';
-import path from 'node:path';
-const URL='https://findit-nearby.vercel.app/';
+const URL=process.env.FINDIT_URL||'https://findit-nearby.vercel.app/';
 const fixtures=[
  {id:'marc',src:'tests/user-images/marc-anthony.jpg.b64',ext:'jpg',expect:/marc|anthony|curl|hair|lotion|condition/i},
  {id:'twinsaver',src:'tests/user-images/twinsaver.webp.b64',ext:'webp',expect:/twinsaver|toilet|tissue|paper|roll/i},
@@ -36,4 +35,4 @@ for(const f of fixtures){
  console.log('USER_IMAGE_PASS',JSON.stringify({id:f.id,name:snap.name||snap.object,brand:snap.brand,model:snap.model,category:snap.category,confidence:snap.confidence,exact:snap.exact,stores:snap.stores.length,offers:snap.offers.length,price:snap.offers.find(x=>x.price!=null)?.price??null}));
 }
 await closeModal();await page.setViewportSize({width:390,height:844});if((await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth))>4)fail('mobile horizontal overflow');if(!await page.locator('#fxSearchNow').isVisible())fail('mobile Identify control hidden');
-if(pageErrors.length)fail(`page errors: ${pageErrors.join(' | ')}`);const bad=reqs.filter(([s])=>s>=500);if(bad.length)fail(`5xx responses: ${JSON.stringify(bad.slice(0,8))}`);console.log('LIVE_USER_IMAGE_MATRIX_PASS',JSON.stringify({images:fixtures.length,requests:reqs.length,serverErrors:bad.length}));await browser.close();
+if(pageErrors.length)fail(`page errors: ${pageErrors.join(' | ')}`);const bad=reqs.filter(([s])=>s>=500);if(bad.length)fail(`5xx responses: ${JSON.stringify(bad.slice(0,8))}`);console.log('LIVE_USER_IMAGE_MATRIX_PASS',JSON.stringify({url:URL,images:fixtures.length,requests:reqs.length,serverErrors:bad.length}));await browser.close();
