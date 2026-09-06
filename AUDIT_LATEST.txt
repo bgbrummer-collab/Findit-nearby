@@ -1,8 +1,8 @@
 FindIt production audit
-Commit: 05e11cefbf3e7804446601f0e748e4ebfce50f82
+Commit: 9522a04d135a7ac30b7bf6e917ce8b72da837b3a
 Release smoke: PASS (exit 0)
 Dashboard readiness: PASS (exit 0)
-Every dashboard function: FAIL (exit 1)
+Every dashboard function: PASS (exit 0)
 Current dashboard real-user audit: FAIL (exit 1)
 
 --- release smoke ---
@@ -66,7 +66,7 @@ FINDIT_DASHBOARD_READINESS_PASS
 [PASS] 1440px action product responds
 [PASS] 1440px action compare responds
 [PASS] 1440px action nearby responds
-[FAIL] 1440px Ask FindIt entry point responds assistant/search entry point produced no usable UI
+[PASS] 1440px Ask FindIt entry point responds
 [PASS] 1440px premium entry point responds
 [PASS] 1440px feedback form present and usable
 [PASS] 1440px no duplicate ids
@@ -90,17 +90,15 @@ FINDIT_DASHBOARD_READINESS_PASS
 [PASS] 390px action product responds
 [PASS] 390px action compare responds
 [PASS] 390px action nearby responds
-[FAIL] 390px Ask FindIt entry point responds assistant/search entry point produced no usable UI
+[PASS] 390px Ask FindIt entry point responds
 [PASS] 390px premium entry point responds
 [PASS] 390px feedback form present and usable
 [PASS] 390px no duplicate ids
 [PASS] 390px no uncaught JS errors
 
-46 PASS / 2 FAIL
+48 PASS / 0 FAIL
 
-FUNCTION FAILURES
-1440px Ask FindIt entry point responds: assistant/search entry point produced no usable UI
-390px Ask FindIt entry point responds: assistant/search entry point produced no usable UI
+FINDIT_ALL_DASHBOARD_FUNCTIONS_PASS
 
 --- current dashboard real-user audit ---
 PASS: desktop shell is visible
