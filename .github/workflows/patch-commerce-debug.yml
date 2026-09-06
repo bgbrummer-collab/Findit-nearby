@@ -1,0 +1,54 @@
+name: Patch commerce grounding diagnostics
+on:
+  push:
+    branches: [debug-commerce-grounding-20260906]
+permissions:
+  contents: write
+jobs:
+  patch:
+    if: "!contains(github.event.head_commit.message, '[commerce-debug-patched]')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: debug-commerce-grounding-20260906
+      - name: Add safe diagnostics
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('api/product-intelligence-v2.js')
+          s=p.read_text()
+          old="async function universalGroundedRecovery(body,result){const key=process.env.GEMINI_API_KEY;if(!key)return result;"
+          new="async function universalGroundedRecovery(body,result){const key=process.env.GEMINI_API_KEY;console.log('[commerce-debug] grounding-start',{hasKey:Boolean(key),query:String(body.searchQuery||body.query||body.name||'').slice(0,160),existing:(result.offers||[]).length});if(!key){console.log('[commerce-debug] no-key');return result;}"
+          assert old in s
+          s=s.replace(old,new,1)
+          old="if(!r.ok)continue;parsed=parseJson((d?.candidates?.[0]?.content?.parts||[]).map(x=>x.text||'').join(''));if(parsed?.offers?.length)break}catch{}}"
+          new="console.log('[commerce-debug] model-response',{model,status:r.status,ok:r.ok,error:d?.error?.message||'',candidateParts:(d?.candidates?.[0]?.content?.parts||[]).length});if(!r.ok)continue;const raw=(d?.candidates?.[0]?.content?.parts||[]).map(x=>x.text||'').join('');parsed=parseJson(raw);console.log('[commerce-debug] parsed',{model,offerCount:parsed?.offers?.length||0,rawPreview:raw.slice(0,1200)});if(parsed?.offers?.length)break}catch(e){console.log('[commerce-debug] model-exception',{model,message:e?.message||String(e)})}}"
+          assert old in s
+          s=s.replace(old,new,1)
+          old="if(!parsed?.offers?.length)return result;const out=[];for(const x of parsed.offers){"
+          new="if(!parsed?.offers?.length){console.log('[commerce-debug] no-grounded-offers');return result;}const out=[];for(const x of parsed.offers){"
+          assert old in s
+          s=s.replace(old,new,1)
+          old="if(!p||Number(x.confidence||0)<.84||!directProductUrl(x.url,p.domain)||!exactEnough(x.title||q,x.url,body,p))continue;const pv=parsePrice(x.price),av=parseStock(x.availability);if(pv==null&&av==null)continue;"
+          new="const reason=!p?'no-profile':Number(x.confidence||0)<.84?'low-confidence':!directProductUrl(x.url,p.domain)?'not-direct-url':!exactEnough(x.title||q,x.url,body,p)?'not-exact':null;console.log('[commerce-debug] candidate',{retailer:x.retailer,title:x.title,url:x.url,confidence:x.confidence,price:x.price,availability:x.availability,reason});if(reason)continue;const pv=parsePrice(x.price),av=parseStock(x.availability);if(pv==null&&av==null){console.log('[commerce-debug] candidate-no-commerce',{retailer:x.retailer});continue;}"
+          assert old in s
+          s=s.replace(old,new,1)
+          old="return mergeOffers(result,out)}"
+          new="console.log('[commerce-debug] accepted',{count:out.length});return mergeOffers(result,out)}"
+          # only replace first occurrence after recovery function by locating from its start
+          idx=s.index('async function universalGroundedRecovery')
+          pos=s.find(old,idx)
+          assert pos>=0
+          s=s[:pos]+new+s[pos+len(old):]
+          p.write_text(s)
+          PY
+          node --check api/product-intelligence-v2.js
+          grep -q '\[commerce-debug\]' api/product-intelligence-v2.js
+      - name: Commit
+        run: |
+          git config user.name findit-debug-bot
+          git config user.email actions@users.noreply.github.com
+          git add api/product-intelligence-v2.js
+          git commit -m "Instrument commerce grounding safely [commerce-debug-patched]"
+          git push origin HEAD:debug-commerce-grounding-20260906
