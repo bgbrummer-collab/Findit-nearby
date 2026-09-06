@@ -1,0 +1,24 @@
+name: Live User Image Production Matrix
+on:
+  push:
+    branches: [finish-premium-workspace-20260905]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  live-matrix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm pkg set type=module
+          npm install --save-dev playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Test five real user images against production
+        run: node tests/live-user-image-production-matrix.mjs
