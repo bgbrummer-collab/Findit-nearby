@@ -1,7 +1,7 @@
 name: Live User Image Production Matrix
 on:
   push:
-    branches: [main]
+    branches: [finish-premium-workspace-20260905]
   workflow_dispatch:
 permissions:
   contents: read
@@ -21,8 +21,7 @@ jobs:
           npm install --save-dev playwright@1.55.0
           npx playwright install --with-deps chromium
       - name: Wait for production deployment
-        if: github.event_name == 'push'
-        run: sleep 70
+        run: sleep 20
       - name: Test five real user images against production
         env:
           FINDIT_URL: https://findit-nearby.vercel.app/
