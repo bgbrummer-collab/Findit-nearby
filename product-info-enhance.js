@@ -8,6 +8,14 @@
 
   let loading=false;
   let dashboardLoading=false;
+  function loadClickGuard(){
+    if(window.__finditProductInfoClickFix||document.querySelector('script[data-findit-product-click-fix]'))return;
+    const g=document.createElement('script');
+    g.src='product-info-click-fix.js?v=20260907-clickhang1';
+    g.async=false;
+    g.dataset.finditProductClickFix='1';
+    document.head.appendChild(g);
+  }
   function loadQualityGuard(){
     if(window.__finditProductInfoQualityFix||document.querySelector('script[data-findit-product-quality]'))return;
     const q=document.createElement('script');
@@ -17,6 +25,7 @@
     document.head.appendChild(q);
   }
   function loadDashboardRuntime(){
+    loadClickGuard();
     if(window.__finditDashboardV8Loader||dashboardLoading){loadQualityGuard();return;}
     if(!document.querySelector('#finditExactShell'))return;
     if(document.querySelector('script[data-findit-dashboard-stable]')){loadQualityGuard();return;}
@@ -29,6 +38,7 @@
     s.onerror=()=>{dashboardLoading=false;loadQualityGuard();};
     document.head.appendChild(s);
   }
+  loadClickGuard();
   const dashboardObserver=new MutationObserver(()=>{
     if(document.querySelector('#finditExactShell')){
       loadDashboardRuntime();
@@ -41,7 +51,7 @@
   setTimeout(loadQualityGuard,1200);
 
   function loadResearchRuntime(){
-    if(window.__finditAiProductInsightsV3)return Promise.resolve();
+    if(window.__finditAiProductInsightsV5)return Promise.resolve();
     const existing=document.querySelector('script[data-findit-product-insights-runtime]');
     if(existing){
       if(existing.dataset.loaded==='1')return Promise.resolve();
@@ -69,8 +79,4 @@
   // Do not fetch the research runtime during the browser's initial page load.
   // Load it only once results exist or the user opens Product Information.
   document.addEventListener('findit:results-rendered',()=>setTimeout(loadResearchRuntime,0));
-  window.addEventListener('click',e=>{
-    const trigger=e.target?.closest?.('#finditExactShell [data-fx="product"]');
-    if(trigger){loadQualityGuard();loadResearchRuntime();}
-  },true);
 })();
