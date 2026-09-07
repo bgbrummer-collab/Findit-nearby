@@ -26,3 +26,5 @@ jobs:
         env:
           FINDIT_URL: https://findit-nearby.vercel.app/
         run: node tests/live-user-image-production-matrix.mjs
+      - name: Test full Nike retailer enrichment against production
+        run: node tests/live-nike-enrichment.mjs
