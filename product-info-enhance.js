@@ -6,11 +6,16 @@
   if(window.__finditProductInfoEnhance)return;
   window.__finditProductInfoEnhance=true;
   let loading=false,dashboardLoading=false;
+  function loadClickGuard(){
+    if(window.__finditProductInfoClickFix||document.querySelector('script[data-findit-product-click-fix]'))return;
+    const g=document.createElement('script');g.src='product-info-click-fix.js?v=20260907-final1';g.async=false;g.dataset.finditProductClickFix='1';document.head.appendChild(g);
+  }
   function loadQualityGuard(){
     if(window.__finditProductInfoQualityFix||document.querySelector('script[data-findit-product-quality]'))return;
     const q=document.createElement('script');q.src='product-info-quality-fix.js?v=20260907-proscons1';q.async=false;q.dataset.finditProductQuality='1';document.head.appendChild(q);
   }
   function loadDashboardRuntime(){
+    loadClickGuard();
     if(window.__finditDashboardV8Loader||dashboardLoading){loadQualityGuard();return}
     if(!document.querySelector('#finditExactShell'))return;
     if(document.querySelector('script[data-findit-dashboard-stable]')){loadQualityGuard();return}
@@ -18,8 +23,9 @@
     s.onload=()=>{dashboardLoading=false;loadQualityGuard();try{document.dispatchEvent(new CustomEvent('findit:dashboard-sync'))}catch{}};
     s.onerror=()=>{dashboardLoading=false;loadQualityGuard()};document.head.appendChild(s);
   }
+  loadClickGuard();
   const observer=new MutationObserver(()=>{if(document.querySelector('#finditExactShell')){loadDashboardRuntime();observer.disconnect()}});observer.observe(document.documentElement,{childList:true,subtree:true});
-  setTimeout(loadDashboardRuntime,0);setTimeout(loadDashboardRuntime,800);setTimeout(loadQualityGuard,1200);
+  setTimeout(loadClickGuard,0);setTimeout(loadDashboardRuntime,0);setTimeout(loadDashboardRuntime,800);setTimeout(loadQualityGuard,1200);
   function loadResearchRuntime(){
     if(window.__finditAiProductInsightsV5)return Promise.resolve();
     const existing=document.querySelector('script[data-findit-product-insights-runtime]');
