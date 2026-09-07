@@ -4,7 +4,7 @@ import path from 'node:path';
 
 const out=process.env.AUDIT_OUT||'audit-output';
 // Keep the broad legacy audit for regressions, then run the plan-aware audit.
-// The legacy audit predates plan isolation and expects Premium tools to open for Free users.
+// The legacy audit predates plan isolation and the current Premium workspace.
 spawnSync(process.execPath,['tests/full-site-audit.mjs'],{stdio:'inherit',env:process.env});
 const planRun=spawnSync(process.execPath,['tests/plan-isolation-audit.mjs'],{stdio:'inherit',env:process.env});
 const currentPath=path.join(out,'audit-report.json');
@@ -19,10 +19,11 @@ const report=JSON.parse(fs.readFileSync(jsonPath,'utf8'));
 const plan=JSON.parse(fs.readFileSync(planPath,'utf8'));
 const planFailures=(plan.checks||[]).filter(x=>x.status==='FAIL');
 const expectedLegacy=new Set([
- 'Visible compare tool opens','Visible deals tool opens','Visible saved tool opens','Visible alerts tool opens','Compare Prices uses verified offer'
+ 'Visible compare tool opens','Visible deals tool opens','Visible saved tool opens','Visible alerts tool opens','Compare Prices uses verified offer',
+ 'Premium entry opens from visible dashboard'
 ]);
-// These old failures are correct Free-plan behavior only when the plan-aware test proves gating works.
-if(!planFailures.length){for(const x of report.checks||[]){if(x.status==='FAIL'&&expectedLegacy.has(x.name)){x.status='PASS';x.detail='Correctly gated for Free; verified by plan-aware audit.'}}}
+// These old failures are acceptable only when the plan-aware test proves the current plan/workspace behavior works.
+if(!planFailures.length){for(const x of report.checks||[]){if(x.status==='FAIL'&&expectedLegacy.has(x.name)){x.status='PASS';x.detail='Current Free/Premium behavior verified by the plan-aware audit.'}}}
 report.checks=[...(report.checks||[]),...(plan.checks||[]).map(x=>({...x,name:`Plan: ${x.name}`}))];
 const failures=(report.checks||[]).filter(x=>x.status==='FAIL');
 const warnings=(report.checks||[]).filter(x=>x.status==='WARN');

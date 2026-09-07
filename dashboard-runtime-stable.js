@@ -10,5 +10,5 @@
   const wireLiveStock=()=>{const shell=document.querySelector('#finditExactShell');if(!shell)return;const labels=[...shell.querySelectorAll('*')].filter(el=>hasLiveStock(el)&&![...el.children].some(hasLiveStock));labels.forEach(label=>{const target=label.closest('[data-fx],button,[role="button"],article')||label.parentElement||label;target.dataset.fx='stock'})};
   wireLiveStock();document.addEventListener('findit:dashboard-sync',wireLiveStock);new MutationObserver(wireLiveStock).observe(document.documentElement,{childList:true,subtree:true});setTimeout(wireLiveStock,100);setTimeout(wireLiveStock,700);
   window.addEventListener('click',e=>{const el=e.target?.closest?.('#finditExactShell [data-fx="stock"]');if(!el)return;e.preventDefault();e.stopImmediatePropagation();window.finditDashboardAction?.('stock')},true);
-  window.addEventListener('click',e=>{const el=e.target?.closest?.('#finditExactShell [data-fx="product"]');if(!el)return;e.preventDefault();e.stopImmediatePropagation();const run=()=>{if(typeof window.finditDashboardAction==='function'){window.finditDashboardAction('product');return true}return false};if(run())return;let tries=0;const timer=setInterval(()=>{if(run()||++tries>20)clearInterval(timer)},50)},true);
+  // Product Information is intentionally owned only by product-info-click-fix.js.
 })();
