@@ -9,11 +9,9 @@ jobs:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
-      - name: Wait for latest preview alias
-        run: sleep 20
-      - name: Probe exact conditioner commerce on preview
+      - name: Probe exact conditioner commerce on patched preview
         env:
-          URL: https://findit-nearby-git-fix-live-commerce-groun-e17df1-findit-nearby1.vercel.app/api/product-intelligence-v2
+          URL: https://findit-nearby-esn4z7gxa-findit-nearby1.vercel.app/api/product-intelligence-v2?_vercel_share=DRAQPPri15ftC3QO1syHS6qND1ELXaFd
         run: |
           set -euo pipefail
           cat > /tmp/body.json <<'JSON'
@@ -32,7 +30,7 @@ jobs:
             "exactIdentityConfidence":0.98
           }
           JSON
-          code=$(curl --max-time 110 -sS -o /tmp/out.json -w '%{http_code}' -H 'content-type: application/json' --data-binary @/tmp/body.json "$URL")
+          code=$(curl -L --max-time 110 -sS -o /tmp/out.json -w '%{http_code}' -H 'content-type: application/json' --data-binary @/tmp/body.json "$URL")
           echo "HTTP_STATUS=$code"
           cat /tmp/out.json
           echo
