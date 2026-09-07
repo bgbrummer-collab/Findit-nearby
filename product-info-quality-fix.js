@@ -12,6 +12,7 @@ const classes=[
  ['footwear',/\b(shoe|shoes|sneaker|sneakers|trainer|trainers|footwear)\b/i],['toilet-paper',/\b(toilet paper|bath tissue|toilet tissue)\b/i],
  ['hair-care',/\b(conditioner|shampoo|hair care|curl cream|styling cream)\b/i],['eyewear',/\b(glasses|eyeglasses|spectacles|eyewear|sunglasses)\b/i]
 ];
+const unknownCons='No trustworthy product-specific limitations or drawbacks have been verified yet.';
 function typeOf(text=''){for(const [k,re] of classes)if(re.test(String(text)))return k;return''}
 function conflicting(i,text){const wanted=typeOf([i.searchQuery,i.name,i.object,i.model,i.category,i.retailCategory].filter(Boolean).join(' '));const got=typeOf(text);return !!(wanted&&got&&wanted!==got)}
 function sectionHTML(title,msg){return`<h4>${esc(title)}</h4><ul><li>${esc(msg)}</li></ul>`}
@@ -24,13 +25,13 @@ function repair(box){
   const body=box.firstElementChild||box;
   if(conflicting(i,text)){
    const label=i.searchQuery||i.name||i.object||'this product';
-   body.innerHTML=`<b>What it does</b><small>FindIt identified this as ${esc(label)}, but the available web research conflicted with that product type, so the conflicting description was removed.</small>${sectionHTML('Pros','No trustworthy product-specific pros have been verified yet.')}${sectionHTML('Cons / considerations','No trustworthy product-specific cons or considerations have been verified yet.')}`;
+   body.innerHTML=`<b>What it does</b><small>FindIt identified this as ${esc(label)}, but the available web research conflicted with that product type, so the conflicting description was removed.</small>${sectionHTML('Pros','No trustworthy product-specific pros have been verified yet.')}${sectionHTML('Cons / considerations',unknownCons)}`;
    try{localStorage.removeItem('finditProductResearchCacheV1')}catch{}
    return;
   }
   const html=body.innerHTML||'';
   if(!/<h4[^>]*>\s*Pros\s*<\/h4>/i.test(html))body.insertAdjacentHTML('beforeend',sectionHTML('Pros','No trustworthy product-specific pros have been verified yet.'));
-  if(!/<h4[^>]*>\s*(Cons|Cons \/ considerations|Considerations)/i.test(html))body.insertAdjacentHTML('beforeend',sectionHTML('Cons / considerations','No trustworthy product-specific cons or considerations have been verified yet.'));
+  if(!/<h4[^>]*>\s*(Cons|Cons \/ considerations|Considerations)/i.test(html))body.insertAdjacentHTML('beforeend',sectionHTML('Cons / considerations',unknownCons));
  }finally{box.dataset.qualityRepairing='0'}
 }
 function scan(){const box=$('#fxStableResearch');if(box)repair(box)}
