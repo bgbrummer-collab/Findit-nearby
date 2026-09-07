@@ -1,0 +1,52 @@
+name: Test commerce preview
+
+on:
+  push:
+    branches: [fix-live-commerce-grounding-20260907]
+
+jobs:
+  probe:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for latest preview alias
+        run: sleep 20
+      - name: Probe exact conditioner commerce on preview
+        env:
+          URL: https://findit-nearby-git-fix-live-commerce-groun-e17df1-findit-nearby1.vercel.app/api/product-intelligence-v2
+        run: |
+          set -euo pipefail
+          cat > /tmp/body.json <<'JSON'
+          {
+            "query":"Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
+            "searchQuery":"Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
+            "name":"Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
+            "object":"conditioner",
+            "brand":"Marc Anthony",
+            "model":"Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
+            "category":"hair care",
+            "retailCategory":"beauty",
+            "visibleText":["MARC ANTHONY","STRICTLY CURLS","3X MOISTURE"],
+            "features":["curl conditioner","moisture","250ml"],
+            "exactIdentityVerified":true,
+            "exactIdentityConfidence":0.98
+          }
+          JSON
+          code=$(curl --max-time 110 -sS -o /tmp/out.json -w '%{http_code}' -H 'content-type: application/json' --data-binary @/tmp/body.json "$URL")
+          echo "HTTP_STATUS=$code"
+          cat /tmp/out.json
+          echo
+          test "$code" = "200"
+          node <<'NODE'
+          const fs=require('fs');
+          const d=JSON.parse(fs.readFileSync('/tmp/out.json','utf8'));
+          const offers=Array.isArray(d.offers)?d.offers:[];
+          console.log('OFFER_COUNT='+offers.length);
+          for(const o of offers) console.log('OFFER',JSON.stringify({retailer:o?.retailer?.name||o?.retailer,title:o.product_name,price:o.price,currency:o.currency,availability:o.availability,source:o.source,sourcePageVerified:o.sourcePageVerified,searchGroundedVerified:o.searchGroundedVerified,branchStockVerified:o.branchStockVerified,branchPriceVerified:o.branchPriceVerified,url:o.product_url}));
+          const priced=offers.filter(o=>Number.isFinite(Number(o.price))&&Number(o.price)>0);
+          const stock=offers.filter(o=>['in_stock','out_of_stock','preorder','backorder'].includes(String(o.availability||'')));
+          if(!priced.length) throw new Error('No trustworthy numeric online price returned');
+          if(!stock.length) throw new Error('No trustworthy online availability returned');
+          if(offers.some(o=>o.branchStockVerified===true||o.branchPriceVerified===true)) throw new Error('Online evidence promoted to branch evidence');
+          console.log('PREVIEW_COMMERCE_PASS');
+          NODE
