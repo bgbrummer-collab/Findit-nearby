@@ -37,6 +37,7 @@ on:
       - 'tests/dashboard-readiness.mjs'
       - 'tests/dashboard-all-functions.mjs'
       - 'tests/current-dashboard-real-user.mjs'
+      - 'tests/.final-production-rerun-*'
   workflow_dispatch:
 
 permissions:
