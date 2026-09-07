@@ -1,0 +1,21 @@
+name: Diagnose TwinSaver Product Info
+on:
+  push:
+    branches: [final-product-info-matrix-fix-20260907]
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: |
+          npm init -y >/dev/null 2>&1
+          npm pkg set type=module
+          npm install --save-dev playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - run: node tests/diagnose-twinsaver-product-info.mjs
