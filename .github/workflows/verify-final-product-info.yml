@@ -1,0 +1,32 @@
+name: Verify Final Product Information
+on:
+  push:
+    branches: [fix-product-info-final-20260907]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm pkg set type=module
+          npm install --save-dev playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Wait for preview
+        run: sleep 45
+      - name: Run five real user images against preview
+        env:
+          FINDIT_URL: https://findit-nearby-git-fix-product-info-final-c753a4-findit-nearby1.vercel.app/
+        run: node tests/live-user-image-production-matrix.mjs
+      - name: Run full plan-aware local audit
+        env:
+          FINDIT_URL: https://findit-nearby-git-fix-product-info-final-c753a4-findit-nearby1.vercel.app/
+          AUDIT_OUT: audit-output-final
+        run: timeout 180s node tests/final-audit-runner.mjs
