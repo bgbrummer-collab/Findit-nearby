@@ -41,10 +41,17 @@ await safe('Legacy engine does not cover dashboard',async()=>{const e=page.locat
 await safe('Dashboard navigation is complete',async()=>{const n=await page.locator('#finditExactShell .fx-nav [data-fxnav]').count();if(n<9)throw Error(`${n} nav controls`);return `${n} controls`});
 await page.screenshot({path:path.join(OUT,'01-dashboard-desktop.png')});
 
-for(const [nav,expected] of [['compare','Compare Prices'],['deals','Verified Deals'],['saved','Saved Items'],['history','History'],['alerts','Price & Stock Alerts'],['feedback','Feedback']]){
+await safe('Free compare is Premium-gated',async()=>{await clickVisible(page,'#finditExactShell [data-fxnav="compare"]');if(!await visible(page,'#premiumModal:not(.hidden)'))throw Error('Free compare bypassed Premium gate');return 'Premium gate shown'});
+await closeModal(page);await top(page);
+await page.evaluate(()=>localStorage.setItem('findit_premium_beta','1'));
+await page.reload({waitUntil:'domcontentloaded'});await page.waitForTimeout(1200);
+if(!await visible(page,'#finditExactShell'))throw Error('dashboard missing after Premium activation');
+for(const [nav,expected] of [['compare','Compare Prices'],['deals','Verified Deals'],['saved','Saved Items'],['history','History'],['alerts','Price & Stock Alerts']]){
  await closeModal(page);await top(page);
- await safe(`Visible ${nav} tool opens`,async()=>{await clickVisible(page,`#finditExactShell [data-fxnav="${nav}"]`);if(!await visible(page,'#fxStableModal:not(.hidden)'))throw Error('visible modal did not open');const t=await modalText(page);if(!t.includes(expected))throw Error(t.slice(0,140));return expected});
+ await safe(`Premium ${nav} tool opens`,async()=>{await clickVisible(page,`#finditExactShell [data-fxnav="${nav}"]`);if(!await visible(page,'#fxStableModal:not(.hidden)'))throw Error('visible modal did not open');const t=await modalText(page);if(!t.includes(expected))throw Error(t.slice(0,140));return expected});
 }
+await closeModal(page);await top(page);
+await safe('Feedback tool remains available',async()=>{await clickVisible(page,'#finditExactShell [data-fxnav="feedback"]');if(!await visible(page,'#fxStableModal:not(.hidden)'))throw Error('feedback modal did not open');const t=await modalText(page);if(!t.includes('Feedback'))throw Error(t.slice(0,140));return 'Feedback'});
 await closeModal(page);await top(page);
 await safe('Settings / nearby filters work',async()=>{await clickVisible(page,'#finditExactShell [data-fx="settings"]');const modal=page.locator('#fxStableModal:not(.hidden)');if(!await modal.isVisible())throw Error('filters modal missing');const sel=page.locator('#fxStableRadius');for(const v of ['3','5','10']){await sel.selectOption(v);if(await sel.inputValue()!==v)throw Error(`radius ${v}`)}return '3/5/10 km'});
 await closeModal(page);await top(page);
