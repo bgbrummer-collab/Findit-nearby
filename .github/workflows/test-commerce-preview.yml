@@ -11,9 +11,11 @@ jobs:
     steps:
       - name: Probe exact conditioner commerce on patched preview
         env:
-          URL: https://findit-nearby-esn4z7gxa-findit-nearby1.vercel.app/api/product-intelligence-v2?_vercel_share=DRAQPPri15ftC3QO1syHS6qND1ELXaFd
+          ROOT: https://findit-nearby-esn4z7gxa-findit-nearby1.vercel.app/
+          SHARE: DRAQPPri15ftC3QO1syHS6qND1ELXaFd
         run: |
           set -euo pipefail
+          curl -L -sS -c /tmp/cookies.txt -o /dev/null "${ROOT}?_vercel_share=${SHARE}"
           cat > /tmp/body.json <<'JSON'
           {
             "query":"Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
@@ -30,7 +32,8 @@ jobs:
             "exactIdentityConfidence":0.98
           }
           JSON
-          code=$(curl -L --max-time 110 -sS -o /tmp/out.json -w '%{http_code}' -H 'content-type: application/json' --data-binary @/tmp/body.json "$URL")
+          URL="${ROOT}api/product-intelligence-v2"
+          code=$(curl -L --max-time 110 -sS -b /tmp/cookies.txt -o /tmp/out.json -w '%{http_code}' -H 'content-type: application/json' --data-binary @/tmp/body.json "$URL")
           echo "HTTP_STATUS=$code"
           cat /tmp/out.json
           echo
