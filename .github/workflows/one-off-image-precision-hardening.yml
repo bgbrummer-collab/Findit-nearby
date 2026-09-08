@@ -2,11 +2,11 @@ name: One-off image precision hardening
 on:
   push:
     branches: [fix-image-precision-20260908]
+    paths: [tests/.precision-trigger]
 permissions:
   contents: write
 jobs:
   patch:
-    if: ${{ !contains(github.event.head_commit.message, '[precision-done]') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
