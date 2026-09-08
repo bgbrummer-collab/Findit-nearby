@@ -5,7 +5,12 @@
   if(window.__finditProductInfoEnhance)return;
   window.__finditProductInfoEnhance=true;
   let loading=false,dashboardLoading=false,guardPromise=null;
+  function loadModalPolish(){
+    if(window.__finditModalPolishFix||document.querySelector('script[data-findit-modal-polish]'))return;
+    const p=document.createElement('script');p.src='modal-polish-fix.js?v=20260908-modal1';p.async=false;p.dataset.finditModalPolish='1';document.head.appendChild(p);
+  }
   function loadClickGuard(){
+    loadModalPolish();
     if(window.__finditProductInfoClickFix)return Promise.resolve();
     if(guardPromise)return guardPromise;
     const existing=document.querySelector('script[data-findit-product-click-fix]');
@@ -25,6 +30,7 @@
     s.onload=()=>{dashboardLoading=false;try{document.dispatchEvent(new CustomEvent('findit:dashboard-sync'))}catch{}};
     s.onerror=()=>{dashboardLoading=false};document.head.appendChild(s);
   }
+  loadModalPolish();
   loadClickGuard();
   const observer=new MutationObserver(()=>{if(document.querySelector('#finditExactShell')){loadDashboardRuntime();observer.disconnect()}});observer.observe(document.documentElement,{childList:true,subtree:true});
   setTimeout(loadDashboardRuntime,0);setTimeout(loadDashboardRuntime,800);
