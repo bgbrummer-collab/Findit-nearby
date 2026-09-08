@@ -1,0 +1,40 @@
+name: One-off image precision hardening
+on:
+  push:
+    branches: [fix-image-precision-20260908]
+permissions:
+  contents: write
+jobs:
+  patch:
+    if: ${{ !contains(github.event.head_commit.message, '[precision-done]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix-image-precision-20260908
+      - name: Harden selective image verification
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('api/search.js')
+          s=p.read_text()
+          old="const needsChecker=draftConfidence<.72||(!draft?.object&&!draft?.name)||(draft?.modelEvidence===true&&draft?.brandEvidence!==true);"
+          new="""const draftContext=norm([draft?.category,draft?.retailCategory,draft?.object,draft?.name].join(' '));
+  const labelSensitive=/grocery|household|beauty|personal care|conditioner|shampoo|hair care|skincare|cosmetic|toiletr|cleaner|detergent|tissue|toilet paper/.test(draftContext);
+  const readableText=Array.isArray(draft?.visibleText)&&draft.visibleText.some(x=>String(x||'').trim().length>1);
+  const visibleBrandOpportunity=readableText&&!draft?.brandEvidence&&/electronics|eyewear|footwear|beauty|grocery|household/.test(draftContext);
+  const needsChecker=draftConfidence<.72||(!draft?.object&&!draft?.name)||(draft?.modelEvidence===true&&draft?.brandEvidence!==true)||(labelSensitive&&(draft?.brandEvidence===true||draft?.modelEvidence===true))||visibleBrandOpportunity;"""
+          if old not in s: raise SystemExit('needsChecker target not found')
+          s=s.replace(old,new,1)
+          old2="Be especially strict about packaged goods, vehicles, tools, artwork printed on products, toys/replicas and accessories. Choose the broader truthful answer rather than guessing. Return the complete structured JSON schema only."
+          new2="Be especially strict about packaged goods, vehicles, tools, artwork printed on products, toys/replicas and accessories. For packaged goods, first transcribe the exact prominent label words into visibleText; do not name a subtype or variant such as cream, conditioner, shampoo, lotion, pack count or formula unless that word or an unmistakable equivalent is actually readable. If a brand or logo word is visibly printed on electronics or accessories, capture it as brand evidence instead of silently dropping it. Choose the broader truthful answer rather than guessing. Return the complete structured JSON schema only."
+          if old2 not in s: raise SystemExit('independent prompt target not found')
+          s=s.replace(old2,new2,1)
+          p.write_text(s)
+          PY
+          node --check api/search.js
+          git config user.name "findit-precision-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add api/search.js
+          git commit -m "Harden packaged and visible-brand image verification [precision-done]"
+          git push origin HEAD:fix-image-precision-20260908
