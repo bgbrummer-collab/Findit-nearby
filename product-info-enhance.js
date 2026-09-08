@@ -6,8 +6,8 @@
   window.__finditProductInfoEnhance=true;
   let loading=false,dashboardLoading=false,guardPromise=null;
   function loadModalPolish(){
-    if(window.__finditModalPolishFix||document.querySelector('script[data-findit-modal-polish]'))return;
-    const p=document.createElement('script');p.src='modal-polish-fix.js?v=20260908-modal1';p.async=false;p.dataset.finditModalPolish='1';document.head.appendChild(p);
+    if(!window.__finditModalPolishFix&&!document.querySelector('script[data-findit-modal-polish]')){const p=document.createElement('script');p.src='modal-polish-fix.js?v=20260908-modal1';p.async=false;p.dataset.finditModalPolish='1';document.head.appendChild(p)}
+    if(!window.__finditCompareStockReliability&&!document.querySelector('script[data-findit-compare-stock-reliability]')){const c=document.createElement('script');c.src='compare-stock-reliability-fix.js?v=20260908-pricestock1';c.async=false;c.dataset.finditCompareStockReliability='1';document.head.appendChild(c)}
   }
   function loadClickGuard(){
     loadModalPolish();
@@ -16,7 +16,7 @@
     const existing=document.querySelector('script[data-findit-product-click-fix]');
     guardPromise=new Promise(resolve=>{
       if(existing){if(window.__finditProductInfoClickFix)return resolve();existing.addEventListener('load',resolve,{once:true});existing.addEventListener('error',resolve,{once:true});return}
-      const g=document.createElement('script');g.src='product-info-click-fix.js?v=20260907-final3';g.async=false;g.dataset.finditProductClickFix='1';g.onload=resolve;g.onerror=resolve;document.head.appendChild(g);
+      const g=document.createElement('script');g.src='product-info-click-fix.js?v=20260908-evidence1';g.async=false;g.dataset.finditProductClickFix='1';g.onload=resolve;g.onerror=resolve;document.head.appendChild(g);
     });
     return guardPromise;
   }
