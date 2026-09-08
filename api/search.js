@@ -47,7 +47,11 @@ export default{async fetch(request){
   let draft=await identifyDraft(key,base64,mime);
   let checker=null,verificationMode='single-pass-quota-safe';
   const draftConfidence=Number(draft?.confidence||0);
-  const needsChecker=draftConfidence<.72||(!draft?.object&&!draft?.name)||(draft?.modelEvidence===true&&draft?.brandEvidence!==true);
+  const draftContext=norm([draft?.category,draft?.retailCategory,draft?.object,draft?.name].join(' '));
+  const labelSensitive=/grocery|household|beauty|personal care|conditioner|shampoo|hair care|skincare|cosmetic|toiletr|cleaner|detergent|tissue|toilet paper/.test(draftContext);
+  const readableText=Array.isArray(draft?.visibleText)&&draft.visibleText.some(x=>String(x||'').trim().length>1);
+  const visibleBrandOpportunity=readableText&&!draft?.brandEvidence&&/electronics|eyewear|footwear|beauty|grocery|household/.test(draftContext);
+  const needsChecker=draftConfidence<.72||(!draft?.object&&!draft?.name)||(draft?.modelEvidence===true&&draft?.brandEvidence!==true)||(labelSensitive&&(draft?.brandEvidence===true||draft?.modelEvidence===true))||visibleBrandOpportunity;
   if(needsChecker){
    checker=await independentCheck(key,base64,mime).catch(()=>null);
    if(checker)verificationMode='selective-two-pass';
@@ -99,7 +103,7 @@ If uncertain between two objects, choose the broader truthful object and lower c
 }
 
 async function independentCheck(key,b64,mime){
- const prompt=`Independently inspect this product photo for FindIt Nearby. Do not rely on any previous answer. Identify the real physical purchasable object, brand only when visibly supported, exact model/variant only when genuinely supported, and readable size/pack count only when visible. Be especially strict about packaged goods, vehicles, tools, artwork printed on products, toys/replicas and accessories. Choose the broader truthful answer rather than guessing. Return the complete structured JSON schema only.`;
+ const prompt=`Independently inspect this product photo for FindIt Nearby. Do not rely on any previous answer. Identify the real physical purchasable object, brand only when visibly supported, exact model/variant only when genuinely supported, and readable size/pack count only when visible. Be especially strict about packaged goods, vehicles, tools, artwork printed on products, toys/replicas and accessories. For packaged goods, first transcribe the exact prominent label words into visibleText; do not name a subtype or variant such as cream, conditioner, shampoo, lotion, pack count or formula unless that word or an unmistakable equivalent is actually readable. If a brand or logo word is visibly printed on electronics or accessories, capture it as brand evidence instead of silently dropping it. Choose the broader truthful answer rather than guessing. Return the complete structured JSON schema only.`;
  let last;for(const model of [FALLBACK_MODEL,FAST_MODEL]){try{const x=await generateStructured(key,model,prompt,b64,mime);x.verifierModel=model;return x}catch(e){last=e}}throw last||Error('Independent verification failed');
 }
 
