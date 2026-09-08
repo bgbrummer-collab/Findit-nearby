@@ -1,0 +1,44 @@
+name: One-off commerce discovery patch
+on:
+  push:
+    branches: [fix-live-commerce-discovery-20260908]
+permissions:
+  contents: write
+jobs:
+  patch:
+    if: ${{ !contains(github.event.head_commit.message, '[commerce-discovery-done]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix-live-commerce-discovery-20260908
+          fetch-depth: 0
+      - name: Broaden exact retailer discovery without weakening verification
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('lib/retailer-coverage.js')
+          s=p.read_text()
+          old="const queries=[`https://www.google.com/search?hl=en&gl=za&num=8&q=${encodeURIComponent(`site:${p.domain} \\\"${q}\\\"`)}`,`https://www.bing.com/search?count=8&q=${encodeURIComponent(`site:${p.domain} \\\"${q}\\\"`)}`];"
+          new="const variants=[q,[body.brand,body.model].filter(Boolean).join(' '),[body.brand,body.object,...sizes(body)].filter(Boolean).join(' ')].map(clean).filter(Boolean).filter((v,i,a)=>a.indexOf(v)===i);const queries=variants.flatMap(v=>[`https://www.google.com/search?hl=en&gl=za&num=10&q=${encodeURIComponent(`site:${p.domain} \\\"${v}\\\"`)}`,`https://www.google.com/search?hl=en&gl=za&num=10&q=${encodeURIComponent(`site:${p.domain} ${v}`)}`,`https://www.bing.com/search?count=10&q=${encodeURIComponent(`site:${p.domain} \\\"${v}\\\"`)}`,`https://www.bing.com/search?count=10&q=${encodeURIComponent(`site:${p.domain} ${v}`)}`]);"
+          if old not in s:
+              raise SystemExit('webSearchOffer query block not found')
+          s=s.replace(old,new,1)
+          old2="const u=`https://html.duckduckgo.com/html/?q=${encodeURIComponent(`site:${p.domain} \"${q}\"`)}`;const r=await fetch(u,{headers:{'user-agent':'Mozilla/5.0 (compatible; FindItNearby/1.0)','accept-language':'en-ZA,en;q=0.9'},signal:AbortSignal.timeout(7500)});"
+          new2="const v=[q,[body.brand,body.model].filter(Boolean).join(' ')].map(clean).find(Boolean)||q;const u=`https://html.duckduckgo.com/html/?q=${encodeURIComponent(`site:${p.domain} ${v}`)}`;const r=await fetch(u,{headers:{'user-agent':'Mozilla/5.0 (compatible; FindItNearby/1.0)','accept-language':'en-ZA,en;q=0.9'},signal:AbortSignal.timeout(7500)});"
+          if old2 not in s:
+              raise SystemExit('duckOffer query block not found')
+          s=s.replace(old2,new2,1)
+          p.write_text(s)
+          PY
+          node --check lib/retailer-coverage.js
+          grep -q "variants.flatMap" lib/retailer-coverage.js
+          grep -q "branchStockVerified:false" lib/retailer-coverage.js
+          grep -q "const BLOCKED" api/product-intelligence-v2.js
+      - name: Commit patch
+        run: |
+          git config user.name "findit-commerce-fix-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add lib/retailer-coverage.js
+          git commit -m "Broaden verified retailer discovery for live price and stock [commerce-discovery-done]"
+          git push origin HEAD:fix-live-commerce-discovery-20260908
