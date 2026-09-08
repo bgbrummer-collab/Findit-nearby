@@ -20,7 +20,12 @@ function ensureStyle(){
 #fxStableModal #fxStableBody a:not(.fx-stable-close){appearance:none;-webkit-appearance:none;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;border:1px solid #315274!important;border-radius:10px!important;padding:9px 13px!important;background:#0d2036!important;color:#fff!important;font:600 13px/1.2 inherit!important;text-decoration:none!important;cursor:pointer;box-shadow:none;transition:transform .15s ease,border-color .15s ease,background .15s ease,filter .15s ease}
 #fxStableModal #fxStableBody button:not(.fx-stable-close):hover,
 #fxStableModal #fxStableBody a:not(.fx-stable-close):hover{border-color:#587ca2!important;background:#102944!important;transform:translateY(-1px)}
-#fxStableModal #fxStableBody button.fx-primary{background:linear-gradient(90deg,#306cff,#7a39ff)!important;border-color:transparent!important;color:#fff!important;box-shadow:0 8px 24px #5c42ff38!important}
+#fxStableModal #fxStableBody button.fx-primary,
+#fxStableModal #fxStableBody button.fx-ask-send,
+#fxStableModal #fxStableBody #fxAskSend{background:linear-gradient(90deg,#306cff,#7a39ff)!important;background-image:linear-gradient(90deg,#306cff,#7a39ff)!important;border-color:transparent!important;color:#fff!important;box-shadow:0 8px 24px #5c42ff38!important}
+#fxStableModal #fxStableBody button.fx-primary:hover,
+#fxStableModal #fxStableBody button.fx-ask-send:hover,
+#fxStableModal #fxStableBody #fxAskSend:hover{background:linear-gradient(90deg,#3976ff,#8448ff)!important;background-image:linear-gradient(90deg,#3976ff,#8448ff)!important;border-color:transparent!important}
 #fxStableModal #fxStableBody button:disabled{opacity:.6;cursor:wait;transform:none!important}
 #fxStableModal #fxPriceStatus{margin:12px 0 16px}
 #fxStableModal h3{margin:20px 0 10px}
