@@ -25,7 +25,7 @@ const norm = v => clean(v, 18000)
 
 const STOP = new Set(['the','and','for','with','from','this','that','new','product','item','online','shop','buy','model','official','pack','packs','piece','pieces','sale','price']);
 const toks = v => [...new Set(norm(v).split(' ').filter(x => x.length > 2 && !STOP.has(x)))];
-const JUNK = /\b(shipping|delivery|refund|return policy|checkout|seller review|customer service|cookie policy|privacy policy|sign in|log in|login|newsletter|loyalty|rewards|menu|where to buy|our story|press coverage|featured products|top sellers|view all)\b/i;
+const JUNK = /\b(shipping|delivery|refund|return policy|checkout|seller review|customer service|cookie policy|privacy policy|cookies?|identity verification|federal law|sign in|log in|login|newsletter|loyalty|rewards|menu|where to buy|our story|press coverage|featured products|top sellers|view all|provide our products and services|recommendations|engage with our site)\b/i;
 const BLOCKPAGE = /\b(captcha|robot or human|verify you are human|are you a human|access denied|access blocked|security check|challenge page|temporarily blocked|request blocked|unusual traffic|enable javascript and cookies|page maybe requiring captcha|forbidden)\b/i;
 const DETAIL = /\b(designed|formulated|features?|includes?|contains?|provides?|helps?|offers?|made|uses?|supports?|compatible|connects?|records?|recording|streaming|podcast|gaming|calls?|noise|monitoring|cardioid|sampling|frequency|battery|bluetooth|wireless|usb|plug.?and.?play|soft|strong|absorb|ply|rolls?|cushion|leather|rubber|variable speed|drilling|scientific|statistics|fraction|moistur|detang|frizz)\b/i;
 const DISPLAY_JUNK = /accessible version|data-testid|picturehighquality|\bsrc\s*=|\bhref\s*=|\balt\s*=|\bclass\s*=|\bstyle\s*=|javascript:|webpack|aria-|\bhttps?:\/\/|\\[nrt]|<[^>]+>/i;
@@ -369,7 +369,7 @@ function snippetCandidates(raw, base, i) {
 
 function stableSourceHints(i) {
   const b = norm(i.brand), p = norm(`${i.name} ${i.model} ${i.object} ${i.category} ${i.searchQuery}`);
-  if (/^pro+a?r$/.test(b.replace(/\s+/g, '')) && /microphone|condenser|usb/.test(p)) return [
+  if (/^pro+a+r$/.test(b.replace(/\s+/g, '')) && /microphone|condenser|usb/.test(p)) return [
     'https://www.amazon.com/Microphone-Condenser-Computer-Streaming-Recording/dp/B09CYMCC1T',
     'https://gradeonetools.com/electronics/proar-professional-condenser-microphone',
     'https://theproar.com/xlr-microphone'
