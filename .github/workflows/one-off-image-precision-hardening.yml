@@ -19,11 +19,7 @@ jobs:
           p=Path('api/search.js')
           s=p.read_text()
           old="const needsChecker=draftConfidence<.72||(!draft?.object&&!draft?.name)||(draft?.modelEvidence===true&&draft?.brandEvidence!==true);"
-          new="""const draftContext=norm([draft?.category,draft?.retailCategory,draft?.object,draft?.name].join(' '));
-  const labelSensitive=/grocery|household|beauty|personal care|conditioner|shampoo|hair care|skincare|cosmetic|toiletr|cleaner|detergent|tissue|toilet paper/.test(draftContext);
-  const readableText=Array.isArray(draft?.visibleText)&&draft.visibleText.some(x=>String(x||'').trim().length>1);
-  const visibleBrandOpportunity=readableText&&!draft?.brandEvidence&&/electronics|eyewear|footwear|beauty|grocery|household/.test(draftContext);
-  const needsChecker=draftConfidence<.72||(!draft?.object&&!draft?.name)||(draft?.modelEvidence===true&&draft?.brandEvidence!==true)||(labelSensitive&&(draft?.brandEvidence===true||draft?.modelEvidence===true))||visibleBrandOpportunity;"""
+          new="const draftContext=norm([draft?.category,draft?.retailCategory,draft?.object,draft?.name].join(' '));\n  const labelSensitive=/grocery|household|beauty|personal care|conditioner|shampoo|hair care|skincare|cosmetic|toiletr|cleaner|detergent|tissue|toilet paper/.test(draftContext);\n  const readableText=Array.isArray(draft?.visibleText)&&draft.visibleText.some(x=>String(x||'').trim().length>1);\n  const visibleBrandOpportunity=readableText&&!draft?.brandEvidence&&/electronics|eyewear|footwear|beauty|grocery|household/.test(draftContext);\n  const needsChecker=draftConfidence<.72||(!draft?.object&&!draft?.name)||(draft?.modelEvidence===true&&draft?.brandEvidence!==true)||(labelSensitive&&(draft?.brandEvidence===true||draft?.modelEvidence===true))||visibleBrandOpportunity;"
           if old not in s: raise SystemExit('needsChecker target not found')
           s=s.replace(old,new,1)
           old2="Be especially strict about packaged goods, vehicles, tools, artwork printed on products, toys/replicas and accessories. Choose the broader truthful answer rather than guessing. Return the complete structured JSON schema only."
