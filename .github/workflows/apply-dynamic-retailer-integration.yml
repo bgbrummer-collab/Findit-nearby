@@ -1,0 +1,57 @@
+name: Apply Dynamic Retailer Integration
+
+on:
+  push:
+    branches: [dynamic-retailer-discovery-20260909]
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: ${{ !contains(github.event.head_commit.message, '[dynamic-retailer-wired]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dynamic-retailer-discovery-20260909
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Patch verification pipeline
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('api/product-intelligence-v2.js')
+          s=p.read_text()
+          old="function profileFor(url,retailerName,body){const q=body.searchQuery||body.query||body.name||body.model||body.object||'';const profiles=selectedRetailers(q,body);return profiles.find(p=>hostMatches(url,p.domain))||profiles.find(p=>norm(p.name)===norm(retailerName))||null}"
+          new="function profileFor(url,retailerName,body){const q=body.searchQuery||body.query||body.name||body.model||body.object||'',dynamic=Array.isArray(body.dynamicRetailers)?body.dynamicRetailers:[],profiles=[...dynamic,...selectedRetailers(q,body)].filter((p,i,a)=>p?.domain&&a.findIndex(x=>x.domain===p.domain)===i);return profiles.find(p=>hostMatches(url,p.domain))||profiles.find(p=>norm(p.name)===norm(retailerName))||null}"
+          if old not in s: raise SystemExit('profileFor target not found')
+          s=s.replace(old,new,1)
+          old2="const profiles=selectedRetailers(q,body).slice(0,24),existing="
+          new2="const dynamic=Array.isArray(body.dynamicRetailers)?body.dynamicRetailers:[],profiles=[...dynamic,...selectedRetailers(q,body)].filter((p,i,a)=>p?.domain&&a.findIndex(x=>x.domain===p.domain)===i).slice(0,30),existing="
+          if old2 not in s: raise SystemExit('grounded recovery target not found')
+          s=s.replace(old2,new2,1)
+          p.write_text(s)
+
+          r=Path('lib/retailer-coverage.js')
+          t=r.read_text()
+          old3="export const __dynamicRetailerTest={safeDynamicProfile,extractDynamicCandidates,matchScore,directProductUrl};"
+          new3="export const __dynamicRetailerTest={safeDynamicProfile,extractDynamicCandidates,matchScore,directProductUrl,dynamicPageOffer};"
+          if old3 not in t: raise SystemExit('test export target not found')
+          r.write_text(t.replace(old3,new3,1))
+          PY
+      - name: Syntax and regression checks
+        run: |
+          node --check lib/retailer-coverage.js
+          node --check api/product-intelligence-v2.js
+          node tests/dynamic-retailer-discovery-regression.mjs
+          grep -q "firearm|gun|rifle|pistol" api/product-intelligence-v2.js
+          grep -q "branchStockVerified:false" lib/retailer-coverage.js
+      - name: Commit integration
+        run: |
+          git config user.name "findit-dynamic-retailer-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add api/product-intelligence-v2.js lib/retailer-coverage.js
+          git commit -m "Connect dynamic retailers to exact source verification [dynamic-retailer-wired]"
+          git push origin HEAD:dynamic-retailer-discovery-20260909
