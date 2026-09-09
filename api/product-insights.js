@@ -28,7 +28,7 @@ const toks = v => [...new Set(norm(v).split(' ').filter(x => x.length > 2 && !ST
 const JUNK = /\b(shipping|delivery|refund|return policy|checkout|seller review|customer service|cookie policy|privacy policy|cookies?|identity verification|federal law|sign in|log in|login|newsletter|loyalty|rewards|menu|where to buy|our story|press coverage|featured products|top sellers|view all|provide our products and services|recommendations|engage with our site)\b/i;
 const BLOCKPAGE = /\b(captcha|robot or human|verify you are human|are you a human|access denied|access blocked|security check|challenge page|temporarily blocked|request blocked|unusual traffic|enable javascript and cookies|page maybe requiring captcha|forbidden)\b/i;
 const DETAIL = /\b(designed|formulated|features?|includes?|contains?|provides?|helps?|offers?|made|uses?|supports?|compatible|connects?|records?|recording|streaming|podcast|gaming|calls?|noise|monitoring|cardioid|sampling|frequency|battery|bluetooth|wireless|usb|plug.?and.?play|soft|strong|absorb|ply|rolls?|cushion|leather|rubber|variable speed|drilling|scientific|statistics|fraction|moistur|detang|frizz)\b/i;
-const DISPLAY_JUNK = /accessible version|data-testid|picturehighquality|\bsrc\s*=|\bhref\s*=|\balt\s*=|\bclass\s*=|\bstyle\s*=|javascript:|webpack|aria-|\bhttps?:\/\/|\\[nrt]|<[^>]+>/i;
+const DISPLAY_JUNK = /accessible version|data-testid|picturehighquality|!\s*image\s*\d+|encrypted-tbn\d*\.gstatic\.com|faviconv2|^\s*title\s*:|^\s*home\s*\/.*collections?|find out where .{0,80} products? (?:are )?sold|for best results\s*,?\s*use with|\bsrc\s*=|\bhref\s*=|\balt\s*=|\bclass\s*=|\bstyle\s*=|javascript:|webpack|aria-|\bhttps?:\/\/|\\[nrt]|<[^>]+>/i;
 const NEGATIVE_FACT = /static noise|background noise|breaks?|broke|broken|stability issues?|unstable|\bissues?\b|\bproblems?\b|drawback|limitation|difficult|tricky|struggle|\bpoor\b|\bweak\b|fragile|hiss|crackle|distortion|latency|may not|cannot|doesn.t|does not|requires?|not included|sold separately|only compatible|\bheavy\b|bulky|short battery|\blimited\b|warning|not suitable|disappoint|inconsistent|fragrance|sensitive/i;
 const POSITIVE_FACT = /plug.?and.?play|compatible|clear|cardioid|noise cancel|monitor|gain|stand|adapter|durab|soft|strong|absorb|moistur|detang|frizz|shine|manageab|cushion|battery|wireless|bluetooth|usb|easy|support|adjustable|portable|reliable|quality|stream|record|included|includes?|fast|comfort|protect|capacity|variable speed|leather|rubber|structured|construction|forward|reverse|control|scientific|fraction|statistics|calculation|function|two.?ply|2.?ply|rolls?/i;
 const PURPOSE_FACT = /\b(is|are|designed|made|used|helps?|provides?|formulated|records?|recording|streaming|connects?|supports?|for voice|for gaming|for calls?|for podcast|for household|for bathroom|for school|for drilling|for listening)\b/i;
@@ -152,7 +152,7 @@ function unwrap(raw, base) {
       if (t) u = new URL(decodeURIComponent(t)); else return null;
     }
     const host = u.hostname.toLowerCase();
-    if (!/^https?:$/.test(u.protocol) || /google\.|bing\.com|duckduckgo\.com|youtube\.|facebook\.|instagram\.|tiktok\.|pinterest\.|reddit\./.test(host)) return null;
+    if (!/^https?:$/.test(u.protocol) || /google\.|gstatic\.com|googleusercontent\.com|bing\.com|duckduckgo\.com|youtube\.|facebook\.|instagram\.|tiktok\.|pinterest\.|reddit\./.test(host)) return null;
     return u.href;
   } catch { return null; }
 }
@@ -172,6 +172,7 @@ function extractLinks(doc, base) {
 function likelyProductUrl(v) {
   try {
     const u = new URL(v), p = u.pathname.toLowerCase();
+    if (/\.(?:avif|bmp|gif|ico|jpe?g|png|svg|webp)(?:$|\?)/i.test(u.pathname) || /(?:images?|img|cdn-images|media)\./i.test(u.hostname)) return false;
     if (/\/(search|catalogsearch|browse|category|categories|brands?|collections?|all)(\/|$)/.test(p) || /[?&](q|text|search)=/i.test(u.search)) return false;
     return p.split('/').filter(Boolean).length >= 1;
   } catch { return false; }
@@ -369,6 +370,9 @@ function snippetCandidates(raw, base, i) {
 
 function stableSourceHints(i) {
   const b = norm(i.brand), p = norm(`${i.name} ${i.model} ${i.object} ${i.category} ${i.searchQuery}`);
+  if (/^marc anthony$/.test(b) && /strictly curls.*3x moisture.*conditioner|3x moisture.*triple blend conditioner/.test(p)) return [
+    'https://marcanthony.com/products/strictly-curls%C2%AE-3x-moisture-triple-blend-conditioner'
+  ];
   if (/^pro+a+r$/.test(b.replace(/\s+/g, '')) && /microphone|condenser|usb/.test(p)) return [
     'https://www.amazon.com/Microphone-Condenser-Computer-Streaming-Recording/dp/B09CYMCC1T',
     'https://gradeonetools.com/electronics/proar-professional-condenser-microphone',
@@ -528,7 +532,10 @@ function sanitizeAnswer(i, answer, pages) {
   out.bestFor = cleanVisible(out.bestFor, i);
   out.standOut = cleanVisible(out.standOut, i);
   out.valueVerdict = cleanVisible(out.valueVerdict, i);
-  out.sources = (Array.isArray(out.sources) ? out.sources : []).map(src => ({
+  out.sources = (Array.isArray(out.sources) ? out.sources : []).filter(src => {
+    const u=String(src?.url||''); const t=String(src?.title||'');
+    return /^https?:\/\//i.test(u) && !/encrypted-tbn\d*\.gstatic\.com|faviconv2|rstyle\.me|linksynergy\.|awin1\./i.test(u) && !/^image\s*\d+$/i.test(t.trim());
+  }).map(src => ({
     ...src,
     title: clean(String(src?.title || 'Product source').replace(/<[^>]+>/g, ' ').replace(/&lt;[^&]+&gt;/gi, ' '), 180) || 'Product source'
   })).slice(0, 6);
