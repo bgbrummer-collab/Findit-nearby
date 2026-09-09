@@ -15,7 +15,7 @@ await page.route('**/api/product-intelligence-v2',r=>r.fulfill({status:200,conte
 await page.route('**/api/product-intelligence',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,matched:true,exactMatchVerified:true,offers})}));
 await page.goto(BASE,{waitUntil:'domcontentloaded',timeout:35000});
 await page.waitForSelector('#finditExactShell',{state:'visible',timeout:15000});
-await page.waitForFunction(()=>window.__finditFinalProductExperienceFix===true,{timeout:15000});
+await page.waitForFunction(()=>window.__finditDashboardRetailerRelevance===true&&window.__finditCompareStockReliability===true&&window.__finditProductInfoClickFix===true,{timeout:15000});
 await page.evaluate((offers)=>{
  const i={name:'Marc Anthony Strictly Curls Triple Blend Conditioner 250ml',brand:'Marc Anthony',model:'Strictly Curls Triple Blend',object:'conditioner',category:'beauty',retailCategory:'beauty',searchQuery:'Marc Anthony Strictly Curls Triple Blend Conditioner 250ml',summary:'A yellow squeeze tube of Marc Anthony Strictly Curls Triple Blend Conditioner, 250ml.',features:['yellow tube','squeeze tube','hair conditioner'],visibleText:['MARC ANTHONY','STRICTLY CURLS','Triple Blend CONDITIONER','Marula, Coconut + Shea','8.4 fl. oz. | 250 ml'],confidence:.97,exactIdentityVerified:true};
  window.finditState=window.finditState||{};
@@ -30,8 +30,9 @@ await page.evaluate((offers)=>{
  window.productIntelligence={offers};
  document.dispatchEvent(new CustomEvent('findit:results-rendered',{detail:{result:window.finditState.result}}));
  document.dispatchEvent(new CustomEvent('findit:dashboard-sync'));
+ document.dispatchEvent(new CustomEvent('findit:nearby-updated'));
 },offers);
-await page.waitForTimeout(300);
+await page.waitForTimeout(350);
 const product=page.locator('#finditExactShell [data-fx="product"]').filter({visible:true}).first();
 await product.click();
 await page.waitForFunction(()=>/What it does/i.test(document.querySelector('#fxStableBody')?.innerText||'')&&/Adds moisture/i.test(document.querySelector('#fxStableBody')?.innerText||''),null,{timeout:7000});
@@ -47,14 +48,14 @@ if(/R\s?0[,.]00/i.test(txt))throw Error(`Unknown price rendered as zero: ${txt.s
 if(!/Price not published/i.test(txt)||!/PriceCheck/i.test(txt))throw Error('Unpriced exact listings are not labelled honestly');
 if(!/Nearby branches of retailers with the exact product online/i.test(txt)||!/Dis-Chem/i.test(txt))throw Error('Exact-retailer nearby branch grouping missing');
 await page.locator('#fxStableModal .fx-stable-close').click();
-const stock=page.locator('#finditExactShell [data-fx="nearby"]').filter({hasText:'Live Stock'}).first();
+const stock=page.locator('#finditExactShell [data-fx="stock"],#finditExactShell [data-fx="nearby"]').filter({hasText:'Live Stock'}).first();
 await stock.click();
 await page.waitForFunction(()=>/Live Stock/i.test(document.querySelector('#fxStableBody')?.innerText||''),null,{timeout:3000});
 txt=await page.locator('#fxStableBody').innerText();
 if(!/No retailer currently publishes a trustworthy stock signal/i.test(txt))throw Error(`Stock truthfulness missing: ${txt.slice(0,700)}`);
 if(/Verified in stock at this branch/i.test(txt))throw Error('Branch stock was fabricated');
 await page.locator('#fxStableModal .fx-stable-close').click();
-await page.waitForTimeout(150);
+await page.waitForTimeout(200);
 const firstStore=await page.locator('#fxStoreList .fx-store b').first().innerText();
 if(firstStore!=='Dis-Chem')throw Error(`Dashboard did not prioritize a nearby retailer that actually lists the exact product: ${firstStore}`);
 const best=await page.locator('#fxBestPrice').innerText();
