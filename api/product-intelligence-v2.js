@@ -1,1 +1,1 @@
-export { default } from './product-intelligence-core.js';
+export { default } from '../lib/product-intelligence-core.js';
