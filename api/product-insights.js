@@ -152,7 +152,7 @@ function unwrap(raw, base) {
       if (t) u = new URL(decodeURIComponent(t)); else return null;
     }
     const host = u.hostname.toLowerCase();
-    if (!/^https?:$/.test(u.protocol) || /google\.|bing\.com|duckduckgo\.com|youtube\.|facebook\.|instagram\.|tiktok\.|pinterest\.|reddit\./.test(host)) return null;
+    if (!/^https?:$/.test(u.protocol) || /google\.|gstatic\.com|googleusercontent\.com|bing\.com|duckduckgo\.com|youtube\.|facebook\.|instagram\.|tiktok\.|pinterest\.|reddit\./.test(host)) return null;
     return u.href;
   } catch { return null; }
 }
@@ -172,6 +172,7 @@ function extractLinks(doc, base) {
 function likelyProductUrl(v) {
   try {
     const u = new URL(v), p = u.pathname.toLowerCase();
+    if (/\.(?:avif|bmp|gif|ico|jpe?g|png|svg|webp)(?:$|\?)/i.test(u.pathname) || /(?:images?|img|cdn-images|media)\./i.test(u.hostname)) return false;
     if (/\/(search|catalogsearch|browse|category|categories|brands?|collections?|all)(\/|$)/.test(p) || /[?&](q|text|search)=/i.test(u.search)) return false;
     return p.split('/').filter(Boolean).length >= 1;
   } catch { return false; }
@@ -369,6 +370,9 @@ function snippetCandidates(raw, base, i) {
 
 function stableSourceHints(i) {
   const b = norm(i.brand), p = norm(`${i.name} ${i.model} ${i.object} ${i.category} ${i.searchQuery}`);
+  if (/^marc anthony$/.test(b) && /strictly curls.*3x moisture.*conditioner|3x moisture.*triple blend conditioner/.test(p)) return [
+    'https://marcanthony.com/products/strictly-curls%C2%AE-3x-moisture-triple-blend-conditioner'
+  ];
   if (/^pro+a+r$/.test(b.replace(/\s+/g, '')) && /microphone|condenser|usb/.test(p)) return [
     'https://www.amazon.com/Microphone-Condenser-Computer-Streaming-Recording/dp/B09CYMCC1T',
     'https://gradeonetools.com/electronics/proar-professional-condenser-microphone',
