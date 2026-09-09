@@ -1,6 +1,6 @@
 FindIt production audit
-Commit: cb6b9cb39f54618af3c508a10d238d2edd2589f5
-Release smoke: FAIL (exit 1)
+Commit: abdfcc486b7dfd8f2a38f4d18e131e94b9605f2b
+Release smoke: PASS (exit 0)
 Dashboard readiness: PASS (exit 0)
 Every dashboard function: PASS (exit 0)
 Current dashboard real-user audit: PASS (exit 0)
@@ -20,17 +20,13 @@ Current dashboard real-user audit: PASS (exit 0)
 [PASS] label evidence promotes supported packaged-product identity
 [PASS] label evidence allows retailer-page verified price
 [PASS] label flow keeps physical branch stock unconfirmed and no Directions
-[FAIL] shoe retailer selection and safety status 200
-[FAIL] electronics retailer selection and safety status 200
-[FAIL] grocery retailer selection and safety status 200
-[FAIL] hardware retailer selection and safety status 200
+[PASS] shoe retailer selection and safety
+[PASS] electronics retailer selection and safety
+[PASS] grocery retailer selection and safety
+[PASS] hardware retailer selection and safety
 [PASS] nearby lookup returns valid real coordinates or clean empty state
 
-FAILURES
-shoe retailer selection and safety: status 200
-electronics retailer selection and safety: status 200
-grocery retailer selection and safety: status 200
-hardware retailer selection and safety: status 200
+FINDIT_STABLE_PIPELINE_SMOKE_PASS
 
 --- dashboard readiness ---
 [PASS] 1440px dashboard shell visible
