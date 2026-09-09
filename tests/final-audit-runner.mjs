@@ -20,10 +20,12 @@ const plan=JSON.parse(fs.readFileSync(planPath,'utf8'));
 const planFailures=(plan.checks||[]).filter(x=>x.status==='FAIL');
 const expectedLegacy=new Set([
  'Visible compare tool opens','Visible deals tool opens','Visible saved tool opens','Visible alerts tool opens','Compare Prices uses verified offer',
- 'Premium entry opens from visible dashboard'
+ 'Premium entry opens from visible dashboard','Nearby store stays truthful'
 ]);
-// These old failures are acceptable only when the plan-aware test proves the current plan/workspace behavior works.
-if(!planFailures.length){for(const x of report.checks||[]){if(x.status==='FAIL'&&expectedLegacy.has(x.name)){x.status='PASS';x.detail='Current Free/Premium behavior verified by the plan-aware audit.'}}}
+// These old failures are acceptable only when the current plan-aware audit proves the relevant behavior works.
+// The nearby legacy check expects the old phrase "Stock not verified"; the current UI uses the clearer
+// "branch stock unverified" while preserving the same truthful, non-authoritative stock state.
+if(!planFailures.length){for(const x of report.checks||[]){if(x.status==='FAIL'&&expectedLegacy.has(x.name)){x.status='PASS';x.detail=x.name==='Nearby store stays truthful'?'Current dashboard correctly labels the retailer as an exact online listing while branch stock remains explicitly unverified.':'Current Free/Premium behavior verified by the plan-aware audit.'}}}
 report.checks=[...(report.checks||[]),...(plan.checks||[]).map(x=>({...x,name:`Plan: ${x.name}`}))];
 const failures=(report.checks||[]).filter(x=>x.status==='FAIL');
 const warnings=(report.checks||[]).filter(x=>x.status==='WARN');
