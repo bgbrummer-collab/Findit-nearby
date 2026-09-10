@@ -1,9 +1,9 @@
 FindIt production audit
-Commit: 1401cbddba0605af7af61f6c6001ec0d9d1c9188
+Commit: e48b540dc5fd9d33d8d31e50787ade210afb0b15
 Release smoke: PASS (exit 0)
 Dashboard readiness: PASS (exit 0)
 Every dashboard function: PASS (exit 0)
-Current dashboard real-user audit: FAIL (exit 1)
+Current dashboard real-user audit: PASS (exit 0)
 
 --- release smoke ---
 [PASS] 1440px page loads
@@ -120,33 +120,7 @@ PASS: desktop Deals responds without blocked click
 PASS: desktop History responds without blocked click
 PASS: desktop Alerts responds without blocked click
 PASS: desktop Feedback responds without blocked click
-FAIL: desktop feature shortcuts are interactive locator.click: Timeout 5000ms exceeded.
-Call log:
-  - waiting for locator('.fx-feature-row article:visible').first()
-    - locator resolved to <article data-fx="product">…</article>
-  - attempting click action
-    2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
-    - retrying click action
-    - waiting 20ms
-    2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
-    - retrying click action
-      - waiting 100ms
-    9 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
-    - retrying click action
-      - waiting 500ms
-
+PASS: desktop feature shortcuts are interactive
 PASS: desktop bottom-card buttons respond
 PASS: desktop no uncaught JS errors
 PASS: mobile shell is visible
@@ -168,67 +142,8 @@ PASS: mobile Deals responds without blocked click
 PASS: mobile History responds without blocked click
 PASS: mobile Alerts responds without blocked click
 PASS: mobile Feedback responds without blocked click
-FAIL: mobile feature shortcuts are interactive locator.click: Timeout 5000ms exceeded.
-Call log:
-  - waiting for locator('.fx-feature-row article:visible').nth(2)
-    - locator resolved to <article data-fx="compare">…</article>
-  - attempting click action
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <div>No retailer has published a branch-specific price…</div> from <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> subtree intercepts pointer events
-  - retrying click action
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <small>3.1 km · Pretoria · Relevant retailer for this ca…</small> from <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> subtree intercepts pointer events
-  - retrying click action
-    - waiting 20ms
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <div>No retailer has published a branch-specific price…</div> from <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> subtree intercepts pointer events
-  2 × retrying click action
-      - waiting 100ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
-  2 × retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <small>3.1 km · Pretoria · Relevant retailer for this ca…</small> from <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> subtree intercepts pointer events
-    - retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div>No retailer has published a branch-specific price…</div> from <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> subtree intercepts pointer events
-    - retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
-    - retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="fxStableModal" aria-hidden="false" class="fx-stable-modal">…</div> intercepts pointer events
-  - retrying click action
-    - waiting 500ms
-
+PASS: mobile feature shortcuts are interactive
 PASS: mobile bottom-card buttons respond
 PASS: mobile no uncaught JS errors
-CURRENT_DASHBOARD_REAL_USER_RESULT 42 PASS / 2 FAIL
+CURRENT_DASHBOARD_REAL_USER_RESULT 44 PASS / 0 FAIL
+FINDIT_CURRENT_DASHBOARD_REAL_USER_PASS
