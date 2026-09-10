@@ -1,4 +1,5 @@
 import coreHandler from '../lib/product-intelligence-core.js';
+import { universalCommerceDiscovery } from '../lib/universal-commerce-discovery.js';
 
 const clean=v=>String(v??'').trim();
 const positive=v=>v!==null&&v!==undefined&&v!==''&&Number.isFinite(Number(v))&&Number(v)>0;
@@ -8,7 +9,7 @@ function isProductPage(o){
   if(!u)return false;
   const h=u.hostname.replace(/^www\./,'').toLowerCase(),p=u.pathname.toLowerCase();
   if(/open prime modal|prime modal|search results|shop online for electronics apparel computers|sign in to continue/.test(title))return false;
-  if(/\/(search|category|categories|collections?|brands?|browse)(\/|$)/.test(p))return false;
+  if(/\/(search|category|categories|collections?|brands?|browse|blog|blogs|news|article|articles)(\/|$)/.test(p))return false;
   if(h==='nike.com'||h.endsWith('.nike.com')){
     if(/^\/w\//.test(p)||!/(^|\/)t\//.test(p))return false;
   }
@@ -25,7 +26,7 @@ function priceIsPlausible(o){
   return true;
 }
 function offerScore(o){
-  return (o?.sourcePageVerified===true?1000:0)+(o?.exactProductMatch===true?300:0)+(o?.verified===true?120:0)+(positive(o?.price)?100:0)+(/^(in_stock|out_of_stock|preorder|backorder)$/i.test(clean(o?.availability))?60:0)+Math.min(100,Number(o?.matchScore||0));
+  return (o?.sourcePageVerified===true?1000:0)+(o?.exactProductMatch===true?300:0)+(o?.verified===true?120:0)+(positive(o?.price)?100:0)+(/^(in_stock|out_of_stock|preorder|backorder)$/i.test(clean(o?.availability))?60:0)+(o?.universalDiscovery===true?20:0)+Math.min(100,Number(o?.matchScore||0));
 }
 function offerKey(o){
   const u=clean(o?.product_url||o?.url).toLowerCase();
@@ -81,6 +82,17 @@ function needsCanonicalRetry(out){
   const sellers=new Set(out.offers.map(o=>clean(o?.retailer?.name||o?.retailer)).filter(Boolean));
   return priced.length===0||sellers.size<2;
 }
+function needsUniversal(out){
+  if(!out||!Array.isArray(out.offers))return true;
+  const priced=out.offers.filter(o=>positive(o.price));
+  const sellers=new Set(out.offers.map(o=>clean(o?.retailer?.name||o?.retailer)).filter(Boolean));
+  return priced.length===0||sellers.size<2;
+}
+function mergeRetailerStatus(out){
+  const offers=Array.isArray(out?.offers)?out.offers:[],existing=Array.isArray(out?.retailerStatus)?out.retailerStatus:[],verified=offers.map(o=>({name:o?.retailer?.name||o?.retailer||'Retailer',searchUrl:o?.product_url||o?.url,exactProductMatch:true,stockVerified:/^(in_stock|out_of_stock|preorder|backorder)$/i.test(clean(o?.availability)),branchStockVerified:false,directionsAvailable:false,status:'verified_exact_online_listing'}));
+  const names=new Set(verified.map(x=>clean(x.name).toLowerCase()));
+  return [...verified,...existing.filter(x=>!names.has(clean(x?.name).toLowerCase()))].slice(0,14);
+}
 
 export default async function handler(req,res){
   let first=await runCore(req),out=normalize(first.payload);
@@ -93,6 +105,17 @@ export default async function handler(req,res){
       out=normalize({...out,...secondOut,offers:merged,requestedIdentity:requestData(req),canonicalCommerceIdentity:retryData.identification||retryData,commerceIdentityRetry:true});
       first={...first,headers:{...first.headers,...second.headers}};
     }
+  }
+  if(first.statusCode===200&&needsUniversal(out)){
+    try{
+      const broad=await universalCommerceDiscovery(requestData(req));
+      if(broad.length){
+        out=normalize({...out,offers:mergeOffers(out?.offers,broad),universalCommerceSearch:true});
+        out.retailerStatus=mergeRetailerStatus(out);
+        out.webRetailers=out.retailerStatus;
+        out.discoveryMethod='Known-retailer search plus wider-web exact product-page verification. Uncommon and niche products can surface when a real retailer page is verifiable; price and stock are never inferred.';
+      }
+    }catch(e){console.error('universal commerce fallback',e)}
   }
   for(const [k,v] of Object.entries(first.headers||{}))res.setHeader(k,v);
   return res.status(first.statusCode).json(out);
