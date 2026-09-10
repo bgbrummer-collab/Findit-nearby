@@ -46,7 +46,7 @@ txt=await page.locator('#fxStableBody').innerText();
 if(!/R\s?200[,.]00/i.test(txt)||!/R\s?229[,.]99/i.test(txt))throw Error(`Real prices missing: ${txt.slice(0,900)}`);
 if(/(^|\n)R\s*0[,.]00(\n|$)/i.test(txt))throw Error(`Unknown price rendered as zero: ${txt.slice(0,900)}`);
 if(!/Price not published/i.test(txt)||!/PriceCheck/i.test(txt))throw Error('Unpriced exact listings are not labelled honestly');
-if(!/Nearby branches of retailers with the exact product online/i.test(txt)||!/Dis-Chem/i.test(txt))throw Error('Exact-retailer nearby branch grouping missing');
+if(!/Nearby branches of retailers (?:with|carrying) the exact product online/i.test(txt)||!/Dis-Chem/i.test(txt))throw Error('Exact-retailer nearby branch grouping missing');
 await page.locator('#fxStableModal .fx-stable-close').click();
 const stock=page.locator('#finditExactShell [data-fx="stock"],#finditExactShell [data-fx="nearby"]').filter({hasText:'Live Stock'}).first();
 await stock.click();
