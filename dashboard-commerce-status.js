@@ -1,4 +1,4 @@
-/* FindIt dashboard commerce status v3 — automatically load exact online price/stock after identification. */
+/* FindIt dashboard commerce status v4 — automatically load exact online price/stock after identification. */
 (()=>{
 'use strict';
 if(window.__finditDashboardCommerceStatus)return;window.__finditDashboardCommerceStatus=true;
@@ -18,12 +18,18 @@ function sync(){const map=offers();for(const row of $$('#fxStoreList .fx-store')
 }
 let prefetchKey='',prefetchPromise=null;
 function identityBody(){const s=state(),i=s?.result?.identification||{},c=s?.coords||{};return{identification:i,name:i.name||i.object||'',brand:i.brand||'',model:i.model||'',object:i.object||'',category:i.retailCategory||i.category||'',retailCategory:i.retailCategory||i.category||'',searchQuery:i.searchQuery||i.name||i.model||i.object||'',query:i.searchQuery||i.name||i.model||i.object||'',visibleText:i.visibleText||[],features:i.features||[],evidence:i.evidence||[],exactIdentityVerified:Boolean(i.exactIdentityVerified),lat:c.lat,lon:c.lon,radius:Number(s.radius||localStorage.getItem('finditRadius')||10)}}
-async function prefetch(force=false){const b=identityBody(),k=norm(`${b.brand}|${b.model}|${b.name}|${b.searchQuery}`);if(!k)return null;if(!force&&k===prefetchKey&&prefetchPromise)return prefetchPromise;prefetchKey=k;prefetchPromise=(async()=>{const ctl=new AbortController(),timer=setTimeout(()=>ctl.abort(),30000);try{const r=await fetch('/api/product-intelligence-v2',{method:'POST',headers:{'content-type':'application/json','accept':'application/json'},body:JSON.stringify(b),signal:ctl.signal,cache:'no-store'}),d=await r.json().catch(()=>({}));if(!r.ok||!Array.isArray(d.offers))return null;const fresh=d.offers.filter(validOffer);state().offers=fresh;window.productIntelligence={...(window.productIntelligence||{}),...d,offers:fresh};sync();try{document.dispatchEvent(new CustomEvent('findit:dashboard-sync',{detail:{commerce:true}}))}catch{}return d}catch{return null}finally{clearTimeout(timer)}})();return prefetchPromise}
+function applyCommerce(d){if(!d||!Array.isArray(d.offers))return null;const fresh=d.offers.filter(validOffer);state().offers=fresh;window.productIntelligence={...(window.productIntelligence||{}),...d,offers:fresh};sync();try{document.dispatchEvent(new CustomEvent('findit:dashboard-sync',{detail:{commerce:true}}))}catch{}return d}
+function hasVerifiedPrice(d){return Array.isArray(d?.offers)&&d.offers.some(o=>positive(o?.price)&&o?.verified===true&&o?.sourcePageVerified===true&&o?.exactProductMatch!==false)}
+function getUrl(b){const q=new URLSearchParams();for(const k of ['name','brand','model','object','category','retailCategory','searchQuery','query','lat','lon','radius']){const v=b[k];if(v!==undefined&&v!==null&&String(v).trim())q.set(k,String(v).trim())}return`/api/product-intelligence-v2?${q.toString()}`}
+async function requestPost(b){const ctl=new AbortController(),timer=setTimeout(()=>ctl.abort(),22000);try{const r=await fetch('/api/product-intelligence-v2',{method:'POST',headers:{'content-type':'application/json','accept':'application/json'},body:JSON.stringify(b),signal:ctl.signal,cache:'no-store'});const d=await r.json().catch(()=>({}));return r.ok&&Array.isArray(d.offers)?d:null}catch{return null}finally{clearTimeout(timer)}}
+async function requestGet(b){const ctl=new AbortController(),timer=setTimeout(()=>ctl.abort(),22000);try{const r=await fetch(getUrl(b),{method:'GET',headers:{accept:'application/json'},signal:ctl.signal,cache:'no-store'});const d=await r.json().catch(()=>({}));return r.ok&&Array.isArray(d.offers)?d:null}catch{return null}finally{clearTimeout(timer)}}
+async function prefetch(force=false){const b=identityBody(),k=norm(`${b.brand}|${b.model}|${b.name}|${b.searchQuery}`);if(!k)return null;if(!force&&k===prefetchKey&&prefetchPromise)return prefetchPromise;prefetchKey=k;prefetchPromise=(async()=>{let d=await requestPost(b);if(d)applyCommerce(d);if(!hasVerifiedPrice(d)){const g=await requestGet(b);if(g){d=g;applyCommerce(g)}}return d})();return prefetchPromise}
 let timer=0;function queue(){clearTimeout(timer);timer=setTimeout(sync,60)}
 ['findit:dashboard-sync','findit:stores-updated'].forEach(n=>document.addEventListener(n,queue));
 document.addEventListener('findit:results-rendered',()=>{queue();setTimeout(()=>prefetch(false),0)});
 window.addEventListener('load',()=>{queue();setTimeout(sync,800);setTimeout(sync,2500);setTimeout(()=>prefetch(false),1200)});
 window.finditRefreshCommerce=()=>prefetch(true);
+window.addEventListener('click',e=>{if(!e.target?.closest?.('#fxRefreshPrices,#fxRefreshStock'))return;setTimeout(()=>prefetch(true),0)},true);
 const mo=new MutationObserver(m=>{if(m.some(x=>x.target?.closest?.('#fxStoreList,#fxTopStores,#fxStableModal')||x.target?.id==='fxStoreList'||x.target?.id==='fxTopStores'||x.target?.id==='fxStableBody'))queue()});
 mo.observe(document.documentElement,{subtree:true,childList:true,characterData:true});
 })();
