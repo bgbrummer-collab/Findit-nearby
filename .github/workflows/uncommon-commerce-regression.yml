@@ -1,0 +1,24 @@
+name: Uncommon Commerce Regression
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'lib/native-retailer-discovery.js'
+      - 'lib/jina-commerce-discovery.js'
+      - 'lib/universal-commerce-discovery.js'
+      - 'lib/grounded-commerce.js'
+      - 'api/product-intelligence-v2.js'
+      - 'tests/uncommon-commerce-regression.mjs'
+      - '.github/workflows/uncommon-commerce-regression.yml'
+  workflow_dispatch:
+jobs:
+  uncommon-commerce:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify uncommon product discovery
+        run: node tests/uncommon-commerce-regression.mjs
