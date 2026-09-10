@@ -48,20 +48,33 @@ function mergeOffers(...groups){
   }
   return [...map.values()];
 }
-function normalize(data){
+function reqIdentity(request={}){return request?.identification||request||{}}
+function variantConflict(o,request={}){
+  const i=reqIdentity(request),wanted=`${clean(i.model)} ${clean(i.name)} ${clean(i.searchQuery||i.query)}`.toLowerCase(),candidate=`${clean(o?.product_name||o?.title)} ${clean(o?.product_url||o?.url)}`.toLowerCase();
+  const marks=[/(?:\+|\bplus\b)/i,/\bpro\b/i,/\bmax\b/i,/\bmini\b/i,/\bultra\b/i,/\bxl\b/i];
+  return marks.some(re=>re.test(candidate)!==re.test(wanted));
+}
+function inSouthAfrica(request={}){const d=request?.identification?request:request||{},lat=Number(d.lat??request?.lat),lon=Number(d.lon??request?.lon);return Number.isFinite(lat)&&Number.isFinite(lon)&&lat>=-35.5&&lat<=-22&&lon>=16&&lon<=33.5}
+function localScore(o,request={}){if(!inSouthAfrica(request))return 0;const u=safeUrl(o?.product_url||o?.url),h=u?.hostname?.toLowerCase()||'',c=clean(o?.currency).toUpperCase();return(c==='ZAR'?100:0)+(h.endsWith('.co.za')||h.endsWith('.za.com')?80:0)+(o?.localSouthAfrica===true?40:0)}
+function fixRetailer(o){const u=safeUrl(o?.product_url||o?.url),h=u?.hostname?.replace(/^www\./,'').toLowerCase()||'',name=clean(o?.retailer?.name||o?.retailer);if(h==='korg.co.uk'&&(!name||name==='Co'))return{...o,retailer:{name:'Korg UK'}};return o}
+function normalize(data,request={}){
   if(!data)return data;
-  data.offers=mergeOffers(data.offers);
-  const priced=data.offers.filter(o=>positive(o.price)).sort((a,b)=>Number(a.price)-Number(b.price));
+  data.offers=mergeOffers(data.offers).map(fixRetailer).filter(o=>!variantConflict(o,request)).sort((a,b)=>localScore(b,request)-localScore(a,request)||offerScore(b)-offerScore(a));
+  const priced=data.offers.filter(o=>positive(o.price));
+  let comparable=priced;
+  if(inSouthAfrica(request)&&priced.some(o=>clean(o.currency).toUpperCase()==='ZAR'))comparable=priced.filter(o=>clean(o.currency).toUpperCase()==='ZAR');
+  else if(priced.length){const counts=new Map();for(const o of priced){const c=clean(o.currency).toUpperCase()||'UNKNOWN';counts.set(c,(counts.get(c)||0)+1)}const preferred=[...counts.entries()].sort((a,b)=>b[1]-a[1])[0]?.[0];if(preferred&&preferred!=='UNKNOWN')comparable=priced.filter(o=>clean(o.currency).toUpperCase()===preferred)}
+  const best=[...comparable].sort((a,b)=>Number(a.price)-Number(b.price))[0]||null;
   const inStock=data.offers.filter(o=>o.availability==='in_stock');
   data.matched=data.offers.length>0;
   data.exactMatchVerified=data.offers.length>0;
   data.bestProduct=data.offers[0]?{name:data.offers[0].product_name}:null;
-  data.bestPrice=priced[0]||null;
+  data.bestPrice=best;
   data.verifiedOfferCount=data.offers.length;
   data.verifiedSellerCount=new Set(data.offers.map(o=>o?.retailer?.name||o?.retailer).filter(Boolean)).size;
   data.priceVerifiedCount=priced.length;
   data.inStockOfferCount=inStock.length;
-  data.postValidation='Strict product-page and currency validation';
+  data.postValidation='Strict product-page, adjacent-variant, currency and locality validation';
   return data;
 }
 function requestData(req){return req.method==='POST'?(req.body||{}):(req.query||{})}
@@ -97,38 +110,29 @@ function mergeRetailerStatus(out){
 }
 
 export default async function handler(req,res){
-  let first=await runCore(req),out=normalize(first.payload);
+  const requested=requestData(req);
+  let first=await runCore(req),out=normalize(first.payload,requested);
   const retryData=(first.statusCode===200&&needsCanonicalRetry(out))?canonicalRetryData(req):null;
   if(retryData){
     const retryReq={...req,body:req.method==='POST'?retryData:req.body,query:req.method==='GET'?retryData:req.query};
-    const second=await runCore(retryReq),secondOut=normalize(second.payload);
+    const second=await runCore(retryReq),secondOut=normalize(second.payload,retryData);
     const merged=mergeOffers(out?.offers,secondOut?.offers);
     if(merged.length>(out?.offers?.length||0)||merged.some(o=>positive(o.price))){
-      out=normalize({...out,...secondOut,offers:merged,requestedIdentity:requestData(req),canonicalCommerceIdentity:retryData.identification||retryData,commerceIdentityRetry:true});
+      out=normalize({...out,...secondOut,offers:merged,requestedIdentity:requested,canonicalCommerceIdentity:retryData.identification||retryData,commerceIdentityRetry:true},requested);
       first={...first,headers:{...first.headers,...second.headers}};
     }
   }
   if(first.statusCode===200&&needsUniversal(out)){
-    try{
-      const broad=await universalCommerceDiscovery(requestData(req));
-      if(broad.length)out=normalize({...out,offers:mergeOffers(out?.offers,broad),universalCommerceSearch:true});
-    }catch(e){console.error('universal commerce fallback',e)}
+    try{const broad=await universalCommerceDiscovery(requested);if(broad.length)out=normalize({...out,offers:mergeOffers(out?.offers,broad),universalCommerceSearch:true},requested)}catch(e){console.error('universal commerce fallback',e)}
   }
   if(first.statusCode===200&&needsUniversal(out)){
-    try{
-      const jina=await jinaCommerceDiscovery(requestData(req));
-      if(jina.length)out=normalize({...out,offers:mergeOffers(out?.offers,jina),jinaCommerceSearch:true});
-    }catch(e){console.error('jina commerce fallback',e)}
+    try{const jina=await jinaCommerceDiscovery(requested);if(jina.length)out=normalize({...out,offers:mergeOffers(out?.offers,jina),jinaCommerceSearch:true},requested)}catch(e){console.error('jina commerce fallback',e)}
   }
   if(first.statusCode===200&&needsUniversal(out)){
-    try{
-      const grounded=await groundedCommerce(requestData(req));
-      if(grounded.length)out=normalize({...out,offers:mergeOffers(out?.offers,grounded),groundedCommerceSearch:true});
-    }catch(e){console.error('grounded commerce fallback',e)}
+    try{const grounded=await groundedCommerce(requested);if(grounded.length)out=normalize({...out,offers:mergeOffers(out?.offers,grounded),groundedCommerceSearch:true},requested)}catch(e){console.error('grounded commerce fallback',e)}
   }
   if(out?.offers?.length){
-    out.retailerStatus=mergeRetailerStatus(out);
-    out.webRetailers=out.retailerStatus;
+    out.retailerStatus=mergeRetailerStatus(out);out.webRetailers=out.retailerStatus;
     out.discoveryMethod=out.jinaCommerceSearch?'Known retailers plus wider-web exact product-page discovery and direct readable-page verification. This route is used for uncommon and niche products; branch stock is never inferred.':out.groundedCommerceSearch?'Direct exact retailer verification plus Google Search-grounded retailer evidence when niche pages cannot be discovered directly. Grounded results are labelled separately and never treated as branch inventory.':'Known-retailer search plus wider-web exact product-page verification. Uncommon and niche products can surface when a real retailer page is verifiable; price and stock are never inferred.';
   }
   for(const [k,v] of Object.entries(first.headers||{}))res.setHeader(k,v);
