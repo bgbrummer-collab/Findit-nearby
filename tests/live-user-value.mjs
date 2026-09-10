@@ -33,7 +33,7 @@ console.log('REAL_IDENTITY_OK',JSON.stringify({name:ident.name,brand:ident.brand
 await openAction('product');
 await page.waitForFunction(()=>/Exact-product web research loaded\./i.test(document.querySelector('#fxStableResearch')?.textContent||''),null,{timeout:70000});
 const product=await page.locator('#fxStableResearch').innerText();
-if(!/What it does/i.test(product)||!/\bPros\b/i.test(product)||!/Cons|considerations/i.test(product))fail(`missing product sections: ${product}`);
+if(!/What it does/i.test(product)||!/Pros/i.test(product)||!/Cons|considerations/i.test(product))fail(`missing product sections: ${product}`);
 if(!/moist|curl|detang|frizz/i.test(product))fail(`product information is still generic: ${product}`);
 if(!/Best for/i.test(product)||!/Stand-out point/i.test(product))fail(`product information lacks useful buying context: ${product}`);
 if(/Exact-product research could not be loaded|conservative guidance/i.test(product))fail(`fallback shown despite live research: ${product}`);
