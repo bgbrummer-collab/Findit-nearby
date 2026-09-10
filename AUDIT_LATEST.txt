@@ -1,26 +1,32 @@
 FindIt production audit
-Commit: a266bd035f30a19772b70427535d88407da9e279
-Release smoke: FAIL (exit 1)
+Commit: 57dac0533cee49918e386f8e759a2d8d4abb0a16
+Release smoke: PASS (exit 0)
 Dashboard readiness: PASS (exit 0)
 Every dashboard function: PASS (exit 0)
 Current dashboard real-user audit: PASS (exit 0)
 
 --- release smoke ---
-file:///home/runner/work/Findit-nearby/Findit-nearby/lib/universal-commerce-discovery.js:19
-function productJson(raw,i){for(const m of String(raw||'').matchAll(/<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)){try{for(const x of flatten(JSON.parse(m[1]))){if(String(x['@type']||'').toLowerCase()!=='product')continue;const name=clean(x.name||'',420);if(name&&score(name,i)<4)continue;for(const o of(Array.isArray(x.offers)?x.offers:[x.offers].filter(Boolean)))return{name,price:amount(o?.price??o?.lowPrice),currency:clean(o?.priceCurrency||'',8)||null,availability:availability(o?.availability),sku:clean(x.sku||x.mpn||'',100)}}catch{}}return null}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^^^^^
+[PASS] 1440px page loads
+[PASS] 1440px one results controller
+[PASS] 1440px no duplicate ids
+[PASS] 1440px no uncaught JS errors
+[PASS] 390px page loads
+[PASS] 390px one results controller
+[PASS] 390px no duplicate ids
+[PASS] 390px no uncaught JS errors
+[PASS] mock exact identity correct
+[PASS] mock exact price shown
+[PASS] mock nearby same retailer paired without fake branch stock
+[PASS] label evidence promotes supported packaged-product identity
+[PASS] label evidence allows retailer-page verified price
+[PASS] label flow keeps physical branch stock unconfirmed and no Directions
+[PASS] shoe retailer selection and safety
+[PASS] electronics retailer selection and safety
+[PASS] grocery retailer selection and safety
+[PASS] hardware retailer selection and safety
+[PASS] nearby lookup returns valid real coordinates or clean empty state
 
-SyntaxError: Unexpected token 'catch'
-    at compileSourceTextModule (node:internal/modules/esm/utils:346:16)
-    at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:110:18)
-    at #translate (node:internal/modules/esm/loader:559:20)
-    at afterLoad (node:internal/modules/esm/loader:612:29)
-    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:617:12)
-    at #createModuleJob (node:internal/modules/esm/loader:640:36)
-    at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34)
-    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:321:41)
-
-Node.js v22.23.2
+FINDIT_STABLE_PIPELINE_SMOKE_PASS
 
 --- dashboard readiness ---
 [PASS] 1440px dashboard shell visible
