@@ -1,5 +1,6 @@
 import coreHandler from '../lib/product-intelligence-core.js';
 import { universalCommerceDiscovery } from '../lib/universal-commerce-discovery.js';
+import { jinaCommerceDiscovery } from '../lib/jina-commerce-discovery.js';
 import { groundedCommerce } from '../lib/grounded-commerce.js';
 
 const clean=v=>String(v??'').trim();
@@ -27,7 +28,7 @@ function priceIsPlausible(o){
   return true;
 }
 function offerScore(o){
-  return (o?.sourcePageVerified===true?1000:0)+(o?.searchGroundedVerified===true?500:0)+(o?.exactProductMatch===true?300:0)+(o?.verified===true?120:0)+(positive(o?.price)?100:0)+(/^(in_stock|out_of_stock|preorder|backorder)$/i.test(clean(o?.availability))?60:0)+(o?.universalDiscovery===true?20:0)+Math.min(100,Number(o?.matchScore||0));
+  return (o?.sourcePageVerified===true?1000:0)+(o?.searchGroundedVerified===true?500:0)+(o?.exactProductMatch===true?300:0)+(o?.verified===true?120:0)+(positive(o?.price)?100:0)+(/^(in_stock|out_of_stock|preorder|backorder)$/i.test(clean(o?.availability))?60:0)+(o?.jinaDiscovery===true?30:0)+(o?.universalDiscovery===true?20:0)+Math.min(100,Number(o?.matchScore||0));
 }
 function offerKey(o){
   const u=clean(o?.product_url||o?.url).toLowerCase();
@@ -115,6 +116,12 @@ export default async function handler(req,res){
   }
   if(first.statusCode===200&&needsUniversal(out)){
     try{
+      const jina=await jinaCommerceDiscovery(requestData(req));
+      if(jina.length)out=normalize({...out,offers:mergeOffers(out?.offers,jina),jinaCommerceSearch:true});
+    }catch(e){console.error('jina commerce fallback',e)}
+  }
+  if(first.statusCode===200&&needsUniversal(out)){
+    try{
       const grounded=await groundedCommerce(requestData(req));
       if(grounded.length)out=normalize({...out,offers:mergeOffers(out?.offers,grounded),groundedCommerceSearch:true});
     }catch(e){console.error('grounded commerce fallback',e)}
@@ -122,7 +129,7 @@ export default async function handler(req,res){
   if(out?.offers?.length){
     out.retailerStatus=mergeRetailerStatus(out);
     out.webRetailers=out.retailerStatus;
-    out.discoveryMethod=out.groundedCommerceSearch?'Direct exact retailer verification plus Google Search-grounded retailer evidence when niche pages cannot be discovered directly. Grounded results are labelled separately and never treated as branch inventory.':'Known-retailer search plus wider-web exact product-page verification. Uncommon and niche products can surface when a real retailer page is verifiable; price and stock are never inferred.';
+    out.discoveryMethod=out.jinaCommerceSearch?'Known retailers plus wider-web exact product-page discovery and direct readable-page verification. This route is used for uncommon and niche products; branch stock is never inferred.':out.groundedCommerceSearch?'Direct exact retailer verification plus Google Search-grounded retailer evidence when niche pages cannot be discovered directly. Grounded results are labelled separately and never treated as branch inventory.':'Known-retailer search plus wider-web exact product-page verification. Uncommon and niche products can surface when a real retailer page is verifiable; price and stock are never inferred.';
   }
   for(const [k,v] of Object.entries(first.headers||{}))res.setHeader(k,v);
   return res.status(first.statusCode).json(out);
