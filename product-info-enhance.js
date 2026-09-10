@@ -11,7 +11,7 @@
   }
   function loadCommerceStatus(){
     if(window.__finditDashboardCommerceStatus||document.querySelector('script[data-findit-commerce-status]'))return;
-    const s=document.createElement('script');s.src='dashboard-commerce-status.js?v=20260910-live2';s.async=false;s.dataset.finditCommerceStatus='1';document.head.appendChild(s);
+    const s=document.createElement('script');s.src='dashboard-commerce-status.js?v=20260910-live3';s.async=false;s.dataset.finditCommerceStatus='1';document.head.appendChild(s);
   }
   function loadModalPolish(){
     if(!window.__finditModalPolishFix&&!document.querySelector('script[data-findit-modal-polish]')){const p=document.createElement('script');p.src='modal-polish-fix.js?v=20260910-modal2';p.async=false;p.dataset.finditModalPolish='1';document.head.appendChild(p)}
