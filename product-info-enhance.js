@@ -1,66 +1,48 @@
 /* FindIt Product Information bootstrap.
-   Loads maintained dashboard controls after the single Product Information guard. */
+   Deterministic loader: reliability guards are ready before dashboard handlers. */
 (()=>{
   'use strict';
   if(window.__finditProductInfoEnhance)return;
   window.__finditProductInfoEnhance=true;
-  let loading=false,dashboardLoading=false,guardPromise=null,replaying=false;
-  function loadRetailerRelevance(){
-    if(window.__finditDashboardRetailerRelevance||document.querySelector('script[data-findit-retailer-relevance]'))return;
-    const f=document.createElement('script');f.src='dashboard-retailer-relevance-fix.js?v=20260910-relevance2';f.async=false;f.dataset.finditRetailerRelevance='1';document.head.appendChild(f);
-  }
-  function loadCommerceStatus(){
-    if(window.__finditDashboardCommerceStatus||document.querySelector('script[data-findit-commerce-status]'))return;
-    const s=document.createElement('script');s.src='dashboard-commerce-status.js?v=20260910-live3';s.async=false;s.dataset.finditCommerceStatus='1';document.head.appendChild(s);
-  }
-  function loadModalPolish(){
-    if(!window.__finditModalPolishFix&&!document.querySelector('script[data-findit-modal-polish]')){const p=document.createElement('script');p.src='modal-polish-fix.js?v=20260910-modal2';p.async=false;p.dataset.finditModalPolish='1';document.head.appendChild(p)}
-    if(!window.__finditCompareStockReliabilityV2&&!document.querySelector('script[data-findit-compare-stock-reliability]')){const c=document.createElement('script');c.src='compare-stock-reliability-fix.js?v=20260910-pricestock3';c.async=false;c.dataset.finditCompareStockReliability='1';document.head.appendChild(c)}
-    loadRetailerRelevance();loadCommerceStatus();
-  }
-  function loadClickGuard(){
-    loadModalPolish();
-    if(window.__finditProductInfoClickFix)return Promise.resolve();
-    if(guardPromise)return guardPromise;
-    const existing=document.querySelector('script[data-findit-product-click-fix]');
-    guardPromise=new Promise(resolve=>{
-      if(existing){if(window.__finditProductInfoClickFix)return resolve();existing.addEventListener('load',resolve,{once:true});existing.addEventListener('error',resolve,{once:true});return}
-      const g=document.createElement('script');g.src='product-info-click-fix.js?v=20260910-research3';g.async=false;g.dataset.finditProductClickFix='1';g.onload=resolve;g.onerror=resolve;document.head.appendChild(g);
+  const pending=new Map();
+  let dashboardLoading=false;
+
+  function loadScript(key,src,ready){
+    if(ready?.())return Promise.resolve();
+    if(pending.has(key))return pending.get(key);
+    const existing=document.querySelector(`script[data-findit-loader="${key}"]`);
+    const p=new Promise(resolve=>{
+      const done=()=>{if(key==='compare'&&window.__finditCompareStockReliabilityV2)window.__finditCompareStockReliability=true;resolve()};
+      if(existing){if(ready?.())return done();existing.addEventListener('load',done,{once:true});existing.addEventListener('error',done,{once:true});return}
+      const s=document.createElement('script');s.src=src;s.async=false;s.dataset.finditLoader=key;s.onload=done;s.onerror=done;document.head.appendChild(s);
     });
-    return guardPromise;
+    pending.set(key,p);return p;
   }
-  /* product-info-enhance loads before redesign-v4. Capture Product Info clicks during
-     startup so the older dashboard handler cannot win the race and open an incomplete modal. */
-  window.addEventListener('click',e=>{
-    if(replaying||window.__finditProductInfoClickFix)return;
-    const t=e.target?.closest?.('#finditExactShell [data-fx="product"],#finditExactShell [data-stable-action="product"]');
-    if(!t)return;
-    e.preventDefault();e.stopImmediatePropagation();
-    loadClickGuard().then(()=>{
-      if(!window.__finditProductInfoClickFix)return;
-      replaying=true;
-      try{t.click()}finally{replaying=false}
-    });
-  },true);
+
+  const loadPolish=()=>loadScript('modal-polish','modal-polish-fix.js?v=20260910-modal2',()=>window.__finditModalPolishFix);
+  const loadCompare=()=>loadScript('compare','compare-stock-reliability-fix.js?v=20260910-pricestock4',()=>window.__finditCompareStockReliabilityV2).then(()=>{if(window.__finditCompareStockReliabilityV2)window.__finditCompareStockReliability=true});
+  const loadRelevance=()=>loadScript('relevance','dashboard-retailer-relevance-fix.js?v=20260910-relevance2',()=>window.__finditDashboardRetailerRelevance);
+  const loadCommerce=()=>loadScript('commerce','dashboard-commerce-status.js?v=20260910-live3',()=>window.__finditDashboardCommerceStatus);
+  const loadProductGuard=()=>loadScript('product-click','product-info-click-fix.js?v=20260910-research3',()=>window.__finditProductInfoClickFix);
+  const loadResearch=()=>loadScript('product-insights','product-insights-runtime.js?v=20260910-research2',()=>window.__finditAiProductInsightsV5);
+
+  async function loadGuards(){
+    await Promise.all([loadPolish(),loadCompare(),loadRelevance(),loadCommerce(),loadProductGuard()]);
+  }
+
   async function loadDashboardRuntime(){
-    await loadClickGuard();
-    if(window.__finditDashboardV8Loader||dashboardLoading)return;
-    if(!document.querySelector('#finditExactShell'))return;
-    if(document.querySelector('script[data-findit-dashboard-stable]'))return;
+    if(window.__finditDashboardV8Loader||dashboardLoading||!document.querySelector('#finditExactShell'))return;
     dashboardLoading=true;
-    const s=document.createElement('script');s.src='dashboard-runtime-stable.js?v=20260910-product3';s.async=false;s.dataset.finditDashboardStable='1';
-    s.onload=()=>{dashboardLoading=false;loadRetailerRelevance();loadCommerceStatus();try{document.dispatchEvent(new CustomEvent('findit:dashboard-sync'))}catch{}};
-    s.onerror=()=>{dashboardLoading=false};document.head.appendChild(s);
+    await loadGuards();
+    if(window.__finditDashboardV8Loader){dashboardLoading=false;return}
+    await loadScript('dashboard-stable','dashboard-runtime-stable.js?v=20260910-product3',()=>window.__finditDashboardV8Loader);
+    dashboardLoading=false;
+    try{document.dispatchEvent(new CustomEvent('findit:dashboard-sync'))}catch{}
   }
-  loadModalPolish();loadClickGuard();
-  const observer=new MutationObserver(()=>{if(document.querySelector('#finditExactShell')){loadDashboardRuntime();loadRetailerRelevance();loadCommerceStatus();observer.disconnect()}});observer.observe(document.documentElement,{childList:true,subtree:true});
-  setTimeout(loadDashboardRuntime,0);setTimeout(loadDashboardRuntime,800);setTimeout(loadRetailerRelevance,1200);setTimeout(loadCommerceStatus,1300);
-  function loadResearchRuntime(){
-    if(window.__finditAiProductInsightsV5)return Promise.resolve();
-    const existing=document.querySelector('script[data-findit-product-insights-runtime]');
-    if(existing){if(existing.dataset.loaded==='1')return Promise.resolve();return new Promise(resolve=>{existing.addEventListener('load',resolve,{once:true});existing.addEventListener('error',resolve,{once:true})})}
-    if(loading)return Promise.resolve();loading=true;
-    return new Promise(resolve=>{const s=document.createElement('script');s.src='product-insights-runtime.js?v=20260910-research3';s.async=true;s.dataset.finditProductInsightsRuntime='1';s.onload=()=>{s.dataset.loaded='1';loading=false;resolve()};s.onerror=()=>{loading=false;resolve()};document.head.appendChild(s)});
-  }
-  document.addEventListener('findit:results-rendered',()=>{setTimeout(loadResearchRuntime,0);setTimeout(loadRetailerRelevance,0);setTimeout(loadCommerceStatus,0)});
+
+  loadGuards();
+  const observer=new MutationObserver(()=>{if(document.querySelector('#finditExactShell'))loadDashboardRuntime()});
+  observer.observe(document.documentElement,{childList:true,subtree:true});
+  setTimeout(loadDashboardRuntime,0);setTimeout(loadDashboardRuntime,500);setTimeout(loadDashboardRuntime,1200);
+  document.addEventListener('findit:results-rendered',()=>{loadResearch();loadGuards().then(()=>{try{document.dispatchEvent(new CustomEvent('findit:dashboard-sync'))}catch{}})});
 })();
