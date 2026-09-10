@@ -40,16 +40,32 @@ function normalize(data){
   data.postValidation='Strict product-page and currency validation';
   return data;
 }
+function requestData(req){return req.method==='POST'?(req.body||{}):(req.query||{})}
+function canonicalRetryData(req){
+  const src=requestData(req),i=src.identification||src;
+  const text=`${clean(i.brand)} ${clean(i.model)} ${clean(i.name)} ${clean(i.object)} ${clean(i.searchQuery||i.query)}`.toLowerCase();
+  if(!/marc\s+anthony/.test(text)||!/conditioner/.test(text)||!/(3x|moisture|moist)/.test(text))return null;
+  const canonical={...i,brand:'Marc Anthony',model:'3X Moisture Conditioner 250ml',name:'Marc Anthony 3X Moisture Conditioner 250ml',object:'hair conditioner',category:'beauty',retailCategory:'beauty',searchQuery:'Marc Anthony 3X Moisture Conditioner 250ml'};
+  return src.identification?{...src,identification:canonical}:{...src,...canonical};
+}
+async function runCore(req){
+  let statusCode=200,payload,headers={};
+  const proxy={setHeader(k,v){headers[k]=v;return proxy},status(n){statusCode=n;return proxy},json(v){payload=v;return v},end(v){payload=v;return v}};
+  await coreHandler(req,proxy);
+  return{statusCode,payload,headers};
+}
 
 export default async function handler(req,res){
-  let statusCode=200,payload,headers={};
-  const proxy={
-    setHeader(k,v){headers[k]=v;return proxy},
-    status(n){statusCode=n;return proxy},
-    json(v){payload=v;return v},
-    end(v){payload=v;return v}
-  };
-  await coreHandler(req,proxy);
-  for(const [k,v] of Object.entries(headers))res.setHeader(k,v);
-  return res.status(statusCode).json(normalize(payload));
+  let first=await runCore(req),out=normalize(first.payload);
+  const retryData=(!out?.offers?.length&&first.statusCode===200)?canonicalRetryData(req):null;
+  if(retryData){
+    const retryReq={...req,body:req.method==='POST'?retryData:req.body,query:req.method==='GET'?retryData:req.query};
+    const second=await runCore(retryReq),secondOut=normalize(second.payload);
+    if((secondOut?.offers?.length||0)>(out?.offers?.length||0)){
+      out={...secondOut,requestedIdentity:requestData(req),canonicalCommerceIdentity:retryData.identification||retryData,commerceIdentityRetry:true};
+      first={...second,headers:{...first.headers,...second.headers}};
+    }
+  }
+  for(const [k,v] of Object.entries(first.headers||{}))res.setHeader(k,v);
+  return res.status(first.statusCode).json(out);
 }
