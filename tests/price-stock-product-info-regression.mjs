@@ -52,7 +52,7 @@ const stock=page.locator('#finditExactShell [data-fx="stock"],#finditExactShell 
 await stock.click();
 await page.waitForFunction(()=>/Live Stock/i.test(document.querySelector('#fxStableBody')?.innerText||''),null,{timeout:3000});
 txt=await page.locator('#fxStableBody').innerText();
-if(!/No retailer currently publishes a trustworthy stock signal/i.test(txt))throw Error(`Stock truthfulness missing: ${txt.slice(0,700)}`);
+if(!/No retailer currently publishes a trustworthy (?:online )?stock signal/i.test(txt))throw Error(`Stock truthfulness missing: ${txt.slice(0,700)}`);
 if(/Verified in stock at this branch/i.test(txt))throw Error('Branch stock was fabricated');
 await page.locator('#fxStableModal .fx-stable-close').click();
 await page.waitForTimeout(200);
