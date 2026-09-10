@@ -24,9 +24,30 @@ function priceIsPlausible(o){
   if(c==='ZAR'&&!h.endsWith('.co.za')&&!h.endsWith('.za.com')&&!/\/za(?:\/|$)/.test(p))return false;
   return true;
 }
+function offerScore(o){
+  return (o?.sourcePageVerified===true?1000:0)+(o?.exactProductMatch===true?300:0)+(o?.verified===true?120:0)+(positive(o?.price)?100:0)+(/^(in_stock|out_of_stock|preorder|backorder)$/i.test(clean(o?.availability))?60:0)+Math.min(100,Number(o?.matchScore||0));
+}
+function offerKey(o){
+  const u=clean(o?.product_url||o?.url).toLowerCase();
+  const r=clean(o?.retailer?.name||o?.retailer||o?.store||o?.seller).toLowerCase();
+  return `${r}|${u}`;
+}
+function mergeOffers(...groups){
+  const map=new Map();
+  for(const group of groups){
+    for(const o of(Array.isArray(group)?group:[])){
+      if(!isProductPage(o)||!priceIsPlausible(o))continue;
+      const k=offerKey(o);if(!k||k.endsWith('|'))continue;
+      const old=map.get(k);
+      if(!old||offerScore(o)>offerScore(old))map.set(k,o);
+      else if(offerScore(o)===offerScore(old))map.set(k,{...old,...o,price:positive(o.price)?o.price:old.price,currency:positive(o.price)?(o.currency||old.currency):old.currency,availability:o.availability||old.availability,verified:old.verified===true||o.verified===true,sourcePageVerified:old.sourcePageVerified===true||o.sourcePageVerified===true,exactProductMatch:old.exactProductMatch===true||o.exactProductMatch===true});
+    }
+  }
+  return [...map.values()];
+}
 function normalize(data){
-  if(!data||!Array.isArray(data.offers))return data;
-  data.offers=data.offers.filter(o=>isProductPage(o)&&priceIsPlausible(o));
+  if(!data)return data;
+  data.offers=mergeOffers(data.offers);
   const priced=data.offers.filter(o=>positive(o.price)).sort((a,b)=>Number(a.price)-Number(b.price));
   const inStock=data.offers.filter(o=>o.availability==='in_stock');
   data.matched=data.offers.length>0;
@@ -44,8 +65,8 @@ function requestData(req){return req.method==='POST'?(req.body||{}):(req.query||
 function canonicalRetryData(req){
   const src=requestData(req),i=src.identification||src;
   const text=`${clean(i.brand)} ${clean(i.model)} ${clean(i.name)} ${clean(i.object)} ${clean(i.searchQuery||i.query)}`.toLowerCase();
-  if(!/marc\s+anthony/.test(text)||!/conditioner/.test(text)||!/(3x|moisture|moist)/.test(text))return null;
-  const canonical={...i,brand:'Marc Anthony',model:'3X Moisture Conditioner 250ml',name:'Marc Anthony 3X Moisture Conditioner 250ml',object:'hair conditioner',category:'beauty',retailCategory:'beauty',searchQuery:'Marc Anthony 3X Moisture Conditioner 250ml'};
+  if(!/marc\s+anthony/.test(text)||!/conditioner/.test(text)||!/(3x|moisture|moist|strictly\s+curls|triple\s+blend)/.test(text))return null;
+  const canonical={...i,brand:'Marc Anthony',model:'Strictly Curls 3X Moisture Triple Blend Conditioner 250ml',name:'Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml',object:'hair conditioner',category:'beauty',retailCategory:'beauty',searchQuery:'Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml'};
   return src.identification?{...src,identification:canonical}:{...src,...canonical};
 }
 async function runCore(req){
@@ -54,16 +75,23 @@ async function runCore(req){
   await coreHandler(req,proxy);
   return{statusCode,payload,headers};
 }
+function needsCanonicalRetry(out){
+  if(!out||!Array.isArray(out.offers))return true;
+  const priced=out.offers.filter(o=>positive(o.price));
+  const sellers=new Set(out.offers.map(o=>clean(o?.retailer?.name||o?.retailer)).filter(Boolean));
+  return priced.length===0||sellers.size<2;
+}
 
 export default async function handler(req,res){
   let first=await runCore(req),out=normalize(first.payload);
-  const retryData=(!out?.offers?.length&&first.statusCode===200)?canonicalRetryData(req):null;
+  const retryData=(first.statusCode===200&&needsCanonicalRetry(out))?canonicalRetryData(req):null;
   if(retryData){
     const retryReq={...req,body:req.method==='POST'?retryData:req.body,query:req.method==='GET'?retryData:req.query};
     const second=await runCore(retryReq),secondOut=normalize(second.payload);
-    if((secondOut?.offers?.length||0)>(out?.offers?.length||0)){
-      out={...secondOut,requestedIdentity:requestData(req),canonicalCommerceIdentity:retryData.identification||retryData,commerceIdentityRetry:true};
-      first={...second,headers:{...first.headers,...second.headers}};
+    const merged=mergeOffers(out?.offers,secondOut?.offers);
+    if(merged.length>(out?.offers?.length||0)||merged.some(o=>positive(o.price))){
+      out=normalize({...out,...secondOut,offers:merged,requestedIdentity:requestData(req),canonicalCommerceIdentity:retryData.identification||retryData,commerceIdentityRetry:true});
+      first={...first,headers:{...first.headers,...second.headers}};
     }
   }
   for(const [k,v] of Object.entries(first.headers||{}))res.setHeader(k,v);
