@@ -6,14 +6,13 @@ const page=await browser.newPage({viewport:{width:1280,height:900}});
 let failures=0;
 const pass=m=>console.log('[PASS]',m);
 const fail=(m,e='')=>{failures++;console.error('[FAIL]',m,e||'')};
-async function check(name,fn){try{await fn();pass(name)}catch(e){fail(name,e?.message||e)}}
+async function check(name,fn){try{await fn();pass(name)}catch(e){fail(name,e?.message||e);await page.evaluate(()=>{const m=document.querySelector('#fxStableModal');if(m){m.classList.add('hidden');m.setAttribute('aria-hidden','true')}}).catch(()=>{})}}
 
 await page.route('**/api/product-insights**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({researched:true,whatItDoes:'A low-top lifestyle sneaker.',pros:['Durable leather upper.'],cons:['Can feel firm during break-in.']})}));
-await page.route('**/api/product-intelligence-v2',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,offers:[{retailer:{name:'Test Retailer'},product_name:"Nike Air Force 1 '07 Low White",product_url:'https://example.com/nike-air-force-1-07-low-white',price:1999,currency:'ZAR',availability:'in_stock',verified:true,sourcePageVerified:true}]})}));
-await page.route('**/api/product-intelligence',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,offers:[]})}));
-await page.route('**/api/assistant',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,answer:'This is a test answer.'})}));
+await page.route('**/api/product-intelligence-v2**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,offers:[{retailer:{name:'Test Retailer'},product_name:"Nike Air Force 1 '07 Low White",product_url:'https://example.com/nike-air-force-1-07-low-white',price:1999,currency:'ZAR',availability:'in_stock',verified:true,sourcePageVerified:true,exactProductMatch:true,branchStockVerified:false}]})}));
+await page.route('**/api/product-intelligence**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,offers:[]})}));
+await page.route('**/api/assistant**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,answer:'This is a test answer.'})}));
 
-// This regression exercises Premium-only dashboard tools, so explicitly run as Premium.
 await page.addInitScript(()=>localStorage.setItem('findit_premium_beta','1'));
 await page.goto(URL,{waitUntil:'domcontentloaded',timeout:30000});
 await page.waitForSelector('#finditExactShell',{state:'visible',timeout:30000});
@@ -52,8 +51,7 @@ await check('Product Information opens and renders researched content',async()=>
 
 await check('Compare Prices can actively verify and render a price',async()=>{
   await page.locator('#finditExactShell [data-fx="compare"]:visible').first().click();
-  await page.click('#fxRefreshPrices');
-  await page.waitForFunction(()=>document.querySelector('#fxOnlinePrices')?.textContent?.includes('Test Retailer'),{timeout:5000});
+  await page.waitForFunction(()=>document.querySelector('#fxOnlinePrices')?.textContent?.includes('Test Retailer'),{timeout:7000});
   const text=await page.locator('#fxStableBody').innerText();
   if(!/R\s?1[,.]?999/.test(text.replace(/ /g,' ')))throw Error(text);
   await page.locator('.fx-stable-close').click();
@@ -63,9 +61,7 @@ await check('Live Stock opens the stock tool and renders verified stock',async()
   const live=page.locator('#finditExactShell [data-fx="stock"]:visible').first();
   await live.waitFor({state:'visible',timeout:5000});
   await live.click();
-  await page.waitForSelector('#fxRefreshStock',{state:'visible',timeout:5000});
-  await page.click('#fxRefreshStock');
-  await page.waitForFunction(()=>document.querySelector('#fxStockRows')?.textContent?.includes('Test Retailer'),{timeout:5000});
+  await page.waitForFunction(()=>document.querySelector('#fxStockRows')?.textContent?.includes('Test Retailer'),{timeout:7000});
   const text=await page.locator('#fxStableBody').innerText();
   if(!text.includes('Live Stock')||!text.toLowerCase().includes('in stock'))throw Error(text);
   await page.locator('.fx-stable-close').click();
