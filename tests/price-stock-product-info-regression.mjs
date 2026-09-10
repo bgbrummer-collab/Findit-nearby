@@ -11,8 +11,8 @@ const offers=[
  {retailer:{name:'Amazon South Africa'},product_name:'Marc Anthony Strictly Curls Conditioner',price:null,currency:'ZAR',availability:null,product_url:'https://www.amazon.co.za/example',verified:true,exactProductMatch:true,matchScore:92}
 ];
 await page.route('**/api/product-insights?**',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({researched:true,whatItDoes:'A moisturising conditioner made for curly hair that adds slip and helps reduce frizz.',pros:['Adds moisture to dry curls.','Provides slip for easier detangling.','Helps improve manageability and shine.'],cons:['Rich conditioning may feel heavy on some fine hair types.'],bestFor:'Dry or frizz-prone curly hair',standOut:'Marula oil, coconut and shea butter blend',sources:[{title:'Marc Anthony',url:'https://marcanthony.com/products/strictly-curls-conditioner'}]})}));
-await page.route('**/api/product-intelligence-v2',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,matched:true,exactMatchVerified:true,offers})}));
-await page.route('**/api/product-intelligence',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,matched:true,exactMatchVerified:true,offers})}));
+await page.route('**/api/product-intelligence-v2**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,matched:true,exactMatchVerified:true,offers})}));
+await page.route('**/api/product-intelligence**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,matched:true,exactMatchVerified:true,offers})}));
 await page.goto(BASE,{waitUntil:'domcontentloaded',timeout:35000});
 await page.waitForSelector('#finditExactShell',{state:'visible',timeout:15000});
 await page.waitForFunction(()=>window.__finditDashboardRetailerRelevance===true&&window.__finditCompareStockReliability===true&&window.__finditProductInfoClickFix===true,{timeout:15000});
@@ -50,7 +50,7 @@ if(!/Nearby branches of retailers (?:with|carrying) the exact product online/i.t
 await page.locator('#fxStableModal .fx-stable-close').click();
 const stock=page.locator('#finditExactShell [data-fx="stock"],#finditExactShell [data-fx="nearby"]').filter({hasText:'Live Stock'}).first();
 await stock.click();
-await page.waitForFunction(()=>/Live Stock/i.test(document.querySelector('#fxStableBody')?.innerText||''),null,{timeout:3000});
+await page.waitForFunction(()=>{const t=document.querySelector('#fxStockStatus')?.textContent||'';return !/Refreshing retailer stock evidence/i.test(t)&&/No retailer currently publishes a trustworthy (?:online )?stock signal/i.test(t)},null,{timeout:7000});
 txt=await page.locator('#fxStableBody').innerText();
 if(!/No retailer currently publishes a trustworthy (?:online )?stock signal/i.test(txt))throw Error(`Stock truthfulness missing: ${txt.slice(0,700)}`);
 if(/Verified in stock at this branch/i.test(txt))throw Error('Branch stock was fabricated');
