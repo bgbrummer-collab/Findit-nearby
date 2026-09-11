@@ -20,7 +20,7 @@
   }
 
   const loadPolish=()=>loadScript('modal-polish','modal-polish-fix.js?v=20260910-modal2',()=>window.__finditModalPolishFix);
-  const loadActionOwner=()=>loadScript('commerce-action-owner','commerce-modal-action-owner.js?v=20260910-owner1',()=>window.__finditCommerceModalActionOwner);
+  const loadActionOwner=()=>loadScript('commerce-action-owner','commerce-modal-action-owner.js?v=20260911-owner2',()=>window.__finditCommerceModalActionOwner);
   const loadCompare=()=>loadScript('compare','compare-stock-reliability-fix.js?v=20260910-pricestock7',()=>window.__finditCompareStockReliabilityV2).then(()=>{if(window.__finditCompareStockReliabilityV2)window.__finditCompareStockReliability=true});
   const loadRelevance=()=>loadScript('relevance','dashboard-retailer-relevance-fix.js?v=20260910-relevance2',()=>window.__finditDashboardRetailerRelevance);
   const loadCommerce=()=>loadScript('commerce','dashboard-commerce-status.js?v=20260910-live6',()=>window.__finditDashboardCommerceStatus);
