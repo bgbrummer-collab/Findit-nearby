@@ -1,4 +1,4 @@
-/* FindIt dashboard commerce status v9 — exact online price/stock with product-scoped state.
+/* FindIt dashboard commerce status v10 — exact online price/stock with product-scoped state.
    Verified evidence is monotonic only inside the SAME identified product. New-result offers are retained only when they match
    the new identity; old-product evidence and late network replies are discarded so prices never bleed between searches. */
 (()=>{
@@ -22,7 +22,6 @@ const stop=new Set(['the','and','for','with','from','this','that','product','ite
 function tokens(v){return norm(v).split(' ').filter(x=>x.length>2&&!stop.has(x))}
 function offerMatchesIdentity(o,i=currentIdentity()){
   if(!validOffer(o))return false;
-  try{if(window.finditTrustAudit?.filterOffers){return window.finditTrustAudit.filterOffers([o],i).length>0}}catch{}
   const hay=norm([o?.product_name,o?.title,o?.name,o?.product_url,o?.url].filter(Boolean).join(' '));if(!hay)return false;
   const brand=norm(i.brand);if(brand&&brand.length>2&&!hay.includes(brand))return false;
   const model=tokens(i.model),name=tokens(i.name),object=tokens(i.object),query=tokens(i.searchQuery);
@@ -30,8 +29,9 @@ function offerMatchesIdentity(o,i=currentIdentity()){
   const hits=distinctive.filter(t=>hay.includes(t)).length;
   if(distinctive.length>=3&&hits>=2)return true;
   if(distinctive.length>=1&&hits>=1&&object.some(t=>hay.includes(t)))return true;
-  if(!distinctive.length&&object.length)return object.some(t=>hay.includes(t));
+  if(!distinctive.length&&object.length&&object.some(t=>hay.includes(t)))return true;
   if(brand&&hits>=1)return true;
+  try{if(window.finditTrustAudit?.filterOffers)return window.finditTrustAudit.filterOffers([o],i).length>0}catch{}
   return false;
 }
 function matchingIncoming(rows,i=currentIdentity()){return (Array.isArray(rows)?rows:[]).filter(o=>offerMatchesIdentity(o,i))}
