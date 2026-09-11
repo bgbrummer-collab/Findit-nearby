@@ -257,6 +257,18 @@ function titleVariantConflict(title, i) {
   return false;
 }
 
+function researchTypeConflict(text, i) {
+  const wanted = norm(`${i.object || ''} ${i.category || ''} ${i.name || ''} ${i.model || ''} ${i.searchQuery || ''}`), candidate = norm(text);
+  const audio = /\b(?:headphone|headphones|headset|headsets|earbud|earbuds)\b/, mouse=/\bmouse\b/, keyboard=/\bkeyboard\b/, camera=/\b(?:camera|webcam)\b/, speaker=/\bspeakers?\b/, controller=/\b(?:controller|gamepad)\b/, mic=/\b(?:microphone|mic)\b/;
+  if (audio.test(wanted) && (!audio.test(candidate) || mouse.test(candidate) || keyboard.test(candidate) || camera.test(candidate) || speaker.test(candidate) || controller.test(candidate))) return true;
+  if (mouse.test(wanted) && !mouse.test(candidate)) return true;
+  if (keyboard.test(wanted) && !keyboard.test(candidate)) return true;
+  if (mic.test(wanted) && audio.test(candidate) && !mic.test(candidate)) return true;
+  if (/\bconditioner\b/.test(wanted) && /\bshampoo\b/.test(candidate) && !/\bconditioner\b/.test(candidate)) return true;
+  if (/\bshampoo\b/.test(wanted) && /\bconditioner\b/.test(candidate) && !/\bshampoo\b/.test(candidate)) return true;
+  return false;
+}
+
 function titleOf(raw, url) {
   const s = String(raw || ''), m = s.match(/^Title:\s*(.+)$/mi) || s.match(/<title[^>]*>([^<]+)<\/title>/i);
   try { return clean(m?.[1] || new URL(url).hostname, 180); } catch { return clean(m?.[1] || 'Product source', 180); }
@@ -308,6 +320,7 @@ async function productPage(url, i) {
   if (BLOCKPAGE.test(`${title} ${text.slice(0, 6000)}`)) return null;
   if (/\b(search|search results|results for)\b/i.test(title)) return null;
   if (titleVariantConflict(title, i)) return null;
+  if (researchTypeConflict(`${title} ${text.slice(0, 10000)}`, i)) return null;
   const score = identityScore(text, i, title);
   const quality = evidenceQuality(text, i);
   return score >= 5 && quality >= 6 ? { title, url: d.url || url, text: text.slice(0, 30000), score: score + quality, evidenceType: 'product-page' } : null;
@@ -357,6 +370,7 @@ function snippetCandidates(raw, base, i) {
     const text = htmlToText(s.slice(Math.max(0, start - 120), Math.min(s.length, end + 1100)));
     if (BLOCKPAGE.test(`${title} ${text}`)) return;
     if (titleVariantConflict(title, i)) return;
+    if (researchTypeConflict(`${title} ${text}`, i)) return;
     const score = resultEvidenceScore(`${title} ${text}`, i);
     const quality = evidenceQuality(`${title}\n${text}`, i);
     if (score < 7 || quality < 6) return;
@@ -526,6 +540,16 @@ function sanitizeAnswer(i, answer, pages) {
     const x = cleanVisible(raw, i);
     if (x && isNegativeEvidence(x)) addUnique(cons, x);
   }
+  if (pros.length < 2) {
+    const evidencePros = [];
+    for (const p of pages || []) for (const raw of evidenceLines(p.text)) {
+      const x = cleanVisible(raw, i);
+      if (!x || researchTypeConflict(x, i) || isNegativeEvidence(x) || !POSITIVE_FACT.test(x) || sentenceScore(x, i) < 5) continue;
+      if (!evidencePros.some(y => norm(y) === norm(x))) evidencePros.push(x);
+    }
+    evidencePros.sort((a,b)=>sentenceScore(b,i)-sentenceScore(a,i));
+    for (const x of evidencePros) { addUnique(pros, x); if (pros.length >= 4) break; }
+  }
   out.whatItDoes = what;
   out.pros = pros.slice(0, 4);
   out.cons = cons.slice(0, 4);
@@ -534,7 +558,7 @@ function sanitizeAnswer(i, answer, pages) {
   out.valueVerdict = cleanVisible(out.valueVerdict, i);
   out.sources = (Array.isArray(out.sources) ? out.sources : []).filter(src => {
     const u=String(src?.url||''); const t=String(src?.title||'');
-    return /^https?:\/\//i.test(u) && !/encrypted-tbn\d*\.gstatic\.com|faviconv2|rstyle\.me|linksynergy\.|awin1\./i.test(u) && !/^image\s*\d+$/i.test(t.trim());
+    return /^https?:\/\//i.test(u) && !researchTypeConflict(`${t} ${u}`, i) && !/encrypted-tbn\d*\.gstatic\.com|faviconv2|rstyle\.me|linksynergy\.|awin1\./i.test(u) && !/^image\s*\d+$/i.test(t.trim());
   }).map(src => ({
     ...src,
     title: clean(String(src?.title || 'Product source').replace(/<[^>]+>/g, ' ').replace(/&lt;[^&]+&gt;/gi, ' '), 180) || 'Product source'
