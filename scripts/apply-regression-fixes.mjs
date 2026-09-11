@@ -3,6 +3,10 @@ import fs from 'node:fs';
 function patch(path, replacements) {
   let text = fs.readFileSync(path, 'utf8');
   for (const [from, to, label] of replacements) {
+    if (text.includes(to)) {
+      console.log(`Already patched ${path}: ${label}`);
+      continue;
+    }
     if (!text.includes(from)) throw new Error(`${path}: expected ${label} block was not found`);
     text = text.replace(from, to);
   }
@@ -48,6 +52,21 @@ patch('api/product-insights.js', [
     "    return /^https?:\\/\\//i.test(u) && !/encrypted-tbn\\d*\\.gstatic\\.com|faviconv2|rstyle\\.me|linksynergy\\.|awin1\\./i.test(u) && !/^image\\s*\\d+$/i.test(t.trim());",
     "    return /^https?:\\/\\//i.test(u) && !researchTypeConflict(`${t} ${u}`, i) && !/encrypted-tbn\\d*\\.gstatic\\.com|faviconv2|rstyle\\.me|linksynergy\\.|awin1\\./i.test(u) && !/^image\\s*\\d+$/i.test(t.trim());",
     'source type filter'
+  ],
+  [
+    "  if (!what || isNegativeEvidence(what) || fallbackNeedsBrand) what = bestPurpose(i, pages);",
+    "  if (!what || isNegativeEvidence(what) || fallbackNeedsBrand || researchTypeConflict(what, i)) what = bestPurpose(i, pages);",
+    'AI summary exact product type guard'
+  ],
+  [
+    "    if (isNegativeEvidence(x)) addUnique(cons, x);\n    else if (POSITIVE_FACT.test(x)) addUnique(pros, x);",
+    "    if (isNegativeEvidence(x)) addUnique(cons, x);\n    else if (!researchTypeConflict(x, i) && (POSITIVE_FACT.test(x) || sentenceScore(x, i) >= 5)) addUnique(pros, x);",
+    'AI pro exactness and usefulness guard'
+  ],
+  [
+    "    for (const x of evidencePros) { addUnique(pros, x); if (pros.length >= 4) break; }\n  }\n  out.whatItDoes = what;",
+    "    for (const x of evidencePros) { addUnique(pros, x); if (pros.length >= 4) break; }\n  }\n  if (pros.length < 2) {\n    const extraEvidence = [];\n    for (const p of pages || []) for (const raw of evidenceLines(p.text)) {\n      const x = cleanVisible(raw, i);\n      if (!x || researchTypeConflict(x, i) || isNegativeEvidence(x) || sentenceScore(x, i) < 7 || norm(x) === norm(what)) continue;\n      if (!extraEvidence.some(y => norm(y) === norm(x))) extraEvidence.push(x);\n    }\n    extraEvidence.sort((a,b)=>sentenceScore(b,i)-sentenceScore(a,i));\n    for (const x of extraEvidence) { addUnique(pros, x); if (pros.length >= 2) break; }\n  }\n  out.whatItDoes = what;",
+    'second evidence-backed pro backfill'
   ]
 ]);
 
