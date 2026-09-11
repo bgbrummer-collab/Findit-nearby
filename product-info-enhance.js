@@ -26,11 +26,12 @@
   const loadCommerce=()=>loadScript('commerce','dashboard-commerce-status.js?v=20260910-live6',()=>window.__finditDashboardCommerceStatus);
   const loadStructure=()=>loadScript('product-structure','product-info-structure-guard.js?v=20260910-structure1',()=>window.__finditProductInfoStructureGuard);
   const loadProductGuard=()=>loadScript('product-click','product-info-click-fix.js?v=20260910-research4',()=>window.__finditProductInfoClickFix);
+  const loadBuyingContext=()=>loadScript('product-buying-context','product-buying-context-fix.js?v=20260911-context1',()=>window.__finditProductBuyingContextFix);
   const loadResearch=()=>loadScript('product-insights','product-insights-runtime.js?v=20260910-research2',()=>window.__finditAiProductInsightsV5);
 
   async function loadGuards(){
     await loadActionOwner();
-    await Promise.all([loadPolish(),loadCompare(),loadRelevance(),loadCommerce(),loadStructure(),loadProductGuard()]);
+    await Promise.all([loadPolish(),loadCompare(),loadRelevance(),loadCommerce(),loadStructure(),loadProductGuard(),loadBuyingContext()]);
   }
 
   async function loadDashboardRuntime(){
