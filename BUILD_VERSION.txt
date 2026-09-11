@@ -1,5 +1,5 @@
 FindIt Production Readiness — Final Regression Redeploy
 Core FindIt interface, search, directions, map, feedback, Assistant, dashboard and product intelligence remain enabled.
-Final regression fixes for product exactness, research quality, useful pros and nearby ordering are now on main.
+Final regression fixes for product exactness, research quality, useful pros, exact-source grounding and nearby ordering are now on main.
 This commit forces a fresh Vercel production deployment and the full production regression suite.
-Redeploy marker: 2026-09-11 23:54 SAST
+Redeploy marker: 2026-09-11 23:58 SAST
