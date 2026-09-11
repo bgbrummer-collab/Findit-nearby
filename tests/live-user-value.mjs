@@ -37,6 +37,8 @@ if(!/What it does/i.test(product)||!/Pros/i.test(product)||!/Cons|considerations
 if(!/moist|curl|detang|frizz/i.test(product))fail(`product information is still generic: ${product}`);
 if(!/Best for/i.test(product)||!/Stand-out point/i.test(product))fail(`product information lacks useful buying context: ${product}`);
 if(/Exact-product research could not be loaded|conservative guidance/i.test(product))fail(`fallback shown despite live research: ${product}`);
+if(/professional-grade|salon-quality|accessible pricing/i.test(product))fail(`ungrounded marketing language leaked into product information: ${product}`);
+if(!/R\s*230/i.test(product)||!/Clicks/i.test(product))fail(`South African verified price not used in Product Information: ${product}`);
 console.log('REAL_PRODUCT_INFO_OK',product.replace(/\s+/g,' ').slice(0,900));
 
 await openAction('compare');
@@ -45,6 +47,8 @@ let compare=await page.locator('#fxStableBody').innerText();
 if(/R\s*0(?:[,.]00)?\b/i.test(compare))fail(`zero price shown: ${compare}`);
 if(!/Clicks|Dis-Chem/i.test(compare))fail(`no verified retailer in comparison: ${compare}`);
 if(!/R\s*2\d\d/i.test(compare))fail(`no realistic verified ZAR price in comparison: ${compare}`);
+if(/US\$|JOD|Walgreens|CVS|Wellnessbetter|Curlthecurls/i.test(compare))fail(`foreign commerce displaced local results: ${compare}`);
+if(/Refreshing exact retailer pages/i.test(compare))fail(`stale refreshing status remained after local results rendered: ${compare}`);
 console.log('REAL_COMPARE_OK',compare.replace(/\s+/g,' ').slice(0,1000));
 
 await openAction('stock');
@@ -53,11 +57,14 @@ const stock=await page.locator('#fxStableBody').innerText();
 if(!/Clicks|Takealot/i.test(stock))fail(`no exact retailer stock evidence: ${stock}`);
 if(!/branch stock/i.test(stock))fail(`branch-vs-online stock distinction missing: ${stock}`);
 if(/verified in stock at this branch/i.test(stock))fail(`branch stock was invented: ${stock}`);
+if(/US\$|JOD|Walgreens|CVS|Wellnessbetter|Curlthecurls/i.test(stock))fail(`foreign stock displaced local results: ${stock}`);
 console.log('REAL_STOCK_OK',stock.replace(/\s+/g,' ').slice(0,1000));
 
-const state=await page.evaluate(()=>({offers:(window.finditState?.offers||[]).map(o=>({retailer:o.retailer?.name||o.retailer,price:o.price,availability:o.availability,verified:o.verified,sourcePageVerified:o.sourcePageVerified,exact:o.exactProductMatch,branch:o.branchStockVerified,url:o.product_url||o.url})),stores:(window.finditState?.stores||[]).map(s=>({name:s.name,distance:s.distanceKm,branch:s.branchStockVerified,stock:s.stockStatus||s.stock||s.availability||null}))}));
+const state=await page.evaluate(()=>({offers:(window.finditState?.offers||[]).map(o=>({retailer:o.retailer?.name||o.retailer,title:o.product_name||o.title||'',price:o.price,currency:o.currency,availability:o.availability,verified:o.verified,sourcePageVerified:o.sourcePageVerified,exact:o.exactProductMatch,branch:o.branchStockVerified,url:o.product_url||o.url})),stores:(window.finditState?.stores||[]).map(s=>({name:s.name,distance:s.distanceKm,branch:s.branchStockVerified,stock:s.stockStatus||s.stock||s.availability||null}))}));
 const priced=state.offers.filter(o=>Number(o.price)>0&&o.verified===true&&o.sourcePageVerified===true&&o.exact!==false);
 if(!priced.length)fail(`no verified positive price reached actual UI state: ${JSON.stringify(state)}`);
+if(!priced.some(o=>String(o.currency).toUpperCase()==='ZAR'&&/Clicks/i.test(String(o.retailer))))fail(`no local ZAR exact price reached actual UI state: ${JSON.stringify(state.offers)}`);
+if(state.offers.some(o=>/\bshampoo\b/i.test(`${o.title} ${o.url}`)&&!/\bconditioner\b/i.test(`${o.title} ${o.url}`)))fail(`wrong product type reached actual UI state: ${JSON.stringify(state.offers)}`);
 if(state.stores.some(s=>s.branch!==true&&/^(in_stock|out_of_stock|preorder|backorder)$/i.test(String(s.stock||''))))fail(`unverified branch stock reached UI state: ${JSON.stringify(state.stores)}`);
 if(errors.length)fail(`page errors: ${errors.join(' | ')}`);
 if(api.some(([s])=>s>=500))fail(`5xx product API response: ${JSON.stringify(api)}`);
