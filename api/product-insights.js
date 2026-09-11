@@ -384,6 +384,9 @@ function snippetCandidates(raw, base, i) {
 
 function stableSourceHints(i) {
   const b = norm(i.brand), p = norm(`${i.name} ${i.model} ${i.object} ${i.category} ${i.searchQuery}`);
+  if (/^logitech$/.test(b) && /(?:g pro|pro).*?(?:gaming )?headset|(?:gaming )?headset.*?(?:g pro|pro)/.test(p)) return [
+    'https://www.logitechg.com/en-ph/shop/p/pro-gaming-headset'
+  ];
   if (/^marc anthony$/.test(b) && /strictly curls.*3x moisture.*conditioner|3x moisture.*triple blend conditioner/.test(p)) return [
     'https://marcanthony.com/products/strictly-curls%C2%AE-3x-moisture-triple-blend-conditioner'
   ];
