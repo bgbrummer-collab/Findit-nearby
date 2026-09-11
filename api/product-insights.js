@@ -527,14 +527,14 @@ function sanitizeAnswer(i, answer, pages) {
   const out = { ...answer };
   let what = cleanVisible(out.whatItDoes, i);
   const fallbackNeedsBrand = out.researchMethod === 'Exact-product web evidence' && what && identityParts(i).brand && brandMatchScore(norm(what), identityParts(i)) < 0;
-  if (!what || isNegativeEvidence(what) || fallbackNeedsBrand) what = bestPurpose(i, pages);
+  if (!what || isNegativeEvidence(what) || fallbackNeedsBrand || researchTypeConflict(what, i)) what = bestPurpose(i, pages);
   const pros = [], cons = [];
   const addUnique = (arr, x) => { if (x && !arr.some(y => norm(y) === norm(x))) arr.push(x); };
   for (const raw of Array.isArray(out.pros) ? out.pros : []) {
     const x = cleanVisible(raw, i);
     if (!x) continue;
     if (isNegativeEvidence(x)) addUnique(cons, x);
-    else if (POSITIVE_FACT.test(x)) addUnique(pros, x);
+    else if (!researchTypeConflict(x, i) && (POSITIVE_FACT.test(x) || sentenceScore(x, i) >= 5)) addUnique(pros, x);
   }
   for (const raw of Array.isArray(out.cons) ? out.cons : []) {
     const x = cleanVisible(raw, i);
@@ -549,6 +549,16 @@ function sanitizeAnswer(i, answer, pages) {
     }
     evidencePros.sort((a,b)=>sentenceScore(b,i)-sentenceScore(a,i));
     for (const x of evidencePros) { addUnique(pros, x); if (pros.length >= 4) break; }
+  }
+  if (pros.length < 2) {
+    const extraEvidence = [];
+    for (const p of pages || []) for (const raw of evidenceLines(p.text)) {
+      const x = cleanVisible(raw, i);
+      if (!x || researchTypeConflict(x, i) || isNegativeEvidence(x) || sentenceScore(x, i) < 7 || norm(x) === norm(what)) continue;
+      if (!extraEvidence.some(y => norm(y) === norm(x))) extraEvidence.push(x);
+    }
+    extraEvidence.sort((a,b)=>sentenceScore(b,i)-sentenceScore(a,i));
+    for (const x of extraEvidence) { addUnique(pros, x); if (pros.length >= 2) break; }
   }
   out.whatItDoes = what;
   out.pros = pros.slice(0, 4);
