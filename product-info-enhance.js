@@ -6,6 +6,7 @@
   window.__finditProductInfoEnhance=true;
   const pending=new Map();
   let dashboardLoading=false;
+  let shellObserver=null;
 
   function loadScript(key,src,ready){
     if(ready?.())return Promise.resolve();
@@ -20,7 +21,7 @@
   }
 
   const loadPolish=()=>loadScript('modal-polish','modal-polish-fix.js?v=20260910-modal2',()=>window.__finditModalPolishFix);
-  const loadActionOwner=()=>loadScript('commerce-action-owner','commerce-modal-action-owner.js?v=20260911-owner2',()=>window.__finditCommerceModalActionOwner);
+  const loadActionOwner=()=>loadScript('commerce-action-owner','commerce-modal-action-owner.js?v=20260912-owner3',()=>window.__finditCommerceModalActionOwner);
   const loadCompare=()=>loadScript('compare','compare-stock-reliability-fix.js?v=20260910-pricestock7',()=>window.__finditCompareStockReliabilityV2).then(()=>{if(window.__finditCompareStockReliabilityV2)window.__finditCompareStockReliability=true});
   const loadPriceSweep=()=>loadScript('price-sweep-ui','price-sweep-ui-fix.js?v=20260911-sweep1',()=>window.__finditPriceSweepUiFix);
   const loadRelevance=()=>loadScript('relevance','dashboard-retailer-relevance-fix.js?v=20260910-relevance2',()=>window.__finditDashboardRetailerRelevance);
@@ -42,18 +43,23 @@
   }
 
   async function loadDashboardRuntime(){
-    if(window.__finditDashboardV8Loader||dashboardLoading||!document.querySelector('#finditExactShell'))return;
+    if(window.__finditDashboardV8Loader){shellObserver?.disconnect();shellObserver=null;return}
+    if(dashboardLoading||!document.querySelector('#finditExactShell'))return;
     dashboardLoading=true;
     await loadGuards();
-    if(window.__finditDashboardV8Loader){dashboardLoading=false;return}
-    await loadScript('dashboard-stable','dashboard-runtime-stable.js?v=20260910-product3',()=>window.__finditDashboardV8Loader);
+    if(!window.__finditDashboardV8Loader){
+      await loadScript('dashboard-stable','dashboard-runtime-stable.js?v=20260910-product3',()=>window.__finditDashboardV8Loader);
+    }
     dashboardLoading=false;
+    if(window.__finditDashboardV8Loader){shellObserver?.disconnect();shellObserver=null}
     try{document.dispatchEvent(new CustomEvent('findit:dashboard-sync'))}catch{}
   }
 
   loadGuards();
-  const observer=new MutationObserver(()=>{if(document.querySelector('#finditExactShell'))loadDashboardRuntime()});
-  observer.observe(document.documentElement,{childList:true,subtree:true});
+  shellObserver=new MutationObserver(()=>{
+    if(document.querySelector('#finditExactShell'))loadDashboardRuntime();
+  });
+  shellObserver.observe(document.documentElement,{childList:true,subtree:true});
   setTimeout(loadDashboardRuntime,0);setTimeout(loadDashboardRuntime,500);setTimeout(loadDashboardRuntime,1200);
   document.addEventListener('findit:results-rendered',()=>{loadResearch();loadGuards().then(()=>{try{document.dispatchEvent(new CustomEvent('findit:dashboard-sync'))}catch{}})});
 })();
