@@ -36,6 +36,8 @@ jobs:
         run: |
           mkdir -p qa-results
           set +e
+          node tests/user-experience-guard-regression.mjs 2>&1 | tee qa-results/user-experience-guard-regression.log
+          ux_guard=${PIPESTATUS[0]}
           node tests/release-smoke.mjs 2>&1 | tee qa-results/live-smoke.log
           smoke=${PIPESTATUS[0]}
           node tests/product-trust-regression.mjs 2>&1 | tee qa-results/product-trust-regression.log
@@ -59,11 +61,11 @@ jobs:
           node tests/plan-isolation-audit.mjs 2>&1 | tee qa-results/plan-isolation-audit.log
           plan_isolation=${PIPESTATUS[0]}
           set -e
-          if [ "$smoke" -eq 0 ] && [ "$trust" -eq 0 ] && [ "$route" -eq 0 ] && [ "$research" -eq 0 ] && [ "$web_research" -eq 0 ] && [ "$category_research" -eq 0 ] && [ "$stationery" -eq 0 ] && [ "$dashboard_route" -eq 0 ] && [ "$dashboard_tools" -eq 0 ] && [ "$price_stock_info" -eq 0 ] && [ "$plan_isolation" -eq 0 ]; then
+          if [ "$ux_guard" -eq 0 ] && [ "$smoke" -eq 0 ] && [ "$trust" -eq 0 ] && [ "$route" -eq 0 ] && [ "$research" -eq 0 ] && [ "$web_research" -eq 0 ] && [ "$category_research" -eq 0 ] && [ "$stationery" -eq 0 ] && [ "$dashboard_route" -eq 0 ] && [ "$dashboard_tools" -eq 0 ] && [ "$price_stock_info" -eq 0 ] && [ "$plan_isolation" -eq 0 ]; then
             echo "PASS $(date -u +%Y-%m-%dT%H:%M:%SZ)" > qa-results/live-smoke-status.txt
             exit 0
           fi
-          echo "FAIL $(date -u +%Y-%m-%dT%H:%M:%SZ) smoke=$smoke trust=$trust route=$route research=$research web_research=$web_research category_research=$category_research stationery=$stationery dashboard_route=$dashboard_route dashboard_tools=$dashboard_tools price_stock_info=$price_stock_info plan_isolation=$plan_isolation" > qa-results/live-smoke-status.txt
+          echo "FAIL $(date -u +%Y-%m-%dT%H:%M:%SZ) ux_guard=$ux_guard smoke=$smoke trust=$trust route=$route research=$research web_research=$web_research category_research=$category_research stationery=$stationery dashboard_route=$dashboard_route dashboard_tools=$dashboard_tools price_stock_info=$price_stock_info plan_isolation=$plan_isolation" > qa-results/live-smoke-status.txt
           exit 1
       - name: Probe live exact-product web research
         continue-on-error: true
