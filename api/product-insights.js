@@ -33,7 +33,6 @@ const NEGATIVE_FACT = /static noise|background noise|breaks?|broke|broken|stabil
 const POSITIVE_FACT = /plug.?and.?play|compatible|clear|cardioid|noise cancel|monitor|gain|stand|adapter|durab|soft|strong|absorb|moistur|detang|frizz|shine|manageab|cushion|battery|wireless|bluetooth|usb|easy|support|adjustable|portable|reliable|quality|stream|record|included|includes?|fast|comfort|protect|capacity|variable speed|leather|rubber|structured|construction|forward|reverse|control|scientific|fraction|statistics|calculation|function|two.?ply|2.?ply|rolls?/i;
 const PURPOSE_FACT = /\b(is|are|designed|made|used|helps?|provides?|formulated|records?|recording|streaming|connects?|supports?|for voice|for gaming|for calls?|for podcast|for household|for bathroom|for school|for drilling|for listening)\b/i;
 
-
 function identity(b = {}) {
   const i = b.identification || b;
   return {
@@ -267,6 +266,10 @@ function researchTypeConflict(text, i) {
   if (/\bconditioner\b/.test(wanted) && /\bshampoo\b/.test(candidate) && !/\bconditioner\b/.test(candidate)) return true;
   if (/\bshampoo\b/.test(wanted) && /\bconditioner\b/.test(candidate) && !/\bshampoo\b/.test(candidate)) return true;
   return false;
+}
+
+function factTypeConflict(text, i) {
+  return researchTypeConflict(`${i.object || i.category || ''} ${text || ''}`, i);
 }
 
 function titleOf(raw, url) {
@@ -537,7 +540,7 @@ function sanitizeAnswer(i, answer, pages) {
     const x = cleanVisible(raw, i);
     if (!x) continue;
     if (isNegativeEvidence(x)) addUnique(cons, x);
-    else if (!researchTypeConflict(x, i) && (POSITIVE_FACT.test(x) || sentenceScore(x, i) >= 5)) addUnique(pros, x);
+    else if (!factTypeConflict(x, i) && (POSITIVE_FACT.test(x) || sentenceScore(x, i) >= 5)) addUnique(pros, x);
   }
   for (const raw of Array.isArray(out.cons) ? out.cons : []) {
     const x = cleanVisible(raw, i);
@@ -547,7 +550,7 @@ function sanitizeAnswer(i, answer, pages) {
     const evidencePros = [];
     for (const p of pages || []) for (const raw of evidenceLines(p.text)) {
       const x = cleanVisible(raw, i);
-      if (!x || researchTypeConflict(x, i) || isNegativeEvidence(x) || !POSITIVE_FACT.test(x) || sentenceScore(x, i) < 5) continue;
+      if (!x || factTypeConflict(x, i) || isNegativeEvidence(x) || !POSITIVE_FACT.test(x) || sentenceScore(x, i) < 5) continue;
       if (!evidencePros.some(y => norm(y) === norm(x))) evidencePros.push(x);
     }
     evidencePros.sort((a,b)=>sentenceScore(b,i)-sentenceScore(a,i));
@@ -557,7 +560,7 @@ function sanitizeAnswer(i, answer, pages) {
     const extraEvidence = [];
     for (const p of pages || []) for (const raw of evidenceLines(p.text)) {
       const x = cleanVisible(raw, i);
-      if (!x || researchTypeConflict(x, i) || isNegativeEvidence(x) || sentenceScore(x, i) < 7 || norm(x) === norm(what)) continue;
+      if (!x || factTypeConflict(x, i) || isNegativeEvidence(x) || sentenceScore(x, i) < 7 || norm(x) === norm(what)) continue;
       if (!extraEvidence.some(y => norm(y) === norm(x))) extraEvidence.push(x);
     }
     extraEvidence.sort((a,b)=>sentenceScore(b,i)-sentenceScore(a,i));
