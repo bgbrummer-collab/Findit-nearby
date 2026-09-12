@@ -1,4 +1,4 @@
-/* FindIt commerce UI v5 — responsive complete price comparison + branch/online clarity. */
+/* FindIt commerce UI v6 — responsive complete price comparison + branch/online clarity. */
 (()=>{
 'use strict';
 if(window.__finditCommerceUiV4)return;window.__finditCommerceUiV4=true;
@@ -31,7 +31,7 @@ function combinedOffers(){
  return out.sort((a,b)=>{const ap=positive(a.price),bp=positive(b.price);if(ap!==bp)return bp-ap;if(ap&&bp)return Number(a.price)-Number(b.price);return evidence(b)-evidence(a)});
 }
 function modal(){let m=$('#fxStableModal');if(!m){m=document.createElement('div');m.id='fxStableModal';m.className='fx-stable-modal hidden';m.innerHTML='<div class="fx-stable-card"><button type="button" class="fx-stable-close" aria-label="Close">×</button><div id="fxStableBody"></div></div>';document.body.appendChild(m)}if(!m.dataset.v4Close){m.dataset.v4Close='1';m.addEventListener('click',e=>{if(e.target===m||e.target.closest('.fx-stable-close')){m.classList.add('hidden');m.setAttribute('aria-hidden','true')}})}return m}
-function open(html){const m=modal(),b=$('#fxStableBody');if(!b)return;b.innerHTML=html;m.classList.remove('hidden');m.setAttribute('aria-hidden','false')}
+function open(html){const m=modal(),b=$('#fxStableBody');if(!b)return;b.innerHTML=html;m.classList.remove('hidden');m.setAttribute('aria-hidden','false');queuePolish()}
 function body(){const i=ident(),s=state(),c=s.coords||{};return{identification:i,name:i.name||i.object||'',brand:i.brand||'',model:i.model||'',object:i.object||'',category:i.retailCategory||i.category||'',retailCategory:i.retailCategory||i.category||'',searchQuery:i.searchQuery||i.name||i.model||i.object||'',query:i.searchQuery||i.name||i.model||i.object||'',lat:c.lat??s.lat,lon:c.lon??c.lng??s.lon??s.lng,radius:Number(s.radius||localStorage.getItem('finditRadius')||10)}}
 let refreshPromise=null;
 async function doRefresh(){const b=body();if(!b.searchQuery)return false;const ctl=new AbortController(),timer=setTimeout(()=>ctl.abort(),15000);try{const r=await fetch('/api/product-intelligence-v2',{method:'POST',headers:{'content-type':'application/json','accept':'application/json'},body:JSON.stringify(b),cache:'no-store',signal:ctl.signal});const d=await r.json().catch(()=>({}));if(!r.ok||!Array.isArray(d.offers))return false;const old=[...(state()?.offers||[]),...(window.productIntelligence?.offers||[])],map=new Map();for(const o of[...old,...d.offers]){if(!trusted(o))continue;const k=`${key(retailer(o))}|${String(o.product_url||o.url||'').toLowerCase()}`;const prev=map.get(k);if(!prev||evidence(o)>=evidence(prev))map.set(k,o)}const offers=[...map.values()];try{state().offers=offers}catch{}window.productIntelligence={...(window.productIntelligence||{}),...d,offers};try{document.dispatchEvent(new CustomEvent('findit:dashboard-sync',{detail:{commerce:true}}))}catch{}return true}catch(e){console.warn('FindIt price refresh unavailable',e?.message||e);return false}finally{clearTimeout(timer)}}
@@ -49,8 +49,7 @@ function polish(){
  const root=$('#fxStableBody');if(root){for(const n of [...root.querySelectorAll('*')]){if(n.childNodes.length!==1||n.firstChild?.nodeType!==Node.TEXT_NODE)continue;const old=n.textContent||'',next=old.replace(/Showing verified South African results while checking for updates…?/gi,'Verified South African exact-product results').replace(/Considered a good value by customers[^.]*\.?/gi,'Compare the verified retailer prices below to decide whether it is good value for your needs.');if(next!==old)n.textContent=next}}
 }
 function queuePolish(){if(polishQueued)return;polishQueued=true;requestAnimationFrame(polish)}
-document.addEventListener('click',e=>{const t=e.target?.closest?.('[data-fx="compare"],[data-fxnav="compare"],#fxComparePrices');if(!t)return;e.preventDefault();e.stopImmediatePropagation();openCompare()},true);
-const mo=new MutationObserver(queuePolish);mo.observe(document.documentElement,{subtree:true,childList:true});
+document.addEventListener('click',e=>{const t=e.target?.closest?.('[data-fx="compare"],[data-fxnav="compare"],#fxComparePrices');if(!t)return;e.preventDefault();e.stopImmediatePropagation();setTimeout(openCompare,0)},true);
 document.addEventListener('findit:dashboard-sync',queuePolish);document.addEventListener('findit:results-rendered',queuePolish);setTimeout(queuePolish,300);setTimeout(queuePolish,1200);
 window.finditOpenFullPriceComparison=openCompare;
 })();
