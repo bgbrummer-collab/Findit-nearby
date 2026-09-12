@@ -3,7 +3,7 @@
 'use strict';
 if(window.__finditDashboardAuditControls)return;window.__finditDashboardAuditControls=true;
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
-const esc=(v='')=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c]));
+const esc=(v='')=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const st=()=>{try{return window.finditState||window.state||{}}catch{return{}}};
 function modal(title,html){let m=$('#fxStableModal');if(!m){m=document.createElement('div');m.id='fxStableModal';m.className='fx-stable-modal hidden';m.innerHTML='<div class="fx-stable-card"><button type="button" class="fx-stable-close" aria-label="Close">×</button><div id="fxStableBody"></div></div>';document.body.appendChild(m);m.addEventListener('click',e=>{if(e.target===m||e.target.closest('.fx-stable-close'))m.classList.add('hidden')})}let b=$('#fxStableBody');if(!b)return;b.innerHTML=`<h2 class="fx-stable-title">${esc(title)}</h2>${html}`;m.classList.remove('hidden');m.setAttribute('aria-hidden','false')}
 function setActive(name){$$('#finditExactShell [data-fxnav]').forEach(x=>x.classList.toggle('active',x.dataset.fxnav===name))}
