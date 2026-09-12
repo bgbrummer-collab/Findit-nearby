@@ -27,7 +27,7 @@
   const loadRelevance=()=>loadScript('relevance','dashboard-retailer-relevance-fix.js?v=20260910-relevance2',()=>window.__finditDashboardRetailerRelevance);
   const loadCommerce=()=>loadScript('commerce','dashboard-commerce-status.js?v=20260911-live9',()=>window.__finditDashboardCommerceStatus);
   const loadStructure=()=>loadScript('product-structure','product-info-structure-guard.js?v=20260910-structure1',()=>window.__finditProductInfoStructureGuard);
-  const loadProductGuard=()=>loadScript('product-click','product-info-click-fix.js?v=20260910-research4',()=>window.__finditProductInfoClickFix);
+  const loadProductGuard=()=>loadScript('product-click','product-info-click-fix.js?v=20260912-research5',()=>window.__finditProductInfoClickFix);
   const loadBuyingContext=()=>loadScript('product-buying-context','product-buying-context-fix.js?v=20260911-context1',()=>window.__finditProductBuyingContextFix);
   const loadLocalMarket=()=>loadScript('local-market-commerce','local-market-commerce-fix.js?v=20260911-local1',()=>window.__finditLocalMarketCommerceFix);
   const loadResearch=()=>loadScript('product-insights','product-insights-runtime.js?v=20260910-research2',()=>window.__finditAiProductInsightsV5);
