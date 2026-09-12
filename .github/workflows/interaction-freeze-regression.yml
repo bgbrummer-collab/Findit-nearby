@@ -1,0 +1,35 @@
+name: FindIt Interaction Freeze Regression
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  interaction:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm pkg set type=module
+          npm install --save-dev playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local app
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/findit-http.log 2>&1 &
+          sleep 2
+      - name: Check user interaction safety
+        env:
+          FINDIT_URL: http://127.0.0.1:4173/
+        run: |
+          timeout --signal=TERM --kill-after=5s 120s node tests/user-experience-guard-regression.mjs
+          timeout --signal=TERM --kill-after=5s 120s node tests/dashboard-tools-regression.mjs
