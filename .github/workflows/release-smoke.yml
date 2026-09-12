@@ -13,7 +13,7 @@ permissions:
 jobs:
   smoke:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -36,31 +36,28 @@ jobs:
         run: |
           mkdir -p qa-results
           set +e
-          node tests/user-experience-guard-regression.mjs 2>&1 | tee qa-results/user-experience-guard-regression.log
-          ux_guard=${PIPESTATUS[0]}
-          node tests/release-smoke.mjs 2>&1 | tee qa-results/live-smoke.log
-          smoke=${PIPESTATUS[0]}
-          node tests/product-trust-regression.mjs 2>&1 | tee qa-results/product-trust-regression.log
-          trust=${PIPESTATUS[0]}
-          node tests/product-intelligence-route-regression.mjs 2>&1 | tee qa-results/product-intelligence-route-regression.log
-          route=${PIPESTATUS[0]}
-          node tests/verified-product-research-regression.mjs 2>&1 | tee qa-results/verified-product-research-regression.log
-          research=${PIPESTATUS[0]}
-          node tests/product-web-research-regression.mjs 2>&1 | tee qa-results/product-web-research-regression.log
-          web_research=${PIPESTATUS[0]}
-          node tests/product-category-research-regression.mjs 2>&1 | tee qa-results/product-category-research-regression.log
-          category_research=${PIPESTATUS[0]}
-          node tests/stationery-retailer-regression.mjs 2>&1 | tee qa-results/stationery-retailer-regression.log
-          stationery=${PIPESTATUS[0]}
-          node tests/dashboard-tools-route-regression.mjs 2>&1 | tee qa-results/dashboard-tools-route-regression.log
-          dashboard_route=${PIPESTATUS[0]}
-          node tests/dashboard-tools-regression.mjs 2>&1 | tee qa-results/dashboard-tools-regression.log
-          dashboard_tools=${PIPESTATUS[0]}
-          node tests/price-stock-product-info-regression.mjs 2>&1 | tee qa-results/price-stock-product-info-regression.log
-          price_stock_info=${PIPESTATUS[0]}
-          node tests/plan-isolation-audit.mjs 2>&1 | tee qa-results/plan-isolation-audit.log
-          plan_isolation=${PIPESTATUS[0]}
+          run_test() {
+            label="$1"
+            seconds="$2"
+            file="$3"
+            timeout --signal=TERM --kill-after=5s "${seconds}s" node "$file" 2>&1 | tee "qa-results/${label}.log"
+            return ${PIPESTATUS[0]}
+          }
+
+          run_test user-experience-guard-regression 60 tests/user-experience-guard-regression.mjs; ux_guard=$?
+          run_test live-smoke 240 tests/release-smoke.mjs; smoke=$?
+          run_test product-trust-regression 90 tests/product-trust-regression.mjs; trust=$?
+          run_test product-intelligence-route-regression 60 tests/product-intelligence-route-regression.mjs; route=$?
+          run_test verified-product-research-regression 60 tests/verified-product-research-regression.mjs; research=$?
+          run_test product-web-research-regression 60 tests/product-web-research-regression.mjs; web_research=$?
+          run_test product-category-research-regression 90 tests/product-category-research-regression.mjs; category_research=$?
+          run_test stationery-retailer-regression 60 tests/stationery-retailer-regression.mjs; stationery=$?
+          run_test dashboard-tools-route-regression 60 tests/dashboard-tools-route-regression.mjs; dashboard_route=$?
+          run_test dashboard-tools-regression 90 tests/dashboard-tools-regression.mjs; dashboard_tools=$?
+          run_test price-stock-product-info-regression 90 tests/price-stock-product-info-regression.mjs; price_stock_info=$?
+          run_test plan-isolation-audit 60 tests/plan-isolation-audit.mjs; plan_isolation=$?
           set -e
+
           if [ "$ux_guard" -eq 0 ] && [ "$smoke" -eq 0 ] && [ "$trust" -eq 0 ] && [ "$route" -eq 0 ] && [ "$research" -eq 0 ] && [ "$web_research" -eq 0 ] && [ "$category_research" -eq 0 ] && [ "$stationery" -eq 0 ] && [ "$dashboard_route" -eq 0 ] && [ "$dashboard_tools" -eq 0 ] && [ "$price_stock_info" -eq 0 ] && [ "$plan_isolation" -eq 0 ]; then
             echo "PASS $(date -u +%Y-%m-%dT%H:%M:%SZ)" > qa-results/live-smoke-status.txt
             exit 0
@@ -70,7 +67,7 @@ jobs:
       - name: Probe live exact-product web research
         continue-on-error: true
         run: |
-          node tests/product-web-live-integration.mjs 2>&1 | tee qa-results/product-web-live-integration.log
+          timeout --signal=TERM --kill-after=5s 120s node tests/product-web-live-integration.mjs 2>&1 | tee qa-results/product-web-live-integration.log
       - name: Upload smoke results
         if: always()
         uses: actions/upload-artifact@v4
