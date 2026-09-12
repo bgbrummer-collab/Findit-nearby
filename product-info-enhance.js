@@ -20,7 +20,7 @@
     pending.set(key,p);return p;
   }
 
-  const loadPolish=()=>loadScript('modal-polish','modal-polish-fix.js?v=20260910-modal2',()=>window.__finditModalPolishFix);
+  const loadPolish=()=>loadScript('modal-polish','modal-polish-fix.js?v=20260912-modal3',()=>window.__finditModalPolishFix);
   const loadActionOwner=()=>loadScript('commerce-action-owner','commerce-modal-action-owner.js?v=20260912-owner3',()=>window.__finditCommerceModalActionOwner);
   const loadCompare=()=>loadScript('compare','compare-stock-reliability-fix.js?v=20260910-pricestock7',()=>window.__finditCompareStockReliabilityV2).then(()=>{if(window.__finditCompareStockReliabilityV2)window.__finditCompareStockReliability=true});
   const loadPriceSweep=()=>loadScript('price-sweep-ui','price-sweep-ui-fix.js?v=20260911-sweep1',()=>window.__finditPriceSweepUiFix);
