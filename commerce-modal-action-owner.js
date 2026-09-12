@@ -1,6 +1,7 @@
 /* FindIt commerce modal action owner.
    Prevents a slower Compare/Stock refresh from replacing a newer tool or reopening a modal the user closed.
-   Only treats a modal as commerce when its actual modal title is Compare Prices or Live Stock. */
+   Only treats a modal as commerce when its actual modal title is Compare Prices or Live Stock.
+   Performance rule: never observe the whole document tree for modal changes. */
 (()=>{
   'use strict';
   if(window.__finditCommerceModalActionOwner)return;
@@ -9,6 +10,10 @@
   let desired=null;
   let lastGoodHtml='';
   let restoring=false;
+  let bodyObserver=null;
+  let modalObserver=null;
+  let attachedBody=null;
+  let attachedModal=null;
 
   const actionOf=t=>{
     const el=t?.closest?.('#finditExactShell [data-fx],#finditExactShell [data-fxnav],#finditExactShell [data-stable-action]');
@@ -31,29 +36,7 @@
   };
   const commerceKind=html=>matches(html,'stock')?'stock':matches(html,'compare')?'compare':null;
 
-  window.addEventListener('click',e=>{
-    if(e.target?.closest?.('#fxStableModal .fx-stable-close')){
-      desired=null;lastGoodHtml='';return;
-    }
-    const a=actionOf(e.target);
-    if(!a)return;
-    if(a==='compare'||a==='stock'){
-      desired=a;
-      lastGoodHtml='';
-    }else{
-      desired=null;
-      lastGoodHtml='';
-    }
-  },true);
-
-  window.addEventListener('keydown',e=>{
-    if(e.key==='Escape'){
-      desired=null;
-      lastGoodHtml='';
-    }
-  },true);
-
-  const observer=new MutationObserver(()=>{
+  function inspect(){
     if(restoring)return;
     const modal=document.querySelector('#fxStableModal');
     const body=document.querySelector('#fxStableBody');
@@ -61,8 +44,6 @@
     const html=body.innerHTML||'';
     const kind=commerceKind(html);
 
-    // Only stale Compare/Stock modals are auto-hidden. Product Information may
-    // legitimately contain price/availability facts and must remain visible.
     if(!desired){
       if(kind){
         restoring=true;
@@ -82,6 +63,59 @@
       body.innerHTML=lastGoodHtml;
       queueMicrotask(()=>{restoring=false});
     }
-  });
-  observer.observe(document.documentElement,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:['class','aria-hidden']});
+  }
+
+  function attachTargetedObservers(){
+    const modal=document.querySelector('#fxStableModal');
+    const body=document.querySelector('#fxStableBody');
+    if(!modal||!body)return false;
+    if(attachedModal===modal&&attachedBody===body)return true;
+
+    bodyObserver?.disconnect();
+    modalObserver?.disconnect();
+    attachedModal=modal;
+    attachedBody=body;
+
+    bodyObserver=new MutationObserver(inspect);
+    bodyObserver.observe(body,{childList:true,subtree:true,characterData:true});
+
+    modalObserver=new MutationObserver(inspect);
+    modalObserver.observe(modal,{attributes:true,attributeFilter:['class','aria-hidden']});
+    inspect();
+    return true;
+  }
+
+  function scheduleAttach(){
+    if(attachTargetedObservers())return;
+    setTimeout(attachTargetedObservers,50);
+    setTimeout(attachTargetedObservers,250);
+    setTimeout(attachTargetedObservers,1000);
+  }
+
+  window.addEventListener('click',e=>{
+    if(e.target?.closest?.('#fxStableModal .fx-stable-close')){
+      desired=null;lastGoodHtml='';return;
+    }
+    const a=actionOf(e.target);
+    if(!a)return;
+    if(a==='compare'||a==='stock'){
+      desired=a;
+      lastGoodHtml='';
+    }else{
+      desired=null;
+      lastGoodHtml='';
+    }
+    scheduleAttach();
+  },true);
+
+  window.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){
+      desired=null;
+      lastGoodHtml='';
+    }
+  },true);
+
+  document.addEventListener('findit:dashboard-sync',scheduleAttach);
+  document.addEventListener('findit:results-rendered',scheduleAttach);
+  scheduleAttach();
 })();
