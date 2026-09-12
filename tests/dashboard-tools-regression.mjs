@@ -4,12 +4,13 @@ const URL=process.env.FINDIT_URL||'http://127.0.0.1:4173/';
 const browser=await chromium.launch({headless:true});
 const page=await browser.newPage({viewport:{width:1280,height:900}});
 let failures=0;
+let slowProductInsights=false;
 const pass=m=>console.log('[PASS]',m);
 const fail=(m,e='')=>{failures++;console.error('[FAIL]',m,e||'')};
 async function check(name,fn){try{await fn();pass(name)}catch(e){fail(name,e?.message||e);await page.evaluate(()=>{const m=document.querySelector('#fxStableModal');if(m){m.classList.add('hidden');m.setAttribute('aria-hidden','true')}}).catch(()=>{})}}
 const testOffer={retailer:{name:'Test Retailer'},product_name:"Nike Air Force 1 '07 Low White",product_url:'https://example.com/nike-air-force-1-07-low-white',price:1999,currency:'ZAR',availability:'in_stock',verified:true,sourcePageVerified:true,exactProductMatch:true,branchStockVerified:false};
 
-await page.route('**/api/product-insights**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({researched:true,whatItDoes:'A low-top lifestyle sneaker.',pros:['Durable leather upper.'],cons:['Can feel firm during break-in.']})}));
+await page.route('**/api/product-insights**',async r=>{if(slowProductInsights)await new Promise(res=>setTimeout(res,4000));await r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({researched:true,whatItDoes:'A low-top lifestyle sneaker.',pros:['Durable leather upper.'],cons:['Can feel firm during break-in.']})})});
 await page.route('**/api/product-intelligence-v2**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,offers:[testOffer]})}));
 await page.route('**/api/product-intelligence**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,offers:[]})}));
 await page.route('**/api/assistant**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,answer:'This is a test answer.'})}));
@@ -49,6 +50,20 @@ await check('Product Information opens and renders researched content',async()=>
   const text=await page.locator('#fxStableBody').innerText();
   if(!text.includes('Product Information')||!text.includes('Pros')||!text.includes('Cons / considerations'))throw Error(text);
   await page.locator('.fx-stable-close').click();
+});
+
+await check('closing Product Information during slow research leaves dashboard responsive',async()=>{
+  slowProductInsights=true;
+  await page.locator('#finditExactShell [data-fx="product"]:visible').first().click({timeout:3000});
+  await page.waitForSelector('#fxStableModal:not(.hidden)',{timeout:2000});
+  await page.locator('.fx-stable-close').click({timeout:1500});
+  await page.waitForFunction(()=>document.querySelector('#fxStableModal')?.classList.contains('hidden'),{timeout:1500});
+  const started=Date.now();
+  await page.locator('#finditExactShell [data-fx="settings"]:visible').first().click({timeout:1500});
+  await page.waitForFunction(()=>document.querySelector('#fxStableBody')?.textContent?.includes('Search radius'),{timeout:1500});
+  if(Date.now()-started>2500)throw Error(`dashboard took ${Date.now()-started}ms after closing Product Information`);
+  await page.locator('.fx-stable-close').click({timeout:1500});
+  slowProductInsights=false;
 });
 
 await check('Compare Prices renders verified exact commerce evidence',async()=>{
