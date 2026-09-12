@@ -32,8 +32,8 @@
   const loadLocalMarket=()=>loadScript('local-market-commerce','local-market-commerce-fix.js?v=20260911-local1',()=>window.__finditLocalMarketCommerceFix);
   const loadResearch=()=>loadScript('product-insights','product-insights-runtime.js?v=20260910-research2',()=>window.__finditAiProductInsightsV5);
   const loadExactnessGuard=()=>loadScript('commerce-exactness','commerce-exactness-guard.js?v=20260911-exact1',()=>window.__finditCommerceExactnessGuard);
-  const loadCommerceUiV4=()=>loadScript('commerce-ui-v4','commerce-ui-v4.js?v=20260911-compare5',()=>window.__finditCommerceUiV4);
-  const loadDashboardAudit=()=>loadScript('dashboard-audit-controls','dashboard-audit-controls.js?v=20260911-audit1',()=>window.__finditDashboardAuditControls);
+  const loadCommerceUiV4=()=>loadScript('commerce-ui-v4','commerce-ui-v4.js?v=20260912-compare6',()=>window.__finditCommerceUiV4);
+  const loadDashboardAudit=()=>loadScript('dashboard-audit-controls','dashboard-audit-controls.js?v=20260912-audit2',()=>window.__finditDashboardAuditControls);
 
   async function loadGuards(){
     await loadActionOwner();
