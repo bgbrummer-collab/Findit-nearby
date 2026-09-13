@@ -45,6 +45,7 @@
   const loadCommerceUiV4=()=>loadScript('commerce-ui-v4','commerce-ui-v4.js?v=20260913-compare7',()=>window.__finditCommerceUiV4);
   const loadDashboardAudit=()=>loadScript('dashboard-audit-controls','dashboard-audit-controls.js?v=20260913-audit8',()=>window.__finditDashboardAuditControls);
   const loadFeedbackUi=()=>loadScript('feedback-feature-ui','feedback-feature-ui.js?v=20260913-feedback2',()=>window.__finditFeedbackFeatureUi);
+  const loadSmartChoice=()=>loadScript('smart-choice','smart-choice-ui.js?v=20260913-smart1',()=>window.__finditSmartChoiceUi);
 
   function reserveFeatureCardsForSingleOwner(){
     const shell=document.querySelector('#finditExactShell');
@@ -64,6 +65,7 @@
     // Product-info bootstrap only loads dependencies; it never intercepts Compare/Stock clicks.
     await loadDashboardAudit();
     await loadFeedbackUi();
+    await loadSmartChoice();
     await loadActionOwner();
     await Promise.all([loadPolish(),loadPriceSweep(),loadRelevance(),loadCommerce(),loadStructure(),loadProductGuard(),loadBuyingContext(),loadLocalMarket(),loadExactnessGuard()]);
     await loadCommerceUiV4();
