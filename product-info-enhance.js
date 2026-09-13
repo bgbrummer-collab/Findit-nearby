@@ -44,6 +44,7 @@
   const loadExactnessGuard=()=>loadScript('commerce-exactness','commerce-exactness-guard.js?v=20260911-exact1',()=>window.__finditCommerceExactnessGuard);
   const loadCommerceUiV4=()=>loadScript('commerce-ui-v4','commerce-ui-v4.js?v=20260913-compare7',()=>window.__finditCommerceUiV4);
   const loadDashboardAudit=()=>loadScript('dashboard-audit-controls','dashboard-audit-controls.js?v=20260913-audit7',()=>window.__finditDashboardAuditControls);
+  const loadFeedbackUi=()=>loadScript('feedback-feature-ui','feedback-feature-ui.js?v=20260913-feedback1',()=>window.__finditFeedbackFeatureUi);
 
   function reserveFeatureCardsForSingleOwner(){
     const shell=document.querySelector('#finditExactShell');
@@ -62,6 +63,7 @@
     // The audit controller is the single browser-event owner for dashboard actions.
     // Product-info bootstrap only loads dependencies; it never intercepts Compare/Stock clicks.
     await loadDashboardAudit();
+    await loadFeedbackUi();
     await loadActionOwner();
     await Promise.all([loadPolish(),loadPriceSweep(),loadRelevance(),loadCommerce(),loadStructure(),loadProductGuard(),loadBuyingContext(),loadLocalMarket(),loadExactnessGuard()]);
     await loadCommerceUiV4();
