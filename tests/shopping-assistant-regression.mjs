@@ -15,7 +15,7 @@ await page.route('**/api/product-intelligence',async route=>{
 });
 await page.goto(URL,{waitUntil:'domcontentloaded',timeout:60000});
 await page.waitForSelector('#finditExactShell',{state:'visible'});
-await page.waitForFunction(()=>window.__finditShoppingAssistantUi===true&&typeof window.finditShoppingAssistantRefresh==='function'&&typeof window.finditShoppingPlan==='function');
+await page.waitForFunction(()=>window.__finditShoppingAssistantUi===true&&typeof window.finditShoppingAssistantRefresh==='function'&&typeof window.finditShoppingPlan==='function'&&window.__finditDashboardV8Loader===true);
 await page.evaluate(()=>{
  const s=window.finditState;
  s.coords={lat:-25.747,lon:28.188};
@@ -66,7 +66,7 @@ await page.waitForSelector('[data-store="0"] [data-check-store]',{state:'visible
 await page.locator('[data-store="0"] [data-check-store]').click();
 await page.waitForSelector('#fxShopModal',{state:'visible'});
 const storeText=await page.locator('#fxShopModal').innerText();
-if(!/Retailer A/i.test(storeText)||!/+27123456789/.test(storeText)||!/Call to confirm stock/i.test(storeText)||!/Directions/i.test(storeText)||!/Opening hours/i.test(storeText))fail('Check Store did not show contact, hours and directions actions');
+if(!/Retailer A/i.test(storeText)||!storeText.includes('+27123456789')||!/Call to confirm stock/i.test(storeText)||!/Directions/i.test(storeText)||!/Opening hours/i.test(storeText))fail('Check Store did not show contact, hours and directions actions');
 await page.locator('#fxShopModal [data-close-shop]').click();
 
 await page.locator('#fxBarcodeScan').click();
