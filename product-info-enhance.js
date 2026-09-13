@@ -48,6 +48,7 @@
   const loadSmartChoice=()=>loadScript('smart-choice','smart-choice-ui.js?v=20260913-smart2',()=>window.__finditSmartChoiceUi);
   const loadShoppingAssistant=()=>loadScript('shopping-assistant','shopping-assistant-ui.js?v=20260913-shop3',()=>window.__finditShoppingAssistantUi);
   const loadShoppingOfferGuard=()=>loadScript('shopping-offer-guard','shopping-assistant-current-offer-guard.js?v=20260913-offerguard1',()=>window.__finditShoppingAssistantCurrentOfferGuard);
+  const loadShoppingStoreAccess=()=>loadScript('shopping-store-access','shopping-assistant-store-access.js?v=20260913-store1',()=>window.__finditShoppingAssistantStoreAccess);
 
   function reserveFeatureCardsForSingleOwner(){
     const shell=document.querySelector('#finditExactShell');
@@ -64,6 +65,7 @@
     await loadSmartChoice();
     await loadShoppingAssistant();
     await loadShoppingOfferGuard();
+    await loadShoppingStoreAccess();
     await loadActionOwner();
     await Promise.all([loadPolish(),loadPriceSweep(),loadRelevance(),loadCommerce(),loadStructure(),loadProductGuard(),loadBuyingContext(),loadLocalMarket(),loadExactnessGuard()]);
     await loadCommerceUiV4();
