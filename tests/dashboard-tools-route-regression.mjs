@@ -10,7 +10,10 @@ if(!fs.existsSync('api/product-insights.js'))throw Error('dedicated product insi
 if(routes.some(r=>r.src==='/api/product-insights'))throw Error('product insights must be served by the deployment filesystem, not rewritten to an older route');
 if(routes.some(r=>r.src==='/dashboard-runtime-stable.js'))throw Error('dashboard runtime must be served from the checked deployment filesystem, not a remote rewrite');
 const loader=fs.readFileSync('dashboard-runtime-stable.js','utf8');
-if(!loader.includes('/dashboard-runtime-v8.js')||!/Live Stock/.test(loader)||!loader.includes("finditDashboardAction?.('stock')"))throw Error('dashboard loader is not wired to v8 + early Live Stock capture');
+if(!loader.includes('/dashboard-runtime-v8.js'))throw Error('dashboard loader is not wired to v8');
+const early=fs.readFileSync('ui-cleanup.js','utf8');
+for(const token of ['#fxCommerceSafeModal','data-fx="compare"','data-fx="stock"','premiumActive','showPremiumGate','stopImmediatePropagation'])if(!early.includes(token))throw Error(`early commerce owner missing ${token}`);
+if(/finditDashboardAction\?\.\('stock'\)/.test(loader))throw Error('legacy dashboard loader must not own Live Stock clicks');
 const runtime=fs.readFileSync('dashboard-runtime-v8.js','utf8');
 for(const token of ['function product()','function compare(','function stock()','function settings()','fx-ask-send','wireSpecialCards'])if(!runtime.includes(token))throw Error(`runtime missing ${token}`);
 console.log('FINDIT_DASHBOARD_TOOLS_ROUTE_REGRESSION_PASS');
