@@ -21,7 +21,7 @@
   }
 
   const loadPolish=()=>loadScript('modal-polish','modal-polish-fix.js?v=20260912-modal3',()=>window.__finditModalPolishFix);
-  const loadActionOwner=()=>loadScript('commerce-action-owner','commerce-modal-action-owner.js?v=20260912-owner3',()=>window.__finditCommerceModalActionOwner);
+  const loadActionOwner=()=>loadScript('commerce-action-owner','commerce-modal-action-owner.js?v=20260913-owner4',()=>window.__finditCommerceModalActionOwner);
   const loadCompare=()=>loadScript('compare','compare-stock-reliability-fix.js?v=20260910-pricestock7',()=>window.__finditCompareStockReliabilityV2).then(()=>{if(window.__finditCompareStockReliabilityV2)window.__finditCompareStockReliability=true});
   const loadPriceSweep=()=>loadScript('price-sweep-ui','price-sweep-ui-fix.js?v=20260911-sweep1',()=>window.__finditPriceSweepUiFix);
   const loadRelevance=()=>loadScript('relevance','dashboard-retailer-relevance-fix.js?v=20260910-relevance2',()=>window.__finditDashboardRetailerRelevance);
@@ -32,7 +32,7 @@
   const loadLocalMarket=()=>loadScript('local-market-commerce','local-market-commerce-fix.js?v=20260911-local1',()=>window.__finditLocalMarketCommerceFix);
   const loadResearch=()=>loadScript('product-insights','product-insights-runtime.js?v=20260910-research2',()=>window.__finditAiProductInsightsV5);
   const loadExactnessGuard=()=>loadScript('commerce-exactness','commerce-exactness-guard.js?v=20260911-exact1',()=>window.__finditCommerceExactnessGuard);
-  const loadCommerceUiV4=()=>loadScript('commerce-ui-v4','commerce-ui-v4.js?v=20260912-compare6',()=>window.__finditCommerceUiV4);
+  const loadCommerceUiV4=()=>loadScript('commerce-ui-v4','commerce-ui-v4.js?v=20260913-compare7',()=>window.__finditCommerceUiV4);
   const loadDashboardAudit=()=>loadScript('dashboard-audit-controls','dashboard-audit-controls.js?v=20260912-audit2',()=>window.__finditDashboardAuditControls);
 
   async function loadGuards(){
