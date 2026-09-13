@@ -19,18 +19,10 @@ await page.waitForFunction(()=>window.__finditDashboardRetailerRelevance===true&
 await page.evaluate((offers)=>{
  const i={name:'Marc Anthony Strictly Curls Triple Blend Conditioner 250ml',brand:'Marc Anthony',model:'Strictly Curls Triple Blend',object:'conditioner',category:'beauty',retailCategory:'beauty',searchQuery:'Marc Anthony Strictly Curls Triple Blend Conditioner 250ml',summary:'A yellow squeeze tube of Marc Anthony Strictly Curls Triple Blend Conditioner, 250ml.',features:['yellow tube','squeeze tube','hair conditioner'],visibleText:['MARC ANTHONY','STRICTLY CURLS','Triple Blend CONDITIONER','Marula, Coconut + Shea','8.4 fl. oz. | 250 ml'],confidence:.97,exactIdentityVerified:true};
  window.finditState=window.finditState||{};
- window.finditState.result={identification:i};
- window.finditState.offers=offers;
- window.finditState.stores=[
-  {name:'Clicks',distanceKm:2.1,address:'Pretoria',branchStockVerified:false,branchPriceVerified:false},
-  {name:'Woolworths',distanceKm:2.4,address:'Pretoria',branchStockVerified:false,branchPriceVerified:false},
-  {name:'Dis-Chem',distanceKm:5.6,address:'Pretoria',branchStockVerified:false,branchPriceVerified:false},
-  {name:'Makro',distanceKm:7.8,address:'Pretoria',branchStockVerified:false,branchPriceVerified:false}
- ];
+ window.finditState.result={identification:i};window.finditState.offers=offers;
+ window.finditState.stores=[{name:'Clicks',distanceKm:2.1,address:'Pretoria',branchStockVerified:false,branchPriceVerified:false},{name:'Woolworths',distanceKm:2.4,address:'Pretoria',branchStockVerified:false,branchPriceVerified:false},{name:'Dis-Chem',distanceKm:5.6,address:'Pretoria',branchStockVerified:false,branchPriceVerified:false},{name:'Makro',distanceKm:7.8,address:'Pretoria',branchStockVerified:false,branchPriceVerified:false}];
  window.productIntelligence={offers};
- document.dispatchEvent(new CustomEvent('findit:results-rendered',{detail:{result:window.finditState.result}}));
- document.dispatchEvent(new CustomEvent('findit:dashboard-sync'));
- document.dispatchEvent(new CustomEvent('findit:nearby-updated'));
+ document.dispatchEvent(new CustomEvent('findit:results-rendered',{detail:{result:window.finditState.result}}));document.dispatchEvent(new CustomEvent('findit:dashboard-sync'));document.dispatchEvent(new CustomEvent('findit:nearby-updated'));
 },offers);
 await page.waitForTimeout(350);
 const product=page.locator('#finditExactShell [data-fx="product"]').filter({visible:true}).first();
@@ -39,22 +31,26 @@ await page.waitForFunction(()=>/What it does/i.test(document.querySelector('#fxS
 let txt=await page.locator('#fxStableBody').innerText();
 if(!/Pros/i.test(txt)||!/Cons \/ considerations/i.test(txt)||!/curly hair/i.test(txt))throw Error(`Product info incomplete: ${txt.slice(0,700)}`);
 await page.locator('#fxStableModal .fx-stable-close').click();
+
 const compare=page.locator('#finditExactShell [data-fx="compare"],#finditExactShell [data-fxnav="compare"]').filter({visible:true}).first();
-await compare.click();
-await page.waitForFunction(()=>/Loot\.co\.za/i.test(document.querySelector('#fxStableBody')?.innerText||''),null,{timeout:7000});
-txt=await page.locator('#fxStableBody').innerText();
-if(!/R\s?200[,.]00/i.test(txt)||!/R\s?229[,.]99/i.test(txt))throw Error(`Real prices missing: ${txt.slice(0,900)}`);
+await compare.click({noWaitAfter:true,timeout:3000});
+await page.waitForFunction(()=>/Loot\.co\.za/i.test(document.querySelector('#fxCommerceSafeBody')?.innerText||''),null,{timeout:7000});
+txt=await page.locator('#fxCommerceSafeBody').innerText();
+if(!/Compare Prices/i.test(txt)||!/R\s?200[,.]00/i.test(txt)||!/R\s?229[,.]99/i.test(txt))throw Error(`Real prices missing: ${txt.slice(0,900)}`);
 if(/(^|\n)R\s*0[,.]00(\n|$)/i.test(txt))throw Error(`Unknown price rendered as zero: ${txt.slice(0,900)}`);
 if(!/Price not published/i.test(txt)||!/PriceCheck/i.test(txt))throw Error('Unpriced exact listings are not labelled honestly');
-if(!/Nearby branches of retailers (?:with|carrying) the exact product online/i.test(txt)||!/Dis-Chem/i.test(txt))throw Error('Exact-retailer nearby branch grouping missing');
-await page.locator('#fxStableModal .fx-stable-close').click();
+if(!/Nearby retailers/i.test(txt)||!/Dis-Chem/i.test(txt)||!/Branch stock unknown/i.test(txt))throw Error('Truthful nearby retailer context missing');
+await page.locator('#fxCommerceSafeModal .fx-commerce-safe-close').click();
+await page.waitForFunction(()=>document.querySelector('#fxCommerceSafeModal')?.hidden===true,{timeout:1500});
+
 const stock=page.locator('#finditExactShell [data-fx="stock"],#finditExactShell [data-fx="nearby"]').filter({hasText:'Live Stock'}).first();
-await stock.click();
-await page.waitForFunction(()=>{const t=document.querySelector('#fxStockStatus')?.textContent||'';return !/Refreshing retailer stock evidence/i.test(t)&&/No retailer currently publishes a trustworthy (?:online )?stock signal/i.test(t)},null,{timeout:7000});
-txt=await page.locator('#fxStableBody').innerText();
-if(!/No retailer currently publishes a trustworthy (?:online )?stock signal/i.test(txt))throw Error(`Stock truthfulness missing: ${txt.slice(0,700)}`);
+await stock.click({noWaitAfter:true,timeout:3000});
+await page.waitForFunction(()=>/No retailer currently publishes a trustworthy online stock signal/i.test(document.querySelector('#fxStockStatus')?.textContent||''),null,{timeout:7000});
+txt=await page.locator('#fxCommerceSafeBody').innerText();
+if(!/Live Stock/i.test(txt)||!/No retailer currently publishes a trustworthy online stock signal/i.test(txt))throw Error(`Stock truthfulness missing: ${txt.slice(0,700)}`);
 if(/Verified in stock at this branch/i.test(txt))throw Error('Branch stock was fabricated');
-await page.locator('#fxStableModal .fx-stable-close').click();
+await page.locator('#fxCommerceSafeModal .fx-commerce-safe-close').click();
+await page.waitForFunction(()=>document.querySelector('#fxCommerceSafeModal')?.hidden===true,{timeout:1500});
 await page.waitForTimeout(200);
 const firstStore=await page.locator('#fxStoreList .fx-store b').first().innerText();
 if(firstStore!=='Dis-Chem')throw Error(`Dashboard did not prioritize a nearby retailer that actually lists the exact product: ${firstStore}`);
