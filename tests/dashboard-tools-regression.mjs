@@ -66,31 +66,41 @@ await check('closing Product Information during slow research leaves dashboard r
   slowProductInsights=false;
 });
 
-await check('Compare Prices renders verified exact commerce evidence',async()=>{
-  await page.locator('#finditExactShell [data-fx="compare"]:visible').first().click();
+await check('Compare Prices renders verified exact commerce evidence and stays in-app',async()=>{
+  const before=page.url();
+  await page.locator('#finditExactShell [data-fx="compare"]:visible').first().click({noWaitAfter:true,timeout:3000});
   await page.waitForFunction(()=>document.querySelector('#fxOnlinePrices')?.textContent?.includes('Test Retailer'),{timeout:7000});
+  if(page.url()!==before)throw Error(`Compare navigated away from FindIt: ${before} -> ${page.url()}`);
   const text=await page.locator('#fxStableBody').innerText();
   if(!/R\s?1[,.]?999/.test(text.replace(/ /g,' ')))throw Error(text);
-  await page.locator('.fx-stable-close').click();
+  await page.locator('.fx-stable-close').click({noWaitAfter:true,timeout:1500});
+  await page.waitForFunction(()=>document.querySelector('#fxStableModal')?.classList.contains('hidden'),{timeout:1500});
+  const started=Date.now();
+  await page.locator('#finditExactShell [data-fx="settings"]:visible').first().click({noWaitAfter:true,timeout:1500});
+  await page.waitForFunction(()=>document.querySelector('#fxStableBody')?.textContent?.includes('Search radius'),{timeout:1500});
+  if(Date.now()-started>2500)throw Error(`dashboard took ${Date.now()-started}ms after closing Compare Prices`);
+  await page.locator('.fx-stable-close').click({noWaitAfter:true,timeout:1500});
 });
 
 await check('Live Stock renders verified online stock separately from branch stock',async()=>{
+  const before=page.url();
   const live=page.locator('#finditExactShell [data-fx="stock"]:visible').first();
   await live.waitFor({state:'visible',timeout:5000});
-  await live.click();
+  await live.click({noWaitAfter:true,timeout:3000});
   await page.waitForFunction(()=>document.querySelector('#fxStockRows')?.textContent?.includes('Test Retailer'),{timeout:7000});
+  if(page.url()!==before)throw Error(`Live Stock navigated away from FindIt: ${before} -> ${page.url()}`);
   const text=await page.locator('#fxStableBody').innerText();
   if(!text.includes('Live Stock')||!text.toLowerCase().includes('in stock'))throw Error(text);
   if(/Verified in stock at this branch/i.test(text))throw Error('branch stock was inferred from online stock');
-  await page.locator('.fx-stable-close').click();
+  await page.locator('.fx-stable-close').click({noWaitAfter:true,timeout:1500});
 });
 
 await check('Ask FindIt uses the polished primary action and returns an answer',async()=>{
-  await page.locator('#finditExactShell [data-fx="assistant"]:visible').first().click();
+  await page.locator('#finditExactShell [data-fx="assistant"]:visible').first().click({noWaitAfter:true,timeout:3000});
   const bg=await page.locator('#fxAskSend').evaluate(el=>getComputedStyle(el).backgroundImage);
   if(!/gradient/i.test(bg))throw Error(`button is not styled: ${bg}`);
   await page.fill('#fxAskQuestion','What is this?');
-  await page.click('#fxAskSend');
+  await page.click('#fxAskSend',{noWaitAfter:true});
   await page.waitForFunction(()=>document.querySelector('#fxAskAnswer')?.textContent?.includes('test answer'),{timeout:5000});
 });
 
