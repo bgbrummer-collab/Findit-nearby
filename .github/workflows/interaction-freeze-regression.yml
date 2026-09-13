@@ -34,6 +34,7 @@ jobs:
           timeout --signal=TERM --kill-after=5s 120s node tests/user-experience-guard-regression.mjs
           timeout --signal=TERM --kill-after=5s 120s node tests/dashboard-tools-regression.mjs
           timeout --signal=TERM --kill-after=5s 120s node tests/feedback-feature-regression.mjs
+          timeout --signal=TERM --kill-after=5s 120s node tests/smart-choice-regression.mjs
       - name: Wait for production deployment
         run: sleep 35
       - name: Check deployed FindIt interactions actually work
@@ -42,3 +43,4 @@ jobs:
         run: |
           timeout --signal=TERM --kill-after=5s 150s node tests/dashboard-tools-regression.mjs
           timeout --signal=TERM --kill-after=5s 120s node tests/feedback-feature-regression.mjs
+          timeout --signal=TERM --kill-after=5s 120s node tests/smart-choice-regression.mjs
