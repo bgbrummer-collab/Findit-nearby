@@ -5,49 +5,83 @@ const browser=await chromium.launch({headless:true});
 const page=await browser.newPage({viewport:{width:1365,height:900}});
 page.setDefaultTimeout(30000);
 const fail=m=>{throw new Error(m)};
+await page.route('**/api/product-intelligence',async route=>{
+  const req=route.request();
+  let body={};try{body=JSON.parse(req.postData()||'{}')}catch{}
+  if(body.barcode||/^\d{6,18}$/.test(String(body.query||''))){
+    await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({matched:true,bestProduct:{name:'Barcode Test Product',barcode:body.barcode||body.query},offers:[]})});return;
+  }
+  await route.continue();
+});
 await page.goto(URL,{waitUntil:'domcontentloaded',timeout:60000});
 await page.waitForSelector('#finditExactShell',{state:'visible'});
-await page.waitForFunction(()=>window.__finditShoppingAssistantUi===true&&typeof window.finditShoppingAssistantRefresh==='function');
+await page.waitForFunction(()=>window.__finditShoppingAssistantUi===true&&typeof window.finditShoppingAssistantRefresh==='function'&&typeof window.finditShoppingPlan==='function');
 await page.evaluate(()=>{
  const s=window.finditState;
+ s.coords={lat:-25.747,lon:28.188};
  s.result={identification:{name:'Test Headphones',brand:'TestBrand',model:'X1',confidence:.95}};
  s.offers=[
   {retailer:'Retailer A',price:899,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true},
   {retailer:'Retailer B',price:799,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true}
  ];
  s.stores=[
-  {name:'Retailer A',distanceKm:1.2,address:'1 Test Road',phone:'+27123456789',website:'https://example.com/a',openingHours:'Mo-Su 08:00-18:00',lat:-25.75,lon:28.19},
-  {name:'Retailer B',distanceKm:3.4,address:'2 Test Road',phone:'+27987654321',website:'https://example.com/b',openingHours:'Mo-Su 09:00-17:00',lat:-25.76,lon:28.20}
+  {name:'Retailer A',distanceKm:1.2,address:'1 Test Road',phone:'+27123456789',website:'https://example.com/a',openingHours:'Mo-Su 08:00-18:00',openNow:true,lat:-25.75,lon:28.19},
+  {name:'Retailer B',distanceKm:3.4,address:'2 Test Road',phone:'+27987654321',website:'https://example.com/b',openingHours:'Mo-Su 09:00-17:00',openNow:true,lat:-25.76,lon:28.20}
  ];
  const list=document.querySelector('#nearbyStores')||document.querySelector('#finditExactShell');
  list.innerHTML='<article data-store="0">Retailer A</article><article data-store="1">Retailer B</article>';
- localStorage.removeItem('findit.shoppingList.v1');
- localStorage.removeItem('findit.watchList.v1');
+ ['findit.shoppingList.v1','findit.watchList.v1','findit.shoppingList.v2','findit.watchList.v2','findit.watchAlerts.v1','findit.priceHistory.v1','findit.shoppingPlanMode.v1'].forEach(k=>localStorage.removeItem(k));
  window.finditShoppingAssistantRefresh();
 });
 await page.waitForSelector('#fxShoppingAssistant',{state:'visible'});
+
 await page.locator('#fxAddCurrentItem').click();
 let listText=await page.locator('#fxShoppingListBody').innerText();
 if(!/Test Headphones/i.test(listText))fail('Shopping List did not add the current item');
-if(!/Retailer B/i.test(listText)||!/R\s?799|799\.00/i.test(listText))fail('Shopping List did not calculate a verified cheapest plan');
+if(!/Retailer B/i.test(listText)||!/R\s?799|799\.00/i.test(listText))fail('Shopping List did not calculate a verified price plan');
+if(!/Optimised verified shopping plan/i.test(listText))fail('Trip planner is missing');
+const plan=await page.evaluate(()=>window.finditShoppingPlan());
+if(!plan||plan.stops.length!==1||plan.stops[0].name!=='Retailer B')fail('Balanced plan did not choose the expected verified retailer');
+if(!plan.url||!plan.url.includes('google.com/maps/dir'))fail('Trip planner did not create a directions route');
+await page.locator('[data-plan-mode="shortest"]').click();
+listText=await page.locator('#fxShoppingListBody').innerText();
+if(!/Shortest trip/i.test(listText))fail('Shortest-trip planning mode did not activate');
+
 await page.locator('#fxWatchCurrentItem').click();
-const watchText=await page.locator('#fxWatchBody').innerText();
+let watchText=await page.locator('#fxWatchBody').innerText();
 if(!/Test Headphones/i.test(watchText)||!/Retailer B/i.test(watchText))fail('Watch Item did not persist the current product');
+await page.evaluate(()=>{
+  window.finditState.offers=[
+   {retailer:'Retailer A',price:899,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true},
+   {retailer:'Retailer B',price:699,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true}
+  ];
+  window.finditShoppingAssistantRefresh();
+});
+await page.waitForTimeout(80);
+watchText=await page.locator('#fxWatchBody').innerText();
+if(!/Price drop/i.test(watchText)||!/699/.test(watchText))fail('Watch Item did not create a persistent price-drop alert');
+if(!/low/i.test(watchText)||!/high/i.test(watchText))fail('Watch Item did not preserve price-history summary');
+
 await page.waitForSelector('[data-store="0"] [data-check-store]',{state:'visible'});
 await page.locator('[data-store="0"] [data-check-store]').click();
 await page.waitForSelector('#fxShopModal',{state:'visible'});
 const storeText=await page.locator('#fxShopModal').innerText();
-if(!/Retailer A/i.test(storeText)||!/+27123456789/.test(storeText)||!/Call to confirm stock/i.test(storeText)||!/Directions/i.test(storeText))fail('Check Store did not show contact and directions actions');
+if(!/Retailer A/i.test(storeText)||!/+27123456789/.test(storeText)||!/Call to confirm stock/i.test(storeText)||!/Directions/i.test(storeText)||!/Opening hours/i.test(storeText))fail('Check Store did not show contact, hours and directions actions');
 await page.locator('#fxShopModal [data-close-shop]').click();
+
 await page.locator('#fxBarcodeScan').click();
 await page.waitForSelector('#fxBarcodeManual',{state:'visible'});
 await page.locator('#fxBarcodeManual').fill('6001234567890');
 await page.locator('#fxUseBarcode').click();
+await page.waitForFunction(()=>window.finditLastBarcodeProduct?.name==='Barcode Test Product');
 const code=await page.evaluate(()=>window.finditLastBarcode);
 if(code!=='6001234567890')fail('Barcode manual fallback did not capture the barcode');
+const barcodeText=await page.locator('#fxBarcodeStatus').innerText();
+if(!/Barcode Test Product/i.test(barcodeText))fail('Barcode lookup did not feed connected product identification back into the UI');
+
 await page.setViewportSize({width:390,height:844});
 await page.waitForTimeout(100);
 const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
 if(overflow>4)fail(`Shopping Assistant caused mobile horizontal overflow: ${overflow}px`);
-console.log('SHOPPING_ASSISTANT_PASS');
+console.log('SHOPPING_ASSISTANT_COMPLETE_PASS');
 await browser.close();
