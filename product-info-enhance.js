@@ -1,5 +1,5 @@
 /* FindIt Product Information bootstrap.
-   Deterministic loader: reliability guards are ready before dashboard handlers. */
+   Deterministic loader: user-facing interaction ownership is ready before legacy handlers. */
 (()=>{
   'use strict';
   if(window.__finditProductInfoEnhance)return;
@@ -36,10 +36,11 @@
   const loadDashboardAudit=()=>loadScript('dashboard-audit-controls','dashboard-audit-controls.js?v=20260913-audit5',()=>window.__finditDashboardAuditControls);
 
   async function loadGuards(){
+    // Install the user-facing click owner first. Nothing slower may register ahead of it.
+    await loadDashboardAudit();
     await loadActionOwner();
     await Promise.all([loadPolish(),loadPriceSweep(),loadRelevance(),loadCommerce(),loadStructure(),loadProductGuard(),loadBuyingContext(),loadLocalMarket(),loadExactnessGuard()]);
     await loadCommerceUiV4();
-    await loadDashboardAudit();
     await loadCompare();
   }
 
