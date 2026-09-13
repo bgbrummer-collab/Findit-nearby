@@ -15,7 +15,7 @@ await page.route('**/api/product-intelligence',async route=>{
 });
 await page.goto(URL,{waitUntil:'domcontentloaded',timeout:60000});
 await page.waitForSelector('#finditExactShell',{state:'visible'});
-await page.waitForFunction(()=>window.__finditShoppingAssistantUi===true&&window.__finditShoppingAssistantCurrentOfferGuard===true&&typeof window.finditShoppingAssistantRefresh==='function'&&typeof window.finditShoppingPlan==='function'&&window.__finditDashboardV8Loader===true);
+await page.waitForFunction(()=>window.__finditShoppingAssistantUi===true&&window.__finditShoppingAssistantCurrentOfferGuard===true&&window.__finditShoppingAssistantStoreAccess===true&&typeof window.finditShoppingAssistantRefresh==='function'&&typeof window.finditShoppingPlan==='function'&&window.__finditDashboardV8Loader===true);
 await page.evaluate(()=>{
  const s=window.finditState;
  s.coords={lat:-25.747,lon:28.188};
@@ -54,7 +54,7 @@ listText=await page.locator('#fxShoppingListBody').innerText();
 if(!/Shortest trip/i.test(listText))fail('Shortest-trip planning mode did not activate');
 
 await page.locator('#fxWatchCurrentItem').click();
-const watchDetails=page.locator('#fxShoppingAssistant details').nth(1);
+const watchDetails=page.locator('#fxShoppingAssistant details').filter({hasText:'Watch List + Price History'}).first();
 if(!(await watchDetails.evaluate(el=>el.open)))await watchDetails.locator('summary').click();
 let watchText=await page.locator('#fxWatchBody').innerText();
 if(!/Test Headphones/i.test(watchText)||!/Retailer B/i.test(watchText)){
@@ -79,8 +79,10 @@ if(await alertDetails.count()){
   if(!/Price drop/i.test(alertText)||!/699/.test(alertText))fail(`Visible watch-alert history did not show the price drop. ui=${JSON.stringify(alertText)}`);
 }else fail('Watch Item created an alert count but no visible alert history panel');
 
-await page.waitForSelector('[data-store="0"] [data-check-store]',{state:'visible'});
-await page.locator('[data-store="0"] [data-check-store]').click();
+await page.waitForSelector('#fxCheckStoresQuick [data-shop-store="0"]',{state:'visible'});
+const quickStores=await page.locator('#fxCheckStoresQuick').innerText();
+if(!/Retailer A/i.test(quickStores)||!/1\.2 km/i.test(quickStores))fail('Visible Check Store list did not show nearby retailer details');
+await page.locator('#fxCheckStoresQuick [data-shop-store="0"]').click();
 await page.waitForSelector('#fxShopModal',{state:'visible'});
 const storeText=await page.locator('#fxShopModal').innerText();
 if(!/Retailer A/i.test(storeText)||!storeText.includes('+27123456789')||!/Call to confirm stock/i.test(storeText)||!/Directions/i.test(storeText)||!/Opening hours/i.test(storeText))fail('Check Store did not show contact, hours and directions actions');
