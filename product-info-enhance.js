@@ -43,8 +43,8 @@
   const loadResearch=()=>loadScript('product-insights','product-insights-runtime.js?v=20260910-research2',()=>window.__finditAiProductInsightsV5);
   const loadExactnessGuard=()=>loadScript('commerce-exactness','commerce-exactness-guard.js?v=20260911-exact1',()=>window.__finditCommerceExactnessGuard);
   const loadCommerceUiV4=()=>loadScript('commerce-ui-v4','commerce-ui-v4.js?v=20260913-compare7',()=>window.__finditCommerceUiV4);
-  const loadDashboardAudit=()=>loadScript('dashboard-audit-controls','dashboard-audit-controls.js?v=20260913-audit7',()=>window.__finditDashboardAuditControls);
-  const loadFeedbackUi=()=>loadScript('feedback-feature-ui','feedback-feature-ui.js?v=20260913-feedback1',()=>window.__finditFeedbackFeatureUi);
+  const loadDashboardAudit=()=>loadScript('dashboard-audit-controls','dashboard-audit-controls.js?v=20260913-audit8',()=>window.__finditDashboardAuditControls);
+  const loadFeedbackUi=()=>loadScript('feedback-feature-ui','feedback-feature-ui.js?v=20260913-feedback2',()=>window.__finditFeedbackFeatureUi);
 
   function reserveFeatureCardsForSingleOwner(){
     const shell=document.querySelector('#finditExactShell');
