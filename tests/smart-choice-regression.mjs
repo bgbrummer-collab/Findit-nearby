@@ -7,7 +7,7 @@ page.setDefaultTimeout(30000);
 const fail=m=>{throw new Error(m)};
 await page.goto(URL,{waitUntil:'domcontentloaded',timeout:60000});
 await page.waitForSelector('#finditExactShell',{state:'visible'});
-await page.waitForFunction(()=>window.__finditSmartChoiceUi===true&&typeof window.finditSmartChoiceRefresh==='function');
+await page.waitForFunction(()=>window.__finditSmartChoiceUi===true&&typeof window.finditSmartChoiceRefresh==='function'&&window.__finditDashboardV8Loader===true);
 await page.evaluate(()=>{
   const s=window.finditState;
   s.result={identification:{name:'Test Headphones',confidence:.92}};
@@ -25,6 +25,7 @@ await page.evaluate(()=>{
   window.finditSmartChoiceRefresh();
 });
 await page.waitForSelector('#fxSmartChoice',{state:'visible'});
+await page.waitForFunction(()=>/BEST OVERALL[\s\S]*Retailer B/i.test(document.querySelector('#fxSmartChoice')?.innerText||''));
 const text=await page.locator('#fxSmartChoice').innerText();
 if(!/BEST OVERALL[\s\S]*Retailer B/i.test(text))fail('Smart Choice did not rank the best overall retailer');
 if(!/CHEAPEST[\s\S]*Retailer B/i.test(text))fail('Smart Choice did not identify the cheapest verified retailer');
