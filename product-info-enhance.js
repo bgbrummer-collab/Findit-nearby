@@ -33,7 +33,22 @@
   const loadResearch=()=>loadScript('product-insights','product-insights-runtime.js?v=20260910-research2',()=>window.__finditAiProductInsightsV5);
   const loadExactnessGuard=()=>loadScript('commerce-exactness','commerce-exactness-guard.js?v=20260911-exact1',()=>window.__finditCommerceExactnessGuard);
   const loadCommerceUiV4=()=>loadScript('commerce-ui-v4','commerce-ui-v4.js?v=20260913-compare7',()=>window.__finditCommerceUiV4);
-  const loadDashboardAudit=()=>loadScript('dashboard-audit-controls','dashboard-audit-controls.js?v=20260913-audit5',()=>window.__finditDashboardAuditControls);
+  const loadDashboardAudit=()=>loadScript('dashboard-audit-controls','dashboard-audit-controls.js?v=20260913-audit6',()=>window.__finditDashboardAuditControls);
+
+  // This listener is installed synchronously by the bootstrap, before legacy dashboard runtimes.
+  // It owns the two commerce clicks and returns from the browser click immediately. Rendering
+  // happens in a microtask after the click, so old/slow commerce handlers cannot freeze the UI.
+  window.addEventListener('click',e=>{
+    const el=e.target?.closest?.('#finditExactShell [data-fx="compare"],#finditExactShell [data-fxnav="compare"],#finditExactShell [data-fx="stock"]');
+    if(!el)return;
+    let action=el.dataset.fxnav||el.dataset.fx||'';
+    if(action!=='compare'&&action!=='stock')return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    Promise.resolve().then(()=>loadDashboardAudit()).then(()=>{
+      if(typeof window.finditDashboardAuditAction==='function')window.finditDashboardAuditAction(action);
+    }).catch(err=>console.warn('FindIt commerce action unavailable',err?.message||err));
+  },true);
 
   async function loadGuards(){
     // Install the user-facing click owner first. Nothing slower may register ahead of it.
