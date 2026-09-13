@@ -7,6 +7,22 @@
   const norm=v=>String(v??'').toLowerCase().replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim();
   const money=(n,c='ZAR')=>{if(n==null||!Number.isFinite(Number(n)))return'';try{return new Intl.NumberFormat('en-ZA',{style:'currency',currency:c||'ZAR'}).format(Number(n))}catch{return`${c||'ZAR'} ${Number(n).toFixed(2)}`}};
 
+  // This file executes synchronously before the deferred dashboard runtimes. Reserve the two
+  // commerce actions here so older feature-card relays can never recursively click themselves.
+  // Actual rendering is delegated to the maintained dashboard controller in a new task.
+  window.addEventListener('click',e=>{
+    const el=e.target?.closest?.('#finditExactShell [data-fx="compare"],#finditExactShell [data-fxnav="compare"],#finditExactShell [data-fx="stock"]');
+    if(!el)return;
+    let action=el.dataset.fxnav||el.dataset.fx||'';
+    if(action!=='compare'&&action!=='stock')return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    setTimeout(()=>{
+      const run=window.finditDashboardAuditAction||window.finditDashboardAction;
+      if(typeof run==='function')run(action);
+    },0);
+  },true);
+
   function ensureFeedbackUi(){
     const form=q('#feedbackForm');
     if(!form||form.dataset.finditFeedbackV2==='1')return;
