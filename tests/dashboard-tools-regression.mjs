@@ -7,7 +7,7 @@ let failures=0;
 let slowProductInsights=false;
 const pass=m=>console.log('[PASS]',m);
 const fail=(m,e='')=>{failures++;console.error('[FAIL]',m,e||'')};
-async function check(name,fn){try{await fn();pass(name)}catch(e){fail(name,e?.message||e);await page.evaluate(()=>{const m=document.querySelector('#fxStableModal');if(m){m.classList.add('hidden');m.setAttribute('aria-hidden','true')}}).catch(()=>{})}}
+async function check(name,fn){try{await fn();pass(name)}catch(e){fail(name,e?.message||e);await page.evaluate(()=>{const s=document.querySelector('#fxStableModal');if(s){s.classList.add('hidden');s.setAttribute('aria-hidden','true')}const c=document.querySelector('#fxCommerceSafeModal');if(c){c.hidden=true;c.setAttribute('aria-hidden','true')}}).catch(()=>{})}}
 const testOffer={retailer:{name:'Test Retailer'},product_name:"Nike Air Force 1 '07 Low White",product_url:'https://example.com/nike-air-force-1-07-low-white',price:1999,currency:'ZAR',availability:'in_stock',verified:true,sourcePageVerified:true,exactProductMatch:true,branchStockVerified:false};
 
 await page.route('**/api/product-insights**',async r=>{if(slowProductInsights)await new Promise(res=>setTimeout(res,4000));await r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({researched:true,whatItDoes:'A low-top lifestyle sneaker.',pros:['Durable leather upper.'],cons:['Can feel firm during break-in.']})})});
@@ -71,10 +71,10 @@ await check('Compare Prices renders verified exact commerce evidence and stays i
   await page.locator('#finditExactShell [data-fx="compare"]:visible').first().click({noWaitAfter:true,timeout:3000});
   await page.waitForFunction(()=>document.querySelector('#fxOnlinePrices')?.textContent?.includes('Test Retailer'),{timeout:7000});
   if(page.url()!==before)throw Error(`Compare navigated away from FindIt: ${before} -> ${page.url()}`);
-  const text=await page.locator('#fxStableBody').innerText();
-  if(!/R\s?1[,.]?999/.test(text.replace(/ /g,' ')))throw Error(text);
-  await page.locator('.fx-stable-close').click({noWaitAfter:true,timeout:1500});
-  await page.waitForFunction(()=>document.querySelector('#fxStableModal')?.classList.contains('hidden'),{timeout:1500});
+  const text=await page.locator('#fxCommerceSafeBody').innerText();
+  if(!text.includes('Compare Prices')||!/R\s?1[,.]?999/.test(text.replace(/ /g,' ')))throw Error(text);
+  await page.locator('.fx-commerce-safe-close').click({noWaitAfter:true,timeout:1500});
+  await page.waitForFunction(()=>document.querySelector('#fxCommerceSafeModal')?.hidden===true,{timeout:1500});
   const started=Date.now();
   await page.locator('#finditExactShell [data-fx="settings"]:visible').first().click({noWaitAfter:true,timeout:1500});
   await page.waitForFunction(()=>document.querySelector('#fxStableBody')?.textContent?.includes('Search radius'),{timeout:1500});
@@ -89,10 +89,11 @@ await check('Live Stock renders verified online stock separately from branch sto
   await live.click({noWaitAfter:true,timeout:3000});
   await page.waitForFunction(()=>document.querySelector('#fxStockRows')?.textContent?.includes('Test Retailer'),{timeout:7000});
   if(page.url()!==before)throw Error(`Live Stock navigated away from FindIt: ${before} -> ${page.url()}`);
-  const text=await page.locator('#fxStableBody').innerText();
+  const text=await page.locator('#fxCommerceSafeBody').innerText();
   if(!text.includes('Live Stock')||!text.toLowerCase().includes('in stock'))throw Error(text);
   if(/Verified in stock at this branch/i.test(text))throw Error('branch stock was inferred from online stock');
-  await page.locator('.fx-stable-close').click({noWaitAfter:true,timeout:1500});
+  await page.locator('.fx-commerce-safe-close').click({noWaitAfter:true,timeout:1500});
+  await page.waitForFunction(()=>document.querySelector('#fxCommerceSafeModal')?.hidden===true,{timeout:1500});
 });
 
 await check('Ask FindIt uses the polished primary action and returns an answer',async()=>{
