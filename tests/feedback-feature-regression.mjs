@@ -31,7 +31,7 @@ if(!/nearby results are useful/i.test(posts[0]?.message||''))fail('Feedback mess
 console.log('FEEDBACK_PASS');
 
 await page.locator('#fxFeedbackModal .fx-stable-close').click();
-await page.waitForSelector('#fxFeedbackModal.hidden');
+await page.waitForSelector('#fxFeedbackModal',{state:'hidden'});
 const suggestNav=page.locator('#finditExactShell [data-fx="suggest-feature"]').first();
 if(!await suggestNav.isVisible())fail('Suggest a Feature dashboard option is not visible');
 await suggestNav.click();
