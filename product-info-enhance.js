@@ -46,7 +46,7 @@
   const loadDashboardAudit=()=>loadScript('dashboard-audit-controls','dashboard-audit-controls.js?v=20260913-audit8',()=>window.__finditDashboardAuditControls);
   const loadFeedbackUi=()=>loadScript('feedback-feature-ui','feedback-feature-ui.js?v=20260913-feedback2',()=>window.__finditFeedbackFeatureUi);
   const loadSmartChoice=()=>loadScript('smart-choice','smart-choice-ui.js?v=20260913-smart2',()=>window.__finditSmartChoiceUi);
-  const loadShoppingAssistant=()=>loadScript('shopping-assistant','shopping-assistant-ui.js?v=20260913-shop2',()=>window.__finditShoppingAssistantUi);
+  const loadShoppingAssistant=()=>loadScript('shopping-assistant','shopping-assistant-ui.js?v=20260913-shop3',()=>window.__finditShoppingAssistantUi);
 
   function reserveFeatureCardsForSingleOwner(){
     const shell=document.querySelector('#finditExactShell');
