@@ -70,8 +70,14 @@ await page.evaluate(()=>{
 });
 await page.waitForTimeout(100);
 watchText=await page.locator('#fxWatchBody').innerText();
-if(!/Price drop/i.test(watchText)||!/699/.test(watchText))fail(`Watch Item did not create a persistent price-drop alert. ui=${JSON.stringify(watchText)}`);
+if(!/1 new alert/i.test(watchText)||!/699/.test(watchText))fail(`Watch Item did not create a persistent price-drop alert. ui=${JSON.stringify(watchText)}`);
 if(!/low/i.test(watchText)||!/high/i.test(watchText))fail(`Watch Item did not preserve price-history summary. ui=${JSON.stringify(watchText)}`);
+const alertDetails=page.locator('#fxWatchBody details').first();
+if(await alertDetails.count()){
+  if(!(await alertDetails.evaluate(el=>el.open)))await alertDetails.locator('summary').click();
+  const alertText=await alertDetails.innerText();
+  if(!/Price drop/i.test(alertText)||!/699/.test(alertText))fail(`Visible watch-alert history did not show the price drop. ui=${JSON.stringify(alertText)}`);
+}else fail('Watch Item created an alert count but no visible alert history panel');
 
 await page.waitForSelector('[data-store="0"] [data-check-store]',{state:'visible'});
 await page.locator('[data-store="0"] [data-check-store]').click();
