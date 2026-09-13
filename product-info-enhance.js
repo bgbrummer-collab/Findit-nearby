@@ -22,7 +22,7 @@
 
   const loadPolish=()=>loadScript('modal-polish','modal-polish-fix.js?v=20260912-modal3',()=>window.__finditModalPolishFix);
   const loadActionOwner=()=>loadScript('commerce-action-owner','commerce-modal-action-owner.js?v=20260913-owner4',()=>window.__finditCommerceModalActionOwner);
-  const loadCompare=()=>loadScript('compare','compare-stock-reliability-fix.js?v=20260910-pricestock7',()=>window.__finditCompareStockReliabilityV2).then(()=>{if(window.__finditCompareStockReliabilityV2)window.__finditCompareStockReliability=true});
+  const loadCompare=()=>loadScript('compare','compare-stock-reliability-fix.js?v=20260913-pricestock8',()=>window.__finditCompareStockReliabilityV2).then(()=>{if(window.__finditCompareStockReliabilityV2)window.__finditCompareStockReliability=true});
   const loadPriceSweep=()=>loadScript('price-sweep-ui','price-sweep-ui-fix.js?v=20260911-sweep1',()=>window.__finditPriceSweepUiFix);
   const loadRelevance=()=>loadScript('relevance','dashboard-retailer-relevance-fix.js?v=20260910-relevance2',()=>window.__finditDashboardRetailerRelevance);
   const loadCommerce=()=>loadScript('commerce','dashboard-commerce-status.js?v=20260911-live9',()=>window.__finditDashboardCommerceStatus);
@@ -33,13 +33,16 @@
   const loadResearch=()=>loadScript('product-insights','product-insights-runtime.js?v=20260910-research2',()=>window.__finditAiProductInsightsV5);
   const loadExactnessGuard=()=>loadScript('commerce-exactness','commerce-exactness-guard.js?v=20260911-exact1',()=>window.__finditCommerceExactnessGuard);
   const loadCommerceUiV4=()=>loadScript('commerce-ui-v4','commerce-ui-v4.js?v=20260913-compare7',()=>window.__finditCommerceUiV4);
-  const loadDashboardAudit=()=>loadScript('dashboard-audit-controls','dashboard-audit-controls.js?v=20260912-audit2',()=>window.__finditDashboardAuditControls);
+  const loadDashboardAudit=()=>loadScript('dashboard-audit-controls','dashboard-audit-controls.js?v=20260913-audit3',()=>window.__finditDashboardAuditControls);
 
   async function loadGuards(){
     await loadActionOwner();
-    await Promise.all([loadPolish(),loadCompare(),loadPriceSweep(),loadRelevance(),loadCommerce(),loadStructure(),loadProductGuard(),loadBuyingContext(),loadLocalMarket(),loadExactnessGuard()]);
+    await Promise.all([loadPolish(),loadPriceSweep(),loadRelevance(),loadCommerce(),loadStructure(),loadProductGuard(),loadBuyingContext(),loadLocalMarket(),loadExactnessGuard()]);
+    // The modern Compare handler must register before the legacy price/stock reliability hook.
+    // This guarantees one visible Compare owner while preserving the reliability hook for Live Stock.
     await loadCommerceUiV4();
     await loadDashboardAudit();
+    await loadCompare();
   }
 
   async function loadDashboardRuntime(){
