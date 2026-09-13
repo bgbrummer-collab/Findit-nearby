@@ -32,8 +32,6 @@ await page.evaluate(()=>{
  const list=document.querySelector('#nearbyStores')||document.querySelector('#finditExactShell');
  list.innerHTML='<article data-store="0">Retailer A</article><article data-store="1">Retailer B</article>';
  ['findit.shoppingList.v1','findit.watchList.v1','findit.shoppingList.v2','findit.watchList.v2','findit.watchAlerts.v1','findit.priceHistory.v1','findit.shoppingPlanMode.v1'].forEach(k=>localStorage.removeItem(k));
- // Use the same lifecycle a completed real Find uses so the current-offer guard
- // captures the current product before any legacy runtime can clear transient state.
  document.dispatchEvent(new CustomEvent('findit:results-rendered'));
 });
 await page.waitForSelector('#fxShoppingAssistant',{state:'visible'});
@@ -57,7 +55,10 @@ if(!/Shortest trip/i.test(listText))fail('Shortest-trip planning mode did not ac
 
 await page.locator('#fxWatchCurrentItem').click();
 let watchText=await page.locator('#fxWatchBody').innerText();
-if(!/Test Headphones/i.test(watchText)||!/Retailer B/i.test(watchText))fail('Watch Item did not persist the current product');
+if(!/Test Headphones/i.test(watchText)||!/Retailer B/i.test(watchText)){
+  const watchState=await page.evaluate(()=>({stored:localStorage.getItem('findit.watchList.v2'),offers:window.finditState?.offers,product:window.finditState?.result?.identification}));
+  fail(`Watch Item did not persist the current product. ui=${JSON.stringify(watchText)} state=${JSON.stringify(watchState)}`);
+}
 await page.evaluate(()=>{
   window.finditState.offers=[
    {retailer:'Retailer A',price:899,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true},
@@ -67,8 +68,8 @@ await page.evaluate(()=>{
 });
 await page.waitForTimeout(100);
 watchText=await page.locator('#fxWatchBody').innerText();
-if(!/Price drop/i.test(watchText)||!/699/.test(watchText))fail('Watch Item did not create a persistent price-drop alert');
-if(!/low/i.test(watchText)||!/high/i.test(watchText))fail('Watch Item did not preserve price-history summary');
+if(!/Price drop/i.test(watchText)||!/699/.test(watchText))fail(`Watch Item did not create a persistent price-drop alert. ui=${JSON.stringify(watchText)}`);
+if(!/low/i.test(watchText)||!/high/i.test(watchText))fail(`Watch Item did not preserve price-history summary. ui=${JSON.stringify(watchText)}`);
 
 await page.waitForSelector('[data-store="0"] [data-check-store]',{state:'visible'});
 await page.locator('[data-store="0"] [data-check-store]').click();
