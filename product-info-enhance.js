@@ -45,15 +45,12 @@
   const loadCommerceUiV4=()=>loadScript('commerce-ui-v4','commerce-ui-v4.js?v=20260913-compare7',()=>window.__finditCommerceUiV4);
   const loadDashboardAudit=()=>loadScript('dashboard-audit-controls','dashboard-audit-controls.js?v=20260913-audit8',()=>window.__finditDashboardAuditControls);
   const loadFeedbackUi=()=>loadScript('feedback-feature-ui','feedback-feature-ui.js?v=20260913-feedback2',()=>window.__finditFeedbackFeatureUi);
-  const loadSmartChoice=()=>loadScript('smart-choice','smart-choice-ui.js?v=20260913-smart1',()=>window.__finditSmartChoiceUi);
+  const loadSmartChoice=()=>loadScript('smart-choice','smart-choice-ui.js?v=20260913-smart2',()=>window.__finditSmartChoiceUi);
+  const loadShoppingAssistant=()=>loadScript('shopping-assistant','shopping-assistant-ui.js?v=20260913-shop1',()=>window.__finditShoppingAssistantUi);
 
   function reserveFeatureCardsForSingleOwner(){
     const shell=document.querySelector('#finditExactShell');
     if(!shell)return false;
-    // modal-nav-fix.js used to attach feature-card handlers that call .click() on the
-    // first matching data-fx element. For the Compare card that selector can resolve
-    // to the same card and recursively click itself. Mark the cards as already wired
-    // before that legacy runtime sees them; the maintained capture owner handles them.
     shell.querySelectorAll('.fx-feature-row article[data-fx]').forEach(card=>{
       if(!card.dataset.wired)card.dataset.wired='single-owner';
     });
@@ -61,11 +58,10 @@
   }
 
   async function loadGuards(){
-    // The audit controller is the single browser-event owner for dashboard actions.
-    // Product-info bootstrap only loads dependencies; it never intercepts Compare/Stock clicks.
     await loadDashboardAudit();
     await loadFeedbackUi();
     await loadSmartChoice();
+    await loadShoppingAssistant();
     await loadActionOwner();
     await Promise.all([loadPolish(),loadPriceSweep(),loadRelevance(),loadCommerce(),loadStructure(),loadProductGuard(),loadBuyingContext(),loadLocalMarket(),loadExactnessGuard()]);
     await loadCommerceUiV4();
