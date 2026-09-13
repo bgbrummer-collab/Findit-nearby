@@ -33,21 +33,22 @@
   const loadResearch=()=>loadScript('product-insights','product-insights-runtime.js?v=20260910-research2',()=>window.__finditAiProductInsightsV5);
   const loadExactnessGuard=()=>loadScript('commerce-exactness','commerce-exactness-guard.js?v=20260911-exact1',()=>window.__finditCommerceExactnessGuard);
   const loadCommerceUiV4=()=>loadScript('commerce-ui-v4','commerce-ui-v4.js?v=20260913-compare7',()=>window.__finditCommerceUiV4);
-  const loadDashboardAudit=()=>loadScript('dashboard-audit-controls','dashboard-audit-controls.js?v=20260913-audit6',()=>window.__finditDashboardAuditControls);
+  const loadDashboardAudit=()=>loadScript('dashboard-audit-controls','dashboard-audit-controls.js?v=20260913-audit7',()=>window.__finditDashboardAuditControls);
 
-  // This listener is installed synchronously by the bootstrap, before legacy dashboard runtimes.
-  // It owns the two commerce clicks and returns from the browser click immediately. Rendering
-  // happens in a microtask after the click, so old/slow commerce handlers cannot freeze the UI.
+  // Own Compare/Stock at the browser-event boundary. Crucially, modal/render work is placed
+  // in a new task (not a Promise microtask), so the physical click always returns first.
   window.addEventListener('click',e=>{
     const el=e.target?.closest?.('#finditExactShell [data-fx="compare"],#finditExactShell [data-fxnav="compare"],#finditExactShell [data-fx="stock"]');
     if(!el)return;
-    let action=el.dataset.fxnav||el.dataset.fx||'';
+    const action=el.dataset.fxnav||el.dataset.fx||'';
     if(action!=='compare'&&action!=='stock')return;
     e.preventDefault();
     e.stopImmediatePropagation();
-    Promise.resolve().then(()=>loadDashboardAudit()).then(()=>{
-      if(typeof window.finditDashboardAuditAction==='function')window.finditDashboardAuditAction(action);
-    }).catch(err=>console.warn('FindIt commerce action unavailable',err?.message||err));
+    setTimeout(()=>{
+      loadDashboardAudit().then(()=>{
+        if(typeof window.finditDashboardAuditAction==='function')window.finditDashboardAuditAction(action);
+      }).catch(err=>console.warn('FindIt commerce action unavailable',err?.message||err));
+    },0);
   },true);
 
   async function loadGuards(){
