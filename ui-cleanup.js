@@ -9,18 +9,20 @@
 
   // This file executes synchronously before the deferred dashboard runtimes. Reserve the two
   // commerce actions here so older feature-card relays can never recursively click themselves.
-  // Actual rendering is delegated to the maintained dashboard controller in a new task.
+  // Never fall back to a legacy dashboard action: wait briefly for the maintained audit owner.
+  function runSafeCommerceAction(action,attempt=0){
+    const run=window.finditDashboardAuditAction;
+    if(typeof run==='function'){run(action);return}
+    if(attempt<80)setTimeout(()=>runSafeCommerceAction(action,attempt+1),25);
+  }
   window.addEventListener('click',e=>{
     const el=e.target?.closest?.('#finditExactShell [data-fx="compare"],#finditExactShell [data-fxnav="compare"],#finditExactShell [data-fx="stock"]');
     if(!el)return;
-    let action=el.dataset.fxnav||el.dataset.fx||'';
+    const action=el.dataset.fxnav||el.dataset.fx||'';
     if(action!=='compare'&&action!=='stock')return;
     e.preventDefault();
     e.stopImmediatePropagation();
-    setTimeout(()=>{
-      const run=window.finditDashboardAuditAction||window.finditDashboardAction;
-      if(typeof run==='function')run(action);
-    },0);
+    setTimeout(()=>runSafeCommerceAction(action),0);
   },true);
 
   function ensureFeedbackUi(){
