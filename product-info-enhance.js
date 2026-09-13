@@ -52,7 +52,6 @@
   },true);
 
   async function loadGuards(){
-    // Install the user-facing click owner first. Nothing slower may register ahead of it.
     await loadDashboardAudit();
     await loadActionOwner();
     await Promise.all([loadPolish(),loadPriceSweep(),loadRelevance(),loadCommerce(),loadStructure(),loadProductGuard(),loadBuyingContext(),loadLocalMarket(),loadExactnessGuard()]);
@@ -66,7 +65,7 @@
     dashboardLoading=true;
     await loadGuards();
     if(!window.__finditDashboardV8Loader){
-      await loadScript('dashboard-stable','dashboard-runtime-stable.js?v=20260910-product3',()=>window.__finditDashboardV8Loader);
+      await loadScript('dashboard-stable','dashboard-runtime-stable.js?v=20260913-product4',()=>window.__finditDashboardV8Loader);
     }
     dashboardLoading=false;
     if(window.__finditDashboardV8Loader){shellObserver?.disconnect();shellObserver=null}
