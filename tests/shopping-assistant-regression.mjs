@@ -54,6 +54,8 @@ listText=await page.locator('#fxShoppingListBody').innerText();
 if(!/Shortest trip/i.test(listText))fail('Shortest-trip planning mode did not activate');
 
 await page.locator('#fxWatchCurrentItem').click();
+const watchDetails=page.locator('#fxShoppingAssistant details').nth(1);
+if(!(await watchDetails.evaluate(el=>el.open)))await watchDetails.locator('summary').click();
 let watchText=await page.locator('#fxWatchBody').innerText();
 if(!/Test Headphones/i.test(watchText)||!/Retailer B/i.test(watchText)){
   const watchState=await page.evaluate(()=>({stored:localStorage.getItem('findit.watchList.v2'),offers:window.finditState?.offers,product:window.finditState?.result?.identification}));
