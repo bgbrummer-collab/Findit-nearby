@@ -12,8 +12,20 @@ page.setDefaultTimeout(120000);
 const errors=[];page.on('pageerror',e=>errors.push(e.message));
 const api=[];page.on('response',r=>{if(/\/api\/(product-insights|product-intelligence-v2)/.test(r.url()))api.push([r.status(),r.url()])});
 const fail=m=>{throw new Error(m)};
-async function closeModal(){const x=page.locator('#fxStableModal .fx-stable-close').first();if(await x.count()&&await x.isVisible().catch(()=>false))await x.click({force:true}).catch(()=>{});await page.keyboard.press('Escape').catch(()=>{});await page.waitForTimeout(100)}
+async function closeModal(){
+  const stable=page.locator('#fxStableModal .fx-stable-close').first();
+  if(await stable.count()&&await stable.isVisible().catch(()=>false))await stable.click({force:true}).catch(()=>{});
+  const commerce=page.locator('#fxCommerceSafeModal .fx-commerce-safe-close').first();
+  if(await commerce.count()&&await commerce.isVisible().catch(()=>false))await commerce.click({force:true}).catch(()=>{});
+  await page.keyboard.press('Escape').catch(()=>{});
+  await page.waitForTimeout(100);
+}
 async function openAction(a){await closeModal();const el=page.locator(`#finditExactShell [data-fx="${a}"]:visible,#finditExactShell [data-fxnav="${a}"]:visible`).first();if(!await el.count())fail(`missing ${a} action`);await el.click({force:true});await page.waitForTimeout(250)}
+async function commerceText(){
+  const safe=page.locator('#fxCommerceSafeModal:not([hidden]) #fxCommerceSafeBody');
+  if(await safe.count()&&await safe.isVisible().catch(()=>false))return safe.innerText();
+  return page.locator('#fxStableBody').innerText();
+}
 
 await page.goto(URL,{waitUntil:'domcontentloaded',timeout:60000});
 await page.waitForSelector('#finditExactShell',{state:'visible'});
@@ -43,7 +55,7 @@ console.log('REAL_PRODUCT_INFO_OK',product.replace(/\s+/g,' ').slice(0,900));
 
 await openAction('compare');
 await page.waitForFunction(()=>{const t=document.querySelector('#fxOnlinePrices')?.textContent||'';return /Clicks|Dis-Chem/i.test(t)&&/R\s*\d+/i.test(t)},null,{timeout:90000});
-let compare=await page.locator('#fxStableBody').innerText();
+let compare=await commerceText();
 if(/R\s*0(?:[,.]00)?\b/i.test(compare))fail(`zero price shown: ${compare}`);
 if(!/Clicks|Dis-Chem/i.test(compare))fail(`no verified retailer in comparison: ${compare}`);
 if(!/R\s*2\d\d/i.test(compare))fail(`no realistic verified ZAR price in comparison: ${compare}`);
@@ -52,8 +64,8 @@ if(/Refreshing exact retailer pages/i.test(compare))fail(`stale refreshing statu
 console.log('REAL_COMPARE_OK',compare.replace(/\s+/g,' ').slice(0,1000));
 
 await openAction('stock');
-await page.waitForFunction(()=>/In stock online/i.test(document.querySelector('#fxStableBody')?.textContent||''),null,{timeout:90000});
-const stock=await page.locator('#fxStableBody').innerText();
+await page.waitForFunction(()=>/In stock online/i.test(document.querySelector('#fxCommerceSafeBody')?.textContent||document.querySelector('#fxStableBody')?.textContent||''),null,{timeout:90000});
+const stock=await commerceText();
 if(!/Clicks|Takealot/i.test(stock))fail(`no exact retailer stock evidence: ${stock}`);
 if(!/branch stock/i.test(stock))fail(`branch-vs-online stock distinction missing: ${stock}`);
 if(/verified in stock at this branch/i.test(stock))fail(`branch stock was invented: ${stock}`);
