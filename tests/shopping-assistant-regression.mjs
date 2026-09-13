@@ -15,7 +15,7 @@ await page.route('**/api/product-intelligence',async route=>{
 });
 await page.goto(URL,{waitUntil:'domcontentloaded',timeout:60000});
 await page.waitForSelector('#finditExactShell',{state:'visible'});
-await page.waitForFunction(()=>window.__finditShoppingAssistantUi===true&&typeof window.finditShoppingAssistantRefresh==='function'&&typeof window.finditShoppingPlan==='function'&&window.__finditDashboardV8Loader===true);
+await page.waitForFunction(()=>window.__finditShoppingAssistantUi===true&&window.__finditShoppingAssistantCurrentOfferGuard===true&&typeof window.finditShoppingAssistantRefresh==='function'&&typeof window.finditShoppingPlan==='function'&&window.__finditDashboardV8Loader===true);
 await page.evaluate(()=>{
  const s=window.finditState;
  s.coords={lat:-25.747,lon:28.188};
@@ -32,9 +32,12 @@ await page.evaluate(()=>{
  const list=document.querySelector('#nearbyStores')||document.querySelector('#finditExactShell');
  list.innerHTML='<article data-store="0">Retailer A</article><article data-store="1">Retailer B</article>';
  ['findit.shoppingList.v1','findit.watchList.v1','findit.shoppingList.v2','findit.watchList.v2','findit.watchAlerts.v1','findit.priceHistory.v1','findit.shoppingPlanMode.v1'].forEach(k=>localStorage.removeItem(k));
- window.finditShoppingAssistantRefresh();
+ // Use the same lifecycle a completed real Find uses so the current-offer guard
+ // captures the current product before any legacy runtime can clear transient state.
+ document.dispatchEvent(new CustomEvent('findit:results-rendered'));
 });
 await page.waitForSelector('#fxShoppingAssistant',{state:'visible'});
+await page.waitForTimeout(80);
 
 await page.locator('#fxAddCurrentItem').click();
 let listText=await page.locator('#fxShoppingListBody').innerText();
@@ -60,9 +63,9 @@ await page.evaluate(()=>{
    {retailer:'Retailer A',price:899,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true},
    {retailer:'Retailer B',price:699,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true}
   ];
-  window.finditShoppingAssistantRefresh();
+  document.dispatchEvent(new CustomEvent('findit:results-rendered'));
 });
-await page.waitForTimeout(80);
+await page.waitForTimeout(100);
 watchText=await page.locator('#fxWatchBody').innerText();
 if(!/Price drop/i.test(watchText)||!/699/.test(watchText))fail('Watch Item did not create a persistent price-drop alert');
 if(!/low/i.test(watchText)||!/high/i.test(watchText))fail('Watch Item did not preserve price-history summary');
