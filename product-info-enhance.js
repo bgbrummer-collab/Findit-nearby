@@ -14,8 +14,18 @@
     const existing=document.querySelector(`script[data-findit-loader="${key}"]`);
     const p=new Promise(resolve=>{
       const done=()=>{if(key==='compare'&&window.__finditCompareStockReliabilityV2)window.__finditCompareStockReliability=true;resolve()};
-      if(existing){if(ready?.())return done();existing.addEventListener('load',done,{once:true});existing.addEventListener('error',done,{once:true});return}
-      const s=document.createElement('script');s.src=src;s.async=false;s.dataset.finditLoader=key;s.onload=done;s.onerror=done;document.head.appendChild(s);
+      if(existing){
+        if(ready?.())return done();
+        if(existing.dataset.finditLoaded==='1')return done();
+        existing.addEventListener('load',done,{once:true});
+        existing.addEventListener('error',done,{once:true});
+        return;
+      }
+      const s=document.createElement('script');
+      s.src=src;s.async=false;s.dataset.finditLoader=key;
+      s.onload=()=>{s.dataset.finditLoaded='1';done()};
+      s.onerror=()=>{s.dataset.finditLoaded='1';done()};
+      document.head.appendChild(s);
     });
     pending.set(key,p);return p;
   }
@@ -26,7 +36,7 @@
   const loadPriceSweep=()=>loadScript('price-sweep-ui','price-sweep-ui-fix.js?v=20260911-sweep1',()=>window.__finditPriceSweepUiFix);
   const loadRelevance=()=>loadScript('relevance','dashboard-retailer-relevance-fix.js?v=20260910-relevance2',()=>window.__finditDashboardRetailerRelevance);
   const loadCommerce=()=>loadScript('commerce','dashboard-commerce-status.js?v=20260911-live9',()=>window.__finditDashboardCommerceStatus);
-  const loadStructure=()=>loadScript('product-structure','product-info-structure-guard.js?v=20260910-structure1',()=>window.__finditProductInfoStructureGuard);
+  const loadStructure=()=>loadScript('product-structure','product-info-structure-guard.js?v=20260913-structure2',()=>window.__finditProductInfoStructureGuard);
   const loadProductGuard=()=>loadScript('product-click','product-info-click-fix.js?v=20260912-research5',()=>window.__finditProductInfoClickFix);
   const loadBuyingContext=()=>loadScript('product-buying-context','product-buying-context-fix.js?v=20260911-context1',()=>window.__finditProductBuyingContextFix);
   const loadLocalMarket=()=>loadScript('local-market-commerce','local-market-commerce-fix.js?v=20260911-local1',()=>window.__finditLocalMarketCommerceFix);
@@ -35,23 +45,9 @@
   const loadCommerceUiV4=()=>loadScript('commerce-ui-v4','commerce-ui-v4.js?v=20260913-compare7',()=>window.__finditCommerceUiV4);
   const loadDashboardAudit=()=>loadScript('dashboard-audit-controls','dashboard-audit-controls.js?v=20260913-audit7',()=>window.__finditDashboardAuditControls);
 
-  // Own Compare/Stock at the browser-event boundary. Crucially, modal/render work is placed
-  // in a new task (not a Promise microtask), so the physical click always returns first.
-  window.addEventListener('click',e=>{
-    const el=e.target?.closest?.('#finditExactShell [data-fx="compare"],#finditExactShell [data-fxnav="compare"],#finditExactShell [data-fx="stock"]');
-    if(!el)return;
-    const action=el.dataset.fxnav||el.dataset.fx||'';
-    if(action!=='compare'&&action!=='stock')return;
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    setTimeout(()=>{
-      loadDashboardAudit().then(()=>{
-        if(typeof window.finditDashboardAuditAction==='function')window.finditDashboardAuditAction(action);
-      }).catch(err=>console.warn('FindIt commerce action unavailable',err?.message||err));
-    },0);
-  },true);
-
   async function loadGuards(){
+    // The audit controller is the single browser-event owner for dashboard actions.
+    // Product-info bootstrap only loads dependencies; it never intercepts Compare/Stock clicks.
     await loadDashboardAudit();
     await loadActionOwner();
     await Promise.all([loadPolish(),loadPriceSweep(),loadRelevance(),loadCommerce(),loadStructure(),loadProductGuard(),loadBuyingContext(),loadLocalMarket(),loadExactnessGuard()]);
