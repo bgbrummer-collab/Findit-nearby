@@ -14,20 +14,10 @@
     const existing=document.querySelector(`script[data-findit-loader="${key}"]`);
     const p=new Promise(resolve=>{
       const done=()=>{if(key==='compare'&&window.__finditCompareStockReliabilityV2)window.__finditCompareStockReliability=true;resolve()};
-      if(existing){
-        if(ready?.())return done();
-        if(existing.dataset.finditLoaded==='1')return done();
-        existing.addEventListener('load',done,{once:true});
-        existing.addEventListener('error',done,{once:true});
-        return;
-      }
-      const s=document.createElement('script');
-      s.src=src;s.async=false;s.dataset.finditLoader=key;
-      s.onload=()=>{s.dataset.finditLoaded='1';done()};
-      s.onerror=()=>{s.dataset.finditLoaded='1';done()};
-      document.head.appendChild(s);
-    });
-    pending.set(key,p);return p;
+      if(existing){if(ready?.())return done();if(existing.dataset.finditLoaded==='1')return done();existing.addEventListener('load',done,{once:true});existing.addEventListener('error',done,{once:true});return;}
+      const s=document.createElement('script');s.src=src;s.async=false;s.dataset.finditLoader=key;
+      s.onload=()=>{s.dataset.finditLoaded='1';done()};s.onerror=()=>{s.dataset.finditLoaded='1';done()};document.head.appendChild(s);
+    });pending.set(key,p);return p;
   }
 
   const loadPolish=()=>loadScript('modal-polish','modal-polish-fix.js?v=20260912-modal3',()=>window.__finditModalPolishFix);
@@ -48,53 +38,13 @@
   const loadSmartChoice=()=>loadScript('smart-choice','smart-choice-ui.js?v=20260913-smart2',()=>window.__finditSmartChoiceUi);
   const loadShoppingAssistant=()=>loadScript('shopping-assistant','shopping-assistant-ui.js?v=20260913-shop3',()=>window.__finditShoppingAssistantUi);
   const loadShoppingOfferGuard=()=>loadScript('shopping-offer-guard','shopping-assistant-current-offer-guard.js?v=20260913-offerguard1',()=>window.__finditShoppingAssistantCurrentOfferGuard);
-  const loadShoppingStoreAccess=()=>loadScript('shopping-store-access','shopping-assistant-store-access.js?v=20260913-store1',()=>window.__finditShoppingAssistantStoreAccess);
+  const loadShoppingStoreAccess=()=>loadScript('shopping-store-access','shopping-assistant-store-access.js?v=20260913-store2',()=>window.__finditShoppingAssistantStoreAccess);
 
-  function reserveFeatureCardsForSingleOwner(){
-    const shell=document.querySelector('#finditExactShell');
-    if(!shell)return false;
-    shell.querySelectorAll('.fx-feature-row article[data-fx]').forEach(card=>{
-      if(!card.dataset.wired)card.dataset.wired='single-owner';
-    });
-    return true;
-  }
-
-  async function loadGuards(){
-    await loadDashboardAudit();
-    await loadFeedbackUi();
-    await loadSmartChoice();
-    await loadShoppingAssistant();
-    await loadShoppingOfferGuard();
-    await loadShoppingStoreAccess();
-    await loadActionOwner();
-    await Promise.all([loadPolish(),loadPriceSweep(),loadRelevance(),loadCommerce(),loadStructure(),loadProductGuard(),loadBuyingContext(),loadLocalMarket(),loadExactnessGuard()]);
-    await loadCommerceUiV4();
-    await loadCompare();
-  }
-
-  async function loadDashboardRuntime(){
-    if(!document.querySelector('#finditExactShell'))return;
-    reserveFeatureCardsForSingleOwner();
-    if(window.__finditDashboardV8Loader){shellObserver?.disconnect();shellObserver=null;return}
-    if(dashboardLoading)return;
-    dashboardLoading=true;
-    await loadGuards();
-    if(!window.__finditDashboardV8Loader){
-      await loadScript('dashboard-stable','dashboard-runtime-stable.js?v=20260913-product5',()=>window.__finditDashboardV8Loader);
-    }
-    dashboardLoading=false;
-    if(window.__finditDashboardV8Loader){shellObserver?.disconnect();shellObserver=null}
-    try{document.dispatchEvent(new CustomEvent('findit:dashboard-sync'))}catch{}
-  }
-
+  function reserveFeatureCardsForSingleOwner(){const shell=document.querySelector('#finditExactShell');if(!shell)return false;shell.querySelectorAll('.fx-feature-row article[data-fx]').forEach(card=>{if(!card.dataset.wired)card.dataset.wired='single-owner'});return true}
+  async function loadGuards(){await loadDashboardAudit();await loadFeedbackUi();await loadSmartChoice();await loadShoppingAssistant();await loadShoppingOfferGuard();await loadShoppingStoreAccess();await loadActionOwner();await Promise.all([loadPolish(),loadPriceSweep(),loadRelevance(),loadCommerce(),loadStructure(),loadProductGuard(),loadBuyingContext(),loadLocalMarket(),loadExactnessGuard()]);await loadCommerceUiV4();await loadCompare()}
+  async function loadDashboardRuntime(){if(!document.querySelector('#finditExactShell'))return;reserveFeatureCardsForSingleOwner();if(window.__finditDashboardV8Loader){shellObserver?.disconnect();shellObserver=null;return}if(dashboardLoading)return;dashboardLoading=true;await loadGuards();if(!window.__finditDashboardV8Loader)await loadScript('dashboard-stable','dashboard-runtime-stable.js?v=20260913-product5',()=>window.__finditDashboardV8Loader);dashboardLoading=false;if(window.__finditDashboardV8Loader){shellObserver?.disconnect();shellObserver=null}try{document.dispatchEvent(new CustomEvent('findit:dashboard-sync'))}catch{}}
   loadGuards();
-  shellObserver=new MutationObserver(()=>{
-    if(document.querySelector('#finditExactShell')){
-      reserveFeatureCardsForSingleOwner();
-      loadDashboardRuntime();
-    }
-  });
-  shellObserver.observe(document.documentElement,{childList:true,subtree:true});
+  shellObserver=new MutationObserver(()=>{if(document.querySelector('#finditExactShell')){reserveFeatureCardsForSingleOwner();loadDashboardRuntime()}});shellObserver.observe(document.documentElement,{childList:true,subtree:true});
   setTimeout(loadDashboardRuntime,0);setTimeout(loadDashboardRuntime,500);setTimeout(loadDashboardRuntime,1200);
   document.addEventListener('findit:results-rendered',()=>{loadResearch();reserveFeatureCardsForSingleOwner();loadGuards().then(()=>{try{document.dispatchEvent(new CustomEvent('findit:dashboard-sync'))}catch{}})});
 })();
