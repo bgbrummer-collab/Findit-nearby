@@ -3,7 +3,7 @@
 'use strict';
 if(window.__finditDashboardAuditControls)return;window.__finditDashboardAuditControls=true;
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
-const esc=(v='')=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c]));
+const esc=(v='')=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const st=()=>{try{return window.finditState||window.state||{}}catch{return{}}};
 const positive=v=>v!==null&&v!==undefined&&v!==''&&Number.isFinite(Number(v))&&Number(v)>0;
 const retailer=o=>String(o?.retailer?.name||o?.retailer||o?.store||o?.seller||'Retailer').trim();
@@ -48,6 +48,6 @@ function alerts(){setActive('alerts');let rows=[];try{rows=JSON.parse(localStora
 function feedback(){setActive('feedback');const x=$('#feedback');if(x){x.scrollIntoView({behavior:'smooth',block:'start'});setTimeout(()=>$('#feedbackMessage')?.focus(),450)}else modal('Feedback','<p class="fx-stable-sub">Feedback is temporarily unavailable.</p>')}
 function deals(){setActive('deals');modal('Deals',compareHtml())}
 function route(a){if(a==='home')home();else if(a==='search')search();else if(a==='nearby')nearby();else if(a==='compare')compare();else if(a==='stock')liveStock();else if(a==='deals')deals();else if(a==='saved')saved();else if(a==='history')history();else if(a==='alerts')alerts();else if(a==='feedback')feedback();else return false;return true}
-window.addEventListener('click',e=>{const el=e.target?.closest?.('#finditExactShell [data-fxnav],#finditExactShell [data-fx="stock"],#finditExactShell [data-fx="alerts"],#finditExactShell [data-fx="saved"],#finditExactShell [data-fx="history"],#finditExactShell [data-fx="feedback"],#finditExactShell [data-fx="deals"]');if(!el)return;let a=el.dataset.fxnav||el.dataset.fx;if(a==='nearby'&&/\bLive Stock\b/i.test(el.textContent||''))a='stock';if(!route(a))return;e.preventDefault();e.stopImmediatePropagation()},true);
+window.addEventListener('click',e=>{const el=e.target?.closest?.('#finditExactShell [data-fxnav],#finditExactShell [data-fx="compare"],#finditExactShell [data-fx="stock"],#finditExactShell [data-fx="alerts"],#finditExactShell [data-fx="saved"],#finditExactShell [data-fx="history"],#finditExactShell [data-fx="feedback"],#finditExactShell [data-fx="deals"]');if(!el)return;let a=el.dataset.fxnav||el.dataset.fx;if(a==='nearby'&&/\bLive Stock\b/i.test(el.textContent||''))a='stock';if(!route(a))return;e.preventDefault();e.stopImmediatePropagation()},true);
 window.finditDashboardAuditAction=route;
 })();
