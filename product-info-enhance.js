@@ -45,6 +45,19 @@
   const loadCommerceUiV4=()=>loadScript('commerce-ui-v4','commerce-ui-v4.js?v=20260913-compare7',()=>window.__finditCommerceUiV4);
   const loadDashboardAudit=()=>loadScript('dashboard-audit-controls','dashboard-audit-controls.js?v=20260913-audit7',()=>window.__finditDashboardAuditControls);
 
+  function reserveFeatureCardsForSingleOwner(){
+    const shell=document.querySelector('#finditExactShell');
+    if(!shell)return false;
+    // modal-nav-fix.js used to attach feature-card handlers that call .click() on the
+    // first matching data-fx element. For the Compare card that selector can resolve
+    // to the same card and recursively click itself. Mark the cards as already wired
+    // before that legacy runtime sees them; the maintained capture owner handles them.
+    shell.querySelectorAll('.fx-feature-row article[data-fx]').forEach(card=>{
+      if(!card.dataset.wired)card.dataset.wired='single-owner';
+    });
+    return true;
+  }
+
   async function loadGuards(){
     // The audit controller is the single browser-event owner for dashboard actions.
     // Product-info bootstrap only loads dependencies; it never intercepts Compare/Stock clicks.
@@ -56,12 +69,14 @@
   }
 
   async function loadDashboardRuntime(){
+    if(!document.querySelector('#finditExactShell'))return;
+    reserveFeatureCardsForSingleOwner();
     if(window.__finditDashboardV8Loader){shellObserver?.disconnect();shellObserver=null;return}
-    if(dashboardLoading||!document.querySelector('#finditExactShell'))return;
+    if(dashboardLoading)return;
     dashboardLoading=true;
     await loadGuards();
     if(!window.__finditDashboardV8Loader){
-      await loadScript('dashboard-stable','dashboard-runtime-stable.js?v=20260913-product4',()=>window.__finditDashboardV8Loader);
+      await loadScript('dashboard-stable','dashboard-runtime-stable.js?v=20260913-product5',()=>window.__finditDashboardV8Loader);
     }
     dashboardLoading=false;
     if(window.__finditDashboardV8Loader){shellObserver?.disconnect();shellObserver=null}
@@ -70,9 +85,12 @@
 
   loadGuards();
   shellObserver=new MutationObserver(()=>{
-    if(document.querySelector('#finditExactShell'))loadDashboardRuntime();
+    if(document.querySelector('#finditExactShell')){
+      reserveFeatureCardsForSingleOwner();
+      loadDashboardRuntime();
+    }
   });
   shellObserver.observe(document.documentElement,{childList:true,subtree:true});
   setTimeout(loadDashboardRuntime,0);setTimeout(loadDashboardRuntime,500);setTimeout(loadDashboardRuntime,1200);
-  document.addEventListener('findit:results-rendered',()=>{loadResearch();loadGuards().then(()=>{try{document.dispatchEvent(new CustomEvent('findit:dashboard-sync'))}catch{}})});
+  document.addEventListener('findit:results-rendered',()=>{loadResearch();reserveFeatureCardsForSingleOwner();loadGuards().then(()=>{try{document.dispatchEvent(new CustomEvent('findit:dashboard-sync'))}catch{}})});
 })();
