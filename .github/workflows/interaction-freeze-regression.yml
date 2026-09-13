@@ -11,7 +11,7 @@ permissions:
 jobs:
   interaction:
     runs-on: ubuntu-latest
-    timeout-minutes: 7
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -27,9 +27,16 @@ jobs:
         run: |
           python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/findit-http.log 2>&1 &
           sleep 2
-      - name: Check user interaction safety
+      - name: Check local user interaction behavior
         env:
           FINDIT_URL: http://127.0.0.1:4173/
         run: |
           timeout --signal=TERM --kill-after=5s 120s node tests/user-experience-guard-regression.mjs
           timeout --signal=TERM --kill-after=5s 120s node tests/dashboard-tools-regression.mjs
+      - name: Wait for production deployment
+        run: sleep 35
+      - name: Check deployed FindIt interactions actually work
+        env:
+          FINDIT_URL: https://findit-nearby.vercel.app/
+        run: |
+          timeout --signal=TERM --kill-after=5s 150s node tests/dashboard-tools-regression.mjs
