@@ -7,7 +7,7 @@ const state=()=>window.finditState||window.state||{};
 const clean=v=>String(v??'').replace(/\s+/g,' ').trim();
 const norm=v=>clean(v).toLowerCase().replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim();
 const esc=(v='')=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const number=v=>Number.isFinite(Number(v))?Number(v):null;
+const number=v=>v==null||v===''?null:(Number.isFinite(Number(v))?Number(v):null);
 let nearbyBusy=false,nearbyKey='';
 
 function decode(v=''){
@@ -97,8 +97,6 @@ function poorPro(v){
  if(/offers low top,? mid top,? and high top/i.test(x))return true;
  if(/^(available|comes|offered) in (many|multiple|different) (styles|colours|colors|versions|variants)/i.test(x))return true;
  if(/^(men|women|kids|unisex)\b/i.test(x)&&x.length<70)return true;
- // Product/variant names are evidence of identity, not a user benefit. Keep only a sentence that
- // actually explains a meaningful performance/use advantage.
  if(/^nike air force 1(?:\s|$)/i.test(x)&&!/(offers?|provides?|features?|uses?|has|includes?|helps?|supports?|improves?|gives?|designed|made|cushion|comfort|durab|traction|support)/i.test(x))return true;
  return false;
 }
