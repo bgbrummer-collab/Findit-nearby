@@ -13,8 +13,6 @@ function money(v,c='ZAR'){if(!positive(v))return'Price not published';try{return
 function retailerName(o){return String(o?.retailer?.name||o?.retailer||o?.store||o?.seller||'').trim()}
 function currentOffers(){
  const s=state();
- // A completed Find owns the current screen. Product-intelligence offers are only a fallback,
- // so evidence left from an older request can never outrank the user's current result.
  const primary=Array.isArray(s.offers)&&s.offers.length?s.offers:(Array.isArray(window.productIntelligence?.offers)?window.productIntelligence.offers:[]);
  const out=[],seen=new Set();
  for(const o of primary){
@@ -53,7 +51,13 @@ function scoreChoices(){
  const closestStore=[...stores].filter(x=>num(x.distanceKm)!=null).sort((a,b)=>Number(a.distanceKm)-Number(b.distanceKm))[0]||null;
  return{best:candidates[0]||null,cheapest,closestStore,stores};
 }
-function confidenceLabel(){const c=num(state()?.result?.identification?.confidence);if(c==null)return'Confidence not supplied';const p=Math.round(Math.max(0,Math.min(1,c))*100);return p>=85?`High confidence · ${p}%`:p>=65?`Likely match · ${p}%`:`Check match · ${p}%`}
+function confidenceLabel(){
+ const id=state()?.result?.identification||{},c=num(id.confidence);if(c==null)return'Confidence not supplied';
+ const p=Math.round(Math.max(0,Math.min(1,c))*100),level=norm(id.matchLevel||id.match_level);
+ const exact=id.exactProductMatch===true||level.includes('exact')||id.modelEvidence===true;
+ if(!exact)return`Object match · ${p}%`;
+ return p>=85?`High confidence · ${p}%`:p>=65?`Likely exact match · ${p}%`:`Check exact match · ${p}%`;
+}
 function card(label,title,meta,klass=''){return`<article class="fx-smart-card ${klass}"><span>${esc(label)}</span><strong>${esc(title)}</strong><small>${esc(meta)}</small></article>`}
 function render(){
  const box=$('#fxSmartChoice');if(!box)return;const{best,cheapest,closestStore,stores}=scoreChoices();
