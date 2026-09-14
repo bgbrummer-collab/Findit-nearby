@@ -35,7 +35,7 @@
   const loadCommerceUiV4=()=>loadScript('commerce-ui-v4','commerce-ui-v4.js?v=20260913-compare7',()=>window.__finditCommerceUiV4);
   const loadDashboardAudit=()=>loadScript('dashboard-audit-controls','dashboard-audit-controls.js?v=20260913-audit8',()=>window.__finditDashboardAuditControls);
   const loadFeedbackUi=()=>loadScript('feedback-feature-ui','feedback-feature-ui.js?v=20260913-feedback2',()=>window.__finditFeedbackFeatureUi);
-  const loadUserFirstPolish=()=>loadScript('user-first-polish','user-first-polish.js?v=20260914-user2',()=>window.__finditUserFirstPolish);
+  const loadUserFirstPolish=()=>loadScript('user-first-polish','user-first-polish.js?v=20260914-user3',()=>window.__finditUserFirstPolish);
   const loadUserPovHardening=()=>loadScript('user-pov-hardening','user-pov-hardening.js?v=20260914-hard1',()=>window.__finditUserPovHardening);
   const loadCurrentFindRelevance=()=>loadScript('current-find-relevance','user-pov-relevance-guard.js?v=20260914-rel1',()=>window.__finditUserPovRelevanceGuard);
   const loadSmartChoice=()=>loadScript('smart-choice','smart-choice-ui.js?v=20260913-smart2',()=>window.__finditSmartChoiceUi);
