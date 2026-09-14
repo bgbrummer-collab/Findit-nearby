@@ -39,7 +39,7 @@
   const loadShoppingAssistant=()=>loadScript('shopping-assistant','shopping-assistant-ui.js?v=20260913-shop3',()=>window.__finditShoppingAssistantUi);
   const loadShoppingOfferGuard=()=>loadScript('shopping-offer-guard','shopping-assistant-current-offer-guard.js?v=20260913-offerguard1',()=>window.__finditShoppingAssistantCurrentOfferGuard);
   const loadShoppingStoreAccess=()=>loadScript('shopping-store-access','shopping-assistant-store-access.js?v=20260914-store3',()=>window.__finditShoppingAssistantStoreAccess);
-  const loadFindActionsHours=()=>loadScript('find-actions-hours','find-actions-hours.js?v=20260914-actions2',()=>window.__finditFindActionsHours);
+  const loadFindActionsHours=()=>loadScript('find-actions-hours','find-actions-hours.js?v=20260914-actions3',()=>window.__finditFindActionsHours);
   const loadFindActionsSettle=()=>loadScript('find-actions-settle','find-actions-settle.js?v=20260914-settle1',()=>window.__finditFindActionsSettle);
 
   function reserveFeatureCardsForSingleOwner(){const shell=document.querySelector('#finditExactShell');if(!shell)return false;shell.querySelectorAll('.fx-feature-row article[data-fx]').forEach(card=>{if(!card.dataset.wired)card.dataset.wired='single-owner'});return true}
