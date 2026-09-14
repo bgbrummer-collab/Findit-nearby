@@ -51,7 +51,6 @@ if(/Nearby stores will appear|not loaded/i.test(top))fail('Top Stores still show
 await page.waitForFunction(()=>{
   try{const x=JSON.parse(localStorage.getItem('findit.shoppingList.v2')||'[]')[0]?.offers?.[0];return x&&x.lat===null&&x.lon===null}catch{return false}
 });
-window;
 await page.evaluate(()=>window.finditShoppingAssistantRefresh?.());
 await page.waitForFunction(()=>/Online-only plan/i.test(document.querySelector('#fxShoppingListBody')?.innerText||''),null,{timeout:15000});
 const plan=await page.locator('#fxShoppingListBody').innerText();
