@@ -11,7 +11,7 @@ permissions:
 jobs:
   interaction:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -54,3 +54,4 @@ jobs:
           timeout --signal=TERM --kill-after=5s 120s node tests/user-first-polish-regression.mjs
           timeout --signal=TERM --kill-after=5s 120s node tests/user-pov-hardening-regression.mjs
           timeout --signal=TERM --kill-after=5s 120s node tests/current-find-relevance-regression.mjs
+          timeout --signal=TERM --kill-after=5s 480s node tests/live-user-upload-matrix.mjs
