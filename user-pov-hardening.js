@@ -1,0 +1,58 @@
+/* FindIt user POV hardening — keep every visible result useful, current and truthful. */
+(()=>{
+'use strict';
+if(window.__finditUserPovHardening)return;window.__finditUserPovHardening=true;
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const state=()=>window.finditState||window.state||{};
+const clean=v=>String(v??'').replace(/\s+/g,' ').trim();
+const norm=v=>clean(v).toLowerCase().replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim();
+const esc=(v='')=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const finite=v=>v==null||v===''?null:(Number.isFinite(Number(v))?Number(v):null);
+const decode=v=>{const s=String(v??'');if(!/[&][a-z#0-9]+;/i.test(s))return s;const x=document.createElement('textarea');x.innerHTML=s;return x.value};
+let queued=false;
+
+function retailer(o){
+ try{if(typeof window.finditRetailerDisplayName==='function'){const x=window.finditRetailerDisplayName(o);if(clean(x))return clean(x)}}catch{}
+ const raw=decode(o?.retailer?.name||o?.retailer||o?.store||o?.seller||'');
+ if(raw&&!/^(co|com|za|www|shop|store|retailer|seller|online|marketplace)$/i.test(clean(raw)))return clean(raw);
+ try{const u=new URL(o?.product_url||o?.productUrl||o?.url||''),p=u.hostname.toLowerCase().replace(/^www\./,'').split('.');let b=p.length>=3&&p.at(-2)==='co'&&p.at(-1)==='za'?p.at(-3):p.at(-2)||p[0];const known={bobshop:'Bob Shop',takealot:'Takealot',amazon:'Amazon',nike:'Nike',adidas:'Adidas',makro:'Makro',game:'Game',woolworths:'Woolworths',checkers:'Checkers',shoprite:'Shoprite',pnp:'Pick n Pay',clicks:'Clicks',dischem:'Dis-Chem',incredible:'Incredible Connection',computermania:'Computer Mania',hirschs:"Hirsch's",hificorp:'HiFi Corp',sportscene:'Sportscene',totalsports:'Totalsports'};return known[b]||b.replace(/[-_]+/g,' ').replace(/\b\w/g,m=>m.toUpperCase())}catch{return'Online retailer'}
+}
+function repairOffer(o){if(!o||typeof o!=='object')return;for(const k of ['product_name','name','title','description','source'])if(typeof o[k]==='string')o[k]=decode(o[k]);const r=retailer(o);if(o.retailer&&typeof o.retailer==='object')o.retailer={...o.retailer,name:r};else o.retailer=r;o._finditRetailerLabel=r}
+function repairOffers(){const s=state();if(Array.isArray(s.offers))s.offers.forEach(repairOffer);if(Array.isArray(window.productIntelligence?.offers))window.productIntelligence.offers.forEach(repairOffer)}
+
+function sanitizeStoredShopping(){
+ let list;try{list=JSON.parse(localStorage.getItem('findit.shoppingList.v2')||'[]')}catch{return false}if(!Array.isArray(list))return false;let changed=false;
+ const fix=x=>{if(!x||typeof x!=='object')return;const lat=finite(x.lat),lon=finite(x.lon);if(lat===0&&lon===0){x.lat=null;x.lon=null;changed=true}if(typeof x.retailer==='string'&&/^(co|com|za)$/i.test(x.retailer)&&x.url){const r=retailer({retailer:x.retailer,url:x.url});if(r!==x.retailer){x.retailer=r;changed=true}}};
+ for(const item of list){for(const o of Array.isArray(item?.offers)?item.offers:[])fix(o);for(const s of Array.isArray(item?.stores)?item.stores:[])fix(s)}
+ if(changed)try{localStorage.setItem('findit.shoppingList.v2',JSON.stringify(list))}catch{}return changed;
+}
+
+function storeStatus(s){if(s?.liveHours?.status==='open'||s?.openNow===true)return'Open now';if(s?.liveHours?.status==='closed'||s?.openNow===false)return'Closed now';return Number.isFinite(Number(s?.distanceKm))?`${Number(s.distanceKm).toFixed(1)} km away`:'Nearby'}
+function renderTopStores(){
+ const host=$('#fxTopStores');if(!host)return;const rows=Array.isArray(state().stores)?state().stores:[];
+ if(!rows.length){const i=state()?.result?.identification,c=state()?.coords;if(i&&(c?.lat!=null||c?.latitude!=null))host.innerHTML='<div class="fx-user-top-empty">Finding relevant nearby retailers…</div>';return}
+ const stale=!host.querySelector('button')||/nearby stores will appear|not loaded|finding relevant nearby/i.test(host.textContent||'');if(!stale)return;
+ host.innerHTML=rows.slice(0,5).map((s,i)=>`<button type="button" class="fx-user-top-store" data-user-top-store="${i}"><span class="fx-store-logo">${esc(clean(s.name||'Store').slice(0,2).toUpperCase())}</span><span class="fx-user-top-copy"><b>${esc(s.name||'Store')}</b><small>${esc(Number.isFinite(Number(s.distanceKm))?`${Number(s.distanceKm).toFixed(1)} km · ${s.address||'Nearby retailer'}`:(s.address||'Nearby retailer'))}</small></span><span class="fx-star">${esc(storeStatus(s))}</span></button>`).join('');
+ $$('[data-user-top-store]',host).forEach(b=>b.addEventListener('click',()=>{const card=$(`#nearbyStores [data-store="${b.dataset.userTopStore}"]`)||$(`#fxStoreList [data-store="${b.dataset.userTopStore}"]`);card?.scrollIntoView({behavior:'smooth',block:'center'})}));
+}
+
+function syncSmartChoice(){
+ const box=$('#fxSmartChoice');if(!box)return;const rows=Array.isArray(state().stores)?state().stores:[],c=state()?.coords;
+ if(!rows.length&&c){const cards=$$('.fx-smart-card',box);const closest=cards.find(x=>/closest/i.test(x.querySelector('span')?.textContent||''));if(closest){const strong=$('strong',closest),small=$('small',closest);if(strong)strong.textContent='Finding nearby stores…';if(small)small.textContent='FindIt is locating relevant retailers near you.'}const status=$('#fxOpenNowStatus',box);if(status)status.textContent='Store hours will be checked automatically when nearby branches load.'}
+}
+
+const benefit=/offers?|provides?|features?|uses?|has|includes?|helps?|supports?|improves?|gives?|designed|made|cushion|comfort|durab|traction|support|reduces?|protects?|connects?|records?|adjustable|portable|reliable|lightweight|breathable|grip|moistur|detangl|noise|battery|performance/i;
+function identityTokens(){const i=state()?.result?.identification||{};return norm([i.brand,i.model,i.name].filter(Boolean).join(' ')).split(' ').filter(x=>x.length>2)}
+function titleLikePro(v){const x=clean(decode(v)),n=norm(x);if(!x||x.length<10)return true;if(/low top,? mid top,? and high top|available in (many|multiple|different) (styles|colours|colors|versions|variants)/i.test(x))return true;if(benefit.test(x))return false;const ids=identityTokens();const hits=ids.filter(t=>n.includes(t)).length;if(ids.length&&hits>=Math.min(2,ids.length))return true;if(/^([a-z0-9'’.-]+\s+){1,8}(leather|suede|canvas|edition|variant|colour|color|white|black)$/i.test(x))return true;return false}
+function cleanProductInfo(){const m=$('#fxStableModal:not(.hidden)');if(!m)return;const body=$('#fxStableBody',m);if(!body||!/^Product Information/i.test(clean(body.querySelector('.fx-stable-title,h2,h3')?.textContent)))return;const w=document.createTreeWalker(body,NodeFilter.SHOW_TEXT);let x;while((x=w.nextNode()))if(/&(?:quot|amp|apos|#39|#x27|nbsp);/i.test(x.nodeValue||''))x.nodeValue=decode(x.nodeValue);for(const h of $$('h3,h4',body)){if(norm(h.textContent)==='pros'){const ul=h.nextElementSibling?.matches('ul')?h.nextElementSibling:null;if(ul){$$('li',ul).forEach(li=>{if(titleLikePro(li.textContent))li.remove()});if(!ul.querySelector('li')){const p=document.createElement('p');p.className='fx-user-note';p.textContent='FindIt has not verified a meaningful product-specific advantage yet.';ul.replaceWith(p)}}}}
+}
+function cleanCommerce(){for(const root of [$('#fxCommerceSafeModal:not([hidden])'),$('#fxStableModal:not(.hidden)')].filter(Boolean)){const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let x;while((x=w.nextNode()))if(/&(?:quot|amp|apos|#39|#x27|nbsp);/i.test(x.nodeValue||''))x.nodeValue=decode(x.nodeValue);$$('.fx-commerce-row b,.fx-stable-row b',root).forEach(b=>{if(/^(co|com|za)$/i.test(clean(b.textContent)))b.textContent='Online retailer'})}}
+function styles(){if($('#fxUserPovHardeningStyle'))return;const s=document.createElement('style');s.id='fxUserPovHardeningStyle';s.textContent=`#fxTopStores .fx-user-top-store{width:100%;display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:10px;align-items:center;text-align:left;border:0;border-bottom:1px solid rgba(255,255,255,.06);background:transparent;color:inherit;padding:10px 4px;cursor:pointer}.fx-user-top-copy b,.fx-user-top-copy small{display:block}.fx-user-top-copy small{margin-top:3px;opacity:.65;font-size:10px;overflow-wrap:anywhere}.fx-user-top-empty{padding:14px 4px;font-size:11px;opacity:.68}.fx-user-top-store .fx-star{white-space:nowrap;font-size:10px;opacity:.75}.fx-user-note{color:#9fb4cb;line-height:1.5}@media(max-width:700px){#fxTopStores .fx-user-top-store{grid-template-columns:32px minmax(0,1fr)}.fx-user-top-store .fx-star{grid-column:2}}`;document.head.appendChild(s)}
+function run(){queued=false;styles();repairOffers();const changed=sanitizeStoredShopping();renderTopStores();syncSmartChoice();cleanProductInfo();cleanCommerce();if(changed)window.finditShoppingAssistantRefresh?.();setTimeout(()=>window.finditSmartChoiceRefresh?.(),0)}
+function queue(){if(queued)return;queued=true;setTimeout(run,20)}
+function watch(sel){const el=$(sel);if(!el||el.dataset.userPovWatch==='1')return;el.dataset.userPovWatch='1';new MutationObserver(queue).observe(el,{childList:true,subtree:true,attributes:true,attributeFilter:['class','hidden']})}
+function attach(){for(const s of ['#fxCommerceSafeModal','#fxStableModal','#fxTopStores','#fxShoppingListBody'])watch(s)}
+for(const ev of ['findit:results-rendered','findit:nearby-updated','findit:dashboard-sync'])document.addEventListener(ev,()=>{queue();setTimeout(attach,40)});
+window.addEventListener('storage',queue);window.finditUserPovHarden=run;
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{run();attach();setTimeout(run,700)},{once:true});else{run();attach();setTimeout(run,700)}
+})();
