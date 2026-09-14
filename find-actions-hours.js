@@ -3,7 +3,7 @@
 'use strict';
 if(window.__finditFindActionsHours)return;window.__finditFindActionsHours=true;
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
-const esc=(v='')=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c]));
+const esc=(v='')=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const norm=v=>String(v||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim();
 const state=()=>window.finditState||window.state||{};
 const SAVE_KEY='finditSaved';
@@ -13,13 +13,14 @@ let hoursBusy=false,lastHoursKey='';
 function read(k,f){try{const x=JSON.parse(localStorage.getItem(k)||'null');return x??f}catch{return f}}
 function write(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch{return false}}
 function product(){const s=state(),i=s.result?.identification||s.identification||{};return{name:String(i.name||i.product||i.object||s.query||'Current Find').trim(),brand:String(i.brand||'').trim(),model:String(i.model||'').trim(),object:String(i.object||'').trim(),category:String(i.retailCategory||i.category||'').trim(),confidence:Number.isFinite(Number(i.confidence))?Number(i.confidence):null,query:String(i.searchQuery||i.query||s.query||i.name||i.model||i.object||'').trim()}}
-function keyOf(p=product()){return norm([p.brand,p.model,p.name,p.query].filter(Boolean).join(' '))||'current-find'}
+function shoppingKeyOf(p=product()){return norm([p.brand,p.model,p.name].filter(Boolean).join(' '))||'current-item'}
+function saveKeyOf(p=product()){return norm([p.brand,p.model,p.name,p.query].filter(Boolean).join(' '))||shoppingKeyOf(p)}
 function stores(){return Array.isArray(state().stores)?state().stores:[]}
 function savedRows(){const a=read(SAVE_KEY,[]);return Array.isArray(a)?a:[]}
-function isSaved(){const k=keyOf();return savedRows().some(x=>(x.key||keyOf(x))===k)}
-function saveCurrent(){const p=product(),k=keyOf(p),rows=savedRows(),s=state();const rec={...p,key:k,savedAt:new Date().toISOString(),offers:Array.isArray(s.offers)?s.offers.slice(0,12).map(o=>({retailer:o?.retailer?.name||o?.retailer||o?.store||'',price:Number.isFinite(Number(o?.price))?Number(o.price):null,currency:o?.currency||'ZAR',availability:o?.availability||o?.stock?.status||'',url:o?.product_url||o?.url||'',verified:o?.verified===true||o?.sourcePageVerified===true||o?.priceComparisonVerified===true})):[],stores:stores().slice(0,12).map(x=>({name:x?.name||'',distanceKm:Number.isFinite(Number(x?.distanceKm))?Number(x.distanceKm):null,address:x?.address||'',openingHours:x?.openingHours||x?.opening_hours||'',openNow:typeof x?.openNow==='boolean'?x.openNow:null}))};const i=rows.findIndex(x=>(x.key||keyOf(x))===k);if(i>=0)rows[i]={...rows[i],...rec};else rows.unshift(rec);write(SAVE_KEY,rows.slice(0,100));updateButtons();toast(i>=0?'Saved Find updated':'Find saved')}
+function isSaved(){const k=saveKeyOf();return savedRows().some(x=>(x.key||saveKeyOf(x))===k)}
+function saveCurrent(){const p=product(),k=saveKeyOf(p),rows=savedRows(),s=state();const rec={...p,key:k,savedAt:new Date().toISOString(),offers:Array.isArray(s.offers)?s.offers.slice(0,12).map(o=>({retailer:o?.retailer?.name||o?.retailer||o?.store||'',price:Number.isFinite(Number(o?.price))?Number(o.price):null,currency:o?.currency||'ZAR',availability:o?.availability||o?.stock?.status||'',url:o?.product_url||o?.url||'',verified:o?.verified===true||o?.sourcePageVerified===true||o?.priceComparisonVerified===true})):[],stores:stores().slice(0,12).map(x=>({name:x?.name||'',distanceKm:Number.isFinite(Number(x?.distanceKm))?Number(x.distanceKm):null,address:x?.address||'',openingHours:x?.openingHours||x?.opening_hours||'',openNow:typeof x?.openNow==='boolean'?x.openNow:null}))};const i=rows.findIndex(x=>(x.key||saveKeyOf(x))===k);if(i>=0)rows[i]={...rows[i],...rec};else rows.unshift(rec);write(SAVE_KEY,rows.slice(0,100));updateButtons();toast(i>=0?'Saved Find updated':'Find saved')}
 function addShopping(){const b=$('#fxAddCurrentItem');if(b){b.click();setTimeout(updateButtons,30);return}toast('Shopping List is still loading — try again in a moment')}
-function listHasCurrent(){const list=read('findit.shoppingList.v2',[]),k=keyOf();return Array.isArray(list)&&list.some(x=>x?.key===k)}
+function listHasCurrent(){const list=read('findit.shoppingList.v2',[]),k=shoppingKeyOf();return Array.isArray(list)&&list.some(x=>x?.key===k)}
 function toast(text){let x=$('#fxFindActionToast');if(!x){x=document.createElement('div');x.id='fxFindActionToast';x.className='fx-find-action-toast';document.body.appendChild(x)}x.textContent=text;x.classList.add('show');clearTimeout(x._t);x._t=setTimeout(()=>x.classList.remove('show'),2100)}
 function googleMapsUrl(s){const q=[s?.name,s?.address].filter(Boolean).join(' ');return`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q||s?.name||'store')}`}
 const textHours=s=>String(s?.liveHours?.todayHours||s?.openingHours||s?.opening_hours||s?.hours||'').trim();
