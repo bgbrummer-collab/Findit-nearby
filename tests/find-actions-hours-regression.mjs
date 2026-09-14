@@ -18,7 +18,7 @@ await page.route('**/api/assistant?action=store-hours',async route=>{
 });
 await page.goto(URL,{waitUntil:'domcontentloaded',timeout:60000});
 await page.waitForSelector('#finditExactShell',{state:'visible'});
-await page.waitForFunction(()=>window.__finditSmartChoiceUi===true&&window.__finditShoppingAssistantUi===true&&window.__finditFindActionsHours===true);
+await page.waitForFunction(()=>window.__finditSmartChoiceUi===true&&window.__finditShoppingAssistantUi===true&&window.__finditFindActionsHours===true&&window.__finditFindActionsSettle===true);
 await page.evaluate(()=>{
   localStorage.removeItem('finditSaved');
   localStorage.removeItem('findit.shoppingList.v2');
@@ -38,10 +38,10 @@ await page.waitForSelector('#fxQuickAddShopping',{state:'visible'});
 await page.waitForSelector('#fxQuickSaveFind',{state:'visible'});
 await page.locator('#fxQuickAddShopping').click();
 await page.waitForFunction(()=>{try{return JSON.parse(localStorage.getItem('findit.shoppingList.v2')||'[]').some(x=>/test headphones/i.test(x.name||''))}catch{return false}});
-if(!/In Shopping List/i.test(await page.locator('#fxQuickAddShopping').innerText()))fail('Shopping List button did not show saved state');
+await page.waitForFunction(()=>/In Shopping List/i.test(document.querySelector('#fxQuickAddShopping')?.textContent||''));
 await page.locator('#fxQuickSaveFind').click();
 await page.waitForFunction(()=>{try{return JSON.parse(localStorage.getItem('finditSaved')||'[]').some(x=>/test headphones/i.test(x.name||''))}catch{return false}});
-if(!/Find Saved/i.test(await page.locator('#fxQuickSaveFind').innerText()))fail('Save Find button did not show saved state');
+await page.waitForFunction(()=>/Find Saved/i.test(document.querySelector('#fxQuickSaveFind')?.textContent||''));
 await page.waitForFunction(()=>/Open now/i.test(document.querySelector('#fxStoreHoursLive')?.innerText||'')&&/Closes 18:00/i.test(document.querySelector('#fxStoreHoursLive')?.innerText||'')&&/Closed/i.test(document.querySelector('#fxStoreHoursLive')?.innerText||'')&&/Opens 09:00/i.test(document.querySelector('#fxStoreHoursLive')?.innerText||''),null,{timeout:30000});
 const hoursText=await page.locator('#fxStoreHoursLive').innerText();
 if(!/Google checked/i.test(hoursText))fail('Store hours did not identify the live grounded check');
