@@ -38,7 +38,7 @@
   const loadUserFirstPolish=()=>loadScript('user-first-polish','user-first-polish.js?v=20260914-user3',()=>window.__finditUserFirstPolish);
   const loadUserPovHardening=()=>loadScript('user-pov-hardening','user-pov-hardening.js?v=20260914-hard1',()=>window.__finditUserPovHardening);
   const loadCurrentFindRelevance=()=>loadScript('current-find-relevance','user-pov-relevance-guard.js?v=20260914-rel1',()=>window.__finditUserPovRelevanceGuard);
-  const loadSmartChoice=()=>loadScript('smart-choice','smart-choice-ui.js?v=20260913-smart2',()=>window.__finditSmartChoiceUi);
+  const loadSmartChoice=()=>loadScript('smart-choice','smart-choice-ui.js?v=20260914-smart3',()=>window.__finditSmartChoiceUi);
   const loadShoppingAssistant=()=>loadScript('shopping-assistant','shopping-assistant-ui.js?v=20260913-shop3',()=>window.__finditShoppingAssistantUi);
   const loadShoppingOfferGuard=()=>loadScript('shopping-offer-guard','shopping-assistant-current-offer-guard.js?v=20260913-offerguard1',()=>window.__finditShoppingAssistantCurrentOfferGuard);
   const loadShoppingStoreAccess=()=>loadScript('shopping-store-access','shopping-assistant-store-access.js?v=20260914-store3',()=>window.__finditShoppingAssistantStoreAccess);
