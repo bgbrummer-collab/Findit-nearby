@@ -24,7 +24,7 @@ await page.waitForFunction(()=>window.__finditSmartChoiceUi===true&&typeof windo
 const text=await page.evaluate(()=>{
   localStorage.removeItem('findit.storeHoursGrounded.v1');
   const s=window.finditState;
-  s.result={identification:{name:'Test Headphones',confidence:.92}};
+  s.result={identification:{name:'Test Headphones',confidence:.92,exactProductMatch:true,modelEvidence:true,matchLevel:'exact'}};
   s.offers=[
     {retailer:'Retailer A',price:900,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true},
     {retailer:'Retailer B',price:800,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true}
@@ -42,7 +42,7 @@ const text=await page.evaluate(()=>{
 if(!/BEST OVERALL[\s\S]*Retailer B/i.test(text))fail('Smart Choice did not rank the best overall retailer');
 if(!/CHEAPEST[\s\S]*Retailer B/i.test(text))fail('Smart Choice did not identify the cheapest verified retailer');
 if(!/CLOSEST[\s\S]*Retailer C/i.test(text))fail('Smart Choice did not identify the closest retailer');
-if(!/High confidence · 92%/i.test(text))fail('Smart Choice did not show match confidence');
+if(!/High confidence · 92%/i.test(text))fail('Smart Choice did not show exact-match confidence');
 await page.locator('#fxOpenNowToggle').click();
 const aHidden=await page.locator('[data-store="0"]').evaluate(el=>el.classList.contains('fx-open-filter-hidden'));
 const bHidden=await page.locator('[data-store="1"]').evaluate(el=>el.classList.contains('fx-open-filter-hidden'));
