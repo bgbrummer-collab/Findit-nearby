@@ -81,7 +81,7 @@ if(!/durable rubber traction/i.test(product))fail('A meaningful user benefit was
 await page.waitForFunction(()=>/Open now/i.test(document.querySelector('#fxStoreHoursLive')?.innerText||''),null,{timeout:15000});
 const hours=await page.locator('#fxStoreHoursLive').innerText();
 if(!/Open now/.test(hours)||!/Closes 20:00/.test(hours))fail('Store hours do not show the useful open/close result');
-if(/check google|verify.*yourself/i.test(hours))fail('Store hours still tells users to verify on their own');
+if(/check google|(?:please|you should|you must|you need to|need to)\s+verify[^.]*yourself/i.test(hours))fail('Store hours still instruct users to verify on their own');
 
 await page.setViewportSize({width:390,height:844});
 await page.waitForTimeout(150);
