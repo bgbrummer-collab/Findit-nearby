@@ -119,27 +119,33 @@ function improveProductInfo(){
 }
 function improveCommerceModal(){const m=$('#fxCommerceSafeModal:not([hidden])');if(!m)return;decodeTextNodes(m);$$('.fx-commerce-row b',m).forEach(b=>{if(badRetailer(b.textContent))b.textContent='Online retailer'});}
 
+function validPhysicalCoords(o){const lat=number(o?.lat??o?.latitude),lon=number(o?.lon??o?.lng??o?.longitude);return lat!=null&&lon!=null&&!(lat===0&&lon===0)&&Math.abs(lat)<=90&&Math.abs(lon)<=180}
 function polishShoppingPlan(){
  const body=$('#fxShoppingListBody');if(!body)return;
  const list=(()=>{try{return JSON.parse(localStorage.getItem('findit.shoppingList.v2')||'[]')}catch{return[]}})();
- if(!Array.isArray(list)||!list.length)return;
+ if(!Array.isArray(list)||!list.length){body.classList.remove('fx-online-only-plan');return}
  let physical=0,online=0;
- for(const item of list){for(const o of Array.isArray(item?.offers)?item.offers:[]){const lat=number(o?.lat),lon=number(o?.lon);if(lat!=null&&lon!=null)physical++;else online++}}
+ for(const item of list){for(const o of Array.isArray(item?.offers)?item.offers:[]){if(validPhysicalCoords(o))physical++;else online++}}
+ const onlineOnly=!physical&&online>0;body.classList.toggle('fx-online-only-plan',onlineOnly);
  const plan=$('.fx-plan',body);if(!plan)return;
  let note=$('.fx-plan-scope-note',plan);
- if(!physical&&online){
+ if(onlineOnly){
   if(!note){note=document.createElement('div');note.className='fx-plan-scope-note';plan.insertBefore(note,plan.children[1]||null)}
   note.textContent='Online-only plan: no physical branch coordinates are verified for these offers, so FindIt will not pretend this is a driving trip.';
-  $$('[data-plan-mode="shortest"]',plan).forEach(b=>b.style.display='none');
+  $$('[data-plan-mode="shortest"]',plan).forEach(b=>b.style.setProperty('display','none','important'));
+  $$('.fx-route-link',plan).forEach(a=>a.remove());
   $$('p',plan).forEach(p=>{if(/^\s*\d+\s+store\b/i.test(p.textContent||''))p.innerHTML=p.innerHTML.replace(/(\d+)\s+store(s?)/i,'$1 online retailer$2')});
- }else if(note)note.remove();
+ }else{
+  if(note)note.remove();
+  $$('[data-plan-mode="shortest"]',plan).forEach(b=>b.style.removeProperty('display'));
+ }
 }
 
-function styles(){if($('#fxUserFirstPolishStyles'))return;const st=document.createElement('style');st.id='fxUserFirstPolishStyles';st.textContent=`.fx-plan-scope-note{margin:10px 0 12px;padding:10px 12px;border:1px solid rgba(116,231,255,.18);border-radius:12px;background:rgba(116,231,255,.06);font-size:12px;line-height:1.45;color:#bcd7e5}.fx-user-note{color:#9fb4cb;line-height:1.5}.fx-smart-card strong{word-break:normal!important;overflow-wrap:break-word!important}`;document.head.appendChild(st)}
+function styles(){if($('#fxUserFirstPolishStyles'))return;const st=document.createElement('style');st.id='fxUserFirstPolishStyles';st.textContent=`.fx-plan-scope-note{margin:10px 0 12px;padding:10px 12px;border:1px solid rgba(116,231,255,.18);border-radius:12px;background:rgba(116,231,255,.06);font-size:12px;line-height:1.45;color:#bcd7e5}.fx-user-note{color:#9fb4cb;line-height:1.5}.fx-smart-card strong{word-break:normal!important;overflow-wrap:break-word!important}#fxShoppingListBody.fx-online-only-plan [data-plan-mode="shortest"],#fxShoppingListBody.fx-online-only-plan .fx-route-link{display:none!important}`;document.head.appendChild(st)}
 function polish(){styles();repairOffers();improveProductInfo();improveCommerceModal();polishShoppingPlan()}
 function settle(){polish();setTimeout(polish,60);setTimeout(polish,220);setTimeout(polish,700);setTimeout(watchTargets,40)}
 function watchTargets(){
- for(const el of [$('#fxCommerceSafeModal'),...$$('#fxStableModal'),$('#fxShoppingAssistant')].filter(Boolean)){
+ for(const el of [$('#fxCommerceSafeModal'),...$$('#fxStableModal'),$('#fxShoppingAssistant'),$('#fxShoppingListBody')].filter(Boolean)){
   if(el.dataset.finditUserFirstWatch==='1')continue;el.dataset.finditUserFirstWatch='1';
   const o=new MutationObserver(()=>setTimeout(polish,10));o.observe(el,{childList:true,subtree:true,attributes:true,attributeFilter:['class','hidden']});
  }
