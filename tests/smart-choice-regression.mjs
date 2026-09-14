@@ -5,10 +5,24 @@ const browser=await chromium.launch({headless:true});
 const page=await browser.newPage({viewport:{width:1365,height:900}});
 page.setDefaultTimeout(30000);
 const fail=m=>{throw new Error(m)};
+await page.route('**/api/assistant?action=store-hours',async route=>{
+  const body=route.request().postDataJSON();
+  const rows=(body?.stores||[]).map(s=>({
+    name:s.name,
+    address:s.address||'',
+    status:s.name==='Retailer A'?'closed':'open',
+    opensAt:s.name==='Retailer A'?'09:00':'',
+    closesAt:s.name==='Retailer A'?'':'18:00',
+    todayHours:'09:00–18:00',
+    sourceLabel:'Google Search grounded'
+  }));
+  await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,researchMode:'google-search-grounded',checkedAt:new Date().toISOString(),stores:rows,sources:[{title:'Test grounded hours',url:'https://example.com'}]})});
+});
 await page.goto(URL,{waitUntil:'domcontentloaded',timeout:60000});
 await page.waitForSelector('#finditExactShell',{state:'visible'});
 await page.waitForFunction(()=>window.__finditSmartChoiceUi===true&&typeof window.finditSmartChoiceRefresh==='function'&&window.__finditDashboardV8Loader===true);
 await page.evaluate(()=>{
+  localStorage.removeItem('findit.storeHoursGrounded.v1');
   const s=window.finditState;
   s.result={identification:{name:'Test Headphones',confidence:.92}};
   s.offers=[
@@ -26,6 +40,7 @@ await page.evaluate(()=>{
 });
 await page.waitForSelector('#fxSmartChoice',{state:'visible'});
 await page.waitForFunction(()=>/BEST OVERALL[\s\S]*Retailer B/i.test(document.querySelector('#fxSmartChoice')?.innerText||''));
+await page.waitForTimeout(500);
 const text=await page.locator('#fxSmartChoice').innerText();
 if(!/BEST OVERALL[\s\S]*Retailer B/i.test(text))fail('Smart Choice did not rank the best overall retailer');
 if(!/CHEAPEST[\s\S]*Retailer B/i.test(text))fail('Smart Choice did not identify the cheapest verified retailer');
