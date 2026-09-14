@@ -90,12 +90,21 @@ async function ensureNearby(){
 }
 
 function decodeTextNodes(root){
- if(!root)return;const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while((n=w.nextNode())){if(/&(?:quot|amp|apos|#39|nbsp);/i.test(n.nodeValue||''))n.nodeValue=decode(n.nodeValue)}
+ if(!root)return;const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while((n=w.nextNode())){if(/&(?:quot|amp|apos|#39|#x27|nbsp);/i.test(n.nodeValue||''))n.nodeValue=decode(n.nodeValue)}
 }
-function poorPro(v){const x=clean(decode(v)),n=norm(x);if(!x)return true;if(x.length<16)return true;if(/^nike air force 1(?:\s|$)/i.test(x)&&!/(leather|cushion|sole|comfort|durab|traction|support)/i.test(x))return true;if(/offers low top,? mid top,? and high top/i.test(x))return true;if(/^(available|comes|offered) in (many|multiple|different) (styles|colours|colors|versions|variants)/i.test(x))return true;if(/^(men|women|kids|unisex)\b/i.test(x)&&x.length<70)return true;return false}
+function poorPro(v){
+ const x=clean(decode(v));if(!x||x.length<16)return true;
+ if(/offers low top,? mid top,? and high top/i.test(x))return true;
+ if(/^(available|comes|offered) in (many|multiple|different) (styles|colours|colors|versions|variants)/i.test(x))return true;
+ if(/^(men|women|kids|unisex)\b/i.test(x)&&x.length<70)return true;
+ // Product/variant names are evidence of identity, not a user benefit. Keep only a sentence that
+ // actually explains a meaningful performance/use advantage.
+ if(/^nike air force 1(?:\s|$)/i.test(x)&&!/(offers?|provides?|features?|uses?|has|includes?|helps?|supports?|improves?|gives?|designed|made|cushion|comfort|durab|traction|support)/i.test(x))return true;
+ return false;
+}
 function improveProductInfo(){
- const modal=$('#fxStableModal');if(!modal||modal.classList.contains('hidden'))return;decodeTextNodes(modal);
- const body=$('#fxStableBody');if(!body)return;
+ const modal=$('#fxStableModal:not(.hidden)');if(!modal)return;decodeTextNodes(modal);
+ const body=$('#fxStableBody',modal);if(!body)return;
  const hs=$$('h4,h3',body);
  for(const h of hs){
   const title=norm(h.textContent);
@@ -110,7 +119,7 @@ function improveProductInfo(){
  }
  const facts=$$('.fx-fact b',body);facts.forEach(x=>{if(/^co\b/i.test(clean(x.textContent)))x.textContent=x.textContent.replace(/^Co\b/i,'Online retailer')});
 }
-function improveCommerceModal(){const m=$('#fxCommerceSafeModal');if(!m||m.hidden)return;decodeTextNodes(m);$$('.fx-commerce-row b',m).forEach(b=>{if(badRetailer(b.textContent))b.textContent='Online retailer'});}
+function improveCommerceModal(){const m=$('#fxCommerceSafeModal:not([hidden])');if(!m)return;decodeTextNodes(m);$$('.fx-commerce-row b',m).forEach(b=>{if(badRetailer(b.textContent))b.textContent='Online retailer'});}
 
 function polishShoppingPlan(){
  const body=$('#fxShoppingListBody');if(!body)return;
@@ -130,10 +139,15 @@ function polishShoppingPlan(){
 
 function styles(){if($('#fxUserFirstPolishStyles'))return;const st=document.createElement('style');st.id='fxUserFirstPolishStyles';st.textContent=`.fx-plan-scope-note{margin:10px 0 12px;padding:10px 12px;border:1px solid rgba(116,231,255,.18);border-radius:12px;background:rgba(116,231,255,.06);font-size:12px;line-height:1.45;color:#bcd7e5}.fx-user-note{color:#9fb4cb;line-height:1.5}.fx-smart-card strong{word-break:normal!important;overflow-wrap:break-word!important}`;document.head.appendChild(st)}
 function polish(){styles();repairOffers();improveProductInfo();improveCommerceModal();polishShoppingPlan()}
-function settle(){polish();setTimeout(polish,60);setTimeout(polish,220);setTimeout(polish,700)}
+function settle(){polish();setTimeout(polish,60);setTimeout(polish,220);setTimeout(polish,700);setTimeout(watchTargets,40)}
+function watchTargets(){
+ for(const el of [$('#fxCommerceSafeModal'),...$$('#fxStableModal'),$('#fxShoppingAssistant')].filter(Boolean)){
+  if(el.dataset.finditUserFirstWatch==='1')continue;el.dataset.finditUserFirstWatch='1';
+  const o=new MutationObserver(()=>setTimeout(polish,10));o.observe(el,{childList:true,subtree:true,attributes:true,attributeFilter:['class','hidden']});
+ }
+}
 for(const ev of ['findit:results-rendered','findit:nearby-updated','findit:dashboard-sync'])document.addEventListener(ev,()=>{settle();if(ev==='findit:results-rendered'){nearbyKey='';setTimeout(ensureNearby,900);setTimeout(ensureNearby,2200)}});
 window.addEventListener('click',e=>{if(e.target?.closest?.('[data-fx="compare"],[data-fxnav="compare"],[data-fx="product"],#fxShoppingAssistant'))setTimeout(settle,30)},true);
-const obs=new MutationObserver(()=>{if($('#fxCommerceSafeModal:not([hidden]),#fxStableModal:not(.hidden),#fxShoppingListBody'))setTimeout(polish,20)});if(document.body)obs.observe(document.body,{childList:true,subtree:true});else document.addEventListener('DOMContentLoaded',()=>obs.observe(document.body,{childList:true,subtree:true}),{once:true});
 window.finditUserFirstPolish=polish;window.finditEnsureNearbyRetailers=ensureNearby;
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{settle();setTimeout(ensureNearby,1200)},{once:true});else{settle();setTimeout(ensureNearby,1200)}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{settle();watchTargets();setTimeout(ensureNearby,1200);setTimeout(watchTargets,900)},{once:true});else{settle();watchTargets();setTimeout(ensureNearby,1200);setTimeout(watchTargets,900)}
 })();
