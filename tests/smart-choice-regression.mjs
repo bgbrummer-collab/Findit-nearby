@@ -21,7 +21,7 @@ await page.route('**/api/assistant?action=store-hours',async route=>{
 await page.goto(URL,{waitUntil:'domcontentloaded',timeout:60000});
 await page.waitForSelector('#finditExactShell',{state:'visible'});
 await page.waitForFunction(()=>window.__finditSmartChoiceUi===true&&typeof window.finditSmartChoiceRefresh==='function'&&window.__finditDashboardV8Loader===true);
-await page.evaluate(()=>{
+const text=await page.evaluate(()=>{
   localStorage.removeItem('findit.storeHoursGrounded.v1');
   const s=window.finditState;
   s.result={identification:{name:'Test Headphones',confidence:.92}};
@@ -37,10 +37,8 @@ await page.evaluate(()=>{
   const list=document.querySelector('#nearbyStores')||document.querySelector('#finditExactShell');
   list.innerHTML='<article data-store="0">Retailer A</article><article data-store="1">Retailer B</article><article data-store="2">Retailer C</article>';
   window.finditSmartChoiceRefresh();
+  return document.querySelector('#fxSmartChoice')?.innerText||'';
 });
-await page.waitForSelector('#fxSmartChoice',{state:'visible'});
-await page.waitForFunction(()=>/BEST OVERALL[\s\S]*Retailer B/i.test(document.querySelector('#fxSmartChoice')?.innerText||''));
-const text=await page.locator('#fxSmartChoice').innerText();
 if(!/BEST OVERALL[\s\S]*Retailer B/i.test(text))fail('Smart Choice did not rank the best overall retailer');
 if(!/CHEAPEST[\s\S]*Retailer B/i.test(text))fail('Smart Choice did not identify the cheapest verified retailer');
 if(!/CLOSEST[\s\S]*Retailer C/i.test(text))fail('Smart Choice did not identify the closest retailer');
