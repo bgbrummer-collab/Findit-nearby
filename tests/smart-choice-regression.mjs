@@ -40,7 +40,6 @@ await page.evaluate(()=>{
 });
 await page.waitForSelector('#fxSmartChoice',{state:'visible'});
 await page.waitForFunction(()=>/BEST OVERALL[\s\S]*Retailer B/i.test(document.querySelector('#fxSmartChoice')?.innerText||''));
-await page.waitForTimeout(500);
 const text=await page.locator('#fxSmartChoice').innerText();
 if(!/BEST OVERALL[\s\S]*Retailer B/i.test(text))fail('Smart Choice did not rank the best overall retailer');
 if(!/CHEAPEST[\s\S]*Retailer B/i.test(text))fail('Smart Choice did not identify the cheapest verified retailer');
