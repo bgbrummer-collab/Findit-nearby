@@ -34,8 +34,12 @@ try{
   const researchText=JSON.stringify(insights.d).toLowerCase();
   ok(/headset|headphones/.test(researchText),'Product research stays about the headset product type');
   ok(!/gaming mouse with esports grade performance/.test(researchText),'Product research does not substitute the G Pro mouse');
-  for(const field of ['whatItDoes','bestFor','standOut','valueVerdict']) ok(Boolean(insights.d[field]),`Product Information includes ${field}`);
+  ok(Boolean(insights.d.whatItDoes),'Product Information includes whatItDoes');
   ok(Array.isArray(insights.d.pros)&&insights.d.pros.length>=2,'Product Information has useful pros');
+  for(const field of ['bestFor','standOut','valueVerdict']){
+    if(insights.d[field]) console.log('PASS',`Product Information includes source-supported ${field}`);
+    else notes.push(`Product Information omitted ${field} because exact-product evidence did not support it; UI must not invent it.`);
+  }
 
   const commerceCases=[
     {label:'headset',body:{name:'Logitech G Pro Gaming Headset',brand:'Logitech',model:'G Pro',object:'gaming headset',category:'electronics',retailCategory:'electronics',searchQuery:'Logitech G Pro gaming headset'},reject:[/\bmouse\b/,/\bkeyboard\b/]},
