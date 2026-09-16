@@ -1,1 +1,0 @@
-Image upload uses a safe no-key fallback on Netlify. Exact photo recognition is disabled until a suitable approved provider or on-device model is configured.
