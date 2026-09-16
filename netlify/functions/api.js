@@ -1,4 +1,4 @@
-import search from '../../api/search.js';
+import search from '../../api/search-free.js';
 import nearby from '../../api/nearby.js';
 import assistant from '../../api/assistant.js';
 import productInsights from '../../api/product-insights.js';
