@@ -1,10 +1,14 @@
 name: Apply FindIt Finish Hotfix
 on:
+  push:
+    branches:
+      - feat/netlify-no-gemini-finish-20260916
   workflow_dispatch:
 permissions:
   contents: write
 jobs:
   patch:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
