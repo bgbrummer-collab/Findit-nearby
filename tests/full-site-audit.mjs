@@ -9,8 +9,8 @@ const checks=[],failures=[],warnings=[];
 function note(name,status='PASS',detail=''){const row={name,status,detail:String(detail||'').slice(0,700)};checks.push(row);console.log(`[${status}] ${name}${detail?` — ${row.detail}`:''}`);if(status==='FAIL')failures.push(row);if(status==='WARN')warnings.push(row)}
 async function safe(name,fn,{warn=false}={}){try{const d=await fn();note(name,'PASS',d||'');return true}catch(e){note(name,warn?'WARN':'FAIL',e?.message||String(e));return false}}
 async function visible(page,sel){try{return await page.locator(sel).first().isVisible({timeout:1800})}catch{return false}}
-async function modalText(page){for(const s of ['#fxCompleteBody','#fxStableBody']){const e=page.locator(s);if(await e.count()&&await e.isVisible().catch(()=>false))return await e.innerText()}return''}
-async function closeModal(page){for(const s of ['#fxStableModal .fx-stable-close','#fxCompleteModal .fx-complete-x','#premiumModal [data-close-modal]','#closePremium']){const e=page.locator(s).first();if(await e.count()&&await e.isVisible().catch(()=>false)){await e.click({force:true}).catch(()=>{});await page.waitForTimeout(80)}}}
+async function modalText(page){for(const s of ['#fxCommerceSafeModal[aria-hidden="false"]','#fxCompleteBody','#fxStableBody']){const e=page.locator(s);if(await e.count()&&await e.isVisible().catch(()=>false))return await e.innerText()}return''}
+async function closeModal(page){for(const s of ['#fxCommerceSafeModal[aria-hidden="false"] [data-commerce-safe-close]','#fxCommerceSafeModal[aria-hidden="false"] .fx-commerce-safe-close','#fxCommerceSafeModal[aria-hidden="false"] button:has-text("Close")','#fxStableModal .fx-stable-close','#fxCompleteModal .fx-complete-x','#premiumModal [data-close-modal]','#closePremium']){const e=page.locator(s).first();if(await e.count()&&await e.isVisible().catch(()=>false)){await e.click({force:true}).catch(()=>{});await page.waitForTimeout(80)}}}
 async function clickVisible(page,sel){const all=page.locator(sel);for(let i=0;i<await all.count();i++){const e=all.nth(i);if(await e.isVisible().catch(()=>false)){await e.scrollIntoViewIfNeeded().catch(()=>{});await e.click({timeout:5000});await page.waitForTimeout(150);return e}}throw Error(`no visible control: ${sel}`)}
 async function top(page){await page.evaluate(()=>window.scrollTo(0,0));await page.waitForTimeout(100)}
 
@@ -48,10 +48,10 @@ await page.reload({waitUntil:'domcontentloaded'});await page.waitForTimeout(1200
 if(!await visible(page,'#finditExactShell'))throw Error('dashboard missing after Premium activation');
 for(const [nav,expected] of [['compare','Compare Prices'],['deals','Verified Deals'],['saved','Saved Items'],['history','History'],['alerts','Price & Stock Alerts']]){
  await closeModal(page);await top(page);
- await safe(`Premium ${nav} tool opens`,async()=>{await clickVisible(page,`#finditExactShell [data-fxnav="${nav}"]`);if(!await visible(page,'#fxStableModal:not(.hidden)'))throw Error('visible modal did not open');const t=await modalText(page);if(!t.includes(expected))throw Error(t.slice(0,140));return expected});
+ await safe(`Premium ${nav} tool opens`,async()=>{await clickVisible(page,`#finditExactShell [data-fxnav="${nav}"]`);if(!await visible(page,'#fxCommerceSafeModal[aria-hidden="false"],#fxStableModal:not(.hidden)'))throw Error('visible modal did not open');const t=await modalText(page);if(!t.includes(expected))throw Error(t.slice(0,140));return expected});
 }
 await closeModal(page);await top(page);
-await safe('Feedback tool remains available',async()=>{await clickVisible(page,'#finditExactShell [data-fxnav="feedback"]');if(!await visible(page,'#fxStableModal:not(.hidden)'))throw Error('feedback modal did not open');const t=await modalText(page);if(!t.includes('Feedback'))throw Error(t.slice(0,140));return 'Feedback'});
+await safe('Feedback tool remains available',async()=>{await clickVisible(page,'#finditExactShell [data-fxnav="feedback"]');if(!await visible(page,'#fxCommerceSafeModal[aria-hidden="false"],#fxStableModal:not(.hidden)'))throw Error('feedback modal did not open');const t=await modalText(page);if(!t.includes('Feedback'))throw Error(t.slice(0,140));return 'Feedback'});
 await closeModal(page);await top(page);
 await safe('Settings / nearby filters work',async()=>{await clickVisible(page,'#finditExactShell [data-fx="settings"]');const modal=page.locator('#fxStableModal:not(.hidden)');if(!await modal.isVisible())throw Error('filters modal missing');const sel=page.locator('#fxStableRadius');for(const v of ['3','5','10']){await sel.selectOption(v);if(await sel.inputValue()!==v)throw Error(`radius ${v}`)}return '3/5/10 km'});
 await closeModal(page);await top(page);
