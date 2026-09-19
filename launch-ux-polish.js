@@ -10,20 +10,13 @@ const hasIdentity=()=>Boolean(id().name||id().object||id().model||id().searchQue
 const hasPhoto=()=>Boolean(state().file||$('#preview')?.src&& !$('#preview')?.classList.contains('hidden'));
 function text(el,v){if(el&&el.textContent!==v)el.textContent=v}
 function truthfulProductState(){
- const identity=id(),identified=hasIdentity(),photo=hasPhoto();
+ const identified=hasIdentity(),photo=hasPhoto();
+ if(identified)return; // Existing verified-result renderer owns populated identity/price states.
  const badge=$('#fxExactBadge'),conf=$('#fxConfidence'),desc=$('#fxProductDesc'),price=$('#fxBestPrice');
- if(!identified){
-   text(badge,photo?'Photo ready — product details needed':'Ready for a product');
-   text(conf,'— Match');
-   if(desc)text(desc,photo?'Automatic photo identification is unavailable right now. Use Search Product or a barcode to continue without guessing.':'Upload a photo, search by product name, or scan a barcode to start.');
-   text(price,'Not verified yet');
- }else{
-   const c=Number(identity.confidence);
-   text(badge,identity.exactProductMatch===true?'Exact product evidence':'Product selected');
-   if(conf)text(conf,Number.isFinite(c)?Math.round(Math.max(0,Math.min(1,c))*100)+'% Match':'Product selected');
-   const prices=verifiedOffers().map(o=>Number(o.price)).filter(n=>Number.isFinite(n)&&n>0);
-   text(price,prices.length?new Intl.NumberFormat('en-ZA',{style:'currency',currency:'ZAR'}).format(Math.min(...prices)):'No verified price yet');
- }
+ text(badge,photo?'Photo ready — product details needed':'Ready for a product');
+ text(conf,'— Match');
+ if(desc)text(desc,photo?'Automatic photo identification is unavailable right now. Use Search Product or a barcode to continue without guessing.':'Upload a photo, search by product name, or scan a barcode to start.');
+ text(price,'Not verified yet');
 }
 function truthfulSmartChoice(){
  const box=$('#fxSmartChoice');if(!box)return;
