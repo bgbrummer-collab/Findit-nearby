@@ -1,5 +1,5 @@
 FindIt production audit
-Commit: abdc9c3f3a053afafdc7d4eadea90a3eda2fc0c6
+Commit: 8a74fc72e41509954c4334dc6b02c4b0af546183
 Release smoke: FAIL (exit 1)
 Dashboard readiness: FAIL (exit 1)
 Every dashboard function: FAIL (exit 1)
