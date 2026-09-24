@@ -1,21 +1,8 @@
 async function healthHandler(req,res){
   res.setHeader('Cache-Control','no-store');
-  const key=process.env.GEMINI_API_KEY;
-  if(!key)return res.status(500).json({ok:false,geminiKeyConfigured:false,message:'GEMINI_API_KEY is missing.'});
-
-  const models=['gemini-3.6-flash','gemini-3.5-flash-lite'];
-  let lastMessage='Gemini model check failed.';
-  for(const model of models){
-    try{
-      const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}`,{headers:{'x-goog-api-key':key}});
-      const data=await r.json().catch(()=>({}));
-      if(r.ok)return res.status(200).json({ok:true,geminiKeyConfigured:true,model,modelReachable:true,message:'Gemini connection is ready.'});
-      lastMessage=data?.error?.message||`${model} model check failed.`;
-    }catch(error){
-      lastMessage=error?.message||lastMessage;
-    }
-  }
-  return res.status(502).json({ok:false,geminiKeyConfigured:true,modelReachable:false,message:lastMessage});
+  let token='';
+  try{token=String(globalThis.Netlify?.env?.get?.('HF_TOKEN')||process.env.HF_TOKEN||'').trim()}catch{token=String(process.env.HF_TOKEN||'').trim()}
+  return res.status(token?200:500).json({ok:Boolean(token),visionProvider:'huggingface',visionConfigured:Boolean(token),message:token?'FindIt vision configuration is ready.':'HF_TOKEN is missing.'});
 }
 
 async function feedbackHealthHandler(req,res){
@@ -63,7 +50,7 @@ async function qaImageHandler(req,res){
   const k=String(req.query?.key||'');
   const spec=QA[k];
   if(!spec)return res.status(400).json({ok:false,error:'Unknown QA key'});
-  const origin='https://findit-nearby.vercel.app';
+  const origin='https://findit-nearby.netlify.app';
   const failures=[];
   try{
     const fr=await fetch(`https://raw.githubusercontent.com/bgbrummer-collab/Findit-nearby/main/.github/qa-fixtures/${k}.b64`,{signal:AbortSignal.timeout(8000)});
