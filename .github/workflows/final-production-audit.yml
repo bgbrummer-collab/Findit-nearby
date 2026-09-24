@@ -65,7 +65,7 @@ jobs:
           npm init -y >/dev/null 2>&1
           npm install --save-dev playwright@1.55.0
           npx playwright install --with-deps chromium
-      - name: Wait briefly for Vercel production
+      - name: Wait briefly for Netlify production
         run: sleep 20
       - name: Run production audits in parallel and record result
         shell: bash
@@ -74,7 +74,7 @@ jobs:
           run_suite() {
             local name="$1"; local script="$2"; local logfile="$3"; local codefile="$4"
             echo "START: $name"
-            timeout --signal=TERM --kill-after=15s 7m env FINDIT_URL=https://findit-nearby.vercel.app/ node "$script" 2>&1 | tee "$logfile"
+            timeout --signal=TERM --kill-after=15s 7m env FINDIT_URL=https://findit-nearby.netlify.app/ node "$script" 2>&1 | tee "$logfile"
             local code=${PIPESTATUS[0]}; echo "$code" > "$codefile"; echo "FINISH: $name exit $code"
           }
           run_suite "Release smoke" "tests/release-smoke.mjs" "/tmp/release.log" "/tmp/release.code" & P1=$!
