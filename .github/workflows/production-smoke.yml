@@ -26,7 +26,7 @@ jobs:
             const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
             for(const id of ['finder','photo','cameraPhoto','location','search','results','nearbyStores','feedbackForm','premiumModal','assistantPanel','mobileMore','drawer'])ok(ids.includes(id),`Main UI has #${id}`);
             for(const asset of ['/script.js','/style.css','/exact-retailer-fix.js','/results-data-quality-fix.js','/pricecheck-source.js','/premium-beta-fix.js','/product-info-click-fix.js','/compare-stock-reliability-fix.js','/dashboard-commerce-status.js','/manifest.webmanifest']){const r=await get(asset);ok(r.status===200,`${asset} loads`)}
-            const health=await get('/api/health'),hj=await health.json();ok(health.status===200&&hj.ok===true,'Core health passes');
+            const health=await get('/.netlify/functions/health'),hj=await health.json();ok(health.status===200&&hj.ok===true,'Core health passes');
             const feedback=await get('/api/feedback-health'),fj=await feedback.json();ok(feedback.status===200&&fj.ok===true,'Feedback health passes');
 
             const imageUrl='https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/FjQAAOSwL3Zk-O6Z/%24_57.JPG?set_id=8800005007';
