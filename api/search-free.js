@@ -4,7 +4,7 @@
 // can continue without a paid vision provider.
 
 const MAX_IMAGE_BYTES = 8 * 1024 * 1024;
-const HF_MODELS = ['Qwen/Qwen2.5-VL-3B-Instruct:fastest','zai-org/GLM-4.5V:fastest'];
+const HF_MODELS = ['CohereLabs/aya-vision-32b:cohere','Qwen/Qwen2.5-VL-72B-Instruct:ovhcloud'];
 const HF_URL = 'https://router.huggingface.co/v1/chat/completions';
 const BLOCKED = /\b(firearm|gun|rifle|pistol|ammunition|ammo|weapon|knife|knives|machete|sword|switchblade|taser|stun gun|pepper spray|mace|brass knuckles|fireworks|explosive|vape|nicotine|cigarette|cigar|alcohol|beer|wine|liquor|cannabis|marijuana|thc|cbd|psilocybin|magic mushroom|gambling|sports betting|casino|pornography|adult sex toy)\b/i;
 
@@ -94,10 +94,10 @@ async function identifyWithHuggingFace(image) {
       });
       lastStatus = response.status;
       const payload = await response.json().catch(() => ({}));
-      if (!response.ok) continue;
+      if (!response.ok) { console.error('FindIt vision provider failed', { model, status: response.status, error: clean(payload?.error?.message || payload?.error || payload?.message) }); continue; }
       const identification = normalizeVision(parseVisionJson(payload?.choices?.[0]?.message?.content));
       if (identification?.blocked) return { blocked: true, identification: null };
-      if (identification && identification.confidence >= 0.35) return { identification, model };
+      if (identification && identification.confidence >= 0.30) return { identification, model };
     } catch (error) {
       if (error?.name === 'AbortError') lastStatus = 408;
     } finally {
