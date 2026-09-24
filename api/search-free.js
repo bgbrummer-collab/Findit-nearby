@@ -4,7 +4,7 @@
 // can continue without a paid vision provider.
 
 const MAX_IMAGE_BYTES = 8 * 1024 * 1024;
-const HF_MODEL = 'Qwen/Qwen2.5-VL-7B-Instruct';
+const HF_MODELS = ['Qwen/Qwen2.5-VL-7B-Instruct','Qwen/Qwen2.5-VL-3B-Instruct'];
 const HF_URL = 'https://router.huggingface.co/v1/chat/completions';
 const BLOCKED = /\b(firearm|gun|rifle|pistol|ammunition|ammo|weapon|knife|knives|machete|sword|switchblade|taser|stun gun|pepper spray|mace|brass knuckles|fireworks|explosive|vape|nicotine|cigarette|cigar|alcohol|beer|wine|liquor|cannabis|marijuana|thc|cbd|psilocybin|magic mushroom|gambling|sports betting|casino|pornography|adult sex toy)\b/i;
 
@@ -44,7 +44,8 @@ function typedIdentification(query, barcode = '') {
 
 
 function netlifyEnv(name) {
-  try { return clean(globalThis.Netlify?.env?.get?.(name)); } catch { return ''; }
+  try { const v = globalThis.Netlify?.env?.get?.(name); if (v) return clean(v); } catch {}
+  try { return clean(process?.env?.[name]); } catch { return ''; }
 }
 
 function parseVisionJson(text) {
@@ -74,34 +75,37 @@ async function identifyWithHuggingFace(image) {
   if (!token) return { identification: null, reason: 'HF_TOKEN_MISSING' };
   const bytes = Buffer.from(await image.arrayBuffer());
   const dataUrl = 'data:' + (image.type || 'image/jpeg') + ';base64,' + bytes.toString('base64');
-  const prompt = 'Identify the ordinary retail product in this image as precisely as visible evidence allows. Read label text carefully. Do not invent brand, model, size, or barcode. Return ONLY JSON with keys name, brand, model, object, category, retailCategory, searchQuery, barcode, confidence. confidence must be 0 to 1. If exact variant is unclear, keep uncertain fields empty and lower confidence.';
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 20000);
-  try {
-    const response = await fetch(HF_URL, {
-      method: 'POST',
-      signal: controller.signal,
-      headers: { authorization: 'Bearer ' + token, 'content-type': 'application/json' },
-      body: JSON.stringify({
-        model: HF_MODEL,
-        messages: [{ role: 'user', content: [{ type: 'text', text: prompt }, { type: 'image_url', image_url: { url: dataUrl } }] }],
-        temperature: 0,
-        max_tokens: 350
-      })
-    });
-    const payload = await response.json().catch(() => ({}));
-    if (!response.ok) return { identification: null, reason: 'HF_INFERENCE_FAILED', status: response.status };
-    const identification = normalizeVision(parseVisionJson(payload?.choices?.[0]?.message?.content));
-    if (identification?.blocked) return { blocked: true, identification: null };
-    if (!identification || identification.confidence < 0.45) return { identification: null, reason: 'LOW_CONFIDENCE' };
-    return { identification };
-  } catch (error) {
-    return { identification: null, reason: error?.name === 'AbortError' ? 'HF_TIMEOUT' : 'HF_INFERENCE_FAILED' };
-  } finally {
-    clearTimeout(timer);
+  const prompt = 'Identify the ordinary retail product in this image. Read every visible word on the package first. Return ONLY JSON with keys name, brand, model, object, category, retailCategory, searchQuery, barcode, confidence. Do not invent hidden text, size, barcode, or variant. If brand and product-line text are clearly visible, include them even if size is unknown. confidence is 0 to 1.';
+  let lastStatus = null;
+  for (const model of HF_MODELS) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 22000);
+    try {
+      const response = await fetch(HF_URL, {
+        method: 'POST',
+        signal: controller.signal,
+        headers: { authorization: 'Bearer ' + token, 'content-type': 'application/json' },
+        body: JSON.stringify({
+          model,
+          messages: [{ role: 'user', content: [{ type: 'text', text: prompt }, { type: 'image_url', image_url: { url: dataUrl } }] }],
+          temperature: 0,
+          max_tokens: 350
+        })
+      });
+      lastStatus = response.status;
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) continue;
+      const identification = normalizeVision(parseVisionJson(payload?.choices?.[0]?.message?.content));
+      if (identification?.blocked) return { blocked: true, identification: null };
+      if (identification && identification.confidence >= 0.35) return { identification, model };
+    } catch (error) {
+      if (error?.name === 'AbortError') lastStatus = 408;
+    } finally {
+      clearTimeout(timer);
+    }
   }
+  return { identification: null, reason: lastStatus === 408 ? 'HF_TIMEOUT' : 'HF_INFERENCE_FAILED', status: lastStatus };
 }
-
 async function readInput(request) {
   const type = String(request.headers.get('content-type') || '').toLowerCase();
   if (type.includes('application/json')) {
