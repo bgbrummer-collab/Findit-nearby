@@ -44,7 +44,7 @@ jobs:
         run: sleep 35
       - name: Check deployed FindIt interactions actually work
         env:
-          FINDIT_URL: https://findit-nearby.vercel.app/
+          FINDIT_URL: https://findit-nearby.netlify.app/
         run: |
           timeout --signal=TERM --kill-after=5s 150s node tests/dashboard-tools-regression.mjs
           timeout --signal=TERM --kill-after=5s 120s node tests/feedback-feature-regression.mjs
