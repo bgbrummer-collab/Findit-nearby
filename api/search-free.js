@@ -4,7 +4,7 @@
 // can continue without a paid vision provider.
 
 const MAX_IMAGE_BYTES = 8 * 1024 * 1024;
-const HF_MODEL = 'Qwen/Qwen3.8-27B:cerebras';
+const HF_MODEL = 'Qwen/Qwen2.5-VL-7B-Instruct';
 const HF_URL = 'https://router.huggingface.co/v1/chat/completions';
 const BLOCKED = /\b(firearm|gun|rifle|pistol|ammunition|ammo|weapon|knife|knives|machete|sword|switchblade|taser|stun gun|pepper spray|mace|brass knuckles|fireworks|explosive|vape|nicotine|cigarette|cigar|alcohol|beer|wine|liquor|cannabis|marijuana|thc|cbd|psilocybin|magic mushroom|gambling|sports betting|casino|pornography|adult sex toy)\b/i;
 
