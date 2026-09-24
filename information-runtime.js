@@ -74,14 +74,17 @@ async function hydrateIdentifiedPhoto(){
    coords?json('/api/nearby',{lat:coords.lat,lon:coords.lon,identification:i,radiusKm:s.radius||10},22000).catch(()=>null):Promise.resolve(null)
   ];
   const [ci,ri,ni]=await Promise.all(tasks);commerce=ci;research=ri?.researched===false?null:ri;
-  if(ci?.offers)s.offers=ci.offers;if(ni?.stores)s.stores=ni.stores;
+  if(ci?.offers)s.offers=ci.offers;
+  // Do not erase an already truthful nearby result when the optional refresh returns empty.
+  if(Array.isArray(ni?.stores)&&ni.stores.length)s.stores=ni.stores;
   syncAll();saveRecent(i);
   document.dispatchEvent(new CustomEvent('findit:dashboard-sync',{detail:{result:s.result}}));
   if(s.stores?.length)document.dispatchEvent(new CustomEvent('findit:nearby-updated',{detail:{stores:s.stores}}));
  }finally{busy=false}
 }
 function handlePhotoResult(){let s=st();if(!s?.file||productName())return;let badge=$('#fxExactBadge'),n=$('#fxProductName'),d=$('#fxProductDesc'),c=$('#fxConfidence');if(badge)badge.textContent='Photo uploaded';if(n)n.textContent='Product not identified';if(d)d.textContent='FindIt received the photo but could not identify the product confidently. Try a clearer photo with the front label visible.';if(c)c.textContent='Not identified'}
-function capture(e){let t=e.target.closest?.('#finditExactShell [data-fx], #finditExactShell [data-power-search]');if(!t)return;let a=t.dataset.fx;if(t.dataset.powerSearch!==undefined||t.matches?.('.fx-search-tabs [data-fx="assistant"]')){e.preventDefault();e.stopImmediatePropagation();searchModal();return}if(!owned)return;if(a==='product'){e.preventDefault();e.stopImmediatePropagation();showProductInfo();return}if(a==='compare'){e.preventDefault();e.stopImmediatePropagation();showCompare();return}if(a==='nearby'){e.preventDefault();e.stopImmediatePropagation();showNearby();return}}
+function closeInformation(){let m=$('#fxInformationModal');if(m)m.classList.remove('open')}
+function capture(e){let t=e.target.closest?.('#finditExactShell [data-fx], #finditExactShell [data-power-search]');if(!t)return;let a=t.dataset.fx;if(a!=='product'&&a!=='compare'&&a!=='nearby'&&a!=='assistant')closeInformation();if(t.dataset.powerSearch!==undefined||t.matches?.('.fx-search-tabs [data-fx="assistant"]')){e.preventDefault();e.stopImmediatePropagation();searchModal();return}if(!owned)return;if(a==='product'){e.preventDefault();e.stopImmediatePropagation();showProductInfo();return}if(a==='compare'){e.preventDefault();e.stopImmediatePropagation();showCompare();return}if(a==='nearby'){e.preventDefault();e.stopImmediatePropagation();showNearby();return}}
 window.addEventListener('click',capture,true);
 document.addEventListener('findit:results-rendered',()=>setTimeout(()=>{if(owned&&productName())syncAll();else if(productName())hydrateIdentifiedPhoto();else handlePhotoResult()},40));
 document.addEventListener('findit:nearby-updated',()=>{if(owned)setTimeout(syncAll,40)});
