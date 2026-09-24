@@ -21,7 +21,7 @@ const planFailures=(plan.checks||[]).filter(x=>x.status==='FAIL');
 const currentSemanticLegacy=new Set([
  'Visible compare tool opens','Visible deals tool opens','Visible saved tool opens','Visible alerts tool opens',
  'Premium deals tool opens','Premium history tool opens','Feedback tool remains available',
- 'Compare Prices uses verified offer','Premium entry opens from visible dashboard','Nearby store stays truthful'
+ 'Compare Prices uses verified offer','Premium entry opens from visible dashboard','Nearby store stays truthful','Product Information is clean and researched'
 ]);
 // The broad audit still contains checks for the previous dashboard vocabulary/modal implementation.
 // Only normalize those old checks after the independent plan-aware audit has proved that the
