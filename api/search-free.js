@@ -4,7 +4,7 @@
 // can continue without a paid vision provider.
 
 const MAX_IMAGE_BYTES = 8 * 1024 * 1024;
-const HF_MODELS = ['Qwen/Qwen2.5-VL-3B-Instruct:fastest','zai-org/GLM-4.5V:fastest'];
+const HF_MODELS = ['CohereLabs/aya-vision-32b:cohere','CohereLabs/command-a-vision-07-2025:cohere'];
 const HF_URL = 'https://router.huggingface.co/v1/chat/completions';
 const BLOCKED = /\b(firearm|gun|rifle|pistol|ammunition|ammo|weapon|knife|knives|machete|sword|switchblade|taser|stun gun|pepper spray|mace|brass knuckles|fireworks|explosive|vape|nicotine|cigarette|cigar|alcohol|beer|wine|liquor|cannabis|marijuana|thc|cbd|psilocybin|magic mushroom|gambling|sports betting|casino|pornography|adult sex toy)\b/i;
 
@@ -49,6 +49,8 @@ function netlifyEnv(name) {
 }
 
 function parseVisionJson(text) {
+  if (Array.isArray(text)) text = text.map(part => part?.text || part?.content || '').join(' ');
+  else if (text && typeof text === 'object') text = text.text || text.content || JSON.stringify(text);
   const raw = String(text || '').trim();
   const start = raw.indexOf('{');
   const end = raw.lastIndexOf('}');
@@ -94,10 +96,10 @@ async function identifyWithHuggingFace(image) {
       });
       lastStatus = response.status;
       const payload = await response.json().catch(() => ({}));
-      if (!response.ok) continue;
+      if (!response.ok) { console.error('FindIt vision provider failed', { model, status: response.status }); continue; }
       const identification = normalizeVision(parseVisionJson(payload?.choices?.[0]?.message?.content));
       if (identification?.blocked) return { blocked: true, identification: null };
-      if (identification && identification.confidence >= 0.35) return { identification, model };
+      if (identification && identification.confidence >= 0.30) return { identification, model };
     } catch (error) {
       if (error?.name === 'AbortError') lastStatus = 408;
     } finally {
@@ -194,6 +196,7 @@ export default {
         requiresUserInput: true,
         confidence: null,
         code: vision.reason || 'PHOTO_NOT_IDENTIFIED',
+        providerStatus: vision.status || null,
         message: 'FindIt could not identify this photo confidently enough to search exact retailers. Try a clearer photo, product name or barcode.'
       });
     } catch (error) {
