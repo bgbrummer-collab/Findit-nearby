@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
-      - name: Wait for Vercel deployment
+      - name: Wait for Netlify deployment
         run: sleep 25
       - name: Test live FindIt production like a real user
         env:
-          BASE_URL: https://findit-nearby.vercel.app
+          BASE_URL: https://findit-nearby.netlify.app
         run: |
           node <<'NODE'
           const base=process.env.BASE_URL,failures=[];
@@ -28,6 +28,10 @@ jobs:
             for(const asset of ['/script.js','/style.css','/exact-retailer-fix.js','/results-data-quality-fix.js','/pricecheck-source.js','/premium-beta-fix.js','/product-info-click-fix.js','/compare-stock-reliability-fix.js','/dashboard-commerce-status.js','/manifest.webmanifest']){const r=await get(asset);ok(r.status===200,`${asset} loads`)}
             const health=await get('/api/health'),hj=await health.json();ok(health.status===200&&hj.ok===true,'Core health passes');
             const feedback=await get('/api/feedback-health'),fj=await feedback.json();ok(feedback.status===200&&fj.ok===true,'Feedback health passes');
+
+            const imageUrl='https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/FjQAAOSwL3Zk-O6Z/%24_57.JPG?set_id=8800005007';
+            const ir=await fetch(imageUrl);ok(ir.ok,'Live photo fixture downloads');
+            if(ir.ok){const fd=new FormData();fd.append('image',new Blob([await ir.arrayBuffer()],{type:'image/jpeg'}),'product.jpg');const vr=await get('/api/search',{method:'POST',body:fd});const v=await vr.json().catch(()=>({}));const vs=JSON.stringify(v.identification||{}).toLowerCase();ok(vr.status===200&&!!v.identification,'Real production photo is identified');ok(vs.includes('marc')&&vs.includes('anthony')&&vs.includes('condition'),'Real production photo identity is correct');}
 
             const tests=[
               {label:'beauty conditioner',body:{brand:'Marc Anthony',model:'Strictly Curls Triple Blend Conditioner 250ml',name:'Marc Anthony Strictly Curls Triple Blend Conditioner 250ml',query:'Marc Anthony Strictly Curls Triple Blend Conditioner 250ml',category:'beauty',retailCategory:'beauty'},required:['Clicks','Dis-Chem'],forbidden:['AutoTrader','Cars.co.za','WeBuyCars']},
