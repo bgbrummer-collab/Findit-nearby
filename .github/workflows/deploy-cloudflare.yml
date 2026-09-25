@@ -8,8 +8,9 @@ on:
       - "cloudflare/**"
       - "wrangler.toml"
       - "index.html"
-      - "style.css"
-      - "script.js"
+      - "*.css"
+      - "*.js"
+      - "*.json"
       - "manifest.webmanifest"
       - "sw.js"
       - "assets/**"
@@ -28,9 +29,10 @@ jobs:
         run: |
           rm -rf cloudflare-public
           mkdir -p cloudflare-public
-          cp index.html style.css script.js cloudflare-public/
-          [ -f manifest.webmanifest ] && cp manifest.webmanifest cloudflare-public/ || true
-          [ -f sw.js ] && cp sw.js cloudflare-public/ || true
+          # FindIt is composed of the base page plus multiple production UI/runtime
+          # layers loaded directly by index.html. Copy every root browser asset so
+          # Cloudflare serves the same dashboard GitHub main contains.
+          find . -maxdepth 1 -type f \( -name '*.html' -o -name '*.css' -o -name '*.js' -o -name '*.json' -o -name '*.webmanifest' -o -name '*.ico' -o -name '*.png' -o -name '*.svg' -o -name '*.webp' \) -exec cp {} cloudflare-public/ \;
           [ -d assets ] && cp -R assets cloudflare-public/assets || true
       - uses: cloudflare/wrangler-action@v3
         with:
