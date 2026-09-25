@@ -1,8 +1,7 @@
 name: FindIt Live Photo Probe
 on:
   push:
-    branches: [main, fix/live-photo-final-20260925]
-  pull_request:
+    branches: [main]
 jobs:
   photo:
     runs-on: ubuntu-latest
@@ -13,7 +12,7 @@ jobs:
         run: |
           set -e
           curl -L --fail --max-time 20 -o /tmp/product.jpg 'https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/FjQAAOSwL3Zk-O6Z/%24_57.JPG?set_id=8800005007'
-          curl -sS --max-time 60 -o /tmp/result.json -w '%{http_code}' -F 'image=@/tmp/product.jpg;type=image/jpeg' https://deploy-preview-111--findit-nearby.netlify.app/api/search > /tmp/status
+          curl -sS --max-time 60 -o /tmp/result.json -w '%{http_code}' -F 'image=@/tmp/product.jpg;type=image/jpeg' https://findit-nearby.netlify.app/api/search > /tmp/status
           node - <<'NODE'
           const fs=require('fs');
           const status=fs.readFileSync('/tmp/status','utf8').trim();
