@@ -22,5 +22,5 @@ jobs:
 
       - name: Run dashboard, product info, commerce, nearby and failure-case regression suite
         env:
-          BASE_URL: https://findit-nearby.netlify.app
+          BASE_URL: https://findit-nearby.bgbrummer.workers.dev
         run: node tests/dashboard-commerce-regression.mjs

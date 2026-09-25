@@ -25,5 +25,5 @@ jobs:
         run: sleep 70
       - name: Test five real user images against production
         env:
-          FINDIT_URL: https://findit-nearby.netlify.app/
+          FINDIT_URL: https://findit-nearby.bgbrummer.workers.dev/
         run: node tests/live-user-image-production-matrix.mjs
