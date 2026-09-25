@@ -1,77 +1,247 @@
 FindIt production audit
-Commit: 2f930b95ddf82e052d2ead6ba4ae39024a56185f
-Release smoke: FAIL (exit 1)
+Commit: eea9a20b64c71ba44b5a732e5051f90363e3fd96
+Release smoke: PASS (exit 0)
 Dashboard readiness: FAIL (exit 1)
 Every dashboard function: FAIL (exit 1)
 Current dashboard real-user audit: FAIL (exit 1)
 
 --- release smoke ---
-[FAIL] 1440px page loads finder missing
-[FAIL] 1440px one results controller got 0
+[PASS] 1440px page loads
+[PASS] 1440px one results controller
 [PASS] 1440px no duplicate ids
 [PASS] 1440px no uncaught JS errors
-[FAIL] 390px page loads finder missing
-[FAIL] 390px one results controller got 0
+[PASS] 390px page loads
+[PASS] 390px one results controller
 [PASS] 390px no duplicate ids
 [PASS] 390px no uncaught JS errors
-node:internal/modules/run_main:123
-    triggerUncaughtException(
-    ^
+[PASS] mock exact identity correct
+[PASS] mock exact price shown
+[PASS] mock nearby same retailer paired without fake branch stock
+[PASS] label evidence promotes supported packaged-product identity
+[PASS] label evidence allows retailer-page verified price
+[PASS] label flow keeps physical branch stock unconfirmed and no Directions
+[PASS] shoe retailer selection and safety
+[PASS] electronics retailer selection and safety
+[PASS] grocery retailer selection and safety
+[PASS] hardware retailer selection and safety
+[PASS] nearby lookup returns valid real coordinates or clean empty state
 
-locator.setInputFiles: Timeout 30000ms exceeded.
-Call log:
-  - waiting for locator('#photo')
-
-    at async mockedProductFlow (/home/runner/work/Findit-nearby/Findit-nearby/tests/release-smoke.mjs:20:54)
-    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/release-smoke.mjs:42:82 {
-  name: 'TimeoutError'
-}
-
-Node.js v22.23.2
+FINDIT_STABLE_PIPELINE_SMOKE_PASS
 
 --- dashboard readiness ---
-node:internal/modules/run_main:123
-    triggerUncaughtException(
-    ^
+[PASS] 1440px dashboard shell visible
+[PASS] 1440px upload control opens chooser and transfers file
+[PASS] 1440px selected image enables search
+[PASS] 1440px location control works
+[FAIL] 1440px identify returns to dashboard not action menu page.waitForFunction: Timeout 30000ms exceeded.
+[FAIL] 1440px result mirrors into dashboard page.waitForFunction: Timeout 30000ms exceeded.
+[PASS] 1440px no uncaught JS errors
+[PASS] 390px dashboard shell visible
+[PASS] 390px upload control opens chooser and transfers file
+[PASS] 390px selected image enables search
+[PASS] 390px location control works
+[FAIL] 390px identify returns to dashboard not action menu page.waitForFunction: Timeout 30000ms exceeded.
+[FAIL] 390px result mirrors into dashboard page.waitForFunction: Timeout 30000ms exceeded.
+[PASS] 390px no uncaught JS errors
 
-page.waitForSelector: Timeout 12000ms exceeded.
-Call log:
-  - waiting for locator('#finditExactShell') to be visible
-
-    at run (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-readiness.mjs:11:79)
-    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-readiness.mjs:19:1 {
-  name: 'TimeoutError'
-}
-
-Node.js v22.23.2
+READINESS FAILURES
+1440px identify returns to dashboard not action menu: page.waitForFunction: Timeout 30000ms exceeded.
+1440px result mirrors into dashboard: page.waitForFunction: Timeout 30000ms exceeded.
+390px identify returns to dashboard not action menu: page.waitForFunction: Timeout 30000ms exceeded.
+390px result mirrors into dashboard: page.waitForFunction: Timeout 30000ms exceeded.
 
 --- every dashboard function ---
-node:internal/modules/run_main:123
-    triggerUncaughtException(
-    ^
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <h3>Supported strengths</h3> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+  - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <section class="fx-info-section">…</section> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="fxInformationModal" class="fx-info-modal open">…</div> intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <h3>Supported strengths</h3> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <section class="fx-info-section">…</section> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="fxInformationModal" class="fx-info-modal open">…</div> intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <h3>Supported strengths</h3> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <section class="fx-info-section">…</section> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
 
-page.waitForSelector: Timeout 12000ms exceeded.
+1440px action nearby responds: locator.click: Timeout 6000ms exceeded.
 Call log:
-  - waiting for locator('#finditExactShell') to be visible
+  - waiting for locator('#finditExactShell [data-fx="nearby"]:visible').first()
+    - locator resolved to <article data-fx="nearby" data-wired="single-owner">…</article>
+  - attempting click action
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <section class="fx-info-section">…</section> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+  - retrying click action
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <h3>Supported strengths</h3> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+  - retrying click action
+    - waiting 20ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <section class="fx-info-section">…</section> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 100ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="fxInformationModal" class="fx-info-modal open">…</div> intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <h3>Supported strengths</h3> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <section class="fx-info-section">…</section> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+  2 × retrying click action
+      - waiting 500ms
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="fxInformationModal" class="fx-info-modal open">…</div> intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <h3>Supported strengths</h3> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <section class="fx-info-section">…</section> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
 
-    at setup (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:11:78)
-    at async audit (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:13:88)
-    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:28:1 {
-  name: 'TimeoutError'
-}
+1440px Ask FindIt entry point responds: locator.click: Timeout 6000ms exceeded.
+Call log:
+  - waiting for locator('#finditExactShell [data-fx="assistant"]:visible').last()
+    - locator resolved to <button data-fx="assistant" class="fx-premium-only">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="fxInformationModal" class="fx-info-modal open">…</div> intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="fxInformationModal" class="fx-info-modal open">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    8 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="fxInformationModal" class="fx-info-modal open">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 500ms
 
-Node.js v22.23.2
+1440px premium entry point responds: locator.click: Timeout 6000ms exceeded.
+Call log:
+  - waiting for locator('#finditExactShell [data-fx="premium"]:visible').first()
+    - locator resolved to <button data-fx="premium" id="fxPremiumSideButton">Upgrade Now</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="fxInformationModal" class="fx-info-modal open">…</div> intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="fxInformationModal" class="fx-info-modal open">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    8 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="fxInformationModal" class="fx-info-modal open">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+
+390px identify action works: page.waitForFunction: Timeout 6000ms exceeded.
+390px product result mirrors into dashboard: page.waitForFunction: Timeout 6000ms exceeded.
 
 --- current dashboard real-user audit ---
 node:internal/modules/run_main:123
     triggerUncaughtException(
     ^
 
-page.waitForSelector: Timeout 30000ms exceeded.
+page.goto: Timeout 60000ms exceeded.
 Call log:
-  - waiting for locator('#finditExactShell') to be visible
+  - navigating to "https://findit-nearby.netlify.app/", waiting until "domcontentloaded"
 
-    at run (/home/runner/work/Findit-nearby/Findit-nearby/tests/current-dashboard-real-user.mjs:19:13)
+    at run (/home/runner/work/Findit-nearby/Findit-nearby/tests/current-dashboard-real-user.mjs:18:13)
     at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/current-dashboard-real-user.mjs:40:1 {
   name: 'TimeoutError'
 }
