@@ -7,6 +7,12 @@ on:
     paths:
       - "cloudflare/**"
       - "wrangler.toml"
+      - "index.html"
+      - "style.css"
+      - "script.js"
+      - "manifest.webmanifest"
+      - "sw.js"
+      - "assets/**"
       - ".github/workflows/deploy-cloudflare.yml"
 
 permissions:
