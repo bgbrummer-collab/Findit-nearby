@@ -50,8 +50,8 @@ function featureModal(){
  $('#fxFeatureBackToFeedback',m)?.addEventListener('click',()=>{closeModal(m);openFeedback()});
  return m;
 }
-function openFeedback(){const m=feedbackModal();m.classList.remove('hidden');m.setAttribute('aria-hidden','false');setTimeout(()=>$('#fxFeedbackMessage')?.focus(),50)}
-function openFeature(){const m=featureModal();m.classList.remove('hidden');m.setAttribute('aria-hidden','false');setTimeout(()=>$('#fxFeatureTitle')?.focus(),50)}
+function openFeedback(){document.querySelector('#fxInformationModal')?.classList.remove('open');const m=feedbackModal();m.classList.remove('hidden');m.setAttribute('aria-hidden','false');setTimeout(()=>$('#fxFeedbackMessage')?.focus(),50)}
+function openFeature(){document.querySelector('#fxInformationModal')?.classList.remove('open');const m=featureModal();m.classList.remove('hidden');m.setAttribute('aria-hidden','false');setTimeout(()=>$('#fxFeatureTitle')?.focus(),50)}
 function injectDashboard(){
  const shell=$('#finditExactShell');if(!shell)return false;
  const nav=shell.querySelector('.fx-nav');
