@@ -79,6 +79,7 @@ async function identifyWithHuggingFace(image) {
   const dataUrl = 'data:' + (image.type || 'image/jpeg') + ';base64,' + bytes.toString('base64');
   const prompt = 'Identify the ordinary retail product in this image. Read every visible word on the package first. Return ONLY JSON with keys name, brand, model, object, category, retailCategory, searchQuery, barcode, confidence. Do not invent hidden text, size, barcode, or variant. If brand and product-line text are clearly visible, include them even if size is unknown. confidence is 0 to 1.';
   let lastStatus = null;
+  let lastProviderError = '';
   for (const model of HF_MODELS) {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 22000);
@@ -96,7 +97,11 @@ async function identifyWithHuggingFace(image) {
       });
       lastStatus = response.status;
       const payload = await response.json().catch(() => ({}));
-      if (!response.ok) { console.error('FindIt vision provider failed', { model, status: response.status }); continue; }
+      if (!response.ok) {
+        lastProviderError = clean(payload?.error?.message || payload?.error || payload?.message || 'provider request failed');
+        console.error('FindIt vision provider failed', { model, status: response.status, error: lastProviderError });
+        continue;
+      }
       const identification = normalizeVision(parseVisionJson(payload?.choices?.[0]?.message?.content));
       if (identification?.blocked) return { blocked: true, identification: null };
       if (identification && identification.confidence >= 0.30) return { identification, model };
@@ -106,7 +111,7 @@ async function identifyWithHuggingFace(image) {
       clearTimeout(timer);
     }
   }
-  return { identification: null, reason: lastStatus === 408 ? 'HF_TIMEOUT' : 'HF_INFERENCE_FAILED', status: lastStatus };
+  return { identification: null, reason: lastStatus === 408 ? 'HF_TIMEOUT' : 'HF_INFERENCE_FAILED', status: lastStatus, providerError: lastProviderError || null };
 }
 async function readInput(request) {
   const type = String(request.headers.get('content-type') || '').toLowerCase();
@@ -197,6 +202,7 @@ export default {
         confidence: null,
         code: vision.reason || 'PHOTO_NOT_IDENTIFIED',
         providerStatus: vision.status || null,
+        providerError: vision.providerError || null,
         message: 'FindIt could not identify this photo confidently enough to search exact retailers. Try a clearer photo, product name or barcode.'
       });
     } catch (error) {
