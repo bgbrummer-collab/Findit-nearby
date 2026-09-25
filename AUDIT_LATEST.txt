@@ -1,5 +1,5 @@
 FindIt production audit
-Commit: 88c5b8e45862c6e48ddfcf25cd7c1713a903d96e
+Commit: 8a5dbc196daef7e047e6acaeb39cef4d5ccdf088
 Release smoke: PASS (exit 0)
 Dashboard readiness: FAIL (exit 1)
 Every dashboard function: FAIL (exit 1)
@@ -40,47 +40,41 @@ FINDIT_STABLE_PIPELINE_SMOKE_PASS
 [PASS] 390px upload control opens chooser and transfers file
 [PASS] 390px selected image enables search
 [PASS] 390px location control works
-[FAIL] 390px identify returns to dashboard not action menu page.waitForFunction: Timeout 30000ms exceeded.
-[FAIL] 390px result mirrors into dashboard page.waitForFunction: Timeout 30000ms exceeded.
+[PASS] 390px identify returns to dashboard not action menu
+[PASS] 390px result mirrors into dashboard
 [PASS] 390px no uncaught JS errors
 
 READINESS FAILURES
 1440px identify returns to dashboard not action menu: page.waitForFunction: Timeout 30000ms exceeded.
 1440px result mirrors into dashboard: page.waitForFunction: Timeout 30000ms exceeded.
-390px identify returns to dashboard not action menu: page.waitForFunction: Timeout 30000ms exceeded.
-390px result mirrors into dashboard: page.waitForFunction: Timeout 30000ms exceeded.
 
 --- every dashboard function ---
   - retrying click action
     - waiting 500ms
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <div id="fxInformationModal" class="fx-info-modal open">…</div> intercepts pointer events
-  - retrying click action
-    - waiting 500ms
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
 
 390px action nearby responds: locator.click: Timeout 6000ms exceeded.
 Call log:
   - waiting for locator('#finditExactShell [data-fx="nearby"]:visible').first()
     - locator resolved to <article data-fx="nearby" data-wired="single-owner">…</article>
   - attempting click action
-    2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <section class="fx-info-section">…</section> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
-    - retrying click action
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <p>Nike Air Force 1 Low sneakers are known for their…</p> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+  - retrying click action
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <li>Best Running Shoes for Fall: Comfort and Support …</li> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+  - retrying click action
     - waiting 20ms
     - waiting for element to be visible, enabled and stable
     - element is visible, enabled and stable
     - scrolling into view if needed
     - done scrolling
-    - <section class="fx-info-section">…</section> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+    - <p>Nike Air Force 1 Low sneakers are known for their…</p> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
   2 × retrying click action
       - waiting 100ms
       - waiting for element to be visible, enabled and stable
@@ -94,14 +88,14 @@ Call log:
       - element is visible, enabled and stable
       - scrolling into view if needed
       - done scrolling
-      - <section class="fx-info-section">…</section> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+      - <li>Best Running Shoes for Fall: Comfort and Support …</li> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
     - retrying click action
       - waiting 500ms
       - waiting for element to be visible, enabled and stable
       - element is visible, enabled and stable
       - scrolling into view if needed
       - done scrolling
-      - <section class="fx-info-section">…</section> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+      - <p>Nike Air Force 1 Low sneakers are known for their…</p> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
     - retrying click action
       - waiting 500ms
       - waiting for element to be visible, enabled and stable
@@ -128,7 +122,7 @@ Call log:
     - element is visible, enabled and stable
     - scrolling into view if needed
     - done scrolling
-    - <p>No product-specific strengths have been verified …</p> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+    - <section class="fx-info-section">…</section> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
   - retrying click action
     - waiting for element to be visible, enabled and stable
     - element is visible, enabled and stable
@@ -141,14 +135,14 @@ Call log:
       - element is visible, enabled and stable
       - scrolling into view if needed
       - done scrolling
-      - <p>No product-specific strengths have been verified …</p> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+      - <section class="fx-info-section">…</section> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
     - retrying click action
       - waiting 100ms
     2 × waiting for element to be visible, enabled and stable
       - element is visible, enabled and stable
       - scrolling into view if needed
       - done scrolling
-      - <p>No product-specific strengths have been verified …</p> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+      - <section class="fx-info-section">…</section> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
     - retrying click action
       - waiting 500ms
       - waiting for element to be visible, enabled and stable
@@ -162,19 +156,23 @@ Call log:
       - element is visible, enabled and stable
       - scrolling into view if needed
       - done scrolling
-      - <p>No product-specific strengths have been verified …</p> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+      - <section class="fx-info-section">…</section> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
     - retrying click action
       - waiting 500ms
       - waiting for element to be visible, enabled and stable
       - element is visible, enabled and stable
       - scrolling into view if needed
       - done scrolling
-      - <p>No product-specific strengths have been verified …</p> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+      - <section class="fx-info-section">…</section> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
     - retrying click action
       - waiting 500ms
     - waiting for element to be visible, enabled and stable
     - element is visible, enabled and stable
     - scrolling into view if needed
+    - done scrolling
+    - <section class="fx-info-section">…</section> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
 
 390px premium entry point responds: locator.click: Timeout 6000ms exceeded.
 Call log:
