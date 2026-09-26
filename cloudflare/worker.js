@@ -27,16 +27,16 @@ async function handleProductInfo(request){
   if(BLOCKED.test(searchQuery))return json({error:'Unsupported product type',researched:false,pros:[],cons:[],sources:[]},403);
   const wanted=([brand,model,name].filter(Boolean).join(' ')||searchQuery).toLowerCase(),isAudio=/headset|headphone/.test(wanted);
   const norm=t=>String(t||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim(),tokens=norm([brand,model].filter(Boolean).join(' ')||name).split(' ').filter(t=>t.length>2);
-  const relevant=t=>{const n=norm(t);if(isAudio&&(!/headset|headphone/.test(n)||/\b(mouse|keyboard|webcam|camera|speaker|controller)\b/.test(n)))return false;return tokens.length?tokens.filter(k=>n.includes(k)).length>=Math.min(2,tokens.length):true};
+  const relevant=t=>{const n=norm(t);if(isAudio&&(!/headset|headphone/.test(n)||/\b(mouse|keyboard|webcam|camera|speaker|controller)\b/.test(n)))return false;const hits=tokens.filter(k=>n.includes(k)).length;return tokens.length?hits>=Math.min(2,tokens.length):true};
   const strip=t=>String(t||'').replace(/<!\[CDATA\[|\]\]>/g,'').replace(/<[^>]+>/g,' ').replace(/&amp;/g,'&').replace(/\s+/g,' ').trim();
   const sources=[],facts=[];
   try{
-    const q='"'+searchQuery+'" product specifications review';
+    const q=[brand,model,name].filter(Boolean).join(' ')+' '+(isAudio?'headset headphones ':'')+'specifications features review';
     const r=await fetch('https://www.bing.com/search?format=rss&q='+encodeURIComponent(q),{headers:{'user-agent':'Mozilla/5.0 FindItNearby/43.0'},signal:AbortSignal.timeout(7000)});
     if(r.ok){const xml=await r.text();for(const m of xml.matchAll(/<item>([\s\S]*?)<\/item>/gi)){const row=m[1],title=strip((row.match(/<title>([\s\S]*?)<\/title>/i)||[])[1]),url=strip((row.match(/<link>([\s\S]*?)<\/link>/i)||[])[1]),desc=strip((row.match(/<description>([\s\S]*?)<\/description>/i)||[])[1]);if(!relevant(title+' '+desc))continue;try{const u=new URL(url);if(u.protocol!=='https:')continue;sources.push({title:title||u.hostname,url:u.href})}catch{continue}for(const sentence of desc.split(/(?<=[.!?])\s+/)){const z=clean(sentence,320);if(z.length>=35&&relevant(z)&&!facts.some(y=>norm(y)===norm(z)))facts.push(z)}if(sources.length>=4)break}}
   }catch{}
   const purpose=facts.find(z=>/designed|features|provides|offers|uses|includes|gaming|audio|sound|microphone|comfort|wireless|usb/i.test(z))||facts[0]||'';
-  const pros=facts.filter(z=>z!==purpose&&/feature|clear|comfort|quality|durab|light|audio|sound|microphone|noise|compatible|performance|memory|battery|wireless|usb/i.test(z)).slice(0,4);
+  let pros=facts.filter(z=>z!==purpose&&/feature|clear|comfort|quality|durab|light|audio|sound|microphone|noise|compatible|performance|memory|battery|wireless|usb/i.test(z)).slice(0,4);if(pros.length<2)pros=facts.filter(z=>z!==purpose).slice(0,4);
   const cons=facts.filter(z=>/but|however|limitation|requires|not included|may not|issue|drawback|heavy|price|expensive/i.test(z)).slice(0,3);
   const researched=Boolean(purpose&&sources.length);
   return json({researched,matched:true,bestProduct:{name:name||[brand,model].filter(Boolean).join(' '),brand,model,category},whatItDoes:purpose,pros,cons,bestFor:'',standOut:'',valueVerdict:'',sources:sources.slice(0,4),researchMethod:researched?'Live exact-product web evidence':'No exact-product evidence found',checkedAt:new Date().toISOString(),message:researched?'Product information is based on current web evidence.':'No trustworthy exact-product research was found, so FindIt is not guessing.'});
