@@ -26,7 +26,7 @@ jobs:
           cat > /tmp/product-qa.mjs <<'NODE'
           import {chromium} from 'playwright';
           import fs from 'node:fs';
-          const base='https://findit-nearby.vercel.app/';
+          const base='https://findit-nearby.bgbrummer.workers.dev/';
           const products=[
             ['Nike Air Force 1 Low','NIKE AIR FORCE 1 LOW','FOOTWEAR'],
             ['Twinsaver Twin Ply 18 Rolls','TWINSAVER TWIN PLY 18 ROLLS','TOILET PAPER'],
