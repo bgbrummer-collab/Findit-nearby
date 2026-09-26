@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - "cloudflare/**"
+      - "lib/**"
       - "wrangler.toml"
       - "index.html"
       - "*.css"
