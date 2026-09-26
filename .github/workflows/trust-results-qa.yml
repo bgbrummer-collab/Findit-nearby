@@ -21,7 +21,7 @@ jobs:
         run: sleep 20
       - name: Audit current production UI and product flows
         run: |
-          cat >/tmp/trust-qa.mjs <<'NODE'
+          cat >trust-qa.mjs <<'NODE'
           import {chromium} from 'playwright';
           import fs from 'node:fs';
           const base='https://findit-nearby.bgbrummer.workers.dev/';
@@ -73,10 +73,9 @@ jobs:
           fs.mkdirSync('qa-results',{recursive:true});fs.writeFileSync('qa-results/trust-results-latest.md',out);console.log(out);
           if(failed.length)process.exitCode=1;
           NODE
-          node /tmp/trust-qa.mjs || true
-      - name: Publish report and remove one-shot workflow
+          node trust-qa.mjs
+      - name: Publish report
         run: |
-          rm .github/workflows/trust-results-qa.yml
           git config user.name 'FindIt Trust QA Bot'
           git config user.email 'actions@users.noreply.github.com'
           git add qa-results/trust-results-latest.md .github/workflows/trust-results-qa.yml
