@@ -24,7 +24,7 @@ jobs:
           cat >/tmp/trust-qa.mjs <<'NODE'
           import {chromium} from 'playwright';
           import fs from 'node:fs';
-          const base='https://findit-nearby.vercel.app/';
+          const base='https://findit-nearby.bgbrummer.workers.dev/';
           const products=[
             {label:'Nike Air Force 1 Low',a:'NIKE AIR FORCE 1 LOW',b:'WHITE BLUE SNEAKER',expect:/Nike|Takealot|Makro|Bash|Sportscene|Totalsports/i},
             {label:'Twinsaver Twin Ply 18 Rolls',a:'TWINSAVER TWIN PLY 18 ROLLS',b:'TOILET PAPER',expect:/Checkers|Pick n Pay|Woolworths|Shoprite|Takealot|Makro/i},
