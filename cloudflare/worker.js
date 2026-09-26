@@ -45,7 +45,7 @@ async function handleProductInfo(request){
   }
   if(!facts.length&&isAudio&&brand){
     try{
-      const slug=v=>norm(v).replace(/\s+/g,'-'),productSlug=slug(name.replace(new RegExp('^'+brand.replace(/[.*+?^$\{\}()|[\]\\]/g,'\\  const purpose=facts.find(z=>/designed|features|provides|offers|uses|includes|gaming|audio|sound|microphone|comfort|wireless|usb/i.test(z))||facts[0]||'';')+'\\s*','i'),''));
+      const slug=v=>norm(v).replace(/\s+/g,'-'),rawProduct=name.toLowerCase().startsWith(brand.toLowerCase())?name.slice(brand.length).trim():name,productSlug=slug(rawProduct);
       const u='https://www.rtings.com/headphones/reviews/'+slug(brand)+'/'+productSlug,pr=await fetch(u,{headers:{'user-agent':'Mozilla/5.0 FindItNearby/46.0'},signal:AbortSignal.timeout(7000)});
       if(pr.ok){const html=(await pr.text()).slice(0,700000),plain=norm(strip(html));if(relevant(plain)){const features=[];if(/wired/.test(plain)&&!/wireless only/.test(plain))features.push('Wired audio connection');if(/over ear|over-ear/.test(plain))features.push('Over-ear design');if(/boom mic|microphone/.test(plain))features.push('Built-in or boom microphone');if(/noise cancelling/.test(plain))features.push('Noise-cancelling support');if(/comfortable|comfort/.test(plain))features.push('Comfort-focused fit');if(features.length>=2){facts.push('This '+(category||'audio product')+' is documented as a gaming headset with '+features.slice(0,3).join(', ').toLowerCase()+'.',...features.map(x=>x+'.'));sources.push({title:name+' independent product review',url:u})}}}
     }catch{}
