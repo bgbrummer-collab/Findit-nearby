@@ -43,6 +43,13 @@ async function handleProductInfo(request){
       for(const o of offers.slice(0,3)){const u=o.product_url||o.url;if(!u)continue;try{const pr=await fetch(u,{headers:{'user-agent':'Mozilla/5.0 FindItNearby/44.0','accept':'text/html'},signal:AbortSignal.timeout(6500)});if(!pr.ok)continue;const html=(await pr.text()).slice(0,900000),meta=strip((html.match(/<meta[^>]+(?:name|property)=["'](?:description|og:description)["'][^>]+content=["']([^"']+)/i)||html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+(?:name|property)=["'](?:description|og:description)["']/i)||[])[1]);if(meta&&meta.length>=35&&relevant(meta)){facts.push(...meta.split(/(?<=[.!?])\s+/).map(x=>clean(x,320)).filter(x=>x.length>=35&&relevant(x)));sources.push({title:o.product_name||o.retailer?.name||new URL(u).hostname,url:u})}}catch{}}
     }catch{}
   }
+  if(!facts.length&&isAudio&&brand){
+    try{
+      const slug=v=>norm(v).replace(/\s+/g,'-'),productSlug=slug(name.replace(new RegExp('^'+brand.replace(/[.*+?^$\{\}()|[\]\\]/g,'\\  const purpose=facts.find(z=>/designed|features|provides|offers|uses|includes|gaming|audio|sound|microphone|comfort|wireless|usb/i.test(z))||facts[0]||'';')+'\\s*','i'),''));
+      const u='https://www.rtings.com/headphones/reviews/'+slug(brand)+'/'+productSlug,pr=await fetch(u,{headers:{'user-agent':'Mozilla/5.0 FindItNearby/46.0'},signal:AbortSignal.timeout(7000)});
+      if(pr.ok){const html=(await pr.text()).slice(0,700000),plain=norm(strip(html));if(relevant(plain)){const features=[];if(/wired/.test(plain)&&!/wireless only/.test(plain))features.push('Wired audio connection');if(/over ear|over-ear/.test(plain))features.push('Over-ear design');if(/boom mic|microphone/.test(plain))features.push('Built-in or boom microphone');if(/noise cancelling/.test(plain))features.push('Noise-cancelling support');if(/comfortable|comfort/.test(plain))features.push('Comfort-focused fit');if(features.length>=2){facts.push('This '+(category||'audio product')+' is documented as a gaming headset with '+features.slice(0,3).join(', ').toLowerCase()+'.',...features.map(x=>x+'.'));sources.push({title:name+' independent product review',url:u})}}}
+    }catch{}
+  }
   const purpose=facts.find(z=>/designed|features|provides|offers|uses|includes|gaming|audio|sound|microphone|comfort|wireless|usb/i.test(z))||facts[0]||'';
   let pros=facts.filter(z=>z!==purpose&&/feature|clear|comfort|quality|durab|light|audio|sound|microphone|noise|compatible|performance|memory|battery|wireless|usb/i.test(z)).slice(0,4);if(pros.length<2)pros=facts.filter(z=>z!==purpose).slice(0,4);
   const cons=facts.filter(z=>/but|however|limitation|requires|not included|may not|issue|drawback|heavy|price|expensive/i.test(z)).slice(0,3);
