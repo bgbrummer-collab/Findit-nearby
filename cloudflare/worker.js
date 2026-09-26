@@ -35,6 +35,13 @@ async function handleProductInfo(request){
     const r=await fetch('https://www.bing.com/search?format=rss&mkt=en-ZA&q='+encodeURIComponent(q),{headers:{'user-agent':'Mozilla/5.0 FindItNearby/43.0'},signal:AbortSignal.timeout(7000)});
     if(r.ok){const xml=await r.text();for(const m of xml.matchAll(/<item>([\s\S]*?)<\/item>/gi)){const row=m[1],title=strip((row.match(/<title>([\s\S]*?)<\/title>/i)||[])[1]),url=strip((row.match(/<link>([\s\S]*?)<\/link>/i)||[])[1]),desc=strip((row.match(/<description>([\s\S]*?)<\/description>/i)||[])[1]);if(!relevant(title+' '+desc))continue;try{const u=new URL(url);if(u.protocol!=='https:')continue;sources.push({title:title||u.hostname,url:u.href})}catch{continue}for(const sentence of desc.split(/(?<=[.!?])\s+/)){const z=clean(sentence,320);if(z.length>=35&&relevant(z)&&!facts.some(y=>norm(y)===norm(z)))facts.push(z)}if(sources.length>=4)break}}
   }catch{}
+  if(!facts.length){
+    try{
+      const rr=await handleRealProductIntelligence(new Request('https://findit.local/api/product-intelligence-v2',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:{name,brand,model,category,retailCategory:category,searchQuery}})}));
+      const rd=await rr.json(),offers=Array.isArray(rd?.offers)?rd.offers.filter(o=>o?.exactProductMatch===true&&(o?.sourcePageVerified===true||o?.verified===true)): [];
+      for(const o of offers.slice(0,3)){const u=o.product_url||o.url;if(!u)continue;try{const pr=await fetch(u,{headers:{'user-agent':'Mozilla/5.0 FindItNearby/44.0','accept':'text/html'},signal:AbortSignal.timeout(6500)});if(!pr.ok)continue;const html=(await pr.text()).slice(0,900000),meta=strip((html.match(/<meta[^>]+(?:name|property)=["'](?:description|og:description)["'][^>]+content=["']([^"']+)/i)||html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+(?:name|property)=["'](?:description|og:description)["']/i)||[])[1]);if(meta&&meta.length>=35&&relevant(meta)){facts.push(...meta.split(/(?<=[.!?])\s+/).map(x=>clean(x,320)).filter(x=>x.length>=35&&relevant(x)));sources.push({title:o.product_name||o.retailer?.name||new URL(u).hostname,url:u})}}catch{}}
+    }catch{}
+  }
   const purpose=facts.find(z=>/designed|features|provides|offers|uses|includes|gaming|audio|sound|microphone|comfort|wireless|usb/i.test(z))||facts[0]||'';
   let pros=facts.filter(z=>z!==purpose&&/feature|clear|comfort|quality|durab|light|audio|sound|microphone|noise|compatible|performance|memory|battery|wireless|usb/i.test(z)).slice(0,4);if(pros.length<2)pros=facts.filter(z=>z!==purpose).slice(0,4);
   const cons=facts.filter(z=>/but|however|limitation|requires|not included|may not|issue|drawback|heavy|price|expensive/i.test(z)).slice(0,3);
