@@ -30,6 +30,7 @@ try{
     const r=await get('/api/product-insights?name=Logitech%20G%20Pro%20Gaming%20Headset&brand=Logitech&model=G%20Pro&category=electronics&searchQuery=Logitech%20G%20Pro%20gaming%20headset');
     const d=await r.json().catch(()=>({})); return {r,d};
   },35000);
+  console.log('PRODUCT_INSIGHTS_RESULT',JSON.stringify(insights.d));
   ok(insights.r.status===200&&insights.d.researched===true,'Product Information research succeeds for Logitech G Pro headset');
   const researchText=JSON.stringify(insights.d).toLowerCase();
   ok(/headset|headphones/.test(researchText),'Product research stays about the headset product type');
