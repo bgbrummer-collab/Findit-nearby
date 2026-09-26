@@ -82,7 +82,7 @@
     if(price&&rec.lastPrice&&price<rec.lastPrice){type='price_drop';msg=`Price drop: ${p.name} is now ${money(price,o.currency||'ZAR')}.`}
     else if(inStock&&!rec.lastStock){type='restock';msg=`Restock found: ${p.name} is available from ${o._retailer}.`}
     if(msg){addAlert(p.key,type,msg);toast(msg);try{if(window.Notification&&Notification.permission==='granted')new Notification('FindIt Watch Item',{body:msg})}catch{}}
-    rec.lastPrice=price||rec.lastPrice;rec.lastStock=inStock;rec.retailer=o._retailer||rec.retailer;rec.updatedAt=Date.now();list[i]=rec;write(LS.watch,list);
+    rec.lastPrice=price||rec.lastPrice;rec.lastStock=inStock;rec.retailer=o._retailer||rec.retailer;rec.updatedAt=Date.now();list[i]=rec;write(LS.watch,list);if(msg)renderWatch();
   }
   async function notifications(){if(!window.Notification){toast('Browser notifications are not supported here');return}try{toast(await Notification.requestPermission()==='granted'?'Watch notifications enabled':'Notifications were not enabled')}catch{toast('Could not enable notifications')}}
 
