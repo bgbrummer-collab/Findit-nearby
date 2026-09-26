@@ -23,7 +23,7 @@ jobs:
         run: sleep 20
       - name: Run four product flows
         run: |
-          cat > /tmp/product-qa.mjs <<'NODE'
+          cat > product-qa.mjs <<'NODE'
           import {chromium} from 'playwright';
           import fs from 'node:fs';
           const base='https://findit-nearby.bgbrummer.workers.dev/';
@@ -66,10 +66,9 @@ jobs:
           fs.mkdirSync('qa-results',{recursive:true});fs.writeFileSync('qa-results/product-flow-latest.md',out);console.log(out);
           if(rows.some(r=>!r.ok))process.exitCode=1;
           NODE
-          node /tmp/product-qa.mjs || true
+          node product-qa.mjs
       - name: Publish report
         run: |
-          rm .github/workflows/product-flow-qa.yml
           git config user.name "FindIt Product QA Bot"
           git config user.email "actions@users.noreply.github.com"
           git add qa-results/product-flow-latest.md .github/workflows/product-flow-qa.yml
