@@ -32,7 +32,7 @@ async function handleProductInfo(request){
   const sources=[],facts=[];
   try{
     const q=[brand,model,name].filter(Boolean).join(' ')+' '+(isAudio?'headset headphones ':'')+'specifications features review';
-    const r=await fetch('https://www.bing.com/search?format=rss&q='+encodeURIComponent(q),{headers:{'user-agent':'Mozilla/5.0 FindItNearby/43.0'},signal:AbortSignal.timeout(7000)});
+    const r=await fetch('https://www.bing.com/search?format=rss&mkt=en-ZA&q='+encodeURIComponent(q),{headers:{'user-agent':'Mozilla/5.0 FindItNearby/43.0'},signal:AbortSignal.timeout(7000)});
     if(r.ok){const xml=await r.text();for(const m of xml.matchAll(/<item>([\s\S]*?)<\/item>/gi)){const row=m[1],title=strip((row.match(/<title>([\s\S]*?)<\/title>/i)||[])[1]),url=strip((row.match(/<link>([\s\S]*?)<\/link>/i)||[])[1]),desc=strip((row.match(/<description>([\s\S]*?)<\/description>/i)||[])[1]);if(!relevant(title+' '+desc))continue;try{const u=new URL(url);if(u.protocol!=='https:')continue;sources.push({title:title||u.hostname,url:u.href})}catch{continue}for(const sentence of desc.split(/(?<=[.!?])\s+/)){const z=clean(sentence,320);if(z.length>=35&&relevant(z)&&!facts.some(y=>norm(y)===norm(z)))facts.push(z)}if(sources.length>=4)break}}
   }catch{}
   const purpose=facts.find(z=>/designed|features|provides|offers|uses|includes|gaming|audio|sound|microphone|comfort|wireless|usb/i.test(z))||facts[0]||'';
