@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: findit-live-photo-ai-live-user-value
+  group: findit-live-ai-production
   cancel-in-progress: false
 
 jobs:
