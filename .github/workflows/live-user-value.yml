@@ -1,12 +1,10 @@
 name: Live User Value Check
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 concurrency:
-  group: findit-live-ai-production
+  group: findit-live-user-value-manual
   cancel-in-progress: false
 
 jobs:
