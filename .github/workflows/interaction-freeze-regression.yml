@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: findit-live-photo-ai
+  group: findit-live-photo-ai-interaction-freeze-regression
   cancel-in-progress: false
 
 jobs:
