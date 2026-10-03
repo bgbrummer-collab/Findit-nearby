@@ -2,6 +2,10 @@ name: FindIt Live Photo Probe
 on:
   push:
     branches: [main]
+concurrency:
+  group: findit-live-photo-ai
+  cancel-in-progress: false
+
 jobs:
   photo:
     runs-on: ubuntu-latest
