@@ -29,7 +29,7 @@ async function runSearch(q){q=clean(q);if(!q||busy)return;busy=true;loading('Fin
   coords?json('/api/nearby',{lat:coords.lat,lon:coords.lon,identification:i,radiusKm:s.radius||10},22000).catch(()=>null):Promise.resolve(null)
  ];
  const [c,r,n]=await Promise.all(tasks);commerce=c;research=r?.researched===false?null:r;
- if(c?.offers)s.offers=c.offers;if(n?.stores)s.stores=n.stores;
+ if(Array.isArray(c?.offers)){s.offers=c.offers;window.productIntelligence=c}if(n?.stores)s.stores=n.stores;
  syncAll();document.dispatchEvent(new CustomEvent('findit:dashboard-sync',{detail:{result:s.result}}));if(s.stores.length)document.dispatchEvent(new CustomEvent('findit:nearby-updated',{detail:{stores:s.stores}}));
  saveRecent(i);showProductInfo();
  }catch(e){openModal('<h2>Search problem</h2><p>'+esc(e.message||'FindIt could not complete this search.')+'</p><button id="fxTryAgain">Try another product</button>');$('#fxTryAgain').onclick=()=>searchModal()}finally{busy=false}}
@@ -74,7 +74,7 @@ async function hydrateIdentifiedPhoto(){
    coords?json('/api/nearby',{lat:coords.lat,lon:coords.lon,identification:i,radiusKm:s.radius||10},22000).catch(()=>null):Promise.resolve(null)
   ];
   const [ci,ri,ni]=await Promise.all(tasks);commerce=ci;research=ri?.researched===false?null:ri;
-  if(ci?.offers)s.offers=ci.offers;
+  if(Array.isArray(ci?.offers)){s.offers=ci.offers;window.productIntelligence=ci}
   // Do not erase an already truthful nearby result when the optional refresh returns empty.
   if(Array.isArray(ni?.stores)&&ni.stores.length)s.stores=ni.stores;
   syncAll();saveRecent(i);
