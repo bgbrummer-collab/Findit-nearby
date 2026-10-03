@@ -5,6 +5,10 @@ on:
     branches: [main]
   workflow_dispatch:
 
+concurrency:
+  group: findit-live-photo-ai
+  cancel-in-progress: false
+
 jobs:
   user-value:
     runs-on: ubuntu-latest
