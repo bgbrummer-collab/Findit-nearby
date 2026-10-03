@@ -1,7 +1,7 @@
 FindIt production audit
-Commit: fe7e2710063299da339486552bd2c810205d5e82
+Commit: 989016676a19eeed602c670519e53c23cdc6825b
 Release smoke: PASS (exit 0)
-Dashboard readiness: FAIL (exit 1)
+Dashboard readiness: PASS (exit 0)
 Every dashboard function: FAIL (exit 1)
 Current dashboard real-user audit: FAIL (exit 1)
 
@@ -33,8 +33,8 @@ FINDIT_STABLE_PIPELINE_SMOKE_PASS
 [PASS] 1440px upload control opens chooser and transfers file
 [PASS] 1440px selected image enables search
 [PASS] 1440px location control works
-[FAIL] 1440px identify returns to dashboard not action menu page.waitForFunction: Timeout 30000ms exceeded.
-[FAIL] 1440px result mirrors into dashboard page.waitForFunction: Timeout 30000ms exceeded.
+[PASS] 1440px identify returns to dashboard not action menu
+[PASS] 1440px result mirrors into dashboard
 [PASS] 1440px no uncaught JS errors
 [PASS] 390px dashboard shell visible
 [PASS] 390px upload control opens chooser and transfers file
@@ -44,81 +44,93 @@ FINDIT_STABLE_PIPELINE_SMOKE_PASS
 [PASS] 390px result mirrors into dashboard
 [PASS] 390px no uncaught JS errors
 
-READINESS FAILURES
-1440px identify returns to dashboard not action menu: page.waitForFunction: Timeout 30000ms exceeded.
-1440px result mirrors into dashboard: page.waitForFunction: Timeout 30000ms exceeded.
+FINDIT_DASHBOARD_READINESS_PASS
 
 --- every dashboard function ---
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <section class="fx-info-section">…</section> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
-  - retrying click action
-    - waiting 500ms
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <div id="fxInformationModal" class="fx-info-modal open">…</div> intercepts pointer events
-  - retrying click action
-    - waiting 500ms
-
-390px action nearby responds: locator.click: Timeout 6000ms exceeded.
-Call log:
-  - waiting for locator('#finditExactShell [data-fx="nearby"]:visible').first()
-    - locator resolved to <article data-fx="nearby" data-wired="single-owner">…</article>
-  - attempting click action
-    2 × waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <section class="fx-info-section">…</section> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
-    - retrying click action
-    - waiting 20ms
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <section class="fx-info-section">…</section> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
-  2 × retrying click action
       - waiting 100ms
       - waiting for element to be visible, enabled and stable
       - element is visible, enabled and stable
       - scrolling into view if needed
       - done scrolling
-      - <div id="fxInformationModal" class="fx-info-modal open">…</div> intercepts pointer events
+      - <div aria-hidden="false" id="fxFeedbackModal" class="fx-stable-modal">…</div> intercepts pointer events
   2 × retrying click action
       - waiting 500ms
       - waiting for element to be visible, enabled and stable
       - element is visible, enabled and stable
       - scrolling into view if needed
       - done scrolling
-      - <section class="fx-info-section">…</section> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+      - <textarea required="" maxlength="1200" id="fxFeedbackMessage" placeholder="What worked? What should improve?"></textarea> from <div aria-hidden="false" id="fxFeedbackModal" class="fx-stable-modal">…</div> subtree intercepts pointer events
   2 × retrying click action
       - waiting 500ms
       - waiting for element to be visible, enabled and stable
       - element is visible, enabled and stable
       - scrolling into view if needed
       - done scrolling
-      - <div id="fxInformationModal" class="fx-info-modal open">…</div> intercepts pointer events
+      - <div aria-hidden="false" id="fxFeedbackModal" class="fx-stable-modal">…</div> intercepts pointer events
   2 × retrying click action
       - waiting 500ms
       - waiting for element to be visible, enabled and stable
       - element is visible, enabled and stable
       - scrolling into view if needed
       - done scrolling
-      - <section class="fx-info-section">…</section> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+      - <textarea required="" maxlength="1200" id="fxFeedbackMessage" placeholder="What worked? What should improve?"></textarea> from <div aria-hidden="false" id="fxFeedbackModal" class="fx-stable-modal">…</div> subtree intercepts pointer events
   - retrying click action
     - waiting 500ms
     - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <div id="fxInformationModal" class="fx-info-modal open">…</div> intercepts pointer events
-  - retrying click action
-    - waiting 500ms
+
+1440px Ask FindIt entry point responds: locator.click: Timeout 6000ms exceeded.
+Call log:
+  - waiting for locator('#finditExactShell [data-fx="assistant"]:visible').last()
+    - locator resolved to <button data-fx="assistant" class="fx-premium-only">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div aria-hidden="false" id="fxFeedbackModal" class="fx-stable-modal">…</div> intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div aria-hidden="false" id="fxFeedbackModal" class="fx-stable-modal">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    9 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div aria-hidden="false" id="fxFeedbackModal" class="fx-stable-modal">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 500ms
+
+1440px premium entry point responds: locator.click: Timeout 6000ms exceeded.
+Call log:
+  - waiting for locator('#finditExactShell [data-fx="premium"]:visible').first()
+    - locator resolved to <button data-fx="premium" id="fxPremiumSideButton">Upgrade Now</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div aria-hidden="false" id="fxFeedbackModal" class="fx-stable-modal">…</div> intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div aria-hidden="false" id="fxFeedbackModal" class="fx-stable-modal">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    9 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div aria-hidden="false" id="fxFeedbackModal" class="fx-stable-modal">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 500ms
 
 390px Ask FindIt entry point responds: locator.click: Timeout 6000ms exceeded.
 Call log:
@@ -129,50 +141,64 @@ Call log:
     - element is visible, enabled and stable
     - scrolling into view if needed
     - done scrolling
-    - <p>No product-specific strengths have been verified …</p> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+    - <div class="fx-info-identity">…</div> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
   - retrying click action
     - waiting for element to be visible, enabled and stable
     - element is visible, enabled and stable
     - scrolling into view if needed
     - done scrolling
-    - <iframe data-nl-ready="1" id="nl-badge-frame" title="Powered by Netlify" srcdoc="<!doctype html><html class="nl-narrow"><head><meta charset="utf-8"><meta name="color-scheme" content="dark"><style>↵    :root{--nl-vw:390px;--nl-vh:844px}↵    *{box-sizing:border-box}↵    html,body{margin:0;padding:0;background:transparent;overflow:hidden}↵    body{display:flex;align-items:flex-end;justify-content:flex-end;height:100vh;↵      padding:8px 18px 18px 8px;↵      font-family:-apple-system,BlinkMacSystemFont,'S…></iframe> intercepts pointer events
+    - <div id="fxInformationModal" class="fx-info-modal open">…</div> intercepts pointer events
   - retrying click action
     - waiting 20ms
     2 × waiting for element to be visible, enabled and stable
       - element is visible, enabled and stable
       - scrolling into view if needed
       - done scrolling
-      - <p>No product-specific strengths have been verified …</p> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+      - <div class="fx-info-identity">…</div> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
     - retrying click action
       - waiting 100ms
     2 × waiting for element to be visible, enabled and stable
       - element is visible, enabled and stable
       - scrolling into view if needed
       - done scrolling
-      - <p>No product-specific strengths have been verified …</p> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+      - <div class="fx-info-identity">…</div> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
     - retrying click action
       - waiting 500ms
       - waiting for element to be visible, enabled and stable
       - element is visible, enabled and stable
       - scrolling into view if needed
       - done scrolling
-      - <iframe data-nl-ready="1" id="nl-badge-frame" title="Powered by Netlify" srcdoc="<!doctype html><html class="nl-narrow"><head><meta charset="utf-8"><meta name="color-scheme" content="dark"><style>↵    :root{--nl-vw:390px;--nl-vh:844px}↵    *{box-sizing:border-box}↵    html,body{margin:0;padding:0;background:transparent;overflow:hidden}↵    body{display:flex;align-items:flex-end;justify-content:flex-end;height:100vh;↵      padding:8px 18px 18px 8px;↵      font-family:-apple-system,BlinkMacSystemFont,'S…></iframe> intercepts pointer events
+      - <div id="fxInformationModal" class="fx-info-modal open">…</div> intercepts pointer events
     - retrying click action
       - waiting 500ms
       - waiting for element to be visible, enabled and stable
       - element is visible, enabled and stable
       - scrolling into view if needed
       - done scrolling
-      - <p>No product-specific strengths have been verified …</p> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+      - <div class="fx-info-identity">…</div> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
     - retrying click action
       - waiting 500ms
       - waiting for element to be visible, enabled and stable
       - element is visible, enabled and stable
       - scrolling into view if needed
       - done scrolling
-      - <p>No product-specific strengths have been verified …</p> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+      - <div class="fx-info-identity">…</div> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
     - retrying click action
       - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="fx-info-identity">…</div> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div id="fxInformationModal" class="fx-info-modal open">…</div> intercepts pointer events
+  - retrying click action
+    - waiting 500ms
 
 390px premium entry point responds: locator.click: Timeout 6000ms exceeded.
 Call log:
@@ -183,51 +209,23 @@ Call log:
       - element is visible, enabled and stable
       - scrolling into view if needed
       - done scrolling
-      - <div id="fxInformationBody">…</div> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
+      - <div id="fxInformationModal" class="fx-info-modal open">…</div> intercepts pointer events
     - retrying click action
     - waiting 20ms
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <div id="fxInformationBody">…</div> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
-  2 × retrying click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="fxInformationModal" class="fx-info-modal open">…</div> intercepts pointer events
+    - retrying click action
       - waiting 100ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="fxInformationModal" class="fx-info-modal open">…</div> intercepts pointer events
-  2 × retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="fxInformationBody">…</div> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
-  2 × retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="fxInformationModal" class="fx-info-modal open">…</div> intercepts pointer events
-  2 × retrying click action
-      - waiting 500ms
-      - waiting for element to be visible, enabled and stable
-      - element is visible, enabled and stable
-      - scrolling into view if needed
-      - done scrolling
-      - <div id="fxInformationBody">…</div> from <div id="fxInformationModal" class="fx-info-modal open">…</div> subtree intercepts pointer events
-  - retrying click action
-    - waiting 500ms
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <div id="fxInformationModal" class="fx-info-modal open">…</div> intercepts pointer events
-  - retrying click action
-    - waiting 500ms
+    10 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div id="fxInformationModal" class="fx-info-modal open">…</div> intercepts pointer events
+     - retrying click action
+       - waiting 500ms
 
 
 --- current dashboard real-user audit ---
