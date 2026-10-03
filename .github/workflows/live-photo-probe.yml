@@ -17,6 +17,6 @@ jobs:
           const fs=require('fs');
           const status=fs.readFileSync('/tmp/status','utf8').trim();
           const x=JSON.parse(fs.readFileSync('/tmp/result.json','utf8'));
-          console.log('LIVE_PHOTO_RESULT',JSON.stringify({httpStatus:status,code:x.code,provider:x.provider,providerStatus:x.providerStatus,identification:x.identification||null}));
+          console.log('LIVE_PHOTO_RESULT',JSON.stringify({httpStatus:status,code:x.code,provider:x.provider,providerStatus:x.providerStatus,cloudflareReason:x.cloudflareReason,cloudflareError:x.cloudflareError,providerError:x.providerError,identification:x.identification||null}));
           if(status!=='200'||!x.identification) process.exit(1);
           NODE
