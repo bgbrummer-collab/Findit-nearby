@@ -8,6 +8,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: findit-live-photo-ai
+  cancel-in-progress: false
+
 jobs:
   interaction:
     runs-on: ubuntu-latest
