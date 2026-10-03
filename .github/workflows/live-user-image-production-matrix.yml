@@ -1,4 +1,8 @@
 name: Live User Image Production Matrix
+
+concurrency:
+  group: findit-live-ai-production
+  cancel-in-progress: false
 on:
   push:
     branches: [main]
