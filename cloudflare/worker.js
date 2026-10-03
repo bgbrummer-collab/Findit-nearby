@@ -26,7 +26,7 @@ async function identifyWithCloudflareScout(image,env){
   try{
     const bytes=new Uint8Array(await image.arrayBuffer());let bin='';for(let i=0;i<bytes.length;i+=0x8000)bin+=String.fromCharCode(...bytes.subarray(i,i+0x8000));
     const data='data:'+(image.type||'image/jpeg')+';base64,'+btoa(bin);
-    const out=await env.AI.run('@cf/meta/llama-4-scout-17b-16e-instruct',{messages:[{role:'system',content:'Identify ordinary retail products from visible evidence only. Never invent hidden text.'},{role:'user',content:'Read the product packaging in the supplied image and return ONLY JSON with name, brand, model, object, category, retailCategory, searchQuery, confidence.'}],image:data,max_tokens:280,temperature:0});
+    const out=await env.AI.run('@cf/meta/llama-4-scout-17b-16e-instruct',{prompt:'Identify the exact ordinary consumer retail product in this supplied image. Read visible packaging text first. Return ONLY JSON with name, brand, model, object, category, retailCategory, searchQuery, confidence. Never invent hidden text.',image:data,max_tokens:280,temperature:0});
     const raw=clean(out?.response||out?.answer||out?.result||out),m=raw.match(/\{[\s\S]*\}/);if(!m)return{identification:null,reason:'CF_SCOUT_NO_JSON',provider:'cloudflare-scout',providerError:raw.slice(0,240)};
     const v=normalizeVision(JSON.parse(m[0]));if(!v?.name&&!v?.object)return{identification:null,reason:'CF_SCOUT_EMPTY_IDENTITY',provider:'cloudflare-scout'};
     const label=[v.name,v.brand,v.model,v.object,v.category].filter(Boolean).join(' ');if(BLOCKED.test(label))return{blocked:true,provider:'cloudflare-scout'};
