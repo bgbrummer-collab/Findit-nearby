@@ -26,8 +26,8 @@ async function identifyWithLlava(image,env){
   try{
     const bytes=[...new Uint8Array(await image.arrayBuffer())];
     const out=await env.AI.run('@cf/llava-hf/llava-1.5-7b-hf',{image:bytes,prompt:'Read the visible words on this retail product and identify it. Return ONLY JSON: {"name":"","brand":"","model":"","object":"","category":"","retailCategory":"","searchQuery":"","confidence":0}. Do not guess text you cannot see.',max_tokens:320});
-    const raw=clean(out?.description||out?.response||out?.answer||out?.result||out),m=raw.match(/\{[\s\S]*\}/);if(!m)return{identification:null,reason:'CF_LLAVA_NO_JSON',provider:'cloudflare-llava',providerError:raw.slice(0,240)};
-    const v=normalizeVision(JSON.parse(m[0]));if(!v?.name&&!v?.object)return{identification:null,reason:'CF_LLAVA_EMPTY_IDENTITY',provider:'cloudflare-llava'};
+    const raw=clean(out?.description||out?.response||out?.answer||out?.result||out),m=raw.match(/\{[\s\S]*\}/);let parsed=null;if(m){try{parsed=JSON.parse(m[0])}catch{}}if(!parsed&&raw&&raw.length>=12&&!/^\[object/i.test(raw))parsed={name:raw,object:raw,searchQuery:raw,confidence:0.62};if(!parsed)return{identification:null,reason:'CF_LLAVA_NO_PRODUCT_TEXT',provider:'cloudflare-llava',providerError:raw.slice(0,240)};
+    const v=normalizeVision(parsed);if(!v?.name&&!v?.object)return{identification:null,reason:'CF_LLAVA_EMPTY_IDENTITY',provider:'cloudflare-llava'};
     const label=[v.name,v.brand,v.model,v.object,v.category].filter(Boolean).join(' ');if(BLOCKED.test(label))return{blocked:true,provider:'cloudflare-llava'};
     return{identification:{...v,confidence:Number.isFinite(Number(v.confidence))?Math.max(0,Math.min(1,Number(v.confidence))):0.7,identificationMethod:'cloudflare-llava',userConfirmed:false},provider:'cloudflare-llava'};
   }catch(e){return{identification:null,reason:'CF_LLAVA_FAILED',provider:'cloudflare-llava',providerError:clean(e?.message||String(e)).slice(0,300)}}
