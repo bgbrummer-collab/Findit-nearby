@@ -1,8 +1,8 @@
 name: Live User Image Production Matrix
 
 concurrency:
-  group: findit-live-ai-production
-  cancel-in-progress: false
+  group: findit-live-user-image-production-matrix
+  cancel-in-progress: true
 on:
   push:
     branches: [main]
@@ -12,7 +12,7 @@ permissions:
 jobs:
   live-matrix:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -31,3 +31,7 @@ jobs:
         env:
           FINDIT_URL: https://findit-nearby.bgbrummer.workers.dev/
         run: node tests/live-user-image-production-matrix.mjs
+      - name: Verify real user value after matrix
+        env:
+          FINDIT_URL: https://findit-nearby.bgbrummer.workers.dev/
+        run: node tests/live-user-value.mjs
