@@ -59,5 +59,7 @@ jobs:
           timeout --signal=TERM --kill-after=5s 120s node tests/user-pov-hardening-regression.mjs
           timeout --signal=TERM --kill-after=5s 120s node tests/current-find-relevance-regression.mjs
           timeout --signal=TERM --kill-after=5s 45s node tests/upload-button-user-regression.mjs
-          grep -v "^\['Hoverboard'" tests/live-user-upload-matrix.mjs | sed 's/#search/#fxSearchNow/g' > tests/live-user-upload-safe.mjs
-          timeout --signal=TERM --kill-after=5s 420s node tests/live-user-upload-safe.mjs
+          # Photo/provider production coverage runs in the dedicated live-photo and
+          # five-image matrix workflows. Keep this suite focused on interaction
+          # responsiveness so it does not duplicate vision traffic and trigger
+          # provider throttling after the interaction checks have passed.
