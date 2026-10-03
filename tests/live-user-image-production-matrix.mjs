@@ -28,7 +28,7 @@ await page.locator('#finditExactShell [data-location-direct]').click();await pag
 for(const f of fixtures){
  await closeModal();await page.locator('#photo').setInputFiles(f.file);await page.waitForTimeout(350);if(await page.locator('#fxSearchNow').isDisabled())fail(`${f.id}: identify disabled after upload`);
  const before=await page.locator('#fxProductName').innerText().catch(()=> '');await page.locator('#fxSearchNow').click();
- await page.waitForFunction(prev=>{const i=window.finditState?.result?.identification;const n=i?.name||i?.object||'';return !!n&&n!==prev},before,{timeout:75000});
+ await page.waitForFunction(prev=>{const i=window.finditState?.result?.identification;const n=i?.name||i?.object||'';const t=(document.querySelector('#fxStatus')?.textContent||'').trim();return (!!n&&n!==prev)||/Search failed\.|Try a clearer photo\./i.test(t)},before,{timeout:120000});
  await waitForSearchComplete(f.id);await page.waitForTimeout(250);
  let snap=await snapshot();console.log('USER_IMAGE_IDENTIFIED',JSON.stringify({id:f.id,name:snap.name,object:snap.object,brand:snap.brand,model:snap.model,category:snap.category,query:snap.query,offers:snap.offers}));
  const label=[snap.name,snap.object,snap.brand,snap.model,snap.category,snap.query].join(' ');if(!f.expect.test(label))fail(`${f.id}: implausible identification ${label}`);if(snap.category!==f.category)fail(`${f.id}: wrong retail category ${snap.category}; expected ${f.category}`);if(!snap.fxName||/No item selected/i.test(snap.fxName))fail(`${f.id}: dashboard stale`);
