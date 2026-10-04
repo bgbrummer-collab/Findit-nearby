@@ -11,10 +11,11 @@ function technical(){
 async function send(payload,statusEl,button){
  const old=button?.textContent;if(button){button.disabled=true;button.textContent='Sending…'};if(statusEl){statusEl.textContent='Sending…';statusEl.classList.remove('error')}
  try{
+  if(statusEl){delete statusEl.dataset.sent}
   const r=await fetch('/api/feedback',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...payload,technical:technical()})});
   const d=await r.json().catch(()=>({}));
   if(!r.ok||d.ok!==true||d.delivered===false)throw new Error(d.error||d.message||'Could not send');
-  if(statusEl)statusEl.textContent=payload.topic==='idea'?'Feature suggestion sent ✓':'Feedback sent ✓';
+  if(statusEl){statusEl.textContent=payload.topic==='idea'?'Feature suggestion sent ✓':'Feedback sent ✓';statusEl.dataset.sent='1'}
   return true;
  }catch(e){if(statusEl){statusEl.textContent='Could not send right now. Please try again.';statusEl.classList.add('error')}return false}
  finally{if(button){button.disabled=false;button.textContent=old||'Send'}}
