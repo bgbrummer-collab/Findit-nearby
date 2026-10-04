@@ -9,6 +9,7 @@ const fixtures=[
  {id:'glasses',src:'tests/user-images/glasses.jpg.b64',ext:'jpg',category:'eyewear',expect:/glass|eyeglass|spectacle|frame|optical|eyewear/i}
 ];
 for(const f of fixtures){f.file=`/tmp/findit-${f.id}.${f.ext}`;fs.writeFileSync(f.file,Buffer.from(fs.readFileSync(f.src,'utf8').trim(),'base64'))}
+console.log('FIXTURE_SHA256_REQUESTED');
 const browser=await chromium.launch({headless:true});
 const ctx=await browser.newContext({viewport:{width:1440,height:900},geolocation:{latitude:-25.7479,longitude:28.2293},permissions:['geolocation','clipboard-read','clipboard-write']});
 const page=await ctx.newPage();page.setDefaultTimeout(120000);const pageErrors=[];page.on('pageerror',e=>{pageErrors.push(e.message);console.log('PAGE_ERROR',e.message)});
