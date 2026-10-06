@@ -46,6 +46,8 @@ function applySelectedFile(file){
  const box=$('#fxProductImage');if(box&&p?.src)box.innerHTML=`<img src="${esc(p.src)}" alt="Selected product">`;
  const search=$('#search');if(search)search.disabled=false;
  const fx=$('#fxSearchNow');if(fx)fx.disabled=false;
+ // Mirror camera selections into the legacy photo input because the native search pipeline reads #photo.
+ try{if(file&&p){const dt=new DataTransfer();dt.items.add(file);p.files=dt.files}}catch{}
  const status=st?.coords?'New image and location ready. Identify it now.':'New image ready. Identify it now.';
  if($('#status'))$('#status').textContent=status;if($('#fxStatus'))$('#fxStatus').textContent=status;
  // Keep the selected file on the native input until identification finishes.
