@@ -1,8 +1,8 @@
 FindIt production audit
-Commit: 030e71d83c9499867bbb4922fe7c3fcf8e71d869
+Commit: 19cd44e0a901c773e6f2f01591f2b179d6d17648
 Release smoke: PASS (exit 0)
-Dashboard readiness: PASS (exit 0)
-Every dashboard function: FAIL (exit 1)
+Dashboard readiness: FAIL (exit 1)
+Every dashboard function: PASS (exit 0)
 Current dashboard real-user audit: PASS (exit 0)
 
 --- release smoke ---
@@ -40,11 +40,13 @@ FINDIT_STABLE_PIPELINE_SMOKE_PASS
 [PASS] 390px upload control opens chooser and transfers file
 [PASS] 390px selected image enables search
 [PASS] 390px location control works
-[PASS] 390px identify returns to dashboard not action menu
-[PASS] 390px result mirrors into dashboard
+[FAIL] 390px identify returns to dashboard not action menu page.waitForFunction: Timeout 30000ms exceeded.
+[FAIL] 390px result mirrors into dashboard page.waitForFunction: Timeout 30000ms exceeded.
 [PASS] 390px no uncaught JS errors
 
-FINDIT_DASHBOARD_READINESS_PASS
+READINESS FAILURES
+390px identify returns to dashboard not action menu: page.waitForFunction: Timeout 30000ms exceeded.
+390px result mirrors into dashboard: page.waitForFunction: Timeout 30000ms exceeded.
 
 --- every dashboard function ---
 [PASS] 1440px dashboard visible
@@ -75,9 +77,9 @@ FINDIT_DASHBOARD_READINESS_PASS
 [PASS] 390px upload chooser opens and transfers file
 [PASS] 390px camera chooser opens and transfers file
 [PASS] 390px location action works
-[FAIL] 390px identify action works page.waitForFunction: Timeout 6000ms exceeded.
+[PASS] 390px identify action works
 [PASS] 390px scan returns directly to dashboard
-[FAIL] 390px product result mirrors into dashboard page.waitForFunction: Timeout 6000ms exceeded.
+[PASS] 390px product result mirrors into dashboard
 [PASS] 390px nav home responds
 [PASS] 390px nav search responds
 [PASS] 390px nav nearby responds
@@ -96,11 +98,9 @@ FINDIT_DASHBOARD_READINESS_PASS
 [PASS] 390px no duplicate ids
 [PASS] 390px no uncaught JS errors
 
-46 PASS / 2 FAIL
+48 PASS / 0 FAIL
 
-FUNCTION FAILURES
-390px identify action works: page.waitForFunction: Timeout 6000ms exceeded.
-390px product result mirrors into dashboard: page.waitForFunction: Timeout 6000ms exceeded.
+FINDIT_ALL_DASHBOARD_FUNCTIONS_PASS
 
 --- current dashboard real-user audit ---
 PASS: desktop shell is visible
