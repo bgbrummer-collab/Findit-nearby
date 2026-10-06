@@ -1,8 +1,8 @@
 FindIt production audit
-Commit: 55115cdc1996f285a4222c891af44759505b77b6
+Commit: 030e71d83c9499867bbb4922fe7c3fcf8e71d869
 Release smoke: PASS (exit 0)
 Dashboard readiness: PASS (exit 0)
-Every dashboard function: PASS (exit 0)
+Every dashboard function: FAIL (exit 1)
 Current dashboard real-user audit: PASS (exit 0)
 
 --- release smoke ---
@@ -75,9 +75,9 @@ FINDIT_DASHBOARD_READINESS_PASS
 [PASS] 390px upload chooser opens and transfers file
 [PASS] 390px camera chooser opens and transfers file
 [PASS] 390px location action works
-[PASS] 390px identify action works
+[FAIL] 390px identify action works page.waitForFunction: Timeout 6000ms exceeded.
 [PASS] 390px scan returns directly to dashboard
-[PASS] 390px product result mirrors into dashboard
+[FAIL] 390px product result mirrors into dashboard page.waitForFunction: Timeout 6000ms exceeded.
 [PASS] 390px nav home responds
 [PASS] 390px nav search responds
 [PASS] 390px nav nearby responds
@@ -96,9 +96,11 @@ FINDIT_DASHBOARD_READINESS_PASS
 [PASS] 390px no duplicate ids
 [PASS] 390px no uncaught JS errors
 
-48 PASS / 0 FAIL
+46 PASS / 2 FAIL
 
-FINDIT_ALL_DASHBOARD_FUNCTIONS_PASS
+FUNCTION FAILURES
+390px identify action works: page.waitForFunction: Timeout 6000ms exceeded.
+390px product result mirrors into dashboard: page.waitForFunction: Timeout 6000ms exceeded.
 
 --- current dashboard real-user audit ---
 PASS: desktop shell is visible
