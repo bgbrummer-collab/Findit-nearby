@@ -1,5 +1,5 @@
 FindIt production audit
-Commit: fb521d4da1cf0d4ddc599718f47870fa7461f03c
+Commit: 253f0568b9c00538f587701cfe8f2d227a186baa
 Release smoke: PASS (exit 0)
 Dashboard readiness: FAIL (exit 1)
 Every dashboard function: FAIL (exit 1)
@@ -33,8 +33,8 @@ FINDIT_STABLE_PIPELINE_SMOKE_PASS
 [PASS] 1440px upload control opens chooser and transfers file
 [PASS] 1440px selected image enables search
 [PASS] 1440px location control works
-[PASS] 1440px identify returns to dashboard not action menu
-[PASS] 1440px result mirrors into dashboard
+[FAIL] 1440px identify returns to dashboard not action menu page.waitForFunction: Timeout 30000ms exceeded.
+[FAIL] 1440px result mirrors into dashboard page.waitForFunction: Timeout 30000ms exceeded.
 [PASS] 1440px no uncaught JS errors
 [PASS] 390px dashboard shell visible
 node:internal/process/promises:394
