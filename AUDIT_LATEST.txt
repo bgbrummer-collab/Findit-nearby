@@ -1,5 +1,5 @@
 FindIt production audit
-Commit: 3ffe760e7956230efcadceb154b7fd18557255c7
+Commit: d023772a17f1a4865e9b076eca98d603542c2ae8
 Release smoke: PASS (exit 0)
 Dashboard readiness: FAIL (exit 1)
 Every dashboard function: FAIL (exit 1)
@@ -98,24 +98,6 @@ waiting for event "filechooser"
 Node.js v22.23.3
 
 --- current dashboard real-user audit ---
-    - <aside class="fx-side">…</aside> intercepts pointer events
-  - retrying click action
-    - waiting 500ms
-
-FAIL: mobile Compare Prices opens locator.click: Timeout 5000ms exceeded.
-Call log:
-  - waiting for locator('#finditExactShell [data-fx="compare"]:visible').first()
-    - locator resolved to <article data-fx="compare" data-wired="single-owner">…</article>
-  - attempting click action
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
-    - <aside class="fx-side">…</aside> intercepts pointer events
-  - retrying click action
-    - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
     - done scrolling
     - <button data-fxnav="search">…</button> from <aside class="fx-side">…</aside> subtree intercepts pointer events
   - retrying click action
@@ -169,6 +151,13 @@ Call log:
     - <aside class="fx-side">…</aside> intercepts pointer events
   - retrying click action
     - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="fx-brand">…</div> from <aside class="fx-side">…</aside> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
 
 PASS: mobile Settings responds
 FAIL: mobile Ask FindIt entry point responds locator.click: Timeout 5000ms exceeded.
@@ -190,7 +179,7 @@ Call log:
       - <button data-fxnav="compare">…</button> from <aside class="fx-side">…</aside> subtree intercepts pointer events
     - retrying click action
       - waiting 100ms
-    7 × waiting for element to be visible, enabled and stable
+    8 × waiting for element to be visible, enabled and stable
       - element is visible, enabled and stable
       - scrolling into view if needed
       - done scrolling
@@ -274,6 +263,13 @@ Call log:
     - <aside class="fx-side">…</aside> intercepts pointer events
   - retrying click action
     - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - <div class="fx-brand">…</div> from <aside class="fx-side">…</aside> subtree intercepts pointer events
+  - retrying click action
+    - waiting 500ms
 
 FAIL: mobile bottom-card buttons respond locator.click: Timeout 5000ms exceeded.
 Call log:
@@ -335,6 +331,10 @@ Call log:
     - <aside class="fx-side">…</aside> intercepts pointer events
   - retrying click action
     - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
 
 PASS: mobile no uncaught JS errors
 CURRENT_DASHBOARD_REAL_USER_RESULT 39 PASS / 5 FAIL
