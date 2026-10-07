@@ -1,5 +1,5 @@
 FindIt production audit
-Commit: b98034ec5553184cabfe3c86e2070fc2245a74c8
+Commit: 118ad7a51cc26dd7aa45e76c90d429f71ff855a7
 Release smoke: PASS (exit 0)
 Dashboard readiness: FAIL (exit 1)
 Every dashboard function: FAIL (exit 1)
@@ -29,69 +29,33 @@ Current dashboard real-user audit: PASS (exit 0)
 FINDIT_STABLE_PIPELINE_SMOKE_PASS
 
 --- dashboard readiness ---
-[PASS] 1440px dashboard shell visible
-[PASS] 1440px upload control opens chooser and transfers file
-[PASS] 1440px selected image enables search
-[PASS] 1440px location control works
-[PASS] 1440px identify returns to dashboard not action menu
-[PASS] 1440px result mirrors into dashboard
-[PASS] 1440px no uncaught JS errors
-[PASS] 390px dashboard shell visible
-node:internal/process/promises:394
-    triggerUncaughtException(err, true /* fromPromise */);
+node:internal/modules/run_main:123
+    triggerUncaughtException(
     ^
 
-page.waitForEvent: Timeout 5000ms exceeded while waiting for event "filechooser"
-=========================== logs ===========================
-waiting for event "filechooser"
-============================================================
-    at /home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-readiness.mjs:13:113
-    at check (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-readiness.mjs:5:38)
-    at run (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-readiness.mjs:13:8)
-    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-readiness.mjs:19:36 {
+page.waitForSelector: Timeout 12000ms exceeded.
+Call log:
+  - waiting for locator('#finditExactShell [data-upload-picker="photo"]') to be visible
+
+    at run (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-readiness.mjs:11:159)
+    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-readiness.mjs:19:1 {
   name: 'TimeoutError'
 }
 
 Node.js v22.23.3
 
 --- every dashboard function ---
-[PASS] 1440px dashboard visible
-[PASS] 1440px upload chooser opens and transfers file
-[PASS] 1440px camera chooser opens and transfers file
-[PASS] 1440px location action works
-[PASS] 1440px identify action works
-[PASS] 1440px scan returns directly to dashboard
-[PASS] 1440px product result mirrors into dashboard
-[PASS] 1440px nav home responds
-[PASS] 1440px nav search responds
-[PASS] 1440px nav nearby responds
-[PASS] 1440px nav compare responds
-[PASS] 1440px nav deals responds
-[PASS] 1440px nav saved responds
-[PASS] 1440px nav history responds
-[PASS] 1440px nav alerts responds
-[PASS] 1440px nav feedback responds
-[PASS] 1440px action product responds
-[PASS] 1440px action compare responds
-[PASS] 1440px action nearby responds
-[PASS] 1440px Ask FindIt entry point responds
-[PASS] 1440px premium entry point responds
-[PASS] 1440px feedback form present and usable
-[PASS] 1440px no duplicate ids
-[PASS] 1440px no uncaught JS errors
-[PASS] 390px dashboard visible
-node:internal/process/promises:394
-    triggerUncaughtException(err, true /* fromPromise */);
+node:internal/modules/run_main:123
+    triggerUncaughtException(
     ^
 
-page.waitForEvent: Timeout 5000ms exceeded while waiting for event "filechooser"
-=========================== logs ===========================
-waiting for event "filechooser"
-============================================================
-    at /home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:15:91
-    at check (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:5:41)
-    at audit (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:15:7)
-    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:28:38 {
+page.waitForSelector: Timeout 12000ms exceeded.
+Call log:
+  - waiting for locator('#finditExactShell [data-upload-picker="photo"]') to be visible
+
+    at setup (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:11:158)
+    at async audit (/home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:13:88)
+    at async file:///home/runner/work/Findit-nearby/Findit-nearby/tests/dashboard-all-functions.mjs:28:1 {
   name: 'TimeoutError'
 }
 
