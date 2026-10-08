@@ -28,7 +28,7 @@ async function finditDetectCountry(){
   }catch(e){console.warn("Currency conversion unavailable",e)}
 }
 function finditFormatFeedPrice(amount,currency="ZAR"){
-  if(amount==null||!Number.isFinite(Number(amount)))return "Price unavailable";
+  if(amount==null||!Number.isFinite(Number(amount))||Number(amount)<=0)return "Price unavailable";
   try{return new Intl.NumberFormat(undefined,{style:"currency",currency}).format(Number(amount))}
   catch{return `${currency} ${Number(amount).toFixed(2)}`}
 }
