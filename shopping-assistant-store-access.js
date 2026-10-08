@@ -30,6 +30,22 @@
         host.appendChild(a);
       }
     }
+    if(modal&&official&&official.startsWith('https://')){
+      const host=modal.querySelector('.fx-shop-modal-body,.fx-modal-body,.modal-content')||modal;
+      let box=modal.querySelector('[data-findit-site-check]');
+      if(!box){box=document.createElement('div');box.dataset.finditSiteCheck='1';box.style.cssText='margin:12px 0;font-size:14px;line-height:1.5;color:#c4d9e9';host.appendChild(box)}
+      box.textContent='Checking published retailer website details…';
+      fetch('/api/store-website-check',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({website:official,name:s.name})})
+        .then(r=>r.json()).then(d=>{
+          if(!box.isConnected)return;
+          const fields=d.verifiedFields||{},items=[['Phone',fields.phone],['Opening hours',fields.openingHours],['Published address',fields.address]].filter(x=>x[1]);
+          box.replaceChildren();
+          const heading=document.createElement('strong');heading.textContent='Retailer website information';box.appendChild(heading);
+          if(items.length){for(const [label,value] of items){const p=document.createElement('p');p.style.margin='6px 0';p.textContent=label+': '+value;box.appendChild(p)}}
+          else{const p=document.createElement('p');p.textContent='No matching published store details could be verified automatically.';box.appendChild(p)}
+          const note=document.createElement('small');note.textContent='Source: '+(d.source||'Retailer website')+(d.checkedAt?' · Checked '+new Date(d.checkedAt).toLocaleString():'')+' · Confirm the exact branch.';box.appendChild(note);
+        }).catch(()=>{if(box.isConnected)box.textContent='Retailer website check unavailable. Use the website link to confirm details.'});
+    }
     return !!modal;
   }
   function bindButton(b){
