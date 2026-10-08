@@ -27,11 +27,11 @@
     const s=app();
     // The current completed Find owns the screen. Product-intelligence offers are fallback only,
     // never merged into a newer Find, so stale prices cannot contaminate plans or alerts.
-    const rows=Array.isArray(s.offers)&&s.offers.length?s.offers:(Array.isArray(window.productIntelligence?.offers)?window.productIntelligence.offers:[]);
+    const rows=Array.isArray(s.offers)&&s.offers.length?s.offers:(s.result?.identification&&Array.isArray(window.productIntelligence?.offers)?window.productIntelligence.offers:[]);
     const seen=new Set(),out=[];
     for(const o of rows){
       if(!o||o.exactProductMatch===false)continue;
-      const verified=o.verified===true||o.sourcePageVerified===true||o.priceComparisonVerified===true||o.searchGroundedVerified===true||o.exactProductMatch===true;
+      const verified=o.verified===true||o.sourcePageVerified===true||o.priceComparisonVerified===true||o.searchGroundedVerified===true;
       if(!verified)continue;
       const retailer=String(o.retailer?.name||o.retailer||o.store||o.seller||'').trim();
       const key=norm(retailer)+'|'+String(o.url||o.productUrl||'')+'|'+String(o.price||'');
