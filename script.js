@@ -238,10 +238,10 @@ function renderPremiumCompare(){
   const base=sortedPremiumStores();
   const selected=base.filter((_,i)=>premiumCompareSelection.has(i));
   const list=(selected.length?selected:base).slice(0,4);
-  if(!list.length){el.innerHTML='<p class="muted">Run a FindIt search first. Nearby stores from that search will appear here.</p>';return}
+  if(!list.length){el.innerHTML='<p class="muted">No nearby stores to compare yet. Price comparisons require actual retailer offers for the same product; FindIt will not guess prices.</p>';return}
   el.innerHTML=list.map((s,i)=>{
     const dir=`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${s.lat},${s.lon}`)}`;
-    return `<article class="compare-card ${i===0?"best":""}"><small>${i===0?"Closest in this comparison":"Retailer"}</small><h3>${esc(s.name)}</h3><div class="compare-distance">${Number(s.distanceKm).toFixed(1)} km</div><small>${esc(s.address||s.type||"Consumer retailer")}</small><br><small>Exact stock not verified</small><br><a href="${dir}" target="_blank" rel="noopener noreferrer">Directions →</a></article>`
+    return `<article class="compare-card ${i===0?"best":""}"><small>${i===0?"Closest nearby store (not cheapest)":"Nearby store (price unverified)"}</small><h3>${esc(s.name)}</h3><div class="compare-distance">${Number(s.distanceKm).toFixed(1)} km</div><small>${esc(s.address||s.type||"Consumer retailer")}</small><br><small>Exact stock not verified</small><br><a href="${dir}" target="_blank" rel="noopener noreferrer">Directions →</a></article>`
   }).join("");
 }
 function premiumRadius(v){
