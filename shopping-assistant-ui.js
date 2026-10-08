@@ -18,7 +18,7 @@
 
   function product(){
     const s=app(),i=s.result?.identification||s.identification||{};
-    const name=String(i.name||i.product||i.object||s.query||'Current item').trim();
+    const name=String(i.name||i.product||i.object||s.query||'').trim();
     const brand=String(i.brand||'').trim(),model=String(i.model||'').trim();
     return{name,brand,model,confidence:n(i.confidence),key:norm([brand,model,name].filter(Boolean).join(' '))||'current-item'};
   }
@@ -66,12 +66,12 @@
   }
   function historySummary(key){const arr=read(LS.history,{})[key]||[];if(!arr.length)return'';const vals=arr.map(x=>n(x.price)).filter(v=>v>0);if(!vals.length)return`${arr.length} checks`;const last=arr[arr.length-1];return`${arr.length} checks · low ${money(Math.min(...vals),last.currency)} · high ${money(Math.max(...vals),last.currency)}`}
 
-  function addCurrent(){const item=snapshot(),list=read(LS.list,[]),i=list.findIndex(x=>x.key===item.key);if(i>=0)list[i]=item;else list.push(item);write(LS.list,list);renderList();toast(i>=0?'Shopping list item updated':'Added to Shopping List')}
+  function addCurrent(){const item=snapshot();if(!item.name){toast('Identify a product before adding it to your shopping list');return}const list=read(LS.list,[]),i=list.findIndex(x=>x.key===item.key);if(i>=0)list[i]=item;else list.push(item);write(LS.list,list);renderList();toast(i>=0?'Shopping list item updated':'Added to Shopping List')}
   function removeCurrent(key){write(LS.list,read(LS.list,[]).filter(x=>x.key!==key));renderList()}
   function clearList(){write(LS.list,[]);renderList();toast('Shopping List cleared')}
 
   function watchCurrent(){
-    const p=product(),o=bestOffer(),list=read(LS.watch,[]),rec={...p,updatedAt:Date.now(),lastPrice:n(o?.price),lastStock:stockYes(o),retailer:o?._retailer||'',currency:o?.currency||'ZAR'};
+    const p=product();if(!p.name){toast('Identify a product before adding a watch');return}const o=bestOffer(),list=read(LS.watch,[]),rec={...p,updatedAt:Date.now(),lastPrice:n(o?.price),lastStock:stockYes(o),retailer:o?._retailer||'',currency:o?.currency||'ZAR'};
     const i=list.findIndex(x=>x.key===p.key);if(i>=0)list[i]={...list[i],...rec};else list.push({...rec,createdAt:Date.now()});write(LS.watch,list);recordHistory();renderWatch();toast(i>=0?'Watch updated':'Item added to Watch List');
   }
   function unwatch(key){write(LS.watch,read(LS.watch,[]).filter(x=>x.key!==key));renderWatch()}
@@ -112,7 +112,7 @@
     const modes=`<div class="fx-plan-modes"><button data-plan-mode="balanced" class="${mode==='balanced'?'active':''}">Best overall</button><button data-plan-mode="cheapest" class="${mode==='cheapest'?'active':''}">Cheapest</button>${hasPhysical?`<button data-plan-mode="shortest" class="${mode==='shortest'?'active':''}">Shortest trip</button>`:''}</div>`;
     const lines=list.map(x=>`<div class="fx-shop-line"><div><strong>${esc(x.name)}</strong><small>${esc([x.brand,x.model].filter(Boolean).join(' '))}</small></div><button data-remove-list="${esc(x.key)}" type="button">Remove</button></div>`).join('');
     const stops=p.stops.map((s,i)=>`${i+1}. ${esc(s.name)} <small>${esc(s.items.join(', '))}</small>`).join('<br>');
-    const planTitle=hasPhysical?'Optimised verified shopping plan':'Online-only plan',planNote=hasPhysical?'FindIt optimises only from verified prices and available store coordinates. Route distance is an estimate; Maps provides the final live route.':'This is an online-only plan because no physical branch coordinates are verified. FindIt will not invent a store trip or route.';
+    const planTitle=hasPhysical?'Optimised verified shopping plan':'No verified shopping route yet',planNote=hasPhysical?'FindIt optimises only from verified prices and available store coordinates. Route distance is an estimate; Maps provides the final live route.':'No price-verified retailer is available for this shopping list yet. Nearby stores may still be visible elsewhere, but their stock and prices are unverified.';
     body.innerHTML=lines+`<div class="fx-plan"><strong>${planTitle}</strong>${modes}<p><b>${p.stops.length} ${hasPhysical?`store${p.stops.length===1?'':'s'}`:`online retailer${p.stops.length===1?'':'s'}`}</b> · ${money(p.total,'ZAR')}${hasPhysical&&p.distance?` · approx. ${p.distance.toFixed(1)} km route`:''}</p>${stops?`<p class="fx-route">${stops}</p>`:''}${hasPhysical&&p.url?`<a class="fx-route-link" href="${esc(p.url)}" target="_blank" rel="noopener">Open trip in Maps</a>`:''}${p.missing.length?`<p class="fx-warn">Missing verified prices for: ${esc(p.missing.join(', '))}</p>`:''}<small>${planNote}</small></div><button id="fxClearShoppingList" class="fx-clear-list" type="button">Clear list</button>`;
     $$('[data-remove-list]',body).forEach(b=>b.onclick=()=>removeCurrent(b.dataset.removeList));
     $$('[data-plan-mode]',body).forEach(b=>b.onclick=()=>{write(LS.mode,b.dataset.planMode);renderList()});
