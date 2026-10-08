@@ -33,7 +33,7 @@ function finditFormatFeedPrice(amount,currency="ZAR"){
   catch{return `${currency} ${Number(amount).toFixed(2)}`}
 }
 function finditFormatLocalEstimate(amount,sourceCurrency="ZAR"){
-  if(amount==null||sourceCurrency===finditUserCurrency)return null;
+  if(amount==null||!Number.isFinite(Number(amount))||Number(amount)<=0||sourceCurrency===finditUserCurrency)return null;
   // Current first feed is ZAR. Other source currencies stay unconverted unless a rate exists.
   if(sourceCurrency!=="ZAR"||!finditFx[finditUserCurrency])return null;
   const n=Number(amount)*finditFx[finditUserCurrency];
