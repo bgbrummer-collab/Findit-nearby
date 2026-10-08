@@ -67,6 +67,13 @@ async function handleStoreWebsiteCheck(request){
   const wanted=String(b.name||'').toLowerCase().replace(/[^a-z0-9]/g,'');
   const candidate=nodes.find(x=>{const types=Array.isArray(x['@type'])?x['@type']:[x['@type']];const business=types.some(t=>/Store|LocalBusiness|Shop|Pharmacy/i.test(String(t||'')));const found=String(x.name||'').toLowerCase().replace(/[^a-z0-9]/g,'');return business&&wanted&&found&&found.length>=4&&(wanted===found||wanted.includes(found)&&found.length>=Math.max(4,Math.floor(wanted.length*.8))||found.includes(wanted)&&wanted.length>=Math.max(4,Math.floor(found.length*.8)))});
   if(candidate){if(typeof candidate.telephone==='string')fields.phone=decode(candidate.telephone);if(typeof candidate.openingHours==='string')fields.openingHours=decode(candidate.openingHours);if(Array.isArray(candidate.openingHours))fields.openingHours=decode(candidate.openingHours.join('; '));const a=candidate.address;if(a&&typeof a==='object'){fields.address=decode([a.streetAddress,a.addressLocality,a.addressRegion].filter(Boolean).join(', '))}}
+  // A retailer chain's corporate details are not verified details for a nearby branch.
+  // Publish extracted fields only if the structured address is tied to the requested branch.
+  const requestedAddress=String(b.address||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+  const publishedAddress=String(fields.address||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+  const tokens=requestedAddress.split(' ').filter(x=>x.length>=4&&!/^(street|road|shop|mall|south|africa|pretoria|centre|center)$/.test(x));
+  const branchMatched=!!(requestedAddress&&publishedAddress&&tokens.length&&tokens.some(t=>publishedAddress.includes(t)));
+  if(!branchMatched){delete fields.phone;delete fields.openingHours;delete fields.address;}
   return json({ok:true,checked:true,website:u.origin,verifiedFields:fields,source:'Retailer website JSON-LD',checkedAt:new Date().toISOString(),message:Object.keys(fields).length?'Published business details found. Confirm the correct branch before relying on these details.':'No matching business details were published in readable structured data.'});
  }catch{return json({ok:true,checked:false,website:u.origin,verifiedFields:{},message:'Website could not be checked automatically.'})}
 }
