@@ -18,7 +18,7 @@
     // Never turn an arbitrary website into a claim of verified branch stock.
     const modal=document.querySelector('#fxShopModal');
     if(modal){
-      const candidate=String(s.website||s.url||'').trim();
+      const candidate=String(s.website||'').trim();
       let official=null;
       try{const u=new URL(candidate.startsWith('www.')?'https://'+candidate:candidate);if(['https:','http:'].includes(u.protocol))official=u.href}catch{}
       if(official&&!modal.querySelector('[data-findit-official-site]')){
