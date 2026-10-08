@@ -62,7 +62,7 @@ async function handleStoreWebsiteCheck(request){
   if(!response.ok||!String(response.headers.get('content-type')||'').includes('text/html'))return json({ok:true,checked:true,website:u.origin,verifiedFields:{},message:'The website did not expose readable store information.'});
   const html=(await response.text()).slice(0,250000),fields={};
   const decode=x=>String(x||'').replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/<[^>]*>/g,'').trim().slice(0,300);
-  const scripts=[...html.matchAll(/<script\\b[^>]*type=["']application\\/ld\\+json["'][^>]*>([\\s\\S]*?)<\\/script>/gi)].slice(0,20);
+  const scripts=[...html.matchAll(new RegExp('<script\\b[^>]*type=["\\x27]application/ld\\+json["\\x27][^>]*>([\\s\\S]*?)</script>','gi'))].slice(0,20);
   const nodes=[];for(const match of scripts){try{const parsed=JSON.parse(match[1]);const stack=Array.isArray(parsed)?parsed:[parsed];for(const item of stack){if(item&&typeof item==='object'){nodes.push(item);if(Array.isArray(item['@graph']))nodes.push(...item['@graph'])}}}catch{}}
   const wanted=String(b.name||'').toLowerCase().replace(/[^a-z0-9]/g,'');
   const candidate=nodes.find(x=>{const types=Array.isArray(x['@type'])?x['@type']:[x['@type']];const business=types.some(t=>/Store|LocalBusiness|Shop|Pharmacy/i.test(String(t||'')));const found=String(x.name||'').toLowerCase().replace(/[^a-z0-9]/g,'');return business&&wanted&&found&&found.length>=4&&(wanted===found||wanted.includes(found)&&found.length>=Math.max(4,Math.floor(wanted.length*.8))||found.includes(wanted)&&wanted.length>=Math.max(4,Math.floor(found.length*.8)))});
