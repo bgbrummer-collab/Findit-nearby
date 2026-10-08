@@ -76,7 +76,7 @@ jobs:
 
             const exact=await post('/api/nearby',{lat:-25.7479,lon:28.2293,radiusKm:10,identification:{brand:'Sony',model:'WH-1000XM5',name:'Sony WH-1000XM5 headphones',object:'headphones',searchQuery:'Sony WH-1000XM5 headphones',category:'electronics',retailCategory:'electronics'}}),ed=await exact.json().catch(()=>({}));
             ok(exact.status===200&&ed.ok===true&&Array.isArray(ed.stores),'Exact nearby endpoint responds');
-            ok((ed.stores||[]).every(s=>s.exactProductMatch===true&&s.branchStockVerified===true&&s.stockVerified===true&&s.directionsAvailable===true),'Directions only appear for exact verified branch stock');
+            ok((ed.stores||[]).every(s=>!s.directionsAvailable||(s.exactProductMatch===true&&s.branchStockVerified===true&&s.stockVerified===true)),'Directions only appear for exact verified branch stock');
             ok((ed.stores||[]).every(s=>s.branchPriceVerified===true||s.price==null),'Branch price shown only when branch-verified');
           }catch(e){failures.push(`Smoke test crashed: ${e.message}`)}
           if(failures.length){console.error('\nFAILURES');failures.forEach(f=>console.error('-',f));process.exit(1)}
