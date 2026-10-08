@@ -156,7 +156,7 @@ function v10Share(){
 }
 function v10Manual(){
  v10Open("Manual Search",`<p class="premium-tool-note">Already know the item name? Search it directly.</p><input id="v10ManualQuery" class="v10-input" placeholder="e.g. Nike Air Force 1 Low"><div class="v10-actions"><button id="v10ManualGo">Search item</button></div>`);
- document.getElementById("v10ManualGo").onclick=()=>{const q=document.getElementById("v10ManualQuery").value.trim();if(q)window.open(`https://www.google.com/search?q=${encodeURIComponent(q+" buy near me")}`,"_blank")};
+ document.getElementById("v10ManualGo").onclick=()=>{const q=document.getElementById("v10ManualQuery").value.trim();if(!q)return;v10Close();const input=document.querySelector('#finder input[name="query"],#finder input[type="search"],#searchInput,#productSearchInput');if(input){input.value=q;input.dispatchEvent(new Event("input",{bubbles:true}));input.closest("form")?.requestSubmit();return}window.open(`https://www.google.com/search?q=${encodeURIComponent(q+" buy near me")}`,"_blank")};
 }
 function v10Exact(){
  const x=v10Current();if(!x.query){v10Open("Exact Match","<p>Identify an item first so FindIt has an exact product query.</p>");return}
