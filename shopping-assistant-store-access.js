@@ -35,7 +35,7 @@
       let box=modal.querySelector('[data-findit-site-check]');
       if(!box){box=document.createElement('div');box.dataset.finditSiteCheck='1';box.style.cssText='margin:12px 0;font-size:14px;line-height:1.5;color:#c4d9e9';host.appendChild(box)}
       box.textContent='Checking published retailer website details…';
-      fetch('/api/store-website-check',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({website:official,name:s.name})})
+      fetch('/api/store-website-check',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({website:official,name:s.name,address:s.address||''})})
         .then(r=>r.json()).then(d=>{
           if(!box.isConnected)return;
           const fields=d.verifiedFields||{},items=[['Phone',fields.phone],['Opening hours',fields.openingHours],['Published address',fields.address]].filter(x=>x[1]);
