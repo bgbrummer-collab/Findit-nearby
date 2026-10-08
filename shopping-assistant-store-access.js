@@ -14,7 +14,23 @@
     if(i===lastOpenIndex&&now-lastOpenAt<250&&document.querySelector('#fxShopModal'))return true;
     lastOpenIndex=i;lastOpenAt=now;
     window.finditCheckStore(s);
-    return !!document.querySelector('#fxShopModal');
+    // Surface only retailer links actually supplied by the nearby data provider.
+    // Never turn an arbitrary website into a claim of verified branch stock.
+    const modal=document.querySelector('#fxShopModal');
+    if(modal){
+      const candidate=String(s.website||s.url||'').trim();
+      let official=null;
+      try{const u=new URL(candidate.startsWith('www.')?'https://'+candidate:candidate);if(['https:','http:'].includes(u.protocol))official=u.href}catch{}
+      if(official&&!modal.querySelector('[data-findit-official-site]')){
+        const a=document.createElement('a');a.dataset.finditOfficialSite='1';
+        a.href=official;a.target='_blank';a.rel='noopener noreferrer';
+        a.textContent='Visit retailer website ↗';
+        a.style.cssText='display:block;text-align:center;margin:12px 0;padding:12px;border:1px solid #75d7ef;border-radius:12px;color:#a1e9ff;text-decoration:none;font-weight:700';
+        const host=modal.querySelector('.fx-shop-modal-body,.fx-modal-body,.modal-content')||modal;
+        host.appendChild(a);
+      }
+    }
+    return !!modal;
   }
   function bindButton(b){
     if(!b||b.dataset.shopStoreBound==='1')return;
