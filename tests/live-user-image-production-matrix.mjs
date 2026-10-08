@@ -48,7 +48,7 @@ for(const f of fixtures){
    await page.waitForTimeout(1500);
    snap=await snapshot();
    const unsafeOffers=snap.offers.filter(o=>o.verified===true&&(!(Number(o.price)>0)||o.sourcePageVerified!==true));
-   if(unsafeOffers.length)fail('marc: purported verified offer lacks a positive price or source-page verification');
+   if(unsafeOffers.length)fail('marc: purported verified offer lacks a positive price or source-page verification: '+JSON.stringify(unsafeOffers));
    console.log('MARC_VERIFIED_OFFERS',JSON.stringify(snap.offers.filter(o=>o.verified===true)));
    compareBody=await commerceBody();if(/R\s*0(?:[,.]00)?\b/i.test(compareBody))fail('marc: Compare rendered R0 after live refresh');
  }
