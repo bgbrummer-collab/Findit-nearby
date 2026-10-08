@@ -26,12 +26,12 @@
         a.href=official;a.target='_blank';a.rel='noopener noreferrer';
         a.textContent='Visit retailer website ↗';
         a.style.cssText='display:block;text-align:center;margin:12px 0;padding:12px;border:1px solid #75d7ef;border-radius:12px;color:#a1e9ff;text-decoration:none;font-weight:700';
-        const host=modal.querySelector('.fx-shop-modal-body,.fx-modal-body,.modal-content')||modal;
+        const host=modal.querySelector('.fx-shop-modal,.fx-shop-modal-body,.fx-modal-body,.modal-content')||modal;
         host.appendChild(a);
       }
     }
     if(modal&&official&&official.startsWith('https://')){
-      const host=modal.querySelector('.fx-shop-modal-body,.fx-modal-body,.modal-content')||modal;
+      const host=modal.querySelector('.fx-shop-modal,.fx-shop-modal-body,.fx-modal-body,.modal-content')||modal;
       let box=modal.querySelector('[data-findit-site-check]');
       if(!box){box=document.createElement('div');box.dataset.finditSiteCheck='1';box.style.cssText='margin:12px 0;font-size:14px;line-height:1.5;color:#c4d9e9';host.appendChild(box)}
       box.textContent='Checking published retailer website details…';
