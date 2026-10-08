@@ -21,10 +21,10 @@ await page.evaluate(()=>{
  s.coords={lat:-25.747,lon:28.188};
  s.result={identification:{name:'Test Headphones',brand:'TestBrand',model:'X1',confidence:.95}};
  s.offers=[
-  {retailer:'Retailer A',price:899,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true},
-  {retailer:'Retailer B',price:799,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true}
+  {retailer:'Retailer A',price:899,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true,url:'https://example.com/a/product'},
+  {retailer:'Retailer B',price:799,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true,url:'https://example.com/b/product'}
  ];
- window.productIntelligence={offers:[{retailer:'Stale Retailer',price:1,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true}]};
+ window.productIntelligence={offers:[{retailer:'Stale Retailer',price:1,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true,url:'https://example.com/stale/product'}]};
  s.stores=[
   {name:'Retailer A',distanceKm:1.2,address:'1 Test Road',phone:'+27123456789',website:'https://example.com/a',openingHours:'Mo-Su 08:00-18:00',openNow:true,lat:-25.75,lon:28.19},
   {name:'Retailer B',distanceKm:3.4,address:'2 Test Road',phone:'+27987654321',website:'https://example.com/b',openingHours:'Mo-Su 09:00-17:00',openNow:true,lat:-25.76,lon:28.20}
@@ -63,8 +63,8 @@ if(!/Test Headphones/i.test(watchText)||!/Retailer B/i.test(watchText)){
 }
 await page.evaluate(()=>{
   window.finditState.offers=[
-   {retailer:'Retailer A',price:899,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true},
-   {retailer:'Retailer B',price:699,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true}
+   {retailer:'Retailer A',price:899,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true,url:'https://example.com/a/product'},
+   {retailer:'Retailer B',price:699,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true,url:'https://example.com/b/product'}
   ];
   document.dispatchEvent(new CustomEvent('findit:results-rendered'));
 });
