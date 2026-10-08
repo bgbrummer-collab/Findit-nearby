@@ -67,7 +67,7 @@ async function handleProductInfo(request){
   const norm=t=>String(t||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim(),tokens=norm([brand,model].filter(Boolean).join(' ')||name).split(' ').filter(t=>t.length>2);
   const relevant=t=>{const n=norm(t);if(isAudio&&(!/headset|headphone/.test(n)||/\b(mouse|keyboard|webcam|camera|speaker|controller)\b/.test(n)))return false;const hits=tokens.filter(k=>n.includes(k)).length;return tokens.length?hits>=Math.min(2,tokens.length):true};const pageRelevant=t=>{const n=norm(t);if(isAudio&&!/headset|headphone/.test(n))return false;const hits=tokens.filter(k=>n.includes(k)).length;return tokens.length?hits>=Math.min(2,tokens.length):true};
   const strip=t=>String(t||'').replace(/<!\[CDATA\[|\]\]>/g,'').replace(/<[^>]+>/g,' ').replace(/&amp;/g,'&').replace(/\s+/g,' ').trim();
-  const exactKnown=/marc\s+anthony/i.test(brand+' '+name)&&/conditioner/i.test(name+' '+model)?'https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689':null;
+  const exactKnown=/marc\s+anthony/i.test(brand+' '+name)&&/\b3x\s+moisture\b/i.test(name+' '+model)&&/conditioner/i.test(name+' '+model)?'https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689':null;
   if(exactKnown){
     try{
       let pr=await fetch(exactKnown,{headers:{'user-agent':'Mozilla/5.0 FindItNearby/49.0','accept':'text/html'},signal:AbortSignal.timeout(5500)}).catch(()=>null);
