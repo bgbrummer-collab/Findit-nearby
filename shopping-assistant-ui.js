@@ -88,7 +88,7 @@
 
   function hav(a,b){if(!a||!b)return null;const R=6371,d=Math.PI/180,dLat=(b.lat-a.lat)*d,dLon=(b.lon-a.lon)*d,x=Math.sin(dLat/2)**2+Math.cos(a.lat*d)*Math.cos(b.lat*d)*Math.sin(dLon/2)**2;return 2*R*Math.asin(Math.sqrt(x))}
   function routeDistance(points,start){let total=0,cur=start||null;for(const p of points){if(cur){const d=hav(cur,p);if(d!=null)total+=d}cur=p}return total}
-  function options(item){return(item.offers||[]).filter(o=>n(o.price)>0).sort((a,b)=>Number(a.price)-Number(b.price)).slice(0,5)}
+  function options(item){return(item.offers||[]).filter(o=>{const price=n(o.price);return price!=null&&price>0&&o.retailer&&o.url&&/^https:\/\//i.test(String(o.url))}).sort((a,b)=>Number(a.price)-Number(b.price)).slice(0,5)}
   function origin(){const s=app();const c=coords(s.coords)||coords(s.userLocation)||coords(s.location);return c}
   function score(combo,mode){const price=combo.reduce((t,x)=>t+Number(x.offer.price||0),0),uniq=[...new Map(combo.map(x=>[norm(x.offer.retailer),x])).values()],points=uniq.map(x=>x.offer.lat!=null&&x.offer.lon!=null?{lat:Number(x.offer.lat),lon:Number(x.offer.lon)}:null).filter(Boolean),dist=routeDistance(points,origin()),count=uniq.length;if(mode==='cheapest')return price;if(mode==='shortest')return dist*1000+count*25+price*.005;return price+dist*18+count*35}
   function routeUrl(stops){const pts=stops.map(s=>s.coords).filter(Boolean);if(!pts.length)return'';const o=origin(),dest=pts[pts.length-1],way=pts.slice(0,-1);let url=`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${dest.lat},${dest.lon}`)}`;if(o)url+=`&origin=${encodeURIComponent(`${o.lat},${o.lon}`)}`;if(way.length)url+=`&waypoints=${encodeURIComponent(way.map(x=>`${x.lat},${x.lon}`).join('|'))}`;return url}
@@ -106,7 +106,7 @@
   }
 
   function renderList(){
-    const body=$('#fxShoppingListBody');if(!body)return;const list=read(LS.list,[]);
+    const body=$('#fxShoppingListBody');if(!body)return;const saved=read(LS.list,[]),list=saved.filter(x=>x&&x.name&&String(x.name).trim().toLowerCase()!=='current item');if(list.length!==saved.length)write(LS.list,list);
     if(!list.length){body.innerHTML='<p class="fx-muted">Your shopping list is empty. Add the current Find to start planning.</p>';return}
     const p=buildPlan(),mode=p?.mode||'balanced',hasPhysical=Array.isArray(p?.stops)&&p.stops.some(s=>s?.coords&&Number.isFinite(Number(s.coords.lat))&&Number.isFinite(Number(s.coords.lon)));
     const modes=`<div class="fx-plan-modes"><button data-plan-mode="balanced" class="${mode==='balanced'?'active':''}">Best overall</button><button data-plan-mode="cheapest" class="${mode==='cheapest'?'active':''}">Cheapest</button>${hasPhysical?`<button data-plan-mode="shortest" class="${mode==='shortest'?'active':''}">Shortest trip</button>`:''}</div>`;
