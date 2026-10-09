@@ -79,7 +79,7 @@ async function hydrateIdentifiedPhoto(){
   const [ci,ni]=await Promise.all(tasks);commerce=ci;
   const ri=await json('/api/product-insights',{identification:i,offers:Array.isArray(ci?.offers)?ci.offers:[]},24000).catch(e=>{console.error('FindIt photo product insights failed',e);return null});
   research=ri?.researched===false?null:ri;
-  if(Array.isArray(ci?.offers)){s.offers=ci.offers;window.productIntelligence=ci}
+  if(Array.isArray(ci?.offers)){s.offers=ci.offers;window.productIntelligence=ci}else console.warn('FindIt photo commerce response has no offer list');
   // Do not erase an already truthful nearby result when the optional refresh returns empty.
   if(Array.isArray(ni?.stores))s.stores=ni.stores;else if(coords)console.warn('FindIt photo nearby response has no store list');
   syncAll();saveRecent(i);
