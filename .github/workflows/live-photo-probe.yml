@@ -2,9 +2,14 @@ name: FindIt Live Photo Probe
 on:
   push:
     branches: [main]
+    paths:
+      - 'cloudflare/worker.js'
+      - 'tests/live-photo*'
+      - '.github/workflows/live-photo-probe.yml'
+  workflow_dispatch:
 concurrency:
   group: findit-live-photo-ai
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   photo:

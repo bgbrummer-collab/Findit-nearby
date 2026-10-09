@@ -4,10 +4,6 @@ concurrency:
   group: findit-live-user-image-production-matrix
   cancel-in-progress: true
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
@@ -26,9 +22,6 @@ jobs:
           npm pkg set type=module
           npm install --save-dev playwright@1.55.0
           npx playwright install --with-deps chromium
-      - name: Wait for production deployment
-        if: github.event_name == 'push'
-        run: sleep 70
       - name: Test five real user images against production
         env:
           FINDIT_URL: https://findit-nearby.bgbrummer.workers.dev/
