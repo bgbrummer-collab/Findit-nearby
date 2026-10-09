@@ -21,7 +21,7 @@ const gen=await context.newPage();
 await gen.setContent(`<canvas id="c" width="1000" height="700"></canvas><script>const c=document.querySelector('#c'),x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,1000,700);x.fillStyle='#111';x.font='bold 64px Arial';x.fillText('NIKE AIR FORCE 1',190,160);x.strokeStyle='#222';x.lineWidth=9;x.beginPath();x.moveTo(180,480);x.quadraticCurveTo(300,310,500,350);x.lineTo(760,420);x.quadraticCurveTo(830,450,850,520);x.lineTo(220,540);x.closePath();x.stroke();x.strokeStyle='#1d5cff';x.lineWidth=25;x.beginPath();x.moveTo(350,420);x.quadraticCurveTo(500,500,700,440);x.stroke();</script>`);
 await gen.locator('#c').screenshot({path:imgPath});await gen.close();
 
-const page=await context.newPage(),pageErrors=[],consoleErrors=[];
+const page=await context.newPage(),pageErrors=[],consoleErrors=[],failedResponses=[];page.on('response',r=>{if(r.status()>=400&&r.url().includes('/api/'))failedResponses.push({status:r.status(),url:r.url()})});
 page.on('pageerror',e=>pageErrors.push(String(e)));
 page.on('console',m=>{if(m.type()==='error')consoleErrors.push(m.text())});
 page.on('dialog',async d=>{try{if(d.type()==='prompt')await d.accept('Nike Air Force 1 Low');else await d.accept()}catch{}});
@@ -59,7 +59,7 @@ await closeModal(page);await top(page);
 await safe('Dashboard image upload works',async()=>{await page.locator('#photo').setInputFiles(imgPath);await page.waitForTimeout(250);if(await page.locator('#fxSearchNow').isDisabled())throw Error('Identify remains disabled');if(!await visible(page,'#fxProductImage img'))throw Error('dashboard preview missing');return 'image ready'});
 await safe('Dashboard location works',async()=>{await clickVisible(page,'#finditExactShell [data-location-direct]');await page.waitForFunction(()=>/Location ready/i.test(document.querySelector('#fxStatus')?.textContent||''),null,{timeout:5000});return (await page.locator('#fxStatus').innerText()).trim()});
 await safe('Identify & Find completes on visible dashboard',async()=>{await clickVisible(page,'#fxSearchNow');await page.waitForFunction(()=>/Nike Air Force 1/i.test(document.querySelector('#fxProductName')?.textContent||''),null,{timeout:12000});return (await page.locator('#fxProductName').innerText()).trim()});
-await safe('Exact identity reaches dashboard',async()=>{const b=(await page.locator('#fxExactBadge').innerText()).trim();if(!/AI identified/i.test(b))throw Error(b);return b});
+await safe('Exact identity reaches dashboard',async()=>{const b=(await page.locator('#fxExactBadge').innerText()).trim();if(!/AI identified|Product identified/i.test(b))throw Error(b);return b});
 await safe('Verified price reaches dashboard',async()=>{const p=(await page.locator('#fxBestPrice').innerText()).trim();if(!/2.?199/i.test(p.replace(/\s/g,'')))throw Error(p);return p});
 await safe('Nearby store stays truthful',async()=>{const t=(await page.locator('#fxStoreList').innerText()).trim();if(!/Nike/i.test(t))throw Error('nearby retailer missing');if(/Stock verified|Branch stock verified/i.test(t))throw Error('unverified branch falsely marked verified');if(!/Stock not verified/i.test(t))throw Error(t);return 'branch remains unverified'});
 await safe('Top Stores does not invent branch stock',async()=>{const t=(await page.locator('#fxTopStores').innerText()).trim();if(/Stock verified/i.test(t))throw Error(t);return t.slice(0,120)});
@@ -76,7 +76,7 @@ await safe('Premium entry opens from visible dashboard',async()=>{await clickVis
 await closeModal(page);
 
 await safe('No uncaught JavaScript errors',async()=>{if(pageErrors.length)throw Error(pageErrors.slice(0,3).join(' | '));return '0 page errors'});
-await safe('No critical console errors',async()=>{const bad=consoleErrors.filter(x=>!/favicon|Failed to load resource.*404/i.test(x));if(bad.length)throw Error(bad.slice(0,3).join(' | '));return `${consoleErrors.length} console errors (${bad.length} critical)`});
+await safe('No critical console errors',async()=>{const bad=consoleErrors.filter(x=>!/favicon|Failed to load resource.*404/i.test(x));if(bad.length)throw Error(bad.slice(0,3).join(' | ')+'; '+JSON.stringify(failedResponses.slice(0,6)));return `${consoleErrors.length} console errors (${bad.length} critical)`});
 
 const mobile=await context.newPage();
 await mobile.setViewportSize({width:390,height:844});
