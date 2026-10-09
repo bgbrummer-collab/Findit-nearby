@@ -8,7 +8,7 @@ let commerce=null,research=null,busy=false,owned=false;
 const validUrl=v=>{try{return /^https?:$/.test(new URL(v).protocol)}catch{return false}};
 const money=o=>{if(!Number.isFinite(Number(o?.price)))return null;try{return new Intl.NumberFormat('en-ZA',{style:'currency',currency:o.currency||'ZAR'}).format(Number(o.price))}catch{return (o.currency||'ZAR')+' '+o.price}};
 function productName(i=ident()){return clean(i.name||i.model||i.object||i.searchQuery)}
-function exactOffers(){return (commerce?.offers||[]).filter(o=>o?.exactProductMatch===true||o?.verified===true||o?.sourcePageVerified===true||o?.priceComparisonVerified===true)}
+function exactOffers(){return (Array.isArray(commerce?.offers)?commerce.offers:[]).filter(o=>o&&o.exactProductMatch===true&&(o.sourcePageVerified===true||o.priceComparisonVerified===true||o.verified===true))}
 function verifiedPrices(){return exactOffers().filter(o=>o.price!==null&&o.price!==undefined&&o.price!==''&&Number.isFinite(Number(o.price))&&Number(o.price)>0&&(o.sourcePageVerified===true||o.priceComparisonVerified===true||o.verified===true))}
 function retailerName(o){return clean(o?.retailer?.name||o?.retailer||o?.store||o?.seller||'Retailer')}
 function closeInfoForDashboardTarget(target){const hit=target?.closest?.('#finditExactShell [data-fx],#finditExactShell [data-fxnav],#fxPremiumSideButton,#fxPremiumBottomButton');if(!hit)return;const m=$('#fxInformationModal');if(m?.classList.contains('open')){m.classList.remove('open');m.style.pointerEvents='none';m.setAttribute('aria-hidden','true')}}
