@@ -27,9 +27,9 @@ async function runSearch(q){q=clean(q);if(!q||busy)return;busy=true;loading('Fin
  const i=base.identification,coords=await getLocationIfAlreadyAllowed(),payload={identification:i,...(coords?{lat:coords.lat,lon:coords.lon}:{})};
  syncIdentity(i);document.dispatchEvent(new CustomEvent('findit:results-rendered',{detail:{result:base}}));
  const tasks=[
-  json('/api/product-intelligence-v2',payload,30000).catch(()=>null),
-  json('/api/product-insights',{identification:i,offers:[]},24000).catch(()=>null),
-  coords?json('/api/nearby',{lat:coords.lat,lon:coords.lon,identification:i,radiusKm:s.radius||10},22000).catch(()=>null):Promise.resolve(null)
+  json('/api/product-intelligence-v2',payload,30000).catch(e=>{console.error('FindIt commerce request failed',e);return null}),
+  json('/api/product-insights',{identification:i,offers:[]},24000).catch(e=>{console.error('FindIt product insights failed',e);return null}),
+  coords?json('/api/nearby',{lat:coords.lat,lon:coords.lon,identification:i,radiusKm:s.radius||10},22000).catch(e=>{console.error('FindIt nearby request failed',e);return null}):Promise.resolve(null)
  ];
  const [c,r,n]=await Promise.all(tasks);commerce=c;research=r?.researched===false?null:r;
  if(Array.isArray(c?.offers)){s.offers=c.offers;window.productIntelligence=c}if(n?.stores)s.stores=n.stores;
