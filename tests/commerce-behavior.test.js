@@ -90,3 +90,10 @@ test('daily AI allowance exhaustion stops further inference and explains the act
  assert.equal(calls,1);assert.equal(d.code,'PHOTO_DAILY_LIMIT_REACHED');assert.equal(d.retryable,false);
  assert.equal(d.identification,null);assert.equal(d.visualVerification,false);assert.match(d.message,/daily service limit.*product name or barcode/);
 });
+
+test('discovery accepts reordered exact product titles without requiring quoted search phrases',async t=>{
+ const wanted='Nivea body lotion 250ml',requests=[];
+ t.mock.method(globalThis,'fetch',async url=>{const u=String(url);if(u.includes('bing.com/search')){const q=new URL(u).searchParams.get('q');requests.push(q);return new Response(q.includes('"')?'<rss/>':'<rss><item><title>Nivea 250ml body lotion</title><description>Nivea body lotion 250ml</description><link>https://store.example/product/nivea-250ml</link></item></rss>')}return new Response(html('Nivea 250ml body lotion',49.99,'ZAR'),{headers:{'content-type':'text/html'}})});
+ let result;const res={setHeader(){},status(){return this},json(x){result=x;return this}};await handler({method:'POST',body:{identification:product(wanted)}},res);
+ assert.ok(requests.some(q=>q.startsWith('site:clicks.co.za')));assert.ok(requests.includes(wanted+' product price'));assert.ok(result.offers.some(o=>o.product_url==='https://store.example/product/nivea-250ml'&&o.price===49.99));
+});
