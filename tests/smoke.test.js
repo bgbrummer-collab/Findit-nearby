@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { Script, SourceTextModule } from 'node:vm';
+import { spawnSync } from 'node:child_process';
 
 const read = path => readFileSync(new URL('../' + path, import.meta.url), 'utf8');
 const worker = read('cloudflare/worker.js');
@@ -9,9 +9,10 @@ const intelligence = read('lib/product-intelligence-core.js');
 const runtime = read('information-runtime.js');
 
 test('core files parse as JavaScript', () => {
-  assert.doesNotThrow(() => new Script(runtime, { filename: 'information-runtime.js' }));
-  assert.doesNotThrow(() => new SourceTextModule(worker, { identifier: 'cloudflare/worker.js' }));
-  assert.doesNotThrow(() => new SourceTextModule(intelligence, { identifier: 'lib/product-intelligence-core.js' }));
+  for (const file of ['information-runtime.js', 'cloudflare/worker.js', 'lib/product-intelligence-core.js']) {
+    const result = spawnSync(process.execPath, ['--check', new URL('../' + file, import.meta.url).pathname], { encoding: 'utf8' });
+    assert.equal(result.status, 0, file + ': ' + result.stderr);
+  }
 });
 
 test('retailer listings require exact identity and page evidence', () => {
