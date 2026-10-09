@@ -4,18 +4,6 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths:
-      - "cloudflare/**"
-      - "lib/**"
-      - "wrangler.toml"
-      - "index.html"
-      - "*.css"
-      - "*.js"
-      - "*.json"
-      - "manifest.webmanifest"
-      - "sw.js"
-      - "assets/**"
-      - ".github/workflows/deploy-cloudflare.yml"
 
 permissions:
   contents: read
