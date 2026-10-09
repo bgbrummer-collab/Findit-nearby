@@ -133,3 +133,11 @@ test('research reads complete product-scoped descriptions and excludes recommend
  const d=await(await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:{name},offers:[{product_name:name,product_url:url,sourcePageVerified:true,exactProductMatch:true}]})}),{})).json();
  assert.match(d.whatItDoes,/Build your own dinosaur models including a T\. rex with this LEGO brick set/);assert.match(d.pros.join(' '),/step-by-step guide/);assert.match(d.cons.join(' '),/sold separately/);assert.doesNotMatch(d.pros.join(' '),/sold separately/);assert.doesNotMatch(JSON.stringify(d),/Invented flying|unlimited battery|Short Description/);
 });
+
+ test('research rejects conflicting colour in scoped retailer copy and uses matching structured facts',async t=>{
+ const name='Sony WH-1000XM5 Wireless Headphones Black',url='https://store.example/sony-wh-1000xm5-black';
+ const page='<title>'+name+'</title><script type="application/ld+json">'+JSON.stringify({'@type':'Product',name,description:'Sony WH-1000XM5 provides wireless listening with active noise cancellation.'})+'</script><div class="product attribute description">Sony WH-1000XM5 Wireless Headphones Silver provide wireless audio, active noise cancellation and a comfortable listening experience for everyday use.</div>';
+ t.mock.method(globalThis,'fetch',async u=>String(u).includes('bing.com')?new Response('<rss/>'):new Response(page));
+ const r=await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:{name,searchQuery:name},offers:[{product_name:name,product_url:url,sourcePageVerified:true,exactProductMatch:true}]})}),{}),d=await r.json();
+ assert.equal(d.researched,true);assert.match(d.whatItDoes,/noise cancellation/);assert.doesNotMatch(JSON.stringify(d),/Silver/);
+ });
