@@ -36,6 +36,7 @@ jobs:
           FINDIT_URL: http://127.0.0.1:4173/
         run: |
           timeout --signal=TERM --kill-after=5s 120s node tests/user-experience-guard-regression.mjs
+          timeout --signal=TERM --kill-after=5s 60s node tests/retailer-candidates-user-regression.mjs
           timeout --signal=TERM --kill-after=5s 120s node tests/dashboard-tools-regression.mjs
           timeout --signal=TERM --kill-after=5s 120s node tests/feedback-feature-regression.mjs
           timeout --signal=TERM --kill-after=5s 120s node tests/smart-choice-regression.mjs
@@ -45,7 +46,6 @@ jobs:
           timeout --signal=TERM --kill-after=5s 120s node tests/user-pov-hardening-regression.mjs
           timeout --signal=TERM --kill-after=5s 120s node tests/current-find-relevance-regression.mjs
           timeout --signal=TERM --kill-after=5s 60s node tests/upload-button-user-regression.mjs
-          timeout --signal=TERM --kill-after=5s 60s node tests/retailer-candidates-user-regression.mjs
       - name: Wait for production deployment
         run: |
           for attempt in $(seq 1 60); do
@@ -59,6 +59,7 @@ jobs:
         env:
           FINDIT_URL: https://findit-nearby.bgbrummer.workers.dev/
         run: |
+          timeout --signal=TERM --kill-after=5s 60s node tests/retailer-candidates-user-regression.mjs
           timeout --signal=TERM --kill-after=5s 150s node tests/dashboard-tools-regression.mjs
           timeout --signal=TERM --kill-after=5s 120s node tests/feedback-feature-regression.mjs
           timeout --signal=TERM --kill-after=5s 120s node tests/smart-choice-regression.mjs
@@ -68,7 +69,6 @@ jobs:
           timeout --signal=TERM --kill-after=5s 120s node tests/user-pov-hardening-regression.mjs
           timeout --signal=TERM --kill-after=5s 120s node tests/current-find-relevance-regression.mjs
           timeout --signal=TERM --kill-after=5s 45s node tests/upload-button-user-regression.mjs
-          timeout --signal=TERM --kill-after=5s 60s node tests/retailer-candidates-user-regression.mjs
           # Photo/provider production coverage runs in the dedicated live-photo and
           # five-image matrix workflows. Keep this suite focused on interaction
           # responsiveness so it does not duplicate vision traffic and trigger
