@@ -72,3 +72,13 @@ test('photo eyewear category is normalized across provider capitalization',async
 test('corroborated eyewear synonyms retain generic identification',async()=>{const f=new FormData();f.set('image',new Blob(['fixture'],{type:'image/jpeg'}),'fixture.jpg');const env={AI:{run:async model=>model.includes('moondream')?{answer:''}:model.includes('llava')?{description:JSON.stringify({name:'Eye Glasses',object:'Eyewear',category:'Eyewear',confidence:.8})}:{response:JSON.stringify({name:'Eyeglasses',object:'Glasses',category:'eyewear',confidence:.8})}}};const d=await(await worker.fetch(new Request('https://findit.test/api/search',{method:'POST',body:f}),env)).json();assert.equal(d.identification.retailCategory,'eyewear');assert.equal(d.identification.brand,'');assert.equal(d.identification.model,'')});
 
 test('nested provider response objects preserve structured visual identity',async()=>{const f=new FormData();f.set('image',new Blob(['fixture'],{type:'image/jpeg'}),'fixture.jpg');const identity={name:'Nike Air Force 1 shoe',brand:'Nike',model:'Air Force 1',object:'shoe',category:'footwear',confidence:.9};const env={AI:{run:async model=>model.includes('moondream')?{result:{answer:{text:JSON.stringify(identity)}}}:{answer:JSON.stringify(identity)}}};const d=await(await worker.fetch(new Request('https://findit.test/api/search',{method:'POST',body:f}),env)).json();assert.equal(d.identification.model,'Air Force 1');assert.equal(d.identification.retailCategory,'footwear');assert.equal(d.visualVerification,true)});
+
+test('primary brand and model need a witness when the second vision provider fails',async()=>{
+ const primary={name:'Marc Anthony',brand:'Strictly Curls',model:'Triple Bend Conditioner',object:'conditioner',category:'beauty',confidence:.99};
+ const witness={name:'Marc Anthony conditioner',brand:'Marc Anthony',model:'Strictly Curls',object:'conditioner',category:'beauty',confidence:.9};
+ const f=new FormData();f.set('image',new Blob(['fixture'],{type:'image/jpeg'}),'fixture.jpg');
+ const env={AI:{run:async model=>model.includes('moondream')?{answer:JSON.stringify(primary)}:model.includes('llava')?{answer:''}:{response:JSON.stringify(witness)}}};
+ const d=await(await worker.fetch(new Request('https://findit.test/api/search',{method:'POST',body:f}),env)).json();
+ assert.equal(d.identification,null);assert.equal(d.visualVerification,false);assert.equal(d.requiresUserInput,true);
+ assert.equal(d.code,'CF_VISION_UNCORROBORATED_SPECIFIC_IDENTITY');
+});

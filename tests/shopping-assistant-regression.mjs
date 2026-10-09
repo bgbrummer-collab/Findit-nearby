@@ -21,8 +21,8 @@ await page.evaluate(()=>{
  s.coords={lat:-25.747,lon:28.188};
  s.result={identification:{name:'Test Headphones',brand:'TestBrand',model:'X1',confidence:.95}};
  s.offers=[
-  {retailer:'Retailer A',price:899,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true,url:'https://example.com/a/product'},
-  {retailer:'Retailer B',price:799,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true,url:'https://example.com/b/product'}
+  {retailer:'Retailer A',price:899,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true,branchStockVerified:true,branchPriceVerified:true,lat:-25.75,lon:28.19,product_url:'https://example.com/a/product'},
+  {retailer:'Retailer B',price:799,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true,branchStockVerified:true,branchPriceVerified:true,lat:-25.76,lon:28.20,product_url:'https://example.com/b/product'}
  ];
  window.productIntelligence={offers:[{retailer:'Stale Retailer',price:1,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true,url:'https://example.com/stale/product'}]};
  s.stores=[
@@ -63,7 +63,7 @@ if(!/Test Headphones/i.test(watchText)||!/Retailer B/i.test(watchText)){
 }
 await page.evaluate(()=>{
   window.finditState.offers=[
-   {retailer:'Retailer A',price:899,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true,url:'https://example.com/a/product'},
+   {retailer:'Retailer A',price:899,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true,branchStockVerified:true,branchPriceVerified:true,lat:-25.75,lon:28.19,product_url:'https://example.com/a/product'},
    {retailer:'Retailer B',price:699,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true,url:'https://example.com/b/product'}
   ];
   document.dispatchEvent(new CustomEvent('findit:results-rendered'));
