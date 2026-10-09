@@ -9,18 +9,26 @@ concurrency:
 jobs:
   photo:
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    timeout-minutes: 5
     steps:
       - name: Probe real live photo
         shell: bash
         run: |
           set -e
+          for attempt in $(seq 1 30); do
+            live=$(curl -sS --max-time 5 https://findit-nearby.bgbrummer.workers.dev/api/version || true)
+            if LIVE_VERSION="$live" node -e 'const v=JSON.parse(process.env.LIVE_VERSION||"{}");process.exit(v.commit===process.env.GITHUB_SHA?0:1)' 2>/dev/null; then
+              break
+            fi
+            sleep 2
+          done
+          LIVE_VERSION="$live" node -e 'const v=JSON.parse(process.env.LIVE_VERSION||"{}");if(v.commit!==process.env.GITHUB_SHA)throw new Error("Production release does not match the commit under test")'
           curl -L --fail --max-time 20 -o /tmp/product.jpg 'https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/FjQAAOSwL3Zk-O6Z/%24_57.JPG?set_id=8800005007'
           curl -sS --max-time 60 -o /tmp/result.json -w '%{http_code}' -F 'image=@/tmp/product.jpg;type=image/jpeg' https://findit-nearby.bgbrummer.workers.dev/api/search > /tmp/status
           node - <<'NODE'
           const fs=require('fs');
           const status=fs.readFileSync('/tmp/status','utf8').trim();
           const x=JSON.parse(fs.readFileSync('/tmp/result.json','utf8'));
-          console.log('LIVE_PHOTO_RESULT',JSON.stringify({httpStatus:status,code:x.code,provider:x.provider,providerStatus:x.providerStatus,cloudflareReason:x.cloudflareReason,cloudflareError:x.cloudflareError,providerError:x.providerError,identification:x.identification||null}));
+          console.log('LIVE_PHOTO_RESULT',JSON.stringify({httpStatus:status,code:x.code,provider:x.provider,providerStatus:x.providerStatus,cloudflareReason:x.cloudflareReason,cloudflareError:x.cloudflareError,providerError:x.providerError,visionDiagnostics:x.visionDiagnostics||[],identification:x.identification||null}));
           if(status!=='200'||!x.identification) process.exit(1);
           NODE

@@ -104,3 +104,24 @@ test('research does not present a truncated meta description tail as a product s
  const r=await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:{name},offers:[{product_name:name,product_url:url,sourcePageVerified:true,exactProductMatch:true}]})}),{}),d=await r.json();
  assert.equal(d.researched,true);assert.match(d.whatItDoes,/moisturises/);assert.deepEqual(d.pros,[]);assert.doesNotMatch(JSON.stringify(d),/helping t/);
 });
+
+test('corroborated photo variant is preserved rather than replaced by a product-specific heuristic',async()=>{
+ const identity={name:'Marc Anthony Strictly Curls 3X Moisture Conditioner',brand:'Marc Anthony',model:'Strictly Curls 3X Moisture',object:'conditioner',category:'beauty',confidence:.9};
+ const f=new FormData();f.set('image',new Blob(['fixture'],{type:'image/jpeg'}),'fixture.jpg');
+ const d=await(await worker.fetch(new Request('https://findit.test/api/search',{method:'POST',body:f}),{AI:{run:async()=>({answer:JSON.stringify(identity)})}})).json();
+ assert.equal(d.identification.model,identity.model);assert.equal(d.identification.name,identity.name);assert.equal(d.visualVerification,true);
+});
+test('conflicting photo brand/model claims stay unverified and provide diagnostic evidence',async()=>{
+ let calls=0;const identity={name:'Visible Conditioner',brand:'Brand One',model:'Variant One',object:'conditioner',category:'beauty',confidence:.9};
+ const f=new FormData();f.set('image',new Blob(['fixture'],{type:'image/jpeg'}),'fixture.jpg');
+ const d=await(await worker.fetch(new Request('https://findit.test/api/search',{method:'POST',body:f}),{AI:{run:async()=>({answer:JSON.stringify(++calls===1?identity:{...identity,brand:'Brand Two'})})}})).json();
+ assert.equal(d.identification,null);assert.equal(d.visualVerification,false);assert.equal(d.code,'CF_VISION_SPECIFIC_IDENTITY_CONFLICT');
+ assert.equal(d.visionDiagnostics[0].identityClaim.brand,'Brand One');assert.equal(d.visionDiagnostics[1].identityClaim.brand,'Brand Two');
+});
+test('verified toy retailer retains its actual name and unknown sellers retain their hostname',async t=>{
+ const name='LEGO Classic Creative Dinosaurs 11041';
+ t.mock.method(globalThis,'fetch',async()=>new Response('<title>'+name+'</title><script type="application/ld+json">'+JSON.stringify({'@type':'Product',name,offers:{price:649.9,priceCurrency:'ZAR',availability:'https://schema.org/InStock'}})+'</script>',{headers:{'content-type':'text/html'}}));
+ const {verify,ident}=await import('../lib/product-intelligence-core.js');
+ assert.equal((await verify('https://www.toysrus.co.za/lego-classic-creative-dinosaurs-11041',ident({name}))).retailer.name,'Toys R Us');
+ assert.equal((await verify('https://independent-shop.co.za/lego-classic-creative-dinosaurs-11041',ident({name}))).retailer.name,'independent-shop.co.za');
+});
