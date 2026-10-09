@@ -123,3 +123,32 @@ body.findit-exact-dashboard{position:relative;left:0!important;right:auto!import
  .fx-result-strip{align-items:flex-start!important;flex-direction:column!important}
  .fx-result-strip>div:last-child{width:100%!important}.fx-result-strip button{flex:1!important}
 }
+
+/* Keep instructions and failures readable instead of squeezing them beside the buttons. */
+#finditExactShell .fx-search-foot{grid-template-columns:repeat(2,minmax(0,1fr))!important;align-items:start}
+#finditExactShell #fxStatus{grid-column:1/-1;font-size:12px;line-height:1.5;white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere}
+#finditExactShell .fx-search-foot button{min-width:0;min-height:42px}
+#fxPhotoRecovery{margin-top:10px;padding:12px;border:1px solid #31516b;border-radius:10px;background:#0a2135}
+#fxPhotoRecovery[hidden]{display:none!important}
+#fxPhotoRecovery p{margin:0 0 10px;font-size:13px;line-height:1.5;color:#d5e6f5}
+#fxPhotoRecovery button{width:100%;min-height:42px;border:1px solid #258ee9;border-radius:9px;background:#0875c9;color:white;font:inherit;cursor:pointer}
+@media(min-width:901px){
+ #finditExactShell .fx-hero{display:grid!important;grid-template-columns:minmax(0,1fr);gap:20px;padding:30px 22px 22px;min-height:0!important;box-sizing:border-box}
+ #finditExactShell .fx-hero-copy{padding:0!important;max-width:none!important;min-width:0}
+ #finditExactShell .fx-hero-copy p{max-width:none}
+ #finditExactShell .fx-hero .fx-search-card{position:relative!important;inset:auto!important;left:auto!important;right:auto!important;bottom:auto!important;width:100%!important;max-width:none!important;margin:0!important;box-sizing:border-box}
+ #finditExactShell .fx-main{min-width:0!important}
+}
+@media(min-width:1400px){
+ #finditExactShell .fx-hero{grid-template-columns:minmax(0,1fr) minmax(300px,1fr);align-items:center}
+}
+@media(min-width:901px) and (max-width:1180px){
+ #finditExactShell{grid-template-columns:148px minmax(0,1fr) 260px!important}
+ #finditExactShell .fx-side{width:148px!important}
+ #finditExactShell .fx-right{width:260px!important;min-width:0!important}
+}
+@media(max-width:900px){
+ .fx-hero{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:12px!important;padding:22px 12px 12px!important;min-height:0!important}
+ .fx-hero-copy{position:relative!important;width:100%!important;max-width:none!important;padding:8px 4px!important;box-sizing:border-box!important}
+ .fx-search-card{position:relative!important;inset:auto!important;width:100%!important;max-width:none!important;box-sizing:border-box!important}
+}

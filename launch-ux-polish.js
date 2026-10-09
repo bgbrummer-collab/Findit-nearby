@@ -13,9 +13,10 @@ function truthfulProductState(){
  const identified=hasIdentity(),photo=hasPhoto();
  if(identified)return; // Existing verified-result renderer owns populated identity/price states.
  const badge=$('#fxExactBadge'),conf=$('#fxConfidence'),desc=$('#fxProductDesc'),price=$('#fxBestPrice');
- text(badge,photo?'Photo ready — product details needed':'Ready for a product');
+ const failed=state()?.result?.requiresUserInput===true,pending=!!state()?.photoSearchPending;
+ text(badge,photo?(pending?'Identifying photo…':failed?'Photo needs product details':'Photo ready'):'Ready for a product');
  text(conf,'— Match');
- if(desc)text(desc,photo?'Automatic photo identification is unavailable right now. Use Search Product or a barcode to continue without guessing.':'Upload a photo, search by product name, or scan a barcode to start.');
+ if(desc)text(desc,photo?(pending?'Reading the visible product details. Please wait.':failed?(state().result.message||'FindIt could not identify this photo confidently. Enter the product name or barcode to continue.'):'Select Identify & Find to read this photo, or use Search Product if you know the name.'): 'Upload a photo, search by product name, or scan a barcode to start.');
  text(price,'Not verified yet');
 }
 function truthfulSmartChoice(){

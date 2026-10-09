@@ -44,8 +44,16 @@ jobs:
           timeout --signal=TERM --kill-after=5s 120s node tests/user-first-polish-regression.mjs
           timeout --signal=TERM --kill-after=5s 120s node tests/user-pov-hardening-regression.mjs
           timeout --signal=TERM --kill-after=5s 120s node tests/current-find-relevance-regression.mjs
+          timeout --signal=TERM --kill-after=5s 60s node tests/upload-button-user-regression.mjs
       - name: Wait for production deployment
-        run: sleep 35
+        run: |
+          for attempt in $(seq 1 60); do
+            deployed=$(curl -fsS "https://findit-nearby.bgbrummer.workers.dev/api/version?expected=$GITHUB_SHA" | python3 -c 'import json,sys; print(json.load(sys.stdin).get("commit", ""))' || true)
+            if [ "$deployed" = "$GITHUB_SHA" ]; then exit 0; fi
+            sleep 5
+          done
+          echo "Production did not report the expected commit"
+          exit 1
       - name: Check deployed FindIt interactions actually work
         env:
           FINDIT_URL: https://findit-nearby.bgbrummer.workers.dev/

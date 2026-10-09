@@ -39,3 +39,10 @@ test('overlay cleanup immediately releases the page without a delayed timer raci
  vm.runInNewContext(code+';hideSearchOverlay()',ctx);
  assert.equal(hidden.has('hidden'),true);assert.equal(progress.style.width,'100%');
 });
+
+test('repeat activation while the same photo is pending starts only one inference request',async()=>{
+ const c=client(),first=c.button.onclick();await c.button.onclick();
+ assert.equal(c.pending.length,1);assert.equal(c.state.photoSearchPending,1);
+ c.pending[0]({identification:null,requiresUserInput:true});await first;
+ assert.equal(c.state.photoSearchPending,null);assert.equal(c.button.disabled,false);
+});
