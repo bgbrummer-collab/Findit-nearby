@@ -23,14 +23,14 @@ function productModalFallback(){
  '<section><h4>Useful next step</h4><p>'+esc(i.barcode?'Use the barcode and retailer links to confirm the exact variant before buying.':'If the exact model or size matters, add the model, size or barcode to the search. That gives FindIt a much stronger exact-product query.')+'</p></section></div>';
 }
 function enrichDashboard(){
- if(!hasIdentity())return;let i=id(),ss=nearby(),os=offers();
+ if(!hasIdentity()){const info=$('#fxValueStrip');if(info){info.hidden=true;info.innerHTML=''}const n=$('#fxResultStripName'),meta=$('#fxResultStripMeta');if(n)n.textContent='No item selected';if(meta)meta.textContent='Upload a photo or search by product name to start.';return}let i=id(),ss=nearby(),os=offers();
  let n=$('#fxProductName');if(n&&/No item selected|Item identified/i.test(n.textContent))n.textContent=name();
  let meta=$('#fxProductMeta');if(meta&&!clean(meta.textContent))meta.textContent=usefulSummary().join(' · ');
  let desc=$('#fxProductDesc');if(desc&&/Automatic photo identification is unavailable|Upload a photo|New photo selected/i.test(desc.textContent)&&clean(i.identificationMethod||i.userConfirmed))desc.textContent='Product selected. FindIt is checking retailer evidence for this exact search.';
  let badge=$('#fxExactBadge');if(badge&&/Photo ready|Waiting|Item identified/i.test(badge.textContent))badge.textContent=i.userConfirmed?'Product confirmed by search':'Product identified';
  let list=$('#fxStoreList');if(list&&ss.length&&/Use your location|Nearby stores will appear/i.test(list.textContent))list.innerHTML=ss.slice(0,5).map(s=>'<button class="fx-store" data-fx="nearby"><span><b>'+esc(s.name||'Nearby retailer')+'</b><small>'+esc([Number.isFinite(+s.distanceKm)?(+s.distanceKm).toFixed(1)+' km':'',s.address||''].filter(Boolean).join(' • '))+'</small><em>Exact branch stock not verified</em></span><strong>›</strong></button>').join('');
  let info=$('#fxValueStrip');if(!info){let anchor=$('.fx-product-copy');if(anchor){info=document.createElement('div');info.id='fxValueStrip';info.className='fx-value-strip';anchor.insertBefore(info,anchor.querySelector('.fx-product-actions'))}}
- if(info)info.innerHTML='<b>What we found</b><span>'+esc(os.length?os.length+' retailer listing'+(os.length===1?'':'s')+' found':ss.length?ss.length+' relevant nearby retailer'+(ss.length===1?'':'s')+' found':'Retailer verification still needed')+'</span>';
+ if(info){const html='<b>What we found</b><span>'+esc(os.length?os.length+' retailer listing'+(os.length===1?'':'s')+' found':ss.length?ss.length+' relevant nearby retailer'+(ss.length===1?'':'s')+' found':'Retailer verification still needed')+'</span>';info.hidden=false;if(info.innerHTML!==html)info.innerHTML=html;}
 }
 function smartChoiceValue(){
  if(!hasIdentity())return;let root=$('#fxSmartChoice');if(!root)return;let ss=nearby(),os=offers(),verified=os.filter(o=>o?.verified===true||o?.sourcePageVerified===true),prices=verified.filter(o=>window.finditOfferEvidence?.amount(o)!==null&&window.finditOfferEvidence?.supported(o));
@@ -38,7 +38,7 @@ function smartChoiceValue(){
  if(cards[1]&&window.finditOfferEvidence?.cheapest(prices)){let cheapest=window.finditOfferEvidence.cheapest(prices),s=cards[1].querySelector('strong'),p=cards[1].querySelector('p');if(s)s.textContent=window.finditOfferEvidence.format(cheapest);if(p)p.textContent='Lowest verified price currently found at '+sourceName(cheapest)+'.'}
 }
 function run(){enrichDashboard();productModalFallback();smartChoiceValue()}
-for(const ev of ['findit:results-rendered','findit:dashboard-sync','findit:nearby-updated'])document.addEventListener(ev,()=>{run();setTimeout(run,100);setTimeout(run,700)});
+for(const ev of ['findit:results-rendered','findit:dashboard-sync','findit:nearby-updated','findit:results-reset','findit:new-photo-selected'])document.addEventListener(ev,()=>{run();setTimeout(run,100);setTimeout(run,700)});
 document.addEventListener('click',e=>{if(e.target.closest?.('[data-fx="product"],[data-fx="compare"],[data-fx="nearby"]')){setTimeout(run,50);setTimeout(run,350)}},true);
 new MutationObserver(()=>{if(hasIdentity())setTimeout(run,20)}).observe(document.documentElement,{childList:true,subtree:true});
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(run,500),{once:true});else setTimeout(run,500);

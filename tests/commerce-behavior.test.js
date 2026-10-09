@@ -125,3 +125,11 @@ test('verified toy retailer retains its actual name and unknown sellers retain t
  assert.equal((await verify('https://www.toysrus.co.za/lego-classic-creative-dinosaurs-11041',ident({name}))).retailer.name,'Toys R Us');
  assert.equal((await verify('https://independent-shop.co.za/lego-classic-creative-dinosaurs-11041',ident({name}))).retailer.name,'independent-shop.co.za');
 });
+
+test('research reads complete product-scoped descriptions and excludes recommendations',async t=>{
+ const name='LEGO Classic Creative Dinosaurs 11041',url='https://store.example/lego-classic-creative-dinosaurs-11041';
+ const raw='<title>'+name+'</title><meta name="description" content="LEGO CLASSICS 11041 CREATIVE DINOSAURS"><div class="product attribute description"><div><h3>Short Description:</h3><p>Get ready for exciting dinosaur adventures! Build your own dinosaur models including a T. rex with this LEGO brick set.</p></div><div><h3>Features and Benefits:</h3><ul><li>A step-by-step guide is included for creative construction</li><li>Other LEGO sets are sold separately</li></ul></div></div><div class="recommendations">Invented flying dinosaurs and unlimited battery life.</div>';
+ t.mock.method(globalThis,'fetch',async u=>String(u).includes('bing.com')?new Response('<rss/>'):new Response(raw));
+ const d=await(await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:{name},offers:[{product_name:name,product_url:url,sourcePageVerified:true,exactProductMatch:true}]})}),{})).json();
+ assert.match(d.whatItDoes,/Build your own dinosaur models including a T\. rex with this LEGO brick set/);assert.match(d.pros.join(' '),/step-by-step guide/);assert.match(d.cons.join(' '),/sold separately/);assert.doesNotMatch(d.pros.join(' '),/sold separately/);assert.doesNotMatch(JSON.stringify(d),/Invented flying|unlimited battery|Short Description/);
+});
