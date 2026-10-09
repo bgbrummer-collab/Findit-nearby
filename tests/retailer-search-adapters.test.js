@@ -11,3 +11,24 @@ for(const [name,expected,productUrl] of [
  assert(urls.includes(productUrl));assert(requested.some(url=>url.endsWith(expected)));
  assert(urls.every(url=>!url.includes('/search?')&&!url.includes('/catalogsearch/')&&!url.includes('/static/')));
 });
+
+test('broader retailer discovery preserves exact identity and size for subsequent verification',async t=>{
+ const exact='https://clicks.co.za/nivea_rich-nourishing-body-lotion-250ml/p/129748';
+ const requested=[];
+ t.mock.method(globalThis,'fetch',async u=>{const url=String(u);requested.push(url);return new Response(url.includes('q=Nivea%3Arelevance')?'<a href="'+exact+'">Nivea Rich Nourishing Body Lotion 250ml</a>':'')});
+ const urls=await nativeRetailerUrls({name:'Nivea Rich Nourishing Body Lotion 250ml',searchQuery:'Nivea Rich Nourishing Body Lotion 250ml'});
+ assert(urls.includes(exact));
+ assert(requested.some(u=>u.includes('q=Nivea%3Arelevance')&&u.includes('count=100')));
+ const {ident,identityMatches}=await import('../lib/product-intelligence-core.js');
+ const i=ident({name:'Nivea Rich Nourishing Body Lotion 250ml'});
+ assert(identityMatches('Nivea Rich Nourishing Body Lotion 250ml',i));
+ assert(!identityMatches('Nivea Rich Nourishing Body Lotion 400ml',i));
+ assert(!identityMatches('Nivea Intensive Moisturising Body Lotion 250ml',i));
+});
+
+test('strong exact candidates from later searches outrank partial matches before the verification budget',async t=>{
+ const exact='https://clicks.co.za/nivea_rich-nourishing-body-lotion-250ml/p/129748';
+ t.mock.method(globalThis,'fetch',async u=>new Response(String(u).includes('q=Nivea%3Arelevance')?'<a href="'+exact+'">Nivea Rich Nourishing Body Lotion 250ml</a>':String(u).includes('clicks.co.za/search?text=')?Array.from({length:20},(_,n)=>'<a href="https://clicks.co.za/other-body-lotion-250ml-'+n+'/p/'+n+'">Body Lotion 250ml</a>').join(''):''));
+ const urls=await nativeRetailerUrls({name:'Nivea Rich Nourishing Body Lotion 250ml'});
+ assert.equal(urls[0],exact);
+});
