@@ -1,0 +1,1159 @@
+{
+  "deployedCommit": "b951511f29653a265f54e544ad67bf47c319fb4e",
+  "checkedAt": "2026-10-09T20:41:02.637525+00:00",
+  "results": [
+    {
+      "httpStatus": 200,
+      "response": {
+        "ok": true,
+        "matched": true,
+        "exactMatchVerified": true,
+        "searchQuery": "Sony WH-1000XM5 black",
+        "bestProduct": {
+          "name": "Sony WH-1000XM5 Wireless Noise Cancelling Headphones Black"
+        },
+        "bestPrice": {
+          "product_name": "Sony WH-1000XM5 Wireless Noise Cancelling Headphones Black",
+          "product_url": "https://www.incredible.co.za/sony-wh-1000xm5-wireless-noise-cancelling-headphones-black",
+          "retailer": {
+            "name": "Incredible Connection"
+          },
+          "price": 5999,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Verified directly on exact retailer product page",
+          "matchScore": 100,
+          "stockScope": "online/general retailer availability only",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-10-09T20:39:57.264Z",
+          "retailerDomain": "incredible.co.za",
+          "trustedRetailerDomain": true
+        },
+        "offers": [
+          {
+            "product_name": "Sony WH-1000XM5 Wireless Noise Cancelling Headphones Black",
+            "product_url": "https://www.incredible.co.za/sony-wh-1000xm5-wireless-noise-cancelling-headphones-black",
+            "retailer": {
+              "name": "Incredible Connection"
+            },
+            "price": 5999,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 100,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-09T20:39:57.264Z",
+            "retailerDomain": "incredible.co.za",
+            "trustedRetailerDomain": true
+          },
+          {
+            "product_name": "Sony WH-1000XM5 Wireless Noise Cancelling Headphones Black",
+            "product_url": "https://www.hificorp.co.za/sony-wh-1000xm5-wireless-noise-cancelling-headphones-black",
+            "retailer": {
+              "name": "HiFi Corp"
+            },
+            "price": 5999,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 100,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-09T20:39:57.268Z",
+            "retailerDomain": "hificorp.co.za",
+            "trustedRetailerDomain": true
+          }
+        ],
+        "retailerStatus": [
+          {
+            "name": "Incredible Connection",
+            "searchUrl": "https://www.incredible.co.za/sony-wh-1000xm5-wireless-noise-cancelling-headphones-black",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "HiFi Corp",
+            "searchUrl": "https://www.hificorp.co.za/sony-wh-1000xm5-wireless-noise-cancelling-headphones-black",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Game",
+            "searchUrl": "https://www.game.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Incredible Connection",
+            "searchUrl": "https://www.incredible.co.za/sony-wh-1000xm5-wireless-noise-cancelling-headphones-black",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "HiFi Corp",
+            "searchUrl": "https://www.hificorp.co.za/sony-wh-1000xm5-wireless-noise-cancelling-headphones-black",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Game",
+            "searchUrl": "https://www.game.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 2,
+        "verifiedSellerCount": 2,
+        "inStockOfferCount": 2,
+        "priceVerifiedCount": 2,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Sony%20WH-1000XM5%20black",
+        "checkedAt": "2026-10-09T20:40:00.545Z"
+      },
+      "category": "electronics",
+      "name": "Sony WH-1000XM5 black",
+      "seconds": 16.5
+    },
+    {
+      "httpStatus": 200,
+      "response": {
+        "ok": true,
+        "matched": false,
+        "exactMatchVerified": false,
+        "searchQuery": "Kelloggs Corn Flakes 500g",
+        "bestProduct": null,
+        "bestPrice": null,
+        "offers": [],
+        "retailerStatus": [
+          {
+            "name": "Checkers",
+            "searchUrl": "https://www.checkers.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Pick n Pay",
+            "searchUrl": "https://www.pnp.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Shoprite",
+            "searchUrl": "https://www.shoprite.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Woolworths",
+            "searchUrl": "https://www.woolworths.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Checkers",
+            "searchUrl": "https://www.checkers.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Pick n Pay",
+            "searchUrl": "https://www.pnp.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Shoprite",
+            "searchUrl": "https://www.shoprite.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Woolworths",
+            "searchUrl": "https://www.woolworths.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 0,
+        "verifiedSellerCount": 0,
+        "inStockOfferCount": 0,
+        "priceVerifiedCount": 0,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Kelloggs%20Corn%20Flakes%20500g",
+        "checkedAt": "2026-10-09T20:39:59.977Z"
+      },
+      "category": "groceries",
+      "name": "Kelloggs Corn Flakes 500g",
+      "seconds": 15.93
+    },
+    {
+      "httpStatus": 200,
+      "response": {
+        "ok": true,
+        "matched": false,
+        "exactMatchVerified": false,
+        "searchQuery": "Levi 501 Original Fit Jeans",
+        "bestProduct": null,
+        "bestPrice": null,
+        "offers": [],
+        "retailerStatus": [
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "PriceCheck",
+            "searchUrl": "https://www.pricecheck.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "PriceCheck",
+            "searchUrl": "https://www.pricecheck.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 0,
+        "verifiedSellerCount": 0,
+        "inStockOfferCount": 0,
+        "priceVerifiedCount": 0,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Levi%20501%20Original%20Fit%20Jeans",
+        "checkedAt": "2026-10-09T20:39:58.607Z"
+      },
+      "category": "clothing",
+      "name": "Levi 501 Original Fit Jeans",
+      "seconds": 14.56
+    },
+    {
+      "httpStatus": 200,
+      "response": {
+        "ok": true,
+        "matched": false,
+        "exactMatchVerified": false,
+        "searchQuery": "Nike Air Force 1 07 white",
+        "bestProduct": null,
+        "bestPrice": null,
+        "offers": [],
+        "retailerStatus": [
+          {
+            "name": "Nike",
+            "searchUrl": "https://www.nike.com/za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Sportscene",
+            "searchUrl": "https://www.sportscene.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Totalsports",
+            "searchUrl": "https://www.totalsports.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "JD Sports",
+            "searchUrl": "https://www.jdsports.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Bash",
+            "searchUrl": "https://bash.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Nike",
+            "searchUrl": "https://www.nike.com/za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Sportscene",
+            "searchUrl": "https://www.sportscene.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Totalsports",
+            "searchUrl": "https://www.totalsports.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "JD Sports",
+            "searchUrl": "https://www.jdsports.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Bash",
+            "searchUrl": "https://bash.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 0,
+        "verifiedSellerCount": 0,
+        "inStockOfferCount": 0,
+        "priceVerifiedCount": 0,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Nike%20Air%20Force%201%2007%20white",
+        "checkedAt": "2026-10-09T20:40:09.652Z"
+      },
+      "category": "shoes",
+      "name": "Nike Air Force 1 07 white",
+      "seconds": 11.13
+    },
+    {
+      "httpStatus": 200,
+      "response": {
+        "ok": true,
+        "matched": true,
+        "exactMatchVerified": true,
+        "searchQuery": "Nivea Rich Nourishing Body Lotion 250ml",
+        "bestProduct": {
+          "name": "NIVEA Body Lotion Rich Nourishing 250ml"
+        },
+        "bestPrice": {
+          "product_name": "NIVEA Body Lotion Rich Nourishing 250ml",
+          "product_url": "https://clicks.co.za/nivea_rich-nourishing-body-lotion-250ml/p/129748",
+          "retailer": {
+            "name": "Clicks"
+          },
+          "price": 59.99,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Verified directly on exact retailer product page",
+          "matchScore": 100,
+          "stockScope": "online/general retailer availability only",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-10-09T20:40:12.240Z",
+          "retailerDomain": "clicks.co.za",
+          "trustedRetailerDomain": true
+        },
+        "offers": [
+          {
+            "product_name": "NIVEA Body Lotion Rich Nourishing 250ml",
+            "product_url": "https://clicks.co.za/nivea_rich-nourishing-body-lotion-250ml/p/129748",
+            "retailer": {
+              "name": "Clicks"
+            },
+            "price": 59.99,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 100,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-09T20:40:12.240Z",
+            "retailerDomain": "clicks.co.za",
+            "trustedRetailerDomain": true
+          }
+        ],
+        "retailerStatus": [
+          {
+            "name": "Clicks",
+            "searchUrl": "https://clicks.co.za/nivea_rich-nourishing-body-lotion-250ml/p/129748",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Dis-Chem",
+            "searchUrl": "https://www.dischem.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Clicks",
+            "searchUrl": "https://clicks.co.za/nivea_rich-nourishing-body-lotion-250ml/p/129748",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Dis-Chem",
+            "searchUrl": "https://www.dischem.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 1,
+        "verifiedSellerCount": 1,
+        "inStockOfferCount": 1,
+        "priceVerifiedCount": 1,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Nivea%20Rich%20Nourishing%20Body%20Lotion%20250ml",
+        "checkedAt": "2026-10-09T20:40:15.734Z"
+      },
+      "category": "beauty",
+      "name": "Nivea Rich Nourishing Body Lotion 250ml",
+      "seconds": 15.76
+    },
+    {
+      "httpStatus": 200,
+      "response": {
+        "ok": true,
+        "matched": false,
+        "exactMatchVerified": false,
+        "searchQuery": "Bosch GSB 185 LI drill",
+        "bestProduct": null,
+        "bestPrice": null,
+        "offers": [],
+        "retailerStatus": [
+          {
+            "name": "Builders",
+            "searchUrl": "https://www.builders.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Leroy Merlin",
+            "searchUrl": "https://www.leroymerlin.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "BUCO",
+            "searchUrl": "https://www.buco.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Mica",
+            "searchUrl": "https://www.mica.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Game",
+            "searchUrl": "https://www.game.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Builders",
+            "searchUrl": "https://www.builders.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Leroy Merlin",
+            "searchUrl": "https://www.leroymerlin.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "BUCO",
+            "searchUrl": "https://www.buco.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Mica",
+            "searchUrl": "https://www.mica.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Game",
+            "searchUrl": "https://www.game.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 0,
+        "verifiedSellerCount": 0,
+        "inStockOfferCount": 0,
+        "priceVerifiedCount": 0,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Bosch%20GSB%20185%20LI%20drill",
+        "checkedAt": "2026-10-09T20:40:13.943Z"
+      },
+      "category": "tools",
+      "name": "Bosch GSB 185 LI drill",
+      "seconds": 13.4
+    },
+    {
+      "httpStatus": 200,
+      "response": {
+        "ok": true,
+        "matched": false,
+        "exactMatchVerified": false,
+        "searchQuery": "LEGO Classic 10698",
+        "bestProduct": null,
+        "bestPrice": null,
+        "offers": [],
+        "retailerStatus": [
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "PriceCheck",
+            "searchUrl": "https://www.pricecheck.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "PriceCheck",
+            "searchUrl": "https://www.pricecheck.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 0,
+        "verifiedSellerCount": 0,
+        "inStockOfferCount": 0,
+        "priceVerifiedCount": 0,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=LEGO%20Classic%2010698",
+        "checkedAt": "2026-10-09T20:40:26.985Z"
+      },
+      "category": "toys",
+      "name": "LEGO Classic 10698",
+      "seconds": 17.29
+    },
+    {
+      "httpStatus": 200,
+      "response": {
+        "ok": true,
+        "matched": false,
+        "exactMatchVerified": false,
+        "searchQuery": "IKEA Billy white 80x28x202cm",
+        "bestProduct": null,
+        "bestPrice": null,
+        "offers": [],
+        "retailerStatus": [
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "PriceCheck",
+            "searchUrl": "https://www.pricecheck.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "PriceCheck",
+            "searchUrl": "https://www.pricecheck.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 0,
+        "verifiedSellerCount": 0,
+        "inStockOfferCount": 0,
+        "priceVerifiedCount": 0,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=IKEA%20Billy%20white%2080x28x202cm",
+        "checkedAt": "2026-10-09T20:40:25.685Z"
+      },
+      "category": "furniture",
+      "name": "IKEA Billy white 80x28x202cm",
+      "seconds": 11.78
+    },
+    {
+      "httpStatus": 200,
+      "response": {
+        "ok": true,
+        "matched": false,
+        "exactMatchVerified": false,
+        "searchQuery": "BabySoft 2 ply 9 rolls",
+        "bestProduct": null,
+        "bestPrice": null,
+        "offers": [],
+        "retailerStatus": [
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "PriceCheck",
+            "searchUrl": "https://www.pricecheck.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "PriceCheck",
+            "searchUrl": "https://www.pricecheck.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 0,
+        "verifiedSellerCount": 0,
+        "inStockOfferCount": 0,
+        "priceVerifiedCount": 0,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=BabySoft%202%20ply%209%20rolls",
+        "checkedAt": "2026-10-09T20:40:24.124Z"
+      },
+      "category": "household",
+      "name": "BabySoft 2 ply 9 rolls",
+      "seconds": 8.43
+    },
+    {
+      "httpStatus": 200,
+      "response": {
+        "ok": true,
+        "matched": true,
+        "exactMatchVerified": true,
+        "searchQuery": "LEGO Classic Creative Dinosaurs 11041",
+        "bestProduct": {
+          "name": "LEGO Classic Creative Dinosaurs (11041)"
+        },
+        "bestPrice": {
+          "product_name": "LEGO Classic Creative Dinosaurs (11041)",
+          "product_url": "https://www.toysrus.co.za/lego-classic-creative-dinosaurs-11041-3003373",
+          "retailer": {
+            "name": "Toys R Us"
+          },
+          "price": 649.9,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Verified directly on exact retailer product page",
+          "matchScore": 100,
+          "stockScope": "online/general retailer availability only",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-10-09T20:40:47.047Z",
+          "retailerDomain": "toysrus.co.za",
+          "trustedRetailerDomain": false
+        },
+        "offers": [
+          {
+            "product_name": "LEGO Classic Creative Dinosaurs (11041)",
+            "product_url": "https://www.toysrus.co.za/lego-classic-creative-dinosaurs-11041-3003373",
+            "retailer": {
+              "name": "Toys R Us"
+            },
+            "price": 649.9,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 100,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-09T20:40:47.047Z",
+            "retailerDomain": "toysrus.co.za",
+            "trustedRetailerDomain": false
+          }
+        ],
+        "retailerStatus": [
+          {
+            "name": "Toys R Us",
+            "searchUrl": "https://www.toysrus.co.za/lego-classic-creative-dinosaurs-11041-3003373",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "PriceCheck",
+            "searchUrl": "https://www.pricecheck.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Toys R Us",
+            "searchUrl": "https://www.toysrus.co.za/lego-classic-creative-dinosaurs-11041-3003373",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "PriceCheck",
+            "searchUrl": "https://www.pricecheck.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 1,
+        "verifiedSellerCount": 1,
+        "inStockOfferCount": 1,
+        "priceVerifiedCount": 1,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=LEGO%20Classic%20Creative%20Dinosaurs%2011041",
+        "checkedAt": "2026-10-09T20:40:52.965Z"
+      },
+      "category": "toys-current-catalogue",
+      "name": "LEGO Classic Creative Dinosaurs 11041",
+      "seconds": 28.8
+    }
+  ]
+}
