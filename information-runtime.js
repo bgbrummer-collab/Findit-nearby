@@ -28,10 +28,11 @@ async function runSearch(q){q=clean(q);if(!q||busy)return;busy=true;loading('Fin
  syncIdentity(i);document.dispatchEvent(new CustomEvent('findit:results-rendered',{detail:{result:base}}));
  const tasks=[
   json('/api/product-intelligence-v2',payload,30000).catch(e=>{console.error('FindIt commerce request failed',e);return null}),
-  json('/api/product-insights',{identification:i,offers:[]},24000).catch(e=>{console.error('FindIt product insights failed',e);return null}),
   coords?json('/api/nearby',{lat:coords.lat,lon:coords.lon,identification:i,radiusKm:s.radius||10},22000).catch(e=>{console.error('FindIt nearby request failed',e);return null}):Promise.resolve(null)
  ];
- const [c,r,n]=await Promise.all(tasks);commerce=c;research=r?.researched===false?null:r;
+ const [c,n]=await Promise.all(tasks);commerce=c;
+ const r=await json('/api/product-insights',{identification:i,offers:Array.isArray(c?.offers)?c.offers:[]},24000).catch(e=>{console.error('FindIt product insights failed',e);return null});
+ research=r?.researched===false?null:r;
  if(Array.isArray(c?.offers)){s.offers=c.offers;window.productIntelligence=c}else console.warn('FindIt commerce response has no offer list');if(Array.isArray(n?.stores))s.stores=n.stores;else if(!coords)console.info('FindIt nearby search needs location permission');else console.warn('FindIt nearby response has no store list');
  syncAll();document.dispatchEvent(new CustomEvent('findit:dashboard-sync',{detail:{result:s.result}}));if(s.stores.length)document.dispatchEvent(new CustomEvent('findit:nearby-updated',{detail:{stores:s.stores}}));
  saveRecent(i);showProductInfo();
