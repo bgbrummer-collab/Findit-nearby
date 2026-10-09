@@ -72,11 +72,12 @@ async function hydrateIdentifiedPhoto(){
   syncIdentity(i);
   const coords=await getLocationIfAlreadyAllowed(),payload={identification:i,...(coords?{lat:coords.lat,lon:coords.lon}:{})};
   const tasks=[
-   json('/api/product-intelligence-v2',payload,30000).catch(()=>null),
-   json('/api/product-insights',{identification:i,offers:[]},24000).catch(()=>null),
-   coords?json('/api/nearby',{lat:coords.lat,lon:coords.lon,identification:i,radiusKm:s.radius||10},22000).catch(()=>null):Promise.resolve(null)
+   json('/api/product-intelligence-v2',payload,30000).catch(e=>{console.error('FindIt photo commerce failed',e);return null}),
+   coords?json('/api/nearby',{lat:coords.lat,lon:coords.lon,identification:i,radiusKm:s.radius||10},22000).catch(e=>{console.error('FindIt photo nearby failed',e);return null}):Promise.resolve(null)
   ];
-  const [ci,ri,ni]=await Promise.all(tasks);commerce=ci;research=ri?.researched===false?null:ri;
+  const [ci,ni]=await Promise.all(tasks);commerce=ci;
+  const ri=await json('/api/product-insights',{identification:i,offers:Array.isArray(ci?.offers)?ci.offers:[]},24000).catch(e=>{console.error('FindIt photo product insights failed',e);return null});
+  research=ri?.researched===false?null:ri;
   if(Array.isArray(ci?.offers)){s.offers=ci.offers;window.productIntelligence=ci}
   // Do not erase an already truthful nearby result when the optional refresh returns empty.
   if(Array.isArray(ni?.stores)&&ni.stores.length)s.stores=ni.stores;
