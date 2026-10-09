@@ -1,0 +1,100 @@
+{
+  "tested_backend_commit": "71b2a71e93649f9723b94529175e21f74baab54e",
+  "note": "The subsequent 406536d9 release changes frontend rendering only; backend code is identical. Results are point-in-time live endpoint probes, not retailer availability guarantees.",
+  "results": [
+    {
+      "category": "electronics",
+      "query": "Sony WH-1000XM5 black",
+      "http": 200,
+      "seconds": 18.8,
+      "offers": [
+        {
+          "product_name": "Sony WH-1000XM5 Wireless Noise-canceling Headphones - Black | Sweetwater",
+          "product_url": "https://www.sweetwater.com/store/detail/WH1kXM5Blk--sony-wh-1000xm5-wireless-noise-canceling-headphones-black",
+          "retailer": {
+            "name": "Sweetwater"
+          },
+          "price": 398,
+          "currency": "USD",
+          "availability": null,
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Verified directly on exact retailer product page",
+          "matchScore": 100,
+          "stockScope": "not supplied",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-10-09T19:00:07.392Z",
+          "retailerDomain": "sweetwater.com",
+          "trustedRetailerDomain": false
+        }
+      ],
+      "error": null
+    },
+    {
+      "category": "groceries",
+      "query": "Kelloggs Corn Flakes 500g",
+      "http": 200,
+      "seconds": 14.7,
+      "offers": [],
+      "error": null
+    },
+    {
+      "category": "clothing",
+      "query": "Levi 501 Original Fit Jeans",
+      "http": 200,
+      "seconds": 14.0,
+      "offers": [],
+      "error": null
+    },
+    {
+      "category": "shoes",
+      "query": "Nike Air Force 1 07 white",
+      "http": 200,
+      "seconds": 10.9,
+      "offers": [],
+      "error": null
+    },
+    {
+      "category": "beauty",
+      "query": "Nivea Rich Nourishing Body Lotion 250ml",
+      "http": 200,
+      "seconds": 9.1,
+      "offers": [],
+      "error": null
+    },
+    {
+      "category": "tools",
+      "query": "Bosch GSB 185 LI drill",
+      "http": 200,
+      "seconds": 7.2,
+      "offers": [],
+      "error": null
+    },
+    {
+      "category": "toys",
+      "query": "LEGO Classic 10698",
+      "http": 200,
+      "seconds": 14.0,
+      "offers": [],
+      "error": null
+    },
+    {
+      "category": "furniture",
+      "query": "IKEA Billy bookcase white 80x28x202 cm",
+      "http": 200,
+      "seconds": 12.9,
+      "offers": [],
+      "error": null
+    },
+    {
+      "category": "household",
+      "query": "Baby Soft 2 ply toilet paper 9 rolls",
+      "http": 200,
+      "seconds": 7.6,
+      "offers": [],
+      "error": null
+    }
+  ]
+}

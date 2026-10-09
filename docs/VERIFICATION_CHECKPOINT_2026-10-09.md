@@ -4,7 +4,7 @@ Status: fixes deployed; application is **not fully verified or finished**. Conti
 
 Production: https://findit-nearby.bgbrummer.workers.dev/
 
-Latest deployed application commit: `d43b57d7ef84e3e8534c27c7131879446867038e`. The production `/api/version` endpoint returned this SHA. Deployment run `37947020209` succeeded. Subsequent documentation/audit-bot commits do not change the application build.
+Latest deployed application commit: `406536d9207be5bdec09a19c7f9d0bb438ba0fa3`. Production `/api/version` confirmed this SHA. Deployment run `37977443593` and local/production interaction run `37977443684` succeeded. Documentation and audit-bot commits do not change the application build. Earlier results below are historical; the current checkpoint appears at the end.
 
 ## Changes implemented
 
@@ -50,3 +50,33 @@ Latest deployed application commit: `d43b57d7ef84e3e8534c27c7131879446867038e`. 
 Release Smoke `37947020186`, Dashboard Commerce `37947020112`, regression `37947020182` and smoke `37947020147` completed successfully on the latest application commit. The earlier Interaction Freeze Regression `37946157087` completed successfully. That interaction workflow ran the new quota-recovery browser test against local and production interfaces and confirmed that manual search remains reachable after photo failure. The successful interaction tests use controlled responses and do not erase the failed real-provider photo tests.
 
 Latest Interaction Freeze Regression `37947020165` completed successfully. Its production run reported `PHOTO_QUOTA_RECOVERY_PASS` after submitting a typed query following a controlled photo-quota failure; it verifies both overlay cleanup and replacement of stale quota status. The final manual browser connection timed out while capturing typed-search completion, so that last completion check relies on this successful production automation; the fresh typed loading status was observed manually.
+
+
+## Current checkpoint — verified live progress, 9 October 2026 evening UTC
+
+The project remains unfinished. Do not describe mock-backed browser results as successful live retailer or vision coverage.
+
+### Changes in this continuation
+
+- Published from the current GitHub main tree, preserving prior files and automated audit output. Earlier publishing from an old base tree had dropped tested fixes. Restored photo recovery, final completion messages, responsive styles, and the missing retailer URL validator.
+- Corrected retailer fallback links to actual domains and the current product query, including beauty and footwear typed searches. Links explicitly remain unverified.
+- Corrected Incredible Connection's Magento search route and Clicks' Hybris search route; added lotion/fragrance classification and recognition of typed Sony WH-1000XM headphone models. Direct retailer retrieval precedes the reader fallback.
+- Ranked relevant retailer product links ahead of navigation; excluded static assets, off-site links, search routes and homepages. Captured real Incredible Connection search HTML now resolves to the exact requested Sony URL. Increased the retained page limit because retailer product links occurred beyond the old 850 KB cutoff.
+- Show verified online offers and direct product URLs in Top Stores, with the source currency and separate online/branch stock labels. Removed a newly discovered competing-observer loop that froze the page when verified offers arrived; integrated card rendering into the existing update handlers instead.
+- Explain online shopping-plan scope directly in its initial render. Cancel superseded interaction checks so the suite verifies the current production SHA.
+
+### Current verification
+
+- `npm test`: **81 passed, 0 failed, 0 skipped**. Syntax and whitespace checks passed. New tests cover retailer routes, product links after long navigation/page prefixes, real fallback domains, and verified/unverified retailer cards.
+- GitHub interaction run **37977443684 succeeded locally and against production**, gated by the exact deployment SHA. It covers desktop/mobile retailer cards, verified direct links, settings, product information, comparison and online stock, feedback UI, shopping tools, hours/maps controls, current-find relevance, upload activation, photo quota recovery, and responsive layouts. External endpoint responses in these browser regressions are controlled fixtures; they do not establish live provider accuracy.
+- Manual production search for **Sony WH-1000XM5 black** returned the exact Incredible Connection page with **ZAR 5,999**, online `in_stock`, and `branchStockVerified: false`. Production rendered the direct link, actual currency, researched source description and stock scope. Opening and closing the help dialog after completion confirmed the page remained responsive. Screenshot: `docs/findit-verified-sony-2026-10-09.jpg`. Prices/stock may change after this check.
+- Nine live API category queries completed: electronics returned that verified offer; groceries, clothing, shoes, beauty, tools, toys, furniture and household returned zero verified offers. These eight are coverage failures, not proof that retailers do not sell the items. Probe results: `docs/category-production-results-2026-10-09.json`.
+- Live photo probe run **37977443632 failed**, code `CF_VISION_SPECIFIC_IDENTITY_CONFLICT`: providers disagreed about visible brand/model details. The app refused to invent an identity. Previous daily quota errors are a separate observed limitation, not the cause of this latest failure.
+
+### Remaining work and boundaries
+
+Prioritize reliable live photo identification and cross-category discovery. Check each store's actual search adapter, pagination and response before accepting any source; retain exact variant/barcode checks and scoped price/currency extraction. A correct parser on captured HTML is not successful production discovery until the live endpoint and browser both confirm it. Do not weaken identity checks or manufacture offers to turn empty searches green.
+
+Physical camera and GPS hardware, branch inventory accuracy, sustained traffic performance, real feedback delivery, and universal product-specific pros/cons have not all passed real-world verification. The existing feedback service lacks confirmed delivery configuration. Do not activate paid providers or incur charges without explicit approval.
+
+Continue from the latest remote tree and use an expected-SHA lease to publish. Never overwrite AUDIT_LATEST.txt manually. Local commit hashes differ from connector-created remote commits. Preserve the current code and design, and do not claim completion while the photo and category coverage failures remain.
