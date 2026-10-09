@@ -82,3 +82,11 @@ test('primary brand and model need a witness when the second vision provider fai
  assert.equal(d.identification,null);assert.equal(d.visualVerification,false);assert.equal(d.requiresUserInput,true);
  assert.equal(d.code,'CF_VISION_UNCORROBORATED_SPECIFIC_IDENTITY');
 });
+
+test('daily AI allowance exhaustion stops further inference and explains the actual limit',async()=>{
+ let calls=0;const env={AI:{run:async()=>{calls++;throw Error('4006: you have used up your daily free allocation of 10,000 neurons')}}};
+ const f=new FormData();f.set('image',new Blob(['fixture'],{type:'image/jpeg'}),'fixture.jpg');
+ const d=await(await worker.fetch(new Request('https://findit.test/api/search',{method:'POST',body:f}),env)).json();
+ assert.equal(calls,1);assert.equal(d.code,'PHOTO_DAILY_LIMIT_REACHED');assert.equal(d.retryable,false);
+ assert.equal(d.identification,null);assert.equal(d.visualVerification,false);assert.match(d.message,/daily service limit.*product name or barcode/);
+});

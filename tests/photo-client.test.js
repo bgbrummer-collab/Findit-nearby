@@ -25,3 +25,9 @@ test('uncertain photos finish once with manual-input guidance, without repeated 
   const c=client(),pending=c.button.onclick();c.pending[0]({identification:null,requiresUserInput:true,retryable:true});await pending;
   assert.equal(c.pending.length,1);assert.match(c.statuses.at(-1),/clearer photo.*product name or barcode/i);assert.equal(c.button.disabled,false);
 });
+
+test('service limits are explained instead of blaming photo clarity',async()=>{
+ const c=client(),pending=c.button.onclick();
+ c.pending[0]({identification:null,requiresUserInput:true,code:'PHOTO_DAILY_LIMIT_REACHED',message:'Photo identification has reached its daily service limit. Search by product name or barcode.',retryable:false});
+ await pending;assert.match(c.statuses.at(-1),/daily service limit/);assert.doesNotMatch(c.statuses.at(-1),/clearer photo/);assert.equal(c.pending.length,1);
+});
