@@ -110,7 +110,7 @@ async function handleProductInfo(request){
   if(!facts.length){
     try{
       const rr=await handleRealProductIntelligence(new Request('https://findit.local/api/product-intelligence-v2',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:{name,brand,model,category,retailCategory:category,searchQuery}})}));
-      const rd=await rr.json(),offers=Array.isArray(rd?.offers)?rd.offers.filter(o=>o?.exactProductMatch===true&&(o?.sourcePageVerified===true||o?.verified===true)): [];
+      const rd=await rr.json(),candidateOffers=[...(Array.isArray(b.offers)?b.offers:[]),...(Array.isArray(rd?.offers)?rd.offers:[])],offers=candidateOffers.filter(o=>o?.exactProductMatch===true&&(o?.sourcePageVerified===true||o?.verified===true));
       for(const o of offers.slice(0,3)){const u=o.product_url||o.url;if(!u)continue;try{const pr=await fetch(u,{headers:{'user-agent':'Mozilla/5.0 FindItNearby/44.0','accept':'text/html'},signal:AbortSignal.timeout(6500)});if(!pr.ok)continue;const html=(await pr.text()).slice(0,900000),meta=strip((html.match(/<meta[^>]+(?:name|property)=["'](?:description|og:description)["'][^>]+content=["']([^"']+)/i)||html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+(?:name|property)=["'](?:description|og:description)["']/i)||[])[1]);if(meta&&meta.length>=35&&relevant(meta)){facts.push(...meta.split(/(?<=[.!?])\s+/).map(x=>clean(x,320)).filter(x=>x.length>=35&&relevant(x)));sources.push({title:o.product_name||o.retailer?.name||new URL(u).hostname,url:u})}}catch{}}
     }catch{}
   }
