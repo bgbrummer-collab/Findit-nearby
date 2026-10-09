@@ -12,13 +12,13 @@ function nearby(){return Array.isArray(state().stores)?state().stores:[]}
 function offers(){let a=[...(Array.isArray(state().offers)?state().offers:[]),...(Array.isArray(window.productIntelligence?.offers)?window.productIntelligence.offers:[])];let seen=new Set();return a.filter(o=>{let k=clean(o?.product_url||o?.url||o?.retailer?.name||o?.retailer||'');if(!k||seen.has(k))return false;seen.add(k);return true})}
 function sourceName(o){return clean(o?.retailer?.name||o?.retailer||o?.store||o?.seller||'Retailer')}
 function productModalFallback(){
- const m=$('#fxStableModal:not(.hidden)'),body=m&&$('#fxStableBody',m);if(!body||!hasIdentity())return;
+ const m=$('#fxStableModal:not(.hidden)'),body=m&&$('#fxStableBody',m);if(!body||!hasIdentity()||body.querySelector('#fxStableResearch'))return;
  const txt=clean(body.textContent);
  if(!/Search for a product first|No product selected yet|Purpose is being verified|Product-specific advantages are being verified/i.test(txt))return;
  let i=id(),rows=usefulSummary(),os=offers(),ss=nearby();
  body.innerHTML='<div class="fx-value-product"><div class="fx-value-identity"><h3>'+esc(name())+'</h3><p>'+esc(rows.join(' · ')||'Product selected from your search.')+'</p></div>'+
- '<section><h4>What FindIt knows</h4><p>'+esc(i.summary||i.description||('This is being treated as a '+category()+'. FindIt will only add product-specific claims when a reliable source supports them.'))+'</p></section>'+
- '<section><h4>Where to look</h4><p>'+(ss.length?esc(ss.slice(0,4).map(s=>s.name).filter(Boolean).join(', '))+' are relevant nearby retailers found for this search. Exact branch stock still needs retailer confirmation.':'No nearby retailer has been confirmed yet. You can still compare online retailer evidence below when available.')+'</p></section>'+
+ '<section><h4>What it does</h4><p>'+esc(i.summary||i.description||('This is being treated as a '+category()+'. FindIt will only add product-specific claims when a reliable source supports them.'))+'</p></section>'+
+ '<section><h4>Pros</h4><p>No product-specific strengths have been verified yet.</p></section><section><h4>Cons / considerations</h4><p>No product-specific drawbacks have been verified yet.</p></section><section><h4>Where to look</h4><p>'+(ss.length?esc(ss.slice(0,4).map(s=>s.name).filter(Boolean).join(', '))+' are relevant nearby retailers found for this search. Exact branch stock still needs retailer confirmation.':'No nearby retailer has been confirmed yet. You can still compare online retailer evidence below when available.')+'</p></section>'+
  '<section><h4>Retailer evidence</h4><p>'+(os.length?esc(os.length+' retailer listing'+(os.length===1?'':'s')+' found. Open Compare Prices to inspect verified price and availability evidence.'):'No exact retailer listing has been verified yet. FindIt will not invent a price or stock status.')+'</p></section>'+
  '<section><h4>Useful next step</h4><p>'+esc(i.barcode?'Use the barcode and retailer links to confirm the exact variant before buying.':'If the exact model or size matters, add the model, size or barcode to the search. That gives FindIt a much stronger exact-product query.')+'</p></section></div>';
 }
@@ -33,9 +33,9 @@ function enrichDashboard(){
  if(info)info.innerHTML='<b>What we found</b><span>'+esc(os.length?os.length+' retailer listing'+(os.length===1?'':'s')+' found':ss.length?ss.length+' relevant nearby retailer'+(ss.length===1?'':'s')+' found':'Retailer verification still needed')+'</span>';
 }
 function smartChoiceValue(){
- if(!hasIdentity())return;let root=$('#fxSmartChoice');if(!root)return;let ss=nearby(),os=offers(),verified=os.filter(o=>o?.verified===true||o?.sourcePageVerified===true),prices=verified.filter(o=>Number.isFinite(+o.price));
+ if(!hasIdentity())return;let root=$('#fxSmartChoice');if(!root)return;let ss=nearby(),os=offers(),verified=os.filter(o=>o?.verified===true||o?.sourcePageVerified===true),prices=verified.filter(o=>window.finditOfferEvidence?.amount(o)!==null&&window.finditOfferEvidence?.supported(o));
  let cards=$$('.fx-smart-card',root);if(cards[0]&&/Need verified retailer evidence/i.test(cards[0].textContent)){let s=cards[0].querySelector('strong'),p=cards[0].querySelector('p');if(s)s.textContent=verified.length?verified.length+' verified retailer option'+(verified.length===1?'':'s'):(ss.length?ss.length+' nearby retailer'+(ss.length===1?'':'s')+' to check':'Retailer check needed');if(p)p.textContent=verified.length?'Compare the verified retailer evidence below.':ss.length?'These stores are relevant nearby options; exact product stock still needs confirmation.':'No retailer evidence has been confirmed yet.'}
- if(cards[1]&&prices.length){let cheapest=prices.sort((a,b)=>+a.price-+b.price)[0],s=cards[1].querySelector('strong'),p=cards[1].querySelector('p');if(s)s.textContent=new Intl.NumberFormat('en-ZA',{style:'currency',currency:cheapest.currency||'ZAR'}).format(+cheapest.price);if(p)p.textContent='Lowest verified price currently found at '+sourceName(cheapest)+'.'}
+ if(cards[1]&&window.finditOfferEvidence?.cheapest(prices)){let cheapest=window.finditOfferEvidence.cheapest(prices),s=cards[1].querySelector('strong'),p=cards[1].querySelector('p');if(s)s.textContent=window.finditOfferEvidence.format(cheapest);if(p)p.textContent='Lowest verified price currently found at '+sourceName(cheapest)+'.'}
 }
 function run(){enrichDashboard();productModalFallback();smartChoiceValue()}
 for(const ev of ['findit:results-rendered','findit:dashboard-sync','findit:nearby-updated'])document.addEventListener(ev,()=>{run();setTimeout(run,100);setTimeout(run,700)});

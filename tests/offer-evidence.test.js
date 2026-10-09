@@ -1,0 +1,12 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import vm from 'node:vm';
+const context={window:{},Intl};vm.runInNewContext(readFileSync(new URL('../offer-evidence.js',import.meta.url),'utf8'),context);const e=context.window.finditOfferEvidence;
+const offer=(price,currency='ZAR',extra={})=>({price,currency,exactProductMatch:true,sourcePageVerified:true,...extra});
+test('missing, blank, zero, negative and invalid prices never become free offers',()=>{for(const value of [null,undefined,'',0,-1,'not-a-price',Infinity]){assert.equal(e.amount(offer(value)),null);assert.equal(e.cheapest([offer(value)]),null);assert.equal(e.format(offer(value)),'Price not verified')}});
+test('USD and EUR remain their retailer currencies',()=>{assert.match(e.format(offer(398,'USD')),/US\$398/);assert.match(e.format(offer(100,'EUR')),/€100/);assert.doesNotMatch(e.format(offer(398,'USD')),/^R /)});
+test('unknown currency is labelled and not ranked as cheapest',()=>{assert.match(e.format(offer(398,'')),/currency unverified/);assert.equal(e.cheapest([offer(398,'')]),null)});
+test('different currencies are not compared without conversion evidence',()=>assert.equal(e.cheapest([offer(10,'USD'),offer(100,'ZAR')]),null));
+test('cheapest uses only positive exact offers in one currency',()=>{const low=offer(99);assert.equal(e.cheapest([offer(null),offer(1,'ZAR',{sourcePageVerified:false,verified:false}),offer(200),low]),low)});
+test('typed confirmation and missing photo confidence never show zero percent',()=>{assert.equal(e.confidence({userConfirmed:true,confidence:null}),'Search confirmed');assert.equal(e.confidence({confidence:null}),'Confidence not supplied');assert.equal(e.confidence({confidence:.78}),'78%')});

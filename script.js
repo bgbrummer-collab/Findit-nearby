@@ -357,8 +357,8 @@ function syncExactDashboardResult(data){
   const nameEl=document.getElementById("fxProductName");if(nameEl&&name)nameEl.textContent=name;
   const metaEl=document.getElementById("fxProductMeta");if(metaEl)metaEl.textContent=[i.brand,i.model,i.category||i.retailCategory].filter(Boolean).join(" · ");
   const descEl=document.getElementById("fxProductDesc");if(descEl)descEl.textContent=i.summary||i.description||(name?"Identified from your uploaded photo.":"Upload a photo to identify an item.");
-  const conf=Number(i.confidence);const confEl=document.getElementById("fxConfidence");if(confEl)confEl.textContent=Number.isFinite(conf)?`${Math.round(conf*100)}% Match`:"— Match";
-  const badge=document.getElementById("fxExactBadge");if(badge)badge.textContent=i.exactIdentityVerified===true?"Exact identity verified":(name?"AI identified":"Waiting for result");
+  const conf=Number(i.confidence);const confEl=document.getElementById("fxConfidence");if(confEl)confEl.textContent=window.finditOfferEvidence?.confidence(i)||"Confidence not supplied";
+  const badge=document.getElementById("fxExactBadge");if(badge)badge.textContent=i.exactIdentityVerified===true?"Exact identity verified":(i.userConfirmed?"Product confirmed by search":name?"AI identified":"Waiting for result");
   const rn=document.getElementById("resultName");if(rn&&name)rn.textContent=name;
   const rd=document.getElementById("resultDescription");if(rd)rd.textContent=i.summary||i.description||"";
   const cv=document.getElementById("confidenceValue");if(cv&&Number.isFinite(conf))cv.textContent=`${Math.round(conf*100)}%`;
