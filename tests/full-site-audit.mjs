@@ -43,6 +43,8 @@ await page.screenshot({path:path.join(OUT,'01-dashboard-desktop.png')});
 
 await safe('Free compare is Premium-gated',async()=>{await clickVisible(page,'#finditExactShell [data-fxnav="compare"]');if(!await visible(page,'#premiumModal:not(.hidden)'))throw Error('Free compare bypassed Premium gate');return 'Premium gate shown'});
 await closeModal(page);await top(page);
+await safe('Premium entry opens from visible dashboard',async()=>{await clickVisible(page,'#fxPremiumSideButton,#finditExactShell .fx-avatar');if(!await visible(page,'#premiumModal:not(.hidden)')&&!await visible(page,'#fxStableModal:not(.hidden)'))throw Error('Premium UI did not open');return 'Premium UI visible'});
+await closeModal(page);await top(page);
 await page.evaluate(()=>localStorage.setItem('findit_premium_beta','1'));
 await page.reload({waitUntil:'domcontentloaded'});await page.waitForTimeout(1200);
 if(!await visible(page,'#finditExactShell'))throw Error('dashboard missing after Premium activation');
@@ -72,7 +74,7 @@ await safe('Compare Prices uses verified offer',async()=>{await clickVisible(pag
 await closeModal(page);await top(page);
 await safe('Nearby action uses visible section',async()=>{await clickVisible(page,'#finditExactShell [data-fxnav="nearby"]');if(!await visible(page,'#fxNearbySection'))throw Error('nearby section missing');return 'nearby section visible'});
 await top(page);await closeModal(page);
-await safe('Premium entry opens from visible dashboard',async()=>{await clickVisible(page,'#fxPremiumSideButton,#finditExactShell .fx-avatar');if(!await visible(page,'#premiumModal:not(.hidden)')&&!await visible(page,'#fxStableModal:not(.hidden)'))throw Error('Premium UI did not open');return 'Premium UI visible'});
+
 await closeModal(page);
 
 await safe('No uncaught JavaScript errors',async()=>{if(pageErrors.length)throw Error(pageErrors.slice(0,3).join(' | '));return '0 page errors'});
