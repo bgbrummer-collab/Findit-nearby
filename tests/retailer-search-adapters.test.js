@@ -32,3 +32,24 @@ test('strong exact candidates from later searches outrank partial matches before
  const urls=await nativeRetailerUrls({name:'Nivea Rich Nourishing Body Lotion 250ml'});
  assert.equal(urls[0],exact);
 });
+
+for(const [name,route] of [
+ ['Nivea Rich Nourishing Body Lotion 250ml','https://www.dischem.co.za/catalogsearch/result/?q='],
+ ['Bosch GSB 185 LI drill','https://www.buco.co.za/catalogsearch/result/?q='],
+ ['LEGO Classic 10698','https://www.toysrus.co.za/catalogsearch/result/?q='],
+ ['Sony smart speaker','https://www.geewiz.co.za/jolisearch?controller=search&s='],
+ ['Sony WH-1000XM5 black','https://www.hificorp.co.za/catalogsearch/result/?q='],
+ ['Faber Castell pencil','https://www.pna.co.za/?s='],
+ ['Caterpillar cordless drill','https://www.buco.co.za/catalogsearch/result/?q=']
+])test('retailer platform and category adapter: '+name,async t=>{
+ const requested=[];t.mock.method(globalThis,'fetch',async u=>{requested.push(String(u));return new Response('')});
+ await nativeRetailerUrls({name});assert(requested.some(u=>u.startsWith(route)));
+ assert(!requested.some(u=>u.includes('absolute-pets')||u.includes('petheaven')));
+});
+test('apostrophe spelling is equivalent while size and brand remain exact',async()=>{
+ const {ident,identityMatches}=await import('../lib/product-intelligence-core.js');
+ const i=ident({name:'Kelloggs Corn Flakes 500g'});
+ assert(identityMatches("Kellogg’s Corn Flakes 500 g",i));
+ assert(!identityMatches("Kellogg’s Corn Flakes 750 g",i));
+ assert(!identityMatches('Other Brand Corn Flakes 500g',i));
+});

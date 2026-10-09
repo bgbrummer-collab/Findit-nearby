@@ -99,7 +99,7 @@ async function handleProductInfo(request){
  if(description.length<35||/access denied|captcha|sign in|page not found/i.test(description))return null;
  const strengths=[];if(known.includes(url)){for(const m of raw.matchAll(/<h[23][^>]*>([\s\S]*?)<\/h[23]>/gi)){const text=strip(m[1]);if(text&&/driver|surround|isolat|microphone|lightweight|comfort|durab/i.test(text)&&!strengths.includes(text))strengths.push(text)}}return{description:description.slice(0,1800),strengths,source:{title:product?.name||title,url}};
  }catch{return null}}));
- const evidence=pages.filter(Boolean),facts=[...new Set(evidence.flatMap(p=>p.description.split(/(?<=[.!?])\s+/).filter(s=>s.length>=25)))];
+ const evidence=pages.filter(Boolean),facts=[...new Set(evidence.flatMap(p=>{const sentences=p.description.split(/(?<=[.!?])\s+/);if(sentences.length>1&&!/[.!?]$/.test(sentences.at(-1)))sentences.pop();return sentences.filter(s=>s.length>=25)}))];
  const whatItDoes=facts[0]||'',pros=[...new Set([...evidence.flatMap(p=>p.strengths||[]),...facts.slice(1)])].filter(s=>! /\b(but|however|requires|not included|may not|limitation|drawback)\b/i.test(s)).slice(0,4),cons=facts.filter(s=>/\b(but|however|requires|not included|may not|limitation|drawback)\b/i.test(s)).slice(0,3);
  return json({researched:Boolean(whatItDoes),whatItDoes,pros,cons,bestFor:'',standOut:'',valueVerdict:'',sources:evidence.map(p=>p.source),researchMethod:'Fetched exact-product page descriptions',checkedAt:new Date().toISOString(),message:whatItDoes?'Product facts are quoted from matching product-page descriptions.':'No trustworthy exact-product description was found. FindIt will not guess.'});
 }

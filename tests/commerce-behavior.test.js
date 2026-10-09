@@ -97,3 +97,10 @@ test('discovery accepts reordered exact product titles without requiring quoted 
  let result;const res={setHeader(){},status(){return this},json(x){result=x;return this}};await handler({method:'POST',body:{identification:product(wanted)}},res);
  assert.ok(requests.some(q=>q.startsWith('site:clicks.co.za')));assert.ok(requests.includes(wanted+' product price'));assert.ok(result.offers.some(o=>o.product_url==='https://store.example/product/nivea-250ml'&&o.price===49.99));
 });
+
+test('research does not present a truncated meta description tail as a product strength',async t=>{
+ const name='Nivea Rich Nourishing Body Lotion 250ml',url='https://store.example/nivea-rich-nourishing-body-lotion-250ml';
+ t.mock.method(globalThis,'fetch',async u=>String(u).includes('bing.com')?new Response('<rss/>'):new Response('<title>'+name+'</title><meta name="description" content="Nivea Rich Nourishing Body Lotion 250ml moisturises very dry skin. It provides hydration for up to 72 hours, helping t">'));
+ const r=await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:{name},offers:[{product_name:name,product_url:url,sourcePageVerified:true,exactProductMatch:true}]})}),{}),d=await r.json();
+ assert.equal(d.researched,true);assert.match(d.whatItDoes,/moisturises/);assert.deepEqual(d.pros,[]);assert.doesNotMatch(JSON.stringify(d),/helping t/);
+});
