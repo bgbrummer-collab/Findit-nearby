@@ -132,7 +132,6 @@ body.findit-exact-dashboard{position:relative;left:0!important;right:auto!import
 #fxPhotoRecovery[hidden]{display:none!important}
 #fxPhotoRecovery p{margin:0 0 10px;font-size:13px;line-height:1.5;color:#d5e6f5}
 #fxPhotoRecovery button{width:100%;min-height:42px;border:1px solid #258ee9;border-radius:9px;background:#0875c9;color:white;font:inherit;cursor:pointer}
-.fx-retailer-candidates{display:grid;gap:8px}.fx-retailer-candidates p{margin:0 0 4px}.fx-retailer-candidate{display:block;padding:10px;border:1px solid #28496a;border-radius:10px;background:#0a1d31;color:#dff3ff;text-decoration:none}.fx-retailer-candidate small{display:block;margin-top:3px;color:#9cb5c9;font-size:11px}
 @media(min-width:901px){
  #finditExactShell .fx-hero{display:grid!important;grid-template-columns:minmax(0,1fr);gap:20px;padding:30px 22px 22px;min-height:0!important;box-sizing:border-box}
  #finditExactShell .fx-hero-copy{padding:0!important;max-width:none!important;min-width:0}
