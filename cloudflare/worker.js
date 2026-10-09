@@ -125,7 +125,7 @@ async function handleProductInfo(request){
   const productFacts=facts.filter(z=>!/\b(findit|image recognition|photo recognition|identified the product|recogniz(?:e|es|ed|ing) the brand|search result|retailer search|shopping assistant|product matching|our app|upload a photo)\b/i.test(z));
   const purpose=productFacts.find(z=>/designed|features|provides|offers|uses|includes|gaming|audio|sound|microphone|comfort|wireless|usb/i.test(z))||productFacts[0]||'';
   let pros=productFacts.filter(z=>z!==purpose&&/feature|clear|comfort|quality|durab|light|audio|sound|microphone|noise|compatible|performance|memory|battery|wireless|usb/i.test(z)).slice(0,4);if(pros.length<2)pros=productFacts.filter(z=>z!==purpose).slice(0,4);
-  const cons=productFacts.filter(z=>/but|however|limitation|requires|not included|may not|issue|drawback|heavy|price|expensive/i.test(z)).slice(0,3);
+  const cons=productFacts.filter(z=>/\b(but|however|limitation|requires|not included|may not|issue|drawback|heavy|expensive)\b/i.test(z)).slice(0,3);
   const researched=Boolean(purpose&&sources.length);
   return json({researched,matched:true,bestProduct:{name:name||[brand,model].filter(Boolean).join(' '),brand,model,category},whatItDoes:purpose,pros,cons,bestFor:'',standOut:'',valueVerdict:'',sources:sources.slice(0,4),researchMethod:researched?'Live exact-product web evidence':'No exact-product evidence found',checkedAt:new Date().toISOString(),message:researched?'Product information is based on current web evidence.':'No trustworthy exact-product research was found, so FindIt is not guessing.'});
 }
