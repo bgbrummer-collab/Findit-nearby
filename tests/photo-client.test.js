@@ -31,3 +31,11 @@ test('service limits are explained instead of blaming photo clarity',async()=>{
  c.pending[0]({identification:null,requiresUserInput:true,code:'PHOTO_DAILY_LIMIT_REACHED',message:'Photo identification has reached its daily service limit. Search by product name or barcode.',retryable:false});
  await pending;assert.match(c.statuses.at(-1),/daily service limit/);assert.doesNotMatch(c.statuses.at(-1),/clearer photo/);assert.equal(c.pending.length,1);
 });
+
+test('overlay cleanup immediately releases the page without a delayed timer racing a new search',()=>{
+ const hidden=new Set(),progress={style:{}},overlay={classList:{add:x=>hidden.add(x)}},dropzone={classList:{remove(){}}};
+ const code=source.slice(source.indexOf('function hideSearchOverlay()'),source.indexOf(String.fromCharCode(10),source.indexOf('function hideSearchOverlay()')));
+ const ctx={stageTimer:1,clearInterval(){},dropzone,$:s=>s==='#searchProgress'?progress:overlay};
+ vm.runInNewContext(code+';hideSearchOverlay()',ctx);
+ assert.equal(hidden.has('hidden'),true);assert.equal(progress.style.width,'100%');
+});
