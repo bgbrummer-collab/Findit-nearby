@@ -81,7 +81,7 @@ async function hydrateIdentifiedPhoto(){
   research=ri?.researched===false?null:ri;
   if(Array.isArray(ci?.offers)){s.offers=ci.offers;window.productIntelligence=ci}
   // Do not erase an already truthful nearby result when the optional refresh returns empty.
-  if(Array.isArray(ni?.stores)&&ni.stores.length)s.stores=ni.stores;
+  if(Array.isArray(ni?.stores))s.stores=ni.stores;else if(coords)console.warn('FindIt photo nearby response has no store list');
   syncAll();saveRecent(i);
   document.dispatchEvent(new CustomEvent('findit:dashboard-sync',{detail:{result:s.result}}));
   if(s.stores?.length)document.dispatchEvent(new CustomEvent('findit:nearby-updated',{detail:{stores:s.stores}}));
