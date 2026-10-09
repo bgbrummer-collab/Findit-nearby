@@ -8,12 +8,12 @@
   const $$=(s,r=document)=>[...r.querySelectorAll(s)];
   const esc=(v='')=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const norm=v=>String(v||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim();
-  const n=v=>Number.isFinite(Number(v))?Number(v):null;
+  const n=v=>v!==null&&v!==undefined&&v!==''&&Number.isFinite(Number(v))?Number(v):null;
   const app=()=>window.finditState||window.state||{};
   const LS={list:'findit.shoppingList.v2',watch:'findit.watchList.v2',alerts:'findit.watchAlerts.v1',history:'findit.priceHistory.v1',mode:'findit.shoppingPlanMode.v1'};
   const read=(k,f)=>{try{const v=JSON.parse(localStorage.getItem(k)||'null');return v??f}catch{return f}};
   const write=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{}};
-  const money=(v,c='ZAR')=>{if(!(n(v)>0))return'Price not verified';try{return new Intl.NumberFormat('en-ZA',{style:'currency',currency:c||'ZAR'}).format(Number(v))}catch{return`${c||'ZAR'} ${Number(v).toFixed(2)}`}};
+  const money=(v,c)=>window.finditOfferEvidence?.format({price:v,currency:c})||'Price not verified';
   let stream=null,scanTimer=null;
 
   function product(){
@@ -30,48 +30,48 @@
     const rows=Array.isArray(s.offers)&&s.offers.length?s.offers:(s.result?.identification&&Array.isArray(window.productIntelligence?.offers)?window.productIntelligence.offers:[]);
     const seen=new Set(),out=[];
     for(const o of rows){
-      if(!o||o.exactProductMatch===false)continue;
+      if(!o||o.exactProductMatch!==true)continue;
       const verified=o.verified===true||o.sourcePageVerified===true||o.priceComparisonVerified===true||o.searchGroundedVerified===true;
       if(!verified)continue;
       const retailer=String(o.retailer?.name||o.retailer||o.store||o.seller||'').trim();
-      const key=norm(retailer)+'|'+String(o.url||o.productUrl||'')+'|'+String(o.price||'');
+      const key=norm(retailer)+'|'+String(o.product_url||o.url||o.productUrl||'')+'|'+String(o.price||'');
       if(!retailer||seen.has(key))continue;
       seen.add(key);out.push({...o,_retailer:retailer});
     }
     return out;
   }
   function storeFor(name){const q=norm(name);return stores().find(s=>{const x=norm(s.name);return x===q||x.startsWith(q+' ')||q.startsWith(x+' ')})||null}
-  function stockYes(o){return /in[_ ]?stock|available|limited stock/i.test(String(o?.availability||o?.stock?.status||''))}
+  function stockYes(o){return /^(in_stock|in stock)$/i.test(String(o?.availability||o?.stock?.status||''))}
   const phone=s=>String(s?.phone||s?.telephone||s?.contactPhone||s?.tags?.phone||s?.tags?.['contact:phone']||'').trim();
   const website=s=>String(s?.website||s?.url||s?.tags?.website||s?.tags?.['contact:website']||'').trim();
   const address=s=>String(s?.address||s?.displayAddress||s?.vicinity||'').trim();
   const hours=s=>String(s?.openingHours||s?.opening_hours||s?.hours||s?.openingHoursText||s?.opening_hours_text||'').trim();
   function coords(s){const lat=n(s?.lat??s?.latitude),lon=n(s?.lon??s?.lng??s?.longitude);return lat!=null&&lon!=null?{lat,lon}:null}
   function directionsUrl(s){const c=coords(s);if(c)return`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${c.lat},${c.lon}`)}`;const q=[s?.name,address(s)].filter(Boolean).join(' ');return q?`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`:''}
-  function bestOffer(){const a=offers();return a.filter(o=>n(o.price)>0).sort((x,y)=>Number(x.price)-Number(y.price))[0]||a[0]||null}
+  function bestOffer(){const a=offers();return window.finditOfferEvidence?.cheapest(a)||a[0]||null}
 
   function toast(msg){let e=$('#fxShopToast');if(!e){e=document.createElement('div');e.id='fxShopToast';e.className='fx-shop-toast';document.body.appendChild(e)}e.textContent=msg;e.classList.add('show');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('show'),2200)}
   function snapshot(){
     const p=product();
-    return{...p,addedAt:Date.now(),offers:offers().map(o=>{const s=storeFor(o._retailer);return{retailer:o._retailer,price:n(o.price),currency:o.currency||'ZAR',availability:o.availability||o.stock?.status||'',url:o.url||o.productUrl||'',distanceKm:n(s?.distanceKm??o.distanceKm),lat:n(s?.lat??s?.latitude),lon:n(s?.lon??s?.lng??s?.longitude)}}),stores:stores().map(s=>({name:s.name||'',distanceKm:n(s.distanceKm),address:address(s),phone:phone(s),website:website(s),hours:hours(s),openNow:typeof s.openNow==='boolean'?s.openNow:null,lat:n(s.lat??s.latitude),lon:n(s.lon??s.lng??s.longitude)}))};
+    return{...p,addedAt:Date.now(),offers:offers().map(o=>{const s=o.branchStockVerified===true&&o.branchPriceVerified===true&&coords(o.branchLocation||o)?(o.branchLocation||o):null;return{branchStockVerified:o.branchStockVerified===true,branchPriceVerified:o.branchPriceVerified===true,retailer:o._retailer,price:n(o.price),currency:o.currency||null,availability:o.availability||o.stock?.status||'',url:o.product_url||o.url||o.productUrl||'',distanceKm:n(s?.distanceKm??o.distanceKm),lat:n(s?.lat??s?.latitude),lon:n(s?.lon??s?.lng??s?.longitude)}}),stores:stores().map(s=>({name:s.name||'',distanceKm:n(s.distanceKm),address:address(s),phone:phone(s),website:website(s),hours:hours(s),openNow:typeof s.openNow==='boolean'?s.openNow:null,lat:n(s.lat??s.latitude),lon:n(s.lon??s.lng??s.longitude)}))};
   }
 
   function recordHistory(){
     const p=product(),o=bestOffer();if(!o||!(n(o.price)>0))return;
     const all=read(LS.history,{}),arr=Array.isArray(all[p.key])?all[p.key]:[],last=arr[arr.length-1];
-    if(!last||last.price!==Number(o.price)||last.retailer!==o._retailer||last.stock!==stockYes(o)){
-      arr.push({at:Date.now(),price:Number(o.price),currency:o.currency||'ZAR',retailer:o._retailer,stock:stockYes(o)});
+    if(!last||last.price!==Number(o.price)||last.retailer!==o._retailer||last.stock!==stockYes(o)||last.currency!==o.currency){
+      arr.push({at:Date.now(),price:Number(o.price),currency:o.currency||null,retailer:o._retailer,stock:stockYes(o)});
       all[p.key]=arr.slice(-30);write(LS.history,all);
     }
   }
-  function historySummary(key){const arr=read(LS.history,{})[key]||[];if(!arr.length)return'';const vals=arr.map(x=>n(x.price)).filter(v=>v>0);if(!vals.length)return`${arr.length} checks`;const last=arr[arr.length-1];return`${arr.length} checks · low ${money(Math.min(...vals),last.currency)} · high ${money(Math.max(...vals),last.currency)}`}
+  function historySummary(key){const arr=read(LS.history,{})[key]||[];if(!arr.length)return'';const last=arr[arr.length-1],comparable=arr.filter(x=>x.currency&&x.currency===last.currency&&x.retailer===last.retailer),vals=comparable.map(x=>n(x.price)).filter(v=>v>0);if(!vals.length)return`${arr.length} checks · currency not verified`;return`${arr.length} checks · low ${money(Math.min(...vals),last.currency)} · high ${money(Math.max(...vals),last.currency)}`}
 
   function addCurrent(){const item=snapshot();if(!item.name){toast('Identify a product before adding it to your shopping list');return}const list=read(LS.list,[]),i=list.findIndex(x=>x.key===item.key);if(i>=0)list[i]=item;else list.push(item);write(LS.list,list);renderList();toast(i>=0?'Shopping list item updated':'Added to Shopping List')}
   function removeCurrent(key){write(LS.list,read(LS.list,[]).filter(x=>x.key!==key));renderList()}
   function clearList(){write(LS.list,[]);renderList();toast('Shopping List cleared')}
 
   function watchCurrent(){
-    const p=product();if(!p.name){toast('Identify a product before adding a watch');return}const o=bestOffer(),list=read(LS.watch,[]),rec={...p,updatedAt:Date.now(),lastPrice:n(o?.price),lastStock:stockYes(o),retailer:o?._retailer||'',currency:o?.currency||'ZAR'};
+    const p=product();if(!p.name){toast('Identify a product before adding a watch');return}const o=bestOffer(),list=read(LS.watch,[]),rec={...p,updatedAt:Date.now(),lastPrice:n(o?.price),lastStock:stockYes(o),lastAvailability:o?.availability||null,retailer:o?._retailer||'',currency:o?.currency||null};
     const i=list.findIndex(x=>x.key===p.key);if(i>=0)list[i]={...list[i],...rec};else list.push({...rec,createdAt:Date.now()});write(LS.watch,list);recordHistory();renderWatch();toast(i>=0?'Watch updated':'Item added to Watch List');
   }
   function unwatch(key){write(LS.watch,read(LS.watch,[]).filter(x=>x.key!==key));renderWatch()}
@@ -79,10 +79,10 @@
   function evaluateWatch(){
     recordHistory();const p=product(),list=read(LS.watch,[]),i=list.findIndex(x=>x.key===p.key);if(i<0)return;
     const o=bestOffer();if(!o)return;const price=n(o.price),inStock=stockYes(o),rec=list[i];let msg='',type='';
-    if(price&&rec.lastPrice&&price<rec.lastPrice){type='price_drop';msg=`Price drop: ${p.name} is now ${money(price,o.currency||'ZAR')}.`}
-    else if(inStock&&!rec.lastStock){type='restock';msg=`Restock found: ${p.name} is available from ${o._retailer}.`}
+    if(price&&rec.lastPrice&&o.currency&&o.currency===rec.currency&&o._retailer===rec.retailer&&price<rec.lastPrice){type='price_drop';msg=`Price drop: ${p.name} is now ${money(price,o.currency||null)}.`}
+    else if(inStock&&rec.lastAvailability==='out_of_stock'&&o._retailer===rec.retailer){type='restock';msg=`Restock found: ${p.name} is available from ${o._retailer}.`}
     if(msg){addAlert(p.key,type,msg);toast(msg);try{if(window.Notification&&Notification.permission==='granted')new Notification('FindIt Watch Item',{body:msg})}catch{}}
-    rec.lastPrice=price||rec.lastPrice;rec.lastStock=inStock;rec.retailer=o._retailer||rec.retailer;rec.updatedAt=Date.now();list[i]=rec;write(LS.watch,list);if(msg)renderWatch();
+    rec.lastPrice=price;rec.lastStock=inStock;rec.lastAvailability=o.availability||null;rec.currency=o.currency||null;rec.retailer=o._retailer||rec.retailer;rec.updatedAt=Date.now();list[i]=rec;write(LS.watch,list);if(msg)renderWatch();
   }
   async function notifications(){if(!window.Notification){toast('Browser notifications are not supported here');return}try{toast(await Notification.requestPermission()==='granted'?'Watch notifications enabled':'Notifications were not enabled')}catch{toast('Could not enable notifications')}}
 
@@ -90,19 +90,19 @@
   function routeDistance(points,start){let total=0,cur=start||null;for(const p of points){if(cur){const d=hav(cur,p);if(d!=null)total+=d}cur=p}return total}
   function options(item){return(item.offers||[]).filter(o=>{const price=n(o.price);return price!=null&&price>0&&o.retailer&&o.url&&/^https:\/\//i.test(String(o.url))}).sort((a,b)=>Number(a.price)-Number(b.price)).slice(0,5)}
   function origin(){const s=app();const c=coords(s.coords)||coords(s.userLocation)||coords(s.location);return c}
-  function score(combo,mode){const price=combo.reduce((t,x)=>t+Number(x.offer.price||0),0),uniq=[...new Map(combo.map(x=>[norm(x.offer.retailer),x])).values()],points=uniq.map(x=>x.offer.lat!=null&&x.offer.lon!=null?{lat:Number(x.offer.lat),lon:Number(x.offer.lon)}:null).filter(Boolean),dist=routeDistance(points,origin()),count=uniq.length;if(mode==='cheapest')return price;if(mode==='shortest')return dist*1000+count*25+price*.005;return price+dist*18+count*35}
+  function score(combo,mode){const price=combo.reduce((t,x)=>t+Number(x.offer.price||0),0),uniq=[...new Map(combo.map(x=>[norm(x.offer.retailer),x])).values()],points=uniq.map(x=>x.offer.branchStockVerified===true&&x.offer.branchPriceVerified===true&&x.offer.lat!=null&&x.offer.lon!=null?{lat:Number(x.offer.lat),lon:Number(x.offer.lon)}:null).filter(Boolean),dist=routeDistance(points,origin()),count=uniq.length;if(mode==='cheapest')return price;if(mode==='shortest')return dist*1000+count*25+price*.005;return price+dist*18+count*35}
   function routeUrl(stops){const pts=stops.map(s=>s.coords).filter(Boolean);if(!pts.length)return'';const o=origin(),dest=pts[pts.length-1],way=pts.slice(0,-1);let url=`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${dest.lat},${dest.lon}`)}`;if(o)url+=`&origin=${encodeURIComponent(`${o.lat},${o.lon}`)}`;if(way.length)url+=`&waypoints=${encodeURIComponent(way.map(x=>`${x.lat},${x.lon}`).join('|'))}`;return url}
   function buildPlan(){
     const list=read(LS.list,[]);if(!list.length)return null;
     const missing=list.filter(i=>!options(i).length).map(i=>i.name),ready=list.filter(i=>options(i).length),mode=String(read(LS.mode,'balanced')||'balanced');
-    if(!ready.length)return{list,missing,chosen:[],total:0,stops:[],distance:0,mode,url:''};
+    if(!ready.length)return{list,missing,chosen:[],total:null,currency:null,stops:[],distance:0,mode,url:''};const codes=new Set(ready.flatMap(i=>options(i).map(o=>/^[A-Z]{3}$/i.test(String(o.currency||''))?String(o.currency).toUpperCase():null)));if(codes.size!==1||codes.has(null))return{list,missing,chosen:[],total:null,currency:null,nonComparable:true,stops:[],distance:0,mode,url:''};const currency=[...codes][0];
     let best=null,visited=0;
     function walk(i,combo){if(visited>5000)return;if(i===ready.length){visited++;const sc=score(combo,mode);if(!best||sc<best.score)best={score:sc,combo:[...combo]};return}for(const o of options(ready[i]))walk(i+1,[...combo,{item:ready[i],offer:o}])}
     walk(0,[]);
     const chosen=best?.combo||ready.map(i=>({item:i,offer:options(i)[0]})),total=chosen.reduce((t,x)=>t+Number(x.offer.price||0),0),map=new Map();
-    for(const x of chosen){const k=norm(x.offer.retailer);if(!map.has(k))map.set(k,{name:x.offer.retailer,items:[],coords:x.offer.lat!=null&&x.offer.lon!=null?{lat:Number(x.offer.lat),lon:Number(x.offer.lon)}:null,distanceKm:n(x.offer.distanceKm)});map.get(k).items.push(x.item.name)}
+    for(const x of chosen){const k=norm(x.offer.retailer);if(!map.has(k))map.set(k,{name:x.offer.retailer,items:[],coords:x.offer.branchStockVerified===true&&x.offer.branchPriceVerified===true&&x.offer.lat!=null&&x.offer.lon!=null?{lat:Number(x.offer.lat),lon:Number(x.offer.lon)}:null,distanceKm:n(x.offer.distanceKm)});map.get(k).items.push(x.item.name)}
     const stops=[...map.values()].sort((a,b)=>(a.distanceKm??999)-(b.distanceKm??999)),distance=routeDistance(stops.map(s=>s.coords).filter(Boolean),origin());
-    return{list,missing,chosen,total,stops,distance,mode,url:routeUrl(stops)};
+    return{list,missing,chosen,total,currency,stops,distance,mode,url:routeUrl(stops)};
   }
 
   function renderList(){
@@ -112,15 +112,15 @@
     const modes=`<div class="fx-plan-modes"><button data-plan-mode="balanced" class="${mode==='balanced'?'active':''}">Best overall</button><button data-plan-mode="cheapest" class="${mode==='cheapest'?'active':''}">Cheapest</button>${hasPhysical?`<button data-plan-mode="shortest" class="${mode==='shortest'?'active':''}">Shortest trip</button>`:''}</div>`;
     const lines=list.map(x=>`<div class="fx-shop-line"><div><strong>${esc(x.name)}</strong><small>${esc([x.brand,x.model].filter(Boolean).join(' '))}</small></div><button data-remove-list="${esc(x.key)}" type="button">Remove</button></div>`).join('');
     const stops=p.stops.map((s,i)=>`${i+1}. ${esc(s.name)} <small>${esc(s.items.join(', '))}</small>`).join('<br>');
-    const planTitle=hasPhysical?'Optimised verified shopping plan':'No verified shopping route yet',planNote=hasPhysical?'FindIt optimises only from verified prices and available store coordinates. Route distance is an estimate; Maps provides the final live route.':'No price-verified retailer is available for this shopping list yet. Nearby stores may still be visible elsewhere, but their stock and prices are unverified.';
-    body.innerHTML=lines+`<div class="fx-plan"><strong>${planTitle}</strong>${modes}<p><b>${p.stops.length} ${hasPhysical?`store${p.stops.length===1?'':'s'}`:`online retailer${p.stops.length===1?'':'s'}`}</b> · ${money(p.total,'ZAR')}${hasPhysical&&p.distance?` · approx. ${p.distance.toFixed(1)} km route`:''}</p>${stops?`<p class="fx-route">${stops}</p>`:''}${hasPhysical&&p.url?`<a class="fx-route-link" href="${esc(p.url)}" target="_blank" rel="noopener">Open trip in Maps</a>`:''}${p.missing.length?`<p class="fx-warn">Missing verified prices for: ${esc(p.missing.join(', '))}</p>`:''}<small>${planNote}</small></div><button id="fxClearShoppingList" class="fx-clear-list" type="button">Clear list</button>`;
+    const planTitle=hasPhysical?'Optimised verified shopping plan':p.stops.length?'Verified online shopping plan':'No verified shopping route yet',planNote=hasPhysical?'FindIt optimises only from verified prices and available store coordinates. Route distance is an estimate; Maps provides the final live route.':p.stops.length?'These are online retailer prices. A store trip needs separately verified branch price and stock.':p.nonComparable?'Retailer currencies differ or are unverified. FindIt does not add or rank these prices without a verified conversion.':'No price-verified retailer is available for this shopping list yet. Nearby stores may still be visible elsewhere, but their stock and prices are unverified.';
+    body.innerHTML=lines+`<div class="fx-plan"><strong>${planTitle}</strong>${modes}<p><b>${p.stops.length} ${hasPhysical?`store${p.stops.length===1?'':'s'}`:`online retailer${p.stops.length===1?'':'s'}`}</b> · ${p.nonComparable?'Currencies differ — compare retailer prices separately':money(p.total,p.currency)}${hasPhysical&&p.distance?` · approx. ${p.distance.toFixed(1)} km route`:''}</p>${stops?`<p class="fx-route">${stops}</p>`:''}${hasPhysical&&p.url?`<a class="fx-route-link" href="${esc(p.url)}" target="_blank" rel="noopener">Open trip in Maps</a>`:''}${p.missing.length?`<p class="fx-warn">Missing verified prices for: ${esc(p.missing.join(', '))}</p>`:''}<small>${planNote}</small></div><button id="fxClearShoppingList" class="fx-clear-list" type="button">Clear list</button>`;
     $$('[data-remove-list]',body).forEach(b=>b.onclick=()=>removeCurrent(b.dataset.removeList));
     $$('[data-plan-mode]',body).forEach(b=>b.onclick=()=>{write(LS.mode,b.dataset.planMode);renderList()});
     $('#fxClearShoppingList')?.addEventListener('click',clearList);
   }
   function renderWatch(){
     const body=$('#fxWatchBody');if(!body)return;const list=read(LS.watch,[]),alerts=read(LS.alerts,[]),unread=alerts.filter(a=>!a.read).length,alertsOpen=Boolean(body.querySelector('details')?.open)||unread>0;
-    body.innerHTML=`<div class="fx-watch-actions"><button id="fxEnableNotifications" type="button">Enable notifications</button><span>${unread} new alert${unread===1?'':'s'}</span></div>${list.length?list.map(x=>`<div class="fx-shop-line"><div><strong>${esc(x.name)}</strong><small>${x.lastPrice?`Last verified: ${esc(money(x.lastPrice,x.currency||'ZAR'))}`:'Waiting for a verified price'}${x.retailer?` · ${esc(x.retailer)}`:''}</small><small>${esc(historySummary(x.key))}</small></div><button type="button" data-unwatch="${esc(x.key)}">Stop watching</button></div>`).join(''):'<p class="fx-muted">No watched items yet.</p>'}${alerts.length?`<details ${alertsOpen?'open':''}><summary>Recent watch alerts</summary>${alerts.slice(0,8).map(a=>`<p class="fx-alert">${esc(a.message)}<small>${new Date(a.at).toLocaleString()}</small></p>`).join('')}</details>`:''}<p class="fx-truth">Watch Item checks refreshed verified data while FindIt is open. True background alerts while the site is closed require a server notification service, so FindIt does not pretend they are active yet.</p>`;
+    body.innerHTML=`<div class="fx-watch-actions"><button id="fxEnableNotifications" type="button">Enable notifications</button><span>${unread} new alert${unread===1?'':'s'}</span></div>${list.length?list.map(x=>`<div class="fx-shop-line"><div><strong>${esc(x.name)}</strong><small>${x.lastPrice?`Last verified: ${esc(money(x.lastPrice,x.currency||null))}`:'Waiting for a verified price'}${x.retailer?` · ${esc(x.retailer)}`:''}</small><small>${esc(historySummary(x.key))}</small></div><button type="button" data-unwatch="${esc(x.key)}">Stop watching</button></div>`).join(''):'<p class="fx-muted">No watched items yet.</p>'}${alerts.length?`<details ${alertsOpen?'open':''}><summary>Recent watch alerts</summary>${alerts.slice(0,8).map(a=>`<p class="fx-alert">${esc(a.message)}<small>${new Date(a.at).toLocaleString()}</small></p>`).join('')}</details>`:''}<p class="fx-truth">Watch Item checks refreshed verified data while FindIt is open. True background alerts while the site is closed require a server notification service, so FindIt does not pretend they are active yet.</p>`;
     $$('[data-unwatch]',body).forEach(b=>b.onclick=()=>unwatch(b.dataset.unwatch));$('#fxEnableNotifications')?.addEventListener('click',notifications);
   }
 

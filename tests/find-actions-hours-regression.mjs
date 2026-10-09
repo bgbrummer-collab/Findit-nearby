@@ -61,7 +61,7 @@ await page.waitForFunction(()=>{
   return row&&/Closed/i.test(row.innerText||'')&&/Opens 09:00/i.test(row.innerText||'');
 },null,{timeout:30000});
 const hoursText=await page.locator('#fxStoreHoursLive').innerText();
-if(!/FindIt AI checked/i.test(hoursText))fail('Store hours did not identify the automatic AI check');
+if(!/Hours checked/i.test(hoursText))fail('Store hours did not show when branch information was checked');
 if(/Check Google Maps/i.test(hoursText))fail('FindIt still tells the user to verify store hours themselves');
 if(/Google Maps/i.test(hoursText))fail('Live hours panel still sends the user away to Google Maps');
 if(hoursRequests<2)fail('FindIt did not automatically retry unresolved exact branch hours');
