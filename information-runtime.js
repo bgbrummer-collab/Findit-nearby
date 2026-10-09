@@ -4,7 +4,7 @@
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const clean=v=>String(v??'').replace(/\s+/g,' ').trim(),esc=v=>clean(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const st=()=>window.finditState||null, ident=()=>st()?.result?.identification||{};
-let commerce=null,research=null,busy=false,owned=false;
+let commerce=null,research=null,busy=false,owned=false,photoGeneration=0;
 const validUrl=v=>{try{return /^https?:$/.test(new URL(v).protocol)}catch{return false}};
 const money=o=>{if(o?.price===null||o?.price===undefined||o?.price===''||!Number.isFinite(Number(o.price))||Number(o.price)<=0)return null;if(!/^[A-Z]{3}$/.test(String(o.currency||'').toUpperCase()))return 'Price '+Number(o.price).toFixed(2)+' (currency unverified)';try{return new Intl.NumberFormat('en-ZA',{style:'currency',currency:o.currency.toUpperCase()}).format(Number(o.price))}catch{return o.currency+' '+o.price}};
 function productName(i=ident()){return clean(i.name||i.model||i.object||i.searchQuery)}
@@ -69,6 +69,7 @@ async function hydrateIdentifiedPhoto(){
  if(owned||busy||!productName())return;
  const s=st(),i=ident();if(!s||!i||!productName(i))return;
  owned=true;busy=true;commerce=null;research=null;
+ const generation=++photoGeneration,photoFile=s.file;
  try{
   syncIdentity(i);
   const coords=await getLocationIfAlreadyAllowed(),payload={identification:i,...(coords?{lat:coords.lat,lon:coords.lon}:{})};
@@ -76,8 +77,9 @@ async function hydrateIdentifiedPhoto(){
    json('/api/product-intelligence-v2',payload,30000).catch(e=>{console.error('FindIt photo commerce failed',e);return null}),
    coords?json('/api/nearby',{lat:coords.lat,lon:coords.lon,identification:i,radiusKm:s.radius||10},22000).catch(e=>{console.error('FindIt photo nearby failed',e);return null}):Promise.resolve(null)
   ];
-  const [ci,ni]=await Promise.all(tasks);commerce=ci;
+  const [ci,ni]=await Promise.all(tasks);if(generation!==photoGeneration||st()!==s||s.file!==photoFile)return;commerce=ci;
   const ri=await json('/api/product-insights',{identification:i,offers:Array.isArray(ci?.offers)?ci.offers:[]},24000).catch(e=>{console.error('FindIt photo product insights failed',e);return null});
+  if(generation!==photoGeneration||st()!==s||s.file!==photoFile)return;
   research=ri?.researched===false?null:ri;
   if(Array.isArray(ci?.offers)){s.offers=ci.offers;window.productIntelligence=ci}else console.warn('FindIt photo commerce response has no offer list');
   // Do not erase an already truthful nearby result when the optional refresh returns empty.
@@ -92,7 +94,7 @@ function closeInformation(){let m=$('#fxInformationModal');if(m)m.classList.remo
 function capture(e){let t=e.target.closest?.('#finditExactShell [data-fx], #finditExactShell [data-power-search]');if(!t)return;let a=t.dataset.fx;if(a!=='product'&&a!=='compare'&&a!=='nearby'&&a!=='assistant')closeInformation();if(t.dataset.powerSearch!==undefined||t.matches?.('.fx-search-tabs [data-fx="assistant"]')){e.preventDefault();e.stopImmediatePropagation();searchModal();return}if(!owned)return;if(a==='product'){return}if(a==='compare'){e.preventDefault();e.stopImmediatePropagation();showCompare();return}if(a==='nearby'){e.preventDefault();e.stopImmediatePropagation();showNearby();return}}
 window.addEventListener('click',capture,true);
 let lastPhotoFile=null;
-document.addEventListener('findit:results-rendered',()=>setTimeout(()=>{const s=st();if(s?.file&&s.file!==lastPhotoFile){lastPhotoFile=s.file;owned=false;commerce=null;research=null;}if(owned&&productName())syncAll();else if(s?.file&&productName())hydrateIdentifiedPhoto();else if(!productName())handlePhotoResult()},40));
+document.addEventListener('findit:results-rendered',()=>setTimeout(()=>{const s=st();if(s?.file&&s.file!==lastPhotoFile){lastPhotoFile=s.file;photoGeneration++;owned=false;commerce=null;research=null;}if(owned&&productName())syncAll();else if(s?.file&&productName())hydrateIdentifiedPhoto();else if(!productName())handlePhotoResult()},40));
 document.addEventListener('findit:nearby-updated',()=>{if(owned)setTimeout(syncAll,40)});
 window.finditRunProductSearch=runSearch;
 const style=document.createElement('style');style.textContent=`.fx-info-modal{display:none;position:fixed;inset:0;z-index:200000;background:rgba(1,7,16,.78);padding:20px;overflow:auto}.fx-info-modal.open{display:grid;place-items:center}.fx-info-card{position:relative;width:min(820px,100%);max-height:90vh;overflow:auto;background:#071727;color:#eef6ff;border:1px solid #29455e;border-radius:22px;padding:26px;box-shadow:0 30px 100px #0009}.fx-info-x{position:absolute;right:16px;top:12px;border:0;background:transparent;color:#fff;font-size:30px}.fx-info-card h2{font-size:27px;margin:0 42px 18px 0}.fx-info-card input{width:100%;box-sizing:border-box;background:#0d2134;color:#fff;border:1px solid #31516b;border-radius:12px;padding:14px;margin:8px 0 12px}.fx-info-card button{background:#3858ff;color:#fff;border:0;border-radius:11px;padding:12px 16px;font-weight:700;cursor:pointer}.fx-info-note,.fx-info-help{color:#9db0c3}.fx-info-identity{padding:16px;border:1px solid #29455e;border-radius:14px;background:#0a1d2f;margin-bottom:14px}.fx-info-identity h3{margin:0 0 10px;font-size:21px}.fx-info-identity>div{display:flex;flex-wrap:wrap;gap:8px}.fx-info-identity span{background:#10283d;padding:8px 10px;border-radius:9px}.fx-info-identity span b{display:block;font-size:10px;text-transform:uppercase;color:#75dfff}.fx-info-section{border-top:1px solid #20384d;padding:16px 0}.fx-info-section h3{margin:0 0 8px}.fx-info-cols{display:grid;grid-template-columns:1fr 1fr;gap:20px}.fx-info-sources{display:flex;flex-wrap:wrap;gap:8px}.fx-info-sources a,.fx-offer-list a,.fx-real-store a{color:#7fdfff}.fx-offer-list{display:grid;gap:10px}.fx-offer-list article{display:grid;grid-template-columns:1fr auto auto;gap:16px;align-items:center;border:1px solid #29455e;border-radius:13px;padding:14px}.fx-offer-list article span,.fx-offer-list article small{display:block;color:#9db0c3;margin-top:4px}.fx-nearby-list{display:grid;gap:8px}.fx-real-store{display:flex;justify-content:space-between;gap:12px;border:1px solid #20384d;border-radius:11px;padding:11px}.fx-real-store small,.fx-real-store em{display:block;color:#9db0c3;font-style:normal;margin-top:3px}.fx-info-empty,.fx-info-loading{padding:18px;border:1px solid #29455e;border-radius:13px;background:#0a1d2f}.fx-value-strip{display:flex;justify-content:space-between;gap:10px;padding:9px 0;color:#9db0c3}@media(max-width:650px){.fx-info-modal{padding:8px}.fx-info-card{padding:20px 16px}.fx-info-cols{grid-template-columns:1fr}.fx-offer-list article{grid-template-columns:1fr}.fx-real-store{flex-direction:column}}`;document.head.appendChild(style);
