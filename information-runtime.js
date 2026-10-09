@@ -44,8 +44,8 @@ function syncIdentity(i){let name=productName(i)||'Product selected',meta=[i.bra
 }
 function syncAll(){if(!owned)return;let i=ident(),prices=verifiedPrices().sort((a,b)=>Number(a.price)-Number(b.price)),best=prices[0],stores=st()?.stores||[],offers=exactOffers();
  let bp=$('#fxBestPrice');if(bp)bp.textContent=best?money(best):'No verified price yet';
- let top=$('#fxTopStores');if(top)top.innerHTML=stores.length?stores.slice(0,4).map(storeRow).join(''):'<div class="fx-empty">No relevant nearby retailer has been returned yet.</div>';
- let list=$('#fxStoreList');if(list)list.innerHTML=stores.length?stores.slice(0,6).map(storeRow).join(''):'<div class="fx-empty">No relevant nearby retailer has been returned yet.</div>';
+ let top=$('#fxTopStores');if(top)top.innerHTML=stores.length?stores.slice(0,4).map(storeRow).join(''):'<div class="fx-empty">'+(!st()?.coords?'Allow location access in your browser, then search again to find nearby retailers.':'No matching nearby retailer was returned. Try a larger search radius; exact product stock is not verified.')+'</div>';
+ let list=$('#fxStoreList');if(list)list.innerHTML=stores.length?stores.slice(0,6).map(storeRow).join(''):'<div class="fx-empty">'+(!st()?.coords?'Allow location access in your browser, then search again to find nearby retailers.':'No matching nearby retailer was returned. Try a larger search radius; exact product stock is not verified.')+'</div>';
  let desc=$('#fxProductDesc');if(desc)desc.textContent=research?.whatItDoes||i.summary||([offers.length?offers.length+' retailer listing'+(offers.length===1?'':'s')+' found':null,stores.length?stores.length+' nearby retailer'+(stores.length===1?'':'s')+' found':null].filter(Boolean).join(' · ')||'Product selected. Retailer evidence is still being checked.');
  syncSmart(best,stores,offers);
 }
