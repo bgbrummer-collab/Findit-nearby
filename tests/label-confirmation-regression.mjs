@@ -19,7 +19,7 @@ try{
   await page.locator('#photo').setInputFiles({name:'conditioner.jpg',mimeType:'image/jpeg',buffer:Buffer.from(fs.readFileSync('tests/user-images/marc-anthony.jpg.b64','utf8').trim(),'base64')});
   await page.locator('#fxSearchNow').click();
   await page.locator('#fxPhotoRecovery').waitFor({state:'visible',timeout:15000});
-  await page.locator('#finditExactShell [data-fx="product"]').click();
+  await page.locator('#finditExactShell [data-fx="product"]:visible').first().click();
   await page.locator('#fxConfirmModel').waitFor({state:'visible'});
   const text=await page.locator('#fxInformationBody').innerText();
   if(!text.includes('Possible label reading:')||!text.includes(label)||!text.includes('not confirmed'))throw Error('Suggested label was not explicitly marked uncertain');
