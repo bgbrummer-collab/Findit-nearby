@@ -114,7 +114,7 @@ test('conflicting photo brand/model claims stay unverified and provide diagnosti
  let calls=0;const identity={name:'Visible Conditioner',brand:'Brand One',model:'Variant One',object:'conditioner',category:'beauty',confidence:.9};
  const f=new FormData();f.set('image',new Blob(['fixture'],{type:'image/jpeg'}),'fixture.jpg');
  const d=await(await worker.fetch(new Request('https://findit.test/api/search',{method:'POST',body:f}),{AI:{run:async()=>({answer:JSON.stringify(++calls===1?identity:{...identity,brand:'Brand Two'})})}})).json();
- assert.equal(d.identification.name,'conditioner');assert.equal(d.identification.brand,'');assert.equal(d.identification.model,'');assert.equal(d.identification.requiresModelConfirmation,true);
+ assert.equal(d.identification.name,'Brand Two conditioner');assert.equal(d.identification.brand,'Brand Two');assert.equal(d.identification.model,'');assert.equal(d.identification.requiresModelConfirmation,true);
  assert.equal(d.visionDiagnostics[0].identityClaim.brand,'Brand One');assert.equal(d.visionDiagnostics[1].identityClaim.brand,'Brand Two');
 });
 test('verified toy retailer retains its actual name and unknown sellers retain their hostname',async t=>{
