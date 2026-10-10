@@ -38,6 +38,7 @@ try{
   }
   await page.waitForFunction(()=>window.finditState?.result?.identification?.userConfirmed===true,{timeout:15000});
   if(confirmed.length!==1||confirmed[0]!==label+' 250ml')throw Error('Human correction did not reach product search exactly once');
+  if(candidateMode){const preserved=await page.evaluate(()=>({file:!!window.finditState.file,brand:window.finditState.result.identification.brand,size:window.finditState.result.identification.size}));if(!preserved.file||preserved.brand!=='Marc Anthony'||preserved.size!=='250ml')throw Error('Candidate confirmation discarded the photo or supported brand/size');}
   console.log('LABEL_CONFIRMATION_PASS',width,candidateMode?'retailer candidate':'manual label');await page.close();
  }
 }finally{await browser.close();}
