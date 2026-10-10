@@ -1,0 +1,65 @@
+{
+  "httpStatus": "200",
+  "code": "PHOTO_IDENTIFIED",
+  "provider": "cloudflare-consensus",
+  "visionDiagnostics": [
+    {
+      "provider": "cloudflare-scout",
+      "code": "IDENTIFIED",
+      "identityClaim": {
+        "name": "Strictly Curls Triple Blend Conditioner",
+        "brand": "Marc Anthony",
+        "model": "Strictly Curls 3X Moisture Triple Blend Conditioner",
+        "object": "Conditioner",
+        "size": "8.4 fl. oz. / 250 ml",
+        "color": "",
+        "visibleText": []
+      },
+      "errorType": null
+    },
+    {
+      "provider": "cloudflare-workers-ai",
+      "code": "IDENTIFIED",
+      "identityClaim": {
+        "name": "STRICTLY CURLS 3X Moisture",
+        "brand": "MARC ANTHONY",
+        "model": "strictly curls 3x moisture triple blend conditioner",
+        "object": "Conditioner",
+        "size": "8 fl. oz./250 ml",
+        "color": "Yellow",
+        "visibleText": [
+          "STRICTLY CURLS",
+          "3X Moisture",
+          "OIL + CREAM + BUTTER",
+          "Triple Blend",
+          "Conditioner",
+          "Removes frizz",
+          "Detangles with lasting hydration.",
+          "Marula, Coconut + Shea"
+        ]
+      },
+      "errorType": null
+    }
+  ],
+  "identification": {
+    "name": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250 ml",
+    "brand": "Marc Anthony",
+    "model": "Strictly Curls 3X Moisture Triple Blend Conditioner",
+    "object": "conditioner",
+    "category": "beauty",
+    "retailCategory": "beauty",
+    "searchQuery": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250 ml",
+    "barcode": null,
+    "size": "250 ml",
+    "color": "",
+    "visibleText": [],
+    "confidence": 0.85,
+    "identificationMethod": "independent-vision-consensus",
+    "userConfirmed": false,
+    "suggestedLabel": "",
+    "identityScope": "model",
+    "requiresModelConfirmation": false,
+    "unverifiedDetails": [],
+    "features": []
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "researched": true,
+  "whatItDoes": "Industry-leading noise cancellation.",
+  "pros": [
+    "Up to 30 hours of playback time.",
+    "Multipoint connection.",
+    "Precise voice pickup technology.",
+    "Auto noise canceling optimizer."
+  ],
+  "cons": [],
+  "specifications": [
+    {
+      "name": "Brand",
+      "value": "Sony",
+      "sourceUrl": "https://www.hificorp.co.za/sony-wh-1000xm5-wireless-noise-cancelling-headphones-black"
+    }
+  ],
+  "bestFor": "",
+  "standOut": "",
+  "valueVerdict": "",
+  "sources": [
+    {
+      "title": "Sony WH-1000XM5 Wireless Noise Cancelling Headphones Black",
+      "url": "https://www.incredible.co.za/sony-wh-1000xm5-wireless-noise-cancelling-headphones-black"
+    },
+    {
+      "title": "Sony WH-1000XM5 Wireless Noise Cancelling Headphones Black",
+      "url": "https://www.hificorp.co.za/sony-wh-1000xm5-wireless-noise-cancelling-headphones-black"
+    }
+  ],
+  "researchMethod": "Fetched exact-product page descriptions",
+  "checkedAt": "2026-10-10T11:58:40.761Z",
+  "message": "Product facts are quoted from matching product-page descriptions."
+}

@@ -1,0 +1,87 @@
+{
+  "identification": {
+    "name": "Beats headphones",
+    "brand": "Beats",
+    "model": "",
+    "object": "headphones",
+    "category": "electronics",
+    "retailCategory": "electronics",
+    "searchQuery": "Beats headphones",
+    "barcode": null,
+    "size": "",
+    "color": "",
+    "visibleText": [],
+    "confidence": 0.65,
+    "identificationMethod": "independent-vision-consensus",
+    "userConfirmed": false,
+    "suggestedLabel": "",
+    "identityScope": "product-family",
+    "requiresModelConfirmation": true,
+    "unverifiedDetails": [
+      "exact model",
+      "variant",
+      "specifications"
+    ],
+    "features": []
+  },
+  "offers": [],
+  "blocked": false,
+  "verified": false,
+  "userConfirmed": false,
+  "identitySource": "cloudflare-consensus",
+  "visionDiagnostics": [
+    {
+      "provider": "cloudflare-scout",
+      "code": "IDENTIFIED",
+      "identityClaim": {
+        "name": "Beats Solo3 Wireless Headphones",
+        "brand": "Beats",
+        "model": "Solo3",
+        "object": "headphones",
+        "size": "",
+        "color": "Multiple Colors (Rose Gold, Gold, Silver)",
+        "visibleText": []
+      },
+      "errorType": null
+    },
+    {
+      "provider": "cloudflare-workers-ai",
+      "code": "IDENTIFIED",
+      "identityClaim": {
+        "name": "Beats",
+        "brand": "Beats",
+        "model": "BO3",
+        "object": "product",
+        "size": "",
+        "color": "",
+        "visibleText": [
+          "Wireless",
+          "BO3"
+        ]
+      },
+      "errorType": null
+    },
+    {
+      "provider": "cloudflare-llava",
+      "code": "IDENTIFIED",
+      "identityClaim": {
+        "name": "Beats by Dr. Dre",
+        "brand": "Beats by Dr. Dre",
+        "model": "Beats by Dr. Dre Studio Wireless Headphones",
+        "object": "Headphones",
+        "size": "Large",
+        "color": "Pink and White",
+        "visibleText": []
+      },
+      "errorType": null
+    }
+  ],
+  "visualVerification": true,
+  "provider": "cloudflare-consensus",
+  "imageAccepted": true,
+  "needsVision": false,
+  "needsRetailerVerification": true,
+  "confidence": 0.65,
+  "code": "PHOTO_PARTIALLY_IDENTIFIED",
+  "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+}
