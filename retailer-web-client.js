@@ -65,6 +65,7 @@
         method:'POST',
         headers:{'content-type':'application/json'},
         body:JSON.stringify({
+          identification:i,
           query:i.searchQuery || i.name || i.object || '',
           name:i.name || i.object || '',
           object:i.object || '',

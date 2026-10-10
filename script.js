@@ -99,7 +99,7 @@ async function loadProductIntelligence(i){
   const requestId=++productIntelligenceRequestId;
   const panel=document.getElementById("productIntelligencePanel"),el=document.getElementById("productIntelligenceResults");if(!panel||!el)return;
   try{
-    const r=await fetch("/api/product-intelligence",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({query:i.searchQuery||i.name||i.object||"",name:i.name||i.object||"",brand:i.brand||"",model:i.model||""})});
+    const r=await fetch("/api/product-intelligence",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({identification:i,query:i.searchQuery||i.name||i.object||"",name:i.name||i.object||"",brand:i.brand||"",model:i.model||""})});
     const d=await r.json();if(requestId!==productIntelligenceRequestId)return;productIntelligence=d;panel.classList.remove("hidden");
     if(!r.ok||!d.matched){el.innerHTML='<div class="empty-state">No verified product price or stock data yet. FindIt will still show nearby retailers.</div>';return}
     if(!(d.offers||[]).length){el.innerHTML=`<div class="empty-state">Matched ${esc(d.bestProduct?.name||"the product")}, but no retailer offers are stored yet.</div>`;return}

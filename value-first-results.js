@@ -9,7 +9,7 @@ function name(){let i=id();return clean(i.name||i.model||i.object||i.searchQuery
 function category(){let i=id();return clean(i.retailCategory||i.category||'product')}
 function usefulSummary(){let i=id(),parts=[];if(i.brand)parts.push('Brand: '+i.brand);if(i.model)parts.push('Model/variant: '+i.model);if(i.category||i.retailCategory)parts.push('Category: '+category());if(i.barcode)parts.push('Barcode: '+i.barcode);return parts}
 function nearby(){return Array.isArray(state().stores)?state().stores:[]}
-function offers(){let a=[...(Array.isArray(state().offers)?state().offers:[]),...(Array.isArray(window.productIntelligence?.offers)?window.productIntelligence.offers:[])];let seen=new Set();return a.filter(o=>{let k=clean(o?.product_url||o?.url||o?.retailer?.name||o?.retailer||'');if(!k||seen.has(k))return false;seen.add(k);return true})}
+function offers(){if(state().result?.identification?.requiresModelConfirmation)return [];let a=[...(Array.isArray(state().offers)?state().offers:[]),...(Array.isArray(window.productIntelligence?.offers)?window.productIntelligence.offers:[])];let seen=new Set();return a.filter(o=>{let k=clean(o?.product_url||o?.url||o?.retailer?.name||o?.retailer||'');if(!k||seen.has(k))return false;seen.add(k);return true})}
 function sourceName(o){return clean(o?.retailer?.name||o?.retailer||o?.store||o?.seller||'Retailer')}
 function productModalFallback(){
  const m=$('#fxStableModal:not(.hidden)'),body=m&&$('#fxStableBody',m);if(!body||!hasIdentity()||body.querySelector('#fxStableResearch'))return;
