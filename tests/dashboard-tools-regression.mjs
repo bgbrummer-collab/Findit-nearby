@@ -66,6 +66,13 @@ await check('closing Product Information during slow research leaves dashboard r
   slowProductInsights=false;
 });
 
+await check('reopening Product Information after cancellation starts fresh research',async()=>{
+ await page.locator('#finditExactShell [data-fx="product"]:visible').first().click({timeout:3000});
+ await page.waitForFunction(()=>document.querySelector('#fxStableResearch')?.textContent?.includes('Exact-product web research loaded.'),null,{timeout:8000});
+ if(!(await page.locator('#fxStableResearch').innerText()).includes('A low-top lifestyle sneaker.'))throw Error('Reopened research reused an aborted request');
+ await page.locator('.fx-stable-close').click({timeout:1500});
+});
+
 await check('Compare Prices renders verified exact commerce evidence and stays in-app',async()=>{
   const before=page.url();
   await page.locator('#finditExactShell [data-fx="compare"]:visible').first().click({noWaitAfter:true,timeout:3000});
