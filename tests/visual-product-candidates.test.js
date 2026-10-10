@@ -24,3 +24,13 @@ test('bare brands, incorrect sizes and guessed shape models do not discover cand
  assert.deepEqual(await visualProductCandidates({...partial,suggestedLabel:''}),[]);
  assert.deepEqual(await visualProductCandidates({...partial,requiresModelConfirmation:false}),[]);
 });
+test('published usage, ingredients and warnings stay scoped to verified product tabs',async t=>{
+ const tabs='<div id="use"><p><b>Usage instructions:</b><br>Apply after shampooing and rinse.</p><p><b>Warnings:</b><br>For external use only.</p></div><div id="ingredients"><p><b>Ingredients:</b><br>Water, Shea Butter.</p></div><footer><p><b>Usage instructions:</b><br>Wrong footer instructions.</p></footer>';
+ t.mock.method(globalThis,'fetch',async u=>String(u).includes('clicks.co.za/marc-anthony_')?new Response(raw+tabs):new Response('<rss/>'));
+ const d=await(await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:partial})}),{})).json();
+ const specs=d.possibleProducts[0].specifications;assert.ok(specs.some(x=>x.name==='How to use'&&/rinse/.test(x.value)));assert.ok(specs.some(x=>x.name==='Ingredients'&&/Shea Butter/.test(x.value)));assert.ok(specs.some(x=>x.name==='Warnings'));assert.doesNotMatch(JSON.stringify(d),/Wrong footer/);
+});
+test('candidate research follows only same-retailer HTTPS redirects',async t=>{
+ let crossFetched=false;t.mock.method(globalThis,'fetch',async u=>{if(String(u).includes('www.clicks.co.za/verified'))return new Response(raw);if(String(u).includes('clicks.co.za/marc-anthony_'))return new Response('',{status:301,headers:{location:'https://www.clicks.co.za/verified'}});if(String(u).includes('dischem.co.za'))return new Response('',{status:302,headers:{location:'http://127.0.0.1/private'}});if(String(u).includes('127.0.0.1'))crossFetched=true;return new Response('<rss/>');});
+ const d=await visualProductCandidates(partial);assert.equal(d.length,1);assert.equal(crossFetched,false);assert.equal(d[0].photoMatchConfirmed,false);
+});

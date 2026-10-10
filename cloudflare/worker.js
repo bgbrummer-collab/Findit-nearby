@@ -123,6 +123,18 @@ function scopedProductDescription(raw){
  }
  return '';
 }
+function scopedPublishedFields(raw){
+ const out=[],labels={'Usage instructions':'How to use','Storage instructions':'Storage instructions','Warnings':'Warnings','Ingredients':'Ingredients','Quantity in pack':'Pack quantity'};
+ for(const opening of String(raw).matchAll(/<div\b[^>]*>/gi)){
+  if(!/\bid=["'](?:use|ingredients|information)["']/i.test(opening[0]))continue;
+  const rest=raw.slice(opening.index+opening[0].length);let depth=1;
+  for(const tag of rest.matchAll(/<\/?div\b[^>]*>/gi)){depth+=/^<\/div/i.test(tag[0])?-1:1;if(depth)continue;
+   const body=rest.slice(0,tag.index);
+   for(const p of body.matchAll(/<p\b[^>]*>\s*<b\b[^>]*>([^<]+):\s*<\/b>([\s\S]*?)<\/p>/gi)){const name=labels[p[1].trim()];if(name)out.push({name,value:p[2]});}break;
+  }
+ }
+ return out;
+}
 async function handleProductInfo(request,preparedPages=null){
  if(!['GET','POST'].includes(request.method))return json({error:'Method not allowed'},405);
  const body=request.method==='POST'?await cfBody(request):Object.fromEntries(new URL(request.url).searchParams),i=commerceIdent(body),q=i.searchQuery||i.name;
@@ -130,7 +142,7 @@ async function handleProductInfo(request,preparedPages=null){
  if(i.requiresModelConfirmation){
   const candidates=await visualProductCandidates({...i,suggestedLabel:body.identification?.suggestedLabel||body.suggestedLabel||''});
   const possibleProducts=await Promise.all(candidates.map(async p=>{const response=await handleProductInfo(new Request('https://findit.internal/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:p.identity,offers:[{product_url:p.url,sourcePageVerified:true,exactProductMatch:true}]})}),new Map([[p.url,p.raw]]));const facts=await response.json();return {name:p.name,productUrl:p.url,photoMatchConfirmed:false,price:p.price,currency:p.currency,availability:p.availability,whatItDoes:facts.whatItDoes,pros:facts.pros,cons:facts.cons,specifications:facts.specifications,sources:facts.sources};}));
-  return json({researched:false,identityScope:'product-family',whatItDoes:'',pros:[],cons:[],sources:[],possibleProducts,message:possibleProducts.length?'A retailer product matches the possible label reading. Check its name against your photo before confirming.':'Recognised '+i.name+'. Confirm the exact model or label for product-specific facts; no specifications have been guessed.'});
+  return json({researched:false,identityScope:'product-family',whatItDoes:'',pros:[],cons:[],sources:[],possibleProducts,candidateChecks:candidates.checks||[],message:possibleProducts.length?'A retailer product matches the possible label reading. Check its name against your photo before confirming.':'Recognised '+i.name+'. Confirm the exact model or label for product-specific facts; no specifications have been guessed.'});
  }
  if(BLOCKED.test(q))return json({error:'Unsupported product type',researched:false,pros:[],cons:[],sources:[]},403);
  const strip=v=>String(v||'').replace(/<[^>]+>/g,' ').replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/\s+/g,' ').trim();
@@ -144,13 +156,14 @@ async function handleProductInfo(request,preparedPages=null){
  let description='';const specifications=[];for(const x of structuredProductNodes(raw)){const types=Array.isArray(x['@type'])?x['@type']:[x['@type']];if(!types.some(t=>String(t).toLowerCase()==='product'))continue;const brand=typeof x.brand==='object'?x.brand?.name:x.brand,sourceName=strip(x.name)===strip(brand)?x.description:x.name;if(!identityMatches(sourceName||'',i))continue;if(x.description&&descriptionFitsVariant(descriptionText(x.description)))description=descriptionText(x.description);for(const [label,key] of [['Brand','brand'],['Model','model'],['Size','size'],['Colour','color'],['Barcode','gtin13']]){const value=x[key]?.name||x[key];if(['string','number'].includes(typeof value))specifications.push({name:label,value:strip(value)});}for(const p of Array.isArray(x.additionalProperty)?x.additionalProperty:[]){if(p&&p.name&&['string','number'].includes(typeof p.value))specifications.push({name:strip(p.name),value:strip(p.value)+(p.unitText?' '+strip(p.unitText):'')});}}
 
  if((!description||description===strip(product?.name))&&(product||identityMatches(title,i))){for(const m of raw.matchAll(/<meta\b[^>]*>/gi)){const a={};for(const v of m[0].matchAll(/([\w:-]+)\s*=\s*["']([^"']*)["']/g))a[v[1].toLowerCase()]=v[2];if(/^(description|og:description)$/.test(a.name||a.property||'')){const candidate=descriptionText(a.content);if(descriptionFitsVariant(candidate)&&(identityMatches(title,i)||identityMatches(candidate,i)))description=candidate}}}
+ for(const field of scopedPublishedFields(raw)){const value=descriptionText(field.value);if(value)specifications.push({name:field.name,value});}
  const scopedDescription=descriptionText(scopedProductDescription(raw));if(scopedDescription.length>description.length&&descriptionFitsVariant(scopedDescription))description=scopedDescription;
  if((description.length<35&&!specifications.length)||/access denied|captcha|sign in|page not found/i.test(description))return null;
- const strengths=[];if(known.includes(url)){for(const m of raw.matchAll(/<h[23][^>]*>([\s\S]*?)<\/h[23]>/gi)){const text=strip(m[1]);if(text&&/driver|surround|isolat|microphone|lightweight|comfort|durab/i.test(text)&&!strengths.includes(text))strengths.push(text)}}return{description:description.slice(0,1800),strengths,specifications:specifications.filter(p=>p.name&&p.value&&p.name.length<100&&p.value.length<240).slice(0,20),source:{title:product?.name||title,url}};
+ const strengths=[];if(known.includes(url)){for(const m of raw.matchAll(/<h[23][^>]*>([\s\S]*?)<\/h[23]>/gi)){const text=strip(m[1]);if(text&&/driver|surround|isolat|microphone|lightweight|comfort|durab/i.test(text)&&!strengths.includes(text))strengths.push(text)}}return{description:description.slice(0,1800),strengths,specifications:specifications.filter(p=>p.name&&p.value&&p.name.length<100&&p.value.length<(/^(Ingredients|How to use|Warnings|Storage instructions)$/.test(p.name)?1800:240)).slice(0,20),source:{title:product?.name||title,url}};
  }catch{return null}}));
  const evidence=pages.filter(Boolean),facts=[...new Set(evidence.flatMap(p=>{const sentences=p.description.replace(/\b([A-Z])\.(?=\s+[a-z])/g,'$1\uE000').split(/(?<=[.!?])\s+/).map(s=>s.replace(/\uE000/g,'.'));if(sentences.length>1&&!/[.!?]$/.test(sentences.at(-1)))sentences.pop();return sentences.filter(s=>s.length>=12)}))];
  const purposeIndex=facts.findIndex(s=>/\b(build|create|provides?|designed|helps?|contains?|offers?|delivers?|features?|reduces?|protects?|moisturis\w*|hydrat\w*|detangl\w*|cleans\w*|conditions?|supports?|used)\b/i.test(s)),selected=purposeIndex<0?0:purposeIndex,whatItDoes=facts[selected]||'',consideration=/\b(but|however|requires|not included|sold separately|not compatible|not supplied|may not|limitation|drawback|aged?\s+\d+)\b/i;
- const pros=[...new Set([...evidence.flatMap(p=>p.strengths||[]),...facts.filter((s,n)=>n!==selected&&!/^(get ready|discover|shop now)\b/i.test(s))])].filter(s=>!consideration.test(s)).slice(0,4),cons=facts.filter(s=>consideration.test(s)).slice(0,3);
+ const pros=[...new Set([...evidence.flatMap(p=>p.strengths||[]),...facts.filter((s,n)=>n!==selected&&!/^(get ready|discover|shop now)\b/i.test(s))])].filter(s=>!consideration.test(s)&&!/no strand is left behind/i.test(s)).slice(0,4),cons=facts.filter(s=>consideration.test(s)).slice(0,3);
  const specifications=[...new Map(evidence.flatMap(p=>(p.specifications||[]).map(s=>[s.name+'|'+s.value,{...s,sourceUrl:p.source.url}]))).values()].slice(0,24);
  return json({researched:Boolean(whatItDoes||specifications.length),whatItDoes,pros,cons,specifications,bestFor:'',standOut:'',valueVerdict:'',sources:evidence.map(p=>p.source),researchMethod:'Fetched exact-product page descriptions',checkedAt:new Date().toISOString(),message:whatItDoes?'Product facts are quoted from matching product-page descriptions.':'No trustworthy exact-product description was found. FindIt will not guess.'});
 }
