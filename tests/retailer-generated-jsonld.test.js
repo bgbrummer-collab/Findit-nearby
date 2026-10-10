@@ -23,3 +23,6 @@ test('Clicks brand-only JSON-LD name requires exact description and ignores an u
  assert.equal(structuredProduct(page(literal.replace('Rich Nourishing 250ml','Rich Nourishing 400ml')),i),null);
  assert.equal(structuredProduct(page(literal.replace('"price":"59.99"','"price":priceVariable')),i),null);
 });
+
+test('an unpriced duplicate Product node does not hide a priced node for the same exact product',()=>{const incomplete={...product,offers:{'@type':'Offer',availability:'http://schema.org/InStock',priceSpecification:[{'@type':'UnitPriceSpecification',priceType:'https://schema.org/MSRP',price:79.99,priceCurrency:'ZAR'}]}};const found=structuredProduct(page(JSON.stringify(incomplete))+page(JSON.stringify(product)),i);assert.equal(found.price,59.99);assert.equal(found.currency,'ZAR');assert.equal(found.availability,'in_stock')});
+test('conflicting prices or stock in duplicate exact Product nodes stay unverified',()=>{const conflict={...product,offers:{...product.offers,price:'79.99',availability:'http://schema.org/OutOfStock'}};const found=structuredProduct(page(JSON.stringify(product))+page(JSON.stringify(conflict)),i);assert.equal(found.price,null);assert.equal(found.priceConflict,true);assert.equal(found.availability,null)});

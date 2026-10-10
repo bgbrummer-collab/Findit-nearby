@@ -70,6 +70,7 @@ async function showNearby(){if(!productName())return searchModal();const state=s
 async function hydrateIdentifiedPhoto(){
  if(owned||busy||!productName())return;
  const s=st(),i=ident();if(!s||!i||!productName(i))return;
+ if(i.requiresModelConfirmation){handlePhotoResult();return}
  owned=true;busy=true;commerce=null;research=null;
  const generation=++photoGeneration,photoFile=s.file;
  try{
