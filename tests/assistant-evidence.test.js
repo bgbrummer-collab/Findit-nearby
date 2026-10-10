@@ -21,3 +21,14 @@ test('live worker assistant obtains exact-product research rather than canned pr
  const r=await worker.fetch(new Request('https://example.com/api/assistant',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({message:'What does this product do?',context:{identification:{name:'Test Brand Conditioner 250 ml'},offers:[{...offer('Retailer',100),product_name:'Test Brand'}]}})}),{});
  const d=await r.json();assert.equal(r.status,200);assert.match(d.answer,/helps detangle/);assert.equal(d.modelUsed,'findit-sourced-evidence');
 });
+test('typed conditioner name discovers and researches retailer candidates without parsed brand or search-engine results',async t=>{
+ const name='Marc Anthony strictly curls triple blend conditioner';
+ const raw='<title>Marc Anthony 3X Moisture Conditioner 250ml</title><script type="application/ld+json">'+JSON.stringify({'@type':'Product',name:'Marc Anthony',brand:'Marc Anthony',description:'Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml',offers:{price:'230',priceCurrency:'ZAR',availability:'https://schema.org/InStock'}})+'</script><div id="information" class="description active"><div class="description_wrap"><p><b>Marketing description:</b><br>Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner helps hydrate and detangle curly hair.</p></div></div>';
+ t.mock.method(globalThis,'fetch',async url=>String(url).includes('clicks.co.za/marc-anthony_')?new Response(raw):new Response('<rss/>'));
+ const identification={name,searchQuery:name,brand:'',model:'',category:'product'};
+ for(const endpoint of ['product-intelligence','product-insights']){
+  const d=await(await worker.fetch(new Request('https://findit.test/api/'+endpoint,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification})}),{})).json();
+  if(endpoint==='product-intelligence'){assert.equal(d.matched,true);assert.equal(d.offers[0].price,230);assert.equal(d.offers[0].currency,'ZAR');}
+  else {assert.equal(d.researched,true);assert.match(d.whatItDoes,/hydrate and detangle/);assert.match(d.sources[0].url,/clicks/);}
+ }
+});
