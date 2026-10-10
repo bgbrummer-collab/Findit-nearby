@@ -18,6 +18,6 @@ test('assistant returns researched purpose, specifications and sources, without 
 });
 test('live worker assistant obtains exact-product research rather than canned product redirect',async t=>{
  t.mock.method(globalThis,'fetch',async url=>String(url).includes('bing.com')?new Response('<rss/>'):new Response('<title>Test Brand Conditioner 250 ml</title><script type="application/ld+json">'+JSON.stringify({'@type':'Product',name:'Test Brand Conditioner 250 ml',description:'This conditioner helps detangle hair. It contains shea butter.',brand:{name:'Test Brand'}})+'</script>'));
- const r=await worker.fetch(new Request('https://example.com/api/assistant',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({message:'What does this product do?',context:{identification:{name:'Test Brand Conditioner 250 ml'},offers:[{...offer('Retailer',100),product_name:'Test Brand Conditioner 250 ml'}]}})}),{});
+ const r=await worker.fetch(new Request('https://example.com/api/assistant',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({message:'What does this product do?',context:{identification:{name:'Test Brand Conditioner 250 ml'},offers:[{...offer('Retailer',100),product_name:'Test Brand'}]}})}),{});
  const d=await r.json();assert.equal(r.status,200);assert.match(d.answer,/helps detangle/);assert.equal(d.modelUsed,'findit-sourced-evidence');
 });
