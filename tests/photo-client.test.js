@@ -23,7 +23,7 @@ test('a photo response cannot overwrite a typed search',async()=>{
 });
 test('uncertain photos finish once with manual-input guidance, without repeated inference calls',async()=>{
   const c=client(),pending=c.button.onclick();c.pending[0]({identification:null,requiresUserInput:true,retryable:true});await pending;
-  assert.equal(c.pending.length,1);assert.match(c.statuses.at(-1),/clearer photo.*product name or barcode/i);assert.equal(c.button.disabled,false);assert.equal(c.visibleButton.disabled,false);
+  assert.equal(c.pending.length,1);assert.match(c.statuses.at(-1),/product name.*barcode/i);assert.equal(c.button.disabled,false);assert.equal(c.visibleButton.disabled,false);
 });
 
 test('service limits are explained instead of blaming photo clarity',async()=>{

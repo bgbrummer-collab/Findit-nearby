@@ -11,6 +11,7 @@ const hasPhoto=()=>Boolean(state().file||$('#preview')?.src&& !$('#preview')?.cl
 function text(el,v){if(el&&el.textContent!==v)el.textContent=v}
 function truthfulProductState(){
  const identified=hasIdentity(),photo=hasPhoto();
+ if(identified&&id().requiresModelConfirmation){text($('#fxExactBadge'),'Product type recognised — confirm model');text($('#fxProductDesc'),state().result.message||'Confirm the exact model for product-specific information.');return}
  if(identified)return; // Existing verified-result renderer owns populated identity/price states.
  const badge=$('#fxExactBadge'),conf=$('#fxConfidence'),desc=$('#fxProductDesc'),price=$('#fxBestPrice');
  const failed=state()?.result?.requiresUserInput===true,pending=!!state()?.photoSearchPending;
