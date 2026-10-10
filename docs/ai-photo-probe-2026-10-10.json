@@ -1,0 +1,61 @@
+{
+  "httpStatus": "200",
+  "code": "PHOTO_PARTIALLY_IDENTIFIED",
+  "provider": "cloudflare-consensus",
+  "visionDiagnostics": [
+    {
+      "provider": "cloudflare-workers-ai",
+      "code": "IDENTIFIED",
+      "identityClaim": {
+        "brand": "MARC ANTHONY",
+        "model": "",
+        "object": "CONDITIONER"
+      },
+      "errorType": null
+    },
+    {
+      "provider": "cloudflare-llava",
+      "code": "IDENTIFIED",
+      "identityClaim": {
+        "brand": "Marc Anthony",
+        "model": "Strictly Curls 3x Moisture Conditioner",
+        "object": "tube"
+      },
+      "errorType": null
+    },
+    {
+      "provider": "cloudflare-scout",
+      "code": "IDENTIFIED",
+      "identityClaim": {
+        "brand": "Marc Anthony",
+        "model": "Strictly Curls 3X Moisture Triple Blend Conditioner",
+        "object": "conditioner"
+      },
+      "errorType": null
+    }
+  ],
+  "identification": {
+    "name": "MARC ANTHONY conditioner",
+    "brand": "MARC ANTHONY",
+    "model": "",
+    "object": "conditioner",
+    "category": "beauty",
+    "retailCategory": "beauty",
+    "searchQuery": "MARC ANTHONY conditioner",
+    "barcode": null,
+    "confidence": 0.65,
+    "identificationMethod": "independent-vision-consensus",
+    "userConfirmed": false,
+    "size": "",
+    "color": "",
+    "identityScope": "product-family",
+    "requiresModelConfirmation": true,
+    "unverifiedDetails": [
+      "exact model",
+      "variant",
+      "specifications"
+    ],
+    "features": [],
+    "visibleText": []
+  }
+}
