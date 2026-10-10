@@ -13,3 +13,11 @@ test('active reliability client retains uncertainty through the commerce API', a
  let result;await handler({method:'POST',body:payload},{setHeader(){},status(){return this},json(v){result=v}});
  assert.deepEqual(result.offers,[]);assert.equal(result.exactMatchVerified,false);
 });
+
+test('GET retry preserves uncertainty rather than publishing another variant',async t=>{
+ t.mock.method(globalThis,'fetch',()=>{throw Error('must not discover uncertain variant')});
+ const source=readFileSync(new URL('../dashboard-commerce-status.js',import.meta.url),'utf8'),line=source.split('\n').find(x=>x.startsWith('function getUrl(b)'));
+ const url=vm.runInNewContext(line+';getUrl(b)',{URLSearchParams,b:{identification:{requiresModelConfirmation:true},name:'Marc Anthony conditioner'}});
+ const query=Object.fromEntries(new URL(url,'https://findit.test').searchParams);assert.equal(query.requiresModelConfirmation,'true');
+ let result;await handler({method:'GET',query},{setHeader(){},status(){return this},json(v){result=v}});assert.deepEqual(result.offers,[]);assert.equal(result.exactMatchVerified,false);
+});
