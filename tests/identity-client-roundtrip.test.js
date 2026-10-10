@@ -21,3 +21,10 @@ test('GET retry preserves uncertainty rather than publishing another variant',as
  const query=Object.fromEntries(new URL(url,'https://findit.test').searchParams);assert.equal(query.requiresModelConfirmation,'true');
  let result;await handler({method:'GET',query},{setHeader(){},status(){return this},json(v){result=v}});assert.deepEqual(result.offers,[]);assert.equal(result.exactMatchVerified,false);
 });
+
+test('GET product research never fetches specifications for an uncertain variant',async t=>{
+ t.mock.method(globalThis,'fetch',()=>{throw Error('must not research an uncertain variant')});
+ const {default:worker}=await import('../cloudflare/worker.js');
+ const r=await worker.fetch(new Request('https://findit.test/api/product-insights?name=Beats%20headphones&requiresModelConfirmation=true'),{}),d=await r.json();
+ assert.equal(d.researched,false);assert.equal(d.identityScope,'product-family');assert.deepEqual(d.sources,[]);
+});

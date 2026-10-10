@@ -23,7 +23,7 @@ async function getLocationIfAlreadyAllowed(){if(st()?.coords)return st().coords;
 function searchStatus(text){for(const selector of ['#status','#fxStatus']){const el=$(selector);if(el)el.textContent=text}}
 async function runSearch(q){q=clean(q);if(!q||busy)return;const generation=++photoGeneration;busy=true;$('#fxPhotoRecovery')?.setAttribute('hidden','');searchStatus('Searching product name…');$('#warning')?.classList.add('hidden');loading('Finding '+q);try{
  const s=st(),base=await json('/api/search',{query:q});if(generation!==photoGeneration)return;owned=true;if(!base.identification)throw Error('FindIt could not create a product search from that name.');
- s.file=null;s.photoSearchPending=null;s.photoSearchFile=null;s.result=base;s.offers=[];s.stores=[];commerce=null;research=null;
+ s.file=null;const oldPreview=$('#preview');if(oldPreview){oldPreview.removeAttribute('src');oldPreview.classList.add('hidden')}const photoBox=$('#fxProductImage');if(photoBox)photoBox.innerHTML='<span>▧</span>';s.photoSearchPending=null;s.photoSearchFile=null;s.result=base;s.offers=[];s.stores=[];commerce=null;research=null;
  const i=base.identification,coords=await getLocationIfAlreadyAllowed(),payload={identification:i,...(coords?{lat:coords.lat,lon:coords.lon}:{})};
  if(generation!==photoGeneration)return;syncIdentity(i);document.dispatchEvent(new CustomEvent('findit:results-rendered',{detail:{result:base}}));
  const tasks=[

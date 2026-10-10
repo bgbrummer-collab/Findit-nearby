@@ -107,7 +107,7 @@ async function handleProductInfo(request){
  if(!['GET','POST'].includes(request.method))return json({error:'Method not allowed'},405);
  const body=request.method==='POST'?await cfBody(request):Object.fromEntries(new URL(request.url).searchParams),i=commerceIdent(body),q=i.searchQuery||i.name;
  if(!q)return json({researched:false,whatItDoes:'',pros:[],cons:[],sources:[]});
- if(body.identification?.requiresModelConfirmation)return json({researched:false,identityScope:'product-family',whatItDoes:'',pros:[],cons:[],sources:[],message:'Recognised '+i.name+'. Confirm the exact model or label for product-specific facts; no specifications have been guessed.'});
+ if(i.requiresModelConfirmation)return json({researched:false,identityScope:'product-family',whatItDoes:'',pros:[],cons:[],sources:[],message:'Recognised '+i.name+'. Confirm the exact model or label for product-specific facts; no specifications have been guessed.'});
  if(BLOCKED.test(q))return json({error:'Unsupported product type',researched:false,pros:[],cons:[],sources:[]},403);
  const strip=v=>String(v||'').replace(/<[^>]+>/g,' ').replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/\s+/g,' ').trim();
  const descriptionFitsVariant=text=>{const colors=['black','white','blue','red','green','pink','brown','grey','gray','silver','gold','beige','purple','orange','yellow'],words=v=>' '+String(v||'').toLowerCase().replace(/[^a-z0-9]+/g,' ')+' ',requested=words([i.name,i.searchQuery,i.color].join(' ')),given=words(text),wanted=colors.filter(c=>requested.includes(' '+c+' '));return !wanted.length||!colors.some(c=>!wanted.includes(c)&&given.includes(' '+c+' '));};
