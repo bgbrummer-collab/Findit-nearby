@@ -23,6 +23,7 @@ try{
   await page.locator('#fxConfirmModel').waitFor({state:'visible'});
   const text=await page.locator('#fxInformationBody').innerText();
   if(!text.includes('Possible label reading:')||!text.includes(label)||!text.includes('not confirmed'))throw Error('Suggested label was not explicitly marked uncertain');
+  if(!text.includes('What this product type does')||!text.includes('General product-type overview'))throw Error('Partial identification lost its truthful product-type information');
   if(confirmed.length)throw Error('An uncertain reading was submitted without user confirmation');
   await page.locator('#fxConfirmModel').click();
   if(await page.locator('#fxRealQuery').inputValue()!==label)throw Error('Label confirmation dropped the available reading');
