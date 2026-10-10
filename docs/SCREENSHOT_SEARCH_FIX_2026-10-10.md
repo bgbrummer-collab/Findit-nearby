@@ -16,7 +16,7 @@ Verification:
 - Clicks listing displayed R230 ZAR and online in-stock availability; branch inventory remained explicitly unverified.
 - Adding this Find to Shopping List produced one online retailer at R230.
 - Ask FindIt answered the combined purpose/price/stock question with sourced facts, R230 and online availability, distinguishing branch stock.
-- Deployment, unit regression, syntax/smoke checks, dashboard commerce, live photo probe and production smoke workflows passed. Release smoke and interaction production checks were still running at report creation; their completion is not claimed here.
+- Deployment, unit regression, syntax/smoke checks, dashboard commerce, live photo probe, production smoke, release smoke (including live product research) and local/production interaction checks all passed. Release run 38068882426 and interaction run 38068882424 completed successfully.
 
 Remaining limitations: no user GPS/camera test in this turn, no private branch inventory, no claim of universal retailer or product coverage, no verified product-specific drawbacks. Nearby stores were not tested using a user's location. Existing saved shopping-list entries are historical snapshots; repeat the search and re-add an item to capture current verified offers.
 
