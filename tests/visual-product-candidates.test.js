@@ -34,3 +34,10 @@ test('candidate research follows only same-retailer HTTPS redirects',async t=>{
  let crossFetched=false;t.mock.method(globalThis,'fetch',async u=>{if(String(u).includes('www.clicks.co.za/verified'))return new Response(raw);if(String(u).includes('clicks.co.za/marc-anthony_'))return new Response('',{status:301,headers:{location:'https://www.clicks.co.za/verified'}});if(String(u).includes('dischem.co.za'))return new Response('',{status:302,headers:{location:'http://127.0.0.1/private'}});if(String(u).includes('127.0.0.1'))crossFetched=true;return new Response('<rss/>');});
  const d=await visualProductCandidates(partial);assert.equal(d.length,1);assert.equal(crossFetched,false);assert.equal(d[0].photoMatchConfirmed,false);
 });
+
+test('known brand and product family can offer an explicitly unconfirmed catalogue choice',async t=>{
+ const title='Example Audio M8 Microphone';const product='<title>'+title+'</title><script type="application/ld+json">'+JSON.stringify({'@type':'Product',name:title,brand:'Example Audio',description:'Designed for recording vocals.',offers:{price:900,priceCurrency:'ZAR'}})+'</script>';
+ t.mock.method(globalThis,'fetch',async url=>String(url).includes('bing.com')?new Response('<rss/>'):String(url).includes('/product/m8')?new Response(product):new Response('<a href="/product/m8">'+title+'</a>'));
+ const r=await visualProductCandidates({name:'Example Audio microphone',brand:'Example Audio',object:'microphone',requiresModelConfirmation:true});
+ assert.ok(r.length>0);assert.equal(r[0].name,title);assert.equal(r[0].photoMatchConfirmed,false);assert.equal(r[0].price,900);
+});
