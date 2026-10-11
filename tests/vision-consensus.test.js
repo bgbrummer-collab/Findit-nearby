@@ -4,7 +4,7 @@ import {reconcileVision} from '../lib/vision-consensus.js';
 const beats={name:'Beats Solo 3 headphones',brand:'Beats',model:'Solo 3',object:'headphones',retailCategory:'electronics'};
 test('retains Beats headphones when exact models conflict, without leaking guessed model in query',()=>{const d=reconcileVision([beats,{...beats,model:'Studio 3'}]);assert.equal(d.name,'Beats headphones');assert.equal(d.model,'');assert.equal(d.searchQuery,'Beats headphones');assert.equal(d.requiresModelConfirmation,true)});
 test('retains exact corroborated model with fewer calls',()=>{const d=reconcileVision([beats,beats]);assert.equal(d.model,'Solo 3');assert.equal(d.requiresModelConfirmation,false)});
-test('rejects broad category agreement on different objects',()=>assert.equal(reconcileVision([beats,{...beats,object:'speaker'}]),null));
+test('different objects cannot confirm an exact product even when the brand agrees',()=>{const i=reconcileVision([beats,{...beats,object:'speaker'}]);assert.equal(i.identityScope,'brand');assert.equal(i.object,'product');assert.equal(i.model,'');assert.equal(i.requiresModelConfirmation,true)});
 test('one confident model cannot independently verify itself',()=>assert.equal(reconcileVision([{...beats,confidence:1}]),null));
 test('different brands cannot corroborate an identically named model',()=>{const d=reconcileVision([beats,{...beats,brand:'Sony'}]);assert.equal(d.brand,'');assert.equal(d.model,'');assert.equal(d.name,'headphones')});
 test('headset and headphones are recognised as the same broad object',()=>assert.equal(reconcileVision([beats,{...beats,name:'Beats headset',object:'headset',model:''}]).name,'Beats headphones'));
@@ -20,3 +20,16 @@ test('shape guesses and incompletely read labels are never suggested as a model'
 
 test('a common printed metric size survives disagreement on an unverified secondary unit',()=>{const d=reconcileVision([{...beats,size:'8.4 fl. oz. / 250 ml'},{...beats,size:'8 fl. oz./250ml'}]);assert.equal(d.size,'250 ml');assert.equal(d.requiresModelConfirmation,false)});
 test('different metric pack sizes still require confirmation',()=>{const d=reconcileVision([{...beats,size:'250 ml'},{...beats,size:'500 ml'}]);assert.equal(d.requiresModelConfirmation,true);assert.equal(d.size,'')});
+
+test('a generic object label recovers the corroborated sneaker family without accepting conflicting models',()=>{
+ const i=reconcileVision([{brand:'Nike',object:'sneakers',name:'Sneakers',model:'Dunk'},{brand:'Nike',object:'product',name:'Nike Dunk Low',model:'Low'}]);
+ assert.equal(i.object,'shoes');assert.equal(i.brand,'Nike');assert.equal(i.model,'');assert.equal(i.requiresModelConfirmation,true);
+});
+test('conflicting product types preserve only a corroborated brand',()=>{
+ const i=reconcileVision([{brand:'Twinsaver',object:'Tissues',name:'Tissues',size:'120'},{brand:'Twinsaver',object:'Toilet paper',name:'Toilet Paper',size:'36 rolls'}]);
+ assert.equal(i.brand,'Twinsaver');assert.equal(i.object,'product');assert.equal(i.size,'');assert.equal(i.identityScope,'brand');assert.equal(i.requiresModelConfirmation,true);
+});
+test('independent descriptive label agreement proposes paint family without inferring size or colour',()=>{
+ const i=reconcileVision([{brand:'Build it',object:'paint',name:'Floor & Stoep Paint',model:'Specialist Floor & Stoep Paint'},{brand:'Build it',object:'paint',name:'SPECIALIST FLOOR & STOEP PAINT',model:''}]);
+ assert.match(i.suggestedLabel,/Floor & Stoep Paint/i);assert.equal(i.size,'');assert.equal(i.requiresModelConfirmation,true);
+});

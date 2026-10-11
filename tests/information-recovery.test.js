@@ -43,3 +43,12 @@ test('abbreviated retailer title uses its own Product description without changi
  assert.equal(structuredProduct(raw({...product,description:'Another conditioner'}),requested),null);
  assert.equal(structuredProduct(raw(product),{...requested,model:'Something Else'}),null);
 });
+
+test('product information extracts item-specific structured specifications across categories',async t=>{
+ const worker=(await import('../cloudflare/worker.js')).default;
+ for(const p of [{name:'Example Audio Microphone M8',brand:'Example Audio',description:'Designed to capture vocals. Requires an audio interface.',additionalProperty:[{name:'Connector',value:'XLR'}]},{name:'Example Comfort Tissues 120',brand:'Example',description:'Provides disposable facial tissues.',material:'Paper',additionalProperty:[{name:'Ply',value:3}]},{name:'Example Court Shoes',brand:'Example',description:'Designed for everyday footwear.',material:'Leather',size:'UK 8'}]){
+  t.mock.method(globalThis,'fetch',async url=>String(url).includes('bing.com')?new Response('<rss/>'):new Response('<title>'+p.name+'</title><script type="application/ld+json">'+JSON.stringify({'@type':'Product',...p})+'</script>'));
+  const r=await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:{name:p.name,brand:p.brand},offers:[{product_url:'https://retailer.example/product',sourcePageVerified:true,exactProductMatch:true}]})}),{});
+  const d=await r.json();assert.equal(d.researched,true);assert.match(d.whatItDoes,/Designed|Provides/);assert.ok(d.specifications.some(x=>x.name===(p.additionalProperty?.[0].name||'Material')));t.mock.restoreAll();
+ }
+});
