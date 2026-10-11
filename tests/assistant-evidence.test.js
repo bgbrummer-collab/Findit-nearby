@@ -37,3 +37,5 @@ test('partial photos answer practical buying questions without inventing specifi
  for(const [name,object,question,expected] of cases){const r=answerFromEvidence(question,{identification:{name,object,requiresModelConfirmation:true}});assert.match(r.answer,new RegExp(expected));assert.match(r.answer,/not verified specifications/);assert.doesNotMatch(r.answer,/MV7|SM7|120 sheets|5 litres|Dunk Low/);}
  const r=answerFromEvidence('what is it?',{identification:{name:'Twinsaver product',object:'product',identityScope:'brand',requiresModelConfirmation:true}});assert.doesNotMatch(r.answer,/Facial tissues/);
 });
+
+test('microphone questions do not accidentally trigger phone-number or location intent',()=>{const r=answerFromEvidence('Does this microphone use USB or XLR and what extra equipment do I need?',{identification:{name:'Shure microphone',object:'microphone',requiresModelConfirmation:true}});assert.match(r.answer,/XLR/);assert.doesNotMatch(r.answer,/nearby branches|Allow location/);});
