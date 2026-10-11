@@ -31,3 +31,15 @@ test('saved shopping item gains late verified offers without losing its saved da
  const source=readFileSync(new URL('../shopping-assistant-ui.js',import.meta.url),'utf8').replace('window.finditShoppingAssistantRefresh=refresh;','window.finditShoppingAssistantRefresh=refresh;window.testSnapshot=snapshot;');vm.runInNewContext(source,context);
  const item=context.window.testSnapshot();item.addedAt=100;data.set('findit.shoppingList.v2',JSON.stringify([item]));context.window.finditState.offers=[{retailer:{name:'Clicks'},price:230,currency:'ZAR',product_url:'https://example.com/soap',exactProductMatch:true,verified:true}];context.window.finditShoppingAssistantRefresh();const list=JSON.parse(data.get('findit.shoppingList.v2'));assert.equal(list[0].offers[0].price,230);assert.equal(list[0].addedAt,100);assert.equal(list.length,1);
 });
+
+test('abbreviated retailer title uses its own Product description without changing variants',async()=>{
+ const {structuredProduct,ident}=await import('../lib/product-intelligence-core.js');
+ const product={ '@type':'Product',name:'Marc Anthony 3x Moist Conditioner 250ml',description:'Strictly Curls 3X Moisture Triple Blend Conditioner',offers:{price:'229.99',priceCurrency:'ZAR',availability:'https://schema.org/InStock'}};
+ const raw=p=>'<script type="application/ld+json">'+JSON.stringify(p)+'</script>';
+ const requested=ident({name:'Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml',brand:'Marc Anthony',size:'250ml'});
+ assert.equal(structuredProduct(raw(product),requested)?.price,229.99);
+ assert.equal(structuredProduct(raw({...product,name:product.name.replace('250ml','500ml')}),requested),null);
+ assert.equal(structuredProduct(raw({...product,name:product.name.replace('Conditioner','Shampoo')}),requested),null);
+ assert.equal(structuredProduct(raw({...product,description:'Another conditioner'}),requested),null);
+ assert.equal(structuredProduct(raw(product),{...requested,model:'Something Else'}),null);
+});

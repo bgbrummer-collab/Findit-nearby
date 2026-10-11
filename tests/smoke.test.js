@@ -20,7 +20,7 @@ test('retailer listings require exact identity and page evidence', () => {
   assert.match(intelligence, /function structuredProduct\(/);
   assert.match(intelligence, /sourcePageVerified:true/);
   assert.match(intelligence, /branchStockVerified:false/);
-  assert.match(intelligence, /if\(!nm\|\|matchScore\(nm,i\)<4/);
+  assert.match(intelligence, /if\(!nm\|\|identityScore<4/);
 });
 
 test('product prices never rely on page-wide text scanning', () => {
