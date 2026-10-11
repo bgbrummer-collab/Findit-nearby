@@ -19,3 +19,9 @@ test('gaming headset discovery uses the current Computer Mania catalogue and ver
  t.mock.method(globalThis,'fetch',async u=>{const address=String(u);if(address.startsWith('https://computermania.co.za/search?')){reached=true;return new Response(`<a href="${productUrl}">${product}</a>`);}if(address===productUrl)return new Response('<script type="application/ld+json">'+JSON.stringify({'@type':'Product',name:product,offers:{price:2999,priceCurrency:'ZAR',availability:'https://schema.org/InStock'}})+'</script>');return new Response('',{status:404});});
  const offers=await nativeRetailerDiscovery({name:product,searchQuery:product});assert.equal(reached,true);assert.equal(offers.length,1);assert.equal(offers[0].retailer.name,'Computer Mania');assert.equal(offers[0].exactProductMatch,true);assert.equal(offers[0].branchStockVerified,false);
 });
+
+test('predictive catalogue finds product URLs without treating suggestions as commerce evidence',async t=>{
+ const {nativeRetailerUrls}=await import('../lib/native-retailer-discovery.js');
+ t.mock.method(globalThis,'fetch',async u=>String(u).includes('computermania.co.za/search/suggest.json')?new Response(JSON.stringify({resources:{results:{products:[{title:'Logitech PRO X Gaming Headset',url:'/products/logitech-pro-x-headset?_pos=1'},{title:'Logitech PRO X Gaming Mouse',url:'/products/mouse'},{title:'Logitech PRO X3 Gaming Headset',url:'https://unrelated.example/products/headset'}]}}})):new Response(''));
+ const rows=await nativeRetailerUrls({name:'Logitech PRO X Gaming Headset',object:'headset',searchQuery:'Logitech PRO X Gaming Headset'});assert.deepEqual(rows,['https://computermania.co.za/products/logitech-pro-x-headset']);
+});
