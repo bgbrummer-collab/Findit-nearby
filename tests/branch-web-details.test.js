@@ -47,3 +47,9 @@ test('concurrent branches share the official locator request and keep their own 
  const [a,b]=await Promise.all([researchBranchDetails({name:'Computer Mania',lat:-25.901,lon:28.411}),researchBranchDetails({name:'Computer Mania',lat:-25.951,lon:28.461})]);
  assert.equal(count,1);assert.equal(a.phone,'012 111 1111');assert.equal(b.phone,'012 222 2222');
 });
+
+test('Magento locator JSON matches Incredible Connection by branch coordinates and scopes contact fields',()=>{
+ const records={one:{name:'INCREDIBLE OTHER',address:'Wrong Mall',phone:'011 000 0000',latitude:-26,longitude:28},two:{name:'INCREDIBLE WOODLANDS',address:'Shop 70C Woodlands',city:'Pretoria',postcode:'0072',phone:'012 994 9000',latitude:-25.82305903,longitude:28.31168174,opening_hours:JSON.stringify({m:{weekday:'monday',open_time:'09:00',close_time:'19:00'},s:{weekday:'sunday',open_time:'09:00',close_time:'17:00'}})}};
+ const page='<script type="text/x-magento-init">'+JSON.stringify({'*':{locator:{stores:records}}})+'</script>';
+ const d=parseBranchDetails(page,{name:'Incredible Connection',lat:-25.82305903,lon:28.31168174},'https://www.incredible.co.za/storelocator/');assert.equal(d.phone,'012 994 9000');assert.equal(d.todayHours,'Mo 09:00-19:00; Su 09:00-17:00');assert.match(d.publishedAddress,/Shop 70C/);assert.equal(parseBranchDetails(page,{name:'Incredible Connection',lat:-24,lon:28},'https://www.incredible.co.za/storelocator/'),null);
+});
