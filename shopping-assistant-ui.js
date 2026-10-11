@@ -25,9 +25,10 @@
   function stores(){return Array.isArray(app().stores)?app().stores:[]}
   function offers(){
     const s=app();
+    if(s.result?.identification?.requiresModelConfirmation)return [];
     // The current completed Find owns the screen. Product-intelligence offers are fallback only,
     // never merged into a newer Find, so stale prices cannot contaminate plans or alerts.
-    const rows=Array.isArray(s.offers)&&s.offers.length?s.offers:(s.result?.identification&&Array.isArray(window.productIntelligence?.offers)?window.productIntelligence.offers:[]);
+    const rows=Array.isArray(s.offers)?s.offers:(s.result?.identification&&Array.isArray(window.productIntelligence?.offers)?window.productIntelligence.offers:[]);
     const seen=new Set(),out=[];
     for(const o of rows){
       if(!o||o.exactProductMatch!==true)continue;
@@ -156,7 +157,7 @@
     if(!box){box=document.createElement('section');box.id='fxShoppingAssistant';box.className='fx-shopping-assistant';box.innerHTML=`<div class="fx-shop-head"><span class="fx-kicker">FINDIT SHOPPING ASSISTANT</span><h2>Plan, verify and track your shopping</h2><p>Verified data first. FindIt does not guess prices, stock, phone numbers or opening hours.</p></div><div class="fx-shop-tools"><button id="fxAddCurrentItem" type="button">+ Add current item</button><button id="fxWatchCurrentItem" type="button">Watch item</button><button id="fxBarcodeScan" type="button">Scan barcode</button></div><details open><summary>Shopping List + Trip Planner</summary><div id="fxShoppingListBody"></div></details><details><summary>Watch List + Price History</summary><div id="fxWatchBody"></div></details>`;const anchor=$('#fxSmartChoice')||shell.querySelector('.fx-feature-row')||shell.firstElementChild;if(anchor?.parentNode)anchor.parentNode.insertBefore(box,anchor.nextSibling);else shell.prepend(box);$('#fxAddCurrentItem').onclick=addCurrent;$('#fxWatchCurrentItem').onclick=watchCurrent;$('#fxBarcodeScan').onclick=barcodeModal}
     renderList();renderWatch();storeButtons();evaluateWatch();return true;
   }
-  function refresh(){styles();inject()}
+  function refresh(){const current=product(),list=read(LS.list,[]);if(Array.isArray(list)&&offers().length){const i=list.findIndex(x=>x.key===current.key);if(i>=0){const previous=list[i];list[i]={...previous,...snapshot(),addedAt:previous.addedAt};write(LS.list,list)}}styles();inject()}
 
   window.finditShoppingAssistantRefresh=refresh;
   window.finditCheckStore=storeModal;
