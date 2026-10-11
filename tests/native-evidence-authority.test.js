@@ -13,3 +13,9 @@ for(const [label,html,expected] of [
  assert.equal(offers.length,1);for(const [key,value] of Object.entries(expected))assert.equal(offers[0][key],value);
  assert.equal(offers[0].branchStockVerified,false);assert.equal(offers[0].exactProductMatch,true);
 });
+
+test('gaming headset discovery uses the current Computer Mania catalogue and verifies the exact listing',async t=>{
+ const product='Logitech PRO X Gaming Headset',productUrl='https://computermania.co.za/products/logitech-pro-x-gaming-headset';let reached=false;
+ t.mock.method(globalThis,'fetch',async u=>{const address=String(u);if(address.startsWith('https://computermania.co.za/search?')){reached=true;return new Response(`<a href="${productUrl}">${product}</a>`);}if(address===productUrl)return new Response('<script type="application/ld+json">'+JSON.stringify({'@type':'Product',name:product,offers:{price:2999,priceCurrency:'ZAR',availability:'https://schema.org/InStock'}})+'</script>');return new Response('',{status:404});});
+ const offers=await nativeRetailerDiscovery({name:product,searchQuery:product});assert.equal(reached,true);assert.equal(offers.length,1);assert.equal(offers[0].retailer.name,'Computer Mania');assert.equal(offers[0].exactProductMatch,true);assert.equal(offers[0].branchStockVerified,false);
+});
