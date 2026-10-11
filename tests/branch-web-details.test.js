@@ -40,3 +40,10 @@ test('locator cards keep branch phone and address inside the coordinate-matched 
 });
 
 test('scoped published hours convert AM/PM without inventing unsupported schedules',()=>{assert.equal(parsePublishedHours('<p>Monday – Friday 9:00 AM – 7:00 PM<br>Sunday 9:00 AM – 4:00 PM</p>'),'Mo-Fr 09:00-19:00; Su 09:00-16:00');assert.equal(parsePublishedHours('Call us for hours'), '');});
+
+test('concurrent branches share the official locator request and keep their own details',async t=>{
+ let count=0;
+ t.mock.method(globalThis,'fetch',async()=>{count++;await new Promise(resolve=>setTimeout(resolve,10));return new Response('<li data-title="Computer Mania First" data-address="First Mall" data-lat="-25.901" data-lng="28.411"><p>Phone: 012 111 1111</p></li><li data-title="Computer Mania Second" data-address="Second Mall" data-lat="-25.951" data-lng="28.461"><p>Phone: 012 222 2222</p></li>');});
+ const [a,b]=await Promise.all([researchBranchDetails({name:'Computer Mania',lat:-25.901,lon:28.411}),researchBranchDetails({name:'Computer Mania',lat:-25.951,lon:28.461})]);
+ assert.equal(count,1);assert.equal(a.phone,'012 111 1111');assert.equal(b.phone,'012 222 2222');
+});
