@@ -22,6 +22,8 @@ jobs:
           # layers loaded directly by index.html. Copy every root browser asset so
           # Cloudflare serves the same dashboard GitHub main contains.
           find . -maxdepth 1 -type f \( -name '*.html' -o -name '*.css' -o -name '*.js' -o -name '*.json' -o -name '*.webmanifest' -o -name '*.ico' -o -name '*.png' -o -name '*.svg' -o -name '*.webp' \) -exec cp {} cloudflare-public/ \;
+          mkdir -p cloudflare-public/lib
+          cp lib/product-type-information.js cloudflare-public/lib/
           [ -d assets ] && cp -R assets cloudflare-public/assets || true
       - uses: cloudflare/wrangler-action@v3
         with:
