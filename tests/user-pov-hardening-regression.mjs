@@ -78,9 +78,9 @@ const product=await page.locator('#fxStableBody').innerText();
 if(/Patent Leather White/i.test(product))fail('A product/variant title is still shown as a Pro');
 if(!/durable rubber traction/i.test(product))fail('A meaningful user benefit was incorrectly removed from Pros');
 
-await page.waitForFunction(()=>/Open now/i.test(document.querySelector('#fxStoreHoursLive')?.innerText||''),null,{timeout:15000});
+await page.waitForFunction(()=>/Scheduled open/i.test(document.querySelector('#fxStoreHoursLive')?.innerText||''),null,{timeout:15000});
 const hours=await page.locator('#fxStoreHoursLive').innerText();
-if(!/Open now/.test(hours)||!/Closes 20:00/.test(hours))fail('Store hours do not show the useful open/close result');
+if(!/Scheduled open/.test(hours)||!/Closes 20:00/.test(hours))fail('Store hours do not show the useful open/close result');
 if(/check google|(?:please|you should|you must|you need to|need to)\s+verify[^.]*yourself/i.test(hours))fail('Store hours still instruct users to verify on their own');
 
 await page.setViewportSize({width:390,height:844});
