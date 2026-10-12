@@ -166,3 +166,9 @@ test('published VO!CE technology name stays within one complete product sentence
  t.mock.method(globalThis,'fetch',async u=>String(u).includes('bing.com')?new Response('<rss/>'):new Response(`<title>${name}</title><meta name="description" content="Pro-designed with detachable mic and Blue VO! CE software for professional-sounding voice comms. Featuring 50 mm drivers.">`));
  const d=await(await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:{name,searchQuery:name},offers:[{product_url:url,sourcePageVerified:true,exactProductMatch:true}]})}),{})).json();assert.equal(d.whatItDoes,'Pro-designed with detachable mic and Blue VO!CE software for professional-sounding voice comms.');assert.ok(!d.pros.some(p=>p.startsWith('CE software')));
 });
+
+test('large retailer navigation cannot truncate later exact product price and stock evidence',async t=>{
+ const {verify,ident}=await import('../lib/product-intelligence-core.js');const name='Logitech PRO X Gaming Headset',url='https://computermania.co.za/products/logitech-pro-x';
+ const raw='<title>'+name+'</title><nav>'+('navigation '.repeat(100000))+'</nav><script type="application/ld+json">'+JSON.stringify({'@type':'Product',name,offers:{price:2299,priceCurrency:'ZAR',availability:'https://schema.org/InStock'}})+'</script>';
+ t.mock.method(globalThis,'fetch',async u=>String(u).includes('r.jina.ai')?new Response('',{status:503}):new Response(raw,{headers:{'content-type':'text/html'}}));const result=await verify(url,ident({name,searchQuery:name}));assert.equal(result.price,2299);assert.equal(result.currency,'ZAR');assert.equal(result.availability,'in_stock');assert.equal(result.branchStockVerified,false);
+});
