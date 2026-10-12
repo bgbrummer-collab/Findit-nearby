@@ -52,3 +52,15 @@ test('product information extracts item-specific structured specifications acros
   const d=await r.json();assert.equal(d.researched,true);assert.match(d.whatItDoes,/Designed|Provides/);assert.ok(d.specifications.some(x=>x.name===(p.additionalProperty?.[0].name||'Material')));t.mock.restoreAll();
  }
 });
+
+test('partial photo identities load nearby category stores without claiming exact stock',async()=>{
+ const r=runtime();r.context.window.finditState.coords={lat:-25.8,lon:28.3};r.context.window.finditState.result.identification={name:'NIKE shoes',brand:'NIKE',object:'shoes',requiresModelConfirmation:true};r.context.document.dispatchEvent=()=>{};r.context.CustomEvent=class{constructor(type,options){this.type=type;this.detail=options.detail}};
+ const source=readFileSync(new URL('../information-runtime.js',import.meta.url),'utf8').replace('window.finditRunProductSearch=runSearch;','window.finditRunProductSearch=runSearch;window.testNearby=loadPartialNearby;');
+ delete r.context.window.__finditInformationRuntime;let requested; r.context.fetch=async(url,options)=>{requested={url,body:JSON.parse(options.body)};return {ok:true,json:async()=>({stores:[{name:'Footwear Store',exactProductMatch:false,branchStockVerified:false}]})}};vm.runInNewContext(source,r.context);await r.context.window.testNearby(r.context.window.finditState.result.identification);assert.equal(requested.url,'/api/nearby');assert.equal(requested.body.identification.requiresModelConfirmation,true);assert.equal(r.context.window.finditState.stores[0].name,'Footwear Store');assert.equal(r.context.window.finditState.stores[0].branchStockVerified,false);
+});
+
+test('typing a brand and product type does not confirm an exact model',async()=>{
+ const worker=(await import('../cloudflare/worker.js')).default;
+ const response=await worker.fetch(new Request('https://findit.test/api/search',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({query:'NIKE shoes'})}),{});const d=await response.json();assert.equal(d.identification.requiresModelConfirmation,true);assert.equal(d.identification.object,'shoes');assert.equal(d.identification.retailCategory,'footwear');assert.equal(d.identification.userConfirmed,false);
+ const exact=await(await worker.fetch(new Request('https://findit.test/api/search',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({query:'Nike Air Force 1 CW2288-111'})}),{})).json();assert.equal(exact.identification.requiresModelConfirmation,undefined);assert.equal(exact.identification.name,'Nike Air Force 1 CW2288-111');
+});
