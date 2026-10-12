@@ -39,3 +39,8 @@ test('partial photos answer practical buying questions without inventing specifi
 });
 
 test('microphone questions do not accidentally trigger phone-number or location intent',()=>{const r=answerFromEvidence('Does this microphone use USB or XLR and what extra equipment do I need?',{identification:{name:'Shure microphone',object:'microphone',requiresModelConfirmation:true}});assert.match(r.answer,/XLR/);assert.doesNotMatch(r.answer,/nearby branches|Allow location/);});
+
+test('uncertain visual model choices and observed colours are not asserted as an exact SKU or price',()=>{
+ const d=answerFromEvidence('What model and colour is this?',{identification:{name:'Nike shoes',requiresModelConfirmation:true,color:'White and Blue',suggestedModels:[{name:'Nike Air Force 1 Low',confirmed:false,source:'visual-model-hypothesis'}]}},{});
+ assert.match(d.answer,/Possible models.*not confirmed/);assert.match(d.answer,/Nike Air Force 1 Low/);assert.match(d.answer,/does not establish an exact retailer colourway/);
+});

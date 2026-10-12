@@ -46,3 +46,11 @@ test('container graphics cannot become a paint colour or conditioner variant',()
  const conditioner={name:'Example Hydrating Conditioner 250ml',brand:'Example',model:'Hydrating Conditioner',object:'conditioner',size:'250ml',color:'yellow',visibleText:['Example','Hydrating Conditioner','250ml']};assert.equal(reconcileVision([conditioner,{...conditioner}]).color,'');
  const printed={...paint,color:'white',visibleText:[...paint.visibleText,'White']};assert.equal(reconcileVision([printed,{...printed}]).color,'white');
 });
+
+test('conflicting shoe models remain reviewable hypotheses without confirming the photographed SKU',()=>{
+ const claim={name:'Nike Air Force 1 Low',brand:'Nike',model:'Air Force 1 Low',object:'shoes',color:'White and Blue'};
+ const result=reconcileVision([claim,{...claim,name:'Nike Air Force 1 07',model:'Air Force 1 07'}]);
+ assert.equal(result.name,'Nike shoes');assert.equal(result.model,'');assert.equal(result.requiresModelConfirmation,true);assert.equal(result.suggestedLabel,'');
+ assert.deepEqual(result.suggestedModels.map(x=>x.name),['Nike Air Force 1 Low','Nike Air Force 1 07']);assert.ok(result.suggestedModels.every(x=>x.confirmed===false));
+ const mixed=reconcileVision([claim,{...claim,brand:'Other',model:'Unrelated model'}]);assert.deepEqual(mixed.suggestedModels,[]);
+});

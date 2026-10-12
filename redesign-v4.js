@@ -11,7 +11,7 @@ function result(){try{return state()?.result?.identification||{}}catch{return{}}
 function stores(){try{return Array.isArray(state()?.stores)?state().stores:[]}catch{return[]}}
 function premiumActive(){try{return localStorage.getItem('findit_premium_beta')==='1'||localStorage.getItem('finditPremium')==='1'||localStorage.getItem('finditPremium')==='true'||window.premiumState?.active===true||document.body.classList.contains('premium-active')}catch{return false}}
 function productName(){const t=$('#resultName')?.textContent?.trim();const i=result();return t&&t!=='Item'?t:(i.name||i.model||i.object||'No item selected')}
-function productDesc(){return $('#resultDescription')?.textContent?.trim()||result().summary||'Upload a photo to identify an item and compare nearby retailers.'}
+function productDesc(){const i=result();return $('#resultDescription')?.textContent?.trim()||i.summary||(i.name?[i.brand,i.object,i.color].filter(Boolean).join(' · ')+(i.requiresModelConfirmation?' — exact model needs confirmation.':' — retailer information requires verification.'):'Upload a photo to identify an item and compare nearby retailers.')}
 function productPreview(){const p=$('#preview');return p?.src&&p.src!==location.href?p.src:''}
 function confidence(){return window.finditOfferEvidence?.confidence(result())||'Confidence not supplied'}
 function storeRows(){

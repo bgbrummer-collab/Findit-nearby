@@ -41,3 +41,11 @@ test('known brand and product family can offer an explicitly unconfirmed catalog
  const r=await visualProductCandidates({name:'Example Audio microphone',brand:'Example Audio',object:'microphone',requiresModelConfirmation:true});
  assert.ok(r.length>0);assert.equal(r[0].name,title);assert.equal(r[0].photoMatchConfirmed,false);assert.equal(r[0].price,900);
 });
+
+test('visual model hypotheses can research matching listings without becoming confirmed photo offers',async t=>{
+ const name='Nike Air Force 1 Low White Blue Shoes',url='https://retailer.example/product/white-blue-af1';
+ const page='<script type="application/ld+json">'+JSON.stringify({'@type':'Product',name,brand:'Nike',description:'Low-top shoes with a padded collar.',offers:{price:1800,priceCurrency:'ZAR',availability:'https://schema.org/InStock'}})+'</script>';
+ t.mock.method(globalThis,'fetch',async u=>String(u)===url?new Response(page):String(u).includes('bing.com')?new Response('<rss><item><title>'+name+'</title><link>'+url+'</link></item><item><title>Nike Dunk Low White Blue Shoes</title><link>https://retailer.example/product/dunk</link></item></rss>'):new Response('<rss/>'));
+ const result=await visualProductCandidates({name:'Nike shoes',brand:'Nike',object:'shoes',color:'White and Blue',requiresModelConfirmation:true,suggestedModels:[{name:'Nike Air Force 1 Low',confirmed:false,source:'visual-model-hypothesis'}]});
+ assert.equal(result.length,1);assert.equal(result[0].name,name);assert.equal(result[0].photoMatchConfirmed,false);assert.equal(result[0].price,1800);assert.equal(result[0].identity.userConfirmed,false);
+});

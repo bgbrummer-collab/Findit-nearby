@@ -189,3 +189,9 @@ test('duplicate retailer SKUs do not inflate listings or pick a conflicting pric
  const {dedupe}=await import('../lib/product-intelligence-core.js');const offer={retailer:{name:'Example'},product_name:'Exact headphones',sku:'SKU-123',price:100,currency:'ZAR',sourcePageVerified:true,product_url:'https://retailer.example/product/a'};
  assert.equal(dedupe([offer,{...offer,product_url:'https://retailer.example/product/b'}]).length,1);const conflict=dedupe([offer,{...offer,price:120,product_url:'https://retailer.example/product/b'}])[0];assert.equal(conflict.price,null);assert.equal(conflict.priceConflict,true);
 });
+
+test('multi-colour photo descriptions match retailer separators without accepting a missing colour',async()=>{
+ const {identityMatches,ident}=await import('../lib/product-intelligence-core.js');const i=ident({brand:'Nike',name:'Nike Air Force 1',model:'Air Force 1',color:'White and Blue'});
+ assert.equal(identityMatches('Nike Air Force 1 White/Blue',i),true);assert.equal(identityMatches('Nike Air Force 1 White Blue',i),true);
+ assert.equal(identityMatches('Nike Air Force 1 White',i),false);assert.equal(identityMatches('Nike Air Force 1 White/Red',i),false);
+});
