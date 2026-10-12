@@ -83,9 +83,9 @@ async function showNearby(){if(!productName())return searchModal();const state=s
 let partialNearbyKey='',partialNearbyPending=false;
 async function loadPartialNearby(i){
  const s=st(),generation=photoGeneration,coords=await getLocationIfAlreadyAllowed();if(!coords||!s||generation!==photoGeneration)return;
- const key=JSON.stringify([productName(i),coords.lat,coords.lon,s.radius||10]);if(partialNearbyPending||partialNearbyKey===key)return;partialNearbyKey=key;partialNearbyPending=true;
- try{const n=await json('/api/nearby',{lat:coords.lat,lon:coords.lon,identification:i,radiusKm:s.radius||10},22000);if(generation!==photoGeneration||st()!==s)return;if(Array.isArray(n?.stores)){s.stores=n.stores;syncAll();document.dispatchEvent(new CustomEvent('findit:nearby-updated',{detail:{stores:s.stores}}));}else partialNearbyKey='';}
- catch(e){partialNearbyKey='';console.error('FindIt product-type nearby search failed',e);}finally{partialNearbyPending=false;}
+ const key=JSON.stringify([generation,productName(i),coords.lat,coords.lon,s.radius||10]);if(partialNearbyKey===key)return;partialNearbyKey=key;partialNearbyPending=true;
+ try{const n=await json('/api/nearby',{lat:coords.lat,lon:coords.lon,identification:i,radiusKm:s.radius||10},22000);if(generation!==photoGeneration||st()!==s)return;if(Array.isArray(n?.stores)){s.stores=n.stores;syncAll();document.dispatchEvent(new CustomEvent('findit:nearby-updated',{detail:{stores:s.stores}}));}else if(partialNearbyKey===key)partialNearbyKey='';}
+ catch(e){if(partialNearbyKey===key)partialNearbyKey='';console.error('FindIt product-type nearby search failed',e);}finally{partialNearbyPending=false;}
 }
 async function hydrateIdentifiedPhoto(){
  if(owned||busy||!productName())return;
