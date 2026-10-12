@@ -58,3 +58,7 @@ test('attribute locator cards select iStore branch details without leaking anoth
  const card=(name,lat,phone)=>`<div data-store-name="${name}" data-latitude="${lat}," data-longitude="28.31"><div class="store-locator__address"><span>Address:</span><span>Shop 35 Example Mall</span></div><a href="tel:${phone}">Call</a><table><tr><th>Monday</th><td>09:00 - 19:00</td></tr></table></div>`;
  const page=card('iStore Other',-26.4,'0110000000')+card('iStore Selected',-25.82,'0870575500');const found=parseBranchDetails(page,{name:'iStore',lat:-25.82,lon:28.31},'https://www.istore.co.za/storelocator');assert.equal(found.phone,'0870575500');assert.equal(found.todayHours,'Mo 09:00-19:00');assert.equal(found.branchName,'iStore Selected');assert.equal(parseBranchDetails(page,{name:'iStore',lat:-24,lon:28.31},'https://www.istore.co.za/storelocator'),null);
 });
+
+test('an explicitly closed official branch cannot be scheduled open from old regular hours',()=>{
+ const record={name:'INCREDIBLE CLOSED BRANCH',address:'Example Street',latitude:-25.8,longitude:28.3,country_id:'ZA',store_closed:'1',opening_hours:JSON.stringify({m:{weekday:'monday',open_time:'09:00',close_time:'19:00'}})};const html='<script type="text/x-magento-init">'+JSON.stringify({'*':{locator:{stores:[record]}}})+'</script>';const value=parseBranchDetails(html,{name:'Incredible Connection',lat:-25.8,lon:28.3},'https://www.incredible.co.za/storelocator/');assert.equal(value.todayHours,'closed');assert.equal(value.countryCode,'ZA');
+});
