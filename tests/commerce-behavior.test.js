@@ -172,3 +172,9 @@ test('large retailer navigation cannot truncate later exact product price and st
  const raw='<title>'+name+'</title><nav>'+('navigation '.repeat(100000))+'</nav><script type="application/ld+json">'+JSON.stringify({'@type':'Product',name,offers:{price:2299,priceCurrency:'ZAR',availability:'https://schema.org/InStock'}})+'</script>';
  t.mock.method(globalThis,'fetch',async u=>String(u).includes('r.jina.ai')?new Response('',{status:503}):new Response(raw,{headers:{'content-type':'text/html'}}));const result=await verify(url,ident({name,searchQuery:name}));assert.equal(result.price,2299);assert.equal(result.currency,'ZAR');assert.equal(result.availability,'in_stock');assert.equal(result.branchStockVerified,false);
 });
+
+test('published SKU corroborates a typed model code while a different SKU remains rejected',()=>{
+ const {name}={name:'Logitech PRO X Gaming Headset'};const node={'@type':'Product',name,sku:'981-000818',offers:{price:2299,priceCurrency:'ZAR',availability:'https://schema.org/InStock'}};
+ const raw=p=>'<script type="application/ld+json">'+JSON.stringify(p)+'</script>';const request=ident({name:name+' 981-000818',searchQuery:name+' 981-000818'});
+ assert.equal(structuredProduct(raw(node),request)?.price,2299);assert.equal(structuredProduct(raw({...node,sku:'981-001234'}),request),null);
+});
