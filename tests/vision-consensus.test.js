@@ -33,3 +33,10 @@ test('independent descriptive label agreement proposes paint family without infe
  const i=reconcileVision([{brand:'Build it',object:'paint',name:'Floor & Stoep Paint',model:'Specialist Floor & Stoep Paint'},{brand:'Build it',object:'paint',name:'SPECIALIST FLOOR & STOEP PAINT',model:''}]);
  assert.match(i.suggestedLabel,/Floor & Stoep Paint/i);assert.equal(i.size,'');assert.equal(i.requiresModelConfirmation,true);
 });
+
+test('a surviving complete printed label can propose a reviewed candidate when other providers fail',()=>{
+ const claim={name:'Strictly Curls 3X Moisture',brand:'Marc Anthony',object:'conditioner',model:'strictly curls 3x moisture triple blend conditioner',size:'250ml',color:'yellow',visibleText:['Strictly Curls','3X Moisture','Triple Blend','Conditioner']};
+ const result=reconcileVision([claim]);assert.equal(result.requiresModelConfirmation,true);assert.equal(result.identificationMethod,'single-label-reading');assert.equal(result.model,'');assert.equal(result.size,'');assert.equal(result.confidence,null);assert.match(result.suggestedLabel,/Marc Anthony/);
+ assert.equal(reconcileVision([{...claim,visibleText:['Conditioner']}]),null);
+ assert.equal(reconcileVision([{...claim,model:'Guessed different model'}]),null);
+});
