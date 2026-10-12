@@ -13,3 +13,10 @@ test('price ranges or absent currency units do not become an invented exact pric
 test('a public catalogue cannot substitute an adjacent Plus model',async t=>{
  t.mock.method(globalThis,'fetch',async()=>new Response(JSON.stringify([{...row,name:'KORG Pitchclip 2 Plus Clip-On Tuner'}])));assert.equal(await verify(url,ident({name:'Korg Pitchclip 2 clip-on tuner',brand:'Korg',model:'Pitchclip 2'})),null);
 });
+
+test('native public catalogue discovery validates publisher and protected records',async t=>{
+ const {wooSearchProducts}=await import('../lib/public-woo-products.js');
+ t.mock.method(globalThis,'fetch',async()=>new Response(JSON.stringify([row,{...row,permalink:'https://other.example/product/tuner/'},{...row,is_password_protected:true}])));
+ assert.deepEqual(await wooSearchProducts('https://www.marshallmusic.co.za/?s=tuner','Korg Pitchclip 2'),[{title:row.name,url}]);
+ assert.deepEqual(await wooSearchProducts('https://unrecognised.example/','tuner'),[]);
+});

@@ -53,7 +53,7 @@ await page.waitForFunction(()=>{try{return JSON.parse(localStorage.getItem('find
 await page.waitForFunction(()=>/Find Saved/i.test(document.querySelector('#fxQuickSaveFind')?.textContent||''));
 await page.waitForFunction(()=>{
   const t=document.querySelector('#fxStoreHoursLive')?.innerText||'';
-  return /Open now/i.test(t)&&/Closes 18:00/i.test(t)&&/Closed/i.test(t)&&/Opens 09:00/i.test(t);
+  return /Scheduled open/i.test(t)&&/Closes 18:00/i.test(t)&&/Closed/i.test(t)&&/Opens 09:00/i.test(t);
 },null,{timeout:30000});
 await page.waitForFunction(()=>{
   const rows=[...document.querySelectorAll('#fxStoreHoursLive .fx-hours-row')];

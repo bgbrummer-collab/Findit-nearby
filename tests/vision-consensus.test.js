@@ -40,3 +40,9 @@ test('a surviving complete printed label can propose a reviewed candidate when o
  assert.equal(reconcileVision([{...claim,visibleText:['Conditioner']}]),null);
  assert.equal(reconcileVision([{...claim,model:'Guessed different model'}]),null);
 });
+
+test('container graphics cannot become a paint colour or conditioner variant',()=>{
+ const paint={name:'Build it Floor & Stoep Paint',brand:'Build it',model:'Floor and Stoep Paint',object:'paint',size:'5L',color:'green',visibleText:['Floor & Stoep Paint','5L']};const result=reconcileVision([paint,{...paint}]);assert.equal(result.color,'');assert.equal(result.requiresModelConfirmation,true);assert.match(result.suggestedLabel,/Floor and Stoep Paint/);
+ const conditioner={name:'Example Hydrating Conditioner 250ml',brand:'Example',model:'Hydrating Conditioner',object:'conditioner',size:'250ml',color:'yellow',visibleText:['Example','Hydrating Conditioner','250ml']};assert.equal(reconcileVision([conditioner,{...conditioner}]).color,'');
+ const printed={...paint,color:'white',visibleText:[...paint.visibleText,'White']};assert.equal(reconcileVision([printed,{...printed}]).color,'white');
+});

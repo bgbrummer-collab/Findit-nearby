@@ -178,3 +178,14 @@ test('published SKU corroborates a typed model code while a different SKU remain
  const raw=p=>'<script type="application/ld+json">'+JSON.stringify(p)+'</script>';const request=ident({name:name+' 981-000818',searchQuery:name+' 981-000818'});
  assert.equal(structuredProduct(raw(node),request)?.price,2299);assert.equal(structuredProduct(raw({...node,sku:'981-001234'}),request),null);
 });
+
+test('redirected pages cannot attribute another publisher or a home-page recommendation to a retailer',async t=>{
+ for(const destination of ['https://other.example/products/item','https://retailer.example/']){
+  t.mock.method(globalThis,'fetch',async u=>{if(String(u).includes('r.jina.ai'))return new Response('',{status:404});const r=new Response(html('Sony WH-1000XM5 black'),{headers:{'content-type':'text/html'}});Object.defineProperty(r,'url',{value:destination});return r;});assert.equal(await verify('https://retailer.example/products/sony-xm5',product('Sony WH-1000XM5 black')),null);t.mock.restoreAll();
+ }
+});
+
+test('duplicate retailer SKUs do not inflate listings or pick a conflicting price',async()=>{
+ const {dedupe}=await import('../lib/product-intelligence-core.js');const offer={retailer:{name:'Example'},product_name:'Exact headphones',sku:'SKU-123',price:100,currency:'ZAR',sourcePageVerified:true,product_url:'https://retailer.example/product/a'};
+ assert.equal(dedupe([offer,{...offer,product_url:'https://retailer.example/product/b'}]).length,1);const conflict=dedupe([offer,{...offer,price:120,product_url:'https://retailer.example/product/b'}])[0];assert.equal(conflict.price,null);assert.equal(conflict.priceConflict,true);
+});
