@@ -25,3 +25,8 @@ test('predictive catalogue finds product URLs without treating suggestions as co
  t.mock.method(globalThis,'fetch',async u=>String(u).includes('computermania.co.za/search/suggest.json')?new Response(JSON.stringify({resources:{results:{products:[{title:'Logitech PRO X Gaming Headset',url:'/products/logitech-pro-x-headset?_pos=1'},{title:'Logitech PRO X Gaming Mouse',url:'/products/mouse'},{title:'Logitech PRO X3 Gaming Headset',url:'https://unrelated.example/products/headset'}]}}})):new Response(''));
  const rows=await nativeRetailerUrls({name:'Logitech PRO X Gaming Headset',object:'headset',searchQuery:'Logitech PRO X Gaming Headset'});assert.deepEqual(rows,['https://computermania.co.za/products/logitech-pro-x-headset']);
 });
+
+test('a published SKU omitted from suggestion titles can still reach strict page verification',async t=>{
+ const {nativeRetailerUrls}=await import('../lib/native-retailer-discovery.js');t.mock.method(globalThis,'fetch',async u=>String(u).includes('computermania.co.za/search/suggest.json')?new Response(JSON.stringify({resources:{results:{products:[{title:'Logitech PRO X Gaming Headset',url:'/products/logitech-pro-x'}]}}})):new Response(''));
+ const urls=await nativeRetailerUrls({name:'Logitech PRO X Gaming Headset 981-000818',searchQuery:'Logitech PRO X Gaming Headset 981-000818'});assert.deepEqual(urls,['https://computermania.co.za/products/logitech-pro-x']);
+});

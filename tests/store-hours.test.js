@@ -29,3 +29,12 @@ test('store-hours route does not fall through to Message required',async t=>{
   const r=await worker.fetch(new Request('https://findit.test/api/assistant?action=store-hours',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({stores:[{name:'Checkers',lat:-25.7479,lon:28.2293}]})}),{});
   const d=await r.json();assert.equal(r.status,200);assert.equal(d.ok,true);assert.equal(d.retryable,false);assert.equal(d.stores[0].status,'unknown');assert.equal(d.stores[0].todayHours,'');
 });
+
+test('published ZA holiday exceptions apply only with a known country and supported calendar',()=>{
+ const rules='Mo-Fr 09:00-19:00; PH 10:00-14:00';
+ assert.equal(scheduleStatus(rules,'Africa/Johannesburg',new Date('2026-10-12T15:00:00Z'),'ZA').status,'open');
+ assert.equal(scheduleStatus(rules,'Africa/Johannesburg',new Date('2026-08-10T13:00:00Z'),'ZA').status,'closed');
+ assert.equal(scheduleStatus(rules,'Africa/Johannesburg',new Date('2026-08-10T09:00:00Z'),'ZA').status,'open');
+ assert.equal(scheduleStatus(rules,'Africa/Johannesburg',new Date('2026-08-10T09:00:00Z'),'NA').status,'unknown');
+ assert.equal(scheduleStatus(rules,'Africa/Johannesburg',new Date('2028-08-10T09:00:00Z'),'ZA').status,'unknown');
+});

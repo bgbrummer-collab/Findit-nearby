@@ -53,3 +53,8 @@ test('Magento locator JSON matches Incredible Connection by branch coordinates a
  const page='<script type="text/x-magento-init">'+JSON.stringify({'*':{locator:{stores:records}}})+'</script>';
  const d=parseBranchDetails(page,{name:'Incredible Connection',lat:-25.82305903,lon:28.31168174},'https://www.incredible.co.za/storelocator/');assert.equal(d.phone,'012 994 9000');assert.equal(d.todayHours,'Mo 09:00-19:00; Su 09:00-17:00');assert.match(d.publishedAddress,/Shop 70C/);assert.equal(parseBranchDetails(page,{name:'Incredible Connection',lat:-24,lon:28},'https://www.incredible.co.za/storelocator/'),null);
 });
+
+test('attribute locator cards select iStore branch details without leaking another branch',()=>{
+ const card=(name,lat,phone)=>`<div data-store-name="${name}" data-latitude="${lat}," data-longitude="28.31"><div class="store-locator__address"><span>Address:</span><span>Shop 35 Example Mall</span></div><a href="tel:${phone}">Call</a><table><tr><th>Monday</th><td>09:00 - 19:00</td></tr></table></div>`;
+ const page=card('iStore Other',-26.4,'0110000000')+card('iStore Selected',-25.82,'0870575500');const found=parseBranchDetails(page,{name:'iStore',lat:-25.82,lon:28.31},'https://www.istore.co.za/storelocator');assert.equal(found.phone,'0870575500');assert.equal(found.todayHours,'Mo 09:00-19:00');assert.equal(found.branchName,'iStore Selected');assert.equal(parseBranchDetails(page,{name:'iStore',lat:-24,lon:28.31},'https://www.istore.co.za/storelocator'),null);
+});
