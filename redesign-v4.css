@@ -175,3 +175,10 @@ body.findit-exact-dashboard{position:relative;left:0!important;right:auto!import
  #finditExactShell>.fx-side{grid-row:1 / span 2!important}
  #finditExactShell>.fx-right{grid-column:2!important;grid-row:2!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
 }
+
+/* Responsive wrapping must never remove existing tools. */
+#finditExactShell .fx-feature-row article:nth-child(n){display:flex!important}
+@media(max-width:900px){
+ #finditExactShell .fx-nav button:nth-child(n){display:block!important}
+ #finditExactShell .fx-bottom-row article:nth-child(n){display:flex!important}
+}
