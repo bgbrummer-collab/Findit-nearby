@@ -10,8 +10,9 @@ try{
   await page.waitForSelector('#fxSmartChoice',{state:'visible'});
   const geometry=await page.evaluate(()=>{
    const rect=selector=>{const r=document.querySelector(selector).getBoundingClientRect();return{x:r.x,right:r.right,width:r.width};};
-   return{viewport:innerWidth,scroll:document.documentElement.scrollWidth,main:rect('#finditExactShell>.fx-main'),side:rect('#finditExactShell>.fx-side'),finder:rect('#finditExactShell .fx-search-card'),cards:Array.from(document.querySelectorAll('#finditExactShell .fx-feature-row article')).map(e=>({width:e.getBoundingClientRect().width,textWidth:e.querySelector('div')?.getBoundingClientRect().width||0,visible:e.getClientRects().length>0}))};
+   return{build:document.querySelector('meta[name="findit-build"]')?.content,styles:Array.from(document.styleSheets).map(s=>({href:s.href,tail:(()=>{try{return Array.from(s.cssRules).slice(-2).map(r=>r.cssText).join(' ').slice(0,350)}catch{return 'unreadable'}})()})),viewport:innerWidth,scroll:document.documentElement.scrollWidth,main:rect('#finditExactShell>.fx-main'),side:rect('#finditExactShell>.fx-side'),finder:rect('#finditExactShell .fx-search-card'),cards:Array.from(document.querySelectorAll('#finditExactShell .fx-feature-row article')).map(e=>({width:e.getBoundingClientRect().width,textWidth:e.querySelector('div')?.getBoundingClientRect().width||0,visible:e.getClientRects().length>0,inline:e.getAttribute('style'),display:getComputedStyle(e).display}))};
   });
+  if(process.env.FINDIT_EXPECTED_COMMIT)assert.equal(geometry.build,process.env.FINDIT_EXPECTED_COMMIT,'Frontend assets must come from this deployment');
   assert.ok(geometry.scroll<=geometry.viewport+4,`${width}: horizontal overflow ${JSON.stringify(geometry)}`);
   assert.ok(geometry.main.right<=geometry.viewport+4,`${width}: main panel is clipped`);
   if(width>900){assert.ok(Math.abs(geometry.main.x-geometry.side.right-10)<=3,`${width}: empty column before main panel`);assert.ok(geometry.finder.width>=geometry.main.width-70,`${width}: finder is squeezed into a narrow column`);}

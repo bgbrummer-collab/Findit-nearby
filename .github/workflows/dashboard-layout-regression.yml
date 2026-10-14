@@ -38,6 +38,7 @@ jobs:
         env:
           FINDIT_URL: https://findit-nearby.bgbrummer.workers.dev/
           LAYOUT_SCREENSHOTS: layout-evidence
+          FINDIT_EXPECTED_COMMIT: ${{ github.sha }}
         run: node tests/dashboard-layout-regression.mjs
       - uses: actions/upload-artifact@v4
         if: always()

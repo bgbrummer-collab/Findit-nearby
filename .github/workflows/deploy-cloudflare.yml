@@ -25,6 +25,24 @@ jobs:
           mkdir -p cloudflare-public/lib
           cp lib/product-type-information.js cloudflare-public/lib/
           [ -d assets ] && cp -R assets cloudflare-public/assets || true
+      - name: Stamp browser assets with the deployment version
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import os, re
+          p = Path('cloudflare-public/index.html')
+          html = p.read_text()
+          sha = os.environ['GITHUB_SHA']
+          def stamp(match):
+              attribute, path = match.groups()
+              if path.startswith(('http://', 'https://', '//')):
+                  return match.group(0)
+              return f'{attribute}="{path}?build={sha}"'
+          html = re.sub(r'\b(href|src)="([^"?#]+\.(?:css|js))(?:\?[^"]*)?"', stamp, html)
+          html = html.replace('<head>', '<head><meta name="findit-build" content="'+sha+'">', 1)
+          p.write_text(html)
+          PY
       - uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
