@@ -1,9 +1,9 @@
 FindIt production audit
-Commit: 9c38fe73344795c387fc477dfcc6bcaf2ef5cda0
+Commit: 109d347e75f139100ad0aa99cce689bb17c314e9
 Release smoke: PASS (exit 0)
 Dashboard readiness: PASS (exit 0)
 Every dashboard function: PASS (exit 0)
-Current dashboard real-user audit: PASS (exit 0)
+Current dashboard real-user audit: FAIL (exit 1)
 
 --- release smoke ---
 [PASS] 1440px page loads
@@ -132,7 +132,7 @@ PASS: mobile nearby store list has no duplicate retailer rows
 PASS: mobile Product Info opens
 PASS: mobile Compare Prices opens
 PASS: mobile Settings responds
-PASS: mobile Ask FindIt entry point responds
+FAIL: mobile Ask FindIt entry point responds assistant/search entry point produced no usable UI
 PASS: mobile Saved navigation stores current product
 PASS: mobile Home responds without blocked click
 PASS: mobile Search responds without blocked click
@@ -145,5 +145,4 @@ PASS: mobile Feedback responds without blocked click
 PASS: mobile feature shortcuts are interactive
 PASS: mobile bottom-card buttons respond
 PASS: mobile no uncaught JS errors
-CURRENT_DASHBOARD_REAL_USER_RESULT 44 PASS / 0 FAIL
-FINDIT_CURRENT_DASHBOARD_REAL_USER_PASS
+CURRENT_DASHBOARD_REAL_USER_RESULT 43 PASS / 1 FAIL
