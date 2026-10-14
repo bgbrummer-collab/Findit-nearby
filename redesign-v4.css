@@ -153,3 +153,25 @@ body.findit-exact-dashboard{position:relative;left:0!important;right:auto!import
  .fx-hero-copy{position:relative!important;width:100%!important;max-width:none!important;padding:8px 4px!important;box-sizing:border-box!important}
  .fx-search-card{position:relative!important;inset:auto!important;width:100%!important;max-width:none!important;box-sizing:border-box!important}
 }
+
+/* Keep dashboard columns deterministic even when feature panels are inserted. */
+@media(min-width:901px){
+ #finditExactShell{box-sizing:border-box!important;grid-template-columns:160px minmax(0,1fr) 285px!important;grid-template-rows:auto!important;gap:10px!important;padding:0 10px 10px 0!important}
+ #finditExactShell>.fx-side{grid-column:1!important;grid-row:1!important;width:100%!important;min-width:0!important;margin:0!important}
+ #finditExactShell>.fx-main{grid-column:2!important;grid-row:1!important;display:flex!important;flex-direction:column!important;gap:10px!important;width:100%!important;min-width:0!important;max-width:100%!important;margin:0!important;padding:0!important;box-sizing:border-box!important}
+ #finditExactShell>.fx-main>*{min-width:0!important;max-width:100%!important;box-sizing:border-box!important}
+ #finditExactShell>.fx-right{grid-column:3!important;grid-row:1!important;width:100%!important;min-width:0!important;margin:0!important;box-sizing:border-box!important}
+ #finditExactShell .fx-hero{display:flex!important;flex-direction:column!important;height:auto!important;min-height:0!important;padding:20px!important;box-sizing:border-box!important}
+ #finditExactShell .fx-hero-copy{position:relative!important;inset:auto!important;width:100%!important;max-width:none!important;padding:0 0 16px!important;box-sizing:border-box!important}
+ #finditExactShell .fx-search-card{position:relative!important;inset:auto!important;width:100%!important;max-width:none!important;box-sizing:border-box!important}
+ #finditExactShell .fx-feature-row{grid-template-columns:repeat(auto-fit,minmax(120px,1fr))!important}
+ #finditExactShell .fx-feature-row article{min-width:0!important;box-sizing:border-box!important}
+}
+@media(min-width:1280px){
+ #finditExactShell{grid-template-columns:186px minmax(0,1fr) 338px!important}
+}
+@media(min-width:901px) and (max-width:1099px){
+ #finditExactShell{grid-template-columns:160px minmax(0,1fr)!important}
+ #finditExactShell>.fx-side{grid-row:1 / span 2!important}
+ #finditExactShell>.fx-right{grid-column:2!important;grid-row:2!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+}

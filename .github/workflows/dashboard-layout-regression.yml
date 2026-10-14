@@ -1,0 +1,47 @@
+name: FindIt Responsive Layout Regression
+on:
+  push:
+    branches: [main]
+    paths: ['redesign-v4.css', 'tests/dashboard-layout-regression.mjs', '.github/workflows/dashboard-layout-regression.yml']
+  workflow_dispatch:
+jobs:
+  layout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install browser test dependencies
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Test eight local viewport sizes
+        env:
+          FINDIT_URL: http://127.0.0.1:4173/
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/findit-layout-http.log 2>&1 &
+          sleep 2
+          node tests/dashboard-layout-regression.mjs
+      - name: Wait for this production deployment
+        env:
+          EXPECTED_COMMIT: ${{ github.sha }}
+        run: |
+          for attempt in $(seq 1 40); do
+            current=$(curl -fsS --max-time 10 https://findit-nearby.bgbrummer.workers.dev/api/version || true)
+            if echo "$current" | jq -e --arg expected "$EXPECTED_COMMIT" '.commit == $expected' >/dev/null 2>&1; then exit 0; fi
+            sleep 3
+          done
+          echo 'Production did not report the expected commit'; exit 1
+      - name: Test eight production viewport sizes
+        env:
+          FINDIT_URL: https://findit-nearby.bgbrummer.workers.dev/
+          LAYOUT_SCREENSHOTS: layout-evidence
+        run: node tests/dashboard-layout-regression.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dashboard-layout-evidence
+          path: layout-evidence/
+          if-no-files-found: ignore
