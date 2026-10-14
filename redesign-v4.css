@@ -182,3 +182,8 @@ body.findit-exact-dashboard{position:relative;left:0!important;right:auto!import
  #finditExactShell .fx-nav button:nth-child(n){display:block!important}
  #finditExactShell .fx-bottom-row article:nth-child(n){display:flex!important}
 }
+
+/* Plan badges must not obscure feature names or descriptions. */
+#finditExactShell .fx-feature-row article{padding-bottom:27px!important}
+#finditExactShell .fx-feature-row .fx-plan-lock{top:auto!important;bottom:6px!important;right:7px!important}
+@media(min-width:901px){#finditExactShell .fx-feature-row{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))!important}}
