@@ -75,3 +75,11 @@ test('published headset connection facts survive research for compatibility ques
  const answer=answerFromEvidence('Will it work with Xbox?',{identification:{name:'Example X Gaming Headset'}},d).answer;
  assert.match(answer,/Windows computers using USB/);assert.match(answer,/Compatibility with xbox has not been verified/i);
 });
+
+test('research removes rhetorical marketing and keeps differing variant codes scoped to their listings',async t=>{
+ const urls=['https://retailer.example/product/jeans-grey','https://retailer.example/product/jeans-brown'];
+ t.mock.method(globalThis,'fetch',async u=>{const index=urls.indexOf(String(u));if(index<0)return new Response('<rss/>');return new Response('<script type="application/ld+json">'+JSON.stringify({'@type':'Product',name:'Example 501 Original Jeans '+(index?'Brown':'Grey'),brand:'Example',sku:index?'BROWN-32':'GREY-30',description:'Close your eyes. Think “jeans.” Now open. They were 501 Originals, right? With a classic straight leg and iconic styling, they are a fashion icon. To this day they have never gone out of style.',offers:{price:1000,priceCurrency:'ZAR'}})+'</script>');});
+ const d=await(await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:{name:'Example 501 Original Jeans',searchQuery:'Example 501 Original Jeans'},offers:urls.map(product_url=>({product_url,sourcePageVerified:true,exactProductMatch:true}))})}),{})).json();
+ assert.equal(d.whatItDoes,'A classic straight leg and iconic styling.');assert.doesNotMatch(d.pros.join(' '),/close your eyes|now open|right\?|never gone out/i);
+ assert.ok(!d.specifications.some(x=>x.name==='SKU / product code'));assert.equal(d.variants.length,2);assert.equal(d.variants[0].specifications.find(x=>x.name==='SKU / product code').value,'GREY-30');assert.equal(d.variants[1].specifications.find(x=>x.name==='SKU / product code').value,'BROWN-32');
+});
