@@ -16,3 +16,11 @@ test('native discovery actually visits category retailers instead of the general
   visited=[];await nativeRetailerUrls({name,searchQuery:name});assert.ok(visited.some(u=>new URL(u).hostname===host),name);assert.ok(!visited.some(u=>new URL(u).hostname==='www.takealot.com'),name);
  }
 });
+
+test('an Original jeans search does not accept adjacent shrink-to-fit, Thermadapt or loose variants',async()=>{
+ const {structuredProduct,ident}=await import('../lib/product-intelligence-core.js');
+ const identity=ident({name:'Levis 501 Original Jeans',searchQuery:'Levis 501 Original Jeans'});
+ const page=name=>'<script type="application/ld+json">'+JSON.stringify({'@type':'Product',name,brand:'Levis',offers:{price:1299,priceCurrency:'ZAR'}})+'</script>';
+ assert.ok(structuredProduct(page('Levis 501 Original Jeans Grey'),identity));
+ for(const name of ['Levis 501 Original Shrink-to-Fit Jeans Grey','Levis 501 Original Thermadapt Jeans Blue','Levis 501 Original Thermodapt Jeans Blue','Levis 501 Original Loose Jeans'])assert.equal(structuredProduct(page(name),identity),null,name);
+});
