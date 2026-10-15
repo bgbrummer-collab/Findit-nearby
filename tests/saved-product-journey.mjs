@@ -23,5 +23,12 @@ try{
  await page.locator('#fxInformationModal.open').getByRole('heading',{name:'Product Information',exact:true}).waitFor();
  assert.equal(await page.locator('#fxProductName').innerText(),name);
  assert.match(await page.locator('#fxInformationBody').innerText(),/981-000818/);
+ await page.locator('#fxInformationModal.open').getByRole('button',{name:'Close',exact:true}).click();
+ await page.getByRole('button',{name:'+ Add current item',exact:true}).click();
+ // A settled shopping plan must not trigger its own MutationObservers forever.
+ await page.waitForTimeout(1000);
+ const mutations=await page.evaluate(async()=>{const root=document.querySelector('#fxShoppingListBody');let count=0;const observer=new MutationObserver(records=>{count+=records.length});observer.observe(root,{childList:true,subtree:true});await new Promise(resolve=>setTimeout(resolve,800));observer.disconnect();return count;});
+ assert.ok(mutations<25,'Shopping plan continuously rewrites its own DOM: '+mutations);
+ console.log('SHOPPING_PLAN_SETTLES_PASS',mutations);
  console.log('SAVED_PRODUCT_JOURNEY_PASS',JSON.stringify({name,persistedAcrossReload:true,reopenedForFreshResearch:true}));
 }finally{await browser.close();}

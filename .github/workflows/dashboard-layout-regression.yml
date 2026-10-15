@@ -2,7 +2,7 @@ name: FindIt Responsive Layout Regression
 on:
   push:
     branches: [main]
-    paths: ['information-runtime.js', 'dashboard-audit-controls.js', 'redesign-v4.js', 'redesign-v4.css', 'tests/dashboard-layout-regression.mjs', 'tests/saved-product-journey.mjs', '.github/workflows/dashboard-layout-regression.yml', '.github/workflows/deploy-cloudflare.yml']
+    paths: ['user-first-polish.js', 'user-pov-hardening.js', 'information-runtime.js', 'dashboard-audit-controls.js', 'redesign-v4.js', 'redesign-v4.css', 'tests/dashboard-layout-regression.mjs', 'tests/saved-product-journey.mjs', '.github/workflows/dashboard-layout-regression.yml', '.github/workflows/deploy-cloudflare.yml']
   workflow_dispatch:
 jobs:
   layout:
