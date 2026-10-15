@@ -4,12 +4,13 @@ const URL=process.env.FINDIT_URL||'http://127.0.0.1:4173/';
 const browser=await chromium.launch({headless:true});
 const page=await browser.newPage({viewport:{width:1440,height:900}});
 page.setDefaultTimeout(30000);
-const posts=[];
+const posts=[];let deliveryFails=false;
 await page.route('**/api/feedback',async route=>{
   const req=route.request();
   let body={};
   try{body=JSON.parse(req.postData()||'{}')}catch{}
   posts.push(body);
+  if(deliveryFails){await route.fulfill({status:503,contentType:'application/json',body:JSON.stringify({ok:false,delivered:false,error:'Feedback was not saved. Use Copy to keep your message; feedback delivery is unavailable.'})});return}
   await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,delivered:true,destination:'test'})});
 });
 function fail(msg){throw new Error(msg)}
@@ -48,6 +49,15 @@ if(idea?.topic!=='idea')fail(`Feature suggestion used wrong topic: ${idea?.topic
 if(!/Store opening-hours filter/i.test(idea?.message||'')||!/only show nearby stores/i.test(idea?.message||''))fail('Feature suggestion title/details were not delivered');
 console.log('FEATURE_SUGGESTION_PASS');
 
+deliveryFails=true;
+await page.locator('#fxFeatureSuggestionModal .fx-stable-close').click();
+await feedbackNav.click();
+await page.fill('#fxFeedbackMessage','Keep this feedback draft after a delivery failure.');
+await page.locator('#fxFeedbackForm button[type="submit"]').click();
+await page.waitForFunction(()=>/was not saved/.test(document.querySelector('#fxFeedbackStatus')?.textContent||''));
+if(await page.inputValue('#fxFeedbackMessage')!=='Keep this feedback draft after a delivery failure.')fail('Failure erased the feedback draft');
+if(!await page.getByRole('button',{name:'Copy feedback',exact:true}).isVisible())fail('No copy fallback for failed feedback');
+console.log('FEEDBACK_FAILURE_PRESERVES_DRAFT_PASS');
 await page.setViewportSize({width:390,height:844});
 await page.waitForTimeout(100);
 const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
