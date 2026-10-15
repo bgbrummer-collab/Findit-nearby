@@ -1,0 +1,1437 @@
+[
+  {
+    "category": "electronics",
+    "query": "Logitech PRO X Gaming Headset 981-000818",
+    "identification": {
+      "name": "Logitech PRO X Gaming Headset 981-000818",
+      "object": "Logitech PRO X Gaming Headset 981-000818",
+      "brand": "",
+      "model": "",
+      "category": "product",
+      "retailCategory": "general",
+      "searchQuery": "Logitech PRO X Gaming Headset 981-000818",
+      "barcode": null,
+      "confidence": null,
+      "identificationMethod": "typed-user-input",
+      "userConfirmed": true
+    },
+    "commerce": {
+      "status": 200,
+      "data": {
+        "ok": true,
+        "matched": true,
+        "exactMatchVerified": true,
+        "searchQuery": "Logitech PRO X Gaming Headset 981-000818",
+        "bestProduct": {
+          "name": "Logitech PRO X Gaming Headset With BLUE VO!CE Microphone Technology"
+        },
+        "bestPrice": {
+          "product_name": "Logitech PRO X Gaming Headset With BLUE VO!CE Microphone Technology",
+          "product_url": "https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology",
+          "sku": "981-000818",
+          "retailer": {
+            "name": "Computer Mania"
+          },
+          "price": 2299,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Verified directly on exact retailer product page",
+          "matchScore": 80,
+          "stockScope": "online/general retailer availability only",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-10-15T13:57:23.479Z",
+          "retailerDomain": "computermania.co.za",
+          "trustedRetailerDomain": true
+        },
+        "offers": [
+          {
+            "product_name": "Logitech PRO X Gaming Headset With BLUE VO!CE Microphone Technology",
+            "product_url": "https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology",
+            "sku": "981-000818",
+            "retailer": {
+              "name": "Computer Mania"
+            },
+            "price": 2299,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 80,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-15T13:57:23.479Z",
+            "retailerDomain": "computermania.co.za",
+            "trustedRetailerDomain": true
+          }
+        ],
+        "retailerStatus": [
+          {
+            "name": "Computer Mania",
+            "searchUrl": "https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Incredible Connection",
+            "searchUrl": "https://www.incredible.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Game",
+            "searchUrl": "https://www.game.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Computer Mania",
+            "searchUrl": "https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Incredible Connection",
+            "searchUrl": "https://www.incredible.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Game",
+            "searchUrl": "https://www.game.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 1,
+        "verifiedSellerCount": 1,
+        "inStockOfferCount": 1,
+        "priceVerifiedCount": 1,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Logitech%20PRO%20X%20Gaming%20Headset%20981-000818",
+        "checkedAt": "2026-10-15T13:57:28.646Z"
+      }
+    },
+    "information": {
+      "status": 200,
+      "data": {
+        "researched": false,
+        "whatItDoes": "",
+        "pros": [],
+        "cons": [],
+        "specifications": [],
+        "bestFor": "",
+        "standOut": "",
+        "valueVerdict": "",
+        "sources": [],
+        "researchMethod": "Fetched exact-product page descriptions",
+        "checkedAt": "2026-10-15T13:57:21.646Z",
+        "message": "No trustworthy exact-product description was found. FindIt will not guess."
+      }
+    },
+    "seconds": 15
+  },
+  {
+    "category": "groceries",
+    "query": "Coca-Cola Original Taste 2L",
+    "identification": {
+      "name": "Coca-Cola Original Taste 2L",
+      "object": "Coca-Cola Original Taste 2L",
+      "brand": "",
+      "model": "",
+      "category": "product",
+      "retailCategory": "general",
+      "searchQuery": "Coca-Cola Original Taste 2L",
+      "barcode": null,
+      "confidence": null,
+      "identificationMethod": "typed-user-input",
+      "userConfirmed": true
+    },
+    "commerce": {
+      "status": 200,
+      "data": {
+        "ok": true,
+        "matched": false,
+        "exactMatchVerified": false,
+        "searchQuery": "Coca-Cola Original Taste 2L",
+        "bestProduct": null,
+        "bestPrice": null,
+        "offers": [],
+        "retailerStatus": [
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "PriceCheck",
+            "searchUrl": "https://www.pricecheck.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "PriceCheck",
+            "searchUrl": "https://www.pricecheck.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 0,
+        "verifiedSellerCount": 0,
+        "inStockOfferCount": 0,
+        "priceVerifiedCount": 0,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Coca-Cola%20Original%20Taste%202L",
+        "checkedAt": "2026-10-15T13:57:36.520Z"
+      }
+    },
+    "information": {
+      "status": 200,
+      "data": {
+        "researched": false,
+        "whatItDoes": "",
+        "pros": [],
+        "cons": [],
+        "specifications": [],
+        "bestFor": "",
+        "standOut": "",
+        "valueVerdict": "",
+        "sources": [],
+        "researchMethod": "Fetched exact-product page descriptions",
+        "checkedAt": "2026-10-15T13:57:32.305Z",
+        "message": "No trustworthy exact-product description was found. FindIt will not guess."
+      }
+    },
+    "seconds": 8
+  },
+  {
+    "category": "clothing",
+    "query": "Levis 501 Original Jeans",
+    "identification": {
+      "name": "Levis 501 Original Jeans",
+      "object": "Levis 501 Original Jeans",
+      "brand": "",
+      "model": "",
+      "category": "product",
+      "retailCategory": "general",
+      "searchQuery": "Levis 501 Original Jeans",
+      "barcode": null,
+      "confidence": null,
+      "identificationMethod": "typed-user-input",
+      "userConfirmed": true
+    },
+    "commerce": {
+      "status": 200,
+      "data": {
+        "ok": true,
+        "matched": false,
+        "exactMatchVerified": false,
+        "searchQuery": "Levis 501 Original Jeans",
+        "bestProduct": null,
+        "bestPrice": null,
+        "offers": [],
+        "retailerStatus": [
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "PriceCheck",
+            "searchUrl": "https://www.pricecheck.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "PriceCheck",
+            "searchUrl": "https://www.pricecheck.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 0,
+        "verifiedSellerCount": 0,
+        "inStockOfferCount": 0,
+        "priceVerifiedCount": 0,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Levis%20501%20Original%20Jeans",
+        "checkedAt": "2026-10-15T13:57:43.742Z"
+      }
+    },
+    "information": {
+      "status": 200,
+      "data": {
+        "researched": false,
+        "whatItDoes": "",
+        "pros": [],
+        "cons": [],
+        "specifications": [],
+        "bestFor": "",
+        "standOut": "",
+        "valueVerdict": "",
+        "sources": [],
+        "researchMethod": "Fetched exact-product page descriptions",
+        "checkedAt": "2026-10-15T13:57:40.243Z",
+        "message": "No trustworthy exact-product description was found. FindIt will not guess."
+      }
+    },
+    "seconds": 7
+  },
+  {
+    "category": "shoes",
+    "query": "Nike Air Force 1 Low White Blue",
+    "identification": {
+      "name": "Nike Air Force 1 Low White Blue",
+      "object": "Nike Air Force 1 Low White Blue",
+      "brand": "",
+      "model": "",
+      "category": "product",
+      "retailCategory": "general",
+      "searchQuery": "Nike Air Force 1 Low White Blue",
+      "barcode": null,
+      "confidence": null,
+      "identificationMethod": "typed-user-input",
+      "userConfirmed": true
+    },
+    "commerce": {
+      "status": 200,
+      "data": {
+        "ok": true,
+        "matched": false,
+        "exactMatchVerified": false,
+        "searchQuery": "Nike Air Force 1 Low White Blue",
+        "bestProduct": null,
+        "bestPrice": null,
+        "offers": [],
+        "retailerStatus": [
+          {
+            "name": "Nike",
+            "searchUrl": "https://www.nike.com/za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Sportscene",
+            "searchUrl": "https://www.sportscene.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Totalsports",
+            "searchUrl": "https://www.totalsports.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "JD Sports",
+            "searchUrl": "https://www.jdsports.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Bash",
+            "searchUrl": "https://bash.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Nike",
+            "searchUrl": "https://www.nike.com/za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Sportscene",
+            "searchUrl": "https://www.sportscene.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Totalsports",
+            "searchUrl": "https://www.totalsports.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "JD Sports",
+            "searchUrl": "https://www.jdsports.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Bash",
+            "searchUrl": "https://bash.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 0,
+        "verifiedSellerCount": 0,
+        "inStockOfferCount": 0,
+        "priceVerifiedCount": 0,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Nike%20Air%20Force%201%20Low%20White%20Blue",
+        "checkedAt": "2026-10-15T13:57:50.941Z"
+      }
+    },
+    "information": {
+      "status": 200,
+      "data": {
+        "researched": false,
+        "whatItDoes": "",
+        "pros": [],
+        "cons": [],
+        "specifications": [],
+        "bestFor": "",
+        "standOut": "",
+        "valueVerdict": "",
+        "sources": [],
+        "researchMethod": "Fetched exact-product page descriptions",
+        "checkedAt": "2026-10-15T13:57:44.145Z",
+        "message": "No trustworthy exact-product description was found. FindIt will not guess."
+      }
+    },
+    "seconds": 7
+  },
+  {
+    "category": "beauty",
+    "query": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
+    "identification": {
+      "name": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
+      "object": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
+      "brand": "",
+      "model": "",
+      "category": "product",
+      "retailCategory": "general",
+      "searchQuery": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
+      "barcode": null,
+      "confidence": null,
+      "identificationMethod": "typed-user-input",
+      "userConfirmed": true
+    },
+    "commerce": {
+      "status": 200,
+      "data": {
+        "ok": true,
+        "matched": true,
+        "exactMatchVerified": true,
+        "searchQuery": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
+        "bestProduct": {
+          "name": "Marc Anthony 3x Moist Conditioner 250ml"
+        },
+        "bestPrice": {
+          "product_name": "Marc Anthony 3x Moist Conditioner 250ml",
+          "product_url": "https://www.dischem.co.za/marc-anthony-3x-moist-conditioner-250ml-818",
+          "sku": "000000000000326818",
+          "retailer": {
+            "name": "Dis-Chem"
+          },
+          "price": 206.99,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Verified directly on exact retailer product page",
+          "matchScore": 80,
+          "stockScope": "online/general retailer availability only",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-10-15T13:57:55.282Z",
+          "retailerDomain": "dischem.co.za",
+          "trustedRetailerDomain": true
+        },
+        "offers": [
+          {
+            "product_name": "Marc Anthony 3x Moist Conditioner 250ml",
+            "product_url": "https://www.dischem.co.za/marc-anthony-3x-moist-conditioner-250ml-818",
+            "sku": "000000000000326818",
+            "retailer": {
+              "name": "Dis-Chem"
+            },
+            "price": 206.99,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 80,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-15T13:57:55.282Z",
+            "retailerDomain": "dischem.co.za",
+            "trustedRetailerDomain": true
+          },
+          {
+            "product_name": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
+            "product_url": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689",
+            "sku": "",
+            "retailer": {
+              "name": "Clicks"
+            },
+            "price": 230,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 92,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-15T13:57:52.124Z",
+            "retailerDomain": "clicks.co.za",
+            "trustedRetailerDomain": true
+          }
+        ],
+        "retailerStatus": [
+          {
+            "name": "Dis-Chem",
+            "searchUrl": "https://www.dischem.co.za/marc-anthony-3x-moist-conditioner-250ml-818",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Clicks",
+            "searchUrl": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Dis-Chem",
+            "searchUrl": "https://www.dischem.co.za/marc-anthony-3x-moist-conditioner-250ml-818",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Clicks",
+            "searchUrl": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 2,
+        "verifiedSellerCount": 2,
+        "inStockOfferCount": 2,
+        "priceVerifiedCount": 2,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Marc%20Anthony%20Strictly%20Curls%203X%20Moisture%20Triple%20Blend%20Conditioner%20250ml",
+        "checkedAt": "2026-10-15T13:58:02.021Z"
+      }
+    },
+    "information": {
+      "status": 200,
+      "data": {
+        "researched": true,
+        "whatItDoes": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml hydrates and detangles curly hair, reducing frizz for soft, defined curls.",
+        "pros": [
+          "Infused with marula oil, coconut cream and shea butter, it restores moisture, strengthens hair and protects against environmental stressors.",
+          "Strictly Curls 3X Moisture is formulated with a triple blend of marula oil, coconut and shea butter.",
+          "It gives thirsty curls the essential moisture they need to feel strengthened, smoothed and protected.",
+          "It all adds up to hair that’s always soft, frizz-free and ready for play."
+        ],
+        "cons": [],
+        "specifications": [
+          {
+            "name": "Brand",
+            "value": "Marc Anthony",
+            "sourceUrl": "https://www.dischem.co.za/marc-anthony-3x-moist-conditioner-250ml-818"
+          },
+          {
+            "name": "Pack quantity",
+            "value": "1",
+            "sourceUrl": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689"
+          },
+          {
+            "name": "How to use",
+            "value": "Apply to wet hair after shampooing, massage and rinse. For best results, use with Strictly Curls 3X Moisture Shampoo.",
+            "sourceUrl": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689"
+          },
+          {
+            "name": "Storage instructions",
+            "value": "Store in a cool, dry place.",
+            "sourceUrl": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689"
+          },
+          {
+            "name": "Warnings",
+            "value": "For external use only. Keep out of reach of children. In case of contact with eyes, rinse immediately",
+            "sourceUrl": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689"
+          },
+          {
+            "name": "Ingredients",
+            "value": "Water (Aqua), Cetyl Alcohol, Behentrimonium Chloride, Cyclopentasiloxane, Propanediol, Glycerin, Sclerocarya Birrea (Marula) Seed Oil, Butyrospermum Parkii (Shea) Butter, Cocos Nucifera (Coconut) Water, Cocos Nucifera (Coconut) Oil, Helianthus Annuus (Sunflower) Seed Oil, Panthenol (Vitamin – B5), Stearyl Alcohol, Trideceth-12, Citric Acid, Cetrimonium Chloride, Isopropyl Alcohol, Amodimethicone, Ethylhexylglycerin, Tetrasodium EDTA, Sodium Benzoate, 1,2-Hexanediol, Potassium Sorbate, Phenoxyethanol, Parfum (Fragrance)",
+            "sourceUrl": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689"
+          },
+          {
+            "name": "SKU / product code",
+            "value": "000000000000326818",
+            "sourceUrl": "https://www.dischem.co.za/marc-anthony-3x-moist-conditioner-250ml-818"
+          },
+          {
+            "name": "Manufacturer part number",
+            "value": "000000000000326818",
+            "sourceUrl": "https://www.dischem.co.za/marc-anthony-3x-moist-conditioner-250ml-818"
+          }
+        ],
+        "bestFor": "",
+        "standOut": "",
+        "valueVerdict": "",
+        "sources": [
+          {
+            "title": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
+            "url": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689"
+          },
+          {
+            "title": "Marc Anthony 3x Moist Conditioner 250ml",
+            "url": "https://www.dischem.co.za/marc-anthony-3x-moist-conditioner-250ml-818"
+          }
+        ],
+        "researchMethod": "Fetched exact-product page descriptions",
+        "checkedAt": "2026-10-15T13:58:01.303Z",
+        "message": "Product facts are quoted from matching product-page descriptions."
+      }
+    },
+    "seconds": 11
+  },
+  {
+    "category": "tools",
+    "query": "Bosch GSB 18V-50",
+    "identification": {
+      "name": "Bosch GSB 18V-50",
+      "object": "Bosch GSB 18V-50",
+      "brand": "",
+      "model": "",
+      "category": "product",
+      "retailCategory": "general",
+      "searchQuery": "Bosch GSB 18V-50",
+      "barcode": null,
+      "confidence": null,
+      "identificationMethod": "typed-user-input",
+      "userConfirmed": true
+    },
+    "commerce": {
+      "status": 200,
+      "data": {
+        "ok": true,
+        "matched": false,
+        "exactMatchVerified": false,
+        "searchQuery": "Bosch GSB 18V-50",
+        "bestProduct": null,
+        "bestPrice": null,
+        "offers": [],
+        "retailerStatus": [
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "PriceCheck",
+            "searchUrl": "https://www.pricecheck.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "PriceCheck",
+            "searchUrl": "https://www.pricecheck.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 0,
+        "verifiedSellerCount": 0,
+        "inStockOfferCount": 0,
+        "priceVerifiedCount": 0,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Bosch%20GSB%2018V-50",
+        "checkedAt": "2026-10-15T13:58:07.676Z"
+      }
+    },
+    "information": {
+      "status": 200,
+      "data": {
+        "researched": false,
+        "whatItDoes": "",
+        "pros": [],
+        "cons": [],
+        "specifications": [],
+        "bestFor": "",
+        "standOut": "",
+        "valueVerdict": "",
+        "sources": [],
+        "researchMethod": "Fetched exact-product page descriptions",
+        "checkedAt": "2026-10-15T13:58:02.462Z",
+        "message": "No trustworthy exact-product description was found. FindIt will not guess."
+      }
+    },
+    "seconds": 6
+  },
+  {
+    "category": "toys",
+    "query": "LEGO Classic 10696",
+    "identification": {
+      "name": "LEGO Classic 10696",
+      "object": "LEGO Classic 10696",
+      "brand": "",
+      "model": "",
+      "category": "product",
+      "retailCategory": "general",
+      "searchQuery": "LEGO Classic 10696",
+      "barcode": null,
+      "confidence": null,
+      "identificationMethod": "typed-user-input",
+      "userConfirmed": true
+    },
+    "commerce": {
+      "status": 200,
+      "data": {
+        "ok": true,
+        "matched": false,
+        "exactMatchVerified": false,
+        "searchQuery": "LEGO Classic 10696",
+        "bestProduct": null,
+        "bestPrice": null,
+        "offers": [],
+        "retailerStatus": [
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "PriceCheck",
+            "searchUrl": "https://www.pricecheck.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "PriceCheck",
+            "searchUrl": "https://www.pricecheck.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 0,
+        "verifiedSellerCount": 0,
+        "inStockOfferCount": 0,
+        "priceVerifiedCount": 0,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=LEGO%20Classic%2010696",
+        "checkedAt": "2026-10-15T13:58:14.483Z"
+      }
+    },
+    "information": {
+      "status": 200,
+      "data": {
+        "researched": false,
+        "whatItDoes": "",
+        "pros": [],
+        "cons": [],
+        "specifications": [],
+        "bestFor": "",
+        "standOut": "",
+        "valueVerdict": "",
+        "sources": [],
+        "researchMethod": "Fetched exact-product page descriptions",
+        "checkedAt": "2026-10-15T13:58:12.500Z",
+        "message": "No trustworthy exact-product description was found. FindIt will not guess."
+      }
+    },
+    "seconds": 7
+  },
+  {
+    "category": "furniture",
+    "query": "IKEA BILLY bookcase 80x28x202 white",
+    "identification": {
+      "name": "IKEA BILLY bookcase 80x28x202 white",
+      "object": "IKEA BILLY bookcase 80x28x202 white",
+      "brand": "",
+      "model": "",
+      "category": "product",
+      "retailCategory": "general",
+      "searchQuery": "IKEA BILLY bookcase 80x28x202 white",
+      "barcode": null,
+      "confidence": null,
+      "identificationMethod": "typed-user-input",
+      "userConfirmed": true
+    },
+    "commerce": {
+      "status": 200,
+      "data": {
+        "ok": true,
+        "matched": false,
+        "exactMatchVerified": false,
+        "searchQuery": "IKEA BILLY bookcase 80x28x202 white",
+        "bestProduct": null,
+        "bestPrice": null,
+        "offers": [],
+        "retailerStatus": [
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "PriceCheck",
+            "searchUrl": "https://www.pricecheck.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "PriceCheck",
+            "searchUrl": "https://www.pricecheck.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 0,
+        "verifiedSellerCount": 0,
+        "inStockOfferCount": 0,
+        "priceVerifiedCount": 0,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=IKEA%20BILLY%20bookcase%2080x28x202%20white",
+        "checkedAt": "2026-10-15T13:58:22.758Z"
+      }
+    },
+    "information": {
+      "status": 200,
+      "data": {
+        "researched": false,
+        "whatItDoes": "",
+        "pros": [],
+        "cons": [],
+        "specifications": [],
+        "bestFor": "",
+        "standOut": "",
+        "valueVerdict": "",
+        "sources": [],
+        "researchMethod": "Fetched exact-product page descriptions",
+        "checkedAt": "2026-10-15T13:58:16.432Z",
+        "message": "No trustworthy exact-product description was found. FindIt will not guess."
+      }
+    },
+    "seconds": 10
+  },
+  {
+    "category": "household",
+    "query": "Twinsaver Comfort 3 Ply Tissues 120",
+    "identification": {
+      "name": "Twinsaver Comfort 3 Ply Tissues 120",
+      "object": "Twinsaver Comfort 3 Ply Tissues 120",
+      "brand": "",
+      "model": "",
+      "category": "product",
+      "retailCategory": "general",
+      "searchQuery": "Twinsaver Comfort 3 Ply Tissues 120",
+      "barcode": null,
+      "confidence": null,
+      "identificationMethod": "typed-user-input",
+      "userConfirmed": true
+    },
+    "commerce": {
+      "status": 200,
+      "data": {
+        "ok": true,
+        "matched": false,
+        "exactMatchVerified": false,
+        "searchQuery": "Twinsaver Comfort 3 Ply Tissues 120",
+        "bestProduct": null,
+        "bestPrice": null,
+        "offers": [],
+        "retailerStatus": [
+          {
+            "name": "Checkers",
+            "searchUrl": "https://www.checkers.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Pick n Pay",
+            "searchUrl": "https://www.pnp.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Shoprite",
+            "searchUrl": "https://www.shoprite.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Woolworths",
+            "searchUrl": "https://www.woolworths.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Checkers",
+            "searchUrl": "https://www.checkers.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Pick n Pay",
+            "searchUrl": "https://www.pnp.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Shoprite",
+            "searchUrl": "https://www.shoprite.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Woolworths",
+            "searchUrl": "https://www.woolworths.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 0,
+        "verifiedSellerCount": 0,
+        "inStockOfferCount": 0,
+        "priceVerifiedCount": 0,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Twinsaver%20Comfort%203%20Ply%20Tissues%20120",
+        "checkedAt": "2026-10-15T13:58:42.233Z"
+      }
+    },
+    "information": {
+      "status": 200,
+      "data": {
+        "researched": false,
+        "whatItDoes": "",
+        "pros": [],
+        "cons": [],
+        "specifications": [],
+        "bestFor": "",
+        "standOut": "",
+        "valueVerdict": "",
+        "sources": [],
+        "researchMethod": "Fetched exact-product page descriptions",
+        "checkedAt": "2026-10-15T13:58:33.739Z",
+        "message": "No trustworthy exact-product description was found. FindIt will not guess."
+      }
+    },
+    "seconds": 17
+  },
+  {
+    "category": "music",
+    "query": "Shure MV7 microphone",
+    "identification": {
+      "name": "Shure MV7 microphone",
+      "object": "Shure MV7 microphone",
+      "brand": "",
+      "model": "",
+      "category": "product",
+      "retailCategory": "general",
+      "searchQuery": "Shure MV7 microphone",
+      "barcode": null,
+      "confidence": null,
+      "identificationMethod": "typed-user-input",
+      "userConfirmed": true
+    },
+    "commerce": {
+      "status": 200,
+      "data": {
+        "ok": true,
+        "matched": false,
+        "exactMatchVerified": false,
+        "searchQuery": "Shure MV7 microphone",
+        "bestProduct": null,
+        "bestPrice": null,
+        "offers": [],
+        "retailerStatus": [
+          {
+            "name": "Incredible Connection",
+            "searchUrl": "https://www.incredible.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Game",
+            "searchUrl": "https://www.game.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Incredible Connection",
+            "searchUrl": "https://www.incredible.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Game",
+            "searchUrl": "https://www.game.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 0,
+        "verifiedSellerCount": 0,
+        "inStockOfferCount": 0,
+        "priceVerifiedCount": 0,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Shure%20MV7%20microphone",
+        "checkedAt": "2026-10-15T13:58:48.996Z"
+      }
+    },
+    "information": {
+      "status": 200,
+      "data": {
+        "researched": false,
+        "whatItDoes": "",
+        "pros": [],
+        "cons": [],
+        "specifications": [],
+        "bestFor": "",
+        "standOut": "",
+        "valueVerdict": "",
+        "sources": [],
+        "researchMethod": "Fetched exact-product page descriptions",
+        "checkedAt": "2026-10-15T13:58:46.088Z",
+        "message": "No trustworthy exact-product description was found. FindIt will not guess."
+      }
+    },
+    "seconds": 7
+  }
+]

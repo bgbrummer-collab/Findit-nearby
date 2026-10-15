@@ -1,0 +1,102 @@
+{
+  "identification": {
+    "name": "Twinsaver tissues",
+    "brand": "Twinsaver",
+    "model": "",
+    "object": "tissues",
+    "category": "Health & Personal Care",
+    "retailCategory": "Tissues",
+    "searchQuery": "Twinsaver tissues",
+    "barcode": null,
+    "size": "120",
+    "color": "",
+    "visibleText": [],
+    "confidence": 0.65,
+    "identificationMethod": "independent-vision-consensus",
+    "userConfirmed": false,
+    "suggestedLabel": "",
+    "suggestedModels": [
+      {
+        "name": "Twinsaver Comfort Super Soft & Gentle",
+        "confirmed": false,
+        "source": "visual-model-hypothesis"
+      },
+      {
+        "name": "Twinsaver Comfort",
+        "confirmed": false,
+        "source": "visual-model-hypothesis"
+      }
+    ],
+    "identityScope": "product-family",
+    "requiresModelConfirmation": true,
+    "unverifiedDetails": [
+      "exact model",
+      "variant",
+      "specifications"
+    ],
+    "features": []
+  },
+  "offers": [],
+  "blocked": false,
+  "verified": false,
+  "userConfirmed": false,
+  "identitySource": "cloudflare-consensus",
+  "visionDiagnostics": [
+    {
+      "provider": "cloudflare-scout",
+      "code": "IDENTIFIED",
+      "identityClaim": {
+        "name": "Tissues",
+        "brand": "Twinsaver",
+        "model": "Comfort Super Soft & Gentle",
+        "object": "Tissues",
+        "size": "120",
+        "color": "",
+        "visibleText": []
+      },
+      "errorType": null
+    },
+    {
+      "provider": "cloudflare-workers-ai",
+      "code": "IDENTIFIED",
+      "identityClaim": {
+        "name": "TWINSAVER COMFORT",
+        "brand": "TWINSAVER",
+        "model": "Comfort",
+        "object": "Tissues",
+        "size": "120",
+        "color": "White",
+        "visibleText": [
+          "NEW",
+          "3ply",
+          "120",
+          "White",
+          "Super Soft & Gentle"
+        ]
+      },
+      "errorType": null
+    },
+    {
+      "provider": "cloudflare-llava",
+      "code": "IDENTIFIED",
+      "identityClaim": {
+        "name": "Twinsaver Comfort & Gentle 36 Rolls",
+        "brand": "Twinsaver",
+        "model": "Comfort & Gentle",
+        "object": "Toilet Paper",
+        "size": "36 Rolls",
+        "color": "",
+        "visibleText": []
+      },
+      "errorType": null
+    }
+  ],
+  "visualVerification": true,
+  "provider": "cloudflare-consensus",
+  "imageAccepted": true,
+  "needsVision": false,
+  "needsRetailerVerification": true,
+  "confidence": 0.65,
+  "code": "PHOTO_PARTIALLY_IDENTIFIED",
+  "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+}

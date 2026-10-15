@@ -1,0 +1,97 @@
+{
+  "identification": {
+    "name": "Build it paint",
+    "brand": "Build it",
+    "model": "Specialist Floor & Stoep Paint",
+    "object": "paint",
+    "category": "paints",
+    "retailCategory": "paints",
+    "searchQuery": "Build it paint",
+    "barcode": null,
+    "size": "",
+    "color": "",
+    "visibleText": [],
+    "confidence": 0.65,
+    "identificationMethod": "independent-vision-consensus",
+    "userConfirmed": false,
+    "suggestedLabel": "Build it Floor & Stoep Paint",
+    "suggestedModels": [
+      {
+        "name": "Build it Specialist Floor & Stoep Paint",
+        "confirmed": false,
+        "source": "visual-model-hypothesis"
+      }
+    ],
+    "identityScope": "product-family",
+    "requiresModelConfirmation": true,
+    "unverifiedDetails": [
+      "exact model",
+      "variant",
+      "specifications"
+    ],
+    "features": []
+  },
+  "offers": [],
+  "blocked": false,
+  "verified": false,
+  "userConfirmed": false,
+  "identitySource": "cloudflare-consensus",
+  "visionDiagnostics": [
+    {
+      "provider": "cloudflare-scout",
+      "code": "IDENTIFIED",
+      "identityClaim": {
+        "name": "Floor & Stoep Paint",
+        "brand": "Build it",
+        "model": "Specialist Floor & Stoep Paint",
+        "object": "paint",
+        "size": "",
+        "color": "",
+        "visibleText": []
+      },
+      "errorType": null
+    },
+    {
+      "provider": "cloudflare-workers-ai",
+      "code": "IDENTIFIED",
+      "identityClaim": {
+        "name": "SPECIALIST FLOOR & STOEP PAINT",
+        "brand": "Build it",
+        "model": "",
+        "object": "Paint",
+        "size": "printed size",
+        "color": "",
+        "visibleText": [
+          "BUILD IT",
+          "SPECIALIST",
+          "FLOOR & STOEP PAINT",
+          "INTERIOR & EXTERIOR",
+          "LONG LASTING GLOSS"
+        ]
+      },
+      "errorType": null
+    },
+    {
+      "provider": "cloudflare-llava",
+      "code": "IDENTIFIED",
+      "identityClaim": {
+        "name": "Build It Specialist Floor & Stoep Paint",
+        "brand": "Build It",
+        "model": "Specialist Floor & Stoep Paint",
+        "object": "Paint",
+        "size": "1L",
+        "color": "Green",
+        "visibleText": []
+      },
+      "errorType": null
+    }
+  ],
+  "visualVerification": true,
+  "provider": "cloudflare-consensus",
+  "imageAccepted": true,
+  "needsVision": false,
+  "needsRetailerVerification": true,
+  "confidence": 0.65,
+  "code": "PHOTO_PARTIALLY_IDENTIFIED",
+  "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+}

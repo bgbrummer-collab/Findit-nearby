@@ -1,0 +1,99 @@
+{
+  "identification": {
+    "name": "Shure microphone",
+    "brand": "Shure",
+    "model": "",
+    "object": "microphone",
+    "category": "electronics",
+    "retailCategory": "electronics",
+    "searchQuery": "Shure microphone",
+    "barcode": null,
+    "size": "",
+    "color": "Black",
+    "visibleText": [],
+    "confidence": 0.65,
+    "identificationMethod": "independent-vision-consensus",
+    "userConfirmed": false,
+    "suggestedLabel": "",
+    "suggestedModels": [
+      {
+        "name": "Shure U87",
+        "confirmed": false,
+        "source": "visual-model-hypothesis"
+      },
+      {
+        "name": "Shure SM58",
+        "confirmed": false,
+        "source": "visual-model-hypothesis"
+      }
+    ],
+    "identityScope": "product-family",
+    "requiresModelConfirmation": true,
+    "unverifiedDetails": [
+      "exact model",
+      "variant",
+      "specifications"
+    ],
+    "features": []
+  },
+  "offers": [],
+  "blocked": false,
+  "verified": false,
+  "userConfirmed": false,
+  "identitySource": "cloudflare-consensus",
+  "visionDiagnostics": [
+    {
+      "provider": "cloudflare-scout",
+      "code": "IDENTIFIED",
+      "identityClaim": {
+        "name": "Microphone",
+        "brand": "Shure",
+        "model": "",
+        "object": "Microphone",
+        "size": "",
+        "color": "Black",
+        "visibleText": []
+      },
+      "errorType": null
+    },
+    {
+      "provider": "cloudflare-workers-ai",
+      "code": "IDENTIFIED",
+      "identityClaim": {
+        "name": "SHURE",
+        "brand": "SHURE",
+        "model": "U87",
+        "object": "microphone",
+        "size": "standard",
+        "color": "black",
+        "visibleText": [
+          "SHURE",
+          "U87"
+        ]
+      },
+      "errorType": null
+    },
+    {
+      "provider": "cloudflare-llava",
+      "code": "IDENTIFIED",
+      "identityClaim": {
+        "name": "Shure SM58 Microphone",
+        "brand": "Shure",
+        "model": "SM58",
+        "object": "Microphone",
+        "size": "",
+        "color": "",
+        "visibleText": []
+      },
+      "errorType": null
+    }
+  ],
+  "visualVerification": true,
+  "provider": "cloudflare-consensus",
+  "imageAccepted": true,
+  "needsVision": false,
+  "needsRetailerVerification": true,
+  "confidence": 0.65,
+  "code": "PHOTO_PARTIALLY_IDENTIFIED",
+  "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+}
