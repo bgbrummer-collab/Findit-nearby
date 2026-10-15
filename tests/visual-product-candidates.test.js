@@ -65,3 +65,13 @@ test('a second model hypothesis is researched when the first has no retailer res
  const result=await visualProductCandidates({name:'Nike shoes',brand:'Nike',object:'shoes',color:'White and Blue',requiresModelConfirmation:true,suggestedModels:['Nike Air Force 1','Nike Dunk Low'].map(name=>({name,confirmed:false,source:'visual-model-hypothesis'}))});
  assert.equal(result.length,1);assert.equal(result[0].name,name);assert.equal(result[0].photoMatchConfirmed,false);assert.equal(queries.length,2);assert.ok(queries.every(q=>q.includes('White and Blue')));
 });
+
+test('published headset connection facts survive research for compatibility questions',async t=>{
+ const url='https://retailer.example/product/example-x-headset';
+ const page='<script type="application/ld+json">'+JSON.stringify({'@type':'Product',name:'Example X Gaming Headset',brand:'Example',description:'Designed for listening to game audio. Connects to Windows computers using USB.',offers:{price:900,priceCurrency:'ZAR'}})+'</script>';
+ t.mock.method(globalThis,'fetch',async u=>String(u)===url?new Response(page):new Response('<rss/>'));
+ const d=await(await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:{name:'Example X Gaming Headset',brand:'Example',object:'headset',searchQuery:'Example X Gaming Headset'},offers:[{product_url:url,sourcePageVerified:true,exactProductMatch:true}]})}),{})).json();
+ assert.equal(d.researched,true);assert.ok(d.compatibility.some(x=>/Windows computers using USB/.test(x)));
+ const answer=answerFromEvidence('Will it work with Xbox?',{identification:{name:'Example X Gaming Headset'}},d).answer;
+ assert.match(answer,/Windows computers using USB/);assert.match(answer,/Compatibility with xbox has not been verified/i);
+});

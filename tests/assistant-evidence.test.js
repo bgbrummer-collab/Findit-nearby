@@ -44,3 +44,10 @@ test('uncertain visual model choices and observed colours are not asserted as an
  const d=answerFromEvidence('What model and colour is this?',{identification:{name:'Nike shoes',requiresModelConfirmation:true,color:'White and Blue',suggestedModels:[{name:'Nike Air Force 1 Low',confirmed:false,source:'visual-model-hypothesis'}]}},{});
  assert.match(d.answer,/Possible models.*not confirmed/);assert.match(d.answer,/Nike Air Force 1 Low/);assert.match(d.answer,/does not establish an exact retailer colourway/);
 });
+
+test('compatibility questions answer published connections and explicitly leave unsupported devices unverified',()=>{
+ const context={identification:{name:'Example X Headset'}};
+ const r=answerFromEvidence('Does it work with Xbox?',context,{researched:true,whatItDoes:'A gaming headset.',compatibility:['Connects to Windows computers using USB.'],sources:[{url:'https://manufacturer.example/headset'}]});
+ assert.match(r.answer,/Windows computers using USB/);assert.match(r.answer,/Compatibility with xbox has not been verified/i);assert.ok(r.sources.some(x=>x.url==='https://manufacturer.example/headset'));
+ const supported=answerFromEvidence('Is it compatible with Xbox?',context,{researched:true,compatibility:['Not compatible with Xbox consoles.']});assert.match(supported.answer,/Not compatible with Xbox/);assert.doesNotMatch(supported.answer,/has not been verified/);
+});
