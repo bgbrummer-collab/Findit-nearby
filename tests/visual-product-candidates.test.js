@@ -49,3 +49,19 @@ test('visual model hypotheses can research matching listings without becoming co
  const result=await visualProductCandidates({name:'Nike shoes',brand:'Nike',object:'shoes',color:'White and Blue',requiresModelConfirmation:true,suggestedModels:[{name:'Nike Air Force 1 Low',confirmed:false,source:'visual-model-hypothesis'}]});
  assert.equal(result.length,1);assert.equal(result[0].name,name);assert.equal(result[0].photoMatchConfirmed,false);assert.equal(result[0].price,1800);assert.equal(result[0].identity.userConfirmed,false);
 });
+
+test('short complete model names can propose matches without accepting a bare brand or number',()=>{
+ assert.equal(candidateLabelMatches('Nike Air Force 1 Low White Blue Shoes',{brand:'Nike',suggestedLabel:'Nike Air Force 1',object:'shoes'}),true);
+ assert.equal(candidateLabelMatches('Nike Dunk Low White Blue Shoes',{brand:'Nike',suggestedLabel:'Nike Dunk Low',object:'shoes'}),true);
+ assert.equal(candidateLabelMatches('Shure MV7 Microphone',{brand:'Shure',suggestedLabel:'Shure MV7',object:'microphone'}),true);
+ for(const suggestedLabel of ['Nike','Nike 1','Nike Shoes'])assert.equal(candidateLabelMatches('Nike Air Force 1 Shoes',{brand:'Nike',suggestedLabel,object:'shoes'}),false);
+ assert.equal(candidateLabelMatches('Shure MV7X Microphone',{brand:'Shure',suggestedLabel:'Shure MV7',object:'microphone'}),false);
+});
+
+test('a second model hypothesis is researched when the first has no retailer result',async t=>{
+ const name='Nike Dunk Low White Blue Shoes',url='https://retailer.example/product/dunk';let queries=[];
+ const page='<script type="application/ld+json">'+JSON.stringify({'@type':'Product',name,brand:'Nike',offers:{price:1700,priceCurrency:'ZAR'}})+'</script>';
+ t.mock.method(globalThis,'fetch',async input=>{const u=String(input);if(u===url)return new Response(page);if(u.includes('bing.com')){const q=new URL(u).searchParams.get('q');queries.push(q);return new Response(q.includes('Dunk Low')?'<rss><item><title>'+name+'</title><link>'+url+'</link></item></rss>':'<rss/>');}return new Response('<rss/>');});
+ const result=await visualProductCandidates({name:'Nike shoes',brand:'Nike',object:'shoes',color:'White and Blue',requiresModelConfirmation:true,suggestedModels:['Nike Air Force 1','Nike Dunk Low'].map(name=>({name,confirmed:false,source:'visual-model-hypothesis'}))});
+ assert.equal(result.length,1);assert.equal(result[0].name,name);assert.equal(result[0].photoMatchConfirmed,false);assert.equal(queries.length,2);assert.ok(queries.every(q=>q.includes('White and Blue')));
+});

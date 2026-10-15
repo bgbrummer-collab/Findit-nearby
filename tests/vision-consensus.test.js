@@ -54,3 +54,8 @@ test('conflicting shoe models remain reviewable hypotheses without confirming th
  assert.deepEqual(result.suggestedModels.map(x=>x.name),['Nike Air Force 1 Low','Nike Air Force 1 07']);assert.ok(result.suggestedModels.every(x=>x.confirmed===false));
  const mixed=reconcileVision([claim,{...claim,brand:'Other',model:'Unrelated model'}]);assert.deepEqual(mixed.suggestedModels,[]);
 });
+
+test('model hypotheses prefer the complete family name and discard isolated numeric fragments',()=>{
+ const r=reconcileVision(['Air Force','1','Air Force 1'].map(model=>({brand:'Nike',object:'shoes',name:'Nike shoes',model})));
+ assert.equal(r.requiresModelConfirmation,true);assert.deepEqual(r.suggestedModels.map(x=>x.name),['Nike Air Force 1']);assert.equal(r.model,'');
+});
