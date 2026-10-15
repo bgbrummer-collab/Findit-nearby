@@ -7,6 +7,15 @@ try{
  for(const width of [390,768,901,1024,1180,1273,1440,1920]){
   const page=await browser.newPage({viewport:{width,height:900}});
   await page.goto(base,{waitUntil:'networkidle',timeout:60000});
+  if(process.env.FINDIT_EXPECTED_COMMIT){
+   // Allow bounded CDN propagation, but never accept a stale frontend build.
+   for(let attempt=0;attempt<5;attempt++){
+    const build=await page.locator('meta[name="findit-build"]').getAttribute('content');
+    if(build===process.env.FINDIT_EXPECTED_COMMIT)break;
+    if(attempt===4)assert.equal(build,process.env.FINDIT_EXPECTED_COMMIT,'Frontend deployment did not converge');
+    await page.waitForTimeout(2000);await page.reload({waitUntil:'networkidle',timeout:60000});
+   }
+  }
   await page.waitForSelector('#fxSmartChoice',{state:'visible'});
   const geometry=await page.evaluate(()=>{
    const rect=selector=>{const r=document.querySelector(selector).getBoundingClientRect();return{x:r.x,right:r.right,width:r.width};};

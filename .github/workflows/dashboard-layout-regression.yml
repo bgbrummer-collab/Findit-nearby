@@ -2,7 +2,7 @@ name: FindIt Responsive Layout Regression
 on:
   push:
     branches: [main]
-    paths: ['information-runtime.js', 'dashboard-audit-controls.js', 'redesign-v4.js', 'redesign-v4.css', 'tests/dashboard-layout-regression.mjs', '.github/workflows/dashboard-layout-regression.yml']
+    paths: ['information-runtime.js', 'dashboard-audit-controls.js', 'redesign-v4.js', 'redesign-v4.css', 'tests/dashboard-layout-regression.mjs', '.github/workflows/dashboard-layout-regression.yml', '.github/workflows/deploy-cloudflare.yml']
   workflow_dispatch:
 jobs:
   layout:
@@ -30,7 +30,8 @@ jobs:
         run: |
           for attempt in $(seq 1 40); do
             current=$(curl -fsS --max-time 10 https://findit-nearby.bgbrummer.workers.dev/api/version || true)
-            if echo "$current" | jq -e --arg expected "$EXPECTED_COMMIT" '.commit == $expected' >/dev/null 2>&1; then exit 0; fi
+            frontend=$(curl -fsS --max-time 10 https://findit-nearby.bgbrummer.workers.dev/ || true)
+            if echo "$current" | jq -e --arg expected "$EXPECTED_COMMIT" '.commit == $expected' >/dev/null 2>&1 && echo "$frontend" | grep -Fq "<meta name=\"findit-build\" content=\"$EXPECTED_COMMIT\">"; then exit 0; fi
             sleep 3
           done
           echo 'Production did not report the expected commit'; exit 1

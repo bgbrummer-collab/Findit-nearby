@@ -5,6 +5,10 @@ on:
   push:
     branches: [main]
 
+concurrency:
+  group: findit-cloudflare-production
+  cancel-in-progress: false
+
 permissions:
   contents: read
 
