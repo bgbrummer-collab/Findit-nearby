@@ -1,0 +1,90 @@
+{
+  "deployedCommit": "18770497e76dff70dad1ba7782b3ca9e9b89bb29",
+  "local": {
+    "command": "npm test",
+    "tests": 208,
+    "passed": 208,
+    "failed": 0,
+    "skipped": 0,
+    "syntax": "passed"
+  },
+  "releaseWorkflows": [
+    {
+      "name": "FindIt smoke checks",
+      "id": 38753089941,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "FindIt regression checks",
+      "id": 38753089929,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "FindIt Production Smoke Test",
+      "id": 38753089934,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Deploy FindIt to Cloudflare",
+      "id": 38753089951,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "FindIt Dashboard Commerce Regression",
+      "id": 38753089919,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "FindIt Release Smoke",
+      "id": 38753089952,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "FindIt Interaction Freeze Regression",
+      "id": 38753089906,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "pages build and deployment",
+      "id": 38753088784,
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "responsiveAndSavedJourney": {
+    "runId": 38751771038,
+    "conclusion": "success",
+    "widths": [
+      390,
+      768,
+      901,
+      1024,
+      1180,
+      1273,
+      1440,
+      1920
+    ],
+    "savedAcrossReload": true,
+    "reopenedForResearch": true,
+    "watchlistAppearsInAlerts": true,
+    "settledShoppingPlanMutations": 0
+  },
+  "uncommonCommerce": {
+    "githubRunId": 38748046178,
+    "githubAttempt": 2,
+    "githubConclusion": "failure",
+    "localResult": "UNCOMMON_COMMERCE_REGRESSION_PASS",
+    "verifiedLocalPrice": 345,
+    "currency": "ZAR",
+    "retailer": "Marshall Music",
+    "limitation": "Runner-dependent live discovery failure remains unresolved."
+  },
+  "launchReady": false
+}

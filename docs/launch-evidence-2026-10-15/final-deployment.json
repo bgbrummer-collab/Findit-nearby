@@ -1,0 +1,17 @@
+{
+  "checkedAt": "2026-10-15T14:41:46.374Z",
+  "backend": "18770497e76dff70dad1ba7782b3ca9e9b89bb29",
+  "frontend": "18770497e76dff70dad1ba7782b3ca9e9b89bb29",
+  "health": {
+    "ok": true,
+    "status": "ok",
+    "service": "core",
+    "platform": "cloudflare",
+    "photoIdentification": true,
+    "nearby": true,
+    "commerce": true,
+    "feedbackEndpoint": false,
+    "checksAreConfigurationOnly": true,
+    "checkedAt": "2026-10-15T14:41:46.312Z"
+  }
+}

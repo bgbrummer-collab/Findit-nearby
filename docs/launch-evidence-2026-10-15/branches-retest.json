@@ -1,0 +1,52 @@
+{
+  "ok": true,
+  "researchMode": "published-branch-hours",
+  "retryable": false,
+  "checkedAt": "2026-10-15T14:12:26.251Z",
+  "stores": [
+    {
+      "name": "Computer Mania",
+      "address": "",
+      "lat": -25.766866,
+      "lon": 28.321128,
+      "publishedAddress": "Shop L87 | Cnr Lynnwood Road & Simon Vermooten Road, Equestria, Pretoria, Gauteng, Zip Code: 0184, ZA",
+      "phone": "012 807 7008",
+      "website": "https://computermania.co.za/pages/computer-mania-the-grove-mall",
+      "branchDetailsVerified": true,
+      "status": "open",
+      "opensAt": "",
+      "closesAt": "19:00",
+      "todayHours": "Mo-Fr 09:00-19:00; Sa 09:00-18:00; Su 09:00-16:00; PH 09:00-16:00",
+      "sourceLabel": "Official retailer branch page",
+      "sourceUrl": "https://computermania.co.za/pages/computer-mania-the-grove-mall",
+      "hoursVerified": true
+    },
+    {
+      "name": "Incredible Connection",
+      "address": "",
+      "lat": -25.82305903,
+      "lon": 28.31168174,
+      "publishedAddress": "Shop 70C, Corner Of Garsfontein Road and De Villebois Mareuil Drive, Pretorius Park Ext 55, Pretoria, 0072",
+      "phone": "(012) 994 9000",
+      "website": "https://www.incredible.co.za/storelocator/",
+      "branchDetailsVerified": true,
+      "status": "open",
+      "opensAt": "",
+      "closesAt": "19:00",
+      "todayHours": "Mo 09:00-19:00; Tu 09:00-19:00; We 09:00-19:00; Th 09:00-19:00; Fr 09:00-19:00; Sa 09:00-19:00; Su 09:00-17:00; PH 09:00-19:00",
+      "sourceLabel": "Official retailer branch page",
+      "sourceUrl": "https://www.incredible.co.za/storelocator/",
+      "hoursVerified": true
+    }
+  ],
+  "sources": [
+    {
+      "title": "Computer Mania",
+      "url": "https://computermania.co.za/pages/computer-mania-the-grove-mall"
+    },
+    {
+      "title": "Incredible Connection",
+      "url": "https://www.incredible.co.za/storelocator/"
+    }
+  ]
+}

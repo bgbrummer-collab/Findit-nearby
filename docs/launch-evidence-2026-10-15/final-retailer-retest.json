@@ -1,0 +1,921 @@
+{
+  "checkedAt": "2026-10-15T14:38:51.526Z",
+  "version": {
+    "commit": "ff522b1622c5b7a3d889cc6f0f8ea8b2f33ed80f",
+    "platform": "cloudflare"
+  },
+  "results": [
+    {
+      "query": "Shure MV7+ Podcast Microphone",
+      "identification": {
+        "name": "Shure MV7+ Podcast Microphone",
+        "object": "Shure MV7+ Podcast Microphone",
+        "brand": "",
+        "model": "",
+        "category": "product",
+        "retailCategory": "general",
+        "searchQuery": "Shure MV7+ Podcast Microphone",
+        "barcode": null,
+        "confidence": null,
+        "identificationMethod": "typed-user-input",
+        "userConfirmed": true
+      },
+      "commerce": {
+        "ok": true,
+        "matched": true,
+        "exactMatchVerified": true,
+        "searchQuery": "Shure MV7+ Podcast Microphone",
+        "bestProduct": {
+          "name": "Shure MV7+ – Podcast Microphone"
+        },
+        "bestPrice": {
+          "product_name": "Shure MV7+ – Podcast Microphone",
+          "product_url": "https://bothners.co.za/shop/microphones-and-wireless/microphones/dynamic-microphones/shure-mv7-podcast-microphone/",
+          "sku": "MV7K",
+          "retailer": {
+            "name": "Bothners"
+          },
+          "price": 6695,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "retailerApiVerified": true,
+          "evidenceUrl": "https://bothners.co.za/wp-json/wc/store/v1/products?slug=shure-mv7-podcast-microphone&per_page=10",
+          "source": "Verified from public retailer product API",
+          "matchScore": 92,
+          "stockScope": "online/general retailer availability only",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-10-15T14:38:56.339Z",
+          "retailerDomain": "bothners.co.za",
+          "trustedRetailerDomain": false
+        },
+        "offers": [
+          {
+            "product_name": "Shure MV7+ – Podcast Microphone",
+            "product_url": "https://bothners.co.za/shop/microphones-and-wireless/microphones/dynamic-microphones/shure-mv7-podcast-microphone/",
+            "sku": "MV7K",
+            "retailer": {
+              "name": "Bothners"
+            },
+            "price": 6695,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "retailerApiVerified": true,
+            "evidenceUrl": "https://bothners.co.za/wp-json/wc/store/v1/products?slug=shure-mv7-podcast-microphone&per_page=10",
+            "source": "Verified from public retailer product API",
+            "matchScore": 92,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-15T14:38:56.339Z",
+            "retailerDomain": "bothners.co.za",
+            "trustedRetailerDomain": false
+          },
+          {
+            "product_name": "Shure MV7+ Hybrid Podcast Microphone – Black",
+            "product_url": "https://bothners.co.za/shop/microphones-and-wireless/shure-mv7-hybrid-podcast-microphone-black/",
+            "sku": "MV7+K",
+            "retailer": {
+              "name": "Bothners"
+            },
+            "price": 6995,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "retailerApiVerified": true,
+            "evidenceUrl": "https://bothners.co.za/wp-json/wc/store/v1/products?slug=shure-mv7-hybrid-podcast-microphone-black&per_page=10",
+            "source": "Verified from public retailer product API",
+            "matchScore": 92,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-15T14:38:55.878Z",
+            "retailerDomain": "bothners.co.za",
+            "trustedRetailerDomain": false
+          }
+        ],
+        "retailerStatus": [
+          {
+            "name": "Bothners",
+            "searchUrl": "https://bothners.co.za/shop/microphones-and-wireless/microphones/dynamic-microphones/shure-mv7-podcast-microphone/",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Bothners",
+            "searchUrl": "https://bothners.co.za/shop/microphones-and-wireless/shure-mv7-hybrid-podcast-microphone-black/",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Marshall Music",
+            "searchUrl": "https://www.marshallmusic.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Music Connection",
+            "searchUrl": "https://musicconnection.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Bothners",
+            "searchUrl": "https://bothners.co.za/shop/microphones-and-wireless/microphones/dynamic-microphones/shure-mv7-podcast-microphone/",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Bothners",
+            "searchUrl": "https://bothners.co.za/shop/microphones-and-wireless/shure-mv7-hybrid-podcast-microphone-black/",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Marshall Music",
+            "searchUrl": "https://www.marshallmusic.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Music Connection",
+            "searchUrl": "https://musicconnection.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 2,
+        "verifiedSellerCount": 1,
+        "inStockOfferCount": 2,
+        "priceVerifiedCount": 2,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Shure%20MV7%2B%20Podcast%20Microphone",
+        "checkedAt": "2026-10-15T14:38:57.997Z"
+      },
+      "research": {
+        "researched": true,
+        "whatItDoes": "Refreshed with a customizable LED touch panel, powerful DSP features and even better audio, the MV7+ Podcast Microphone is a dynamic microphone built for discerning podcasters, streamers and musicians.",
+        "pros": [
+          "This updated version offers USB-C and XLR outputs, an improved Auto Level Mode, as well as a new digital pop filter, real-time Denoiser and reverb effects.",
+          "Select from millions of color options to make the touch-to-mute LED panel as unique as the audio you’re recording.",
+          "The MV7+ is certified for Microsoft Teams in combination with the AONIC 50 Gen 2 Headphones – Certified for Microsoft Teams.",
+          "Hybrid USB/XLR Dynamic Microphone with Onboard DSP, LED Strip, Headphone Jack, and App-based Control – Black."
+        ],
+        "cons": [],
+        "specifications": [],
+        "compatibility": [
+          "This updated version offers USB-C and XLR outputs, an improved Auto Level Mode, as well as a new digital pop filter, real-time Denoiser and reverb effects.",
+          "Hybrid USB/XLR Dynamic Microphone with Onboard DSP, LED Strip, Headphone Jack, and App-based Control – Black.",
+          "This hybrid podcasting microphone supplies the superb sound of the standard MV7 and updates it with new features, including a touch-sensitive LED strip, complete computer control, and compatibility with the Shure MOTIV Mix desktop app.",
+          "Shure mics are incredibly popular; our MV7+ users report that the hybrid USB-C and XLR outputs allow this microphone to integrate into any setup."
+        ],
+        "variants": [
+          {
+            "name": "Shure MV7+ – Podcast Microphone",
+            "productUrl": "https://bothners.co.za/shop/microphones-and-wireless/microphones/dynamic-microphones/shure-mv7-podcast-microphone/",
+            "specifications": [
+              {
+                "name": "SKU / product code",
+                "value": "MV7K"
+              }
+            ]
+          },
+          {
+            "name": "Shure MV7+ Hybrid Podcast Microphone – Black",
+            "productUrl": "https://bothners.co.za/shop/microphones-and-wireless/shure-mv7-hybrid-podcast-microphone-black/",
+            "specifications": [
+              {
+                "name": "SKU / product code",
+                "value": "MV7+K"
+              }
+            ]
+          }
+        ],
+        "bestFor": "",
+        "standOut": "",
+        "valueVerdict": "",
+        "sources": [
+          {
+            "title": "Shure MV7+ – Podcast Microphone",
+            "url": "https://bothners.co.za/shop/microphones-and-wireless/microphones/dynamic-microphones/shure-mv7-podcast-microphone/"
+          },
+          {
+            "title": "Shure MV7+ Hybrid Podcast Microphone – Black",
+            "url": "https://bothners.co.za/shop/microphones-and-wireless/shure-mv7-hybrid-podcast-microphone-black/"
+          }
+        ],
+        "researchMethod": "Fetched exact-product page descriptions",
+        "checkedAt": "2026-10-15T14:38:59.135Z",
+        "message": "Product facts are quoted from matching product-page descriptions."
+      }
+    },
+    {
+      "query": "Shure MV7 microphone",
+      "identification": {
+        "name": "Shure MV7 microphone",
+        "object": "Shure MV7 microphone",
+        "brand": "",
+        "model": "",
+        "category": "product",
+        "retailCategory": "general",
+        "searchQuery": "Shure MV7 microphone",
+        "barcode": null,
+        "confidence": null,
+        "identificationMethod": "typed-user-input",
+        "userConfirmed": true
+      },
+      "commerce": {
+        "ok": true,
+        "matched": false,
+        "exactMatchVerified": false,
+        "searchQuery": "Shure MV7 microphone",
+        "bestProduct": null,
+        "bestPrice": null,
+        "offers": [],
+        "retailerStatus": [
+          {
+            "name": "Marshall Music",
+            "searchUrl": "https://www.marshallmusic.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Bothners",
+            "searchUrl": "https://bothners.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Music Connection",
+            "searchUrl": "https://musicconnection.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Marshall Music",
+            "searchUrl": "https://www.marshallmusic.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Bothners",
+            "searchUrl": "https://bothners.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Music Connection",
+            "searchUrl": "https://musicconnection.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 0,
+        "verifiedSellerCount": 0,
+        "inStockOfferCount": 0,
+        "priceVerifiedCount": 0,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Shure%20MV7%20microphone",
+        "checkedAt": "2026-10-15T14:39:05.377Z"
+      },
+      "research": {
+        "researched": false,
+        "whatItDoes": "",
+        "pros": [],
+        "cons": [],
+        "specifications": [],
+        "compatibility": [],
+        "variants": [],
+        "bestFor": "",
+        "standOut": "",
+        "valueVerdict": "",
+        "sources": [],
+        "researchMethod": "Fetched exact-product page descriptions",
+        "checkedAt": "2026-10-15T14:39:05.709Z",
+        "message": "No trustworthy exact-product description was found. FindIt will not guess."
+      }
+    },
+    {
+      "query": "Levis 501 Original Jeans",
+      "identification": {
+        "name": "Levis 501 Original Jeans",
+        "object": "Levis 501 Original Jeans",
+        "brand": "",
+        "model": "",
+        "category": "product",
+        "retailCategory": "general",
+        "searchQuery": "Levis 501 Original Jeans",
+        "barcode": null,
+        "confidence": null,
+        "identificationMethod": "typed-user-input",
+        "userConfirmed": true
+      },
+      "commerce": {
+        "ok": true,
+        "matched": true,
+        "exactMatchVerified": true,
+        "searchQuery": "Levis 501 Original Jeans",
+        "bestProduct": {
+          "name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - GREY"
+        },
+        "bestPrice": {
+          "product_name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - BLACK",
+          "product_url": "https://www.levi.co.za/products/levis-r-mens-501-r-original-jeans-black-2",
+          "sku": "A544700372830",
+          "retailer": {
+            "name": "Levi’s South Africa"
+          },
+          "price": 909,
+          "currency": "ZAR",
+          "availability": null,
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Verified directly on exact retailer product page",
+          "matchScore": 92,
+          "stockScope": "not supplied",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-10-15T14:39:07.944Z",
+          "retailerDomain": "levi.co.za",
+          "trustedRetailerDomain": false
+        },
+        "offers": [
+          {
+            "product_name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - GREY",
+            "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-grey-1",
+            "sku": "A544700413032",
+            "retailer": {
+              "name": "Levi’s South Africa"
+            },
+            "price": 1299,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 92,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-15T14:39:08.262Z",
+            "retailerDomain": "levi.co.za",
+            "trustedRetailerDomain": false
+          },
+          {
+            "product_name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - MEDIUM WASH",
+            "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2",
+            "sku": "0050135983632",
+            "retailer": {
+              "name": "Levi’s South Africa"
+            },
+            "price": 1299,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 92,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-15T14:39:08.279Z",
+            "retailerDomain": "levi.co.za",
+            "trustedRetailerDomain": false
+          },
+          {
+            "product_name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - MED INDIGO - WORN IN",
+            "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-med-indigo-worn-in",
+            "sku": "A544700404032",
+            "retailer": {
+              "name": "Levi’s South Africa"
+            },
+            "price": 1299,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 92,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-15T14:39:08.643Z",
+            "retailerDomain": "levi.co.za",
+            "trustedRetailerDomain": false
+          },
+          {
+            "product_name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - BROWN",
+            "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown",
+            "sku": "A544700422832",
+            "retailer": {
+              "name": "Levi’s South Africa"
+            },
+            "price": 1399,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 92,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-15T14:39:08.030Z",
+            "retailerDomain": "levi.co.za",
+            "trustedRetailerDomain": false
+          },
+          {
+            "product_name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - BLACK",
+            "product_url": "https://www.levi.co.za/products/levis-r-mens-501-r-original-jeans-black-2",
+            "sku": "A544700372830",
+            "retailer": {
+              "name": "Levi’s South Africa"
+            },
+            "price": 909,
+            "currency": "ZAR",
+            "availability": null,
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 92,
+            "stockScope": "not supplied",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-15T14:39:07.944Z",
+            "retailerDomain": "levi.co.za",
+            "trustedRetailerDomain": false
+          },
+          {
+            "product_name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - DARK INDIGO - FLAT FINISH",
+            "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-flat-finish",
+            "sku": "A544700002832",
+            "retailer": {
+              "name": "Levi’s South Africa"
+            },
+            "price": 1199,
+            "currency": "ZAR",
+            "availability": null,
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 92,
+            "stockScope": "not supplied",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-15T14:39:08.141Z",
+            "retailerDomain": "levi.co.za",
+            "trustedRetailerDomain": false
+          },
+          {
+            "product_name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - DARK INDIGO - WORN IN",
+            "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-worn-in",
+            "sku": "A544700332832",
+            "retailer": {
+              "name": "Levi’s South Africa"
+            },
+            "price": 1199,
+            "currency": "ZAR",
+            "availability": null,
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 92,
+            "stockScope": "not supplied",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-15T14:39:08.404Z",
+            "retailerDomain": "levi.co.za",
+            "trustedRetailerDomain": false
+          },
+          {
+            "product_name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - GREY",
+            "product_url": "https://www.levi.co.za/products/levis-r-mens-501-r-original-jeans-grey-1",
+            "sku": "0050123702832",
+            "retailer": {
+              "name": "Levi’s South Africa"
+            },
+            "price": 1299,
+            "currency": "ZAR",
+            "availability": null,
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 92,
+            "stockScope": "not supplied",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-15T14:39:08.457Z",
+            "retailerDomain": "levi.co.za",
+            "trustedRetailerDomain": false
+          }
+        ],
+        "retailerStatus": [
+          {
+            "name": "Levi’s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-grey-1",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Levi’s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Levi’s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-med-indigo-worn-in",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Levi’s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Levi’s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis-r-mens-501-r-original-jeans-black-2",
+            "exactProductMatch": true,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Levi’s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-flat-finish",
+            "exactProductMatch": true,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Levi’s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-worn-in",
+            "exactProductMatch": true,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Levi’s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis-r-mens-501-r-original-jeans-grey-1",
+            "exactProductMatch": true,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Bash",
+            "searchUrl": "https://bash.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Superbalist",
+            "searchUrl": "https://www.superbalist.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Levi’s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-grey-1",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Levi’s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Levi’s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-med-indigo-worn-in",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Levi’s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Levi’s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis-r-mens-501-r-original-jeans-black-2",
+            "exactProductMatch": true,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Levi’s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-flat-finish",
+            "exactProductMatch": true,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Levi’s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-worn-in",
+            "exactProductMatch": true,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Levi’s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis-r-mens-501-r-original-jeans-grey-1",
+            "exactProductMatch": true,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Bash",
+            "searchUrl": "https://bash.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Superbalist",
+            "searchUrl": "https://www.superbalist.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 8,
+        "verifiedSellerCount": 1,
+        "inStockOfferCount": 4,
+        "priceVerifiedCount": 8,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Levis%20501%20Original%20Jeans",
+        "checkedAt": "2026-10-15T14:39:14.119Z"
+      },
+      "research": {
+        "researched": true,
+        "whatItDoes": "A classic straight leg and iconic styling.",
+        "pros": [
+          "And they never will."
+        ],
+        "cons": [],
+        "specifications": [
+          {
+            "name": "Brand",
+            "value": "Levi’s ®",
+            "sourceUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown"
+          }
+        ],
+        "compatibility": [],
+        "variants": [
+          {
+            "name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - GREY",
+            "productUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-grey-1",
+            "specifications": [
+              {
+                "name": "Brand",
+                "value": "Levi’s ®"
+              },
+              {
+                "name": "SKU / product code",
+                "value": "A544700413032"
+              },
+              {
+                "name": "Manufacturer part number",
+                "value": "A544700413032"
+              },
+              {
+                "name": "Brand",
+                "value": "Levi’s ®"
+              },
+              {
+                "name": "SKU / product code",
+                "value": "A544700413032"
+              }
+            ]
+          },
+          {
+            "name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - MEDIUM WASH",
+            "productUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2",
+            "specifications": [
+              {
+                "name": "Brand",
+                "value": "Levi’s ®"
+              },
+              {
+                "name": "SKU / product code",
+                "value": "0050135983632"
+              },
+              {
+                "name": "Manufacturer part number",
+                "value": "0050135983632"
+              },
+              {
+                "name": "Brand",
+                "value": "Levi’s ®"
+              },
+              {
+                "name": "SKU / product code",
+                "value": "0050135983632"
+              }
+            ]
+          },
+          {
+            "name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - MED INDIGO - WORN IN",
+            "productUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-med-indigo-worn-in",
+            "specifications": [
+              {
+                "name": "Brand",
+                "value": "Levi’s ®"
+              },
+              {
+                "name": "SKU / product code",
+                "value": "A544700404032"
+              },
+              {
+                "name": "Manufacturer part number",
+                "value": "A544700404032"
+              },
+              {
+                "name": "Brand",
+                "value": "Levi’s ®"
+              },
+              {
+                "name": "SKU / product code",
+                "value": "A544700404032"
+              }
+            ]
+          },
+          {
+            "name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - BROWN",
+            "productUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown",
+            "specifications": [
+              {
+                "name": "Brand",
+                "value": "Levi’s ®"
+              },
+              {
+                "name": "SKU / product code",
+                "value": "A544700422832"
+              },
+              {
+                "name": "Manufacturer part number",
+                "value": "A544700422832"
+              },
+              {
+                "name": "Brand",
+                "value": "Levi’s ®"
+              },
+              {
+                "name": "SKU / product code",
+                "value": "A544700422832"
+              }
+            ]
+          }
+        ],
+        "bestFor": "",
+        "standOut": "",
+        "valueVerdict": "",
+        "sources": [
+          {
+            "title": "LEVI'S® MEN'S 501® ORIGINAL JEANS - GREY",
+            "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-grey-1"
+          },
+          {
+            "title": "LEVI'S® MEN'S 501® ORIGINAL JEANS - MEDIUM WASH",
+            "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2"
+          },
+          {
+            "title": "LEVI'S® MEN'S 501® ORIGINAL JEANS - MED INDIGO - WORN IN",
+            "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-med-indigo-worn-in"
+          },
+          {
+            "title": "LEVI'S® MEN'S 501® ORIGINAL JEANS - BROWN",
+            "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown"
+          }
+        ],
+        "researchMethod": "Fetched exact-product page descriptions",
+        "checkedAt": "2026-10-15T14:39:14.447Z",
+        "message": "Product facts are quoted from matching product-page descriptions."
+      }
+    }
+  ]
+}

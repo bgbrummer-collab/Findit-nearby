@@ -1,0 +1,55 @@
+{
+  "ok": true,
+  "radiusKm": 10,
+  "stores": [
+    {
+      "id": "sportsmans-423",
+      "name": "Sportsmans Warehouse Atterbury Value Mart, Pretoria",
+      "lat": -25.7891667,
+      "lon": 28.3086111,
+      "address": "Shop 5.7, Atterbury Value Mart, 2001 Atterbury Road, Faerie Glen, Pretoria, 0081",
+      "phone": "012 991 4926",
+      "website": "https://www.sportsmanswarehouse.co.za/store-locator/",
+      "openingHours": "Monday: 9:00 to 18:00; Tuesday: 9:00 to 18:00; Wednesday: 9:00 to 18:00; Thursday: 9:00 to 18:00; Friday: 9:00 to 18:00; Saturday: 8:30 to 17:00; Sunday: 9:00 to 15:00; Public Holidays: 9:00 to 16:00",
+      "source": "Official retailer locator",
+      "sourceUrl": "https://www.sportsmanswarehouse.co.za/store-locator/",
+      "exactProductMatch": false,
+      "stockVerified": false,
+      "branchStockVerified": false,
+      "branchDetailsVerified": true,
+      "openNow": null,
+      "type": "Nearby footwear and sports retailer — exact item stock not verified",
+      "distanceKm": 3.9564237745046453
+    },
+    {
+      "id": "sportsmans-394",
+      "name": "Sportsmans Warehouse Menlyn Park Shopping Centre, Pretoria",
+      "lat": -25.784,
+      "lon": 28.27384,
+      "address": "Shop G214, Menlyn Park Shopping Centre, Atterbury Road, Menlyn, Pretoria, 0181",
+      "phone": "012 348 2882",
+      "website": "https://www.sportsmanswarehouse.co.za/store-locator/",
+      "openingHours": "Monday: 9:00 to 20:00; Tuesday: 9:00 to 20:00; Wednesday: 9:00 to 20:00; Thursday: 9:00 to 20:00; Friday: 9:00 to 21:00; Saturday: 9:00 to 21:00; Sunday: 9:00 to 18:00; Public Holidays: 9:00 to 17:00",
+      "source": "Official retailer locator",
+      "sourceUrl": "https://www.sportsmanswarehouse.co.za/store-locator/",
+      "exactProductMatch": false,
+      "stockVerified": false,
+      "branchStockVerified": false,
+      "branchDetailsVerified": true,
+      "openNow": null,
+      "type": "Nearby footwear and sports retailer — exact item stock not verified",
+      "distanceKm": 6.139108337846042
+    }
+  ],
+  "reliable": true,
+  "exactProductOnly": false,
+  "exactVerifiedCount": 0,
+  "branchStockVerified": false,
+  "directionsAvailable": false,
+  "message": "Found 2 relevant nearby retailers. Exact item stock is not claimed until retailer evidence verifies it.",
+  "searchedShopTags": [
+    "shoes",
+    "sports"
+  ],
+  "disclaimer": "These are real nearby retailers for the product type. FindIt does not guess exact branch stock or prices."
+}
