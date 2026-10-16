@@ -378,13 +378,15 @@ $$('.sort-btn').forEach(b=>b.onclick=()=>{state.sort=b.dataset.sort;$$('.sort-bt
 function money(p){if(p.price==null)return 'Price unavailable';try{return new Intl.NumberFormat('en-ZA',{style:'currency',currency:p.currency||'ZAR'}).format(Number(p.price))}catch{return `${p.currency||'ZAR'} ${p.price}`}}function placeholderImage(){return "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect width='100%25' height='100%25' fill='%23eef1f5'/%3E%3C/svg%3E"}
 
 async function loadNearby(i,radius){
-  const requestedFile=state.file,requestedResult=state.result;
+  const requestedFile=state.file,requestedResult=state.result,requestedCoords=state.coords,requestId=(state.nearbyRequestId||0)+1;
+  state.nearbyRequestId=requestId;
+  const isCurrent=()=>state.nearbyRequestId===requestId&&state.file===requestedFile&&state.result===requestedResult&&state.coords===requestedCoords;
   nearbyStores.innerHTML='<div class="empty-state">Finding the closest relevant retailers…</div>';
   try{
     const payload={lat:state.coords.lat,lon:state.coords.lon,identification:i,radiusKm:radius};
     let r=await fetch('/api/nearby',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)});
     let d=await r.json();
-    if(state.file!==requestedFile||state.result!==requestedResult)return;
+    if(!isCurrent())return;
     recordNearbyAnalyticsFromResponse(d,i);
     if(!r.ok||!d.ok)throw Error(d.error||'Nearby search failed');
 
@@ -398,7 +400,7 @@ async function loadNearby(i,radius){
       }finally{clearTimeout(t)}
     }
 
-    if(state.file!==requestedFile||state.result!==requestedResult)return;
+    if(!isCurrent())return;
     state.stores=rows.map(x=>({
       ...x,
       exactProductMatch:x.exactProductMatch===true,
@@ -412,6 +414,7 @@ async function loadNearby(i,radius){
     if(!state.stores.length)showNothing(d.message||'No relevant nearby retailers found in this radius.');else nothingFound.classList.add('hidden');
     document.dispatchEvent(new CustomEvent('findit:nearby-updated',{detail:{stores:state.stores}}));
   }catch(e){
+    if(!isCurrent())return;
     state.diagnostics.lastError=String(e.message||e).slice(0,240);state.diagnostics.nearbyReliable=false;state.diagnostics.lastSearchCompletedAt=new Date().toISOString();trackFindIt('nearby_failed',{success:false});nearbyStores.innerHTML='<div class="empty-state">Nearby retailer search is temporarily unavailable.</div>';showNothing('Nearby retailer search could not return useful results.');
   }
 }

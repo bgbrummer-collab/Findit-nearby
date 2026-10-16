@@ -15,11 +15,12 @@ async function fillIfNeeded(){
  const st=getState(),i=st?.result?.identification;
  if(!st?.coords||!i||Number(i.confidence||0)<.55||st?.result?.blocked)return;
  if(Array.isArray(st.stores)&&st.stores.length){document.dispatchEvent(new CustomEvent('findit:nearby-updated',{detail:{stores:st.stores}}));return;}
- const key=keyFor(i);if(!key||busy||lastKey===key)return;
+ const coords=st.coords,searchRadius=Number(st.radius)||10;
+ const key=[keyFor(i),coords.lat,coords.lon,searchRadius].join('|');if(!key||busy||lastKey===key)return;
  busy=true;lastKey=key;const token=++runToken;
  try{
   const r=await fetch('/api/nearby',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({lat:st.coords.lat,lon:st.coords.lon,identification:i,radiusKm:Number(st.radius)||10,mode:'likely'})});
-  const d=await r.json().catch(()=>({}));if(token!==runToken||!r.ok||!d?.ok)return;
+  const d=await r.json().catch(()=>({}));if(token!==runToken||st.coords!==coords||st.result?.identification!==i||(Number(st.radius)||10)!==searchRadius||!r.ok||!d?.ok)return;
   const rows=normalize(d.stores);if(!rows.length)return;
   st.stores=rows;
   if(st.diagnostics)Object.assign(st.diagnostics,{nearbyStoreCount:rows.length,closestStoreDistanceKm:rows[0]?.distanceKm??null,nearbyRadiusKm:Number(st.radius)||10,nearbyReliable:d.reliable!==false,lastSearchCompletedAt:new Date().toISOString()});

@@ -42,6 +42,7 @@ function resetForNewPhoto(st){
 }
 function applySelectedFile(file){
  if(!file)return;
+ if(window.finditValidateUpload&&!window.finditValidateUpload(file))return;
  const st=state();
  resetForNewPhoto(st);
  if(st)st.file=file;
