@@ -99,3 +99,9 @@ test('product research prefers drill facts over corporate marketing on the same 
  const d=await(await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({name,offers:[{product_url:'https://retailer.example/drill',sourcePageVerified:true,exactProductMatch:true}]})}),{})).json();
  assert.match(d.whatItDoes,/Cordless Impact Drill/);assert.doesNotMatch(d.whatItDoes,/developed for professionals/);assert.ok(d.pros.every(x=>!/creates new innovations/.test(x)));assert.match(d.compatibility.join(' '),/same voltage/);
 });
+
+test('history entries reopen their stored query for fresh product research',()=>{
+ let listener,opened;const body={innerHTML:''},modal={style:{},removeAttribute(){},classList:{add(){},remove(){}},setAttribute(){}};
+ const context={window:{addEventListener(type,fn){if(type==='click')listener=fn;},finditRunProductSearch:q=>opened=q},document:{querySelector:s=>s==='#fxStableModal'?modal:s==='#fxStableBody'?body:null,querySelectorAll:()=>[]},localStorage:{getItem:k=>k==='finditRecent'?JSON.stringify([{name:'Bosch drill',query:'Bosch GSB 18V-50'}]):null},Intl,console};
+ vm.runInNewContext(readFileSync(new URL('../dashboard-audit-controls.js',import.meta.url),'utf8'),context);context.window.finditDashboardAuditAction('history');assert.match(body.innerHTML,/data-history-query="Bosch GSB 18V-50"/);assert.match(body.innerHTML,/Open product/);listener({target:{closest:s=>s.includes('data-open-history')?{dataset:{historyQuery:'Bosch GSB 18V-50'}}:null},preventDefault(){},stopImmediatePropagation(){}});assert.equal(opened,'Bosch GSB 18V-50');
+});
