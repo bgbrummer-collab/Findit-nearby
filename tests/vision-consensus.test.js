@@ -6,6 +6,11 @@ test('retains Beats headphones when exact models conflict, without leaking guess
 test('retains exact corroborated model with fewer calls',()=>{const d=reconcileVision([beats,beats]);assert.equal(d.model,'Solo 3');assert.equal(d.requiresModelConfirmation,false)});
 test('different objects cannot confirm an exact product even when the brand agrees',()=>{const i=reconcileVision([beats,{...beats,object:'speaker'}]);assert.equal(i.identityScope,'brand');assert.equal(i.object,'product');assert.equal(i.model,'');assert.equal(i.requiresModelConfirmation,true)});
 test('one confident model cannot independently verify itself',()=>assert.equal(reconcileVision([{...beats,confidence:1}]),null));
+test('a surviving complete printed shoe-family name is a reviewable candidate, not a confirmed model',()=>{
+ const i=reconcileVision([{name:'AIR FORCE 1',brand:'NIKE',model:'1',object:'sneaker',visibleText:['AIR','FORCE','1'],color:'white',size:'US'}]);
+ assert.equal(i.requiresModelConfirmation,true);assert.equal(i.model,'');assert.equal(i.size,'');assert.equal(i.color,'');assert.equal(i.confidence,null);assert.match(i.suggestedLabel,/NIKE air force 1/i);assert.equal(i.identityScope,'label-candidate');
+ assert.equal(reconcileVision([{name:'AIR FORCE 1',brand:'NIKE',model:'1',object:'sneaker',visibleText:['AIR']}]),null);
+});
 test('different brands cannot corroborate an identically named model',()=>{const d=reconcileVision([beats,{...beats,brand:'Sony'}]);assert.equal(d.brand,'');assert.equal(d.model,'');assert.equal(d.name,'headphones')});
 test('headset and headphones are recognised as the same broad object',()=>assert.equal(reconcileVision([beats,{...beats,name:'Beats headset',object:'headset',model:''}]).name,'Beats headphones'));
 test('container descriptions retain the independently recognised labelled product',()=>{const a={name:'Marc Anthony Triple Blend Conditioner',brand:'Marc Anthony',model:'Triple Blend Conditioner',object:'conditioner'},b={name:'Marc Anthony Strictly Curls 3x Moisture Conditioner',brand:'Marc Anthony',model:'Strictly Curls 3x Moisture Conditioner',object:'tube'};const d=reconcileVision([a,b]);assert.equal(d.name,'Marc Anthony conditioner');assert.equal(d.model,'');assert.equal(d.requiresModelConfirmation,true)});

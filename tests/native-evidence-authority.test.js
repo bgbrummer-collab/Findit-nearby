@@ -5,6 +5,12 @@ import {verify,ident} from '../lib/product-intelligence-core.js';
 const name='Sony WH-1000XM5 black',url='https://www.incredible.co.za/sony-wh-1000xm5-black';
 const page=(body)=>'<title>'+name+'</title>'+body;
 const search='<a href="'+url+'">'+name+'</a>';
+test('specialist hardware search keeps exact models and distinguishes bundle separators from Plus models',async t=>{
+ const {nativeRetailerUrls}=await import('../lib/native-retailer-discovery.js');
+ t.mock.method(globalThis,'fetch',async u=>String(u).includes('tmbsupplies.co.za/search/suggest.json')?new Response(JSON.stringify({resources:{results:{products:[{title:'Bosch Professional Cordless Drill GSB 18V-50 + 2 X 2.0Ah Batteries + Charger',url:'/products/bosch-gsb-18v-50-batteries-charger'},{title:'Bosch Professional GSB 185-LI',url:'/products/gsb-185-li'}]}}})):new Response('',{status:404}));
+ const urls=await nativeRetailerUrls({name:'Bosch GSB 18V-50',searchQuery:'Bosch GSB 18V-50'});
+ assert.deepEqual(urls,['https://www.tmbsupplies.co.za/products/bosch-gsb-18v-50-batteries-charger']);
+});
 test('a page is parsed once for identity, price and stock within a verification request',async t=>{
  const payload=JSON.stringify({'@type':'Product',name,offers:{price:5999,priceCurrency:'ZAR',availability:'https://schema.org/InStock'}}),raw=page('<script type="application/ld+json">'+payload+'</script>');
  const parse=JSON.parse;let parses=0;t.mock.method(JSON,'parse',function(value,...args){if(value===payload)parses++;return parse(value,...args)});
