@@ -1,0 +1,2343 @@
+{
+  "checkedAt": "2026-10-16T18:17:04.559Z",
+  "base": "https://findit-nearby.bgbrummer.workers.dev/",
+  "version": {
+    "commit": "abb0d739fcb066f062dae22144f712a55144227f",
+    "platform": "cloudflare"
+  },
+  "endVersion": {
+    "commit": "abb0d739fcb066f062dae22144f712a55144227f",
+    "platform": "cloudflare"
+  },
+  "versionStable": true,
+  "results": [
+    {
+      "category": "electronics",
+      "query": "Logitech PRO X Gaming Headset 981-000818",
+      "status": "passed",
+      "durationMs": 5537,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Logitech PRO X Gaming Headset 981-000818",
+            "object": "Logitech PRO X Gaming Headset 981-000818",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Logitech PRO X Gaming Headset 981-000818",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": true,
+          "exactMatchVerified": true,
+          "searchQuery": "Logitech PRO X Gaming Headset 981-000818",
+          "bestProduct": {
+            "name": "Logitech PRO X Gaming Headset With BLUE VO!CE Microphone Technology"
+          },
+          "bestPrice": {
+            "product_name": "Logitech PRO X Gaming Headset With BLUE VO!CE Microphone Technology",
+            "product_url": "https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology",
+            "sku": "981-000818",
+            "retailer": {
+              "name": "Computer Mania"
+            },
+            "price": 2299,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 80,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-16T18:16:23.699Z",
+            "retailerDomain": "computermania.co.za",
+            "trustedRetailerDomain": true
+          },
+          "offers": [
+            {
+              "product_name": "Logitech PRO X Gaming Headset With BLUE VO!CE Microphone Technology",
+              "product_url": "https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology",
+              "sku": "981-000818",
+              "retailer": {
+                "name": "Computer Mania"
+              },
+              "price": 2299,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 80,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-10-16T18:16:23.699Z",
+              "retailerDomain": "computermania.co.za",
+              "trustedRetailerDomain": true
+            }
+          ],
+          "retailerStatus": [
+            {
+              "name": "Computer Mania",
+              "searchUrl": "https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Computer Mania",
+              "searchUrl": "https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 1,
+          "verifiedSellerCount": 1,
+          "inStockOfferCount": 1,
+          "priceVerifiedCount": 1,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Logitech%20PRO%20X%20Gaming%20Headset%20981-000818",
+          "checkedAt": "2026-10-16T18:16:23.699Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": true,
+          "whatItDoes": "Pro-designed with detachable mic and Blue VO!CE software for professional-sounding voice comms.",
+          "pros": [
+            "Hear and sound like a pro with the Logitech G PRO X Gaming Headset.",
+            "Featuring next-gen 7.1 surround sound and PRO-G 50 mm drivers for amazingly clear sound imaging.",
+            "Soft memory foam padded leatherette or velour earcups.",
+            "Durable steel + aluminum construction."
+          ],
+          "cons": [],
+          "specifications": [
+            {
+              "name": "Brand",
+              "value": "Logitech",
+              "sourceUrl": "https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology"
+            },
+            {
+              "name": "SKU / product code",
+              "value": "981-000818",
+              "sourceUrl": "https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology"
+            }
+          ],
+          "compatibility": [
+            "Premium USB external sound card gives you crystal-clear game sound and voice chat."
+          ],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [
+            {
+              "title": "Logitech PRO X Gaming Headset With BLUE VO!CE Microphone Technology",
+              "url": "https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-10-16T18:16:24.263Z",
+          "message": "Product facts are quoted from matching product-page descriptions."
+        }
+      }
+    },
+    {
+      "category": "clothing",
+      "query": "Levis 501 Original Jeans",
+      "status": "passed",
+      "durationMs": 4015,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Levis 501 Original Jeans",
+            "object": "Levis 501 Original Jeans",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Levis 501 Original Jeans",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": true,
+          "exactMatchVerified": true,
+          "searchQuery": "Levis 501 Original Jeans",
+          "bestProduct": {
+            "name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - MEDIUM WASH"
+          },
+          "bestPrice": {
+            "product_name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - BLACK",
+            "product_url": "https://www.levi.co.za/products/levis-r-mens-501-r-original-jeans-black-2",
+            "sku": "A544700372830",
+            "retailer": {
+              "name": "Levi’s South Africa"
+            },
+            "price": 909,
+            "currency": "ZAR",
+            "availability": null,
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 92,
+            "stockScope": "not supplied",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-16T18:16:27.113Z",
+            "retailerDomain": "levi.co.za",
+            "trustedRetailerDomain": false
+          },
+          "offers": [
+            {
+              "product_name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - MEDIUM WASH",
+              "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2",
+              "sku": "0050135983632",
+              "retailer": {
+                "name": "Levi’s South Africa"
+              },
+              "price": 1299,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-10-16T18:16:26.914Z",
+              "retailerDomain": "levi.co.za",
+              "trustedRetailerDomain": false
+            },
+            {
+              "product_name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - MED INDIGO - WORN IN",
+              "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-med-indigo-worn-in",
+              "sku": "A544700404032",
+              "retailer": {
+                "name": "Levi’s South Africa"
+              },
+              "price": 1299,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-10-16T18:16:27.136Z",
+              "retailerDomain": "levi.co.za",
+              "trustedRetailerDomain": false
+            },
+            {
+              "product_name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - GREY",
+              "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-grey-1",
+              "sku": "A544700413032",
+              "retailer": {
+                "name": "Levi’s South Africa"
+              },
+              "price": 1299,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-10-16T18:16:27.327Z",
+              "retailerDomain": "levi.co.za",
+              "trustedRetailerDomain": false
+            },
+            {
+              "product_name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - BROWN",
+              "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown",
+              "sku": "A544700422832",
+              "retailer": {
+                "name": "Levi’s South Africa"
+              },
+              "price": 1399,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-10-16T18:16:26.952Z",
+              "retailerDomain": "levi.co.za",
+              "trustedRetailerDomain": false
+            },
+            {
+              "product_name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - BLACK",
+              "product_url": "https://www.levi.co.za/products/levis-r-mens-501-r-original-jeans-black-2",
+              "sku": "A544700372830",
+              "retailer": {
+                "name": "Levi’s South Africa"
+              },
+              "price": 909,
+              "currency": "ZAR",
+              "availability": null,
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "not supplied",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-10-16T18:16:27.113Z",
+              "retailerDomain": "levi.co.za",
+              "trustedRetailerDomain": false
+            },
+            {
+              "product_name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - DARK INDIGO - FLAT FINISH",
+              "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-flat-finish",
+              "sku": "A544700002832",
+              "retailer": {
+                "name": "Levi’s South Africa"
+              },
+              "price": 1199,
+              "currency": "ZAR",
+              "availability": null,
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "not supplied",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-10-16T18:16:27.332Z",
+              "retailerDomain": "levi.co.za",
+              "trustedRetailerDomain": false
+            },
+            {
+              "product_name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - DARK INDIGO - WORN IN",
+              "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-worn-in",
+              "sku": "A544700332832",
+              "retailer": {
+                "name": "Levi’s South Africa"
+              },
+              "price": 1199,
+              "currency": "ZAR",
+              "availability": null,
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "not supplied",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-10-16T18:16:27.534Z",
+              "retailerDomain": "levi.co.za",
+              "trustedRetailerDomain": false
+            },
+            {
+              "product_name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - GREY",
+              "product_url": "https://www.levi.co.za/products/levis-r-mens-501-r-original-jeans-grey-1",
+              "sku": "0050123702832",
+              "retailer": {
+                "name": "Levi’s South Africa"
+              },
+              "price": 1299,
+              "currency": "ZAR",
+              "availability": null,
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "not supplied",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-10-16T18:16:27.107Z",
+              "retailerDomain": "levi.co.za",
+              "trustedRetailerDomain": false
+            }
+          ],
+          "retailerStatus": [
+            {
+              "name": "Levi’s South Africa",
+              "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Levi’s South Africa",
+              "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-med-indigo-worn-in",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Levi’s South Africa",
+              "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-grey-1",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Levi’s South Africa",
+              "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Levi’s South Africa",
+              "searchUrl": "https://www.levi.co.za/products/levis-r-mens-501-r-original-jeans-black-2",
+              "exactProductMatch": true,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Levi’s South Africa",
+              "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-flat-finish",
+              "exactProductMatch": true,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Levi’s South Africa",
+              "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-worn-in",
+              "exactProductMatch": true,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Levi’s South Africa",
+              "searchUrl": "https://www.levi.co.za/products/levis-r-mens-501-r-original-jeans-grey-1",
+              "exactProductMatch": true,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Bash",
+              "searchUrl": "https://bash.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Superbalist",
+              "searchUrl": "https://www.superbalist.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Levi’s South Africa",
+              "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Levi’s South Africa",
+              "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-med-indigo-worn-in",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Levi’s South Africa",
+              "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-grey-1",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Levi’s South Africa",
+              "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Levi’s South Africa",
+              "searchUrl": "https://www.levi.co.za/products/levis-r-mens-501-r-original-jeans-black-2",
+              "exactProductMatch": true,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Levi’s South Africa",
+              "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-flat-finish",
+              "exactProductMatch": true,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Levi’s South Africa",
+              "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-worn-in",
+              "exactProductMatch": true,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Levi’s South Africa",
+              "searchUrl": "https://www.levi.co.za/products/levis-r-mens-501-r-original-jeans-grey-1",
+              "exactProductMatch": true,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Bash",
+              "searchUrl": "https://bash.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Superbalist",
+              "searchUrl": "https://www.superbalist.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 8,
+          "verifiedSellerCount": 1,
+          "inStockOfferCount": 4,
+          "priceVerifiedCount": 8,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Levis%20501%20Original%20Jeans",
+          "checkedAt": "2026-10-16T18:16:27.534Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": true,
+          "whatItDoes": "A classic straight leg and iconic styling.",
+          "pros": [
+            "And they never will."
+          ],
+          "cons": [],
+          "specifications": [
+            {
+              "name": "Brand",
+              "value": "Levi’s ®",
+              "sourceUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown"
+            }
+          ],
+          "compatibility": [],
+          "variants": [
+            {
+              "name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - MEDIUM WASH",
+              "productUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2",
+              "specifications": [
+                {
+                  "name": "Brand",
+                  "value": "Levi’s ®"
+                },
+                {
+                  "name": "SKU / product code",
+                  "value": "0050135983632"
+                },
+                {
+                  "name": "Manufacturer part number",
+                  "value": "0050135983632"
+                },
+                {
+                  "name": "Brand",
+                  "value": "Levi’s ®"
+                },
+                {
+                  "name": "SKU / product code",
+                  "value": "0050135983632"
+                }
+              ]
+            },
+            {
+              "name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - MED INDIGO - WORN IN",
+              "productUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-med-indigo-worn-in",
+              "specifications": [
+                {
+                  "name": "Brand",
+                  "value": "Levi’s ®"
+                },
+                {
+                  "name": "SKU / product code",
+                  "value": "A544700404032"
+                },
+                {
+                  "name": "Manufacturer part number",
+                  "value": "A544700404032"
+                },
+                {
+                  "name": "Brand",
+                  "value": "Levi’s ®"
+                },
+                {
+                  "name": "SKU / product code",
+                  "value": "A544700404032"
+                }
+              ]
+            },
+            {
+              "name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - GREY",
+              "productUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-grey-1",
+              "specifications": [
+                {
+                  "name": "Brand",
+                  "value": "Levi’s ®"
+                },
+                {
+                  "name": "SKU / product code",
+                  "value": "A544700413032"
+                },
+                {
+                  "name": "Manufacturer part number",
+                  "value": "A544700413032"
+                },
+                {
+                  "name": "Brand",
+                  "value": "Levi’s ®"
+                },
+                {
+                  "name": "SKU / product code",
+                  "value": "A544700413032"
+                }
+              ]
+            },
+            {
+              "name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - BROWN",
+              "productUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown",
+              "specifications": [
+                {
+                  "name": "Brand",
+                  "value": "Levi’s ®"
+                },
+                {
+                  "name": "SKU / product code",
+                  "value": "A544700422832"
+                },
+                {
+                  "name": "Manufacturer part number",
+                  "value": "A544700422832"
+                },
+                {
+                  "name": "Brand",
+                  "value": "Levi’s ®"
+                },
+                {
+                  "name": "SKU / product code",
+                  "value": "A544700422832"
+                }
+              ]
+            }
+          ],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [
+            {
+              "title": "LEVI'S® MEN'S 501® ORIGINAL JEANS - MEDIUM WASH",
+              "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2"
+            },
+            {
+              "title": "LEVI'S® MEN'S 501® ORIGINAL JEANS - MED INDIGO - WORN IN",
+              "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-med-indigo-worn-in"
+            },
+            {
+              "title": "LEVI'S® MEN'S 501® ORIGINAL JEANS - GREY",
+              "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-grey-1"
+            },
+            {
+              "title": "LEVI'S® MEN'S 501® ORIGINAL JEANS - BROWN",
+              "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-10-16T18:16:28.252Z",
+          "message": "Product facts are quoted from matching product-page descriptions."
+        }
+      }
+    },
+    {
+      "category": "shoes",
+      "query": "Nike Air Force 1 Low White Blue",
+      "status": "failed",
+      "durationMs": 1536,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Nike Air Force 1 Low White Blue",
+            "object": "Nike Air Force 1 Low White Blue",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Nike Air Force 1 Low White Blue",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "Nike Air Force 1 Low White Blue",
+          "bestProduct": null,
+          "bestPrice": null,
+          "offers": [],
+          "retailerStatus": [
+            {
+              "name": "Nike",
+              "searchUrl": "https://www.nike.com/za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Sportscene",
+              "searchUrl": "https://www.sportscene.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Totalsports",
+              "searchUrl": "https://www.totalsports.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "JD Sports",
+              "searchUrl": "https://www.jdsports.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Bash",
+              "searchUrl": "https://bash.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Nike",
+              "searchUrl": "https://www.nike.com/za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Sportscene",
+              "searchUrl": "https://www.sportscene.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Totalsports",
+              "searchUrl": "https://www.totalsports.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "JD Sports",
+              "searchUrl": "https://www.jdsports.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Bash",
+              "searchUrl": "https://bash.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Nike%20Air%20Force%201%20Low%20White%20Blue",
+          "checkedAt": "2026-10-16T18:16:29.330Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-10-16T18:16:29.828Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "groceries",
+      "query": "Coca-Cola Original Taste 2L",
+      "status": "failed",
+      "durationMs": 16835,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Coca-Cola Original Taste 2L",
+            "object": "Coca-Cola Original Taste 2L",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Coca-Cola Original Taste 2L",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "Coca-Cola Original Taste 2L",
+          "bestProduct": null,
+          "bestPrice": null,
+          "offers": [],
+          "retailerStatus": [
+            {
+              "name": "Checkers",
+              "searchUrl": "https://www.checkers.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Pick n Pay",
+              "searchUrl": "https://www.pnp.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Shoprite",
+              "searchUrl": "https://www.shoprite.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Woolworths",
+              "searchUrl": "https://www.woolworths.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Checkers",
+              "searchUrl": "https://www.checkers.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Pick n Pay",
+              "searchUrl": "https://www.pnp.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Shoprite",
+              "searchUrl": "https://www.shoprite.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Woolworths",
+              "searchUrl": "https://www.woolworths.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Coca-Cola%20Original%20Taste%202L",
+          "checkedAt": "2026-10-16T18:16:35.298Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-10-16T18:16:35.581Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "beauty",
+      "query": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
+      "status": "passed",
+      "durationMs": 9317,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
+            "object": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": true,
+          "exactMatchVerified": true,
+          "searchQuery": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
+          "bestProduct": {
+            "name": "Marc Anthony 3x Moist Conditioner 250ml"
+          },
+          "bestPrice": {
+            "product_name": "Marc Anthony 3x Moist Conditioner 250ml",
+            "product_url": "https://www.dischem.co.za/marc-anthony-3x-moist-conditioner-250ml-818",
+            "sku": "000000000000326818",
+            "retailer": {
+              "name": "Dis-Chem"
+            },
+            "price": 206.99,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 80,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-16T18:16:31.371Z",
+            "retailerDomain": "dischem.co.za",
+            "trustedRetailerDomain": true
+          },
+          "offers": [
+            {
+              "product_name": "Marc Anthony 3x Moist Conditioner 250ml",
+              "product_url": "https://www.dischem.co.za/marc-anthony-3x-moist-conditioner-250ml-818",
+              "sku": "000000000000326818",
+              "retailer": {
+                "name": "Dis-Chem"
+              },
+              "price": 206.99,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 80,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-10-16T18:16:31.371Z",
+              "retailerDomain": "dischem.co.za",
+              "trustedRetailerDomain": true
+            },
+            {
+              "product_name": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
+              "product_url": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689",
+              "sku": "",
+              "retailer": {
+                "name": "Clicks"
+              },
+              "price": 230,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-10-16T18:16:30.693Z",
+              "retailerDomain": "clicks.co.za",
+              "trustedRetailerDomain": true
+            }
+          ],
+          "retailerStatus": [
+            {
+              "name": "Dis-Chem",
+              "searchUrl": "https://www.dischem.co.za/marc-anthony-3x-moist-conditioner-250ml-818",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Clicks",
+              "searchUrl": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Dis-Chem",
+              "searchUrl": "https://www.dischem.co.za/marc-anthony-3x-moist-conditioner-250ml-818",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Clicks",
+              "searchUrl": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 2,
+          "verifiedSellerCount": 2,
+          "inStockOfferCount": 2,
+          "priceVerifiedCount": 2,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Marc%20Anthony%20Strictly%20Curls%203X%20Moisture%20Triple%20Blend%20Conditioner%20250ml",
+          "checkedAt": "2026-10-16T18:16:38.032Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": true,
+          "whatItDoes": "Strictly Curls 3X Moisture Triple Blend Conditioner is formulated with a powerful combination of marula oil, coconut, and shea butter to deliver intense moisture to dry, curly hair.",
+          "pros": [
+            "This conditioner works to detangle with lasting hydration, restore moisture with marula oil, strengthen with coconut cream, and protect with shea butter.",
+            "The result is hair that is soft, touchable, and free from frizz, always ready for play.",
+            "Instructions: Apply to wet hair after shampooing, massage and rinse.",
+            "For best results, use with Strictly Curls 3X Moisture Shampoo."
+          ],
+          "cons": [],
+          "specifications": [
+            {
+              "name": "Brand",
+              "value": "Marc Anthony",
+              "sourceUrl": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689"
+            },
+            {
+              "name": "SKU / product code",
+              "value": "000000000000326818",
+              "sourceUrl": "https://www.dischem.co.za/marc-anthony-3x-moist-conditioner-250ml-818"
+            },
+            {
+              "name": "Manufacturer part number",
+              "value": "000000000000326818",
+              "sourceUrl": "https://www.dischem.co.za/marc-anthony-3x-moist-conditioner-250ml-818"
+            },
+            {
+              "name": "Pack quantity",
+              "value": "1",
+              "sourceUrl": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689"
+            },
+            {
+              "name": "How to use",
+              "value": "Apply to wet hair after shampooing, massage and rinse. For best results, use with Strictly Curls 3X Moisture Shampoo.",
+              "sourceUrl": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689"
+            },
+            {
+              "name": "Storage instructions",
+              "value": "Store in a cool, dry place.",
+              "sourceUrl": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689"
+            },
+            {
+              "name": "Warnings",
+              "value": "For external use only. Keep out of reach of children. In case of contact with eyes, rinse immediately",
+              "sourceUrl": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689"
+            },
+            {
+              "name": "Ingredients",
+              "value": "Water (Aqua), Cetyl Alcohol, Behentrimonium Chloride, Cyclopentasiloxane, Propanediol, Glycerin, Sclerocarya Birrea (Marula) Seed Oil, Butyrospermum Parkii (Shea) Butter, Cocos Nucifera (Coconut) Water, Cocos Nucifera (Coconut) Oil, Helianthus Annuus (Sunflower) Seed Oil, Panthenol (Vitamin – B5), Stearyl Alcohol, Trideceth-12, Citric Acid, Cetrimonium Chloride, Isopropyl Alcohol, Amodimethicone, Ethylhexylglycerin, Tetrasodium EDTA, Sodium Benzoate, 1,2-Hexanediol, Potassium Sorbate, Phenoxyethanol, Parfum (Fragrance)",
+              "sourceUrl": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689"
+            }
+          ],
+          "compatibility": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [
+            {
+              "title": "Marc Anthony 3x Moist Conditioner 250ml",
+              "url": "https://www.dischem.co.za/marc-anthony-3x-moist-conditioner-250ml-818"
+            },
+            {
+              "title": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
+              "url": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-10-16T18:16:39.128Z",
+          "message": "Product facts are quoted from matching product-page descriptions."
+        }
+      }
+    },
+    {
+      "category": "tools",
+      "query": "Bosch GSB 18V-50",
+      "status": "failed",
+      "durationMs": 6701,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Bosch GSB 18V-50",
+            "object": "Bosch GSB 18V-50",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Bosch GSB 18V-50",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "Bosch GSB 18V-50",
+          "bestProduct": null,
+          "bestPrice": null,
+          "offers": [],
+          "retailerStatus": [
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "PriceCheck",
+              "searchUrl": "https://www.pricecheck.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "PriceCheck",
+              "searchUrl": "https://www.pricecheck.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Bosch%20GSB%2018V-50",
+          "checkedAt": "2026-10-16T18:16:41.932Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-10-16T18:16:42.279Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "furniture",
+      "query": "IKEA BILLY bookcase 80x28x202 white",
+      "status": "failed",
+      "durationMs": 2328,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "IKEA BILLY bookcase 80x28x202 white",
+            "object": "IKEA BILLY bookcase 80x28x202 white",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "IKEA BILLY bookcase 80x28x202 white",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "IKEA BILLY bookcase 80x28x202 white",
+          "bestProduct": null,
+          "bestPrice": null,
+          "offers": [],
+          "retailerStatus": [
+            {
+              "name": "Mr Price Home",
+              "searchUrl": "https://www.mrphome.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Decofurn",
+              "searchUrl": "https://www.decofurnsa.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Weylandts",
+              "searchUrl": "https://www.weylandts.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Mr Price Home",
+              "searchUrl": "https://www.mrphome.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Decofurn",
+              "searchUrl": "https://www.decofurnsa.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Weylandts",
+              "searchUrl": "https://www.weylandts.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=IKEA%20BILLY%20bookcase%2080x28x202%20white",
+          "checkedAt": "2026-10-16T18:16:44.278Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-10-16T18:16:44.603Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "household",
+      "query": "Twinsaver Comfort 3 Ply Tissues 120",
+      "status": "failed",
+      "durationMs": 2039,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Twinsaver Comfort 3 Ply Tissues 120",
+            "object": "Twinsaver Comfort 3 Ply Tissues 120",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Twinsaver Comfort 3 Ply Tissues 120",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "Twinsaver Comfort 3 Ply Tissues 120",
+          "bestProduct": null,
+          "bestPrice": null,
+          "offers": [],
+          "retailerStatus": [
+            {
+              "name": "Checkers",
+              "searchUrl": "https://www.checkers.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Pick n Pay",
+              "searchUrl": "https://www.pnp.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Shoprite",
+              "searchUrl": "https://www.shoprite.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Woolworths",
+              "searchUrl": "https://www.woolworths.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Checkers",
+              "searchUrl": "https://www.checkers.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Pick n Pay",
+              "searchUrl": "https://www.pnp.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Shoprite",
+              "searchUrl": "https://www.shoprite.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Woolworths",
+              "searchUrl": "https://www.woolworths.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Twinsaver%20Comfort%203%20Ply%20Tissues%20120",
+          "checkedAt": "2026-10-16T18:16:46.297Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-10-16T18:16:46.649Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "toys",
+      "query": "LEGO Classic 10696",
+      "status": "passed",
+      "durationMs": 8155,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "LEGO Classic 10696",
+            "object": "LEGO Classic 10696",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "LEGO Classic 10696",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": true,
+          "exactMatchVerified": true,
+          "searchQuery": "LEGO Classic 10696",
+          "bestProduct": {
+            "name": "10696 | LEGO® Classic Medium Creative Brick Box"
+          },
+          "bestPrice": {
+            "product_name": "10696 | LEGO® Classic Medium Creative Brick Box",
+            "product_url": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696?_pos=1&_sid=da11ccb96&_ss=r",
+            "sku": "5702015357180",
+            "retailer": {
+              "name": "LEGO Certified Stores"
+            },
+            "price": 559,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 91,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-16T18:16:45.645Z",
+            "retailerDomain": "lego-gybc.co.za",
+            "trustedRetailerDomain": false
+          },
+          "offers": [
+            {
+              "product_name": "10696 | LEGO® Classic Medium Creative Brick Box",
+              "product_url": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696?_pos=1&_sid=da11ccb96&_ss=r",
+              "sku": "5702015357180",
+              "retailer": {
+                "name": "LEGO Certified Stores"
+              },
+              "price": 559,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 91,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-10-16T18:16:45.645Z",
+              "retailerDomain": "lego-gybc.co.za",
+              "trustedRetailerDomain": false
+            }
+          ],
+          "retailerStatus": [
+            {
+              "name": "LEGO Certified Stores",
+              "searchUrl": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696?_pos=1&_sid=da11ccb96&_ss=r",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Toys R Us",
+              "searchUrl": "https://www.toysrus.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "LEGO Certified Stores",
+              "searchUrl": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696?_pos=1&_sid=da11ccb96&_ss=r",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Toys R Us",
+              "searchUrl": "https://www.toysrus.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 1,
+          "verifiedSellerCount": 1,
+          "inStockOfferCount": 1,
+          "priceVerifiedCount": 1,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=LEGO%20Classic%2010696",
+          "checkedAt": "2026-10-16T18:16:46.615Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": true,
+          "whatItDoes": "Designed with builders of all ages in mind, this 10696 collection of LEGO® bricks in 35 different colors will encourage open-ended building play, and inspire any imagination.",
+          "pros": [
+            "Windows, eyes, and lots and lots of wheels add to the fun and offer endless possibilities for creative construction and vehicle play.",
+            "A great supplement set to any existing LEGO collection, this set comes in a convenient plastic storage box and includes ideas to get the building started.",
+            "Build your own vehicles and much more with this classic collection of LEGO bricks in 35 different colors.",
+            "Includes windows, eyes, 18 tires and wheel rims, green baseplate and more."
+          ],
+          "cons": [],
+          "specifications": [
+            {
+              "name": "SKU / product code",
+              "value": "5702015357180",
+              "sourceUrl": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696?_pos=1&_sid=da11ccb96&_ss=r"
+            }
+          ],
+          "compatibility": [
+            "LEGO Creative Brick building toys are compatible with all LEGO construction sets for creative building."
+          ],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [
+            {
+              "title": "10696 | LEGO® Classic Medium Creative Brick Box",
+              "url": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696?_pos=1&_sid=da11ccb96&_ss=r"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-10-16T18:16:47.293Z",
+          "message": "Product facts are quoted from matching product-page descriptions."
+        }
+      }
+    },
+    {
+      "category": "music",
+      "query": "Shure MV7+ microphone",
+      "status": "passed",
+      "durationMs": 17732,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Shure MV7+ microphone",
+            "object": "Shure MV7+ microphone",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Shure MV7+ microphone",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": true,
+          "exactMatchVerified": true,
+          "searchQuery": "Shure MV7+ microphone",
+          "bestProduct": {
+            "name": "Shure MV7+ – Podcast Microphone"
+          },
+          "bestPrice": {
+            "product_name": "Shure MV7+ – Podcast Microphone",
+            "product_url": "https://bothners.co.za/shop/microphones-and-wireless/microphones/dynamic-microphones/shure-mv7-podcast-microphone/",
+            "sku": "MV7K",
+            "retailer": {
+              "name": "Bothners"
+            },
+            "price": 6695,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "retailerApiVerified": true,
+            "evidenceUrl": "https://bothners.co.za/wp-json/wc/store/v1/products?slug=shure-mv7-podcast-microphone&per_page=10",
+            "source": "Verified from public retailer product API",
+            "matchScore": 91,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-16T18:16:57.394Z",
+            "retailerDomain": "bothners.co.za",
+            "trustedRetailerDomain": false
+          },
+          "offers": [
+            {
+              "product_name": "Shure MV7+ – Podcast Microphone",
+              "product_url": "https://bothners.co.za/shop/microphones-and-wireless/microphones/dynamic-microphones/shure-mv7-podcast-microphone/",
+              "sku": "MV7K",
+              "retailer": {
+                "name": "Bothners"
+              },
+              "price": 6695,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "retailerApiVerified": true,
+              "evidenceUrl": "https://bothners.co.za/wp-json/wc/store/v1/products?slug=shure-mv7-podcast-microphone&per_page=10",
+              "source": "Verified from public retailer product API",
+              "matchScore": 91,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-10-16T18:16:57.394Z",
+              "retailerDomain": "bothners.co.za",
+              "trustedRetailerDomain": false
+            },
+            {
+              "product_name": "Shure MV7+ Hybrid Podcast Microphone – Black",
+              "product_url": "https://bothners.co.za/shop/microphones-and-wireless/shure-mv7-hybrid-podcast-microphone-black/",
+              "sku": "MV7+K",
+              "retailer": {
+                "name": "Bothners"
+              },
+              "price": 6995,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "retailerApiVerified": true,
+              "evidenceUrl": "https://bothners.co.za/wp-json/wc/store/v1/products?slug=shure-mv7-hybrid-podcast-microphone-black&per_page=10",
+              "source": "Verified from public retailer product API",
+              "matchScore": 91,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-10-16T18:16:56.859Z",
+              "retailerDomain": "bothners.co.za",
+              "trustedRetailerDomain": false
+            }
+          ],
+          "retailerStatus": [
+            {
+              "name": "Bothners",
+              "searchUrl": "https://bothners.co.za/shop/microphones-and-wireless/microphones/dynamic-microphones/shure-mv7-podcast-microphone/",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Bothners",
+              "searchUrl": "https://bothners.co.za/shop/microphones-and-wireless/shure-mv7-hybrid-podcast-microphone-black/",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Marshall Music",
+              "searchUrl": "https://www.marshallmusic.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Music Connection",
+              "searchUrl": "https://musicconnection.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Bothners",
+              "searchUrl": "https://bothners.co.za/shop/microphones-and-wireless/microphones/dynamic-microphones/shure-mv7-podcast-microphone/",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Bothners",
+              "searchUrl": "https://bothners.co.za/shop/microphones-and-wireless/shure-mv7-hybrid-podcast-microphone-black/",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Marshall Music",
+              "searchUrl": "https://www.marshallmusic.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Music Connection",
+              "searchUrl": "https://musicconnection.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 2,
+          "verifiedSellerCount": 1,
+          "inStockOfferCount": 2,
+          "priceVerifiedCount": 2,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Shure%20MV7%2B%20microphone",
+          "checkedAt": "2026-10-16T18:17:03.389Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": true,
+          "whatItDoes": "Refreshed with a customizable LED touch panel, powerful DSP features and even better audio, the MV7+ Podcast Microphone is a dynamic microphone built for discerning podcasters, streamers and musicians.",
+          "pros": [
+            "This updated version offers USB-C and XLR outputs, an improved Auto Level Mode, as well as a new digital pop filter, real-time Denoiser and reverb effects.",
+            "Select from millions of color options to make the touch-to-mute LED panel as unique as the audio you’re recording.",
+            "The MV7+ is certified for Microsoft Teams in combination with the AONIC 50 Gen 2 Headphones – Certified for Microsoft Teams.",
+            "Hybrid USB/XLR Dynamic Microphone with Onboard DSP, LED Strip, Headphone Jack, and App-based Control – Black."
+          ],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [
+            "This updated version offers USB-C and XLR outputs, an improved Auto Level Mode, as well as a new digital pop filter, real-time Denoiser and reverb effects.",
+            "Hybrid USB/XLR Dynamic Microphone with Onboard DSP, LED Strip, Headphone Jack, and App-based Control – Black.",
+            "This hybrid podcasting microphone supplies the superb sound of the standard MV7 and updates it with new features, including a touch-sensitive LED strip, complete computer control, and compatibility with the Shure MOTIV Mix desktop app.",
+            "Shure mics are incredibly popular; our MV7+ users report that the hybrid USB-C and XLR outputs allow this microphone to integrate into any setup."
+          ],
+          "variants": [
+            {
+              "name": "Shure MV7+ – Podcast Microphone",
+              "productUrl": "https://bothners.co.za/shop/microphones-and-wireless/microphones/dynamic-microphones/shure-mv7-podcast-microphone/",
+              "specifications": [
+                {
+                  "name": "SKU / product code",
+                  "value": "MV7K"
+                }
+              ]
+            },
+            {
+              "name": "Shure MV7+ Hybrid Podcast Microphone – Black",
+              "productUrl": "https://bothners.co.za/shop/microphones-and-wireless/shure-mv7-hybrid-podcast-microphone-black/",
+              "specifications": [
+                {
+                  "name": "SKU / product code",
+                  "value": "MV7+K"
+                }
+              ]
+            }
+          ],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [
+            {
+              "title": "Shure MV7+ – Podcast Microphone",
+              "url": "https://bothners.co.za/shop/microphones-and-wireless/microphones/dynamic-microphones/shure-mv7-podcast-microphone/"
+            },
+            {
+              "title": "Shure MV7+ Hybrid Podcast Microphone – Black",
+              "url": "https://bothners.co.za/shop/microphones-and-wireless/shure-mv7-hybrid-podcast-microphone-black/"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-10-16T18:17:04.354Z",
+          "message": "Product facts are quoted from matching product-page descriptions."
+        }
+      }
+    }
+  ]
+}

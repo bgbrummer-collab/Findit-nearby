@@ -1,0 +1,13 @@
+{
+  "commit": "abb0d739fcb066f062dae22144f712a55144227f",
+  "runUrl": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/38945854621",
+  "layoutPasses": 16,
+  "checks": [
+    "2026-10-16T18:16:12.2139963Z UPLOAD_LOCATION_BROWSER_PASS {\"width\":390,\"manualCoordinates\":true,\"invalidCoordinateRejected\":true,\"invalidUploadRejected\":true,\"oversizeUploadRejected\":true,\"galleryTransport\":true,\"cameraInputTransport\":true,\"dropEventTransport\":true,\"physicalCamera\":false}",
+    "2026-10-16T18:16:16.7836042Z UPLOAD_LOCATION_BROWSER_PASS {\"width\":768,\"manualCoordinates\":true,\"invalidCoordinateRejected\":true,\"invalidUploadRejected\":true,\"oversizeUploadRejected\":true,\"galleryTransport\":true,\"cameraInputTransport\":true,\"dropEventTransport\":true,\"physicalCamera\":false}",
+    "2026-10-16T18:16:21.7829160Z UPLOAD_LOCATION_BROWSER_PASS {\"width\":1440,\"manualCoordinates\":true,\"invalidCoordinateRejected\":true,\"invalidUploadRejected\":true,\"oversizeUploadRejected\":true,\"galleryTransport\":true,\"cameraInputTransport\":true,\"dropEventTransport\":true,\"physicalCamera\":false}",
+    "2026-10-16T18:16:39.7283592Z SHOPPING_PLAN_SETTLES_PASS 0",
+    "2026-10-16T18:16:39.9025337Z WATCHLIST_ALERTS_CONNECTED_PASS",
+    "2026-10-16T18:16:39.9027379Z SAVED_PRODUCT_JOURNEY_PASS {\"name\":\"Logitech PRO X Gaming Headset 981-000818\",\"persistedAcrossReload\":true,\"reopenedForFreshResearch\":true}"
+  ]
+}

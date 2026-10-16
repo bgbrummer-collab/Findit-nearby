@@ -1,0 +1,25 @@
+{
+  "checkedAt": "2026-10-16T18:21:49.486Z",
+  "rows": [
+    {
+      "path": "/api/version",
+      "status": 200,
+      "body": "{\"commit\":\"0395ea3c56f53afc5475166eb2d1da7f65ef8936\",\"platform\":\"cloudflare\"}"
+    },
+    {
+      "path": "/robots.txt",
+      "status": 200,
+      "body": "User-agent: *\nAllow: /\n\nSitemap: https://findit-nearby.bgbrummer.workers.dev/sitemap.xml\n\nDisallow: /catalog-admin.html\n\nDisallow: /awin-import.html\n"
+    },
+    {
+      "path": "/sitemap.xml",
+      "status": 200,
+      "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n  <url><loc>https://findit-nearby.bgbrummer.workers.dev/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>\n</urlset>\n"
+    },
+    {
+      "path": "/",
+      "status": 200,
+      "body": "0395ea3c56f53afc5475166eb2d1da7f65ef8936"
+    }
+  ]
+}

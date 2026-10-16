@@ -1,0 +1,10 @@
+{
+  "commit": "0395ea3c56f53afc5475166eb2d1da7f65ef8936",
+  "fixture": "tests/user-images/nike.jpg.b64",
+  "transport": "Live dashboard Upload Photo chooser, then Identify & Find",
+  "manualProductNameEntered": false,
+  "status": "failed",
+  "displayedProduct": "Product not identified",
+  "displayedMessage": "The models could not agree on the product identity. Add the product name, label or barcode; this does not necessarily mean the photo is unclear.",
+  "verifiedOffers": 0
+}
