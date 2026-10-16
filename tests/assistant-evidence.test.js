@@ -51,3 +51,9 @@ test('compatibility questions answer published connections and explicitly leave 
  assert.match(r.answer,/Windows computers using USB/);assert.match(r.answer,/Compatibility with xbox has not been verified/i);assert.ok(r.sources.some(x=>x.url==='https://manufacturer.example/headset'));
  const supported=answerFromEvidence('Is it compatible with Xbox?',context,{researched:true,compatibility:['Not compatible with Xbox consoles.']});assert.match(supported.answer,/Not compatible with Xbox/);assert.doesNotMatch(supported.answer,/has not been verified/);
 });
+
+test('assistant answers kit contents from the published package instead of omitting charger evidence',()=>{
+ const research={researched:true,whatItDoes:'Cordless impact drill.',includedItems:['2 x battery GBA 18V 2.0Ah.','1 x GAL 18V-20 charger.'],compatibility:['Professional 18V System works with Bosch batteries and chargers of the same voltage.'],sources:[{title:'Bosch GSB 18V-50 + 2 X 2.0Ah Batteries + Charger',url:'https://retailer.example/drill-kit'}]};
+ const d=answerFromEvidence('Does this include batteries and a charger, and what batteries work with it?',{identification:{name:'Bosch GSB 18V-50'}},research);assert.match(d.answer,/2 x battery GBA/);assert.match(d.answer,/GAL 18V-20 charger/);assert.match(d.answer,/same voltage/);assert.equal(d.sources.length,1);
+ const partial=answerFromEvidence('Does it include batteries?',{identification:{name:'Drill',requiresModelConfirmation:true}},research);assert.doesNotMatch(partial.answer,/GAL 18V-20/);assert.match(partial.answer,/not been confirmed/);
+});
