@@ -5,7 +5,7 @@
     if (!foot || document.getElementById('finditManualLocation')) return;
     const details = document.createElement('details');
     details.id = 'finditManualLocation';
-    details.style.cssText = 'width:100%;color:#cbd5e1;padding:8px 0';
+    details.style.cssText = 'width:100%;grid-column:1 / -1;color:#cbd5e1;padding:8px 0';
     details.innerHTML = `<summary style="cursor:pointer">Choose location on map / enter coordinates</summary>
       <p>Select your search area on the map, or enter its latitude and longitude. Distances use this point. Your selection lasts for this visit.</p>
       <button type="button" id="finditLocationMapButton">Open location map</button>
