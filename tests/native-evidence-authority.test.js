@@ -8,7 +8,7 @@ const search='<a href="'+url+'">'+name+'</a>';
 test('specialist hardware search keeps exact models and distinguishes bundle separators from Plus models',async t=>{
  const {nativeRetailerUrls}=await import('../lib/native-retailer-discovery.js');
  t.mock.method(globalThis,'fetch',async u=>String(u).includes('tmbsupplies.co.za/search/suggest.json')?new Response(JSON.stringify({resources:{results:{products:[{title:'Bosch Professional Cordless Drill GSB 18V-50 + 2 X 2.0Ah Batteries + Charger',url:'/products/bosch-gsb-18v-50-batteries-charger'},{title:'Bosch Professional GSB 185-LI',url:'/products/gsb-185-li'}]}}})):new Response('',{status:404}));
- const urls=await nativeRetailerUrls({name:'Bosch GSB 18V-50',searchQuery:'Bosch GSB 18V-50'});
+ const urls=await nativeRetailerUrls({name:'Bosch GSB 18V-50',object:'Bosch GSB 18V-50',category:'general',searchQuery:'Bosch GSB 18V-50'});
  assert.deepEqual(urls,['https://www.tmbsupplies.co.za/products/bosch-gsb-18v-50-batteries-charger']);
 });
 test('a page is parsed once for identity, price and stock within a verification request',async t=>{
