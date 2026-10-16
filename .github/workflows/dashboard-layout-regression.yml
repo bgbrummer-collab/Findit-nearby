@@ -2,7 +2,7 @@ name: FindIt Responsive Layout Regression
 on:
   push:
     branches: [main]
-    paths: ['user-first-polish.js', 'user-pov-hardening.js', 'information-runtime.js', 'dashboard-audit-controls.js', 'redesign-v4.js', 'redesign-v4.css', 'tests/dashboard-layout-regression.mjs', 'tests/saved-product-journey.mjs', '.github/workflows/dashboard-layout-regression.yml', '.github/workflows/deploy-cloudflare.yml']
+    paths: ['manual-location.js', 'upload-validation.js', 'tests/upload-location-browser.mjs', 'user-first-polish.js', 'user-pov-hardening.js', 'information-runtime.js', 'dashboard-audit-controls.js', 'redesign-v4.js', 'redesign-v4.css', 'tests/dashboard-layout-regression.mjs', 'tests/saved-product-journey.mjs', '.github/workflows/dashboard-layout-regression.yml', '.github/workflows/deploy-cloudflare.yml']
   workflow_dispatch:
 jobs:
   layout:
@@ -41,6 +41,11 @@ jobs:
           LAYOUT_SCREENSHOTS: layout-evidence
           FINDIT_EXPECTED_COMMIT: ${{ github.sha }}
         run: node tests/dashboard-layout-regression.mjs
+      - name: Verify production upload inputs and manual location at three viewport sizes
+        env:
+          FINDIT_URL: https://findit-nearby.bgbrummer.workers.dev/
+          FINDIT_EXPECTED_COMMIT: ${{ github.sha }}
+        run: node tests/upload-location-browser.mjs
       - name: Verify real saved-product persistence and reopen journey
         env:
           FINDIT_URL: https://findit-nearby.bgbrummer.workers.dev/

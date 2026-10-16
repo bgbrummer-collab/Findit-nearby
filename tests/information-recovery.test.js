@@ -64,3 +64,17 @@ test('typing a brand and product type does not confirm an exact model',async()=>
  const response=await worker.fetch(new Request('https://findit.test/api/search',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({query:'NIKE shoes'})}),{});const d=await response.json();assert.equal(d.identification.requiresModelConfirmation,true);assert.equal(d.identification.object,'shoes');assert.equal(d.identification.retailCategory,'footwear');assert.equal(d.identification.userConfirmed,false);
  const exact=await(await worker.fetch(new Request('https://findit.test/api/search',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({query:'Nike Air Force 1 CW2288-111'})}),{})).json();assert.equal(exact.identification.requiresModelConfirmation,undefined);assert.equal(exact.identification.name,'Nike Air Force 1 CW2288-111');
 });
+
+test('a new typed family search clears the previous photo, while explicit candidate confirmation retains it',async()=>{
+ for(const confirm of [false,true]){
+  const r=runtime(),state=r.context.window.finditState;
+  state.file={name:'old-product.jpg'};state.result.identification={name:'Old photo',requiresModelConfirmation:true};
+  let removed=false;r.elements.set('#preview',{removeAttribute(){removed=true},classList:{add(){}}});
+  r.elements.set('#fxProductImage',{innerHTML:'<img src="old-product.jpg">'});
+  r.context.navigator={};r.context.CustomEvent=class{};r.context.document.dispatchEvent=()=>{};
+  r.context.fetch=async url=>({ok:true,json:async()=>String(url)==='/api/search'?{identification:{name:'Nike shoes',brand:'Nike',object:'shoes',requiresModelConfirmation:true}}:{offers:[],researched:false}});
+  await r.context.window.finditRunProductSearch('Nike shoes',confirm?{name:'Nike shoes'}:null);
+  assert.equal(removed,!confirm);
+  assert.equal(state.file===null,!confirm);
+ }
+});

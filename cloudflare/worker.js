@@ -77,7 +77,7 @@ async function handleNearby(request){if(request.method!=='POST')return json({err
 async function handleStoreWebsiteCheck(request){
  if(request.method!=='POST')return json({error:'POST only'},405);
  const b=await request.json().catch(()=>({}));let u;
- try{u=new URL(String(b.website||''));if(u.protocol!=='https:'||u.username||u.password||u.port||!u.hostname.includes('.')||u.hostname==='localhost'||/^(?:\\d+\\.){3}\\d+$/.test(u.hostname)||/^(?:127|10|192\\.168|169\\.254|172\\.(?:1[6-9]|2\\d|3[01]))\\./.test(u.hostname)||u.hostname.endsWith('.local'))throw Error('Invalid public retailer website')}catch{return json({ok:false,error:'A valid public HTTPS retailer website is required'},400)}
+ try{u=new URL(String(b.website||''));if(u.protocol!=='https:'||u.username||u.password||u.port||!u.hostname.includes('.')||u.hostname.startsWith('[')||/^(?:\d+\.){3}\d+$/.test(u.hostname)||/(?:^|\.)(?:localhost|local|internal)$/.test(u.hostname))throw Error('Invalid public retailer website')}catch{return json({ok:false,error:'A valid public HTTPS retailer website is required'},400)}
  try{
   const c=new AbortController(),timer=setTimeout(()=>c.abort(),4500);let response;
   try{response=await fetch(u.href,{redirect:'manual',signal:c.signal,headers:{accept:'text/html'}})}finally{clearTimeout(timer)}
