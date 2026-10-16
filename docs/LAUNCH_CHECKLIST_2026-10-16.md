@@ -93,3 +93,19 @@ The original shoe photo was uploaded again through the actual chooser after the 
 Empty offers in this audit mean FindIt failed to retrieve/verify an exact listing; they do not establish that the product is unavailable in the real world. Retailer-specific search-adapter coverage remains engineering work.
 
 All nine workflows triggered for final packaging release 0395ea3 completed successfully, including responsive/upload/location/saved-item, commerce, production smoke, release smoke and Interaction Freeze checks. See `launch-evidence-2026-10-16/packaging-workflows.json`. This does not override the live-data/photo failures.
+
+## Final continuation — 16 October, 19:15 UTC
+
+Deployed code: `03ce5aaca4db2063847974b172c683def91e6d68`. Production API version and browser build metadata both match. No paid services were activated.
+
+Additional repairs: overlap primary/secondary vision requests after a 200 ms quota-aware hedge, preserving time for final corroboration; preserve complete printed label candidates without asserting exact identity; add TMB Supplies Shopify discovery, route Bosch GSB/GSR families correctly, and distinguish bundle ` + ` from attached Plus model suffixes. Regression checks: **223/223 local Node tests passed**, syntax/diff checks passed.
+
+Final actual browser journey uploaded the original Nike shoe through the file chooser, clicked Identify & Find, and waited for the result without typing a replacement. UI now shows NIKE shoes and requires exact-model confirmation; API retains NIKE Air Force 1 as an unconfirmed label candidate. Scout failed and LLAVA reported unsupported; the surviving provider alone does not establish exact identity. Thus photo identification remains **failed**, with useful partial recovery. Screenshot is retained locally as `/workspace/scratch/findit-final-photo-20261016.jpg`.
+
+Final live API matrix (`launch-evidence-2026-10-16-next/live-data-matrix.json`) remains **5/10 passed**, stable on this release: electronics, beauty, clothing, toys, music. Groceries, shoes, tools, furniture and household exact discovery failed. The local native Bosch adapter independently verified a TMB GSB 18V-50 kit (two 2 Ah batteries and charger), R4999 ZAR and online stock, but production's complete matrix returned no offer. This adapter is NOT counted as a completed production repair. Retailer adapter/discovery reliability still needs investigation.
+
+Latest CI: regression, smoke, Cloudflare deployment, Pages, live photo probe, dashboard commerce, production smoke and release smoke passed. Uncommon Commerce Regression failed: no verified exact retailer page discovered (run 38953123225, job 117149209668). Local Korg success does not override this CI failure. Interaction Freeze was still running at the recorded check. A passing photo probe does not establish exact identification.
+
+All checklist statuses above continue to apply except local test count is now 223. Critical remaining work: reliable real-photo exact identification; the five failing category searches; uncommon discovery and production/native discrepancies; wider product/Ask FindIt usefulness; full tools/navigation/accessibility/device regression. Integration blockers remain secure feedback endpoint configuration, authoritative branch inventory, analytics persistence and background alert delivery. These are not all credentials blockers; independent engineering and untested journeys remain.
+
+Resume from GitHub main with code release 03ce5aa. Current worktree: `/workspace/scratch/dfb28728663c/Findit-next` (detached earlier HEAD with published changes); fetch before further work, use expected-parent leases, never force-push. **Recommendation remains NOT launch-ready.**
