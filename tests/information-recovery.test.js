@@ -92,3 +92,10 @@ test('a delayed product-family nearby lookup cannot overwrite a newly selected l
   assert.equal(s.stores[0].name,'Current result');
  }
 });
+
+test('product research prefers drill facts over corporate marketing on the same product page',async t=>{
+ const worker=(await import('../cloudflare/worker.js')).default,name='Bosch Professional GSB 18V-50 Cordless Drill';
+ t.mock.method(globalThis,'fetch',async u=>String(u).includes('bing.com')?new Response('<rss/>'):new Response('<script type="application/ld+json">'+JSON.stringify({'@type':'Product',name,description:'The professional blue power tools and accessories from Bosch are developed for professionals. Bosch creates new innovations in power tools and accessories by working intensively with professionals. GSB18V-50 Cordless Impact Drill - Robust brushless motor for durability and flexibility. Professional 18V System works with Bosch batteries and chargers of the same voltage.'})+'</script>'));
+ const d=await(await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({name,offers:[{product_url:'https://retailer.example/drill',sourcePageVerified:true,exactProductMatch:true}]})}),{})).json();
+ assert.match(d.whatItDoes,/Cordless Impact Drill/);assert.doesNotMatch(d.whatItDoes,/developed for professionals/);assert.ok(d.pros.every(x=>!/creates new innovations/.test(x)));assert.match(d.compatibility.join(' '),/same voltage/);
+});

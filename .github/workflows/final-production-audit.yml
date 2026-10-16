@@ -6,6 +6,8 @@ on:
     paths:
       - '.github/workflows/final-production-audit.yml'
       - '.github/workflows/production-smoke.yml'
+      - 'cloudflare/**'
+      - 'lib/**'
       - 'index.html'
       - 'style.css'
       - 'script.js'

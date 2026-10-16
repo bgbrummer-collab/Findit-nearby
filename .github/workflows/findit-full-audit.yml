@@ -5,6 +5,8 @@ on:
   push:
     branches: [main]
     paths:
+      - 'cloudflare/**'
+      - 'lib/**'
       - 'index.html'
       - 'style.css'
       - 'script.js'

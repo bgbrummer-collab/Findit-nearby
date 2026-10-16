@@ -43,3 +43,10 @@ test('a published SKU omitted from suggestion titles can still reach strict page
  const {nativeRetailerUrls}=await import('../lib/native-retailer-discovery.js');t.mock.method(globalThis,'fetch',async u=>String(u).includes('computermania.co.za/search/suggest.json')?new Response(JSON.stringify({resources:{results:{products:[{title:'Logitech PRO X Gaming Headset',url:'/products/logitech-pro-x'}]}}})):new Response(''));
  const urls=await nativeRetailerUrls({name:'Logitech PRO X Gaming Headset 981-000818',searchQuery:'Logitech PRO X Gaming Headset 981-000818'});assert.deepEqual(urls,['https://computermania.co.za/products/logitech-pro-x']);
 });
+
+test('unavailable retailer search does not skip independently verified product candidates',async t=>{
+ const title='Korg Pitchclip 2 clip-on tuner',url='https://www.marshallmusic.co.za/product/korg-pitchclip-2-clip-on-tuner/';
+ t.mock.method(globalThis,'fetch',async input=>String(input)===url?new Response('<script type="application/ld+json">'+JSON.stringify({'@type':'Product',name:title,offers:{price:345,priceCurrency:'ZAR',availability:'https://schema.org/InStock'}})+'</script>',{headers:{'content-type':'text/html'}}):new Response('',{status:503}));
+ const offers=await nativeRetailerDiscovery({brand:'Korg',model:'Pitchclip 2',name:title,object:'clip-on instrument tuner',category:'musical accessories',searchQuery:title});
+ assert.equal(offers.length,1);assert.equal(offers[0].product_url,url);assert.equal(offers[0].sourcePageVerified,true);assert.equal(offers[0].price,345);
+});
