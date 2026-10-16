@@ -1,9 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {nativeRetailerDiscovery} from '../lib/native-retailer-discovery.js';
+import {verify,ident} from '../lib/product-intelligence-core.js';
 const name='Sony WH-1000XM5 black',url='https://www.incredible.co.za/sony-wh-1000xm5-black';
 const page=(body)=>'<title>'+name+'</title>'+body;
 const search='<a href="'+url+'">'+name+'</a>';
+test('a page is parsed once for identity, price and stock within a verification request',async t=>{
+ const payload=JSON.stringify({'@type':'Product',name,offers:{price:5999,priceCurrency:'ZAR',availability:'https://schema.org/InStock'}}),raw=page('<script type="application/ld+json">'+payload+'</script>');
+ const parse=JSON.parse;let parses=0;t.mock.method(JSON,'parse',function(value,...args){if(value===payload)parses++;return parse(value,...args)});
+ t.mock.method(globalThis,'fetch',async()=>new Response(raw,{headers:{'content-type':'text/html'}}));
+ const offer=await verify(url,ident({name}));assert.equal(offer.price,5999);assert.equal(offer.availability,'in_stock');assert.equal(parses,1,'Repeated full-page parsing exhausts the Worker CPU budget');
+});
 for(const [label,html,expected] of [
  ['explicit USD remains USD',page('<script type="application/ld+json">'+JSON.stringify({'@type':'Product',name,offers:{price:299,priceCurrency:'USD',availability:'https://schema.org/InStock'}})+'</script>'),{price:299,currency:'USD',availability:'in_stock'}],
  ['recommendation prices and cart buttons cannot verify product price or stock',page('<script>{"recommendations":[{"price":1}]}</script><p>R 1 Add to cart</p>'),{price:null,currency:null,availability:null}]

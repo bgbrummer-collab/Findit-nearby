@@ -16,7 +16,7 @@ const cases=[
 ];
 const post=async(path,body)=>{
  const r=await fetch(new URL(path,base),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body),signal:AbortSignal.timeout(65000)});
- return {status:r.status,data:await r.json()};
+ const raw=await r.text();let data;try{data=JSON.parse(raw)}catch{throw Error('Non-JSON response: HTTP '+r.status+' '+r.headers.get('content-type')+' '+raw.slice(0,160));}return {status:r.status,data};
 };
 const version=await(await fetch(new URL('/api/version',base))).json(),results=[];
 let cursor=0;

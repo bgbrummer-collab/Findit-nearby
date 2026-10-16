@@ -26,17 +26,17 @@ async function runSearch(q,confirmedCandidate=null){q=clean(q);if(!q||busy)retur
  const s=st(),previousIdentity=ident(),base=await json('/api/search',{query:q});if(generation!==photoGeneration)return;owned=true;partialResearch=null;partialPending=false;if(!base.identification)throw Error('FindIt could not create a product search from that name.');
  if(confirmedCandidate&&confirmedCandidate.name===q&&previousIdentity.requiresModelConfirmation){const size=q.match(/\b\d+(?:\.\d+)?\s*(?:ml|kg|g|l)\b/i)?.[0]||previousIdentity.size||'';base.identification={...base.identification,brand:previousIdentity.brand||'',object:previousIdentity.object||base.identification.object,category:previousIdentity.category||base.identification.category,retailCategory:previousIdentity.retailCategory||base.identification.retailCategory,size,confirmationMethod:'user-confirmed-retailer-candidate'};}
  if(!confirmedCandidate){s.file=null;const oldPreview=$('#preview');if(oldPreview){oldPreview.removeAttribute('src');oldPreview.classList.add('hidden')}const photoBox=$('#fxProductImage');if(photoBox)photoBox.innerHTML='<span>▧</span>';}s.photoSearchPending=null;s.photoSearchFile=null;s.result=base;s.offers=[];window.productIntelligence=null;s.stores=[];commerce=null;research=null;
- const i=base.identification,coords=await getLocationIfAlreadyAllowed(),payload={identification:i,...(coords?{lat:coords.lat,lon:coords.lon}:{})};
+ const i=base.identification,coords=await getLocationIfAlreadyAllowed(),requestedRadius=s.radius||10,payload={identification:i,...(coords?{lat:coords.lat,lon:coords.lon}:{})};
  if(generation!==photoGeneration)return;syncIdentity(i);document.dispatchEvent(new CustomEvent('findit:results-rendered',{detail:{result:base}}));
  const tasks=[
   json('/api/product-intelligence-v2',payload,30000).catch(e=>{console.error('FindIt commerce request failed',e);return null}),
-  coords?json('/api/nearby',{lat:coords.lat,lon:coords.lon,identification:i,radiusKm:s.radius||10},22000).catch(e=>{console.error('FindIt nearby request failed',e);return null}):Promise.resolve(null)
+  coords?json('/api/nearby',{lat:coords.lat,lon:coords.lon,identification:i,radiusKm:requestedRadius},22000).catch(e=>{console.error('FindIt nearby request failed',e);return null}):Promise.resolve(null)
  ];
  const [c,n]=await Promise.all(tasks);if(generation!==photoGeneration)return;commerce=c;
  if(Array.isArray(c?.offers)){s.offers=c.offers;window.productIntelligence=c;syncAll();document.dispatchEvent(new CustomEvent('findit:dashboard-sync',{detail:{result:s.result}}))}
  const r=await json('/api/product-insights',{identification:i,offers:Array.isArray(c?.offers)?c.offers:[]},24000).catch(e=>{console.error('FindIt product insights failed',e);return null});
  if(generation!==photoGeneration)return;research=r?.researched===false?null:r;if(i.requiresModelConfirmation)partialResearch=r;
- if(Array.isArray(c?.offers)){s.offers=c.offers;window.productIntelligence=c}else console.warn('FindIt commerce response has no offer list');if(Array.isArray(n?.stores))s.stores=n.stores;else if(!coords)console.info('FindIt nearby search needs location permission');else console.warn('FindIt nearby response has no store list');
+ if(Array.isArray(c?.offers)){s.offers=c.offers;window.productIntelligence=c}else console.warn('FindIt commerce response has no offer list');if(s.coords===coords&&(s.radius||10)===requestedRadius&&Array.isArray(n?.stores))s.stores=n.stores;else if(!coords)console.info('FindIt nearby search needs location permission');else console.warn('FindIt nearby response has no store list');
  syncAll();document.dispatchEvent(new CustomEvent('findit:dashboard-sync',{detail:{result:s.result}}));if(s.stores.length)document.dispatchEvent(new CustomEvent('findit:nearby-updated',{detail:{stores:s.stores}}));
  searchStatus('Product search complete. Prices and stock require verified retailer evidence.');saveRecent(i);if($('#fxInformationModal.open .fx-info-loading')||$('#fxInformationModal.open #fxProductInfoView'))showProductInfo();
  }catch(e){if(generation!==photoGeneration)return;searchStatus('Search failed. Check the message below.');openModal('<h2>Search problem</h2><p>'+esc(e.message||'FindIt could not complete this search.')+'</p><button id="fxTryAgain">Try another product</button>');$('#fxTryAgain').onclick=()=>searchModal()}finally{if(generation===photoGeneration){busy=false;syncAll()}}}
@@ -85,8 +85,9 @@ async function showNearby(){if(!productName())return searchModal();const state=s
 let partialNearbyKey='',partialNearbyPending=false;
 async function loadPartialNearby(i){
  const s=st(),generation=photoGeneration,coords=await getLocationIfAlreadyAllowed();if(!coords||!s||generation!==photoGeneration)return;
- const key=JSON.stringify([generation,productName(i),coords.lat,coords.lon,s.radius||10]);if(partialNearbyKey===key)return;partialNearbyKey=key;partialNearbyPending=true;
- try{const n=await json('/api/nearby',{lat:coords.lat,lon:coords.lon,identification:i,radiusKm:s.radius||10},22000);if(generation!==photoGeneration||st()!==s)return;if(Array.isArray(n?.stores)){s.stores=n.stores;syncAll();document.dispatchEvent(new CustomEvent('findit:nearby-updated',{detail:{stores:s.stores}}));}else if(partialNearbyKey===key)partialNearbyKey='';}
+ const requestedRadius=s.radius||10;
+ const key=JSON.stringify([generation,productName(i),coords.lat,coords.lon,requestedRadius]);if(partialNearbyKey===key)return;partialNearbyKey=key;partialNearbyPending=true;
+ try{const n=await json('/api/nearby',{lat:coords.lat,lon:coords.lon,identification:i,radiusKm:requestedRadius},22000);if(generation!==photoGeneration||st()!==s||s.coords!==coords||(s.radius||10)!==requestedRadius)return;if(Array.isArray(n?.stores)){s.stores=n.stores;syncAll();document.dispatchEvent(new CustomEvent('findit:nearby-updated',{detail:{stores:s.stores}}));}else if(partialNearbyKey===key)partialNearbyKey='';}
  catch(e){if(partialNearbyKey===key)partialNearbyKey='';console.error('FindIt product-type nearby search failed',e);}finally{partialNearbyPending=false;}
 }
 async function hydrateIdentifiedPhoto(){
@@ -97,10 +98,10 @@ async function hydrateIdentifiedPhoto(){
  const generation=++photoGeneration,photoFile=s.file;
  try{
   syncIdentity(i);
-  const coords=await getLocationIfAlreadyAllowed(),payload={identification:i,...(coords?{lat:coords.lat,lon:coords.lon}:{})};
+  const coords=await getLocationIfAlreadyAllowed(),requestedRadius=s.radius||10,payload={identification:i,...(coords?{lat:coords.lat,lon:coords.lon}:{})};
   const tasks=[
    json('/api/product-intelligence-v2',payload,30000).catch(e=>{console.error('FindIt photo commerce failed',e);return null}),
-   coords?json('/api/nearby',{lat:coords.lat,lon:coords.lon,identification:i,radiusKm:s.radius||10},22000).catch(e=>{console.error('FindIt photo nearby failed',e);return null}):Promise.resolve(null)
+   coords?json('/api/nearby',{lat:coords.lat,lon:coords.lon,identification:i,radiusKm:requestedRadius},22000).catch(e=>{console.error('FindIt photo nearby failed',e);return null}):Promise.resolve(null)
   ];
   const [ci,ni]=await Promise.all(tasks);if(generation!==photoGeneration||st()!==s||s.file!==photoFile)return;commerce=ci;
   const ri=await json('/api/product-insights',{identification:i,offers:Array.isArray(ci?.offers)?ci.offers:[]},24000).catch(e=>{console.error('FindIt photo product insights failed',e);return null});
@@ -108,7 +109,7 @@ async function hydrateIdentifiedPhoto(){
   research=ri?.researched===false?null:ri;
   if(Array.isArray(ci?.offers)){s.offers=ci.offers;window.productIntelligence=ci}else console.warn('FindIt photo commerce response has no offer list');
   // Do not erase an already truthful nearby result when the optional refresh returns empty.
-  if(Array.isArray(ni?.stores))s.stores=ni.stores;else if(coords)console.warn('FindIt photo nearby response has no store list');
+  if(s.coords===coords&&(s.radius||10)===requestedRadius&&Array.isArray(ni?.stores))s.stores=ni.stores;else if(coords)console.warn('FindIt photo nearby response has no store list');
   syncAll();saveRecent(i);
   document.dispatchEvent(new CustomEvent('findit:dashboard-sync',{detail:{result:s.result}}));
   if(s.stores?.length)document.dispatchEvent(new CustomEvent('findit:nearby-updated',{detail:{stores:s.stores}}));

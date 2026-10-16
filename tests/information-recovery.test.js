@@ -78,3 +78,17 @@ test('a new typed family search clears the previous photo, while explicit candid
   assert.equal(state.file===null,!confirm);
  }
 });
+
+test('a delayed product-family nearby lookup cannot overwrite a newly selected location or radius',async()=>{
+ for(const change of ['location','radius']){
+  const r=runtime(),s=r.context.window.finditState;s.coords={lat:-25.8,lon:28.3};s.radius=10;
+  s.result.identification={name:'Nike shoes',requiresModelConfirmation:true};
+  const code=readFileSync(new URL('../information-runtime.js',import.meta.url),'utf8').replace('window.finditRunProductSearch=runSearch;','window.finditRunProductSearch=runSearch;window.testNearby=loadPartialNearby;');
+  delete r.context.window.__finditInformationRuntime;r.context.document.dispatchEvent=()=>{};r.context.CustomEvent=class{};
+  vm.runInNewContext(code,r.context);
+  const pending=r.context.window.testNearby(s.result.identification);await new Promise(resolve=>setImmediate(resolve));
+  if(change==='location')s.coords={lat:-33.9,lon:18.4};else s.radius=3;
+  s.stores=[{name:'Current result'}];await r.finish({stores:[{name:'Obsolete result'}]});await pending;
+  assert.equal(s.stores[0].name,'Current result');
+ }
+});
