@@ -134,3 +134,8 @@ test('empty photo research settles the dashboard loading status',async()=>{
  const context={window:{},st:()=>state,ident:()=>state.result.identification,productName:()=>state.result.identification.name,owned:false,busy:false,commerce:null,research:null,photoGeneration:0,syncIdentity(){},getLocationIfAlreadyAllowed:async()=>null,json:async()=>({offers:[],researched:false}),syncAll(){states.push(context.busy)},saveRecent(){},document:{dispatchEvent(){}},CustomEvent:class{},console};
  vm.runInNewContext(source.slice(start,end)+';this.hydrate=hydrateIdentifiedPhoto;',context);await context.hydrate();assert.equal(context.busy,false);assert.equal(states.at(-1),false);assert.ok(states.includes(true));
 });
+
+test('nearby outage messages follow only the selected product, radius and location',()=>{
+ const source=readFileSync(new URL('../information-runtime.js',import.meta.url),'utf8'),start=source.indexOf('let nearbyOutcome=null;'),end=source.indexOf('function storeRow',start),state={coords:{lat:-25.78,lon:28.27},radius:10};let name='Conditioner';const c={st:()=>state,productName:()=>name,clean:v=>String(v||'')};vm.runInNewContext(source.slice(start,end)+';this.remember=rememberNearby;this.failure=nearbyFailure;',c);
+ c.remember({discoveryAvailable:false,stores:[],message:'Nearby data unavailable'}, {},state.coords,10);assert.equal(c.failure(),'Nearby data unavailable');state.radius=5;assert.equal(c.failure(),'');state.radius=10;name='Shirt';assert.equal(c.failure(),'');name='Conditioner';state.coords.lon=29;assert.equal(c.failure(),'');
+});
