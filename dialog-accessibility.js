@@ -17,6 +17,6 @@
    });
    new MutationObserver(()=>{if(state.active&&!visible()){state.active=false;if(state.previous?.isConnected&&(!document.activeElement||document.activeElement===document.body||modal.contains(document.activeElement)))state.previous.focus();}}).observe(modal,{attributes:true,attributeFilter:['class','aria-hidden','style']});
   }
-  if(!state.active){state.previous=document.activeElement;state.active=true;const first=modal.querySelector('[autofocus]')||controls()[0];if(first)first.focus();else{modal.tabIndex=-1;modal.focus();}}
+  if(!state.active){state.previous=document.activeElement;state.active=true;}if(!modal.contains(document.activeElement)){const first=modal.querySelector('[autofocus]')||controls()[0];if(first)first.focus();else{modal.tabIndex=-1;modal.focus();}}
  };
 })();

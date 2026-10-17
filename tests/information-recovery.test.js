@@ -105,3 +105,10 @@ test('history entries reopen their stored query for fresh product research',()=>
  const context={window:{addEventListener(type,fn){if(type==='click')listener=fn;},finditRunProductSearch:q=>opened=q},document:{querySelector:s=>s==='#fxStableModal'?modal:s==='#fxStableBody'?body:null,querySelectorAll:()=>[]},localStorage:{getItem:k=>k==='finditRecent'?JSON.stringify([{name:'Bosch drill',query:'Bosch GSB 18V-50'}]):null},Intl,console};
  vm.runInNewContext(readFileSync(new URL('../dashboard-audit-controls.js',import.meta.url),'utf8'),context);context.window.finditDashboardAuditAction('history');assert.match(body.innerHTML,/data-history-query="Bosch GSB 18V-50"/);assert.match(body.innerHTML,/Open product/);listener({target:{closest:s=>s.includes('data-open-history')?{dataset:{historyQuery:'Bosch GSB 18V-50'}}:null},preventDefault(){},stopImmediatePropagation(){}});assert.equal(opened,'Bosch GSB 18V-50');
 });
+
+test('catalogue identities are labelled as barcode matches rather than AI or user confirmations',async()=>{
+ const r=runtime();r.context.navigator={};r.context.CustomEvent=class{};r.context.document.dispatchEvent=()=>{};
+ for(const selector of ['#fxExactBadge','#fxConfidence'])r.elements.set(selector,{textContent:''});
+ r.context.fetch=async url=>({ok:true,json:async()=>String(url)==='/api/search'?{identification:{name:'Coca-Cola 330 ml',barcode:'5449000000996',confidence:null,userConfirmed:false,catalogueSource:{title:'Open Food Facts'}}}:{offers:[],researched:false}});
+ await r.context.window.finditRunProductSearch('5449000000996');assert.equal(r.elements.get('#fxExactBadge').textContent,'Barcode catalogue match');assert.equal(r.elements.get('#fxConfidence').textContent,'Barcode catalogue match');
+});

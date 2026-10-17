@@ -6,5 +6,5 @@ test('dialog keyboard journey enters, wraps focus, closes with Escape and restor
  const context={window:{},document,getComputedStyle:()=>({display:classes.has('hidden')?'none':'grid'}),MutationObserver:class{constructor(fn){observe=fn}observe(){}}};
  vm.runInNewContext(readFileSync(new URL('../dialog-accessibility.js',import.meta.url),'utf8'),context);context.window.finditAccessibleDialog(modal,'Search a product');assert.equal(attrs.role,'dialog');assert.equal(attrs['aria-modal'],'true');assert.equal(document.activeElement,field);
  const key=(k,shift=false)=>handlers.keydown({key:k,shiftKey:shift,preventDefault(){},stopImmediatePropagation(){}});
- close.focus();key('Tab',true);assert.equal(document.activeElement,send);key('Tab');assert.equal(document.activeElement,close);key('Escape');assert.equal(document.activeElement,opener);
+ document.activeElement=document.body;context.window.finditAccessibleDialog(modal,'Loading product');assert.equal(document.activeElement,field,'Replacing form content must restore focus inside the dialog');close.focus();key('Tab',true);assert.equal(document.activeElement,send);key('Tab');assert.equal(document.activeElement,close);key('Escape');assert.equal(document.activeElement,opener);
 });
