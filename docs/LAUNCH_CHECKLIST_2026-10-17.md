@@ -83,3 +83,9 @@ Completed final e0a83b1 API matrix (same version before/after), all eleven workf
 ## Evidence files
 
 Raw final responses, source URLs, local test output, workflow results and integration status are in [launch-evidence-2026-10-17](launch-evidence-2026-10-17/). The final ten-photo matrix ran on frontend release 29e3720; the optional-key-only backend adapter then shipped as e0a83b1. No live Gemini result is claimed. The final gallery browser retest and barcode journey ran on e0a83b1. Earlier and final response files are deliberately labelled by run; they must not be combined into a higher success count.
+
+## Follow-up: retailer domain trust boundary
+
+Reproduced an additional exact-retailer bug: `incredible.co.za.unrelated.example` received the same trust boost as the actual retailer because the domain check used a substring regular expression. Replaced it with a complete domain/subdomain boundary check and explicit retailer domains. Unrelated lookalikes no longer receive trust points. Independently verified niche retailers remain eligible through product evidence. Regression covers four unrelated hosts and the genuine domain/www subdomain; **245/245 local tests passed**, syntax and diff checks passed. Deployment and final production retest for this follow-up are recorded separately; the prior e0a83b1 evidence remains scoped to that release.
+
+Current follow-up worktree: `/workspace/scratch/dfb28728663c/Findit-final`. Launch remains blocked by the photo/data failures and integrations described above. Configuration-only health recheck still reports feedbackEndpoint:false.

@@ -56,3 +56,15 @@ test('a Plus title cannot override its contradictory base-model product code',as
  t.mock.method(globalThis,'fetch',async u=>String(u).includes('/wp-json/')?new Response(JSON.stringify([{name:'Shure MV7+ Podcast Microphone',sku,permalink:url,is_in_stock:true,prices:{price:'669500',currency_code:'ZAR',currency_minor_unit:2}}])):new Response('',{status:404}));
  const wanted=ident({name:'Shure MV7+ microphone',searchQuery:'Shure MV7+ microphone'});assert.equal(await verify(url,wanted),null,'Contradictory model code must be excluded from exact price comparisons');sku='MV7+K';assert.equal((await verify(url,wanted))?.price,6695);
 });
+
+// Reproduction: substring host matching previously gave these unrelated domains
+// enough trust points to accept a page without structured product evidence.
+test('retailer trust requires a complete host boundary',async t=>{
+ t.mock.method(globalThis,'fetch',async()=>new Response(page('<p>Add to cart In stock</p>')));
+ for(const h of ['incredible.co.za.unrelated.example','fakeincredible.co.za','amazon.unrelated.example','notebay.example']){
+  assert.equal(await verify('https://'+h+'/products/sony-wh-1000xm5-black',ident({name})),null,h);
+ }
+ for(const h of ['incredible.co.za','www.incredible.co.za']){
+  assert.equal((await verify('https://'+h+'/products/sony-wh-1000xm5-black',ident({name})))?.trustedRetailerDomain,true,h);
+ }
+});
