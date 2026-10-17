@@ -88,3 +88,9 @@ test('construction toy synonyms keep family guidance without inventing a LEGO se
  const d=reconcileVision([{name:'LEGO construction toy',brand:'LEGO',object:'construction toy',model:''},{name:'LEGO building blocks set',brand:'LEGO',object:'building blocks set',model:''}]);
  assert.equal(d.object,'building blocks');assert.equal(d.requiresModelConfirmation,true);assert.equal(d.model,'');assert.doesNotMatch(JSON.stringify(d),/10696/);
 });
+
+test('provider template placeholders cannot veto corroborated size or confirm a fake product name',()=>{
+ const d=reconcileVision([{name:'Twinsaver toilet paper',brand:'Twinsaver',object:'toilet paper',model:'Twin Ply',size:'18 Rolls'},{name:'Twinsaver toilet rolls',brand:'Twinsaver',object:'toilet rolls',model:'18 Rolls',size:'18 Rolls'},{name:'full printed product name',brand:'Twinsaver',object:'toilet paper',model:'PRINTED MODEL',size:'PRINTED SIZE'}]);
+ assert.equal(d.size,'18 Rolls');assert.equal(d.requiresModelConfirmation,true);assert.ok(d.suggestedModels.every(x=>!/PRINTED MODEL/i.test(x.name)));
+ const template={name:'full printed product name',brand:'Example',object:'headphones',model:'unknown'};const empty=reconcileVision([template,{...template}]);assert.equal(empty.requiresModelConfirmation,true);assert.equal(empty.name,'Example headphones');assert.equal(empty.model,'');
+});
