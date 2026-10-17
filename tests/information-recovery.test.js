@@ -131,6 +131,6 @@ test('a toilet-paper photo gets paper buying guidance rather than food instructi
 test('empty photo research settles the dashboard loading status',async()=>{
  const source=readFileSync(new URL('../information-runtime.js',import.meta.url),'utf8');const start=source.indexOf('async function hydrateIdentifiedPhoto('),end=source.indexOf('\nfunction recoveryNote',start);assert.ok(start>=0&&end>start);
  const states=[];const state={file:{name:'photo.jpg'},radius:10,result:{identification:{name:'Example toilet paper',model:'Twin Ply'}}};
- const context={st:()=>state,ident:()=>state.result.identification,productName:()=>state.result.identification.name,owned:false,busy:false,commerce:null,research:null,photoGeneration:0,syncIdentity(){},getLocationIfAlreadyAllowed:async()=>null,json:async()=>({offers:[],researched:false}),syncAll(){states.push(context.busy)},saveRecent(){},document:{dispatchEvent(){}},CustomEvent:class{},console};
+ const context={window:{},st:()=>state,ident:()=>state.result.identification,productName:()=>state.result.identification.name,owned:false,busy:false,commerce:null,research:null,photoGeneration:0,syncIdentity(){},getLocationIfAlreadyAllowed:async()=>null,json:async()=>({offers:[],researched:false}),syncAll(){states.push(context.busy)},saveRecent(){},document:{dispatchEvent(){}},CustomEvent:class{},console};
  vm.runInNewContext(source.slice(start,end)+';this.hydrate=hydrateIdentifiedPhoto;',context);await context.hydrate();assert.equal(context.busy,false);assert.equal(states.at(-1),false);assert.ok(states.includes(true));
 });
