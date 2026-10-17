@@ -4,7 +4,7 @@ test('configured Gemini still requires independent corroboration before exact ph
 
 test('existing project service contributes one claim and still needs independent agreement',async t=>{
  const claim={name:'Example X1 headphones',brand:'Example',model:'X1',object:'headphones',confidence:.9};
- t.mock.method(globalThis,'fetch',async(url,options)=>{assert.equal(url,'https://findit-nearby.vercel.app/api/search');assert.equal(options.redirect,'error');assert.ok(options.body.get('image'));assert.ok(options.signal);return new Response(JSON.stringify({identification:claim}));});
+ t.mock.method(globalThis,'fetch',async(url,options)=>{assert.equal(url,'https://findit-nearby.vercel.app/api/search');assert.equal(options.redirect,'manual');assert.ok(options.body.get('image'));assert.ok(options.signal);return new Response(JSON.stringify({identification:claim}));});
  let calls=0;const env={USE_EXISTING_GEMINI_SERVICE:'true',AI:{run:async()=>{calls++;return{response:JSON.stringify(claim)}}}};
  const body=new FormData();body.append('image',new File([new Uint8Array([1,2,3])],'p.jpg',{type:'image/jpeg'}));
  const data=await(await worker.fetch(new Request('https://findit.test/api/search',{method:'POST',body}),env)).json();
