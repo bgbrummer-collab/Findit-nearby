@@ -1,4 +1,4 @@
-import handler from '../api/product-intelligence.js';
+import handler from '../lib/legacy-product-research.js';
 const originalFetch=global.fetch;
 global.fetch=async url=>new Response(`<!doctype html><html><head><title>Nike Air Force 1 '07 Low White</title><meta property="og:title" content="Nike Air Force 1 '07 Low White"><meta property="og:description" content="The Nike Air Force 1 '07 Low combines durable leather with classic cushioning for everyday footwear."></head><body><ul><li>Nike Air cushioning helps provide comfortable everyday wear.</li><li>Durable leather upper gives the Nike Air Force 1 a structured feel.</li><li>Shipping and delivery terms apply at checkout.</li></ul><p>The Nike Air Force 1 may require separate care products for leather maintenance.</p></body></html>`,{status:200,headers:{'content-type':'text/html'}});
 let status=200,payload=null;

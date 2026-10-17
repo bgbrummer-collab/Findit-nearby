@@ -15,7 +15,7 @@ jobs:
           node-version: 22
       - name: Check JavaScript syntax
         run: |
-          node --check api/product-intelligence.js
+          node --check lib/legacy-product-research.js
           node --check api/nearby.js
           node --check api/search.js
           node --check api/official-brand-intelligence.js

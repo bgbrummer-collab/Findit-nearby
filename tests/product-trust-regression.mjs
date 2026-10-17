@@ -1,5 +1,5 @@
 import { chromium } from 'playwright';
-import { __finditProductTrust } from '../api/product-intelligence.js';
+import { __finditProductTrust } from '../lib/legacy-product-research.js';
 
 const URL=process.env.FINDIT_URL||'http://127.0.0.1:4173/';
 const browser=await chromium.launch({headless:true});
