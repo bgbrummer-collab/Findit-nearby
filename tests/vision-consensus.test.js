@@ -64,3 +64,14 @@ test('model hypotheses prefer the complete family name and discard isolated nume
  const r=reconcileVision(['Air Force','1','Air Force 1'].map(model=>({brand:'Nike',object:'shoes',name:'Nike shoes',model})));
  assert.equal(r.requiresModelConfirmation,true);assert.deepEqual(r.suggestedModels.map(x=>x.name),['Nike Air Force 1']);assert.equal(r.model,'');
 });
+
+test('bookcase and bookshelf readings preserve useful family evidence without inventing IKEA identity',()=>{
+ const d=reconcileVision([{name:'full printed product name',brand:'unknown',model:'unknown',object:'bookcase',size:'unknown',color:'white'},{name:'White bookshelf',brand:'',model:'',object:'bookshelf',size:'',color:'white'}]);assert.equal(d.object,'bookcase');assert.equal(d.name,'bookcase');assert.equal(d.brand,'');assert.equal(d.model,'');assert.equal(d.color,'white');assert.equal(d.requiresModelConfirmation,true);assert.doesNotMatch(JSON.stringify(d),/IKEA|BILLY/);
+});
+
+test('generic object fields preserve a corroborated headset family from the other observed fields',()=>{
+ const d=reconcileVision([{name:'Logitech G',brand:'Logitech',model:'G gaming headset',object:'product'},{name:'G Pro X Headset',brand:'G Pro X',model:'G Pro X Headset',object:'Headset'}]);assert.equal(d.object,'headphones');assert.equal(d.brand,'');assert.equal(d.model,'');assert.equal(d.requiresModelConfirmation,true);
+});
+test('toilet rolls and toilet paper are the same family without asserting an uncertain pack size',()=>{
+ const d=reconcileVision([{name:'TWINSAVER',brand:'TWINSAVER',model:'Twin Pty',object:'TOILET PAPER',size:'PRINTED SIZE',color:'WHITE'},{name:'Twinsaver Toilet Rolls',brand:'Twinsaver',model:'Toilet Rolls',object:'Toilet Rolls',size:'18 Rolls',color:'Green'}]);assert.equal(d.object,'toilet paper');assert.equal(d.requiresModelConfirmation,true);assert.equal(d.size,'');assert.equal(d.color,'');
+});

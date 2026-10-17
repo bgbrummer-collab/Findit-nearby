@@ -50,6 +50,10 @@ jobs:
         env:
           FINDIT_URL: https://findit-nearby.bgbrummer.workers.dev/
         run: node tests/saved-product-journey.mjs
+      - name: Verify feedback consent and draft recovery with simulated delivery
+        env:
+          FINDIT_URL: https://findit-nearby.bgbrummer.workers.dev/
+        run: node tests/feedback-feature-regression.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:

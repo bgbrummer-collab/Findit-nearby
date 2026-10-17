@@ -27,3 +27,13 @@ test('vision corroboration does not send unsupported capacity options to the leg
  const env={AI:{run:async(model,input,options)=>{calls.push(model);if(model.includes('gemma')){assert.equal(options?.rejectIfBusy,undefined,'Gemma must allow its bounded capacity wait');throw Error('3040: Capacity temporarily exceeded');}if(model.includes('moondream'))return{answer:JSON.stringify(claim)};if(options?.rejectIfBusy)throw Error('8007: unsupported request queuing');return{description:JSON.stringify(claim)};}}};
  const f=new FormData();f.append('image',new File([new Uint8Array([1,2,3])],'test.jpg',{type:'image/jpeg'}));const d=await(await worker.fetch(new Request('https://findit.test/api/search',{method:'POST',body:f}),env)).json();assert.equal(calls.length,3);assert.equal(d.identification.model,'X1');assert.equal(d.identification.requiresModelConfirmation,false);assert.equal(d.visionDiagnostics[0].providerErrorCode,'3040');
 });
+
+test('bounded Gemma output spends its token budget on JSON rather than hidden reasoning',async()=>{
+ const claim={name:'Example X1 headphones',brand:'Example',model:'X1',object:'headphones',confidence:.9};
+ const env={AI:{run:async(model,input)=>model.includes('gemma')?{object:'chat.completion',choices:[{message:{content:input.chat_template_kwargs?.enable_thinking===false&&input.response_format?.type==='json_object'?JSON.stringify(claim):''},finish_reason:'length'}]}:{answer:JSON.stringify(claim)}}};
+ const f=new FormData();f.append('image',new File([new Uint8Array([1,2,3])],'test.jpg',{type:'image/jpeg'}));const d=await(await worker.fetch(new Request('https://findit.test/api/search',{method:'POST',body:f}),env)).json();assert.equal(d.identification.model,'X1');assert.equal(d.identification.requiresModelConfirmation,false);assert.equal(d.visionDiagnostics.length,2);
+});
+test('an empty JSON template is never converted into a literal product name',async()=>{
+ const env={AI:{run:async()=>({response:JSON.stringify({name:'',brand:'',model:'',object:'',category:'',confidence:0})})}};
+ const f=new FormData();f.append('image',new File([new Uint8Array([1,2,3])],'test.jpg',{type:'image/jpeg'}));const d=await(await worker.fetch(new Request('https://findit.test/api/search',{method:'POST',body:f}),env)).json();assert.equal(d.identification,null);assert.ok(d.visionDiagnostics.every(x=>x.identityClaim===null));
+});
