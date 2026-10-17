@@ -10,3 +10,11 @@ test('existing project service contributes one claim and still needs independent
  const data=await(await worker.fetch(new Request('https://findit.test/api/search',{method:'POST',body}),env)).json();
  assert.equal(data.identification.model,'X1');assert.equal(data.identification.requiresModelConfirmation,false);assert.equal(calls,1);assert.equal(data.visionDiagnostics.filter(x=>x.provider==='google-gemini').length,1);
 });
+
+test('printed pack count is corroborated separately from the model family',async t=>{
+ const claim={name:'Example Twin Ply toilet paper 18 Rolls',brand:'Example',model:'Twin Ply',object:'toilet paper',visibleText:['EXAMPLE','TWIN PLY','18 Rolls'],confidence:.9};
+ t.mock.method(globalThis,'fetch',async()=>new Response(JSON.stringify({identification:claim})));
+ const body=new FormData();body.append('image',new File([new Uint8Array([1,2,3])],'p.jpg',{type:'image/jpeg'}));
+ let calls=0;const data=await(await worker.fetch(new Request('https://findit.test/api/search',{method:'POST',body}),{USE_EXISTING_GEMINI_SERVICE:'true',AI:{run:async()=>{calls++;return{response:JSON.stringify({...claim,model:'Twin Ply 18 Rolls',size:'18 Rolls',visibleText:[]})}}}})).json();
+ assert.equal(calls,1);assert.equal(data.identification.requiresModelConfirmation,false);assert.equal(data.identification.size.toLowerCase(),'18 rolls');assert.equal(data.identification.model,'Twin Ply');
+});
