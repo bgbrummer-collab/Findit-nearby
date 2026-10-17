@@ -2,7 +2,7 @@ async function healthHandler(req,res){
   res.setHeader('Cache-Control','no-store');
   let token='';
   try{token=String(globalThis.Netlify?.env?.get?.('HF_TOKEN')||process.env.HF_TOKEN||'').trim()}catch{token=String(process.env.HF_TOKEN||'').trim()}
-  return res.status(token?200:500).json({ok:Boolean(token),visionProvider:'huggingface',visionConfigured:Boolean(token),message:token?'FindIt vision configuration is ready.':'HF_TOKEN is missing.'});
+  const gemini=Boolean(String(process.env.GEMINI_API_KEY||'').trim()),configured=gemini||Boolean(token);return res.status(configured?200:503).json({ok:configured,visionProvider:gemini?'google-gemini':token?'huggingface':null,visionConfigured:configured,checksAreConfigurationOnly:true,message:configured?'Photo provider credentials are configured; this check does not run identification.':'No photo provider credentials are configured.'});
 }
 
 async function feedbackHealthHandler(req,res){

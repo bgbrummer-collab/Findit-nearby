@@ -113,7 +113,7 @@ async function hydrateIdentifiedPhoto(){
   syncAll();saveRecent(i);
   document.dispatchEvent(new CustomEvent('findit:dashboard-sync',{detail:{result:s.result}}));
   if(s.stores?.length)document.dispatchEvent(new CustomEvent('findit:nearby-updated',{detail:{stores:s.stores}}));
- }finally{if(generation===photoGeneration)busy=false}
+ }finally{if(generation===photoGeneration){busy=false;syncAll()}}
 }
 function recoveryNote(){return st()?.result?.requiresUserInput||st()?.result?.identification?.requiresModelConfirmation?clean(st().result.message||'FindIt could not identify this photo confidently. Enter the product name or barcode to continue.'):'Enter the product name, brand and model, or barcode first. This lets FindIt look for matching product information and retailers.'}
 function handlePhotoResult(){
