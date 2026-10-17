@@ -68,3 +68,16 @@ test('retailer trust requires a complete host boundary',async t=>{
   assert.equal((await verify('https://'+h+'/products/sony-wh-1000xm5-black',ident({name})))?.trustedRetailerDomain,true,h);
  }
 });
+
+test('exact structured retailer evidence avoids reader fetch and full-page text work',async t=>{
+ const calls=[],payload={'@type':'Product',name,offers:{price:5999,priceCurrency:'ZAR',availability:'https://schema.org/InStock'}};
+ const raw=page('<script type="application/ld+json">'+JSON.stringify(payload)+'</script><div>'+('Retail navigation '.repeat(40000))+'</div>');
+ t.mock.method(globalThis,'fetch',async u=>{calls.push(String(u));return new Response(raw,{headers:{'content-type':'text/html'}})});
+ const offer=await verify(url,ident({name}));
+ assert.equal(offer.price,5999);assert.equal(offer.currency,'ZAR');assert.equal(offer.availability,'in_stock');assert.equal(offer.branchStockVerified,false);
+ assert.deepEqual(calls,[url],'A second reader is unnecessary when the matching Product node already verifies evidence');
+});
+test('unstructured pages retain reader fallback without promoting unrelated data',async t=>{
+ const calls=[];t.mock.method(globalThis,'fetch',async u=>{calls.push(String(u));return new Response(String(u).startsWith('https://r.jina.ai/')?'Title: Unrelated television\nR 1 Add to cart':'<title>Unrelated television</title>',{headers:{'content-type':'text/html'}})});
+ assert.equal(await verify(url,ident({name})),null);assert.ok(calls.some(u=>u.startsWith('https://r.jina.ai/')));
+});
