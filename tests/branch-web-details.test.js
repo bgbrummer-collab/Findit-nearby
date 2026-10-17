@@ -62,3 +62,20 @@ test('attribute locator cards select iStore branch details without leaking anoth
 test('an explicitly closed official branch cannot be scheduled open from old regular hours',()=>{
  const record={name:'INCREDIBLE CLOSED BRANCH',address:'Example Street',latitude:-25.8,longitude:28.3,country_id:'ZA',store_closed:'1',opening_hours:JSON.stringify({m:{weekday:'monday',open_time:'09:00',close_time:'19:00'}})};const html='<script type="text/x-magento-init">'+JSON.stringify({'*':{locator:{stores:[record]}}})+'</script>';const value=parseBranchDetails(html,{name:'Incredible Connection',lat:-25.8,lon:28.3},'https://www.incredible.co.za/storelocator/');assert.equal(value.todayHours,'closed');assert.equal(value.countryCode,'ZA');
 });
+
+test('Clicks store schedule excludes the clinic and retains published country for holiday evaluation',async()=>{
+ const {scheduleStatus}=await import('../lib/store-hours.js');
+ const days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday','Public Holidays'];
+ const rows=days.map(day=>'<dt>'+day+'</dt><dd>09.00 - 20.00</dd>').join('');
+ const page='<h1>Example Park</h1><strong>Address</strong><span>123 Example Road, Pretoria</span><div class="map active" data-latitude="-25.77" data-longitude="28.23" data-stores=\'{"name":"<div>Example Park</div><div>South Africa</div>"}\'></div><div class="store-hours"><h2>Store &amp; pharmacy</h2>'+rows+'<dt>Shop telephone 1</dt><dd>012 000 0000</dd><h2>Clinic</h2><dt>Friday</dt><dd>09.00 - 17.00</dd></div>';
+ const d=parseBranchDetails(page,{name:'Clicks Example Park',lat:-25.77,lon:28.23},'https://clicks.co.za/store/Example-Park/123');
+ assert.equal(d.countryCode,'ZA');assert.equal(d.todayHours.split(';').length,8);assert.doesNotMatch(d.todayHours,/17:00/);
+ assert.equal(scheduleStatus(d.todayHours,'Africa/Johannesburg',new Date('2026-10-16T16:00:00Z'),d.countryCode).status,'open');
+ assert.equal(scheduleStatus(d.todayHours,'Africa/Johannesburg',new Date('2026-12-25T19:00:00Z'),d.countryCode).status,'closed');
+ const wrong=parseBranchDetails(page,{name:'Clicks Example Park',lat:-26.3,lon:28.6},'https://clicks.co.za/store/Example-Park/123');assert.equal(wrong,null);
+});
+test('a nearby Clicks Baby concept is not attached to a regular Clicks branch',()=>{
+ const baby={...node,name:'Clicks Baby Brooklyn',geo:{latitude:branch.lat,longitude:branch.lon}};
+ assert.equal(parseBranchDetails(html(baby),branch,'https://clicks.co.za/store/Baby-Brooklyn/123'),null);
+ assert.ok(parseBranchDetails(html(baby),{...branch,name:'Clicks Baby Brooklyn'},'https://clicks.co.za/store/Baby-Brooklyn/123'));
+});
