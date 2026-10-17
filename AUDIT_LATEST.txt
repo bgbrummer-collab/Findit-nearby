@@ -1,5 +1,5 @@
 FindIt production audit
-Commit: 0ad185f87c5aad7b45279e0b574a76cb8b8bc293
+Commit: 29e3720f51039f66d13a8eba6f28addbbbc34fe6
 Release smoke: PASS (exit 0)
 Dashboard readiness: PASS (exit 0)
 Every dashboard function: PASS (exit 0)
@@ -29,6 +29,7 @@ Current dashboard real-user audit: PASS (exit 0)
 FINDIT_STABLE_PIPELINE_SMOKE_PASS
 
 --- dashboard readiness ---
+[PASS] 1440px first feedback click works immediately after DOM ready
 [PASS] 1440px dashboard shell visible
 [PASS] 1440px upload control opens chooser and transfers file
 [PASS] 1440px selected image enables search
