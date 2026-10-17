@@ -1,0 +1,12 @@
+HTTP/1.1 200 OK
+date: Sat, 17 Oct 2026 19:29:43 GMT
+
+HTTP/2 200 
+cache-control: no-store
+content-type: application/json; charset=utf-8
+date: Sat, 17 Oct 2026 19:29:57 GMT
+server: Vercel
+strict-transport-security: max-age=63072000; includeSubDomains; preload
+x-vercel-cache: MISS
+x-vercel-id: sfo1::iad1::n9t6q-1792265383232-e91f59a43dd8
+

@@ -1,0 +1,1225 @@
+{
+  "version": {
+    "status": 200,
+    "data": {
+      "commit": "8591cf783b2aa1d61857ee9233a49946f81ecec1",
+      "platform": "cloudflare"
+    }
+  },
+  "endVersion": {
+    "status": 200,
+    "data": {
+      "commit": "8591cf783b2aa1d61857ee9233a49946f81ecec1",
+      "platform": "cloudflare"
+    }
+  },
+  "versionStable": true,
+  "results": [
+    {
+      "category": "electronics",
+      "page": "https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology",
+      "imageUrl": "http://computermania.co.za/cdn/shop/files/logitech_981_000817_g_pro_x_wired_1502157.jpg?v=1694695213",
+      "path": "/workspace/scratch/findit-real-photos/electronics.jpg",
+      "response": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Logitech headphones",
+            "brand": "Logitech",
+            "model": "",
+            "object": "headphones",
+            "category": "electronics",
+            "retailCategory": "electronics",
+            "searchQuery": "Logitech headphones",
+            "barcode": null,
+            "size": "",
+            "color": "black",
+            "visibleText": [],
+            "confidence": 0.65,
+            "identificationMethod": "independent-vision-consensus",
+            "userConfirmed": false,
+            "suggestedLabel": "",
+            "suggestedModels": [
+              {
+                "name": "Logitech G Pro X",
+                "confirmed": false,
+                "source": "visual-model-hypothesis"
+              },
+              {
+                "name": "Logitech G gaming headset",
+                "confirmed": false,
+                "source": "visual-model-hypothesis"
+              }
+            ],
+            "identityScope": "product-family",
+            "requiresModelConfirmation": true,
+            "unverifiedDetails": [
+              "exact model",
+              "variant",
+              "specifications"
+            ],
+            "features": []
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": false,
+          "identitySource": "cloudflare-consensus",
+          "visionDiagnostics": [
+            {
+              "provider": "cloudflare-gemma",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "G Pro X Gaming Headset",
+                "brand": "Logitech",
+                "model": "G Pro X",
+                "object": "headset",
+                "size": "",
+                "color": "black",
+                "visibleText": []
+              },
+              "errorType": null
+            },
+            {
+              "provider": "cloudflare-workers-ai",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "Logitech G",
+                "brand": "Logitech",
+                "model": "G gaming headset",
+                "object": "product",
+                "size": "",
+                "color": "",
+                "visibleText": [
+                  "Gaming",
+                  "Headset",
+                  "Logitech",
+                  "Gaming Headset"
+                ]
+              },
+              "errorType": null
+            },
+            {
+              "provider": "cloudflare-llava",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "G Pro X Headset",
+                "brand": "Gaming",
+                "model": "G Pro X Headset",
+                "object": "Headphones",
+                "size": "Large",
+                "color": "Black",
+                "visibleText": []
+              },
+              "errorType": null
+            },
+            {
+              "provider": "huggingface",
+              "code": "HF_INFERENCE_FAILED",
+              "providerStatus": 402,
+              "providerErrorCode": null,
+              "identityClaim": null,
+              "errorType": "credits"
+            }
+          ],
+          "visualVerification": true,
+          "provider": "cloudflare-consensus",
+          "imageAccepted": true,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "confidence": 0.65,
+          "code": "PHOTO_PARTIALLY_IDENTIFIED",
+          "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "identityScope": "product-family",
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "sources": [],
+          "possibleProducts": [],
+          "candidateChecks": [
+            {
+              "host": "www.hificorp.co.za",
+              "status": 200
+            },
+            {
+              "host": "www.incredible.co.za",
+              "status": 200
+            },
+            {
+              "host": "www.incredible.co.za",
+              "status": 200
+            },
+            {
+              "host": "www.incredible.co.za",
+              "status": 200
+            }
+          ],
+          "message": "Recognised Logitech headphones. Confirm the exact model or label for product-specific facts; no specifications have been guessed."
+        }
+      },
+      "typedSubstitution": false
+    },
+    {
+      "category": "clothing",
+      "page": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2",
+      "imageUrl": "http://www.levi.co.za/cdn/shop/files/b656875f49830c1dfd13d79892cdaa03.jpg?v=1786963292",
+      "path": "/workspace/scratch/findit-real-photos/clothing.jpg",
+      "response": {
+        "status": 200,
+        "data": {
+          "identification": null,
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "visualVerification": false,
+          "provider": "cloudflare-consensus",
+          "imageAccepted": true,
+          "needsVision": false,
+          "requiresUserInput": true,
+          "retryable": true,
+          "confidence": null,
+          "visionDiagnostics": [
+            {
+              "provider": "cloudflare-gemma",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "shirt",
+                "brand": "",
+                "model": "",
+                "object": "shirt",
+                "size": "",
+                "color": "multicolor",
+                "visibleText": []
+              },
+              "errorType": null
+            },
+            {
+              "provider": "cloudflare-workers-ai",
+              "code": "CF_AI_NO_JSON",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": null,
+              "errorType": null
+            },
+            {
+              "provider": "cloudflare-llava",
+              "code": "CF_LLAVA_FAILED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": null,
+              "errorType": "TIMEOUT"
+            },
+            {
+              "provider": "huggingface",
+              "code": "HF_INFERENCE_FAILED",
+              "providerStatus": 402,
+              "providerErrorCode": null,
+              "identityClaim": null,
+              "errorType": "credits"
+            }
+          ],
+          "code": "PHOTO_IDENTITY_UNCERTAIN",
+          "providerStatus": null,
+          "providerError": null,
+          "cloudflareReason": "PHOTO_IDENTITY_UNCERTAIN",
+          "cloudflareError": null,
+          "message": "The image service could not complete identification. Try again or enter the product name or barcode."
+        }
+      },
+      "research": {},
+      "typedSubstitution": false
+    },
+    {
+      "category": "tools",
+      "page": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger",
+      "imageUrl": "http://www.tmbsupplies.co.za/cdn/shop/files/GSB-18v-50-1_688x653_015db31d-b53a-408a-b6d3-6b28c3546563.webp?v=1716145384",
+      "path": "/workspace/scratch/findit-real-photos/tools.jpg",
+      "response": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "drill",
+            "brand": "",
+            "model": "",
+            "object": "drill",
+            "category": "hardware",
+            "retailCategory": "hardware",
+            "searchQuery": "drill",
+            "barcode": null,
+            "size": "",
+            "color": "",
+            "visibleText": [],
+            "confidence": 0.65,
+            "identificationMethod": "independent-vision-consensus",
+            "userConfirmed": false,
+            "suggestedLabel": "",
+            "suggestedModels": [],
+            "identityScope": "product-family",
+            "requiresModelConfirmation": true,
+            "unverifiedDetails": [
+              "exact model",
+              "variant",
+              "specifications"
+            ],
+            "features": []
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": false,
+          "identitySource": "cloudflare-consensus",
+          "visionDiagnostics": [
+            {
+              "provider": "cloudflare-gemma",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "Cordless Drill Kit",
+                "brand": "Bosch",
+                "model": "Professional 18V",
+                "object": "drill",
+                "size": "",
+                "color": "blue and red",
+                "visibleText": []
+              },
+              "errorType": null
+            },
+            {
+              "provider": "cloudflare-workers-ai",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "Bosch Professional",
+                "brand": "Bosch",
+                "model": "18V",
+                "object": "product",
+                "size": "",
+                "color": "",
+                "visibleText": [
+                  "BOSCH",
+                  "Professional",
+                  "18V"
+                ]
+              },
+              "errorType": null
+            },
+            {
+              "provider": "cloudflare-llava",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "Hosco Drill",
+                "brand": "Hosco",
+                "model": "Drill",
+                "object": "Drill",
+                "size": "",
+                "color": "",
+                "visibleText": []
+              },
+              "errorType": null
+            },
+            {
+              "provider": "huggingface",
+              "code": "HF_INFERENCE_FAILED",
+              "providerStatus": 402,
+              "providerErrorCode": null,
+              "identityClaim": null,
+              "errorType": "credits"
+            }
+          ],
+          "visualVerification": true,
+          "provider": "cloudflare-consensus",
+          "imageAccepted": true,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "confidence": 0.65,
+          "code": "PHOTO_PARTIALLY_IDENTIFIED",
+          "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "identityScope": "product-family",
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "sources": [],
+          "possibleProducts": [],
+          "candidateChecks": [],
+          "message": "Recognised drill. Confirm the exact model or label for product-specific facts; no specifications have been guessed."
+        }
+      },
+      "typedSubstitution": false
+    },
+    {
+      "category": "toys",
+      "page": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696",
+      "imageUrl": "http://lego-gybc.co.za/cdn/shop/files/Classic-Medium-Creative-Brick-Box-10696_001_prod_8f538b25-dcbc-463f-bc75-59c74cec8ad0.jpg?v=1761150696",
+      "path": "/workspace/scratch/findit-real-photos/toys.jpg",
+      "response": {
+        "status": 200,
+        "data": {
+          "identification": null,
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "visualVerification": false,
+          "provider": "cloudflare-consensus",
+          "imageAccepted": true,
+          "needsVision": false,
+          "requiresUserInput": true,
+          "retryable": true,
+          "confidence": null,
+          "visionDiagnostics": [
+            {
+              "provider": "cloudflare-gemma",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "building blocks set",
+                "brand": "LEGO",
+                "model": "",
+                "object": "building blocks set",
+                "size": "",
+                "color": "multicolor",
+                "visibleText": []
+              },
+              "errorType": null
+            },
+            {
+              "provider": "cloudflare-workers-ai",
+              "code": "CF_AI_NO_JSON",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": null,
+              "errorType": null
+            },
+            {
+              "provider": "cloudflare-llava",
+              "code": "CF_LLAVA_NO_PRODUCT_TEXT",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": null,
+              "errorType": null
+            },
+            {
+              "provider": "huggingface",
+              "code": "HF_INFERENCE_FAILED",
+              "providerStatus": 402,
+              "providerErrorCode": null,
+              "identityClaim": null,
+              "errorType": "credits"
+            }
+          ],
+          "code": "PHOTO_IDENTITY_UNCERTAIN",
+          "providerStatus": null,
+          "providerError": null,
+          "cloudflareReason": "PHOTO_IDENTITY_UNCERTAIN",
+          "cloudflareError": null,
+          "message": "The image service could not complete identification. Try again or enter the product name or barcode."
+        }
+      },
+      "research": {},
+      "typedSubstitution": false
+    },
+    {
+      "category": "furniture",
+      "page": "https://www.ikea.com/at/en/p/billy-bookcase-white-00263850/",
+      "imageUrl": "https://www.ikea.com/at/en/images/products/billy-bookcase-white__1590272_pe1038911_s5.jpg",
+      "path": "/workspace/scratch/findit-real-photos/furniture.jpg",
+      "response": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "bookcase",
+            "brand": "",
+            "model": "",
+            "object": "bookcase",
+            "category": "home",
+            "retailCategory": "home",
+            "searchQuery": "bookcase",
+            "barcode": null,
+            "size": "",
+            "color": "white",
+            "visibleText": [],
+            "confidence": 0.65,
+            "identificationMethod": "independent-vision-consensus",
+            "userConfirmed": false,
+            "suggestedLabel": "",
+            "suggestedModels": [],
+            "identityScope": "product-family",
+            "requiresModelConfirmation": true,
+            "unverifiedDetails": [
+              "exact model",
+              "variant",
+              "specifications"
+            ],
+            "features": []
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": false,
+          "identitySource": "cloudflare-consensus",
+          "visionDiagnostics": [
+            {
+              "provider": "cloudflare-workers-ai",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "full printed product name",
+                "brand": "unknown",
+                "model": "unknown",
+                "object": "bookcase",
+                "size": "unknown",
+                "color": "white",
+                "visibleText": [
+                  "unknown",
+                  "unknown",
+                  "unknown",
+                  "unknown",
+                  "unknown",
+                  "unknown"
+                ]
+              },
+              "errorType": null
+            },
+            {
+              "provider": "cloudflare-gemma",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "bookshelf",
+                "brand": "",
+                "model": "",
+                "object": "bookshelf",
+                "size": "",
+                "color": "white",
+                "visibleText": []
+              },
+              "errorType": null
+            },
+            {
+              "provider": "cloudflare-llava",
+              "code": "CF_LLAVA_FAILED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": null,
+              "errorType": "TIMEOUT"
+            },
+            {
+              "provider": "huggingface",
+              "code": "HF_INFERENCE_FAILED",
+              "providerStatus": 402,
+              "providerErrorCode": null,
+              "identityClaim": null,
+              "errorType": "credits"
+            }
+          ],
+          "visualVerification": true,
+          "provider": "cloudflare-consensus",
+          "imageAccepted": true,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "confidence": 0.65,
+          "code": "PHOTO_PARTIALLY_IDENTIFIED",
+          "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "identityScope": "product-family",
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "sources": [],
+          "possibleProducts": [],
+          "candidateChecks": [],
+          "message": "Recognised bookcase. Confirm the exact model or label for product-specific facts; no specifications have been guessed."
+        }
+      },
+      "typedSubstitution": false
+    },
+    {
+      "category": "groceries",
+      "page": "https://world.openfoodfacts.org/product/5449000000996",
+      "imageUrl": "https://images.openfoodfacts.org/images/products/544/900/000/0996/front_en.1129.400.jpg",
+      "path": "/workspace/scratch/findit-real-photos/groceries.jpg",
+      "response": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Coca-Cola beverage",
+            "brand": "Coca-Cola",
+            "model": "",
+            "object": "beverage",
+            "category": "grocery",
+            "retailCategory": "grocery",
+            "searchQuery": "Coca-Cola beverage",
+            "barcode": null,
+            "size": "",
+            "color": "red",
+            "visibleText": [],
+            "confidence": 0.65,
+            "identificationMethod": "independent-vision-consensus",
+            "userConfirmed": false,
+            "suggestedLabel": "",
+            "suggestedModels": [
+              {
+                "name": "Coca-Cola Orijinal Tat",
+                "confirmed": false,
+                "source": "visual-model-hypothesis"
+              }
+            ],
+            "identityScope": "product-family",
+            "requiresModelConfirmation": true,
+            "unverifiedDetails": [
+              "exact model",
+              "variant",
+              "specifications"
+            ],
+            "features": []
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": false,
+          "identitySource": "cloudflare-consensus",
+          "visionDiagnostics": [
+            {
+              "provider": "cloudflare-workers-ai",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "Coca-Cola",
+                "brand": "Coca-Cola",
+                "model": "Original",
+                "object": "product",
+                "size": "",
+                "color": "",
+                "visibleText": [
+                  "Coca-Cola",
+                  "Original"
+                ]
+              },
+              "errorType": null
+            },
+            {
+              "provider": "cloudflare-gemma",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "Coca-Cola",
+                "brand": "Coca-Cola",
+                "model": "Orijinal Tat",
+                "object": "soft drink",
+                "size": "",
+                "color": "red",
+                "visibleText": []
+              },
+              "errorType": null
+            },
+            {
+              "provider": "cloudflare-llava",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "Coca-Cola",
+                "brand": "Coca-Cola",
+                "model": "Coca-Cola",
+                "object": "Beverage",
+                "size": "Regular",
+                "color": "Red",
+                "visibleText": [
+                  "Coca-Cola"
+                ]
+              },
+              "errorType": null
+            },
+            {
+              "provider": "huggingface",
+              "code": "HF_INFERENCE_FAILED",
+              "providerStatus": 402,
+              "providerErrorCode": null,
+              "identityClaim": null,
+              "errorType": "credits"
+            }
+          ],
+          "visualVerification": true,
+          "provider": "cloudflare-consensus",
+          "imageAccepted": true,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "confidence": 0.65,
+          "code": "PHOTO_PARTIALLY_IDENTIFIED",
+          "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "identityScope": "product-family",
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "sources": [],
+          "possibleProducts": [],
+          "candidateChecks": [],
+          "message": "Recognised Coca-Cola beverage. Confirm the exact model or label for product-specific facts; no specifications have been guessed."
+        }
+      },
+      "typedSubstitution": false
+    },
+    {
+      "category": "shoes",
+      "page": "Existing user photo fixture",
+      "path": "/workspace/scratch/nike.jpg",
+      "response": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "NIKE shoes",
+            "brand": "NIKE",
+            "model": "",
+            "object": "shoes",
+            "category": "footwear",
+            "retailCategory": "footwear",
+            "searchQuery": "NIKE air force 1",
+            "barcode": null,
+            "size": "",
+            "color": "",
+            "visibleText": [],
+            "confidence": null,
+            "identificationMethod": "single-label-reading",
+            "userConfirmed": false,
+            "suggestedLabel": "NIKE air force 1",
+            "identityScope": "label-candidate",
+            "requiresModelConfirmation": true,
+            "features": [],
+            "unverifiedDetails": [
+              "brand",
+              "exact model",
+              "variant",
+              "size"
+            ]
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": false,
+          "identitySource": "cloudflare-consensus",
+          "visionDiagnostics": [
+            {
+              "provider": "cloudflare-gemma",
+              "code": "CF_GEMMA_FAILED",
+              "providerStatus": null,
+              "providerErrorCode": "8007",
+              "identityClaim": null,
+              "errorType": null
+            },
+            {
+              "provider": "cloudflare-workers-ai",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "AIR FORCE 1",
+                "brand": "NIKE",
+                "model": "1",
+                "object": "sneaker",
+                "size": "US",
+                "color": "white",
+                "visibleText": [
+                  "AIR",
+                  "FORCE",
+                  "1"
+                ]
+              },
+              "errorType": null
+            },
+            {
+              "provider": "cloudflare-llava",
+              "code": "CF_LLAVA_FAILED",
+              "providerStatus": null,
+              "providerErrorCode": "8007",
+              "identityClaim": null,
+              "errorType": "unsupported"
+            },
+            {
+              "provider": "huggingface",
+              "code": "HF_INFERENCE_FAILED",
+              "providerStatus": 402,
+              "providerErrorCode": null,
+              "identityClaim": null,
+              "errorType": "credits"
+            }
+          ],
+          "visualVerification": true,
+          "provider": "cloudflare-consensus",
+          "imageAccepted": true,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "confidence": null,
+          "code": "PHOTO_PARTIALLY_IDENTIFIED",
+          "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "identityScope": "product-family",
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "sources": [],
+          "possibleProducts": [],
+          "candidateChecks": [
+            {
+              "host": "www.footlocker.com",
+              "status": 200
+            },
+            {
+              "host": "www.nike.com",
+              "status": 200
+            },
+            {
+              "host": "www.nike.ae",
+              "status": 200
+            },
+            {
+              "host": "www.nike.com",
+              "status": 200
+            }
+          ],
+          "message": "Recognised NIKE shoes. Confirm the exact model or label for product-specific facts; no specifications have been guessed."
+        }
+      },
+      "typedSubstitution": false
+    },
+    {
+      "category": "beauty",
+      "page": "Existing user photo fixture",
+      "path": "/workspace/scratch/marc-anthony.jpg",
+      "response": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Marc Anthony conditioner",
+            "brand": "Marc Anthony",
+            "model": "",
+            "object": "conditioner",
+            "category": "beauty",
+            "retailCategory": "beauty",
+            "searchQuery": "Marc Anthony conditioner",
+            "barcode": null,
+            "size": "",
+            "color": "",
+            "visibleText": [],
+            "confidence": 0.65,
+            "identificationMethod": "independent-vision-consensus",
+            "userConfirmed": false,
+            "suggestedLabel": "",
+            "suggestedModels": [
+              {
+                "name": "Marc Anthony Strictly Curls Jungle Blend Conditioner",
+                "confirmed": false,
+                "source": "visual-model-hypothesis"
+              },
+              {
+                "name": "Marc Anthony Strictly Curly Conditioner",
+                "confirmed": false,
+                "source": "visual-model-hypothesis"
+              }
+            ],
+            "identityScope": "product-family",
+            "requiresModelConfirmation": true,
+            "unverifiedDetails": [
+              "exact model",
+              "variant",
+              "specifications"
+            ],
+            "features": []
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": false,
+          "identitySource": "cloudflare-consensus",
+          "visionDiagnostics": [
+            {
+              "provider": "cloudflare-workers-ai",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "STRICTLY CURLS",
+                "brand": "MARC ANTHONY",
+                "model": "XTREME",
+                "object": "product",
+                "size": "",
+                "color": "YELLOW",
+                "visibleText": [
+                  "STRICTLY CURLS",
+                  "XTREME"
+                ]
+              },
+              "errorType": null
+            },
+            {
+              "provider": "cloudflare-gemma",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "Strictly Curls Jungle Blend Conditioner",
+                "brand": "Marc Anthony",
+                "model": "Strictly Curls Jungle Blend Conditioner",
+                "object": "conditioner",
+                "size": "",
+                "color": "yellow",
+                "visibleText": []
+              },
+              "errorType": null
+            },
+            {
+              "provider": "cloudflare-llava",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "Marc Anthony Strictly Curly Conditioner",
+                "brand": "Marc Anthony",
+                "model": "Strictly Curly Conditioner",
+                "object": "Conditioner",
+                "size": "Full Size",
+                "color": "Yellow",
+                "visibleText": []
+              },
+              "errorType": null
+            },
+            {
+              "provider": "huggingface",
+              "code": "HF_INFERENCE_FAILED",
+              "providerStatus": 402,
+              "providerErrorCode": null,
+              "identityClaim": null,
+              "errorType": "credits"
+            }
+          ],
+          "visualVerification": true,
+          "provider": "cloudflare-consensus",
+          "imageAccepted": true,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "confidence": 0.65,
+          "code": "PHOTO_PARTIALLY_IDENTIFIED",
+          "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "identityScope": "product-family",
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "sources": [],
+          "possibleProducts": [
+            {
+              "name": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
+              "productUrl": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689",
+              "photoMatchConfirmed": false,
+              "price": 230,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "whatItDoes": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml hydrates and detangles curly hair, reducing frizz for soft, defined curls.",
+              "pros": [
+                "Infused with marula oil, coconut cream and shea butter, it restores moisture, strengthens hair and protects against environmental stressors.",
+                "Strictly Curls 3X Moisture is formulated with a triple blend of marula oil, coconut and shea butter.",
+                "It gives thirsty curls the essential moisture they need to feel strengthened, smoothed and protected.",
+                "It all adds up to hair that\u2019s always soft, frizz-free and ready for play."
+              ],
+              "cons": [],
+              "specifications": [
+                {
+                  "name": "Brand",
+                  "value": "Marc Anthony",
+                  "sourceUrl": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689"
+                },
+                {
+                  "name": "Pack quantity",
+                  "value": "1",
+                  "sourceUrl": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689"
+                },
+                {
+                  "name": "How to use",
+                  "value": "Apply to wet hair after shampooing, massage and rinse. For best results, use with Strictly Curls 3X Moisture Shampoo.",
+                  "sourceUrl": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689"
+                },
+                {
+                  "name": "Storage instructions",
+                  "value": "Store in a cool, dry place.",
+                  "sourceUrl": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689"
+                },
+                {
+                  "name": "Warnings",
+                  "value": "For external use only. Keep out of reach of children. In case of contact with eyes, rinse immediately",
+                  "sourceUrl": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689"
+                },
+                {
+                  "name": "Ingredients",
+                  "value": "Water (Aqua), Cetyl Alcohol, Behentrimonium Chloride, Cyclopentasiloxane, Propanediol, Glycerin, Sclerocarya Birrea (Marula) Seed Oil, Butyrospermum Parkii (Shea) Butter, Cocos Nucifera (Coconut) Water, Cocos Nucifera (Coconut) Oil, Helianthus Annuus (Sunflower) Seed Oil, Panthenol (Vitamin \u2013 B5), Stearyl Alcohol, Trideceth-12, Citric Acid, Cetrimonium Chloride, Isopropyl Alcohol, Amodimethicone, Ethylhexylglycerin, Tetrasodium EDTA, Sodium Benzoate, 1,2-Hexanediol, Potassium Sorbate, Phenoxyethanol, Parfum (Fragrance)",
+                  "sourceUrl": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689"
+                }
+              ],
+              "sources": [
+                {
+                  "title": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
+                  "url": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689"
+                }
+              ]
+            },
+            {
+              "name": "Marc Anthony Strictly Curls Leave-In Conditioner 250 ml",
+              "productUrl": "https://clicks.co.za/marc-anthony_strictly-curls-leave-in-conditioner-250ml/p/311798",
+              "photoMatchConfirmed": false,
+              "price": 240,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "whatItDoes": "Ultra hydratant.",
+              "pros": [
+                "Marc Anthony\u00ae.",
+                "True professional.",
+                "Extra moisturizing.",
+                "Strictly Curls\u2122."
+              ],
+              "cons": [],
+              "specifications": [
+                {
+                  "name": "Brand",
+                  "value": "Marc Anthony",
+                  "sourceUrl": "https://clicks.co.za/marc-anthony_strictly-curls-leave-in-conditioner-250ml/p/311798"
+                },
+                {
+                  "name": "Pack quantity",
+                  "value": "1",
+                  "sourceUrl": "https://clicks.co.za/marc-anthony_strictly-curls-leave-in-conditioner-250ml/p/311798"
+                },
+                {
+                  "name": "How to use",
+                  "value": "Spray onto damp hair, from roots to ends. Do not rinse. Comb through and style as usual.",
+                  "sourceUrl": "https://clicks.co.za/marc-anthony_strictly-curls-leave-in-conditioner-250ml/p/311798"
+                },
+                {
+                  "name": "Warnings",
+                  "value": "Keep out of reach of children. Use in well ventilated area. For external use only.",
+                  "sourceUrl": "https://clicks.co.za/marc-anthony_strictly-curls-leave-in-conditioner-250ml/p/311798"
+                },
+                {
+                  "name": "Ingredients",
+                  "value": "Water, Cetyl Alcohol, Behentrimonium Chloride, Stearyl Alcohol, Glycerin, Cetrimonium Chloride, Cyclopentasiloxane, Isopropyl Alcohol, Butyrospermum Parkii (Shea) Butter, Persea Gratissima (Avocado) Oil, Fragrance, Tocopheryl Acetate, Propylene Glycol, Phenoxyethanol, Ethylhexylglycerin, Tetrasodium EDTA, Citric Acid.",
+                  "sourceUrl": "https://clicks.co.za/marc-anthony_strictly-curls-leave-in-conditioner-250ml/p/311798"
+                }
+              ],
+              "sources": [
+                {
+                  "title": "Marc Anthony Strictly Curls Leave-In Conditioner 250 ml",
+                  "url": "https://clicks.co.za/marc-anthony_strictly-curls-leave-in-conditioner-250ml/p/311798"
+                }
+              ]
+            }
+          ],
+          "candidateChecks": [
+            {
+              "host": "clicks.co.za",
+              "status": 200
+            },
+            {
+              "host": "clicks.co.za",
+              "status": 200
+            },
+            {
+              "host": "clicks.co.za",
+              "status": 200
+            },
+            {
+              "host": "www.dischem.co.za",
+              "status": 200
+            }
+          ],
+          "message": "A retailer product matches the possible label reading. Check its name against your photo before confirming."
+        }
+      },
+      "typedSubstitution": false
+    },
+    {
+      "category": "household",
+      "page": "Existing user photo fixture",
+      "path": "/workspace/scratch/twinsaver.webp",
+      "response": {
+        "status": 400,
+        "data": {
+          "error": "Uploaded file must be an image."
+        }
+      },
+      "research": {},
+      "typedSubstitution": false
+    },
+    {
+      "category": "music",
+      "page": "Existing user photo fixture",
+      "path": "/workspace/scratch/mic.jpg",
+      "response": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "microphone",
+            "brand": "",
+            "model": "",
+            "object": "microphone",
+            "category": "electronics",
+            "retailCategory": "electronics",
+            "searchQuery": "microphone",
+            "barcode": null,
+            "size": "",
+            "color": "Black",
+            "visibleText": [],
+            "confidence": 0.65,
+            "identificationMethod": "independent-vision-consensus",
+            "userConfirmed": false,
+            "suggestedLabel": "",
+            "suggestedModels": [],
+            "identityScope": "product-family",
+            "requiresModelConfirmation": true,
+            "unverifiedDetails": [
+              "exact model",
+              "variant",
+              "specifications"
+            ],
+            "features": []
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": false,
+          "identitySource": "cloudflare-consensus",
+          "visionDiagnostics": [
+            {
+              "provider": "cloudflare-workers-ai",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "Microphone",
+                "brand": "Microsoft",
+                "model": "Studio",
+                "object": "Microphone",
+                "size": "Standard",
+                "color": "Black",
+                "visibleText": [
+                  "Microphone",
+                  "Studio",
+                  "Microphone"
+                ]
+              },
+              "errorType": null
+            },
+            {
+              "provider": "cloudflare-gemma",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "microphone",
+                "brand": "",
+                "model": "",
+                "object": "microphone",
+                "size": "",
+                "color": "black",
+                "visibleText": []
+              },
+              "errorType": null
+            },
+            {
+              "provider": "cloudflare-llava",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "Microphone",
+                "brand": "Voice-Over",
+                "model": "Voice-Over Microphone",
+                "object": "Microphone",
+                "size": "",
+                "color": "",
+                "visibleText": []
+              },
+              "errorType": null
+            },
+            {
+              "provider": "huggingface",
+              "code": "HF_INFERENCE_FAILED",
+              "providerStatus": 402,
+              "providerErrorCode": null,
+              "identityClaim": null,
+              "errorType": "credits"
+            }
+          ],
+          "visualVerification": true,
+          "provider": "cloudflare-consensus",
+          "imageAccepted": true,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "confidence": 0.65,
+          "code": "PHOTO_PARTIALLY_IDENTIFIED",
+          "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "identityScope": "product-family",
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "sources": [],
+          "possibleProducts": [],
+          "candidateChecks": [],
+          "message": "Recognised microphone. Confirm the exact model or label for product-specific facts; no specifications have been guessed."
+        }
+      },
+      "typedSubstitution": false
+    }
+  ]
+}

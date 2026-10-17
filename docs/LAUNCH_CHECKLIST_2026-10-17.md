@@ -2,7 +2,7 @@
 
 **Recommendation: NOT launch-ready.** User testing is welcome; this is not a completion certificate.
 
-Latest deployed follow-up: `a5147d111da6652a2f170428c5fe9e3d5d4bd81b`; API and actual browser metadata both verified. Runtime repair is `0c2d29c`; a5147d1 changes only the smoke assertion to recognize either valid unconfirmed-stock wording, retaining rejection of stock/directions claims. 245/245 local tests passed. See the final follow-up below for current release workflow results and reliability failures.
+Historical deployed follow-up: `a5147d111da6652a2f170428c5fe9e3d5d4bd81b`; API and actual browser metadata both verified. Runtime repair is `0c2d29c`; a5147d1 changes only the smoke assertion to recognize either valid unconfirmed-stock wording, retaining rejection of stock/directions claims. 245/245 local tests passed. See the final follow-up below for current release workflow results and reliability failures.
 
 Earlier audited repair release: `e0a83b16055bc814053981a043d113f1e077c1d1`. Production API version and actual browser build metadata both returned this code release. All eleven workflows triggered for this backend release passed; all twelve workflows for frontend release 29e3720 also passed. Existing features/design are preserved. No purchase or paid service activation was performed.
 
@@ -20,7 +20,7 @@ Earlier audited repair release: `e0a83b16055bc814053981a043d113f1e077c1d1`. Prod
 
 Local checks: **244/244 Node tests passed**, syntax and diff checks passed. All twelve workflows for frontend repair 29e3720 passed, including responsive/upload/location/saved-item checks and the new feedback consent regression. The actual first Feedback click after reload, dialog keyboard wrap/Escape/focus restoration and retained failed-feedback draft were verified in the cloud browser. All eleven latest backend workflows passed; raw workflow records are included.
 
-## Complete feature checklist
+## Feature checklist (earlier checkpoint; evening updates below supersede it)
 
 The table carries forward scoped evidence. The updates below it supersede older run counts/details.
 
@@ -107,3 +107,58 @@ Required next work: configure existing Gemini and feedback credentials securely 
 Final a5147d1 workflow snapshot: all 9 triggered workflows succeeded. Corrected Release Smoke passed. No jobs remain pending in this release snapshot. Raw snapshot: domain-repair-final-workflows.json. Actual final-build Bosch search returned TMB Supplies R4999 ZAR and sourced compatibility; Ask FindIt named two GBA18V2.0Ah batteries and GAL18V-20 charger with source URL.
 
 All nine a5147d1 release workflows completed successfully. The latest frontend/backend versions match a5147d1. This does not override the live-photo, catalogue, resource and integration failures.
+
+
+## Continued repair checkpoint — 17 October, evening (SAST)
+
+**Recommendation remains NOT launch-ready.** Earlier counts and configuration blockers above are historical; this section supersedes them. The design and existing tools remain intact. No purchase, billing activation, or paid-service activation was performed.
+
+Latest code checkpoint: `d4c235a3149c6a1d400d043638bfd4f473dcaf7c`. Actual browser frontend metadata verified this commit; Vercel deployment also reports READY for it. Final backend-version and journey verification is still in progress; do not infer completion from deployment status. Stable full photo sweep verified `7f249e8c6cd28a45237335d7401395d4b36d5f32` at both ends.
+
+### Verified repairs and evidence
+
+- Reduced duplicate retailer-page parsing and unnecessary reader fetches when exact structured Product data already supplies the requested evidence. In the captured 311,520-byte Bothners case, the same MV7+K SKU/R6995/ZAR/in-stock result used 60 rather than 90 fetches over 30 runs; local CPU time fell about 61%. This is a local benchmark, not a Worker CPU measurement. Two subsequent ten-query production matrices returned all HTTP200 JSON, six verified priced listings and four no-listing results, without the previously reproduced 1102. This does not establish broad load reliability.
+- Fixed beverage, construction-toy and shirt family reconciliation; rejected literal vision template values; partial photo cache now expires in 120 seconds and separates provider configurations.
+- Removed generic marketing from product strengths, retained concrete connector/DSP/compatibility facts, and fixed toilet-paper photos receiving food/allergen advice.
+- Corrected the official Clicks branch parser: store hours exclude clinic schedules, preserve supported South African country context for scheduled status, and reject Clicks Baby being attached to a regular Clicks branch. Actual Menlyn Park source/API returned address, 0123486162 and Mo–Th09–20, Fr/Sa09–21, Su/PH09–18. This proves published schedule parsing, not exceptional closure or shelf inventory.
+- Repaired Vercel's Hobby limit failure by moving the retained legacy research implementation from an unused deployable function to `lib/legacy-product-research.js`. Existing public API rewrites remain. Vercel subsequently reached READY without upgrading the plan.
+- Reused the project's existing public Vercel Gemini service from the Worker, without retrieving or exposing the saved key. One Gemini service result counts as one claim, regardless of its internal passes; a separate Cloudflare reader still corroborates identity. Redirect mode was reproduced as failing and changed to Workers-compatible manual handling; subsequent production diagnostics confirm Gemini IDENTIFIED. No authentication protection was changed.
+- Read explicit printed pack counts separately from model text, so corroborated “Twin Ply”/“Twin Ply 18 Rolls” preserve model and pack count. Actual original Twinsaver photo now shows **TWINSAVER TWIN PLY toilet paper 18 Rolls**, with no typed product name. No price or stock is invented.
+- Reconnected the existing configured Formspree delivery through Vercel. Both live Worker API and actual browser form confirmed delivery. Browser submission with diagnostic consent unchecked showed “Feedback sent ✓”; a failed or undelivered receipt remains failure. No credentials need to be copied into chat or Cloudflare for these two existing-service paths.
+- Fixed the legacy health endpoint reporting missing Hugging Face credentials despite working Gemini. Health now labels its result as configuration-only; actual inference is evidenced separately.
+- Fixed nearby API reporting “no retailers” when all discovery providers fail. Results now distinguish unavailable data from a successful empty query; frontend outage messages are scoped to product, coordinates and radius.
+- Fixed completed photo research leaving “Checking retailer evidence…” visible after an empty result. Automated behavior regression verifies loading settles; latest actual-browser retest is pending.
+
+### Actual customer and data results
+
+Local Node checks: **266/266 passing** (see `launch-evidence-2026-10-17-resource/local-tests.log`); syntax and diff checks passed. Inspect individual workflow results before describing CI as fully passed.
+
+The stable ten-photo production sweep (`bridge-real-photo-matrix.json`) uploaded real files with correct MIME types and never supplied typed product names. All ten upload responses were HTTP200: **one identified pack, eight partial identifications, one unidentified shirt**. The shirt family was repaired afterward and verified in the browser as “shirt”, with no guessed brand, model or colour; do not rewrite the earlier stable matrix as a later all-pass run. **Zero photo journeys produced a confirmed exact priced offer.** A successful upload or plausible family is not an exact retail match.
+
+| Photo category | Stable sweep result | Useful result / remaining gap |
+|---|---|---|
+| Electronics | partial | Logitech headphones; G Pro versus G Pro X disagreement retained. |
+| Clothing | unidentified | Later browser repair retains shirt family; brand/style/size unknown. |
+| Tools | partial | Bosch drill; different model hypotheses remain possible listings only. |
+| Toys | partial | Building blocks; exact set and maker not corroborated. |
+| Furniture | partial | Bookcase; brand, dimensions and model not visible/corroborated. |
+| Groceries | partial | Coca-Cola beverage; can size and variant unconfirmed. |
+| Shoes | partial | Nike shoes; model splitting and variant uncertainty remain. |
+| Beauty | partial | Marc Anthony conditioner; actual browser review shows a clearly labelled possible Strictly Curls 3X Moisture 250ml listing, Clicks R230, online in stock, instructions/ingredients/warnings and product link. Size is not silently assigned to the photo. |
+| Household | identified | Twinsaver Twin Ply 18-roll pack; correct paper guidance, no exact priced offer found. |
+| Music | partial | Microphone; no confirmed brand/model, no Shure data attached. |
+
+Actual browser settings: radius changed to5km and automatic verification off, saved, reloaded and retained; defaults restored afterward. Existing Shure shopping-list entry persisted across reloads and remained an explicitly online-only plan. Ask FindIt on the photo-selected toilet-paper pack supplied labelled general paper/value guidance and did not invent exact prices. Physical inventory remains unverified. Manual Menlyn search produced no nearby data in this run; this is a provider-retrieval limitation, not evidence that Menlyn has no shops.
+
+### Remaining launch blockers and precise continuation
+
+1. Exact photo-to-offer coverage remains failed. Improve evidence-preserving label/model reconciliation and candidate discovery, then retest original photos across all categories. Do not weaken variant gates or confirm possible listings merely to obtain prices.
+2. Nearby discovery reliability remains failed in the recorded Menlyn journey. Retest the deployed outage UI and establish a reliable permitted data source/official locator fallback; opening schedules do not establish inventory.
+3. Branch inventory is blocked on an authoritative retailer inventory integration. The existing feed contract can be configured securely when an authorized feed is available; do not infer stock from map presence or online stock.
+4. Background alerts/notification delivery and central analytics remain blocked on appropriate storage/delivery integration. Do not activate the paused Supabase service or billing. Local watch observations are not background monitoring.
+5. Hugging Face returns402 (credits unavailable). Gemini and Cloudflare can work without it; do not treat this as the explanation for unrelated product/retailer failures or enable billing.
+6. Physical camera/GPS success, real OS drag/drop, full screen-reader testing and complete real-device navigation remain untested. Existing transport, keyboard/modal and responsive automated checks are scoped evidence, not hardware certification.
+7. Collections/favourites, every History+ tool, all Premium tools and every menu's usefulness/persistence remain incompletely audited despite broad smoke checks. Continue those journeys and update statuses individually.
+8. Final latest-version browser/API proof, complete CI results, and latest loading/outage UI retests remain outstanding for the code checkpoint above. Preserve bot-generated audit commits when publishing; local worktree is detached with previously published changes retained as modifications. Never reset or force-push it.
+
+Evidence is in `docs/launch-evidence-2026-10-17-resource/`; reusable live query and photo scripts are included. Screenshots are supporting UI evidence, not substitutes for API/source records.

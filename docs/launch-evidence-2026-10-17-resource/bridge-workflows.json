@@ -1,0 +1,127 @@
+{
+  "note": "Selected original GitHub workflow metadata; pending snapshots are not final pass claims.",
+  "total_count": 11,
+  "workflow_runs": [
+    {
+      "id": 39062581946,
+      "name": "FindIt Full Production Audit",
+      "head_sha": "a59079312171bd9adb429688397d1f05a9a12220",
+      "status": "in_progress",
+      "conclusion": null,
+      "html_url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/39062581946",
+      "created_at": "2026-10-17T19:28:01Z",
+      "updated_at": "2026-10-17T19:28:05Z",
+      "run_attempt": 1
+    },
+    {
+      "id": 39062582006,
+      "name": "FindIt Dashboard Commerce Regression",
+      "head_sha": "a59079312171bd9adb429688397d1f05a9a12220",
+      "status": "in_progress",
+      "conclusion": null,
+      "html_url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/39062582006",
+      "created_at": "2026-10-17T19:28:01Z",
+      "updated_at": "2026-10-17T19:28:04Z",
+      "run_attempt": 1
+    },
+    {
+      "id": 39062581978,
+      "name": "FindIt Release Smoke",
+      "head_sha": "a59079312171bd9adb429688397d1f05a9a12220",
+      "status": "in_progress",
+      "conclusion": null,
+      "html_url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/39062581978",
+      "created_at": "2026-10-17T19:28:01Z",
+      "updated_at": "2026-10-17T19:28:04Z",
+      "run_attempt": 1
+    },
+    {
+      "id": 39062581987,
+      "name": "FindIt Production Smoke Test",
+      "head_sha": "a59079312171bd9adb429688397d1f05a9a12220",
+      "status": "in_progress",
+      "conclusion": null,
+      "html_url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/39062581987",
+      "created_at": "2026-10-17T19:28:01Z",
+      "updated_at": "2026-10-17T19:28:05Z",
+      "run_attempt": 1
+    },
+    {
+      "id": 39062582007,
+      "name": "FindIt Final Production Audit",
+      "head_sha": "a59079312171bd9adb429688397d1f05a9a12220",
+      "status": "in_progress",
+      "conclusion": null,
+      "html_url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/39062582007",
+      "created_at": "2026-10-17T19:28:01Z",
+      "updated_at": "2026-10-17T19:28:04Z",
+      "run_attempt": 1
+    },
+    {
+      "id": 39062581979,
+      "name": "FindIt Interaction Freeze Regression",
+      "head_sha": "a59079312171bd9adb429688397d1f05a9a12220",
+      "status": "in_progress",
+      "conclusion": null,
+      "html_url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/39062581979",
+      "created_at": "2026-10-17T19:28:01Z",
+      "updated_at": "2026-10-17T19:28:04Z",
+      "run_attempt": 1
+    },
+    {
+      "id": 39062581915,
+      "name": "FindIt smoke checks",
+      "head_sha": "a59079312171bd9adb429688397d1f05a9a12220",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/39062581915",
+      "created_at": "2026-10-17T19:28:01Z",
+      "updated_at": "2026-10-17T19:28:09Z",
+      "run_attempt": 1
+    },
+    {
+      "id": 39062582024,
+      "name": "FindIt regression checks",
+      "head_sha": "a59079312171bd9adb429688397d1f05a9a12220",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/39062582024",
+      "created_at": "2026-10-17T19:28:01Z",
+      "updated_at": "2026-10-17T19:28:15Z",
+      "run_attempt": 1
+    },
+    {
+      "id": 39062582004,
+      "name": "Deploy FindIt to Cloudflare",
+      "head_sha": "a59079312171bd9adb429688397d1f05a9a12220",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/39062582004",
+      "created_at": "2026-10-17T19:28:01Z",
+      "updated_at": "2026-10-17T19:28:31Z",
+      "run_attempt": 1
+    },
+    {
+      "id": 39062581980,
+      "name": "FindIt Live Photo Probe",
+      "head_sha": "a59079312171bd9adb429688397d1f05a9a12220",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/39062581980",
+      "created_at": "2026-10-17T19:28:01Z",
+      "updated_at": "2026-10-17T19:28:38Z",
+      "run_attempt": 1
+    },
+    {
+      "id": 39062581242,
+      "name": "pages build and deployment",
+      "head_sha": "a59079312171bd9adb429688397d1f05a9a12220",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/39062581242",
+      "created_at": "2026-10-17T19:28:00Z",
+      "updated_at": "2026-10-17T19:28:46Z",
+      "run_attempt": 1
+    }
+  ]
+}

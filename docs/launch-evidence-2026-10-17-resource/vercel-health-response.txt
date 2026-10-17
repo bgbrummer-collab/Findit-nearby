@@ -1,0 +1,1 @@
+{"ok":false,"visionProvider":"huggingface","visionConfigured":false,"message":"HF_TOKEN is missing."}
