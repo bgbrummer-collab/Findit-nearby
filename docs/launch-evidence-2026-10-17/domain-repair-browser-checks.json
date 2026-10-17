@@ -1,0 +1,26 @@
+{
+  "runtimeBuild": "0c2d29cea6aa35afe077b8659a10867d405d3937",
+  "finalBuild": "a5147d111da6652a2f170428c5fe9e3d5d4bd81b",
+  "logitechTypedCompare": {
+    "price": 2299,
+    "currency": "ZAR",
+    "retailer": "Computer Mania",
+    "onlineStock": "in_stock",
+    "branchStockVerified": false
+  },
+  "realGalleryPhoto": {
+    "typedSubstitution": false,
+    "partialFamily": "Logitech headphones",
+    "exactOffer": false,
+    "staleTypedPriceCleared": true
+  },
+  "finalBosch": {
+    "price": 4999,
+    "currency": "ZAR",
+    "retailer": "TMB Supplies",
+    "sourcedAnswer": "2 x GBA18V2.0Ah;GAL18V-20;Professional18V same-voltage compatibility"
+  },
+  "settingsRadiusPersistence": true,
+  "deals": "verified current price; no discount invented",
+  "launchReady": false
+}
