@@ -120,3 +120,10 @@ test('product strengths discard popularity slogans and keep published microphone
  const d=await(await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({name,offers:[{product_url:'https://retailer.example/microphone',sourcePageVerified:true,exactProductMatch:true}]})}),{})).json();
  assert.ok(d.pros.length);assert.doesNotMatch(d.pros.join(' '),/next evolution|more and more|quality offerings|easy to see why/i);assert.match([d.whatItDoes,...d.pros].join(' '),/USB\/XLR/);assert.match(d.pros.join(' '),/Auto Level|touch mute/);
 });
+
+test('a toilet-paper photo gets paper buying guidance rather than food instructions',async()=>{
+ const {productTypeInformation}=await import('../lib/product-type-information.js');
+ const d=productTypeInformation({name:'Twinsaver toilet paper',object:'toilet paper',category:'grocery/household',identityScope:'product-family'});
+ assert.match(d.overview,/personal hygiene/);assert.match(d.buyingChecks,/plies|sheets per roll/);assert.doesNotMatch(d.overview+' '+d.buyingChecks,/food|ingredients|allergens|nutrition|recipe/);assert.equal(d.scope,'general-product-type');
+ assert.equal(productTypeInformation({name:'Twinsaver product',object:'product',identityScope:'brand'}),null);
+});
