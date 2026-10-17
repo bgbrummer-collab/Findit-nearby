@@ -112,3 +112,11 @@ test('catalogue identities are labelled as barcode matches rather than AI or use
  r.context.fetch=async url=>({ok:true,json:async()=>String(url)==='/api/search'?{identification:{name:'Coca-Cola 330 ml',barcode:'5449000000996',confidence:null,userConfirmed:false,catalogueSource:{title:'Open Food Facts'}}}:{offers:[],researched:false}});
  await r.context.window.finditRunProductSearch('5449000000996');assert.equal(r.elements.get('#fxExactBadge').textContent,'Barcode catalogue match');assert.equal(r.elements.get('#fxConfidence').textContent,'Barcode catalogue match');
 });
+
+test('product strengths discard popularity slogans and keep published microphone features',async t=>{
+ const worker=(await import('../cloudflare/worker.js')).default,name='Example X2 Podcast Microphone';
+ const description='Hybrid USB/XLR Dynamic Microphone with Onboard DSP and headphone jack. The next evolution. More and more creators are using our podcast microphones. With quality offerings like this, it is easy to see why. Auto Level Mode adjusts microphone gain. The LED panel includes a touch mute control.';
+ t.mock.method(globalThis,'fetch',async u=>String(u).includes('bing.com')?new Response('<rss/>'):new Response('<script type="application/ld+json">'+JSON.stringify({'@type':'Product',name,description})+'</script>'));
+ const d=await(await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({name,offers:[{product_url:'https://retailer.example/microphone',sourcePageVerified:true,exactProductMatch:true}]})}),{})).json();
+ assert.ok(d.pros.length);assert.doesNotMatch(d.pros.join(' '),/next evolution|more and more|quality offerings|easy to see why/i);assert.match([d.whatItDoes,...d.pros].join(' '),/USB\/XLR/);assert.match(d.pros.join(' '),/Auto Level|touch mute/);
+});
