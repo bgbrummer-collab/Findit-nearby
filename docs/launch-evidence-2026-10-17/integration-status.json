@@ -1,0 +1,11 @@
+{
+  "geminiAdapter": "implemented; no live verification without Cloudflare key",
+  "vercelGeminiKey": "sensitive and not recoverable",
+  "vercelFeedbackEndpoint": "sensitive and not recoverable",
+  "cloudflareFeedbackEndpoint": false,
+  "huggingFace": "live HTTP 402 / credits",
+  "branchInventory": "no authoritative feed configured",
+  "analytics": "no persistent storage configured",
+  "backgroundAlerts": "no delivery integration configured",
+  "paidServicesActivated": false
+}

@@ -1,0 +1,19 @@
+{
+  "build": "e0a83b16055bc814053981a043d113f1e077c1d1",
+  "browser": "cloud Chrome",
+  "gallery": {
+    "input": "real Logitech headset photo via chooser",
+    "typed_substitution": false,
+    "result": "partial brand/family; possible model unconfirmed",
+    "exact_offer": false
+  },
+  "barcode": {
+    "input": "5449000000996",
+    "result": "Coca-Cola 330 ml",
+    "label": "Barcode catalogue match",
+    "source": "Open Food Facts",
+    "offers_verified": false
+  },
+  "loading_focus_inside_dialog": true,
+  "launch_ready": false
+}

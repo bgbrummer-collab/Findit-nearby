@@ -1,0 +1,829 @@
+{
+  "checkedAt": "2026-10-17T14:06:20.999736+00:00",
+  "version": {
+    "commit": "0ad185f87c5aad7b45279e0b574a76cb8b8bc293",
+    "platform": "cloudflare"
+  },
+  "endVersion": {
+    "commit": "0ad185f87c5aad7b45279e0b574a76cb8b8bc293",
+    "platform": "cloudflare"
+  },
+  "results": [
+    {
+      "category": "electronics",
+      "page": "https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology",
+      "imageUrl": "http://computermania.co.za/cdn/shop/files/logitech_981_000817_g_pro_x_wired_1502157.jpg?v=1694695213",
+      "path": "/workspace/scratch/findit-real-photos/electronics.jpg",
+      "bytes": 122384,
+      "response": {
+        "identification": null,
+        "offers": [],
+        "blocked": false,
+        "verified": false,
+        "visualVerification": false,
+        "provider": "cloudflare-consensus",
+        "imageAccepted": true,
+        "needsVision": false,
+        "requiresUserInput": true,
+        "retryable": true,
+        "confidence": null,
+        "visionDiagnostics": [
+          {
+            "provider": "cloudflare-workers-ai",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "Logitech G",
+              "brand": "Logitech",
+              "model": "G gaming headset",
+              "object": "product",
+              "size": "",
+              "color": "",
+              "visibleText": [
+                "Gaming",
+                "Headset",
+                "Logitech",
+                "Gaming Headset"
+              ]
+            },
+            "errorType": null
+          },
+          {
+            "provider": "cloudflare-gemma",
+            "code": "CF_GEMMA_NO_JSON",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": null
+          },
+          {
+            "provider": "cloudflare-llava",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "G Pro X Headset",
+              "brand": "G Pro X",
+              "model": "G Pro X Headset",
+              "object": "Headset",
+              "size": "Large",
+              "color": "Black",
+              "visibleText": []
+            },
+            "errorType": null
+          },
+          {
+            "provider": "huggingface",
+            "code": "HF_INFERENCE_FAILED",
+            "providerStatus": 402,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": "credits"
+          }
+        ],
+        "code": "PHOTO_IDENTITY_UNCERTAIN",
+        "providerStatus": null,
+        "providerError": null,
+        "cloudflareReason": "PHOTO_IDENTITY_UNCERTAIN",
+        "cloudflareError": null,
+        "message": "The image service could not complete identification. Try again or enter the product name or barcode."
+      }
+    },
+    {
+      "category": "clothing",
+      "page": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2",
+      "imageUrl": "http://www.levi.co.za/cdn/shop/files/b656875f49830c1dfd13d79892cdaa03.jpg?v=1786963292",
+      "path": "/workspace/scratch/findit-real-photos/clothing.jpg",
+      "bytes": 155987,
+      "response": {
+        "identification": null,
+        "offers": [],
+        "blocked": false,
+        "verified": false,
+        "visualVerification": false,
+        "provider": "cloudflare-consensus",
+        "imageAccepted": true,
+        "needsVision": false,
+        "requiresUserInput": true,
+        "retryable": true,
+        "confidence": null,
+        "visionDiagnostics": [
+          {
+            "provider": "cloudflare-workers-ai",
+            "code": "CF_AI_NO_JSON",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": null
+          },
+          {
+            "provider": "cloudflare-gemma",
+            "code": "CF_GEMMA_NO_JSON",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": null
+          },
+          {
+            "provider": "cloudflare-llava",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "{\"name\":\"\",\"brand\":\"\",\"model\":\"\",\"object\":\"\",\"category\":\"\",\"retailCategory\":\"\",\"searchQuery\":\"\",\"size\":\"\",\"color\":\"\",\"barcode\":\"\",\"visibleText\":[],\"confidence\":0}",
+              "brand": "",
+              "model": "",
+              "object": "{\"name\":\"\",\"brand\":\"\",\"model\":\"\",\"object\":\"\",\"category\":\"\",\"retailCategory\":\"\",\"searchQuery\":\"\",\"size\":\"\",\"color\":\"\",\"barcode\":\"\",\"visibleText\":[],\"confidence\":0}",
+              "size": "",
+              "color": "",
+              "visibleText": []
+            },
+            "errorType": null
+          },
+          {
+            "provider": "huggingface",
+            "code": "HF_INFERENCE_FAILED",
+            "providerStatus": 402,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": "credits"
+          }
+        ],
+        "code": "PHOTO_IDENTITY_UNCERTAIN",
+        "providerStatus": null,
+        "providerError": null,
+        "cloudflareReason": "PHOTO_IDENTITY_UNCERTAIN",
+        "cloudflareError": null,
+        "message": "The image service could not complete identification. Try again or enter the product name or barcode."
+      }
+    },
+    {
+      "category": "tools",
+      "page": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger",
+      "imageUrl": "http://www.tmbsupplies.co.za/cdn/shop/files/GSB-18v-50-1_688x653_015db31d-b53a-408a-b6d3-6b28c3546563.webp?v=1716145384",
+      "path": "/workspace/scratch/findit-real-photos/tools.jpg",
+      "bytes": 52951,
+      "response": {
+        "identification": null,
+        "offers": [],
+        "blocked": false,
+        "verified": false,
+        "visualVerification": false,
+        "provider": "cloudflare-consensus",
+        "imageAccepted": true,
+        "needsVision": false,
+        "requiresUserInput": true,
+        "retryable": true,
+        "confidence": null,
+        "visionDiagnostics": [
+          {
+            "provider": "cloudflare-workers-ai",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "Bosch Professional",
+              "brand": "Bosch",
+              "model": "18V",
+              "object": "product",
+              "size": "",
+              "color": "",
+              "visibleText": [
+                "Bosch",
+                "Professional"
+              ]
+            },
+            "errorType": null
+          },
+          {
+            "provider": "cloudflare-gemma",
+            "code": "CF_GEMMA_NO_JSON",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": null
+          },
+          {
+            "provider": "cloudflare-llava",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "Hosco Drill",
+              "brand": "Hosco",
+              "model": "Drill",
+              "object": "Drill",
+              "size": "",
+              "color": "",
+              "visibleText": []
+            },
+            "errorType": null
+          },
+          {
+            "provider": "huggingface",
+            "code": "HF_INFERENCE_FAILED",
+            "providerStatus": 402,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": "credits"
+          }
+        ],
+        "code": "PHOTO_IDENTITY_UNCERTAIN",
+        "providerStatus": null,
+        "providerError": null,
+        "cloudflareReason": "PHOTO_IDENTITY_UNCERTAIN",
+        "cloudflareError": null,
+        "message": "The image service could not complete identification. Try again or enter the product name or barcode."
+      }
+    },
+    {
+      "category": "toys",
+      "page": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696",
+      "imageUrl": "http://lego-gybc.co.za/cdn/shop/files/Classic-Medium-Creative-Brick-Box-10696_001_prod_8f538b25-dcbc-463f-bc75-59c74cec8ad0.jpg?v=1761150696",
+      "path": "/workspace/scratch/findit-real-photos/toys.jpg",
+      "bytes": 100295,
+      "response": {
+        "identification": null,
+        "offers": [],
+        "blocked": false,
+        "verified": false,
+        "visualVerification": false,
+        "provider": "cloudflare-consensus",
+        "imageAccepted": true,
+        "needsVision": false,
+        "requiresUserInput": true,
+        "retryable": true,
+        "confidence": null,
+        "visionDiagnostics": [
+          {
+            "provider": "cloudflare-gemma",
+            "code": "CF_GEMMA_NO_JSON",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": null
+          },
+          {
+            "provider": "cloudflare-workers-ai",
+            "code": "CF_AI_NO_JSON",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": null
+          },
+          {
+            "provider": "cloudflare-llava",
+            "code": "CF_LLAVA_FAILED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": "TIMEOUT"
+          },
+          {
+            "provider": "huggingface",
+            "code": "HF_INFERENCE_FAILED",
+            "providerStatus": 402,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": "credits"
+          }
+        ],
+        "code": "PHOTO_IDENTITY_UNCERTAIN",
+        "providerStatus": null,
+        "providerError": null,
+        "cloudflareReason": "PHOTO_IDENTITY_UNCERTAIN",
+        "cloudflareError": null,
+        "message": "The image service could not complete identification. Try again or enter the product name or barcode."
+      }
+    },
+    {
+      "category": "furniture",
+      "page": "https://www.ikea.com/at/en/p/billy-bookcase-white-00263850/",
+      "imageUrl": "https://www.ikea.com/at/en/images/products/billy-bookcase-white__1590272_pe1038911_s5.jpg",
+      "path": "/workspace/scratch/findit-real-photos/furniture.jpg",
+      "bytes": 71924,
+      "response": {
+        "identification": null,
+        "offers": [],
+        "blocked": false,
+        "verified": false,
+        "visualVerification": false,
+        "provider": "cloudflare-consensus",
+        "imageAccepted": true,
+        "needsVision": false,
+        "requiresUserInput": true,
+        "retryable": true,
+        "confidence": null,
+        "visionDiagnostics": [
+          {
+            "provider": "cloudflare-workers-ai",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "full printed product name",
+              "brand": "unknown",
+              "model": "unknown",
+              "object": "bookcase",
+              "size": "unknown",
+              "color": "white",
+              "visibleText": [
+                "unknown",
+                "unknown",
+                "unknown",
+                "unknown",
+                "unknown",
+                "unknown"
+              ]
+            },
+            "errorType": null
+          },
+          {
+            "provider": "cloudflare-gemma",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "White bookshelf",
+              "brand": "",
+              "model": "",
+              "object": "bookshelf",
+              "size": "",
+              "color": "white",
+              "visibleText": []
+            },
+            "errorType": null
+          },
+          {
+            "provider": "cloudflare-llava",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "Shelf",
+              "brand": "",
+              "model": "",
+              "object": "Shelf",
+              "size": "",
+              "color": "",
+              "visibleText": []
+            },
+            "errorType": null
+          },
+          {
+            "provider": "huggingface",
+            "code": "HF_INFERENCE_FAILED",
+            "providerStatus": 402,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": "credits"
+          }
+        ],
+        "code": "PHOTO_IDENTITY_UNCERTAIN",
+        "providerStatus": null,
+        "providerError": null,
+        "cloudflareReason": "PHOTO_IDENTITY_UNCERTAIN",
+        "cloudflareError": null,
+        "message": "The image service could not complete identification. Try again or enter the product name or barcode."
+      }
+    },
+    {
+      "category": "groceries",
+      "page": "https://world.openfoodfacts.org/product/5449000000996",
+      "imageUrl": "https://images.openfoodfacts.org/images/products/544/900/000/0996/front_en.1129.400.jpg",
+      "path": "/workspace/scratch/findit-real-photos/groceries.jpg",
+      "response": {
+        "identification": null,
+        "offers": [],
+        "blocked": false,
+        "verified": false,
+        "visualVerification": false,
+        "provider": "cloudflare-consensus",
+        "imageAccepted": true,
+        "needsVision": false,
+        "requiresUserInput": true,
+        "retryable": true,
+        "confidence": null,
+        "visionDiagnostics": [
+          {
+            "provider": "cloudflare-workers-ai",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "Coca-Cola",
+              "brand": "Coca-Cola",
+              "model": "Original",
+              "object": "can",
+              "size": "12",
+              "color": "red",
+              "visibleText": [
+                "Coca-Cola",
+                "Original"
+              ]
+            },
+            "errorType": null
+          },
+          {
+            "provider": "cloudflare-gemma",
+            "code": "CF_GEMMA_FAILED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": "TIMEOUT"
+          },
+          {
+            "provider": "cloudflare-llava",
+            "code": "CF_LLAVA_FAILED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": "TIMEOUT"
+          },
+          {
+            "provider": "huggingface",
+            "code": "HF_INFERENCE_FAILED",
+            "providerStatus": 402,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": "credits"
+          }
+        ],
+        "code": "PHOTO_IDENTITY_UNCERTAIN",
+        "providerStatus": null,
+        "providerError": null,
+        "cloudflareReason": "PHOTO_IDENTITY_UNCERTAIN",
+        "cloudflareError": null,
+        "message": "The image service could not complete identification. Try again or enter the product name or barcode."
+      }
+    },
+    {
+      "category": "shoes",
+      "page": "Existing user photo fixture",
+      "path": "/workspace/scratch/nike.jpg",
+      "response": {
+        "identification": {
+          "name": "NIKE shoes",
+          "brand": "NIKE",
+          "model": "",
+          "object": "shoes",
+          "category": "footwear",
+          "retailCategory": "footwear",
+          "searchQuery": "NIKE air force 1",
+          "barcode": null,
+          "size": "",
+          "color": "",
+          "visibleText": [],
+          "confidence": null,
+          "identificationMethod": "single-label-reading",
+          "userConfirmed": false,
+          "suggestedLabel": "NIKE air force 1",
+          "identityScope": "label-candidate",
+          "requiresModelConfirmation": true,
+          "features": [],
+          "unverifiedDetails": [
+            "brand",
+            "exact model",
+            "variant",
+            "size"
+          ]
+        },
+        "offers": [],
+        "blocked": false,
+        "verified": false,
+        "userConfirmed": false,
+        "identitySource": "cloudflare-consensus",
+        "visionDiagnostics": [
+          {
+            "provider": "cloudflare-gemma",
+            "code": "CF_GEMMA_FAILED",
+            "providerStatus": null,
+            "providerErrorCode": "8007",
+            "identityClaim": null,
+            "errorType": null
+          },
+          {
+            "provider": "cloudflare-workers-ai",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "AIR FORCE 1",
+              "brand": "NIKE",
+              "model": "1",
+              "object": "sneaker",
+              "size": "US",
+              "color": "white",
+              "visibleText": [
+                "AIR",
+                "FORCE",
+                "1"
+              ]
+            },
+            "errorType": null
+          },
+          {
+            "provider": "cloudflare-llava",
+            "code": "CF_LLAVA_FAILED",
+            "providerStatus": null,
+            "providerErrorCode": "8007",
+            "identityClaim": null,
+            "errorType": "unsupported"
+          },
+          {
+            "provider": "huggingface",
+            "code": "HF_INFERENCE_FAILED",
+            "providerStatus": 402,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": "credits"
+          }
+        ],
+        "visualVerification": true,
+        "provider": "cloudflare-consensus",
+        "imageAccepted": true,
+        "needsVision": false,
+        "needsRetailerVerification": true,
+        "confidence": null,
+        "code": "PHOTO_PARTIALLY_IDENTIFIED",
+        "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+      }
+    },
+    {
+      "category": "beauty",
+      "page": "Existing user photo fixture",
+      "path": "/workspace/scratch/marc-anthony.jpg",
+      "response": {
+        "identification": {
+          "name": "MARC ANTHONY product",
+          "brand": "MARC ANTHONY",
+          "model": "",
+          "object": "product",
+          "category": "product",
+          "retailCategory": "general",
+          "searchQuery": "MARC ANTHONY product",
+          "barcode": null,
+          "size": "",
+          "color": "",
+          "visibleText": [],
+          "confidence": 0.5,
+          "identificationMethod": "independent-brand-consensus",
+          "userConfirmed": false,
+          "features": [],
+          "suggestedLabel": "",
+          "identityScope": "brand",
+          "requiresModelConfirmation": true,
+          "unverifiedDetails": [
+            "product type",
+            "exact model",
+            "size"
+          ]
+        },
+        "offers": [],
+        "blocked": false,
+        "verified": false,
+        "userConfirmed": false,
+        "identitySource": "cloudflare-consensus",
+        "visionDiagnostics": [
+          {
+            "provider": "cloudflare-workers-ai",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "STRICTLY CURLS",
+              "brand": "MARC ANTHONY",
+              "model": "XTREME",
+              "object": "product",
+              "size": "",
+              "color": "YELLOW",
+              "visibleText": [
+                "STRICTLY CURLS",
+                "XTREME"
+              ]
+            },
+            "errorType": null
+          },
+          {
+            "provider": "cloudflare-gemma",
+            "code": "CF_GEMMA_NO_JSON",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": null
+          },
+          {
+            "provider": "cloudflare-llava",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "Marc Anthony Strictly Curls Conditioner",
+              "brand": "Marc Anthony",
+              "model": "Strictly Curls Conditioner",
+              "object": "Conditioner",
+              "size": "Full Size",
+              "color": "Yellow",
+              "visibleText": []
+            },
+            "errorType": null
+          },
+          {
+            "provider": "huggingface",
+            "code": "HF_INFERENCE_FAILED",
+            "providerStatus": 402,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": "credits"
+          }
+        ],
+        "visualVerification": true,
+        "provider": "cloudflare-consensus",
+        "imageAccepted": true,
+        "needsVision": false,
+        "needsRetailerVerification": true,
+        "confidence": 0.5,
+        "code": "PHOTO_PARTIALLY_IDENTIFIED",
+        "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+      }
+    },
+    {
+      "category": "household",
+      "page": "Existing user photo fixture",
+      "path": "/workspace/scratch/twinsaver.webp",
+      "response": {
+        "identification": {
+          "name": "TWINSAVER product",
+          "brand": "TWINSAVER",
+          "model": "",
+          "object": "product",
+          "category": "grocery/household",
+          "retailCategory": "grocery/household",
+          "searchQuery": "TWINSAVER product",
+          "barcode": null,
+          "size": "",
+          "color": "",
+          "visibleText": [],
+          "confidence": 0.5,
+          "identificationMethod": "independent-brand-consensus",
+          "userConfirmed": false,
+          "features": [],
+          "suggestedLabel": "",
+          "identityScope": "brand",
+          "requiresModelConfirmation": true,
+          "unverifiedDetails": [
+            "product type",
+            "exact model",
+            "size"
+          ]
+        },
+        "offers": [],
+        "blocked": false,
+        "verified": false,
+        "userConfirmed": false,
+        "identitySource": "cloudflare-consensus",
+        "visionDiagnostics": [
+          {
+            "provider": "cloudflare-workers-ai",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "TWINSAVER",
+              "brand": "TWINSAVER",
+              "model": "Twin Pty",
+              "object": "TOILET PAPER",
+              "size": "PRINTED SIZE",
+              "color": "WHITE",
+              "visibleText": [
+                "TWINSAVER",
+                "Twin Pty",
+                "Thin Pty"
+              ]
+            },
+            "errorType": null
+          },
+          {
+            "provider": "cloudflare-gemma",
+            "code": "CF_GEMMA_NO_JSON",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": null
+          },
+          {
+            "provider": "cloudflare-llava",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "Twinsaver Toilet Rolls",
+              "brand": "Twinsaver",
+              "model": "Toilet Rolls",
+              "object": "Toilet Rolls",
+              "size": "18 Rolls",
+              "color": "Green",
+              "visibleText": []
+            },
+            "errorType": null
+          },
+          {
+            "provider": "huggingface",
+            "code": "HF_INFERENCE_FAILED",
+            "providerStatus": 402,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": "credits"
+          }
+        ],
+        "visualVerification": true,
+        "provider": "cloudflare-consensus",
+        "imageAccepted": true,
+        "needsVision": false,
+        "needsRetailerVerification": true,
+        "confidence": 0.5,
+        "code": "PHOTO_PARTIALLY_IDENTIFIED",
+        "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+      }
+    },
+    {
+      "category": "music",
+      "page": "Existing user photo fixture",
+      "path": "/workspace/scratch/mic.jpg",
+      "response": {
+        "identification": null,
+        "offers": [],
+        "blocked": false,
+        "verified": false,
+        "visualVerification": false,
+        "provider": "cloudflare-consensus",
+        "imageAccepted": true,
+        "needsVision": false,
+        "requiresUserInput": true,
+        "retryable": true,
+        "confidence": null,
+        "visionDiagnostics": [
+          {
+            "provider": "cloudflare-workers-ai",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "Microphone",
+              "brand": "Microsoft",
+              "model": "Studio",
+              "object": "Microphone",
+              "size": "Standard",
+              "color": "Black",
+              "visibleText": [
+                "Microphone",
+                "Studio",
+                "Microphone"
+              ]
+            },
+            "errorType": null
+          },
+          {
+            "provider": "cloudflare-gemma",
+            "code": "CF_GEMMA_NO_JSON",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": null
+          },
+          {
+            "provider": "cloudflare-llava",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "Voice Recorder",
+              "brand": "Voice Recorder",
+              "model": "Voice Recorder",
+              "object": "Voice Recorder",
+              "size": "",
+              "color": "",
+              "visibleText": []
+            },
+            "errorType": null
+          },
+          {
+            "provider": "huggingface",
+            "code": "HF_INFERENCE_FAILED",
+            "providerStatus": 402,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": "credits"
+          }
+        ],
+        "code": "PHOTO_IDENTITY_UNCERTAIN",
+        "providerStatus": null,
+        "providerError": null,
+        "cloudflareReason": "PHOTO_IDENTITY_UNCERTAIN",
+        "cloudflareError": null,
+        "message": "The image service could not complete identification. Try again or enter the product name or barcode."
+      }
+    }
+  ]
+}
