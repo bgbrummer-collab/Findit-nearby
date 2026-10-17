@@ -50,3 +50,9 @@ test('unavailable retailer search does not skip independently verified product c
  const offers=await nativeRetailerDiscovery({brand:'Korg',model:'Pitchclip 2',name:title,object:'clip-on instrument tuner',category:'musical accessories',searchQuery:title});
  assert.equal(offers.length,1);assert.equal(offers[0].product_url,url);assert.equal(offers[0].sourcePageVerified,true);assert.equal(offers[0].price,345);
 });
+
+test('a Plus title cannot override its contradictory base-model product code',async t=>{
+ const url='https://bothners.co.za/shop/microphones/example-mv7/';let sku='MV7K';
+ t.mock.method(globalThis,'fetch',async u=>String(u).includes('/wp-json/')?new Response(JSON.stringify([{name:'Shure MV7+ Podcast Microphone',sku,permalink:url,is_in_stock:true,prices:{price:'669500',currency_code:'ZAR',currency_minor_unit:2}}])):new Response('',{status:404}));
+ const wanted=ident({name:'Shure MV7+ microphone',searchQuery:'Shure MV7+ microphone'});assert.equal(await verify(url,wanted),null,'Contradictory model code must be excluded from exact price comparisons');sku='MV7+K';assert.equal((await verify(url,wanted))?.price,6695);
+});
