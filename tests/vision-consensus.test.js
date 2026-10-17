@@ -94,3 +94,8 @@ test('provider template placeholders cannot veto corroborated size or confirm a 
  assert.equal(d.size,'18 Rolls');assert.equal(d.requiresModelConfirmation,true);assert.ok(d.suggestedModels.every(x=>!/PRINTED MODEL/i.test(x.name)));
  const template={name:'full printed product name',brand:'Example',object:'headphones',model:'unknown'};const empty=reconcileVision([template,{...template}]);assert.equal(empty.requiresModelConfirmation,true);assert.equal(empty.name,'Example headphones');assert.equal(empty.model,'');
 });
+
+test('unbranded shirt descriptions retain a supported family without guessing a brand or style',()=>{
+ const result=reconcileVision([{name:'Short Sleeve Patchwork Shirt',object:'shirt',model:'Patchwork Shirt',brand:'',color:'multicolor'},{name:"men's striped short-sleeve button-down shirt",object:"men's short-sleeve button-down shirt",model:'',brand:''}]);
+ assert.equal(result.object,'shirt');assert.equal(result.brand,'');assert.equal(result.model,'');assert.equal(result.requiresModelConfirmation,true);assert.equal(result.color,'');
+});
