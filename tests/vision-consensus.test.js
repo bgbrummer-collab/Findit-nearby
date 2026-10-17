@@ -75,3 +75,16 @@ test('generic object fields preserve a corroborated headset family from the othe
 test('toilet rolls and toilet paper are the same family without asserting an uncertain pack size',()=>{
  const d=reconcileVision([{name:'TWINSAVER',brand:'TWINSAVER',model:'Twin Pty',object:'TOILET PAPER',size:'PRINTED SIZE',color:'WHITE'},{name:'Twinsaver Toilet Rolls',brand:'Twinsaver',model:'Toilet Rolls',object:'Toilet Rolls',size:'18 Rolls',color:'Green'}]);assert.equal(d.object,'toilet paper');assert.equal(d.requiresModelConfirmation,true);assert.equal(d.size,'');assert.equal(d.color,'');
 });
+
+test('soft drink and beverage readings preserve supported family without translating a variant guess',()=>{
+ const d=reconcileVision([{name:'Coca-Cola',brand:'Coca-Cola',model:'Orijinal Tat',object:'soft drink',color:'red'},{name:'Coca-Cola',brand:'Coca-Cola',model:'Original',object:'product'},{name:'Coca-Cola',brand:'Coca-Cola',model:'Coca-Cola',object:'Beverage',size:'Regular',color:'Red'}]);
+ assert.equal(d.object,'beverage');assert.equal(d.identityScope,'product-family');assert.equal(d.requiresModelConfirmation,true);assert.equal(d.model,'');assert.equal(d.size,'');
+});
+test('missing object fields can recover a family from two independent names',()=>{
+ const d=reconcileVision([{name:'Logitech gaming headset',brand:'Logitech',object:'',model:''},{name:'Logitech headphones',brand:'Logitech',object:'headphones',model:''}]);
+ assert.equal(d.object,'headphones');assert.equal(d.requiresModelConfirmation,true);assert.equal(d.model,'');
+});
+test('construction toy synonyms keep family guidance without inventing a LEGO set number',()=>{
+ const d=reconcileVision([{name:'LEGO construction toy',brand:'LEGO',object:'construction toy',model:''},{name:'LEGO building blocks set',brand:'LEGO',object:'building blocks set',model:''}]);
+ assert.equal(d.object,'building blocks');assert.equal(d.requiresModelConfirmation,true);assert.equal(d.model,'');assert.doesNotMatch(JSON.stringify(d),/10696/);
+});
