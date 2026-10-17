@@ -20,7 +20,7 @@ async function mockedProductFlow(){
  await page.goto(URL,{waitUntil:'domcontentloaded'});await page.locator('#photo').setInputFiles({name:'shoe.jpg',mimeType:'image/jpeg',buffer:Buffer.from([255,216,255,217])});await page.waitForTimeout(250);await engineClick(page,'#search');await page.waitForFunction(()=>/Nike Air Force 1 Low/i.test(document.querySelector('#resultName')?.textContent||''),{timeout:10000});await page.waitForTimeout(500);
  await check('mock exact identity correct',async()=>{if(!/Nike Air Force 1 Low/i.test(await page.locator('#resultName').innerText()))throw Error('missing')});
  await check('mock exact price shown',async()=>{const t=await page.locator('#exactSellerResults').innerText();if(!/2.?399|2399/i.test(t))throw Error(t)});
- await check('mock nearby same retailer paired without fake branch stock',async()=>{const t=await page.locator('#nearbyStores').innerText();if(!/Sportscene Menlyn/i.test(t)||!/In stock online/i.test(t)||!/physical branch has not confirmed stock/i.test(t))throw Error(t);if(/✓ Branch stock confirmed|Directions to store|Directions\s*→/i.test(t))throw Error('unverified branch exposed stock/directions')});
+ await check('mock nearby same retailer paired without fake branch stock',async()=>{const t=await page.locator('#nearbyStores').innerText();if(!/Sportscene Menlyn/i.test(t)||!/In stock online/i.test(t)||!/(?:physical branch has not confirmed stock|Branch stock not confirmed)/i.test(t))throw Error(t);if(/✓ Branch stock confirmed|Directions to store|Directions\s*→/i.test(t))throw Error('unverified branch exposed stock/directions')});
  await ctx.close()
 }
 
@@ -33,7 +33,7 @@ async function mockedLabelEvidenceFlow(){
  await page.goto(URL,{waitUntil:'domcontentloaded'});await page.locator('#photo').setInputFiles({name:'conditioner.jpg',mimeType:'image/jpeg',buffer:Buffer.from([255,216,255,217])});await page.waitForTimeout(250);await engineClick(page,'#search');await page.waitForFunction(()=>/Marc Anthony/i.test(document.querySelector('#resultName')?.textContent||''),{timeout:10000});await page.waitForTimeout(650);
  await check('label evidence promotes supported packaged-product identity',async()=>{const t=await page.locator('#resultNote').innerText();if(!/exact product identity verified/i.test(t))throw Error(t)});
  await check('label evidence allows retailer-page verified price',async()=>{const t=await page.locator('#exactSellerResults').innerText();if(!/199/i.test(t)||!/Clicks/i.test(t))throw Error(t)});
- await check('label flow keeps physical branch stock unconfirmed and no Directions',async()=>{const t=await page.locator('#nearbyStores').innerText();if(!/Clicks/i.test(t)||!/physical branch has not confirmed stock/i.test(t))throw Error(t);if(/Branch stock confirmed|Directions to store|Directions\s*→/i.test(t))throw Error('unverified branch exposed stock/directions')});
+ await check('label flow keeps physical branch stock unconfirmed and no Directions',async()=>{const t=await page.locator('#nearbyStores').innerText();if(!/Clicks/i.test(t)||!/(?:physical branch has not confirmed stock|Branch stock not confirmed)/i.test(t))throw Error(t);if(/Branch stock confirmed|Directions to store|Directions\s*→/i.test(t))throw Error('unverified branch exposed stock/directions')});
  await ctx.close()
 }
 
