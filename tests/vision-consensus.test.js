@@ -116,3 +116,12 @@ test('fully printed consumer label survives manufacturer/brand disagreement only
  assert.equal(r.requiresModelConfirmation,true);assert.equal(r.model,'');assert.equal(r.color,'');assert.equal(r.labelCandidates[0].name,'Anthisan Cream 25g');assert.equal(r.labelCandidates[0].brand,'Anthisan');assert.equal(r.labelCandidates[0].confirmed,false);
  const incomplete=reconcileVision([{name:'Example Cream 25g',brand:'Example',model:'',object:'cream tube',visibleText:['Example','CREAM']},{name:'Example cream',brand:'Example',model:'',object:'cream tube'}]);assert.equal(incomplete.labelCandidates.length,0);
 });
+
+test('topical cream descriptions corroborate only their broad family without treating ice cream as the same product',()=>{
+ const r=reconcileVision([{name:'Example Cream',brand:'Maker',object:'cream tube',model:''},{name:'Example skin cream',brand:'Maker',object:'skin cream',model:''}]);assert.equal(r.object,'topical cream');assert.equal(r.requiresModelConfirmation,true);assert.equal(r.model,'');
+ const other=reconcileVision([{name:'Example Cream',object:'cream tube',brand:'',model:''},{name:'Ice cream',object:'ice cream',brand:'',model:''}]);assert.equal(other,null);
+});
+test('brand-only consensus still retains a fully printed label as an unconfirmed candidate',()=>{
+ const r=reconcileVision([{name:'Example Relief Cream 25g',brand:'Example Relief',object:'cream',model:'',visibleText:['Example Relief','Cream','25 g']},{name:'Maker product',brand:'Maker',object:'medicine',model:''},{name:'Maker tube',brand:'Maker',object:'tube',model:''}]);
+ assert.equal(r.identityScope,'brand');assert.equal(r.requiresModelConfirmation,true);assert.equal(r.model,'');assert.equal(r.size,'');assert.equal(r.labelCandidates[0].name,'Example Relief Cream 25g');assert.equal(r.labelCandidates[0].confirmed,false);
+});
