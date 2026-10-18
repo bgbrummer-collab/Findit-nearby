@@ -195,3 +195,17 @@ test('multi-colour photo descriptions match retailer separators without acceptin
  assert.equal(identityMatches('Nike Air Force 1 White/Blue',i),true);assert.equal(identityMatches('Nike Air Force 1 White Blue',i),true);
  assert.equal(identityMatches('Nike Air Force 1 White',i),false);assert.equal(identityMatches('Nike Air Force 1 White/Red',i),false);
 });
+
+test('photo GTINs require a checksum and independent agreement, including printed spacing',async()=>{
+ for(const [a,b,expected] of [
+  [{barcode:'5449000000997'},{barcode:'5449000000997'},null],
+  [{visibleText:['5 449000 000996']},{barcode:'5449000000996'},'5449000000996'],
+  [{barcode:'EAN 5449000000996'},{barcode:'EAN 5449000000996'},null],
+  [{visibleText:['5449000000996','3017620422003']},{barcode:'5449000000996'},null],
+  [{visibleText:['5 449000 000996']},{visibleText:[]},null]
+ ]){
+  const f=new FormData();f.set('image',new Blob(['barcode normalization regression'],{type:'image/jpeg'}),'barcode.jpg');
+  let n=0;const data=await(await worker.fetch(new Request('https://findit.test/api/search',{method:'POST',body:f}),{AI:{run:async()=>({answer:JSON.stringify({name:'Example X1 headphones',brand:'Example',model:'X1',object:'headphones',...([a,b][n++]||b)})})}})).json();
+  assert.equal(data.identification.barcode,expected);assert.equal(data.identification.model,'X1');
+ }
+});
