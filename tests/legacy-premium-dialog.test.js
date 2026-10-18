@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';import vm from 'node:vm';import{readFileSync}from'node:fs';
+test('legacy Premium dialogs move outside the nearly transparent legacy page before opening',()=>{
+ const source=readFileSync(new URL('../script.js',import.meta.url),'utf8'),line=source.split('\n').find(x=>x.startsWith('function v10Open('));const content={},close={setAttribute(k,v){this[k]=v}},modal={parentElement:{id:'home'},classList:{remove(n){assert.equal(n,'hidden')}},removeAttribute(){}},body={appendChild(el){el.parentElement=this}};let named;
+ const ctx={document:{body,getElementById:id=>({v10UniversalModal:modal,v10ModalBody:content,v10CloseModal:close}[id])},window:{finditAccessibleDialog:(el,title)=>{assert.equal(el.parentElement,body);named=title}},esc:x=>x};vm.runInNewContext(line+';v10Open("Collections","<p>1 item</p>")',ctx);assert.equal(modal.parentElement,body);assert.equal(named,'Collections');assert.equal(close['aria-label'],'Close');assert.match(content.innerHTML,/1 item/);
+});

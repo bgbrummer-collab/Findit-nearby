@@ -121,12 +121,12 @@ const V10KEYS={collections:"findit_v10_collections",watch:"findit_v10_watchlist"
 function v10Read(k,f=[]){try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(f))}catch{return f}}
 function v10Write(k,v){localStorage.setItem(k,JSON.stringify(v));v10Refresh()}
 function v10Current(){const i=state.result?.identification||{};return {name:i.name||i.object||"Current Find",query:i.searchQuery||i.name||i.object||"",category:i.retailCategory||i.category||"",savedAt:new Date().toISOString()}}
-function v10Open(title,body){document.getElementById("v10ModalBody").innerHTML=`<p class="premium-home-kicker">★ PREMIUM V10</p><h2>${esc(title)}</h2>${body}`;document.getElementById("v10UniversalModal")?.classList.remove("hidden")}
+function v10Open(title,body){const modal=document.getElementById("v10UniversalModal");if(!modal)return;if(modal.parentElement!==document.body)document.body.appendChild(modal);document.getElementById("v10ModalBody").innerHTML=`<p class="premium-home-kicker">★ PREMIUM V10</p><h2>${esc(title)}</h2>${body}`;const close=document.getElementById("v10CloseModal");if(close)close.setAttribute("aria-label","Close");modal.removeAttribute("aria-hidden");modal.classList.remove("hidden");window.finditAccessibleDialog?.(modal,title)}
 function v10Close(){document.getElementById("v10UniversalModal")?.classList.add("hidden")}
 function v10Refresh(){if(!premiumState.active)return;document.body.classList.add("premium-v10");document.getElementById("v10CommandCentre")?.classList.remove("hidden")}
 function v10Collections(){
  let cols=v10Read(V10KEYS.collections,[{name:"Want to Buy",items:[]}]);
- v10Open("Collections",`<input id="v10CollectionName" class="v10-input" placeholder="New collection name"><div class="v10-actions"><button id="v10AddCollection">+ Create collection</button></div><div class="v10-list" style="margin-top:15px">${cols.map((c,i)=>`<div class="v10-row"><div><b>${esc(c.name)}</b><br><small>${c.items.length} items</small></div><button data-col-add="${i}">Add current Find</button></div>`).join("")}</div>`);
+ v10Open("Collections",`<label for="v10CollectionName">New collection name</label><input id="v10CollectionName" class="v10-input" placeholder="New collection name"><div class="v10-actions"><button id="v10AddCollection">+ Create collection</button></div><div class="v10-list" style="margin-top:15px">${cols.map((c,i)=>`<div class="v10-row"><div><b>${esc(c.name)}</b><br><small>${c.items.length} items</small></div><button data-col-add="${i}">Add current Find</button></div>`).join("")}</div>`);
  document.getElementById("v10AddCollection").onclick=()=>{const n=document.getElementById("v10CollectionName").value.trim();if(!n)return;cols.push({name:n,items:[]});v10Write(V10KEYS.collections,cols);v10Collections()};
  document.querySelectorAll("[data-col-add]").forEach(b=>b.onclick=()=>{const x=v10Current();if(!x.query)return;cols[+b.dataset.colAdd].items.unshift(x);v10Write(V10KEYS.collections,cols);v10Collections()});
 }
@@ -148,7 +148,7 @@ function v10Stats(){
 }
 function v10History(){
  let a=[];try{a=JSON.parse(localStorage.getItem("finditRecent")||"[]")}catch{}
- v10Open("History+",`<input id="v10HistorySearch" class="v10-input" placeholder="Search your recent finds"><div id="v10HistoryRows" class="v10-list"></div>`);
+ v10Open("History+",`<label for="v10HistorySearch">Search your recent finds</label><input id="v10HistorySearch" class="v10-input" placeholder="Search your recent finds"><div id="v10HistoryRows" class="v10-list"></div>`);
  const draw=()=>{const q=document.getElementById("v10HistorySearch").value.toLowerCase();document.getElementById("v10HistoryRows").innerHTML=a.filter(x=>(x.name+" "+x.query).toLowerCase().includes(q)).slice(0,50).map(x=>`<div class="v10-row"><div><b>${esc(x.name)}</b><br><small>${esc(x.query||"")}</small></div><a href="https://www.google.com/search?q=${encodeURIComponent(x.query||x.name)}" target="_blank">Search again</a></div>`).join("")||"<p>No matching history.</p>"};draw();document.getElementById("v10HistorySearch").oninput=draw;
 }
 function v10Share(){
