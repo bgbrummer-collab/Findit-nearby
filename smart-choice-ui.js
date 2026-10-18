@@ -55,6 +55,7 @@ function confidenceLabel(){
  const id=state()?.result?.identification||{},c=num(id.confidence);if(id.userConfirmed)return'Search confirmed';if(c==null)return'Confidence not supplied';
  const p=Math.round(Math.max(0,Math.min(1,c))*100),level=norm(id.matchLevel||id.match_level);
  const exact=id.exactProductMatch===true||level.includes('exact')||id.modelEvidence===true;
+ if(id.identityScope==='brand')return`Brand recognised · ${p}%`;
  if(!exact)return`Object match · ${p}%`;
  return p>=85?`High confidence · ${p}%`:p>=65?`Likely exact match · ${p}%`:`Check exact match · ${p}%`;
 }

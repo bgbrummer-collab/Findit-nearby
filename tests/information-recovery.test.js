@@ -143,3 +143,16 @@ test('nearby outage messages follow only the selected product, radius and locati
 test('typed product research preserves the advertised fifty Premium history entries',()=>{
  const source=readFileSync(new URL('../information-runtime.js',import.meta.url),'utf8'),line=source.split('\n').find(x=>x.startsWith('function saveRecent('));let saved=Array.from({length:50},(_,n)=>({query:'Old '+n,name:'Old '+n}));const ctx={window:{premiumHistoryLimit:()=>50},localStorage:{getItem:()=>JSON.stringify(saved),setItem:(k,v)=>{saved=JSON.parse(v)}},productName:i=>i.name};vm.runInNewContext(line+';saveRecent({name:"New product",searchQuery:"New product"})',ctx);assert.equal(saved.length,50);assert.equal(saved[0].query,'New product');assert.ok(saved.some(x=>x.query==='Old 48'));
 });
+
+test('barcode tool reuses maintained search and replaces the previous photo identity',async()=>{
+ const old={name:'Previous photo',barcode:null};let called='';
+ const context={window:{finditState:{result:{identification:old}},finditRunProductSearch:async code=>{called=code;context.window.finditState.result.identification={name:'Catalogue match',barcode:code,catalogueSource:{title:'Test catalogue'}};}},document:{readyState:'loading',addEventListener(){},querySelector:()=>null},localStorage:{getItem:()=>null,setItem(){}},setTimeout(){},clearTimeout(){},CustomEvent:class{constructor(name,options){this.type=name;this.detail=options.detail;}},Intl};
+ context.document.dispatchEvent=()=>{};vm.runInNewContext(readFileSync(new URL('../shopping-assistant-ui.js',import.meta.url),'utf8'),context);
+ await context.window.finditUseBarcode('5449000000996');assert.equal(called,'5449000000996');assert.equal(context.window.finditLastBarcodeProduct.name,'Catalogue match');assert.notEqual(context.window.finditState.result.identification,old);
+});
+
+test('brand-only photo evidence cannot claim a recognised product type',()=>{
+ const label={textContent:''},description={textContent:''};
+ const ctx={window:{finditState:{result:{identification:{name:'Coca-Cola product',brand:'Coca-Cola',object:'product',identityScope:'brand',requiresModelConfirmation:true},message:'Brand recognised; product type unknown.'}}},document:{querySelector:s=>s==='#fxExactBadge'?label:s==='#fxProductDesc'?description:null,querySelectorAll:()=>[],addEventListener(){}},setTimeout(){},console};
+ ctx.MutationObserver=class{observe(){}};let source=readFileSync(new URL('../launch-ux-polish.js',import.meta.url),'utf8').replace('function truthfulProductState(){','window.testTruthfulProductState=function truthfulProductState(){');vm.runInNewContext(source,ctx);ctx.window.testTruthfulProductState();assert.equal(label.textContent,'Brand recognised — confirm product');assert.match(description.textContent,/product type unknown/);
+});

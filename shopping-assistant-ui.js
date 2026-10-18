@@ -146,7 +146,14 @@
 
   async function lookupBarcode(code){
     const st=$('#fxBarcodeStatus');if(st)st.textContent=`Looking up barcode ${code} in connected product data…`;
-    try{const r=await fetch('/api/product-intelligence',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({query:code,name:code,barcode:code})}),d=await r.json();if(r.ok&&d?.matched&&d.bestProduct){window.finditLastBarcodeProduct=d.bestProduct;const name=d.bestProduct.name||d.bestProduct.product_name||code;if(st)st.innerHTML=`Matched connected product data: <b>${esc(name)}</b>.`;document.dispatchEvent(new CustomEvent('findit:barcode-product',{detail:{code,product:d.bestProduct,offers:d.offers||[]}}));toast(`Barcode matched: ${name}`);return d}if(st)st.textContent=`Barcode captured: ${code}. No connected verified product match yet.`}catch{if(st)st.textContent=`Barcode captured: ${code}. Product lookup is temporarily unavailable.`}return null;
+    if(typeof window.finditRunProductSearch==='function'){
+      closeModal();await window.finditRunProductSearch(code);
+      const product=app().result?.identification;
+      if(product?.barcode===code)window.finditLastBarcodeProduct=product;
+      return product?.barcode===code?product:null;
+    }
+
+    try{const r=await fetch('/api/search',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({barcode:code})}),d=await r.json();if(d.identification?.catalogueSource&&d.identification.barcode===code){d.bestProduct=d.identification;d.matched=true;}if(r.ok&&d?.matched&&d.bestProduct){window.finditLastBarcodeProduct=d.bestProduct;const name=d.bestProduct.name||d.bestProduct.product_name||code;if(st)st.innerHTML=`Matched connected product data: <b>${esc(name)}</b>.`;document.dispatchEvent(new CustomEvent('findit:barcode-product',{detail:{code,product:d.bestProduct,offers:d.offers||[]}}));toast(`Barcode matched: ${name}`);return d}if(st)st.textContent=`Barcode captured: ${code}. No connected verified product match yet.`}catch{if(st)st.textContent=`Barcode captured: ${code}. Product lookup is temporarily unavailable.`}return null;
   }
   async function useBarcode(raw){const code=String(raw||'').replace(/\s+/g,'').trim();if(!code){toast('Enter or scan a barcode first');return}if(!/^\d{6,18}$/.test(code)){toast('Use a valid numeric retail barcode');return}window.finditLastBarcode=code;document.dispatchEvent(new CustomEvent('findit:barcode',{detail:{code}}));await lookupBarcode(code)}
   async function startScanner(){

@@ -5,11 +5,11 @@ const browser=await chromium.launch({headless:true});
 const page=await browser.newPage({viewport:{width:1365,height:900}});
 page.setDefaultTimeout(30000);
 const fail=m=>{throw new Error(m)};
-await page.route('**/api/product-intelligence',async route=>{
+await page.route('**/api/search',async route=>{
   const req=route.request();
   let body={};try{body=JSON.parse(req.postData()||'{}')}catch{}
   if(body.barcode||/^\d{6,18}$/.test(String(body.query||''))){
-    await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({matched:true,bestProduct:{name:'Barcode Test Product',barcode:body.barcode||body.query},offers:[]})});return;
+    await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({identification:{name:'Barcode Test Product',barcode:body.barcode||body.query,catalogueSource:{title:'Regression catalogue fixture'},identificationMethod:'public-barcode-catalogue'},offers:[]})});return;
   }
   await route.continue();
 });
@@ -95,7 +95,7 @@ await page.locator('#fxUseBarcode').click();
 await page.waitForFunction(()=>window.finditLastBarcodeProduct?.name==='Barcode Test Product');
 const code=await page.evaluate(()=>window.finditLastBarcode);
 if(code!=='6001234567890')fail('Barcode manual fallback did not capture the barcode');
-const barcodeText=await page.locator('#fxBarcodeStatus').innerText();
+const barcodeText=await page.locator('#fxProductName').innerText();
 if(!/Barcode Test Product/i.test(barcodeText))fail('Barcode lookup did not feed connected product identification back into the UI');
 
 await page.setViewportSize({width:390,height:844});
