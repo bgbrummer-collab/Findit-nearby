@@ -40,7 +40,9 @@ async function runSearch(q,confirmedCandidate=null){q=clean(q);if(!q||busy)retur
  syncAll();document.dispatchEvent(new CustomEvent('findit:dashboard-sync',{detail:{result:s.result}}));if(s.stores.length)document.dispatchEvent(new CustomEvent('findit:nearby-updated',{detail:{stores:s.stores}}));
  searchStatus('Product search complete. Prices and stock require verified retailer evidence.');saveRecent(i);if($('#fxInformationModal.open .fx-info-loading')||$('#fxInformationModal.open #fxProductInfoView'))showProductInfo();
  }catch(e){if(generation!==photoGeneration)return;searchStatus('Search failed. Check the message below.');openModal('<h2>Search problem</h2><p>'+esc(e.message||'FindIt could not complete this search.')+'</p><button id="fxTryAgain">Try another product</button>');$('#fxTryAgain').onclick=()=>searchModal()}finally{if(generation===photoGeneration){busy=false;syncAll()}}}
-function saveRecent(i){try{let a=JSON.parse(localStorage.getItem('finditRecent')||'[]'),q=i.searchQuery||i.name||i.object;a=[{id:Date.now(),name:productName(i),brand:i.brand||'',query:q,date:new Date().toISOString()},...a.filter(x=>x.query!==q)].slice(0,window.premiumHistoryLimit?.()===50?50:30);localStorage.setItem('finditRecent',JSON.stringify(a))}catch{}}
+function refreshRecentSide(){try{const a=JSON.parse(localStorage.getItem('finditRecent')||'[]'),side=$('#fxRecentSide');if(side)side.innerHTML=a.length?a.slice(0,4).map(x=>'<span>'+esc(x.name)+'</span>').join(''):'<span>No recent searches yet.</span>'}catch{}}
+setTimeout(refreshRecentSide,500);
+function saveRecent(i){try{let a=JSON.parse(localStorage.getItem('finditRecent')||'[]'),q=i.searchQuery||i.name||i.object;a=[{id:Date.now(),name:productName(i),brand:i.brand||'',identification:{...i},query:q,date:new Date().toISOString()},...a.filter(x=>x.query!==q)].slice(0,window.premiumHistoryLimit?.()===50?50:30);localStorage.setItem('finditRecent',JSON.stringify(a));refreshRecentSide()}catch{}}
 function syncIdentity(i){let name=productName(i)||'Product selected',meta=[i.brand,i.model,i.category||i.retailCategory].filter(Boolean).join(' · ');
  const set=(sel,v)=>{let e=$(sel);if(e&&v!==undefined)e.textContent=v};
  set('#fxProductName',name);set('#fxProductMeta',meta);set('#fxProductDesc',i.summary||('Searching current retailer information for '+name+'.'));set('#fxExactBadge',i.catalogueSource?'Barcode catalogue match':i.userConfirmed?'Product confirmed by search':'Product identified');set('#fxConfidence',i.catalogueSource?'Barcode catalogue match':i.confidence!==null&&i.confidence!==undefined&&Number.isFinite(Number(i.confidence))?Math.round(Number(i.confidence)*100)+'% Match':'Search confirmed');
@@ -96,7 +98,7 @@ async function loadPartialNearby(i){
 async function hydrateIdentifiedPhoto(){
  if(owned||busy||!productName())return;
  const s=st(),i=ident();if(!s||!i||!productName(i))return;
- if(i.requiresModelConfirmation){handlePhotoResult();researchPartial(i,true);loadPartialNearby(i);return}
+ if(i.requiresModelConfirmation){saveRecent(i);handlePhotoResult();researchPartial(i,true);loadPartialNearby(i);return}
  owned=true;busy=true;commerce=null;research=null;
  const generation=++photoGeneration,photoFile=s.file;
  try{
@@ -134,6 +136,18 @@ let lastPhotoFile=null;
 document.addEventListener('findit:results-rendered',()=>setTimeout(()=>{const s=st();if(s?.file&&s.file!==lastPhotoFile){lastPhotoFile=s.file;photoGeneration++;owned=false;busy=false;commerce=null;research=null;partialResearch=null;partialPending=false;}if(owned&&productName())syncAll();else if(s?.file&&productName()){hydrateIdentifiedPhoto();handlePhotoResult();}else if(!productName())handlePhotoResult()},40));
 document.addEventListener('findit:nearby-updated',()=>{if(owned)setTimeout(syncAll,40)});
 document.addEventListener('findit:new-photo-selected',()=>{photoGeneration++;lastPhotoFile=st()?.file||null;owned=false;busy=false;commerce=null;research=null;researchPending=false;partialResearch=null;partialPending=false;partialNearbyKey='';closeInformation();if($('#fxPhotoRecovery'))$('#fxPhotoRecovery').hidden=true});
+function openRecordedProduct(q){
+ let entry;try{entry=JSON.parse(localStorage.getItem('finditRecent')||'[]').find(x=>(x.query||x.name)===q)}catch{}
+ const i=entry?.identification;
+ if(!i?.requiresModelConfirmation)return runSearch(q);
+ const s=st();if(!s)return;
+ photoGeneration++;owned=false;busy=false;commerce=null;research=null;researchPending=false;partialResearch=null;partialPending=false;partialNearbyKey='';lastPhotoFile=null;
+ s.file=null;s.result={identification:{...i},offers:[],verified:false,visualVerification:true};s.offers=[];s.stores=[];window.productIntelligence=null;
+ const image=$('#fxProductImage');if(image)image.innerHTML='<span>▧</span>';
+ syncIdentity(i);handlePhotoResult();saveRecent(i);researchPartial(i,true);loadPartialNearby(i);showProductInfo();
+ document.dispatchEvent(new CustomEvent('findit:dashboard-sync',{detail:{result:s.result}}));
+}
+window.finditOpenRecordedProduct=openRecordedProduct;
 window.finditRunProductSearch=runSearch;window.finditOpenCurrentProductInfo=showProductInfo;
 const style=document.createElement('style');style.textContent=`.fx-info-modal{display:none;position:fixed;inset:0;z-index:200000;background:rgba(1,7,16,.78);padding:20px;overflow:auto}.fx-info-modal.open{display:grid;place-items:center}.fx-info-card{position:relative;width:min(820px,100%);max-height:90vh;overflow:auto;background:#071727;color:#eef6ff;border:1px solid #29455e;border-radius:22px;padding:26px;box-shadow:0 30px 100px #0009}.fx-info-x{position:absolute;right:16px;top:12px;border:0;background:transparent;color:#fff;font-size:30px}.fx-info-card h2{font-size:27px;margin:0 42px 18px 0}.fx-info-card input{width:100%;box-sizing:border-box;background:#0d2134;color:#fff;border:1px solid #31516b;border-radius:12px;padding:14px;margin:8px 0 12px}.fx-info-card button{background:#3858ff;color:#fff;border:0;border-radius:11px;padding:12px 16px;font-weight:700;cursor:pointer}.fx-info-note,.fx-info-help{color:#9db0c3}.fx-info-identity{padding:16px;border:1px solid #29455e;border-radius:14px;background:#0a1d2f;margin-bottom:14px}.fx-info-identity h3{margin:0 0 10px;font-size:21px}.fx-info-identity>div{display:flex;flex-wrap:wrap;gap:8px}.fx-info-identity span{background:#10283d;padding:8px 10px;border-radius:9px}.fx-info-identity span b{display:block;font-size:10px;text-transform:uppercase;color:#75dfff}.fx-info-section{border-top:1px solid #20384d;padding:16px 0}.fx-info-section h3{margin:0 0 8px}.fx-info-cols{display:grid;grid-template-columns:1fr 1fr;gap:20px}.fx-info-sources{display:flex;flex-wrap:wrap;gap:8px}.fx-info-sources a,.fx-offer-list a,.fx-real-store a{color:#7fdfff}.fx-offer-list{display:grid;gap:10px}.fx-offer-list article{display:grid;grid-template-columns:1fr auto auto;gap:16px;align-items:center;border:1px solid #29455e;border-radius:13px;padding:14px}.fx-offer-list article span,.fx-offer-list article small{display:block;color:#9db0c3;margin-top:4px}.fx-nearby-list{display:grid;gap:8px}.fx-real-store{display:flex;justify-content:space-between;gap:12px;border:1px solid #20384d;border-radius:11px;padding:11px}.fx-real-store small,.fx-real-store em{display:block;color:#9db0c3;font-style:normal;margin-top:3px}.fx-info-empty,.fx-info-loading{padding:18px;border:1px solid #29455e;border-radius:13px;background:#0a1d2f}.fx-value-strip{display:flex;justify-content:space-between;gap:10px;padding:9px 0;color:#9db0c3}@media(max-width:650px){.fx-info-modal{padding:8px}.fx-info-card{padding:20px 16px}.fx-info-cols{grid-template-columns:1fr}.fx-offer-list article{grid-template-columns:1fr}.fx-real-store{flex-direction:column}}`;document.head.appendChild(style);
 })();

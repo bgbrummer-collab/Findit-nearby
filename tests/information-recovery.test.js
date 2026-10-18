@@ -176,3 +176,23 @@ test('partial Product Info does not claim a brand absent from the identity',asyn
  r.elements.set('#fxRetryCandidate',{});r.elements.set('#fxConfirmModel',{});
  r.context.window.testInfo();assert.match(r.body.innerHTML,/brand is not confirmed/);assert.doesNotMatch(r.body.innerHTML,/photo identifies the brand/);await r.finish({possibleProducts:[]});
 });
+
+test('partial photo history is persisted with its uncertainty and reopens without a typed identification request',async()=>{
+ const r=runtime(),values=new Map(),listeners={};r.context.navigator={};r.context.document.addEventListener=(name,fn)=>listeners[name]=fn;
+ r.context.localStorage={getItem:k=>values.get(k)||null,setItem:(k,v)=>values.set(k,v)};
+ r.context.document.dispatchEvent=()=>{};r.context.CustomEvent=class{};
+ r.elements.set('#fxRetryCandidate',{});r.elements.set('#fxConfirmModel',{});
+ r.elements.set('#fxProductImage',{innerHTML:'Old photo'});r.elements.set('#fxRecentSide',{innerHTML:''});
+ delete r.context.window.__finditInformationRuntime;
+ let source=readFileSync(new URL('../information-runtime.js',import.meta.url),'utf8').replace('window.finditRunProductSearch=runSearch;','window.finditRunProductSearch=runSearch;window.testHydrate=hydrateIdentifiedPhoto;');
+ vm.runInNewContext(source,r.context);
+ r.context.window.finditState.file={name:'headset.jpg'};r.context.window.finditState.result={identification:{name:'Example headphones',brand:'Example',object:'headphones',requiresModelConfirmation:true,identificationMethod:'independent-vision-consensus'}};
+ await r.context.window.testHydrate();await r.finish({possibleProducts:[]});
+ const history=JSON.parse(values.get('finditRecent'));assert.equal(history.length,1);assert.equal(history[0].identification.requiresModelConfirmation,true);assert.equal(history[0].identification.userConfirmed,undefined);
+ assert.match(r.elements.get('#fxRecentSide').innerHTML,/Example headphones/);
+ const requests=[];r.context.fetch=async(url)=>{requests.push(url);return {ok:true,json:async()=>({possibleProducts:[]})}};
+ r.context.window.finditOpenRecordedProduct(history[0].query);await new Promise(resolve=>setImmediate(resolve));
+ assert.equal(r.context.window.finditState.result.identification.requiresModelConfirmation,true);assert.equal(r.context.window.finditState.result.identification.userConfirmed,undefined);
+ assert.equal(r.context.window.finditState.file,null);assert.ok(!requests.includes('/api/search'));assert.deepEqual(Array.from(r.context.window.finditState.offers),[]);
+ assert.doesNotMatch(r.elements.get('#fxProductImage').innerHTML,/Old photo/);
+});
