@@ -125,10 +125,10 @@ function v10Open(title,body){const modal=document.getElementById("v10UniversalMo
 function v10Close(){document.getElementById("v10UniversalModal")?.classList.add("hidden")}
 function v10Refresh(){if(!premiumState.active)return;document.body.classList.add("premium-v10");document.getElementById("v10CommandCentre")?.classList.remove("hidden")}
 function v10Collections(){
- let cols=v10Read(V10KEYS.collections,[{name:"Want to Buy",items:[]}]);
- v10Open("Collections",`<label for="v10CollectionName">New collection name</label><input id="v10CollectionName" class="v10-input" placeholder="New collection name"><div class="v10-actions"><button id="v10AddCollection">+ Create collection</button></div><div class="v10-list" style="margin-top:15px">${cols.map((c,i)=>`<div class="v10-row"><div><b>${esc(c.name)}</b><br><small>${c.items.length} items</small></div><button data-col-add="${i}">Add current Find</button></div>`).join("")}</div>`);
+ let cols=v10Read(V10KEYS.collections,[{name:"Want to Buy",items:[]}]);const current=v10Current();
+ v10Open("Collections",`<label for="v10CollectionName">New collection name</label><input id="v10CollectionName" class="v10-input" placeholder="New collection name"><div class="v10-actions"><button id="v10AddCollection">+ Create collection</button></div><div class="v10-list" style="margin-top:15px">${cols.map((c,i)=>`<div class="v10-row"><div><b>${esc(c.name)}</b><br><small>${c.items.length} item${c.items.length===1?"":"s"}</small>${c.items.length?`<ul>${c.items.map(x=>`<li>${esc(x.name||x.query||"Saved product")}</li>`).join("")}</ul>`:""}</div><button data-col-add="${i}" ${current.query?"":"disabled"}>Add current Find</button></div>`).join("")}</div>`);
  document.getElementById("v10AddCollection").onclick=()=>{const n=document.getElementById("v10CollectionName").value.trim();if(!n)return;cols.push({name:n,items:[]});v10Write(V10KEYS.collections,cols);v10Collections()};
- document.querySelectorAll("[data-col-add]").forEach(b=>b.onclick=()=>{const x=v10Current();if(!x.query)return;cols[+b.dataset.colAdd].items.unshift(x);v10Write(V10KEYS.collections,cols);v10Collections()});
+ document.querySelectorAll("[data-col-add]").forEach(b=>b.onclick=()=>{const x=v10Current();if(!x.query)return;const items=cols[+b.dataset.colAdd].items;if(!items.some(item=>item.query===x.query))items.unshift(x);v10Write(V10KEYS.collections,cols);v10Collections()});
 }
 function v10Watchlist(){
  let a=v10Read(V10KEYS.watch);const cur=v10Current();
