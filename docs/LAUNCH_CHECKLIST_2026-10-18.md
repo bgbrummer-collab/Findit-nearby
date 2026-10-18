@@ -90,3 +90,55 @@ A passed entry is limited to its stated evidence. “Failed” includes incomple
 - Configure any future provider/feed tokens through hosting secret settings; never paste secrets in chat. Existing Gemini/feedback work without new credentials. HF402 credits remain unavailable and billing must remain disabled.
 
 All raw evidence is under `docs/launch-evidence-2026-10-18/`. No capability here is declared globally complete merely because its tests pass.
+
+
+## Further continuation — 18 October, afternoon (SAST)
+
+**NOT launch-ready. This is an unfinished repair checkpoint.** Existing design/features retained; no purchase, billing, paid service, or credential change.
+
+Deployed code: `096b21f154476e2b48bb26802711cbc90db8ab9c`. Actual browser `findit-build` and Worker `/api/version` both matched. This final commit only wraps long assistant messages; the preceding complete API matrices stayed on `e022eee1f5def6c7409ca6fa09720a2cfae9e20e` before and after. Do not describe them as matrices on 096b21f.
+
+### Reproduced causes and repairs
+
+- Scanner focus remained on its background opener. Connect scanner/store dialogs to the existing accessible-dialog helper and restore the opener on removal. Production keyboard journey enters Close, Shift+Tab wraps to Find product, Escape restores Scan barcode.
+- Pending camera acquisition could complete after closing/reopening the scanner. A generation guard now stops late media tracks and rejects stale detector results. Three isolated lifecycle regressions pass; physical camera remains untested.
+- Premium Exact Match opened external Google with the uncertain photo family. The repaired actions depended on a research-loaded script absent from initial startup, while legacy routing remained reachable. Load the maintained script directly, expose a dedicated action dispatcher, and route workspace Manual/Exact/AI actions through it. Actual latest logic build: uploaded headset without any typed name; Exact Match opens in-app evidence review with G Pro X and G gaming headset explicitly possible, not confirmed. Manual search then independently entered a barcode and selected Coca-Cola 330 ml with catalogue attribution. This separate manual journey does not count as photo success.
+- Premium manual dialogs use the existing styled modal layout and keyboard support.
+- A long assistant source URL caused horizontal scrolling. Final CSS uses wrapping and bounded message sizing. Actual source-bearing reply: message pane clientWidth373, scrollWidth373. Screenshot retained.
+
+Local checks: **297 passed, zero failed**, syntax and diff checks pass. Final workflow state is in the evidence snapshot; pending workflows are not passes.
+
+### Actual production results
+
+Evidence: `launch-evidence-2026-10-18-continuation/`. Earlier continuation matrices crossed deployments and are labelled non-stable; use the `final-code-*` files for stable e022eee comparisons.
+
+| Journey | Status | Actual evidence |
+|---|---|---|
+| Ten-category photo upload/identity/research transport | Passed | Stable e022eee,30/30 API stages HTTP200 JSON. No typed product names submitted. |
+| Exact photo-to-priced-offer | Failed | One identified household pack,nine partial identities,zero confirmed exact priced offers. |
+| Typed query coverage | Failed | Stable e022eee,30/30 stages HTTP200 JSON;6/10 verified priced listings. Groceries,shoes,furniture,household have none. |
+| Worker1102 recurrence | Untested at broad load | No1102 in these60 staged requests; scoped concurrency only,not a load guarantee or production trace-based root-cause proof. |
+| Original household browser photo | Passed for identity only | TWINSAVER TWIN PLY toilet paper18Rolls; no verified exact retailer offer. |
+| Original beauty browser photo | Failed for exact identity | Marc Anthony conditioner; possible listing remains separate. |
+| Retailer headset browser photo | Failed for exact identity | Logitech headphones; suggested models disagree, no exact price. |
+| Manual scanner catalogue journey | Passed | Actual scanner5449000000996→Coca-Cola330ml→attributed Product Information on final096b21f. Camera detector unsupported here. |
+| Premium Exact Match | Passed for safe partial-photo review | Opens in-app supported family guidance and explicitly possible models; no false exact offer. |
+| Premium Manual Search | Passed | Usable styled form→new barcode journey; prior headset identity cleared. |
+| Premium AI Retailer Search/Ask | Passed for scoped question | Opens in-app assistant; actual current-product price/stock question states no verified price/online availability and separates branch stock; includes Open Food Facts source. |
+| Premium Stats/watch state | Passed for scoped activity | Watchlist changes0→1 after adding current catalogue product; remains1 after reload. Other count categories not exhaustively exercised. |
+| Premium25km radius | Passed | Selected25km via workspace; reload retained25; restored10km via visible selector. No nearby inventory claim. |
+| Assistant source wrapping | Passed | Final browser client/scroll widths both373; no horizontal message overflow. |
+| All other checklist entries | Prior scope retained | Earlier Passed/Failed/Blocked/Untested rows remain; no wholesale certification from these repairs. |
+
+### Concrete remaining work and blockers
+
+1. Exact photo-to-offer remains critically failed across every tested category. Multiple readers disagree or lack discriminating model/variant text. Generic object photos must not be assigned a manufacturer/model from a source filename. Improve extraction and independent catalogue corroboration without relaxing gates.
+2. Four typed categories still lack verified priced listings. Exact retailer discovery needs further permitted source coverage; missing listings do not mean products cannot be bought.
+3. Non-beauty/non-shoe nearby discovery remains unreliable in previous evidence. Full source/locator coverage and latest category/location retests remain engineering work.
+4. Authoritative SKU-by-branch inventory feed, durable background monitoring/delivery, and central analytics storage remain unconfigured. Those capabilities are blocked on authorized integrations. Do not activate paused Supabase or billing. Existing Gemini and feedback bridges already work; no new credentials are requested for them.
+5. Physical phone camera/GPS, real barcode capture, actual OS drag/drop, full screen-reader/contrast review, exhaustive populated Compare/filter/deal usefulness and every remaining action are not certified. The full final production customer checklist has not passed.
+6. Production CPU traces and broader reliability/load validation remain outstanding; no1102 during this scoped rerun is insufficient to declare it solved.
+
+Continuation: fetch main and preserve bot audit commits. Worktree `/workspace/scratch/2460bb5b9c00/Findit-nearby` contains published modifications against its initial clone; do not reset or force-push. Code commits in this continuation:70c11d6(scanner),17b75a1(Premium dispatcher),e022eee(startup loading/dialogs),096b21f(URL wrap). Check latest workflow state before claiming CI complete. No work continues after this session ends.
+
+Final workflow recheck: all 10 workflows for096b21f completed successfully, including Interaction Freeze Regression and Release Smoke. This does not override critical photo, catalogue, nearby and integration failures.
