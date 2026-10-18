@@ -156,3 +156,23 @@ test('brand-only photo evidence cannot claim a recognised product type',()=>{
  const ctx={window:{finditState:{result:{identification:{name:'Coca-Cola product',brand:'Coca-Cola',object:'product',identityScope:'brand',requiresModelConfirmation:true},message:'Brand recognised; product type unknown.'}}},document:{querySelector:s=>s==='#fxExactBadge'?label:s==='#fxProductDesc'?description:null,querySelectorAll:()=>[],addEventListener(){}},setTimeout(){},console};
  ctx.MutationObserver=class{observe(){}};let source=readFileSync(new URL('../launch-ux-polish.js',import.meta.url),'utf8').replace('function truthfulProductState(){','window.testTruthfulProductState=function truthfulProductState(){');vm.runInNewContext(source,ctx);ctx.window.testTruthfulProductState();assert.equal(label.textContent,'Brand recognised — confirm product');assert.match(description.textContent,/product type unknown/);
 });
+
+
+test('a newly selected photo immediately invalidates pending typed research',async()=>{
+ const r=runtime(),listeners={};r.context.document.addEventListener=(name,fn)=>listeners[name]=fn;
+ delete r.context.window.__finditInformationRuntime;
+ vm.runInNewContext(readFileSync(new URL('../information-runtime.js',import.meta.url),'utf8'),r.context);
+ r.elements.set('#fxRealQuery',{value:''});r.elements.set('#fxRealSearch',{});
+ r.context.CustomEvent=class{};r.context.document.dispatchEvent=()=>{};
+ const pending=r.context.window.finditRunProductSearch('Old product');
+ r.context.window.finditState.result=null;r.context.window.finditState.file={name:'new.jpg'};
+ listeners['findit:new-photo-selected']();
+ await r.finish({identification:{name:'Old product',userConfirmed:true}});await pending;
+ assert.equal(r.context.window.finditState.result,null);
+ assert.doesNotMatch(r.body.innerHTML,/Old product.*Brand/s);
+});
+test('partial Product Info does not claim a brand absent from the identity',async()=>{
+ const r=runtime();r.context.window.finditState.result.identification={name:'headphones',object:'headphones',requiresModelConfirmation:true};
+ r.elements.set('#fxRetryCandidate',{});r.elements.set('#fxConfirmModel',{});
+ r.context.window.testInfo();assert.match(r.body.innerHTML,/brand is not confirmed/);assert.doesNotMatch(r.body.innerHTML,/photo identifies the brand/);await r.finish({possibleProducts:[]});
+});

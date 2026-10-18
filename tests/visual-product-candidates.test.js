@@ -83,3 +83,11 @@ test('research removes rhetorical marketing and keeps differing variant codes sc
  assert.equal(d.whatItDoes,'A classic straight leg and iconic styling.');assert.doesNotMatch(d.pros.join(' '),/close your eyes|now open|right\?|never gone out/i);
  assert.ok(!d.specifications.some(x=>x.name==='SKU / product code'));assert.equal(d.variants.length,2);assert.equal(d.variants[0].specifications.find(x=>x.name==='SKU / product code').value,'GREY-30');assert.equal(d.variants[1].specifications.find(x=>x.name==='SKU / product code').value,'BROWN-32');
 });
+
+test('alternate printed brand is used only for an unconfirmed retailer page and retains exact size checks',async t=>{
+ const product={'@type':'Product',name:'Example Relief Cream 25g',brand:'Example Relief',description:'Published cream description.',offers:{price:75,priceCurrency:'ZAR'}};
+ t.mock.method(globalThis,'fetch',async u=>String(u).includes('bing.com')?new Response('<rss><item><title>Example Relief Cream 25g</title><link>https://retailer.example/cream</link></item></rss>'):new Response('<script type="application/ld+json">'+JSON.stringify(product)+'</script>'));
+ const input={name:'Maker cream tube',brand:'Maker',object:'cream tube',size:'25 g',requiresModelConfirmation:true,labelCandidates:[{name:'Example Relief Cream 25g',brand:'Example Relief',confirmed:false,source:'printed-label-hypothesis'}]};
+ const r=await visualProductCandidates(input);assert.equal(r.length,1);assert.equal(r[0].photoMatchConfirmed,false);assert.equal(input.brand,'Maker');assert.equal(input.requiresModelConfirmation,true);
+ product.name='Example Relief Cream 50g';assert.equal((await visualProductCandidates(input)).length,0);
+});

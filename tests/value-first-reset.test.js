@@ -15,3 +15,10 @@ test('new photo clears every old product/count label and repeated renders do not
  state.result=null;state.offers=[];listeners['findit:new-photo-selected']();
  assert.equal(strip.hidden,true);assert.equal(strip.innerHTML,'');assert.equal(nodes['#fxResultStripName'].textContent,'No item selected');assert.doesNotMatch(nodes['#fxResultStripMeta'].textContent,/Old price/);
 });
+
+test('replacement photo clears the previous Smart Choice confidence before identification completes',()=>{
+ const listeners={},badge={textContent:''},state={result:{identification:{name:'Old product',confidence:.65}}};
+ const context={window:{finditState:state},document:{querySelector:()=>null,querySelectorAll:s=>s==='.fx-match-confidence'?[badge]:[],addEventListener:(name,fn)=>listeners[name]=fn},setTimeout:fn=>fn()};
+ vm.runInNewContext(fs.readFileSync(new URL('../user-pov-relevance-guard.js',import.meta.url),'utf8'),context);
+ assert.match(badge.textContent,/65%/);state.result=null;listeners['findit:new-photo-selected']();assert.equal(badge.textContent,'Confidence not supplied');
+});

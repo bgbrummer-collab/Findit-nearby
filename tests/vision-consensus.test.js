@@ -104,3 +104,15 @@ test('a fully printed label remains a possible match when product-type readings 
  const result=reconcileVision([{name:'Example Strict Curls Moisture Conditioner',brand:'Example',model:'Strict Curls Moisture Conditioner',object:'conditioner',visibleText:['Example','Strict Curls','Moisture Conditioner']},{name:'Example product',brand:'Example',model:'',object:'shampoo',visibleText:[]}]);
  assert.equal(result.identityScope,'brand');assert.equal(result.object,'product');assert.equal(result.model,'');assert.equal(result.requiresModelConfirmation,true);assert.equal(result.suggestedLabel,'Example Strict Curls Moisture Conditioner');assert.equal(result.suggestedModels[0].confirmed,false);
 });
+
+test('a cream package colour is not the cream colour without independently printed evidence',()=>{
+ const a={name:'Example cream',brand:'Example',object:'cream tube',model:'Skin Cream',color:'purple',visibleText:['Example','Skin Cream']};
+ assert.equal(reconcileVision([a,{...a}]).color,'');
+ const b={...a,color:'white',visibleText:[...a.visibleText,'White']};assert.equal(reconcileVision([b,{...b}]).color,'white');
+});
+
+test('fully printed consumer label survives manufacturer/brand disagreement only as an unconfirmed candidate',()=>{
+ const r=reconcileVision([{name:'Anthisan Cream',brand:'Sanofi',model:'Anthisan Cream',object:'cream tube',size:'25 g',color:'purple',visibleText:[]},{name:'Anthisan Cream 25g',brand:'Anthisan',model:'Cream 25g',object:'Anthisan cream tube',visibleText:['Anthisan','CREAM','25 g','SANOFI']},{name:'Anthisan',brand:'Sanofi',model:'CREAM',object:'cream tube',size:'25g',color:'purple',visibleText:[]}]);
+ assert.equal(r.requiresModelConfirmation,true);assert.equal(r.model,'');assert.equal(r.color,'');assert.equal(r.labelCandidates[0].name,'Anthisan Cream 25g');assert.equal(r.labelCandidates[0].brand,'Anthisan');assert.equal(r.labelCandidates[0].confirmed,false);
+ const incomplete=reconcileVision([{name:'Example Cream 25g',brand:'Example',model:'',object:'cream tube',visibleText:['Example','CREAM']},{name:'Example cream',brand:'Example',model:'',object:'cream tube'}]);assert.equal(incomplete.labelCandidates.length,0);
+});
