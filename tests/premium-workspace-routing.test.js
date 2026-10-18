@@ -17,3 +17,7 @@ test('Exact Match on a partial photo opens evidence review without researching a
   vm.runInNewContext(source.split('\n').find(x=>x.startsWith('function exact('))+';exact()',c);
   assert.equal(reviewed,1);
 });
+test('maintained Premium actions load on the initial page without depending on a research response',()=>{
+  const html=readFileSync(new URL('../index.html',import.meta.url),'utf8');
+  assert.match(html,/<script src="premium-tool-audit-fix\.js"[^>]*data-findit-paid-tool-audit="1"[^>]*defer/);
+});
