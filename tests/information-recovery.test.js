@@ -139,3 +139,7 @@ test('nearby outage messages follow only the selected product, radius and locati
  const source=readFileSync(new URL('../information-runtime.js',import.meta.url),'utf8'),start=source.indexOf('let nearbyOutcome=null;'),end=source.indexOf('function storeRow',start),state={coords:{lat:-25.78,lon:28.27},radius:10};let name='Conditioner';const c={st:()=>state,productName:()=>name,clean:v=>String(v||'')};vm.runInNewContext(source.slice(start,end)+';this.remember=rememberNearby;this.failure=nearbyFailure;',c);
  c.remember({discoveryAvailable:false,stores:[],message:'Nearby data unavailable'}, {},state.coords,10);assert.equal(c.failure(),'Nearby data unavailable');state.radius=5;assert.equal(c.failure(),'');state.radius=10;name='Shirt';assert.equal(c.failure(),'');name='Conditioner';state.coords.lon=29;assert.equal(c.failure(),'');
 });
+
+test('typed product research preserves the advertised fifty Premium history entries',()=>{
+ const source=readFileSync(new URL('../information-runtime.js',import.meta.url),'utf8'),line=source.split('\n').find(x=>x.startsWith('function saveRecent('));let saved=Array.from({length:50},(_,n)=>({query:'Old '+n,name:'Old '+n}));const ctx={window:{premiumHistoryLimit:()=>50},localStorage:{getItem:()=>JSON.stringify(saved),setItem:(k,v)=>{saved=JSON.parse(v)}},productName:i=>i.name};vm.runInNewContext(line+';saveRecent({name:"New product",searchQuery:"New product"})',ctx);assert.equal(saved.length,50);assert.equal(saved[0].query,'New product');assert.ok(saved.some(x=>x.query==='Old 48'));
+});
