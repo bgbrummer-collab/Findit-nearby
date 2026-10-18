@@ -18,6 +18,7 @@ function run(a){close();hideLegacy();const call=name=>typeof window.finditDashbo
  if(a==='saved')return typeof openTool==='function'?openTool('saved'):call('saved');
  if(a==='compare')return typeof openTool==='function'?openTool('compare'):call('compare');
  if(a==='filters')return typeof openTool==='function'?openTool('filters'):call('settings');
+ if(['manual','exact','assistant'].includes(a)&&typeof window.finditAuditedPremiumAction==='function')return window.finditAuditedPremiumAction(a);
  const v={collections:'collections',watchlist:'watchlist',favourites:'favourites',history:'history',manual:'manual',exact:'exact',assistant:'assistant',stats:'stats'}[a];if(v){const el=document.createElement('button');el.dataset.v10=v;el.hidden=true;document.body.appendChild(el);el.click();el.remove()}}
 window.addEventListener('click',e=>{const b=e.target?.closest?.('#finditExactShell [data-fx="premium"]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();open()},true);
 window.addEventListener('keydown',e=>{if(e.key==='Escape')close()});window.addEventListener('storage',hideLegacy);document.addEventListener('findit:results-rendered',hideLegacy);document.addEventListener('findit:dashboard-sync',hideLegacy);new MutationObserver(hideLegacy).observe(document.documentElement,{childList:true,subtree:true});setTimeout(hideLegacy,0);setTimeout(hideLegacy,500);setTimeout(hideLegacy,1500);
