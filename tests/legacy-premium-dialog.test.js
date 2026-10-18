@@ -15,3 +15,7 @@ test('History+ reopens the selected stored query inside FindIt and supports filt
  const ctx={localStorage:{getItem:()=>JSON.stringify(records),setItem:(k,v)=>{records=JSON.parse(v)}},v10Open(){},v10Close(){closed++},window:{finditRunProductSearch:q=>{opened=q}},esc:x=>String(x),document:{getElementById:id=>id==='v10HistorySearch'?input:rows,querySelectorAll:s=>s==='[data-history-reopen]'?[reopen]:[remove]}};
  vm.runInNewContext(source.slice(start,end)+';v10History();',ctx);assert.doesNotMatch(rows.innerHTML,/google.com/);reopen.onclick();assert.equal(opened,'Example X1 headphones');assert.equal(closed,1);input.value='drill';input.oninput();assert.match(rows.innerHTML,/Example drill/);assert.doesNotMatch(rows.innerHTML,/Example headphones/);remove.onclick();assert.equal(records.length,1);assert.equal(records[0].query,'Example D2 drill');
 });
+
+test('Premium workspace navigation is installed eagerly and loader does not install a second copy',()=>{
+ const html=readFileSync(new URL('../index.html',import.meta.url),'utf8');assert.match(html,/<script[^>]*src="big-clean-fix\.js"[^>]*data-findit-big-clean="1"[^>]*defer/);const loader=readFileSync(new URL('../dashboard-runtime-stable.js',import.meta.url),'utf8');assert.match(loader,/script\[data-findit-big-clean\]/);
+});
