@@ -19,3 +19,7 @@ test('History+ reopens the selected stored query inside FindIt and supports filt
 test('Premium workspace navigation is installed eagerly and loader does not install a second copy',()=>{
  const html=readFileSync(new URL('../index.html',import.meta.url),'utf8');assert.match(html,/<script[^>]*src="big-clean-fix\.js"[^>]*data-findit-big-clean="1"[^>]*defer/);const loader=readFileSync(new URL('../dashboard-runtime-stable.js',import.meta.url),'utf8');assert.match(loader,/script\[data-findit-big-clean\]/);
 });
+
+test('Premium saved-item counts include collection contents without counting collection headings or duplicates',()=>{
+ const source=readFileSync(new URL('../script.js',import.meta.url),'utf8'),start=source.indexOf('function getPremiumSaved(){'),end=source.indexOf('function premiumHistoryLimit()',start),values={finditSaved:[{name:'Paper',query:'Paper'}],findit_favourites:[{item:'Paper'}],findit_v10_collections:[{name:'Collection heading',items:[{name:'Conditioner',query:'Conditioner'}]}]};const c={localStorage:{getItem:key=>JSON.stringify(values[key]||[])}};vm.runInNewContext(source.slice(start,end)+';this.items=getPremiumSaved();',c);assert.equal(c.items.length,2);assert.ok(c.items.some(x=>x.name==='Conditioner'));assert.ok(!c.items.some(x=>x.name==='Collection heading'));
+});

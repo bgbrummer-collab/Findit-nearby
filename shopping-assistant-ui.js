@@ -10,9 +10,9 @@
   const norm=v=>String(v||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim();
   const n=v=>v!==null&&v!==undefined&&v!==''&&Number.isFinite(Number(v))?Number(v):null;
   const app=()=>window.finditState||window.state||{};
-  const LS={list:'findit.shoppingList.v2',watch:'findit.watchList.v2',alerts:'findit.watchAlerts.v1',history:'findit.priceHistory.v1',mode:'findit.shoppingPlanMode.v1'};
-  const read=(k,f)=>{try{const v=JSON.parse(localStorage.getItem(k)||'null');return v??f}catch{return f}};
-  const write=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{}};
+  const LS={list:'findit.shoppingList.v2',watch:'findit_v10_watchlist',alerts:'findit.watchAlerts.v1',history:'findit.priceHistory.v1',mode:'findit.shoppingPlanMode.v1'};
+  const read=(k,f)=>{if(k===LS.watch&&window.finditWatchStorage)return window.finditWatchStorage.read();try{const v=JSON.parse(localStorage.getItem(k)||'null');return v??f}catch{return f}};
+  const write=(k,v)=>{if(k===LS.watch&&window.finditWatchStorage){window.finditWatchStorage.write(v);return;}try{localStorage.setItem(k,JSON.stringify(v))}catch{}};
   const money=(v,c)=>window.finditOfferEvidence?.format({price:v,currency:c})||'Price not verified';
   let stream=null,scanTimer=null;
 
@@ -20,7 +20,7 @@
     const s=app(),i=s.result?.identification||s.identification||{};
     const name=String(i.name||i.product||i.object||s.query||'').trim();
     const brand=String(i.brand||'').trim(),model=String(i.model||'').trim();
-    return{name,brand,model,confidence:n(i.confidence),key:norm([brand,model,name].filter(Boolean).join(' '))||'current-item'};
+    return{name,brand,model,object:i.object||'',category:i.category||i.retailCategory||'',retailCategory:i.retailCategory||i.category||'',size:i.size||'',color:i.color||'',query:i.searchQuery||name,requiresModelConfirmation:i.requiresModelConfirmation===true,identityScope:i.identityScope||'',confidence:n(i.confidence),key:norm([brand,model,name].filter(Boolean).join(' '))||'current-item'};
   }
   function stores(){return Array.isArray(app().stores)?app().stores:[]}
   function offers(){
@@ -72,18 +72,18 @@
   function clearList(){write(LS.list,[]);renderList();toast('Shopping List cleared')}
 
   function watchCurrent(){
-    const p=product();if(!p.name){toast('Identify a product before adding a watch');return}const o=bestOffer(),list=read(LS.watch,[]),rec={...p,updatedAt:Date.now(),lastPrice:n(o?.price),lastStock:stockYes(o),lastAvailability:o?.availability||null,retailer:o?._retailer||'',currency:o?.currency||null};
+    const p=product();if(!p.name){toast('Identify a product before adding a watch');return}const o=bestOffer(),list=read(LS.watch,[]),rec={...p,updatedAt:Date.now(),lastPrice:n(o?.price),lastPriceVerified:Boolean(o&&(o.verified===true||o.sourcePageVerified===true||o.priceComparisonVerified===true)),lastStock:o?.availability||null,lastAvailability:o?.availability||null,retailer:o?._retailer||'',currency:o?.currency||null};
     const i=list.findIndex(x=>x.key===p.key);if(i>=0)list[i]={...list[i],...rec};else list.push({...rec,createdAt:Date.now()});write(LS.watch,list);recordHistory();renderWatch();toast(i>=0?'Watch updated':'Item added to Watch List');
   }
   function unwatch(key){write(LS.watch,read(LS.watch,[]).filter(x=>x.key!==key));renderWatch()}
   function addAlert(key,type,message){const a=read(LS.alerts,[]);a.unshift({id:`${Date.now()}-${Math.random()}`,key,type,message,at:Date.now(),read:false});write(LS.alerts,a.slice(0,50))}
   function evaluateWatch(){
     recordHistory();const p=product(),list=read(LS.watch,[]),i=list.findIndex(x=>x.key===p.key);if(i<0)return;
-    const o=bestOffer();if(!o)return;const price=n(o.price),inStock=stockYes(o),rec=list[i];let msg='',type='';
-    if(price&&rec.lastPrice&&o.currency&&o.currency===rec.currency&&o._retailer===rec.retailer&&price<rec.lastPrice){type='price_drop';msg=`Price drop: ${p.name} is now ${money(price,o.currency||null)}.`}
-    else if(inStock&&rec.lastAvailability==='out_of_stock'&&o._retailer===rec.retailer){type='restock';msg=`Restock found: ${p.name} is available from ${o._retailer}.`}
+    const o=bestOffer();if(!o)return;const price=n(o.price),inStock=stockYes(o),rec=list[i];if(rec.lastPrice>0&&rec.currency&&rec.retailer&&(rec.currency!==o.currency||rec.retailer!==o._retailer)){rec.lastAlert='A different retailer or currency was found. Compare it separately.';list[i]=rec;write(LS.watch,list);return;}let msg='',type='';
+    if(rec.alertPriceDrop!==false&&price&&rec.lastPrice&&o.currency&&o.currency===rec.currency&&o._retailer===rec.retailer&&price<rec.lastPrice){type='price_drop';msg=`Price drop: ${p.name} is now ${money(price,o.currency||null)}.`}
+    else if(rec.alertBackInStock!==false&&inStock&&rec.lastAvailability==='out_of_stock'&&o._retailer===rec.retailer){type='restock';msg=`Restock found: ${p.name} is available from ${o._retailer}.`}
     if(msg){addAlert(p.key,type,msg);toast(msg);try{if(window.Notification&&Notification.permission==='granted')new Notification('FindIt Watch Item',{body:msg})}catch{}}
-    rec.lastPrice=price;rec.lastStock=inStock;rec.lastAvailability=o.availability||null;rec.currency=o.currency||null;rec.retailer=o._retailer||rec.retailer;rec.updatedAt=Date.now();list[i]=rec;write(LS.watch,list);if(msg)renderWatch();
+    rec.lastPrice=price;rec.lastPriceVerified=true;rec.lastStock=o.availability||null;rec.lastAvailability=o.availability||null;rec.currency=o.currency||null;rec.retailer=o._retailer||rec.retailer;rec.updatedAt=Date.now();list[i]=rec;write(LS.watch,list);if(msg)renderWatch();
   }
   async function notifications(){if(!window.Notification){toast('Browser notifications are not supported here');return}try{toast(await Notification.requestPermission()==='granted'?'Watch notifications enabled':'Notifications were not enabled')}catch{toast('Could not enable notifications')}}
 
@@ -121,7 +121,7 @@
   }
   function renderWatch(){
     const body=$('#fxWatchBody');if(!body)return;const list=read(LS.watch,[]),alerts=read(LS.alerts,[]),unread=alerts.filter(a=>!a.read).length,alertsOpen=Boolean(body.querySelector('details')?.open)||unread>0;
-    body.innerHTML=`<div class="fx-watch-actions"><button id="fxEnableNotifications" type="button">Enable notifications</button><span>${unread} new alert${unread===1?'':'s'}</span></div>${list.length?list.map(x=>`<div class="fx-shop-line"><div><strong>${esc(x.name)}</strong><small>${x.lastPrice?`Last verified: ${esc(money(x.lastPrice,x.currency||null))}`:'Waiting for a verified price'}${x.retailer?` · ${esc(x.retailer)}`:''}</small><small>${esc(historySummary(x.key))}</small></div><button type="button" data-unwatch="${esc(x.key)}">Stop watching</button></div>`).join(''):'<p class="fx-muted">No watched items yet.</p>'}${alerts.length?`<details ${alertsOpen?'open':''}><summary>Recent watch alerts</summary>${alerts.slice(0,8).map(a=>`<p class="fx-alert">${esc(a.message)}<small>${new Date(a.at).toLocaleString()}</small></p>`).join('')}</details>`:''}<p class="fx-truth">Watch Item checks refreshed verified data while FindIt is open. True background alerts while the site is closed require a server notification service, so FindIt does not pretend they are active yet.</p>`;
+    body.innerHTML=`<div class="fx-watch-actions"><button id="fxEnableNotifications" type="button">Enable notifications</button><span>${unread} new alert${unread===1?'':'s'}</span></div>${list.length?list.map(x=>`<div class="fx-shop-line"><div><strong>${esc(x.name)}</strong><small>${x.lastPrice?`${x.lastPriceVerified?'Last verified':'Saved price'}: ${esc(money(x.lastPrice,x.currency||null))}`:'Waiting for a verified price'}${x.retailer?` · ${esc(x.retailer)}`:''}</small><small>${esc(historySummary(x.key))}</small></div><button type="button" data-unwatch="${esc(x.key)}">Stop watching</button></div>`).join(''):'<p class="fx-muted">No watched items yet.</p>'}${alerts.length?`<details ${alertsOpen?'open':''}><summary>Recent watch alerts</summary>${alerts.slice(0,8).map(a=>`<p class="fx-alert">${esc(a.message)}<small>${new Date(a.at).toLocaleString()}</small></p>`).join('')}</details>`:''}<p class="fx-truth">Watch Item checks refreshed verified data while FindIt is open. True background alerts while the site is closed require a server notification service, so FindIt does not pretend they are active yet.</p>`;
     $$('[data-unwatch]',body).forEach(b=>b.onclick=()=>unwatch(b.dataset.unwatch));$('#fxEnableNotifications')?.addEventListener('click',notifications);
   }
 

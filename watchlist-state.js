@@ -1,0 +1,11 @@
+/* Share existing local watch records across the dashboard and Premium tools. */
+(()=>{'use strict';if(window.finditWatchStorage)return;
+ const KEY='findit_v10_watchlist',PREVIOUS='findit.watchList.v2',MIGRATED='findit.watchlistUnified.v1';
+ const norm=v=>String(v||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+ const rows=key=>{try{const data=JSON.parse(localStorage.getItem(key)||'[]');return Array.isArray(data)?data.filter(x=>x&&typeof x==='object'):[];}catch{return[];}};
+ const normalize=item=>{const name=String(item.name||item.query||'').trim(),query=String(item.query||item.searchQuery||name).trim(),key=norm([item.brand,item.model,name].filter(Boolean).join(' '));if(!name||!key)return null;const status=[item.lastAvailability,item.lastStock].find(value=>typeof value==='string'&&/^(in_stock|out_of_stock|preorder|backorder)$/.test(value))||(item.lastStock===true?'in_stock':null);const price=item.lastPrice!=null&&item.lastPrice!==''&&Number.isFinite(Number(item.lastPrice))&&Number(item.lastPrice)>0?Number(item.lastPrice):null;return{...item,name,query,key,requiresModelConfirmation:item.requiresModelConfirmation===true||(item.requiresModelConfirmation==null&&!item.model),alertPriceDrop:item.alertPriceDrop!==false,alertBackInStock:item.alertBackInStock!==false,lastPriceVerified:item.lastPriceVerified===true,lastPrice:price,lastStock:status,lastAvailability:status};};
+ const merge=input=>{const out=new Map();for(const raw of input){const item=normalize(raw);if(!item)continue;const previous=out.get(item.key);out.set(item.key,previous?{...previous,...item}:item);}return [...out.values()];};
+ function migrate(){if(localStorage.getItem(MIGRATED)==='1')return;if(localStorage.getItem('findit.watchlistLegacyBackup.v1')==null)localStorage.setItem('findit.watchlistLegacyBackup.v1',JSON.stringify(rows(KEY)));const combined=merge([...rows(KEY),...rows(PREVIOUS)]);localStorage.setItem(KEY,JSON.stringify(combined));localStorage.setItem(MIGRATED,'1');/* Keep PREVIOUS intact as a recovery copy. */}
+ window.finditWatchStorage={read(){try{migrate();return merge(rows(KEY));}catch{return merge([...rows(KEY),...rows(PREVIOUS)]);}},write(items){const result=merge(Array.isArray(items)?items:[]);localStorage.setItem(KEY,JSON.stringify(result));return result;}};
+ try{migrate();}catch{}
+})();

@@ -56,8 +56,8 @@
   };
 
   const readWatch=()=>{try{const a=JSON.parse(localStorage.getItem(WATCH_KEY)||'[]');if(!Array.isArray(a))return[];return a.map(x=>{const verified=Boolean(x?.nearestStore?.exactProductMatch&&x?.nearestStore?.stockVerified)||Boolean(x?.exactBranchVerified);if(!verified)return {...x,nearestStore:null,exactBranchVerified:false,branchStockVerified:false};return x})}catch{return[]}};
-  const writeWatch=a=>localStorage.setItem(WATCH_KEY,JSON.stringify(a.slice(0,50)));
-  const money=(n,c='ZAR')=>Number.isFinite(Number(n))&&Number(n)>0?new Intl.NumberFormat(undefined,{style:'currency',currency:c||'ZAR'}).format(Number(n)):'Price not verified';
+  const writeWatch=a=>localStorage.setItem(WATCH_KEY,JSON.stringify(a));
+  const money=(n,c)=>n!=null&&n!==''&&Number(n)>0&&/^[A-Z]{3}$/.test(String(c||''))?new Intl.NumberFormat(undefined,{style:'currency',currency:c}).format(Number(n)):'Price not verified';
   const stockLabel=s=>s==='in_stock'?'In stock':s==='out_of_stock'?'Out of stock':s==='preorder'?'Pre-order':'Stock not verified';
   const norm=v=>String(v||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
   const retailerName=o=>typeof o?.retailer==='string'?o.retailer:(o?.retailer?.name||'');
@@ -69,17 +69,17 @@
   }
   function currentWatchItem(){
     const i=(typeof state!=='undefined'&&state.result?.identification)||{};
-    const offers=(typeof productIntelligence!=='undefined'&&Array.isArray(productIntelligence?.offers))?productIntelligence.offers:[];
+    const offers=i.requiresModelConfirmation?[]:(typeof state!=='undefined'&&Array.isArray(state.offers)?state.offers:[]);
     const near=nearestVerifiedExactStore();
     const localMatch=near?offers.filter(o=>sameRetailer(retailerName(o),near.name)):[];
     const best=(localMatch.length?localMatch:offers).filter(o=>o&&(o.price!=null||o.availability)).sort((a,b)=>Number(b.matchScore||b.match||0)-Number(a.matchScore||a.match||0))[0]||{};
-    return {name:i.name||i.object||'Current Find',query:i.searchQuery||i.name||i.object||'',brand:i.brand||'',model:i.model||'',addedAt:new Date().toISOString(),baselinePrice:Number(best.price)>0?Number(best.price):null,lastPrice:Number(best.price)>0?Number(best.price):null,currency:best.currency||'ZAR',lastStock:best.availability||null,retailer:retailerName(best)||'',productUrl:best.product_url||best.url||'',nearestStore:near?{name:near.name,distanceKm:near.distanceKm,address:near.address||'',website:near.website||'',exactProductMatch:true,stockVerified:true}:null,exactBranchVerified:Boolean(near),branchStockVerified:Boolean(near&&best.branchStockVerified),alertPriceDrop:true,alertBackInStock:true,targetPrice:null,lastCheckedAt:null,lastAlert:null};
+    return {...i,name:i.name||i.object||'Current Find',query:i.searchQuery||i.name||i.object||'',brand:i.brand||'',model:i.model||'',addedAt:new Date().toISOString(),baselinePrice:Number(best.price)>0?Number(best.price):null,lastPrice:Number(best.price)>0?Number(best.price):null,currency:best.currency||'ZAR',lastStock:best.availability||null,retailer:retailerName(best)||'',productUrl:best.product_url||best.url||'',nearestStore:near?{name:near.name,distanceKm:near.distanceKm,address:near.address||'',website:near.website||'',exactProductMatch:true,stockVerified:true}:null,exactBranchVerified:Boolean(near),branchStockVerified:Boolean(near&&best.branchStockVerified),alertPriceDrop:true,alertBackInStock:true,targetPrice:null,lastCheckedAt:null,lastAlert:null};
   }
 
   async function checkItem(item){
-    const body={query:item.query,name:item.name,brand:item.brand,model:item.model};
+    const body={identification:item,query:item.query,name:item.name,brand:item.brand,model:item.model};
     const r=await fetch('/api/product-intelligence',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)});
-    const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||'Could not check this product.');
+    const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||'Could not check this product.');if(d.requiresModelConfirmation)return {...item,lastCheckedAt:new Date().toISOString(),lastAlert:'Confirm the product model or label before checking exact prices.'};
     const offers=Array.isArray(d.offers)?d.offers:[];
     const near=nearestVerifiedExactStore();
     const local=near?offers.filter(o=>sameRetailer(retailerName(o),near.name)):[];
@@ -87,12 +87,13 @@
     const now=new Date().toISOString();
     if(!best)return {...item,nearestStore:near?{name:near.name,distanceKm:near.distanceKm,address:near.address||'',website:near.website||'',exactProductMatch:true,stockVerified:true}:null,exactBranchVerified:Boolean(near),branchStockVerified:false,lastCheckedAt:now,lastAlert:'No verified exact price or stock update yet'};
     const p=Number(best.price)>0?Number(best.price):null,st=best.availability||null,branch=Boolean(near&&best.branchStockVerified),sourceRetailer=retailerName(best)||item.retailer;
-    let msg=null;
-    if(item.alertPriceDrop&&p!=null&&item.lastPrice!=null&&p<Number(item.lastPrice))msg=`Price dropped to ${money(p,best.currency||item.currency)}.`;
-    if(item.alertPriceDrop&&item.targetPrice!=null&&p!=null&&p<=Number(item.targetPrice))msg=`Target price reached: ${money(p,best.currency||item.currency)}.`;
+    const comparable=Boolean(best.currency&&item.currency&&best.currency===item.currency&&sourceRetailer===item.retailer);let msg=null;
+    if(item.lastPrice>0&&item.currency&&item.retailer&&!comparable)return {...item,lastCheckedAt:now,lastAlert:'A different retailer or currency was found. Open Compare Prices to compare it separately.'};
+    if(comparable&&item.alertPriceDrop&&p!=null&&item.lastPrice!=null&&p<Number(item.lastPrice))msg=`Price dropped to ${money(p,best.currency||item.currency)}.`;
+    if(comparable&&item.alertPriceDrop&&item.targetPrice!=null&&p!=null&&p<=Number(item.targetPrice))msg=`Target price reached: ${money(p,best.currency||item.currency)}.`;
     if(item.alertBackInStock&&st==='in_stock'&&item.lastStock&&item.lastStock!=='in_stock')msg=branch?'Back in stock at the verified local retailer.':'Back in stock on the retailer listing.';
     if(msg&&'Notification'in window&&Notification.permission==='granted'){try{new Notification('FindIt Premium alert',{body:`${item.name}: ${msg}`})}catch{}}
-    return {...item,lastPrice:p??item.lastPrice,lastStock:st??item.lastStock,currency:best.currency||item.currency,retailer:sourceRetailer,productUrl:best.product_url||best.url||item.productUrl,nearestStore:near?{name:near.name,distanceKm:near.distanceKm,address:near.address||'',website:near.website||'',exactProductMatch:true,stockVerified:true}:null,exactBranchVerified:Boolean(near),branchStockVerified:branch,lastCheckedAt:now,lastAlert:msg||'Checked latest available retailer data'};
+    return {...item,lastPrice:p??item.lastPrice,lastPriceVerified:p!=null?true:item.lastPriceVerified,lastStock:st??item.lastStock,currency:best.currency||item.currency,retailer:sourceRetailer,productUrl:best.product_url||best.url||item.productUrl,nearestStore:near?{name:near.name,distanceKm:near.distanceKm,address:near.address||'',website:near.website||'',exactProductMatch:true,stockVerified:true}:null,exactBranchVerified:Boolean(near),branchStockVerified:branch,lastCheckedAt:now,lastAlert:msg||'Checked latest available retailer data'};
   }
 
   function openWatch(){

@@ -188,9 +188,10 @@ function getPremiumSaved(){
   let a=[],b=[];
   try{a=JSON.parse(localStorage.getItem("finditSaved")||"[]")}catch{}
   try{b=JSON.parse(localStorage.getItem("findit_favourites")||"[]")}catch{}
-  const merged=[...a,...b].map(x=>({name:x.name||x.item||"Saved item",query:x.query||"",savedAt:x.savedAt||x.createdAt||""}));
+  let collections=[];try{const rows=JSON.parse(localStorage.getItem("findit_v10_collections")||"[]");if(Array.isArray(rows))collections=rows.flatMap(c=>Array.isArray(c?.items)?c.items:[])}catch{}
+  const merged=[...(Array.isArray(a)?a:[]),...(Array.isArray(b)?b:[]),...collections].filter(x=>x&&typeof x==='object').map(x=>({name:x.name||x.item||"Saved item",query:x.query||x.searchQuery||x.name||x.item||"",savedAt:x.savedAt||x.createdAt||""}));
   const seen=new Set();
-  return merged.filter(x=>{const k=(x.name+"|"+x.query).toLowerCase();if(seen.has(k))return false;seen.add(k);return true}).slice(0,50);
+  return merged.filter(x=>{const k=(x.query||x.name).toLowerCase();if(seen.has(k))return false;seen.add(k);return true}).slice(0,50);
 }
 function premiumHistoryLimit(){return premiumState.active?50:12}
 function updatePremiumDashboard(){
