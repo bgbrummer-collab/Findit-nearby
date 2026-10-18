@@ -1,0 +1,4 @@
+import test from 'node:test';import assert from 'node:assert/strict';import vm from 'node:vm';import{readFileSync}from'node:fs';
+for(const[file,name]of[['final-product-experience-fix.js','nearby'],['dashboard-retailer-relevance-fix.js','stores'],['dashboard-runtime-fix.js','preparedStores']])test(file+' ranks a branch at the selected point before farther branches',()=>{
+ const rows=[{name:'Far',distanceKm:1},{name:'Here',distanceKm:0},{name:'Unknown',distanceKm:null}],source=readFileSync(new URL('../'+file,import.meta.url),'utf8'),line=source.split('\n').find(x=>x.startsWith('function '+name+'('));assert.ok(line);const ctx={state:()=>({stores:rows}),safeStores:()=>rows,prefs:{sort:'closest'},retailerKey:x=>x,key:x=>x};vm.runInNewContext(line+';this.result='+name+'();',ctx);assert.equal(ctx.result[0].name,'Here');assert.equal(ctx.result[1].name,'Far');assert.equal(ctx.result[2].name,'Unknown');
+});
