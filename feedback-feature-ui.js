@@ -31,7 +31,7 @@ function wireLegacyFeedback(){
   if(await send({rating,topic:'general',message,includeTechnical:Boolean($('#includeTechnical')?.checked)},status,btn))form.reset();
  },true);
 }
-async function copyDraft(message,status){if(!String(message||'').trim()){status.textContent='Write your message before copying it.';return}try{await navigator.clipboard.writeText(message);status.textContent='Copied. Keep this message and try sending again once delivery is restored.'}catch{status.textContent='Select and copy the message text above. Clipboard access is unavailable.'}}
+async function copyDraft(message,status){if(!String(message||'').trim()){status.textContent='Write your message before copying it.';return}try{await navigator.clipboard.writeText(message);status.textContent='Copied to clipboard. Your draft is still here.'}catch{status.textContent='Select and copy the message text above. Clipboard access is unavailable.'}}
 function closeModal(m){if(!m)return;m.classList.add('hidden');m.setAttribute('aria-hidden','true');m.style.pointerEvents='none'}
 function feedbackModal(){
  let m=$('#fxFeedbackModal');if(m)return m;
