@@ -99,3 +99,8 @@ test('unbranded shirt descriptions retain a supported family without guessing a 
  const result=reconcileVision([{name:'Short Sleeve Patchwork Shirt',object:'shirt',model:'Patchwork Shirt',brand:'',color:'multicolor'},{name:"men's striped short-sleeve button-down shirt",object:"men's short-sleeve button-down shirt",model:'',brand:''}]);
  assert.equal(result.object,'shirt');assert.equal(result.brand,'');assert.equal(result.model,'');assert.equal(result.requiresModelConfirmation,true);assert.equal(result.color,'');
 });
+
+test('a fully printed label remains a possible match when product-type readings disagree',()=>{
+ const result=reconcileVision([{name:'Example Strict Curls Moisture Conditioner',brand:'Example',model:'Strict Curls Moisture Conditioner',object:'conditioner',visibleText:['Example','Strict Curls','Moisture Conditioner']},{name:'Example product',brand:'Example',model:'',object:'shampoo',visibleText:[]}]);
+ assert.equal(result.identityScope,'brand');assert.equal(result.object,'product');assert.equal(result.model,'');assert.equal(result.requiresModelConfirmation,true);assert.equal(result.suggestedLabel,'Example Strict Curls Moisture Conditioner');assert.equal(result.suggestedModels[0].confirmed,false);
+});
