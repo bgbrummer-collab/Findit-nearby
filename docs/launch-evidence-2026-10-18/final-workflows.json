@@ -1,0 +1,79 @@
+[
+  {
+    "name": "FindIt regression checks",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/39115915014",
+    "head_sha": "49f4ca0d4870f75e301b5290659de5219e36a57f"
+  },
+  {
+    "name": "FindIt smoke checks",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/39115915040",
+    "head_sha": "49f4ca0d4870f75e301b5290659de5219e36a57f"
+  },
+  {
+    "name": "Deploy FindIt to Cloudflare",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/39115915011",
+    "head_sha": "49f4ca0d4870f75e301b5290659de5219e36a57f"
+  },
+  {
+    "name": "pages build and deployment",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/39115914709",
+    "head_sha": "49f4ca0d4870f75e301b5290659de5219e36a57f"
+  },
+  {
+    "name": "FindIt Dashboard Commerce Regression",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/39115915051",
+    "head_sha": "49f4ca0d4870f75e301b5290659de5219e36a57f"
+  },
+  {
+    "name": "FindIt Full Production Audit",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/39115915008",
+    "head_sha": "49f4ca0d4870f75e301b5290659de5219e36a57f"
+  },
+  {
+    "name": "FindIt Responsive Layout Regression",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/39115915055",
+    "head_sha": "49f4ca0d4870f75e301b5290659de5219e36a57f"
+  },
+  {
+    "name": "FindIt Production Smoke Test",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/39115914975",
+    "head_sha": "49f4ca0d4870f75e301b5290659de5219e36a57f"
+  },
+  {
+    "name": "FindIt Final Production Audit",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/39115915018",
+    "head_sha": "49f4ca0d4870f75e301b5290659de5219e36a57f"
+  },
+  {
+    "name": "FindIt Release Smoke",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/39115915020",
+    "head_sha": "49f4ca0d4870f75e301b5290659de5219e36a57f"
+  },
+  {
+    "name": "FindIt Interaction Freeze Regression",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/39115915028",
+    "head_sha": "49f4ca0d4870f75e301b5290659de5219e36a57f"
+  }
+]
