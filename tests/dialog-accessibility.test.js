@@ -8,3 +8,7 @@ test('dialog keyboard journey enters, wraps focus, closes with Escape and restor
  const key=(k,shift=false)=>handlers.keydown({key:k,shiftKey:shift,preventDefault(){},stopImmediatePropagation(){}});
  document.activeElement=document.body;context.window.finditAccessibleDialog(modal,'Loading product');assert.equal(document.activeElement,field,'Replacing form content must restore focus inside the dialog');close.focus();key('Tab',true);assert.equal(document.activeElement,send);key('Tab');assert.equal(document.activeElement,close);key('Escape');assert.equal(document.activeElement,opener);
 });
+
+test('legacy Premium close buttons receive a name and work with Escape',()=>{
+ const attrs={},handlers={};let closed=false;const close={setAttribute:(key,value)=>attrs[key]=value,disabled:false,tabIndex:0,getClientRects:()=>[{}],focus(){},click(){closed=true}},modal={setAttribute(){},classList:{contains:()=>false},querySelector:s=>s.includes('.premium-tool-close')?close:null,querySelectorAll:()=>[close],contains:()=>false,addEventListener:(name,fn)=>handlers[name]=fn};const c={window:{},document:{activeElement:null},getComputedStyle:()=>({display:'flex'}),MutationObserver:class{observe(){}}};vm.runInNewContext(readFileSync(new URL('../dialog-accessibility.js',import.meta.url),'utf8'),c);c.window.finditAccessibleDialog(modal,'Watchlist');assert.equal(attrs['aria-label'],'Close');handlers.keydown({key:'Escape',preventDefault(){},stopImmediatePropagation(){}});assert.equal(closed,true);
+});

@@ -2,6 +2,7 @@
 (()=>{'use strict';
  const states=new WeakMap();
  window.finditAccessibleDialog=(modal,title)=>{
+  const closeSelector='[aria-label="Close"],.fx-stable-close,.fx-info-x,.premium-tool-close,.fx-premium-workspace-close,[data-close-shop]';const close=modal.querySelector(closeSelector);close?.setAttribute?.('aria-label','Close');
   modal.setAttribute('role','dialog');modal.setAttribute('aria-modal','true');modal.setAttribute('aria-label',title||'FindIt');
   let state=states.get(modal);
   const visible=()=>!modal.classList.contains('hidden')&&getComputedStyle(modal).display!=='none';
@@ -9,7 +10,7 @@
   if(!state){state={active:false,previous:null};states.set(modal,state);
    modal.addEventListener('keydown',event=>{
     if(!visible())return;
-    if(event.key==='Escape'){event.preventDefault();event.stopImmediatePropagation();modal.querySelector('[aria-label="Close"],.fx-stable-close,.fx-info-x')?.click();return;}
+    if(event.key==='Escape'){event.preventDefault();event.stopImmediatePropagation();modal.querySelector(closeSelector)?.click();return;}
     if(event.key!=='Tab')return;const items=controls(),first=items[0],last=items.at(-1);
     if(!first){event.preventDefault();modal.focus();return;}
     if(event.shiftKey&&(document.activeElement===first||!modal.contains(document.activeElement))){event.preventDefault();last.focus();}

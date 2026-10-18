@@ -106,7 +106,7 @@ async function loadProductIntelligence(i){
     el.innerHTML=d.offers.map(o=>{const retailer=o.retailer?.name||"Retailer";const price=finditFormatFeedPrice(o.price,o.currency||"ZAR");const localEstimate=finditFormatLocalEstimate(o.price,o.currency||"ZAR");const stock=o.availability||"Availability not supplied";const stockLabel=stock==="in_stock"?"In stock online/general":stock==="out_of_stock"?"Out of stock":stock==="preorder"?"Pre-order":stock==="backorder"?"Back-order":stock;const validPrice=Number.isFinite(Number(o.price))&&Number(o.price)>0;const saving=(validPrice&&o.original_price!=null&&Number(o.original_price)>Number(o.price))?Number(o.original_price)-Number(o.price):null;return `<article class="pi-offer ${o.verified?"verified":""}"><div><h4>${esc(o.product_name||d.bestProduct?.name||"Product")}</h4><p>${esc(retailer)}</p><div class="pi-meta"><span>${o.verified?"✓ Verified listing":"Catalog listing"}</span><span>${esc(stockLabel)}</span>${saving?`<span>Save ${new Intl.NumberFormat("en-ZA",{style:"currency",currency:o.currency||"ZAR"}).format(saving)}</span>`:""}${o.source?`<span>${esc(o.source)}</span>`:""}</div><div class="pi-actions">${validUrl(o.product_url)?`<a href="${esc(o.product_url)}" target="_blank" rel="noopener noreferrer">View product</a>`:""}</div></div><div class="pi-price">${esc(price)}${localEstimate?`<small class="pi-local-estimate">${esc(localEstimate)} estimated</small>`:""}</div>${validPrice&&o.original_price!=null&&Number(o.original_price)>Number(o.price)?`<div class="pi-old-price">${new Intl.NumberFormat("en-ZA",{style:"currency",currency:o.currency||"ZAR"}).format(Number(o.original_price))}</div>`:""}</article>`}).join("");
   }catch{if(requestId!==productIntelligenceRequestId)return;panel.classList.remove("hidden");el.innerHTML='<div class="empty-state">Product price data is temporarily unavailable.</div>'}
 }
-function assistantContext(){const i=state.result?.identification||{},rows=(state.stores||[]).slice(0,12);return {identification:{...i},stores:rows.map(s=>({name:s.name,distanceKm:s.distanceKm,type:s.type,address:s.address,phone:s.phone,openingHours:s.openingHours,lat:s.lat,lon:s.lon})),offers:(productIntelligence?.offers||state.offers||[]).slice(0,8).map(o=>({...o})),nearbyStores:rows,premium:premiumState.active,radiusKm:state.radius}}
+function assistantContext(){const i=state.result?.identification||{},rows=(state.stores||[]).slice(0,12);return {identification:{...i},stores:rows.map(s=>({name:s.name,distanceKm:s.distanceKm,type:s.type,address:s.address,phone:s.phone,openingHours:s.openingHours,lat:s.lat,lon:s.lon})),offers:(Array.isArray(state.offers)?state.offers:[]).slice(0,8).map(o=>({...o})),nearbyStores:rows,premium:premiumState.active,radiusKm:state.radius}}
 function openAssistant(){document.getElementById("assistantPanel")?.classList.remove("hidden");setTimeout(()=>document.getElementById("assistantInput")?.focus(),50)}
 function closeAssistant(){document.getElementById("assistantPanel")?.classList.add("hidden")}
 function addAssistantMessage(text,type="bot"){const el=document.getElementById("assistantMessages");const d=document.createElement("div");d.className=`assistant-msg ${type}`;d.textContent=text;el.appendChild(d);el.scrollTop=el.scrollHeight;return d}
@@ -213,6 +213,7 @@ function openTool(name){
   if(name==="saved"){renderPremiumSaved();document.getElementById("premiumSavedModal")?.classList.remove("hidden")}
   if(name==="compare"){renderPremiumCompare();document.getElementById("premiumCompareModal")?.classList.remove("hidden")}
   if(name==="filters")document.getElementById("premiumFiltersModal")?.classList.remove("hidden");
+  const ids={saved:"premiumSavedModal",compare:"premiumCompareModal",filters:"premiumFiltersModal"},modal=document.getElementById(ids[name]);if(modal){if(modal.parentElement!==document.body)document.body.appendChild(modal);modal.removeAttribute("aria-hidden");const close=modal.querySelector('[data-close-tool]');if(close)close.setAttribute('aria-label','Close');window.finditAccessibleDialog?.(modal,{saved:'Saved Items',compare:'Compare Stores',filters:'Smart Store Filters'}[name]);}
 }
 function closeTool(name){
   const ids={saved:"premiumSavedModal",compare:"premiumCompareModal",filters:"premiumFiltersModal"};
@@ -223,7 +224,7 @@ function renderPremiumSaved(){
   const list=getPremiumSaved();
   if(!list.length){el.innerHTML='<p class="muted">No saved items yet. Use the ♡ Save button after a FindIt search.</p>';return}
   el.innerHTML=list.map((x,i)=>`<div class="premium-saved-row"><div><b>${esc(x.name)}</b><small>${esc(x.query||"Saved Find")}</small></div><button data-premium-saved-search="${i}">Search again</button></div>`).join("");
-  document.querySelectorAll("[data-premium-saved-search]").forEach(b=>b.onclick=()=>{const x=list[Number(b.dataset.premiumSavedSearch)];if(x?.query)window.open(`https://www.google.com/search?q=${encodeURIComponent(x.query)}`,"_blank")});
+  document.querySelectorAll("[data-premium-saved-search]").forEach(b=>b.onclick=()=>{const x=list[Number(b.dataset.premiumSavedSearch)];if(x?.query){closeTool('saved');window.finditRunProductSearch?.(x.query)}});
 }
 function sortedPremiumStores(){
   const a=[...state.stores];
@@ -242,9 +243,11 @@ function renderPremiumCompare(){
   const selected=base.filter((_,i)=>premiumCompareSelection.has(i));
   const list=(selected.length?selected:base).slice(0,4);
   if(!list.length){el.innerHTML='<p class="muted">No nearby stores to compare yet. Price comparisons require actual retailer offers for the same product; FindIt will not guess prices.</p>';return}
+  const nearest=Math.min(...list.filter(s=>s.distanceKm!=null&&s.distanceKm!==''&&Number.isFinite(Number(s.distanceKm))).map(s=>Number(s.distanceKm)));
   el.innerHTML=list.map((s,i)=>{
+    const closest=Number.isFinite(nearest)&&s.distanceKm!=null&&Number(s.distanceKm)===nearest;
     const dir=`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${s.lat},${s.lon}`)}`;
-    return `<article class="compare-card ${i===0?"best":""}"><small>${i===0?"Closest nearby store (not cheapest)":"Nearby store (price unverified)"}</small><h3>${esc(s.name)}</h3><div class="compare-distance">${Number(s.distanceKm).toFixed(1)} km</div><small>${esc(s.address||s.type||"Consumer retailer")}</small><br><small>Exact stock not verified</small><br><a href="${dir}" target="_blank" rel="noopener noreferrer">Directions →</a></article>`
+    return `<article class="compare-card ${closest?"best":""}"><small>${closest?"Closest of these stores (not cheapest)":"Nearby store (price unverified)"}</small><h3>${esc(s.name)}</h3><div class="compare-distance">${Number(s.distanceKm).toFixed(1)} km</div><small>${esc(s.address||s.type||"Consumer retailer")}</small><br><small>Exact stock not verified</small><br><a href="${dir}" target="_blank" rel="noopener noreferrer">Directions →</a></article>`
   }).join("");
 }
 function premiumRadius(v){
