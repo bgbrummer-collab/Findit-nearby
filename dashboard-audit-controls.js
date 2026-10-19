@@ -30,7 +30,7 @@ function currentOffers(){
  }
  return [...best.values()].sort((a,b)=>{const ap=positive(a.price),bp=positive(b.price);if(ap!==bp)return bp-ap;if(ap&&bp)return Number(a.price)-Number(b.price);return retailer(a).localeCompare(retailer(b))});
 }
-function offerRow(o,showPrice=true){const url=o.product_url||o.url;return`<div class="fx-stable-row"><div><b>${esc(retailer(o))}</b><small>${esc(o.product_name||st()?.result?.identification?.name||'Exact product')} · ${esc(stock(o.availability))}</small></div><div>${showPrice?`<b>${esc(money(o.price,o.currency||'ZAR'))}</b>`:''}${validUrl(url)?`<br><a href="${esc(url)}" target="_blank" rel="noopener noreferrer">View product</a>`:''}</div></div>`}
+function offerRow(o,showPrice=true){const url=o.product_url||o.url;return`<div class="fx-stable-row"><div><b>${esc(retailer(o))}</b><small>${esc(o.product_name||st()?.result?.identification?.name||'Exact product')} · ${esc(stock(o.availability))}</small>${o.priceConditions?`<small>${esc(o.priceConditions)}</small>`:''}</div><div>${showPrice?`<b>${esc(money(o.price,o.currency||'ZAR'))}</b>`:''}${validUrl(url)?`<br><a href="${esc(url)}" target="_blank" rel="noopener noreferrer">View product</a>`:''}</div></div>`}
 function sortedStores(){return[...(Array.isArray(st()?.stores)?st().stores:[])].sort((a,b)=>Number(a.distanceKm??1e9)-Number(b.distanceKm??1e9))}
 function compareHtml(){
  const offers=currentOffers(),priced=offers.filter(o=>positive(o.price)),unpriced=offers.filter(o=>!positive(o.price)),stores=sortedStores();

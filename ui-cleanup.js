@@ -37,7 +37,7 @@
   function stores(){return[...(Array.isArray(state()?.stores)?state().stores:[])].sort((a,b)=>Number(a.distanceKm??1e9)-Number(b.distanceKm??1e9))}
   function offerRow(o,showPrice=true){
     const url=o.product_url||o.url;
-    return`<div class="fx-commerce-row"><div><b>${esc(retailer(o))}</b><small>${esc(o.product_name||state()?.result?.identification?.name||'Exact product')} · ${esc(stock(o.availability))}</small></div><div>${showPrice?`<b>${esc(money(o.price,o.currency||'ZAR'))}</b>`:''}${validUrl(url)?`<br><a href="${esc(url)}" target="_blank" rel="noopener noreferrer">View product</a>`:''}</div></div>`;
+    return`<div class="fx-commerce-row"><div><b>${esc(retailer(o))}</b><small>${esc(o.product_name||state()?.result?.identification?.name||'Exact product')} · ${esc(stock(o.availability))}</small>${o.priceConditions?`<small>${esc(o.priceConditions)}</small>`:''}</div><div>${showPrice?`<b>${esc(money(o.price,o.currency||'ZAR'))}</b>`:''}${validUrl(url)?`<br><a href="${esc(url)}" target="_blank" rel="noopener noreferrer">View product</a>`:''}</div></div>`;
   }
   function safeModal(title,html){
     let m=q('#fxCommerceSafeModal');
