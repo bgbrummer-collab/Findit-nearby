@@ -222,3 +222,18 @@ test('older saved entries without original identity evidence cannot silently bec
  r.context.window.finditOpenRecordedProduct({name:'Example headphones',query:'Example headphones'});await new Promise(resolve=>setImmediate(resolve));
  const i=r.context.window.finditState.result.identification;assert.equal(i.requiresModelConfirmation,true);assert.equal(i.userConfirmed,false);assert.equal(i.identificationMethod,'saved-query-unverified');assert.ok(!requests.includes('/api/search'));assert.match(r.body.innerHTML,/older saved entry has no original identity evidence/);
 });
+
+test('refreshing a restored uncertain Find needs no photo and never sends its guess to typed identification',async()=>{
+ const r=runtime(),requests=[];r.context.navigator={};r.context.localStorage={getItem:()=>null,setItem(){}};r.context.document.dispatchEvent=()=>{};r.context.CustomEvent=class{};
+ r.elements.set('#fxRetryCandidate',{});r.elements.set('#fxConfirmModel',{});
+ const identity={name:'Example cream',brand:'Example',object:'cream',size:'25 g',requiresModelConfirmation:true,userConfirmed:false};r.context.window.finditState.result={identification:identity};r.context.window.finditState.file=null;
+ r.context.fetch=async(url,opts)=>{requests.push({url,body:JSON.parse(opts.body)});return {ok:true,json:async()=>({possibleProducts:[]})}};
+ await r.context.window.finditRefreshCurrentProduct();await new Promise(resolve=>setImmediate(resolve));
+ assert.ok(requests.some(x=>x.url==='/api/product-insights'));assert.ok(!requests.some(x=>x.url==='/api/search'));assert.equal(r.context.window.finditState.result.identification,identity);assert.equal(identity.requiresModelConfirmation,true);assert.equal(identity.userConfirmed,false);assert.match(r.body.innerHTML,/not confirmed/);
+});
+test('refreshing a restored exact Find rechecks commerce and research with the existing identity',async()=>{
+ const r=runtime(),requests=[];r.context.navigator={};r.context.localStorage={getItem:()=>null,setItem(){}};r.context.document.dispatchEvent=()=>{};r.context.CustomEvent=class{};
+ const identity={name:'Example X1',model:'X1',userConfirmed:true};r.context.window.finditState.result={identification:identity};r.context.window.finditState.file=null;r.context.window.finditState.stores=[];
+ r.context.fetch=async(url,opts)=>{requests.push({url,body:JSON.parse(opts.body)});return {ok:true,json:async()=>url.includes('intelligence')?{offers:[]}:{researched:true,whatItDoes:'Verified current description',sources:[]}}};
+ await r.context.window.finditRefreshCurrentProduct();assert.ok(requests.some(x=>x.url==='/api/product-intelligence-v2'&&x.body.identification.model==='X1'));assert.ok(requests.some(x=>x.url==='/api/product-insights'));assert.ok(!requests.some(x=>x.url==='/api/search'));assert.equal(r.context.window.finditState.result.identification,identity);assert.match(r.body.innerHTML,/Verified current description/);
+});
