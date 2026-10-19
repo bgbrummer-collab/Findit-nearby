@@ -245,3 +245,12 @@ test('explicit candidate confirmation uses the reviewed listing brand rather tha
  await r.context.window.finditRunProductSearch('Consumer Relief Cream 25g',{name:'Consumer Relief Cream 25g',identity:{name:'Consumer Relief Cream 25g',brand:'Consumer Relief',object:'topical cream',size:'25 g',category:'beauty'},photoMatchConfirmed:false});
  const request=requests.find(x=>x.url==='/api/product-intelligence-v2');assert.equal(request.body.identification.brand,'Consumer Relief');assert.equal(request.body.identification.size,'25 g');assert.equal(request.body.identification.userConfirmed,true);assert.equal(request.body.identification.confirmationMethod,'user-confirmed-retailer-candidate');assert.equal(photo.brand,'Maker');assert.equal(photo.requiresModelConfirmation,true);
 });
+
+test('older candidate payload preserves a supported brand only when the reviewed product name contains it',async()=>{
+ for(const name of ['Example Maker Cream 25g','Other Cream 25g','Example Maker2 Cream 25g']){
+ const r=runtime();r.context.navigator={};r.context.localStorage={getItem:()=>null,setItem(){}};r.context.document.dispatchEvent=()=>{};r.context.CustomEvent=class{};r.context.window.finditState.stores=[];
+ r.context.window.finditState.result={identification:{name:'Example Maker cream',brand:'Example Maker',object:'cream',size:'25 g',requiresModelConfirmation:true}};r.context.window.finditState.file={name:'original.jpg'};
+ r.context.fetch=async(url,opts)=>({ok:true,json:async()=>url==='/api/search'?{identification:{name,searchQuery:name,userConfirmed:true}}:url.includes('intelligence')?{offers:[]}:{researched:false}});
+ await r.context.window.finditRunProductSearch(name,{name});assert.equal(r.context.window.finditState.result.identification.brand,name==='Example Maker Cream 25g'?'Example Maker':'');assert.equal(r.context.window.finditState.file.name,'original.jpg');
+ }
+});
