@@ -237,6 +237,15 @@ test('refreshing a restored exact Find rechecks commerce and research with the e
  r.context.fetch=async(url,opts)=>{requests.push({url,body:JSON.parse(opts.body)});return {ok:true,json:async()=>url.includes('intelligence')?{offers:[]}:{researched:true,whatItDoes:'Verified current description',sources:[]}}};
  await r.context.window.finditRefreshCurrentProduct();assert.ok(requests.some(x=>x.url==='/api/product-intelligence-v2'&&x.body.identification.model==='X1'));assert.ok(requests.some(x=>x.url==='/api/product-insights'));assert.ok(!requests.some(x=>x.url==='/api/search'));assert.equal(r.context.window.finditState.result.identification,identity);assert.match(r.body.innerHTML,/Verified current description/);
 });
+test('reopening a confirmed history item preserves brand, category and variant instead of reparsing its name',async()=>{
+ const r=runtime(),requests=[];r.context.navigator={};r.context.localStorage={getItem:()=>null,setItem(){}};r.context.document.dispatchEvent=()=>{};r.context.CustomEvent=class{};
+ const identity={name:'Example Relief Cream 25g',brand:'Example Relief',model:'',object:'topical cream',category:'beauty',retailCategory:'beauty',size:'25 g',userConfirmed:true,requiresModelConfirmation:false,confirmationMethod:'user-confirmed-retailer-candidate'};
+ r.context.fetch=async(url,opts)=>{requests.push({url,body:JSON.parse(opts.body)});return {ok:true,json:async()=>url.includes('intelligence')?{offers:[]}:{researched:true,whatItDoes:'Verified current description',sources:[]}}};
+ r.context.window.finditOpenRecordedProduct({name:identity.name,query:identity.name,identification:identity});
+ for(let n=0;n<5;n++)await new Promise(resolve=>setImmediate(resolve));
+ const i=r.context.window.finditState.result.identification;assert.equal(i.brand,'Example Relief');assert.equal(i.category,'beauty');assert.equal(i.size,'25 g');assert.equal(i.userConfirmed,true);assert.equal(i.confirmationMethod,'user-confirmed-retailer-candidate');assert.equal(r.context.window.finditState.result.visualVerification,false);assert.equal(r.context.window.finditState.result.identitySource,'saved-identity');
+ assert.ok(requests.some(x=>x.url==='/api/product-intelligence-v2'&&x.body.identification.brand==='Example Relief'&&x.body.identification.retailCategory==='beauty'));assert.ok(requests.some(x=>x.url==='/api/product-insights'));assert.ok(!requests.some(x=>x.url==='/api/search'));assert.match(r.body.innerHTML,/Verified current description/);
+});
 
 test('explicit candidate confirmation uses the reviewed listing brand rather than an earlier manufacturer guess',async()=>{
  const r=runtime(),requests=[];r.context.navigator={};r.context.localStorage={getItem:()=>null,setItem(){}};r.context.document.dispatchEvent=()=>{};r.context.CustomEvent=class{};r.context.window.finditState.stores=[];

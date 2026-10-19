@@ -140,12 +140,14 @@ function openRecordedProduct(q){
  let entry=typeof q==='object'&&q?q:null;q=entry?clean(entry.query||entry.name):q;
  if(!entry?.identification)try{const previous=JSON.parse(localStorage.getItem('finditRecent')||'[]').find(x=>(x.query||x.name)===q);if(previous?.identification||!entry)entry=previous||entry}catch{}
  const i=entry?.identification||(entry?{name:clean(entry.name||q),object:clean(entry.object||'product'),brand:clean(entry.brand||''),model:'',category:clean(entry.category||'product'),searchQuery:q,confidence:null,requiresModelConfirmation:true,userConfirmed:false,identificationMethod:'saved-query-unverified'}:null);
- if(!i?.requiresModelConfirmation)return runSearch(q);
+ if(!i)return runSearch(q);
  const s=st();if(!s)return;
  photoGeneration++;owned=false;busy=false;commerce=null;research=null;researchPending=false;partialResearch=null;partialPending=false;partialNearbyKey='';lastPhotoFile=null;
- s.file=null;s.result={identification:{...i},offers:[],verified:false,visualVerification:true};s.offers=[];s.stores=[];window.productIntelligence=null;
+ s.file=null;s.result={identification:{...i},offers:[],verified:false,visualVerification:false,identitySource:'saved-identity',userConfirmed:i.userConfirmed===true};s.offers=[];s.stores=[];window.productIntelligence=null;
  const image=$('#fxProductImage');if(image)image.innerHTML='<span>▧</span>';
- syncIdentity(i);handlePhotoResult();saveRecent(i);researchPartial(i,true);loadPartialNearby(i);showProductInfo();
+ syncIdentity(i);handlePhotoResult();saveRecent(i);
+ if(i.requiresModelConfirmation){researchPartial(i,true);loadPartialNearby(i);showProductInfo();}
+ else{const restored=s.result.identification;searchStatus('Refreshing saved product information…');loading('Refreshing '+productName(i));hydrateIdentifiedPhoto().then(()=>{if(st()?.result?.identification!==restored)return;searchStatus('Saved product information refreshed.');showProductInfo();});}
  document.dispatchEvent(new CustomEvent('findit:dashboard-sync',{detail:{result:s.result}}));
 }
 async function refreshCurrentProduct(){
