@@ -22,3 +22,10 @@ test('replacement photo clears the previous Smart Choice confidence before ident
  vm.runInNewContext(fs.readFileSync(new URL('../user-pov-relevance-guard.js',import.meta.url),'utf8'),context);
  assert.match(badge.textContent,/65%/);state.result=null;listeners['findit:new-photo-selected']();assert.equal(badge.textContent,'Confidence not supplied');
 });
+
+test('Smart Choice rerender preserves the existing quick-action node and its handlers',()=>{
+ let attached=null,html='',clicked=0;const actions={click:()=>clicked++},anchor={},box={querySelector:s=>s==='.fx-open-row'?anchor:null,insertBefore:(node,before)=>{assert.equal(before,anchor);attached=node},set innerHTML(value){html=value;attached=null}};
+ const source=fs.readFileSync(new URL('../smart-choice-ui.js',import.meta.url),'utf8'),start=source.indexOf('function render(){'),end=source.indexOf('function applyOpenFilter(){',start);
+ const context={$:s=>s==='#fxSmartChoice'?box:s==='#fxFindQuickActions'?actions:null,scoreChoices:()=>({best:null,cheapest:null,closestStore:null,stores:[]}),knownOpenState:()=>null,confidenceLabel:()=>'',esc:x=>x,card:()=>'',openOnly:false,applyOpenFilter(){}};
+ vm.runInNewContext(source.slice(start,end)+';render();render()',context);assert.ok(html.includes('fxOpenNowToggle'));assert.equal(attached,actions);attached.click();assert.equal(clicked,1);
+});

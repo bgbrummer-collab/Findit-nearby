@@ -40,7 +40,7 @@
       const rows=all.map((x,index)=>({x,index})).filter(({x})=>`${x.name||''} ${x.query||''}`.toLowerCase().includes(q)).slice(0,50);
       const out=$('#v10HistoryRows'); if(!out)return;
       out.innerHTML=rows.length?rows.map(({x,index})=>`<div class="v10-row"><div><b>${esc(x.name||'FindIt item')}</b><br><small>${esc(x.query||'')}</small></div><div class="findit-row-actions"><button data-history-search="${index}">Search again</button><button class="findit-delete-btn" data-history-delete="${index}">Delete</button></div></div>`).join(''):'<p>No matching history.</p>';
-      out.querySelectorAll('[data-history-search]').forEach(b=>b.onclick=()=>{const x=all[Number(b.dataset.historySearch)];if(x?.query)window.open(`https://www.google.com/search?q=${encodeURIComponent(x.query)}`,'_blank')});
+      out.querySelectorAll('[data-history-search]').forEach(b=>b.onclick=()=>{const x=all[Number(b.dataset.historySearch)];if(x?.query){if(typeof closeTool==='function')closeTool('saved');if(window.finditOpenRecordedProduct)window.finditOpenRecordedProduct(x);else window.finditRunProductSearch?.(x.query)}});
       out.querySelectorAll('[data-history-delete]').forEach(b=>b.onclick=()=>{all.splice(Number(b.dataset.historyDelete),1);localStorage.setItem('finditRecent',JSON.stringify(all));if(typeof renderRecent==='function')renderRecent();if(typeof updatePremiumDashboard==='function')updatePremiumDashboard();draw()});
     };
     draw(); $('#v10HistorySearch').oninput=draw;
@@ -51,7 +51,7 @@
     let list=[];try{list=JSON.parse(localStorage.getItem('finditSaved')||'[]');if(!Array.isArray(list))list=[]}catch{list=[]}
     if(!list.length){el.innerHTML='<p class="muted">No saved items yet. Use the ♡ Save button after a FindIt search.</p>';return}
     el.innerHTML=list.map((x,i)=>`<div class="premium-saved-row"><div><b>${esc(x.name||'Saved Find')}</b><small>${esc(x.query||'Saved Find')}</small></div><div class="findit-row-actions"><button data-premium-saved-search="${i}">Search again</button><button class="findit-delete-btn" data-premium-saved-delete="${i}">Delete</button></div></div>`).join('');
-    el.querySelectorAll('[data-premium-saved-search]').forEach(b=>b.onclick=()=>{const x=list[Number(b.dataset.premiumSavedSearch)];if(x?.query)window.open(`https://www.google.com/search?q=${encodeURIComponent(x.query)}`,'_blank')});
+    el.querySelectorAll('[data-premium-saved-search]').forEach(b=>b.onclick=()=>{const x=list[Number(b.dataset.premiumSavedSearch)];if(x?.query){if(typeof closeTool==='function')closeTool('saved');if(window.finditOpenRecordedProduct)window.finditOpenRecordedProduct(x);else window.finditRunProductSearch?.(x.query)}});
     el.querySelectorAll('[data-premium-saved-delete]').forEach(b=>b.onclick=()=>{list.splice(Number(b.dataset.premiumSavedDelete),1);localStorage.setItem('finditSaved',JSON.stringify(list));window.renderPremiumSaved();if(typeof updatePremiumDashboard==='function')updatePremiumDashboard()});
   };
 

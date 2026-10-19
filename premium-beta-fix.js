@@ -135,11 +135,11 @@
 
   function saveCurrent(el) {
     ensureRuntime();
-    const i = (typeof state !== 'undefined' && state.result?.identification) || null;
+    const i = window.finditState?.result?.identification || (typeof state !== 'undefined' && state.result?.identification) || null;
     if (!i) return;
     let arr = [];
     try { arr = JSON.parse(localStorage.getItem('finditSaved') || '[]'); } catch {}
-    arr = [{name:i.name||i.object||'Item',query:i.searchQuery||'',savedAt:new Date().toISOString()}, ...arr].slice(0,30);
+    arr = [{identification:{...i},name:i.name||i.object||'Item',query:i.searchQuery||'',savedAt:new Date().toISOString()}, ...arr].slice(0,30);
     localStorage.setItem('finditSaved', JSON.stringify(arr));
     el.textContent = '✓ Saved';
     setTimeout(() => { if (active()) el.textContent = '♡ Save'; }, 900);

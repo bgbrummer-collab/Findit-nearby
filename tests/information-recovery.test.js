@@ -206,3 +206,10 @@ test('saved and collection snapshots retain photo uncertainty independently of h
  const list=vm.runInNewContext(source.slice(savedStart,savedEnd)+';getPremiumSaved()', {localStorage:{getItem:k=>k==='finditSaved'?JSON.stringify([snap]):'[]'}});
  assert.equal(list[0].identification.requiresModelConfirmation,true);assert.equal(list[0].identification.userConfirmed,undefined);
 });
+
+test('Premium capture save handler preserves uncertain identity even when only maintained window state exists',()=>{
+ const source=readFileSync(new URL('../premium-beta-fix.js',import.meta.url),'utf8'),start=source.indexOf('  function saveCurrent(el)'),end=source.indexOf('  function route(el)',start);let saved;
+ const identity={name:'Example headphones',requiresModelConfirmation:true,suggestedLabel:'Example X1 headphones'};
+ vm.runInNewContext(source.slice(start,end)+';saveCurrent(el)',{window:{finditState:{result:{identification:identity}}},ensureRuntime(){},localStorage:{getItem:()=>null,setItem:(k,v)=>saved=JSON.parse(v)},el:{textContent:''},setTimeout(){},Date});
+ assert.equal(saved[0].identification.requiresModelConfirmation,true);assert.equal(saved[0].identification.suggestedLabel,'Example X1 headphones');assert.equal(saved[0].identification.userConfirmed,undefined);
+});
