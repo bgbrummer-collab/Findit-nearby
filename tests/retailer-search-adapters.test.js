@@ -53,3 +53,11 @@ test('apostrophe spelling is equivalent while size and brand remain exact',async
  assert(!identityMatches("Kellogg’s Corn Flakes 750 g",i));
  assert(!identityMatches('Other Brand Corn Flakes 500g',i));
 });
+
+test('product name anchor wins over earlier duplicate image anchor containing inline styles',async t=>{
+ const page='https://www.dischem.co.za/catalogsearch/result/?q=Example%20Relief%20Cream%2025g',url='https://www.dischem.co.za/example-relief-cream-25g-123';
+ const html='<a href="'+url+'"><img alt="Example Relief Cream 25g"><style>.product-image { width:240px; }</style></a><strong><a class="product-item-link" href="'+url+'">Example Relief Cream 25g</a></strong>';
+ t.mock.method(globalThis,'fetch',async u=>new Response(String(u)===page?html:''));
+ const urls=await nativeRetailerUrls({brand:'Example Relief',name:'Example Relief Cream 25g',object:'topical cream',category:'beauty',searchQuery:'Example Relief Cream 25g'});
+ assert.equal(urls.filter(u=>u===url).length,1);
+});
