@@ -213,3 +213,10 @@ test('Premium capture save handler preserves uncertain identity even when only m
  vm.runInNewContext(source.slice(start,end)+';saveCurrent(el)',{window:{finditState:{result:{identification:identity}}},ensureRuntime(){},localStorage:{getItem:()=>null,setItem:(k,v)=>saved=JSON.parse(v)},el:{textContent:''},setTimeout(){},Date});
  assert.equal(saved[0].identification.requiresModelConfirmation,true);assert.equal(saved[0].identification.suggestedLabel,'Example X1 headphones');assert.equal(saved[0].identification.userConfirmed,undefined);
 });
+
+test('older saved entries without original identity evidence cannot silently become confirmed typed products',async()=>{
+ const r=runtime();r.context.navigator={};r.context.localStorage={getItem:()=>null,setItem(){}};r.context.document.dispatchEvent=()=>{};r.context.CustomEvent=class{};r.elements.set('#fxRetryCandidate',{});r.elements.set('#fxConfirmModel',{});
+ const requests=[];r.context.fetch=async url=>{requests.push(url);return {ok:true,json:async()=>({possibleProducts:[]})}};
+ r.context.window.finditOpenRecordedProduct({name:'Example headphones',query:'Example headphones'});await new Promise(resolve=>setImmediate(resolve));
+ const i=r.context.window.finditState.result.identification;assert.equal(i.requiresModelConfirmation,true);assert.equal(i.userConfirmed,false);assert.equal(i.identificationMethod,'saved-query-unverified');assert.ok(!requests.includes('/api/search'));assert.match(r.body.innerHTML,/older saved entry has no original identity evidence/);
+});
