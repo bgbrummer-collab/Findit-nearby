@@ -26,6 +26,7 @@ function currentOffers(){
 }
 function openingText(s){return String(s?.openingHours||s?.opening_hours||s?.hours||s?.openingHoursText||s?.opening_hours_text||'').trim()}
 function knownOpenState(s,when=new Date()){
+ if(s?.liveHours?.checkedAt&&s.liveHours.status==='unknown')return null;
  if(s?.openNow===true||s?.isOpen===true)return true;if(s?.openNow===false||s?.isOpen===false)return false;
  const text=openingText(s);if(!text)return null;if(/^(24\s*\/\s*7|24 hours)$/i.test(text))return true;
  const days=['Su','Mo','Tu','We','Th','Fr','Sa'],today=days[when.getDay()],mins=when.getHours()*60+when.getMinutes(),idx=d=>days.indexOf(d);

@@ -29,3 +29,8 @@ test('Smart Choice rerender preserves the existing quick-action node and its han
  const context={$:s=>s==='#fxSmartChoice'?box:s==='#fxFindQuickActions'?actions:null,scoreChoices:()=>({best:null,cheapest:null,closestStore:null,stores:[]}),knownOpenState:()=>null,confidenceLabel:()=>'',esc:x=>x,card:()=>'',openOnly:false,applyOpenFilter(){}};
  vm.runInNewContext(source.slice(start,end)+';render();render()',context);assert.ok(html.includes('fxOpenNowToggle'));assert.equal(attached,actions);attached.click();assert.equal(clicked,1);
 });
+test('Open Now keeps an unconfirmed backend schedule unknown instead of recalculating it in browser time',()=>{
+ const source=fs.readFileSync(new URL('../smart-choice-ui.js',import.meta.url),'utf8'),start=source.indexOf('function knownOpenState('),end=source.indexOf('\nfunction ',start+1),fn=vm.runInNewContext(source.slice(start,end)+';knownOpenState',{openingText:()=> 'Mo-Su 00:00-23:59'});
+ assert.equal(fn({liveHours:{status:'unknown',checkedAt:'2026-10-19T07:00:00Z'},openingHours:'Mo-Su 00:00-23:59'}),null);
+ assert.equal(fn({openNow:true,liveHours:{status:'open',checkedAt:'2026-10-19T07:00:00Z'}}),true);
+});
