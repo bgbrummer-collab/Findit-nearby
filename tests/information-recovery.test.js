@@ -182,6 +182,7 @@ test('partial photo history is persisted with its uncertainty and reopens withou
  r.context.localStorage={getItem:k=>values.get(k)||null,setItem:(k,v)=>values.set(k,v)};
  r.context.document.dispatchEvent=()=>{};r.context.CustomEvent=class{};
  r.elements.set('#fxRetryCandidate',{});r.elements.set('#fxConfirmModel',{});
+ r.elements.set('#fxResultStripName',{textContent:'No item selected'});r.elements.set('#fxResultStripMeta',{textContent:''});
  r.elements.set('#fxProductImage',{innerHTML:'Old photo'});r.elements.set('#fxRecentSide',{innerHTML:''});
  delete r.context.window.__finditInformationRuntime;
  let source=readFileSync(new URL('../information-runtime.js',import.meta.url),'utf8').replace('window.finditRunProductSearch=runSearch;','window.finditRunProductSearch=runSearch;window.testHydrate=hydrateIdentifiedPhoto;');
@@ -195,6 +196,7 @@ test('partial photo history is persisted with its uncertainty and reopens withou
  assert.equal(r.context.window.finditState.result.identification.requiresModelConfirmation,true);assert.equal(r.context.window.finditState.result.identification.userConfirmed,undefined);
  assert.equal(r.context.window.finditState.file,null);assert.ok(!requests.includes('/api/search'));assert.deepEqual(Array.from(r.context.window.finditState.offers),[]);
  assert.doesNotMatch(r.elements.get('#fxProductImage').innerHTML,/Old photo/);
+ assert.equal(r.elements.get('#fxResultStripName').textContent,'Example headphones');assert.match(r.elements.get('#fxResultStripMeta').textContent,/Example/);
 });
 
 test('saved and collection snapshots retain photo uncertainty independently of history',()=>{

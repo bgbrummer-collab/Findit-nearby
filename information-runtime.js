@@ -46,7 +46,7 @@ function saveRecent(i){try{let a=JSON.parse(localStorage.getItem('finditRecent')
 function syncIdentity(i){let name=productName(i)||'Product selected',meta=[i.brand,i.model,i.category||i.retailCategory].filter(Boolean).join(' · ');
  const set=(sel,v)=>{let e=$(sel);if(e&&v!==undefined)e.textContent=v};
  set('#fxProductName',name);set('#fxProductMeta',meta);set('#fxProductDesc',i.summary||('Searching current retailer information for '+name+'.'));set('#fxExactBadge',i.catalogueSource?'Barcode catalogue match':i.userConfirmed?'Product confirmed by search':'Product identified');set('#fxConfidence',i.catalogueSource?'Barcode catalogue match':i.confidence!==null&&i.confidence!==undefined&&Number.isFinite(Number(i.confidence))?Math.round(Number(i.confidence)*100)+'% Match':'Search confirmed');
- set('#resultName',name);set('#resultDescription',i.summary||meta);set('#confidenceValue',i.confidence!==null&&i.confidence!==undefined&&Number.isFinite(Number(i.confidence))?Math.round(Number(i.confidence)*100)+'%':'—');
+ set('#fxResultStripName',name);set('#fxResultStripMeta',i.summary||meta);set('#resultName',name);set('#resultDescription',i.summary||meta);set('#confidenceValue',i.confidence!==null&&i.confidence!==undefined&&Number.isFinite(Number(i.confidence))?Math.round(Number(i.confidence)*100)+'%':'—');
 }
 function syncAll(){if(!owned)return;syncIdentity(ident());let i=ident(),prices=verifiedPrices().sort((a,b)=>Number(a.price)-Number(b.price)),best=prices.length&&prices.every(o=>o.currency&&o.currency===prices[0].currency)?prices[0]:null,stores=st()?.stores||[],offers=exactOffers();
  let bp=$('#fxBestPrice');if(bp)bp.textContent=best?money(best):(prices.length?'Prices use different or unverified currencies — open Compare Prices':'No verified price yet');
