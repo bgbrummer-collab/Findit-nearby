@@ -57,3 +57,9 @@ test('assistant answers kit contents from the published package instead of omitt
  const d=answerFromEvidence('Does this include batteries and a charger, and what batteries work with it?',{identification:{name:'Bosch GSB 18V-50'}},research);assert.match(d.answer,/2 x battery GBA/);assert.match(d.answer,/GAL 18V-20 charger/);assert.match(d.answer,/same voltage/);assert.equal(d.sources.length,1);
  const partial=answerFromEvidence('Does it include batteries?',{identification:{name:'Drill',requiresModelConfirmation:true}},research);assert.doesNotMatch(partial.answer,/GAL 18V-20/);assert.match(partial.answer,/not been confirmed/);
 });
+test('nearest branches keep zero distance first and do not confuse closest with closing hours',()=>{
+ const stores=[{name:'Further',distanceKm:0.7,openingHours:'Mo-Fr 09:00-18:00'},{name:'At selected point',distanceKm:0,openingHours:'Mo-Fr 08:00-20:00'},{name:'Unknown',distanceKm:null},{name:'Invalid',distanceKm:-1}];
+ const answer=answerFromEvidence('Which branch is closest?',{stores}).answer;
+ assert.ok(answer.indexOf('At selected point')<answer.indexOf('Further'));assert.ok(answer.indexOf('Further')<answer.indexOf('Unknown'));assert.doesNotMatch(answer,/Published hours:|-1\.0 km/);
+ assert.match(answerFromEvidence('What are the opening hours?',{stores}).answer,/Published hours: Mo-Fr 08:00-20:00/);
+});
