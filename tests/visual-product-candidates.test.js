@@ -91,6 +91,15 @@ test('alternate printed brand is used only for an unconfirmed retailer page and 
  const r=await visualProductCandidates(input);assert.equal(r.length,1);assert.equal(r[0].photoMatchConfirmed,false);assert.equal(input.brand,'Maker');assert.equal(input.requiresModelConfirmation,true);
  product.name='Example Relief Cream 50g';assert.equal((await visualProductCandidates(input)).length,0);
 });
+test('a complete printed name and quantity can research a retailer brand without promoting a manufacturer guess',async t=>{
+ const product={'@type':'Product',name:'Example Relief Cream 25g',brand:'Example Relief',offers:{price:75,priceCurrency:'ZAR'}};
+ t.mock.method(globalThis,'fetch',async u=>String(u).includes('bing.com')?new Response('<rss><item><title>'+product.name+'</title><link>https://retailer.example/cream</link></item></rss>'):new Response('<script type="application/ld+json">'+JSON.stringify(product)+'</script>'));
+ const input={name:'Maker Company topical cream',brand:'Maker Company',object:'cream tube',size:'25 g',requiresModelConfirmation:true,labelCandidates:[{name:'Example Relief Cream 25g',brand:'',manufacturer:'Maker Company',size:'25 g',confirmed:false,source:'printed-label-hypothesis'}]};
+ const result=await visualProductCandidates(input);assert.equal(result.length,1);assert.equal(result[0].identity.brand,'Example Relief');assert.equal(result[0].photoMatchConfirmed,false);assert.equal(result[0].identity.userConfirmed,false);assert.equal(input.brand,'Maker Company');assert.equal(input.requiresModelConfirmation,true);
+ product.name='Example Relief Cream 50g';assert.equal((await visualProductCandidates(input)).length,0);
+ product.name='Other Relief Cream 25g';assert.equal((await visualProductCandidates(input)).length,0);
+ assert.equal((await visualProductCandidates({...input,labelCandidates:[{...input.labelCandidates[0],size:''}]})).length,0);
+});
 
 test('generic visual phrases cannot admit a different numbered headset model beside a specific hypothesis',async t=>{
  const {specificVisualModel}=await import('../lib/visual-product-candidates.js');const input={name:'Example headphones',brand:'Example',object:'headphones',category:'electronics',requiresModelConfirmation:true,suggestedModels:['Example G Pro X','Example G gaming headset'].map(name=>({name,confirmed:false,source:'visual-model-hypothesis'}))};

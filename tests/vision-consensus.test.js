@@ -116,6 +116,13 @@ test('fully printed consumer label survives manufacturer/brand disagreement only
  assert.equal(r.requiresModelConfirmation,true);assert.equal(r.model,'');assert.equal(r.color,'');assert.equal(r.labelCandidates[0].name,'Anthisan Cream 25g');assert.equal(r.labelCandidates[0].brand,'Anthisan');assert.equal(r.labelCandidates[0].confirmed,false);
  const incomplete=reconcileVision([{name:'Example Cream 25g',brand:'Example',model:'',object:'cream tube',visibleText:['Example','CREAM']},{name:'Example cream',brand:'Example',model:'',object:'cream tube'}]);assert.equal(incomplete.labelCandidates.length,0);
 });
+test('a separately printed manufacturer does not replace a complete consumer label or invent its retail brand',()=>{
+ const a={name:'Example Relief Cream',brand:'Maker Company',model:'Example Relief Cream',object:'cream tube',size:'25g',visibleText:[]};
+ const b={name:'Example Relief Cream 25g',brand:'Maker Company',model:'Example Relief Cream 25g',object:'cream tube',visibleText:['Example Relief CREAM','25 g','Maker Company']};
+ const r=reconcileVision([a,b]);assert.equal(r.requiresModelConfirmation,true);assert.equal(r.brand,'Maker Company');assert.equal(r.labelCandidates[0].name,'Example Relief Cream 25g');assert.equal(r.labelCandidates[0].brand,'');assert.equal(r.labelCandidates[0].manufacturer,'Maker Company');assert.equal(r.labelCandidates[0].size,'25 g');assert.equal(r.labelCandidates[0].confirmed,false);
+ assert.equal(reconcileVision([a,{...b,visibleText:['Example Relief CREAM','Maker Company']}]).labelCandidates.length,0);
+ assert.equal(reconcileVision([a,{...b,name:'Example Relief Cream',model:'',visibleText:['Example Relief CREAM','Maker Company']}]).labelCandidates.length,0);
+});
 
 test('topical cream descriptions corroborate only their broad family without treating ice cream as the same product',()=>{
  const r=reconcileVision([{name:'Example Cream',brand:'Maker',object:'cream tube',model:''},{name:'Example skin cream',brand:'Maker',object:'skin cream',model:''}]);assert.equal(r.object,'topical cream');assert.equal(r.requiresModelConfirmation,true);assert.equal(r.model,'');
