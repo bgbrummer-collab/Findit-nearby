@@ -137,7 +137,8 @@ document.addEventListener('findit:results-rendered',()=>setTimeout(()=>{const s=
 document.addEventListener('findit:nearby-updated',()=>{if(owned)setTimeout(syncAll,40)});
 document.addEventListener('findit:new-photo-selected',()=>{photoGeneration++;lastPhotoFile=st()?.file||null;owned=false;busy=false;commerce=null;research=null;researchPending=false;partialResearch=null;partialPending=false;partialNearbyKey='';closeInformation();if($('#fxPhotoRecovery'))$('#fxPhotoRecovery').hidden=true});
 function openRecordedProduct(q){
- let entry;try{entry=JSON.parse(localStorage.getItem('finditRecent')||'[]').find(x=>(x.query||x.name)===q)}catch{}
+ let entry=typeof q==='object'&&q?q:null;q=entry?clean(entry.query||entry.name):q;
+ if(!entry)try{entry=JSON.parse(localStorage.getItem('finditRecent')||'[]').find(x=>(x.query||x.name)===q)}catch{}
  const i=entry?.identification;
  if(!i?.requiresModelConfirmation)return runSearch(q);
  const s=st();if(!s)return;

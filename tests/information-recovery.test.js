@@ -191,8 +191,18 @@ test('partial photo history is persisted with its uncertainty and reopens withou
  const history=JSON.parse(values.get('finditRecent'));assert.equal(history.length,1);assert.equal(history[0].identification.requiresModelConfirmation,true);assert.equal(history[0].identification.userConfirmed,undefined);
  assert.match(r.elements.get('#fxRecentSide').innerHTML,/Example headphones/);
  const requests=[];r.context.fetch=async(url)=>{requests.push(url);return {ok:true,json:async()=>({possibleProducts:[]})}};
- r.context.window.finditOpenRecordedProduct(history[0].query);await new Promise(resolve=>setImmediate(resolve));
+ values.delete('finditRecent');r.context.window.finditOpenRecordedProduct(history[0]);await new Promise(resolve=>setImmediate(resolve));
  assert.equal(r.context.window.finditState.result.identification.requiresModelConfirmation,true);assert.equal(r.context.window.finditState.result.identification.userConfirmed,undefined);
  assert.equal(r.context.window.finditState.file,null);assert.ok(!requests.includes('/api/search'));assert.deepEqual(Array.from(r.context.window.finditState.offers),[]);
  assert.doesNotMatch(r.elements.get('#fxProductImage').innerHTML,/Old photo/);
+});
+
+test('saved and collection snapshots retain photo uncertainty independently of history',()=>{
+ const source=readFileSync(new URL('../script.js',import.meta.url),'utf8');
+ const start=source.indexOf('function v10Current(){'),end=source.indexOf('\n',start),identity={name:'Example headphones',object:'headphones',requiresModelConfirmation:true,suggestedModels:[{name:'Example X1',confirmed:false}]};
+ const snap=vm.runInNewContext(source.slice(start,end)+';v10Current()', {state:{result:{identification:identity}},Date});
+ assert.equal(snap.identification.requiresModelConfirmation,true);assert.equal(snap.identification.suggestedModels[0].confirmed,false);
+ const savedStart=source.indexOf('function getPremiumSaved(){'),savedEnd=source.indexOf('function premiumHistoryLimit()',savedStart);
+ const list=vm.runInNewContext(source.slice(savedStart,savedEnd)+';getPremiumSaved()', {localStorage:{getItem:k=>k==='finditSaved'?JSON.stringify([snap]):'[]'}});
+ assert.equal(list[0].identification.requiresModelConfirmation,true);assert.equal(list[0].identification.userConfirmed,undefined);
 });
