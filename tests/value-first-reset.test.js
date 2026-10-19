@@ -34,3 +34,21 @@ test('Open Now keeps an unconfirmed backend schedule unknown instead of recalcul
  assert.equal(fn({liveHours:{status:'unknown',checkedAt:'2026-10-19T07:00:00Z'},openingHours:'Mo-Su 00:00-23:59'}),null);
  assert.equal(fn({openNow:true,liveHours:{status:'open',checkedAt:'2026-10-19T07:00:00Z'}}),true);
 });
+test('Open Now filters real dashboard and quick-store cards by branch identity after sorting',()=>{
+ const source=fs.readFileSync(new URL('../smart-choice-ui.js',import.meta.url),'utf8'),start=source.indexOf('function applyOpenFilter(){'),end=source.indexOf('\nfunction styles()',start);
+ const stores=[{name:'Closed branch',openNow:false},{name:'Open branch',openNow:true},{name:'Unknown branch',openNow:null}];
+ const card=(name,dataset={})=>({dataset,hidden:false,querySelector:()=>name?{textContent:name}:null,classList:{toggle(k,v){this.owner.hidden=v}}});
+ const cards=[card('Open branch',{store:'0'}),card('Closed branch'),card('Unknown branch'),card('',{store:'0'}),card('',{store:'1'})];cards.forEach(c=>c.classList.owner=c);
+ const context={state:()=>({stores}),$$:selector=>{assert.match(selector,/#fxStoreList/);assert.match(selector,/#fxCheckStoresQuickBody/);return cards},norm:v=>String(v||'').toLowerCase(),knownOpenState:s=>s?.openNow??null,openOnly:true};
+ vm.runInNewContext(source.slice(start,end)+';applyOpenFilter()',context);assert.deepEqual(cards.map(c=>c.hidden),[false,true,true,true,false]);
+ // Turning it off restores every card; a newly rendered closed card is filtered.
+ context.openOnly=false;vm.runInNewContext('applyOpenFilter()',context);assert.ok(cards.every(c=>!c.hidden));
+ context.openOnly=true;cards.push(card('Closed branch'));cards.at(-1).classList.owner=cards.at(-1);vm.runInNewContext('applyOpenFilter()',context);assert.equal(cards.at(-1).hidden,true);
+});
+test('Open Now closest recommendation skips closed and unknown branches while retaining truthful counts',()=>{
+ const source=fs.readFileSync(new URL('../smart-choice-ui.js',import.meta.url),'utf8'),start=source.indexOf('function scoreChoices(){'),end=source.indexOf('\nfunction confidenceLabel()',start);
+ const stores=[{name:'Closed',distanceKm:0,openNow:false},{name:'Unknown',distanceKm:1},{name:'Open',distanceKm:2,openNow:true}];
+ const context={state:()=>({stores}),currentOffers:()=>[],positive:()=>false,num:v=>v==null?null:Number(v),knownOpenState:s=>s?.openNow??null,openOnly:true};
+ vm.runInNewContext(source.slice(start,end)+';result=scoreChoices()',context);assert.equal(context.result.closestStore.name,'Open');assert.equal(context.result.stores.length,3);
+ context.openOnly=false;vm.runInNewContext('result=scoreChoices()',context);assert.equal(context.result.closestStore.name,'Closed');
+});

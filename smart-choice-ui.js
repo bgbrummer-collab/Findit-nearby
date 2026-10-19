@@ -49,7 +49,8 @@ function scoreChoices(){
  }
  candidates.sort((a,b)=>b.total-a.total);
  const cheapest=(comparable?candidates:[]).filter(x=>x.price!=null).sort((a,b)=>a.price-b.price||((a.distance??1e9)-(b.distance??1e9)))[0]||null;
- const closestStore=[...stores].filter(x=>num(x.distanceKm)!=null).sort((a,b)=>Number(a.distanceKm)-Number(b.distanceKm))[0]||null;
+ const filterNearby=openOnly&&stores.some(x=>knownOpenState(x)!==null);
+ const closestStore=[...stores].filter(x=>num(x.distanceKm)!=null&&(!filterNearby||knownOpenState(x)===true)).sort((a,b)=>Number(a.distanceKm)-Number(b.distanceKm))[0]||null;
  return{best:candidates[0]||null,cheapest,closestStore,stores};
 }
 function confidenceLabel(){
@@ -72,10 +73,24 @@ function render(){
  if(actions)box.insertBefore(actions,box.querySelector('.fx-open-row'));
  $('#fxOpenNowToggle')?.addEventListener('click',()=>{openOnly=!openOnly;render()});applyOpenFilter();
 }
-function applyOpenFilter(){const stores=Array.isArray(state().stores)?state().stores:[],cards=$$('#nearbyStores [data-store],#finditExactShell [data-store]');if(!openOnly){cards.forEach(c=>c.classList.remove('fx-open-filter-hidden'));return}const known=stores.filter(s=>knownOpenState(s)!==null);if(!known.length){cards.forEach(c=>c.classList.remove('fx-open-filter-hidden'));return}cards.forEach(c=>{const i=Number(c.dataset.store);c.classList.toggle('fx-open-filter-hidden',knownOpenState(stores[i])!==true)});$('#listViewBtn')?.click()}
+function applyOpenFilter(){
+ const stores=Array.isArray(state().stores)?state().stores:[],cards=$$('#nearbyStores [data-store],#finditExactShell [data-store],#fxStoreList [data-fx="nearby"],#fxTopStores [data-fx="nearby"],#fxTopStores [data-user-top-store],#fxCheckStoresQuickBody .fx-quick-store');
+ const active=openOnly&&stores.some(s=>knownOpenState(s)!==null);
+ for(const c of cards){
+  // Dashboard layers rank and sort cards independently of the backing array.
+  // Prefer the displayed branch name; legacy cards retain their numeric index.
+  const name=norm(c.querySelector('b,strong')?.textContent),matching=name?stores.filter(s=>norm(s.name)===name):[],index=c.dataset.store;
+  const store=matching.length===1?matching[0]:!name&&index!==undefined&&/^\d+$/.test(index)?stores[Number(index)]:null;
+  c.classList.toggle('fx-open-filter-hidden',Boolean(active&&knownOpenState(store)!==true));
+ }
+}
 function styles(){if($('#fxSmartChoiceStyles'))return;const st=document.createElement('style');st.id='fxSmartChoiceStyles';st.textContent=`#fxSmartChoice{margin:18px 0;padding:20px;border:1px solid rgba(90,210,255,.2);border-radius:22px;background:linear-gradient(135deg,rgba(12,31,49,.96),rgba(8,20,34,.96));box-shadow:0 16px 38px rgba(0,0,0,.18)}.fx-smart-head{display:flex;gap:18px;align-items:flex-start;justify-content:space-between}.fx-smart-kicker{font-size:12px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:#74e7ff}.fx-smart-head h2{margin:5px 0 6px;font-size:22px}.fx-smart-head p{margin:0;max-width:700px;opacity:.78}.fx-match-confidence{white-space:nowrap;padding:8px 11px;border-radius:999px;background:rgba(116,231,255,.11);font-size:12px;font-weight:700}.fx-smart-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}.fx-smart-card{padding:15px;border:1px solid rgba(255,255,255,.09);border-radius:16px;background:rgba(255,255,255,.035);min-width:0}.fx-smart-card.best{border-color:rgba(116,231,255,.32);background:rgba(116,231,255,.065)}.fx-smart-card span{display:block;font-size:10px;font-weight:900;letter-spacing:.11em;opacity:.64}.fx-smart-card strong{display:block;margin:5px 0;font-size:17px;overflow-wrap:anywhere}.fx-smart-card small{display:block;line-height:1.35;opacity:.75}.fx-open-row{display:flex;align-items:center;gap:12px;margin-top:15px}.fx-open-row button{border:1px solid rgba(116,231,255,.36);border-radius:999px;padding:9px 14px;background:transparent;color:inherit;font-weight:800;cursor:pointer}.fx-open-row button.active{background:#74e7ff;color:#062130}.fx-open-row span{font-size:12px;opacity:.76}.fx-open-filter-hidden{display:none!important}@media(max-width:760px){.fx-smart-head{display:block}.fx-match-confidence{display:inline-block;margin-top:10px}.fx-smart-grid{grid-template-columns:1fr}.fx-open-row{align-items:flex-start;flex-direction:column}}`;document.head.appendChild(st)}
 function refresh(){styles();const shell=$('#finditExactShell');if(!shell)return false;let box=$('#fxSmartChoice');if(!box){box=document.createElement('section');box.id='fxSmartChoice';const anchor=shell.querySelector('.fx-feature-row')||shell.querySelector('.fx-search-card');anchor?.parentNode?anchor.parentNode.insertBefore(box,anchor.nextSibling):shell.prepend(box)}render();return true}
 window.finditSmartChoiceRefresh=refresh;window.finditOpenNowState=knownOpenState;
+// Later dashboard renderers replace branch cards after Smart Choice renders.
+// Reapply only the visibility classes, without redrawing or rebinding controls.
+let filterQueued=false;const branchHosts='#nearbyStores,#fxStoreList,#fxTopStores,#fxCheckStoresQuickBody';
+new MutationObserver(records=>{if(filterQueued||!records.some(r=>r.target?.closest?.(branchHosts)||[...r.addedNodes].some(n=>n.matches?.(branchHosts)||n.querySelector?.(branchHosts))))return;filterQueued=true;Promise.resolve().then(()=>{filterQueued=false;applyOpenFilter()})}).observe(document.documentElement,{childList:true,subtree:true});
 for(const ev of ['findit:nearby-updated','findit:dashboard-sync'])document.addEventListener(ev,refresh);document.addEventListener('findit:results-rendered',()=>{refresh();setTimeout(refresh,500);setTimeout(refresh,1600)});
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',refresh,{once:true});else refresh();setTimeout(refresh,350);setTimeout(refresh,1200);
 })();
