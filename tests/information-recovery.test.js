@@ -237,3 +237,11 @@ test('refreshing a restored exact Find rechecks commerce and research with the e
  r.context.fetch=async(url,opts)=>{requests.push({url,body:JSON.parse(opts.body)});return {ok:true,json:async()=>url.includes('intelligence')?{offers:[]}:{researched:true,whatItDoes:'Verified current description',sources:[]}}};
  await r.context.window.finditRefreshCurrentProduct();assert.ok(requests.some(x=>x.url==='/api/product-intelligence-v2'&&x.body.identification.model==='X1'));assert.ok(requests.some(x=>x.url==='/api/product-insights'));assert.ok(!requests.some(x=>x.url==='/api/search'));assert.equal(r.context.window.finditState.result.identification,identity);assert.match(r.body.innerHTML,/Verified current description/);
 });
+
+test('explicit candidate confirmation uses the reviewed listing brand rather than an earlier manufacturer guess',async()=>{
+ const r=runtime(),requests=[];r.context.navigator={};r.context.localStorage={getItem:()=>null,setItem(){}};r.context.document.dispatchEvent=()=>{};r.context.CustomEvent=class{};r.context.window.finditState.stores=[];
+ const photo={name:'Maker topical cream',brand:'Maker',object:'topical cream',category:'beauty',size:'25 g',requiresModelConfirmation:true,userConfirmed:false};r.context.window.finditState.result={identification:photo};r.context.window.finditState.file=null;
+ r.context.fetch=async(url,opts)=>{const body=JSON.parse(opts.body);requests.push({url,body});return {ok:true,json:async()=>url==='/api/search'?{identification:{name:body.query,searchQuery:body.query,userConfirmed:true}}:url.includes('intelligence')?{offers:[]}:{researched:false}}};
+ await r.context.window.finditRunProductSearch('Consumer Relief Cream 25g',{name:'Consumer Relief Cream 25g',identity:{name:'Consumer Relief Cream 25g',brand:'Consumer Relief',object:'topical cream',size:'25 g',category:'beauty'},photoMatchConfirmed:false});
+ const request=requests.find(x=>x.url==='/api/product-intelligence-v2');assert.equal(request.body.identification.brand,'Consumer Relief');assert.equal(request.body.identification.size,'25 g');assert.equal(request.body.identification.userConfirmed,true);assert.equal(request.body.identification.confirmationMethod,'user-confirmed-retailer-candidate');assert.equal(photo.brand,'Maker');assert.equal(photo.requiresModelConfirmation,true);
+});
