@@ -1,0 +1,330 @@
+- complementary:
+  - generic: F
+  - generic: FindIt
+  - generic: Find it. Compare it. Get it.
+  - navigation:
+    - button "⌂ Home"
+    - button "⌕ Search"
+    - button "⌖ Nearby"
+    - button "⇄ Compare"
+    - button "◇ Deals"
+    - button "♡ Saved"
+    - button "◷ History"
+    - button "♧ Alerts"
+    - button "▣ Feedback"
+    - button "✦ Suggest a Feature"
+    - button "ⓘ How to use FindIt"
+  - generic: 🚀
+  - heading "Premium Active" [level=3]
+  - paragraph: Unlock wider search, saved finds, comparisons & more.
+  - button "Premium Tools"
+  - generic: Recent Searches
+  - button "View all"
+  - generic: Korg Pitchclip 2 clip-on tuner
+  - generic: Sanofi topical cream
+  - generic: headphones
+- main:
+  - text: ⌕
+  - generic: Search or upload an image to find anything...
+  - text: ⌖
+  - generic: Nearby
+  - button "Settings": ⚙
+  - button "Alerts": ♧
+  - button "Premium tools": P
+  - generic: ✦ AI powered product search
+  - heading "Find anything nearby." [level=1]:
+    - text: Find anything
+    - text: nearby.
+  - paragraph: Take a photo, upload an image, or search by text and we’ll find where to buy it near you.
+  - button "Upload Photo"
+  - button "⌕ Search Product"
+  - button "▥ Scan / Camera"
+  - button "▧ Drag & drop an image here or click to browse":
+    - generic: ▧
+    - generic: Drag & drop an image here
+    - text: or click to
+    - emphasis: browse
+  - button "⌖ Use my location"
+  - button "✦ Identify & Find" [disabled]
+  - status: Product search complete. Prices and stock require verified retailer evidence.
+  - generic "Choose location on map / enter coordinates"
+  - article:
+    - generic: ✓
+    - generic: Exact match
+    - generic: See the identified product and only supported identity details.
+  - article:
+    - generic: R
+    - generic: Real prices
+    - generic: Compare retailer prices only when FindIt can verify them.
+  - article:
+    - generic: ⌖
+    - generic: Nearby stores
+    - generic: See relevant stores around your selected location.
+  - article:
+    - generic: ▣
+    - generic: Live stock
+    - generic: Branch stock appears only when retailer evidence confirms it.
+  - article:
+    - generic: ⇄
+    - generic: Compare
+    - generic: Compare verified offers without invented prices or availability.
+  - article:
+    - generic: ＋
+    - generic: Shopping Tools
+    - generic: Lists, watchlist, budget, links & preferences.
+  - generic: Image confidence identifies what the object appears to be. Store, price and stock recommendations remain separate and are only shown when their evidence matches this Find.
+  - text: FindIt Smart Choice
+  - heading "Best options from this Find" [level=2]
+  - paragraph: Ranked from verified/current evidence. Missing prices, stock or opening hours are never guessed.
+  - generic: Search confirmed
+  - article:
+    - generic: BEST OVERALL
+    - strong: 1 exact/relevant retailer listing
+    - generic: R 345,00
+  - article:
+    - generic: CHEAPEST
+    - strong: R 345,00
+    - generic: Lowest verified current price found at Marshall Music.
+  - article:
+    - generic: CLOSEST
+    - strong: No nearby retailer yet
+    - generic: Location results have not loaded yet.
+  - button "+ Shopping List"
+  - button "Save Find"
+  - button "Open Now" [disabled]
+  - generic: Opening hours are not published for these nearby results yet.
+  - paragraph: Nearby stores have not loaded yet.
+  - text: FINDIT SHOPPING ASSISTANT
+  - heading "Plan, verify and track your shopping" [level=2]
+  - paragraph: Verified data first. FindIt does not guess prices, stock, phone numbers or opening hours.
+  - button "+ Add current item"
+  - button "Watch item"
+  - button "Scan barcode"
+  - generic "Check nearby stores"
+  - paragraph: Nearby store details will appear after FindIt locates retailers.
+  - generic "Shopping List + Trip Planner"
+  - strong: Korg Pitchclip 2 clip-on tuner
+  - button "Remove"
+  - strong: Online-only plan
+  - generic: "Online-only plan: no physical branch coordinates are verified for these offers, so FindIt will not pretend this is a driving trip."
+  - button "Best overall"
+  - button "Cheapest"
+  - paragraph: 1 online retailer · R 345,00
+  - paragraph: 1. Marshall Music Korg Pitchclip 2 clip-on tuner
+  - text: No physical branch coordinates are verified for these offers. These are online retailer prices; a store trip needs separately verified branch price and stock.
+  - paragraph: No physical branch coordinates are verified, so FindIt will not pretend this is a driving trip.
+  - button "Clear list"
+  - generic "Watch List + Price History"
+  - button "Enable notifications"
+  - generic: 0 new alerts
+  - strong: Korg Pitchclip 2 clip-on tuner
+  - generic: "Last verified: R 345,00 · Marshall Music"
+  - generic: 1 checks · low R 345,00 · high R 345,00
+  - button "Stop watching"
+  - paragraph: Watch Item checks refreshed verified data while FindIt is open. True background alerts while the site is closed require a server notification service, so FindIt does not pretend they are active yet.
+  - generic: Results for your image
+  - generic: Korg Pitchclip 2 clip-on tuner
+  - generic: product
+  - button "♡ Save"
+  - button "⇄ Compare"
+  - heading "Nearby Stores" [level=2]
+  - button "☷ Filter"
+  - button "View all"
+  - generic: ●
+  - generic: Real store pins appear after relevant nearby results are found.
+  - generic: Choose a search location to find nearby retailers.
+  - article:
+    - generic: ◇
+    - generic: Deals Near You
+    - generic: See verified retailer offers when available.
+    - button "View Deals →"
+  - article:
+    - generic: ♡
+    - generic: Saved Items
+    - generic: Open the Finds you saved on this device.
+    - button "View Saved →"
+  - article:
+    - generic: ↗
+    - generic: Price History
+    - generic: See verified price observations when available.
+    - button "View History →"
+  - article:
+    - generic: ✦
+    - generic: Suggest a Feature
+    - generic: Tell us what FindIt should build next.
+    - button "Send Idea →"
+- complementary:
+  - generic: ▧
+  - generic: Product confirmed by search
+  - heading "Korg Pitchclip 2 clip-on tuner" [level=2]
+  - paragraph: product
+  - paragraph: KORG Pitchclip 2 compact clip-on tuner with accurate ±1 cent tuning, clear LED display, improved low-frequency detection and secure rubberised clip.
+  - generic: Search confirmed
+  - generic: Best verified price
+  - strong: R 345,00
+  - generic: FindIt won’t guess a price.
+  - generic: What we found
+  - generic: 1 retailer listing found
+  - button "ⓘ Product Info":
+    - text: ⓘ
+    - generic: Product Info
+  - button "⇄ Compare Prices":
+    - text: ⇄
+    - generic: Compare Prices
+  - button "⌖ Nearby Stores":
+    - text: ⌖
+    - generic: Nearby Stores
+  - button "✦ Ask FindIt":
+    - text: ✦
+    - generic: Ask FindIt
+  - heading "Top Stores" [level=2]
+  - button "View all"
+  - paragraph: "Verified product listings:"
+  - link "Marshall Music R 345,00 · Online in stock · Branch stock not verified":
+    - /url: https://www.marshallmusic.co.za/product/korg-pitchclip-2-clip-on-tuner/
+    - text: Marshall Music
+    - generic: R 345,00 · Online in stock · Branch stock not verified
+- banner:
+  - link "F FindIt Nearby":
+    - /url: "#home"
+    - generic: F
+    - generic: FindIt Nearby
+  - navigation:
+    - link "Find":
+      - /url: "#finder"
+    - link "How it works":
+      - /url: "#how"
+    - link "Examples":
+      - /url: "#examples"
+    - link "Feedback":
+      - /url: "#feedback"
+  - button "☰"
+- complementary:
+  - generic: F
+  - generic: FindIt Nearby
+  - button: ×
+- main:
+  - generic: ★ PREMIUM • START SEARCHING
+  - heading "What are you looking for?" [level=2]
+  - paragraph: Use a clear photo. Logos, labels and model text help FindIt be more precise.
+  - generic: Radius
+  - combobox "Radius":
+    - option "3 km"
+    - option "5 km"
+    - option "10 km" [selected]
+    - option "15 km"
+    - option "25 km"
+  - generic: 📸
+  - strong: Drop or choose a photo
+  - generic: Gallery • Camera • Files
+  - generic: No need to know the name. Just show us.
+  - button "Upload product photo"
+  - button "Choose File"
+  - button "🖼️ Gallery / Files"
+  - button "📷 Take photo"
+  - button "📍 Use my location"
+  - button "✨ Identify & Find" [disabled]
+  - paragraph: Product search complete. Prices and stock require verified retailer evidence.
+  - paragraph: TRY FINDIT WITH…
+  - heading "Ordinary. Unusual. Anything in-between." [level=2]
+  - button "Shuffle ↻"
+  - button "🎮 Controller Try something like this":
+    - generic: 🎮
+    - strong: Controller
+    - generic: Try something like this
+  - button "🔧 Tool Try something like this":
+    - generic: 🔧
+    - strong: Tool
+    - generic: Try something like this
+  - button "💄 Makeup Try something like this":
+    - generic: 💄
+    - strong: Makeup
+    - generic: Try something like this
+  - button "🎒 Backpack Try something like this":
+    - generic: 🎒
+    - strong: Backpack
+    - generic: Try something like this
+  - button "🔌 Charger Try something like this":
+    - generic: 🔌
+    - strong: Charger
+    - generic: Try something like this
+  - button "☕ Hot chocolate Try something like this":
+    - generic: ☕
+    - strong: Hot chocolate
+    - generic: Try something like this
+  - paragraph: HOW IT WORKS
+  - heading "Three simple steps." [level=2]
+  - article:
+    - text: "01"
+    - generic: 📸
+    - heading "Show It" [level=3]
+    - paragraph: Take or upload a photo of the item you want.
+  - article:
+    - text: "02"
+    - generic: ✨
+    - heading "Find It" [level=3]
+    - paragraph: FindIt checks visible product details. Clear labels and model text improve identification.
+  - article:
+    - text: "03"
+    - generic: 📍
+    - heading "Get It" [level=3]
+    - paragraph: FindIt looks for relevant consumer retailers close to you.
+  - paragraph: FINDIT CHALLENGE
+  - heading "Think FindIt can’t identify it? 👀" [level=2]
+  - paragraph: Find the weirdest object around you and put FindIt to the test.
+  - button "🎲 Give me a challenge"
+  - paragraph: RECENT
+  - heading "Recent finds" [level=2]
+  - button "Clear"
+  - paragraph: FEEDBACK
+  - heading "Help make FindIt better." [level=2]
+  - generic: Have an idea for FindIt?
+  - generic: Send a feature request separately from normal feedback.
+  - button "✦ Suggest a Feature"
+  - generic: Tell us what worked, report a problem, or suggest what FindIt should build next.
+  - text: Feedback type
+  - combobox "Feedback type":
+    - option "General feedback" [selected]
+    - option "Wrong identification"
+    - option "Nearby store / location problem"
+    - option "Price or stock problem"
+    - option "💡 Suggest a feature"
+  - strong: 💡 Have an idea for FindIt?
+  - generic: Suggest a feature and tell us what would make FindIt more useful.
+  - button "Suggest a feature"
+  - group "Rating":
+    - generic: Rating
+    - generic "Choose a rating from 1 to 5 stars":
+      - button "1 star": ★
+      - button "2 stars": ★
+      - button "3 stars": ★
+      - button "4 stars": ★
+      - button "5 stars": ★
+    - combobox
+  - text: Message
+  - textbox "Message":
+    - /placeholder: What worked? What should improve?
+  - checkbox "Include basic technical details to help us fix bugs" [checked]
+  - text: Include basic technical details to help us fix bugs
+  - button "Send feedback"
+  - button "Copy"
+  - paragraph
+- contentinfo:
+  - generic: F
+  - generic: FindIt Nearby
+  - paragraph: © 2026 Bernard Brummer — FindIt Nearby. All rights reserved.
+  - text: Nearby retailer ≠ verified exact-item stock.
+- button "✦ Ask FindIt"
+- generic: Item added to Watch List
+- dialog "Deals":
+  - button "Close" [active]: ×
+  - heading "Deals" [level=2]
+  - paragraph: Verified exact-product results from your current Find. FindIt does not guess missing prices or branch stock.
+  - generic: 1 retailer with a verified/current price.
+  - heading "Current online prices" [level=3]
+  - generic: Marshall MusicKORG Pitchclip 2 Clip-On Tuner · In stock online
+  - text: R 345,00
+  - link "View product":
+    - /url: https://www.marshallmusic.co.za/product/korg-pitchclip-2-clip-on-tuner/
+  - heading "Nearby retailers" [level=3]
+  - generic: No nearby retailer locations are available yet.

@@ -1,0 +1,1691 @@
+{
+  "startedVersion": {
+    "status": 200,
+    "data": {
+      "commit": "b7896c97515358ec86bd38489af0ad8586237dcc",
+      "platform": "cloudflare"
+    }
+  },
+  "endVersion": {
+    "status": 200,
+    "data": {
+      "commit": "b7896c97515358ec86bd38489af0ad8586237dcc",
+      "platform": "cloudflare"
+    }
+  },
+  "versionStable": true,
+  "checkedAt": "2026-10-19T15:51:16.182126+00:00",
+  "results": [
+    {
+      "category": "electronics",
+      "path": "/workspace/scratch/82322af24170/varied-photos/electronics.jpg",
+      "page": "https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology",
+      "imageUrl": "http://computermania.co.za/cdn/shop/files/logitech_981_000817_g_pro_x_wired_1502157.jpg?v=1694695213",
+      "photo": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Logitech headphones",
+            "brand": "Logitech",
+            "model": "",
+            "object": "headphones",
+            "category": "electronics",
+            "retailCategory": "electronics",
+            "searchQuery": "Logitech headphones",
+            "barcode": null,
+            "size": "",
+            "color": "",
+            "visibleText": [],
+            "confidence": 0.65,
+            "identificationMethod": "independent-vision-consensus",
+            "userConfirmed": false,
+            "labelCandidates": [],
+            "suggestedLabel": "",
+            "suggestedModels": [
+              {
+                "name": "Logitech G Pro X",
+                "confirmed": false,
+                "source": "visual-model-hypothesis"
+              },
+              {
+                "name": "Logitech G gaming headset",
+                "confirmed": false,
+                "source": "visual-model-hypothesis"
+              }
+            ],
+            "identityScope": "product-family",
+            "requiresModelConfirmation": true,
+            "unverifiedDetails": [
+              "exact model",
+              "variant",
+              "specifications"
+            ],
+            "features": []
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": false,
+          "identitySource": "cloudflare-consensus",
+          "visionDiagnostics": [
+            {
+              "provider": "cloudflare-gemma",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "G Pro X Gaming Headset",
+                "brand": "Logitech",
+                "model": "G Pro X",
+                "object": "headset",
+                "size": "",
+                "color": "black",
+                "visibleText": []
+              },
+              "errorType": null
+            },
+            {
+              "provider": "google-gemini",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "Logitech G Gaming Headset",
+                "brand": "Logitech G",
+                "model": "",
+                "object": "Headphones",
+                "size": "",
+                "color": "",
+                "visibleText": [
+                  "G"
+                ]
+              },
+              "errorType": null
+            },
+            {
+              "provider": "cloudflare-workers-ai",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "Logitech G",
+                "brand": "Logitech",
+                "model": "G gaming headset",
+                "object": "product",
+                "size": "",
+                "color": "",
+                "visibleText": [
+                  "Gaming Headset",
+                  "Logitech"
+                ]
+              },
+              "errorType": null
+            },
+            {
+              "provider": "huggingface",
+              "code": "HF_INFERENCE_FAILED",
+              "providerStatus": 402,
+              "providerErrorCode": null,
+              "identityClaim": null,
+              "errorType": "credits"
+            }
+          ],
+          "visualVerification": true,
+          "provider": "cloudflare-consensus",
+          "imageAccepted": true,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "confidence": 0.65,
+          "code": "PHOTO_PARTIALLY_IDENTIFIED",
+          "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "offers": [],
+          "retailerStatus": [
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "requiresModelConfirmation": true,
+          "message": "Confirm the exact model before matching product prices or stock."
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "identityScope": "product-family",
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "sources": [],
+          "possibleProducts": [],
+          "candidateChecks": [
+            {
+              "host": "www.geewiz.co.za",
+              "status": 200
+            },
+            {
+              "host": "www.geewiz.co.za",
+              "status": 200
+            },
+            {
+              "host": "www.geewiz.co.za",
+              "status": 200
+            },
+            {
+              "host": "www.hificorp.co.za",
+              "status": 200
+            }
+          ],
+          "message": "Recognised Logitech headphones. Confirm the exact model or label for product-specific facts; no specifications have been guessed."
+        }
+      }
+    },
+    {
+      "category": "clothing",
+      "path": "/workspace/scratch/82322af24170/varied-photos/clothing.jpg",
+      "page": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2",
+      "imageUrl": "http://www.levi.co.za/cdn/shop/files/b656875f49830c1dfd13d79892cdaa03.jpg?v=1786963292",
+      "photo": {
+        "status": 200,
+        "data": {
+          "identification": null,
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "visualVerification": false,
+          "provider": "cloudflare-consensus",
+          "imageAccepted": true,
+          "needsVision": false,
+          "requiresUserInput": true,
+          "retryable": true,
+          "confidence": null,
+          "visionDiagnostics": [
+            {
+              "provider": "cloudflare-gemma",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "shirt",
+                "brand": "",
+                "model": "",
+                "object": "shirt",
+                "size": "",
+                "color": "multicolor",
+                "visibleText": []
+              },
+              "errorType": null
+            },
+            {
+              "provider": "google-gemini",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "Men's Colorblocked Striped Short-Sleeve Button-Down Shirt",
+                "brand": "",
+                "model": "",
+                "object": "clothing",
+                "size": "",
+                "color": "",
+                "visibleText": []
+              },
+              "errorType": null
+            },
+            {
+              "provider": "cloudflare-workers-ai",
+              "code": "CF_AI_NO_JSON",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": null,
+              "errorType": null
+            },
+            {
+              "provider": "huggingface",
+              "code": "HF_INFERENCE_FAILED",
+              "providerStatus": 402,
+              "providerErrorCode": null,
+              "identityClaim": null,
+              "errorType": "credits"
+            }
+          ],
+          "code": "PHOTO_IDENTITY_UNCERTAIN",
+          "providerStatus": null,
+          "providerError": null,
+          "cloudflareReason": "PHOTO_IDENTITY_UNCERTAIN",
+          "cloudflareError": null,
+          "message": "The image service could not complete identification. Try again or enter the product name or barcode."
+        }
+      },
+      "commerce": {},
+      "research": {}
+    },
+    {
+      "category": "tools",
+      "path": "/workspace/scratch/82322af24170/varied-photos/tools.jpg",
+      "page": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger",
+      "imageUrl": "http://www.tmbsupplies.co.za/cdn/shop/files/GSB-18v-50-1_688x653_015db31d-b53a-408a-b6d3-6b28c3546563.webp?v=1716145384",
+      "photo": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Bosch drill",
+            "brand": "Bosch",
+            "model": "",
+            "object": "drill",
+            "category": "hardware",
+            "retailCategory": "hardware",
+            "searchQuery": "Bosch drill",
+            "barcode": null,
+            "size": "",
+            "color": "",
+            "visibleText": [],
+            "confidence": 0.65,
+            "identificationMethod": "independent-vision-consensus",
+            "userConfirmed": false,
+            "labelCandidates": [],
+            "suggestedLabel": "",
+            "suggestedModels": [
+              {
+                "name": "Bosch Professional 18V",
+                "confirmed": false,
+                "source": "visual-model-hypothesis"
+              }
+            ],
+            "identityScope": "product-family",
+            "requiresModelConfirmation": true,
+            "unverifiedDetails": [
+              "exact model",
+              "variant",
+              "specifications"
+            ],
+            "features": []
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": false,
+          "identitySource": "cloudflare-consensus",
+          "visionDiagnostics": [
+            {
+              "provider": "cloudflare-gemma",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "Professional Cordless Drill",
+                "brand": "Bosch",
+                "model": "Professional 18V",
+                "object": "drill",
+                "size": "",
+                "color": "blue, black, red",
+                "visibleText": []
+              },
+              "errorType": null
+            },
+            {
+              "provider": "google-gemini",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "Bosch Cordless Drill Kit",
+                "brand": "Bosch",
+                "model": "",
+                "object": "cordless drill kit",
+                "size": "",
+                "color": "",
+                "visibleText": [
+                  "BOSCH",
+                  "Professional",
+                  "18V"
+                ]
+              },
+              "errorType": null
+            },
+            {
+              "provider": "cloudflare-workers-ai",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "BOSCH Professional",
+                "brand": "BOSCH",
+                "model": "18V",
+                "object": "product",
+                "size": "",
+                "color": "",
+                "visibleText": [
+                  "BOSCH",
+                  "Professional",
+                  "18V"
+                ]
+              },
+              "errorType": null
+            },
+            {
+              "provider": "huggingface",
+              "code": "HF_INFERENCE_FAILED",
+              "providerStatus": 402,
+              "providerErrorCode": null,
+              "identityClaim": null,
+              "errorType": "credits"
+            }
+          ],
+          "visualVerification": true,
+          "provider": "cloudflare-consensus",
+          "imageAccepted": true,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "confidence": 0.65,
+          "code": "PHOTO_PARTIALLY_IDENTIFIED",
+          "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "offers": [],
+          "retailerStatus": [
+            {
+              "name": "Builders",
+              "searchUrl": "https://www.builders.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Leroy Merlin",
+              "searchUrl": "https://www.leroymerlin.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "BUCO",
+              "searchUrl": "https://www.buco.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Mica",
+              "searchUrl": "https://www.mica.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Builders",
+              "searchUrl": "https://www.builders.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Leroy Merlin",
+              "searchUrl": "https://www.leroymerlin.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "BUCO",
+              "searchUrl": "https://www.buco.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Mica",
+              "searchUrl": "https://www.mica.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "requiresModelConfirmation": true,
+          "message": "Confirm the exact model before matching product prices or stock."
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "identityScope": "product-family",
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "sources": [],
+          "possibleProducts": [
+            {
+              "name": "Bosch Professional | Cordless Drill GSB 18V-90 C + 2 x 5.0Ah Batt & Charger",
+              "identity": {
+                "requiresModelConfirmation": false,
+                "brand": "Bosch",
+                "model": "",
+                "name": "Bosch Professional | Cordless Drill GSB 18V-90 C + 2 x 5.0Ah Batt & Charger",
+                "object": "drill",
+                "category": "hardware",
+                "barcode": "",
+                "size": "",
+                "color": "",
+                "searchQuery": "Bosch Professional | Cordless Drill GSB 18V-90 C + 2 x 5.0Ah Batt & Charger",
+                "visibleText": [],
+                "features": [],
+                "suggestedLabel": "",
+                "userConfirmed": false
+              },
+              "productUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-90-c-2-x-5-0ah-batt-charger",
+              "photoMatchConfirmed": false,
+              "price": 11799,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "priceConditions": "",
+              "whatItDoes": "The GSB 18V-90 C Professional is a powerful cordless impact drill with a brushless motor that delivers top performance with 64Nm and 2,100rpm.",
+              "pros": [
+                "Its compact head length of 175mm provides perfect tool handiness.",
+                "The robust 13mm metal chuck ensures great torque transfer for every job.",
+                "The impact drill holds a very high level of tool control for both, increased user health and tool protection: The HMI offers switchable Kickback Control to reduce the risk of sudden rotational torque reaction in a bind-up scenario.",
+                "A switchable Precision Clutch stops the overriding once a preset torque level is reached and, thus, reduces the wear and tear of the clutch and the resulting noise."
+              ],
+              "cons": [],
+              "specifications": [
+                {
+                  "name": "Brand",
+                  "value": "Bosch",
+                  "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-90-c-2-x-5-0ah-batt-charger"
+                },
+                {
+                  "name": "SKU / product code",
+                  "value": "SKU 06019K6106",
+                  "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-90-c-2-x-5-0ah-batt-charger"
+                },
+                {
+                  "name": "Torque (soft/hard/max.)",
+                  "value": "36/64/Nm",
+                  "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-90-c-2-x-5-0ah-batt-charger"
+                },
+                {
+                  "name": "No-load speed (1st gear / 2nd gear)",
+                  "value": "0 \u2013 630 / 0 \u2013 2,100rpm",
+                  "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-90-c-2-x-5-0ah-batt-charger"
+                },
+                {
+                  "name": "Battery voltage",
+                  "value": "18.0V",
+                  "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-90-c-2-x-5-0ah-batt-charger"
+                },
+                {
+                  "name": "Chuck capacity, min./max.",
+                  "value": "1.5 / 13mm",
+                  "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-90-c-2-x-5-0ah-batt-charger"
+                },
+                {
+                  "name": "Weight excl. battery",
+                  "value": "1.2kg",
+                  "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-90-c-2-x-5-0ah-batt-charger"
+                },
+                {
+                  "name": "Torque settings",
+                  "value": "21",
+                  "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-90-c-2-x-5-0ah-batt-charger"
+                }
+              ],
+              "sources": [
+                {
+                  "title": "Bosch Professional | Cordless Drill GSB 18V-90 C + 2 x 5.0Ah Batt & Charger",
+                  "url": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-90-c-2-x-5-0ah-batt-charger"
+                }
+              ]
+            },
+            {
+              "name": "Bosch Professional | Cordless Drill GSB 180-LI + 1 x 2Ah Battery + GAL 18V-20 Charger + Case",
+              "identity": {
+                "requiresModelConfirmation": false,
+                "brand": "Bosch",
+                "model": "",
+                "name": "Bosch Professional | Cordless Drill GSB 180-LI + 1 x 2Ah Battery + GAL 18V-20 Charger + Case",
+                "object": "drill",
+                "category": "hardware",
+                "barcode": "",
+                "size": "",
+                "color": "",
+                "searchQuery": "Bosch Professional | Cordless Drill GSB 180-LI + 1 x 2Ah Battery + GAL 18V-20 Charger + Case",
+                "visibleText": [],
+                "features": [],
+                "suggestedLabel": "",
+                "userConfirmed": false
+              },
+              "productUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-180-li-1-x-2ah-battery-gal-18v-20-charger-case",
+              "photoMatchConfirmed": false,
+              "price": 2875,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "priceConditions": "",
+              "whatItDoes": "Durable: Designed with Robust Housing and Battery Cell Protection!",
+              "pros": [
+                "GSB 180-LI Cordless Drill - More Power.",
+                "1 x 2,0 Ah Li-ion battery.",
+                "GAL 18V-20 charger.",
+                "No-load speed (1st gear / 2nd gear)."
+              ],
+              "cons": [],
+              "specifications": [
+                {
+                  "name": "Brand",
+                  "value": "Bosch",
+                  "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-180-li-1-x-2ah-battery-gal-18v-20-charger-case"
+                },
+                {
+                  "name": "SKU / product code",
+                  "value": "SKU 06019F83K6",
+                  "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-180-li-1-x-2ah-battery-gal-18v-20-charger-case"
+                },
+                {
+                  "name": "Torque (soft/hard/max.)",
+                  "value": "21/54Nm",
+                  "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-180-li-1-x-2ah-battery-gal-18v-20-charger-case"
+                },
+                {
+                  "name": "No-load speed (1st gear / 2nd gear)",
+                  "value": "0 \u2013 500 / 0 \u2013 1,900rpm",
+                  "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-180-li-1-x-2ah-battery-gal-18v-20-charger-case"
+                },
+                {
+                  "name": "Battery type",
+                  "value": "Lithium-ion",
+                  "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-180-li-1-x-2ah-battery-gal-18v-20-charger-case"
+                },
+                {
+                  "name": "Max. impact rate",
+                  "value": "27,000bpm",
+                  "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-180-li-1-x-2ah-battery-gal-18v-20-charger-case"
+                },
+                {
+                  "name": "Chuck capacity, min./max.",
+                  "value": "1,5 / 13mm",
+                  "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-180-li-1-x-2ah-battery-gal-18v-20-charger-case"
+                },
+                {
+                  "name": "Torque settings",
+                  "value": "20+2",
+                  "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-180-li-1-x-2ah-battery-gal-18v-20-charger-case"
+                },
+                {
+                  "name": "Max. drilling diameter in wood",
+                  "value": "35mm",
+                  "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-180-li-1-x-2ah-battery-gal-18v-20-charger-case"
+                },
+                {
+                  "name": "Max. drilling diameter in steel",
+                  "value": "10mm",
+                  "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-180-li-1-x-2ah-battery-gal-18v-20-charger-case"
+                },
+                {
+                  "name": "Max. drilling diameter in masonry",
+                  "value": "10mm",
+                  "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-180-li-1-x-2ah-battery-gal-18v-20-charger-case"
+                },
+                {
+                  "name": "Max. screw diameter",
+                  "value": "10mm",
+                  "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-180-li-1-x-2ah-battery-gal-18v-20-charger-case"
+                }
+              ],
+              "sources": [
+                {
+                  "title": "Bosch Professional | Cordless Drill GSB 180-LI + 1 x 2Ah Battery + GAL 18V-20 Charger + Case",
+                  "url": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-180-li-1-x-2ah-battery-gal-18v-20-charger-case"
+                }
+              ]
+            }
+          ],
+          "candidateChecks": [
+            {
+              "host": "www.tmbsupplies.co.za",
+              "status": 200
+            },
+            {
+              "host": "www.tmbsupplies.co.za",
+              "status": 200
+            },
+            {
+              "host": "www.tmbsupplies.co.za",
+              "status": 200
+            },
+            {
+              "host": "www.tmbsupplies.co.za",
+              "status": 200
+            }
+          ],
+          "message": "A retailer product matches the possible label reading. Check its name against your photo before confirming."
+        }
+      }
+    },
+    {
+      "category": "toys",
+      "path": "/workspace/scratch/82322af24170/varied-photos/toys.jpg",
+      "page": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696",
+      "imageUrl": "http://lego-gybc.co.za/cdn/shop/files/Classic-Medium-Creative-Brick-Box-10696_001_prod_8f538b25-dcbc-463f-bc75-59c74cec8ad0.jpg?v=1761150696",
+      "photo": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "LEGO product",
+            "brand": "LEGO",
+            "model": "",
+            "object": "product",
+            "category": "toys",
+            "retailCategory": "toys",
+            "searchQuery": "LEGO product",
+            "barcode": null,
+            "size": "",
+            "color": "",
+            "visibleText": [],
+            "confidence": 0.5,
+            "identificationMethod": "independent-brand-consensus",
+            "userConfirmed": false,
+            "features": [],
+            "suggestedLabel": "",
+            "suggestedModels": [],
+            "labelCandidates": [],
+            "identityScope": "brand",
+            "requiresModelConfirmation": true,
+            "unverifiedDetails": [
+              "product type",
+              "exact model",
+              "size"
+            ]
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": false,
+          "identitySource": "cloudflare-consensus",
+          "visionDiagnostics": [
+            {
+              "provider": "cloudflare-gemma",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "building blocks set",
+                "brand": "LEGO",
+                "model": "",
+                "object": "building blocks set",
+                "size": "",
+                "color": "multicolor",
+                "visibleText": []
+              },
+              "errorType": null
+            },
+            {
+              "provider": "google-gemini",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "LEGO Classic Building Set",
+                "brand": "LEGO",
+                "model": "",
+                "object": "LEGO building toy set",
+                "size": "",
+                "color": "",
+                "visibleText": []
+              },
+              "errorType": null
+            },
+            {
+              "provider": "cloudflare-workers-ai",
+              "code": "CF_AI_NO_JSON",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": null,
+              "errorType": null
+            },
+            {
+              "provider": "huggingface",
+              "code": "HF_INFERENCE_FAILED",
+              "providerStatus": 402,
+              "providerErrorCode": null,
+              "identityClaim": null,
+              "errorType": "credits"
+            }
+          ],
+          "visualVerification": true,
+          "provider": "cloudflare-consensus",
+          "imageAccepted": true,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "confidence": 0.5,
+          "code": "PHOTO_PARTIALLY_IDENTIFIED",
+          "message": "Brand recognised; the product type and model still need confirmation. Review any possible label reading before choosing a product."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "offers": [],
+          "retailerStatus": [
+            {
+              "name": "Toys R Us",
+              "searchUrl": "https://www.toysrus.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Toys R Us",
+              "searchUrl": "https://www.toysrus.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "requiresModelConfirmation": true,
+          "message": "Confirm the exact model before matching product prices or stock."
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "identityScope": "product-family",
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "sources": [],
+          "possibleProducts": [],
+          "candidateChecks": [],
+          "message": "Recognised LEGO product. Confirm the exact model or label for product-specific facts; no specifications have been guessed."
+        }
+      }
+    },
+    {
+      "category": "furniture",
+      "path": "/workspace/scratch/82322af24170/varied-photos/furniture.jpg",
+      "page": "https://www.ikea.com/at/en/p/billy-bookcase-white-00263850/",
+      "imageUrl": "https://www.ikea.com/at/en/images/products/billy-bookcase-white__1590272_pe1038911_s5.jpg",
+      "photo": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "bookcase",
+            "brand": "",
+            "model": "",
+            "object": "bookcase",
+            "category": "home",
+            "retailCategory": "home",
+            "searchQuery": "bookcase",
+            "barcode": null,
+            "size": "",
+            "color": "white",
+            "visibleText": [],
+            "confidence": 0.65,
+            "identificationMethod": "independent-vision-consensus",
+            "userConfirmed": false,
+            "labelCandidates": [],
+            "suggestedLabel": "",
+            "suggestedModels": [],
+            "identityScope": "product-family",
+            "requiresModelConfirmation": true,
+            "unverifiedDetails": [
+              "exact model",
+              "variant",
+              "specifications"
+            ],
+            "features": []
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": false,
+          "identitySource": "cloudflare-consensus",
+          "visionDiagnostics": [
+            {
+              "provider": "cloudflare-gemma",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "bookshelf",
+                "brand": "",
+                "model": "",
+                "object": "bookshelf",
+                "size": "",
+                "color": "white",
+                "visibleText": []
+              },
+              "errorType": null
+            },
+            {
+              "provider": "google-gemini",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "White Bookcase",
+                "brand": "",
+                "model": "",
+                "object": "Bookshelf",
+                "size": "",
+                "color": "",
+                "visibleText": []
+              },
+              "errorType": null
+            },
+            {
+              "provider": "cloudflare-workers-ai",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "full printed product name",
+                "brand": "unknown",
+                "model": "unknown",
+                "object": "bookcase",
+                "size": "unknown",
+                "color": "white",
+                "visibleText": [
+                  "unknown",
+                  "unknown",
+                  "unknown",
+                  "unknown",
+                  "unknown",
+                  "unknown"
+                ]
+              },
+              "errorType": null
+            },
+            {
+              "provider": "huggingface",
+              "code": "HF_INFERENCE_FAILED",
+              "providerStatus": 402,
+              "providerErrorCode": null,
+              "identityClaim": null,
+              "errorType": "credits"
+            }
+          ],
+          "visualVerification": true,
+          "provider": "cloudflare-consensus",
+          "imageAccepted": true,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "confidence": 0.65,
+          "code": "PHOTO_PARTIALLY_IDENTIFIED",
+          "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "offers": [],
+          "retailerStatus": [
+            {
+              "name": "Mr Price Home",
+              "searchUrl": "https://www.mrphome.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Decofurn",
+              "searchUrl": "https://www.decofurnsa.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Weylandts",
+              "searchUrl": "https://www.weylandts.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Mr Price Home",
+              "searchUrl": "https://www.mrphome.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Decofurn",
+              "searchUrl": "https://www.decofurnsa.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Weylandts",
+              "searchUrl": "https://www.weylandts.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "requiresModelConfirmation": true,
+          "message": "Confirm the exact model before matching product prices or stock."
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "identityScope": "product-family",
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "sources": [],
+          "possibleProducts": [],
+          "candidateChecks": [],
+          "message": "Recognised bookcase. Confirm the exact model or label for product-specific facts; no specifications have been guessed."
+        }
+      }
+    },
+    {
+      "category": "groceries",
+      "path": "/workspace/scratch/82322af24170/varied-photos/groceries.jpg",
+      "page": "https://world.openfoodfacts.org/product/5449000000996",
+      "imageUrl": "https://images.openfoodfacts.org/images/products/544/900/000/0996/front_en.1129.400.jpg",
+      "photo": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Coca-Cola beverage",
+            "brand": "Coca-Cola",
+            "model": "",
+            "object": "beverage",
+            "category": "grocery",
+            "retailCategory": "grocery",
+            "searchQuery": "Coca-Cola beverage",
+            "barcode": null,
+            "size": "",
+            "color": "",
+            "visibleText": [],
+            "confidence": 0.65,
+            "identificationMethod": "independent-vision-consensus",
+            "userConfirmed": false,
+            "labelCandidates": [],
+            "suggestedLabel": "",
+            "suggestedModels": [
+              {
+                "name": "Coca-Cola Orijinal Tat",
+                "confirmed": false,
+                "source": "visual-model-hypothesis"
+              }
+            ],
+            "identityScope": "product-family",
+            "requiresModelConfirmation": true,
+            "unverifiedDetails": [
+              "exact model",
+              "variant",
+              "specifications"
+            ],
+            "features": []
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": false,
+          "identitySource": "cloudflare-consensus",
+          "visionDiagnostics": [
+            {
+              "provider": "cloudflare-gemma",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "Coca-Cola",
+                "brand": "Coca-Cola",
+                "model": "Orijinal Tat",
+                "object": "soft drink",
+                "size": "",
+                "color": "red",
+                "visibleText": []
+              },
+              "errorType": null
+            },
+            {
+              "provider": "google-gemini",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "Coca-Cola Coca-Cola soda can",
+                "brand": "Coca-Cola",
+                "model": "",
+                "object": "Coca-Cola soda can",
+                "size": "",
+                "color": "",
+                "visibleText": [
+                  "OR\u0130J\u0130NAL TAT",
+                  "Coca-Cola"
+                ]
+              },
+              "errorType": null
+            },
+            {
+              "provider": "cloudflare-workers-ai",
+              "code": "IDENTIFIED",
+              "providerStatus": null,
+              "providerErrorCode": null,
+              "identityClaim": {
+                "name": "Coca-Cola",
+                "brand": "Coca-Cola",
+                "model": "Original",
+                "object": "can",
+                "size": "12",
+                "color": "red",
+                "visibleText": [
+                  "Coca-Cola",
+                  "Original"
+                ]
+              },
+              "errorType": null
+            },
+            {
+              "provider": "huggingface",
+              "code": "HF_INFERENCE_FAILED",
+              "providerStatus": 402,
+              "providerErrorCode": null,
+              "identityClaim": null,
+              "errorType": "credits"
+            }
+          ],
+          "visualVerification": true,
+          "provider": "cloudflare-consensus",
+          "imageAccepted": true,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "confidence": 0.65,
+          "code": "PHOTO_PARTIALLY_IDENTIFIED",
+          "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "offers": [],
+          "retailerStatus": [
+            {
+              "name": "Checkers",
+              "searchUrl": "https://www.checkers.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Pick n Pay",
+              "searchUrl": "https://www.pnp.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Shoprite",
+              "searchUrl": "https://www.shoprite.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Woolworths",
+              "searchUrl": "https://www.woolworths.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Checkers",
+              "searchUrl": "https://www.checkers.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Pick n Pay",
+              "searchUrl": "https://www.pnp.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Shoprite",
+              "searchUrl": "https://www.shoprite.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Woolworths",
+              "searchUrl": "https://www.woolworths.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "requiresModelConfirmation": true,
+          "message": "Confirm the exact model before matching product prices or stock."
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "identityScope": "product-family",
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "sources": [],
+          "possibleProducts": [],
+          "candidateChecks": [],
+          "message": "Recognised Coca-Cola beverage. Confirm the exact model or label for product-specific facts; no specifications have been guessed."
+        }
+      }
+    },
+    {
+      "category": "attached-headset",
+      "path": "/workspace/scratch/82322af24170/images/images (4)(3).jpg",
+      "photo": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "headphones",
+            "brand": "",
+            "model": "",
+            "object": "headphones",
+            "category": "electronics",
+            "retailCategory": "electronics",
+            "searchQuery": "headphones",
+            "barcode": null,
+            "size": "",
+            "color": "",
+            "visibleText": [],
+            "confidence": 0.65,
+            "identificationMethod": "independent-vision-consensus",
+            "userConfirmed": false,
+            "labelCandidates": [],
+            "suggestedLabel": "",
+            "suggestedModels": [],
+            "identityScope": "product-family",
+            "requiresModelConfirmation": true,
+            "unverifiedDetails": [
+              "exact model",
+              "variant",
+              "specifications"
+            ],
+            "features": []
+          },
+          "offers": [],
+          "verified": false,
+          "visualVerification": true,
+          "imageAccepted": true,
+          "needsRetailerVerification": true,
+          "provider": "verified-visual-cache",
+          "code": "PHOTO_PARTIALLY_IDENTIFIED",
+          "message": "Brand or product type identified. Confirm the model to get exact product information."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "offers": [],
+          "retailerStatus": [
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "requiresModelConfirmation": true,
+          "message": "Confirm the exact model before matching product prices or stock."
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "identityScope": "product-family",
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "sources": [],
+          "possibleProducts": [],
+          "candidateChecks": [],
+          "message": "Recognised headphones. Confirm the exact model or label for product-specific facts; no specifications have been guessed."
+        }
+      }
+    },
+    {
+      "category": "attached-cream",
+      "path": "/workspace/scratch/82322af24170/images/WhatsApp Image 2026-08-09 at 17.56.07.jpeg",
+      "photo": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Sanofi topical cream",
+            "brand": "Sanofi",
+            "model": "",
+            "object": "topical cream",
+            "category": "beauty",
+            "retailCategory": "beauty",
+            "searchQuery": "Sanofi topical cream",
+            "barcode": null,
+            "size": "25 g",
+            "color": "",
+            "visibleText": [],
+            "confidence": 0.65,
+            "identificationMethod": "independent-vision-consensus",
+            "userConfirmed": false,
+            "labelCandidates": [],
+            "suggestedLabel": "",
+            "suggestedModels": [
+              {
+                "name": "Sanofi Anthisan Cream",
+                "confirmed": false,
+                "source": "visual-model-hypothesis"
+              },
+              {
+                "name": "Sanofi CREAM",
+                "confirmed": false,
+                "source": "visual-model-hypothesis"
+              }
+            ],
+            "identityScope": "product-family",
+            "requiresModelConfirmation": true,
+            "unverifiedDetails": [
+              "exact model",
+              "variant",
+              "specifications"
+            ],
+            "features": []
+          },
+          "offers": [],
+          "verified": false,
+          "visualVerification": true,
+          "imageAccepted": true,
+          "needsRetailerVerification": true,
+          "provider": "verified-visual-cache",
+          "code": "PHOTO_PARTIALLY_IDENTIFIED",
+          "message": "Brand or product type identified. Confirm the model to get exact product information."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "offers": [],
+          "retailerStatus": [
+            {
+              "name": "Clicks",
+              "searchUrl": "https://www.clicks.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Dis-Chem",
+              "searchUrl": "https://www.dischem.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Clicks",
+              "searchUrl": "https://www.clicks.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Dis-Chem",
+              "searchUrl": "https://www.dischem.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "requiresModelConfirmation": true,
+          "message": "Confirm the exact model before matching product prices or stock."
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "identityScope": "product-family",
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "sources": [],
+          "possibleProducts": [],
+          "candidateChecks": [],
+          "message": "Recognised Sanofi topical cream. Confirm the exact model or label for product-specific facts; no specifications have been guessed."
+        }
+      }
+    }
+  ]
+}

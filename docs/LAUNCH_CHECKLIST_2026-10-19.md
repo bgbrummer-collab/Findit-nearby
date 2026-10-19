@@ -1,5 +1,17 @@
 # FindIt Nearby — customer audit checkpoint, 19 October 2026
 
+## Later 19 October continuation — work remains active
+
+This section supersedes the earlier release/outcome statements below. Current verified frontend/backend code is `b6ad41a16178f06a074217e8c918063d6cbc5be0`;336 local Node checks pass. Full repair history and raw browser/source evidence: [continued evidence](launch-evidence-2026-10-19/README.md).
+
+The original cream photo now reaches a source-backed Anthisan Cream25g candidate without a typed name. After reviewing its visible label/size and the actual Dis-Chem page, the explicit confirmation button reaches the exact R76.99 ZAR offer. Compare preserves the published cash-only SEP/dispensing-fee caveat. Retailer barcode is source data; unseen strength/formula/barcode/colour/pack-count details are not photo-confirmed.12 relevant pharmacy branches, real contact/hours and Maps destination are verified in scoped tests; SKU-by-branch inventory remains unverified. The original headset still lacks reliable exact identification; latest actual-browser repeat is ongoing.
+
+Additional repairs include retailer duplicate-link discovery, scoped product attributes/price caveats, header labels, saved-photo refresh, reviewed brand confirmation, category routing, synchronized branch hours/timezone, zero-distance nearest answers, generic model-hypothesis restrictions, actual Open Now filtering, persistent A–Z/closest sorting, full verified product-content research and manufacturer/consumer-brand label preservation. The Korg retest now shows11 attributed specifications and published compatibility/strengths.
+
+Current copied control/state inventory:272 observed entries,43passed,2failed,6blocked,221untested. This remains an incomplete inventory, not272 unique controls or an exhaustive application pass. Current new failure: shopping subtotals/watch observations omit the dispensing-fee caveat. That repair and a stale-hours replacement-photo investigation are unfinished. Further photo/provider reliability, four typed categories without priced listings, identical-variant multi-retailer comparisons, device/accessibility/load/CPU tests and the remaining inventory are still open. No launch-ready claim. Supabase remains paused, payments/billing disabled.
+
+The earlier checkpoint below is retained as historical evidence.
+
 **NOT launch-ready. The exhaustive application audit is unfinished.** Continue from the latest remote main; do not discard historical failed runs or equate CI success with customer success.
 
 ## Production release

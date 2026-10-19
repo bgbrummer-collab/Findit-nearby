@@ -1,0 +1,230 @@
+- alertdialog "Cookie Notice":
+  - document:
+    - text: We use cookies to offer you a better experience. For further information on how we use cookies you can read our
+    - link "Cookie and privacy policy.":
+      - /url: https://www.dischem.co.za/site-privacy-policy
+    - generic: 
+- banner:
+  - img "better-rewards-card"
+  - strong: NEW
+  - text: "| Instant 10% discount"
+  - link "Join Better Rewards":
+    - /url: https://www.dischem.co.za/customer/account/create/
+    - strong: Join Better Rewards
+  - text: 
+  - link "Dischem Logo":
+    - /url: https://www.dischem.co.za/
+    - img "Dischem Logo"
+  - link "Shopping Cart 0 R 0.00":
+    - /url: https://www.dischem.co.za/checkout/cart/
+    - generic: Shopping Cart
+    - generic: "0"
+    - generic: R 0.00
+  - dialog "Shopping cart":
+    - text: 
+    - generic: Cart Total
+    - generic: R 0.00
+    - link "Checkout":
+      - /url: https://www.dischem.co.za/checkout/cart/
+    - strong: You have no items in your shopping cart.
+  - link "Skip to Content":
+    - /url: "#contentarea"
+  - list:
+    - generic: Hi, Guest
+    - generic: Sign In / Register
+    - text: or
+  - text: 
+  - generic: Search
+  - combobox " Search"
+  - generic: 
+  - button "Search" [disabled]:
+    - generic: Search
+  - link "331 Stores Find a Store":
+    - /url: https://www.dischem.co.za/stores/
+    - generic: 331 Stores
+    - generic: Find a Store
+  - text:  * * 
+  - group "Mobile navigation sections":
+    - list:
+      - link "Shop ":
+        - /url: https://www.dischem.co.za/shop-by-department
+        - text: Shop
+        - text: 
+      - text:                                                                      
+      - link "On Promotion":
+        - /url: https://www.dischem.co.za/on-promotion
+      - link "Brands A-Z":
+        - /url: https://www.dischem.co.za/featured-brands
+      - link "Better Rewards":
+        - /url: https://www.dischem.co.za/better-rewards
+      - link "Services ":
+        - /url: https://www.dischem.co.za/my-services
+        - text: Services
+        - text: 
+      - link "Financial Services ":
+        - /url: https://www.dischem.co.za/financial-services
+        - text: Financial Services
+        - text: 
+      - text:  
+      - link "Magazines ":
+        - /url: https://www.dischem.co.za/articles-to
+        - text: Magazines
+        - text: 
+- list:
+  - link "Home":
+    - /url: https://www.dischem.co.za/
+  - text: /
+  - strong: Anthisan Cream 25g
+- main:
+  - link "Skip to the end of the images gallery":
+    - /url: "#gallery-next-area"
+  - text: 
+  - img "Anthisan Cream 25g"
+  - text: 
+  - text: 
+  - link "Skip to the beginning of the images gallery":
+    - /url: "#gallery-prev-area"
+  - generic: ANTHISAN
+  - heading "Anthisan Cream 25g" [level=1]
+  - text: "Price:"
+  - generic: R 76.99
+  - 'link "Credit: from R8 per month "':
+    - /url: "#"
+  - generic: "disclaimer:"
+  - strong: Price shown is the Single Exit Price (SEP), a cash-only price that excludes the dispensing fee.
+  - link "Login to buy":
+    - /url: https://www.dischem.co.za/sso/redirect/logintobuy?sku=000000000000004023/
+    - generic: Login to buy
+  - generic: Available for Click & Collect
+  - generic: Delivery within
+  - generic: 3-5 days. T&Cs apply
+  - generic: 
+  - button "Add to list"
+  - link "Find in store":
+    - /url: "#"
+  - list
+  - group "Product information":
+    - button " Product Details" [expanded]
+    - generic " Product Details":
+      - link "Get more information on SAHPRA's website by clicking here":
+        - /url: https://medsinfo.sahpra.org.za/home
+    - button " More Info"
+    - text: 
+- list:
+  - heading "Sign In or Register an Account." [level=3]
+  - link "Sign In":
+    - /url: https://www.dischem.co.za/customer/account/login/
+    - generic: Sign In
+  - link "Register an Account":
+    - /url: https://www.dischem.co.za/register/account/lookup/
+    - generic: Register an Account
+  - heading "Benefits of having an Account" [level=3]
+  - list:
+    - listitem: Get instant discounts on 180+ brands with Better Rewards
+    - listitem: Get convenience through saved shipping and payment info
+    - listitem: Personalised browsing and shopping
+    - listitem: Easy tracking of your order history and status
+- list:
+  - paragraph:
+    - img "shipped"
+    - text: Free Delivery
+  - paragraph:
+    - img "secure-payment"
+    - text: Secure Payment
+  - paragraph:
+    - img "click-and-collect"
+    - text: Click & Collect
+- contentinfo:
+  - paragraph:
+    - link "Customer Service":
+      - /url: "#"
+  - list:
+    - link "Delivery Options":
+      - /url: https://www.dischem.co.za/delivery-options
+    - link "Payment Options":
+      - /url: https://www.dischem.co.za/payment-options
+    - link "Contact Us":
+      - /url: https://www.dischem.co.za/contact-us
+    - link "Ask an Expert":
+      - /url: https://www.dischem.co.za/askanexpert
+    - strong: Careline
+    - link "0860347243":
+      - /url: tel:0860347243
+  - paragraph:
+    - link "Legal":
+      - /url: "#"
+  - list:
+    - link "Terms & Conditions":
+      - /url: https://www.dischem.co.za/site-terms-and-conditions
+    - link "Privacy Policy":
+      - /url: https://www.dischem.co.za/site-privacy-policy
+    - link "Disclaimer":
+      - /url: https://www.dischem.co.za/site-disclaimer
+    - link "FAQ":
+      - /url: https://www.dischem.co.za/site-faqs
+    - link "PAIA and POPIA":
+      - /url: https://www.dischem.co.za/media/wysiwyg/pdf_files/DisChem%20paia%20and%20popia%20manual%20June%202024-final.pdf
+    - link "Mergers & Acquisitions":
+      - /url: "https://www.dischem.co.za/media/wysiwyg/pdf_files/Website%20Mergers%20and%20Acquisitions.pdf "
+  - paragraph:
+    - link "About":
+      - /url: "#"
+  - list:
+    - link "Investor Relations":
+      - /url: https://dischemgroup.com/
+    - link "About Dis-Chem":
+      - /url: https://www.dischem.co.za/about-dis-chem
+    - link "Careers":
+      - /url: https://dischem.simplify.hr/
+  - paragraph:
+    - link "Download Our App":
+      - /url: "#"
+  - list:
+    - link "App Store":
+      - /url: https://itunes.apple.com/za/app/dis-chem/id1226396951?mt=8
+      - img "App Store"
+    - link "Google Play":
+      - /url: https://play.google.com/store/apps/details?id=za.co.dischem
+      - img "Google Play"
+    - link "AppGallery":
+      - /url: https://appgallery.huawei.com/store/apps/details#/app/C101979111
+      - img "AppGallery"
+  - heading "Follow Us" [level=4]
+  - link "Facebook Social Icon":
+    - /url: https://www.facebook.com/Dischem/
+    - img "Facebook Social Icon"
+  - link "Twitter Social Icon":
+    - /url: https://twitter.com/Dischem
+    - img "Twitter Social Icon"
+  - link "Instagram Social Icon":
+    - /url: https://www.instagram.com/dischem_pharmacies
+    - img "Instagram Social Icon"
+  - link "WhatsApp Social Icon":
+    - /url: https://wa.me/message/CZHEF3MWMFTXI1
+    - img "WhatsApp Social Icon"
+  - link "Linkedin Social Icon":
+    - /url: https://www.linkedin.com/company/dis-chem-pharmacies/
+    - img "Linkedin Social Icon"
+  - link "Tiktok Social Icon":
+    - /url: https://www.tiktok.com/@dischem_pharmacies/
+    - img "Tiktok Social Icon"
+  - link "Youtube Social Icon":
+    - /url: https://www.youtube.com/user/DischemTV
+    - img "Youtube Social Icon"
+  - paragraph:
+    - strong: "*Sale prices shown on the Dis-Chem website are exclusive to the website and may vary from the prices set in your local Dis-Chem Store.*"
+  - separator
+  - img "PCI Logo"
+  - img "Mastercard Logo"
+  - img "American Express Logo"
+  - img "Visa Logo"
+  - img "Diners Club Logo"
+  - img "Discovery Miles Logo"
+  - img "Mobicred Logo"
+  - img "PayU Logo"
+  - img "OZOW Logo"
+  - img "PayFast Logo"
+  - img "RCS Logo"
+  - paragraph: Copyright © 2026 Dis-Chem Pharmacies. All rights reserved.
+- region "Klevu Search Container"
+- region "Klevu Personalisation Container"

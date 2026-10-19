@@ -1,0 +1,390 @@
+- dialog "Manage Consent":
+  - generic: Manage Consent
+  - button "Close dialog" [active]:
+  - generic: To provide the best experiences, we use technologies like cookies to store and/or access device information. Consenting to these technologies will allow us to process data such as browsing behavior or unique IDs on this site. Not consenting or withdrawing consent, may adversely affect certain features and functions.
+  - button "Accept"
+  - button "Deny"
+  - button "View preferences"
+  - list:
+    - link "Cookie Policy":
+      - /url: https://www.marshallmusic.co.za/cookie-policy-za/
+    - link "Privacy Policy":
+      - /url: https://www.marshallmusic.co.za/privacy-policy/
+- link "Skip to navigation":
+  - /url: "#menu-header-menu"
+- link "Skip to main content":
+  - /url: "#main-content"
+- banner:
+  - link "Site logo":
+    - /url: https://www.marshallmusic.co.za/
+  - search:
+    - textbox "Search":
+      - /placeholder: Search for products
+    - text: 
+    - button "Search ":
+      - generic: Search
+      - text: 
+  - heading "Call Us" [level=6]
+  - paragraph: +27 11 804 1362
+  - heading "Free Delivery On Orders" [level=6]
+  - paragraph:
+    - link "Over R500 in Gauteng and Over R1000 nationwide.":
+      - /url: https://www.marshallmusic.co.za/delivery-return/
+  - text:  
+  - navigation "Main navigation":
+    - list:
+      - link "Instruments Instruments ":
+        - /url: https://www.marshallmusic.co.za/product-category/musical-instruments/
+        - img "Instruments"
+        - generic: Instruments
+        - text: 
+      - link "Recording Recording ":
+        - /url: https://www.marshallmusic.co.za/product-category/studio-recording/
+        - img "Recording"
+        - generic: Recording
+        - text: 
+      - link "Live Sound Live Sound ":
+        - /url: https://www.marshallmusic.co.za/product-category/live-sound/
+        - img "Live Sound"
+        - generic: Live Sound
+        - text: 
+      - link "DJ Gear DJ Gear ":
+        - /url: https://www.marshallmusic.co.za/product-category/dj-gear/
+        - img "DJ Gear"
+        - generic: DJ Gear
+        - text: 
+      - link "Headphones Headphones ":
+        - /url: https://www.marshallmusic.co.za/product-category/headphones/
+        - img "Headphones"
+        - generic: Headphones
+        - text: 
+      - link "Books Books ":
+        - /url: https://www.marshallmusic.co.za/product-category/books/
+        - img "Books"
+        - generic: Books
+        - text: 
+      - link "Merch Merch ":
+        - /url: https://www.marshallmusic.co.za/product-category/merch/
+        - img "Merch"
+        - generic: Merch
+        - text: 
+      - link "Clearance Clearance ":
+        - /url: https://www.marshallmusic.co.za/product-category/clearance/
+        - img "Clearance"
+        - generic: Clearance
+        - text: 
+      - link "Contact":
+        - /url: https://www.marshallmusic.co.za/contact/
+        - generic: Contact
+  - link "":
+    - /url: https://www.marshallmusic.co.za/my-account/
+    - generic: 
+  - generic "My Wishlist":
+    - link " 0":
+      - /url: https://www.marshallmusic.co.za/wishlist/
+      - text: 
+      - generic: "0"
+  - link " 0 R0.00":
+    - /url: https://www.marshallmusic.co.za/cart/
+    - text: 
+    - generic: "0"
+    - generic: R0.00
+  - text:  
+- main:
+  - navigation "Breadcrumb":
+    - link "Home":
+      - /url: https://www.marshallmusic.co.za
+    - generic: /
+    - link "Musical Instruments":
+      - /url: https://www.marshallmusic.co.za/product-category/musical-instruments/
+    - generic: /
+    - link "Guitar Department":
+      - /url: https://www.marshallmusic.co.za/product-category/musical-instruments/guitar-department/
+    - generic: /
+    - link "Guitar Accessories":
+      - /url: https://www.marshallmusic.co.za/product-category/musical-instruments/guitar-department/guitar-accessories/
+    - generic: /
+    - link "Guitar Tuners":
+      - /url: https://www.marshallmusic.co.za/product-category/musical-instruments/guitar-department/guitar-accessories/guitar-tuners/
+    - generic: /
+    - generic: KORG Pitchclip 2 Clip-On Tuner
+  - link "Previous product":
+    - /url: https://www.marshallmusic.co.za/product/tc-electronic-unitune-clip-clip-on-chromatic-tuner-noir/
+    - text: 
+  - link " Back to products":
+    - /url: https://www.marshallmusic.co.za/shop/
+    - text: 
+    - generic: Back to products
+  - link "Next product":
+    - /url: https://www.marshallmusic.co.za/product/tc-electronic-polytune-clip-clip-on-polyphonic-tuner/
+    - text: 
+  - generic: "-23%"
+  - figure:
+    - group "1 / 3":
+      - figure:
+        - link "KORG Pitchclip 2 Clip-On Tuner - Image 1":
+          - /url: https://www.marshallmusic.co.za/wp-content/uploads/2026/05/KAT002.jpg
+          - img "KORG Pitchclip 2 Clip-On Tuner - Image 1"
+    - group "2 / 3":
+      - figure:
+        - link "KORG Pitchclip 2 Clip-On Tuner - Image 2":
+          - /url: https://www.marshallmusic.co.za/wp-content/uploads/2026/05/KAT0021.gif
+          - img "KORG Pitchclip 2 Clip-On Tuner - Image 2"
+    - group "3 / 3":
+      - figure:
+        - link "KORG Pitchclip 2 Clip-On Tuner - Image 3":
+          - /url: https://www.marshallmusic.co.za/wp-content/uploads/2026/05/KAT0022.jpg
+          - img "KORG Pitchclip 2 Clip-On Tuner - Image 3"
+  - button "Previous slide" [disabled]:
+    - generic: 
+  - button "Next slide":
+    - generic: 
+  - link " Click to enlarge":
+    - /url: "#"
+    - generic: 
+    - generic: Click to enlarge
+  - group "1 / 3":
+    - img "KORG Pitchclip 2 Clip-On Tuner"
+  - group "2 / 3":
+    - img "KORG Pitchclip 2 Clip-On Tuner - Image 2"
+  - group "3 / 3":
+    - img "KORG Pitchclip 2 Clip-On Tuner - Image 3"
+  - button "Previous slide" [disabled]:
+    - generic: 
+  - button "Next slide" [disabled]:
+    - generic: 
+  - heading "KORG Pitchclip 2 Clip-On Tuner" [level=1]
+  - paragraph: KORG Pitchclip 2 compact clip-on tuner with accurate ±1 cent tuning, clear LED display, improved low-frequency detection and secure rubberised clip. Ideal for guitar, bass, ukulele and other stringed instruments.
+  - generic: "SKU: XTMT-KAT002"
+  - paragraph:
+    - deletion:
+      - generic: R450.00
+    - generic: "Original price was: R450.00."
+    - insertion:
+      - generic: R345.00
+    - generic: "Current price is: R345.00."
+  - paragraph:
+    - generic: 1 in stock
+  - text: "Credit Amount: R33 per month"
+  - link "Sign up with Mobicred":
+    - /url: https://mobicred.co.za/customer/mobicred/register?merchantID=&returnUrl=https://www.marshallmusic.co.za
+    - img "Sign up with Mobicred"
+  - img "Payflex Logo"
+  - paragraph: Buy now. Pay later. 0% interest.
+  - paragraph:
+    - text: Choose your payment plan, and pay from as little as R86.25 today.
+    - link "Learn more":
+      - /url: "#"
+  - button "Add to cart"
+  - button "Buy now"
+  - link "Send WhatsApp":
+    - /url: https://wa.me/27645104503?text=Hi%20there%20Marshall%20Music%2C%20I%20am%20interested%20or%20need%20more%20information%20on%20this%20product%20please%3A%20KORG%20Pitchclip%202%20Clip-On%20Tuner%20-%20https%3A%2F%2Fwww.marshallmusic.co.za%2Fproduct%2Fkorg-pitchclip-2-clip-on-tuner%2F
+    - text: Send WhatsApp
+  - link " Compare":
+    - /url: https://www.marshallmusic.co.za/product/korg-pitchclip-2-clip-on-tuner/?product_id=280979
+    - generic:  
+    - generic: Compare
+  - link " Add to wishlist":
+    - /url: https://www.marshallmusic.co.za/wishlist/
+    - generic:  
+    - generic: Add to wishlist
+  - generic: "Share:"
+  - link "Facebook social link":
+    - /url: https://www.facebook.com/sharer/sharer.php?u=https://www.marshallmusic.co.za/product/korg-pitchclip-2-clip-on-tuner/
+    - generic: 
+  - link "X social link":
+    - /url: https://x.com/share?url=https://www.marshallmusic.co.za/product/korg-pitchclip-2-clip-on-tuner/
+    - generic: 
+  - link "Pinterest social link":
+    - /url: https://pinterest.com/pin/create/button/?url=https://www.marshallmusic.co.za/product/korg-pitchclip-2-clip-on-tuner/&media=https://www.marshallmusic.co.za/wp-content/uploads/2026/05/KAT002.jpg&description=KORG%20Pitchclip%202%20Clip-On%20Tuner
+    - generic: 
+  - link "Linkedin social link":
+    - /url: https://www.linkedin.com/shareArticle?mini=true&url=https://www.marshallmusic.co.za/product/korg-pitchclip-2-clip-on-tuner/
+    - generic: 
+  - link "Telegram social link":
+    - /url: https://telegram.me/share/url?url=https://www.marshallmusic.co.za/product/korg-pitchclip-2-clip-on-tuner/
+    - generic: 
+  - list:
+    - generic: Pick up from Marshall Music Woodmead Store
+  - paragraph: To pick up today
+  - paragraph: Free
+  - list:
+    - generic: Free Gauteng Delivery
+  - paragraph: Free delivery in Gauteng for orders over R500
+  - paragraph: 1-2 Days
+  - paragraph: Free
+  - list:
+    - generic: Free Nationwide Delivery
+  - paragraph: Free delivery nationwide for orders over R1000
+  - paragraph: 2-3 Days
+  - paragraph: Free
+  - list:
+    - generic: Courier Guy Kiosk or Locker
+  - paragraph: Specify Courier Guy Kiosk or Locker on checkout.
+  - paragraph: 2-3 Days
+  - heading "Description" [level=4]
+  - heading "KORG Pitchclip 2 Clip-On Tuner" [level=1]
+  - paragraph: The KORG Pitchclip 2 is a compact and accurate clip-on tuner designed for fast, easy tuning on the go. Simply attach it to the headstock of your instrument, switch it on and play a string to see the pitch difference clearly on the LED display.
+  - paragraph: The Pitchclip 2 features improved detection accuracy, particularly in the low-frequency range, making it suitable for guitars, basses and other compatible stringed instruments. Its enhanced clip provides improved holding power, while the rubberised grip helps protect the instrument’s finish. The display can also be vertically inverted, making the tuner convenient for left-handed players or for mounting on the rear of a headstock.
+  - heading "KORG Pitchclip 2 Clip-On Tuner Features" [level=2]
+  - list:
+    - listitem: Compact and stylish clip-on design
+    - listitem: Simple, easy-to-read LED display
+    - listitem: Adjustable display with 120-degree viewing angle
+    - listitem: Improved low-frequency detection accuracy
+    - listitem: Enhanced clip with 140% greater holding power compared with the previous model
+    - listitem: Rubberised clip grip helps protect the instrument
+    - listitem: Suitable for guitars, basses, ukuleles and other stringed instruments
+    - listitem: Reverse display function for left-handed players and alternative mounting positions
+    - listitem: Detection range from A0 to C8
+    - listitem: High tuning accuracy of ±1 cent
+    - listitem: Approximately 24 hours of battery life
+    - listitem: Automatic power-off after approximately three minutes without detected sound
+  - heading "Tech Specs" [level=2]
+  - paragraph:
+    - strong: Model
+    - text: ": Pitchclip 2"
+    - strong: Tuning
+    - strong: System
+    - text: ": 12-note equal temperament"
+    - strong: Detection
+    - strong: Range
+    - text: ": A0 (27.5 Hz) – C8 (4186 Hz)"
+    - strong: Detection
+    - strong: Accuracy
+    - text: ": ±1 cent"
+    - strong: Power
+    - strong: Supply
+    - text: ": 1 x CR2032 lithium battery"
+    - strong: Battery
+    - strong: Life
+    - text: ": Approximately 24 hours (A4 input)"
+    - strong: Auto
+    - strong: Power-Off
+    - text: ": Approximately 3 minutes without sound detection"
+    - strong: Display
+    - text: ": LED"
+    - strong: Accessories
+    - text: ": 1 x CR2032 lithium battery"
+  - paragraph:
+    - text: Learn more about
+    - link "Korg":
+      - /url: https://www.korg.com/za/
+  - paragraph:
+    - text: View more Korg at
+    - link "Marshall Music":
+      - /url: https://www.marshallmusic.co.za/?s=korg&post_type=product
+  - paragraph:
+    - strong: Why Buy From Marshall Music
+  - paragraph: At Marshall Music, we’re all passionate and highly experienced musicians that love what we do. Family run and family owned for over 35 years, we stock a huge variety of the very best brands in the world of musical instruments, music technology, professional audio and accessories. At Marshall Music, you’ll get the right advice – exactly what you need to make the best possible purchasing decision. We’ll do all we can to make sure you get the right thing at the right price as efficiently as possible – leaving you with a smile on your face!
+- contentinfo:
+  - heading "Trading Hours" [level=4]
+  - paragraph: "Monday - Friday: 9h00 - 17h00"
+  - paragraph: "Saturday: 09h00 - 13h00"
+  - paragraph: "Sunday: Closed"
+  - paragraph: "Public Holidays: 09h00 - 13h00"
+  - heading "Contact Information" [level=4]
+  - paragraph: Woodmead Commercial Park
+  - paragraph: 17 Waterval Crescent
+  - paragraph: Woodmead
+  - paragraph: "2192"
+  - paragraph: (011) 804 1362
+  - paragraph: info@marshallmusic.co.za
+  - heading "Information" [level=4]
+  - paragraph: Brands
+  - paragraph: Our Partners
+  - paragraph:
+    - link "Contact Us":
+      - /url: https://www.marshallmusic.co.za/contact/
+  - heading "Information" [level=4]
+  - paragraph:
+    - link "Privacy Policy":
+      - /url: https://www.marshallmusic.co.za/privacy-policy/
+  - paragraph:
+    - link "Terms & Conditions":
+      - /url: https://www.marshallmusic.co.za/terms_conditions/
+  - paragraph:
+    - link "Delivery & Return":
+      - /url: https://www.marshallmusic.co.za/delivery-return/
+  - strong: Marshall Music
+  - text: © 2026
+- link "Scroll to top button":
+  - /url: "#"
+  - text: 
+- navigation "Mobile navigation":
+  - list:
+    - link "Menu":
+      - /url: "#"
+      - generic: Menu
+    - link "Categories":
+      - /url: "#"
+      - generic: Categories
+  - list:
+    - link "Instruments Instruments":
+      - /url: https://www.marshallmusic.co.za/product-category/musical-instruments/
+      - img "Instruments"
+      - generic: Instruments
+    - text:                            
+    - generic: 
+    - link "Recording Recording":
+      - /url: https://www.marshallmusic.co.za/product-category/studio-recording/
+      - img "Recording"
+      - generic: Recording
+    - generic: 
+    - link "Live Sound Live Sound":
+      - /url: https://www.marshallmusic.co.za/product-category/live-sound/
+      - img "Live Sound"
+      - generic: Live Sound
+    - text:      
+    - generic: 
+    - link "DJ Gear DJ Gear":
+      - /url: https://www.marshallmusic.co.za/product-category/dj-gear/
+      - img "DJ Gear"
+      - generic: DJ Gear
+    - generic: 
+    - link "Headphones Headphones":
+      - /url: https://www.marshallmusic.co.za/product-category/headphones/
+      - img "Headphones"
+      - generic: Headphones
+    - text: 
+    - generic: 
+    - link "Books Books":
+      - /url: https://www.marshallmusic.co.za/product-category/books/
+      - img "Books"
+      - generic: Books
+    - generic: 
+    - link "Merch Merch":
+      - /url: https://www.marshallmusic.co.za/product-category/merch/
+      - img "Merch"
+      - generic: Merch
+    - generic: 
+    - link "Clearance Clearance":
+      - /url: https://www.marshallmusic.co.za/product-category/clearance/
+      - img "Clearance"
+      - generic: Clearance
+    - generic: 
+    - link "Contact":
+      - /url: https://www.marshallmusic.co.za/contact/
+      - generic: Contact
+  - text:                                           
+- complementary "Shopping cart sidebar":
+  - generic: Shopping cart
+  - link " Close":
+    - /url: "#"
+    - generic: 
+    - generic: Close
+- complementary "Login sidebar":
+  - generic: Sign in
+  - link " Close":
+    - /url: "#"
+    - generic: 
+    - generic: Close
+  - text: 
+  - text: 
+  - paragraph: No account yet?
+  - link "Create an Account":
+    - /url: https://www.marshallmusic.co.za/my-account/?action=register
+- text:   
+- generic: desktop
+- status
+- button "Chat with us on WhatsApp":

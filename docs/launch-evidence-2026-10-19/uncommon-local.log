@@ -1,0 +1,3 @@
+NATIVE_SEARCH_PROBE {"chars":529,"containsPitchclip":false,"containsProduct":true}
+NATIVE_DISCOVERY_RESULT [{"retailer":"Marshall Music","title":"KORG Pitchclip 2 Clip-On Tuner","price":345,"currency":"ZAR","availability":"in_stock","url":"https://www.marshallmusic.co.za/product/korg-pitchclip-2-clip-on-tuner/","verified":true,"exact":true,"source":true}]
+UNCOMMON_COMMERCE_REGRESSION_PASS {"retailer":"Marshall Music","livePrice":345,"currency":"ZAR"}

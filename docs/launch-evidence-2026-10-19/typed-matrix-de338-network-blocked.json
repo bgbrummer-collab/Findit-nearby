@@ -1,0 +1,179 @@
+{
+  "checkedAt": "2026-10-19T15:39:26.233131+00:00",
+  "base": "https://findit-nearby.bgbrummer.workers.dev",
+  "version": {
+    "status": 200,
+    "data": {
+      "commit": "de338a01de3fd7e88f8f087844e7d182b4cf2ee1",
+      "platform": "cloudflare"
+    }
+  },
+  "endVersion": {
+    "error": "Command '['curl', '--max-time', '55', '-sS', '-w', '\\n%{http_code}', 'https://findit-nearby.bgbrummer.workers.dev/api/version']' returned non-zero exit status 56."
+  },
+  "versionStable": false,
+  "results": [
+    {
+      "category": "electronics",
+      "query": "Logitech PRO X Gaming Headset 981-000818",
+      "status": "failed: transport/reliability",
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Logitech PRO X Gaming Headset 981-000818",
+            "object": "Logitech PRO X Gaming Headset 981-000818",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Logitech PRO X Gaming Headset 981-000818",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "error": "Command '['curl', '--max-time', '55', '-sS', '-w', '\\n%{http_code}', 'https://findit-nearby.bgbrummer.workers.dev/api/product-intelligence', '-H', 'Content-Type: application/json', '--data-binary', '{\"identification\": {\"name\": \"Logitech PRO X Gaming Headset 981-000818\", \"object\": \"Logitech PRO X Gaming Headset 981-000818\", \"brand\": \"\", \"model\": \"\", \"category\": \"product\", \"retailCategory\": \"general\", \"searchQuery\": \"Logitech PRO X Gaming Headset 981-000818\", \"barcode\": null, \"confidence\": null, \"identificationMethod\": \"typed-user-input\", \"userConfirmed\": true}}']' returned non-zero exit status 28."
+      },
+      "research": {
+        "error": "Command '['curl', '--max-time', '55', '-sS', '-w', '\\n%{http_code}', 'https://findit-nearby.bgbrummer.workers.dev/api/product-insights', '-H', 'Content-Type: application/json', '--data-binary', '{\"identification\": {\"name\": \"Logitech PRO X Gaming Headset 981-000818\", \"object\": \"Logitech PRO X Gaming Headset 981-000818\", \"brand\": \"\", \"model\": \"\", \"category\": \"product\", \"retailCategory\": \"general\", \"searchQuery\": \"Logitech PRO X Gaming Headset 981-000818\", \"barcode\": null, \"confidence\": null, \"identificationMethod\": \"typed-user-input\", \"userConfirmed\": true}, \"offers\": []}']' returned non-zero exit status 56."
+      }
+    },
+    {
+      "category": "clothing",
+      "query": "Levis 501 Original Jeans",
+      "status": "failed: transport/reliability",
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Levis 501 Original Jeans",
+            "object": "Levis 501 Original Jeans",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Levis 501 Original Jeans",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "error": "Command '['curl', '--max-time', '55', '-sS', '-w', '\\n%{http_code}', 'https://findit-nearby.bgbrummer.workers.dev/api/product-intelligence', '-H', 'Content-Type: application/json', '--data-binary', '{\"identification\": {\"name\": \"Levis 501 Original Jeans\", \"object\": \"Levis 501 Original Jeans\", \"brand\": \"\", \"model\": \"\", \"category\": \"product\", \"retailCategory\": \"general\", \"searchQuery\": \"Levis 501 Original Jeans\", \"barcode\": null, \"confidence\": null, \"identificationMethod\": \"typed-user-input\", \"userConfirmed\": true}}']' returned non-zero exit status 28."
+      },
+      "research": {
+        "error": "Command '['curl', '--max-time', '55', '-sS', '-w', '\\n%{http_code}', 'https://findit-nearby.bgbrummer.workers.dev/api/product-insights', '-H', 'Content-Type: application/json', '--data-binary', '{\"identification\": {\"name\": \"Levis 501 Original Jeans\", \"object\": \"Levis 501 Original Jeans\", \"brand\": \"\", \"model\": \"\", \"category\": \"product\", \"retailCategory\": \"general\", \"searchQuery\": \"Levis 501 Original Jeans\", \"barcode\": null, \"confidence\": null, \"identificationMethod\": \"typed-user-input\", \"userConfirmed\": true}, \"offers\": []}']' returned non-zero exit status 56."
+      }
+    },
+    {
+      "category": "groceries",
+      "query": "Coca-Cola Original Taste 2L",
+      "status": "failed: transport/reliability",
+      "search": {
+        "error": "Command '['curl', '--max-time', '55', '-sS', '-w', '\\n%{http_code}', 'https://findit-nearby.bgbrummer.workers.dev/api/search', '-H', 'Content-Type: application/json', '--data-binary', '{\"query\": \"Coca-Cola Original Taste 2L\"}']' returned non-zero exit status 56."
+      },
+      "commerce": {},
+      "research": {}
+    },
+    {
+      "category": "shoes",
+      "query": "Nike Air Force 1 Low White Blue",
+      "status": "failed: transport/reliability",
+      "search": {
+        "error": "Command '['curl', '--max-time', '55', '-sS', '-w', '\\n%{http_code}', 'https://findit-nearby.bgbrummer.workers.dev/api/search', '-H', 'Content-Type: application/json', '--data-binary', '{\"query\": \"Nike Air Force 1 Low White Blue\"}']' returned non-zero exit status 56."
+      },
+      "commerce": {},
+      "research": {}
+    },
+    {
+      "category": "tools",
+      "query": "Bosch GSB 18V-50",
+      "status": "failed: transport/reliability",
+      "search": {
+        "error": "Command '['curl', '--max-time', '55', '-sS', '-w', '\\n%{http_code}', 'https://findit-nearby.bgbrummer.workers.dev/api/search', '-H', 'Content-Type: application/json', '--data-binary', '{\"query\": \"Bosch GSB 18V-50\"}']' returned non-zero exit status 56."
+      },
+      "commerce": {},
+      "research": {}
+    },
+    {
+      "category": "beauty",
+      "query": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
+      "status": "failed: transport/reliability",
+      "search": {
+        "error": "Command '['curl', '--max-time', '55', '-sS', '-w', '\\n%{http_code}', 'https://findit-nearby.bgbrummer.workers.dev/api/search', '-H', 'Content-Type: application/json', '--data-binary', '{\"query\": \"Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml\"}']' returned non-zero exit status 56."
+      },
+      "commerce": {},
+      "research": {}
+    },
+    {
+      "category": "furniture",
+      "query": "IKEA BILLY bookcase 80x28x202 white",
+      "status": "failed: transport/reliability",
+      "search": {
+        "error": "Command '['curl', '--max-time', '55', '-sS', '-w', '\\n%{http_code}', 'https://findit-nearby.bgbrummer.workers.dev/api/search', '-H', 'Content-Type: application/json', '--data-binary', '{\"query\": \"IKEA BILLY bookcase 80x28x202 white\"}']' returned non-zero exit status 56."
+      },
+      "commerce": {},
+      "research": {}
+    },
+    {
+      "category": "toys",
+      "query": "LEGO Classic 10696",
+      "status": "failed: transport/reliability",
+      "search": {
+        "error": "Command '['curl', '--max-time', '55', '-sS', '-w', '\\n%{http_code}', 'https://findit-nearby.bgbrummer.workers.dev/api/search', '-H', 'Content-Type: application/json', '--data-binary', '{\"query\": \"LEGO Classic 10696\"}']' returned non-zero exit status 56."
+      },
+      "commerce": {},
+      "research": {}
+    },
+    {
+      "category": "household",
+      "query": "Twinsaver Comfort 3 Ply Tissues 120",
+      "status": "failed: transport/reliability",
+      "search": {
+        "error": "Command '['curl', '--max-time', '55', '-sS', '-w', '\\n%{http_code}', 'https://findit-nearby.bgbrummer.workers.dev/api/search', '-H', 'Content-Type: application/json', '--data-binary', '{\"query\": \"Twinsaver Comfort 3 Ply Tissues 120\"}']' returned non-zero exit status 56."
+      },
+      "commerce": {},
+      "research": {}
+    },
+    {
+      "category": "music",
+      "query": "Shure MV7+ microphone",
+      "status": "failed: transport/reliability",
+      "search": {
+        "error": "Command '['curl', '--max-time', '55', '-sS', '-w', '\\n%{http_code}', 'https://findit-nearby.bgbrummer.workers.dev/api/search', '-H', 'Content-Type: application/json', '--data-binary', '{\"query\": \"Shure MV7+ microphone\"}']' returned non-zero exit status 56."
+      },
+      "commerce": {},
+      "research": {}
+    }
+  ]
+}
