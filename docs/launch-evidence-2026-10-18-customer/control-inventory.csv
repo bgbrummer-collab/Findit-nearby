@@ -1,0 +1,273 @@
+tag,id,label,href,status,evidence
+BUTTON,,⌂ Home,,untested,Not individually certified in this continuation.
+BUTTON,,⌕ Search,,untested,Not individually certified in this continuation.
+BUTTON,,⌖ Nearby,,untested,Not individually certified in this continuation.
+BUTTON,,⇄ Compare★ PREMIUM,,untested,Not individually certified in this continuation.
+BUTTON,,◇ Deals★ PREMIUM,,untested,Not individually certified in this continuation.
+BUTTON,,♡ Saved★ PREMIUM,,untested,Not individually certified in this continuation.
+BUTTON,,◷ History,,untested,Not individually certified in this continuation.
+BUTTON,,♧ Alerts★ PREMIUM,,untested,Not individually certified in this continuation.
+BUTTON,,▣ Feedback,,untested,Not individually certified in this continuation.
+BUTTON,,✦ Suggest a Feature,,untested,Not individually certified in this continuation.
+BUTTON,fxHowToButton,ⓘ  How to use FindIt,,passed,Customer instructions inspected.
+BUTTON,fxPremiumSideButton,Upgrade Now,,passed,"Free activation, workspace routing and nested tools exercised."
+BUTTON,,View all,,untested,Not individually certified in this continuation.
+BUTTON,,⚙,,untested,Not individually certified in this continuation.
+BUTTON,,♧★ PREMIUM,,untested,Not individually certified in this continuation.
+BUTTON,,F,,untested,Not individually certified in this continuation.
+BUTTON,,Alerts,,untested,Not individually certified in this continuation.
+BUTTON,,Profile,,untested,Not individually certified in this continuation.
+INPUT,fxVisiblePhotoPicker,Upload Photo,,passed,"Actual chooser uploads, replacement, invalid TXT and oversized JPEG rejection."
+BUTTON,,⌕ Search Product,,untested,Not individually certified in this continuation.
+BUTTON,,▥ Scan / Camera,,untested,Not individually certified in this continuation.
+BUTTON,,▧Drag & drop an image hereor click to browse,,untested,Not individually certified in this continuation.
+BUTTON,,⌖ Use my location,,untested,Not individually certified in this continuation.
+BUTTON,fxSearchNow,✦ Identify & Find,,passed,Click starts live photo journey; identity outcome is separately failed.
+SUMMARY,,Choose location on map / enter coordinates,,untested,Not individually certified in this continuation.
+BUTTON,finditLocationMapButton,Open location map,,untested,Not individually certified in this continuation.
+INPUT,finditManualLat,e.g. -25.75,,passed,Public Menlyn coordinate input accepted.
+INPUT,finditManualLon,e.g. 28.23,,passed,Public Menlyn coordinate input accepted.
+BUTTON,,Use selected location,,untested,Not individually certified in this continuation.
+BUTTON,,Search by name or barcode,,untested,Not individually certified in this continuation.
+BUTTON,fxOpenNowToggle,Open Now,,untested,Disabled without published hours; populated final-version filtering needs broader live check.
+BUTTON,fxAddCurrentItem,+ Add current item,,passed,Added uncertain cream; persisted after reload without a price.
+BUTTON,fxWatchCurrentItem,Watch item,,passed,Added uncertain cream; both watchlist surfaces agree after reload.
+BUTTON,fxBarcodeScan,Scan barcode,,passed,"Manual fallback, invalid 123 rejection, 5449000000996 catalogue result. Camera unsupported."
+SUMMARY,,Check nearby stores,,untested,Not individually certified in this continuation.
+SUMMARY,,Shopping List + Trip Planner,,untested,Not individually certified in this continuation.
+SUMMARY,,Watch List + Price History,,untested,Not individually certified in this continuation.
+BUTTON,fxEnableNotifications,Enable notifications,,blocked,No durable background notification service; local while-open monitoring only.
+BUTTON,,♡ Save★ PREMIUM,,untested,Not individually certified in this continuation.
+BUTTON,,☷ Filter,,untested,Not individually certified in this continuation.
+BUTTON,,View Deals →★ PREMIUM,,untested,Not individually certified in this continuation.
+BUTTON,,View Saved →★ PREMIUM,,untested,Not individually certified in this continuation.
+BUTTON,,View History →★ PREMIUM,,untested,Not individually certified in this continuation.
+BUTTON,,View Alerts →★ PREMIUM,,untested,Not individually certified in this continuation.
+BUTTON,fxPremiumBottomButton,Upgrade Now →,,untested,Not individually certified in this continuation.
+BUTTON,,Send Idea →,,untested,Not individually certified in this continuation.
+BUTTON,,ⓘProduct Info,,untested,Not individually certified in this continuation.
+BUTTON,,⇄Compare Prices★ PREMIUM,,untested,Not individually certified in this continuation.
+BUTTON,,⌖Nearby Stores,,untested,Not individually certified in this continuation.
+BUTTON,,✦Ask FindIt★ PREMIUM,,untested,Not individually certified in this continuation.
+A,,ClicksPrice and stock not verified,https://www.google.com/search?q=site%3Awww.clicks.co.za%20Sanofi%20cream%20tube,untested,Not individually certified in this continuation.
+A,,Dis-ChemPrice and stock not verified,https://www.google.com/search?q=site%3Awww.dischem.co.za%20Sanofi%20cream%20tube,untested,Not individually certified in this continuation.
+A,,TakealotPrice and stock not verified,https://www.google.com/search?q=site%3Awww.takealot.com%20Sanofi%20cream%20tube,untested,Not individually certified in this continuation.
+A,,FFindIt Nearby,#home,untested,Not individually certified in this continuation.
+A,,Find,#finder,untested,Not individually certified in this continuation.
+A,,How it works,#how,untested,Not individually certified in this continuation.
+A,,Examples,#examples,untested,Not individually certified in this continuation.
+A,,Feedback,#feedback,untested,Not individually certified in this continuation.
+BUTTON,menuBtn,☰,,untested,Not individually certified in this continuation.
+BUTTON,closeMenu,×,,untested,Not individually certified in this continuation.
+A,,⌂ Home,#home,untested,Not individually certified in this continuation.
+A,,📸 Find an item,#finder,untested,Not individually certified in this continuation.
+A,,✨ How it works,#how,untested,Not individually certified in this continuation.
+BUTTON,openRecent,🕘 Recent finds,,untested,Not individually certified in this continuation.
+BUTTON,drawerAskFindIt,✦ Ask FindIt,,untested,Not individually certified in this continuation.
+BUTTON,drawerPremium,★ Premium,,untested,Not individually certified in this continuation.
+A,,💬 Feedback,#feedback,untested,Not individually certified in this continuation.
+BUTTON,openSettings,⚙ Settings,,untested,Not individually certified in this continuation.
+A,,✦ Premium Home,#premiumHome,untested,Not individually certified in this continuation.
+A,,⌕ Advanced Find,#finder,untested,Not individually certified in this continuation.
+BUTTON,premiumSavedMenu,♡ Saved Items,,untested,Not individually certified in this continuation.
+BUTTON,premiumCompareMenu,⇄ Compare Stores,,untested,Not individually certified in this continuation.
+A,,⌖ Nearby Map,#nearbyPanel,untested,Not individually certified in this continuation.
+BUTTON,premiumRadiusMenu,◎ Search Radius,,untested,Not individually certified in this continuation.
+BUTTON,premiumFiltersMenu,≡ Smart Filters,,untested,Not individually certified in this continuation.
+BUTTON,premiumHistoryMenu,◷ Extended History,,untested,Not individually certified in this continuation.
+BUTTON,premiumChallengeMenu,✦ Premium Challenge,,untested,Not individually certified in this continuation.
+BUTTON,openSettingsPremium,⚙ Premium Settings,,untested,Not individually certified in this continuation.
+BUTTON,,📸 Vision+Scan & identify an item,,untested,Not individually certified in this continuation.
+BUTTON,,⌨ Manual SearchSearch the web for a named item,,untested,Not individually certified in this continuation.
+BUTTON,,🎯 Exact MatchUse the identified product query,,untested,Not individually certified in this continuation.
+BUTTON,,🧠 AI SearchBuild a smarter retailer query,,untested,Not individually certified in this continuation.
+BUTTON,,♥CollectionsOrganise saved finds,,untested,Not individually certified in this continuation.
+BUTTON,,🔖WatchlistTrack price drops & stock,,untested,Not individually certified in this continuation.
+BUTTON,,🏪Favourite StoresSave retailers you like,,untested,Not individually certified in this continuation.
+BUTTON,,▥My StatsYour local FindIt activity,,untested,Not individually certified in this continuation.
+BUTTON,,◷History+Search up to 50 recent finds,,untested,Not individually certified in this continuation.
+BUTTON,v10CloseModal,×,,untested,Not individually certified in this continuation.
+BUTTON,,⌕Advanced FindPhoto search with Premium controls,,untested,Not individually certified in this continuation.
+BUTTON,,♡Saved Items0 saved,,untested,Not individually certified in this continuation.
+BUTTON,,⇄Compare StoresCompare your current results,,untested,Not individually certified in this continuation.
+BUTTON,,⌖Nearby MapExplore stores visually,,untested,Not individually certified in this continuation.
+BUTTON,,5 km,,untested,Not individually certified in this continuation.
+BUTTON,,10 km,,untested,Not individually certified in this continuation.
+BUTTON,,15 km,,untested,Not individually certified in this continuation.
+BUTTON,,25 km,,untested,Not individually certified in this continuation.
+BUTTON,,Closest,,untested,Not individually certified in this continuation.
+BUTTON,,A–Z,,untested,Not individually certified in this continuation.
+BUTTON,,Best match,,untested,Not individually certified in this continuation.
+BUTTON,,×,,untested,Not individually certified in this continuation.
+BUTTON,,📍 Closest first,,untested,Not individually certified in this continuation.
+BUTTON,,🔤 Store name A–Z,,untested,Not individually certified in this continuation.
+BUTTON,,✨ Best match / original order,,untested,Not individually certified in this continuation.
+A,,📸 Find my item,#finder,untested,Not individually certified in this continuation.
+BUTTON,challengeBtn,🎲 Challenge FindIt,,untested,Not individually certified in this continuation.
+SELECT,radiusSelect,3 km5 km10 km15 km ★ Premium25 km ★ Premium,,untested,Not individually certified in this continuation.
+INPUT,photo,Upload product photo,,untested,Not individually certified in this continuation.
+INPUT,cameraPhoto,file,,untested,Physical camera capture unavailable; chooser path is not physical capture.
+BUTTON,choosePhoto,🖼️ Gallery / Files,,untested,Not individually certified in this continuation.
+BUTTON,takePhoto,📷 Take photo,,untested,Physical camera capture unavailable; chooser path is not physical capture.
+BUTTON,location,📍 Use my location,,untested,Not individually certified in this continuation.
+BUTTON,search,✨ Identify & Find,,untested,Not individually certified in this continuation.
+BUTTON,shuffleExamples,Shuffle ↻,,untested,Not individually certified in this continuation.
+BUTTON,,🎸GuitarTry something like this,,untested,Not individually certified in this continuation.
+BUTTON,,🐶Pet productTry something like this,,untested,Not individually certified in this continuation.
+BUTTON,,💡Ceiling lightTry something like this,,untested,Not individually certified in this continuation.
+BUTTON,,🧵YarnTry something like this,,untested,Not individually certified in this continuation.
+BUTTON,,🚲Bike partTry something like this,,untested,Not individually certified in this continuation.
+BUTTON,,🪴BonsaiTry something like this,,untested,Not individually certified in this continuation.
+BUTTON,challengeBtn2,🎲 Give me a challenge,,untested,Not individually certified in this continuation.
+BUTTON,mapViewBtn,Map view,,untested,Not individually certified in this continuation.
+BUTTON,saveFind,♡ Save ★,,untested,Not individually certified in this continuation.
+BUTTON,shareFind,↗ Share,,untested,Not individually certified in this continuation.
+BUTTON,clearHistory,Clear,,untested,Not individually certified in this continuation.
+BUTTON,suggestFeatureFromFeedback,✦ Suggest a Feature,,untested,Not individually certified in this continuation.
+SELECT,feedbackTopic,General feedbackWrong identificationNearby store / location problemPrice or stock problem💡 Suggest a feature,,untested,Not individually certified in this continuation.
+BUTTON,suggestFeatureQuick,Suggest a feature,,untested,Not individually certified in this continuation.
+BUTTON,,1 star,,untested,Not individually certified in this continuation.
+BUTTON,,2 stars,,untested,Not individually certified in this continuation.
+BUTTON,,3 stars,,untested,Not individually certified in this continuation.
+BUTTON,,4 stars,,untested,Not individually certified in this continuation.
+BUTTON,,5 stars,,untested,Not individually certified in this continuation.
+SELECT,feedbackRating,012345,,untested,Not individually certified in this continuation.
+TEXTAREA,feedbackMessage,What worked? What should improve?,,untested,Not individually certified in this continuation.
+INPUT,includeTechnical,checkbox,,untested,Not individually certified in this continuation.
+BUTTON,sendFeedback,Send feedback,,untested,Not individually certified in this continuation.
+BUTTON,copyFeedback,Copy,,untested,Not individually certified in this continuation.
+A,,⌂Home,#home,untested,Not individually certified in this continuation.
+A,,📸Find,#finder,untested,Not individually certified in this continuation.
+A,,🕘Recent,#recent,untested,Not individually certified in this continuation.
+BUTTON,mobileMore,☰More,,untested,Not individually certified in this continuation.
+BUTTON,newChallenge,🎲 Another challenge,,untested,Not individually certified in this continuation.
+INPUT,animationsToggle,checkbox,,untested,Not individually certified in this continuation.
+SELECT,settingsRadius,3 km5 km10 km15 km ★ Premium25 km ★ Premium,,untested,Not individually certified in this continuation.
+BUTTON,clearHistorySetting,Clear recent finds,,untested,Not individually certified in this continuation.
+BUTTON,premiumButton,★ Premium,,untested,Not individually certified in this continuation.
+BUTTON,closePremium,×,,untested,Not individually certified in this continuation.
+BUTTON,activatePremiumTester,Activate Premium Beta — Free,,untested,Not individually certified in this continuation.
+BUTTON,closePremiumWorkspace,×,,untested,Not individually certified in this continuation.
+BUTTON,,⌕ Advanced FindSearch with more control,,untested,Not individually certified in this continuation.
+BUTTON,,♡ Saved ItemsYour favourite finds,,untested,Not individually certified in this continuation.
+BUTTON,,⇄ Compare StoresCompare nearby results,,untested,Not individually certified in this continuation.
+BUTTON,,⌖ Nearby MapExplore stores visually,,untested,Not individually certified in this continuation.
+BUTTON,,◎ 25 km RadiusSearch farther,,untested,Not individually certified in this continuation.
+BUTTON,,≡ Smart FiltersClosest • best match,,untested,Not individually certified in this continuation.
+BUTTON,,◷ Extended HistoryMore recent finds,,untested,Not individually certified in this continuation.
+BUTTON,,✦ Premium ChallengePut FindIt to the test,,untested,Not individually certified in this continuation.
+BUTTON,,♢ Price AlertsComing later,,untested,Not individually certified in this continuation.
+BUTTON,premiumWorkspaceButton,★ Premium Tools,,untested,Not individually certified in this continuation.
+BUTTON,assistantFab,✦ Ask FindIt,,untested,Not individually certified in this continuation.
+BUTTON,closeAssistant,Close FindIt Assistant,,untested,Not individually certified in this continuation.
+BUTTON,,What is this?,,untested,Not individually certified in this continuation.
+BUTTON,,No stores?,,untested,Not individually certified in this continuation.
+BUTTON,,Price & stock?,,untested,Not individually certified in this continuation.
+INPUT,assistantInput,Ask FindIt Assistant,,untested,Not individually certified in this continuation.
+BUTTON,,Send,,untested,Not individually certified in this continuation.
+BUTTON,listViewBtn,,,untested,Not individually certified in this continuation.
+A,searchOnline,,https://www.google.com/search?q=Sanofi%20cream%20tube,untested,Not individually certified in this continuation.
+A,searchNearbyFree,,https://www.google.com/maps/search/?api=1&query=department+store,untested,Not individually certified in this continuation.
+BUTTON,copyQuery,,,untested,Not individually certified in this continuation.
+A,similarSearch,,https://www.google.com/search?q=Sanofi%20cream%20tube%20similar%20products,untested,Not individually certified in this continuation.
+BUTTON,retry,,,untested,Not individually certified in this continuation.
+BUTTON,changeItem,,,untested,Not individually certified in this continuation.
+BUTTON,correctSearch,,,untested,Not individually certified in this continuation.
+BUTTON,,Search online →,,untested,Not individually certified in this continuation.
+BUTTON,clearRecent,,,untested,Not individually certified in this continuation.
+BUTTON,thumbUp,,,untested,Not individually certified in this continuation.
+BUTTON,thumbDown,,,untested,Not individually certified in this continuation.
+BUTTON,,⌂ Main screen,,untested,Not individually certified in this continuation.
+BUTTON,,Close,,untested,Not individually certified in this continuation.
+BUTTON,fxConfirmModel,Enter or correct model / label,,untested,Not individually certified in this continuation.
+BUTTON,fxRetryCandidate,Refresh possible matches,,untested,Not individually certified in this continuation.
+BUTTON,,⇄ Compare,,untested,Not individually certified in this continuation.
+BUTTON,,◇ Deals,,untested,Not individually certified in this continuation.
+BUTTON,,♡ Saved,,untested,Not individually certified in this continuation.
+BUTTON,,♧ Alerts,,untested,Not individually certified in this continuation.
+BUTTON,fxPremiumSideButton,Premium Tools,,passed,"Free activation, workspace routing and nested tools exercised."
+BUTTON,,♧,,untested,Not individually certified in this continuation.
+BUTTON,,P,,untested,Not individually certified in this continuation.
+BUTTON,fxQuickAddShopping,+ Shopping List,,untested,Not individually certified in this continuation.
+BUTTON,fxQuickSaveFind,Save Find,,untested,Not individually certified in this continuation.
+BUTTON,,Remove,,untested,Not individually certified in this continuation.
+BUTTON,,Best overall,,untested,Not individually certified in this continuation.
+BUTTON,,Cheapest,,untested,Not individually certified in this continuation.
+BUTTON,fxClearShoppingList,Clear list,,untested,Not individually certified in this continuation.
+BUTTON,,Stop watching,,untested,Not individually certified in this continuation.
+BUTTON,,♡ Save,,untested,Not individually certified in this continuation.
+BUTTON,,View Deals →,,untested,Not individually certified in this continuation.
+BUTTON,,View Saved →,,untested,Not individually certified in this continuation.
+BUTTON,,View History →,,untested,Not individually certified in this continuation.
+BUTTON,,View Alerts →,,untested,Not individually certified in this continuation.
+BUTTON,fxPremiumBottomButton,Open Premium →,,untested,Not individually certified in this continuation.
+BUTTON,,⇄Compare Prices,,untested,Not individually certified in this continuation.
+BUTTON,,✦Ask FindIt,,untested,Not individually certified in this continuation.
+A,,"TMB SuppliesR 4 999,00 · Online in stock · Branch stock not verified",https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger,untested,Not individually certified in this continuation.
+BUTTON,,♡Saved Items1 saved,,untested,Not individually certified in this continuation.
+SELECT,radiusSelect,3 km5 km10 km15 km25 km,,untested,Not individually certified in this continuation.
+BUTTON,,👟SneakersTry something like this,,untested,Not individually certified in this continuation.
+BUTTON,,🥤Energy drinkTry something like this,,untested,Not individually certified in this continuation.
+BUTTON,,🎧HeadphonesTry something like this,,untested,Not individually certified in this continuation.
+BUTTON,,🌱PlantTry something like this,,untested,Not individually certified in this continuation.
+BUTTON,,👓GlassesTry something like this,,untested,Not individually certified in this continuation.
+BUTTON,,⌚WatchTry something like this,,untested,Not individually certified in this continuation.
+BUTTON,saveFind,♡ Save,,untested,Not individually certified in this continuation.
+SELECT,settingsRadius,3 km5 km10 km15 km25 km,,untested,Not individually certified in this continuation.
+BUTTON,activatePremiumTester,Premium Beta active ✓,,untested,Not individually certified in this continuation.
+BUTTON,finditReturnFree,Return to Free for testing,,untested,Not individually certified in this continuation.
+A,searchOnline,,,untested,Not individually certified in this continuation.
+A,searchNearbyFree,,,untested,Not individually certified in this continuation.
+A,similarSearch,,,untested,Not individually certified in this continuation.
+A,,Source,https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger,untested,Not individually certified in this continuation.
+BUTTON,fxInfoCompare,Compare retailer results,,passed,Populated Bosch comparison; retailer page followed.
+A,,"Bosch Professional | Cordless Drill GSB 18V-50 + 2 X 2,0Ah Batteries + Charger",https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger,untested,Not individually certified in this continuation.
+BUTTON,fxInfoRetry,Refresh product information,,untested,Research refresh coverage in CI; full all-category usefulness untested.
+BUTTON,fxInfoCorrect,Correct product name / model,,untested,Not individually certified in this continuation.
+CONTROL,fxStableRadius,Search radius,,passed,5 km persisted on reload; reset10 km.
+CONTROL,fxStableSort,Store sorting,,passed,A–Z persisted on reload; reset Best match.
+CONTROL,fxStableAutoVerify,Check automatically,,passed,Unchecked persisted across reload; reset checked.
+CONTROL,fxStableReset,Reset settings,,passed,"Radius,sort,automatic verification returned to defaults."
+CONTROL,fxStableApplySettings,Save & apply settings,,passed,Controls persisted through actual reload.
+CONTROL,fxStableRefreshSearch,Refresh current results,,untested,No final meaningful refresh outcome certified.
+CONTROL,fxStableLocation,Update my location,,untested,Physical GPS success unavailable.
+CONTROL,activatePremiumTester,Activate Premium Beta — Free,,passed,Actual free activation; payments remain disabled.
+CONTROL,v10CollectionName,New collection name,,passed,Customer audit18Oct created.
+CONTROL,v10AddCollection,Create collection,,passed,New collection and headset persisted after reload.
+CONTROL,,Add current Find,,passed,Added photo headset to audit collection; count1 persisted.
+CONTROL,v10HistorySearch,Search your recent finds,,passed,Sanofi filter and safe partial-photo reopen.
+CONTROL,,History Open product,,passed,Preserved original uncertain identity and possible label.
+CONTROL,,History+ Open product,,passed,Preserved original uncertain identity and possible label.
+CONTROL,,History+ Delete,,untested,Deletion behavior not exercised in this live continuation.
+CONTROL,watchCheckAll,Check all now,,untested,Single-item uncertain recheck exercised; all-items flow not certified.
+CONTROL,,Watchlist Check now,,passed,Partial identity kept prices/stock unverified; did not turn family query into exact search.
+CONTROL,watchEnableAlerts,Enable browser alerts,,blocked,No durable background service; hardware/browser permission flow not exercised.
+CONTROL,fxBarcodeManual,Or enter barcode,,passed,123 rejected;5449000000996 yielded Coca-Cola330ml with catalogue attribution.
+CONTROL,fxUseBarcode,Find product,,passed,Manual barcode result and source inspected.
+CONTROL,,Camera barcode detection,,blocked,BarcodeDetector unsupported in this remote Chrome.
+CONTROL,fxInfoCompare,Compare retailer results,,passed,Bosch listing populated; price and online-vs-branch availability displayed.
+CONTROL,,View retailer page,,passed,TMB exact kit title and technical specs verified after clicking link.
+CONTROL,fxFeatureTitle,Feature title,,passed,Empty required validation; draft text entered.
+CONTROL,fxFeatureDetails,How would this help you?,,passed,Empty required validation; draft text entered.
+CONTROL,fxFeatureRating,How useful would this be?,,untested,Default observed; each selection not certified.
+CONTROL,fxFeatureTechnical,Include basic technical details,,passed,Unchecked; copied draft omitted diagnostics.
+CONTROL,fxCopySuggestion,Copy suggestion,,passed,Clipboard exact draft verified; misleading delivery message repaired.
+CONTROL,fxFeatureBackToFeedback,Back to Feedback,,passed,Returned to the feedback dialog.
+CONTROL,,Send suggestion,,untested,Empty validation tested; actual delivery not repeated to avoid a duplicate test message.
+CONTROL,fxFeedbackRating,Rating,,untested,"Control inventoried, all values not exercised."
+CONTROL,fxFeedbackTechnical,Include basic technical details,,untested,Separate feedback toggle not certified by suggestion toggle.
+CONTROL,fxCloseHowTo,Close instructions,,passed,Instructions inspected and closed.
+CONTROL,,Printed-label review,,failed,Readable label retained only as a candidate; no matching retailer candidate returned.
+CONTROL,,Nearby electronics lookup,,failed,Public Menlyn location accepted; sources returned unavailable data.
+CONTROL,,Physical phone photo capture,,untested,No physical camera available.
+CONTROL,,OS drag-and-drop,,untested,Actual OS drag/drop not available; automation coverage is separate.
+CONTROL,,Branch SKU inventory,,blocked,No authoritative SKU-by-branch feed configured.
+CONTROL,,Background alerts,,blocked,No durable scheduler/delivery integration configured.
+CONTROL,,Central analytics,,blocked,No authorized central storage configured; paused Supabase unchanged.
+BUTTON,fxQuickSaveFind,Save Find → Find Saved,,passed,"254e998 actual cream quick-save, reload, Saved Open product; stored uncertain identity retained."
+BUTTON,saved-open-product,Saved Items Open product,,passed,saved-reopen-254e998-browser.txt: central strip and right product panel agree; label/model remain unconfirmed.
+BUTTON,pw-ai-retailer,Premium AI Retailer Search,,passed,headset-premium-ai-254e998-browser.txt: current headset context; no exact price/model invented. Retailer-discovery outcome still failed.
+BUTTON,pw-exact,Premium Exact Match Search,,passed,"headset-premium-exact-254e998-browser.txt: uncertain headset opens confirmation panel, not confirmed query."
+BUTTON,pw-stats,Premium Stats,,passed,"premium-stats-254e998-browser.txt: 2 recent, 1 saved, 0 watchlist/favourites agree with this browser."
+BUTTON,pw-radius,Premium 25 km Radius,,passed,"Applied25km and actual reload retains selected25. No verified branch result, so distances/refresh usefulness untested."
+BUTTON,pw-manual,Premium Manual Product Search,,passed,"bosch-254e998-browser.txt: separate typed Bosch request,15 attributed specs, sourced kit listing. Does not count as photo success."
