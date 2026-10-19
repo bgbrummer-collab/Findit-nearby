@@ -40,6 +40,7 @@ window.finditSaveCurrentFind=saveCurrent;window.finditRefreshStoreHours=()=>chec
 document.addEventListener('findit:results-rendered',()=>setTimeout(refreshAndCheck,80));
 document.addEventListener('findit:nearby-updated',()=>setTimeout(refreshAndCheck,80));
 document.addEventListener('findit:dashboard-sync',()=>setTimeout(refresh,80));
+document.addEventListener('findit:new-photo-selected',refresh);
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{refresh();setTimeout(()=>checkHours(false),700)},{once:true});else{refresh();setTimeout(()=>checkHours(false),700)}
 setTimeout(refresh,500);setTimeout(refresh,1400);
 })();

@@ -10,3 +10,9 @@ test('published branch hours notify every dashboard consumer without changing a 
  assert.equal(branch.openNow,true);assert.equal(branch.openingHours,'Mo-Fr 09:00-18:00');assert.equal(branch.liveHours.timeZone,'Africa/Johannesburg');assert.deepEqual(events,['findit:dashboard-sync']);assert.equal(other.liveHours,undefined);
  ctx.apply({stores:[{name:branch.name,lat:-26,lon:branch.lon,status:'closed'}]});assert.equal(events.length,1);assert.equal(branch.openNow,true);
 });
+test('selecting a replacement photo immediately clears old branch schedules before identification finishes',()=>{
+ const source=readFileSync(new URL('../find-actions-hours.js',import.meta.url),'utf8'),line=source.split('\n').find(x=>x.startsWith('function renderHours(')),events={},host={innerHTML:'Old pharmacy branch — scheduled open'};
+ const ctx={$:()=>host,stores:()=>[],document:{addEventListener:(name,fn)=>events[name]=fn}};ctx.refresh=()=>ctx.renderHours();
+ vm.runInNewContext(line+'\n'+source.split('\n').filter(x=>x.startsWith('document.addEventListener(')).join('\n'),ctx);
+ assert.equal(typeof events['findit:new-photo-selected'],'function');events['findit:new-photo-selected']();assert.doesNotMatch(host.innerHTML,/Old pharmacy|scheduled open/);assert.match(host.innerHTML,/Nearby stores have not loaded yet/);
+});
