@@ -28,6 +28,17 @@ test('verified structured descriptions expose technical paragraph specs with att
  assert.ok(d.specifications.some(x=>x.name==='Power Supply'&&x.value==='1 x CR2032 lithium battery'&&x.sourceUrl===url));
  assert.doesNotMatch(JSON.stringify(d.specifications),/999kg/);
 });
+test('short Woo catalogue descriptions are enriched only from an independently matching product content block',async t=>{
+ const url='https://www.marshallmusic.co.za/product/example-t2-tuner/';
+ for(const sameModel of [true,false]){
+  const api={name:'Example T2 tuner',permalink:url,short_description:'A compact tuner for stringed instruments.',description:'',sku:'T2',prices:{price:'34500',currency_code:'ZAR',currency_minor_unit:2},is_in_stock:true};
+  const html='<script type="application/ld+json">'+JSON.stringify({'@type':'Product',name:sameModel?'Example T2 tuner':'Example T3 tuner',brand:'Example',sku:sameModel?'T2':'T3',offers:{price:345,priceCurrency:'ZAR'}})+'</script><div class="elementor-widget-wd_single_product_content"><div class="elementor-widget-container"><h2>Tech Specs</h2><p><strong>Power Supply</strong>: 1 x CR2032 lithium battery<br><strong>Detection Accuracy</strong>: ±1 cent</p></div></div><footer><h2>Tech Specs</h2><p><strong>Wrong field</strong>: 999kg</p></footer>';
+  t.mock.method(globalThis,'fetch',async u=>String(u).includes('/wp-json/wc/store/')?new Response(JSON.stringify([api])):String(u)===url?new Response(html):new Response('<rss/>'));
+  const d=await(await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:{name:'Example T2 tuner',brand:'Example',model:'T2'},offers:[{product_url:url,sourcePageVerified:true,exactProductMatch:true}]})}),{})).json();
+  assert.equal(d.specifications.some(x=>x.name==='Power Supply'&&x.value==='1 x CR2032 lithium battery'&&x.sourceUrl===url),sameModel);
+  assert.doesNotMatch(JSON.stringify(d.specifications),/Wrong field|999kg/);t.mock.restoreAll();
+ }
+});
 
 test('retailer product attributes and price caveats remain scoped and do not turn a link into purpose',async t=>{
  const url='https://retailer.example/example-cream-25g',name='Example Cream 25g';
