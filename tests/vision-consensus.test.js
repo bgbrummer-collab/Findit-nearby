@@ -119,7 +119,7 @@ test('complete printed consumer label and quantity corroborated by another reade
 test('a separately printed manufacturer does not replace a complete consumer label or invent its retail brand',()=>{
  const a={name:'Example Relief Cream',brand:'Maker Company',model:'Example Relief Cream',object:'cream tube',size:'25g',visibleText:[]};
  const b={name:'Example Relief Cream 25g',brand:'Maker Company',model:'Example Relief Cream 25g',object:'cream tube',visibleText:['Example Relief CREAM','25 g','Maker Company']};
- const r=reconcileVision([a,b]);assert.equal(r.requiresModelConfirmation,true);assert.equal(r.brand,'Maker Company');assert.equal(r.labelCandidates[0].name,'Example Relief Cream 25g');assert.equal(r.labelCandidates[0].brand,'');assert.equal(r.labelCandidates[0].manufacturer,'Maker Company');assert.equal(r.labelCandidates[0].size,'25 g');assert.equal(r.labelCandidates[0].confirmed,false);
+ const r=reconcileVision([a,b]);assert.equal(r.requiresModelConfirmation,false);assert.equal(r.brand,'');assert.equal(r.labelCompany,'Maker Company');assert.equal(r.name,'Example Relief Cream 25g');assert.equal(r.size,'25 g');assert.equal(r.userConfirmed,false);
  assert.equal(reconcileVision([a,{...b,visibleText:['Example Relief CREAM','Maker Company']}]).labelCandidates.length,0);
  assert.equal(reconcileVision([a,{...b,name:'Example Relief Cream',model:'',visibleText:['Example Relief CREAM','Maker Company']}]).labelCandidates.length,0);
 });
@@ -153,4 +153,9 @@ test('label statements need two independent transcriptions and never become form
  const b={name:'Example Relief Cream 25g',brand:'Example',model:'Cream 25g',object:'cream tube',size:'25 g',visibleText:['Example Relief Cream','25 g','Maker','Rapid relief from itching and stings.','Invented single-reader claim']};
  const r=reconcileVision([a,b]);assert.equal(r.requiresModelConfirmation,false);assert.ok(r.visibleText.includes('Rapid relief from itching and stings.'));assert.ok(!r.visibleText.includes('Invented single-reader claim'));assert.equal(r.color,'');assert.equal(r.barcode,null);
  for(const [key,v1,v2] of [['color','blue','red'],['barcode','123','456']])assert.equal(reconcileVision([{...a,[key]:v1},{...b,[key]:v2}]).requiresModelConfirmation,true);
+});
+
+test('a reader using the complete printed label as its object still corroborates the independent cream family',()=>{
+ const r=reconcileVision([{name:'Example Relief Cream',brand:'Maker',model:'Example Relief Cream',object:'cream tube',size:'25g',visibleText:[]},{name:'Example Relief Cream 25g',brand:'Maker',model:'Example Relief Cream 25g',object:'Example Relief Cream 25g',visibleText:['Example Relief Cream','25g','Maker']},{name:'Example',brand:'Maker',model:'Cream',object:'cream tube',size:'25g',visibleText:[]}]);
+ assert.equal(r.name,'Example Relief Cream 25g');assert.equal(r.requiresModelConfirmation,false);assert.equal(r.brand,'');assert.equal(r.labelCompany,'Maker');
 });
