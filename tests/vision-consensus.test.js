@@ -111,9 +111,9 @@ test('a cream package colour is not the cream colour without independently print
  const b={...a,color:'white',visibleText:[...a.visibleText,'White']};assert.equal(reconcileVision([b,{...b}]).color,'white');
 });
 
-test('fully printed consumer label survives manufacturer/brand disagreement only as an unconfirmed candidate',()=>{
+test('complete printed consumer label and quantity corroborated by another reader resolve manufacturer field splitting',()=>{
  const r=reconcileVision([{name:'Anthisan Cream',brand:'Sanofi',model:'Anthisan Cream',object:'cream tube',size:'25 g',color:'purple',visibleText:[]},{name:'Anthisan Cream 25g',brand:'Anthisan',model:'Cream 25g',object:'Anthisan cream tube',visibleText:['Anthisan','CREAM','25 g','SANOFI']},{name:'Anthisan',brand:'Sanofi',model:'CREAM',object:'cream tube',size:'25g',color:'purple',visibleText:[]}]);
- assert.equal(r.requiresModelConfirmation,true);assert.equal(r.model,'');assert.equal(r.color,'');assert.equal(r.labelCandidates[0].name,'Anthisan Cream 25g');assert.equal(r.labelCandidates[0].brand,'Anthisan');assert.equal(r.labelCandidates[0].confirmed,false);
+ assert.equal(r.requiresModelConfirmation,false);assert.equal(r.name,'Anthisan Cream 25g');assert.equal(r.brand,'Anthisan');assert.equal(r.manufacturer,'Sanofi');assert.equal(r.size,'25 g');assert.equal(r.model,'');assert.equal(r.color,'');assert.equal(r.barcode,null);assert.equal(r.userConfirmed,false);assert.equal(r.identificationMethod,'independent-printed-label-consensus');
  const incomplete=reconcileVision([{name:'Example Cream 25g',brand:'Example',model:'',object:'cream tube',visibleText:['Example','CREAM']},{name:'Example cream',brand:'Example',model:'',object:'cream tube'}]);assert.equal(incomplete.labelCandidates.length,0);
 });
 test('a separately printed manufacturer does not replace a complete consumer label or invent its retail brand',()=>{
@@ -131,4 +131,26 @@ test('topical cream descriptions corroborate only their broad family without tre
 test('brand-only consensus still retains a fully printed label as an unconfirmed candidate',()=>{
  const r=reconcileVision([{name:'Example Relief Cream 25g',brand:'Example Relief',object:'cream',model:'',visibleText:['Example Relief','Cream','25 g']},{name:'Maker product',brand:'Maker',object:'medicine',model:''},{name:'Maker tube',brand:'Maker',object:'tube',model:''}]);
  assert.equal(r.identityScope,'brand');assert.equal(r.requiresModelConfirmation,true);assert.equal(r.model,'');assert.equal(r.size,'');assert.equal(r.labelCandidates[0].name,'Example Relief Cream 25g');assert.equal(r.labelCandidates[0].confirmed,false);
+});
+
+test('printed identity reconciliation still rejects uncorroborated labels and conflicting variants',()=>{
+ const a={name:'Example Relief Cream',brand:'Maker',model:'Example Relief Cream',object:'cream tube',size:'25 g',visibleText:[]};
+ const b={name:'Example Relief Cream 25g',brand:'Example',model:'Cream 25g',object:'cream tube',size:'25 g',visibleText:['Example Relief Cream','25 g','Maker']};
+ const good=reconcileVision([a,b]);assert.equal(good.requiresModelConfirmation,false);assert.equal(good.brand,'Example');
+ for(const bad of [
+  {...a,name:'Unknown cream',model:'CREAM'},
+  {...a,model:'Example Relief Plus Cream'},
+  {...a,name:'Example Relief Plus Cream',model:''},
+  {...a,size:'50 g'},
+  {...a,brand:'Unprinted maker'},
+ ])assert.equal(reconcileVision([bad,b]).requiresModelConfirmation,true);
+ assert.equal(reconcileVision([a,{...b,visibleText:[]}]).requiresModelConfirmation,true);
+ assert.notEqual(reconcileVision([b])?.requiresModelConfirmation,false);
+});
+
+test('label statements need two independent transcriptions and never become formula facts',()=>{
+ const a={name:'Example Relief Cream',brand:'Maker',model:'Example Relief Cream',object:'cream tube',size:'25 g',visibleText:['Rapid relief from itching and stings.']};
+ const b={name:'Example Relief Cream 25g',brand:'Example',model:'Cream 25g',object:'cream tube',size:'25 g',visibleText:['Example Relief Cream','25 g','Maker','Rapid relief from itching and stings.','Invented single-reader claim']};
+ const r=reconcileVision([a,b]);assert.equal(r.requiresModelConfirmation,false);assert.ok(r.visibleText.includes('Rapid relief from itching and stings.'));assert.ok(!r.visibleText.includes('Invented single-reader claim'));assert.equal(r.color,'');assert.equal(r.barcode,null);
+ for(const [key,v1,v2] of [['color','blue','red'],['barcode','123','456']])assert.equal(reconcileVision([{...a,[key]:v1},{...b,[key]:v2}]).requiresModelConfirmation,true);
 });

@@ -263,3 +263,9 @@ test('older candidate payload preserves a supported brand only when the reviewed
  await r.context.window.finditRunProductSearch(name,{name});assert.equal(r.context.window.finditState.result.identification.brand,name==='Example Maker Cream 25g'?'Example Maker':'');assert.equal(r.context.window.finditState.file.name,'original.jpg');
  }
 });
+
+test('Product Info separates independently read label facts and maker from external specifications',async()=>{
+ const r=runtime();r.context.window.finditState.result.identification={name:'Example Relief Cream 25g',brand:'Example',manufacturer:'Maker',size:'25 g',identificationMethod:'independent-printed-label-consensus',visibleText:['Example Relief Cream 25g','Rapid relief from itching and stings.'],unverifiedDetails:['strength']};
+ r.context.window.testInfo();assert.match(r.body.innerHTML,/Manufacturer on label<\/b>Maker/);assert.match(r.body.innerHTML,/From your product label/);assert.match(r.body.innerHTML,/Rapid relief from itching and stings/);assert.match(r.body.innerHTML,/Unprinted strength, ingredients and barcode details are not confirmed/);assert.doesNotMatch(r.body.innerHTML,/2%|mepyramine|purple/);
+ await r.finish({researched:false});
+});
