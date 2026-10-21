@@ -113,7 +113,7 @@ test('a cream package colour is not the cream colour without independently print
 
 test('complete printed consumer label and quantity corroborated by another reader resolve manufacturer field splitting',()=>{
  const r=reconcileVision([{name:'Anthisan Cream',brand:'Sanofi',model:'Anthisan Cream',object:'cream tube',size:'25 g',color:'purple',visibleText:[]},{name:'Anthisan Cream 25g',brand:'Anthisan',model:'Cream 25g',object:'Anthisan cream tube',visibleText:['Anthisan','CREAM','25 g','SANOFI']},{name:'Anthisan',brand:'Sanofi',model:'CREAM',object:'cream tube',size:'25g',color:'purple',visibleText:[]}]);
- assert.equal(r.requiresModelConfirmation,false);assert.equal(r.name,'Anthisan Cream 25g');assert.equal(r.brand,'Anthisan');assert.equal(r.manufacturer,'Sanofi');assert.equal(r.size,'25 g');assert.equal(r.model,'');assert.equal(r.color,'');assert.equal(r.barcode,null);assert.equal(r.userConfirmed,false);assert.equal(r.identificationMethod,'independent-printed-label-consensus');
+ assert.equal(r.requiresModelConfirmation,false);assert.equal(r.name,'Anthisan Cream 25g');assert.equal(r.brand,'Anthisan');assert.equal(r.labelCompany,'Sanofi');assert.equal(r.size,'25 g');assert.equal(r.model,'');assert.equal(r.color,'');assert.equal(r.barcode,null);assert.equal(r.userConfirmed,false);assert.equal(r.identificationMethod,'independent-printed-label-consensus');
  const incomplete=reconcileVision([{name:'Example Cream 25g',brand:'Example',model:'',object:'cream tube',visibleText:['Example','CREAM']},{name:'Example cream',brand:'Example',model:'',object:'cream tube'}]);assert.equal(incomplete.labelCandidates.length,0);
 });
 test('a separately printed manufacturer does not replace a complete consumer label or invent its retail brand',()=>{
