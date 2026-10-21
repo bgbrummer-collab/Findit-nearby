@@ -1,0 +1,5 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> test:syntax
+> node --check information-runtime.js && node --check cloudflare/worker.js && node --check lib/product-intelligence-core.js
+

@@ -1,0 +1,408 @@
+- complementary:
+  - generic: F
+  - generic: FindIt
+  - generic: Find it. Compare it. Get it.
+  - navigation:
+    - button "⌂ Home"
+    - button "⌕ Search"
+    - button "⌖ Nearby"
+    - button "⇄ Compare"
+    - button "◇ Deals"
+    - button "♡ Saved"
+    - button "◷ History"
+    - button "♧ Alerts"
+    - button "▣ Feedback"
+    - button "✦ Suggest a Feature"
+    - button "ⓘ How to use FindIt"
+  - generic: 🚀
+  - heading "Premium Active" [level=3]
+  - paragraph: Unlock wider search, saved finds, comparisons & more.
+  - button "Premium Tools"
+  - generic: Recent Searches
+  - button "View all"
+  - generic: Sanofi topical cream
+  - generic: headphones
+  - generic: Logitech headphones
+- main:
+  - text: ⌕
+  - generic: Search or upload an image to find anything...
+  - text: ⌖
+  - generic: Nearby
+  - button "Settings": ⚙
+  - button "Alerts": ♧
+  - button "Premium tools": P
+  - generic: ✦ AI powered product search
+  - heading "Find anything nearby." [level=1]:
+    - text: Find anything
+    - text: nearby.
+  - paragraph: Take a photo, upload an image, or search by text and we’ll find where to buy it near you.
+  - button "Upload Photo"
+  - button "⌕ Search Product"
+  - button "▥ Scan / Camera"
+  - button "▧ Drag & drop an image here or click to browse":
+    - generic: ▧
+    - generic: Drag & drop an image here
+    - text: or click to
+    - emphasis: browse
+  - button "⌖ Use my location"
+  - button "✦ Identify & Find"
+  - status: Product type identified. Confirm the exact model for specific information, prices and stock.
+  - generic "Choose location on map / enter coordinates"
+  - paragraph: Recognised Sanofi topical cream. Add the exact model or label to get product-specific facts and matching offers.
+  - button "Search by name or barcode"
+  - article:
+    - generic: ✓
+    - generic: Exact match
+    - generic: See the identified product and only supported identity details.
+  - article:
+    - generic: R
+    - generic: Real prices
+    - generic: Compare retailer prices only when FindIt can verify them.
+  - article:
+    - generic: ⌖
+    - generic: Nearby stores
+    - generic: See relevant stores around your selected location.
+  - article:
+    - generic: ▣
+    - generic: Live stock
+    - generic: Branch stock appears only when retailer evidence confirms it.
+  - article:
+    - generic: ⇄
+    - generic: Compare
+    - generic: Compare verified offers without invented prices or availability.
+  - article:
+    - generic: ＋
+    - generic: Shopping Tools
+    - generic: Lists, watchlist, budget, links & preferences.
+  - text: FindIt Smart Choice
+  - heading "Best options from this Find" [level=2]
+  - paragraph: Ranked from verified/current evidence. Missing prices, stock or opening hours are never guessed.
+  - generic: Object match · 65%
+  - article:
+    - generic: BEST OVERALL
+    - strong: Need verified retailer evidence
+    - generic: FindIt will rank a best option only after an exact retailer result is verified.
+  - article:
+    - generic: CHEAPEST
+    - strong: No verified price yet
+    - generic: Missing prices are never guessed.
+  - article:
+    - generic: CLOSEST
+    - strong: No relevant nearby store yet
+    - generic: Use location after selecting a product to find relevant retailers.
+  - button "+ Shopping List"
+  - button "Save Find"
+  - button "Open Now" [disabled]
+  - generic: Opening hours are not published for these nearby results yet.
+  - paragraph: Nearby stores have not loaded yet.
+  - text: FINDIT SHOPPING ASSISTANT
+  - heading "Plan, verify and track your shopping" [level=2]
+  - paragraph: Verified data first. FindIt does not guess prices, stock, phone numbers or opening hours.
+  - button "+ Add current item"
+  - button "Watch item"
+  - button "Scan barcode"
+  - generic "Check nearby stores"
+  - paragraph: Nearby store details will appear after FindIt locates retailers.
+  - generic "Shopping List + Trip Planner"
+  - paragraph: Your shopping list is empty. Add the current Find to start planning.
+  - generic "Watch List + Price History"
+  - generic: Results for your image
+  - generic: Sanofi topical cream
+  - generic: Sanofi · topical cream — exact model needs confirmation.
+  - button "♡ Save"
+  - button "⇄ Compare"
+  - heading "Nearby Stores" [level=2]
+  - button "☷ Filter"
+  - button "View all"
+  - generic: ●
+  - generic: Real store pins appear after relevant nearby results are found.
+  - generic: No verified exact-product store found yet. FindIt will not list unrelated shops as sellers.
+  - article:
+    - generic: ◇
+    - generic: Deals Near You
+    - generic: See verified retailer offers when available.
+    - button "View Deals →"
+  - article:
+    - generic: ♡
+    - generic: Saved Items
+    - generic: Open the Finds you saved on this device.
+    - button "View Saved →"
+  - article:
+    - generic: ↗
+    - generic: Price History
+    - generic: See verified price observations when available.
+    - button "View History →"
+  - article:
+    - generic: ✦
+    - generic: Suggest a Feature
+    - generic: Tell us what FindIt should build next.
+    - button "Send Idea →"
+- complementary:
+  - img "Selected product"
+  - generic: Product type recognised — confirm model
+  - heading "Sanofi topical cream" [level=2]
+  - paragraph: Sanofi · beauty
+  - paragraph: Product type identified. Confirm the exact model for specific information, prices and stock.
+  - generic: 65% Match
+  - generic: Best verified price
+  - strong: Not verified yet
+  - generic: FindIt won’t guess a price.
+  - generic: What we found
+  - generic: Retailer verification still needed
+  - button "ⓘ Product Info":
+    - text: ⓘ
+    - generic: Product Info
+  - button "⇄ Compare Prices":
+    - text: ⇄
+    - generic: Compare Prices
+  - button "⌖ Nearby Stores":
+    - text: ⌖
+    - generic: Nearby Stores
+  - button "✦ Ask FindIt":
+    - text: ✦
+    - generic: Ask FindIt
+  - heading "Top Stores" [level=2]
+  - button "View all"
+  - paragraph: "No exact listing verified yet. Check relevant retailer searches:"
+  - link "Clicks Price and stock not verified":
+    - /url: https://www.google.com/search?q=site%3Awww.clicks.co.za%20Sanofi%20topical%20cream
+    - text: Clicks
+    - generic: Price and stock not verified
+  - link "Dis-Chem Price and stock not verified":
+    - /url: https://www.google.com/search?q=site%3Awww.dischem.co.za%20Sanofi%20topical%20cream
+    - text: Dis-Chem
+    - generic: Price and stock not verified
+  - link "Takealot Price and stock not verified":
+    - /url: https://www.google.com/search?q=site%3Awww.takealot.com%20Sanofi%20topical%20cream
+    - text: Takealot
+    - generic: Price and stock not verified
+- banner:
+  - link "F FindIt Nearby":
+    - /url: "#home"
+    - generic: F
+    - generic: FindIt Nearby
+  - navigation:
+    - link "Find":
+      - /url: "#finder"
+    - link "How it works":
+      - /url: "#how"
+    - link "Examples":
+      - /url: "#examples"
+    - link "Feedback":
+      - /url: "#feedback"
+  - button "☰"
+- complementary:
+  - generic: F
+  - generic: FindIt Nearby
+  - button: ×
+  - navigation:
+    - generic: ★
+    - generic: FindIt Premium
+    - generic: Power workspace
+    - link:
+      - /url: "#premiumHome"
+      - text: ✦ Premium Home
+    - link:
+      - /url: "#finder"
+      - text: ⌕ Advanced Find
+    - button: ♡ Saved Items
+    - button: ⇄ Compare Stores
+    - link:
+      - /url: "#nearbyPanel"
+      - text: ⌖ Nearby Map
+    - button: ◎ Search Radius
+    - button: ≡ Smart Filters
+    - button: ◷ Extended History
+    - button: ✦ Premium Challenge
+    - link:
+      - /url: "#feedback"
+      - text: 💬 Feedback
+    - button: ⚙ Premium Settings
+- main:
+  - text: PREMIUM
+  - generic: THE PREMIUM EXPERIENCE
+  - heading "More than a bigger radius." [level=2]
+  - paragraph: Premium is built to help you find the right product, keep track of it, compare nearby options and come back when the price or stock changes.
+  - article:
+    - generic: ⚡
+    - heading "Find once. Keep watching." [level=3]
+    - paragraph: Save products to your Watchlist, set a target price and re-check verified retailer data for price drops or restocks.
+    - generic: PRICE + STOCK WATCHLIST
+  - article:
+    - generic: 🎯
+    - heading "Search smarter" [level=3]
+    - paragraph: Vision+, Exact Match, Manual Search and AI Search give you more ways to find what you actually mean.
+    - generic: 4 SEARCH MODES
+  - article:
+    - generic: ⌖
+    - heading "Go further" [level=3]
+    - paragraph: Search up to 25 km, compare stores and sort results by closest, name or best match.
+    - generic: UP TO 25 KM
+  - article:
+    - generic: "01"
+    - generic: Identify
+    - text: Use a photo or named product.
+  - article:
+    - generic: "02"
+    - generic: Compare
+    - text: Check relevant nearby retailers.
+  - article:
+    - generic: "03"
+    - generic: Save
+    - text: Collections, favourites and history.
+  - article:
+    - generic: "04"
+    - generic: Watch
+    - text: Track price and stock changes.
+  - strong: 25 km
+  - generic: Premium search radius
+  - strong: "50"
+  - generic: Extended history capacity
+  - strong: "4"
+  - generic: Premium search modes
+  - strong: Live
+  - generic: Price & stock checks when available
+  - text: PREMIUM SEARCH
+  - generic: ★ PREMIUM • START SEARCHING
+  - heading "What are you looking for?" [level=2]
+  - paragraph: Use a clear photo. Logos, labels and model text help FindIt be more precise.
+  - generic: Radius
+  - combobox "Radius":
+    - option "3 km"
+    - option "5 km"
+    - option "10 km" [selected]
+    - option "15 km"
+    - option "25 km"
+  - img "Selected item preview"
+  - button "Upload product photo"
+  - button "Choose File"
+  - button "🖼️ Gallery / Files"
+  - button "📷 Take photo"
+  - button "📍 Use my location"
+  - button "✨ Identify & Find"
+  - paragraph: Product type identified. Confirm the exact model for specific information, prices and stock.
+  - paragraph: TRY FINDIT WITH…
+  - heading "Ordinary. Unusual. Anything in-between." [level=2]
+  - button "Shuffle ↻"
+  - button "🎮 Controller Try something like this":
+    - generic: 🎮
+    - strong: Controller
+    - generic: Try something like this
+  - button "🔧 Tool Try something like this":
+    - generic: 🔧
+    - strong: Tool
+    - generic: Try something like this
+  - button "💄 Makeup Try something like this":
+    - generic: 💄
+    - strong: Makeup
+    - generic: Try something like this
+  - button "🎒 Backpack Try something like this":
+    - generic: 🎒
+    - strong: Backpack
+    - generic: Try something like this
+  - button "🔌 Charger Try something like this":
+    - generic: 🔌
+    - strong: Charger
+    - generic: Try something like this
+  - button "☕ Hot chocolate Try something like this":
+    - generic: ☕
+    - strong: Hot chocolate
+    - generic: Try something like this
+  - paragraph: HOW IT WORKS
+  - heading "Three simple steps." [level=2]
+  - article:
+    - text: "01"
+    - generic: 📸
+    - heading "Show It" [level=3]
+    - paragraph: Take or upload a photo of the item you want.
+  - article:
+    - text: "02"
+    - generic: ✨
+    - heading "Find It" [level=3]
+    - paragraph: FindIt checks visible product details. Clear labels and model text improve identification.
+  - article:
+    - text: "03"
+    - generic: 📍
+    - heading "Get It" [level=3]
+    - paragraph: FindIt looks for relevant consumer retailers close to you.
+  - paragraph: FINDIT CHALLENGE
+  - heading "Think FindIt can’t identify it? 👀" [level=2]
+  - paragraph: Find the weirdest object around you and put FindIt to the test.
+  - button "🎲 Give me a challenge"
+  - generic: ✨
+  - paragraph: You saw it. You want it.
+  - strong: You FoundIt.
+  - paragraph: IDENTIFIED ITEM
+  - heading "Sanofi topical cream" [level=2]
+  - paragraph
+  - strong: 65%
+  - text: confidence
+  - paragraph: NEARBY
+  - heading "Relevant retailers" [level=3]
+  - paragraph
+  - button "Map view"
+  - button "♡ Save"
+  - button "↗ Share"
+  - paragraph: RECENT
+  - heading "Recent finds" [level=2]
+  - button "Clear"
+  - paragraph: FEEDBACK
+  - heading "Help make FindIt better." [level=2]
+  - generic: Have an idea for FindIt?
+  - generic: Send a feature request separately from normal feedback.
+  - button "✦ Suggest a Feature"
+  - generic: Tell us what worked, report a problem, or suggest what FindIt should build next.
+  - text: Feedback type
+  - combobox "Feedback type":
+    - option "General feedback" [selected]
+    - option "Wrong identification"
+    - option "Nearby store / location problem"
+    - option "Price or stock problem"
+    - option "💡 Suggest a feature"
+  - strong: 💡 Have an idea for FindIt?
+  - generic: Suggest a feature and tell us what would make FindIt more useful.
+  - button "Suggest a feature"
+  - group "Rating":
+    - generic: Rating
+    - generic "Choose a rating from 1 to 5 stars":
+      - button "1 star": ★
+      - button "2 stars": ★
+      - button "3 stars": ★
+      - button "4 stars": ★
+      - button "5 stars": ★
+    - combobox
+  - text: Message
+  - textbox "Message":
+    - /placeholder: What worked? What should improve?
+  - checkbox "Include basic technical details to help us fix bugs" [checked]
+  - text: Include basic technical details to help us fix bugs
+  - button "Send feedback"
+  - button "Copy"
+  - paragraph
+- contentinfo:
+  - generic: F
+  - generic: FindIt Nearby
+  - paragraph: © 2026 Bernard Brummer — FindIt Nearby. All rights reserved.
+  - text: Nearby retailer ≠ verified exact-item stock.
+- button "✦ Ask FindIt"
+- paragraph: Allow location to see nearby retailers.
+- dialog "Product Information":
+  - button "Close" [active]: ×
+  - heading "Product Information" [level=2]
+  - heading "Sanofi topical cream" [level=3]
+  - generic: Brand
+  - text: Sanofi
+  - generic: Size — check label
+  - text: 25 g
+  - generic: Category
+  - text: beauty
+  - heading "Possible models to check" [level=3]
+  - paragraph: The image models suggested these names, but they did not agree. These are possibilities, not a confirmed identification.
+  - list:
+    - listitem: Sanofi Anthisan Cream
+    - listitem: Sanofi CREAM
+  - paragraph: Check the style or model code on the product or its box. Any retailer listing below must still be checked against your item.
+  - paragraph: The photo identifies a brand and product type. The exact model and variant are not confirmed. Check any retailer product below against your item before confirming.
+  - paragraph: "Possible printed label: Anthisan Cream 25g. This is an unconfirmed reading; check it against your item."
+  - button "Enter or correct model / label"
+  - button "Refresh possible matches"

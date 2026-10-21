@@ -1,0 +1,211 @@
+- banner:
+  - list
+  - list:
+    - link "Sign in / Register":
+      - /url: javascript:void(0)
+    - link "Find a store":
+      - /url: javascript:void(0)
+    - link "List":
+      - /url: javascript:void(0)
+    - link "0 Basket":
+      - /url: /cart
+      - generic: "0"
+      - generic: Basket
+  - link "logo":
+    - /url: /
+    - img "logo"
+  - combobox "Search":
+    - search:
+      - button "Search"
+      - searchbox "Search"
+  - link "Where is my order?":
+    - /url: /orderTracking
+  - text: 
+  - link " Set delivery address":
+    - /url: "#"
+    - generic: 
+    - generic: Set delivery address
+  - text:  
+  - text:    
+- navigation:
+  - list:
+    - link "Shop":
+      - /url: /products/c/OH1
+    - link "Promotions":
+      - /url: /specials
+    - link "Brands A-Z":
+      - /url: /all-brands
+    - link "Healthcare Services":
+      - /url: /healthcareservices
+    - link "Vouchers":
+      - /url: /giftVoucherCheckoutPage
+    - link "ClubCard":
+      - /url: /clubcard
+    - link "Building Healthier Future":
+      - /url: https://clicks.co.za/building-healthier-future
+- list:
+  - link "Home":
+    - /url: /
+  - text: ">"
+  - link "Store Finder Result":
+    - /url: /store-finder
+  - text: ">"
+  - link:
+    - /url: "#"
+- heading "Menlyn Park" [level=1]
+- paragraph:
+  - strong: Facilities
+  - generic: Pharmacy
+  - generic: Clinic
+- paragraph:
+  - strong: Address
+  - generic: Shop LF72, Menlyn Park Shopping Centre, Lois Rd, Menlyn, Pretoria, Gauteng, 0181.
+- button "Keyboard shortcuts"
+- region "Map"
+- button
+- iframe
+- menubar:
+  - menuitemradio "Show street map" [checked]: Map
+  - menuitemradio "Show satellite imagery": Satellite
+- button "Toggle fullscreen view"
+- button "Map camera controls"
+- button "Zoom in"
+- button "Zoom out"
+- link "Open this area in Google Maps (opens a new window)":
+  - /url: https://maps.google.com/maps?ll=-25.782714,28.274678&z=13&t=m&hl=en-US&gl=US&mapclient=apiv3
+  - img "Google"
+- button "Keyboard shortcuts"
+- generic: Map data ©2026 AfriGIS (Pty) Ltd, Google
+- link "Terms (opens in new tab)":
+  - /url: https://www.google.com/intl/en-US_US/help/terms_maps.html
+  - text: Terms
+- link "Report a map error (opens in new tab)":
+  - /url: https://www.google.com/maps/@-25.782714,28.274678,13z/data=!10m1!1e1!12b1?source=apiv3&rapsrc=apiv3
+  - text: Report a map error
+- heading "Store & pharmacy" [level=2]
+- heading "Opening hours" [level=3]
+- term: Monday
+- definition: 09.00 - 20.00
+- term: Tuesday
+- definition: 09.00 - 20.00
+- term: Wednesday
+- definition: 09.00 - 20.00
+- term: Thursday
+- definition: 09.00 - 20.00
+- term: Friday
+- definition: 09.00 - 21.00
+- term: Saturday
+- definition: 09.00 - 21.00
+- term: Sunday
+- definition: 09.00 - 18.00
+- term: Public Holidays
+- definition: 09.00 - 18.00
+- emphasis: Call to confirm
+- heading "Contact Details" [level=3]
+- term: Shop telephone 1
+- definition:
+  - generic: 012 348 6162
+- term: Shop telephone 2
+- definition:
+  - generic: 012 348 6161
+- term: Pharmacy tel
+- definition:
+  - generic: "0123486161"
+- paragraph: "Responsible Pharmacist: Ms.Sinegugu Hlatshwayo"
+- paragraph: "Y-Number: Y56024"
+- heading "Clinic" [level=2]
+- heading "Opening hours" [level=3]
+- term: Monday
+- definition: 09.00 - 17.00
+- term: Tuesday
+- definition: 09.00 - 17.00
+- term: Wednesday
+- definition: 09.00 - 17.00
+- term: Thursday
+- definition: 09.00 - 17.00
+- term: Friday
+- definition: 09.00 - 17.00
+- term: Sat
+- definition: Closed
+- term: Sun
+- definition: Closed
+- term: Public Holidays
+- definition: Closed
+- term: 1st & last Saturday of each month
+- definition: 09.00 - 13.00
+- heading "We value your privacy" [level=2]
+- paragraph:
+  - text: Your experience matters to us. We use cookies to personalise your experience, remember your preferences, and help us improve our website and services. You can Accept All Cookies or Manage Cookies at any time. To learn more, please read our
+  - link "Privacy Policy.":
+    - /url: https://help.clicks.co.za/support/solutions/80000456221
+- button "Accept all"
+- button "Manage cookies"
+- contentinfo:
+  - figure:
+    - generic: Don't miss out on savings. Subscribe today!
+    - textbox "Enter email address"
+    - button "Subscribe"
+    - generic: "Connect with Clicks on:"
+    - link "Twitter":
+      - /url: https://twitter.com/Clicks_SA
+    - link "Facebook":
+      - /url: https://www.facebook.com/ClicksSouthAfrica
+    - link "icon-instagram":
+      - /url: https://www.instagram.com/clicks_sa/
+    - link "Youtube":
+      - /url: https://www.youtube.com/user/ClicksSouthAfrica
+  - generic: Cookie Preferences
+  - emphasis:
+    - paragraph:
+      - text: Customer Service Centre
+      - emphasis: 0860 254 257
+  - emphasis:
+    - paragraph:
+      - text: Outside South Africa
+      - emphasis: +27 21 460 1009
+  - list:
+    - list:
+      - heading "ClubCard" [level=5]
+      - link "Join ClubCard":
+        - /url: /register/joincc
+      - link "Partners":
+        - /url: /clubcardpartnerspage
+      - link "Competitions":
+        - /url: /competitions/view
+      - link "BabyClub":
+        - /url: /babyClubLandingPage
+      - heading "My Account" [level=5]
+      - link "My ClubCard":
+        - /url: /clubCardPage
+      - link "Order History":
+        - /url: /my-account/orders
+      - heading "Customer Service" [level=5]
+      - link "Help":
+        - /url: /help
+      - link "Contact us":
+        - /url: /contactus
+      - link "Legal Terms and Conditions":
+        - /url: https://help.clicks.co.za/support/solutions/folders/80000682186
+      - link "Privacy Policy":
+        - /url: https://help.clicks.co.za/support/solutions/articles/80001141722-clicks-group-limited-privacy-policy
+      - heading "Health Hub" [level=5]
+      - link "Conditions":
+        - /url: /health/info-list/category/conditions
+      - link "Medicines":
+        - /url: /medicinesPage
+      - link "Vitamins & Supplements":
+        - /url: /c/OH20078
+      - link "Healthy Living":
+        - /url: /clubcard-magazine/?id=all&pageType=healthyLivingPage
+  - img "feel good"
+  - heading "All Clicks pharmacies are licenced by the National Department of Health and recorded at the South African Pharmacy Council." [level=4]
+  - heading "Guaranteed secure payment by" [level=3]
+  - img "visa.jpg"
+  - img "master.jpg"
+  - img "pci.png"
+  - img "visa.png"
+  - img "master.png"
+- iframe [id="fc_widget"] [name="fc_widget"]:
+  - text: 
+  - button "Chat with us":
+    - generic: Chat with us

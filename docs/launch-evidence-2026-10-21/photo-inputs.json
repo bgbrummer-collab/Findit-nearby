@@ -1,0 +1,44 @@
+[
+  {
+    "category": "electronics",
+    "page": "https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology",
+    "imageUrl": "http://computermania.co.za/cdn/shop/files/logitech_981_000817_g_pro_x_wired_1502157.jpg?v=1694695213",
+    "path": "/workspace/scratch/e56c2af3a8d6/varied-photos/electronics.jpg",
+    "downloaded": true
+  },
+  {
+    "category": "clothing",
+    "page": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2",
+    "imageUrl": "http://www.levi.co.za/cdn/shop/files/b656875f49830c1dfd13d79892cdaa03.jpg?v=1786963292",
+    "path": "/workspace/scratch/e56c2af3a8d6/varied-photos/clothing.jpg",
+    "downloaded": true
+  },
+  {
+    "category": "tools",
+    "page": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger",
+    "imageUrl": "http://www.tmbsupplies.co.za/cdn/shop/files/GSB-18v-50-1_688x653_015db31d-b53a-408a-b6d3-6b28c3546563.webp?v=1716145384",
+    "path": "/workspace/scratch/e56c2af3a8d6/varied-photos/tools.jpg",
+    "downloaded": true
+  },
+  {
+    "category": "toys",
+    "page": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696",
+    "imageUrl": "http://lego-gybc.co.za/cdn/shop/files/Classic-Medium-Creative-Brick-Box-10696_001_prod_8f538b25-dcbc-463f-bc75-59c74cec8ad0.jpg?v=1761150696",
+    "path": "/workspace/scratch/e56c2af3a8d6/varied-photos/toys.jpg",
+    "downloaded": true
+  },
+  {
+    "category": "furniture",
+    "page": "https://www.ikea.com/at/en/p/billy-bookcase-white-00263850/",
+    "imageUrl": "https://www.ikea.com/at/en/images/products/billy-bookcase-white__1590272_pe1038911_s5.jpg",
+    "path": "/workspace/scratch/e56c2af3a8d6/varied-photos/furniture.jpg",
+    "downloaded": true
+  },
+  {
+    "category": "groceries",
+    "page": "https://world.openfoodfacts.org/product/5449000000996",
+    "imageUrl": "https://images.openfoodfacts.org/images/products/544/900/000/0996/front_en.1129.400.jpg",
+    "path": "/workspace/scratch/e56c2af3a8d6/varied-photos/groceries.jpg",
+    "downloaded": true
+  }
+]

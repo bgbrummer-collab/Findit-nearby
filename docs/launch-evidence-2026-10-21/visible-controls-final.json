@@ -1,0 +1,1052 @@
+[
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "⌂ Home",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "⌕ Search",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "⌖ Nearby",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "⇄ Compare",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "◇ Deals",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "♡ Saved",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "◷ History",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "♧ Alerts",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "▣ Feedback",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "✦ Suggest a Feature",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": "button"
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "fxHowToButton",
+    "label": "ⓘ How to use FindIt",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": "button"
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "fxPremiumSideButton",
+    "label": "Premium Tools",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "View all",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "Settings",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "Alerts",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "Premium tools",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "fxVisiblePhotoPicker",
+    "label": "Upload Photo",
+    "role": "",
+    "status": "untested",
+    "tag": "INPUT",
+    "type": "file"
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "⌕ Search Product",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "▥ Scan / Camera",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "▧\nDrag & drop an image here\nor click to browse",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": "button"
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "⌖ Use my location",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "fxSearchNow",
+    "label": "✦ Identify & Find",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "Choose location on map / enter coordinates",
+    "role": "",
+    "status": "untested",
+    "tag": "SUMMARY",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "finditLocationMapButton",
+    "label": "",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": "button"
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "finditManualLat",
+    "label": "e.g. -25.75",
+    "role": "",
+    "status": "untested",
+    "tag": "INPUT",
+    "type": "number"
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "finditManualLon",
+    "label": "e.g. 28.23",
+    "role": "",
+    "status": "untested",
+    "tag": "INPUT",
+    "type": "number"
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": "submit"
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "Search by name or barcode",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": "button"
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "fxQuickAddShopping",
+    "label": "+ Shopping List",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": "button"
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "fxQuickSaveFind",
+    "label": "Save Find",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": "button"
+  },
+  {
+    "disabled": true,
+    "href": "",
+    "id": "fxOpenNowToggle",
+    "label": "Open Now",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": "button"
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "fxAddCurrentItem",
+    "label": "+ Add current item",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": "button"
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "fxWatchCurrentItem",
+    "label": "Watch item",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": "button"
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "fxBarcodeScan",
+    "label": "Scan barcode",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": "button"
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "Check nearby stores",
+    "role": "",
+    "status": "untested",
+    "tag": "SUMMARY",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "Shopping List + Trip Planner",
+    "role": "",
+    "status": "untested",
+    "tag": "SUMMARY",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "Watch List + Price History",
+    "role": "",
+    "status": "untested",
+    "tag": "SUMMARY",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "♡ Save",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "⇄ Compare",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "☷ Filter",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "View all",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "View Deals →",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "View Saved →",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "View History →",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "Send Idea →",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": "button"
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "ⓘ\nProduct Info",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "⇄\nCompare Prices",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "⌖\nNearby Stores",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "✦\nAsk FindIt",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "View all",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "https://www.google.com/search?q=site%3Awww.incredible.co.za%20headphones",
+    "id": "",
+    "label": "Incredible Connection\nPrice and stock not verified",
+    "role": "",
+    "status": "untested",
+    "tag": "A",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "https://www.google.com/search?q=site%3Awww.game.co.za%20headphones",
+    "id": "",
+    "label": "Game\nPrice and stock not verified",
+    "role": "",
+    "status": "untested",
+    "tag": "A",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "https://www.google.com/search?q=site%3Awww.makro.co.za%20headphones",
+    "id": "",
+    "label": "Makro\nPrice and stock not verified",
+    "role": "",
+    "status": "untested",
+    "tag": "A",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "https://www.google.com/search?q=site%3Awww.takealot.com%20headphones",
+    "id": "",
+    "label": "Takealot\nPrice and stock not verified",
+    "role": "",
+    "status": "untested",
+    "tag": "A",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "#home",
+    "id": "",
+    "label": "F\nFindIt Nearby",
+    "role": "",
+    "status": "untested",
+    "tag": "A",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "#finder",
+    "id": "",
+    "label": "Find",
+    "role": "",
+    "status": "untested",
+    "tag": "A",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "#how",
+    "id": "",
+    "label": "How it works",
+    "role": "",
+    "status": "untested",
+    "tag": "A",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "#examples",
+    "id": "",
+    "label": "Examples",
+    "role": "",
+    "status": "untested",
+    "tag": "A",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "#feedback",
+    "id": "",
+    "label": "Feedback",
+    "role": "",
+    "status": "untested",
+    "tag": "A",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "menuBtn",
+    "label": "☰",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "closeMenu",
+    "label": "×",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "#premiumHome",
+    "id": "",
+    "label": "✦ Premium Home",
+    "role": "",
+    "status": "untested",
+    "tag": "A",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "#finder",
+    "id": "",
+    "label": "⌕ Advanced Find",
+    "role": "",
+    "status": "untested",
+    "tag": "A",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "premiumSavedMenu",
+    "label": "♡ Saved Items",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "premiumCompareMenu",
+    "label": "⇄ Compare Stores",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "#nearbyPanel",
+    "id": "",
+    "label": "⌖ Nearby Map",
+    "role": "",
+    "status": "untested",
+    "tag": "A",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "premiumRadiusMenu",
+    "label": "◎ Search Radius",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "premiumFiltersMenu",
+    "label": "≡ Smart Filters",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "premiumHistoryMenu",
+    "label": "◷ Extended History",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "premiumChallengeMenu",
+    "label": "✦ Premium Challenge",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "#feedback",
+    "id": "",
+    "label": "💬 Feedback",
+    "role": "",
+    "status": "untested",
+    "tag": "A",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "openSettingsPremium",
+    "label": "⚙ Premium Settings",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "radiusSelect",
+    "label": "3 km\n5 km\n10 km\n15 km\n25 km",
+    "role": "",
+    "status": "untested",
+    "tag": "SELECT",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "photo",
+    "label": "Upload product photo",
+    "role": "",
+    "status": "untested",
+    "tag": "INPUT",
+    "type": "file"
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "cameraPhoto",
+    "label": "",
+    "role": "",
+    "status": "untested",
+    "tag": "INPUT",
+    "type": "file"
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "choosePhoto",
+    "label": "🖼️ Gallery / Files",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "takePhoto",
+    "label": "📷 Take photo",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "location",
+    "label": "📍 Use my location",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "search",
+    "label": "✨ Identify & Find",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "shuffleExamples",
+    "label": "Shuffle ↻",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "🦻\nHearing aid\nTry something like this",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "🚗\nCar part\nTry something like this",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "🧸\nToy\nTry something like this",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "🖱️\nMouse\nTry something like this",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "👕\nClothing\nTry something like this",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "🔬\nMicroscope\nTry something like this",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "challengeBtn2",
+    "label": "🎲 Give me a challenge",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "mapViewBtn",
+    "label": "Map view",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "saveFind",
+    "label": "♡ Save",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "shareFind",
+    "label": "↗ Share",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "clearHistory",
+    "label": "Clear",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "suggestFeatureFromFeedback",
+    "label": "✦ Suggest a Feature",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": "button"
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "feedbackTopic",
+    "label": "General feedback\nWrong identification\nNearby store / location problem\nPrice or stock problem\n💡 Suggest a feature",
+    "role": "",
+    "status": "untested",
+    "tag": "SELECT",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "suggestFeatureQuick",
+    "label": "Suggest a feature",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": "button"
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "1 star",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": "button"
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "2 stars",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": "button"
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "3 stars",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": "button"
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "4 stars",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": "button"
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "",
+    "label": "5 stars",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": "button"
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "feedbackRating",
+    "label": "0\n1\n2\n3\n4\n5",
+    "role": "",
+    "status": "untested",
+    "tag": "SELECT",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "feedbackMessage",
+    "label": "What worked? What should improve?",
+    "role": "",
+    "status": "untested",
+    "tag": "TEXTAREA",
+    "type": ""
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "includeTechnical",
+    "label": "",
+    "role": "",
+    "status": "untested",
+    "tag": "INPUT",
+    "type": "checkbox"
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "sendFeedback",
+    "label": "Send feedback",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": "submit"
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "copyFeedback",
+    "label": "Copy",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": "button"
+  },
+  {
+    "disabled": false,
+    "href": "",
+    "id": "assistantFab",
+    "label": "✦ Ask FindIt",
+    "role": "",
+    "status": "untested",
+    "tag": "BUTTON",
+    "type": "button"
+  }
+]

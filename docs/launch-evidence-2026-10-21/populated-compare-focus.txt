@@ -1,0 +1,1 @@
+Actual browser on 1a28a19: initial focus Close; Shift+Tab wraps to View product; Tab wraps to Close. Source opens matching Bosch kit; external retailer displays GBP despite ZA selector, whereas FindIt returned ZAR4999. Currency discrepancy remains recorded.

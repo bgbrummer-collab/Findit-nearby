@@ -1,0 +1,142 @@
+disabled,href,id,label,role,status,tag,type
+False,,,⌂ Home,,untested,BUTTON,
+False,,,⌕ Search,,untested,BUTTON,
+False,,,⌖ Nearby,,untested,BUTTON,
+False,,,⇄ Compare,,untested,BUTTON,
+False,,,◇ Deals,,untested,BUTTON,
+False,,,♡ Saved,,untested,BUTTON,
+False,,,◷ History,,untested,BUTTON,
+False,,,♧ Alerts,,untested,BUTTON,
+False,,,▣ Feedback,,untested,BUTTON,
+False,,,✦ Suggest a Feature,,untested,BUTTON,button
+False,,fxHowToButton,ⓘ How to use FindIt,,untested,BUTTON,button
+False,,fxPremiumSideButton,Premium Tools,,untested,BUTTON,
+False,,,View all,,untested,BUTTON,
+False,,,Settings,,untested,BUTTON,
+False,,,Alerts,,untested,BUTTON,
+False,,,Premium tools,,untested,BUTTON,
+False,,fxVisiblePhotoPicker,Upload Photo,,untested,INPUT,file
+False,,,⌕ Search Product,,untested,BUTTON,
+False,,,▥ Scan / Camera,,untested,BUTTON,
+False,,,"▧
+Drag & drop an image here
+or click to browse",,untested,BUTTON,button
+False,,,⌖ Use my location,,untested,BUTTON,
+False,,fxSearchNow,✦ Identify & Find,,untested,BUTTON,
+False,,,Choose location on map / enter coordinates,,untested,SUMMARY,
+False,,finditLocationMapButton,,,untested,BUTTON,button
+False,,finditManualLat,e.g. -25.75,,untested,INPUT,number
+False,,finditManualLon,e.g. 28.23,,untested,INPUT,number
+False,,,,,untested,BUTTON,submit
+False,,,Search by name or barcode,,untested,BUTTON,button
+False,,fxQuickAddShopping,+ Shopping List,,untested,BUTTON,button
+False,,fxQuickSaveFind,Save Find,,untested,BUTTON,button
+True,,fxOpenNowToggle,Open Now,,untested,BUTTON,button
+False,,fxAddCurrentItem,+ Add current item,,untested,BUTTON,button
+False,,fxWatchCurrentItem,Watch item,,untested,BUTTON,button
+False,,fxBarcodeScan,Scan barcode,,untested,BUTTON,button
+False,,,Check nearby stores,,untested,SUMMARY,
+False,,,Shopping List + Trip Planner,,untested,SUMMARY,
+False,,,Watch List + Price History,,untested,SUMMARY,
+False,,,♡ Save,,untested,BUTTON,
+False,,,⇄ Compare,,untested,BUTTON,
+False,,,☷ Filter,,untested,BUTTON,
+False,,,View all,,untested,BUTTON,
+False,,,View Deals →,,untested,BUTTON,
+False,,,View Saved →,,untested,BUTTON,
+False,,,View History →,,untested,BUTTON,
+False,,,Send Idea →,,untested,BUTTON,button
+False,,,"ⓘ
+Product Info",,untested,BUTTON,
+False,,,"⇄
+Compare Prices",,untested,BUTTON,
+False,,,"⌖
+Nearby Stores",,untested,BUTTON,
+False,,,"✦
+Ask FindIt",,untested,BUTTON,
+False,,,View all,,untested,BUTTON,
+False,https://www.google.com/search?q=site%3Awww.incredible.co.za%20headphones,,"Incredible Connection
+Price and stock not verified",,untested,A,
+False,https://www.google.com/search?q=site%3Awww.game.co.za%20headphones,,"Game
+Price and stock not verified",,untested,A,
+False,https://www.google.com/search?q=site%3Awww.makro.co.za%20headphones,,"Makro
+Price and stock not verified",,untested,A,
+False,https://www.google.com/search?q=site%3Awww.takealot.com%20headphones,,"Takealot
+Price and stock not verified",,untested,A,
+False,#home,,"F
+FindIt Nearby",,untested,A,
+False,#finder,,Find,,untested,A,
+False,#how,,How it works,,untested,A,
+False,#examples,,Examples,,untested,A,
+False,#feedback,,Feedback,,untested,A,
+False,,menuBtn,☰,,untested,BUTTON,
+False,,closeMenu,×,,untested,BUTTON,
+False,#premiumHome,,✦ Premium Home,,untested,A,
+False,#finder,,⌕ Advanced Find,,untested,A,
+False,,premiumSavedMenu,♡ Saved Items,,untested,BUTTON,
+False,,premiumCompareMenu,⇄ Compare Stores,,untested,BUTTON,
+False,#nearbyPanel,,⌖ Nearby Map,,untested,A,
+False,,premiumRadiusMenu,◎ Search Radius,,untested,BUTTON,
+False,,premiumFiltersMenu,≡ Smart Filters,,untested,BUTTON,
+False,,premiumHistoryMenu,◷ Extended History,,untested,BUTTON,
+False,,premiumChallengeMenu,✦ Premium Challenge,,untested,BUTTON,
+False,#feedback,,💬 Feedback,,untested,A,
+False,,openSettingsPremium,⚙ Premium Settings,,untested,BUTTON,
+False,,radiusSelect,"3 km
+5 km
+10 km
+15 km
+25 km",,untested,SELECT,
+False,,photo,Upload product photo,,untested,INPUT,file
+False,,cameraPhoto,,,untested,INPUT,file
+False,,choosePhoto,🖼️ Gallery / Files,,untested,BUTTON,
+False,,takePhoto,📷 Take photo,,untested,BUTTON,
+False,,location,📍 Use my location,,untested,BUTTON,
+False,,search,✨ Identify & Find,,untested,BUTTON,
+False,,shuffleExamples,Shuffle ↻,,untested,BUTTON,
+False,,,"🦻
+Hearing aid
+Try something like this",,untested,BUTTON,
+False,,,"🚗
+Car part
+Try something like this",,untested,BUTTON,
+False,,,"🧸
+Toy
+Try something like this",,untested,BUTTON,
+False,,,"🖱️
+Mouse
+Try something like this",,untested,BUTTON,
+False,,,"👕
+Clothing
+Try something like this",,untested,BUTTON,
+False,,,"🔬
+Microscope
+Try something like this",,untested,BUTTON,
+False,,challengeBtn2,🎲 Give me a challenge,,untested,BUTTON,
+False,,mapViewBtn,Map view,,untested,BUTTON,
+False,,saveFind,♡ Save,,untested,BUTTON,
+False,,shareFind,↗ Share,,untested,BUTTON,
+False,,clearHistory,Clear,,untested,BUTTON,
+False,,suggestFeatureFromFeedback,✦ Suggest a Feature,,untested,BUTTON,button
+False,,feedbackTopic,"General feedback
+Wrong identification
+Nearby store / location problem
+Price or stock problem
+💡 Suggest a feature",,untested,SELECT,
+False,,suggestFeatureQuick,Suggest a feature,,untested,BUTTON,button
+False,,,1 star,,untested,BUTTON,button
+False,,,2 stars,,untested,BUTTON,button
+False,,,3 stars,,untested,BUTTON,button
+False,,,4 stars,,untested,BUTTON,button
+False,,,5 stars,,untested,BUTTON,button
+False,,feedbackRating,"0
+1
+2
+3
+4
+5",,untested,SELECT,
+False,,feedbackMessage,What worked? What should improve?,,untested,TEXTAREA,
+False,,includeTechnical,,,untested,INPUT,checkbox
+False,,sendFeedback,Send feedback,,untested,BUTTON,submit
+False,,copyFeedback,Copy,,untested,BUTTON,button
+False,,assistantFab,✦ Ask FindIt,,untested,BUTTON,button
