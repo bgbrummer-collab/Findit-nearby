@@ -43,12 +43,12 @@
     let m=q('#fxCommerceSafeModal');
     if(!m){
       m=document.createElement('div');m.id='fxCommerceSafeModal';m.className='fx-commerce-safe-modal';m.hidden=true;m.setAttribute('aria-hidden','true');
-      m.innerHTML='<div class="fx-commerce-safe-card" role="dialog" aria-modal="true"><button type="button" class="fx-commerce-safe-close" aria-label="Close">×</button><div id="fxCommerceSafeBody"></div></div>';
+      m.innerHTML='<div class="fx-commerce-safe-card"><button type="button" class="fx-commerce-safe-close" aria-label="Close">×</button><div id="fxCommerceSafeBody"></div></div>';
       document.body.appendChild(m);
       m.addEventListener('click',e=>{if(e.target===m||e.target.closest('.fx-commerce-safe-close'))closeSafeModal()});
     }
     const b=q('#fxCommerceSafeBody');if(!b)return;
-    b.innerHTML=`<h2>${esc(title)}</h2>${html}`;m.hidden=false;m.setAttribute('aria-hidden','false');
+    b.innerHTML=`<h2>${esc(title)}</h2>${html}`;m.hidden=false;m.setAttribute('aria-hidden','false');m.setAttribute('role','dialog');m.setAttribute('aria-modal','true');m.setAttribute('aria-label',title);window.finditAccessibleDialog?.(m,title);
   }
   function compareHtml(){
     const offers=currentOffers(),priced=offers.filter(o=>positive(o.price)),unpriced=offers.filter(o=>!positive(o.price)),nearby=stores();
