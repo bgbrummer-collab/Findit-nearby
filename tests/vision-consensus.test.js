@@ -159,3 +159,10 @@ test('a reader using the complete printed label as its object still corroborates
  const r=reconcileVision([{name:'Example Relief Cream',brand:'Maker',model:'Example Relief Cream',object:'cream tube',size:'25g',visibleText:[]},{name:'Example Relief Cream 25g',brand:'Maker',model:'Example Relief Cream 25g',object:'Example Relief Cream 25g',visibleText:['Example Relief Cream','25g','Maker']},{name:'Example',brand:'Maker',model:'Cream',object:'cream tube',size:'25g',visibleText:[]}]);
  assert.equal(r.name,'Example Relief Cream 25g');assert.equal(r.requiresModelConfirmation,false);assert.equal(r.brand,'');assert.equal(r.labelCompany,'Maker');
 });
+
+test('Logitech G and Logitech retain the shared brand while conflicting unprinted models remain unconfirmed',()=>{
+ const rows=[{name:'G Pro X Gaming Headset',brand:'Logitech',model:'G Pro X',object:'headset',color:'black'},
+ {name:'Logitech G Pro X Gaming Headset',brand:'Logitech G',model:'Pro X',object:'gaming headset',visibleText:['G']}];
+ const i=reconcileVision(rows);assert.equal(i.brand,'Logitech');assert.equal(i.name,'Logitech headphones');assert.equal(i.requiresModelConfirmation,true);assert.equal(i.model,'');assert.equal(i.color,'');assert.equal(i.barcode,null);assert.equal(i.searchQuery,'Logitech headphones');
+ const conflict=reconcileVision([rows[0],{...rows[1],brand:'Corsair'}]);assert.equal(conflict.brand,'');assert.equal(conflict.model,'');assert.equal(conflict.requiresModelConfirmation,true);
+});
