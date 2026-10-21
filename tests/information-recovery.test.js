@@ -266,6 +266,6 @@ test('older candidate payload preserves a supported brand only when the reviewed
 
 test('Product Info separates independently read label facts and maker from external specifications',async()=>{
  const r=runtime();r.context.window.finditState.result.identification={name:'Example Relief Cream 25g',brand:'Example',labelCompany:'Maker',size:'25 g',identificationMethod:'independent-printed-label-consensus',visibleText:['Example Relief Cream 25g','Rapid relief from itching and stings.'],unverifiedDetails:['strength']};
- r.context.window.testInfo();assert.match(r.body.innerHTML,/Company on label<\/b>Maker/);assert.match(r.body.innerHTML,/From your product label/);assert.match(r.body.innerHTML,/Rapid relief from itching and stings/);assert.match(r.body.innerHTML,/Unprinted strength, ingredients and barcode details are not confirmed/);assert.doesNotMatch(r.body.innerHTML,/2%|mepyramine|purple/);
+ r.context.window.testInfo();assert.match(r.body.innerHTML,/Company on label<\/b>Maker/);assert.match(r.body.innerHTML,/From your product label/);assert.match(r.body.innerHTML,/Rapid relief from itching and stings/);assert.match(r.body.innerHTML,/<h3>What it does<\/h3><p>The product label states: Rapid relief from itching and stings/);assert.doesNotMatch(r.body.innerHTML,/FindIt has not verified a product-specific description/);assert.match(r.body.innerHTML,/Unprinted strength, ingredients and barcode details are not confirmed/);assert.doesNotMatch(r.body.innerHTML,/2%|mepyramine|purple/);
  await r.finish({researched:false});
 });
