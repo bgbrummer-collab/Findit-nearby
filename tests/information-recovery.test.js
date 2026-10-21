@@ -132,7 +132,7 @@ test('empty photo research settles the dashboard loading status',async()=>{
  const source=readFileSync(new URL('../information-runtime.js',import.meta.url),'utf8');const start=source.indexOf('async function hydrateIdentifiedPhoto('),end=source.indexOf('\nfunction recoveryNote',start);assert.ok(start>=0&&end>start);
  const states=[];const state={file:{name:'photo.jpg'},radius:10,result:{identification:{name:'Example toilet paper',model:'Twin Ply'}}};
  const context={window:{},st:()=>state,ident:()=>state.result.identification,productName:()=>state.result.identification.name,owned:false,busy:false,commerce:null,research:null,photoGeneration:0,syncIdentity(){},getLocationIfAlreadyAllowed:async()=>null,json:async()=>({offers:[],researched:false}),syncAll(){states.push(context.busy)},saveRecent(){},document:{dispatchEvent(){}},CustomEvent:class{},console};
- vm.runInNewContext(source.slice(start,end)+';this.hydrate=hydrateIdentifiedPhoto;',context);await context.hydrate();assert.equal(context.busy,false);assert.equal(states.at(-1),false);assert.ok(states.includes(true));
+ vm.runInNewContext(source.match(/function keepResearch\(r\)\{[^\n]+/)[0]+'\n'+source.slice(start,end)+';this.hydrate=hydrateIdentifiedPhoto;',context);await context.hydrate();assert.equal(context.busy,false);assert.equal(states.at(-1),false);assert.ok(states.includes(true));
 });
 
 test('nearby outage messages follow only the selected product, radius and location',()=>{
@@ -268,4 +268,9 @@ test('Product Info separates independently read label facts and maker from exter
  const r=runtime();r.context.window.finditState.result.identification={name:'Example Relief Cream 25g',brand:'Example',labelCompany:'Maker',size:'25 g',identificationMethod:'independent-printed-label-consensus',visibleText:['Example Relief Cream 25g','Rapid relief from itching and stings.'],unverifiedDetails:['strength']};
  r.context.window.testInfo();assert.match(r.body.innerHTML,/Company on label<\/b>Maker/);assert.match(r.body.innerHTML,/From your product label/);assert.match(r.body.innerHTML,/Rapid relief from itching and stings/);assert.match(r.body.innerHTML,/<h3>What it does<\/h3><p>The product label states: Rapid relief from itching and stings/);assert.doesNotMatch(r.body.innerHTML,/FindIt has not verified a product-specific description/);assert.match(r.body.innerHTML,/Unprinted strength, ingredients and barcode details are not confirmed/);assert.doesNotMatch(r.body.innerHTML,/2%|mepyramine|purple/);
  await r.finish({researched:false});
+});
+
+test('failed source checks survive refresh without becoming verified product facts',async()=>{
+ const r=runtime();r.context.URL=URL;r.context.window.testInfo();await r.finish({researched:false,sourceChecks:[{url:'https://shop.example/product',status:'http-error',httpStatus:403},{url:'javascript:alert(1)',status:'fetch-error'},{url:'https://wrong.example/product',status:'identity-mismatch'}]});r.context.window.testInfo();
+ assert.match(r.body.innerHTML,/Sources unavailable/);assert.match(r.body.innerHTML,/https:\/\/shop.example\/product/);assert.match(r.body.innerHTML,/not verified product facts or prices/);assert.doesNotMatch(r.body.innerHTML,/javascript:|wrong.example/);
 });
