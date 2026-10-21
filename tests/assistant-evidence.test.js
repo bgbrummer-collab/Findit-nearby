@@ -63,3 +63,19 @@ test('nearest branches keep zero distance first and do not confuse closest with 
  assert.ok(answer.indexOf('At selected point')<answer.indexOf('Further'));assert.ok(answer.indexOf('Further')<answer.indexOf('Unknown'));assert.doesNotMatch(answer,/Published hours:|-1\.0 km/);
  assert.match(answerFromEvidence('What are the opening hours?',{stores}).answer,/Published hours: Mo-Fr 08:00-20:00/);
 });
+
+test('assistant uses corroborated photo purpose when external sources only have catalogue metadata',()=>{
+ const identification={name:'Example Relief Cream 25g',identificationMethod:'independent-printed-label-consensus',visibleText:['Example Relief Cream 25g','Rapid relief from allergic skin reactions, stings and bites'],requiresModelConfirmation:false};
+ for(const research of [{},{researched:true,whatItDoes:'',specifications:[{name:'Size',value:'25 g'}],sources:[{url:'https://retailer.example/product'}]}]){
+  const answer=answerFromEvidence('What does this product do?',{identification},research).answer;
+  assert.match(answer,/photo label states: Rapid relief/);assert.match(answer,/label claim, not independently verified effectiveness/i);
+  assert.doesNotMatch(answer,/could not verify published product-specific information|mepyramine|2%/);
+ }
+});
+test('assistant does not promote single-reader, partial or warning text into a photo purpose',()=>{
+ for(const identification of [
+  {name:'Example Cream',identificationMethod:'google-gemini',visibleText:['Helps treat everything']},
+  {name:'Example Cream',identificationMethod:'independent-printed-label-consensus',requiresModelConfirmation:true,visibleText:['Helps treat everything']},
+  {name:'Example Cream',identificationMethod:'independent-printed-label-consensus',visibleText:['Do not use for relief of burns']},
+ ])assert.doesNotMatch(answerFromEvidence('What does it do?',{identification},{}).answer,/photo label states/i);
+});
