@@ -166,3 +166,10 @@ test('Logitech G and Logitech retain the shared brand while conflicting unprinte
  const i=reconcileVision(rows);assert.equal(i.brand,'Logitech');assert.equal(i.name,'Logitech headphones');assert.equal(i.requiresModelConfirmation,true);assert.equal(i.model,'');assert.equal(i.color,'');assert.equal(i.barcode,null);assert.equal(i.searchQuery,'Logitech headphones');
  const conflict=reconcileVision([rows[0],{...rows[1],brand:'Corsair'}]);assert.equal(conflict.brand,'');assert.equal(conflict.model,'');assert.equal(conflict.requiresModelConfirmation,true);
 });
+
+test('independently transcribed labels differing only in quantity spacing are one candidate',()=>{
+ const a={name:'Example Relief CREAM 25 g',brand:'Maker',model:'Example Relief Cream',object:'cream tube',size:'25 g',visibleText:['Example Relief CREAM','25 g','MAKER']};
+ const b={name:'Example Relief Cream 25g',brand:'Maker',model:'Example Relief Cream 25g',object:'Example Relief Cream 25g',visibleText:['Example Relief CREAM','25 g','MAKER']};
+ const i=reconcileVision([a,b]);assert.equal(i.identificationMethod,'independent-printed-label-consensus');assert.equal(i.requiresModelConfirmation,false);assert.equal(i.size,'25 g');assert.equal(i.labelCompany,'Maker');assert.equal(i.brand,'');assert.equal(i.barcode,null);
+ const different=reconcileVision([a,{...b,name:'Example Relief Cream 250g',model:'Example Relief Cream 250g',object:'Example Relief Cream 250g',visibleText:['Example Relief CREAM','250 g','MAKER']}]);assert.notEqual(different?.requiresModelConfirmation,false);
+});
