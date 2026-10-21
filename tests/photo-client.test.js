@@ -5,10 +5,10 @@ import {readFileSync} from 'node:fs';
 const source=readFileSync(new URL('../script.js',import.meta.url),'utf8');
 const handler=source.slice(source.indexOf('searchBtn.onclick=async()=>'),source.indexOf('\n\nfunction resetResults()',source.indexOf('searchBtn.onclick=async()=>')));
 function client(){
-  const pending=[],rendered=[],statuses=[],state={file:{name:'first.jpg'},coords:{lat:-25,lon:28},diagnostics:{},radius:10},button={},visibleButton={disabled:false};
-  const ctx={state,searchBtn:button,FormData:class{append(){}},CustomEvent:class{},document:{dispatchEvent(){},getElementById(id){return id==='fxSearchNow'?visibleButton:null}},results:{classList:{remove(){}},scrollIntoView(){}},resetResults(){state.result=null},showSearchOverlay(){},hideSearchOverlay(){},finditSearchRequest(){return new Promise(resolve=>pending.push(data=>resolve({ok:true,json:async()=>data})))},renderIdentification(i){rendered.push(i.name)},syncExactDashboardResult(){},loadProductIntelligence(){},renderOffers(){},renderFreeActions(){},renderStores(){},updateMap(){},showWarning(){},showNothing(){},saveRecent(){},trackFindIt(){},setStatus(t){statuses.push(t)},loadNearby:async()=>{}};
+  const pending=[],rendered=[],statuses=[],warnings=[],state={file:{name:'first.jpg'},coords:{lat:-25,lon:28},diagnostics:{},radius:10},button={},visibleButton={disabled:false};
+  const ctx={state,searchBtn:button,FormData:class{append(){}},CustomEvent:class{},document:{dispatchEvent(){},getElementById(id){return id==='fxSearchNow'?visibleButton:null}},results:{classList:{remove(){}},scrollIntoView(){}},resetResults(){state.result=null},showSearchOverlay(){},hideSearchOverlay(){},finditSearchRequest(){return new Promise(resolve=>pending.push(data=>resolve({ok:true,json:async()=>data})))},renderIdentification(i){rendered.push(i.name)},syncExactDashboardResult(){},loadProductIntelligence(){},renderOffers(){},renderFreeActions(){},renderStores(){},updateMap(){},showWarning(t){warnings.push(t)},showNothing(){},saveRecent(){},trackFindIt(){},setStatus(t){statuses.push(t)},loadNearby:async()=>{}};
   vm.runInNewContext(handler,ctx);
-  return {state,button,visibleButton,pending,rendered,statuses};
+  return {state,button,visibleButton,pending,rendered,statuses,warnings};
 }
 test('an older photo cannot overwrite a later photo result',async()=>{
   const c=client(),first=c.button.onclick();c.state.file={name:'second.jpg'};const second=c.button.onclick();
@@ -46,4 +46,13 @@ test('repeat activation while the same photo is pending starts only one inferenc
  assert.equal(c.visibleButton.disabled,true);assert.match(c.statuses.at(-1),/identifying/i);
  c.pending[0]({identification:null,requiresUserInput:true});await first;
  assert.equal(c.state.photoSearchPending,null);assert.equal(c.button.disabled,false);assert.equal(c.visibleButton.disabled,false);
+});
+
+for(const [code,message] of [
+ ['PHOTO_IDENTIFICATION_TEMPORARILY_UNAVAILABLE','The image service could not complete identification. Try again or enter the product name or barcode.'],
+ ['PHOTO_IDENTITY_UNCERTAIN','The models could not agree on the product identity. Add the product name, label or barcode; this does not necessarily mean the photo is unclear.']
+])test('photo warning retains the backend explanation: '+code,async()=>{
+ const c=client(),pending=c.button.onclick();
+ c.pending[0]({identification:null,requiresUserInput:true,code,message});await pending;
+ assert.equal(c.warnings.at(-1),message);assert.equal(c.statuses.at(-1),message);
 });
