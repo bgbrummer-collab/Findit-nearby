@@ -1,0 +1,28 @@
+{
+  "name": "Anthisan Cream 25g",
+  "brand": "",
+  "model": "",
+  "object": "topical cream",
+  "size": "25 g",
+  "color": "",
+  "visibleText": [
+    "Anthisan Cream 25g",
+    "Rapid relief from allergic skin reactions, stings and bites"
+  ],
+  "labelCompany": "Sanofi",
+  "barcode": null,
+  "searchQuery": "Anthisan Cream 25g",
+  "confidence": 0.85,
+  "userConfirmed": false,
+  "identificationMethod": "independent-printed-label-consensus",
+  "identityScope": "printed-product-label",
+  "requiresModelConfirmation": false,
+  "labelCandidates": [],
+  "suggestedLabel": "",
+  "suggestedModels": [],
+  "features": [],
+  "unverifiedDetails": [
+    "unprinted strength or formula",
+    "barcode unless independently read"
+  ]
+}

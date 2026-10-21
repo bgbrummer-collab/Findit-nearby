@@ -1,0 +1,7 @@
+{
+  "run_id": 39598233863,
+  "job_id": 119215807151,
+  "failedStep": "Verify feedback consent and draft recovery with simulated delivery",
+  "failure": "tests/feedback-feature-regression.mjs:47 waits for feature-suggestion success; timed out. Local/production eight viewport suites passed; upload/location and saved-product journeys passed.",
+  "rerunRequested": true
+}

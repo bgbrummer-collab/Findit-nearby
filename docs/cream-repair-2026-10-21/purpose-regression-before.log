@@ -1,0 +1,409 @@
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:279:9)
+    at evalmachine.<anonymous>:7:26
+    at evalmachine.<anonymous>:167:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:15:93)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1382:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:279:9)
+    at evalmachine.<anonymous>:7:26
+    at evalmachine.<anonymous>:167:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:16:88)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1382:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+✔ delayed product research never reopens a closed Product Info panel (22.150752ms)
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:279:9)
+    at evalmachine.<anonymous>:7:26
+    at evalmachine.<anonymous>:167:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:17:78)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1382:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+✔ research for an old product cannot overwrite the next product (6.586633ms)
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:279:9)
+    at evalmachine.<anonymous>:7:26
+    at evalmachine.<anonymous>:167:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:57:10)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1382:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:279:9)
+    at evalmachine.<anonymous>:7:26
+    at evalmachine.<anonymous>:167:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:59:273)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1382:25)
+    at Test.processPendingSubtests (node:internal/test_runner/test:960:18) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:279:9)
+    at evalmachine.<anonymous>:7:26
+    at evalmachine.<anonymous>:167:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:70:11)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1382:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+FindIt nearby search needs location permission
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:279:9)
+    at evalmachine.<anonymous>:7:26
+    at evalmachine.<anonymous>:167:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:70:11)
+    at async Test.run (node:internal/test_runner/test:1389:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+FindIt nearby search needs location permission
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:279:9)
+    at evalmachine.<anonymous>:7:26
+    at evalmachine.<anonymous>:167:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:84:11)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1382:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:279:9)
+    at evalmachine.<anonymous>:7:26
+    at evalmachine.<anonymous>:167:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:88:6)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1382:25)
+    at Test.processPendingSubtests (node:internal/test_runner/test:960:18) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+✔ a failed research request settles the retry control (5.15839ms)
+✔ saved items merge storage sources and flatten collection products (3.176723ms)
+✔ shopping snapshots reject old offers and uncertain product identities (3.313238ms)
+✔ saved shopping item gains late verified offers without losing its saved date (2.489388ms)
+✔ abbreviated retailer title uses its own Product description without changing variants (13.542929ms)
+✔ product information extracts item-specific structured specifications across categories (38.458415ms)
+✔ partial photo identities load nearby category stores without claiming exact stock (3.700638ms)
+✔ typing a brand and product type does not confirm an exact model (2.147455ms)
+✔ a new typed family search clears the previous photo, while explicit candidate confirmation retains it (13.385339ms)
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:279:9)
+    at evalmachine.<anonymous>:7:26
+    at evalmachine.<anonymous>:167:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:84:11)
+    at async Test.run (node:internal/test_runner/test:1389:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:279:9)
+    at evalmachine.<anonymous>:7:26
+    at evalmachine.<anonymous>:167:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:88:6)
+    at async Test.run (node:internal/test_runner/test:1389:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:279:9)
+    at evalmachine.<anonymous>:7:26
+    at evalmachine.<anonymous>:167:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:110:10)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1382:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+FindIt nearby search needs location permission
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:279:9)
+    at evalmachine.<anonymous>:7:26
+    at evalmachine.<anonymous>:167:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:162:10)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1382:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:279:9)
+    at evalmachine.<anonymous>:7:26
+    at evalmachine.<anonymous>:167:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:164:5)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1382:25)
+    at Test.processPendingSubtests (node:internal/test_runner/test:960:18) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+✔ a delayed product-family nearby lookup cannot overwrite a newly selected location or radius (16.745246ms)
+✔ product research prefers drill facts over corporate marketing on the same product page (7.012043ms)
+✔ history entries reopen their stored query for fresh product research (1.528065ms)
+✔ catalogue identities are labelled as barcode matches rather than AI or user confirmations (2.14337ms)
+✔ product strengths discard popularity slogans and keep published microphone features (1.814126ms)
+✔ a toilet-paper photo gets paper buying guidance rather than food instructions (0.596356ms)
+✔ empty photo research settles the dashboard loading status (4.650058ms)
+✔ nearby outage messages follow only the selected product, radius and location (4.938622ms)
+✔ typed product research preserves the advertised fifty Premium history entries (3.353127ms)
+✔ barcode tool reuses maintained search and replaces the previous photo identity (6.613698ms)
+✔ brand-only photo evidence cannot claim a recognised product type (8.188592ms)
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:279:9)
+    at evalmachine.<anonymous>:7:26
+    at evalmachine.<anonymous>:167:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:175:10)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1382:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+✔ a newly selected photo immediately invalidates pending typed research (11.639388ms)
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:279:9)
+    at evalmachine.<anonymous>:7:26
+    at evalmachine.<anonymous>:167:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:181:10)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1382:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:279:9)
+    at evalmachine.<anonymous>:7:26
+    at evalmachine.<anonymous>:167:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:189:5)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1382:25)
+    at Test.processPendingSubtests (node:internal/test_runner/test:960:18) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+✔ partial Product Info does not claim a brand absent from the identity (5.323402ms)
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:279:9)
+    at evalmachine.<anonymous>:7:26
+    at evalmachine.<anonymous>:167:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:220:10)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1382:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+✔ partial photo history is persisted with its uncertainty and reopens without a typed identification request (9.181802ms)
+✔ saved and collection snapshots retain photo uncertainty independently of history (7.130487ms)
+✔ Premium capture save handler preserves uncertain identity even when only maintained window state exists (2.281818ms)
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:279:9)
+    at evalmachine.<anonymous>:7:26
+    at evalmachine.<anonymous>:167:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:227:10)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1382:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+✔ older saved entries without original identity evidence cannot silently become confirmed typed products (4.295407ms)
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:279:9)
+    at evalmachine.<anonymous>:7:26
+    at evalmachine.<anonymous>:167:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:235:10)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1382:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:279:9)
+    at evalmachine.<anonymous>:7:26
+    at evalmachine.<anonymous>:167:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:241:10)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1382:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+✔ refreshing a restored uncertain Find needs no photo and never sends its guess to typed identification (8.601985ms)
+✔ refreshing a restored exact Find rechecks commerce and research with the existing identity (6.598821ms)
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:279:9)
+    at evalmachine.<anonymous>:7:26
+    at evalmachine.<anonymous>:167:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:251:10)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1382:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:279:9)
+    at evalmachine.<anonymous>:7:26
+    at evalmachine.<anonymous>:167:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:260:10)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1382:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+FindIt nearby search needs location permission
+FindIt nearby search needs location permission
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:279:9)
+    at evalmachine.<anonymous>:7:26
+    at evalmachine.<anonymous>:167:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:260:10)
+    at async Test.run (node:internal/test_runner/test:1389:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+FindIt nearby search needs location permission
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:279:9)
+    at evalmachine.<anonymous>:7:26
+    at evalmachine.<anonymous>:167:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:260:10)
+    at async Test.run (node:internal/test_runner/test:1389:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+FindIt nearby search needs location permission
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:279:9)
+    at evalmachine.<anonymous>:7:26
+    at evalmachine.<anonymous>:167:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:268:10)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1382:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+✔ reopening a confirmed history item preserves brand, category and variant instead of reparsing its name (11.230652ms)
+✔ explicit candidate confirmation uses the reviewed listing brand rather than an earlier manufacturer guess (3.478832ms)
+✔ older candidate payload preserves a supported brand only when the reviewed product name contains it (8.283537ms)
+✖ Product Info separates independently read label facts and maker from external specifications (2.59942ms)
+ℹ tests 34
+ℹ suites 0
+ℹ pass 33
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 12358.126136
+
+✖ failing tests:
+
+test at tests/information-recovery.test.js:267:1
+✖ Product Info separates independently read label facts and maker from external specifications (2.59942ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /<h3>What it does<\/h3><p>The product label states: Rapid relief from itching and stings/. Input:
+  
+  '<div id="fxProductInfoView"></div><h2>Product Information</h2><div class="fx-info-identity"><h3>Example Relief Cream 25g</h3><div><span><b>Company on label</b>Maker</span><span><b>Brand</b>Example</span><span><b>Size</b>25 g</span></div></div><section class="fx-info-section"><h3>From your product label</h3><ul><li>Rapid relief from itching and stings.</li></ul><p class="fx-info-help">Source: the label in your uploaded photo. Retailer specifications are listed separately. Unprinted strength, ingredients and barcode details are not confirmed by this photo.</p></section><section class="fx-info-section"><h3>What it does</h3><p>FindIt has not verified a product-specific description from reliable sources yet.</p></section><div class="fx-info-cols"><section class="fx-info-section"><h3>Pros / supported strengths</h3><p>No product-specific strengths have been verified yet.</p></section><section class="fx-info-section"><h3>Considerations</h3><p>No independent product-specific drawbacks were found in the checked sources. Read the published specifications and retailer page before deciding.</p></section></div><section class="fx-info-section"><h3>Shopping information</h3><p>No exact retailer listing has been verified yet.</p><button id="fxInfoCompare">Compare retailer results</button></section><section class="fx-info-section"><button id="fxInfoRetry" disabled>Checking sources…</button><button id="fxInfoCorrect">Correct product name / model</button></section>'
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-cream-fix/tests/information-recovery.test.js:269:224)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '<div id="fxProductInfoView"></div><h2>Product Information</h2><div class="fx-info-identity"><h3>Example Relief Cream 25g</h3><div><span><b>Company on label</b>Maker</span><span><b>Brand</b>Example</span><span><b>Size</b>25 g</span></div></div><section class="fx-info-section"><h3>From your product label</h3><ul><li>Rapid relief from itching and stings.</li></ul><p class="fx-info-help">Source: the label in your uploaded photo. Retailer specifications are listed separately. Unprinted strength, ingredients and barcode details are not confirmed by this photo.</p></section><section class="fx-info-section"><h3>What it does</h3><p>FindIt has not verified a product-specific description from reliable sources yet.</p></section><div class="fx-info-cols"><section class="fx-info-section"><h3>Pros / supported strengths</h3><p>No product-specific strengths have been verified yet.</p></section><section class="fx-info-section"><h3>Considerations</h3><p>No independent product-specific drawbacks were found in the checked sources. Read the published specifications and retailer page before deciding.</p></section></div><section class="fx-info-section"><h3>Shopping information</h3><p>No exact retailer listing has been verified yet.</p><button id="fxInfoCompare">Compare retailer results</button></section><section class="fx-info-section"><button id="fxInfoRetry" disabled>Checking sources…</button><button id="fxInfoCorrect">Correct product name / model</button></section>',
+    expected: /<h3>What it does<\/h3><p>The product label states: Rapid relief from itching and stings/,
+    operator: 'match',
+    diff: 'simple'
+  }
