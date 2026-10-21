@@ -79,3 +79,11 @@ test('assistant does not promote single-reader, partial or warning text into a p
   {name:'Example Cream',identificationMethod:'independent-printed-label-consensus',visibleText:['Do not use for relief of burns']},
  ])assert.doesNotMatch(answerFromEvidence('What does it do?',{identification},{}).answer,/photo label states/i);
 });
+
+test('barcode questions distinguish the current identity, retailer evidence and missing evidence',()=>{
+ const i={name:'Example Cream',identificationMethod:'independent-printed-label-consensus',visibleText:['Helps protect skin'],requiresModelConfirmation:false};
+ assert.match(answerFromEvidence('What is its barcode?',{identification:i},{}).answer,/No barcode has been independently verified/);
+ const research={researched:true,specifications:[{name:'Barcode',value:'6009712390007',sourceUrl:'https://retailer.example/product'}],sources:[{url:'https://retailer.example/product'}]};
+ const r=answerFromEvidence('What is its barcode?',{identification:i},research);assert.match(r.answer,/Retailer source lists barcode: 6009712390007/);assert.match(r.answer,/not read from your photo/);assert.ok(r.sources.some(s=>s.url==='https://retailer.example/product'));
+ const p=answerFromEvidence('barcode',{identification:{...i,requiresModelConfirmation:true}},research);assert.doesNotMatch(p.answer,/6009712390007/);assert.match(p.answer,/No barcode has been independently verified/);
+});
