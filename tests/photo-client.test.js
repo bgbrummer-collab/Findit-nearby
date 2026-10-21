@@ -5,7 +5,7 @@ import {readFileSync} from 'node:fs';
 const source=readFileSync(new URL('../script.js',import.meta.url),'utf8');
 const handler=source.slice(source.indexOf('searchBtn.onclick=async()=>'),source.indexOf('\n\nfunction resetResults()',source.indexOf('searchBtn.onclick=async()=>')));
 function client(){
-  const pending=[],rendered=[],statuses=[],state={file:{name:'first.jpg'},coords:{lat:-25,lon:28},diagnostics:{},radius:10},button={},visibleButton={disabled:true};
+  const pending=[],rendered=[],statuses=[],state={file:{name:'first.jpg'},coords:{lat:-25,lon:28},diagnostics:{},radius:10},button={},visibleButton={disabled:false};
   const ctx={state,searchBtn:button,FormData:class{append(){}},CustomEvent:class{},document:{dispatchEvent(){},getElementById(id){return id==='fxSearchNow'?visibleButton:null}},results:{classList:{remove(){}},scrollIntoView(){}},resetResults(){state.result=null},showSearchOverlay(){},hideSearchOverlay(){},finditSearchRequest(){return new Promise(resolve=>pending.push(data=>resolve({ok:true,json:async()=>data})))},renderIdentification(i){rendered.push(i.name)},syncExactDashboardResult(){},loadProductIntelligence(){},renderOffers(){},renderFreeActions(){},renderStores(){},updateMap(){},showWarning(){},showNothing(){},saveRecent(){},trackFindIt(){},setStatus(t){statuses.push(t)},loadNearby:async()=>{}};
   vm.runInNewContext(handler,ctx);
   return {state,button,visibleButton,pending,rendered,statuses};
@@ -43,6 +43,7 @@ test('overlay cleanup immediately releases the page without a delayed timer raci
 test('repeat activation while the same photo is pending starts only one inference request',async()=>{
  const c=client(),first=c.button.onclick();await c.button.onclick();
  assert.equal(c.pending.length,1);assert.equal(c.state.photoSearchPending,1);
+ assert.equal(c.visibleButton.disabled,true);assert.match(c.statuses.at(-1),/identifying/i);
  c.pending[0]({identification:null,requiresUserInput:true});await first;
  assert.equal(c.state.photoSearchPending,null);assert.equal(c.button.disabled,false);assert.equal(c.visibleButton.disabled,false);
 });
