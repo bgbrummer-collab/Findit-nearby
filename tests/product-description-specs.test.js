@@ -73,3 +73,12 @@ test('different manufacturer codes, quantities and source provenance remain sepa
  assert.equal(rows.length,5);assert.equal(rows[1].name,'Manufacturer part number');
  assert.equal(rows[3].value,'25 g');assert.equal(rows[4].value,'50 g');
 });
+
+test('product research distinguishes unavailable sources from product mismatches',async t=>{
+ const urls=['https://retailer.example/product/unavailable','https://retailer.example/product/different'];
+ t.mock.method(globalThis,'fetch',async u=>String(u)===urls[0]?new Response('unavailable',{status:403}):String(u)===urls[1]?new Response('<title>Unrelated product</title>'):new Response('<rss/>'));
+ const d=await(await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:{name:'Example Relief Cream 25g'},offers:urls.map(product_url=>({product_url,sourcePageVerified:true,exactProductMatch:true}))})}),{})).json();
+ assert.equal(d.researched,false);assert.ok(d.sourceChecks.some(s=>s.url===urls[0]&&s.status==='http-error'&&s.httpStatus===403));
+ assert.ok(d.sourceChecks.some(s=>s.url===urls[1]&&s.status==='identity-mismatch'));
+ assert.equal(d.sources.length,0);assert.equal(d.specifications.length,0);
+});
