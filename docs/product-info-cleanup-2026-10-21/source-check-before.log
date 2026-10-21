@@ -1,0 +1,26 @@
+✔ product specification tables keep exact units and deduplicate repeated tables (3.618672ms)
+✔ labelled technical paragraphs retain exact source units and exclude unrelated prose (1.68458ms)
+✔ Shopify description specifications are scoped to the verified product, excluding footer tables (14.165186ms)
+✔ verified structured descriptions expose technical paragraph specs with attribution (3.587239ms)
+✔ short Woo catalogue descriptions are enriched only from an independently matching product content block (5.69058ms)
+✔ retailer product attributes and price caveats remain scoped and do not turn a link into purpose (16.897387ms)
+✔ catalogue aliases collapse without claiming an independently verified manufacturer code or units (0.304263ms)
+✔ different manufacturer codes, quantities and source provenance remain separate (0.115122ms)
+✖ product research distinguishes unavailable sources from product mismatches (1.43587ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 8
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 158.766574
+
+✖ failing tests:
+
+test at tests/product-description-specs.test.js:77:1
+✖ product research distinguishes unavailable sources from product mismatches (1.43587ms)
+  TypeError: Cannot read properties of undefined (reading 'some')
+      at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-info-cleanup/tests/product-description-specs.test.js:81:60)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)

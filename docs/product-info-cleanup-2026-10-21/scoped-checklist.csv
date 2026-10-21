@@ -1,0 +1,32 @@
+entry,status,evidence_or_limit
+Supplied screenshots,passed,All three local PNGs opened and inspected; automatic missing-file text was inaccurate.
+Actual cream file chooser upload,passed,"Exact supplied JPEG selected, Identify clicked; no typed rescue."
+Actual headset file chooser upload,passed,Original supplied JPG selected; no typed rescue.
+Invalid file selection,passed,Text file rejected with Please choose an image file; 95e6f3c.
+Oversized photo selection,passed,9 MB JPEG rejected with smaller than 8 MB message; 95e6f3c.
+Valid selection after invalid/oversized files,passed,Valid headset accepted and search ran; provider outcome failed independently.
+Premium Beta activation,passed,Free activation and reload persistence observed; payments visibly disabled.
+History list,passed,"Separate earlier exact cream, later partial cream and typed conditioner entries shown on 95e6f3c."
+Ask FindIt label-purpose answer,passed,Actual earlier assistant repair answers from selected photo and attributes claim; assistant-final-browser.txt.
+Typed conditioner source recovery,passed,b2f0af7 shows Clicks verified facts and separate Dis-Chem unavailable section.
+Recovery link usefulness,passed,Clicked unavailable Dis-Chem source; actual browser opened matching 250ml conditioner page.
+Actual cream retailer source,passed,"Browser shows Anthisan Cream 25g, published price conditions and metadata; not a FindIt offer/branch-stock verification."
+Production cream facts/price from Dis-Chem,blocked,Worker direct fetch returns HTTP403; browser page is readable.
+Normalized Anthisan catalogue fields in production UI,blocked,"Local extraction regressions pass; fresh production source unavailable, so full populated cream UI retest not certified."
+Earlier latest-code cream photo outcome,failed,95e6f3c reverted to partial Sanofi topical cream; retained evidence.
+Earlier latest-code headset photo outcome,failed,95e6f3c actual browser reported image service unable to identify.
+Fresh cream photo on final spacing repair,passed,Actual chooser upload on 0ce5ecf and b871569 identifies Anthisan CREAM 25 g at 85%; no typed rescue. Retailer journey remains blocked separately.
+Fresh headset photo on final spacing repair,failed,Actual b871569 chooser run: headphones at 65%; brand/model unconfirmed; no exact offer. Honest compatibility answer is not an exact-shopping success.
+Physical gallery/camera/GPS and OS drag,blocked,Remote chooser is not a physical-device or native OS gesture certification.
+Whole application inventory and uncommon paths,untested,Inherited 272 observed states are not a complete unique-control inventory; continue launch checklist.
+Branch inventory feed,blocked,No authoritative SKU-by-branch inventory source configured.
+Durable background alerts,blocked,"Storage, scheduling and delivery integrations remain absent; no paid services activated."
+Central analytics,blocked,Central persistence remains unconfigured.
+Final current-product Ask FindIt,passed,b871569 cream purpose/strength/barcode question answered with source and uncertainty; headset PS5/model/barcode answer contains no cream facts.
+Final cream Save Find and reload,passed,"Save Find succeeded; after reload Saved Items contains corrected cream and Open product refreshes its existing identity, with no typed rescue."
+Manual public coordinates and pharmacy discovery,passed,"0ce5ecf: after location unavailable, public Menlyn coordinates return 12 pharmacies, nearest Clicks Menlyn Park 0.1km; scheduled open/closed follows published hours, not branch inventory."
+Manual short barcode validation,passed,b871569: 123 rejected as invalid numeric retail barcode.
+Manual valid barcode catalogue,passed,"b871569: 5449000000996 resolves to community catalogue Coca-Cola 330ml, with source link and no exact priced retailer offer."
+Camera barcode detector,blocked,Actual dialog states camera barcode detection unsupported in this browser; manual entry available.
+Final empty cream comparison,passed,0ce5ecf Compare clearly says no verified exact price; no invented price or seller.
+Latest tablet/mobile/zoom sweep,untested,No manual final-device sweep certified; automated workflows are separate and do not certify every customer outcome.

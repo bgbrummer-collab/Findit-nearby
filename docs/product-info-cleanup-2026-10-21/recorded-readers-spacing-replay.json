@@ -1,0 +1,83 @@
+{
+  "before": {
+    "name": "Sanofi topical cream",
+    "brand": "Sanofi",
+    "model": "",
+    "object": "topical cream",
+    "size": "25 g",
+    "color": "",
+    "visibleText": [],
+    "labelCandidates": [
+      {
+        "name": "Anthisan CREAM 25 g",
+        "brand": "",
+        "manufacturer": "Sanofi",
+        "size": "25 g",
+        "confirmed": false,
+        "source": "printed-label-hypothesis"
+      },
+      {
+        "name": "Anthisan Cream 25g",
+        "brand": "",
+        "manufacturer": "Sanofi",
+        "size": "25 g",
+        "confirmed": false,
+        "source": "printed-label-hypothesis"
+      }
+    ],
+    "suggestedLabel": "Sanofi anthisan cream 25 g",
+    "suggestedModels": [
+      {
+        "name": "Sanofi anthisan cream",
+        "confirmed": false,
+        "source": "visual-model-hypothesis"
+      },
+      {
+        "name": "Sanofi CREAM",
+        "confirmed": false,
+        "source": "visual-model-hypothesis"
+      }
+    ],
+    "barcode": null,
+    "searchQuery": "Sanofi topical cream",
+    "confidence": 0.65,
+    "userConfirmed": false,
+    "identificationMethod": "independent-vision-consensus",
+    "identityScope": "product-family",
+    "requiresModelConfirmation": true,
+    "unverifiedDetails": [
+      "exact model",
+      "variant",
+      "specifications"
+    ],
+    "features": []
+  },
+  "after": {
+    "name": "Anthisan CREAM 25 g",
+    "brand": "",
+    "model": "",
+    "object": "topical cream",
+    "size": "25 g",
+    "color": "",
+    "visibleText": [
+      "Anthisan CREAM 25 g",
+      "Rapid relief from allergic skin reactions, stings and bites"
+    ],
+    "labelCompany": "Sanofi",
+    "barcode": null,
+    "searchQuery": "Anthisan CREAM 25 g",
+    "confidence": 0.85,
+    "userConfirmed": false,
+    "identificationMethod": "independent-printed-label-consensus",
+    "identityScope": "printed-product-label",
+    "requiresModelConfirmation": false,
+    "labelCandidates": [],
+    "suggestedLabel": "",
+    "suggestedModels": [],
+    "features": [],
+    "unverifiedDetails": [
+      "unprinted strength or formula",
+      "barcode unless independently read"
+    ]
+  }
+}

@@ -1,0 +1,71 @@
+✔ retains Beats headphones when exact models conflict, without leaking guessed model in query (3.404853ms)
+✔ retains exact corroborated model with fewer calls (0.218054ms)
+✔ different objects cannot confirm an exact product even when the brand agrees (0.573022ms)
+✔ one confident model cannot independently verify itself (0.152056ms)
+✔ a surviving complete printed shoe-family name is a reviewable candidate, not a confirmed model (0.67923ms)
+✔ different brands cannot corroborate an identically named model (0.206457ms)
+✔ headset and headphones are recognised as the same broad object (1.115789ms)
+✔ container descriptions retain the independently recognised labelled product (0.312524ms)
+✔ two agreeing brands retain the brand when a third model misreads the logo (0.561255ms)
+✔ model punctuation and size spacing preserve exact identity (0.681524ms)
+✔ conflicting colour or size cannot publish an exact variant (0.837175ms)
+✔ a complete single-model label reading is retained only for human confirmation (0.376169ms)
+✔ shape guesses and incompletely read labels are never suggested as a model (0.629886ms)
+✔ a common printed metric size survives disagreement on an unverified secondary unit (0.190954ms)
+✔ different metric pack sizes still require confirmation (0.165005ms)
+✔ a generic object label recovers the corroborated sneaker family without accepting conflicting models (0.20893ms)
+✔ conflicting product types preserve only a corroborated brand (0.486474ms)
+✔ independent descriptive label agreement proposes paint family without inferring size or colour (0.393325ms)
+✔ a surviving complete printed label can propose a reviewed candidate when other providers fail (0.361929ms)
+✔ container graphics cannot become a paint colour or conditioner variant (1.535923ms)
+✔ conflicting shoe models remain reviewable hypotheses without confirming the photographed SKU (0.839879ms)
+✔ model hypotheses prefer the complete family name and discard isolated numeric fragments (0.460645ms)
+✔ bookcase and bookshelf readings preserve useful family evidence without inventing IKEA identity (0.252726ms)
+✔ generic object fields preserve a corroborated headset family from the other observed fields (0.149111ms)
+✔ toilet rolls and toilet paper are the same family without asserting an uncertain pack size (0.166297ms)
+✔ soft drink and beverage readings preserve supported family without translating a variant guess (0.176082ms)
+✔ missing object fields can recover a family from two independent names (0.288038ms)
+✔ construction toy synonyms keep family guidance without inventing a LEGO set number (0.178605ms)
+✔ provider template placeholders cannot veto corroborated size or confirm a fake product name (0.461897ms)
+✔ unbranded shirt descriptions retain a supported family without guessing a brand or style (0.196002ms)
+✔ a fully printed label remains a possible match when product-type readings disagree (0.148731ms)
+✔ a cream package colour is not the cream colour without independently printed evidence (0.235791ms)
+✔ complete printed consumer label and quantity corroborated by another reader resolve manufacturer field splitting (0.343872ms)
+✔ a separately printed manufacturer does not replace a complete consumer label or invent its retail brand (0.372053ms)
+✔ topical cream descriptions corroborate only their broad family without treating ice cream as the same product (0.159447ms)
+✔ brand-only consensus still retains a fully printed label as an unconfirmed candidate (0.195791ms)
+✔ printed identity reconciliation still rejects uncorroborated labels and conflicting variants (0.917278ms)
+✔ label statements need two independent transcriptions and never become formula facts (0.610738ms)
+✔ a reader using the complete printed label as its object still corroborates the independent cream family (0.61209ms)
+✖ Logitech G and Logitech retain the shared brand while conflicting unprinted models remain unconfirmed (1.045765ms)
+ℹ tests 40
+ℹ suites 0
+ℹ pass 39
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 116.798891
+
+✖ failing tests:
+
+test at tests/vision-consensus.test.js:163:1
+✖ Logitech G and Logitech retain the shared brand while conflicting unprinted models remain unconfirmed (1.045765ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  '' !== 'Logitech'
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-info-cleanup/tests/vision-consensus.test.js:166:39)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '',
+    expected: 'Logitech',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

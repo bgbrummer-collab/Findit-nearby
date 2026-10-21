@@ -1,0 +1,21 @@
+Focused factual excerpt from actual browser source; full page not reproduced.
+heading "Marc Anthony 3x Moist Conditioner 250ml" [level=1]
+  - text: "Price:"
+  - generic: R 229.99
+  - text: ":"
+  - generic: R 206.99
+  - strong: This is a Better Rewards product!
+  - text: Members will
+  - strong: see discount at checkout.
+  - 'link "Credit: from R20 per month "':
+    - /url: "#"
+  - spinbutton "Qty": "1"
+  - button "Add to Cart"
+  - generic: Available for Click & Collect
+  - generic: Delivery within
+  - generic: 3-5 days. T&Cs apply
+  - generic: 
+  - button "Add to list"
+  - link "Find in store":
+    - /url: "#"
+  - list

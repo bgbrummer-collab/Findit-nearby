@@ -1,0 +1,53 @@
+Focused factual excerpt from actual browser source; full page not reproduced.
+heading "Anthisan Cream 25g" [level=1]
+  - text: "Price:"
+  - generic: R 76.99
+  - 'link "Credit: from R8 per month "':
+    - /url: "#"
+  - generic: "disclaimer:"
+  - strong: Price shown is the Single Exit Price (SEP), a cash-only price that excludes the dispensing fee.
+  - link "Login to buy":
+    - /url: https://www.dischem.co.za/sso/redirect/logintobuy?sku=000000000000004023/
+    - generic: Login to buy
+  - generic: Available for Click & Collect
+  - generic: Delivery within
+  - generic: 3-5 days. T&Cs apply
+  - generic: 
+  - button "Add to list" [disabled]
+  - link "Find in store":
+    - /url: "#"
+  - list
+  - link " Product Details":
+    - /url: "#description"
+  - generic " Product Details":
+    - link "Get more information on SAHPRA's website by clicking here":
+      - /url: https://medsinfo.sahpra.org.za/home
+  - link " More Info":
+    - /url: "#additional"
+  - generic " More Info":
+    - table "More Information":
+      - caption: More Information
+      - rowgroup:
+        - row "SKU 000000000000004023":
+          - rowheader "SKU"
+          - cell "000000000000004023"
+        - row "Pack Size 25":
+          - rowheader "Pack Size"
+          - cell "25"
+        - row "Product Drugschedule 2":
+          - rowheader "Product Drugschedule"
+          - cell "2"
+        - row "Product Main Barcode 6009712390007":
+          - rowheader "Product Main Barcode"
+          - cell "6009712390007"
+        - row "Product BMC Value PDOI18":
+          - rowheader "Product BMC Value"
+          - cell "PDOI18"
+        - row "Product Nappi Code 703834002":
+          - rowheader "Product Nappi Code"
+          - cell "703834002"
+        - row "Product Reference Number 004023000EA":
+          - rowheader "Product Reference Number"
+          - cell "004023000EA"
+  - text: 
+  - generic " Description"

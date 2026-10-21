@@ -1,0 +1,44 @@
+✔ assistant answers combined price and location questions instead of hiding prices behind where intent (20.245704ms)
+✔ assistant separates currencies and rejects null, unverified and partial-identity prices (0.917886ms)
+✔ assistant returns researched purpose, specifications and sources, without fabricating cons (0.219477ms)
+✔ live worker assistant obtains exact-product research rather than canned product redirect (15.317493ms)
+✔ typed conditioner name discovers and researches retailer candidates without parsed brand or search-engine results (15.474667ms)
+✔ partial photos answer practical buying questions without inventing specifications (0.897044ms)
+✔ microphone questions do not accidentally trigger phone-number or location intent (0.190193ms)
+✔ uncertain visual model choices and observed colours are not asserted as an exact SKU or price (0.237163ms)
+✔ compatibility questions answer published connections and explicitly leave unsupported devices unverified (0.373696ms)
+✔ assistant answers kit contents from the published package instead of omitting charger evidence (0.488757ms)
+✔ nearest branches keep zero distance first and do not confuse closest with closing hours (0.49755ms)
+✖ assistant uses corroborated photo purpose when external sources only have catalogue metadata (1.212253ms)
+✔ assistant does not promote single-reader, partial or warning text into a photo purpose (0.20169ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 12
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 168.343309
+
+✖ failing tests:
+
+test at tests/assistant-evidence.test.js:67:1
+✖ assistant uses corroborated photo purpose when external sources only have catalogue metadata (1.212253ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /photo label states: Rapid relief/. Input:
+  
+  'I could not verify published product-specific information for Example Relief Cream 25g. Add the exact model, size or barcode if the current identity is incomplete.'
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-info-cleanup/tests/assistant-evidence.test.js:71:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'I could not verify published product-specific information for Example Relief Cream 25g. Add the exact model, size or barcode if the current identity is incomplete.',
+    expected: /photo label states: Rapid relief/,
+    operator: 'match',
+    diff: 'simple'
+  }

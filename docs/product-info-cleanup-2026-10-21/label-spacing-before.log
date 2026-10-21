@@ -1,0 +1,75 @@
+✔ retains Beats headphones when exact models conflict, without leaking guessed model in query (3.829355ms)
+✔ retains exact corroborated model with fewer calls (0.231544ms)
+✔ different objects cannot confirm an exact product even when the brand agrees (0.507064ms)
+✔ one confident model cannot independently verify itself (0.198756ms)
+✔ a surviving complete printed shoe-family name is a reviewable candidate, not a confirmed model (0.681373ms)
+✔ different brands cannot corroborate an identically named model (0.234619ms)
+✔ headset and headphones are recognised as the same broad object (0.952186ms)
+✔ container descriptions retain the independently recognised labelled product (0.388488ms)
+✔ two agreeing brands retain the brand when a third model misreads the logo (0.293426ms)
+✔ model punctuation and size spacing preserve exact identity (0.906618ms)
+✔ conflicting colour or size cannot publish an exact variant (0.669546ms)
+✔ a complete single-model label reading is retained only for human confirmation (0.459083ms)
+✔ shape guesses and incompletely read labels are never suggested as a model (0.413305ms)
+✔ a common printed metric size survives disagreement on an unverified secondary unit (0.165456ms)
+✔ different metric pack sizes still require confirmation (0.163303ms)
+✔ a generic object label recovers the corroborated sneaker family without accepting conflicting models (0.237293ms)
+✔ conflicting product types preserve only a corroborated brand (0.590769ms)
+✔ independent descriptive label agreement proposes paint family without inferring size or colour (0.393315ms)
+✔ a surviving complete printed label can propose a reviewed candidate when other providers fail (0.228059ms)
+✔ container graphics cannot become a paint colour or conditioner variant (1.717745ms)
+✔ conflicting shoe models remain reviewable hypotheses without confirming the photographed SKU (0.792649ms)
+✔ model hypotheses prefer the complete family name and discard isolated numeric fragments (0.187228ms)
+✔ bookcase and bookshelf readings preserve useful family evidence without inventing IKEA identity (0.270303ms)
+✔ generic object fields preserve a corroborated headset family from the other observed fields (0.146528ms)
+✔ toilet rolls and toilet paper are the same family without asserting an uncertain pack size (0.144175ms)
+✔ soft drink and beverage readings preserve supported family without translating a variant guess (0.377422ms)
+✔ missing object fields can recover a family from two independent names (0.156213ms)
+✔ construction toy synonyms keep family guidance without inventing a LEGO set number (0.166388ms)
+✔ provider template placeholders cannot veto corroborated size or confirm a fake product name (0.610688ms)
+✔ unbranded shirt descriptions retain a supported family without guessing a brand or style (0.135652ms)
+✔ a fully printed label remains a possible match when product-type readings disagree (0.145476ms)
+✔ a cream package colour is not the cream colour without independently printed evidence (0.234669ms)
+✔ complete printed consumer label and quantity corroborated by another reader resolve manufacturer field splitting (0.410541ms)
+✔ a separately printed manufacturer does not replace a complete consumer label or invent its retail brand (0.647543ms)
+✔ topical cream descriptions corroborate only their broad family without treating ice cream as the same product (0.212697ms)
+✔ brand-only consensus still retains a fully printed label as an unconfirmed candidate (0.22823ms)
+✔ printed identity reconciliation still rejects uncorroborated labels and conflicting variants (0.8003ms)
+✔ label statements need two independent transcriptions and never become formula facts (0.472363ms)
+✔ a reader using the complete printed label as its object still corroborates the independent cream family (0.681704ms)
+✔ Logitech G and Logitech retain the shared brand while conflicting unprinted models remain unconfirmed (0.206026ms)
+✖ independently transcribed labels differing only in quantity spacing are one candidate (1.291ms)
+ℹ tests 41
+ℹ suites 0
+ℹ pass 40
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 117.991606
+
+✖ failing tests:
+
+test at tests/vision-consensus.test.js:170:1
+✖ independently transcribed labels differing only in quantity spacing are one candidate (1.291ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'independent-brand-consensus'
+  - 'independent-printed-label-consensus'
+                 ^
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/e56c2af3a8d6/Findit-info-cleanup/tests/vision-consensus.test.js:173:40)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'independent-brand-consensus',
+    expected: 'independent-printed-label-consensus',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
