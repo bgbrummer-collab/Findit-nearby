@@ -14,17 +14,21 @@ assert.equal(safeDynamicProfile('https://example.co.za/search?q=acme'),null,'sea
 assert.equal(safeDynamicProfile('https://news24.com/shop/acme-runner-x100'),null,'content/news domains must not become retailers');
 
 const good=`Title: Acme Runner X100 Sneaker\nR 1 999.00\nAdd to cart\nIn stock\nProduct code AX100`;
-const offer=dynamicPageOffer(good,'https://newshop.example.co.za/products/acme-runner-x100',body,p);
+const originalFetch=globalThis.fetch;
+globalThis.fetch=async()=>new Response('<script type="application/ld+json">'+JSON.stringify({'@type':'Product',name:'Acme Runner X100 Sneaker',offers:{'@type':'Offer',price:1999,priceCurrency:'ZAR',availability:'https://schema.org/InStock'}})+'</script>',{headers:{'content-type':'text/html'}});
+const offer=await dynamicPageOffer(good,'https://newshop.example.co.za/products/acme-runner-x100',body,p);
 assert.ok(offer,'exact direct retailer page with usable commerce data should be accepted');
 assert.equal(offer.price,1999);
 assert.equal(offer.availability,'in_stock');
 assert.equal(offer.sourcePageVerified,true);
 assert.equal(offer.branchStockVerified,false,'online stock must never become branch stock');
 assert.equal(offer.branchPriceVerified,false,'online price must never become branch price');
-assert.equal(offer.stockScope,'online');
+assert.equal(offer.stockScope,'online/general retailer availability only');
 assert.equal(offer.priceScope,'online');
 
 const wrong=`Title: Acme Runner X200 Sneaker\nR 1 899.00\nAdd to cart\nIn stock\nProduct code AX200`;
-assert.equal(dynamicPageOffer(wrong,'https://newshop.example.co.za/products/acme-runner-x200',body,p),null,'wrong model must not be accepted');
+globalThis.fetch=async()=>new Response('<title>Acme Runner X200 Sneaker</title>R 1899 In stock Add to cart',{headers:{'content-type':'text/html'}});
+assert.equal(await dynamicPageOffer(wrong,'https://newshop.example.co.za/products/acme-runner-x200',body,p),null,'wrong model must not be accepted');
 
+globalThis.fetch=originalFetch;
 console.log('DYNAMIC_RETAILER_DISCOVERY_REGRESSION_PASS');
