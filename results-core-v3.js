@@ -12,7 +12,7 @@
 
   const status=(txt,bad=false)=>{const e=$('#status');if(e){e.textContent=txt;e.style.color=bad?'#ff9da7':''}};
   const radius=()=>{const n=Number(S()?.radius||$('#radiusSelect')?.value||10);return Number.isFinite(n)?n:10};
-  const money=(n,c='ZAR')=>{if(n==null||!Number.isFinite(Number(n)))return 'Price not published';try{return new Intl.NumberFormat('en-ZA',{style:'currency',currency:c||'ZAR'}).format(Number(n))}catch{return `${c||'ZAR'} ${Number(n).toFixed(2)}`}};
+  const money=(n,c='')=>window.finditOfferEvidence?.format({price:n,currency:c})||'Price not verified';
   const stockText=v=>{const x=String(v||'').toLowerCase();if(x==='in_stock')return'In stock online';if(x==='out_of_stock')return'Out of stock online';if(x==='preorder')return'Pre-order';if(x==='backorder')return'Back-order';return'Stock not published'};
   const mapsUrl=s=>{const q=[s?.name,s?.address].filter(Boolean).join(' ');return q?`https://www.google.com/maps/search/?${new URLSearchParams({api:'1',query:q})}`:''};
   const directionsUrl=s=>exactBranch(s)?`https://www.google.com/maps/dir/?${new URLSearchParams({api:'1',destination:`${Number(s.lat)},${Number(s.lon)}`})}`:'';
@@ -59,7 +59,7 @@
     const title=clean(o.product_name||o.name||o.title);
     const score=Number(o.matchScore??o.match??0);
     const price=o.price==null?null:Number(o.price);
-    return {retailer,url,title,score:Number.isFinite(score)?score:0,price:Number.isFinite(price)?price:null,currency:o.currency||'ZAR',availability:o.availability||o.stock?.status||null,verified:o.verified===true||o.listingType==='connected_feed'||o.source?.toLowerCase?.().includes('verified'),branchStockVerified:o.branchStockVerified===true};
+    return {...o,retailer,url,title,score:Number.isFinite(score)?score:0,price:Number.isFinite(price)&&price>0?price:null,currency:o.currency||null,availability:o.availability||o.stock?.status||null,verified:o.verified===true||o.listingType==='connected_feed'||o.source?.toLowerCase?.().includes('verified'),branchStockVerified:o.branchStockVerified===true};
   }
 
   function mergeOffers(...sets){
@@ -88,7 +88,7 @@
     const offers=mergeOffers(primary?.offers||[],secondary?.offers||[]);
     const priced=offers.filter(o=>o.price!=null).sort((a,b)=>a.price-b.price);
     const links=retailerLinks(primary||secondary||{},i);
-    const best=priced[0];
+    const best=window.finditOfferEvidence?.cheapest(offers)||null;
     if(offers.length){
       root.innerHTML=`<div class="section-title-row"><div><p class="section-kicker">WHERE TO BUY</p><h3>${offers.length} strong online match${offers.length===1?'':'es'}</h3><p>Prices and stock below are online listing data. Physical branch stock is shown separately only when verified.</p></div></div>${best?`<div class="result-note"><strong>Best published price: ${esc(money(best.price,best.currency))}</strong> • ${esc(best.retailer)}</div>`:''}<div class="offer-list">${offers.map(o=>`<article class="offer-card"><div><h4>${esc(o.title)}</h4><p>${esc(o.retailer)}</p><p>${o.verified?'✓ Strong product-page match':'Strong product match'} • ${esc(stockText(o.availability))}${o.branchStockVerified?' • ✓ Branch stock verified':''}</p><a href="${esc(o.url)}" target="_blank" rel="noopener noreferrer">View retailer →</a></div><div class="price">${esc(money(o.price,o.currency))}</div></article>`).join('')}</div>`;
     }else{
