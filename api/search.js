@@ -35,7 +35,7 @@ export default{async fetch(request){
  if(request.method!=='POST')return json({error:'POST only'},405);
  const started=Date.now();
  try{
-  const key=process.env.GEMINI_API_KEY;if(!key)return json({error:'GEMINI_API_KEY is missing in Vercel.'},500);
+  const key=process.env.GEMINI_API_KEY;if(!key)return json({error:'Image identification is not configured on this deployment.'},500);
   const form=await request.formData(),image=form.get('image');
   if(!image||typeof image.arrayBuffer!=='function')return json({error:'No image uploaded.'},400);
   if(!String(image.type||'').startsWith('image/'))return json({error:'Uploaded file must be an image.'},400);
