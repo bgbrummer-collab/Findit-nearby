@@ -117,7 +117,7 @@ function needsTieBreak(a,b){
 function mergeIndependent(primary,checker){
  if(!checker)return {...primary,verificationNote:'Independent verification was unavailable; strong primary result retained with conservative evidence rules.',draftChanged:false,confidence:Math.min(Number(primary.confidence||0),.88)};
  const agreement=overlap([primary.object,primary.name,primary.brand,primary.model].join(' '),[checker.object,checker.name,checker.brand,checker.model].join(' '));
- return {...primary,visibleText:[...new Set([...(primary.visibleText||[]),...(checker.visibleText||[])])].slice(0,14),evidence:[...new Set([...(primary.evidence||[]),...(checker.evidence||[])])].slice(0,10),verificationNote:`Independent parallel verifier agreement ${Math.round(agreement*100)}%. ${checker.verificationNote||''}`.trim(),draftChanged:false,confidence:Math.min(1,Math.max(Number(primary.confidence||0),agreement>=.7?Number(checker.confidence||0)*.98:0))};
+ return {...primary,visibleText:(agreement>=.7?[...new Set([...(primary.visibleText||[]),...(checker.visibleText||[])])]:[...(primary.visibleText||[])]).slice(0,14),evidence:(agreement>=.7?[...new Set([...(primary.evidence||[]),...(checker.evidence||[])])]:[...(primary.evidence||[])]).slice(0,10),verificationNote:`Independent parallel verifier agreement ${Math.round(agreement*100)}%. ${checker.verificationNote||''}`.trim(),draftChanged:false,confidence:Math.min(1,Math.max(Number(primary.confidence||0),agreement>=.7?Number(checker.confidence||0)*.98:0))};
 }
 
 async function tieBreak(key,b64,mime,primary,checker){
