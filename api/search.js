@@ -35,7 +35,7 @@ export default{async fetch(request){
  if(request.method!=='POST')return json({error:'POST only'},405);
  const started=Date.now();
  try{
-  const key=process.env.GEMINI_API_KEY;if(!key)return json({error:'GEMINI_API_KEY is missing in Vercel.'},500);
+  const key=process.env.GEMINI_API_KEY;if(!key)return json({error:'Image identification is not configured on this deployment.'},500);
   const form=await request.formData(),image=form.get('image');
   if(!image||typeof image.arrayBuffer!=='function')return json({error:'No image uploaded.'},400);
   if(!String(image.type||'').startsWith('image/'))return json({error:'Uploaded file must be an image.'},400);
@@ -117,7 +117,7 @@ function needsTieBreak(a,b){
 function mergeIndependent(primary,checker){
  if(!checker)return {...primary,verificationNote:'Independent verification was unavailable; strong primary result retained with conservative evidence rules.',draftChanged:false,confidence:Math.min(Number(primary.confidence||0),.88)};
  const agreement=overlap([primary.object,primary.name,primary.brand,primary.model].join(' '),[checker.object,checker.name,checker.brand,checker.model].join(' '));
- return {...primary,visibleText:[...new Set([...(primary.visibleText||[]),...(checker.visibleText||[])])].slice(0,14),evidence:[...new Set([...(primary.evidence||[]),...(checker.evidence||[])])].slice(0,10),verificationNote:`Independent parallel verifier agreement ${Math.round(agreement*100)}%. ${checker.verificationNote||''}`.trim(),draftChanged:false,confidence:Math.min(1,Math.max(Number(primary.confidence||0),agreement>=.7?Number(checker.confidence||0)*.98:0))};
+ return {...primary,visibleText:(agreement>=.7?[...new Set([...(primary.visibleText||[]),...(checker.visibleText||[])])]:[...(primary.visibleText||[])]).slice(0,14),evidence:(agreement>=.7?[...new Set([...(primary.evidence||[]),...(checker.evidence||[])])]:[...(primary.evidence||[])]).slice(0,10),verificationNote:`Independent parallel verifier agreement ${Math.round(agreement*100)}%. ${checker.verificationNote||''}`.trim(),draftChanged:false,confidence:Math.min(1,Math.max(Number(primary.confidence||0),agreement>=.7?Number(checker.confidence||0)*.98:0))};
 }
 
 async function tieBreak(key,b64,mime,primary,checker){
