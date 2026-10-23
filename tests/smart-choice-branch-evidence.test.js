@@ -11,3 +11,5 @@ test('explicit branch price evidence retains verified distance and opening state
 
 const offerSnippet=source.slice(source.indexOf('function currentOffers(){'),source.indexOf('function openingText('));
 test('Smart Choice requires exact identity and independent source evidence',()=>{const run=(offers,i={})=>vm.runInNewContext(offerSnippet+';currentOffers()',{state:()=>({offers,result:{identification:i}}),window:{},norm:v=>String(v||''),retailerName:o=>o.retailer||'',positive:v=>Number(v)>0});assert.equal(run([{retailer:'A',price:1,verified:true}]).length,0);assert.equal(run([{retailer:'A',price:1,exactProductMatch:true}]).length,0);const good={retailer:'A',price:1,exactProductMatch:true,sourcePageVerified:true};assert.equal(run([good]).length,1);assert.equal(run([good],{requiresModelConfirmation:true}).length,0);});
+
+test('branch stock evidence alone does not turn an online price into a branch price',()=>{const r=choices({retailer:'Acme',price:230,currency:'ZAR',branchStockVerified:true,branchId:'branch-1'});assert.equal(r.best.store,null);assert.equal(r.best.distance,null);});

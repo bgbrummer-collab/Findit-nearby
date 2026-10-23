@@ -38,7 +38,7 @@ function knownOpenState(s,when=new Date()){
 }
 function matchStore(o,stores){
  // A chain's online offer says nothing about the closest branch's price or stock.
- if(o.branchPriceVerified!==true&&o.branchStockVerified!==true)return null;
+ if(o.branchPriceVerified!==true)return null;
  const id=o.branchId||o.storeId,name=norm(o.branchName||o.storeName);
  return stores.find(s=>id&&String(s.branchId||s.id)===String(id)||name&&norm(s.name)===name)||null;
 }
