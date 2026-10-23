@@ -33,6 +33,8 @@ function enrichDashboard(){
  if(info){const html='<b>What we found</b><span>'+esc(os.length?os.length+' retailer listing'+(os.length===1?'':'s')+' found':ss.length?ss.length+' relevant nearby retailer'+(ss.length===1?'':'s')+' found':'Retailer verification still needed')+'</span>';info.hidden=false;if(info.innerHTML!==html)info.innerHTML=html;}
 }
 function smartChoiceValue(){
+ // The Smart Choice owner supplies scoped prices and branch evidence.
+ if(window.__finditSmartChoiceUi)return;
  if(!hasIdentity())return;let root=$('#fxSmartChoice');if(!root)return;let ss=nearby(),os=offers(),verified=os.filter(o=>o?.verified===true||o?.sourcePageVerified===true),prices=verified.filter(o=>window.finditOfferEvidence?.amount(o)!==null&&window.finditOfferEvidence?.supported(o));
  let cards=$$('.fx-smart-card',root);if(cards[0]&&/Need verified retailer evidence/i.test(cards[0].textContent)){let s=cards[0].querySelector('strong'),p=cards[0].querySelector('p');if(s)s.textContent=verified.length?verified.length+' verified retailer option'+(verified.length===1?'':'s'):(ss.length?ss.length+' nearby retailer'+(ss.length===1?'':'s')+' to check':'Retailer check needed');if(p)p.textContent=verified.length?'Compare the verified retailer evidence below.':ss.length?'These stores are relevant nearby options; exact product stock still needs confirmation.':'No retailer evidence has been confirmed yet.'}
  if(cards[1]&&window.finditOfferEvidence?.cheapest(prices)){let cheapest=window.finditOfferEvidence.cheapest(prices),s=cards[1].querySelector('strong'),p=cards[1].querySelector('p');if(s)s.textContent=window.finditOfferEvidence.format(cheapest);if(p)p.textContent='Lowest verified price currently found at '+sourceName(cheapest)+'.'}
