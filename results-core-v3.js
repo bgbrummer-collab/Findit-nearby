@@ -59,7 +59,7 @@
     const title=clean(o.product_name||o.name||o.title);
     const score=Number(o.matchScore??o.match??0);
     const price=o.price==null?null:Number(o.price);
-    return {retailer,url,title,score:Number.isFinite(score)?score:0,price:Number.isFinite(price)?price:null,currency:o.currency||'ZAR',availability:o.availability||o.stock?.status||null,verified:o.verified===true||o.listingType==='connected_feed'||o.source?.toLowerCase?.().includes('verified'),branchStockVerified:o.branchStockVerified===true};
+    return {...o,retailer,url,title,score:Number.isFinite(score)?score:0,price:Number.isFinite(price)&&price>0?price:null,currency:o.currency||null,availability:o.availability||o.stock?.status||null,verified:o.verified===true||o.listingType==='connected_feed'||o.source?.toLowerCase?.().includes('verified'),branchStockVerified:o.branchStockVerified===true};
   }
 
   function mergeOffers(...sets){

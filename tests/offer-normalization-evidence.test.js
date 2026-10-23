@@ -1,0 +1,5 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+for(const file of ['exact-retailer-fix.js','results-core-v3.js'])test(file+' preserves source, currency and branch evidence through normalization',()=>{const s=fs.readFileSync(new URL('../'+file,import.meta.url),'utf8'),start=s.indexOf('  function normalizeOffer(o)'),end=s.indexOf('\n  function ',start+1),normalize=vm.runInNewContext(s.slice(start,end)+';normalizeOffer',{clean:v=>String(v||'')});const offer={retailer:{name:'Example'},price:230,currency:'GBP',exactProductMatch:true,sourcePageVerified:true,branchPriceVerified:false,branchStockVerified:false,priceConditions:'Fee excluded',product_url:'https://example.co.za/products/item'};const o=normalize(offer);assert.equal(o.exactProductMatch,true);assert.equal(o.currency,'GBP');assert.equal(o.branchPriceVerified,false);assert.equal(o.priceConditions,'Fee excluded');assert.equal(normalize({...offer,currency:undefined}).currency,null);for(const price of [null,'',0,-1])assert.equal(normalize({...offer,price}).price,null);});
