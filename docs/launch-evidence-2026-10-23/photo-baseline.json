@@ -1,0 +1,1093 @@
+{
+  "version": {
+    "commit": "9d143f184a13fc031886b6f902aeedbd755455f5",
+    "platform": "cloudflare"
+  },
+  "endVersion": {
+    "commit": "9d143f184a13fc031886b6f902aeedbd755455f5",
+    "platform": "cloudflare"
+  },
+  "rows": [
+    {
+      "name": "marc-anthony.jpg",
+      "status": 200,
+      "search": {
+        "identification": {
+          "name": "Marc Anthony strictly curls 3x moisture triple blend conditioner",
+          "brand": "Marc Anthony",
+          "model": "strictly curls 3x moisture triple blend conditioner",
+          "object": "conditioner",
+          "category": "beauty",
+          "retailCategory": "beauty",
+          "searchQuery": "Marc Anthony strictly curls 3x moisture triple blend conditioner",
+          "barcode": null,
+          "size": "",
+          "color": "",
+          "visibleText": [],
+          "confidence": 0.85,
+          "identificationMethod": "independent-vision-consensus",
+          "userConfirmed": false,
+          "labelCandidates": [],
+          "suggestedLabel": "",
+          "suggestedModels": [],
+          "identityScope": "model",
+          "requiresModelConfirmation": false,
+          "unverifiedDetails": [],
+          "features": []
+        },
+        "offers": [],
+        "verified": false,
+        "visualVerification": true,
+        "imageAccepted": true,
+        "needsRetailerVerification": true,
+        "provider": "verified-visual-cache",
+        "code": "PHOTO_IDENTIFIED",
+        "message": "Photo identified. Retailer information still requires a fresh check."
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": true,
+          "exactMatchVerified": true,
+          "searchQuery": "Marc Anthony strictly curls 3x moisture triple blend conditioner",
+          "bestProduct": {
+            "name": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml"
+          },
+          "bestPrice": {
+            "product_name": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
+            "product_url": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689",
+            "sku": "",
+            "retailer": {
+              "name": "Clicks"
+            },
+            "price": 230,
+            "currency": "ZAR",
+            "availability": null,
+            "priceConditions": "",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 100,
+            "stockScope": "not supplied",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-23T14:13:27.476Z",
+            "retailerDomain": "clicks.co.za",
+            "trustedRetailerDomain": true
+          },
+          "offers": [
+            {
+              "product_name": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
+              "product_url": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689",
+              "sku": "",
+              "retailer": {
+                "name": "Clicks"
+              },
+              "price": 230,
+              "currency": "ZAR",
+              "availability": null,
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 100,
+              "stockScope": "not supplied",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-10-23T14:13:27.476Z",
+              "retailerDomain": "clicks.co.za",
+              "trustedRetailerDomain": true
+            }
+          ],
+          "retailerStatus": [
+            {
+              "name": "Clicks",
+              "searchUrl": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689",
+              "exactProductMatch": true,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Dis-Chem",
+              "searchUrl": "https://www.dischem.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Clicks",
+              "searchUrl": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689",
+              "exactProductMatch": true,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Dis-Chem",
+              "searchUrl": "https://www.dischem.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 1,
+          "verifiedSellerCount": 1,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 1,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Marc%20Anthony%20strictly%20curls%203x%20moisture%20triple%20blend%20conditioner",
+          "checkedAt": "2026-10-23T14:13:28.433Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": true,
+          "whatItDoes": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml hydrates and detangles curly hair, reducing frizz for soft, defined curls.",
+          "pros": [
+            "Infused with marula oil, coconut cream and shea butter, it restores moisture, strengthens hair and protects against environmental stressors.",
+            "Strictly Curls 3X Moisture is formulated with a triple blend of marula oil, coconut and shea butter.",
+            "- Detangles with lasting hydration.",
+            "- Coconut cream strengthens."
+          ],
+          "cons": [],
+          "specifications": [
+            {
+              "name": "Brand",
+              "value": "Marc Anthony",
+              "sourceUrl": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689"
+            },
+            {
+              "name": "Pack quantity",
+              "value": "1",
+              "sourceUrl": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689"
+            },
+            {
+              "name": "How to use",
+              "value": "Apply to wet hair after shampooing, massage and rinse. For best results, use with Strictly Curls 3X Moisture Shampoo.",
+              "sourceUrl": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689"
+            },
+            {
+              "name": "Storage instructions",
+              "value": "Store in a cool, dry place.",
+              "sourceUrl": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689"
+            },
+            {
+              "name": "Warnings",
+              "value": "For external use only. Keep out of reach of children. In case of contact with eyes, rinse immediately",
+              "sourceUrl": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689"
+            },
+            {
+              "name": "Ingredients",
+              "value": "Water (Aqua), Cetyl Alcohol, Behentrimonium Chloride, Cyclopentasiloxane, Propanediol, Glycerin, Sclerocarya Birrea (Marula) Seed Oil, Butyrospermum Parkii (Shea) Butter, Cocos Nucifera (Coconut) Water, Cocos Nucifera (Coconut) Oil, Helianthus Annuus (Sunflower) Seed Oil, Panthenol (Vitamin – B5), Stearyl Alcohol, Trideceth-12, Citric Acid, Cetrimonium Chloride, Isopropyl Alcohol, Amodimethicone, Ethylhexylglycerin, Tetrasodium EDTA, Sodium Benzoate, 1,2-Hexanediol, Potassium Sorbate, Phenoxyethanol, Parfum (Fragrance)",
+              "sourceUrl": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689"
+            }
+          ],
+          "compatibility": [],
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [
+            {
+              "title": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
+              "url": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689"
+            }
+          ],
+          "sourceChecks": [
+            {
+              "url": "https://www.dischem.co.za/marc-anthony-3x-moist-conditioner-250ml-818",
+              "status": "http-error",
+              "httpStatus": 403
+            },
+            {
+              "url": "https://www.takealot.com/marc-anthony-strictly-curls-3xmoisture-nourishing-curl-condition/PLID72198666",
+              "status": "identity-mismatch"
+            },
+            {
+              "url": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689",
+              "status": "product-facts-verified"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-10-23T14:13:28.913Z",
+          "message": "Product facts are quoted from matching product-page descriptions."
+        }
+      },
+      "durationMs": 2123
+    },
+    {
+      "name": "twinsaver.webp",
+      "status": 200,
+      "search": {
+        "identification": {
+          "name": "toilet paper",
+          "brand": "",
+          "model": "",
+          "object": "toilet paper",
+          "category": "grocery/household",
+          "retailCategory": "grocery/household",
+          "searchQuery": "toilet paper",
+          "barcode": null,
+          "size": "",
+          "color": "",
+          "visibleText": [],
+          "confidence": 0.65,
+          "identificationMethod": "independent-vision-consensus",
+          "userConfirmed": false,
+          "labelCandidates": [],
+          "suggestedLabel": "",
+          "suggestedModels": [],
+          "identityScope": "product-family",
+          "requiresModelConfirmation": true,
+          "unverifiedDetails": [
+            "exact model",
+            "variant",
+            "specifications"
+          ],
+          "features": []
+        },
+        "offers": [],
+        "blocked": false,
+        "verified": false,
+        "userConfirmed": false,
+        "identitySource": "cloudflare-consensus",
+        "visionDiagnostics": [
+          {
+            "provider": "cloudflare-gemma",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "TWIN SAVER TWIN PLY 18 Rolls",
+              "brand": "TWIN SAVER",
+              "model": "ply 18 rolls twin ply",
+              "object": "toilet paper",
+              "size": "18 Rolls",
+              "color": "white and green",
+              "visibleText": [
+                "TWIN SAVER",
+                "TWIN PLY",
+                "TWIN SAVER",
+                "TWIN PLY",
+                "18 Rolls",
+                "Ultra Soft & Touch"
+              ]
+            },
+            "errorType": null
+          },
+          {
+            "provider": "google-gemini",
+            "code": "GEMINI_TIMEOUT",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": null
+          },
+          {
+            "provider": "cloudflare-workers-ai",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "TWINSAVER",
+              "brand": "TWINSAVER",
+              "model": "Twin Pty",
+              "object": "TOILET PAPER",
+              "size": "PRINTED SIZE",
+              "color": "WHITE",
+              "visibleText": [
+                "TWINSAVER",
+                "Twin Pty",
+                "Thin Pty"
+              ]
+            },
+            "errorType": null
+          },
+          {
+            "provider": "huggingface",
+            "code": "HF_INFERENCE_FAILED",
+            "providerStatus": 402,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": "credits"
+          }
+        ],
+        "visualVerification": true,
+        "provider": "cloudflare-consensus",
+        "imageAccepted": true,
+        "needsVision": false,
+        "needsRetailerVerification": true,
+        "confidence": 0.65,
+        "code": "PHOTO_PARTIALLY_IDENTIFIED",
+        "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "offers": [],
+          "retailerStatus": [
+            {
+              "name": "Checkers",
+              "searchUrl": "https://www.checkers.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Pick n Pay",
+              "searchUrl": "https://www.pnp.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Shoprite",
+              "searchUrl": "https://www.shoprite.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Woolworths",
+              "searchUrl": "https://www.woolworths.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Checkers",
+              "searchUrl": "https://www.checkers.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Pick n Pay",
+              "searchUrl": "https://www.pnp.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Shoprite",
+              "searchUrl": "https://www.shoprite.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Woolworths",
+              "searchUrl": "https://www.woolworths.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "requiresModelConfirmation": true,
+          "message": "Confirm the exact model before matching product prices or stock."
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "identityScope": "product-family",
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "sources": [],
+          "possibleProducts": [],
+          "candidateChecks": [],
+          "message": "Recognised toilet paper. Confirm the exact model or label for product-specific facts; no specifications have been guessed."
+        }
+      },
+      "durationMs": 30629
+    },
+    {
+      "name": "nike.jpg",
+      "status": 200,
+      "search": {
+        "identification": {
+          "name": "NIKE shoes",
+          "brand": "NIKE",
+          "model": "",
+          "object": "shoes",
+          "category": "footwear",
+          "retailCategory": "footwear",
+          "searchQuery": "NIKE air force 1",
+          "barcode": null,
+          "size": "",
+          "color": "",
+          "visibleText": [],
+          "confidence": null,
+          "identificationMethod": "single-label-reading",
+          "userConfirmed": false,
+          "suggestedLabel": "NIKE air force 1",
+          "identityScope": "label-candidate",
+          "requiresModelConfirmation": true,
+          "features": [],
+          "unverifiedDetails": [
+            "brand",
+            "exact model",
+            "variant",
+            "size"
+          ]
+        },
+        "offers": [],
+        "blocked": false,
+        "verified": false,
+        "userConfirmed": false,
+        "identitySource": "cloudflare-consensus",
+        "visionDiagnostics": [
+          {
+            "provider": "cloudflare-gemma",
+            "code": "CF_GEMMA_FAILED",
+            "providerStatus": null,
+            "providerErrorCode": "8007",
+            "identityClaim": null,
+            "errorType": null
+          },
+          {
+            "provider": "google-gemini",
+            "code": "GEMINI_TIMEOUT",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": null
+          },
+          {
+            "provider": "cloudflare-workers-ai",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "AIR FORCE 1",
+              "brand": "NIKE",
+              "model": "1",
+              "object": "sneaker",
+              "size": "US",
+              "color": "white",
+              "visibleText": [
+                "AIR",
+                "FORCE",
+                "1"
+              ]
+            },
+            "errorType": null
+          },
+          {
+            "provider": "huggingface",
+            "code": "HF_INFERENCE_FAILED",
+            "providerStatus": 402,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": "credits"
+          }
+        ],
+        "visualVerification": true,
+        "provider": "cloudflare-consensus",
+        "imageAccepted": true,
+        "needsVision": false,
+        "needsRetailerVerification": true,
+        "confidence": null,
+        "code": "PHOTO_PARTIALLY_IDENTIFIED",
+        "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "offers": [],
+          "retailerStatus": [
+            {
+              "name": "Nike",
+              "searchUrl": "https://www.nike.com/za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Sportscene",
+              "searchUrl": "https://www.sportscene.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Totalsports",
+              "searchUrl": "https://www.totalsports.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "JD Sports",
+              "searchUrl": "https://www.jdsports.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Bash",
+              "searchUrl": "https://bash.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Nike",
+              "searchUrl": "https://www.nike.com/za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Sportscene",
+              "searchUrl": "https://www.sportscene.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Totalsports",
+              "searchUrl": "https://www.totalsports.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "JD Sports",
+              "searchUrl": "https://www.jdsports.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Bash",
+              "searchUrl": "https://bash.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "requiresModelConfirmation": true,
+          "message": "Confirm the exact model before matching product prices or stock."
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "identityScope": "product-family",
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "sources": [],
+          "possibleProducts": [],
+          "candidateChecks": [
+            {
+              "host": "www.footlocker.com",
+              "status": 200
+            },
+            {
+              "host": "www.dickssportinggoods.com",
+              "status": 403
+            },
+            {
+              "host": "www.nike.com",
+              "status": 200
+            },
+            {
+              "host": "www.nike.com",
+              "status": 200
+            }
+          ],
+          "message": "Recognised NIKE shoes. Confirm the exact model or label for product-specific facts; no specifications have been guessed."
+        }
+      },
+      "durationMs": 34733
+    },
+    {
+      "name": "mic.jpg",
+      "status": 200,
+      "search": {
+        "identification": {
+          "name": "microphone",
+          "brand": "",
+          "model": "",
+          "object": "microphone",
+          "category": "electronics",
+          "retailCategory": "electronics",
+          "searchQuery": "microphone",
+          "barcode": null,
+          "size": "",
+          "color": "black",
+          "visibleText": [],
+          "confidence": 0.65,
+          "identificationMethod": "independent-vision-consensus",
+          "userConfirmed": false,
+          "labelCandidates": [],
+          "suggestedLabel": "",
+          "suggestedModels": [],
+          "identityScope": "product-family",
+          "requiresModelConfirmation": true,
+          "unverifiedDetails": [
+            "exact model",
+            "variant",
+            "specifications"
+          ],
+          "features": []
+        },
+        "offers": [],
+        "blocked": false,
+        "verified": false,
+        "userConfirmed": false,
+        "identitySource": "cloudflare-consensus",
+        "visionDiagnostics": [
+          {
+            "provider": "cloudflare-gemma",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "microphone",
+              "brand": "",
+              "model": "",
+              "object": "microphone",
+              "size": "",
+              "color": "black",
+              "visibleText": []
+            },
+            "errorType": null
+          },
+          {
+            "provider": "google-gemini",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "USB desktop microphone",
+              "brand": "",
+              "model": "",
+              "object": "USB microphone",
+              "size": "",
+              "color": "",
+              "visibleText": [
+                "VOL"
+              ]
+            },
+            "errorType": null
+          },
+          {
+            "provider": "cloudflare-workers-ai",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "Microphone",
+              "brand": "Microsoft",
+              "model": "Studio",
+              "object": "Microphone",
+              "size": "Standard",
+              "color": "Black",
+              "visibleText": [
+                "Microphone",
+                "Studio",
+                "Microphone"
+              ]
+            },
+            "errorType": null
+          },
+          {
+            "provider": "huggingface",
+            "code": "HF_INFERENCE_FAILED",
+            "providerStatus": 402,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": "credits"
+          }
+        ],
+        "visualVerification": true,
+        "provider": "cloudflare-consensus",
+        "imageAccepted": true,
+        "needsVision": false,
+        "needsRetailerVerification": true,
+        "confidence": 0.65,
+        "code": "PHOTO_PARTIALLY_IDENTIFIED",
+        "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "offers": [],
+          "retailerStatus": [
+            {
+              "name": "Marshall Music",
+              "searchUrl": "https://www.marshallmusic.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Bothners",
+              "searchUrl": "https://bothners.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Music Connection",
+              "searchUrl": "https://musicconnection.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Marshall Music",
+              "searchUrl": "https://www.marshallmusic.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Bothners",
+              "searchUrl": "https://bothners.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Music Connection",
+              "searchUrl": "https://musicconnection.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "requiresModelConfirmation": true,
+          "message": "Confirm the exact model before matching product prices or stock."
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "identityScope": "product-family",
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "sources": [],
+          "possibleProducts": [],
+          "candidateChecks": [],
+          "message": "Recognised microphone. Confirm the exact model or label for product-specific facts; no specifications have been guessed."
+        }
+      },
+      "durationMs": 13643
+    },
+    {
+      "name": "glasses.jpg",
+      "status": 200,
+      "search": {
+        "identification": {
+          "name": "eyeglasses",
+          "brand": "",
+          "model": "",
+          "object": "eyeglasses",
+          "category": "eyewear",
+          "retailCategory": "eyewear",
+          "searchQuery": "eyeglasses",
+          "barcode": null,
+          "size": "",
+          "color": "",
+          "visibleText": [],
+          "confidence": 0.65,
+          "identificationMethod": "independent-vision-consensus",
+          "userConfirmed": false,
+          "labelCandidates": [],
+          "suggestedLabel": "",
+          "suggestedModels": [],
+          "identityScope": "product-family",
+          "requiresModelConfirmation": true,
+          "unverifiedDetails": [
+            "exact model",
+            "variant",
+            "specifications"
+          ],
+          "features": []
+        },
+        "offers": [],
+        "blocked": false,
+        "verified": false,
+        "userConfirmed": false,
+        "identitySource": "cloudflare-consensus",
+        "visionDiagnostics": [
+          {
+            "provider": "cloudflare-gemma",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "eyeglasses",
+              "brand": "",
+              "model": "",
+              "object": "eyeglasses",
+              "size": "",
+              "color": "clear",
+              "visibleText": []
+            },
+            "errorType": null
+          },
+          {
+            "provider": "google-gemini",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "Eyeglasses",
+              "brand": "",
+              "model": "",
+              "object": "eyeglasses",
+              "size": "",
+              "color": "",
+              "visibleText": []
+            },
+            "errorType": null
+          },
+          {
+            "provider": "cloudflare-workers-ai",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "LENS",
+              "brand": "OAKLEY",
+              "model": "PROFIT",
+              "object": "GLASSES",
+              "size": "MEDIUM",
+              "color": "TRUE",
+              "visibleText": [
+                "OAKLEY",
+                "PROFIT"
+              ]
+            },
+            "errorType": null
+          },
+          {
+            "provider": "huggingface",
+            "code": "HF_INFERENCE_FAILED",
+            "providerStatus": 402,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": "credits"
+          }
+        ],
+        "visualVerification": true,
+        "provider": "cloudflare-consensus",
+        "imageAccepted": true,
+        "needsVision": false,
+        "needsRetailerVerification": true,
+        "confidence": 0.65,
+        "code": "PHOTO_PARTIALLY_IDENTIFIED",
+        "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "offers": [],
+          "retailerStatus": [
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "PriceCheck",
+              "searchUrl": "https://www.pricecheck.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "PriceCheck",
+              "searchUrl": "https://www.pricecheck.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "requiresModelConfirmation": true,
+          "message": "Confirm the exact model before matching product prices or stock."
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "identityScope": "product-family",
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "sources": [],
+          "possibleProducts": [],
+          "candidateChecks": [],
+          "message": "Recognised eyeglasses. Confirm the exact model or label for product-specific facts; no specifications have been guessed."
+        }
+      },
+      "durationMs": 17827
+    }
+  ]
+}

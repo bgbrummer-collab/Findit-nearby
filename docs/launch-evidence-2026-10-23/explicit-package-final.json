@@ -1,0 +1,98 @@
+{
+  "status": 200,
+  "query": "Bosch Professional Cordless Drill GSB 18V-50 2 X 2.0Ah Batteries Charger",
+  "data": {
+    "ok": true,
+    "matched": false,
+    "exactMatchVerified": false,
+    "searchQuery": "Bosch Professional Cordless Drill GSB 18V-50 2 X 2.0Ah Batteries Charger",
+    "bestProduct": null,
+    "bestPrice": null,
+    "offers": [],
+    "retailerStatus": [
+      {
+        "name": "Incredible Connection",
+        "searchUrl": "https://www.incredible.co.za/",
+        "exactProductMatch": false,
+        "stockVerified": false,
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "status": "candidate_retailer"
+      },
+      {
+        "name": "Game",
+        "searchUrl": "https://www.game.co.za/",
+        "exactProductMatch": false,
+        "stockVerified": false,
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "status": "candidate_retailer"
+      },
+      {
+        "name": "Makro",
+        "searchUrl": "https://www.makro.co.za/",
+        "exactProductMatch": false,
+        "stockVerified": false,
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "status": "candidate_retailer"
+      },
+      {
+        "name": "Takealot",
+        "searchUrl": "https://www.takealot.com/",
+        "exactProductMatch": false,
+        "stockVerified": false,
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "status": "candidate_retailer"
+      }
+    ],
+    "webRetailers": [
+      {
+        "name": "Incredible Connection",
+        "searchUrl": "https://www.incredible.co.za/",
+        "exactProductMatch": false,
+        "stockVerified": false,
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "status": "candidate_retailer"
+      },
+      {
+        "name": "Game",
+        "searchUrl": "https://www.game.co.za/",
+        "exactProductMatch": false,
+        "stockVerified": false,
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "status": "candidate_retailer"
+      },
+      {
+        "name": "Makro",
+        "searchUrl": "https://www.makro.co.za/",
+        "exactProductMatch": false,
+        "stockVerified": false,
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "status": "candidate_retailer"
+      },
+      {
+        "name": "Takealot",
+        "searchUrl": "https://www.takealot.com/",
+        "exactProductMatch": false,
+        "stockVerified": false,
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "status": "candidate_retailer"
+      }
+    ],
+    "verifiedOfferCount": 0,
+    "verifiedSellerCount": 0,
+    "inStockOfferCount": 0,
+    "priceVerifiedCount": 0,
+    "nearbyBranchStockVerified": false,
+    "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+    "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+    "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Bosch%20Professional%20Cordless%20Drill%20GSB%2018V-50%202%20X%202.0Ah%20Batteries%20Charger",
+    "checkedAt": "2026-10-23T14:24:35.403Z"
+  }
+}

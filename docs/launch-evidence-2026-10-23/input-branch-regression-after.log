@@ -1,0 +1,17 @@
+✔ dashboard-commerce-status.js labels online prices on physical branch cards explicitly (2.912886ms)
+✔ local-market-commerce-fix.js labels online prices on physical branch cards explicitly (1.18909ms)
+✔ invalid explicit and numeric barcode inputs are rejected before external catalogue or model calls (12.828051ms)
+✔ formatted valid explicit barcode keeps the canonical digits when catalogue is unavailable (1.750585ms)
+✔ an empty photo is rejected without invoking an AI provider (5.165737ms)
+✔ chain online price never inherits nearest branch distance or opening state (3.640109ms)
+✔ branch evidence must name the matching branch, not just the chain (1.810185ms)
+✔ explicit branch price evidence retains verified distance and opening state (1.308961ms)
+✔ Smart Choice requires exact identity and independent source evidence (2.395125ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 154.623279

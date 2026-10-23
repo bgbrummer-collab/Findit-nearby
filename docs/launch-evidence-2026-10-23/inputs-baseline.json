@@ -1,0 +1,71 @@
+[
+  {
+    "name": "empty search",
+    "status": 400,
+    "data": {
+      "error": "Add a product name, barcode or image.",
+      "code": "PRODUCT_INPUT_REQUIRED"
+    }
+  },
+  {
+    "name": "invalid barcode",
+    "status": 200,
+    "data": {
+      "identification": {
+        "name": "Barcode 5449000000997",
+        "object": "product",
+        "brand": "",
+        "model": "5449000000997",
+        "category": "product",
+        "retailCategory": "general",
+        "searchQuery": "5449000000997",
+        "barcode": "5449000000997",
+        "confidence": null,
+        "identificationMethod": "barcode-user-input",
+        "userConfirmed": true
+      },
+      "offers": [],
+      "blocked": false,
+      "verified": false,
+      "userConfirmed": true,
+      "identitySource": "user-confirmed",
+      "visualVerification": false,
+      "provider": "user-input",
+      "imageAccepted": false,
+      "needsVision": false,
+      "needsRetailerVerification": true,
+      "code": "USER_CONFIRMED_PRODUCT",
+      "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+    }
+  },
+  {
+    "name": "invalid location",
+    "status": 400,
+    "data": {
+      "error": "Valid location required"
+    }
+  },
+  {
+    "name": "unsupported method",
+    "status": 405,
+    "data": {
+      "error": "POST only"
+    }
+  },
+  {
+    "name": "configuration health",
+    "status": 200,
+    "data": {
+      "ok": true,
+      "status": "ok",
+      "service": "core",
+      "platform": "cloudflare",
+      "photoIdentification": true,
+      "nearby": true,
+      "commerce": true,
+      "feedbackEndpoint": true,
+      "checksAreConfigurationOnly": true,
+      "checkedAt": "2026-10-23T14:17:48.504Z"
+    }
+  }
+]

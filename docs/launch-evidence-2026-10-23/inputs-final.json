@@ -1,0 +1,77 @@
+[
+  {
+    "name": "empty search",
+    "status": 400,
+    "data": {
+      "error": "Add a product name, barcode or image.",
+      "code": "PRODUCT_INPUT_REQUIRED"
+    }
+  },
+  {
+    "name": "invalid barcode",
+    "status": 400,
+    "data": {
+      "error": "Enter a valid EAN/UPC barcode with a correct check digit.",
+      "code": "INVALID_BARCODE"
+    }
+  },
+  {
+    "name": "invalid location",
+    "status": 400,
+    "data": {
+      "error": "Valid location required"
+    }
+  },
+  {
+    "name": "unsupported method",
+    "status": 405,
+    "data": {
+      "error": "POST only"
+    }
+  },
+  {
+    "name": "formatted valid barcode",
+    "status": 200,
+    "data": {
+      "identification": {
+        "name": "Coca-Cola 330 ml",
+        "object": "Coca-Cola",
+        "brand": "COCA-COLA SERVICES SA/NV",
+        "model": "",
+        "category": "grocery",
+        "retailCategory": "grocery",
+        "searchQuery": "Coca-Cola 330 ml",
+        "barcode": "5449000000996",
+        "confidence": null,
+        "identificationMethod": "public-barcode-catalogue",
+        "userConfirmed": false,
+        "size": "330 ml",
+        "barcodeUserEntered": true,
+        "catalogueSource": {
+          "title": "Open Food Facts — Coca-Cola",
+          "url": "https://world.openfoodfacts.org/product/5449000000996"
+        }
+      },
+      "offers": [],
+      "blocked": false,
+      "verified": false,
+      "userConfirmed": false,
+      "identitySource": "public-barcode-catalogue",
+      "visualVerification": false,
+      "provider": "open-food-facts",
+      "imageAccepted": false,
+      "needsVision": false,
+      "needsRetailerVerification": true,
+      "code": "BARCODE_CATALOGUE_MATCH",
+      "message": "Barcode matched a public food catalogue record. Retailer prices and stock require separate verification."
+    }
+  },
+  {
+    "name": "empty photo",
+    "status": 400,
+    "data": {
+      "error": "This image is empty. Please choose another photo.",
+      "code": "EMPTY_IMAGE"
+    }
+  }
+]

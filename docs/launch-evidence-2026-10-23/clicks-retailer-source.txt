@@ -1,0 +1,3 @@
+Browser tab: 3, Title: "Marc Anthony 3X Moisture Conditioner 250 ml - Clicks", URL: "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689".
+There has been no change in the accessibility tree.
+The focused UI element is 0 AXWebArea Marc Anthony 3X Moisture Conditioner 250 ml - Clicks, URL: clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689

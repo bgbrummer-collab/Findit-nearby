@@ -1,0 +1,17 @@
+✔ a drill and added batteries plus charger cannot become an exact bare model price (11.762351ms)
+✔ explicitly requested package retains verified product price (4.211109ms)
+✔ an ordinary standalone drill remains eligible (2.541519ms)
+✔ fallback uses product-scoped price and stock rather than recommendation text (16.9817ms)
+✔ fallback preserves published foreign currency instead of assuming ZAR (4.195985ms)
+✔ fallback cannot promote an unconfirmed photo to an exact seller (0.524338ms)
+✔ fallback cannot use recommendations as the requested product (3.267971ms)
+✔ failed retailer requests do not fabricate an offer from rendered snippets (0.431158ms)
+✔ coverage never ranks incomparable currencies as the cheapest offer (0.516356ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 164.274566

@@ -1,0 +1,4 @@
+2026-10-23T14:34:21.4427156Z NATIVE_SEARCH_PROBE {"chars":529,"containsPitchclip":false,"containsProduct":true}
+2026-10-23T14:34:29.9174170Z NATIVE_DISCOVERY_RESULT []
+2026-10-23T14:34:29.9195999Z Error: uncommon product: no verified exact retailer page discovered
+2026-10-23T14:34:29.9270895Z ##[error]Process completed with exit code 1.

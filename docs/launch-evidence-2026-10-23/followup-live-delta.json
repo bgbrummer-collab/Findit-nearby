@@ -1,0 +1,510 @@
+{
+  "version": {
+    "commit": "f4f276a0cc5a58c1b00c087d5d5d64b5ded5e6d6",
+    "platform": "cloudflare"
+  },
+  "endVersion": {
+    "commit": "f4f276a0cc5a58c1b00c087d5d5d64b5ded5e6d6",
+    "platform": "cloudflare"
+  },
+  "rows": [
+    {
+      "query": "Bosch GSB 18V-50",
+      "status": 200,
+      "data": {
+        "ok": true,
+        "matched": false,
+        "exactMatchVerified": false,
+        "searchQuery": "Bosch GSB 18V-50",
+        "bestProduct": null,
+        "bestPrice": null,
+        "offers": [],
+        "retailerStatus": [
+          {
+            "name": "Builders",
+            "searchUrl": "https://www.builders.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Leroy Merlin",
+            "searchUrl": "https://www.leroymerlin.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "BUCO",
+            "searchUrl": "https://www.buco.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Mica",
+            "searchUrl": "https://www.mica.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Game",
+            "searchUrl": "https://www.game.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Builders",
+            "searchUrl": "https://www.builders.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Leroy Merlin",
+            "searchUrl": "https://www.leroymerlin.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "BUCO",
+            "searchUrl": "https://www.buco.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Mica",
+            "searchUrl": "https://www.mica.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Game",
+            "searchUrl": "https://www.game.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 0,
+        "verifiedSellerCount": 0,
+        "inStockOfferCount": 0,
+        "priceVerifiedCount": 0,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Bosch%20GSB%2018V-50",
+        "checkedAt": "2026-10-23T14:35:44.516Z"
+      }
+    },
+    {
+      "query": "Bosch Professional Cordless Drill GSB 18V-50 2 X 2.0Ah Batteries Charger",
+      "status": 200,
+      "data": {
+        "ok": true,
+        "matched": true,
+        "exactMatchVerified": true,
+        "searchQuery": "Bosch Professional Cordless Drill GSB 18V-50 2 X 2.0Ah Batteries Charger",
+        "bestProduct": {
+          "name": "Bosch Professional | Cordless Drill GSB 18V-50 + 2 X 2,0Ah Batteries + Charger"
+        },
+        "bestPrice": {
+          "product_name": "Bosch Professional | Cordless Drill GSB 18V-50 + 2 X 2,0Ah Batteries + Charger",
+          "product_url": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger",
+          "sku": "SKU 06019H5100",
+          "retailer": {
+            "name": "TMB Supplies"
+          },
+          "price": 4999,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "priceConditions": "",
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Verified directly on exact retailer product page",
+          "matchScore": 100,
+          "stockScope": "online/general retailer availability only",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-10-23T14:35:49.775Z",
+          "retailerDomain": "tmbsupplies.co.za",
+          "trustedRetailerDomain": false
+        },
+        "offers": [
+          {
+            "product_name": "Bosch Professional | Cordless Drill GSB 18V-50 + 2 X 2,0Ah Batteries + Charger",
+            "product_url": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger",
+            "sku": "SKU 06019H5100",
+            "retailer": {
+              "name": "TMB Supplies"
+            },
+            "price": 4999,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "priceConditions": "",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 100,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-23T14:35:49.775Z",
+            "retailerDomain": "tmbsupplies.co.za",
+            "trustedRetailerDomain": false
+          }
+        ],
+        "retailerStatus": [
+          {
+            "name": "TMB Supplies",
+            "searchUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Builders",
+            "searchUrl": "https://www.builders.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Leroy Merlin",
+            "searchUrl": "https://www.leroymerlin.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "BUCO",
+            "searchUrl": "https://www.buco.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Mica",
+            "searchUrl": "https://www.mica.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Game",
+            "searchUrl": "https://www.game.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "TMB Supplies",
+            "searchUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Builders",
+            "searchUrl": "https://www.builders.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Leroy Merlin",
+            "searchUrl": "https://www.leroymerlin.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "BUCO",
+            "searchUrl": "https://www.buco.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Mica",
+            "searchUrl": "https://www.mica.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Game",
+            "searchUrl": "https://www.game.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 1,
+        "verifiedSellerCount": 1,
+        "inStockOfferCount": 1,
+        "priceVerifiedCount": 1,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Bosch%20Professional%20Cordless%20Drill%20GSB%2018V-50%202%20X%202.0Ah%20Batteries%20Charger",
+        "checkedAt": "2026-10-23T14:35:49.775Z"
+      }
+    },
+    {
+      "query": "Logitech PRO X Gaming Headset 981-000818",
+      "status": 200,
+      "data": {
+        "ok": true,
+        "matched": true,
+        "exactMatchVerified": true,
+        "searchQuery": "Logitech PRO X Gaming Headset 981-000818",
+        "bestProduct": {
+          "name": "Logitech PRO X Gaming Headset With BLUE VO!CE Microphone Technology"
+        },
+        "bestPrice": {
+          "product_name": "Logitech PRO X Gaming Headset With BLUE VO!CE Microphone Technology",
+          "product_url": "https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology",
+          "sku": "981-000818",
+          "retailer": {
+            "name": "Computer Mania"
+          },
+          "price": 2299,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "priceConditions": "",
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Verified directly on exact retailer product page",
+          "matchScore": 80,
+          "stockScope": "online/general retailer availability only",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-10-23T14:35:47.231Z",
+          "retailerDomain": "computermania.co.za",
+          "trustedRetailerDomain": true
+        },
+        "offers": [
+          {
+            "product_name": "Logitech PRO X Gaming Headset With BLUE VO!CE Microphone Technology",
+            "product_url": "https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology",
+            "sku": "981-000818",
+            "retailer": {
+              "name": "Computer Mania"
+            },
+            "price": 2299,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "priceConditions": "",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 80,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-23T14:35:47.231Z",
+            "retailerDomain": "computermania.co.za",
+            "trustedRetailerDomain": true
+          }
+        ],
+        "retailerStatus": [
+          {
+            "name": "Computer Mania",
+            "searchUrl": "https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Incredible Connection",
+            "searchUrl": "https://www.incredible.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Game",
+            "searchUrl": "https://www.game.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Computer Mania",
+            "searchUrl": "https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Incredible Connection",
+            "searchUrl": "https://www.incredible.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Game",
+            "searchUrl": "https://www.game.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 1,
+        "verifiedSellerCount": 1,
+        "inStockOfferCount": 1,
+        "priceVerifiedCount": 1,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Logitech%20PRO%20X%20Gaming%20Headset%20981-000818",
+        "checkedAt": "2026-10-23T14:36:00.176Z"
+      }
+    }
+  ]
+}

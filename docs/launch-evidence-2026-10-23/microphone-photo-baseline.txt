@@ -1,0 +1,75 @@
+Browser tab: 2, Title: "FindIt Nearby", URL: "https://findit-nearby.bgbrummer.workers.dev/".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 919, 965-1011, 1013-1036
++					1056 text Premium Active
++				1057 text Unlock wider search, saved finds, comparisons & more.
++					1058 text microphone Marc Anthony strictly curls 3x moisture triple blend conditioner Logitech PRO X Gaming Headset 981-000818
++					1059 text Brand or product type identified. Confirm the model to get exact product information.
++						1060 text Recognised microphone. Add the exact model or label to get product-specific facts and matching offers.
++					1061 text FINDIT SMART CHOICE
++					1062 heading Best options from this Find, Value: 2
++						1063 text Best options from this Find
++					1064 text Ranked from verified/current evidence. Missing prices, stock or opening hours are never guessed.
++					1065 text Object match · 65%
++					1066 container
++						1067 text BEST OVERALL Need verified retailer evidence FindIt will rank a best option only after an exact retailer result is verified.
++					1068 container
++						1069 text CHEAPEST No verified price yet Missing prices are never guessed.
++					1070 container
++						1071 text CLOSEST No relevant nearby store yet Use location after selecting a product to find relevant retailers.
++					1072 checkbox (disabled) Open Now, Help: Available when published opening hours are known, Value: 0, ID: fxOpenNowToggle
++					1073 text Opening hours are not published for these nearby results yet.
++				1074 text Nearby stores have not loaded yet.
++						1075 text Nearby store details will appear after FindIt locates retailers.
++							1076 text Marc Anthony strictly curls 3x moisture triple blend conditioner
++							1077 text Marc Anthony strictly curls 3x moisture triple blend conditioner
++							1078 button Remove
++							1079 text Verified online shopping plan
++							1080 text Online-only plan: no physical branch coordinates are verified for these offers, so FindIt will not pretend this is a driving trip.
++							1081 button Best overall
++							1082 button Cheapest
++							1083 container
++								1084 text 1 online retailer  · R 230,00
++							1085 container
++								1086 text 1. Clicks  Marc Anthony strictly curls 3x moisture triple blend conditioner
++							1087 text No physical branch coordinates are verified for these offers. These are online retailer prices; a store trip needs separately verified branch price and stock.
++							1088 button Clear list, ID: fxClearShoppingList
++				1089 text microphone
++				1090 text microphone · black — exact model needs confirmation.
++					1091 text No verified exact-product store found yet. FindIt will not list unrelated shops as sellers.
++				1092 image Selected product
++				1093 text Product type recognised — confirm model
++					1094 text microphone
++				1095 text electronics
++				1096 text Brand or product type identified. Confirm the model to get exact product information.
++				1097 text 65% Match
++				1098 text Not verified yet
++					1099 text No exact listing verified yet. Check relevant retailer searches:
++					1100 link Description: Marshall Music Price and stock not verified, Value: google.com/search?q=site%3Awww.marshallmusic.co.za%20microphone
++					1101 link Description: Bothners Price and stock not verified, Value: google.com/search?q=site%3Abothners.co.za%20microphone
++					1102 link Description: Music Connection Price and stock not verified, Value: google.com/search?q=site%3Amusicconnection.co.za%20microphone
++					1103 button 🎸 Guitar Try something like this
++						1104 text 🎸
++						1105 text Guitar
++						1106 text Try something like this
++					1107 button 🐶 Pet product Try something like this
++						1108 text 🐶
++						1109 text Pet product
++						1110 text Try something like this
++					1111 button 💡 Ceiling light Try something like this
++						1112 text 💡
++						1113 text Ceiling light
++						1114 text Try something like this
++					1115 button 🧵 Yarn Try something like this
++						1116 text 🧵
++						1117 text Yarn
++						1118 text Try something like this
++					1119 button 🚲 Bike part Try something like this
++						1120 text 🚲
++						1121 text Bike part
++						1122 text Try something like this
++					1123 button 🪴 Bonsai Try something like this
++						1124 text 🪴
++						1125 text Bonsai
++						1126 text Try something like this
+The focused UI element is 0 AXWebArea FindIt Nearby, URL: findit-nearby.bgbrummer.workers.dev/

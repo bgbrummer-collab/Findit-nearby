@@ -1,0 +1,34 @@
+Browser tab: 2, Title: "FindIt Nearby", URL: "https://findit-nearby.bgbrummer.workers.dev/".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 936-965
++								967 text Relevant nearby retailer • exact item not confirmed Branch availability unknown
++								968 text Relevant nearby retailer • exact item not confirmed Branch availability unknown
++								969 text Relevant nearby retailer • exact item not confirmed Branch availability unknown
++								970 text Relevant nearby retailer • exact item not confirmed Branch availability unknown
++								971 text Relevant nearby retailer • exact item not confirmed Branch availability unknown
++								972 text Relevant nearby retailer • exact item not confirmed Branch availability unknown
++					973 button 🦻 Hearing aid Try something like this
++						974 text 🦻
++						975 text Hearing aid
++						976 text Try something like this
++					977 button 🚗 Car part Try something like this
++						978 text 🚗
++						979 text Car part
++						980 text Try something like this
++					981 button 🧸 Toy Try something like this
++						982 text 🧸
++						983 text Toy
++						984 text Try something like this
++					985 button 🖱️ Mouse Try something like this
++						986 text 🖱️
++						987 text Mouse
++						988 text Try something like this
++					989 button 👕 Clothing Try something like this
++						990 text 👕
++						991 text Clothing
++						992 text Try something like this
++					993 button 🔬 Microscope Try something like this
++						994 text 🔬
++						995 text Microscope
++						996 text Try something like this
+The focused UI element is 0 AXWebArea FindIt Nearby, URL: findit-nearby.bgbrummer.workers.dev/

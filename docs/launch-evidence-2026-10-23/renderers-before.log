@@ -1,0 +1,115 @@
+✖ dashboard-commerce-status.js headline uses one shared currency/evidence rule (16.505031ms)
+✖ nearby-results-fix.js headline uses one shared currency/evidence rule (1.414054ms)
+✖ dashboard-retailer-relevance-fix.js headline uses one shared currency/evidence rule (1.133042ms)
+✖ South African headline rejects foreign currency even when the retailer has a local domain (1.174064ms)
+✖ information renderer delegates Smart Choice to its existing owner without rewriting cards (1.044118ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 0
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 109.579049
+
+✖ failing tests:
+
+test at tests/price-renderer-consistency.test.js:8:159
+✖ dashboard-commerce-status.js headline uses one shared currency/evidence rule (16.505031ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /Not verified/. Input:
+  
+  '£10,00'
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/e44663242004/Findit-nearby/tests/price-renderer-consistency.test.js:8:232)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '£10,00',
+    expected: /Not verified/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at tests/price-renderer-consistency.test.js:8:159
+✖ nearby-results-fix.js headline uses one shared currency/evidence rule (1.414054ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /Not verified/. Input:
+  
+  '£10,00'
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/e44663242004/Findit-nearby/tests/price-renderer-consistency.test.js:8:232)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '£10,00',
+    expected: /Not verified/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at tests/price-renderer-consistency.test.js:8:159
+✖ dashboard-retailer-relevance-fix.js headline uses one shared currency/evidence rule (1.133042ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /Not verified/. Input:
+  
+  '£10,00'
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/e44663242004/Findit-nearby/tests/price-renderer-consistency.test.js:8:232)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '£10,00',
+    expected: /Not verified/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at tests/price-renderer-consistency.test.js:9:1
+✖ South African headline rejects foreign currency even when the retailer has a local domain (1.174064ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /Not verified locally/. Input:
+  
+  '£10,00'
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/e44663242004/Findit-nearby/tests/price-renderer-consistency.test.js:9:110)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '£10,00',
+    expected: /Not verified locally/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at tests/price-renderer-consistency.test.js:10:1
+✖ information renderer delegates Smart Choice to its existing owner without rewriting cards (1.044118ms)
+  file:///workspace/scratch/e44663242004/Findit-nearby/tests/price-renderer-consistency.test.js:10
+  test('information renderer delegates Smart Choice to its existing owner without rewriting cards',()=>{const s=read('information-runtime.js'),a=s.indexOf('function syncSmart('),b=s.indexOf('\nfunction ',a+1);let calls=0;vm.runInNewContext(s.slice(a,b)+';syncSmart(null,[],[])',{window:{finditSmartChoiceRefresh:()=>calls++},$:()=>{throw Error('must delegate')}});assert.equal(calls,1);});
+                                                                                                                                                                                                                                                                                                                                            ^
+  
+  Error: must delegate
+      at $ (file:///workspace/scratch/e44663242004/Findit-nearby/tests/price-renderer-consistency.test.js:10:337)
+      at syncSmart (evalmachine.<anonymous>:1:49)
+      at evalmachine.<anonymous>:1:1294
+      at Script.runInContext (node:vm:149:12)
+      at Script.runInNewContext (node:vm:154:17)
+      at Object.runInNewContext (node:vm:310:38)
+      at TestContext.<anonymous> (file:///workspace/scratch/e44663242004/Findit-nearby/tests/price-renderer-consistency.test.js:10:223)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)

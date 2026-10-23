@@ -1,0 +1,16 @@
+Browser tab: 2, Title: "FindIt Nearby", URL: "https://findit-nearby.bgbrummer.workers.dev/".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 936-965
++								1003 text Relevant nearby retailer • exact item not confirmed Branch availability unknown
++								1004 text Relevant nearby retailer • exact item not confirmed Branch availability unknown
++								1005 text Relevant nearby retailer • exact item not confirmed Branch availability unknown
++								1006 text Relevant nearby retailer • exact item not confirmed Branch availability unknown
++								1007 text Relevant nearby retailer • exact item not confirmed Branch availability unknown
++								1008 text Relevant nearby retailer • exact item not confirmed Branch availability unknown
++					1009 button 🎮 Controller Try something like this
++					1010 button 🔧 Tool Try something like this
++					1011 button 💄 Makeup Try something like this
++					1012 button 🎒 Backpack Try something like this
++					1013 button 🔌 Charger Try something like this
++					1014 button ☕ Hot chocolate Try something like this
+The focused UI element is 968 button Close

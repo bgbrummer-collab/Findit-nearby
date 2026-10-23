@@ -1,0 +1,34 @@
+Browser tab: 2, Title: "FindIt Nearby", URL: "https://findit-nearby.bgbrummer.workers.dev/".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 713, 720, 727, 734, 741, 748, 777-800
++								889 text Stock not verified Branch availability unknown
++								890 text Stock not verified Branch availability unknown
++								891 text Stock not verified Branch availability unknown
++								892 text Stock not verified Branch availability unknown
++								893 text Stock not verified Branch availability unknown
++								894 text Stock not verified Branch availability unknown
++					895 button 🦻 Hearing aid Try something like this
++						896 text 🦻
++						897 text Hearing aid
++						898 text Try something like this
++					899 button 🚗 Car part Try something like this
++						900 text 🚗
++						901 text Car part
++						902 text Try something like this
++					903 button 🧸 Toy Try something like this
++						904 text 🧸
++						905 text Toy
++						906 text Try something like this
++					907 button 🖱️ Mouse Try something like this
++						908 text 🖱️
++						909 text Mouse
++						910 text Try something like this
++					911 button 👕 Clothing Try something like this
++						912 text 👕
++						913 text Clothing
++						914 text Try something like this
++					915 button 🔬 Microscope Try something like this
++						916 text 🔬
++						917 text Microscope
++						918 text Try something like this
+The focused UI element is 557 container Description: Zoom in Zoom out Leaflet © OpenStreetMap contributors, ID: finditLocationMap

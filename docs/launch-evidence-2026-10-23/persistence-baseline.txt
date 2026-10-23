@@ -1,0 +1,28 @@
+Browser tab: 2, Title: "FindIt Nearby", URL: "https://findit-nearby.bgbrummer.workers.dev/".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 372-395
++					405 button 🦻 Hearing aid Try something like this
++						406 text 🦻
++						407 text Hearing aid
++						408 text Try something like this
++					409 button 🚗 Car part Try something like this
++						410 text 🚗
++						411 text Car part
++						412 text Try something like this
++					413 button 🧸 Toy Try something like this
++						414 text 🧸
++						415 text Toy
++						416 text Try something like this
++					417 button 🖱️ Mouse Try something like this
++						418 text 🖱️
++						419 text Mouse
++						420 text Try something like this
++					421 button 👕 Clothing Try something like this
++						422 text 👕
++						423 text Clothing
++						424 text Try something like this
++					425 button 🔬 Microscope Try something like this
++						426 text 🔬
++						427 text Microscope
++						428 text Try something like this
+The focused UI element is 397 button Close

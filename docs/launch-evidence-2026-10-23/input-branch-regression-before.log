@@ -1,0 +1,192 @@
+✖ dashboard-commerce-status.js labels online prices on physical branch cards explicitly (5.168121ms)
+✖ local-market-commerce-fix.js labels online prices on physical branch cards explicitly (1.403325ms)
+✖ invalid explicit and numeric barcode inputs are rejected before external catalogue or model calls (6.519359ms)
+✖ formatted valid explicit barcode keeps the canonical digits when catalogue is unavailable (1.146508ms)
+✖ an empty photo is rejected without invoking an AI provider (22.169418ms)
+✖ chain online price never inherits nearest branch distance or opening state (2.601412ms)
+✖ branch evidence must name the matching branch, not just the chain (0.948851ms)
+✖ explicit branch price evidence retains verified distance and opening state (0.601707ms)
+✖ Smart Choice requires exact identity and independent source evidence (1.428824ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 0
+ℹ fail 9
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 321.979573
+
+✖ failing tests:
+
+test at tests/branch-online-price-label.test.js:5:83
+✖ dashboard-commerce-status.js labels online prices on physical branch cards explicitly (5.168121ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'R230 ›'
+  - 'Online R230 ›'
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/e44663242004/Findit-nearby/tests/branch-online-price-label.test.js:11:75)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'R230 ›',
+    expected: 'Online R230 ›',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/branch-online-price-label.test.js:5:83
+✖ local-market-commerce-fix.js labels online prices on physical branch cards explicitly (1.403325ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'R230 ›'
+  - 'Online R230 ›'
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/e44663242004/Findit-nearby/tests/branch-online-price-label.test.js:11:75)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'R230 ›',
+    expected: 'Online R230 ›',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/search-input-boundaries.test.js:5:1
+✖ invalid explicit and numeric barcode inputs are rejected before external catalogue or model calls (6.519359ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  200 !== 400
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/e44663242004/Findit-nearby/tests/search-input-boundaries.test.js:5:373)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 200,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/search-input-boundaries.test.js:6:1
+✖ formatted valid explicit barcode keeps the canonical digits when catalogue is unavailable (1.146508ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + '5449 0000-00996'
+  - '5449000000996'
+         ^
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/e44663242004/Findit-nearby/tests/search-input-boundaries.test.js:6:281)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '5449 0000-00996',
+    expected: '5449000000996',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/search-input-boundaries.test.js:7:1
+✖ an empty photo is rejected without invoking an AI provider (22.169418ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  200 !== 400
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/e44663242004/Findit-nearby/tests/search-input-boundaries.test.js:7:412)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 200,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/smart-choice-branch-evidence.test.js:8:1
+✖ chain online price never inherits nearest branch distance or opening state (2.601412ms)
+  evalmachine.<anonymous>:1
+  function matchStore(o,stores){const n=norm(retailerName(o));if(!n)return null;return stores.find(s=>{const sn=norm(s.name);return sn===n||sn.startsWith(n+' ')||n.startsWith(sn+' ')})||null}
+                                        ^
+  
+  ReferenceError: retailerName is not defined
+      at matchStore (evalmachine.<anonymous>:1:39)
+      at scoreChoices (evalmachine.<anonymous>:7:16)
+      at evalmachine.<anonymous>:18:3
+      at Script.runInContext (node:vm:149:12)
+      at Script.runInNewContext (node:vm:154:17)
+      at Object.runInNewContext (node:vm:310:38)
+      at choices (file:///workspace/scratch/e44663242004/Findit-nearby/tests/smart-choice-branch-evidence.test.js:7:309)
+      at TestContext.<anonymous> (file:///workspace/scratch/e44663242004/Findit-nearby/tests/smart-choice-branch-evidence.test.js:8:96)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+
+test at tests/smart-choice-branch-evidence.test.js:9:1
+✖ branch evidence must name the matching branch, not just the chain (0.948851ms)
+  evalmachine.<anonymous>:1
+  function matchStore(o,stores){const n=norm(retailerName(o));if(!n)return null;return stores.find(s=>{const sn=norm(s.name);return sn===n||sn.startsWith(n+' ')||n.startsWith(sn+' ')})||null}
+                                        ^
+  
+  ReferenceError: retailerName is not defined
+      at matchStore (evalmachine.<anonymous>:1:39)
+      at scoreChoices (evalmachine.<anonymous>:7:16)
+      at evalmachine.<anonymous>:18:3
+      at Script.runInContext (node:vm:149:12)
+      at Script.runInNewContext (node:vm:154:17)
+      at Object.runInNewContext (node:vm:310:38)
+      at choices (file:///workspace/scratch/e44663242004/Findit-nearby/tests/smart-choice-branch-evidence.test.js:7:309)
+      at TestContext.<anonymous> (file:///workspace/scratch/e44663242004/Findit-nearby/tests/smart-choice-branch-evidence.test.js:9:92)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+
+test at tests/smart-choice-branch-evidence.test.js:10:1
+✖ explicit branch price evidence retains verified distance and opening state (0.601707ms)
+  evalmachine.<anonymous>:1
+  function matchStore(o,stores){const n=norm(retailerName(o));if(!n)return null;return stores.find(s=>{const sn=norm(s.name);return sn===n||sn.startsWith(n+' ')||n.startsWith(sn+' ')})||null}
+                                        ^
+  
+  ReferenceError: retailerName is not defined
+      at matchStore (evalmachine.<anonymous>:1:39)
+      at scoreChoices (evalmachine.<anonymous>:7:16)
+      at evalmachine.<anonymous>:18:3
+      at Script.runInContext (node:vm:149:12)
+      at Script.runInNewContext (node:vm:154:17)
+      at Object.runInNewContext (node:vm:310:38)
+      at choices (file:///workspace/scratch/e44663242004/Findit-nearby/tests/smart-choice-branch-evidence.test.js:7:309)
+      at TestContext.<anonymous> (file:///workspace/scratch/e44663242004/Findit-nearby/tests/smart-choice-branch-evidence.test.js:10:96)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+
+test at tests/smart-choice-branch-evidence.test.js:13:1
+✖ Smart Choice requires exact identity and independent source evidence (1.428824ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/e44663242004/Findit-nearby/tests/smart-choice-branch-evidence.test.js:13:302)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

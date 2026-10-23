@@ -1,0 +1,10 @@
+{
+  "checkedAt": "2026-10-23T14:49:14.833Z",
+  "version": {
+    "commit": "57285eaf30d2d11e4a302af646e73ba597a7a328",
+    "platform": "cloudflare"
+  },
+  "frontendBuild": "57285eaf30d2d11e4a302af646e73ba597a7a328",
+  "assetStatus": 200,
+  "ownerGuardServed": true
+}

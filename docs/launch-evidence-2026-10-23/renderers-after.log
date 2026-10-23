@@ -1,0 +1,13 @@
+✔ dashboard-commerce-status.js headline uses one shared currency/evidence rule (20.190166ms)
+✔ nearby-results-fix.js headline uses one shared currency/evidence rule (3.757214ms)
+✔ dashboard-retailer-relevance-fix.js headline uses one shared currency/evidence rule (3.982972ms)
+✔ South African headline rejects foreign currency even when the retailer has a local domain (1.357639ms)
+✔ information renderer delegates Smart Choice to its existing owner without rewriting cards (1.053102ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 117.812491

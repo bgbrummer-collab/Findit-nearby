@@ -1,0 +1,210 @@
+✖ a drill and added batteries plus charger cannot become an exact bare model price (10.548892ms)
+✔ explicitly requested package retains verified product price (2.663773ms)
+✔ an ordinary standalone drill remains eligible (1.248777ms)
+✖ fallback uses product-scoped price and stock rather than recommendation text (7.656445ms)
+✖ fallback preserves published foreign currency instead of assuming ZAR (7.951409ms)
+✖ fallback cannot promote an unconfirmed photo to an exact seller (1.041064ms)
+✖ fallback cannot use recommendations as the requested product (5.98246ms)
+✖ failed retailer requests do not fabricate an offer from rendered snippets (0.868304ms)
+✖ coverage never ranks incomparable currencies as the cheapest offer (0.225158ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 2
+ℹ fail 7
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 176.972363
+
+✖ failing tests:
+
+test at tests/commerce-package-variants.test.js:6:1
+✖ a drill and added batteries plus charger cannot become an exact bare model price (10.548892ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + {
+  +   availability: 'in_stock',
+  +   branchStockVerified: false,
+  +   checkedAt: '2026-10-23T14:07:26.637Z',
+  +   currency: 'ZAR',
+  +   directionsAvailable: false,
+  +   exactProductMatch: true,
+  +   matchScore: 100,
+  +   price: 4999,
+  +   priceConditions: '',
+  +   product_name: 'Acme Cordless Drill X50 + 2 x 2Ah Batteries + Charger',
+  +   product_url: 'https://tools.example.co.za/products/cordless-drill-x50',
+  +   retailer: {
+  +     name: 'tools.example.co.za'
+  +   },
+  +   retailerDomain: 'tools.example.co.za',
+  +   sku: '',
+  +   source: 'Verified directly on exact retailer product page',
+  +   sourcePageVerified: true,
+  +   stockScope: 'online/general retailer availability only',
+  +   trustedRetailerDomain: false,
+  +   verified: true
+  + }
+  - null
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/e44663242004/Findit-nearby/tests/commerce-package-variants.test.js:6:173)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { product_name: 'Acme Cordless Drill X50 + 2 x 2Ah Batteries + Charger', product_url: 'https://tools.example.co.za/products/cordless-drill-x50', sku: '', retailer: { name: 'tools.example.co.za' }, price: 4999, currency: 'ZAR', availability: 'in_stock', priceConditions: '', verified: true, exactProductMatch: true, sourcePageVerified: true, source: 'Verified directly on exact retailer product page', matchScore: 100, stockScope: 'online/general retailer availability only', branchStockVerified: false, directionsAvailable: false, checkedAt: '2026-10-23T14:07:26.637Z', retailerDomain: 'tools.example.co.za', trustedRetailerDomain: false },
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/retailer-coverage-evidence.test.js:10:1
+✖ fallback uses product-scoped price and stock rather than recommendation text (7.656445ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  10 !== 1999
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/e44663242004/Findit-nearby/tests/retailer-coverage-evidence.test.js:10:137)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 10,
+    expected: 1999,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/retailer-coverage-evidence.test.js:11:1
+✖ fallback preserves published foreign currency instead of assuming ZAR (7.951409ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'ZAR' !== 'GBP'
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/e44663242004/Findit-nearby/tests/retailer-coverage-evidence.test.js:11:95)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'ZAR',
+    expected: 'GBP',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/retailer-coverage-evidence.test.js:12:1
+✖ fallback cannot promote an unconfirmed photo to an exact seller (1.041064ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + {
+  +   availability: 'in_stock',
+  +   branchPriceVerified: false,
+  +   branchStockVerified: false,
+  +   checkedAt: '2026-10-23T14:07:26.705Z',
+  +   currency: 'ZAR',
+  +   directionsAvailable: false,
+  +   dynamicRetailer: true,
+  +   evidenceLevel: 'dynamic_direct_retailer_page',
+  +   listingType: 'retailer_verified',
+  +   matchScore: 0.98,
+  +   onlineListing: true,
+  +   price: 10,
+  +   priceScope: 'online',
+  +   product_name: 'Acme Runner X100 Sneaker',
+  +   product_url: 'https://newshop.example.co.za/products/acme-runner-x100',
+  +   retailer: {
+  +     country: 'ZA',
+  +     name: 'Co',
+  +     source: 'retailer_site'
+  +   },
+  +   source: 'Verified dynamically discovered retailer product page',
+  +   sourcePageVerified: true,
+  +   stockScope: 'online',
+  +   verified: true
+  + }
+  - null
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/e44663242004/Findit-nearby/tests/retailer-coverage-evidence.test.js:12:89)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { product_name: 'Acme Runner X100 Sneaker', price: 10, currency: 'ZAR', availability: 'in_stock', product_url: 'https://newshop.example.co.za/products/acme-runner-x100', verified: true, source: 'Verified dynamically discovered retailer product page', retailer: { name: 'Co', country: 'ZA', source: 'retailer_site' }, matchScore: 0.98, branchStockVerified: false, branchPriceVerified: false, stockScope: 'online', priceScope: 'online', directionsAvailable: false, listingType: 'retailer_verified', onlineListing: true, checkedAt: '2026-10-23T14:07:26.705Z', sourcePageVerified: true, dynamicRetailer: true, evidenceLevel: 'dynamic_direct_retailer_page' },
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/retailer-coverage-evidence.test.js:13:1
+✖ fallback cannot use recommendations as the requested product (5.98246ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(!offer||offer.price===null)
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/e44663242004/Findit-nearby/tests/retailer-coverage-evidence.test.js:13:147)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/retailer-coverage-evidence.test.js:14:1
+✖ failed retailer requests do not fabricate an offer from rendered snippets (0.868304ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + {
+  +   availability: 'in_stock',
+  +   branchPriceVerified: false,
+  +   branchStockVerified: false,
+  +   checkedAt: '2026-10-23T14:07:26.712Z',
+  +   currency: 'ZAR',
+  +   directionsAvailable: false,
+  +   dynamicRetailer: true,
+  +   evidenceLevel: 'dynamic_direct_retailer_page',
+  +   listingType: 'retailer_verified',
+  +   matchScore: 0.98,
+  +   onlineListing: true,
+  +   price: 10,
+  +   priceScope: 'online',
+  +   product_name: 'Acme Runner X100 Sneaker',
+  +   product_url: 'https://newshop.example.co.za/products/acme-runner-x100',
+  +   retailer: {
+  +     country: 'ZA',
+  +     name: 'Co',
+  +     source: 'retailer_site'
+  +   },
+  +   source: 'Verified dynamically discovered retailer product page',
+  +   sourcePageVerified: true,
+  +   stockScope: 'online',
+  +   verified: true
+  + }
+  - null
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/e44663242004/Findit-nearby/tests/retailer-coverage-evidence.test.js:14:167)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { product_name: 'Acme Runner X100 Sneaker', price: 10, currency: 'ZAR', availability: 'in_stock', product_url: 'https://newshop.example.co.za/products/acme-runner-x100', verified: true, source: 'Verified dynamically discovered retailer product page', retailer: { name: 'Co', country: 'ZA', source: 'retailer_site' }, matchScore: 0.98, branchStockVerified: false, branchPriceVerified: false, stockScope: 'online', priceScope: 'online', directionsAvailable: false, listingType: 'retailer_verified', onlineListing: true, checkedAt: '2026-10-23T14:07:26.712Z', sourcePageVerified: true, dynamicRetailer: true, evidenceLevel: 'dynamic_direct_retailer_page' },
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/retailer-coverage-evidence.test.js:15:1
+✖ coverage never ranks incomparable currencies as the cheapest offer (0.225158ms)
+  TypeError: api.merge is not a function
+      at TestContext.<anonymous> (file:///workspace/scratch/e44663242004/Findit-nearby/tests/retailer-coverage-evidence.test.js:15:246)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)

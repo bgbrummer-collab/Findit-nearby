@@ -1,0 +1,18 @@
+✔ a hardware package charger does not route its drill to electronics stores (8.989397ms)
+✔ exact-retailer-fix.js preserves source, currency and branch evidence through normalization (2.755437ms)
+✔ results-core-v3.js preserves source, currency and branch evidence through normalization (1.094998ms)
+✔ exact-retailer-fix.js formats unknown currency without guessing rand (18.728863ms)
+✔ results-core-v3.js formats unknown currency without guessing rand (1.256681ms)
+✔ dashboard-commerce-status.js headline uses one shared currency/evidence rule (21.685051ms)
+✔ nearby-results-fix.js headline uses one shared currency/evidence rule (3.646467ms)
+✔ dashboard-retailer-relevance-fix.js headline uses one shared currency/evidence rule (4.024746ms)
+✔ South African headline rejects foreign currency even when the retailer has a local domain (1.559616ms)
+✔ information renderer delegates Smart Choice to its existing owner without rewriting cards (1.095027ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 128.296017

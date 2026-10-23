@@ -1,0 +1,11 @@
+NATIVE_SEARCH_PROBE {"chars":529,"containsPitchclip":false,"containsProduct":true}
+NATIVE_DISCOVERY_RESULT []
+file:///workspace/scratch/e44663242004/Findit-nearby/tests/uncommon-commerce-regression.mjs:12
+if(!exact.length)throw new Error('uncommon product: no verified exact retailer page discovered');
+                       ^
+
+Error: uncommon product: no verified exact retailer page discovered
+    at file:///workspace/scratch/e44663242004/Findit-nearby/tests/uncommon-commerce-regression.mjs:12:24
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+Node.js v24.19.0
