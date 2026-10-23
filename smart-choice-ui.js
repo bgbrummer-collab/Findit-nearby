@@ -13,11 +13,12 @@ function money(v,c){return window.finditOfferEvidence?.format({price:v,currency:
 function retailerName(o){return String(o?.retailer?.name||o?.retailer||o?.store||o?.seller||'').trim()}
 function currentOffers(){
  const s=state();
+ if(s.result?.identification?.requiresModelConfirmation===true)return [];
  const primary=Array.isArray(s.offers)&&s.offers.length?s.offers:(Array.isArray(window.productIntelligence?.offers)?window.productIntelligence.offers:[]);
  const out=[],seen=new Set();
  for(const o of primary){
-   if(!o||o.exactProductMatch===false)continue;
-   const verified=o.sourcePageVerified===true||o.priceComparisonVerified===true||o.verified===true||o.searchGroundedVerified===true||o.exactProductMatch===true;
+   if(!o||o.exactProductMatch!==true)continue;
+   const verified=o.sourcePageVerified===true||o.priceComparisonVerified===true||o.verified===true||o.searchGroundedVerified===true;
    if(!verified)continue;
    const key=`${norm(retailerName(o))}|${positive(o.price)?Number(o.price):''}|${norm(o.url||o.productUrl||'')}`;
    if(seen.has(key))continue;seen.add(key);out.push(o);
@@ -35,13 +36,18 @@ function knownOpenState(s,when=new Date()){
  for(const rule of text.split(';')){const m=rule.trim().match(/^([A-Za-z,-]+)\s+(.+)$/);if(!m||!applies(m[1]))continue;saw=true;if(/\boff\b|closed/i.test(m[2]))return false;for(const range of m[2].split(',')){const t=range.trim().match(/^(\d{1,2}):(\d{2})-(\d{1,2}):(\d{2})$/);if(!t)continue;const a=+t[1]*60 + +t[2],b=+t[3]*60 + +t[4];if(a<=b?mins>=a&&mins<b:mins>=a||mins<b)return true}}
  return saw?false:null;
 }
-function matchStore(o,stores){const n=norm(retailerName(o));if(!n)return null;return stores.find(s=>{const sn=norm(s.name);return sn===n||sn.startsWith(n+' ')||n.startsWith(sn+' ')})||null}
+function matchStore(o,stores){
+ // A chain's online offer says nothing about the closest branch's price or stock.
+ if(o.branchPriceVerified!==true&&o.branchStockVerified!==true)return null;
+ const id=o.branchId||o.storeId,name=norm(o.branchName||o.storeName);
+ return stores.find(s=>id&&String(s.branchId||s.id)===String(id)||name&&norm(s.name)===name)||null;
+}
 function scoreChoices(){
  const s=state(),stores=Array.isArray(s.stores)?s.stores:[],offers=currentOffers(),priced=offers.filter(o=>positive(o.price));
  const comparable=priced.length&&priced.every(o=>o.currency&&o.currency===priced[0].currency);const prices=comparable?priced.map(o=>Number(o.price)):[],minP=prices.length?Math.min(...prices):null,maxP=prices.length?Math.max(...prices):null;
  const ds=stores.map(x=>num(x.distanceKm)).filter(x=>x!=null),maxD=ds.length?Math.max(...ds):null,candidates=[];
  for(const o of offers){
-   const store=matchStore(o,stores),price=positive(o.price)?Number(o.price):null,distance=store?num(store.distanceKm):num(o.distanceKm),avail=String(o.availability||o.stock?.status||'').toLowerCase();
+   const store=matchStore(o,stores),price=positive(o.price)?Number(o.price):null,distance=store?num(store.distanceKm):null,avail=String(o.availability||o.stock?.status||'').toLowerCase();
    const priceScore=price!=null&&comparable?(maxP===minP?1:1-(price-minP)/(maxP-minP)):0.25,distanceScore=distance!=null&&maxD>0?1-Math.min(1,distance/maxD):0.35;
    const stockScore=/in[_ ]?stock|available/.test(avail)?1:/out[_ ]?of[_ ]?stock|sold out/.test(avail)?0:.45,reliability=(o.sourcePageVerified===true||o.priceComparisonVerified===true||o.verified===true)?1:.7;
    const open=store?knownOpenState(store):null,openScore=open===true?1:open===false?0:.5;
@@ -65,8 +71,8 @@ function card(label,title,meta,klass=''){return`<article class="fx-smart-card ${
 function render(){
  const box=$('#fxSmartChoice');if(!box)return;const actions=$('#fxFindQuickActions',box);const{best,cheapest,closestStore,stores}=scoreChoices();
  const bestName=best?(retailerName(best.offer)||best.store?.name||'Verified retailer'):(closestStore?.name||'Run a Find to get a recommendation');
- const bestMeta=best?[best.price!=null?money(best.price,best.offer.currency):null,best.distance!=null?`${best.distance.toFixed(1)} km away`:null,best.open===true?'Open now':best.open===false?'Closed now':null].filter(Boolean).join(' · '):(closestStore?`${Number(closestStore.distanceKm).toFixed(1)} km away · price/stock not verified`:'Smart Choice uses price, distance, stock confidence and retailer evidence.');
- const cheapName=cheapest?(retailerName(cheapest.offer)||'Verified retailer'):'No verified price yet',cheapMeta=cheapest?`${money(cheapest.price,cheapest.offer.currency)}${cheapest.distance!=null?` · ${cheapest.distance.toFixed(1)} km`:''}`:'FindIt will not guess a missing price.';
+ const bestMeta=best?[best.price!=null?money(best.price,best.offer.currency):null,best.distance!=null?`${best.distance.toFixed(1)} km away`:null,best.open===true?'Open now':best.open===false?'Closed now':null,!best.store?'Online offer · branch price and stock unverified':null].filter(Boolean).join(' · '):(closestStore?`${Number(closestStore.distanceKm).toFixed(1)} km away · price/stock not verified`:'Smart Choice uses price, distance, stock confidence and retailer evidence.');
+ const cheapName=cheapest?(retailerName(cheapest.offer)||'Verified retailer'):'No verified price yet',cheapMeta=cheapest?`${money(cheapest.price,cheapest.offer.currency)}${cheapest.distance!=null?` · ${cheapest.distance.toFixed(1)} km`:' · online offer; branch price unverified'}`:'FindIt will not guess a missing price.';
  const closestMeta=closestStore?`${Number(closestStore.distanceKm).toFixed(1)} km away${knownOpenState(closestStore)===true?' · Open now':knownOpenState(closestStore)===false?' · Closed now':''}`:'Location results have not loaded yet.';
  const known=stores.filter(s=>knownOpenState(s)!==null),open=known.filter(s=>knownOpenState(s)===true).length;
  box.innerHTML=`<div class="fx-smart-head"><div><span class="fx-smart-kicker">FindIt Smart Choice</span><h2>Best options from this Find</h2><p>Ranked from verified/current evidence. Missing prices, stock or opening hours are never guessed.</p></div><div class="fx-match-confidence">${esc(confidenceLabel())}</div></div><div class="fx-smart-grid">${card('BEST OVERALL',bestName,bestMeta,'best')}${card('CHEAPEST',cheapName,cheapMeta)}${card('CLOSEST',closestStore?.name||'No nearby store yet',closestMeta)}</div><div class="fx-open-row"><button type="button" id="fxOpenNowToggle" class="${openOnly?'active':''}" aria-pressed="${openOnly}">${openOnly?'✓ ':''}Open Now</button><span id="fxOpenNowStatus">${known.length?`${open} of ${known.length} stores with published hours are open now.`:'Opening hours are not published for these nearby results yet.'}</span></div>`;
