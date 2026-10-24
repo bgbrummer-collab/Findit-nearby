@@ -92,3 +92,22 @@ test('product purpose prefers a sourced function over an earlier material or fit
  assert.ok(d.pros.includes('Soft fit leather earcups.'));
  assert.ok(d.sources.some(s=>s.url===url));
 });
+
+import {productPagePriceConditions} from '../lib/product-description-specs.js';
+const memberPrice='<div class="price-box"><span class="plusmore-price regular"><span class="price">R 9,499</span>Normal Price</span><div class="price-plus-container"><span class="plusmore-price special"><span data-price-type="finalPrice">R 5,999</span><div class="plusmore-text"><span>more</span></div><div>Sale ends Friday, 30 October 2026</div></span></div></div>';
+test('product-specific member-price badge is retained as a price condition',()=>{
+ const conditions=productPagePriceConditions('<div class="product-info-main"><h1>Acme headphones</h1>'+memberPrice+'</div>');
+ assert.match(conditions,/\+more price/);assert.match(conditions,/eligibility/);assert.match(conditions,/Sale ends Friday, 30 October 2026/);
+});
+test('member-price badges in recommendations, headers or script templates do not qualify this product',()=>{
+ for(const raw of ['<header>'+memberPrice+'</header><div class="product-info-main"><div class="price-box">R 123</div></div>', '<div class="product-info-main"><div class="price-box">R 123</div></div><aside>'+memberPrice+'</aside>', '<div class="product-info-main"><script type="text/template">'+memberPrice+'</script><div class="price-box">R 123</div></div>'])assert.equal(productPagePriceConditions(raw),'');
+});
+test('verified offers preserve the member-price qualification through the existing price-condition field',async t=>{
+ const name='Acme X1 headphones',url='https://shop.example/products/acme-x1';
+ const raw='<title>'+name+'</title><script type="application/ld+json">'+JSON.stringify({'@type':'Product',name,offers:{price:5999,priceCurrency:'ZAR'}})+'</script><div class="product-info-main">'+memberPrice+'</div>';
+ t.mock.method(globalThis,'fetch',async()=>new Response(raw,{headers:{'content-type':'text/html'}}));
+ const {ident,verify}=await import('../lib/product-intelligence-core.js');const offer=await verify(url,ident({name}));
+ assert.equal(offer.price,5999);assert.equal(offer.currency,'ZAR');assert.match(offer.priceConditions,/\+more price/);
+});
+
+test('retailer layout with the primary price outside its metadata-only main block retains the badge',()=>{assert.match(productPagePriceConditions('<div class="product-info-right-row-shop">'+memberPrice+'</div><div class="product-info-main"><div>Product metadata</div></div>'),/\+more price/);});
