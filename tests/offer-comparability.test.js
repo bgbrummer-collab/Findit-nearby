@@ -53,3 +53,9 @@ test('the quick shopping/watch selector cannot bypass a single ambiguous product
  const source=readFileSync(new URL('../shopping-assistant-ui.js',import.meta.url),'utf8'),start=source.indexOf('  function bestOffer(){'),end=source.indexOf('\n\n',start),e=browserEvidence();
  const result=vm.runInNewContext(source.slice(start,end)+';bestOffer()',{offers:()=>[offer('Example shoes',100,{comparisonAmbiguous:true})],window:{finditOfferEvidence:e}});assert.equal(result,null);
 });
+
+test('quantity and multiplier spacing compares equivalent published labels without merging amounts',()=>{
+ const rows=[offer('Example 3x Moisture Conditioner (250ml)',200),offer('Example 3 x Moisture Conditioner 250 ml',229)];
+ assert.equal(selectComparablePrice(rows),rows[0]);assert.equal(browserEvidence().cheapest(rows),rows[0]);
+ assert.equal(selectComparablePrice([rows[0],offer('Example 3 x Moisture Conditioner 500ml',100)]),null);
+});

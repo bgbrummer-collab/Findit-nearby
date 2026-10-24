@@ -1,7 +1,7 @@
 /* Shared evidence rules for every FindIt price renderer. */
 (()=>{'use strict';
 // Same conservative rules as lib/offer-comparison.js; parity tests cover both runtimes.
-const comparisonText=value=>String(value??'').replace(/[™®©]/g,'').normalize('NFKC').toLowerCase().replace(/&amp;/g,' and ').replace(/[’']/g,'').replace(/\bgray\b/g,'grey').replace(/[^a-z0-9+]+/g,' ').trim().replace(/\s+/g,' ');
+const comparisonText=value=>String(value??'').replace(/[™®©]/g,'').normalize('NFKC').toLowerCase().replace(/&amp;/g,' and ').replace(/[’']/g,'').replace(/\bgray\b/g,'grey').replace(/(\d)\s*x\b/g,'$1 x').replace(/(\d)\s*(ml|cl|l|mg|kg|g|mm|cm)\b/g,'$1 $2').replace(/[^a-z0-9+]+/g,' ').trim().replace(/\s+/g,' ');
 function listingComparisonKey(offer){
  const title=comparisonText(offer?.product_name||offer?.title||offer?.name);
  if(!title)return null;
