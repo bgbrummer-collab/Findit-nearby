@@ -10,3 +10,9 @@ test('unknown currency is labelled and not ranked as cheapest',()=>{assert.match
 test('different currencies are not compared without conversion evidence',()=>assert.equal(e.cheapest([offer(10,'USD'),offer(100,'ZAR')]),null));
 test('cheapest uses only positive exact offers in one currency',()=>{const low=offer(99);assert.equal(e.cheapest([offer(null),offer(1,'ZAR',{sourcePageVerified:false,verified:false}),offer(200),low]),low)});
 test('typed confirmation and missing photo confidence never show zero percent',()=>{assert.equal(e.confidence({userConfirmed:true,confidence:null}),'Search confirmed');assert.equal(e.confidence({confidence:null}),'Confidence not supplied');assert.equal(e.confidence({confidence:.78}),'78%')});
+test('headline formatter keeps conditional pricing visible instead of displaying an unconditional amount',()=>{
+ const conditional=offer(5999,'ZAR',{priceConditions:'Retailer marks this as a +more price. Check eligibility.'});
+ assert.match(e.format(conditional),/5.*999.*\+more price.*eligibility/);
+ assert.match(e.format(offer(75,'ZAR',{priceConditions:'Excludes dispensing fee.'})),/price conditions apply/);
+ assert.doesNotMatch(e.format(offer(75)),/conditions|eligibility/);
+});
