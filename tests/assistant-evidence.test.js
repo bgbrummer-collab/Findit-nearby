@@ -2,10 +2,10 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {answerFromEvidence} from '../lib/assistant-answer.js';
 import worker from '../cloudflare/worker.js';
-const offer=(name,price,currency='ZAR')=>({retailer:{name},price,currency,availability:'in_stock',sourcePageVerified:true,exactProductMatch:true,product_url:'https://example.com/'+name});
+const offer=(name,price,currency='ZAR')=>({product_name:'Example X1 headphones',retailer:{name},price,currency,availability:'in_stock',sourcePageVerified:true,exactProductMatch:true,product_url:'https://example.com/'+name});
 test('assistant answers combined price and location questions instead of hiding prices behind where intent',()=>{
  const r=answerFromEvidence('Where nearby is cheapest and is it in stock?',{identification:{name:'Headphones'},offers:[offer('Expensive',200),offer('Cheap',100)],stores:[{name:'Branch',distanceKm:2,address:'123 Test Road'}]});
- assert.match(r.answer,/Cheap:.*100/);assert.match(r.answer,/Lowest listed ZAR price: Cheap/);assert.match(r.answer,/2.0 km/);assert.match(r.answer,/does not confirm stock at a nearby branch/);assert.equal(r.sources.length,2);
+ assert.match(r.answer,/Cheap:.*100/);assert.match(r.answer,/Lowest comparable listed ZAR price: Cheap/);assert.match(r.answer,/2.0 km/);assert.match(r.answer,/does not confirm stock at a nearby branch/);assert.equal(r.sources.length,2);
 });
 test('assistant separates currencies and rejects null, unverified and partial-identity prices',()=>{
  const r=answerFromEvidence('compare prices',{offers:[offer('ZA',100),offer('US',10,'USD'),offer('Null',null),{...offer('Fake',1),sourcePageVerified:false}]});
