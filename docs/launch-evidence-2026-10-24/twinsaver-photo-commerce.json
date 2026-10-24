@@ -1,0 +1,155 @@
+{
+  "identification": {
+    "name": "TWINSAVER twin ply toilet paper 18 Rolls",
+    "brand": "TWINSAVER",
+    "model": "twin ply",
+    "object": "toilet paper",
+    "category": "grocery/household",
+    "retailCategory": "grocery/household",
+    "searchQuery": "TWINSAVER twin ply toilet paper 18 Rolls",
+    "barcode": null,
+    "size": "18 Rolls",
+    "color": "",
+    "visibleText": [],
+    "confidence": 0.85,
+    "identificationMethod": "independent-vision-consensus",
+    "userConfirmed": false,
+    "labelCandidates": [],
+    "suggestedLabel": "",
+    "suggestedModels": [],
+    "identityScope": "model",
+    "requiresModelConfirmation": false,
+    "unverifiedDetails": [],
+    "features": []
+  },
+  "commerce": {
+    "ok": true,
+    "matched": false,
+    "exactMatchVerified": false,
+    "searchQuery": "TWINSAVER twin ply toilet paper 18 Rolls",
+    "bestProduct": null,
+    "bestPrice": null,
+    "offers": [],
+    "retailerStatus": [
+      {
+        "name": "Checkers",
+        "searchUrl": "https://www.checkers.co.za/",
+        "exactProductMatch": false,
+        "stockVerified": false,
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "status": "candidate_retailer"
+      },
+      {
+        "name": "Pick n Pay",
+        "searchUrl": "https://www.pnp.co.za/",
+        "exactProductMatch": false,
+        "stockVerified": false,
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "status": "candidate_retailer"
+      },
+      {
+        "name": "Shoprite",
+        "searchUrl": "https://www.shoprite.co.za/",
+        "exactProductMatch": false,
+        "stockVerified": false,
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "status": "candidate_retailer"
+      },
+      {
+        "name": "Woolworths",
+        "searchUrl": "https://www.woolworths.co.za/",
+        "exactProductMatch": false,
+        "stockVerified": false,
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "status": "candidate_retailer"
+      },
+      {
+        "name": "Makro",
+        "searchUrl": "https://www.makro.co.za/",
+        "exactProductMatch": false,
+        "stockVerified": false,
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "status": "candidate_retailer"
+      }
+    ],
+    "webRetailers": [
+      {
+        "name": "Checkers",
+        "searchUrl": "https://www.checkers.co.za/",
+        "exactProductMatch": false,
+        "stockVerified": false,
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "status": "candidate_retailer"
+      },
+      {
+        "name": "Pick n Pay",
+        "searchUrl": "https://www.pnp.co.za/",
+        "exactProductMatch": false,
+        "stockVerified": false,
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "status": "candidate_retailer"
+      },
+      {
+        "name": "Shoprite",
+        "searchUrl": "https://www.shoprite.co.za/",
+        "exactProductMatch": false,
+        "stockVerified": false,
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "status": "candidate_retailer"
+      },
+      {
+        "name": "Woolworths",
+        "searchUrl": "https://www.woolworths.co.za/",
+        "exactProductMatch": false,
+        "stockVerified": false,
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "status": "candidate_retailer"
+      },
+      {
+        "name": "Makro",
+        "searchUrl": "https://www.makro.co.za/",
+        "exactProductMatch": false,
+        "stockVerified": false,
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "status": "candidate_retailer"
+      }
+    ],
+    "verifiedOfferCount": 0,
+    "verifiedSellerCount": 0,
+    "inStockOfferCount": 0,
+    "priceVerifiedCount": 0,
+    "nearbyBranchStockVerified": false,
+    "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+    "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+    "providerSearchUrl": "https://www.pricecheck.co.za/search?search=TWINSAVER%20twin%20ply%20toilet%20paper%2018%20Rolls",
+    "checkedAt": "2026-10-24T16:20:23.769Z"
+  },
+  "research": {
+    "researched": false,
+    "whatItDoes": "",
+    "pros": [],
+    "cons": [],
+    "specifications": [],
+    "compatibility": [],
+    "includedItems": [],
+    "variants": [],
+    "bestFor": "",
+    "standOut": "",
+    "valueVerdict": "",
+    "sources": [],
+    "sourceChecks": [],
+    "researchMethod": "Fetched exact-product page descriptions",
+    "checkedAt": "2026-10-24T16:20:23.934Z",
+    "message": "No trustworthy exact-product description was found. FindIt will not guess."
+  }
+}

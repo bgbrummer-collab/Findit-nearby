@@ -1,0 +1,161 @@
+{
+  "version": {
+    "commit": "916a0e64b47440876ac47b2b523c067e89893580",
+    "platform": "cloudflare"
+  },
+  "frontend": "916a0e64b47440876ac47b2b523c067e89893580",
+  "matchingBuild": true,
+  "rows": [
+    {
+      "name": "feedback-null",
+      "status": 400,
+      "data": {
+        "error": "Rating must be from 1 to 5."
+      },
+      "passed": true
+    },
+    {
+      "name": "normal-text",
+      "status": 200,
+      "data": {
+        "identification": {
+          "name": "Sony WH-1000XM5 black",
+          "object": "Sony WH-1000XM5 black",
+          "brand": "",
+          "model": "",
+          "category": "product",
+          "retailCategory": "general",
+          "searchQuery": "Sony WH-1000XM5 black",
+          "barcode": null,
+          "confidence": null,
+          "identificationMethod": "typed-user-input",
+          "userConfirmed": true
+        },
+        "offers": [],
+        "blocked": false,
+        "verified": false,
+        "userConfirmed": true,
+        "identitySource": "user-confirmed",
+        "visualVerification": false,
+        "provider": "user-input",
+        "imageAccepted": false,
+        "needsVision": false,
+        "needsRetailerVerification": true,
+        "code": "USER_CONFIRMED_PRODUCT",
+        "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+      },
+      "passed": true
+    },
+    {
+      "name": "assistant-null",
+      "status": 400,
+      "data": {
+        "error": "Message required"
+      },
+      "passed": true
+    },
+    {
+      "name": "overlong-query",
+      "status": 400,
+      "data": {
+        "error": "Product name is too long. Use at most 240 characters.",
+        "code": "INVALID_SEARCH_INPUT",
+        "imageAccepted": false,
+        "retryable": false
+      },
+      "passed": true
+    },
+    {
+      "name": "object-query",
+      "status": 400,
+      "data": {
+        "error": "Product name must be text.",
+        "code": "INVALID_SEARCH_INPUT",
+        "imageAccepted": false,
+        "retryable": false
+      },
+      "passed": true
+    },
+    {
+      "name": "malformed-json",
+      "status": 400,
+      "data": {
+        "error": "Send valid JSON product details.",
+        "code": "INVALID_SEARCH_INPUT",
+        "imageAccepted": false,
+        "retryable": false
+      },
+      "passed": true
+    },
+    {
+      "name": "null-search",
+      "status": 400,
+      "data": {
+        "error": "Send a JSON object with a product name or barcode.",
+        "code": "INVALID_SEARCH_INPUT",
+        "imageAccepted": false,
+        "retryable": false
+      },
+      "passed": true
+    },
+    {
+      "name": "invalid-checksum",
+      "status": 400,
+      "data": {
+        "error": "Enter a valid EAN/UPC barcode with a correct check digit.",
+        "code": "INVALID_BARCODE"
+      },
+      "passed": true
+    },
+    {
+      "name": "info-null",
+      "status": 200,
+      "data": {
+        "researched": false,
+        "whatItDoes": "",
+        "pros": [],
+        "cons": [],
+        "sources": []
+      },
+      "passed": true
+    },
+    {
+      "name": "formatted-barcode",
+      "status": 200,
+      "data": {
+        "identification": {
+          "name": "Coca-Cola 330 ml",
+          "object": "Coca-Cola",
+          "brand": "COCA-COLA SERVICES SA/NV",
+          "model": "",
+          "category": "grocery",
+          "retailCategory": "grocery",
+          "searchQuery": "Coca-Cola 330 ml",
+          "barcode": "5449000000996",
+          "confidence": null,
+          "identificationMethod": "public-barcode-catalogue",
+          "userConfirmed": false,
+          "size": "330 ml",
+          "barcodeUserEntered": true,
+          "catalogueSource": {
+            "title": "Open Food Facts — Coca-Cola",
+            "url": "https://world.openfoodfacts.org/product/5449000000996"
+          }
+        },
+        "offers": [],
+        "blocked": false,
+        "verified": false,
+        "userConfirmed": false,
+        "identitySource": "public-barcode-catalogue",
+        "visualVerification": false,
+        "provider": "open-food-facts",
+        "imageAccepted": false,
+        "needsVision": false,
+        "needsRetailerVerification": true,
+        "code": "BARCODE_CATALOGUE_MATCH",
+        "message": "Barcode matched a public food catalogue record. Retailer prices and stock require separate verification."
+      },
+      "passed": true
+    }
+  ]
+}

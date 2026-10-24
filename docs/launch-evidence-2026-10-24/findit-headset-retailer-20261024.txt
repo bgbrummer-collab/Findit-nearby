@@ -1,0 +1,155 @@
+- generic: 
+- link "Skip to content":
+  - /url: "#main-content"
+- link:
+  - /url: /collections/the-ultimate-clearance-sale
+  - text: Free delivery on orders R2500 or more 🚚
+- link:
+  - /url: https://scnv.io/EiL8?qr=1
+  - text: 📲 Exclusive App-Only Deals — Download Free →
+- link "CM Flex — The Ultimate Premium Membership. Join FREE Today!":
+  - /url: /pages/cm-flex
+  - text: CM Flex — The Ultimate Premium Membership. Join FREE Today!
+- link:
+  - /url: https://gomaxx.co.za/
+  - text: Shop pre-owned Apple with gomaxx.
+- link:
+  - /url: /pages/reboot
+  - text: Reboot | Second Hand, First Class
+- complementary:
+  - menubar:
+    - link "About Us":
+      - /url: /pages/about-us
+    - link "Technical Services":
+      - /url: /pages/technical-services
+    - link "Community Involvement":
+      - /url: /pages/community-involvement
+    - link "Blogs":
+      - /url: /blogs/blog
+    - link "Contact Us":
+      - /url: /pages/contact
+    - link "Store Locator":
+      - /url: /pages/store-locator
+    - link "Warranty Registration":
+      - /url: /pages/warranty-registration
+    - 'link "Warranty T&C`s"':
+      - /url: https://computermania.co.za/pages/3-year-warranty-terms-conditions
+    - link "FAQ's":
+      - /url: /pages/faq
+- link "Computer Mania Computer Mania":
+  - /url: /
+  - img "Computer Mania"
+  - img "Computer Mania"
+- menubar:
+  - link "CM Flex":
+    - /url: /pages/cm-flex
+  - link "Laptops":
+    - /url: /collections/laptops
+    - text: Laptops
+  - link "PC's":
+    - /url: /collections/pc-s
+    - text: PC's
+  - link "Components":
+    - /url: /collections/components
+    - text: Components
+  - link "Accessories":
+    - /url: /collections/accessories
+    - text: Accessories
+  - link "Consoles":
+    - /url: /collections/consoles
+    - text: Consoles
+  - link "Smart Home":
+    - /url: /collections/smart-home
+    - text: Smart Home
+  - link "Catalogue":
+    - /url: https://view.publitas.com/p222-832/laptops
+    - text: Catalogue
+  - link "Pre-Owned Devices":
+    - /url: /pages/reboot
+    - text: Pre-Owned Devices
+  - link "Pre-Owned iPhones":
+    - /url: https://computermania.co.za/collections/vendors?q=Gomaxx
+    - text: Pre-Owned iPhones
+  - link "Brands":
+    - /url: /pages/shop-by-brand
+  - link "Software":
+    - /url: https://computermania.co.za/collections/software
+    - text: Software
+- link "Search":
+  - /url: /search
+- link:
+  - /url: "#swym-wishlist"
+  - generic: 
+- link "My Account":
+  - /url: https://computermania.co.za/customer_authentication/redirect?locale=en&region_country=ZA
+- link "0":
+  - /url: /cart
+  - generic: "0"
+- main:
+  - navigation "breadcrumbs":
+    - link "Home":
+      - /url: /
+    - generic: /
+    - text: Logitech PRO X Gaming Headset With BLUE VO!CE Microphone Technology
+  - link:
+    - /url: //computermania.co.za/cdn/shop/files/logitech_981_000817_g_pro_x_wired_1502157.jpg?v=1694695213
+  - link:
+    - /url: //computermania.co.za/cdn/shop/files/gprox.png?v=1694695214
+  - paragraph:
+    - link "Logitech":
+      - /url: /collections/vendors?q=Logitech
+  - heading "Logitech PRO X Gaming Headset With BLUE VO!CE Microphone Technology" [level=1]
+  - insertion: R 2,299.00
+  - text: ( )
+  - text: Tax included.
+  - link "Shipping":
+    - /url: /policies/shipping-policy
+  - text: calculated at checkout.
+  - link "★★★★★":
+    - /url: "#shopify-product-reviews"
+    - generic: ★★★★★
+  - generic: "SKU: 981-000818"
+  - generic: In stock
+  - generic: Quantity
+  - button "Decrease quantity for Logitech PRO X Gaming Headset With BLUE VO!CE Microphone Technology":
+  - spinbutton "Quantity for Logitech PRO X Gaming Headset With BLUE VO!CE Microphone Technology": <redacted>
+  - button "Increase quantity for Logitech PRO X Gaming Headset With BLUE VO!CE Microphone Technology":
+  - button "Add to wishlist": 
+  - button "Add to cart":
+    - generic: Add to cart
+  - img "Payflex Logo"
+  - paragraph: Buy now. Pay later. 0% interest.
+  - paragraph:
+    - text: Choose your payment plan, and pay from as little as R574.75 today.
+    - link "Learn more":
+      - /url: "#"
+  - paragraph:
+    - text: From R766.33 p/m,
+    - strong: interest & fee free.
+    - link "?":
+      - /url: "#"
+  - paragraph: BLUE VO!CE microphone technology gives you a choice of real-time voice filters to reduce noise, add compression and de-essing, and ensure that your voice sounds richer, cleaner, and more professional. Get consistent, studio-quality, in-game vocal communications with BLUE VO!CE via G HUB Gaming Software.
+  - paragraph: Memory foam wrapped in premium leatherette or breathable velour give you lasting comfort. So you can play longer and harder, and focus on winning.
+  - paragraph: With a sturdy and lightweight frame constructed of aluminum and steel, PRO X is built for durability, comfort, and a premium aesthetic.
+  - paragraph: DTS HEADPHONE:X 2.0 is the latest version of object-based sound imaging from DTS. Version 2.0 takes 7.1 channel surround sound further than ever with enhanced bass rendering, audio clarity and proximity cues. And most importantly, a new level of distance awareness differentiates between near field and far field audio, so your enemies location is pinpointed more than ever.
+  - paragraph: PRO-G features a unique hybrid mesh construction to deliver amazingly clear and precise sound imaging. Hear footsteps and environmental cues with breathtaking clarity, and get the competitive edge you need to win. Now, with 50 mm drivers, the next-gen PRO-G achieves even more accuracy across a wider frequency range, plus higher-fidelity bass response.
+  - paragraph: Audio EQ profiles—tuned by esports athletes—now available on G HUB Gaming Software. Use their profiles as-is, or fine tune to your ears. Save them to the external USB sound card—then apply to other PCs.
+  - paragraph
+  - generic: Hear and sound like a pro with the Logitech G PRO X Gaming Headset. Pro-designed with detachable mic and Blue VO! CE software for professional-sounding voice comms. Featuring next-gen 7.1 surround sound and PRO-G 50 mm drivers for amazingly clear sound imaging. Soft memory foam padded leatherette or velour earcups. Durable steel + aluminum construction. Premium USB external sound card gives you crystal-clear game sound and voice chat.
+  - generic: "Share:"
+  - link "Facebook":
+    - /url: http://www.facebook.com/sharer.php?u=https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology
+    - img "Facebook"
+  - link "Twitter":
+    - /url: https://twitter.com/intent/tweet?text=Logitech%20PRO%20X%20Gaming%20Headset%20With%20BLUE%20VO!CE%20Microphone%20Technology&url=https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology
+    - img "Twitter"
+  - link:
+    - /url: http://pinterest.com/pin/create/link/?url=https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology&media=//computermania.co.za/cdn/shop/files/logitech_981_000817_g_pro_x_wired_1502157.jpg?crop=center&height=1024&v=1694695213&width=1024&description=Logitech%20PRO%20X%20Gaming%20Headset%20With%20BLUE%20VO!CE%20Microphone%20Technology
+  - button "Logitech PRO X Gaming Headset With BLUE VO!CE Microphone Technology R 2,299.00":
+    - generic: Logitech PRO X Gaming Headset With BLUE VO!CE Microphone Technology
+    - insertion: R 2,299.00
+    - text: ( )
+  - link "Minisite button image":
+    - /url: javascript:;
+    - img "Minisite button image"
+  
