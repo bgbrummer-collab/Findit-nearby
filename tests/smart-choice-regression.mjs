@@ -26,8 +26,8 @@ const text=await page.evaluate(()=>{
   const s=window.finditState;
   s.result={identification:{name:'Test Headphones',confidence:.92,exactProductMatch:true,modelEvidence:true,matchLevel:'exact'}};
   s.offers=[
-    {retailer:'Retailer A',price:900,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true},
-    {retailer:'Retailer B',price:800,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true}
+    {retailer:'Retailer A',product_name:'Test Headphones',price:900,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true},
+    {retailer:'Retailer B',product_name:'Test Headphones',price:800,currency:'ZAR',availability:'in_stock',verified:true,exactProductMatch:true}
   ];
   s.stores=[
     {name:'Retailer A',distanceKm:1,openNow:false,address:'One Street'},
@@ -54,5 +54,16 @@ await page.setViewportSize({width:390,height:844});
 await page.waitForTimeout(100);
 const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
 if(overflow>4)fail(`Smart Choice caused mobile horizontal overflow: ${overflow}px`);
+// A broad family request must preserve its listings without inventing an equivalent variant.
+for(const missingNames of [false,true]){
+ const mixed=await page.evaluate(missingNames=>{
+  window.finditState.offers=[
+   {retailer:'Retailer A',product_name:missingNames?'':'Test Headphones Black',price:900,currency:'ZAR',verified:true,exactProductMatch:true},
+   {retailer:'Retailer B',product_name:missingNames?'':'Test Headphones Silver',price:800,currency:'ZAR',verified:true,exactProductMatch:true}
+  ];window.finditSmartChoiceRefresh();return document.querySelector('#fxSmartChoice')?.innerText||'';
+ },missingNames);
+ if(!/Confirm the listing variant/i.test(mixed))fail('Smart Choice did not preserve variant uncertainty');
+ if(/BEST OVERALL\s*Retailer|CHEAPEST\s*Retailer/i.test(mixed))fail('Smart Choice ranked different or unnamed listings');
+}
 console.log('SMART_CHOICE_OPEN_NOW_PASS');
 await browser.close();

@@ -3,13 +3,14 @@ name: FindIt Interaction Freeze Regression
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: findit-live-photo-ai-interaction-freeze-regression
+  group: findit-live-photo-ai-interaction-freeze-regression-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -48,6 +49,7 @@ jobs:
           timeout --signal=TERM --kill-after=5s 60s node tests/upload-button-user-regression.mjs
           timeout --signal=TERM --kill-after=5s 90s node tests/label-confirmation-regression.mjs
       - name: Wait for production deployment
+        if: github.event_name != 'pull_request'
         run: |
           for attempt in $(seq 1 60); do
             deployed=$(curl -fsS "https://findit-nearby.bgbrummer.workers.dev/api/version?expected=$GITHUB_SHA" | python3 -c 'import json,sys; print(json.load(sys.stdin).get("commit", ""))' || true)
@@ -57,6 +59,7 @@ jobs:
           echo "Production did not report the expected commit"
           exit 1
       - name: Check deployed FindIt interactions actually work
+        if: github.event_name != 'pull_request'
         env:
           FINDIT_URL: https://findit-nearby.bgbrummer.workers.dev/
         run: |
