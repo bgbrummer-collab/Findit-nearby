@@ -1,6 +1,6 @@
 FindIt production audit
-Commit: 3050ed7f72c0e75aeda32e1546c3262b6370b761
-Release smoke: FAIL (exit 1)
+Commit: 8d0537bac23c8e574d3095ca53e57f8758f62532
+Release smoke: PASS (exit 0)
 Dashboard readiness: PASS (exit 0)
 Every dashboard function: PASS (exit 0)
 Current dashboard real-user audit: PASS (exit 0)
@@ -19,29 +19,14 @@ Current dashboard real-user audit: PASS (exit 0)
 [PASS] mock nearby same retailer paired without fake branch stock
 [PASS] label evidence promotes supported packaged-product identity
 [PASS] label evidence allows retailer-page verified price
-[FAIL] label flow keeps physical branch stock unconfirmed and no Directions 1
-Clicks
-Menlyn, Pretoria
-Relevant nearby retailer
-Exact branch stock not verified
-4.2 km
-View store
-Check Store
+[PASS] label flow keeps physical branch stock unconfirmed and no Directions
 [PASS] shoe retailer selection and safety
 [PASS] electronics retailer selection and safety
 [PASS] grocery retailer selection and safety
 [PASS] hardware retailer selection and safety
 [PASS] nearby lookup returns valid real coordinates or clean empty state
 
-FAILURES
-label flow keeps physical branch stock unconfirmed and no Directions: 1
-Clicks
-Menlyn, Pretoria
-Relevant nearby retailer
-Exact branch stock not verified
-4.2 km
-View store
-Check Store
+FINDIT_STABLE_PIPELINE_SMOKE_PASS
 
 --- dashboard readiness ---
 [PASS] 1440px first feedback click works immediately after DOM ready
