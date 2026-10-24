@@ -82,3 +82,13 @@ test('product research distinguishes unavailable sources from product mismatches
  assert.ok(d.sourceChecks.some(s=>s.url===urls[1]&&s.status==='identity-mismatch'));
  assert.equal(d.sources.length,0);assert.equal(d.specifications.length,0);
 });
+
+test('product purpose prefers a sourced function over an earlier material or fit fragment',async t=>{
+ const name='Acme X1 headphones',url='https://shop.example/products/acme-x1';
+ const description='Soft fit leather earcups. Industry-leading noise cancellation. Up to 30 hours of playback time. Multipoint connection.';
+ t.mock.method(globalThis,'fetch',async u=>String(u)===url?new Response('<title>'+name+'</title><script type="application/ld+json">'+JSON.stringify({'@type':'Product',name,description})+'</script>'):new Response('<rss/>'));
+ const d=await(await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:{name},offers:[{product_url:url,sourcePageVerified:true,exactProductMatch:true}]})}),{})).json();
+ assert.equal(d.whatItDoes,'Industry-leading noise cancellation.');
+ assert.ok(d.pros.includes('Soft fit leather earcups.'));
+ assert.ok(d.sources.some(s=>s.url===url));
+});
