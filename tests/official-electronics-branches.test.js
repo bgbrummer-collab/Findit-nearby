@@ -25,6 +25,9 @@ test('nearby electronics discovery survives failed map providers and independent
  const request=()=>new Request('https://findit.test/api/nearby',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({lat:-25.7821,lon:28.2752,radiusKm:3,identification:{name:'Sony headphones',object:'headphones',category:'electronics'}})});
  const response=await worker.fetch(request(),{}),d=await response.json();assert.equal(d.stores.length,2);assert.equal(d.discoveryAvailable,true);assert.ok(d.stores.every(s=>s.distanceKm<3&&s.branchStockVerified===false&&s.price===null));assert.equal(d.stores[0].name,'INCREDIBLE MENLYN');
  const result=await worker.fetch(new Request('https://findit.test/api/assistant?action=store-hours',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({stores:d.stores})}),{}),h=await result.json();assert.ok(h.stores.every(s=>s.hoursVerified&&s.sourceLabel==='Official retailer locator'&&s.phone));assert.equal(sourceCalls,1,'A locator download is shared across nearby and branch-hours requests');
+ const modelOnly=await(await worker.fetch(new Request('https://findit.test/api/nearby',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({lat:-25.7821,lon:28.2752,radiusKm:3,identification:{name:'Sony WH-1000XM5 black',object:'product',category:'general'}})}),{})).json();
+ assert.ok(modelOnly.searchedShopTags.includes('electronics'),'Model-only browser searches use the commerce category');assert.equal(modelOnly.stores.length,2);
+
  const checked=await(await worker.fetch(new Request('https://findit.test/api/store-website-check',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({name:d.stores[0].name,address:d.stores[0].address,website:source})}),{})).json();assert.equal(checked.verifiedFields.phone,record.phone);assert.equal(checked.source,'Official retailer locator');
 });
 
