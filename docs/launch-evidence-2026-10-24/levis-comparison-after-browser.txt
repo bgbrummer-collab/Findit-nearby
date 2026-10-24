@@ -1,0 +1,408 @@
+- complementary:
+  - generic: F
+  - generic: FindIt
+  - generic: Find it. Compare it. Get it.
+  - navigation:
+    - button "⌂ Home"
+    - button "⌕ Search"
+    - button "⌖ Nearby"
+    - button "⇄ Compare"
+    - button "◇ Deals"
+    - button "♡ Saved"
+    - button "◷ History"
+    - button "♧ Alerts"
+    - button "▣ Feedback"
+    - button "✦ Suggest a Feature"
+    - button "ⓘ How to use FindIt"
+  - generic: 🚀
+  - heading "Premium Active" [level=3]
+  - paragraph: Unlock wider search, saved finds, comparisons & more.
+  - button "Premium Tools"
+  - generic: Recent Searches
+  - button "View all"
+  - generic: Levis 501 Original Jeans
+  - generic: Sony WH-1000XM5 black
+- main:
+  - text: ⌕
+  - generic: Search or upload an image to find anything...
+  - text: ⌖
+  - generic: Nearby
+  - button "Settings": ⚙
+  - button "Alerts": ♧
+  - button "Premium tools": P
+  - generic: ✦ AI powered product search
+  - heading "Find anything nearby." [level=1]:
+    - text: Find anything
+    - text: nearby.
+  - paragraph: Take a photo, upload an image, or search by text and we’ll find where to buy it near you.
+  - button "Upload Photo"
+  - button "⌕ Search Product"
+  - button "▥ Scan / Camera"
+  - button "▧ Drag & drop an image here or click to browse":
+    - generic: ▧
+    - generic: Drag & drop an image here
+    - text: or click to
+    - emphasis: browse
+  - button "⌖ Use my location"
+  - button "✦ Identify & Find" [disabled]
+  - status: Product search complete. Prices and stock require verified retailer evidence.
+  - generic "Choose location on map / enter coordinates"
+  - article:
+    - generic: ✓
+    - generic: Exact match
+    - generic: See the identified product and only supported identity details.
+  - article:
+    - generic: R
+    - generic: Real prices
+    - generic: Compare retailer prices only when FindIt can verify them.
+  - article:
+    - generic: ⌖
+    - generic: Nearby stores
+    - generic: See relevant stores around your selected location.
+  - article:
+    - generic: ▣
+    - generic: Live stock
+    - generic: Branch stock appears only when retailer evidence confirms it.
+  - article:
+    - generic: ⇄
+    - generic: Compare
+    - generic: Compare verified offers without invented prices or availability.
+  - article:
+    - generic: ＋
+    - generic: Shopping Tools
+    - generic: Lists, watchlist, budget, links & preferences.
+  - generic: Image confidence identifies what the object appears to be. Store, price and stock recommendations remain separate and are only shown when their evidence matches this Find.
+  - text: FindIt Smart Choice
+  - heading "Best options from this Find" [level=2]
+  - paragraph: Ranked from verified/current evidence. Missing prices, stock or opening hours are never guessed.
+  - generic: Search confirmed
+  - article:
+    - generic: BEST OVERALL
+    - strong: Compare listing details
+    - generic: Confirm the listing variant before comparing prices
+  - article:
+    - generic: CHEAPEST
+    - strong: Compare listing details
+    - generic: Confirm the listing variant before comparing prices
+  - article:
+    - generic: CLOSEST
+    - strong: No nearby store yet
+    - generic: Location results have not loaded yet.
+  - button "+ Shopping List"
+  - button "Save Find"
+  - button "Open Now" [disabled]
+  - generic: Opening hours are not published for these nearby results yet.
+  - paragraph: Nearby stores have not loaded yet.
+  - text: FINDIT SHOPPING ASSISTANT
+  - heading "Plan, verify and track your shopping" [level=2]
+  - paragraph: Verified data first. FindIt does not guess prices, stock, phone numbers or opening hours.
+  - button "+ Add current item"
+  - button "Watch item"
+  - button "Scan barcode"
+  - generic "Check nearby stores"
+  - paragraph: Nearby store details will appear after FindIt locates retailers.
+  - generic "Shopping List + Trip Planner"
+  - strong: Levis 501 Original Jeans
+  - button "Remove"
+  - strong: Online-only plan
+  - generic: "Online-only plan: no physical branch coordinates are verified for these offers, so FindIt will not pretend this is a driving trip."
+  - button "Best overall"
+  - button "Cheapest"
+  - paragraph: 0 online retailers · Price not verified
+  - paragraph: "Missing comparable prices for: Levis 501 Original Jeans"
+  - text: No price-verified retailer is available for this shopping list yet. Nearby stores may still be visible elsewhere, but their stock and prices are unverified.
+  - paragraph: No physical branch coordinates are verified, so FindIt will not pretend this is a driving trip.
+  - button "Clear list"
+  - generic "Watch List + Price History"
+  - generic: Results for your image
+  - generic: Levis 501 Original Jeans
+  - generic: product
+  - button "♡ Save"
+  - button "⇄ Compare"
+  - heading "Nearby Stores" [level=2]
+  - button "☷ Filter"
+  - button "View all"
+  - generic: ●
+  - generic: Real store pins appear after relevant nearby results are found.
+  - generic: Choose a search location to find nearby retailers.
+  - article:
+    - generic: ◇
+    - generic: Deals Near You
+    - generic: See verified retailer offers when available.
+    - button "View Deals →"
+  - article:
+    - generic: ♡
+    - generic: Saved Items
+    - generic: Open the Finds you saved on this device.
+    - button "View Saved →"
+  - article:
+    - generic: ↗
+    - generic: Price History
+    - generic: See verified price observations when available.
+    - button "View History →"
+  - article:
+    - generic: ✦
+    - generic: Suggest a Feature
+    - generic: Tell us what FindIt should build next.
+    - button "Send Idea →"
+- complementary:
+  - generic: ▧
+  - generic: Product confirmed by search
+  - heading "Levis 501 Original Jeans" [level=2]
+  - paragraph: product
+  - paragraph: A classic straight leg and iconic styling.
+  - generic: Search confirmed
+  - generic: Best verified price
+  - strong: Confirm the listing variant before comparing prices
+  - generic: FindIt won’t guess a price.
+  - generic: What we found
+  - generic: 9 retailer listings found
+  - button "ⓘ Product Info":
+    - text: ⓘ
+    - generic: Product Info
+  - button "⇄ Compare Prices":
+    - text: ⇄
+    - generic: Compare Prices
+  - button "⌖ Nearby Stores":
+    - text: ⌖
+    - generic: Nearby Stores
+  - button "✦ Ask FindIt":
+    - text: ✦
+    - generic: Ask FindIt
+  - heading "Top Stores" [level=2]
+  - button "View all"
+  - paragraph: "Verified product listings:"
+  - link "Superbalist 501® Levi's®ORIGINAL - AT THE GALLERY R 909,00 · Online in stock · Branch stock not verified":
+    - /url: https://superbalist.com/men/jeans-pants-shorts/jeans/501-levi-s-original-at-the-gallery/1695947?clickRef=search_listing&searchTerm=Levis+501+Original+Jeans
+    - text: Superbalist
+    - generic: 501® Levi's®ORIGINAL - AT THE GALLERY
+    - generic: R 909,00 · Online in stock · Branch stock not verified
+  - link "Levi’s South Africa LEVI'S® MEN'S 501® ORIGINAL JEANS - GREY R 1 299,00 · Online in stock · Branch stock not verified":
+    - /url: https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-grey-1
+    - text: Levi’s South Africa
+    - generic: LEVI'S® MEN'S 501® ORIGINAL JEANS - GREY
+    - generic: R 1 299,00 · Online in stock · Branch stock not verified
+  - link "Levi’s South Africa LEVI'S® MEN'S 501® ORIGINAL JEANS - MEDIUM WASH R 1 299,00 · Online in stock · Branch stock not verified":
+    - /url: https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2
+    - text: Levi’s South Africa
+    - generic: LEVI'S® MEN'S 501® ORIGINAL JEANS - MEDIUM WASH
+    - generic: R 1 299,00 · Online in stock · Branch stock not verified
+  - link "Levi’s South Africa LEVI'S® MEN'S 501® ORIGINAL JEANS - MED INDIGO - WORN IN R 1 299,00 · Online in stock · Branch stock not verified":
+    - /url: https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-med-indigo-worn-in
+    - text: Levi’s South Africa
+    - generic: LEVI'S® MEN'S 501® ORIGINAL JEANS - MED INDIGO - WORN IN
+    - generic: R 1 299,00 · Online in stock · Branch stock not verified
+  - link "Levi’s South Africa LEVI'S® MEN'S 501® ORIGINAL JEANS - BROWN R 1 399,00 · Online in stock · Branch stock not verified":
+    - /url: https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown
+    - text: Levi’s South Africa
+    - generic: LEVI'S® MEN'S 501® ORIGINAL JEANS - BROWN
+    - generic: R 1 399,00 · Online in stock · Branch stock not verified
+- banner:
+  - link "F FindIt Nearby":
+    - /url: "#home"
+    - generic: F
+    - generic: FindIt Nearby
+  - navigation:
+    - link "Find":
+      - /url: "#finder"
+    - link "How it works":
+      - /url: "#how"
+    - link "Examples":
+      - /url: "#examples"
+    - link "Feedback":
+      - /url: "#feedback"
+  - button "☰"
+- complementary:
+  - generic: F
+  - generic: FindIt Nearby
+  - button: ×
+  - navigation:
+    - generic: ★
+    - generic: FindIt Premium
+    - generic: Power workspace
+    - link:
+      - /url: "#premiumHome"
+      - text: ✦ Premium Home
+    - link:
+      - /url: "#finder"
+      - text: ⌕ Advanced Find
+    - button: ♡ Saved Items
+    - button: ⇄ Compare Stores
+    - link:
+      - /url: "#nearbyPanel"
+      - text: ⌖ Nearby Map
+    - button: ◎ Search Radius
+    - button: ≡ Smart Filters
+    - button: ◷ Extended History
+    - button: ✦ Premium Challenge
+    - link:
+      - /url: "#feedback"
+      - text: 💬 Feedback
+    - button: ⚙ Premium Settings
+- main:
+  - text: PREMIUM
+  - generic: THE PREMIUM EXPERIENCE
+  - heading "More than a bigger radius." [level=2]
+  - paragraph: Premium is built to help you find the right product, keep track of it, compare nearby options and come back when the price or stock changes.
+  - article:
+    - generic: ⚡
+    - heading "Find once. Keep watching." [level=3]
+    - paragraph: Save products to your Watchlist, set a target price and re-check verified retailer data for price drops or restocks.
+    - generic: PRICE + STOCK WATCHLIST
+  - article:
+    - generic: 🎯
+    - heading "Search smarter" [level=3]
+    - paragraph: Vision+, Exact Match, Manual Search and AI Search give you more ways to find what you actually mean.
+    - generic: 4 SEARCH MODES
+  - article:
+    - generic: ⌖
+    - heading "Go further" [level=3]
+    - paragraph: Search up to 25 km, compare stores and sort results by closest, name or best match.
+    - generic: UP TO 25 KM
+  - article:
+    - generic: "01"
+    - generic: Identify
+    - text: Use a photo or named product.
+  - article:
+    - generic: "02"
+    - generic: Compare
+    - text: Check relevant nearby retailers.
+  - article:
+    - generic: "03"
+    - generic: Save
+    - text: Collections, favourites and history.
+  - article:
+    - generic: "04"
+    - generic: Watch
+    - text: Track price and stock changes.
+  - strong: 25 km
+  - generic: Premium search radius
+  - strong: "50"
+  - generic: Extended history capacity
+  - strong: "4"
+  - generic: Premium search modes
+  - strong: Live
+  - generic: Price & stock checks when available
+  - text: PREMIUM SEARCH
+  - generic: ★ PREMIUM • START SEARCHING
+  - heading "What are you looking for?" [level=2]
+  - paragraph: Use a clear photo. Logos, labels and model text help FindIt be more precise.
+  - generic: Radius
+  - combobox "Radius":
+    - option "3 km"
+    - option "5 km"
+    - option "10 km" [selected]
+    - option "15 km"
+    - option "25 km"
+  - generic: 📸
+  - strong: Drop or choose a photo
+  - generic: Gallery • Camera • Files
+  - generic: No need to know the name. Just show us.
+  - button "Upload product photo"
+  - button "Choose File"
+  - button "🖼️ Gallery / Files"
+  - button "📷 Take photo"
+  - button "📍 Use my location"
+  - button "✨ Identify & Find" [disabled]
+  - paragraph: Product search complete. Prices and stock require verified retailer evidence.
+  - paragraph: TRY FINDIT WITH…
+  - heading "Ordinary. Unusual. Anything in-between." [level=2]
+  - button "Shuffle ↻"
+  - button "🎮 Controller Try something like this":
+    - generic: 🎮
+    - strong: Controller
+    - generic: Try something like this
+  - button "🔧 Tool Try something like this":
+    - generic: 🔧
+    - strong: Tool
+    - generic: Try something like this
+  - button "💄 Makeup Try something like this":
+    - generic: 💄
+    - strong: Makeup
+    - generic: Try something like this
+  - button "🎒 Backpack Try something like this":
+    - generic: 🎒
+    - strong: Backpack
+    - generic: Try something like this
+  - button "🔌 Charger Try something like this":
+    - generic: 🔌
+    - strong: Charger
+    - generic: Try something like this
+  - button "☕ Hot chocolate Try something like this":
+    - generic: ☕
+    - strong: Hot chocolate
+    - generic: Try something like this
+  - paragraph: HOW IT WORKS
+  - heading "Three simple steps." [level=2]
+  - article:
+    - text: "01"
+    - generic: 📸
+    - heading "Show It" [level=3]
+    - paragraph: Take or upload a photo of the item you want.
+  - article:
+    - text: "02"
+    - generic: ✨
+    - heading "Find It" [level=3]
+    - paragraph: FindIt checks visible product details. Clear labels and model text improve identification.
+  - article:
+    - text: "03"
+    - generic: 📍
+    - heading "Get It" [level=3]
+    - paragraph: FindIt looks for relevant consumer retailers close to you.
+  - paragraph: FINDIT CHALLENGE
+  - heading "Think FindIt can’t identify it? 👀" [level=2]
+  - paragraph: Find the weirdest object around you and put FindIt to the test.
+  - button "🎲 Give me a challenge"
+  - paragraph: RECENT
+  - heading "Recent finds" [level=2]
+  - button "Clear"
+  - paragraph: FEEDBACK
+  - heading "Help make FindIt better." [level=2]
+  - generic: Have an idea for FindIt?
+  - generic: Send a feature request separately from normal feedback.
+  - button "✦ Suggest a Feature"
+  - generic: Tell us what worked, report a problem, or suggest what FindIt should build next.
+  - text: Feedback type
+  - combobox "Feedback type":
+    - option "General feedback" [selected]
+    - option "Wrong identification"
+    - option "Nearby store / location problem"
+    - option "Price or stock problem"
+    - option "💡 Suggest a feature"
+  - strong: 💡 Have an idea for FindIt?
+  - generic: Suggest a feature and tell us what would make FindIt more useful.
+  - button "Suggest a feature"
+  - group "Rating":
+    - generic: Rating
+    - generic "Choose a rating from 1 to 5 stars":
+      - button "1 star": ★
+      - button "2 stars": ★
+      - button "3 stars": ★
+      - button "4 stars": ★
+      - button "5 stars": ★
+    - combobox
+  - text: Message
+  - textbox "Message":
+    - /placeholder: What worked? What should improve?
+  - checkbox "Include basic technical details to help us fix bugs" [checked]
+  - text: Include basic technical details to help us fix bugs
+  - button "Send feedback"
+  - button "Copy"
+  - paragraph
+- contentinfo:
+  - generic: F
+  - generic: FindIt Nearby
+  - paragraph: © 2026 Bernard Brummer — FindIt Nearby. All rights reserved.
+  - text: Nearby retailer ≠ verified exact-item stock.
+- button "✦ Ask FindIt"
+- generic: Added to Shopping List
+- dialog "Ask FindIt":
+  - button "Close": ×
+  - heading "Ask FindIt" [level=2]
+  - paragraph: Ask about this product, nearby retailers, verified prices or how FindIt works.
+  - generic: Your question
+  - textbox "Your question":
+    - /placeholder: Ask FindIt anything about this product…
+    - text: Which is cheapest and is it in stock near me?
+  - button "✦ Ask FindIt"
+  - status: "Verified online prices in the current result: Superbalist — 501® Levi's®ORIGINAL - AT THE GALLERY: R 909,00 — in stock online. Levi’s South Africa — LEVI'S® MEN'S 501® ORIGINAL JEANS - DARK INDIGO - FLAT FINISH: R 1 199,00. Levi’s South Africa — LEVI'S® MEN'S 501® ORIGINAL JEANS - DARK INDIGO - WORN IN: R 1 199,00. Levi’s South Africa — LEVI'S® MEN'S 501® ORIGINAL JEANS - DARK INDIGO - FLAT FINISH: R 1 199,00. Levi’s South Africa — LEVI'S® MEN'S 501® ORIGINAL JEANS - GREY: R 1 299,00 — in stock online. These listings have different or unconfirmed variants or price conditions; no cheapest exact-item comparison is established. Superbalist: in stock online. Levi’s South Africa: in stock online. Levi’s South Africa: in stock online. Levi’s South Africa: in stock online. Online availability does not confirm stock at a nearby branch. Sources: https://superbalist.com/men/jeans-pants-shorts/jeans/501-levi-s-original-at-the-gallery/1695947?clickRef=search_listing&searchTerm=Levis+501+Original+Jeans https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-flat-finish https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-worn-in https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-flat-finish-1 https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-grey-1 https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2"

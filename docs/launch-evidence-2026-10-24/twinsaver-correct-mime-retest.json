@@ -1,0 +1,33 @@
+{
+  "identification": {
+    "name": "TWINSAVER twin ply toilet paper 18 Rolls",
+    "brand": "TWINSAVER",
+    "model": "twin ply",
+    "object": "toilet paper",
+    "category": "grocery/household",
+    "retailCategory": "grocery/household",
+    "searchQuery": "TWINSAVER twin ply toilet paper 18 Rolls",
+    "barcode": null,
+    "size": "18 Rolls",
+    "color": "",
+    "visibleText": [],
+    "confidence": 0.85,
+    "identificationMethod": "independent-vision-consensus",
+    "userConfirmed": false,
+    "labelCandidates": [],
+    "suggestedLabel": "",
+    "suggestedModels": [],
+    "identityScope": "model",
+    "requiresModelConfirmation": false,
+    "unverifiedDetails": [],
+    "features": []
+  },
+  "offers": [],
+  "verified": false,
+  "visualVerification": true,
+  "imageAccepted": true,
+  "needsRetailerVerification": true,
+  "provider": "verified-visual-cache",
+  "code": "PHOTO_IDENTIFIED",
+  "message": "Photo identified. Retailer information still requires a fresh check."
+}

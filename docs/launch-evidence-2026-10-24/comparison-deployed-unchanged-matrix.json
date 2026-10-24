@@ -1,0 +1,1861 @@
+{
+  "startVersion": {
+    "commit": "3050ed7f72c0e75aeda32e1546c3262b6370b761",
+    "platform": "cloudflare"
+  },
+  "endVersion": {
+    "commit": "3050ed7f72c0e75aeda32e1546c3262b6370b761",
+    "platform": "cloudflare"
+  },
+  "rows": [
+    {
+      "q": "Sony WH-1000XM5 black",
+      "seconds": 11.72,
+      "result": {
+        "ok": true,
+        "matched": true,
+        "exactMatchVerified": true,
+        "searchQuery": "Sony WH-1000XM5 black",
+        "bestProduct": {
+          "name": "Sony WH-1000XM5 Wireless Noise Cancelling Headphones Black"
+        },
+        "bestPrice": {
+          "product_name": "Sony WH-1000XM5 Wireless Noise Cancelling Headphones Black",
+          "product_url": "https://www.incredible.co.za/sony-wh-1000xm5-wireless-noise-cancelling-headphones-black",
+          "sku": "000000000010282383",
+          "comparisonAttributes": {
+            "size": "",
+            "color": ""
+          },
+          "comparisonAmbiguous": false,
+          "retailer": {
+            "name": "Incredible Connection"
+          },
+          "price": 5999,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "priceConditions": "Retailer marks this as a +more price. Check eligibility and sale terms on the product page. Sale ends Friday, 30 October 2026.",
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Verified directly on exact retailer product page",
+          "matchScore": 100,
+          "stockScope": "online/general retailer availability only",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-10-24T21:41:05.239Z",
+          "retailerDomain": "incredible.co.za",
+          "trustedRetailerDomain": true
+        },
+        "priceComparisonIssue": null,
+        "priceComparisonNote": "",
+        "offers": [
+          {
+            "product_name": "Sony WH-1000XM5 Wireless Noise Cancelling Headphones Black",
+            "product_url": "https://www.incredible.co.za/sony-wh-1000xm5-wireless-noise-cancelling-headphones-black",
+            "sku": "000000000010282383",
+            "comparisonAttributes": {
+              "size": "",
+              "color": ""
+            },
+            "comparisonAmbiguous": false,
+            "retailer": {
+              "name": "Incredible Connection"
+            },
+            "price": 5999,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "priceConditions": "Retailer marks this as a +more price. Check eligibility and sale terms on the product page. Sale ends Friday, 30 October 2026.",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 100,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-24T21:41:05.239Z",
+            "retailerDomain": "incredible.co.za",
+            "trustedRetailerDomain": true
+          },
+          {
+            "product_name": "Sony WH-1000XM5 Wireless Noise Cancelling Headphones Black",
+            "product_url": "https://www.hificorp.co.za/sony-wh-1000xm5-wireless-noise-cancelling-headphones-black",
+            "sku": "000000000010282383",
+            "comparisonAttributes": {
+              "size": "",
+              "color": ""
+            },
+            "comparisonAmbiguous": false,
+            "retailer": {
+              "name": "HiFi Corp"
+            },
+            "price": 5999,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "priceConditions": "Retailer marks this as a +more price. Check eligibility and sale terms on the product page. Sale ends Friday, 30 October 2026.",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 100,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-24T21:41:05.243Z",
+            "retailerDomain": "hificorp.co.za",
+            "trustedRetailerDomain": true
+          }
+        ],
+        "retailerStatus": [
+          {
+            "name": "Incredible Connection",
+            "searchUrl": "https://www.incredible.co.za/sony-wh-1000xm5-wireless-noise-cancelling-headphones-black",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "HiFi Corp",
+            "searchUrl": "https://www.hificorp.co.za/sony-wh-1000xm5-wireless-noise-cancelling-headphones-black",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Game",
+            "searchUrl": "https://www.game.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Incredible Connection",
+            "searchUrl": "https://www.incredible.co.za/sony-wh-1000xm5-wireless-noise-cancelling-headphones-black",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "HiFi Corp",
+            "searchUrl": "https://www.hificorp.co.za/sony-wh-1000xm5-wireless-noise-cancelling-headphones-black",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Game",
+            "searchUrl": "https://www.game.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 2,
+        "verifiedSellerCount": 2,
+        "inStockOfferCount": 2,
+        "priceVerifiedCount": 2,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Sony%20WH-1000XM5%20black",
+        "checkedAt": "2026-10-24T21:41:05.316Z"
+      }
+    },
+    {
+      "q": "Coca-Cola Original Taste 2L",
+      "seconds": 8.87,
+      "result": {
+        "ok": true,
+        "matched": false,
+        "exactMatchVerified": false,
+        "searchQuery": "Coca-Cola Original Taste 2L",
+        "bestProduct": null,
+        "bestPrice": null,
+        "priceComparisonIssue": "no-prices",
+        "priceComparisonNote": "",
+        "offers": [],
+        "retailerStatus": [
+          {
+            "name": "Checkers",
+            "searchUrl": "https://www.checkers.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Pick n Pay",
+            "searchUrl": "https://www.pnp.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Shoprite",
+            "searchUrl": "https://www.shoprite.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Woolworths",
+            "searchUrl": "https://www.woolworths.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Checkers",
+            "searchUrl": "https://www.checkers.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Pick n Pay",
+            "searchUrl": "https://www.pnp.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Shoprite",
+            "searchUrl": "https://www.shoprite.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Woolworths",
+            "searchUrl": "https://www.woolworths.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 0,
+        "verifiedSellerCount": 0,
+        "inStockOfferCount": 0,
+        "priceVerifiedCount": 0,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Coca-Cola%20Original%20Taste%202L",
+        "checkedAt": "2026-10-24T21:41:02.487Z"
+      }
+    },
+    {
+      "q": "Nike Air Force 1 Low White Blue",
+      "seconds": 9.45,
+      "result": {
+        "ok": true,
+        "matched": false,
+        "exactMatchVerified": false,
+        "searchQuery": "Nike Air Force 1 Low White Blue",
+        "bestProduct": null,
+        "bestPrice": null,
+        "priceComparisonIssue": "no-prices",
+        "priceComparisonNote": "",
+        "offers": [],
+        "retailerStatus": [
+          {
+            "name": "Nike",
+            "searchUrl": "https://www.nike.com/za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Sportscene",
+            "searchUrl": "https://www.sportscene.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Totalsports",
+            "searchUrl": "https://www.totalsports.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "JD Sports",
+            "searchUrl": "https://www.jdsports.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Bash",
+            "searchUrl": "https://bash.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Nike",
+            "searchUrl": "https://www.nike.com/za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Sportscene",
+            "searchUrl": "https://www.sportscene.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Totalsports",
+            "searchUrl": "https://www.totalsports.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "JD Sports",
+            "searchUrl": "https://www.jdsports.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Bash",
+            "searchUrl": "https://bash.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 0,
+        "verifiedSellerCount": 0,
+        "inStockOfferCount": 0,
+        "priceVerifiedCount": 0,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Nike%20Air%20Force%201%20Low%20White%20Blue",
+        "checkedAt": "2026-10-24T21:41:11.914Z"
+      }
+    },
+    {
+      "q": "Bosch GSB 18V-50 drill",
+      "seconds": 18.0,
+      "result": {
+        "ok": true,
+        "matched": false,
+        "exactMatchVerified": false,
+        "searchQuery": "Bosch GSB 18V-50 drill",
+        "bestProduct": null,
+        "bestPrice": null,
+        "priceComparisonIssue": "no-prices",
+        "priceComparisonNote": "",
+        "offers": [],
+        "retailerStatus": [
+          {
+            "name": "Builders",
+            "searchUrl": "https://www.builders.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Leroy Merlin",
+            "searchUrl": "https://www.leroymerlin.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "BUCO",
+            "searchUrl": "https://www.buco.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Mica",
+            "searchUrl": "https://www.mica.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Game",
+            "searchUrl": "https://www.game.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Builders",
+            "searchUrl": "https://www.builders.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Leroy Merlin",
+            "searchUrl": "https://www.leroymerlin.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "BUCO",
+            "searchUrl": "https://www.buco.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Mica",
+            "searchUrl": "https://www.mica.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Game",
+            "searchUrl": "https://www.game.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 0,
+        "verifiedSellerCount": 0,
+        "inStockOfferCount": 0,
+        "priceVerifiedCount": 0,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Bosch%20GSB%2018V-50%20drill",
+        "checkedAt": "2026-10-24T21:41:23.350Z"
+      }
+    },
+    {
+      "q": "Bosch GSB 18V-50 drill with batteries and charger",
+      "seconds": 20.43,
+      "result": {
+        "ok": true,
+        "matched": true,
+        "exactMatchVerified": true,
+        "searchQuery": "Bosch GSB 18V-50 drill with batteries and charger",
+        "bestProduct": {
+          "name": "Bosch Professional | Cordless Drill GSB 18V-50 + 2 X 2,0Ah Batteries + Charger"
+        },
+        "bestPrice": {
+          "product_name": "Bosch Professional | Cordless Drill GSB 18V-50 + 2 X 2,0Ah Batteries + Charger",
+          "product_url": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger",
+          "sku": "SKU 06019H5100",
+          "comparisonAttributes": {
+            "size": "",
+            "color": ""
+          },
+          "comparisonAmbiguous": false,
+          "retailer": {
+            "name": "TMB Supplies"
+          },
+          "price": 4999,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "priceConditions": "",
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Verified directly on exact retailer product page",
+          "matchScore": 100,
+          "stockScope": "online/general retailer availability only",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-10-24T21:41:32.389Z",
+          "retailerDomain": "tmbsupplies.co.za",
+          "trustedRetailerDomain": false
+        },
+        "priceComparisonIssue": null,
+        "priceComparisonNote": "",
+        "offers": [
+          {
+            "product_name": "Bosch Professional | Cordless Drill GSB 18V-50 + 2 X 2,0Ah Batteries + Charger",
+            "product_url": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger",
+            "sku": "SKU 06019H5100",
+            "comparisonAttributes": {
+              "size": "",
+              "color": ""
+            },
+            "comparisonAmbiguous": false,
+            "retailer": {
+              "name": "TMB Supplies"
+            },
+            "price": 4999,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "priceConditions": "",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 100,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-24T21:41:32.389Z",
+            "retailerDomain": "tmbsupplies.co.za",
+            "trustedRetailerDomain": false
+          }
+        ],
+        "retailerStatus": [
+          {
+            "name": "TMB Supplies",
+            "searchUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Builders",
+            "searchUrl": "https://www.builders.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Leroy Merlin",
+            "searchUrl": "https://www.leroymerlin.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "BUCO",
+            "searchUrl": "https://www.buco.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Mica",
+            "searchUrl": "https://www.mica.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Game",
+            "searchUrl": "https://www.game.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "TMB Supplies",
+            "searchUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Builders",
+            "searchUrl": "https://www.builders.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Leroy Merlin",
+            "searchUrl": "https://www.leroymerlin.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "BUCO",
+            "searchUrl": "https://www.buco.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Mica",
+            "searchUrl": "https://www.mica.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Game",
+            "searchUrl": "https://www.game.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 1,
+        "verifiedSellerCount": 1,
+        "inStockOfferCount": 1,
+        "priceVerifiedCount": 1,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Bosch%20GSB%2018V-50%20drill%20with%20batteries%20and%20charger",
+        "checkedAt": "2026-10-24T21:41:32.389Z"
+      }
+    },
+    {
+      "q": "Logitech PRO X Gaming Headset 981-000818",
+      "seconds": 11.87,
+      "result": {
+        "ok": true,
+        "matched": true,
+        "exactMatchVerified": true,
+        "searchQuery": "Logitech PRO X Gaming Headset 981-000818",
+        "bestProduct": {
+          "name": "Logitech PRO X Gaming Headset With BLUE VO!CE Microphone Technology"
+        },
+        "bestPrice": {
+          "product_name": "Logitech PRO X Gaming Headset With BLUE VO!CE Microphone Technology",
+          "product_url": "https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology",
+          "sku": "981-000818",
+          "comparisonAttributes": {
+            "size": "",
+            "color": ""
+          },
+          "comparisonAmbiguous": false,
+          "retailer": {
+            "name": "Computer Mania"
+          },
+          "price": 2299,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "priceConditions": "",
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Verified directly on exact retailer product page",
+          "matchScore": 80,
+          "stockScope": "online/general retailer availability only",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-10-24T21:41:33.980Z",
+          "retailerDomain": "computermania.co.za",
+          "trustedRetailerDomain": true
+        },
+        "priceComparisonIssue": null,
+        "priceComparisonNote": "",
+        "offers": [
+          {
+            "product_name": "Logitech PRO X Gaming Headset With BLUE VO!CE Microphone Technology",
+            "product_url": "https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology",
+            "sku": "981-000818",
+            "comparisonAttributes": {
+              "size": "",
+              "color": ""
+            },
+            "comparisonAmbiguous": false,
+            "retailer": {
+              "name": "Computer Mania"
+            },
+            "price": 2299,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "priceConditions": "",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 80,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-24T21:41:33.980Z",
+            "retailerDomain": "computermania.co.za",
+            "trustedRetailerDomain": true
+          }
+        ],
+        "retailerStatus": [
+          {
+            "name": "Computer Mania",
+            "searchUrl": "https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Incredible Connection",
+            "searchUrl": "https://www.incredible.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Game",
+            "searchUrl": "https://www.game.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Computer Mania",
+            "searchUrl": "https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Incredible Connection",
+            "searchUrl": "https://www.incredible.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Game",
+            "searchUrl": "https://www.game.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 1,
+        "verifiedSellerCount": 1,
+        "inStockOfferCount": 1,
+        "priceVerifiedCount": 1,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Logitech%20PRO%20X%20Gaming%20Headset%20981-000818",
+        "checkedAt": "2026-10-24T21:41:35.148Z"
+      }
+    },
+    {
+      "q": "LEGO Classic 10696",
+      "seconds": 15.81,
+      "result": {
+        "ok": true,
+        "matched": true,
+        "exactMatchVerified": true,
+        "searchQuery": "LEGO Classic 10696",
+        "bestProduct": {
+          "name": "10696 | LEGO\u00ae Classic Medium Creative Brick Box"
+        },
+        "bestPrice": {
+          "product_name": "10696 | LEGO\u00ae Classic Medium Creative Brick Box",
+          "product_url": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696",
+          "sku": "5702015357180",
+          "comparisonAttributes": {
+            "size": "",
+            "color": ""
+          },
+          "comparisonAmbiguous": false,
+          "retailer": {
+            "name": "LEGO Certified Stores"
+          },
+          "price": 559,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "priceConditions": "",
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Verified directly on exact retailer product page",
+          "matchScore": 100,
+          "stockScope": "online/general retailer availability only",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-10-24T21:41:48.181Z",
+          "retailerDomain": "lego-gybc.co.za",
+          "trustedRetailerDomain": false
+        },
+        "priceComparisonIssue": null,
+        "priceComparisonNote": "",
+        "offers": [
+          {
+            "product_name": "10696 | LEGO\u00ae Classic Medium Creative Brick Box",
+            "product_url": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696",
+            "sku": "5702015357180",
+            "comparisonAttributes": {
+              "size": "",
+              "color": ""
+            },
+            "comparisonAmbiguous": false,
+            "retailer": {
+              "name": "LEGO Certified Stores"
+            },
+            "price": 559,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "priceConditions": "",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 100,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-24T21:41:48.181Z",
+            "retailerDomain": "lego-gybc.co.za",
+            "trustedRetailerDomain": false
+          }
+        ],
+        "retailerStatus": [
+          {
+            "name": "LEGO Certified Stores",
+            "searchUrl": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Toys R Us",
+            "searchUrl": "https://www.toysrus.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "LEGO Certified Stores",
+            "searchUrl": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Toys R Us",
+            "searchUrl": "https://www.toysrus.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 1,
+        "verifiedSellerCount": 1,
+        "inStockOfferCount": 1,
+        "priceVerifiedCount": 1,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=LEGO%20Classic%2010696",
+        "checkedAt": "2026-10-24T21:41:48.181Z"
+      }
+    },
+    {
+      "q": "Levis 501 Original Jeans",
+      "seconds": 5.99,
+      "result": {
+        "ok": true,
+        "matched": true,
+        "exactMatchVerified": true,
+        "searchQuery": "Levis 501 Original Jeans",
+        "bestProduct": {
+          "name": "501\u00ae Levi's\u00aeORIGINAL - AT THE GALLERY"
+        },
+        "bestPrice": null,
+        "priceComparisonIssue": "variants",
+        "priceComparisonNote": "Listing variants, currencies or price conditions differ. Compare each listing separately.",
+        "offers": [
+          {
+            "product_name": "501\u00ae Levi's\u00aeORIGINAL - AT THE GALLERY",
+            "product_url": "https://superbalist.com/men/jeans-pants-shorts/jeans/501-levi-s-original-at-the-gallery/1695947?clickRef=search_listing&searchTerm=Levis+501+Original+Jeans",
+            "sku": "1695947",
+            "comparisonAttributes": {
+              "size": "",
+              "color": ""
+            },
+            "comparisonAmbiguous": false,
+            "retailer": {
+              "name": "Superbalist"
+            },
+            "price": 909,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "priceConditions": "",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 100,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-24T21:41:41.005Z",
+            "retailerDomain": "superbalist.com",
+            "trustedRetailerDomain": true
+          },
+          {
+            "product_name": "LEVI'S\u00ae MEN'S 501\u00ae ORIGINAL JEANS - GREY",
+            "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-grey-1",
+            "sku": "A544700413032",
+            "comparisonAttributes": {
+              "size": "",
+              "color": ""
+            },
+            "comparisonAmbiguous": false,
+            "retailer": {
+              "name": "Levi\u2019s South Africa"
+            },
+            "price": 1299,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "priceConditions": "",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 100,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-24T21:41:40.935Z",
+            "retailerDomain": "levi.co.za",
+            "trustedRetailerDomain": false
+          },
+          {
+            "product_name": "LEVI'S\u00ae MEN'S 501\u00ae ORIGINAL JEANS - MEDIUM WASH",
+            "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2",
+            "sku": "0050135983632",
+            "comparisonAttributes": {
+              "size": "",
+              "color": ""
+            },
+            "comparisonAmbiguous": false,
+            "retailer": {
+              "name": "Levi\u2019s South Africa"
+            },
+            "price": 1299,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "priceConditions": "",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 100,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-24T21:41:40.999Z",
+            "retailerDomain": "levi.co.za",
+            "trustedRetailerDomain": false
+          },
+          {
+            "product_name": "LEVI'S\u00ae MEN'S 501\u00ae ORIGINAL JEANS - MED INDIGO - WORN IN",
+            "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-med-indigo-worn-in",
+            "sku": "A544700404032",
+            "comparisonAttributes": {
+              "size": "",
+              "color": ""
+            },
+            "comparisonAmbiguous": false,
+            "retailer": {
+              "name": "Levi\u2019s South Africa"
+            },
+            "price": 1299,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "priceConditions": "",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 100,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-24T21:41:41.003Z",
+            "retailerDomain": "levi.co.za",
+            "trustedRetailerDomain": false
+          },
+          {
+            "product_name": "LEVI'S\u00ae MEN'S 501\u00ae ORIGINAL JEANS - BROWN",
+            "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown",
+            "sku": "A544700422832",
+            "comparisonAttributes": {
+              "size": "",
+              "color": ""
+            },
+            "comparisonAmbiguous": false,
+            "retailer": {
+              "name": "Levi\u2019s South Africa"
+            },
+            "price": 1399,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "priceConditions": "",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 100,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-24T21:41:40.942Z",
+            "retailerDomain": "levi.co.za",
+            "trustedRetailerDomain": false
+          },
+          {
+            "product_name": "LEVI'S\u00ae MEN'S 501\u00ae ORIGINAL JEANS - DARK INDIGO - FLAT FINISH",
+            "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-flat-finish",
+            "sku": "A544700002832",
+            "comparisonAttributes": {
+              "size": "",
+              "color": ""
+            },
+            "comparisonAmbiguous": false,
+            "retailer": {
+              "name": "Levi\u2019s South Africa"
+            },
+            "price": 1199,
+            "currency": "ZAR",
+            "availability": null,
+            "priceConditions": "",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 100,
+            "stockScope": "not supplied",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-24T21:41:40.942Z",
+            "retailerDomain": "levi.co.za",
+            "trustedRetailerDomain": false
+          },
+          {
+            "product_name": "LEVI'S\u00ae MEN'S 501\u00ae ORIGINAL JEANS - DARK INDIGO - WORN IN",
+            "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-worn-in",
+            "sku": "A544700332832",
+            "comparisonAttributes": {
+              "size": "",
+              "color": ""
+            },
+            "comparisonAmbiguous": false,
+            "retailer": {
+              "name": "Levi\u2019s South Africa"
+            },
+            "price": 1199,
+            "currency": "ZAR",
+            "availability": null,
+            "priceConditions": "",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 100,
+            "stockScope": "not supplied",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-24T21:41:40.940Z",
+            "retailerDomain": "levi.co.za",
+            "trustedRetailerDomain": false
+          },
+          {
+            "product_name": "LEVI'S\u00ae MEN'S 501\u00ae ORIGINAL JEANS - DARK INDIGO - FLAT FINISH",
+            "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-flat-finish-1",
+            "sku": "A544700033032",
+            "comparisonAttributes": {
+              "size": "",
+              "color": ""
+            },
+            "comparisonAmbiguous": false,
+            "retailer": {
+              "name": "Levi\u2019s South Africa"
+            },
+            "price": 1199,
+            "currency": "ZAR",
+            "availability": null,
+            "priceConditions": "",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 100,
+            "stockScope": "not supplied",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-24T21:41:41.002Z",
+            "retailerDomain": "levi.co.za",
+            "trustedRetailerDomain": false
+          },
+          {
+            "product_name": "LEVI'S\u00ae MEN'S 501\u00ae ORIGINAL JEANS - GREY",
+            "product_url": "https://www.levi.co.za/products/levis-r-mens-501-r-original-jeans-grey-1",
+            "sku": "0050123702832",
+            "comparisonAttributes": {
+              "size": "",
+              "color": ""
+            },
+            "comparisonAmbiguous": false,
+            "retailer": {
+              "name": "Levi\u2019s South Africa"
+            },
+            "price": 1299,
+            "currency": "ZAR",
+            "availability": null,
+            "priceConditions": "",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 100,
+            "stockScope": "not supplied",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-10-24T21:41:40.964Z",
+            "retailerDomain": "levi.co.za",
+            "trustedRetailerDomain": false
+          }
+        ],
+        "retailerStatus": [
+          {
+            "name": "Superbalist",
+            "searchUrl": "https://superbalist.com/men/jeans-pants-shorts/jeans/501-levi-s-original-at-the-gallery/1695947?clickRef=search_listing&searchTerm=Levis+501+Original+Jeans",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Levi\u2019s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-grey-1",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Levi\u2019s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Levi\u2019s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-med-indigo-worn-in",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Levi\u2019s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Levi\u2019s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-flat-finish",
+            "exactProductMatch": true,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Levi\u2019s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-worn-in",
+            "exactProductMatch": true,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Levi\u2019s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-flat-finish-1",
+            "exactProductMatch": true,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Levi\u2019s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis-r-mens-501-r-original-jeans-grey-1",
+            "exactProductMatch": true,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Bash",
+            "searchUrl": "https://bash.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Superbalist",
+            "searchUrl": "https://superbalist.com/men/jeans-pants-shorts/jeans/501-levi-s-original-at-the-gallery/1695947?clickRef=search_listing&searchTerm=Levis+501+Original+Jeans",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Levi\u2019s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-grey-1",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Levi\u2019s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Levi\u2019s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-med-indigo-worn-in",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Levi\u2019s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown",
+            "exactProductMatch": true,
+            "stockVerified": true,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Levi\u2019s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-flat-finish",
+            "exactProductMatch": true,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Levi\u2019s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-worn-in",
+            "exactProductMatch": true,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Levi\u2019s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-flat-finish-1",
+            "exactProductMatch": true,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Levi\u2019s South Africa",
+            "searchUrl": "https://www.levi.co.za/products/levis-r-mens-501-r-original-jeans-grey-1",
+            "exactProductMatch": true,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "verified_exact_online_listing"
+          },
+          {
+            "name": "Bash",
+            "searchUrl": "https://bash.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 9,
+        "verifiedSellerCount": 2,
+        "inStockOfferCount": 5,
+        "priceVerifiedCount": 9,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Levis%20501%20Original%20Jeans",
+        "checkedAt": "2026-10-24T21:41:41.087Z"
+      }
+    },
+    {
+      "q": "IKEA BILLY 80x28x202 white",
+      "seconds": 14.57,
+      "result": {
+        "ok": true,
+        "matched": false,
+        "exactMatchVerified": false,
+        "searchQuery": "IKEA BILLY 80x28x202 white",
+        "bestProduct": null,
+        "bestPrice": null,
+        "priceComparisonIssue": "no-prices",
+        "priceComparisonNote": "",
+        "offers": [],
+        "retailerStatus": [
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "PriceCheck",
+            "searchUrl": "https://www.pricecheck.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "PriceCheck",
+            "searchUrl": "https://www.pricecheck.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 0,
+        "verifiedSellerCount": 0,
+        "inStockOfferCount": 0,
+        "priceVerifiedCount": 0,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=IKEA%20BILLY%2080x28x202%20white",
+        "checkedAt": "2026-10-24T21:41:55.782Z"
+      }
+    },
+    {
+      "q": "Twinsaver Comfort 3 Ply Tissues 120",
+      "seconds": 1.11,
+      "result": {
+        "ok": true,
+        "matched": false,
+        "exactMatchVerified": false,
+        "searchQuery": "Twinsaver Comfort 3 Ply Tissues 120",
+        "bestProduct": null,
+        "bestPrice": null,
+        "priceComparisonIssue": "no-prices",
+        "priceComparisonNote": "",
+        "offers": [],
+        "retailerStatus": [
+          {
+            "name": "Checkers",
+            "searchUrl": "https://www.checkers.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Pick n Pay",
+            "searchUrl": "https://www.pnp.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Shoprite",
+            "searchUrl": "https://www.shoprite.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Woolworths",
+            "searchUrl": "https://www.woolworths.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Checkers",
+            "searchUrl": "https://www.checkers.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Pick n Pay",
+            "searchUrl": "https://www.pnp.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Shoprite",
+            "searchUrl": "https://www.shoprite.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Woolworths",
+            "searchUrl": "https://www.woolworths.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 0,
+        "verifiedSellerCount": 0,
+        "inStockOfferCount": 0,
+        "priceVerifiedCount": 0,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Twinsaver%20Comfort%203%20Ply%20Tissues%20120",
+        "checkedAt": "2026-10-24T21:41:49.287Z"
+      }
+    },
+    {
+      "q": "Korg Pitchclip 2",
+      "seconds": 14.06,
+      "result": {
+        "ok": true,
+        "matched": false,
+        "exactMatchVerified": false,
+        "searchQuery": "Korg Pitchclip 2",
+        "bestProduct": null,
+        "bestPrice": null,
+        "priceComparisonIssue": "no-prices",
+        "priceComparisonNote": "",
+        "offers": [],
+        "retailerStatus": [
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "PriceCheck",
+            "searchUrl": "https://www.pricecheck.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "webRetailers": [
+          {
+            "name": "Takealot",
+            "searchUrl": "https://www.takealot.com/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "Makro",
+            "searchUrl": "https://www.makro.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          },
+          {
+            "name": "PriceCheck",
+            "searchUrl": "https://www.pricecheck.co.za/",
+            "exactProductMatch": false,
+            "stockVerified": false,
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "status": "candidate_retailer"
+          }
+        ],
+        "verifiedOfferCount": 0,
+        "verifiedSellerCount": 0,
+        "inStockOfferCount": 0,
+        "priceVerifiedCount": 0,
+        "nearbyBranchStockVerified": false,
+        "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+        "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+        "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Korg%20Pitchclip%202",
+        "checkedAt": "2026-10-24T21:42:03.370Z"
+      }
+    }
+  ]
+}
