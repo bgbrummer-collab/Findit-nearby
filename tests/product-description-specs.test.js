@@ -111,3 +111,4 @@ test('verified offers preserve the member-price qualification through the existi
 });
 
 test('retailer layout with the primary price outside its metadata-only main block retains the badge',()=>{assert.match(productPagePriceConditions('<div class="product-info-right-row-shop">'+memberPrice+'</div><div class="product-info-main"><div>Product metadata</div></div>'),/\+more price/);});
+test('the same primary member price is recognised when the retailer uses a textual +more label',()=>{const alternate=memberPrice.replace('<div class="plusmore-text"><span>more</span></div>','<span class="plusmore-label">with +more</span>');assert.match(productPagePriceConditions('<div class="product-info-right-row-shop">'+alternate+'</div>'),/\+more price/);assert.equal(productPagePriceConditions('<div class="product-info-main"><div class="price-box">R 123</div></div><aside>'+alternate+'</aside>'),'');});

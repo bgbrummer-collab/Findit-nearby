@@ -25,3 +25,24 @@ for(const [name,retailer] of [['Hair conditioner','Clicks'],['Skin care lotion',
  let data;await handler({method:'POST',body:{name,requiresModelConfirmation:true}},{setHeader(){},status(){return this},json(d){data=d;return this;}});
  assert.ok(data.retailerStatus.some(s=>s.name===retailer));
 });
+
+test('synthetic material does not turn furniture into a synthesizer search',async t=>{
+ const name='Synthetic leather chair';let data;
+ await handler({method:'POST',body:{name,requiresModelConfirmation:true}},{setHeader(){},status(){return this},json(d){data=d;return this;}});
+ assert.ok(data.retailerStatus.some(s=>s.name==='Mr Price Home'));
+ const seen=[];t.mock.method(globalThis,'fetch',async u=>{seen.push(String(u));return new Response('');});
+ await nativeRetailerUrls({name});assert.ok(seen.some(u=>u.includes('mrphome.com')));assert.ok(!seen.some(u=>u.includes('marshallmusic')));
+});
+test('a baby bassinet is not a bass instrument',async t=>{
+ const seen=[];t.mock.method(globalThis,'fetch',async u=>{seen.push(String(u));return new Response('');});await nativeRetailerUrls({name:'Baby bassinet'});
+ assert.ok(seen.some(u=>u.includes('babycity.co.za')));assert.ok(!seen.some(u=>u.includes('marshallmusic')));
+});
+
+test('nearby search uses the same whole-word categories as retailer discovery',async t=>{
+ const worker=(await import('../cloudflare/worker.js')).default;
+ t.mock.method(globalThis,'fetch',async()=>new Response(JSON.stringify({elements:[]}),{headers:{'content-type':'application/json'}}));
+ for(const [name,wanted,unwanted]of [['Synthetic leather chair','furniture','musical_instrument'],['Moleskine notebook','stationery','chemist'],['Smartphones','electronics','stationery'],['Over-ear headphones','electronics','stationery']]){
+  const r=await worker.fetch(new Request('https://findit.test/api/nearby',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({lat:-25.78,lon:28.27,identification:{name}})}),{}),d=await r.json();
+  assert.ok(d.searchedShopTags.includes(wanted),name+': '+d.searchedShopTags);assert.ok(!d.searchedShopTags.includes(unwanted),name);
+ }
+});
