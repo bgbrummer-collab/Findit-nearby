@@ -1,1 +1,2 @@
 Loader activation prepared.
+Baseline release-gate probe: 2026-09-14.
