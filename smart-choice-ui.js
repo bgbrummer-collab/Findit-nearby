@@ -44,7 +44,7 @@ function matchStore(o,stores){
 }
 function scoreChoices(){
  const s=state(),stores=Array.isArray(s.stores)?s.stores:[],offers=currentOffers(),priced=offers.filter(o=>positive(o.price));
- const comparable=priced.length&&priced.every(o=>o.currency&&o.currency===priced[0].currency);const prices=comparable?priced.map(o=>Number(o.price)):[],minP=prices.length?Math.min(...prices):null,maxP=prices.length?Math.max(...prices):null;
+ const comparable=Boolean(typeof window!=='undefined'&&window.finditOfferEvidence?.cheapest(priced));const prices=comparable?priced.map(o=>Number(o.price)):[],minP=prices.length?Math.min(...prices):null,maxP=prices.length?Math.max(...prices):null;
  const ds=stores.map(x=>num(x.distanceKm)).filter(x=>x!=null),maxD=ds.length?Math.max(...ds):null,candidates=[];
  for(const o of offers){
    const store=matchStore(o,stores),price=positive(o.price)?Number(o.price):null,distance=store?num(store.distanceKm):null,avail=String(o.availability||o.stock?.status||'').toLowerCase();
@@ -57,7 +57,8 @@ function scoreChoices(){
  const cheapest=(comparable?candidates:[]).filter(x=>x.price!=null).sort((a,b)=>a.price-b.price||((a.distance??1e9)-(b.distance??1e9)))[0]||null;
  const filterNearby=openOnly&&stores.some(x=>knownOpenState(x)!==null);
  const closestStore=[...stores].filter(x=>num(x.distanceKm)!=null&&(!filterNearby||knownOpenState(x)===true)).sort((a,b)=>Number(a.distanceKm)-Number(b.distanceKm))[0]||null;
- return{best:candidates[0]||null,cheapest,closestStore,stores};
+ const issue=typeof window!=='undefined'?window.finditOfferEvidence?.comparisonIssue(offers):null,comparisonNote=['variants','conditions','currencies'].includes(issue)?window.finditOfferEvidence.comparisonMessage(offers):'';
+ return{best:comparisonNote?null:candidates[0]||null,cheapest,closestStore,stores,offers,comparisonNote};
 }
 function confidenceLabel(){
  const id=state()?.result?.identification||{},c=num(id.confidence);if(id.userConfirmed)return'Search confirmed';if(c==null)return'Confidence not supplied';
@@ -69,10 +70,10 @@ function confidenceLabel(){
 }
 function card(label,title,meta,klass=''){return`<article class="fx-smart-card ${klass}"><span>${esc(label)}</span><strong>${esc(title)}</strong><small>${esc(meta)}</small></article>`}
 function render(){
- const box=$('#fxSmartChoice');if(!box)return;const actions=$('#fxFindQuickActions',box);const{best,cheapest,closestStore,stores}=scoreChoices();
- const bestName=best?(retailerName(best.offer)||best.store?.name||'Verified retailer'):(closestStore?.name||'Run a Find to get a recommendation');
- const bestMeta=best?[best.price!=null?money(best.price,best.offer.currency,best.offer.priceConditions):null,best.distance!=null?`${best.distance.toFixed(1)} km away`:null,best.open===true?'Open now':best.open===false?'Closed now':null,!best.store?'Online offer · branch price and stock unverified':null].filter(Boolean).join(' · '):(closestStore?`${Number(closestStore.distanceKm).toFixed(1)} km away · price/stock not verified`:'Smart Choice uses price, distance, stock confidence and retailer evidence.');
- const cheapName=cheapest?(retailerName(cheapest.offer)||'Verified retailer'):'No verified price yet',cheapMeta=cheapest?`${money(cheapest.price,cheapest.offer.currency,cheapest.offer.priceConditions)}${cheapest.distance!=null?` · ${cheapest.distance.toFixed(1)} km`:' · online offer; branch price unverified'}`:'FindIt will not guess a missing price.';
+ const box=$('#fxSmartChoice');if(!box)return;const actions=$('#fxFindQuickActions',box);const{best,cheapest,closestStore,stores,offers=[],comparisonNote=''}=scoreChoices();
+ const bestName=best?(retailerName(best.offer)||best.store?.name||'Verified retailer'):(comparisonNote?'Compare listing details':closestStore?.name||'Run a Find to get a recommendation');
+ const bestMeta=best?[best.offer.product_name||best.offer.title||null,best.price!=null?money(best.price,best.offer.currency,best.offer.priceConditions):null,best.distance!=null?`${best.distance.toFixed(1)} km away`:null,best.open===true?'Open now':best.open===false?'Closed now':null,!best.store?'Online offer · branch price and stock unverified':null].filter(Boolean).join(' · '):(comparisonNote|| (closestStore?`${Number(closestStore.distanceKm).toFixed(1)} km away · price/stock not verified`:'Smart Choice uses price, distance, stock confidence and retailer evidence.'));
+ const cheapName=cheapest?(retailerName(cheapest.offer)||'Verified retailer'):offers.some(o=>o.price!=null&&Number(o.price)>0)?'Compare listing details':'No verified price yet',cheapMeta=cheapest?`${money(cheapest.price,cheapest.offer.currency,cheapest.offer.priceConditions)}${cheapest.distance!=null?` · ${cheapest.distance.toFixed(1)} km`:' · online offer; branch price unverified'}`:(typeof window!=='undefined'&&window.finditOfferEvidence?.comparisonMessage(offers)||'FindIt will not guess a missing price.');
  const closestMeta=closestStore?`${Number(closestStore.distanceKm).toFixed(1)} km away${knownOpenState(closestStore)===true?' · Open now':knownOpenState(closestStore)===false?' · Closed now':''}`:'Location results have not loaded yet.';
  const known=stores.filter(s=>knownOpenState(s)!==null),open=known.filter(s=>knownOpenState(s)===true).length;
  box.innerHTML=`<div class="fx-smart-head"><div><span class="fx-smart-kicker">FindIt Smart Choice</span><h2>Best options from this Find</h2><p>Ranked from verified/current evidence. Missing prices, stock or opening hours are never guessed.</p></div><div class="fx-match-confidence">${esc(confidenceLabel())}</div></div><div class="fx-smart-grid">${card('BEST OVERALL',bestName,bestMeta,'best')}${card('CHEAPEST',cheapName,cheapMeta)}${card('CLOSEST',closestStore?.name||'No nearby store yet',closestMeta)}</div><div class="fx-open-row"><button type="button" id="fxOpenNowToggle" class="${openOnly?'active':''}" aria-pressed="${openOnly}">${openOnly?'✓ ':''}Open Now</button><span id="fxOpenNowStatus">${known.length?`${open} of ${known.length} stores with published hours are open now.`:'Opening hours are not published for these nearby results yet.'}</span></div>`;

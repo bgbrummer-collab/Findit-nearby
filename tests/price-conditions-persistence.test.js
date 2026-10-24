@@ -9,7 +9,7 @@ const offer={_retailer:'Example pharmacy',price:75,currency:'ZAR',availability:'
 const item={key:'example',name:'Example cream 25g',brand:'Example',model:''};
 function context(extra={}){
  const c={product:()=>item,offers:()=>[offer],stores:()=>[],coords:()=>null,n:v=>v==null?null:Number(v),Date,...extra};
- vm.runInNewContext(source.split('\n').filter(x=>x.includes('const esc=')||x.includes('const priceConditions=')).join('\n'),c);return c;
+ vm.runInNewContext(source.split('\n').filter(x=>x.includes('const esc=')||x.includes('const priceConditions=')||x.includes('const listingKey=')).join('\n'),c);return c;
 }
 test('shopping and watch snapshots preserve the exact source price conditions',()=>{
  const c=context({bestOffer:()=>offer,LS:{watch:'watch'},read:()=>[],write:(key,value)=>c.saved=value,recordHistory(){},renderWatch(){},toast(){}});
@@ -36,7 +36,7 @@ test('quick watch does not announce a price drop when fee conditions change',()=
 test('Premium checks rebase changed fee conditions without false price or target alerts',async()=>{
  const premium=readFileSync(new URL('../premium-beta-fix.js',import.meta.url),'utf8'),start=premium.indexOf('  async function checkOne(item)'),end=premium.indexOf('  async function checkIndex(',start);let price=75;const notifications=[];
  const c={fetch:async()=>({ok:true,json:async()=>({offers:[{...offer,price,retailer:{name:offer._retailer}}]})}),notify:async(...args)=>notifications.push(args),money2:v=>String(v),Date};vm.runInNewContext(premium.slice(start,end),c);
- const initial={...item,retailer:offer._retailer,lastPrice:100,baselinePrice:100,currency:'ZAR',priceConditions:'Fee included',alertPriceDrop:true,targetPrice:80};
+ const initial={...item,productUrl:offer.product_url,retailer:offer._retailer,lastPrice:100,baselinePrice:100,currency:'ZAR',priceConditions:'Fee included',alertPriceDrop:true,targetPrice:80};
  const first=await c.checkOne(initial);assert.equal(notifications.length,0);assert.equal(first.priceConditions,caveat);assert.equal(first.baselinePrice,75);assert.match(first.lastAlert,/conditions changed/);
  price=50;await c.checkOne({...first,targetPrice:null});assert.equal(notifications.length,1);assert.ok(notifications[0][1].includes(caveat));
 });
@@ -44,4 +44,17 @@ test('watch rendering escapes retailer price conditions rather than treating the
  const body={innerHTML:'',querySelector:()=>null},bad='<img src=x onerror=alert(1)> excludes fee';
  const c=context({$:s=>s==='#fxWatchBody'?body:null,$$:()=>[],LS:{watch:'watch',alerts:'alerts'},read:key=>key==='watch'?[{...item,lastPrice:75,priceConditions:bad}]:[],money:()=> 'ZAR 75',historySummary:()=>'',unwatch(){},notifications(){}});
  vm.runInNewContext(block('renderWatch','function stopScanner('),c);c.renderWatch();assert.ok(body.innerHTML.includes('&lt;img'));assert.doesNotMatch(body.innerHTML,/<img/);
+});
+
+test('quick watch cannot compare a cheaper different variant from the same retailer',()=>{
+ const current={...offer,product_url:'https://pharmacy.example/blue',product_name:'Example item Blue',price:50};
+ const watch=[{...item,lastPrice:100,currency:'ZAR',retailer:offer._retailer,lastAvailability:'out_of_stock',listingComparisonKey:'https://pharmacy.example/grey',priceConditions:caveat}],alerts=[];
+ const c=context({recordHistory(){},bestOffer:()=>current,stockYes:()=>true,LS:{watch:'watch'},read:()=>watch,write(){},addAlert:(...args)=>alerts.push(args),toast(){},renderWatch(){},money:v=>String(v),window:{}});
+ vm.runInNewContext(block('evaluateWatch','async function notifications('),c);c.evaluateWatch();assert.equal(alerts.length,0);assert.equal(watch[0].lastPrice,100);assert.match(watch[0].lastAlert,/different listing variant/);
+});
+test('Premium watch cannot issue a price or restock alert for a different listing variant',async()=>{
+ const premium=readFileSync(new URL('../premium-beta-fix.js',import.meta.url),'utf8'),start=premium.indexOf('  async function checkOne(item)'),end=premium.indexOf('  async function checkIndex(',start);let notifications=0;
+ const c={fetch:async()=>({ok:true,json:async()=>({offers:[{...offer,product_url:'https://pharmacy.example/blue',product_name:'Example item Blue',price:50,availability:'in_stock',retailer:{name:offer._retailer}}]})}),notify:async()=>notifications++,money2:v=>String(v),Date};vm.runInNewContext(premium.slice(start,end),c);
+ const result=await c.checkOne({...item,listingComparisonKey:'https://pharmacy.example/grey',lastPrice:100,baselinePrice:100,currency:'ZAR',retailer:offer._retailer,lastStock:'out_of_stock',alertPriceDrop:true,alertBackInStock:true});
+ assert.equal(notifications,0);assert.equal(result.lastPrice,100);assert.equal(result.lastStock,'out_of_stock');assert.match(result.lastAlert,/different listing variant/);
 });

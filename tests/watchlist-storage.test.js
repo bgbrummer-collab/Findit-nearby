@@ -9,3 +9,9 @@ test('missing watch prices and unknown currencies never render as a free ZAR off
 test('a different-currency watch offer cannot overwrite a saved baseline or trigger a price drop',async()=>{
  const source=readFileSync(new URL('../premium-beta-fix.js',import.meta.url),'utf8'),start=source.indexOf('  async function checkOne(item)'),end=source.indexOf('  async function checkIndex(',start);assert.ok(start>=0&&end>start);let notifications=0,payload;const c={fetch:async(url,options)=>{payload=JSON.parse(options.body);return{ok:true,json:async()=>({offers:[{price:10,currency:'USD',retailer:{name:'Other shop'},availability:'in_stock'}]})}},notify:async()=>{notifications++},money2:()=>'',Date};vm.runInNewContext(source.slice(start,end)+';this.check=checkOne;',c);const item={name:'Example item',query:'Example X1',requiresModelConfirmation:true,lastPrice:200,baselinePrice:200,currency:'ZAR',retailer:'Original shop',targetPrice:100,alertPriceDrop:true};const result=await c.check(item);assert.equal(payload.identification.requiresModelConfirmation,true);assert.equal(result.lastPrice,200);assert.equal(result.baselinePrice,200);assert.equal(result.currency,'ZAR');assert.equal(result.targetPrice,100);assert.equal(notifications,0);assert.match(result.lastAlert,/different retailer or currency/);
 });
+
+test('new Premium watches retain unknown currency instead of inventing a rand baseline',()=>{
+ const source=readFileSync(new URL('../premium-beta-fix.js',import.meta.url),'utf8'),start=source.indexOf('  const currentItem = () => {'),end=source.indexOf('  async function notify(',start);
+ const c={state:{result:{identification:{name:'Example X1 headphones'}},offers:[{product_name:'Example X1 headphones',price:100,retailer:{name:'Shop'},sourcePageVerified:true,exactProductMatch:true}]},window:{},Date};
+ const item=vm.runInNewContext(source.slice(start,end)+';currentItem()',c);assert.equal(item.currency,null);assert.equal(item.lastPrice,100);
+});
