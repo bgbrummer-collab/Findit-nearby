@@ -1,0 +1,415 @@
+[
+  {
+    "fixture": "marc-anthony.jpg",
+    "seconds": 21.4,
+    "result": {
+      "identification": {
+        "name": "MARC ANTHONY conditioner",
+        "brand": "MARC ANTHONY",
+        "model": "",
+        "object": "conditioner",
+        "category": "beauty",
+        "retailCategory": "beauty",
+        "searchQuery": "MARC ANTHONY conditioner",
+        "barcode": null,
+        "size": "",
+        "color": "",
+        "visibleText": [],
+        "confidence": 0.65,
+        "identificationMethod": "independent-vision-consensus",
+        "userConfirmed": false,
+        "labelCandidates": [
+          {
+            "name": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner",
+            "brand": "Marc Anthony",
+            "size": "",
+            "confirmed": false,
+            "source": "printed-label-hypothesis"
+          }
+        ],
+        "suggestedLabel": "MARC ANTHONY strictly curls 3x moisture jungle blend conditioner",
+        "suggestedModels": [
+          {
+            "name": "MARC ANTHONY strictly curls 3x moisture jungle blend conditioner",
+            "confirmed": false,
+            "source": "visual-model-hypothesis"
+          },
+          {
+            "name": "MARC ANTHONY Strictly Curls 3X Moisture Triple Blend Conditioner",
+            "confirmed": false,
+            "source": "visual-model-hypothesis"
+          }
+        ],
+        "identityScope": "product-family",
+        "requiresModelConfirmation": true,
+        "unverifiedDetails": [
+          "exact model",
+          "variant",
+          "specifications"
+        ],
+        "features": []
+      },
+      "offers": [],
+      "blocked": false,
+      "verified": false,
+      "userConfirmed": false,
+      "identitySource": "cloudflare-consensus",
+      "visionDiagnostics": [
+        {
+          "provider": "cloudflare-gemma",
+          "code": "IDENTIFIED",
+          "providerStatus": null,
+          "providerErrorCode": null,
+          "identityClaim": {
+            "name": "STRICTLY CURLS 3X Moisture Jungle Blend CONDITIONER",
+            "brand": "MARC ANTHONY",
+            "model": "strictly curls 3x moisture jungle blend conditioner",
+            "object": "conditioner",
+            "size": "",
+            "color": "yellow",
+            "visibleText": [
+              "MARC ANTHONY.",
+              "STYLE PROFESSIONAL",
+              "STRICTLY CURLS",
+              "3X Moisture",
+              "Jungle Blend",
+              "CONDITIONER",
+              "for wavy/curly hair",
+              "Detangles with",
+              "strong nourishment",
+              "Monoi, Coconut",
+              "+ Shea"
+            ]
+          },
+          "errorType": null
+        },
+        {
+          "provider": "google-gemini",
+          "code": "IDENTIFIED",
+          "providerStatus": null,
+          "providerErrorCode": null,
+          "identityClaim": {
+            "name": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner",
+            "brand": "Marc Anthony",
+            "model": "Strictly Curls 3X Moisture Triple Blend Conditioner",
+            "object": "hair conditioner",
+            "size": "",
+            "color": "",
+            "visibleText": [
+              "MARC ANTHONY",
+              "TRUE PROFESSIONAL",
+              "STRICTLY CURLS",
+              "3X Moisture",
+              "Triple Blend",
+              "CONDITIONER",
+              "Removes Frizz",
+              "Detangles with",
+              "lasting Hydration",
+              "Marula, Coconut",
+              "+ Shea"
+            ]
+          },
+          "errorType": null
+        },
+        {
+          "provider": "cloudflare-workers-ai",
+          "code": "IDENTIFIED",
+          "providerStatus": null,
+          "providerErrorCode": null,
+          "identityClaim": {
+            "name": "STRICTLY CURLS",
+            "brand": "MARC ANTHONY",
+            "model": "XTREME",
+            "object": "product",
+            "size": "",
+            "color": "YELLOW",
+            "visibleText": [
+              "STRICTLY CURLS",
+              "XTREME"
+            ]
+          },
+          "errorType": null
+        },
+        {
+          "provider": "huggingface",
+          "code": "HF_INFERENCE_FAILED",
+          "providerStatus": 402,
+          "providerErrorCode": null,
+          "identityClaim": null,
+          "errorType": "credits"
+        }
+      ],
+      "visualVerification": true,
+      "provider": "cloudflare-consensus",
+      "imageAccepted": true,
+      "needsVision": false,
+      "needsRetailerVerification": true,
+      "confidence": 0.65,
+      "code": "PHOTO_PARTIALLY_IDENTIFIED",
+      "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+    }
+  },
+  {
+    "fixture": "twinsaver.webp",
+    "seconds": 4.5,
+    "result": {
+      "error": "Uploaded file must be an image."
+    }
+  },
+  {
+    "fixture": "nike.jpg",
+    "seconds": 3.8,
+    "result": {
+      "identification": {
+        "name": "Nike shoes",
+        "brand": "Nike",
+        "model": "",
+        "object": "shoes",
+        "category": "footwear",
+        "retailCategory": "footwear",
+        "searchQuery": "Nike shoes",
+        "barcode": null,
+        "size": "",
+        "color": "",
+        "visibleText": [],
+        "confidence": 0.65,
+        "identificationMethod": "independent-vision-consensus",
+        "userConfirmed": false,
+        "labelCandidates": [],
+        "suggestedLabel": "Nike air force 1",
+        "suggestedModels": [
+          {
+            "name": "Nike Air Force 1",
+            "confirmed": false,
+            "source": "visual-model-hypothesis"
+          }
+        ],
+        "identityScope": "product-family",
+        "requiresModelConfirmation": true,
+        "unverifiedDetails": [
+          "exact model",
+          "variant",
+          "specifications"
+        ],
+        "features": []
+      },
+      "offers": [],
+      "verified": false,
+      "visualVerification": true,
+      "imageAccepted": true,
+      "needsRetailerVerification": true,
+      "provider": "verified-visual-cache",
+      "code": "PHOTO_PARTIALLY_IDENTIFIED",
+      "message": "Brand or product type identified. Confirm the model to get exact product information."
+    }
+  },
+  {
+    "fixture": "mic.jpg",
+    "seconds": 29.4,
+    "result": {
+      "identification": {
+        "name": "microphone",
+        "brand": "",
+        "model": "",
+        "object": "microphone",
+        "category": "electronics",
+        "retailCategory": "electronics",
+        "searchQuery": "microphone",
+        "barcode": null,
+        "size": "",
+        "color": "black",
+        "visibleText": [],
+        "confidence": 0.65,
+        "identificationMethod": "independent-vision-consensus",
+        "userConfirmed": false,
+        "labelCandidates": [],
+        "suggestedLabel": "",
+        "suggestedModels": [],
+        "identityScope": "product-family",
+        "requiresModelConfirmation": true,
+        "unverifiedDetails": [
+          "exact model",
+          "variant",
+          "specifications"
+        ],
+        "features": []
+      },
+      "offers": [],
+      "blocked": false,
+      "verified": false,
+      "userConfirmed": false,
+      "identitySource": "cloudflare-consensus",
+      "visionDiagnostics": [
+        {
+          "provider": "cloudflare-gemma",
+          "code": "IDENTIFIED",
+          "providerStatus": null,
+          "providerErrorCode": null,
+          "identityClaim": {
+            "name": "microphone",
+            "brand": "",
+            "model": "",
+            "object": "microphone",
+            "size": "",
+            "color": "black",
+            "visibleText": [
+              "VOL"
+            ]
+          },
+          "errorType": null
+        },
+        {
+          "provider": "google-gemini",
+          "code": "GEMINI_TIMEOUT",
+          "providerStatus": null,
+          "providerErrorCode": null,
+          "identityClaim": null,
+          "errorType": null
+        },
+        {
+          "provider": "cloudflare-workers-ai",
+          "code": "IDENTIFIED",
+          "providerStatus": null,
+          "providerErrorCode": null,
+          "identityClaim": {
+            "name": "Microphone",
+            "brand": "Microsoft",
+            "model": "Studio",
+            "object": "Microphone",
+            "size": "Standard",
+            "color": "Black",
+            "visibleText": [
+              "Microphone",
+              "Studio",
+              "Microphone"
+            ]
+          },
+          "errorType": null
+        },
+        {
+          "provider": "huggingface",
+          "code": "HF_INFERENCE_FAILED",
+          "providerStatus": 402,
+          "providerErrorCode": null,
+          "identityClaim": null,
+          "errorType": "credits"
+        }
+      ],
+      "visualVerification": true,
+      "provider": "cloudflare-consensus",
+      "imageAccepted": true,
+      "needsVision": false,
+      "needsRetailerVerification": true,
+      "confidence": 0.65,
+      "code": "PHOTO_PARTIALLY_IDENTIFIED",
+      "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+    }
+  },
+  {
+    "fixture": "glasses.jpg",
+    "seconds": 6.8,
+    "result": {
+      "identification": {
+        "name": "eyeglasses",
+        "brand": "",
+        "model": "",
+        "object": "eyeglasses",
+        "category": "eyewear",
+        "retailCategory": "eyewear",
+        "searchQuery": "eyeglasses",
+        "barcode": null,
+        "size": "",
+        "color": "",
+        "visibleText": [],
+        "confidence": 0.65,
+        "identificationMethod": "independent-vision-consensus",
+        "userConfirmed": false,
+        "labelCandidates": [],
+        "suggestedLabel": "",
+        "suggestedModels": [],
+        "identityScope": "product-family",
+        "requiresModelConfirmation": true,
+        "unverifiedDetails": [
+          "exact model",
+          "variant",
+          "specifications"
+        ],
+        "features": []
+      },
+      "offers": [],
+      "blocked": false,
+      "verified": false,
+      "userConfirmed": false,
+      "identitySource": "cloudflare-consensus",
+      "visionDiagnostics": [
+        {
+          "provider": "google-gemini",
+          "code": "IDENTIFIED",
+          "providerStatus": null,
+          "providerErrorCode": null,
+          "identityClaim": {
+            "name": "eyeglasses",
+            "brand": "",
+            "model": "",
+            "object": "eyeglasses",
+            "size": "",
+            "color": "",
+            "visibleText": []
+          },
+          "errorType": null
+        },
+        {
+          "provider": "cloudflare-gemma",
+          "code": "IDENTIFIED",
+          "providerStatus": null,
+          "providerErrorCode": null,
+          "identityClaim": {
+            "name": "eyeglasses",
+            "brand": "",
+            "model": "",
+            "object": "eyeglasses",
+            "size": "",
+            "color": "clear",
+            "visibleText": []
+          },
+          "errorType": null
+        },
+        {
+          "provider": "cloudflare-workers-ai",
+          "code": "IDENTIFIED",
+          "providerStatus": null,
+          "providerErrorCode": null,
+          "identityClaim": {
+            "name": "LENS",
+            "brand": "OAKLEY",
+            "model": "PROFIT",
+            "object": "GLASSES",
+            "size": "MEDIUM",
+            "color": "TRUE",
+            "visibleText": [
+              "OAKLEY",
+              "PROFIT"
+            ]
+          },
+          "errorType": null
+        },
+        {
+          "provider": "huggingface",
+          "code": "HF_INFERENCE_FAILED",
+          "providerStatus": 402,
+          "providerErrorCode": null,
+          "identityClaim": null,
+          "errorType": "credits"
+        }
+      ],
+      "visualVerification": true,
+      "provider": "cloudflare-consensus",
+      "imageAccepted": true,
+      "needsVision": false,
+      "needsRetailerVerification": true,
+      "confidence": 0.65,
+      "code": "PHOTO_PARTIALLY_IDENTIFIED",
+      "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+    }
+  }
+]

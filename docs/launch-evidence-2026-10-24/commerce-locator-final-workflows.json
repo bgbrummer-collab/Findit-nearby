@@ -1,0 +1,126 @@
+{
+  "release": "f9416ecc9ad10e70312042804bc61151d6bb941e",
+  "capturedAt": "2026-10-24T21:55:10Z",
+  "branchChecks": {
+    "pr318": [
+      {
+        "id": 40135179192,
+        "name": "FindIt Full Production Audit",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 40135179137,
+        "name": "FindIt Interaction Freeze Regression",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 40135179184,
+        "name": "FindIt Release Smoke",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 40135179069,
+        "name": "FindIt regression checks",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "pr319": [
+      {
+        "id": 40135620339,
+        "name": "FindIt regression checks",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 40135620349,
+        "name": "FindIt Full Production Audit",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 40135620383,
+        "name": "FindIt Interaction Freeze Regression",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 40135620289,
+        "name": "FindIt Release Smoke",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "production": [
+    {
+      "id": 40135862183,
+      "name": "FindIt smoke checks",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 40135862106,
+      "name": "FindIt regression checks",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 40135862155,
+      "name": "Deploy FindIt to Cloudflare",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 40135861882,
+      "name": "pages build and deployment",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 40135862169,
+      "name": "FindIt Live Photo Probe",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 40135862075,
+      "name": "FindIt Interaction Freeze Regression",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "id": 40135862100,
+      "name": "FindIt Full Production Audit",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 40135862203,
+      "name": "FindIt Dashboard Commerce Regression",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 40135862096,
+      "name": "FindIt Production Smoke Test",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 40135862102,
+      "name": "FindIt Release Smoke",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 40135862131,
+      "name": "FindIt Final Production Audit",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ]
+}

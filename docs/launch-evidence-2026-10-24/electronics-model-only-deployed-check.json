@@ -1,0 +1,192 @@
+{
+  "startVersion": {
+    "commit": "f9416ecc9ad10e70312042804bc61151d6bb941e",
+    "platform": "cloudflare"
+  },
+  "endVersion": {
+    "commit": "f9416ecc9ad10e70312042804bc61151d6bb941e",
+    "platform": "cloudflare"
+  },
+  "seconds": 43.22,
+  "nearby": {
+    "ok": true,
+    "radiusKm": 3,
+    "stores": [
+      {
+        "id": "incredible-61",
+        "name": "INCREDIBLE MENLYN",
+        "lat": -25.782677,
+        "lon": 28.276191,
+        "address": "Shop 34A, Menlyn Shopping Mall, Cnr Atterbury & C/O Atterbury Road and Lois Ave, Menlo Park, Pretoria, 0047",
+        "phone": "(012) 369 6480",
+        "countryCode": "ZA",
+        "website": "https://www.incredible.co.za/storelocator/",
+        "sourceUrl": "https://www.incredible.co.za/storelocator/",
+        "source": "Official retailer locator",
+        "branchDetailsVerified": true,
+        "openingHours": "Mo 09:00-20:00; Tu 09:00-20:00; We 09:00-20:00; Th 09:00-20:00; Fr 09:00-21:00; Sa 09:00-21:00; Su 09:00-18:00; PH 09:00-17:00",
+        "schedule": "Mo 09:00-20:00; Tu 09:00-20:00; We 09:00-20:00; Th 09:00-20:00; Fr 09:00-21:00; Sa 09:00-21:00; Su 09:00-18:00; PH 09:00-17:00",
+        "openNow": null,
+        "exactProductMatch": false,
+        "stockVerified": false,
+        "branchStockVerified": false,
+        "branchPriceVerified": false,
+        "directionsAvailable": false,
+        "price": null,
+        "type": "Nearby electronics retailer \u2014 exact item stock not verified",
+        "distanceKm": 0.11816075045787769
+      },
+      {
+        "id": "hificorp-1293",
+        "name": "HiFiCorp Menlyn",
+        "lat": -25.78021823,
+        "lon": 28.27530038,
+        "address": "Shop LF141, Atterbury Road And, Lois Ave, Menlyn, Pretoria, 0063",
+        "phone": "012 133 0032",
+        "countryCode": "ZA",
+        "website": "https://www.hificorp.co.za/storelocator",
+        "sourceUrl": "https://www.hificorp.co.za/storelocator",
+        "source": "Official retailer locator",
+        "branchDetailsVerified": true,
+        "openingHours": "Mo 09:00-20:00; Tu 09:00-20:00; We 09:00-20:00; Th 09:00-20:00; Fr 09:00-21:00; Sa 09:00-21:00; Su 09:00-18:00; PH 09:00-18:00",
+        "schedule": "Mo 09:00-20:00; Tu 09:00-20:00; We 09:00-20:00; Th 09:00-20:00; Fr 09:00-21:00; Sa 09:00-21:00; Su 09:00-18:00; PH 09:00-18:00",
+        "openNow": null,
+        "exactProductMatch": false,
+        "stockVerified": false,
+        "branchStockVerified": false,
+        "branchPriceVerified": false,
+        "directionsAvailable": false,
+        "price": null,
+        "type": "Nearby electronics retailer \u2014 exact item stock not verified",
+        "distanceKm": 0.2094845247991997
+      },
+      {
+        "id": "incredible-782",
+        "name": "INCREDIBLE MENLYN ON MAINE",
+        "lat": -25.78481869,
+        "lon": 28.2811688,
+        "address": "Shop 37, Menlyn on Maine, Cnr January Masilela Rd and Aramist Ave, Waterkloof Glen, Extension 2, Pretoria, 0063",
+        "phone": "(012) 348 2674",
+        "countryCode": "ZA",
+        "website": "https://www.incredible.co.za/storelocator/",
+        "sourceUrl": "https://www.incredible.co.za/storelocator/",
+        "source": "Official retailer locator",
+        "branchDetailsVerified": true,
+        "openingHours": "Mo 09:00-18:00; Tu 09:00-18:00; We 09:00-18:00; Th 09:00-18:00; Fr 09:00-18:00; Sa 09:00-18:00; Su 09:00-17:00; PH 09:00-17:00",
+        "schedule": "Mo 09:00-18:00; Tu 09:00-18:00; We 09:00-18:00; Th 09:00-18:00; Fr 09:00-18:00; Sa 09:00-18:00; Su 09:00-17:00; PH 09:00-17:00",
+        "openNow": null,
+        "exactProductMatch": false,
+        "stockVerified": false,
+        "branchStockVerified": false,
+        "branchPriceVerified": false,
+        "directionsAvailable": false,
+        "price": null,
+        "type": "Nearby electronics retailer \u2014 exact item stock not verified",
+        "distanceKm": 0.6697341967513458
+      }
+    ],
+    "reliable": true,
+    "discoveryAvailable": true,
+    "exactProductOnly": false,
+    "exactVerifiedCount": 0,
+    "branchStockVerified": false,
+    "directionsAvailable": false,
+    "message": "Found 3 relevant nearby retailers. Exact item stock is not claimed until retailer evidence verifies it.",
+    "searchedShopTags": [
+      "electronics",
+      "computer",
+      "mobile_phone"
+    ],
+    "disclaimer": "These are real nearby retailers for the product type. FindIt does not guess exact branch stock or prices."
+  },
+  "hours": {
+    "ok": true,
+    "researchMode": "published-branch-hours",
+    "retryable": false,
+    "checkedAt": "2026-10-24T21:50:16.848Z",
+    "stores": [
+      {
+        "name": "INCREDIBLE MENLYN",
+        "address": "Shop 34A, Menlyn Shopping Mall, Cnr Atterbury & C/O Atterbury Road and Lois Ave, Menlo Park, Pretoria, 0047",
+        "lat": -25.782677,
+        "lon": 28.276191,
+        "publishedAddress": "Shop 34A, Menlyn Shopping Mall, Cnr Atterbury & C/O Atterbury Road and Lois Ave, Menlo Park, Pretoria, 0047",
+        "phone": "(012) 369 6480",
+        "website": "https://www.incredible.co.za/storelocator/",
+        "branchDetailsVerified": true,
+        "timeZone": "Africa/Johannesburg",
+        "status": "closed",
+        "opensAt": "",
+        "closesAt": "",
+        "todayHours": "Mo 09:00-20:00; Tu 09:00-20:00; We 09:00-20:00; Th 09:00-20:00; Fr 09:00-21:00; Sa 09:00-21:00; Su 09:00-18:00; PH 09:00-17:00",
+        "sourceLabel": "Official retailer locator",
+        "sourceUrl": "https://www.incredible.co.za/storelocator/",
+        "hoursVerified": true
+      },
+      {
+        "name": "HiFiCorp Menlyn",
+        "address": "Shop LF141, Atterbury Road And, Lois Ave, Menlyn, Pretoria, 0063",
+        "lat": -25.78021823,
+        "lon": 28.27530038,
+        "publishedAddress": "Shop LF141, Atterbury Road And, Lois Ave, Menlyn, Pretoria, 0063",
+        "phone": "012 133 0032",
+        "website": "https://www.hificorp.co.za/storelocator",
+        "branchDetailsVerified": true,
+        "timeZone": "Africa/Johannesburg",
+        "status": "closed",
+        "opensAt": "",
+        "closesAt": "",
+        "todayHours": "Mo 09:00-20:00; Tu 09:00-20:00; We 09:00-20:00; Th 09:00-20:00; Fr 09:00-21:00; Sa 09:00-21:00; Su 09:00-18:00; PH 09:00-18:00",
+        "sourceLabel": "Official retailer locator",
+        "sourceUrl": "https://www.hificorp.co.za/storelocator",
+        "hoursVerified": true
+      },
+      {
+        "name": "INCREDIBLE MENLYN ON MAINE",
+        "address": "Shop 37, Menlyn on Maine, Cnr January Masilela Rd and Aramist Ave, Waterkloof Glen, Extension 2, Pretoria, 0063",
+        "lat": -25.78481869,
+        "lon": 28.2811688,
+        "publishedAddress": "Shop 37, Menlyn on Maine, Cnr January Masilela Rd and Aramist Ave, Waterkloof Glen, Extension 2, Pretoria, 0063",
+        "phone": "(012) 348 2674",
+        "website": "https://www.incredible.co.za/storelocator/",
+        "branchDetailsVerified": true,
+        "timeZone": "Africa/Johannesburg",
+        "status": "closed",
+        "opensAt": "",
+        "closesAt": "",
+        "todayHours": "Mo 09:00-18:00; Tu 09:00-18:00; We 09:00-18:00; Th 09:00-18:00; Fr 09:00-18:00; Sa 09:00-18:00; Su 09:00-17:00; PH 09:00-17:00",
+        "sourceLabel": "Official retailer locator",
+        "sourceUrl": "https://www.incredible.co.za/storelocator/",
+        "hoursVerified": true
+      }
+    ],
+    "sources": [
+      {
+        "title": "INCREDIBLE MENLYN",
+        "url": "https://www.incredible.co.za/storelocator/"
+      },
+      {
+        "title": "HiFiCorp Menlyn",
+        "url": "https://www.hificorp.co.za/storelocator"
+      },
+      {
+        "title": "INCREDIBLE MENLYN ON MAINE",
+        "url": "https://www.incredible.co.za/storelocator/"
+      }
+    ]
+  },
+  "branchCheck": {
+    "ok": true,
+    "checked": true,
+    "website": "https://www.incredible.co.za/storelocator/",
+    "verifiedFields": {
+      "phone": "(012) 369 6480",
+      "address": "Shop 34A, Menlyn Shopping Mall, Cnr Atterbury & C/O Atterbury Road and Lois Ave, Menlo Park, Pretoria, 0047",
+      "openingHours": "Mo 09:00-20:00; Tu 09:00-20:00; We 09:00-20:00; Th 09:00-20:00; Fr 09:00-21:00; Sa 09:00-21:00; Su 09:00-18:00; PH 09:00-17:00"
+    },
+    "source": "Official retailer locator",
+    "sourceUrl": "https://www.incredible.co.za/storelocator/",
+    "checkedAt": "2026-10-24T21:50:24.339Z",
+    "message": "Published details verified for this exact branch. Product stock and branch prices remain unverified."
+  }
+}

@@ -1,0 +1,98 @@
+[
+  {
+    "path": "/api/search",
+    "input": "null",
+    "expectedStatus": 400,
+    "status": 400,
+    "passed": true,
+    "response": {
+      "error": "Send a JSON object with a product name or barcode.",
+      "code": "INVALID_SEARCH_INPUT",
+      "imageAccepted": false,
+      "retryable": false
+    }
+  },
+  {
+    "path": "/api/search",
+    "input": "{bad",
+    "expectedStatus": 400,
+    "status": 400,
+    "passed": true,
+    "response": {
+      "error": "Send valid JSON product details.",
+      "code": "INVALID_SEARCH_INPUT",
+      "imageAccepted": false,
+      "retryable": false
+    }
+  },
+  {
+    "path": "/api/search",
+    "input": "{\"query\": {\"bad\": true}}",
+    "expectedStatus": 400,
+    "status": 400,
+    "passed": true,
+    "response": {
+      "error": "Product name must be text.",
+      "code": "INVALID_SEARCH_INPUT",
+      "imageAccepted": false,
+      "retryable": false
+    }
+  },
+  {
+    "path": "/api/search",
+    "input": "{\"barcode\": \"5449000000997\"}",
+    "expectedStatus": 400,
+    "status": 400,
+    "passed": true,
+    "response": {
+      "error": "Enter a valid EAN/UPC barcode with a correct check digit.",
+      "code": "INVALID_BARCODE"
+    }
+  },
+  {
+    "path": "/api/nearby",
+    "input": "{\"lat\": 91, \"lon\": 28}",
+    "expectedStatus": 400,
+    "status": 400,
+    "passed": true,
+    "response": {
+      "error": "Valid location required"
+    }
+  },
+  {
+    "path": "/api/store-website-check",
+    "input": "{\"website\": \"http://localhost/\"}",
+    "expectedStatus": 400,
+    "status": 400,
+    "passed": true,
+    "response": {
+      "ok": false,
+      "error": "A valid public HTTPS retailer website is required"
+    }
+  },
+  {
+    "path": "/api/assistant",
+    "input": "null",
+    "expectedStatus": 400,
+    "status": 400,
+    "passed": true,
+    "response": {
+      "error": "Message required"
+    }
+  },
+  {
+    "path": "/api/product-insights",
+    "input": "null",
+    "expectedStatus": 200,
+    "status": 200,
+    "passed": true,
+    "response": {
+      "researched": false,
+      "whatItDoes": "",
+      "pros": [],
+      "cons": [],
+      "sources": []
+    },
+    "contractNote": "Product insights reads URL identity parameters; absent identity returns clean empty research, not a provider failure or invented facts."
+  }
+]

@@ -1,0 +1,508 @@
+- complementary:
+  - generic: F
+  - generic: FindIt
+  - generic: Find it. Compare it. Get it.
+  - navigation:
+    - button "⌂ Home"
+    - button "⌕ Search"
+    - button "⌖ Nearby"
+    - button "⇄ Compare"
+    - button "◇ Deals"
+    - button "♡ Saved"
+    - button "◷ History"
+    - button "♧ Alerts"
+    - button "▣ Feedback"
+    - button "✦ Suggest a Feature"
+    - button "ⓘ How to use FindIt"
+  - generic: 🚀
+  - heading "Premium Active" [level=3]
+  - paragraph: Unlock wider search, saved finds, comparisons & more.
+  - button "Premium Tools"
+  - generic: Recent Searches
+  - button "View all"
+  - generic: Sony WH-1000XM5 black
+  - generic: Levis 501 Original Jeans
+- main:
+  - text: ⌕
+  - generic: Search or upload an image to find anything...
+  - text: ⌖
+  - generic: Selected location
+  - button "Settings": ⚙
+  - button "Alerts": ♧
+  - button "Premium tools": P
+  - generic: ✦ AI powered product search
+  - heading "Find anything nearby." [level=1]:
+    - text: Find anything
+    - text: nearby.
+  - paragraph: Take a photo, upload an image, or search by text and we’ll find where to buy it near you.
+  - button "Upload Photo"
+  - button "⌕ Search Product"
+  - button "▥ Scan / Camera"
+  - button "▧ Drag & drop an image here or click to browse":
+    - generic: ▧
+    - generic: Drag & drop an image here
+    - text: or click to
+    - emphasis: browse
+  - button "⌖ Use my location"
+  - button "✦ Identify & Find" [disabled]
+  - status: Product search complete. Prices and stock require verified retailer evidence.
+  - generic "Choose location on map / enter coordinates"
+  - paragraph: Select your search area on the map, or enter its latitude and longitude. Distances use this point. Your selection lasts for this visit.
+  - button "Open location map"
+  - text: Latitude
+  - spinbutton "Latitude": "-25.7821"
+  - text: Longitude
+  - spinbutton "Longitude": "28.2752"
+  - button "Use selected location"
+  - status: Search location set to -25.7821, 28.2752. Distances are measured from your selected point.
+  - article:
+    - generic: ✓
+    - generic: Exact match
+    - generic: See the identified product and only supported identity details.
+  - article:
+    - generic: R
+    - generic: Real prices
+    - generic: Compare retailer prices only when FindIt can verify them.
+  - article:
+    - generic: ⌖
+    - generic: Nearby stores
+    - generic: See relevant stores around your selected location.
+  - article:
+    - generic: ▣
+    - generic: Live stock
+    - generic: Branch stock appears only when retailer evidence confirms it.
+  - article:
+    - generic: ⇄
+    - generic: Compare
+    - generic: Compare verified offers without invented prices or availability.
+  - article:
+    - generic: ＋
+    - generic: Shopping Tools
+    - generic: Lists, watchlist, budget, links & preferences.
+  - generic: Image confidence identifies what the object appears to be. Store, price and stock recommendations remain separate and are only shown when their evidence matches this Find.
+  - text: FindIt Smart Choice
+  - heading "Best options from this Find" [level=2]
+  - paragraph: Ranked from verified/current evidence. Missing prices, stock or opening hours are never guessed.
+  - generic: Search confirmed
+  - article:
+    - generic: BEST OVERALL
+    - strong: Incredible Connection
+    - generic: Sony WH-1000XM5 Wireless Noise Cancelling Headphones Black · R 5 999,00 · +more price — check eligibility · Online offer · branch price and stock unverified
+  - article:
+    - generic: CHEAPEST
+    - strong: Incredible Connection
+    - generic: R 5 999,00 · +more price — check eligibility · online offer; branch price unverified
+  - article:
+    - generic: CLOSEST
+    - strong: INCREDIBLE MENLYN
+    - generic: 0.1 km away · Closed now
+  - button "+ Shopping List"
+  - button "✓ Find Saved" [pressed]
+  - button "Open Now"
+  - generic: 0 of 6 stores with published hours are open now.
+  - text: LIVE STORE HOURS
+  - heading "Open, closed & next hours" [level=3]
+  - button "Check again"
+  - paragraph: FindIt checks published information for the named branch. Open or closed status follows its published schedule. Complex schedules, holiday exceptions and missing hours are marked unconfirmed.
+  - strong: INCREDIBLE MENLYN
+  - generic: Shop 34A, Menlyn Shopping Mall, Cnr Atterbury & C/O Atterbury Road and Lois Ave, Menlo Park, Pretoria, 0047
+  - text: Scheduled closed
+  - generic: Mo 09:00-20:00; Tu 09:00-20:00; We 09:00-20:00; Th 09:00-20:00; Fr 09:00-21:00; Sa 09:00-21:00; Su 09:00-18:00; PH 09:00-17:00
+  - emphasis: Hours checked 23:50 SAST
+  - strong: HiFiCorp Menlyn
+  - generic: Shop LF141, Atterbury Road And, Lois Ave, Menlyn, Pretoria, 0063
+  - text: Scheduled closed
+  - generic: Mo 09:00-20:00; Tu 09:00-20:00; We 09:00-20:00; Th 09:00-20:00; Fr 09:00-21:00; Sa 09:00-21:00; Su 09:00-18:00; PH 09:00-18:00
+  - emphasis: Hours checked 23:50 SAST
+  - strong: INCREDIBLE MENLYN ON MAINE
+  - generic: Shop 37, Menlyn on Maine, Cnr January Masilela Rd and Aramist Ave, Waterkloof Glen, Extension 2, Pretoria, 0063
+  - text: Scheduled closed
+  - generic: Mo 09:00-18:00; Tu 09:00-18:00; We 09:00-18:00; Th 09:00-18:00; Fr 09:00-18:00; Sa 09:00-18:00; Su 09:00-17:00; PH 09:00-17:00
+  - emphasis: Hours checked 23:50 SAST
+  - strong: INCREDIBLE BROOKLYN
+  - generic: Shop no. 60, Building/Centre Brooklyn Mall, Street 338 Bronkhorst Str. & Nieuw Muckleneuk, Erf No 450, Pretoria, 0181
+  - text: Scheduled closed
+  - generic: Mo 09:00-19:00; Tu 09:00-19:00; We 09:00-19:00; Th 09:00-19:00; Fr 09:00-19:00; Sa 09:00-17:00; Su 09:00-17:00; PH 09:00-17:00
+  - emphasis: Hours checked 23:50 SAST
+  - strong: INCREDIBLE THE GROVE
+  - generic: The Grove Shop L27, The Grove, Corner Simon Vermooten and Lynwood Road, Equestria, Pretoria, 0184
+  - text: Scheduled closed
+  - generic: Mo 09:00-19:00; Tu 09:00-19:00; We 09:00-19:00; Th 09:00-19:00; Fr 09:00-19:00; Sa 09:00-18:00; Su 09:00-16:00; PH 09:00-16:00
+  - emphasis: Hours checked 23:50 SAST
+  - strong: INCREDIBLE WOODLANDS
+  - generic: Shop 70C, Corner Of Garsfontein Road and De Villebois Mareuil Drive, Pretorius Park Ext 55, Pretoria, 0072
+  - text: Scheduled closed
+  - generic: Mo 09:00-19:00; Tu 09:00-19:00; We 09:00-19:00; Th 09:00-19:00; Fr 09:00-19:00; Sa 09:00-19:00; Su 09:00-17:00; PH 09:00-19:00
+  - emphasis: Hours checked 23:50 SAST
+  - text: FINDIT SHOPPING ASSISTANT
+  - heading "Plan, verify and track your shopping" [level=2]
+  - paragraph: Verified data first. FindIt does not guess prices, stock, phone numbers or opening hours.
+  - button "+ Add current item"
+  - button "Watch item"
+  - button "Scan barcode"
+  - generic "Check nearby stores"
+  - strong: INCREDIBLE MENLYN
+  - generic: 0.1 km · Closed now
+  - button "Check Store"
+  - strong: HiFiCorp Menlyn
+  - generic: 0.2 km · Closed now
+  - button "Check Store"
+  - strong: INCREDIBLE MENLYN ON MAINE
+  - generic: 0.7 km · Closed now
+  - button "Check Store"
+  - strong: INCREDIBLE BROOKLYN
+  - generic: 4.2 km · Closed now
+  - button "Check Store"
+  - strong: INCREDIBLE THE GROVE
+  - generic: 5.3 km · Closed now
+  - button "Check Store"
+  - strong: INCREDIBLE WOODLANDS
+  - generic: 5.8 km · Closed now
+  - button "Check Store"
+  - generic "Shopping List + Trip Planner"
+  - strong: Levis 501 Original Jeans
+  - button "Remove"
+  - strong: Online-only plan
+  - generic: "Online-only plan: no physical branch coordinates are verified for these offers, so FindIt will not pretend this is a driving trip."
+  - button "Best overall"
+  - button "Cheapest"
+  - paragraph: 0 online retailers · Price not verified
+  - paragraph: "Missing comparable prices for: Levis 501 Original Jeans"
+  - text: No price-verified retailer is available for this shopping list yet. Nearby stores may still be visible elsewhere, but their stock and prices are unverified.
+  - paragraph: No physical branch coordinates are verified, so FindIt will not pretend this is a driving trip.
+  - button "Clear list"
+  - generic "Watch List + Price History"
+  - generic: Results for your image
+  - generic: Sony WH-1000XM5 black
+  - generic: product
+  - button "♡ Save"
+  - button "⇄ Compare"
+  - heading "Nearby Stores" [level=2]
+  - button "☷ Filter"
+  - button "View all"
+  - generic: ●
+  - generic: ●
+  - generic: ●
+  - generic: ●
+  - generic: ●
+  - generic: ●
+  - button "IN INCREDIBLE MENLYN 0.1 km • Shop 34A, Menlyn Shopping Mall, Cnr Atterbury & C/O Atterbury Road and Lois Ave, Menlo Park, Pretoria, 0047 Branch availability unknown →":
+    - generic: IN
+    - generic: INCREDIBLE MENLYN
+    - generic: 0.1 km • Shop 34A, Menlyn Shopping Mall, Cnr Atterbury & C/O Atterbury Road and Lois Ave, Menlo Park, Pretoria, 0047
+    - emphasis: Relevant nearby retailer • exact item not confirmedBranch availability unknown
+    - strong: →
+  - button "HI HiFiCorp Menlyn 0.2 km • Shop LF141, Atterbury Road And, Lois Ave, Menlyn, Pretoria, 0063 Branch availability unknown Online R 5 999,00 · +more price — check eligibility ›":
+    - generic: HI
+    - generic: HiFiCorp Menlyn
+    - generic: 0.2 km • Shop LF141, Atterbury Road And, Lois Ave, Menlyn, Pretoria, 0063
+    - emphasis: Relevant nearby retailer • exact item not confirmedBranch availability unknown
+    - strong: Online R 5 999,00 · +more price — check eligibility ›
+  - button "IN INCREDIBLE MENLYN ON MAINE 0.7 km • Shop 37, Menlyn on Maine, Cnr January Masilela Rd and Aramist Ave, Waterkloof Glen, Extension 2, Pretoria, 0063 Branch availability unknown →":
+    - generic: IN
+    - generic: INCREDIBLE MENLYN ON MAINE
+    - generic: 0.7 km • Shop 37, Menlyn on Maine, Cnr January Masilela Rd and Aramist Ave, Waterkloof Glen, Extension 2, Pretoria, 0063
+    - emphasis: Relevant nearby retailer • exact item not confirmedBranch availability unknown
+    - strong: →
+  - button "IN INCREDIBLE BROOKLYN 4.2 km • Shop no. 60, Building/Centre Brooklyn Mall, Street 338 Bronkhorst Str. & Nieuw Muckleneuk, Erf No 450, Pretoria, 0181 Branch availability unknown →":
+    - generic: IN
+    - generic: INCREDIBLE BROOKLYN
+    - generic: 4.2 km • Shop no. 60, Building/Centre Brooklyn Mall, Street 338 Bronkhorst Str. & Nieuw Muckleneuk, Erf No 450, Pretoria, 0181
+    - emphasis: Relevant nearby retailer • exact item not confirmedBranch availability unknown
+    - strong: →
+  - button "IN INCREDIBLE THE GROVE 5.3 km • The Grove Shop L27, The Grove, Corner Simon Vermooten and Lynwood Road, Equestria, Pretoria, 0184 Branch availability unknown →":
+    - generic: IN
+    - generic: INCREDIBLE THE GROVE
+    - generic: 5.3 km • The Grove Shop L27, The Grove, Corner Simon Vermooten and Lynwood Road, Equestria, Pretoria, 0184
+    - emphasis: Relevant nearby retailer • exact item not confirmedBranch availability unknown
+    - strong: →
+  - button "IN INCREDIBLE WOODLANDS 5.8 km • Shop 70C, Corner Of Garsfontein Road and De Villebois Mareuil Drive, Pretorius Park Ext 55, Pretoria, 0072 Branch availability unknown →":
+    - generic: IN
+    - generic: INCREDIBLE WOODLANDS
+    - generic: 5.8 km • Shop 70C, Corner Of Garsfontein Road and De Villebois Mareuil Drive, Pretorius Park Ext 55, Pretoria, 0072
+    - emphasis: Relevant nearby retailer • exact item not confirmedBranch availability unknown
+    - strong: →
+  - article:
+    - generic: ◇
+    - generic: Deals Near You
+    - generic: See verified retailer offers when available.
+    - button "View Deals →"
+  - article:
+    - generic: ♡
+    - generic: Saved Items
+    - generic: Open the Finds you saved on this device.
+    - button "View Saved →"
+  - article:
+    - generic: ↗
+    - generic: Price History
+    - generic: See verified price observations when available.
+    - button "View History →"
+  - article:
+    - generic: ✦
+    - generic: Suggest a Feature
+    - generic: Tell us what FindIt should build next.
+    - button "Send Idea →"
+- complementary:
+  - generic: ▧
+  - generic: Product confirmed by search
+  - heading "Sony WH-1000XM5 black" [level=2]
+  - paragraph: product
+  - paragraph: Industry-leading noise cancellation.
+  - generic: Search confirmed
+  - generic: Best verified price
+  - strong: R 5 999,00 · +more price — check eligibility
+  - generic: FindIt won’t guess a price.
+  - generic: What we found
+  - generic: 2 retailer listings found
+  - button "ⓘ Product Info":
+    - text: ⓘ
+    - generic: Product Info
+  - button "⇄ Compare Prices":
+    - text: ⇄
+    - generic: Compare Prices
+  - button "⌖ Nearby Stores":
+    - text: ⌖
+    - generic: Nearby Stores
+  - button "✦ Ask FindIt":
+    - text: ✦
+    - generic: Ask FindIt
+  - heading "Top Stores" [level=2]
+  - button "View all"
+  - button "IN INCREDIBLE MENLYN Nearby 0.1 km":
+    - generic: IN
+    - generic: INCREDIBLE MENLYN
+    - generic: Nearby
+    - generic: 0.1 km
+  - button "HI HiFiCorp Menlyn Nearby 0.2 km":
+    - generic: HI
+    - generic: HiFiCorp Menlyn
+    - generic: Nearby
+    - generic: 0.2 km
+  - button "IN INCREDIBLE MENLYN ON MAINE Nearby 0.7 km":
+    - generic: IN
+    - generic: INCREDIBLE MENLYN ON MAINE
+    - generic: Nearby
+    - generic: 0.7 km
+  - button "IN INCREDIBLE BROOKLYN Nearby 4.2 km":
+    - generic: IN
+    - generic: INCREDIBLE BROOKLYN
+    - generic: Nearby
+    - generic: 4.2 km
+- banner:
+  - link "F FindIt Nearby":
+    - /url: "#home"
+    - generic: F
+    - generic: FindIt Nearby
+  - navigation:
+    - link "Find":
+      - /url: "#finder"
+    - link "How it works":
+      - /url: "#how"
+    - link "Examples":
+      - /url: "#examples"
+    - link "Feedback":
+      - /url: "#feedback"
+  - button "☰"
+- complementary:
+  - generic: F
+  - generic: FindIt Nearby
+  - button: ×
+  - navigation:
+    - generic: ★
+    - generic: FindIt Premium
+    - generic: Power workspace
+    - link:
+      - /url: "#premiumHome"
+      - text: ✦ Premium Home
+    - link:
+      - /url: "#finder"
+      - text: ⌕ Advanced Find
+    - button: ♡ Saved Items
+    - button: ⇄ Compare Stores
+    - link:
+      - /url: "#nearbyPanel"
+      - text: ⌖ Nearby Map
+    - button: ◎ Search Radius
+    - button: ≡ Smart Filters
+    - button: ◷ Extended History
+    - button: ✦ Premium Challenge
+    - link:
+      - /url: "#feedback"
+      - text: 💬 Feedback
+    - button: ⚙ Premium Settings
+- main:
+  - text: PREMIUM
+  - generic: THE PREMIUM EXPERIENCE
+  - heading "More than a bigger radius." [level=2]
+  - paragraph: Premium is built to help you find the right product, keep track of it, compare nearby options and come back when the price or stock changes.
+  - article:
+    - generic: ⚡
+    - heading "Find once. Keep watching." [level=3]
+    - paragraph: Save products to your Watchlist, set a target price and re-check verified retailer data for price drops or restocks.
+    - generic: PRICE + STOCK WATCHLIST
+  - article:
+    - generic: 🎯
+    - heading "Search smarter" [level=3]
+    - paragraph: Vision+, Exact Match, Manual Search and AI Search give you more ways to find what you actually mean.
+    - generic: 4 SEARCH MODES
+  - article:
+    - generic: ⌖
+    - heading "Go further" [level=3]
+    - paragraph: Search up to 25 km, compare stores and sort results by closest, name or best match.
+    - generic: UP TO 25 KM
+  - article:
+    - generic: "01"
+    - generic: Identify
+    - text: Use a photo or named product.
+  - article:
+    - generic: "02"
+    - generic: Compare
+    - text: Check relevant nearby retailers.
+  - article:
+    - generic: "03"
+    - generic: Save
+    - text: Collections, favourites and history.
+  - article:
+    - generic: "04"
+    - generic: Watch
+    - text: Track price and stock changes.
+  - strong: 25 km
+  - generic: Premium search radius
+  - strong: "50"
+  - generic: Extended history capacity
+  - strong: "4"
+  - generic: Premium search modes
+  - strong: Live
+  - generic: Price & stock checks when available
+  - text: PREMIUM SEARCH
+  - generic: ★ PREMIUM • START SEARCHING
+  - heading "What are you looking for?" [level=2]
+  - paragraph: Use a clear photo. Logos, labels and model text help FindIt be more precise.
+  - generic: Radius
+  - combobox "Radius":
+    - option "3 km"
+    - option "5 km"
+    - option "10 km" [selected]
+    - option "15 km"
+    - option "25 km"
+  - generic: 📸
+  - strong: Drop or choose a photo
+  - generic: Gallery • Camera • Files
+  - generic: No need to know the name. Just show us.
+  - button "Upload product photo"
+  - button "Choose File"
+  - button "🖼️ Gallery / Files"
+  - button "📷 Take photo"
+  - button "📍 Use my location"
+  - button "✨ Identify & Find" [disabled]
+  - paragraph: Product search complete. Prices and stock require verified retailer evidence.
+  - paragraph: TRY FINDIT WITH…
+  - heading "Ordinary. Unusual. Anything in-between." [level=2]
+  - button "Shuffle ↻"
+  - button "🎸 Guitar Try something like this":
+    - generic: 🎸
+    - strong: Guitar
+    - generic: Try something like this
+  - button "🐶 Pet product Try something like this":
+    - generic: 🐶
+    - strong: Pet product
+    - generic: Try something like this
+  - button "💡 Ceiling light Try something like this":
+    - generic: 💡
+    - strong: Ceiling light
+    - generic: Try something like this
+  - button "🧵 Yarn Try something like this":
+    - generic: 🧵
+    - strong: Yarn
+    - generic: Try something like this
+  - button "🚲 Bike part Try something like this":
+    - generic: 🚲
+    - strong: Bike part
+    - generic: Try something like this
+  - button "🪴 Bonsai Try something like this":
+    - generic: 🪴
+    - strong: Bonsai
+    - generic: Try something like this
+  - paragraph: HOW IT WORKS
+  - heading "Three simple steps." [level=2]
+  - article:
+    - text: "01"
+    - generic: 📸
+    - heading "Show It" [level=3]
+    - paragraph: Take or upload a photo of the item you want.
+  - article:
+    - text: "02"
+    - generic: ✨
+    - heading "Find It" [level=3]
+    - paragraph: FindIt checks visible product details. Clear labels and model text improve identification.
+  - article:
+    - text: "03"
+    - generic: 📍
+    - heading "Get It" [level=3]
+    - paragraph: FindIt looks for relevant consumer retailers close to you.
+  - paragraph: FINDIT CHALLENGE
+  - heading "Think FindIt can’t identify it? 👀" [level=2]
+  - paragraph: Find the weirdest object around you and put FindIt to the test.
+  - button "🎲 Give me a challenge"
+  - paragraph: RECENT
+  - heading "Recent finds" [level=2]
+  - button "Clear"
+  - paragraph: FEEDBACK
+  - heading "Help make FindIt better." [level=2]
+  - generic: Have an idea for FindIt?
+  - generic: Send a feature request separately from normal feedback.
+  - button "✦ Suggest a Feature"
+  - generic: Tell us what worked, report a problem, or suggest what FindIt should build next.
+  - text: Feedback type
+  - combobox "Feedback type":
+    - option "General feedback" [selected]
+    - option "Wrong identification"
+    - option "Nearby store / location problem"
+    - option "Price or stock problem"
+    - option "💡 Suggest a feature"
+  - strong: 💡 Have an idea for FindIt?
+  - generic: Suggest a feature and tell us what would make FindIt more useful.
+  - button "Suggest a feature"
+  - group "Rating":
+    - generic: Rating
+    - generic "Choose a rating from 1 to 5 stars":
+      - button "1 star": ★
+      - button "2 stars": ★
+      - button "3 stars": ★
+      - button "4 stars": ★
+      - button "5 stars": ★
+    - combobox
+  - text: Message
+  - textbox "Message":
+    - /placeholder: What worked? What should improve?
+  - checkbox "Include basic technical details to help us fix bugs" [checked]
+  - text: Include basic technical details to help us fix bugs
+  - button "Send feedback"
+  - button "Copy"
+  - paragraph
+- contentinfo:
+  - generic: F
+  - generic: FindIt Nearby
+  - paragraph: © 2026 Bernard Brummer — FindIt Nearby. All rights reserved.
+  - text: Nearby retailer ≠ verified exact-item stock.
+- button "✦ Ask FindIt"
+- dialog "INCREDIBLE MENLYN":
+  - button "Close" [active]: ×
+  - text: CHECK STORE
+  - heading "INCREDIBLE MENLYN" [level=2]
+  - paragraph: "Status: Scheduled closed — based on published hours"
+  - paragraph: "Distance: 0.1 km"
+  - paragraph: "Address: Shop 34A, Menlyn Shopping Mall, Cnr Atterbury & C/O Atterbury Road and Lois Ave, Menlo Park, Pretoria, 0047"
+  - paragraph: "Opening hours: Mo 09:00-20:00; Tu 09:00-20:00; We 09:00-20:00; Th 09:00-20:00; Fr 09:00-21:00; Sa 09:00-21:00; Su 09:00-18:00; PH 09:00-17:00"
+  - paragraph: "Phone: (012) 369 6480"
+  - link "Published branch source":
+    - /url: https://www.incredible.co.za/storelocator/
+  - link "Call to confirm stock":
+    - /url: tel:0123696480
+  - link "Directions":
+    - /url: https://www.google.com/maps/dir/?api=1&destination=-25.782677%2C28.276191
+  - link "Store website":
+    - /url: https://www.incredible.co.za/storelocator/
+  - paragraph: Branch stock can change quickly. FindIt shows branch stock only when a source publishes it. Calling the store is the safest final confirmation.
+  - link "Visit retailer website ↗":
+    - /url: https://www.incredible.co.za/storelocator/
