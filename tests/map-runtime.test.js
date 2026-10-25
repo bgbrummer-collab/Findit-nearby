@@ -4,10 +4,10 @@ import vm from 'node:vm';
 import {readFileSync, existsSync} from 'node:fs';
 const source=readFileSync(new URL('../map-runtime.js',import.meta.url),'utf8');
 function setup(){
- const nodes=[],timers=new Map();let id=0;
- const window={},document={head:{appendChild(el){nodes.push(el)}},createElement(tag){return {tag,remove(){this.removed=true}}},addEventListener(){}};
+ const nodes=[],timers=new Map(),listeners={};let id=0;
+ const window={},document={head:{appendChild(el){nodes.push(el)}},createElement(tag){return {tag,remove(){this.removed=true},setAttribute(){}}},getElementById(){return null},addEventListener(n,fn){listeners[n]=fn}};
  vm.runInNewContext(source,{window,document,setTimeout(fn){timers.set(++id,fn);return id},clearTimeout(id){timers.delete(id)}});
- return {window,nodes,timers};
+ return {window,document,nodes,timers,listeners};
 }
 const leaflet={map(){},tileLayer(){}};
 test('map requests share a load, use local assets, and wait for both CSS and JS',async()=>{
@@ -42,4 +42,13 @@ test('tile errors and stalls report uncertainty; recovered imagery clears it; te
 test('vendored Leaflet includes license and every CSS/marker image dependency',()=>{
  for(const name of ['LICENSE','leaflet.js','leaflet.css','images/marker-icon.png','images/marker-icon-2x.png','images/marker-shadow.png','images/layers.png','images/layers-2x.png'])assert.ok(existsSync(new URL('../assets/leaflet/'+name,import.meta.url)),name);
  const html=readFileSync(new URL('../index.html',import.meta.url),'utf8');assert.ok(html.indexOf('src="map-runtime.js"')<html.indexOf('src="script.js'));
+});
+
+test('a failed map reopen preserves an already initialized map and its controls',async()=>{
+ const {window,document,nodes,listeners}=setup(),map={textContent:'existing map controls'},notices=[];
+ document.getElementById=id=>id==='map'?map:id==='mapWrap'?{appendChild(el){notices.push(el)}}:null;
+ listeners.click({target:{closest(){return true}}});
+ const pending=window.finditLoadLeaflet();nodes[0].onerror();nodes[1].onerror();await assert.rejects(pending);
+ await Promise.resolve();await Promise.resolve();
+ assert.equal(map.textContent,'existing map controls');assert.equal(notices.length,1);assert.match(notices[0].textContent,/Try opening it again/);
 });

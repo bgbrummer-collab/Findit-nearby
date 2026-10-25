@@ -57,8 +57,13 @@
       window.ensureMap?.(); window.updateMap?.();
       window.finditRetryMapTiles(window.finditState?.map);
     }).catch(() => {
-      const host = document.getElementById('map');
-      if (host) host.textContent = 'Map unavailable. Try opening it again. Nearby store details and manual coordinates remain available.';
+      const wrapper = document.getElementById('mapWrap');
+      let notice = document.getElementById('finditNearbyMapStatus');
+      if (wrapper && !notice) {
+        notice = document.createElement('p'); notice.id = 'finditNearbyMapStatus';
+        notice.setAttribute('role', 'status'); wrapper.appendChild(notice);
+      }
+      if (notice) notice.textContent = 'Map unavailable. Try opening it again. Nearby store details and manual coordinates remain available.';
     });
   }, true);
 })();
