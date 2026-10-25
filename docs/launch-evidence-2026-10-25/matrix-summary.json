@@ -1,0 +1,89 @@
+{
+  "startVersion": {
+    "seconds": 5.49,
+    "data": {
+      "commit": "f9416ecc9ad10e70312042804bc61151d6bb941e",
+      "platform": "cloudflare"
+    }
+  },
+  "endVersion": {
+    "seconds": 5.56,
+    "data": {
+      "commit": "f9416ecc9ad10e70312042804bc61151d6bb941e",
+      "platform": "cloudflare"
+    }
+  },
+  "queries": [
+    {
+      "query": "Sony WH-1000XM5 black",
+      "offers": 2,
+      "priced": 2,
+      "researched": null,
+      "seconds": 12.79
+    },
+    {
+      "query": "Logitech PRO X Gaming Headset 981-000818",
+      "offers": 1,
+      "priced": 1,
+      "researched": null,
+      "seconds": 9.07
+    },
+    {
+      "query": "LEGO Classic 10696",
+      "offers": 1,
+      "priced": 1,
+      "researched": null,
+      "seconds": 19.2
+    },
+    {
+      "query": "Coca-Cola Original Taste 2L",
+      "offers": 0,
+      "priced": 0,
+      "researched": null,
+      "seconds": 7.46
+    },
+    {
+      "query": "Bosch GSB 18V-50",
+      "offers": 0,
+      "priced": 0,
+      "researched": null,
+      "seconds": 12.77
+    },
+    {
+      "query": "Bosch GSB 18V-50 drill kit",
+      "offers": 0,
+      "priced": 0,
+      "researched": null,
+      "seconds": 26.47
+    },
+    {
+      "query": "Levis 501 Original jeans",
+      "offers": 9,
+      "priced": 9,
+      "researched": null,
+      "seconds": 26.78
+    },
+    {
+      "query": "Nivea body lotion 250ml",
+      "offers": 1,
+      "priced": 1,
+      "researched": null,
+      "seconds": 15.27
+    },
+    {
+      "query": "Twinsaver Comfort 3 Ply Tissues 120",
+      "offers": 0,
+      "priced": 0,
+      "researched": null,
+      "seconds": 7.13
+    },
+    {
+      "query": "Shure MV7+ microphone",
+      "offers": 1,
+      "priced": 1,
+      "researched": null,
+      "seconds": 13.84
+    }
+  ],
+  "captureNote": "HTTP status was not separately captured by this baseline script. Payloads and elapsed client times are recorded; no HTTP-status pass is inferred."
+}

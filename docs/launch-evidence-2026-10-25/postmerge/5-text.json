@@ -1,0 +1,170 @@
+{
+  "query": "Bosch GSB 18V-50",
+  "search": {
+    "status": 200,
+    "seconds": 5.57,
+    "data": {
+      "identification": {
+        "name": "Bosch GSB 18V-50",
+        "object": "Bosch GSB 18V-50",
+        "brand": "",
+        "model": "",
+        "category": "product",
+        "retailCategory": "general",
+        "searchQuery": "Bosch GSB 18V-50",
+        "barcode": null,
+        "confidence": null,
+        "identificationMethod": "typed-user-input",
+        "userConfirmed": true
+      },
+      "offers": [],
+      "blocked": false,
+      "verified": false,
+      "userConfirmed": true,
+      "identitySource": "user-confirmed",
+      "visualVerification": false,
+      "provider": "user-input",
+      "imageAccepted": false,
+      "needsVision": false,
+      "needsRetailerVerification": true,
+      "code": "USER_CONFIRMED_PRODUCT",
+      "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+    }
+  },
+  "commerce": {
+    "status": 200,
+    "seconds": 13.49,
+    "data": {
+      "ok": true,
+      "matched": false,
+      "exactMatchVerified": false,
+      "searchQuery": "Bosch GSB 18V-50",
+      "bestProduct": null,
+      "bestPrice": null,
+      "priceComparisonIssue": "no-prices",
+      "priceComparisonNote": "",
+      "offers": [],
+      "retailerStatus": [
+        {
+          "name": "Builders",
+          "searchUrl": "https://www.builders.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        },
+        {
+          "name": "Leroy Merlin",
+          "searchUrl": "https://www.leroymerlin.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        },
+        {
+          "name": "BUCO",
+          "searchUrl": "https://www.buco.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        },
+        {
+          "name": "Mica",
+          "searchUrl": "https://www.mica.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        },
+        {
+          "name": "Game",
+          "searchUrl": "https://www.game.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        },
+        {
+          "name": "Makro",
+          "searchUrl": "https://www.makro.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        }
+      ],
+      "webRetailers": [
+        {
+          "name": "Builders",
+          "searchUrl": "https://www.builders.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        },
+        {
+          "name": "Leroy Merlin",
+          "searchUrl": "https://www.leroymerlin.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        },
+        {
+          "name": "BUCO",
+          "searchUrl": "https://www.buco.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        },
+        {
+          "name": "Mica",
+          "searchUrl": "https://www.mica.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        },
+        {
+          "name": "Game",
+          "searchUrl": "https://www.game.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        },
+        {
+          "name": "Makro",
+          "searchUrl": "https://www.makro.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        }
+      ],
+      "verifiedOfferCount": 0,
+      "verifiedSellerCount": 0,
+      "inStockOfferCount": 0,
+      "priceVerifiedCount": 0,
+      "nearbyBranchStockVerified": false,
+      "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+      "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+      "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Bosch%20GSB%2018V-50",
+      "checkedAt": "2026-10-25T17:09:01.605Z"
+    }
+  }
+}

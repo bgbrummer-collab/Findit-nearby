@@ -1,0 +1,141 @@
+{
+  "query": "Twinsaver Comfort 3 Ply Tissues 120",
+  "search": {
+    "seconds": 5.2,
+    "data": {
+      "identification": {
+        "name": "Twinsaver Comfort 3 Ply Tissues 120",
+        "object": "Twinsaver Comfort 3 Ply Tissues 120",
+        "brand": "",
+        "model": "",
+        "category": "product",
+        "retailCategory": "general",
+        "searchQuery": "Twinsaver Comfort 3 Ply Tissues 120",
+        "barcode": null,
+        "confidence": null,
+        "identificationMethod": "typed-user-input",
+        "userConfirmed": true
+      },
+      "offers": [],
+      "blocked": false,
+      "verified": false,
+      "userConfirmed": true,
+      "identitySource": "user-confirmed",
+      "visualVerification": false,
+      "provider": "user-input",
+      "imageAccepted": false,
+      "needsVision": false,
+      "needsRetailerVerification": true,
+      "code": "USER_CONFIRMED_PRODUCT",
+      "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+    }
+  },
+  "commerce": {
+    "seconds": 7.13,
+    "data": {
+      "ok": true,
+      "matched": false,
+      "exactMatchVerified": false,
+      "searchQuery": "Twinsaver Comfort 3 Ply Tissues 120",
+      "bestProduct": null,
+      "bestPrice": null,
+      "priceComparisonIssue": "no-prices",
+      "priceComparisonNote": "",
+      "offers": [],
+      "retailerStatus": [
+        {
+          "name": "Checkers",
+          "searchUrl": "https://www.checkers.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Pick n Pay",
+          "searchUrl": "https://www.pnp.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Shoprite",
+          "searchUrl": "https://www.shoprite.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Woolworths",
+          "searchUrl": "https://www.woolworths.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Makro",
+          "searchUrl": "https://www.makro.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        }
+      ],
+      "webRetailers": [
+        {
+          "name": "Checkers",
+          "searchUrl": "https://www.checkers.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Pick n Pay",
+          "searchUrl": "https://www.pnp.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Shoprite",
+          "searchUrl": "https://www.shoprite.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Woolworths",
+          "searchUrl": "https://www.woolworths.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Makro",
+          "searchUrl": "https://www.makro.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        }
+      ],
+      "verifiedOfferCount": 0,
+      "verifiedSellerCount": 0,
+      "inStockOfferCount": 0,
+      "priceVerifiedCount": 0,
+      "nearbyBranchStockVerified": false,
+      "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+      "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+      "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Twinsaver%20Comfort%203%20Ply%20Tissues%20120",
+      "checkedAt": "2026-10-25T16:53:09.960Z"
+    }
+  },
+  "captureNote": "HTTP status was not separately captured by this baseline script. Payloads and elapsed client times are recorded; no HTTP-status pass is inferred."
+}

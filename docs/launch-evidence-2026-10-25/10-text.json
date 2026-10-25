@@ -1,0 +1,171 @@
+{
+  "query": "Shure MV7+ microphone",
+  "search": {
+    "seconds": 5.55,
+    "data": {
+      "identification": {
+        "name": "Shure MV7+ microphone",
+        "object": "Shure MV7+ microphone",
+        "brand": "",
+        "model": "",
+        "category": "product",
+        "retailCategory": "general",
+        "searchQuery": "Shure MV7+ microphone",
+        "barcode": null,
+        "confidence": null,
+        "identificationMethod": "typed-user-input",
+        "userConfirmed": true
+      },
+      "offers": [],
+      "blocked": false,
+      "verified": false,
+      "userConfirmed": true,
+      "identitySource": "user-confirmed",
+      "visualVerification": false,
+      "provider": "user-input",
+      "imageAccepted": false,
+      "needsVision": false,
+      "needsRetailerVerification": true,
+      "code": "USER_CONFIRMED_PRODUCT",
+      "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+    }
+  },
+  "commerce": {
+    "seconds": 13.84,
+    "data": {
+      "ok": true,
+      "matched": true,
+      "exactMatchVerified": true,
+      "searchQuery": "Shure MV7+ microphone",
+      "bestProduct": {
+        "name": "Shure MV7+ Hybrid Podcast Microphone \u2013 Black"
+      },
+      "bestPrice": {
+        "product_name": "Shure MV7+ Hybrid Podcast Microphone \u2013 Black",
+        "product_url": "https://bothners.co.za/shop/microphones-and-wireless/shure-mv7-hybrid-podcast-microphone-black/",
+        "sku": "MV7+K",
+        "comparisonAttributes": {
+          "size": "",
+          "color": ""
+        },
+        "comparisonAmbiguous": false,
+        "retailer": {
+          "name": "Bothners"
+        },
+        "price": 7095,
+        "currency": "ZAR",
+        "availability": "in_stock",
+        "priceConditions": "",
+        "verified": true,
+        "exactProductMatch": true,
+        "sourcePageVerified": true,
+        "retailerApiVerified": true,
+        "evidenceUrl": "https://bothners.co.za/wp-json/wc/store/v1/products?slug=shure-mv7-hybrid-podcast-microphone-black&per_page=10",
+        "source": "Verified from public retailer product API",
+        "matchScore": 91,
+        "stockScope": "online/general retailer availability only",
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "checkedAt": "2026-10-25T16:53:25.816Z",
+        "retailerDomain": "bothners.co.za",
+        "trustedRetailerDomain": false
+      },
+      "priceComparisonIssue": null,
+      "priceComparisonNote": "",
+      "offers": [
+        {
+          "product_name": "Shure MV7+ Hybrid Podcast Microphone \u2013 Black",
+          "product_url": "https://bothners.co.za/shop/microphones-and-wireless/shure-mv7-hybrid-podcast-microphone-black/",
+          "sku": "MV7+K",
+          "comparisonAttributes": {
+            "size": "",
+            "color": ""
+          },
+          "comparisonAmbiguous": false,
+          "retailer": {
+            "name": "Bothners"
+          },
+          "price": 7095,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "priceConditions": "",
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "retailerApiVerified": true,
+          "evidenceUrl": "https://bothners.co.za/wp-json/wc/store/v1/products?slug=shure-mv7-hybrid-podcast-microphone-black&per_page=10",
+          "source": "Verified from public retailer product API",
+          "matchScore": 91,
+          "stockScope": "online/general retailer availability only",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-10-25T16:53:25.816Z",
+          "retailerDomain": "bothners.co.za",
+          "trustedRetailerDomain": false
+        }
+      ],
+      "retailerStatus": [
+        {
+          "name": "Bothners",
+          "searchUrl": "https://bothners.co.za/shop/microphones-and-wireless/shure-mv7-hybrid-podcast-microphone-black/",
+          "exactProductMatch": true,
+          "stockVerified": true,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Marshall Music",
+          "searchUrl": "https://www.marshallmusic.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Music Connection",
+          "searchUrl": "https://musicconnection.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        }
+      ],
+      "webRetailers": [
+        {
+          "name": "Bothners",
+          "searchUrl": "https://bothners.co.za/shop/microphones-and-wireless/shure-mv7-hybrid-podcast-microphone-black/",
+          "exactProductMatch": true,
+          "stockVerified": true,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Marshall Music",
+          "searchUrl": "https://www.marshallmusic.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Music Connection",
+          "searchUrl": "https://musicconnection.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        }
+      ],
+      "verifiedOfferCount": 1,
+      "verifiedSellerCount": 1,
+      "inStockOfferCount": 1,
+      "priceVerifiedCount": 1,
+      "nearbyBranchStockVerified": false,
+      "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+      "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+      "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Shure%20MV7%2B%20microphone",
+      "checkedAt": "2026-10-25T16:53:29.361Z"
+    }
+  },
+  "captureNote": "HTTP status was not separately captured by this baseline script. Payloads and elapsed client times are recorded; no HTTP-status pass is inferred."
+}

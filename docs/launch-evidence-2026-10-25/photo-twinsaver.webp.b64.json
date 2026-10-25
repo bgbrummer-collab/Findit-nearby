@@ -1,0 +1,131 @@
+{
+  "fixture": "twinsaver.webp.b64",
+  "seconds": 22.03,
+  "status": 200,
+  "data": {
+    "identification": {
+      "name": "Twinsaver toilet paper",
+      "brand": "Twinsaver",
+      "model": "",
+      "object": "toilet paper",
+      "category": "grocery/household",
+      "retailCategory": "grocery/household",
+      "searchQuery": "Twinsaver toilet paper",
+      "barcode": null,
+      "size": "18 Rolls",
+      "color": "",
+      "visibleText": [],
+      "confidence": 0.65,
+      "identificationMethod": "independent-vision-consensus",
+      "userConfirmed": false,
+      "labelCandidates": [],
+      "suggestedLabel": "",
+      "suggestedModels": [
+        {
+          "name": "Twinsaver Twin Ply",
+          "confirmed": false,
+          "source": "visual-model-hypothesis"
+        },
+        {
+          "name": "Twinsaver Twin Pty",
+          "confirmed": false,
+          "source": "visual-model-hypothesis"
+        }
+      ],
+      "identityScope": "product-family",
+      "requiresModelConfirmation": true,
+      "unverifiedDetails": [
+        "exact model",
+        "variant",
+        "specifications"
+      ],
+      "features": []
+    },
+    "offers": [],
+    "blocked": false,
+    "verified": false,
+    "userConfirmed": false,
+    "identitySource": "cloudflare-consensus",
+    "visionDiagnostics": [
+      {
+        "provider": "cloudflare-gemma",
+        "code": "IDENTIFIED",
+        "providerStatus": null,
+        "providerErrorCode": null,
+        "identityClaim": {
+          "name": "TWIN SAVER TWIN PLY 18 Rolls",
+          "brand": "TWIN SAVER",
+          "model": "ply 18 rolls twin ply",
+          "object": "toilet paper",
+          "size": "18 Rolls",
+          "color": "white, green",
+          "visibleText": [
+            "TWIN SAVER",
+            "TWIN PLY",
+            "TWIN SAVER",
+            "18 Rolls",
+            "Clean & Pure"
+          ]
+        },
+        "errorType": null
+      },
+      {
+        "provider": "google-gemini",
+        "code": "IDENTIFIED",
+        "providerStatus": null,
+        "providerErrorCode": null,
+        "identityClaim": {
+          "name": "Twinsaver Twin Ply Toilet Paper 18 Rolls",
+          "brand": "Twinsaver",
+          "model": "Twin Ply",
+          "object": "toilet paper",
+          "size": "18 rolls",
+          "color": "",
+          "visibleText": [
+            "TWINSAVER",
+            "TWIN PLY",
+            "18 Rolls",
+            "Classic"
+          ]
+        },
+        "errorType": null
+      },
+      {
+        "provider": "cloudflare-workers-ai",
+        "code": "IDENTIFIED",
+        "providerStatus": null,
+        "providerErrorCode": null,
+        "identityClaim": {
+          "name": "TWINSAVER",
+          "brand": "TWINSAVER",
+          "model": "Twin Pty",
+          "object": "TOILET PAPER",
+          "size": "PRINTED SIZE",
+          "color": "WHITE",
+          "visibleText": [
+            "TWINSAVER",
+            "Twin Pty",
+            "Thin Pty"
+          ]
+        },
+        "errorType": null
+      },
+      {
+        "provider": "huggingface",
+        "code": "HF_INFERENCE_FAILED",
+        "providerStatus": 402,
+        "providerErrorCode": null,
+        "identityClaim": null,
+        "errorType": "credits"
+      }
+    ],
+    "visualVerification": true,
+    "provider": "cloudflare-consensus",
+    "imageAccepted": true,
+    "needsVision": false,
+    "needsRetailerVerification": true,
+    "confidence": 0.65,
+    "code": "PHOTO_PARTIALLY_IDENTIFIED",
+    "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+  }
+}

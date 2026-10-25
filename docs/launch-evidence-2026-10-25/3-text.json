@@ -1,0 +1,167 @@
+{
+  "query": "LEGO Classic 10696",
+  "search": {
+    "seconds": 5.54,
+    "data": {
+      "identification": {
+        "name": "LEGO Classic 10696",
+        "object": "LEGO Classic 10696",
+        "brand": "",
+        "model": "",
+        "category": "product",
+        "retailCategory": "general",
+        "searchQuery": "LEGO Classic 10696",
+        "barcode": null,
+        "confidence": null,
+        "identificationMethod": "typed-user-input",
+        "userConfirmed": true
+      },
+      "offers": [],
+      "blocked": false,
+      "verified": false,
+      "userConfirmed": true,
+      "identitySource": "user-confirmed",
+      "visualVerification": false,
+      "provider": "user-input",
+      "imageAccepted": false,
+      "needsVision": false,
+      "needsRetailerVerification": true,
+      "code": "USER_CONFIRMED_PRODUCT",
+      "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+    }
+  },
+  "commerce": {
+    "seconds": 19.2,
+    "data": {
+      "ok": true,
+      "matched": true,
+      "exactMatchVerified": true,
+      "searchQuery": "LEGO Classic 10696",
+      "bestProduct": {
+        "name": "10696 | LEGO\u00ae Classic Medium Creative Brick Box"
+      },
+      "bestPrice": {
+        "product_name": "10696 | LEGO\u00ae Classic Medium Creative Brick Box",
+        "product_url": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696",
+        "sku": "5702015357180",
+        "comparisonAttributes": {
+          "size": "",
+          "color": ""
+        },
+        "comparisonAmbiguous": false,
+        "retailer": {
+          "name": "LEGO Certified Stores"
+        },
+        "price": 559,
+        "currency": "ZAR",
+        "availability": "in_stock",
+        "priceConditions": "",
+        "verified": true,
+        "exactProductMatch": true,
+        "sourcePageVerified": true,
+        "source": "Verified directly on exact retailer product page",
+        "matchScore": 91,
+        "stockScope": "online/general retailer availability only",
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "checkedAt": "2026-10-25T16:52:19.666Z",
+        "retailerDomain": "lego-gybc.co.za",
+        "trustedRetailerDomain": false
+      },
+      "priceComparisonIssue": null,
+      "priceComparisonNote": "",
+      "offers": [
+        {
+          "product_name": "10696 | LEGO\u00ae Classic Medium Creative Brick Box",
+          "product_url": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696",
+          "sku": "5702015357180",
+          "comparisonAttributes": {
+            "size": "",
+            "color": ""
+          },
+          "comparisonAmbiguous": false,
+          "retailer": {
+            "name": "LEGO Certified Stores"
+          },
+          "price": 559,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "priceConditions": "",
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Verified directly on exact retailer product page",
+          "matchScore": 91,
+          "stockScope": "online/general retailer availability only",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-10-25T16:52:19.666Z",
+          "retailerDomain": "lego-gybc.co.za",
+          "trustedRetailerDomain": false
+        }
+      ],
+      "retailerStatus": [
+        {
+          "name": "LEGO Certified Stores",
+          "searchUrl": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696",
+          "exactProductMatch": true,
+          "stockVerified": true,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Toys R Us",
+          "searchUrl": "https://www.toysrus.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Takealot",
+          "searchUrl": "https://www.takealot.com/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        }
+      ],
+      "webRetailers": [
+        {
+          "name": "LEGO Certified Stores",
+          "searchUrl": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696",
+          "exactProductMatch": true,
+          "stockVerified": true,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Toys R Us",
+          "searchUrl": "https://www.toysrus.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Takealot",
+          "searchUrl": "https://www.takealot.com/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        }
+      ],
+      "verifiedOfferCount": 1,
+      "verifiedSellerCount": 1,
+      "inStockOfferCount": 1,
+      "priceVerifiedCount": 1,
+      "nearbyBranchStockVerified": false,
+      "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+      "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+      "providerSearchUrl": "https://www.pricecheck.co.za/search?search=LEGO%20Classic%2010696",
+      "checkedAt": "2026-10-25T16:52:19.666Z"
+    }
+  },
+  "captureNote": "HTTP status was not separately captured by this baseline script. Payloads and elapsed client times are recorded; no HTTP-status pass is inferred."
+}

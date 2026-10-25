@@ -1,0 +1,8 @@
+{
+  "seconds": 5.49,
+  "data": {
+    "commit": "f9416ecc9ad10e70312042804bc61151d6bb941e",
+    "platform": "cloudflare"
+  },
+  "captureNote": "HTTP status was not separately captured by this baseline script. Payloads and elapsed client times are recorded; no HTTP-status pass is inferred."
+}

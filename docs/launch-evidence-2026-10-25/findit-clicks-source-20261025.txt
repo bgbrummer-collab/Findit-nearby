@@ -1,0 +1,1110 @@
+- banner:
+  - list
+  - link "Earn even more with our new banking partners!":
+    - /url: https://clicks.co.za/campaigns/new-lower-prices
+  - list:
+    - link "Sign in / Register":
+      - /url: javascript:void(0)
+    - link "Find a store":
+      - /url: javascript:void(0)
+    - link "List":
+      - /url: javascript:void(0)
+    - link "0 Basket":
+      - /url: /cart
+      - generic: "0"
+      - generic: Basket
+  - link "logo":
+    - /url: /
+    - img "logo"
+  - combobox "Search":
+    - search:
+      - button "Search"
+      - searchbox "Search"
+  - link "Where is my order?":
+    - /url: /orderTracking
+  - text: 
+  - link " Set delivery address":
+    - /url: "#"
+    - generic: 
+    - generic: Set delivery address
+  - text:  
+  - text:    
+- navigation:
+  - list:
+    - link "Shop":
+      - /url: /products/c/OH1
+    - link "Promotions":
+      - /url: /specials
+    - link "Brands A-Z":
+      - /url: /all-brands
+    - link "Healthcare Services":
+      - /url: /healthcareservices
+    - link "Vouchers":
+      - /url: /giftVoucherCheckoutPage
+    - link "ClubCard":
+      - /url: /clubcard
+    - link "Building Healthier Future":
+      - /url: https://clicks.co.za/building-healthier-future
+- list:
+  - link "Home":
+    - /url: /
+  - link "Marc Anthony":
+    - /url: /marc-anthony/c/0000EQY2
+  - link:
+    - /url: /marc-anthony_3x-moisture-conditioner-250-ml/p/335689
+- list:
+  - img "img_not_available"
+- link "Enlarged view of picture":
+  - /url: /marc-anthony_3x-moisture-conditioner-250-ml/p/335689/zoomImages
+- list:
+  - link "test":
+    - /url: /medias/?context=bWFzdGVyfHByb2R1Y3QtaW1hZ2VzfDEwMDA0M3xpbWFnZS9qcGVnfGFESTRMMmcxWlM4eE1qQXlOekV5TlRZNU5EUTVOQXxhYmZjZGE4Mzk5ZTBiYTU2NGQxOTcxZWIyMzdmMWI1NjBlOTE5NjNhNDg4NjU2NjZkMzhmZjQxMWNlYzY5MTYx
+    - img "test"
+  - link "test":
+    - /url: /medias/?context=bWFzdGVyfHByb2R1Y3QtaW1hZ2VzfDEwOTkwNnxpbWFnZS9qcGVnfGFEbGtMMmd3T1M4eE1qQXlOekV5TmpBeU1qRTNOQXw4ODZlNDQzMWE5ZThmMDY4YmY4ZjBiZjFiZTU0M2IzZDI3ZDA5Njc0ZjFkNzU3MjM0ODVjNDg5Mjg0YTk3ZDAy
+    - img "test"
+- heading "Marc Anthony" [level=1]
+- heading "3X Moisture Conditioner 250 ml" [level=1]
+- generic: "0"
+- link "0 reviews":
+  - /url: "#review-pdp"
+- link "Share":
+  - /url: javascript:void(0)
+  - text: Share
+- generic: "ID: 335689"
+- button
+- generic: Add to favourites
+- paragraph
+- paragraph: Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml hydrates and detangles curly hair, reducing frizz for soft, defined curls. Infused with marula oil, coconut cream and shea butter, it restores moisture, strengthens hair and protects against environmental stressors.
+- paragraph
+- paragraph: In Stock
+- link "Delivered in 1 - 2 working days.":
+  - /url: "#delivery-options-modal"
+- generic "Clicks - click & collect": 
+- paragraph: Store pick-up
+- paragraph: Collect your order in-store R35 or FREE for orders over R350.
+- generic "Clicks - Standard delivery": 
+- paragraph: Standard Delivery
+- paragraph: Door-to-door courier nationwide R80 or FREE for orders over R650.
+- heading "Find in-store" [level=1]
+- paragraph: See if we have this item in your closest store
+- generic: Find in-store
+- generic: R 230.00
+- generic: "eB: 2300"
+- paragraph: Delivered in 1 - 2 working days.
+- generic: In Stock
+- generic: Quantity
+- button "-"
+- textbox: "1"
+- button "+"
+- button "Add to basket"
+- text: 
+- heading "More Information" [level=3]
+- heading "Detailed information" [level=4]
+- paragraph:
+  - text: "Description:"
+  - text: Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml
+- paragraph:
+  - text: "Detailed Description:"
+  - text: With 3X moisture, no strand is left behind. Strictly Curls 3X Moisture is formulated with a triple blend of marula oil, coconut and shea butter. It gives thirsty curls the essential moisture they need to feel strengthened, smoothed and protected. It all adds up to hair that’s always soft, frizz-free and ready for play.
+  - text: "- Removes frizz"
+  - text: "- Detangles with lasting hydration"
+  - text: "- Marula oil restores moisture"
+  - text: "- Coconut cream strengthens"
+  - text: "- Shea butter protects"
+  - text: "- Soft, touchable, frizz-free curls"
+- paragraph:
+  - text: "Pack size:"
+  - text: 250ml
+- paragraph:
+  - text: "Quantity in pack:"
+  - text: "1"
+- paragraph:
+  - text: "Marketing description:"
+  - text: Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml hydrates and detangles curly hair, reducing frizz for soft, defined curls. Infused with marula oil, coconut cream and shea butter, it restores moisture, strengthens hair and protects against environmental stressors.
+- paragraph:
+  - text: "Brand:"
+  - text: Marc Anthony
+- paragraph:
+  - text: "Package type:"
+  - text: Tube
+- generic: See more
+- heading "How to use" [level=4]
+- heading "Ingredients" [level=4]
+- heading "Similar Products" [level=4]
+- link "Daily Moisture Conditioner 350ml":
+  - /url: https://clicks.co.za/dove_daily-moisture-conditioner-350ml/p/259183
+  - img "Daily Moisture Conditioner 350ml"
+- link "Dove Daily Moisture Conditioner 350ml":
+  - /url: https://clicks.co.za/dove_daily-moisture-conditioner-350ml/p/259183
+  - heading "Dove" [level=4]
+  - paragraph: Daily Moisture Conditioner 350ml
+- generic: R 105.00
+- button "Add to basket"
+- link "Max Moisture Conditioner 354ml":
+  - /url: https://www.clicks.co.za/being_max-moisture-conditioner-354ml/p/402213
+  - img "Max Moisture Conditioner 354ml"
+- link "Being Max Moisture Conditioner 354ml":
+  - /url: https://www.clicks.co.za/being_max-moisture-conditioner-354ml/p/402213
+  - heading "Being" [level=4]
+  - paragraph: Max Moisture Conditioner 354ml
+- generic: R 169.00
+- button "Add to basket"
+- list:
+  - img "Product Stickers"
+  - img "Product Stickers"
+- link "Moisture Rich Conditioner Moisturizing 900ml":
+  - /url: https://clicks.co.za/tresemme_moisture-rich-conditioner-moisturizing-900ml/p/65437
+  - img "Moisture Rich Conditioner Moisturizing 900ml"
+- link "TRESemme Moisture Rich Conditioner Moisturizing 900ml":
+  - /url: https://clicks.co.za/tresemme_moisture-rich-conditioner-moisturizing-900ml/p/65437
+  - heading "TRESemme" [level=4]
+  - paragraph: Moisture Rich Conditioner Moisturizing 900ml
+- generic: R 140.00
+- generic: On Promotion
+- button "Add to basket"
+- heading "Reviews" [level=3]
+- link "Write a review":
+  - /url: "#reviews"
+- generic: "0"
+- generic: from 0 reviews
+- heading "You might also like" [level=3]
+- button "Previous": ←Previous
+- link:
+  - /url: https://clicks.co.za/clicks-skincare-collection_turmeric+vitamin-c-face-and-body-glycerine-bar-150g/p/390394
+- link:
+  - /url: https://clicks.co.za/clicks-skincare-collection_turmeric+vitamin-c-face-and-body-glycerine-bar-150g/p/390394
+  - heading [level=4]: Clicks Skincare Collection
+  - paragraph: Turmeric+Vitamin C Face & Body Glycerine Bar 150g
+- generic: R 36.99
+- button: Add to basket
+- list:
+- link:
+  - /url: https://clicks.co.za/bioplus_booster-strawberry-sachets-10ml/p/944604
+- link:
+  - /url: https://clicks.co.za/bioplus_booster-strawberry-sachets-10ml/p/944604
+  - heading [level=4]: Bioplus
+  - paragraph: Booster Strawberry Sachets 10ml
+- generic: R 7.49
+- generic: On Promotion
+- button: Add to basket
+- list:
+- link:
+  - /url: https://clicks.co.za/made-4-tots_instant-noodles-chicken/p/373634
+- link:
+  - /url: https://clicks.co.za/made-4-tots_instant-noodles-chicken/p/373634
+  - heading [level=4]: Made 4 Tots
+  - paragraph: Instant Noodles Chicken
+- generic: R 8.99
+- generic: On Promotion
+- button: Add to basket
+- list:
+- link:
+  - /url: https://clicks.co.za/made-4-tots_instant-noodles-beef/p/373632
+- link:
+  - /url: https://clicks.co.za/made-4-tots_instant-noodles-beef/p/373632
+  - heading [level=4]: Made 4 Tots
+  - paragraph: Instant Noodles Beef
+- generic: R 8.99
+- generic: On Promotion
+- button: Add to basket
+- list:
+- link:
+  - /url: https://clicks.co.za/kotex_all-nighter-maxi-pads-duo-16-pads/p/291964
+- link:
+  - /url: https://clicks.co.za/kotex_all-nighter-maxi-pads-duo-16-pads/p/291964
+  - heading [level=4]: Kotex
+  - paragraph: All Nighter Maxi Pads Duo 16 Pads
+- generic: R 48.99
+- generic: On Promotion
+- button: Add to basket
+- list:
+- link:
+  - /url: https://clicks.co.za/clicks-skincare-collection_turmeric-+-vitamin-c-body-wash-750ml/p/395841
+- link:
+  - /url: https://clicks.co.za/clicks-skincare-collection_turmeric-+-vitamin-c-body-wash-750ml/p/395841
+  - heading [level=4]: Clicks Skincare Collection
+  - paragraph: Turmeric + Vitamin C Body Wash 750ml
+- generic: R 89.99
+- generic: On Promotion
+- button: Add to basket
+- tabpanel:
+  - list:
+    - img "Product Stickers"
+    - img "Product Stickers"
+  - link "Payless 2-Ply Toilet Paper 18 Rolls":
+    - /url: https://clicks.co.za/payless_2-ply-toilet-paper-18-rolls/p/235115
+    - img "Payless 2-Ply Toilet Paper 18 Rolls"
+  - link "Payless 2-Ply Toilet Paper 18 Rolls":
+    - /url: https://clicks.co.za/payless_2-ply-toilet-paper-18-rolls/p/235115
+    - heading "Payless" [level=4]
+    - paragraph: 2-Ply Toilet Paper 18 Rolls
+  - generic: R 120.00
+  - generic: On Promotion
+  - button "Add to basket"
+- tabpanel:
+  - list:
+    - img "Product Stickers"
+    - img "Product Stickers"
+  - link "Turbovite Focus 10ml":
+    - /url: https://clicks.co.za/turbovite_focus-10ml/p/168488
+    - img "Turbovite Focus 10ml"
+  - link "Turbovite Focus 10ml":
+    - /url: https://clicks.co.za/turbovite_focus-10ml/p/168488
+    - heading "Turbovite" [level=4]
+    - paragraph: Focus 10ml
+  - generic: R 7.99
+  - generic: On Promotion
+  - button "Add to basket"
+- tabpanel:
+  - link "NuovaPure Soap Tumeric 100g":
+    - /url: https://clicks.co.za/nuovapure_soap-tumeric-100g/p/363294
+    - img "NuovaPure Soap Tumeric 100g"
+  - link "NuovaPure Soap Tumeric 100g":
+    - /url: https://clicks.co.za/nuovapure_soap-tumeric-100g/p/363294
+    - heading "NuovaPure" [level=4]
+    - paragraph: Soap Tumeric 100g
+  - generic: R 28.99
+  - button "Add to basket"
+- tabpanel:
+  - link "Pure Fragrance &Colour Free Glycerine Soap 150g":
+    - /url: https://clicks.co.za/pure_fragrance-andcolour-free-glycerine-soap-150g/p/267970
+    - img "Pure Fragrance &Colour Free Glycerine Soap 150g"
+  - link "Pure Fragrance &Colour Free Glycerine Soap 150g":
+    - /url: https://clicks.co.za/pure_fragrance-andcolour-free-glycerine-soap-150g/p/267970
+    - heading "Pure" [level=4]
+    - paragraph: Fragrance &Colour Free Glycerine Soap 150g
+  - generic: R 32.99
+  - button "Add to basket"
+- tabpanel:
+  - list:
+    - img "Product Stickers"
+    - img "Product Stickers"
+  - link "Reitzer Aqueous Cream Jar 500ml":
+    - /url: https://clicks.co.za/reitzer_aqueous-cream-jar-500ml/p/39962
+    - img "Reitzer Aqueous Cream Jar 500ml"
+  - link "Reitzer Aqueous Cream Jar 500ml":
+    - /url: https://clicks.co.za/reitzer_aqueous-cream-jar-500ml/p/39962
+    - heading "Reitzer" [level=4]
+    - paragraph: Aqueous Cream Jar 500ml
+  - generic: R 46.99
+  - generic: On Promotion
+  - button "Add to basket"
+- tabpanel:
+  - link "Sunlight Laundry Bar Soap Original 500g":
+    - /url: https://clicks.co.za/sunlight_laundry-bar-soap-original-500g/p/880021
+    - img "Sunlight Laundry Bar Soap Original 500g"
+  - link "Sunlight Laundry Bar Soap Original 500g":
+    - /url: https://clicks.co.za/sunlight_laundry-bar-soap-original-500g/p/880021
+    - heading "Sunlight" [level=4]
+    - paragraph: Laundry Bar Soap Original 500g
+  - generic: R 29.99
+  - button "Add to basket"
+- tabpanel:
+  - link:
+    - /url: https://clicks.co.za/clicks-skincare-collection_turmeric+vitamin-c-face-and-body-glycerine-bar-150g/p/390394
+  - link:
+    - /url: https://clicks.co.za/clicks-skincare-collection_turmeric+vitamin-c-face-and-body-glycerine-bar-150g/p/390394
+    - heading [level=4]: Clicks Skincare Collection
+    - paragraph: Turmeric+Vitamin C Face & Body Glycerine Bar 150g
+  - generic: R 36.99
+  - button: Add to basket
+- tabpanel:
+  - list:
+  - link:
+    - /url: https://clicks.co.za/bioplus_booster-strawberry-sachets-10ml/p/944604
+  - link:
+    - /url: https://clicks.co.za/bioplus_booster-strawberry-sachets-10ml/p/944604
+    - heading [level=4]: Bioplus
+    - paragraph: Booster Strawberry Sachets 10ml
+  - generic: R 7.49
+  - generic: On Promotion
+  - button: Add to basket
+- tabpanel:
+  - list:
+  - link:
+    - /url: https://clicks.co.za/made-4-tots_instant-noodles-chicken/p/373634
+  - link:
+    - /url: https://clicks.co.za/made-4-tots_instant-noodles-chicken/p/373634
+    - heading [level=4]: Made 4 Tots
+    - paragraph: Instant Noodles Chicken
+  - generic: R 8.99
+  - generic: On Promotion
+  - button: Add to basket
+- tabpanel:
+  - list:
+  - link:
+    - /url: https://clicks.co.za/made-4-tots_instant-noodles-beef/p/373632
+  - link:
+    - /url: https://clicks.co.za/made-4-tots_instant-noodles-beef/p/373632
+    - heading [level=4]: Made 4 Tots
+    - paragraph: Instant Noodles Beef
+  - generic: R 8.99
+  - generic: On Promotion
+  - button: Add to basket
+- tabpanel:
+  - list:
+  - link:
+    - /url: https://clicks.co.za/kotex_all-nighter-maxi-pads-duo-16-pads/p/291964
+  - link:
+    - /url: https://clicks.co.za/kotex_all-nighter-maxi-pads-duo-16-pads/p/291964
+    - heading [level=4]: Kotex
+    - paragraph: All Nighter Maxi Pads Duo 16 Pads
+  - generic: R 48.99
+  - generic: On Promotion
+  - button: Add to basket
+- tabpanel:
+  - list:
+  - link:
+    - /url: https://clicks.co.za/clicks-skincare-collection_turmeric-+-vitamin-c-body-wash-750ml/p/395841
+  - link:
+    - /url: https://clicks.co.za/clicks-skincare-collection_turmeric-+-vitamin-c-body-wash-750ml/p/395841
+    - heading [level=4]: Clicks Skincare Collection
+    - paragraph: Turmeric + Vitamin C Body Wash 750ml
+  - generic: R 89.99
+  - generic: On Promotion
+  - button: Add to basket
+- list:
+- link:
+  - /url: https://clicks.co.za/payless_2-ply-toilet-paper-18-rolls/p/235115
+- link:
+  - /url: https://clicks.co.za/payless_2-ply-toilet-paper-18-rolls/p/235115
+  - heading [level=4]: Payless
+  - paragraph: 2-Ply Toilet Paper 18 Rolls
+- generic: R 120.00
+- generic: On Promotion
+- button: Add to basket
+- list:
+- link:
+  - /url: https://clicks.co.za/turbovite_focus-10ml/p/168488
+- link:
+  - /url: https://clicks.co.za/turbovite_focus-10ml/p/168488
+  - heading [level=4]: Turbovite
+  - paragraph: Focus 10ml
+- generic: R 7.99
+- generic: On Promotion
+- button: Add to basket
+- link:
+  - /url: https://clicks.co.za/nuovapure_soap-tumeric-100g/p/363294
+- link:
+  - /url: https://clicks.co.za/nuovapure_soap-tumeric-100g/p/363294
+  - heading [level=4]: NuovaPure
+  - paragraph: Soap Tumeric 100g
+- generic: R 28.99
+- button: Add to basket
+- link:
+  - /url: https://clicks.co.za/pure_fragrance-andcolour-free-glycerine-soap-150g/p/267970
+- link:
+  - /url: https://clicks.co.za/pure_fragrance-andcolour-free-glycerine-soap-150g/p/267970
+  - heading [level=4]: Pure
+  - paragraph: Fragrance &Colour Free Glycerine Soap 150g
+- generic: R 32.99
+- button: Add to basket
+- list:
+- link:
+  - /url: https://clicks.co.za/reitzer_aqueous-cream-jar-500ml/p/39962
+- link:
+  - /url: https://clicks.co.za/reitzer_aqueous-cream-jar-500ml/p/39962
+  - heading [level=4]: Reitzer
+  - paragraph: Aqueous Cream Jar 500ml
+- generic: R 46.99
+- generic: On Promotion
+- button: Add to basket
+- link:
+  - /url: https://clicks.co.za/sunlight_laundry-bar-soap-original-500g/p/880021
+- link:
+  - /url: https://clicks.co.za/sunlight_laundry-bar-soap-original-500g/p/880021
+  - heading [level=4]: Sunlight
+  - paragraph: Laundry Bar Soap Original 500g
+- generic: R 29.99
+- button: Add to basket
+- link:
+  - /url: https://clicks.co.za/clicks-skincare-collection_turmeric+vitamin-c-face-and-body-glycerine-bar-150g/p/390394
+- link:
+  - /url: https://clicks.co.za/clicks-skincare-collection_turmeric+vitamin-c-face-and-body-glycerine-bar-150g/p/390394
+  - heading [level=4]: Clicks Skincare Collection
+  - paragraph: Turmeric+Vitamin C Face & Body Glycerine Bar 150g
+- generic: R 36.99
+- button: Add to basket
+- list:
+- link:
+  - /url: https://clicks.co.za/bioplus_booster-strawberry-sachets-10ml/p/944604
+- link:
+  - /url: https://clicks.co.za/bioplus_booster-strawberry-sachets-10ml/p/944604
+  - heading [level=4]: Bioplus
+  - paragraph: Booster Strawberry Sachets 10ml
+- generic: R 7.49
+- generic: On Promotion
+- button: Add to basket
+- list:
+- link:
+  - /url: https://clicks.co.za/made-4-tots_instant-noodles-chicken/p/373634
+- link:
+  - /url: https://clicks.co.za/made-4-tots_instant-noodles-chicken/p/373634
+  - heading [level=4]: Made 4 Tots
+  - paragraph: Instant Noodles Chicken
+- generic: R 8.99
+- generic: On Promotion
+- button: Add to basket
+- list:
+- link:
+  - /url: https://clicks.co.za/made-4-tots_instant-noodles-beef/p/373632
+- link:
+  - /url: https://clicks.co.za/made-4-tots_instant-noodles-beef/p/373632
+  - heading [level=4]: Made 4 Tots
+  - paragraph: Instant Noodles Beef
+- generic: R 8.99
+- generic: On Promotion
+- button: Add to basket
+- list:
+- link:
+  - /url: https://clicks.co.za/kotex_all-nighter-maxi-pads-duo-16-pads/p/291964
+- link:
+  - /url: https://clicks.co.za/kotex_all-nighter-maxi-pads-duo-16-pads/p/291964
+  - heading [level=4]: Kotex
+  - paragraph: All Nighter Maxi Pads Duo 16 Pads
+- generic: R 48.99
+- generic: On Promotion
+- button: Add to basket
+- list:
+- link:
+  - /url: https://clicks.co.za/clicks-skincare-collection_turmeric-+-vitamin-c-body-wash-750ml/p/395841
+- link:
+  - /url: https://clicks.co.za/clicks-skincare-collection_turmeric-+-vitamin-c-body-wash-750ml/p/395841
+  - heading [level=4]: Clicks Skincare Collection
+  - paragraph: Turmeric + Vitamin C Body Wash 750ml
+- generic: R 89.99
+- generic: On Promotion
+- button: Add to basket
+- button "Next": →Next
+- tablist:
+  - tab "1 of 2" [selected]: • 1
+  - tab "2 of 2": • 2
+- heading "Related suggestions" [level=3]
+- button "Previous": ←Previous
+- link:
+  - /url: https://clicks.co.za/bioderma_sensibio-h20-micellar-cleanser-250-ml/p/205398
+- link:
+  - /url: https://clicks.co.za/bioderma_sensibio-h20-micellar-cleanser-250-ml/p/205398
+  - heading [level=4]: Bioderma
+  - paragraph: Sensibio H20 Micellar Cleanser 250 ml
+- generic: R 325.00
+- button: Add to basket
+- list:
+- link:
+  - /url: https://clicks.co.za/the-body-shop_shower-gel-vibrant-bergamot-250-ml/p/357404
+- link:
+  - /url: https://clicks.co.za/the-body-shop_shower-gel-vibrant-bergamot-250-ml/p/357404
+  - heading [level=4]: The Body Shop
+  - paragraph: Shower Gel Vibrant Bergamot 250 ml
+- generic: R 135.00
+- generic: On Promotion
+- button: Add to basket
+- link:
+  - /url: https://clicks.co.za/vida-is-life_curl-condition-curling-cream-250-ml/p/359439
+- link:
+  - /url: https://clicks.co.za/vida-is-life_curl-condition-curling-cream-250-ml/p/359439
+  - heading [level=4]: Vida Is Life
+  - paragraph: Curl Condition Curling Cream 250 ml
+- generic: R 96.99
+- button: Add to basket
+- list:
+- link:
+  - /url: https://clicks.co.za/the-body-shop_shower-gel-wild-jasmine-250-ml/p/357402
+- link:
+  - /url: https://clicks.co.za/the-body-shop_shower-gel-wild-jasmine-250-ml/p/357402
+  - heading [level=4]: The Body Shop
+  - paragraph: Shower Gel Wild Jasmine 250 ml
+- generic: R 135.00
+- generic: On Promotion
+- button: Add to basket
+- link:
+  - /url: https://clicks.co.za/bioderma_sebium-h20-micellar-cleanser-250-ml/p/205415
+- link:
+  - /url: https://clicks.co.za/bioderma_sebium-h20-micellar-cleanser-250-ml/p/205415
+  - heading [level=4]: Bioderma
+  - paragraph: Sebium H20 Micellar Cleanser 250 ml
+- generic: R 320.00
+- button: Add to basket
+- link:
+  - /url: https://clicks.co.za/easy-waves_amla-oil-hair-moisturiser-250-ml/p/343713
+- link:
+  - /url: https://clicks.co.za/easy-waves_amla-oil-hair-moisturiser-250-ml/p/343713
+  - heading [level=4]: Easy Waves
+  - paragraph: Amla Oil Hair Moisturiser 250 ml
+- generic: R 45.99
+- button: Add to basket
+- tabpanel:
+  - link "Curl Leave-In Conditioner 250 ml":
+    - /url: https://clicks.co.za/vida-is-life_curl-leave-in-conditioner-250-ml/p/359445
+    - img "Curl Leave-In Conditioner 250 ml"
+  - link "Vida Is Life Curl Leave-In Conditioner 250 ml":
+    - /url: https://clicks.co.za/vida-is-life_curl-leave-in-conditioner-250-ml/p/359445
+    - heading "Vida Is Life" [level=4]
+    - paragraph: Curl Leave-In Conditioner 250 ml
+  - generic: R 96.99
+  - button "Add to basket"
+- tabpanel:
+  - link "Leave-In Conditioner Cocoa Butter 250 ml":
+    - /url: https://clicks.co.za/palmers_leave-in-conditioner-cocoa-butter-250-ml/p/356989
+    - img "Leave-In Conditioner Cocoa Butter 250 ml"
+  - link "Palmer's Leave-In Conditioner Cocoa Butter 250 ml":
+    - /url: https://clicks.co.za/palmers_leave-in-conditioner-cocoa-butter-250-ml/p/356989
+    - heading "Palmer's" [level=4]
+    - paragraph: Leave-In Conditioner Cocoa Butter 250 ml
+  - generic: R 130.00
+  - button "Add to basket"
+- tabpanel:
+  - link "Curl Deep Moisture Hair Masque 250 ml":
+    - /url: https://clicks.co.za/vida-is-life_curl-deep-moisture-hair-masque-250-ml/p/359446
+    - img "Curl Deep Moisture Hair Masque 250 ml"
+  - link "Vida Is Life Curl Deep Moisture Hair Masque 250 ml":
+    - /url: https://clicks.co.za/vida-is-life_curl-deep-moisture-hair-masque-250-ml/p/359446
+    - heading "Vida Is Life" [level=4]
+    - paragraph: Curl Deep Moisture Hair Masque 250 ml
+  - generic: R 96.99
+  - button "Add to basket"
+- tabpanel:
+  - link "3x Moisture Shampoo 250ml":
+    - /url: https://clicks.co.za/marc-anthony_3x-moisture-shampoo-250ml/p/335690
+    - img "3x Moisture Shampoo 250ml"
+  - link "Marc Anthony 3x Moisture Shampoo 250ml":
+    - /url: https://clicks.co.za/marc-anthony_3x-moisture-shampoo-250ml/p/335690
+    - heading "Marc Anthony" [level=4]
+    - paragraph: 3x Moisture Shampoo 250ml
+  - generic: R 230.00
+  - button "Add to basket"
+- tabpanel:
+  - link "Deodorant Sunkissed Mist 250 ml":
+    - /url: https://clicks.co.za/guess_deodorant-sunkissed-mist-250-ml/p/358717
+    - img "Deodorant Sunkissed Mist 250 ml"
+  - link "Guess Deodorant Sunkissed Mist 250 ml":
+    - /url: https://clicks.co.za/guess_deodorant-sunkissed-mist-250-ml/p/358717
+    - heading "Guess" [level=4]
+    - paragraph: Deodorant Sunkissed Mist 250 ml
+  - generic: R 299.00
+  - button "Add to basket"
+- tabpanel:
+  - link "Shampoo Sulfate Free 250 ml":
+    - /url: https://clicks.co.za/vida-is-life_shampoo-sulfate-free-250-ml/p/359447
+    - img "Shampoo Sulfate Free 250 ml"
+  - link "Vida Is Life Shampoo Sulfate Free 250 ml":
+    - /url: https://clicks.co.za/vida-is-life_shampoo-sulfate-free-250-ml/p/359447
+    - heading "Vida Is Life" [level=4]
+    - paragraph: Shampoo Sulfate Free 250 ml
+  - generic: R 92.99
+  - button "Add to basket"
+- tabpanel:
+  - link:
+    - /url: https://clicks.co.za/bioderma_sensibio-h20-micellar-cleanser-250-ml/p/205398
+  - link:
+    - /url: https://clicks.co.za/bioderma_sensibio-h20-micellar-cleanser-250-ml/p/205398
+    - heading [level=4]: Bioderma
+    - paragraph: Sensibio H20 Micellar Cleanser 250 ml
+  - generic: R 325.00
+  - button: Add to basket
+- tabpanel:
+  - list:
+  - link:
+    - /url: https://clicks.co.za/the-body-shop_shower-gel-vibrant-bergamot-250-ml/p/357404
+  - link:
+    - /url: https://clicks.co.za/the-body-shop_shower-gel-vibrant-bergamot-250-ml/p/357404
+    - heading [level=4]: The Body Shop
+    - paragraph: Shower Gel Vibrant Bergamot 250 ml
+  - generic: R 135.00
+  - generic: On Promotion
+  - button: Add to basket
+- tabpanel:
+  - link:
+    - /url: https://clicks.co.za/vida-is-life_curl-condition-curling-cream-250-ml/p/359439
+  - link:
+    - /url: https://clicks.co.za/vida-is-life_curl-condition-curling-cream-250-ml/p/359439
+    - heading [level=4]: Vida Is Life
+    - paragraph: Curl Condition Curling Cream 250 ml
+  - generic: R 96.99
+  - button: Add to basket
+- tabpanel:
+  - list:
+  - link:
+    - /url: https://clicks.co.za/the-body-shop_shower-gel-wild-jasmine-250-ml/p/357402
+  - link:
+    - /url: https://clicks.co.za/the-body-shop_shower-gel-wild-jasmine-250-ml/p/357402
+    - heading [level=4]: The Body Shop
+    - paragraph: Shower Gel Wild Jasmine 250 ml
+  - generic: R 135.00
+  - generic: On Promotion
+  - button: Add to basket
+- tabpanel:
+  - link:
+    - /url: https://clicks.co.za/bioderma_sebium-h20-micellar-cleanser-250-ml/p/205415
+  - link:
+    - /url: https://clicks.co.za/bioderma_sebium-h20-micellar-cleanser-250-ml/p/205415
+    - heading [level=4]: Bioderma
+    - paragraph: Sebium H20 Micellar Cleanser 250 ml
+  - generic: R 320.00
+  - button: Add to basket
+- tabpanel:
+  - link:
+    - /url: https://clicks.co.za/easy-waves_amla-oil-hair-moisturiser-250-ml/p/343713
+  - link:
+    - /url: https://clicks.co.za/easy-waves_amla-oil-hair-moisturiser-250-ml/p/343713
+    - heading [level=4]: Easy Waves
+    - paragraph: Amla Oil Hair Moisturiser 250 ml
+  - generic: R 45.99
+  - button: Add to basket
+- link:
+  - /url: https://clicks.co.za/vida-is-life_curl-leave-in-conditioner-250-ml/p/359445
+- link:
+  - /url: https://clicks.co.za/vida-is-life_curl-leave-in-conditioner-250-ml/p/359445
+  - heading [level=4]: Vida Is Life
+  - paragraph: Curl Leave-In Conditioner 250 ml
+- generic: R 96.99
+- button: Add to basket
+- link:
+  - /url: https://clicks.co.za/palmers_leave-in-conditioner-cocoa-butter-250-ml/p/356989
+- link:
+  - /url: https://clicks.co.za/palmers_leave-in-conditioner-cocoa-butter-250-ml/p/356989
+  - heading [level=4]: Palmer's
+  - paragraph: Leave-In Conditioner Cocoa Butter 250 ml
+- generic: R 130.00
+- button: Add to basket
+- link:
+  - /url: https://clicks.co.za/vida-is-life_curl-deep-moisture-hair-masque-250-ml/p/359446
+- link:
+  - /url: https://clicks.co.za/vida-is-life_curl-deep-moisture-hair-masque-250-ml/p/359446
+  - heading [level=4]: Vida Is Life
+  - paragraph: Curl Deep Moisture Hair Masque 250 ml
+- generic: R 96.99
+- button: Add to basket
+- link:
+  - /url: https://clicks.co.za/marc-anthony_3x-moisture-shampoo-250ml/p/335690
+- link:
+  - /url: https://clicks.co.za/marc-anthony_3x-moisture-shampoo-250ml/p/335690
+  - heading [level=4]: Marc Anthony
+  - paragraph: 3x Moisture Shampoo 250ml
+- generic: R 230.00
+- button: Add to basket
+- link:
+  - /url: https://clicks.co.za/guess_deodorant-sunkissed-mist-250-ml/p/358717
+- link:
+  - /url: https://clicks.co.za/guess_deodorant-sunkissed-mist-250-ml/p/358717
+  - heading [level=4]: Guess
+  - paragraph: Deodorant Sunkissed Mist 250 ml
+- generic: R 299.00
+- button: Add to basket
+- link:
+  - /url: https://clicks.co.za/vida-is-life_shampoo-sulfate-free-250-ml/p/359447
+- link:
+  - /url: https://clicks.co.za/vida-is-life_shampoo-sulfate-free-250-ml/p/359447
+  - heading [level=4]: Vida Is Life
+  - paragraph: Shampoo Sulfate Free 250 ml
+- generic: R 92.99
+- button: Add to basket
+- link:
+  - /url: https://clicks.co.za/bioderma_sensibio-h20-micellar-cleanser-250-ml/p/205398
+- link:
+  - /url: https://clicks.co.za/bioderma_sensibio-h20-micellar-cleanser-250-ml/p/205398
+  - heading [level=4]: Bioderma
+  - paragraph: Sensibio H20 Micellar Cleanser 250 ml
+- generic: R 325.00
+- button: Add to basket
+- list:
+- link:
+  - /url: https://clicks.co.za/the-body-shop_shower-gel-vibrant-bergamot-250-ml/p/357404
+- link:
+  - /url: https://clicks.co.za/the-body-shop_shower-gel-vibrant-bergamot-250-ml/p/357404
+  - heading [level=4]: The Body Shop
+  - paragraph: Shower Gel Vibrant Bergamot 250 ml
+- generic: R 135.00
+- generic: On Promotion
+- button: Add to basket
+- link:
+  - /url: https://clicks.co.za/vida-is-life_curl-condition-curling-cream-250-ml/p/359439
+- link:
+  - /url: https://clicks.co.za/vida-is-life_curl-condition-curling-cream-250-ml/p/359439
+  - heading [level=4]: Vida Is Life
+  - paragraph: Curl Condition Curling Cream 250 ml
+- generic: R 96.99
+- button: Add to basket
+- list:
+- link:
+  - /url: https://clicks.co.za/the-body-shop_shower-gel-wild-jasmine-250-ml/p/357402
+- link:
+  - /url: https://clicks.co.za/the-body-shop_shower-gel-wild-jasmine-250-ml/p/357402
+  - heading [level=4]: The Body Shop
+  - paragraph: Shower Gel Wild Jasmine 250 ml
+- generic: R 135.00
+- generic: On Promotion
+- button: Add to basket
+- link:
+  - /url: https://clicks.co.za/bioderma_sebium-h20-micellar-cleanser-250-ml/p/205415
+- link:
+  - /url: https://clicks.co.za/bioderma_sebium-h20-micellar-cleanser-250-ml/p/205415
+  - heading [level=4]: Bioderma
+  - paragraph: Sebium H20 Micellar Cleanser 250 ml
+- generic: R 320.00
+- button: Add to basket
+- link:
+  - /url: https://clicks.co.za/easy-waves_amla-oil-hair-moisturiser-250-ml/p/343713
+- link:
+  - /url: https://clicks.co.za/easy-waves_amla-oil-hair-moisturiser-250-ml/p/343713
+  - heading [level=4]: Easy Waves
+  - paragraph: Amla Oil Hair Moisturiser 250 ml
+- generic: R 45.99
+- button: Add to basket
+- button "Next": →Next
+- tablist:
+  - tab "1 of 2" [selected]: • 1
+  - tab "2 of 2": • 2
+- heading "Related products from Clicks" [level=3]
+- button "Previous": ←Previous
+- link:
+  - /url: https://clicks.co.za/aunt-jackies_grapeseed-thirst-quench-conditioner/p/323668
+- link:
+  - /url: https://clicks.co.za/aunt-jackies_grapeseed-thirst-quench-conditioner/p/323668
+  - heading [level=4]: Aunt Jackie's
+  - paragraph: Grapeseed Thirst Quench Conditioner
+- generic: R 175.00
+- button: Add to basket
+- list:
+- link:
+  - /url: https://clicks.co.za/clicks-hydrate_body-lotion-firming-400-ml/p/227667
+- link:
+  - /url: https://clicks.co.za/clicks-hydrate_body-lotion-firming-400-ml/p/227667
+  - heading [level=4]: Clicks Hydrate
+  - paragraph: Body Lotion Firming 400 ml
+- generic: R 44.99
+- generic: On Promotion
+- button: Add to basket
+- link:
+  - /url: https://clicks.co.za/aunt-jackies_biotin-and-honey-shine-boosting-moisturizer-354ml/p/381362
+- link:
+  - /url: https://clicks.co.za/aunt-jackies_biotin-and-honey-shine-boosting-moisturizer-354ml/p/381362
+  - heading [level=4]: Aunt Jackie's
+  - paragraph: Biotin & Honey Shine Boosting Moisturizer 354ml
+- generic: R 220.00
+- button: Add to basket
+- list:
+- link:
+  - /url: https://clicks.co.za/clicks-hydrate_body-cream-aloe-vera-500-ml/p/227662
+- link:
+  - /url: https://clicks.co.za/clicks-hydrate_body-cream-aloe-vera-500-ml/p/227662
+  - heading [level=4]: Clicks Hydrate
+  - paragraph: Body Cream Aloe Vera 500 ml
+- generic: R 48.99
+- generic: On Promotion
+- button: Add to basket
+- link:
+  - /url: https://clicks.co.za/aunt-jackies_knot-havin-it-leave-in-ultimate-detangling-moisturizer-335ml/p/264797
+- link:
+  - /url: https://clicks.co.za/aunt-jackies_knot-havin-it-leave-in-ultimate-detangling-moisturizer-335ml/p/264797
+  - heading [level=4]: Aunt Jackie's
+  - paragraph: Knot Havin It Leave-in Ultimate Detangling Moisturizer 335ml
+- generic: R 142.00
+- button: Add to basket
+- link:
+  - /url: https://clicks.co.za/lee-stafford_for-the-love-of-curls-leave-in-conditioning-moisture-mist-150ml/p/355270
+- link:
+  - /url: https://clicks.co.za/lee-stafford_for-the-love-of-curls-leave-in-conditioning-moisture-mist-150ml/p/355270
+  - heading [level=4]: Lee Stafford
+  - paragraph: For The Love Of Curls Leave-In Conditioning Moisture Mist 150ml
+- generic: R 150.00
+- button: Add to basket
+- tabpanel:
+  - link "Lee Stafford For The Love Of Curls Shampoo 250 ml":
+    - /url: https://clicks.co.za/lee-stafford_for-the-love-of-curls-shampoo-250-ml/p/355266
+    - img "Lee Stafford For The Love Of Curls Shampoo 250 ml"
+  - link "Lee Stafford For The Love Of Curls Shampoo 250 ml":
+    - /url: https://clicks.co.za/lee-stafford_for-the-love-of-curls-shampoo-250-ml/p/355266
+    - heading "Lee Stafford" [level=4]
+    - paragraph: For The Love Of Curls Shampoo 250 ml
+  - generic: R 165.00
+  - button "Add to basket"
+- tabpanel:
+  - link "John Frieda Violet Crush For Blondes Purple Shampoo 250 ml":
+    - /url: https://clicks.co.za/john-frieda_violet-crush-for-blondes-purple-shampoo-250-ml/p/218088
+    - img "John Frieda Violet Crush For Blondes Purple Shampoo 250 ml"
+  - link "John Frieda Violet Crush For Blondes Purple Shampoo 250 ml":
+    - /url: https://clicks.co.za/john-frieda_violet-crush-for-blondes-purple-shampoo-250-ml/p/218088
+    - heading "John Frieda" [level=4]
+    - paragraph: Violet Crush For Blondes Purple Shampoo 250 ml
+  - generic: R 140.00
+  - button "Add to basket"
+- tabpanel:
+  - link "Lee Stafford Coco Shine Conditioner 250ml":
+    - /url: https://clicks.co.za/lee-stafford_coco-shine-conditioner-250ml/p/389620
+    - img "Lee Stafford Coco Shine Conditioner 250ml"
+  - link "Lee Stafford Coco Shine Conditioner 250ml":
+    - /url: https://clicks.co.za/lee-stafford_coco-shine-conditioner-250ml/p/389620
+    - heading "Lee Stafford" [level=4]
+    - paragraph: Coco Shine Conditioner 250ml
+  - generic: R 150.00
+  - button "Add to basket"
+- tabpanel:
+  - link "Lee Stafford Argan Oil Nourishing Conditioner 250ml":
+    - /url: https://clicks.co.za/lee-stafford_argan-oil-nourishing-conditioner-250ml/p/389554
+    - img "Lee Stafford Argan Oil Nourishing Conditioner 250ml"
+  - link "Lee Stafford Argan Oil Nourishing Conditioner 250ml":
+    - /url: https://clicks.co.za/lee-stafford_argan-oil-nourishing-conditioner-250ml/p/389554
+    - heading "Lee Stafford" [level=4]
+    - paragraph: Argan Oil Nourishing Conditioner 250ml
+  - generic: R 180.00
+  - button "Add to basket"
+- tabpanel:
+  - link "Clicks Provitene Family Conditioner 1L":
+    - /url: https://clicks.co.za/clicks_provitene-family-conditioner-1l/p/336525
+    - img "Clicks Provitene Family Conditioner 1L"
+  - link "Clicks Provitene Family Conditioner 1L":
+    - /url: https://clicks.co.za/clicks_provitene-family-conditioner-1l/p/336525
+    - heading "Clicks" [level=4]
+    - paragraph: Provitene Family Conditioner 1L
+  - generic: R 77.99
+  - button "Add to basket"
+- tabpanel:
+  - link "Aunt Jackie's Transform Leave In Conditioner 426g":
+    - /url: https://clicks.co.za/aunt-jackies_transform-leave-in-conditioner-426g/p/365658
+    - img "Aunt Jackie's Transform Leave In Conditioner 426g"
+  - link "Aunt Jackie's Transform Leave In Conditioner 426g":
+    - /url: https://clicks.co.za/aunt-jackies_transform-leave-in-conditioner-426g/p/365658
+    - heading "Aunt Jackie's" [level=4]
+    - paragraph: Transform Leave In Conditioner 426g
+  - generic: R 161.00
+  - button "Add to basket"
+- tabpanel:
+  - link:
+    - /url: https://clicks.co.za/aunt-jackies_grapeseed-thirst-quench-conditioner/p/323668
+  - link:
+    - /url: https://clicks.co.za/aunt-jackies_grapeseed-thirst-quench-conditioner/p/323668
+    - heading [level=4]: Aunt Jackie's
+    - paragraph: Grapeseed Thirst Quench Conditioner
+  - generic: R 175.00
+  - button: Add to basket
+- tabpanel:
+  - list:
+  - link:
+    - /url: https://clicks.co.za/clicks-hydrate_body-lotion-firming-400-ml/p/227667
+  - link:
+    - /url: https://clicks.co.za/clicks-hydrate_body-lotion-firming-400-ml/p/227667
+    - heading [level=4]: Clicks Hydrate
+    - paragraph: Body Lotion Firming 400 ml
+  - generic: R 44.99
+  - generic: On Promotion
+  - button: Add to basket
+- tabpanel:
+  - link:
+    - /url: https://clicks.co.za/aunt-jackies_biotin-and-honey-shine-boosting-moisturizer-354ml/p/381362
+  - link:
+    - /url: https://clicks.co.za/aunt-jackies_biotin-and-honey-shine-boosting-moisturizer-354ml/p/381362
+    - heading [level=4]: Aunt Jackie's
+    - paragraph: Biotin & Honey Shine Boosting Moisturizer 354ml
+  - generic: R 220.00
+  - button: Add to basket
+- tabpanel:
+  - list:
+  - link:
+    - /url: https://clicks.co.za/clicks-hydrate_body-cream-aloe-vera-500-ml/p/227662
+  - link:
+    - /url: https://clicks.co.za/clicks-hydrate_body-cream-aloe-vera-500-ml/p/227662
+    - heading [level=4]: Clicks Hydrate
+    - paragraph: Body Cream Aloe Vera 500 ml
+  - generic: R 48.99
+  - generic: On Promotion
+  - button: Add to basket
+- tabpanel:
+  - link:
+    - /url: https://clicks.co.za/aunt-jackies_knot-havin-it-leave-in-ultimate-detangling-moisturizer-335ml/p/264797
+  - link:
+    - /url: https://clicks.co.za/aunt-jackies_knot-havin-it-leave-in-ultimate-detangling-moisturizer-335ml/p/264797
+    - heading [level=4]: Aunt Jackie's
+    - paragraph: Knot Havin It Leave-in Ultimate Detangling Moisturizer 335ml
+  - generic: R 142.00
+  - button: Add to basket
+- tabpanel:
+  - link:
+    - /url: https://clicks.co.za/lee-stafford_for-the-love-of-curls-leave-in-conditioning-moisture-mist-150ml/p/355270
+  - link:
+    - /url: https://clicks.co.za/lee-stafford_for-the-love-of-curls-leave-in-conditioning-moisture-mist-150ml/p/355270
+    - heading [level=4]: Lee Stafford
+    - paragraph: For The Love Of Curls Leave-In Conditioning Moisture Mist 150ml
+  - generic: R 150.00
+  - button: Add to basket
+- link:
+  - /url: https://clicks.co.za/lee-stafford_for-the-love-of-curls-shampoo-250-ml/p/355266
+- link:
+  - /url: https://clicks.co.za/lee-stafford_for-the-love-of-curls-shampoo-250-ml/p/355266
+  - heading [level=4]: Lee Stafford
+  - paragraph: For The Love Of Curls Shampoo 250 ml
+- generic: R 165.00
+- button: Add to basket
+- link:
+  - /url: https://clicks.co.za/john-frieda_violet-crush-for-blondes-purple-shampoo-250-ml/p/218088
+- link:
+  - /url: https://clicks.co.za/john-frieda_violet-crush-for-blondes-purple-shampoo-250-ml/p/218088
+  - heading [level=4]: John Frieda
+  - paragraph: Violet Crush For Blondes Purple Shampoo 250 ml
+- generic: R 140.00
+- button: Add to basket
+- link:
+  - /url: https://clicks.co.za/lee-stafford_coco-shine-conditioner-250ml/p/389620
+- link:
+  - /url: https://clicks.co.za/lee-stafford_coco-shine-conditioner-250ml/p/389620
+  - heading [level=4]: Lee Stafford
+  - paragraph: Coco Shine Conditioner 250ml
+- generic: R 150.00
+- button: Add to basket
+- link:
+  - /url: https://clicks.co.za/lee-stafford_argan-oil-nourishing-conditioner-250ml/p/389554
+- link:
+  - /url: https://clicks.co.za/lee-stafford_argan-oil-nourishing-conditioner-250ml/p/389554
+  - heading [level=4]: Lee Stafford
+  - paragraph: Argan Oil Nourishing Conditioner 250ml
+- generic: R 180.00
+- button: Add to basket
+- link:
+  - /url: https://clicks.co.za/clicks_provitene-family-conditioner-1l/p/336525
+- link:
+  - /url: https://clicks.co.za/clicks_provitene-family-conditioner-1l/p/336525
+  - heading [level=4]: Clicks
+  - paragraph: Provitene Family Conditioner 1L
+- generic: R 77.99
+- button: Add to basket
+- link:
+  - /url: https://clicks.co.za/aunt-jackies_transform-leave-in-conditioner-426g/p/365658
+- link:
+  - /url: https://clicks.co.za/aunt-jackies_transform-leave-in-conditioner-426g/p/365658
+  - heading [level=4]: Aunt Jackie's
+  - paragraph: Transform Leave In Conditioner 426g
+- generic: R 161.00
+- button: Add to basket
+- link:
+  - /url: https://clicks.co.za/aunt-jackies_grapeseed-thirst-quench-conditioner/p/323668
+- link:
+  - /url: https://clicks.co.za/aunt-jackies_grapeseed-thirst-quench-conditioner/p/323668
+  - heading [level=4]: Aunt Jackie's
+  - paragraph: Grapeseed Thirst Quench Conditioner
+- generic: R 175.00
+- button: Add to basket
+- list:
+- link:
+  - /url: https://clicks.co.za/clicks-hydrate_body-lotion-firming-400-ml/p/227667
+- link:
+  - /url: https://clicks.co.za/clicks-hydrate_body-lotion-firming-400-ml/p/227667
+  - heading [level=4]: Clicks Hydrate
+  - paragraph: Body Lotion Firming 400 ml
+- generic: R 44.99
+- generic: On Promotion
+- button: Add to basket
+- link:
+  - /url: https://clicks.co.za/aunt-jackies_biotin-and-honey-shine-boosting-moisturizer-354ml/p/381362
+- link:
+  - /url: https://clicks.co.za/aunt-jackies_biotin-and-honey-shine-boosting-moisturizer-354ml/p/381362
+  - heading [level=4]: Aunt Jackie's
+  - paragraph: Biotin & Honey Shine Boosting Moisturizer 354ml
+- generic: R 220.00
+- button: Add to basket
+- list:
+- link:
+  - /url: https://clicks.co.za/clicks-hydrate_body-cream-aloe-vera-500-ml/p/227662
+- link:
+  - /url: https://clicks.co.za/clicks-hydrate_body-cream-aloe-vera-500-ml/p/227662
+  - heading [level=4]: Clicks Hydrate
+  - paragraph: Body Cream Aloe Vera 500 ml
+- generic: R 48.99
+- generic: On Promotion
+- button: Add to basket
+- link:
+  - /url: https://clicks.co.za/aunt-jackies_knot-havin-it-leave-in-ultimate-detangling-moisturizer-335ml/p/264797
+- link:
+  - /url: https://clicks.co.za/aunt-jackies_knot-havin-it-leave-in-ultimate-detangling-moisturizer-335ml/p/264797
+  - heading [level=4]: Aunt Jackie's
+  - paragraph: Knot Havin It Leave-in Ultimate Detangling Moisturizer 335ml
+- generic: R 142.00
+- button: Add to basket
+- link:
+  - /url: https://clicks.co.za/lee-stafford_for-the-love-of-curls-leave-in-conditioning-moisture-mist-150ml/p/355270
+- link:
+  - /url: https://clicks.co.za/lee-stafford_for-the-love-of-curls-leave-in-conditioning-moisture-mist-150ml/p/355270
+  - heading [level=4]: Lee Stafford
+  - paragraph: For The Love Of Curls Leave-In Conditioning Moisture Mist 150ml
+- generic: R 150.00
+- button: Add to basket
+- button "Next": →Next
+- tablist:
+  - tab "1 of 2" [selected]: • 1
+  - tab "2 of 2": • 2
+- heading "We value your privacy" [level=2]
+- paragraph:
+  - text: Your experience matters to us. We use cookies to personalise your experience, remember your preferences, and help us improve our website and services. You can Accept All Cookies or Manage Cookies at any time. To learn more, please read our
+  - link "Privacy Policy.":
+    - /url: https://help.clicks.co.za/support/solutions/80000456221
+- button "Accept all"
+- button "Manage cookies"
+- contentinfo:
+  - figure:
+    - generic: Don't miss out on savings. Subscribe today!
+    - textbox "Enter email address"
+    - button "Subscribe"
+    - generic: "Connect with Clicks on:"
+    - link "Twitter":
+      - /url: https://twitter.com/Clicks_SA
+    - link "Facebook":
+      - /url: https://www.facebook.com/ClicksSouthAfrica
+    - link "icon-instagram":
+      - /url: https://www.instagram.com/clicks_sa/
+    - link "Youtube":
+      - /url: https://www.youtube.com/user/ClicksSouthAfrica
+  - generic: Cookie Preferences
+  - emphasis:
+    - paragraph:
+      - text: Customer Service Centre
+      - emphasis: 0860 254 257
+  - emphasis:
+    - paragraph:
+      - text: Outside South Africa
+      - emphasis: +27 21 460 1009
+  - list:
+    - list:
+      - heading "ClubCard" [level=5]
+      - link "Join ClubCard":
+        - /url: /register/joincc
+      - link "Partners":
+        - /url: /clubcardpartnerspage
+      - link "Competitions":
+        - /url: /competitions/view
+      - link "BabyClub":
+        - /url: /babyClubLandingPage
+      - heading "My Account" [level=5]
+      - link "My ClubCard":
+        - /url: /clubCardPage
+      - link "Order History":
+        - /url: /my-account/orders
+      - heading "Customer Service" [level=5]
+      - link "Help":
+        - /url: /help
+      - link "Contact us":
+        - /url: /contactus
+      - link "Legal Terms and Conditions":
+        - /url: https://help.clicks.co.za/support/solutions/folders/80000682186
+      - link "Privacy Policy":
+        - /url: https://help.clicks.co.za/support/solutions/articles/80001141722-clicks-group-limited-privacy-policy
+      - heading "Health Hub" [level=5]
+      - link "Conditions":
+        - /url: /health/info-list/category/conditions
+      - link "Medicines":
+        - /url: /medicinesPage
+      - link "Vitamins & Supplements":
+        - /url: /c/OH20078
+      - link "Healthy Living":
+        - /url: /clubcard-magazine/?id=all&pageType=healthyLivingPage
+  - img "feel good"
+  - heading "All Clicks pharmacies are licenced by the National Department of Health and recorded at the South African Pharmacy Council." [level=4]
+  - heading "Guaranteed secure payment by" [level=3]
+  - img "visa.jpg"
+  - img "master.jpg"
+  - img "pci.png"
+  - img "visa.png"
+  - img "master.png"
+- iframe [id="fc_widget"] [name="fc_widget"]:
+  - text: 
+  - button "Chat with us":
+    - generic: Chat with us

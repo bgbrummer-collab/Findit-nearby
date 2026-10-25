@@ -1,0 +1,239 @@
+{
+  "identification": {
+    "name": "Bosch GSB 18V-50 with batteries and charger",
+    "object": "product",
+    "category": "product",
+    "searchQuery": "Bosch GSB 18V-50 with batteries and charger"
+  },
+  "commerce": {
+    "status": 200,
+    "data": {
+      "ok": true,
+      "matched": true,
+      "exactMatchVerified": true,
+      "searchQuery": "Bosch GSB 18V-50 with batteries and charger",
+      "bestProduct": {
+        "name": "Bosch Professional | Cordless Drill GSB 18V-50 + 2 X 2,0Ah Batteries + Charger"
+      },
+      "bestPrice": {
+        "product_name": "Bosch Professional | Cordless Drill GSB 18V-50 + 2 X 2,0Ah Batteries + Charger",
+        "product_url": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger",
+        "sku": "SKU 06019H5100",
+        "comparisonAttributes": {
+          "size": "",
+          "color": ""
+        },
+        "comparisonAmbiguous": false,
+        "retailer": {
+          "name": "TMB Supplies"
+        },
+        "price": 4999,
+        "currency": "ZAR",
+        "availability": "in_stock",
+        "priceConditions": "",
+        "verified": true,
+        "exactProductMatch": true,
+        "sourcePageVerified": true,
+        "source": "Verified directly on exact retailer product page",
+        "matchScore": 100,
+        "stockScope": "online/general retailer availability only",
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "checkedAt": "2026-10-25T17:11:33.942Z",
+        "retailerDomain": "tmbsupplies.co.za",
+        "trustedRetailerDomain": false
+      },
+      "priceComparisonIssue": null,
+      "priceComparisonNote": "",
+      "offers": [
+        {
+          "product_name": "Bosch Professional | Cordless Drill GSB 18V-50 + 2 X 2,0Ah Batteries + Charger",
+          "product_url": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger",
+          "sku": "SKU 06019H5100",
+          "comparisonAttributes": {
+            "size": "",
+            "color": ""
+          },
+          "comparisonAmbiguous": false,
+          "retailer": {
+            "name": "TMB Supplies"
+          },
+          "price": 4999,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "priceConditions": "",
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Verified directly on exact retailer product page",
+          "matchScore": 100,
+          "stockScope": "online/general retailer availability only",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-10-25T17:11:33.942Z",
+          "retailerDomain": "tmbsupplies.co.za",
+          "trustedRetailerDomain": false
+        }
+      ],
+      "retailerStatus": [
+        {
+          "name": "TMB Supplies",
+          "searchUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger",
+          "exactProductMatch": true,
+          "stockVerified": true,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "verified_exact_online_listing"
+        },
+        {
+          "name": "Builders",
+          "searchUrl": "https://www.builders.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        },
+        {
+          "name": "Leroy Merlin",
+          "searchUrl": "https://www.leroymerlin.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        },
+        {
+          "name": "BUCO",
+          "searchUrl": "https://www.buco.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        },
+        {
+          "name": "Mica",
+          "searchUrl": "https://www.mica.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        },
+        {
+          "name": "Game",
+          "searchUrl": "https://www.game.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        },
+        {
+          "name": "Makro",
+          "searchUrl": "https://www.makro.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        }
+      ],
+      "webRetailers": [
+        {
+          "name": "TMB Supplies",
+          "searchUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger",
+          "exactProductMatch": true,
+          "stockVerified": true,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "verified_exact_online_listing"
+        },
+        {
+          "name": "Builders",
+          "searchUrl": "https://www.builders.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        },
+        {
+          "name": "Leroy Merlin",
+          "searchUrl": "https://www.leroymerlin.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        },
+        {
+          "name": "BUCO",
+          "searchUrl": "https://www.buco.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        },
+        {
+          "name": "Mica",
+          "searchUrl": "https://www.mica.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        },
+        {
+          "name": "Game",
+          "searchUrl": "https://www.game.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        },
+        {
+          "name": "Makro",
+          "searchUrl": "https://www.makro.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        }
+      ],
+      "verifiedOfferCount": 1,
+      "verifiedSellerCount": 1,
+      "inStockOfferCount": 1,
+      "priceVerifiedCount": 1,
+      "nearbyBranchStockVerified": false,
+      "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+      "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+      "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Bosch%20GSB%2018V-50%20with%20batteries%20and%20charger",
+      "checkedAt": "2026-10-25T17:11:36.182Z"
+    }
+  },
+  "nearby": {
+    "status": 200,
+    "data": {
+      "ok": true,
+      "radiusKm": 3,
+      "stores": [],
+      "reliable": false,
+      "discoveryAvailable": false,
+      "exactProductOnly": false,
+      "exactVerifiedCount": 0,
+      "branchStockVerified": false,
+      "directionsAvailable": false,
+      "message": "Nearby retailer data could not be retrieved. Try again later or use retailer branch locators; this does not mean there are no nearby shops.",
+      "searchedShopTags": [
+        "hardware",
+        "doityourself"
+      ],
+      "disclaimer": "These are real nearby retailers for the product type. FindIt does not guess exact branch stock or prices."
+    }
+  }
+}

@@ -1,0 +1,55 @@
+2026-10-25T17:08:24.5621640Z [PASS] 1440px page loads
+2026-10-25T17:08:24.5674434Z [PASS] 1440px one results controller
+2026-10-25T17:08:24.5706622Z [PASS] 1440px no duplicate ids
+2026-10-25T17:08:24.5708275Z [PASS] 1440px no uncaught JS errors
+2026-10-25T17:08:25.3550627Z [PASS] 390px page loads
+2026-10-25T17:08:25.3566709Z [PASS] 390px one results controller
+2026-10-25T17:08:25.3590943Z [PASS] 390px no duplicate ids
+2026-10-25T17:08:25.3591753Z [PASS] 390px no uncaught JS errors
+2026-10-25T17:08:26.4539759Z [PASS] mock exact identity correct
+2026-10-25T17:08:26.4564770Z [PASS] mock exact price shown
+2026-10-25T17:08:26.4586966Z [PASS] mock nearby same retailer paired without fake branch stock
+2026-10-25T17:08:27.8791210Z [PASS] label evidence promotes supported packaged-product identity
+2026-10-25T17:08:27.8859102Z [PASS] label evidence allows retailer-page verified price
+2026-10-25T17:08:27.9033032Z [FAIL] label flow keeps physical branch stock unconfirmed and no Directions 1
+2026-10-25T17:08:27.9035792Z Exact branch stock not verified
+2026-10-25T17:08:55.4452429Z [PASS] shoe retailer selection and safety
+2026-10-25T17:09:19.9062762Z [PASS] electronics retailer selection and safety
+2026-10-25T17:09:31.4796383Z [PASS] grocery retailer selection and safety
+2026-10-25T17:10:05.5297661Z [PASS] hardware retailer selection and safety
+2026-10-25T17:10:12.5371085Z [PASS] nearby lookup returns valid real coordinates or clean empty state
+2026-10-25T17:10:12.5646502Z FAILURES
+2026-10-25T17:10:12.5649745Z label flow keeps physical branch stock unconfirmed and no Directions: 1
+2026-10-25T17:10:12.5651872Z Exact branch stock not verified
+2026-10-25T17:10:12.8814353Z [PASS] backend keeps the more specific search identity
+2026-10-25T17:10:12.8820009Z [PASS] backend rejects conflicting Air Force 1 variants
+2026-10-25T17:10:12.8838276Z [PASS] backend collapses duplicate retailer variants
+2026-10-25T17:10:12.8859855Z [PASS] backend research cleaner rejects retailer policy junk
+2026-10-25T17:10:13.2460109Z [PASS] wrong Nike variant is rejected
+2026-10-25T17:10:13.2534835Z [PASS] wrong Air Force 1 colour variants are rejected
+2026-10-25T17:10:13.2593180Z [PASS] duplicate retailer offers collapse to one exact result
+2026-10-25T17:10:13.2669822Z [PASS] branch stock is never inferred from online stock
+2026-10-25T17:10:13.6046224Z [PASS] visible dashboard can reduce mixed retailer offers to exact offers only
+2026-10-25T17:10:13.6085398Z [PASS] research sanitizer rejects warranty, importer and shipping junk
+2026-10-25T17:10:14.3929914Z [PASS] Product Information does not display shipping/reviewer junk
+2026-10-25T17:10:14.6789076Z [PASS] beauty exact-product research
+2026-10-25T17:10:14.6845663Z [PASS] household exact-product research
+2026-10-25T17:10:14.6875601Z [PASS] electronics exact-product research
+2026-10-25T17:10:14.6923607Z [PASS] uncommon-electronics exact-product research
+2026-10-25T17:10:14.6965171Z [PASS] footwear exact-product research
+2026-10-25T17:10:14.7014165Z [PASS] hardware exact-product research
+2026-10-25T17:10:14.7044831Z [PASS] stationery exact-product research
+2026-10-25T17:10:14.7192998Z [PASS] unrelated search-page noise is rejected
+2026-10-25T17:10:15.9320524Z [PASS] settings restores multiple working controls
+2026-10-25T17:10:16.1349875Z [PASS] Product Information opens and renders researched content
+2026-10-25T17:10:16.4722355Z [PASS] closing Product Information during slow research leaves dashboard responsive
+2026-10-25T17:10:16.6460560Z [PASS] reopening Product Information after cancellation starts fresh research
+2026-10-25T17:10:16.9127536Z [PASS] Compare Prices renders verified exact commerce evidence and stays in-app
+2026-10-25T17:10:17.0313673Z [PASS] Live Stock renders verified online stock separately from branch stock
+2026-10-25T17:10:17.2398587Z [PASS] Ask FindIt uses the polished primary action and returns an answer
+2026-10-25T17:10:24.1791001Z [PASS] Plan lists exactly match product promise — Free 9 / Premium 12
+2026-10-25T17:10:24.1816914Z [PASS] Free gates Premium dashboard actions — Premium-only tools locked; Free core open
+2026-10-25T17:10:24.2947093Z [PASS] Free Premium click opens upgrade instead of tool — Compare gated
+2026-10-25T17:10:24.3482057Z [PASS] Free radius and smart filters are capped — 10 km max; smart sort locked
+2026-10-25T17:10:24.9074757Z [PASS] Premium unlocks all promised dashboard controls — Premium functions available
+2026-10-25T17:10:26.3536350Z [PASS] Premium radius and smart filters unlock — 25 km and smart sort enabled

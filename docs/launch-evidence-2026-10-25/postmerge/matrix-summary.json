@@ -1,0 +1,100 @@
+{
+  "startVersion": {
+    "status": 200,
+    "seconds": 6.15,
+    "data": {
+      "commit": "a49ff40a786d7f8973af8411cc3e5737749d13b5",
+      "platform": "cloudflare"
+    }
+  },
+  "endVersion": {
+    "status": 200,
+    "seconds": 5.52,
+    "data": {
+      "commit": "a49ff40a786d7f8973af8411cc3e5737749d13b5",
+      "platform": "cloudflare"
+    }
+  },
+  "queries": [
+    {
+      "query": "Sony WH-1000XM5 black",
+      "status": 200,
+      "offers": 2,
+      "priced": 2,
+      "researched": null,
+      "seconds": 17.13
+    },
+    {
+      "query": "Logitech PRO X Gaming Headset 981-000818",
+      "status": 200,
+      "offers": 1,
+      "priced": 1,
+      "researched": null,
+      "seconds": 9.21
+    },
+    {
+      "query": "LEGO Classic 10696",
+      "status": 200,
+      "offers": 1,
+      "priced": 1,
+      "researched": null,
+      "seconds": 14.86
+    },
+    {
+      "query": "Coca-Cola Original Taste 2L",
+      "status": 200,
+      "offers": 0,
+      "priced": 0,
+      "researched": null,
+      "seconds": 6.83
+    },
+    {
+      "query": "Bosch GSB 18V-50",
+      "status": 200,
+      "offers": 0,
+      "priced": 0,
+      "researched": null,
+      "seconds": 13.49
+    },
+    {
+      "query": "Bosch GSB 18V-50 drill kit",
+      "status": 200,
+      "offers": 1,
+      "priced": 1,
+      "researched": null,
+      "seconds": 12.61
+    },
+    {
+      "query": "Levis 501 Original jeans",
+      "status": 200,
+      "offers": 9,
+      "priced": 9,
+      "researched": null,
+      "seconds": 19.01
+    },
+    {
+      "query": "Nivea body lotion 250ml",
+      "status": 200,
+      "offers": 1,
+      "priced": 1,
+      "researched": null,
+      "seconds": 16.84
+    },
+    {
+      "query": "Twinsaver Comfort 3 Ply Tissues 120",
+      "status": 200,
+      "offers": 0,
+      "priced": 0,
+      "researched": null,
+      "seconds": 6.59
+    },
+    {
+      "query": "Shure MV7+ microphone",
+      "status": 200,
+      "offers": 1,
+      "priced": 1,
+      "researched": null,
+      "seconds": 13.66
+    }
+  ]
+}

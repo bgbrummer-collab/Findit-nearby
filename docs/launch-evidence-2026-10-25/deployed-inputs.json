@@ -1,0 +1,88 @@
+[
+  {
+    "case": "null-search",
+    "status": 400,
+    "expected": 400,
+    "passed": true,
+    "data": {
+      "error": "Send a JSON object with a product name or barcode.",
+      "code": "INVALID_SEARCH_INPUT",
+      "imageAccepted": false,
+      "retryable": false
+    }
+  },
+  {
+    "case": "object-query",
+    "status": 400,
+    "expected": 400,
+    "passed": true,
+    "data": {
+      "error": "Product name must be text.",
+      "code": "INVALID_SEARCH_INPUT",
+      "imageAccepted": false,
+      "retryable": false
+    }
+  },
+  {
+    "case": "malformed-search",
+    "status": 400,
+    "expected": 400,
+    "passed": true,
+    "data": {
+      "error": "Send valid JSON product details.",
+      "code": "INVALID_SEARCH_INPUT",
+      "imageAccepted": false,
+      "retryable": false
+    }
+  },
+  {
+    "case": "bad-barcode",
+    "status": 400,
+    "expected": 400,
+    "passed": true,
+    "data": {
+      "error": "Enter a valid EAN/UPC barcode with a correct check digit.",
+      "code": "INVALID_BARCODE"
+    }
+  },
+  {
+    "case": "null-assistant",
+    "status": 400,
+    "expected": 400,
+    "passed": true,
+    "data": {
+      "error": "Message required"
+    }
+  },
+  {
+    "case": "invalid-latitude",
+    "status": 400,
+    "expected": 400,
+    "passed": true,
+    "data": {
+      "error": "Valid location required"
+    }
+  },
+  {
+    "case": "private-website",
+    "status": 400,
+    "expected": 400,
+    "passed": true,
+    "data": {
+      "ok": false,
+      "error": "A valid public HTTPS retailer website is required"
+    }
+  },
+  {
+    "case": "overlong-query",
+    "status": 400,
+    "expected": 400,
+    "passed": true,
+    "data": {
+      "error": "Product name is too long. Use at most 240 characters.",
+      "code": "INVALID_SEARCH_INPUT",
+      "imageAccepted": false,
+      "retryable": false
+    }
+  }
+]

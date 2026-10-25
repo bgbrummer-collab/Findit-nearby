@@ -1,0 +1,167 @@
+{
+  "query": "Nivea body lotion 250ml",
+  "search": {
+    "seconds": 5.53,
+    "data": {
+      "identification": {
+        "name": "Nivea body lotion 250ml",
+        "object": "Nivea body lotion 250ml",
+        "brand": "",
+        "model": "",
+        "category": "product",
+        "retailCategory": "general",
+        "searchQuery": "Nivea body lotion 250ml",
+        "barcode": null,
+        "confidence": null,
+        "identificationMethod": "typed-user-input",
+        "userConfirmed": true
+      },
+      "offers": [],
+      "blocked": false,
+      "verified": false,
+      "userConfirmed": true,
+      "identitySource": "user-confirmed",
+      "visualVerification": false,
+      "provider": "user-input",
+      "imageAccepted": false,
+      "needsVision": false,
+      "needsRetailerVerification": true,
+      "code": "USER_CONFIRMED_PRODUCT",
+      "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+    }
+  },
+  "commerce": {
+    "seconds": 15.27,
+    "data": {
+      "ok": true,
+      "matched": true,
+      "exactMatchVerified": true,
+      "searchQuery": "Nivea body lotion 250ml",
+      "bestProduct": {
+        "name": "NIVEA Body Lotion Rich Nourishing 250ml"
+      },
+      "bestPrice": {
+        "product_name": "NIVEA Body Lotion Rich Nourishing 250ml",
+        "product_url": "https://clicks.co.za/nivea_rich-nourishing-body-lotion-250ml/p/129748",
+        "sku": "",
+        "comparisonAttributes": {
+          "size": "",
+          "color": ""
+        },
+        "comparisonAmbiguous": false,
+        "retailer": {
+          "name": "Clicks"
+        },
+        "price": 59.99,
+        "currency": "ZAR",
+        "availability": "in_stock",
+        "priceConditions": "",
+        "verified": true,
+        "exactProductMatch": true,
+        "sourcePageVerified": true,
+        "source": "Verified directly on exact retailer product page",
+        "matchScore": 92,
+        "stockScope": "online/general retailer availability only",
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "checkedAt": "2026-10-25T16:53:06.018Z",
+        "retailerDomain": "clicks.co.za",
+        "trustedRetailerDomain": true
+      },
+      "priceComparisonIssue": null,
+      "priceComparisonNote": "",
+      "offers": [
+        {
+          "product_name": "NIVEA Body Lotion Rich Nourishing 250ml",
+          "product_url": "https://clicks.co.za/nivea_rich-nourishing-body-lotion-250ml/p/129748",
+          "sku": "",
+          "comparisonAttributes": {
+            "size": "",
+            "color": ""
+          },
+          "comparisonAmbiguous": false,
+          "retailer": {
+            "name": "Clicks"
+          },
+          "price": 59.99,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "priceConditions": "",
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Verified directly on exact retailer product page",
+          "matchScore": 92,
+          "stockScope": "online/general retailer availability only",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-10-25T16:53:06.018Z",
+          "retailerDomain": "clicks.co.za",
+          "trustedRetailerDomain": true
+        }
+      ],
+      "retailerStatus": [
+        {
+          "name": "Clicks",
+          "searchUrl": "https://clicks.co.za/nivea_rich-nourishing-body-lotion-250ml/p/129748",
+          "exactProductMatch": true,
+          "stockVerified": true,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Dis-Chem",
+          "searchUrl": "https://www.dischem.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Takealot",
+          "searchUrl": "https://www.takealot.com/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        }
+      ],
+      "webRetailers": [
+        {
+          "name": "Clicks",
+          "searchUrl": "https://clicks.co.za/nivea_rich-nourishing-body-lotion-250ml/p/129748",
+          "exactProductMatch": true,
+          "stockVerified": true,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Dis-Chem",
+          "searchUrl": "https://www.dischem.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Takealot",
+          "searchUrl": "https://www.takealot.com/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        }
+      ],
+      "verifiedOfferCount": 1,
+      "verifiedSellerCount": 1,
+      "inStockOfferCount": 1,
+      "priceVerifiedCount": 1,
+      "nearbyBranchStockVerified": false,
+      "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+      "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+      "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Nivea%20body%20lotion%20250ml",
+      "checkedAt": "2026-10-25T16:53:12.560Z"
+    }
+  },
+  "captureNote": "HTTP status was not separately captured by this baseline script. Payloads and elapsed client times are recorded; no HTTP-status pass is inferred."
+}

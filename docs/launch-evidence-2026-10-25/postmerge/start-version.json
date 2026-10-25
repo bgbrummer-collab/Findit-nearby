@@ -1,0 +1,8 @@
+{
+  "status": 200,
+  "seconds": 6.15,
+  "data": {
+    "commit": "a49ff40a786d7f8973af8411cc3e5737749d13b5",
+    "platform": "cloudflare"
+  }
+}

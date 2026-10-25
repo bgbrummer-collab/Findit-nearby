@@ -1,0 +1,102 @@
+{
+  "map": [
+    {
+      "name": "Vercel Preview Comments",
+      "status": "completed",
+      "conclusion": "success",
+      "sha": "05026bc3ed08e06b486c005c5d69793ae9f92844"
+    },
+    {
+      "name": "Redirect rules - findit-nearby",
+      "status": "completed",
+      "conclusion": "neutral",
+      "sha": "05026bc3ed08e06b486c005c5d69793ae9f92844"
+    },
+    {
+      "name": "Header rules - findit-nearby",
+      "status": "completed",
+      "conclusion": "neutral",
+      "sha": "05026bc3ed08e06b486c005c5d69793ae9f92844"
+    },
+    {
+      "name": "Pages changed - findit-nearby",
+      "status": "completed",
+      "conclusion": "neutral",
+      "sha": "05026bc3ed08e06b486c005c5d69793ae9f92844"
+    },
+    {
+      "name": "smoke",
+      "status": "completed",
+      "conclusion": "success",
+      "sha": "05026bc3ed08e06b486c005c5d69793ae9f92844"
+    },
+    {
+      "name": "interaction",
+      "status": "completed",
+      "conclusion": "success",
+      "sha": "05026bc3ed08e06b486c005c5d69793ae9f92844"
+    },
+    {
+      "name": "audit",
+      "status": "completed",
+      "conclusion": "success",
+      "sha": "05026bc3ed08e06b486c005c5d69793ae9f92844"
+    },
+    {
+      "name": "smoke",
+      "status": "completed",
+      "conclusion": "success",
+      "sha": "05026bc3ed08e06b486c005c5d69793ae9f92844"
+    }
+  ],
+  "package": [
+    {
+      "name": "interaction",
+      "status": "completed",
+      "conclusion": "success",
+      "sha": "fa3afb4e691162cf81d0d1e2b01fc3be4264d1e0"
+    },
+    {
+      "name": "Vercel Preview Comments",
+      "status": "completed",
+      "conclusion": "success",
+      "sha": "fa3afb4e691162cf81d0d1e2b01fc3be4264d1e0"
+    },
+    {
+      "name": "Redirect rules - findit-nearby",
+      "status": "completed",
+      "conclusion": "neutral",
+      "sha": "fa3afb4e691162cf81d0d1e2b01fc3be4264d1e0"
+    },
+    {
+      "name": "Header rules - findit-nearby",
+      "status": "completed",
+      "conclusion": "neutral",
+      "sha": "fa3afb4e691162cf81d0d1e2b01fc3be4264d1e0"
+    },
+    {
+      "name": "Pages changed - findit-nearby",
+      "status": "completed",
+      "conclusion": "neutral",
+      "sha": "fa3afb4e691162cf81d0d1e2b01fc3be4264d1e0"
+    },
+    {
+      "name": "audit",
+      "status": "completed",
+      "conclusion": "success",
+      "sha": "fa3afb4e691162cf81d0d1e2b01fc3be4264d1e0"
+    },
+    {
+      "name": "smoke",
+      "status": "completed",
+      "conclusion": "success",
+      "sha": "fa3afb4e691162cf81d0d1e2b01fc3be4264d1e0"
+    },
+    {
+      "name": "smoke",
+      "status": "completed",
+      "conclusion": "success",
+      "sha": "fa3afb4e691162cf81d0d1e2b01fc3be4264d1e0"
+    }
+  ]
+}

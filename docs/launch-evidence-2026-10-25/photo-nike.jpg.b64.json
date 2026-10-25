@@ -1,0 +1,109 @@
+{
+  "fixture": "nike.jpg.b64",
+  "seconds": 15.49,
+  "status": 200,
+  "data": {
+    "identification": {
+      "name": "Nike shoes",
+      "brand": "Nike",
+      "model": "",
+      "object": "shoes",
+      "category": "footwear",
+      "retailCategory": "footwear",
+      "searchQuery": "Nike shoes",
+      "barcode": null,
+      "size": "",
+      "color": "",
+      "visibleText": [],
+      "confidence": 0.65,
+      "identificationMethod": "independent-vision-consensus",
+      "userConfirmed": false,
+      "labelCandidates": [],
+      "suggestedLabel": "Nike air force 1",
+      "suggestedModels": [
+        {
+          "name": "Nike Air Force 1",
+          "confirmed": false,
+          "source": "visual-model-hypothesis"
+        }
+      ],
+      "identityScope": "product-family",
+      "requiresModelConfirmation": true,
+      "unverifiedDetails": [
+        "exact model",
+        "variant",
+        "specifications"
+      ],
+      "features": []
+    },
+    "offers": [],
+    "blocked": false,
+    "verified": false,
+    "userConfirmed": false,
+    "identitySource": "cloudflare-consensus",
+    "visionDiagnostics": [
+      {
+        "provider": "cloudflare-gemma",
+        "code": "CF_GEMMA_FAILED",
+        "providerStatus": null,
+        "providerErrorCode": "8007",
+        "identityClaim": null,
+        "errorType": null
+      },
+      {
+        "provider": "google-gemini",
+        "code": "IDENTIFIED",
+        "providerStatus": null,
+        "providerErrorCode": null,
+        "identityClaim": {
+          "name": "Nike Air Force 1 White and Blue Sneakers",
+          "brand": "Nike",
+          "model": "Air Force 1",
+          "object": "Sneakers",
+          "size": "",
+          "color": "",
+          "visibleText": [
+            "AIR"
+          ]
+        },
+        "errorType": null
+      },
+      {
+        "provider": "cloudflare-workers-ai",
+        "code": "IDENTIFIED",
+        "providerStatus": null,
+        "providerErrorCode": null,
+        "identityClaim": {
+          "name": "AIR FORCE 1",
+          "brand": "NIKE",
+          "model": "1",
+          "object": "sneaker",
+          "size": "US",
+          "color": "white",
+          "visibleText": [
+            "AIR",
+            "FORCE",
+            "1"
+          ]
+        },
+        "errorType": null
+      },
+      {
+        "provider": "huggingface",
+        "code": "HF_INFERENCE_FAILED",
+        "providerStatus": 402,
+        "providerErrorCode": null,
+        "identityClaim": null,
+        "errorType": "credits"
+      }
+    ],
+    "visualVerification": true,
+    "provider": "cloudflare-consensus",
+    "imageAccepted": true,
+    "needsVision": false,
+    "needsRetailerVerification": true,
+    "confidence": 0.65,
+    "code": "PHOTO_PARTIALLY_IDENTIFIED",
+    "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+  }
+}

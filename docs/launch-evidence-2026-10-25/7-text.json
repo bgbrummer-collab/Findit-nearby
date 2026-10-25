@@ -1,0 +1,476 @@
+{
+  "query": "Levis 501 Original jeans",
+  "search": {
+    "seconds": 4.6,
+    "data": {
+      "identification": {
+        "name": "Levis 501 Original jeans",
+        "object": "Levis 501 Original jeans",
+        "brand": "",
+        "model": "",
+        "category": "product",
+        "retailCategory": "general",
+        "searchQuery": "Levis 501 Original jeans",
+        "barcode": null,
+        "confidence": null,
+        "identificationMethod": "typed-user-input",
+        "userConfirmed": true
+      },
+      "offers": [],
+      "blocked": false,
+      "verified": false,
+      "userConfirmed": true,
+      "identitySource": "user-confirmed",
+      "visualVerification": false,
+      "provider": "user-input",
+      "imageAccepted": false,
+      "needsVision": false,
+      "needsRetailerVerification": true,
+      "code": "USER_CONFIRMED_PRODUCT",
+      "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+    }
+  },
+  "commerce": {
+    "seconds": 26.78,
+    "data": {
+      "ok": true,
+      "matched": true,
+      "exactMatchVerified": true,
+      "searchQuery": "Levis 501 Original jeans",
+      "bestProduct": {
+        "name": "501\u00ae Levi's\u00aeORIGINAL - AT THE GALLERY"
+      },
+      "bestPrice": null,
+      "priceComparisonIssue": "variants",
+      "priceComparisonNote": "Listing variants, currencies or price conditions differ. Compare each listing separately.",
+      "offers": [
+        {
+          "product_name": "501\u00ae Levi's\u00aeORIGINAL - AT THE GALLERY",
+          "product_url": "https://superbalist.com/men/jeans-pants-shorts/jeans/501-levi-s-original-at-the-gallery/1695947?clickRef=search_listing&searchTerm=Levis+501+Original+jeans",
+          "sku": "1695947",
+          "comparisonAttributes": {
+            "size": "",
+            "color": ""
+          },
+          "comparisonAmbiguous": false,
+          "retailer": {
+            "name": "Superbalist"
+          },
+          "price": 909,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "priceConditions": "",
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Verified directly on exact retailer product page",
+          "matchScore": 92,
+          "stockScope": "online/general retailer availability only",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-10-25T16:52:39.365Z",
+          "retailerDomain": "superbalist.com",
+          "trustedRetailerDomain": true
+        },
+        {
+          "product_name": "LEVI'S\u00ae MEN'S 501\u00ae ORIGINAL JEANS - MEDIUM WASH",
+          "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2",
+          "sku": "0050135983632",
+          "comparisonAttributes": {
+            "size": "",
+            "color": ""
+          },
+          "comparisonAmbiguous": false,
+          "retailer": {
+            "name": "Levi\u2019s South Africa"
+          },
+          "price": 1299,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "priceConditions": "",
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Verified directly on exact retailer product page",
+          "matchScore": 92,
+          "stockScope": "online/general retailer availability only",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-10-25T16:52:38.568Z",
+          "retailerDomain": "levi.co.za",
+          "trustedRetailerDomain": false
+        },
+        {
+          "product_name": "LEVI'S\u00ae MEN'S 501\u00ae ORIGINAL JEANS - MED INDIGO - WORN IN",
+          "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-med-indigo-worn-in",
+          "sku": "A544700404032",
+          "comparisonAttributes": {
+            "size": "",
+            "color": ""
+          },
+          "comparisonAmbiguous": false,
+          "retailer": {
+            "name": "Levi\u2019s South Africa"
+          },
+          "price": 1299,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "priceConditions": "",
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Verified directly on exact retailer product page",
+          "matchScore": 92,
+          "stockScope": "online/general retailer availability only",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-10-25T16:52:38.629Z",
+          "retailerDomain": "levi.co.za",
+          "trustedRetailerDomain": false
+        },
+        {
+          "product_name": "LEVI'S\u00ae MEN'S 501\u00ae ORIGINAL JEANS - GREY",
+          "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-grey-1",
+          "sku": "A544700413032",
+          "comparisonAttributes": {
+            "size": "",
+            "color": ""
+          },
+          "comparisonAmbiguous": false,
+          "retailer": {
+            "name": "Levi\u2019s South Africa"
+          },
+          "price": 1299,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "priceConditions": "",
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Verified directly on exact retailer product page",
+          "matchScore": 92,
+          "stockScope": "online/general retailer availability only",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-10-25T16:52:38.623Z",
+          "retailerDomain": "levi.co.za",
+          "trustedRetailerDomain": false
+        },
+        {
+          "product_name": "LEVI'S\u00ae MEN'S 501\u00ae ORIGINAL JEANS - BROWN",
+          "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown",
+          "sku": "A544700422832",
+          "comparisonAttributes": {
+            "size": "",
+            "color": ""
+          },
+          "comparisonAmbiguous": false,
+          "retailer": {
+            "name": "Levi\u2019s South Africa"
+          },
+          "price": 1399,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "priceConditions": "",
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Verified directly on exact retailer product page",
+          "matchScore": 92,
+          "stockScope": "online/general retailer availability only",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-10-25T16:52:38.468Z",
+          "retailerDomain": "levi.co.za",
+          "trustedRetailerDomain": false
+        },
+        {
+          "product_name": "LEVI'S\u00ae MEN'S 501\u00ae ORIGINAL JEANS - DARK INDIGO - FLAT FINISH",
+          "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-flat-finish",
+          "sku": "A544700002832",
+          "comparisonAttributes": {
+            "size": "",
+            "color": ""
+          },
+          "comparisonAmbiguous": false,
+          "retailer": {
+            "name": "Levi\u2019s South Africa"
+          },
+          "price": 1199,
+          "currency": "ZAR",
+          "availability": null,
+          "priceConditions": "",
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Verified directly on exact retailer product page",
+          "matchScore": 92,
+          "stockScope": "not supplied",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-10-25T16:52:38.469Z",
+          "retailerDomain": "levi.co.za",
+          "trustedRetailerDomain": false
+        },
+        {
+          "product_name": "LEVI'S\u00ae MEN'S 501\u00ae ORIGINAL JEANS - DARK INDIGO - WORN IN",
+          "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-worn-in",
+          "sku": "A544700332832",
+          "comparisonAttributes": {
+            "size": "",
+            "color": ""
+          },
+          "comparisonAmbiguous": false,
+          "retailer": {
+            "name": "Levi\u2019s South Africa"
+          },
+          "price": 1199,
+          "currency": "ZAR",
+          "availability": null,
+          "priceConditions": "",
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Verified directly on exact retailer product page",
+          "matchScore": 92,
+          "stockScope": "not supplied",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-10-25T16:52:38.465Z",
+          "retailerDomain": "levi.co.za",
+          "trustedRetailerDomain": false
+        },
+        {
+          "product_name": "LEVI'S\u00ae MEN'S 501\u00ae ORIGINAL JEANS - DARK INDIGO - FLAT FINISH",
+          "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-flat-finish-1",
+          "sku": "A544700033032",
+          "comparisonAttributes": {
+            "size": "",
+            "color": ""
+          },
+          "comparisonAmbiguous": false,
+          "retailer": {
+            "name": "Levi\u2019s South Africa"
+          },
+          "price": 1199,
+          "currency": "ZAR",
+          "availability": null,
+          "priceConditions": "",
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Verified directly on exact retailer product page",
+          "matchScore": 92,
+          "stockScope": "not supplied",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-10-25T16:52:38.597Z",
+          "retailerDomain": "levi.co.za",
+          "trustedRetailerDomain": false
+        },
+        {
+          "product_name": "LEVI'S\u00ae MEN'S 501\u00ae ORIGINAL JEANS - GREY",
+          "product_url": "https://www.levi.co.za/products/levis-r-mens-501-r-original-jeans-grey-1",
+          "sku": "0050123702832",
+          "comparisonAttributes": {
+            "size": "",
+            "color": ""
+          },
+          "comparisonAmbiguous": false,
+          "retailer": {
+            "name": "Levi\u2019s South Africa"
+          },
+          "price": 1299,
+          "currency": "ZAR",
+          "availability": null,
+          "priceConditions": "",
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Verified directly on exact retailer product page",
+          "matchScore": 92,
+          "stockScope": "not supplied",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-10-25T16:52:38.449Z",
+          "retailerDomain": "levi.co.za",
+          "trustedRetailerDomain": false
+        }
+      ],
+      "retailerStatus": [
+        {
+          "name": "Superbalist",
+          "searchUrl": "https://superbalist.com/men/jeans-pants-shorts/jeans/501-levi-s-original-at-the-gallery/1695947?clickRef=search_listing&searchTerm=Levis+501+Original+jeans",
+          "exactProductMatch": true,
+          "stockVerified": true,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Levi\u2019s South Africa",
+          "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2",
+          "exactProductMatch": true,
+          "stockVerified": true,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Levi\u2019s South Africa",
+          "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-med-indigo-worn-in",
+          "exactProductMatch": true,
+          "stockVerified": true,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Levi\u2019s South Africa",
+          "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-grey-1",
+          "exactProductMatch": true,
+          "stockVerified": true,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Levi\u2019s South Africa",
+          "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown",
+          "exactProductMatch": true,
+          "stockVerified": true,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Levi\u2019s South Africa",
+          "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-flat-finish",
+          "exactProductMatch": true,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Levi\u2019s South Africa",
+          "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-worn-in",
+          "exactProductMatch": true,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Levi\u2019s South Africa",
+          "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-flat-finish-1",
+          "exactProductMatch": true,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Levi\u2019s South Africa",
+          "searchUrl": "https://www.levi.co.za/products/levis-r-mens-501-r-original-jeans-grey-1",
+          "exactProductMatch": true,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Bash",
+          "searchUrl": "https://bash.com/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        }
+      ],
+      "webRetailers": [
+        {
+          "name": "Superbalist",
+          "searchUrl": "https://superbalist.com/men/jeans-pants-shorts/jeans/501-levi-s-original-at-the-gallery/1695947?clickRef=search_listing&searchTerm=Levis+501+Original+jeans",
+          "exactProductMatch": true,
+          "stockVerified": true,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Levi\u2019s South Africa",
+          "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2",
+          "exactProductMatch": true,
+          "stockVerified": true,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Levi\u2019s South Africa",
+          "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-med-indigo-worn-in",
+          "exactProductMatch": true,
+          "stockVerified": true,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Levi\u2019s South Africa",
+          "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-grey-1",
+          "exactProductMatch": true,
+          "stockVerified": true,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Levi\u2019s South Africa",
+          "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown",
+          "exactProductMatch": true,
+          "stockVerified": true,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Levi\u2019s South Africa",
+          "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-flat-finish",
+          "exactProductMatch": true,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Levi\u2019s South Africa",
+          "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-worn-in",
+          "exactProductMatch": true,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Levi\u2019s South Africa",
+          "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-flat-finish-1",
+          "exactProductMatch": true,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Levi\u2019s South Africa",
+          "searchUrl": "https://www.levi.co.za/products/levis-r-mens-501-r-original-jeans-grey-1",
+          "exactProductMatch": true,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Bash",
+          "searchUrl": "https://bash.com/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        }
+      ],
+      "verifiedOfferCount": 9,
+      "verifiedSellerCount": 2,
+      "inStockOfferCount": 5,
+      "priceVerifiedCount": 9,
+      "nearbyBranchStockVerified": false,
+      "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+      "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+      "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Levis%20501%20Original%20jeans",
+      "checkedAt": "2026-10-25T16:52:57.607Z"
+    }
+  },
+  "captureNote": "HTTP status was not separately captured by this baseline script. Payloads and elapsed client times are recorded; no HTTP-status pass is inferred."
+}

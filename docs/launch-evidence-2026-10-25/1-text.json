@@ -1,0 +1,227 @@
+{
+  "query": "Sony WH-1000XM5 black",
+  "search": {
+    "seconds": 5.57,
+    "data": {
+      "identification": {
+        "name": "Sony WH-1000XM5 black",
+        "object": "Sony WH-1000XM5 black",
+        "brand": "",
+        "model": "",
+        "category": "product",
+        "retailCategory": "general",
+        "searchQuery": "Sony WH-1000XM5 black",
+        "barcode": null,
+        "confidence": null,
+        "identificationMethod": "typed-user-input",
+        "userConfirmed": true
+      },
+      "offers": [],
+      "blocked": false,
+      "verified": false,
+      "userConfirmed": true,
+      "identitySource": "user-confirmed",
+      "visualVerification": false,
+      "provider": "user-input",
+      "imageAccepted": false,
+      "needsVision": false,
+      "needsRetailerVerification": true,
+      "code": "USER_CONFIRMED_PRODUCT",
+      "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+    }
+  },
+  "commerce": {
+    "seconds": 12.79,
+    "data": {
+      "ok": true,
+      "matched": true,
+      "exactMatchVerified": true,
+      "searchQuery": "Sony WH-1000XM5 black",
+      "bestProduct": {
+        "name": "Sony WH-1000XM5 Wireless Noise Cancelling Headphones Black"
+      },
+      "bestPrice": {
+        "product_name": "Sony WH-1000XM5 Wireless Noise Cancelling Headphones Black",
+        "product_url": "https://www.incredible.co.za/sony-wh-1000xm5-wireless-noise-cancelling-headphones-black",
+        "sku": "000000000010282383",
+        "comparisonAttributes": {
+          "size": "",
+          "color": ""
+        },
+        "comparisonAmbiguous": false,
+        "retailer": {
+          "name": "Incredible Connection"
+        },
+        "price": 5999,
+        "currency": "ZAR",
+        "availability": "in_stock",
+        "priceConditions": "Retailer marks this as a +more price. Check eligibility and sale terms on the product page. Sale ends Friday, 30 October 2026.",
+        "verified": true,
+        "exactProductMatch": true,
+        "sourcePageVerified": true,
+        "source": "Verified directly on exact retailer product page",
+        "matchScore": 91,
+        "stockScope": "online/general retailer availability only",
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "checkedAt": "2026-10-25T16:51:55.370Z",
+        "retailerDomain": "incredible.co.za",
+        "trustedRetailerDomain": true
+      },
+      "priceComparisonIssue": null,
+      "priceComparisonNote": "",
+      "offers": [
+        {
+          "product_name": "Sony WH-1000XM5 Wireless Noise Cancelling Headphones Black",
+          "product_url": "https://www.incredible.co.za/sony-wh-1000xm5-wireless-noise-cancelling-headphones-black",
+          "sku": "000000000010282383",
+          "comparisonAttributes": {
+            "size": "",
+            "color": ""
+          },
+          "comparisonAmbiguous": false,
+          "retailer": {
+            "name": "Incredible Connection"
+          },
+          "price": 5999,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "priceConditions": "Retailer marks this as a +more price. Check eligibility and sale terms on the product page. Sale ends Friday, 30 October 2026.",
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Verified directly on exact retailer product page",
+          "matchScore": 91,
+          "stockScope": "online/general retailer availability only",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-10-25T16:51:55.370Z",
+          "retailerDomain": "incredible.co.za",
+          "trustedRetailerDomain": true
+        },
+        {
+          "product_name": "Sony WH-1000XM5 Wireless Noise Cancelling Headphones Black",
+          "product_url": "https://www.hificorp.co.za/sony-wh-1000xm5-wireless-noise-cancelling-headphones-black",
+          "sku": "000000000010282383",
+          "comparisonAttributes": {
+            "size": "",
+            "color": ""
+          },
+          "comparisonAmbiguous": false,
+          "retailer": {
+            "name": "HiFi Corp"
+          },
+          "price": 5999,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "priceConditions": "Retailer marks this as a +more price. Check eligibility and sale terms on the product page. Sale ends Friday, 30 October 2026.",
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Verified directly on exact retailer product page",
+          "matchScore": 91,
+          "stockScope": "online/general retailer availability only",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-10-25T16:51:58.709Z",
+          "retailerDomain": "hificorp.co.za",
+          "trustedRetailerDomain": true
+        }
+      ],
+      "retailerStatus": [
+        {
+          "name": "Incredible Connection",
+          "searchUrl": "https://www.incredible.co.za/sony-wh-1000xm5-wireless-noise-cancelling-headphones-black",
+          "exactProductMatch": true,
+          "stockVerified": true,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "HiFi Corp",
+          "searchUrl": "https://www.hificorp.co.za/sony-wh-1000xm5-wireless-noise-cancelling-headphones-black",
+          "exactProductMatch": true,
+          "stockVerified": true,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Game",
+          "searchUrl": "https://www.game.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Makro",
+          "searchUrl": "https://www.makro.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Takealot",
+          "searchUrl": "https://www.takealot.com/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        }
+      ],
+      "webRetailers": [
+        {
+          "name": "Incredible Connection",
+          "searchUrl": "https://www.incredible.co.za/sony-wh-1000xm5-wireless-noise-cancelling-headphones-black",
+          "exactProductMatch": true,
+          "stockVerified": true,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "HiFi Corp",
+          "searchUrl": "https://www.hificorp.co.za/sony-wh-1000xm5-wireless-noise-cancelling-headphones-black",
+          "exactProductMatch": true,
+          "stockVerified": true,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Game",
+          "searchUrl": "https://www.game.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Makro",
+          "searchUrl": "https://www.makro.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        },
+        {
+          "name": "Takealot",
+          "searchUrl": "https://www.takealot.com/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false
+        }
+      ],
+      "verifiedOfferCount": 2,
+      "verifiedSellerCount": 2,
+      "inStockOfferCount": 2,
+      "priceVerifiedCount": 2,
+      "nearbyBranchStockVerified": false,
+      "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+      "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+      "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Sony%20WH-1000XM5%20black",
+      "checkedAt": "2026-10-25T16:51:58.709Z"
+    }
+  },
+  "captureNote": "HTTP status was not separately captured by this baseline script. Payloads and elapsed client times are recorded; no HTTP-status pass is inferred."
+}

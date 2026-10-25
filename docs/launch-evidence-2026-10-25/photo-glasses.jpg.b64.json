@@ -1,0 +1,100 @@
+{
+  "fixture": "glasses.jpg.b64",
+  "seconds": 17.13,
+  "status": 200,
+  "data": {
+    "identification": {
+      "name": "eyeglasses",
+      "brand": "",
+      "model": "",
+      "object": "eyeglasses",
+      "category": "eyewear",
+      "retailCategory": "eyewear",
+      "searchQuery": "eyeglasses",
+      "barcode": null,
+      "size": "",
+      "color": "",
+      "visibleText": [],
+      "confidence": 0.65,
+      "identificationMethod": "independent-vision-consensus",
+      "userConfirmed": false,
+      "labelCandidates": [],
+      "suggestedLabel": "",
+      "suggestedModels": [],
+      "identityScope": "product-family",
+      "requiresModelConfirmation": true,
+      "unverifiedDetails": [
+        "exact model",
+        "variant",
+        "specifications"
+      ],
+      "features": []
+    },
+    "offers": [],
+    "blocked": false,
+    "verified": false,
+    "userConfirmed": false,
+    "identitySource": "cloudflare-consensus",
+    "visionDiagnostics": [
+      {
+        "provider": "cloudflare-gemma",
+        "code": "IDENTIFIED",
+        "providerStatus": null,
+        "providerErrorCode": null,
+        "identityClaim": {
+          "name": "eyeglasses",
+          "brand": "",
+          "model": "",
+          "object": "eyeglasses",
+          "size": "",
+          "color": "clear",
+          "visibleText": []
+        },
+        "errorType": null
+      },
+      {
+        "provider": "google-gemini",
+        "code": "GEMINI_SERVICE_FAILED",
+        "providerStatus": 503,
+        "providerErrorCode": null,
+        "identityClaim": null,
+        "errorType": null
+      },
+      {
+        "provider": "cloudflare-workers-ai",
+        "code": "IDENTIFIED",
+        "providerStatus": null,
+        "providerErrorCode": null,
+        "identityClaim": {
+          "name": "LENS",
+          "brand": "OAKLEY",
+          "model": "PROFIT",
+          "object": "GLASSES",
+          "size": "MEDIUM",
+          "color": "TRUE",
+          "visibleText": [
+            "OAKLEY",
+            "PROFIT"
+          ]
+        },
+        "errorType": null
+      },
+      {
+        "provider": "huggingface",
+        "code": "HF_INFERENCE_FAILED",
+        "providerStatus": 402,
+        "providerErrorCode": null,
+        "identityClaim": null,
+        "errorType": "credits"
+      }
+    ],
+    "visualVerification": true,
+    "provider": "cloudflare-consensus",
+    "imageAccepted": true,
+    "needsVision": false,
+    "needsRetailerVerification": true,
+    "confidence": 0.65,
+    "code": "PHOTO_PARTIALLY_IDENTIFIED",
+    "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+  }
+}
