@@ -1,0 +1,69 @@
+{
+  "commit": "cc140f2e39d675a2aa65f8d317b0b445c8e1b697",
+  "checkedAt": "2026-10-25T17:21:41.000Z",
+  "workflows": [
+    {
+      "id": 40215699186,
+      "name": "FindIt smoke checks",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/40215699186"
+    },
+    {
+      "id": 40215699134,
+      "name": "FindIt regression checks",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/40215699134"
+    },
+    {
+      "id": 40215699145,
+      "name": "pages build and deployment",
+      "status": "completed",
+      "conclusion": "cancelled",
+      "url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/40215699145"
+    },
+    {
+      "id": 40215699148,
+      "name": "Deploy FindIt to Cloudflare",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/40215699148"
+    },
+    {
+      "id": 40215699177,
+      "name": "FindIt Dashboard Commerce Regression",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/40215699177"
+    },
+    {
+      "id": 40215699174,
+      "name": "FindIt Final Production Audit",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/40215699174"
+    },
+    {
+      "id": 40215699163,
+      "name": "FindIt Release Smoke",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/40215699163"
+    },
+    {
+      "id": 40215699182,
+      "name": "FindIt Production Smoke Test",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/40215699182"
+    },
+    {
+      "id": 40215699141,
+      "name": "FindIt Interaction Freeze Regression",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/40215699141"
+    }
+  ]
+}
