@@ -1,6 +1,7 @@
 /* Same-origin Leaflet assets; failed loads can be retried during the same visit. */
 (() => {
   let pending;
+  const mapLayers = new WeakMap();
   const version = '1.9.4';
   function asset(tag, attributes) {
     return new Promise((resolve, reject) => {
@@ -45,13 +46,16 @@
     layer.on('tileerror', () => { errors++; failed(); });
     layer.on('load', () => { clearTimeout(timer); if (errors) failed(); else notify(''); });
     map.on('unload', () => clearTimeout(timer));
+    mapLayers.set(map, layer);
     layer.addTo(map);
     return layer;
   };
+  window.finditRetryMapTiles = map => map && mapLayers.get(map)?.redraw();
   document.addEventListener('click', event => {
     if (!event.target.closest?.('#mapViewBtn,[data-premium-action="map"],[data-pw="map"],a[href="#nearbyPanel"]')) return;
     window.finditLoadLeaflet().then(() => {
       window.ensureMap?.(); window.updateMap?.();
+      window.finditRetryMapTiles(window.finditState?.map);
     }).catch(() => {
       const host = document.getElementById('map');
       if (host) host.textContent = 'Map unavailable. Try opening it again. Nearby store details and manual coordinates remain available.';

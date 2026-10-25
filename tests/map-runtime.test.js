@@ -30,11 +30,13 @@ test('hung downloads time out and permit a later attempt',async()=>{
 });
 test('tile errors and stalls report uncertainty; recovered imagery clears it; teardown cancels timer',()=>{
  const {window,timers}=setup(),events={},mapEvents={},messages=[];
- const layer={on(n,fn){events[n]=fn;return this},addTo(){return this}};
- window.finditAddMapTiles({tileLayer(){return layer}},{on(n,fn){mapEvents[n]=fn}},s=>messages.push(s));
+ let redraws=0;const layer={on(n,fn){events[n]=fn;return this},addTo(){return this},redraw(){redraws++}};
+ const map={on(n,fn){mapEvents[n]=fn}};
+ window.finditAddMapTiles({tileLayer(){return layer}},map,s=>messages.push(s));
  events.loading();events.tileerror();events.load();assert.match(messages.at(-1),/imagery could not load/);
  events.loading();events.load();assert.equal(messages.at(-1),'');
  events.loading();for(const fn of [...timers.values()])fn();assert.match(messages.at(-1),/coordinates/);
+ window.finditRetryMapTiles(map);assert.equal(redraws,1);
  mapEvents.unload();assert.equal(timers.size,0);
 });
 test('vendored Leaflet includes license and every CSS/marker image dependency',()=>{
