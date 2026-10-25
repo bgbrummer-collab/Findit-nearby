@@ -25,4 +25,12 @@ for(const name of ['Bosch GSB 18V-50 with batteries and charger','Bosch Professi
 for(const name of ['Samsung phone charger','Bosch USB phone charger'])test('a charger without tool identity retains electronics routing: '+name,()=>{
  assert.equal(productFamily(ident({name})), 'electronics');
 });
+test('hardware priority does not turn cosmetic face paint into a hardware search',async t=>{
+ const name='Cosmetic face paint';
+ t.mock.method(globalThis,'fetch',async()=>new Response(JSON.stringify({elements:[]})));
+ const response=await worker.fetch(new Request('https://findit.test/api/nearby',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({lat:-25.78,lon:28.27,identification:{name}})}),{});
+ const data=await response.json();
+ assert.ok(data.searchedShopTags.includes('beauty'));
+ assert.ok(!data.searchedShopTags.includes('hardware'));
+});
 test('a hardware package charger does not route its drill to electronics stores',async t=>{let data;await handler({method:'POST',body:{name,searchQuery:name,requiresModelConfirmation:true}},{setHeader(){},status(){return this},json(d){data=d;return this}});assert.ok(data.retailerStatus.some(s=>s.name==='Builders'));assert.ok(!data.retailerStatus.some(s=>s.name==='Incredible Connection'));const visited=[];t.mock.method(globalThis,'fetch',async url=>{visited.push(String(url));return new Response('<html></html>')});await nativeRetailerUrls({name,searchQuery:name});assert.ok(visited.some(u=>new URL(u).hostname==='www.tmbsupplies.co.za'));assert.ok(!visited.some(u=>new URL(u).hostname==='www.incredible.co.za'));});
