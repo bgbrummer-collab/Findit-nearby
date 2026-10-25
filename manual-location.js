@@ -10,6 +10,7 @@
       <p>Select your search area on the map, or enter its latitude and longitude. Distances use this point. Your selection lasts for this visit.</p>
       <button type="button" id="finditLocationMapButton">Open location map</button>
       <div id="finditLocationMap" hidden style="height:260px;width:100%;margin:10px 0;isolation:isolate"></div>
+      <p id="finditMapStatus" role="status" aria-live="polite"></p>
       <form id="finditLocationForm" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
       <label style="flex:1;min-width:120px">Latitude<input id="finditManualLat" type="number" step="any" min="-90" max="90" required placeholder="e.g. -25.75" style="width:100%;box-sizing:border-box"></label>
       <label style="flex:1;min-width:120px">Longitude<input id="finditManualLon" type="number" step="any" min="-180" max="180" required placeholder="e.g. 28.23" style="width:100%;box-sizing:border-box"></label>
@@ -18,7 +19,7 @@
     foot.appendChild(details);
     const lat = details.querySelector('#finditManualLat'), lon = details.querySelector('#finditManualLon');
     const status = details.querySelector('#finditManualLocationStatus');
-    let map, marker;
+    let map, marker, tiles;
     details.querySelector('#finditLocationMapButton').onclick = async () => {
       status.textContent = 'Loading location map…';
       try {
@@ -27,7 +28,7 @@
         if (!map) {
           const coords = window.finditState?.coords;
           map = L.map(host).setView(coords ? [coords.lat, coords.lon] : [-29, 25], coords ? 12 : 5);
-          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:19, attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
+          tiles = window.finditAddMapTiles(L, map, message => { details.querySelector('#finditMapStatus').textContent = message; });
           map.on('click', e => {
             lat.value = e.latlng.lat.toFixed(6); lon.value = e.latlng.lng.toFixed(6);
             if (marker) marker.remove();
@@ -36,6 +37,7 @@
           });
         }
         map.invalidateSize();
+        tiles?.redraw();
         status.textContent = 'Zoom to your area and select a point. You can also enter coordinates below.';
       } catch { status.textContent = 'The map could not load. You can still enter coordinates below.'; }
     };
