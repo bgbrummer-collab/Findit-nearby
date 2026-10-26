@@ -11,9 +11,9 @@ try{
    if(path==='/api/search'){
     const raw=route.request().postData()||'';
     if(raw.startsWith('{')){const input=JSON.parse(raw);confirmed.push(input.query);body={identification:{name:input.query,searchQuery:input.query,object:'conditioner',userConfirmed:true}};}
-    else body={identification:{name:'Marc Anthony conditioner',brand:'Marc Anthony',object:'conditioner',model:'',requiresModelConfirmation:true,suggestedLabel:label},code:'PHOTO_PARTIALLY_IDENTIFIED',message:'Confirm the exact label.'};
+    else body={identification:{name:'Marc Anthony conditioner',brand:'Marc Anthony',object:'conditioner',color:'Yellow packaging',model:'',requiresModelConfirmation:true,suggestedLabel:label},code:'PHOTO_PARTIALLY_IDENTIFIED',message:'Confirm the exact label.'};
    }
-   if(candidateMode&&path==='/api/product-insights'&&JSON.parse(route.request().postData()||'{}').identification?.requiresModelConfirmation)body={researched:false,possibleProducts:[{name:label+' 250ml',productUrl:'https://clicks.co.za/product/p/123',photoMatchConfirmed:false,whatItDoes:'Helps detangle curly hair.',pros:['Published moisturising formula.'],price:230,currency:'ZAR'}]};
+   if(candidateMode&&path==='/api/product-insights'&&JSON.parse(route.request().postData()||'{}').identification?.requiresModelConfirmation)body={researched:false,possibleProducts:[{name:label+' 250ml',productUrl:'https://clicks.co.za/product/p/123',photoMatchConfirmed:false,quantityNote:'Confirm the pack size; the printed quantity is not verified.',whatItDoes:'Helps detangle curly hair.',pros:['Published moisturising formula.'],price:230,currency:'ZAR'}]};
    await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(body)});
   });
   await page.goto(base,{waitUntil:'domcontentloaded',timeout:60000});
@@ -26,6 +26,8 @@ try{
   const text=await page.locator('#fxInformationBody').innerText();
   if((!candidateMode&&!text.includes('Possible label reading:'))||!text.includes(label)||!text.includes('not confirmed'))throw Error('Suggested label was not explicitly marked uncertain');
   if(!text.includes('What this product type does')||!text.includes('General product-type overview'))throw Error('Partial identification lost its truthful product-type information');
+  if(!text.includes('Identity and evidence')||!text.includes('Yellow packaging')||!text.includes('Photograph the front label'))throw Error('Partial information lost observed details or useful label checks');
+  if(candidateMode&&!text.includes('Confirm the pack size;'))throw Error('Unconfirmed pack-size caveat missing');
   if(confirmed.length)throw Error('An uncertain reading was submitted without user confirmation');
   if(candidateMode){
    if(!text.includes('Helps detangle curly hair.')||!text.includes('match to your photo needs your confirmation')||!text.includes('Listed online price:'))throw Error('Candidate facts or uncertainty labels missing');
