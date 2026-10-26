@@ -1,0 +1,248 @@
+0[0m
+2026-10-26T09:53:16.1018543Z shell: bash --noprofile --norc -e -o pipefail {0}
+2026-10-26T09:53:16.1018853Z ##[endgroup]
+2026-10-26T09:53:36.1670464Z ##[group]Run cat >trust-qa.mjs <<'NODE'
+2026-10-26T09:53:36.1670910Z [36;1mcat >trust-qa.mjs <<'NODE'[0m
+2026-10-26T09:53:36.1671219Z [36;1mimport {chromium} from 'playwright';[0m
+2026-10-26T09:53:36.1671532Z [36;1mimport fs from 'node:fs';[0m
+2026-10-26T09:53:36.1671909Z [36;1mconst base='https://findit-nearby.bgbrummer.workers.dev/';[0m
+2026-10-26T09:53:36.1672302Z [36;1mconst products=[[0m
+2026-10-26T09:53:36.1672875Z [36;1m  {label:'Nike Air Force 1 Low',a:'NIKE AIR FORCE 1 LOW',b:'WHITE BLUE SNEAKER',expect:/Nike|Takealot|Makro|Bash|Sportscene|Totalsports/i},[0m
+2026-10-26T09:53:36.1673856Z [36;1m  {label:'Twinsaver Twin Ply 18 Rolls',a:'TWINSAVER TWIN PLY 18 ROLLS',b:'TOILET PAPER',expect:/Checkers|Pick n Pay|Woolworths|Shoprite|Takealot|Makro/i},[0m
+2026-10-26T09:53:36.1675227Z [36;1m  {label:'Sony WH-1000XM5',a:'SONY WH-1000XM5',b:'HEADPHONES',expect:/Incredible|Game|Takealot|Makro|HiFi/i},[0m
+2026-10-26T09:53:36.1676015Z [36;1m  {label:'Bosch cordless drill',a:'BOSCH CORDLESS DRILL',b:'POWER TOOL',expect:/Builders|Takealot|Makro|Leroy/i}[0m
+2026-10-26T09:53:36.1676521Z [36;1m];[0m
+2026-10-26T09:53:36.1676785Z [36;1mconst browser=await chromium.launch({headless:true});[0m
+2026-10-26T09:53:36.1677639Z [36;1mconst ctx=await browser.newContext({viewport:{width:1280,height:900},geolocation:{latitude:-25.7479,longitude:28.2293},permissions:['geolocation','clipboard-read','clipboard-write']});[0m
+2026-10-26T09:53:36.1678551Z [36;1mconst checks=[];const add=(label,ok,detail='')=>checks.push({label,ok,detail});[0m
+2026-10-26T09:53:36.1678996Z [36;1mfor(let n=0;n<products.length;n++){[0m
+2026-10-26T09:53:36.1679504Z [36;1m  const x=products[n],p=await ctx.newPage(),errors=[];p.on('pageerror',e=>errors.push(String(e)));[0m
+2026-10-26T09:53:36.1679973Z [36;1m  try{[0m
+2026-10-26T09:53:36.1680391Z [36;1m    await p.goto(base,{waitUntil:'domcontentloaded',timeout:35000});await p.waitForTimeout(1500);[0m
+2026-10-26T09:53:36.1680972Z [36;1m    const img=`/tmp/trust-${n}.png`;const g=await ctx.newPage();[0m
+2026-10-26T09:53:36.1682677Z [36;1m    await g.setContent(`<canvas id=c width=1200 height=800></canvas><script>const c=document.querySelector('#c'),z=c.getContext('2d');z.fillStyle='#fff';z.fillRect(0,0,1200,800);z.fillStyle='#111';z.font='bold 70px Arial';z.fillText(${JSON.stringify(x.a)},70,260);z.font='bold 52px Arial';z.fillText(${JSON.stringify(x.b)},70,370);z.strokeStyle='#222';z.lineWidth=8;z.strokeRect(50,120,1100,390)</script>`);await g.locator('#c').screenshot({path:img});await g.close();[0m
+2026-10-26T09:53:36.1685140Z [36;1m    await p.locator('#fxVisiblePhotoPicker').setInputFiles(img);await p.locator('#finditExactShell [data-location-direct]').click();await p.waitForTimeout(500);await p.locator('#fxSearchNow').click();[0m
+2026-10-26T09:53:36.1686444Z [36;1m    await p.waitForFunction(()=>{const s=window.finditState||{};return !s.photoSearchPending&&!!s.result?.identification;},null,{timeout:55000});await p.waitForTimeout(6500);[0m
+2026-10-26T09:53:36.1687295Z [36;1m    const result=(await p.locator('#resultName').innerText()).trim();[0m
+2026-10-26T09:53:36.1687795Z [36;1m    const seller=await p.locator('#fxTopStores').innerText().catch(()=> '');[0m
+2026-10-26T09:53:36.1688313Z [36;1m    const nearby=await p.locator('#nearbyPanel').innerText().catch(()=> '');[0m
+2026-10-26T09:53:36.1688872Z [36;1m    add(`${x.label}: identification returned`,!!result&&!/^Item$/i.test(result),result);[0m
+2026-10-26T09:53:36.1689484Z [36;1m    add(`${x.label}: exact-seller section exists`,seller.length>15,seller.slice(0,150));[0m
+2026-10-26T09:53:36.1690124Z [36;1m    add(`${x.label}: relevant retailer search path exists`,x.expect.test(seller),seller.slice(-250));[0m
+2026-10-26T09:53:36.1690814Z [36;1m    add(`${x.label}: duplicate stat strip removed`,await p.locator('#finditV3Strip').count()===0);[0m
+2026-10-26T09:53:36.1691765Z [36;1m    add(`${x.label}: duplicate seller stats removed`,await p.locator('#exactSellerResults .premium-insights').count()===0);[0m
+2026-10-26T09:53:36.1692712Z [36;1m    const unsafeCards=await p.locator('#nearbyStores [data-exact-branch="0"],#nearbyStores .store-card:not([data-exact-branch="1"])').count();[0m
+2026-10-26T09:53:36.1693862Z [36;1m    const undisclosed=await p.locator('#nearbyStores .store-card:not([data-exact-branch="1"])').evaluateAll(cards=>cards.filter(c=>!/stock not verified|stock unknown/i.test(c.innerText)).length);[0m
+2026-10-26T09:53:36.1695286Z [36;1m    add(`${x.label}: unverified branches disclose unknown stock`,undisclosed===0,`unverifiedCards=${unsafeCards}, undisclosed=${undisclosed}`);[0m
+2026-10-26T09:53:36.1696380Z [36;1m    const unsafeDir=await p.locator('#nearbyStores [data-exact-branch="0"] a:has-text("Directions"),#nearbyStores [data-exact-branch="0"] button:has-text("Directions")').count();[0m
+2026-10-26T09:53:36.1697459Z [36;1m    add(`${x.label}: no unsafe Directions`,unsafeDir===0,`unsafeDirections=${unsafeDir}`);[0m
+2026-10-26T09:53:36.1698211Z [36;1m    const disabledClosest=await p.locator('#finditV3Actions [aria-disabled="true"]:has-text("Closest directions")').count();[0m
+2026-10-26T09:53:36.1698930Z [36;1m    add(`${x.label}: no useless disabled Closest directions`,disabledClosest===0);[0m
+2026-10-26T09:53:36.1699740Z [36;1m    const offers=await p.locator('#fxTopStores .fx-retailer-candidate').evaluateAll(cards=>cards.filter(c=>!/google\.com\/search/.test(c.href)) .length);[0m
+2026-10-26T09:53:36.1700406Z [36;1m    if(offers){[0m
+2026-10-26T09:53:36.1701098Z [36;1m      add(`${x.label}: verified listings disclose branch stock`,/Verified product listings/i.test(seller)&&/Branch stock (not verified|verified)/i.test(seller),seller.slice(0,250));[0m
+2026-10-26T09:53:36.1702202Z [36;1m    }else add(`${x.label}: honest no-match fallback shown`,/No exact listing verified yet/i.test(seller)&&/Price and stock not verified/i.test(seller));[0m
+2026-10-26T09:53:36.1703585Z [36;1m    const heights=[];for(let k=0;k<6;k++){await p.evaluate(k=>window.scrollTo(0,(document.documentElement.scrollHeight-window.innerHeight)*(k/5)),k);await p.waitForTimeout(250);heights.push(await p.evaluate(()=>document.documentElement.scrollHeight));}[0m
+2026-10-26T09:53:36.1705138Z [36;1m    add(`${x.label}: scroll layout stable`,Math.max(...heights)-Math.min(...heights)<80,`heights=${heights.join(',')}`);[0m
+2026-10-26T09:53:36.1705855Z [36;1m    add(`${x.label}: no page JavaScript errors`,errors.length===0,errors.join(' | ').slice(0,300));[0m
+2026-10-26T09:53:36.1706830Z [36;1m    const copy=p.locator('[data-fi3="copy"]');if(await copy.count()){await copy.click();await p.waitForTimeout(150);add(`${x.label}: Copy product name works`,/Copied/i.test(await copy.innerText()));}[0m
+2026-10-26T09:53:36.1707755Z [36;1m  }catch(e){add(`${x.label}: flow completed`,false,e.message+' | '+errors.join(' | '));}[0m
+2026-10-26T09:53:36.1708186Z [36;1m  await p.close();[0m
+2026-10-26T09:53:36.1708414Z [36;1m}[0m
+2026-10-26T09:53:36.1708613Z [36;1mawait browser.close();[0m
+2026-10-26T09:53:36.1709709Z [36;1mconst failed=checks.filter(c=>!c.ok);const out=['# FindIt trust-first production QA','',`Generated: ${new Date().toISOString()}`,'',...checks.map(c=>`${c.ok?'✅':'❌'} ${c.label}${c.detail?' — '+c.detail:''}`),'',`Passed: ${checks.length-failed.length}/${checks.length}`,`Failed: ${failed.length}`].join('\n');[0m
+2026-10-26T09:53:36.1711122Z [36;1mfs.mkdirSync('qa-results',{recursive:true});fs.writeFileSync('qa-results/trust-results-latest.md',out);console.log(out);[0m
+2026-10-26T09:53:36.1711727Z [36;1mif(failed.length)process.exitCode=1;[0m
+2026-10-26T09:53:36.1712036Z [36;1mNODE[0m
+2026-10-26T09:53:36.1712240Z [36;1mnode trust-qa.mjs[0m
+2026-10-26T09:53:36.1712773Z shell: bash --noprofile --norc -e -o pipefail {0}
+2026-10-26T09:53:36.1713079Z ##[endgroup]
+2026-10-26T09:55:49.5305814Z # FindIt trust-first production QA
+2026-10-26T09:55:49.5306280Z 
+2026-10-26T09:55:49.5307351Z Generated: 2026-10-26T09:55:49.529Z
+2026-10-26T09:55:49.5322852Z 
+2026-10-26T09:55:49.5325102Z ✅ Nike Air Force 1 Low: identification returned — NIKE AIR FORCE 1 LOW shoes
+2026-10-26T09:55:49.5326575Z ✅ Nike Air Force 1 Low: exact-seller section exists — No exact listing verified yet. Check relevant retailer searches:
+2026-10-26T09:55:49.5327393Z 
+2026-10-26T09:55:49.5327599Z Nike
+2026-10-26T09:55:49.5328034Z Price and stock not verified
+2026-10-26T09:55:49.5328531Z Sportscene
+2026-10-26T09:55:49.5329100Z Price and stock not verified
+2026-10-26T09:55:49.5329580Z Totalsport
+2026-10-26T09:55:49.5330873Z ✅ Nike Air Force 1 Low: relevant retailer search path exists — exact listing verified yet. Check relevant retailer searches:
+2026-10-26T09:55:49.5332225Z 
+2026-10-26T09:55:49.5332441Z Nike
+2026-10-26T09:55:49.5332926Z Price and stock not verified
+2026-10-26T09:55:49.5333437Z Sportscene
+2026-10-26T09:55:49.5333888Z Price and stock not verified
+2026-10-26T09:55:49.5334595Z Totalsports
+2026-10-26T09:55:49.5335162Z Price and stock not verified
+2026-10-26T09:55:49.5335693Z JD Sports
+2026-10-26T09:55:49.5336113Z Price and stock not verified
+2026-10-26T09:55:49.5336687Z Bash
+2026-10-26T09:55:49.5336983Z Price and stock not verified
+2026-10-26T09:55:49.5337903Z ✅ Nike Air Force 1 Low: duplicate stat strip removed
+2026-10-26T09:55:49.5338988Z ✅ Nike Air Force 1 Low: duplicate seller stats removed
+2026-10-26T09:55:49.5340563Z ✅ Nike Air Force 1 Low: unverified branches disclose unknown stock — unverifiedCards=0, undisclosed=0
+2026-10-26T09:55:49.5341740Z ✅ Nike Air Force 1 Low: no unsafe Directions — unsafeDirections=0
+2026-10-26T09:55:49.5342691Z ✅ Nike Air Force 1 Low: no useless disabled Closest directions
+2026-10-26T09:55:49.5343679Z ✅ Nike Air Force 1 Low: honest no-match fallback shown
+2026-10-26T09:55:49.5345215Z ✅ Nike Air Force 1 Low: scroll layout stable — heights=2661,2661,2661,2661,2661,2661
+2026-10-26T09:55:49.5346308Z ✅ Nike Air Force 1 Low: no page JavaScript errors
+2026-10-26T09:55:49.5347620Z ✅ Twinsaver Twin Ply 18 Rolls: identification returned — TWINSAVER toilet paper
+2026-10-26T09:55:49.5349614Z ✅ Twinsaver Twin Ply 18 Rolls: exact-seller section exists — No exact listing verified yet. Check relevant retailer searches:
+2026-10-26T09:55:49.5350614Z 
+2026-10-26T09:55:49.5350815Z Checkers
+2026-10-26T09:55:49.5351274Z Price and stock not verified
+2026-10-26T09:55:49.5351609Z Pick n Pay
+2026-10-26T09:55:49.5352049Z Price and stock not verified
+2026-10-26T09:55:49.5352530Z Shopri
+2026-10-26T09:55:49.5354021Z ✅ Twinsaver Twin Ply 18 Rolls: relevant retailer search path exists — ct listing verified yet. Check relevant retailer searches:
+2026-10-26T09:55:49.5355257Z 
+2026-10-26T09:55:49.5355483Z Checkers
+2026-10-26T09:55:49.5355906Z Price and stock not verified
+2026-10-26T09:55:49.5356418Z Pick n Pay
+2026-10-26T09:55:49.5356881Z Price and stock not verified
+2026-10-26T09:55:49.5357265Z Shoprite
+2026-10-26T09:55:49.5357531Z Price and stock not verified
+2026-10-26T09:55:49.5357957Z Woolworths
+2026-10-26T09:55:49.5358344Z Price and stock not verified
+2026-10-26T09:55:49.5358761Z Makro
+2026-10-26T09:55:49.5359116Z Price and stock not verified
+2026-10-26T09:55:49.5359930Z ✅ Twinsaver Twin Ply 18 Rolls: duplicate stat strip removed
+2026-10-26T09:55:49.5360948Z ✅ Twinsaver Twin Ply 18 Rolls: duplicate seller stats removed
+2026-10-26T09:55:49.5361969Z ✅ Twinsaver Twin Ply 18 Rolls: unverified branches disclose unknown stock — unverifiedCards=0, undisclosed=0
+2026-10-26T09:55:49.5362927Z ✅ Twinsaver Twin Ply 18 Rolls: no unsafe Directions — unsafeDirections=0
+2026-10-26T09:55:49.5363930Z ✅ Twinsaver Twin Ply 18 Rolls: no useless disabled Closest directions
+2026-10-26T09:55:49.5365101Z ✅ Twinsaver Twin Ply 18 Rolls: honest no-match fallback shown
+2026-10-26T09:55:49.5366485Z ✅ Twinsaver Twin Ply 18 Rolls: scroll layout stable — heights=2788,2788,2788,2788,2788,2788
+2026-10-26T09:55:49.5367697Z ✅ Twinsaver Twin Ply 18 Rolls: no page JavaScript errors
+2026-10-26T09:55:49.5368792Z ✅ Sony WH-1000XM5: identification returned — SONY WH-1000XM5 HEADPHONES
+2026-10-26T09:55:49.5369957Z ✅ Sony WH-1000XM5: exact-seller section exists — IN
+2026-10-26T09:55:49.5370666Z INCREDIBLE BROOKLYN
+2026-10-26T09:55:49.5370930Z Nearby
+2026-10-26T09:55:49.5371141Z 2.8 km
+2026-10-26T09:55:49.5371350Z HI
+2026-10-26T09:55:49.5371565Z HiFiCorp Menlyn
+2026-10-26T09:55:49.5371795Z Nearby
+2026-10-26T09:55:49.5371998Z 5.8 km
+2026-10-26T09:55:49.5372191Z IN
+2026-10-26T09:55:49.5372413Z INCREDIBLE MENLYN
+2026-10-26T09:55:49.5372759Z Nearby
+2026-10-26T09:55:49.5372995Z 6.1 km
+2026-10-26T09:55:49.5373195Z IN
+2026-10-26T09:55:49.5373443Z INCREDIBLE MENLYN ON MAINE
+2026-10-26T09:55:49.5373712Z Nearby
+2026-10-26T09:55:49.5373909Z 6.6 km
+2026-10-26T09:55:49.5375100Z ✅ Sony WH-1000XM5: relevant retailer search path exists — IN
+2026-10-26T09:55:49.5375720Z INCREDIBLE BROOKLYN
+2026-10-26T09:55:49.5376047Z Nearby
+2026-10-26T09:55:49.5376250Z 2.8 km
+2026-10-26T09:55:49.5376446Z HI
+2026-10-26T09:55:49.5376658Z HiFiCorp Menlyn
+2026-10-26T09:55:49.5376892Z Nearby
+2026-10-26T09:55:49.5377121Z 5.8 km
+2026-10-26T09:55:49.5377316Z IN
+2026-10-26T09:55:49.5377562Z INCREDIBLE MENLYN
+2026-10-26T09:55:49.5377798Z Nearby
+2026-10-26T09:55:49.5377990Z 6.1 km
+2026-10-26T09:55:49.5378182Z IN
+2026-10-26T09:55:49.5378428Z INCREDIBLE MENLYN ON MAINE
+2026-10-26T09:55:49.5378694Z Nearby
+2026-10-26T09:55:49.5378885Z 6.6 km
+2026-10-26T09:55:49.5379416Z ✅ Sony WH-1000XM5: duplicate stat strip removed
+2026-10-26T09:55:49.5379935Z ✅ Sony WH-1000XM5: duplicate seller stats removed
+2026-10-26T09:55:49.5380793Z ✅ Sony WH-1000XM5: unverified branches disclose unknown stock — unverifiedCards=7, undisclosed=0
+2026-10-26T09:55:49.5381600Z ✅ Sony WH-1000XM5: no unsafe Directions — unsafeDirections=0
+2026-10-26T09:55:49.5382269Z ✅ Sony WH-1000XM5: no useless disabled Closest directions
+2026-10-26T09:55:49.5382840Z ❌ Sony WH-1000XM5: honest no-match fallback shown
+2026-10-26T09:55:49.5383498Z ✅ Sony WH-1000XM5: scroll layout stable — heights=3855,3855,3855,3855,3855,3855
+2026-10-26T09:55:49.5384328Z ✅ Sony WH-1000XM5: no page JavaScript errors
+2026-10-26T09:55:49.5384972Z ✅ Bosch cordless drill: identification returned — Bosch drill
+2026-10-26T09:55:49.5385821Z ✅ Bosch cordless drill: exact-seller section exists — Builders Express Cherry Lane
+2026-10-26T09:55:49.5386317Z Nearby
+2026-10-26T09:55:49.5386522Z 2.4 km
+2026-10-26T09:55:49.5386775Z Builders Express Lynnwood
+2026-10-26T09:55:49.5387033Z Nearby
+2026-10-26T09:55:49.5387229Z 7.0 km
+2026-10-26T09:55:49.5387513Z Builders Warehouse Erasmus Prk
+2026-10-26T09:55:49.5387944Z Nearby
+2026-10-26T09:55:49.5388391Z 7.8 km
+2026-10-26T09:55:49.5388679Z Builders Warehouse Zam
+2026-10-26T09:55:49.5389659Z ✅ Bosch cordless drill: relevant retailer search path exists — Builders Express Cherry Lane
+2026-10-26T09:55:49.5390504Z Nearby
+2026-10-26T09:55:49.5390830Z 2.4 km
+2026-10-26T09:55:49.5391191Z Builders Express Lynnwood
+2026-10-26T09:55:49.5391586Z Nearby
+2026-10-26T09:55:49.5391881Z 7.0 km
+2026-10-26T09:55:49.5392309Z Builders Warehouse Erasmus Prk
+2026-10-26T09:55:49.5392723Z Nearby
+2026-10-26T09:55:49.5393016Z 7.8 km
+2026-10-26T09:55:49.5393385Z Builders Warehouse Zambezi
+2026-10-26T09:55:49.5393794Z Nearby
+2026-10-26T09:55:49.5394089Z 8.4 km
+2026-10-26T09:55:49.5394911Z ✅ Bosch cordless drill: duplicate stat strip removed
+2026-10-26T09:55:49.5395792Z ✅ Bosch cordless drill: duplicate seller stats removed
+2026-10-26T09:55:49.5397151Z ✅ Bosch cordless drill: unverified branches disclose unknown stock — unverifiedCards=5, undisclosed=0
+2026-10-26T09:55:49.5398502Z ✅ Bosch cordless drill: no unsafe Directions — unsafeDirections=0
+2026-10-26T09:55:49.5399534Z ✅ Bosch cordless drill: no useless disabled Closest directions
+2026-10-26T09:55:49.5400480Z ❌ Bosch cordless drill: honest no-match fallback shown
+2026-10-26T09:55:49.5401627Z ✅ Bosch cordless drill: scroll layout stable — heights=3572,3572,3572,3572,3572,3572
+2026-10-26T09:55:49.5402678Z ✅ Bosch cordless drill: no page JavaScript errors
+2026-10-26T09:55:49.5403093Z 
+2026-10-26T09:55:49.5403250Z Passed: 42/44
+2026-10-26T09:55:49.5403595Z Failed: 2
+2026-10-26T09:55:49.5473062Z ##[error]Process completed with exit code 1.
+2026-10-26T09:55:49.5554003Z ##[group]Run actions/upload-artifact@v4
+2026-10-26T09:55:49.5554698Z with:
+2026-10-26T09:55:49.5554925Z   name: trust-results-qa-report
+2026-10-26T09:55:49.5555192Z   path: qa-results/
+2026-10-26T09:55:49.5555413Z   if-no-files-found: warn
+2026-10-26T09:55:49.5555647Z   compression-level: 6
+2026-10-26T09:55:49.5555865Z   overwrite: false
+2026-10-26T09:55:49.5556081Z   include-hidden-files: false
+2026-10-26T09:55:49.5556321Z ##[endgroup]
+2026-10-26T09:55:49.5559979Z ##[command]/usr/bin/docker exec  2330bd2dcb585db146715a2cd53f40c9cbca6a47fdecd7a224b55c0854f41f06 sh -c "cat /etc/*release | grep ^ID"
+2026-10-26T09:55:49.8362520Z (node:448) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-26T09:55:49.8363728Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-26T09:55:49.8457939Z With the provided path, there will be 5 files uploaded
+2026-10-26T09:55:49.8458953Z Artifact name is valid!
+2026-10-26T09:55:49.8459489Z Root directory input is valid!
+2026-10-26T09:55:50.0293884Z Beginning upload of artifact content to blob storage
+2026-10-26T09:55:50.0589443Z (node:448) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-26T09:55:50.1040622Z Uploaded bytes 5748
+2026-10-26T09:55:50.1276056Z Finished uploading artifact content to blob storage!
+2026-10-26T09:55:50.1277454Z SHA256 digest of uploaded artifact zip is 3522e85244d05253bb138c3801212f32dac78933776cb574bcac02451ed7e61d
+2026-10-26T09:55:50.1278567Z Finalizing artifact upload
+2026-10-26T09:55:50.5916577Z Artifact trust-results-qa-report.zip successfully finalized. Artifact ID 12640404705
+2026-10-26T09:55:50.5917801Z Artifact trust-results-qa-report has been successfully uploaded! Final size is 5748 bytes. Artifact ID is 12640404705
+2026-10-26T09:55:50.5925659Z Artifact download URL: https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/40302965550/artifacts/12640404705
+2026-10-26T09:55:50.6092363Z ##[group]Run if [ -f qa-results/trust-results-latest.md ]; then
+2026-10-26T09:55:50.6092904Z [36;1mif [ -f qa-results/trust-results-latest.md ]; then[0m
+2026-10-26T09:55:50.6093569Z [36;1m  cat qa-results/trust-results-latest.md >> "$GITHUB_STEP_SUMMARY"[0m
+2026-10-26T09:55:50.6093961Z [36;1mfi[0m
+2026-10-26T09:55:50.6094879Z shell: bash --noprofile --norc -e -o pipefail {0}
+2026-10-26T09:55:50.6095214Z ##[endgroup]
+2026-10-26T09:55:50.6834778Z Post job cleanup.
+2026-10-26T09:55:50.6843023Z ##[command]/usr/bin/docker exec  2330bd2dcb585db146715a2cd53f40c9cbca6a47fdecd7a224b55c0854f41f06 sh -c "cat /etc/*release | grep ^ID"
+2026-10-26T09:55:50.8890924Z [command]/usr/bin/git version
+2026-10-26T09:55:50.8933596Z git version 2.43.0
+2026-10-26T09:55:50.8986757Z Temporarily overriding HOME='/__w/_temp/c1564cb4-deb0-41e3-a51f-8880cb10a7b9' before making global git config changes
+2026-10-26T09:55:50.8990685Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-26T09:55:50.8995307Z [command]/usr/bin/git config --global --add safe.directory /__w/Findit-nearby/Findit-nearby
+2026-10-26T09:55:50.9043624Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-26T09:55:50.9092467Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-26T09:55:50.9495463Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-26T09:55:50.9527262Z http.https://github.com/.extraheader
+2026-10-26T09:55:50.9548429Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-26T09:55:50.9593111Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-26T09:55:50.9911150Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-26T09:55:51.0008254Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-26T09:55:51.0458119Z Stop and remove container: ffa4fb03d7e443b68b1c63d3898ed8d2_mcrmicrosoftcomplaywrightv1550noble_ff767a
+2026-10-26T09:55:51.0463254Z ##[command]/usr/bin/docker rm --force 2330bd2dcb585db146715a2cd53f40c9cbca6a47fdecd7a224b55c0854f41f06
+2026-10-26T09:55:51.1983624Z 2330bd2dcb585db146715a2cd53f40c9cbca6a47fdecd7a224b55c0854f41f06
+2026-10-26T09:55:51.2014449Z Remove container network: github_network_dd9d55f31ea744d09b707f69480f8580
+2026-10-26T09:55:51.2018836Z ##[command]/usr/bin/docker network rm github_network_dd9d55f31ea744d09b707f69480f8580
+2026-10-26T09:55:51.2986510Z github_network_dd9d55f31ea744d09b707f69480f8580
+2026-10-26T09:55:51.3063535Z Cleaning up orphan processes
+2026-10-26T09:55:51.3550767Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-node@v4, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
