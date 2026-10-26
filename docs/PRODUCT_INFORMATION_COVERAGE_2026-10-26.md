@@ -36,4 +36,4 @@ Exact photo recognition is still limited by available visual evidence and provid
 
 Application commit `36eb14a24481b7996b17a2e24a0a4c10b09343f8` is deployed (PR #333). The live API reports HTTP 403 at the manufacturer-document metadata stage for Shure MV7X. No exact specifications were returned. The real browser on this build shows general microphone guidance explicitly labelled as general, “Sources unavailable”, the official MV7X guide link, and refresh/correct controls. This source-access limitation remains unresolved; local guide extraction success is not a production success. The original API responses and final browser DOM are retained.
 
-The final application passed 515 Node tests and all four PR gates. Final post-merge workflow results are preserved in `main-workflows-333.json`.
+The final application passed 515 Node tests and all four PR gates. All 12 final post-merge workflows passed. Final post-merge workflow results are preserved in `main-workflows-333.json`.

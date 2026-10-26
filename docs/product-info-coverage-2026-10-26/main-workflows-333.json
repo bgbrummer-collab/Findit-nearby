@@ -26,8 +26,8 @@
   {
     "id": 40367060544,
     "name": "FindIt Interaction Freeze Regression",
-    "status": "in_progress",
-    "conclusion": null
+    "status": "completed",
+    "conclusion": "success"
   },
   {
     "id": 40367060441,
