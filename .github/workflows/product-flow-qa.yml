@@ -9,6 +9,10 @@ permissions:
 jobs:
   qa:
     runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:v1.55.0-noble
+    defaults:
+      run:
+        shell: bash
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
@@ -18,7 +22,6 @@ jobs:
       - run: |
           npm init -y >/dev/null 2>&1
           npm i -D playwright@1.55.0
-          npx playwright install --with-deps chromium
       - name: Wait for production
         run: sleep 20
       - name: Run four product flows

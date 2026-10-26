@@ -35,6 +35,10 @@ permissions:
 jobs:
   audit:
     runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:v1.55.0-noble
+    defaults:
+      run:
+        shell: bash
     timeout-minutes: 10
     steps:
       - name: Checkout
@@ -47,7 +51,6 @@ jobs:
         run: |
           npm init -y >/dev/null 2>&1
           npm install --save-dev playwright@1.55.0
-          npx playwright install --with-deps chromium
       - name: Start pull-request branch preview
         if: github.event_name == 'pull_request'
         run: |

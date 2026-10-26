@@ -13,6 +13,10 @@ permissions:
 jobs:
   smoke:
     runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:v1.55.0-noble
+    defaults:
+      run:
+        shell: bash
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
@@ -24,7 +28,6 @@ jobs:
           npm init -y >/dev/null 2>&1
           npm pkg set type=module
           npm install --save-dev playwright@1.55.0
-          npx playwright install --with-deps chromium
       - name: Start local branch build
         run: |
           python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/findit-http.log 2>&1 &

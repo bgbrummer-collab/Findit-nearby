@@ -7,6 +7,10 @@ on:
 jobs:
   layout:
     runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:v1.55.0-noble
+    defaults:
+      run:
+        shell: bash
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
@@ -16,7 +20,6 @@ jobs:
       - name: Install browser test dependencies
         run: |
           npm install --no-save playwright@1.55.0
-          npx playwright install --with-deps chromium
       - name: Test eight local viewport sizes
         env:
           FINDIT_URL: http://127.0.0.1:4173/
