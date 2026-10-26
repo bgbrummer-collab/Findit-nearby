@@ -10,6 +10,10 @@ permissions:
 jobs:
   live-matrix:
     runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:v1.55.0-noble
+    defaults:
+      run:
+        shell: bash
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
@@ -21,7 +25,6 @@ jobs:
           npm init -y >/dev/null 2>&1
           npm pkg set type=module
           npm install --save-dev playwright@1.55.0
-          npx playwright install --with-deps chromium
       - name: Test five real user images against production
         env:
           FINDIT_URL: https://findit-nearby.bgbrummer.workers.dev/

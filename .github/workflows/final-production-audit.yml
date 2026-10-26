@@ -52,6 +52,10 @@ concurrency:
 jobs:
   audit:
     runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:v1.55.0-noble
+    defaults:
+      run:
+        shell: bash
     timeout-minutes: 18
     steps:
       - name: Checkout production branch
@@ -66,7 +70,6 @@ jobs:
         run: |
           npm init -y >/dev/null 2>&1
           npm install --save-dev playwright@1.55.0
-          npx playwright install --with-deps chromium
       - name: Wait briefly for Cloudflare production
         run: sleep 20
       - name: Run production audits in parallel and record result

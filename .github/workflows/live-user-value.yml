@@ -10,6 +10,10 @@ concurrency:
 jobs:
   user-value:
     runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:v1.55.0-noble
+    defaults:
+      run:
+        shell: bash
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
@@ -21,7 +25,6 @@ jobs:
           npm init -y >/dev/null 2>&1
           npm pkg set type=module
           npm install --save-dev playwright@1.55.0
-          npx playwright install --with-deps chromium
       - name: Wait for production deployment
         run: sleep 70
       - name: Verify real user value on live FindIt
