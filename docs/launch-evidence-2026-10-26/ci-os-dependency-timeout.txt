@@ -1,0 +1,136 @@
+.
+2026-10-26T09:10:33.6387502Z Installing dependencies...
+2026-10-26T09:10:33.6464597Z Switching to root user to install dependencies...
+2026-10-26T09:10:33.7671052Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+2026-10-26T09:10:33.7794358Z Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+2026-10-26T09:10:33.8015888Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+2026-10-26T09:10:33.8017853Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+2026-10-26T09:10:33.8114034Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+2026-10-26T09:10:33.8161560Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+2026-10-26T09:10:33.8827650Z Get:7 https://packages.microsoft.com/ubuntu/24.04/prod noble/main armhf Packages [12.4 kB]
+2026-10-26T09:10:33.8953214Z Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [661 kB]
+2026-10-26T09:10:33.9060783Z Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [598 kB]
+2026-10-26T09:10:33.9914297Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1400 kB]
+2026-10-26T09:10:34.0060642Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [310 kB]
+2026-10-26T09:10:34.0098332Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1706 kB]
+2026-10-26T09:10:34.0254663Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [342 kB]
+2026-10-26T09:10:34.0283578Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1805 kB]
+2026-10-26T09:10:34.0455997Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [411 kB]
+2026-10-26T09:10:34.0770145Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1146 kB]
+2026-10-26T09:10:34.0892224Z Get:17 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [231 kB]
+2026-10-26T09:10:34.0914194Z Get:18 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1222 kB]
+2026-10-26T09:10:34.1033186Z Get:19 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [246 kB]
+2026-10-26T09:10:34.1505896Z Get:20 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1713 kB]
+2026-10-26T09:10:34.1665448Z Get:21 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [392 kB]
+2026-10-26T09:10:43.7215471Z Fetched 12.6 MB in 1s (11.8 MB/s)
+2026-10-26T09:10:44.3511445Z Reading package lists...
+2026-10-26T09:10:44.3703382Z Reading package lists...
+2026-10-26T09:10:44.5399352Z Building dependency tree...
+2026-10-26T09:10:44.5404944Z Reading state information...
+2026-10-26T09:10:44.6551940Z libasound2t64 is already the newest version (1.2.11-1ubuntu0.3).
+2026-10-26T09:10:44.6552645Z libasound2t64 set to manually installed.
+2026-10-26T09:10:44.6553212Z libatk-bridge2.0-0t64 is already the newest version (2.52.0-1build1).
+2026-10-26T09:10:44.6553804Z libatk-bridge2.0-0t64 set to manually installed.
+2026-10-26T09:10:44.6555125Z libatk1.0-0t64 is already the newest version (2.52.0-1build1).
+2026-10-26T09:10:44.6555643Z libatk1.0-0t64 set to manually installed.
+2026-10-26T09:10:44.6556173Z libatspi2.0-0t64 is already the newest version (2.52.0-1build1).
+2026-10-26T09:10:44.6556700Z libatspi2.0-0t64 set to manually installed.
+2026-10-26T09:10:44.6557202Z libcairo2 is already the newest version (1.18.0-3build1).
+2026-10-26T09:10:44.6557699Z libcairo2 set to manually installed.
+2026-10-26T09:10:44.6558108Z libcups2t64 is already the newest version (2.4.7-1.2ubuntu7.14).
+2026-10-26T09:10:44.6558516Z libcups2t64 set to manually installed.
+2026-10-26T09:10:44.6559124Z libdbus-1-3 is already the newest version (1.14.10-4ubuntu4.1).
+2026-10-26T09:10:44.6559557Z libdbus-1-3 set to manually installed.
+2026-10-26T09:10:44.6560002Z libdrm2 is already the newest version (2.4.125-1ubuntu0.1~24.04.2).
+2026-10-26T09:10:44.6560422Z libdrm2 set to manually installed.
+2026-10-26T09:10:44.6560842Z libgbm1 is already the newest version (25.2.8-0ubuntu0.24.04.4).
+2026-10-26T09:10:44.6561247Z libgbm1 set to manually installed.
+2026-10-26T09:10:44.6561647Z libnspr4 is already the newest version (2:4.35-1.1build1).
+2026-10-26T09:10:44.6562033Z libnspr4 set to manually installed.
+2026-10-26T09:10:44.6562474Z libpango-1.0-0 is already the newest version (1.52.1+ds-1build1).
+2026-10-26T09:10:44.6562913Z libpango-1.0-0 set to manually installed.
+2026-10-26T09:10:44.6563345Z libx11-6 is already the newest version (2:1.8.7-1ubuntu0.1).
+2026-10-26T09:10:44.6563803Z libx11-6 set to manually installed.
+2026-10-26T09:10:44.6564092Z libxcb1 is already the newest version (1.15-1ubuntu2).
+2026-10-26T09:10:44.6564379Z libxcb1 set to manually installed.
+2026-10-26T09:10:44.6564716Z libxcomposite1 is already the newest version (1:0.4.5-1build3).
+2026-10-26T09:10:44.6565005Z libxcomposite1 set to manually installed.
+2026-10-26T09:10:44.6565222Z libxdamage1 is already the newest version (1:1.1.6-1build1).
+2026-10-26T09:10:44.6565423Z libxdamage1 set to manually installed.
+2026-10-26T09:10:44.6565643Z libxext6 is already the newest version (2:1.3.4-1build2).
+2026-10-26T09:10:44.6565837Z libxext6 set to manually installed.
+2026-10-26T09:10:44.6566036Z libxfixes3 is already the newest version (1:6.0.0-2build1).
+2026-10-26T09:10:44.6566235Z libxfixes3 set to manually installed.
+2026-10-26T09:10:44.6566438Z libxkbcommon0 is already the newest version (1.6.0-1build1).
+2026-10-26T09:10:44.6566871Z libxkbcommon0 set to manually installed.
+2026-10-26T09:10:44.6567115Z libxrandr2 is already the newest version (2:1.5.2-2build1).
+2026-10-26T09:10:44.6567429Z libxrandr2 set to manually installed.
+2026-10-26T09:10:44.6567693Z fonts-noto-color-emoji is already the newest version (2.047-0ubuntu0.24.04.1).
+2026-10-26T09:10:44.6567982Z libfontconfig1 is already the newest version (2.15.0-1.1ubuntu2).
+2026-10-26T09:10:44.6568197Z libfontconfig1 set to manually installed.
+2026-10-26T09:10:44.6568426Z libfreetype6 is already the newest version (2.13.2+dfsg-1ubuntu0.2).
+2026-10-26T09:10:44.6568652Z libfreetype6 set to manually installed.
+2026-10-26T09:10:44.6569036Z fonts-liberation is already the newest version (1:2.1.5-3).
+2026-10-26T09:10:44.6569254Z fonts-liberation set to manually installed.
+2026-10-26T09:10:44.6569463Z The following additional packages will be installed:
+2026-10-26T09:10:44.6569692Z   gir1.2-glib-2.0 libglib2.0-bin libglib2.0-data libnss3-tools
+2026-10-26T09:10:44.6569914Z   xfonts-encodings xfonts-utils xserver-common
+2026-10-26T09:10:44.6570169Z Suggested packages:
+2026-10-26T09:10:44.6570291Z   low-memory-monitor
+2026-10-26T09:10:44.6570418Z Recommended packages:
+2026-10-26T09:10:44.6570579Z   fonts-ipafont-mincho fonts-tlwg-loma xfonts-base
+2026-10-26T09:10:44.7019688Z The following NEW packages will be installed:
+2026-10-26T09:10:44.7021154Z   fonts-freefont-ttf fonts-ipafont-gothic fonts-tlwg-loma-otf fonts-unifont
+2026-10-26T09:10:44.7024397Z   fonts-wqy-zenhei xfonts-cyrillic xfonts-encodings xfonts-scalable
+2026-10-26T09:10:44.7028908Z   xfonts-utils
+2026-10-26T09:10:44.7029253Z The following packages will be upgraded:
+2026-10-26T09:10:44.7030220Z   gir1.2-glib-2.0 libglib2.0-0t64 libglib2.0-bin libglib2.0-data libnss3
+2026-10-26T09:10:44.7030705Z   libnss3-tools xserver-common xvfb
+2026-10-26T09:10:44.7167038Z 8 upgraded, 9 newly installed, 0 to remove and 92 not upgraded.
+2026-10-26T09:10:44.7167433Z Need to get 25.9 MB of archives.
+2026-10-26T09:10:44.7170448Z After this operation, 79.5 MB of additional disk space will be used.
+2026-10-26T09:10:44.7170888Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+2026-10-26T09:10:45.6339180Z Get:2 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-ipafont-gothic all 00303-21ubuntu1 [3513 kB]
+2026-10-26T09:12:13.3265098Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libglib2.0-data all 2.80.0-6ubuntu3.10 [50.2 kB]
+2026-10-26T09:12:15.2039829Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libglib2.0-bin amd64 2.80.0-6ubuntu3.10 [97.9 kB]
+2026-10-26T09:12:17.8931082Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 gir1.2-glib-2.0 amd64 2.80.0-6ubuntu3.10 [183 kB]
+2026-10-26T09:12:22.5311864Z Get:6 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libglib2.0-0t64 amd64 2.80.0-6ubuntu3.10 [1548 kB]
+2026-10-26T09:13:00.6863939Z Get:7 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 fonts-freefont-ttf all 20211204+svn4273-2 [5641 kB]
+2026-10-26T09:15:21.2778115Z Get:8 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-tlwg-loma-otf all 1:0.7.3-1 [107 kB]
+2026-10-26T09:15:25.0734523Z Get:9 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-unifont all 1:15.1.01-1build1 [2993 kB]
+2026-10-26T09:16:41.4184326Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-wqy-zenhei all 0.9.45-8 [7472 kB]
+2026-10-26T09:19:47.5295375Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libnss3 amd64 2:3.98-1ubuntu0.3 [1445 kB]
+2026-10-26T09:20:24.5801350Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libnss3-tools amd64 2:3.98-1ubuntu0.3 [615 kB]
+2026-10-26T09:20:37.3324749Z ##[error]The operation was canceled.
+2026-10-26T09:20:37.3428915Z ##[group]Run actions/upload-artifact@v4
+2026-10-26T09:20:37.3429101Z with:
+2026-10-26T09:20:37.3429248Z   name: findit-full-production-audit-40297506228
+2026-10-26T09:20:37.3429589Z   path: audit-output/
+2026-10-26T09:20:37.3429722Z   if-no-files-found: warn
+2026-10-26T09:20:37.3429858Z   retention-days: 14
+2026-10-26T09:20:37.3429985Z   compression-level: 6
+2026-10-26T09:20:37.3430110Z   overwrite: false
+2026-10-26T09:20:37.3430236Z   include-hidden-files: false
+2026-10-26T09:20:37.3430378Z ##[endgroup]
+2026-10-26T09:20:37.4601150Z (node:2619) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-26T09:20:37.4602096Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-26T09:20:37.4625912Z ##[warning]No files were found with the provided path: audit-output/. No artifacts will be uploaded.
+2026-10-26T09:20:37.4889239Z Post job cleanup.
+2026-10-26T09:20:37.5484245Z [command]/usr/bin/git version
+2026-10-26T09:20:37.5520760Z git version 2.55.0
+2026-10-26T09:20:37.5548248Z Temporarily overriding HOME='/home/runner/work/_temp/799f1150-1a33-4508-8bb6-0650fd8ff891' before making global git config changes
+2026-10-26T09:20:37.5549293Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-26T09:20:37.5552581Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Findit-nearby/Findit-nearby
+2026-10-26T09:20:37.5593911Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-26T09:20:37.5638167Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-26T09:20:37.5879986Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-26T09:20:37.5914750Z http.https://github.com/.extraheader
+2026-10-26T09:20:37.5928292Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-26T09:20:37.5968454Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-26T09:20:37.6199809Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-26T09:20:37.6234773Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-26T09:20:37.6578103Z Cleaning up orphan processes
+2026-10-26T09:20:37.6735152Z Terminate orphan process: pid (2114) (npm exec playwright install --with-deps chromium)
+2026-10-26T09:20:37.6762494Z Terminate orphan process: pid (2126) (sh)
+2026-10-26T09:20:37.6784276Z Terminate orphan process: pid (2127) (node)
+2026-10-26T09:20:37.6902805Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-node@v4, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

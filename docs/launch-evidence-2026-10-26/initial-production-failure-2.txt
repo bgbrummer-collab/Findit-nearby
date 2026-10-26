@@ -1,0 +1,151 @@
+33.5813441Z [36;1m    if(errs.length)throw Error('page error: '+errs[0]);[0m
+2026-10-26T09:35:33.5814401Z [36;1m    detail=`identified=${result}; sellerSection=yes; nearbySection=yes; unsafeDirections=${badDirections}`;[0m
+2026-10-26T09:35:33.5815481Z [36;1m  }catch(e){ok=false;detail=e.message+'; result='+result+'; seller='+sellers.slice(0,120)+'; nearby='+nearby.slice(0,120)+'; errors='+errs.join(' | ')}[0m
+2026-10-26T09:35:33.5816276Z [36;1m  rows.push({label,ok,detail});await p.close();[0m
+2026-10-26T09:35:33.5816645Z [36;1m}[0m
+2026-10-26T09:35:33.5816896Z [36;1mawait browser.close();[0m
+2026-10-26T09:35:33.5817885Z [36;1mconst out=['# FindIt multi-product production QA','',`Generated: ${new Date().toISOString()}`,'',...rows.map(r=>`${r.ok?'✅':'❌'} **${r.label}** — ${r.detail}`),'',`**Passed: ${rows.filter(r=>r.ok).length}/${rows.length}**`].join('\n');[0m
+2026-10-26T09:35:33.5819517Z [36;1mfs.mkdirSync('qa-results',{recursive:true});fs.writeFileSync('qa-results/product-flow-latest.md',out);console.log(out);[0m
+2026-10-26T09:35:33.5820248Z [36;1mif(rows.some(r=>!r.ok))process.exitCode=1;[0m
+2026-10-26T09:35:33.5820644Z [36;1mNODE[0m
+2026-10-26T09:35:33.5820909Z [36;1mnode product-qa.mjs[0m
+2026-10-26T09:35:33.5821542Z shell: bash --noprofile --norc -e -o pipefail {0}
+2026-10-26T09:35:33.5821930Z ##[endgroup]
+2026-10-26T09:37:41.5069727Z # FindIt multi-product production QA
+2026-10-26T09:37:41.5070111Z 
+2026-10-26T09:37:41.5070326Z Generated: 2026-10-26T09:37:41.505Z
+2026-10-26T09:37:41.5070593Z 
+2026-10-26T09:37:41.5071280Z ❌ **Nike Air Force 1 Low** — locator.click: Timeout 30000ms exceeded.
+2026-10-26T09:37:41.5071777Z Call log:
+2026-10-26T09:37:41.5072112Z   - waiting for locator('#location')
+2026-10-26T09:37:41.5072931Z     - locator resolved to <button id="location" class="btn secondary">📍 Use my location</button>
+2026-10-26T09:37:41.5073587Z   - attempting click action
+2026-10-26T09:37:41.5074474Z     2 × waiting for element to be visible, enabled and stable
+2026-10-26T09:37:41.5075006Z       - element is visible, enabled and stable
+2026-10-26T09:37:41.5075415Z       - scrolling into view if needed
+2026-10-26T09:37:41.5075790Z       - done scrolling
+2026-10-26T09:37:41.5076150Z       - element is outside of the viewport
+2026-10-26T09:37:41.5076533Z     - retrying click action
+2026-10-26T09:37:41.5076843Z     - waiting 20ms
+2026-10-26T09:37:41.5077319Z     2 × waiting for element to be visible, enabled and stable
+2026-10-26T09:37:41.5077844Z       - element is visible, enabled and stable
+2026-10-26T09:37:41.5078622Z       - scrolling into view if needed
+2026-10-26T09:37:41.5078980Z       - done scrolling
+2026-10-26T09:37:41.5079330Z       - element is outside of the viewport
+2026-10-26T09:37:41.5105986Z     - retrying click action
+2026-10-26T09:37:41.5106354Z       - waiting 100ms
+2026-10-26T09:37:41.5106970Z     57 × waiting for element to be visible, enabled and stable
+2026-10-26T09:37:41.5107523Z        - element is visible, enabled and stable
+2026-10-26T09:37:41.5107948Z        - scrolling into view if needed
+2026-10-26T09:37:41.5108408Z        - done scrolling
+2026-10-26T09:37:41.5108643Z        - element is outside of the viewport
+2026-10-26T09:37:41.5108902Z      - retrying click action
+2026-10-26T09:37:41.5109127Z        - waiting 500ms
+2026-10-26T09:37:41.5109358Z ; result=; seller=; nearby=; errors=
+2026-10-26T09:37:41.5109895Z ❌ **Twinsaver Twin Ply 18 Rolls** — locator.click: Timeout 30000ms exceeded.
+2026-10-26T09:37:41.5110222Z Call log:
+2026-10-26T09:37:41.5110414Z   - waiting for locator('#location')
+2026-10-26T09:37:41.5110871Z     - locator resolved to <button id="location" class="btn secondary">📍 Use my location</button>
+2026-10-26T09:37:41.5111238Z   - attempting click action
+2026-10-26T09:37:41.5111551Z     2 × waiting for element to be visible, enabled and stable
+2026-10-26T09:37:41.5111848Z       - element is visible, enabled and stable
+2026-10-26T09:37:41.5112110Z       - scrolling into view if needed
+2026-10-26T09:37:41.5112323Z       - done scrolling
+2026-10-26T09:37:41.5112542Z       - element is outside of the viewport
+2026-10-26T09:37:41.5112763Z     - retrying click action
+2026-10-26T09:37:41.5113210Z     - waiting 20ms
+2026-10-26T09:37:41.5113489Z     2 × waiting for element to be visible, enabled and stable
+2026-10-26T09:37:41.5113813Z       - element is visible, enabled and stable
+2026-10-26T09:37:41.5114065Z       - scrolling into view if needed
+2026-10-26T09:37:41.5114280Z       - done scrolling
+2026-10-26T09:37:41.5114485Z       - element is outside of the viewport
+2026-10-26T09:37:41.5114720Z     - retrying click action
+2026-10-26T09:37:41.5114910Z       - waiting 100ms
+2026-10-26T09:37:41.5115203Z     57 × waiting for element to be visible, enabled and stable
+2026-10-26T09:37:41.5115497Z        - element is visible, enabled and stable
+2026-10-26T09:37:41.5115916Z        - scrolling into view if needed
+2026-10-26T09:37:41.5116226Z        - done scrolling
+2026-10-26T09:37:41.5116538Z        - element is outside of the viewport
+2026-10-26T09:37:41.5116867Z      - retrying click action
+2026-10-26T09:37:41.5117198Z        - waiting 500ms
+2026-10-26T09:37:41.5117505Z ; result=; seller=; nearby=; errors=
+2026-10-26T09:37:41.5117939Z ❌ **Sony WH-1000XM5** — locator.click: Timeout 30000ms exceeded.
+2026-10-26T09:37:41.5118404Z Call log:
+2026-10-26T09:37:41.5118594Z   - waiting for locator('#location')
+2026-10-26T09:37:41.5119039Z     - locator resolved to <button id="location" class="btn secondary">📍 Use my location</button>
+2026-10-26T09:37:41.5119411Z   - attempting click action
+2026-10-26T09:37:41.5119734Z     2 × waiting for element to be visible, enabled and stable
+2026-10-26T09:37:41.5120036Z       - element is visible, enabled and stable
+2026-10-26T09:37:41.5120287Z       - scrolling into view if needed
+2026-10-26T09:37:41.5120498Z       - done scrolling
+2026-10-26T09:37:41.5120821Z       - element is outside of the viewport
+2026-10-26T09:37:41.5121219Z     - retrying click action
+2026-10-26T09:37:41.5121411Z     - waiting 20ms
+2026-10-26T09:37:41.5121694Z     2 × waiting for element to be visible, enabled and stable
+2026-10-26T09:37:41.5121973Z       - element is visible, enabled and stable
+2026-10-26T09:37:41.5122224Z       - scrolling into view if needed
+2026-10-26T09:37:41.5122436Z       - done scrolling
+2026-10-26T09:37:41.5122637Z       - element is outside of the viewport
+2026-10-26T09:37:41.5122854Z     - retrying click action
+2026-10-26T09:37:41.5123037Z       - waiting 100ms
+2026-10-26T09:37:41.5123339Z     57 × waiting for element to be visible, enabled and stable
+2026-10-26T09:37:41.5123630Z        - element is visible, enabled and stable
+2026-10-26T09:37:41.5123890Z        - scrolling into view if needed
+2026-10-26T09:37:41.5124099Z        - done scrolling
+2026-10-26T09:37:41.5124307Z        - element is outside of the viewport
+2026-10-26T09:37:41.5124529Z      - retrying click action
+2026-10-26T09:37:41.5124717Z        - waiting 500ms
+2026-10-26T09:37:41.5124935Z ; result=; seller=; nearby=; errors=
+2026-10-26T09:37:41.5125317Z ❌ **Bosch cordless drill** — locator.click: Timeout 30000ms exceeded.
+2026-10-26T09:37:41.5125592Z Call log:
+2026-10-26T09:37:41.5125788Z   - waiting for locator('#location')
+2026-10-26T09:37:41.5126224Z     - locator resolved to <button id="location" class="btn secondary">📍 Use my location</button>
+2026-10-26T09:37:41.5126603Z   - attempting click action
+2026-10-26T09:37:41.5126907Z     2 × waiting for element to be visible, enabled and stable
+2026-10-26T09:37:41.5127191Z       - element is visible, enabled and stable
+2026-10-26T09:37:41.5127436Z       - scrolling into view if needed
+2026-10-26T09:37:41.5127642Z       - done scrolling
+2026-10-26T09:37:41.5127844Z       - element is outside of the viewport
+2026-10-26T09:37:41.5128239Z     - retrying click action
+2026-10-26T09:37:41.5128433Z     - waiting 20ms
+2026-10-26T09:37:41.5128709Z     2 × waiting for element to be visible, enabled and stable
+2026-10-26T09:37:41.5129000Z       - element is visible, enabled and stable
+2026-10-26T09:37:41.5129237Z       - scrolling into view if needed
+2026-10-26T09:37:41.5129440Z       - done scrolling
+2026-10-26T09:37:41.5129637Z       - element is outside of the viewport
+2026-10-26T09:37:41.5129976Z     - retrying click action
+2026-10-26T09:37:41.5130162Z       - waiting 100ms
+2026-10-26T09:37:41.5130446Z     57 × waiting for element to be visible, enabled and stable
+2026-10-26T09:37:41.5130739Z        - element is visible, enabled and stable
+2026-10-26T09:37:41.5130984Z        - scrolling into view if needed
+2026-10-26T09:37:41.5131191Z        - done scrolling
+2026-10-26T09:37:41.5131393Z        - element is outside of the viewport
+2026-10-26T09:37:41.5131614Z      - retrying click action
+2026-10-26T09:37:41.5131819Z        - waiting 500ms
+2026-10-26T09:37:41.5132037Z ; result=; seller=; nearby=; errors=
+2026-10-26T09:37:41.5132178Z 
+2026-10-26T09:37:41.5132262Z **Passed: 0/4**
+2026-10-26T09:37:41.5206890Z ##[error]Process completed with exit code 1.
+2026-10-26T09:37:41.5305226Z Post job cleanup.
+2026-10-26T09:37:41.5311433Z ##[command]/usr/bin/docker exec  4f821ce71442e682965750fc0696ee715456ad22aafbe860b18b57827b5f1d25 sh -c "cat /etc/*release | grep ^ID"
+2026-10-26T09:37:41.6790168Z [command]/usr/bin/git version
+2026-10-26T09:37:41.6829076Z git version 2.43.0
+2026-10-26T09:37:41.6864765Z Temporarily overriding HOME='/__w/_temp/5406cefa-3241-46a6-9411-b870ad017d75' before making global git config changes
+2026-10-26T09:37:41.6866098Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-26T09:37:41.6869808Z [command]/usr/bin/git config --global --add safe.directory /__w/Findit-nearby/Findit-nearby
+2026-10-26T09:37:41.6908495Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-26T09:37:41.6959617Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-26T09:37:41.7219641Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-26T09:37:41.7250792Z http.https://github.com/.extraheader
+2026-10-26T09:37:41.7279281Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-26T09:37:41.7488385Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-26T09:37:41.7696172Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-26T09:37:41.7735259Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-26T09:37:41.8077894Z Stop and remove container: d804661e07a948e5937f72e3eb9513dd_mcrmicrosoftcomplaywrightv1550noble_48442e
+2026-10-26T09:37:41.8082420Z ##[command]/usr/bin/docker rm --force 4f821ce71442e682965750fc0696ee715456ad22aafbe860b18b57827b5f1d25
+2026-10-26T09:37:42.2369146Z 4f821ce71442e682965750fc0696ee715456ad22aafbe860b18b57827b5f1d25
+2026-10-26T09:37:42.2394083Z Remove container network: github_network_7f6dea8056b24bc9977e6d7541a7fd75
+2026-10-26T09:37:42.2397558Z ##[command]/usr/bin/docker network rm github_network_7f6dea8056b24bc9977e6d7541a7fd75
+2026-10-26T09:37:42.3429655Z github_network_7f6dea8056b24bc9977e6d7541a7fd75
+2026-10-26T09:37:42.3499057Z Cleaning up orphan processes
+2026-10-26T09:37:42.3813074Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-node@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

@@ -1,0 +1,239 @@
+- heading "Store Locator" [level=1]
+- textbox "Search by city, suburb or store": Lynnwood
+- button "Close":
+- generic: or
+- button "Detect my address":
+  - generic: Detect my address
+- link "Need help?":
+  - /url: /contact-us
+  - generic: Need help?
+- generic: Builders Express Lynnwood
+- generic: Shop 1 Gift Acres Shopping Centre, 118 Lynnwood Road, Gauteng, Pretoria, 0081
+- button "View details":
+  - generic: View details
+- button "Get directions":
+  - generic: Get directions
+- button "Keyboard shortcuts"
+- region "Map"
+- button "Map":
+- iframe
+- button "Toggle fullscreen view"
+- button "Map camera controls"
+- link "Open this area in Google Maps (opens a new window)":
+  - /url: https://maps.google.com/maps?ll=-26.133917,27.911825&z=10&t=m&hl=en-US&gl=US&mapclient=apiv3
+  - img "Google"
+- button "Keyboard shortcuts"
+- generic: Map data ©2026 AfriGIS (Pty) Ltd
+- link "Terms (opens in new tab)":
+  - /url: https://www.google.com/intl/en-US_US/help/terms_maps.html
+  - text: Terms
+- link "Report a map error (opens in new tab)":
+  - /url: https://www.google.com/maps/@-26.1339174,27.9118247,10z/data=!10m1!1e1!12b1?source=apiv3&rapsrc=apiv3
+  - text: Report a map error
+- generic: Buy online or present your Builders+ virtual card in store for a chance to win a R5,000 Builders voucher every month.
+- generic: Follow us on
+- link "Twitter":
+  - /url: https://twitter.com/BuildersSA
+- link "Instagram":
+  - /url: https://www.instagram.com/builderssa/
+- link "Facebook":
+  - /url: https://www.facebook.com/BuildersSA/
+- link "Youtube":
+  - /url: https://www.youtube.com/BuildersFan
+- link "Pinterest":
+  - /url: https://za.pinterest.com/BuildersSA_/
+- link "LinkedIn":
+  - /url: https://www.linkedin.com/company/builders-warehouse
+- generic: Contact Us
+- link "0600199347":
+  - /url: https://wa.me/27600199347
+  - generic: "0600199347"
+- link "0860284533":
+  - /url: tel:0860284533
+  - generic: "0860284533"
+- link "info@builders.co.za":
+  - /url: mailto:info@builders.co.za
+  - generic: info@builders.co.za
+- generic: Policy
+- link "Returns & refunds":
+  - /url: /returns-refunds
+  - generic: Returns & refunds
+- link "Delivery & pickup":
+  - /url: /delivery-pickup
+  - generic: Delivery & pickup
+- link "Terms & conditions":
+  - /url: /terms-conditions-occ
+  - generic: Terms & conditions
+- link "Privacy centre":
+  - /url: https://www.massmart.co.za/privacy-policy-2
+  - generic: Privacy centre
+- link "Massmart PAIA":
+  - /url: https://www.massmart.co.za/paia/
+  - generic: Massmart PAIA
+- generic: About Us
+- link "Our Story":
+  - /url: /builders-our-story
+  - generic: Our Story
+- link "Our People":
+  - /url: /builders-our-people
+  - generic: Our People
+- generic: Know more
+- link "Blog":
+  - /url: https://blog.builders.co.za/
+  - generic: Blog
+- generic: Explore on Builders
+- link "Paint":
+  - /url: /cat/01
+  - generic: Paint
+- generic: "|"
+- link "Outdoor Garden and Patio":
+  - /url: /cat/05
+  - generic: Outdoor Garden and Patio
+- generic: "|"
+- link "Decor Furniture and Home Living":
+  - /url: /cat/07
+  - generic: Decor Furniture and Home Living
+- generic: "|"
+- link "Appliances, Heating and Cooling":
+  - /url: /cat/04
+  - generic: Appliances, Heating and Cooling
+- generic: "|"
+- link "Tools and Machinery":
+  - /url: /cat/09
+  - generic: Tools and Machinery
+- generic: "|"
+- link "Online Only Range":
+  - /url: /online-only-range/c/19
+  - generic: Online Only Range
+- generic: "|"
+- link "Plumbing Bathroom and Kitchen":
+  - /url: /cat/13
+  - generic: Plumbing Bathroom and Kitchen
+- generic: "|"
+- link "Water Tanks and Filtration":
+  - /url: /cat/03
+  - generic: Water Tanks and Filtration
+- generic: "|"
+- link "Security and Smart Home":
+  - /url: /cat/06
+  - generic: Security and Smart Home
+- generic: "|"
+- link "Lighting":
+  - /url: /cat/08
+  - generic: Lighting
+- generic: "|"
+- link "Safety and Protective Wear":
+  - /url: /cat/10
+  - generic: Safety and Protective Wear
+- generic: "|"
+- link "Building Materials":
+  - /url: /cat/11
+  - generic: Building Materials
+- generic: "|"
+- link "Doors and Windows":
+  - /url: /cat/12
+  - generic: Doors and Windows
+- generic: "|"
+- link "Electrical and Electronics":
+  - /url: /cat/14
+  - generic: Electrical and Electronics
+- generic: "|"
+- link "Fasteners and Adhesives":
+  - /url: /cat/15
+  - generic: Fasteners and Adhesives
+- generic: "|"
+- link "Tiles and Flooring":
+  - /url: /cat/16
+  - generic: Tiles and Flooring
+- generic: "|"
+- link "Services":
+  - /url: /services/c/18
+  - generic: Services
+- generic: "|"
+- link "Load Shedding":
+  - /url: /cat/02
+  - generic: Load Shedding
+- generic: "|"
+- link "Automotive":
+  - /url: /automotive-/c/21
+  - generic: Automotive
+- generic: 100% secure payments guaranteed by
+- generic: © BUILDERS. All rights reserved
+- button "Builders":
+- generic: Shop by Department
+- textbox "What can we help you find?"
+- generic: Trade
+- generic: Wishlist
+- generic: Sign in
+- generic: "0"
+- generic: Roodepoort, 1709
+- generic: Deals
+- link "Shop By Room":
+  - /url: /shop-by-room
+  - generic: Shop By Room
+- link "Catalogue":
+  - /url: /Interactive-Catalogue
+  - generic: Catalogue
+- link "Blog":
+  - /url: https://blog.builders.co.za/
+  - generic: Blog
+- link "Builders+":
+  - /url: /builders-plus
+  - generic: Builders+
+- link "Store Locator":
+  - /url: /store-finder
+  - generic: Store Locator
+- link "Contact Us":
+  - /url: /contact-us
+  - generic: Contact Us
+- text: "Go big, pay less: FREE delivery when you spend R500+."
+- link "Ts & Cs Apply.":
+  - /url: https://www.builders.co.za/website-terms-conditions-occ
+  - generic: Ts & Cs Apply.
+- dialog:
+  - generic: Store Details
+  - generic: Builders Express Lynnwood
+  - generic: Shop 1 Gift Acres Shopping Centre, 118 Lynnwood Road, Gauteng, Pretoria, 0081
+  - button "Keyboard shortcuts"
+  - region "Map"
+  - generic: Builders Express Lynnwood
+  - iframe
+  - button "Toggle fullscreen view"
+  - button "Map camera controls"
+  - link "Open this area in Google Maps (opens a new window)":
+    - /url: https://maps.google.com/maps?ll=-25.767488,28.296105&z=14&t=m&hl=en-US&gl=US&mapclient=apiv3
+    - img "Google"
+  - button "Keyboard shortcuts"
+  - generic: Map data ©2026 AfriGIS (Pty) Ltd, Google
+  - link "Terms (opens in new tab)":
+    - /url: https://www.google.com/intl/en-US_US/help/terms_maps.html
+    - text: Terms
+  - link "Report a map error (opens in new tab)":
+    - /url: https://www.google.com/maps/@-25.767488,28.296105,14z/data=!10m1!1e1!12b1?source=apiv3&rapsrc=apiv3
+    - text: Report a map error
+  - button "Directions to store":
+    - generic: Directions to store
+  - generic: Contact Details
+  - generic: Street Address
+  - generic: Shop 1 Gift Acres Shopping Centre
+  - generic: Telephone
+  - generic: "0860008985"
+  - generic: Fax
+  - generic: N/A
+  - generic: Postal Address
+  - generic: Shop 1 Gift Acres Shopping Centre, 118 Lynnwood Road, Gauteng, Pretoria, 0081
+  - generic: Trading hours
+  - generic: Sunday
+  - generic: 8:00 AM - 3:00 PM
+  - generic: Monday
+  - generic: 8:00 AM - 6:00 PM
+  - generic: Tuesday
+  - generic: 8:00 AM - 6:00 PM
+  - generic: Wednesday
+  - generic: 8:00 AM - 6:00 PM
+  - generic: Thursday
+  - generic: 8:00 AM - 6:00 PM
+  - generic: Friday
+  - generic: 8:00 AM - 6:00 PM
+  - generic: Saturday
+  - generic: 8:00 AM - 4:00 PM

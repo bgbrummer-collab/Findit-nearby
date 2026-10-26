@@ -1,0 +1,282 @@
+ut(1500);[0m
+2026-10-26T09:58:32.2990371Z [36;1m    const img=`/tmp/trust-${n}.png`;const g=await ctx.newPage();[0m
+2026-10-26T09:58:32.2992213Z [36;1m    await g.setContent(`<canvas id=c width=1200 height=800></canvas><script>const c=document.querySelector('#c'),z=c.getContext('2d');z.fillStyle='#fff';z.fillRect(0,0,1200,800);z.fillStyle='#111';z.font='bold 70px Arial';z.fillText(${JSON.stringify(x.a)},70,260);z.font='bold 52px Arial';z.fillText(${JSON.stringify(x.b)},70,370);z.strokeStyle='#222';z.lineWidth=8;z.strokeRect(50,120,1100,390)</script>`);await g.locator('#c').screenshot({path:img});await g.close();[0m
+2026-10-26T09:58:32.2994570Z [36;1m    await p.locator('#fxVisiblePhotoPicker').setInputFiles(img);await p.locator('#finditExactShell [data-location-direct]').click();await p.waitForTimeout(500);await p.locator('#fxSearchNow').click();[0m
+2026-10-26T09:58:32.2995979Z [36;1m    await p.waitForFunction(()=>{const s=window.finditState||{};return !s.photoSearchPending&&!!s.result?.identification;},null,{timeout:55000});await p.waitForTimeout(6500);[0m
+2026-10-26T09:58:32.2996905Z [36;1m    const result=(await p.locator('#resultName').innerText()).trim();[0m
+2026-10-26T09:58:32.2997466Z [36;1m    const seller=await p.locator('#fxTopStores').innerText().catch(()=> '');[0m
+2026-10-26T09:58:32.2998331Z [36;1m    add(`${x.label}: identification returned`,!!result&&!/^Item$/i.test(result),result);[0m
+2026-10-26T09:58:32.2999115Z [36;1m    add(`${x.label}: exact-seller section exists`,seller.length>15,seller.slice(0,150));[0m
+2026-10-26T09:58:32.2999816Z [36;1m    add(`${x.label}: relevant retailer search path exists`,x.expect.test(seller),seller.slice(-250));[0m
+2026-10-26T09:58:32.3000561Z [36;1m    add(`${x.label}: duplicate stat strip removed`,await p.locator('#finditV3Strip').count()===0);[0m
+2026-10-26T09:58:32.3001380Z [36;1m    add(`${x.label}: duplicate seller stats removed`,await p.locator('#exactSellerResults .premium-insights').count()===0);[0m
+2026-10-26T09:58:32.3002579Z [36;1m    const unsafeCards=await p.locator('#nearbyStores [data-exact-branch="0"],#nearbyStores .store-card:not([data-exact-branch="1"])').count();[0m
+2026-10-26T09:58:32.3003845Z [36;1m    const undisclosed=await p.locator('#nearbyStores .store-card:not([data-exact-branch="1"])').evaluateAll(cards=>cards.filter(c=>!/stock not verified|stock unknown/i.test(c.innerText)).length);[0m
+2026-10-26T09:58:32.3005093Z [36;1m    add(`${x.label}: unverified branches disclose unknown stock`,undisclosed===0,`unverifiedCards=${unsafeCards}, undisclosed=${undisclosed}`);[0m
+2026-10-26T09:58:32.3006285Z [36;1m    const unsafeDir=await p.locator('#nearbyStores [data-exact-branch="0"] a:has-text("Directions"),#nearbyStores [data-exact-branch="0"] button:has-text("Directions")').count();[0m
+2026-10-26T09:58:32.3007376Z [36;1m    add(`${x.label}: no unsafe Directions`,unsafeDir===0,`unsafeDirections=${unsafeDir}`);[0m
+2026-10-26T09:58:32.3008334Z [36;1m    const disabledClosest=await p.locator('#finditV3Actions [aria-disabled="true"]:has-text("Closest directions")').count();[0m
+2026-10-26T09:58:32.3008998Z [36;1m    add(`${x.label}: no useless disabled Closest directions`,disabledClosest===0);[0m
+2026-10-26T09:58:32.3009730Z [36;1m    const offers=await p.locator('#fxTopStores .fx-retailer-candidate').evaluateAll(cards=>cards.filter(c=>!/google\.com\/search/.test(c.href)) .length);[0m
+2026-10-26T09:58:32.3010334Z [36;1m    if(offers){[0m
+2026-10-26T09:58:32.3010972Z [36;1m      add(`${x.label}: verified listings disclose branch stock`,/Verified product listings/i.test(seller)&&/Branch stock (not verified|verified)/i.test(seller),seller.slice(0,250));[0m
+2026-10-26T09:58:32.3011631Z [36;1m    }else {[0m
+2026-10-26T09:58:32.3011956Z [36;1m      const nearbyRows=await p.locator('#fxTopStores > button').count();[0m
+2026-10-26T09:58:32.3012880Z [36;1m      const labelledNearby=await p.locator('#fxTopStores > button').evaluateAll(cards=>cards.every(c=>/Nearby|branch stock (unknown|unverified|not verified)/i.test(c.innerText)&&!/(?<!not )Stock verified/i.test(c.innerText)));[0m
+2026-10-26T09:58:32.3014244Z [36;1m      add(`${x.label}: honest search fallback or nearby-only results`,(/No exact listing verified yet/i.test(seller)&&/Price and stock not verified/i.test(seller))||(nearbyRows>0&&labelledNearby&&undisclosed===0),seller.slice(0,250));[0m
+2026-10-26T09:58:32.3015044Z [36;1m    }[0m
+2026-10-26T09:58:32.3015913Z [36;1m    const heights=[];for(let k=0;k<6;k++){await p.evaluate(k=>window.scrollTo(0,(document.documentElement.scrollHeight-window.innerHeight)*(k/5)),k);await p.waitForTimeout(250);heights.push(await p.evaluate(()=>document.documentElement.scrollHeight));}[0m
+2026-10-26T09:58:32.3017069Z [36;1m    add(`${x.label}: scroll layout stable`,Math.max(...heights)-Math.min(...heights)<80,`heights=${heights.join(',')}`);[0m
+2026-10-26T09:58:32.3017713Z [36;1m    add(`${x.label}: no page JavaScript errors`,errors.length===0,errors.join(' | ').slice(0,300));[0m
+2026-10-26T09:58:32.3018952Z [36;1m    const copy=p.locator('[data-fi3="copy"]');if(await copy.count()){await copy.click();await p.waitForTimeout(150);add(`${x.label}: Copy product name works`,/Copied/i.test(await copy.innerText()));}[0m
+2026-10-26T09:58:32.3019795Z [36;1m  }catch(e){add(`${x.label}: flow completed`,false,e.message+' | '+errors.join(' | '));}[0m
+2026-10-26T09:58:32.3020203Z [36;1m  await p.close();[0m
+2026-10-26T09:58:32.3020430Z [36;1m}[0m
+2026-10-26T09:58:32.3020638Z [36;1mawait browser.close();[0m
+2026-10-26T09:58:32.3021616Z [36;1mconst failed=checks.filter(c=>!c.ok);const out=['# FindIt trust-first production QA','',`Generated: ${new Date().toISOString()}`,'',...checks.map(c=>`${c.ok?'✅':'❌'} ${c.label}${c.detail?' — '+c.detail:''}`),'',`Passed: ${checks.length-failed.length}/${checks.length}`,`Failed: ${failed.length}`].join('\n');[0m
+2026-10-26T09:58:32.3022852Z [36;1mfs.mkdirSync('qa-results',{recursive:true});fs.writeFileSync('qa-results/trust-results-latest.md',out);console.log(out);[0m
+2026-10-26T09:58:32.3023407Z [36;1mif(failed.length)process.exitCode=1;[0m
+2026-10-26T09:58:32.3023841Z [36;1mNODE[0m
+2026-10-26T09:58:32.3024058Z [36;1mnode trust-qa.mjs[0m
+2026-10-26T09:58:32.3024573Z shell: bash --noprofile --norc -e -o pipefail {0}
+2026-10-26T09:58:32.3024867Z ##[endgroup]
+2026-10-26T10:00:35.0270088Z # FindIt trust-first production QA
+2026-10-26T10:00:35.0270972Z 
+2026-10-26T10:00:35.0276400Z Generated: 2026-10-26T10:00:35.025Z
+2026-10-26T10:00:35.0276873Z 
+2026-10-26T10:00:35.0277740Z ✅ Nike Air Force 1 Low: identification returned — NIKE AIR FORCE 1 LOW
+2026-10-26T10:00:35.0280449Z ✅ Nike Air Force 1 Low: exact-seller section exists — No exact listing verified yet. Check relevant retailer searches:
+2026-10-26T10:00:35.0281834Z 
+2026-10-26T10:00:35.0282073Z Nike
+2026-10-26T10:00:35.0282554Z Price and stock not verified
+2026-10-26T10:00:35.0283037Z Sportscene
+2026-10-26T10:00:35.0283558Z Price and stock not verified
+2026-10-26T10:00:35.0284021Z Totalsport
+2026-10-26T10:00:35.0285507Z ✅ Nike Air Force 1 Low: relevant retailer search path exists — exact listing verified yet. Check relevant retailer searches:
+2026-10-26T10:00:35.0286359Z 
+2026-10-26T10:00:35.0286497Z Nike
+2026-10-26T10:00:35.0286978Z Price and stock not verified
+2026-10-26T10:00:35.0287404Z Sportscene
+2026-10-26T10:00:35.0287813Z Price and stock not verified
+2026-10-26T10:00:35.0288355Z Totalsports
+2026-10-26T10:00:35.0288900Z Price and stock not verified
+2026-10-26T10:00:35.0289369Z JD Sports
+2026-10-26T10:00:35.0289796Z Price and stock not verified
+2026-10-26T10:00:35.0290243Z Bash
+2026-10-26T10:00:35.0290718Z Price and stock not verified
+2026-10-26T10:00:35.0291581Z ✅ Nike Air Force 1 Low: duplicate stat strip removed
+2026-10-26T10:00:35.0292712Z ✅ Nike Air Force 1 Low: duplicate seller stats removed
+2026-10-26T10:00:35.0293710Z ✅ Nike Air Force 1 Low: unverified branches disclose unknown stock — unverifiedCards=0, undisclosed=0
+2026-10-26T10:00:35.0294475Z ✅ Nike Air Force 1 Low: no unsafe Directions — unsafeDirections=0
+2026-10-26T10:00:35.0295179Z ✅ Nike Air Force 1 Low: no useless disabled Closest directions
+2026-10-26T10:00:35.0296152Z ✅ Nike Air Force 1 Low: honest search fallback or nearby-only results — No exact listing verified yet. Check relevant retailer searches:
+2026-10-26T10:00:35.0296697Z 
+2026-10-26T10:00:35.0296800Z Nike
+2026-10-26T10:00:35.0297088Z Price and stock not verified
+2026-10-26T10:00:35.0297350Z Sportscene
+2026-10-26T10:00:35.0297727Z Price and stock not verified
+2026-10-26T10:00:35.0298036Z Totalsports
+2026-10-26T10:00:35.0298755Z Price and stock not verified
+2026-10-26T10:00:35.0299128Z JD Sports
+2026-10-26T10:00:35.0299462Z Price and stock not verified
+2026-10-26T10:00:35.0299836Z Bash
+2026-10-26T10:00:35.0300189Z Price and stock not verif
+2026-10-26T10:00:35.0301147Z ✅ Nike Air Force 1 Low: scroll layout stable — heights=2661,2661,2661,2661,2661,2661
+2026-10-26T10:00:35.0302061Z ✅ Nike Air Force 1 Low: no page JavaScript errors
+2026-10-26T10:00:35.0303044Z ✅ Twinsaver Twin Ply 18 Rolls: identification returned — TWINSAVER toilet paper
+2026-10-26T10:00:35.0304635Z ✅ Twinsaver Twin Ply 18 Rolls: exact-seller section exists — No exact listing verified yet. Check relevant retailer searches:
+2026-10-26T10:00:35.0305396Z 
+2026-10-26T10:00:35.0305573Z Checkers
+2026-10-26T10:00:35.0305950Z Price and stock not verified
+2026-10-26T10:00:35.0306323Z Pick n Pay
+2026-10-26T10:00:35.0306669Z Price and stock not verified
+2026-10-26T10:00:35.0307034Z Shopri
+2026-10-26T10:00:35.0308980Z ✅ Twinsaver Twin Ply 18 Rolls: relevant retailer search path exists — ct listing verified yet. Check relevant retailer searches:
+2026-10-26T10:00:35.0309740Z 
+2026-10-26T10:00:35.0309895Z Checkers
+2026-10-26T10:00:35.0310256Z Price and stock not verified
+2026-10-26T10:00:35.0310613Z Pick n Pay
+2026-10-26T10:00:35.0310949Z Price and stock not verified
+2026-10-26T10:00:35.0311321Z Shoprite
+2026-10-26T10:00:35.0311658Z Price and stock not verified
+2026-10-26T10:00:35.0312025Z Woolworths
+2026-10-26T10:00:35.0312375Z Price and stock not verified
+2026-10-26T10:00:35.0312788Z Makro
+2026-10-26T10:00:35.0313479Z Price and stock not verified
+2026-10-26T10:00:35.0314293Z ✅ Twinsaver Twin Ply 18 Rolls: duplicate stat strip removed
+2026-10-26T10:00:35.0315127Z ✅ Twinsaver Twin Ply 18 Rolls: duplicate seller stats removed
+2026-10-26T10:00:35.0316346Z ✅ Twinsaver Twin Ply 18 Rolls: unverified branches disclose unknown stock — unverifiedCards=0, undisclosed=0
+2026-10-26T10:00:35.0317667Z ✅ Twinsaver Twin Ply 18 Rolls: no unsafe Directions — unsafeDirections=0
+2026-10-26T10:00:35.0318860Z ✅ Twinsaver Twin Ply 18 Rolls: no useless disabled Closest directions
+2026-10-26T10:00:35.0320489Z ✅ Twinsaver Twin Ply 18 Rolls: honest search fallback or nearby-only results — No exact listing verified yet. Check relevant retailer searches:
+2026-10-26T10:00:35.0321638Z 
+2026-10-26T10:00:35.0321793Z Checkers
+2026-10-26T10:00:35.0322167Z Price and stock not verified
+2026-10-26T10:00:35.0322581Z Pick n Pay
+2026-10-26T10:00:35.0323076Z Price and stock not verified
+2026-10-26T10:00:35.0323537Z Shoprite
+2026-10-26T10:00:35.0323904Z Price and stock not verified
+2026-10-26T10:00:35.0324326Z Woolworths
+2026-10-26T10:00:35.0324715Z Price and stock not verified
+2026-10-26T10:00:35.0325097Z Makro
+2026-10-26T10:00:35.0325442Z Price and stock not ve
+2026-10-26T10:00:35.0326446Z ✅ Twinsaver Twin Ply 18 Rolls: scroll layout stable — heights=2788,2788,2788,2788,2788,2788
+2026-10-26T10:00:35.0327460Z ✅ Twinsaver Twin Ply 18 Rolls: no page JavaScript errors
+2026-10-26T10:00:35.0328777Z ✅ Sony WH-1000XM5: identification returned — Sony WH-1000XM5 Headphones
+2026-10-26T10:00:35.0329580Z ✅ Sony WH-1000XM5: exact-seller section exists — IN
+2026-10-26T10:00:35.0330091Z INCREDIBLE BROOKLYN
+2026-10-26T10:00:35.0330476Z Nearby
+2026-10-26T10:00:35.0330811Z 2.8 km
+2026-10-26T10:00:35.0331078Z HI
+2026-10-26T10:00:35.0331389Z HiFiCorp Menlyn
+2026-10-26T10:00:35.0331714Z Nearby
+2026-10-26T10:00:35.0331976Z 5.8 km
+2026-10-26T10:00:35.0332229Z IN
+2026-10-26T10:00:35.0332509Z INCREDIBLE MENLYN
+2026-10-26T10:00:35.0332797Z Nearby
+2026-10-26T10:00:35.0333036Z 6.1 km
+2026-10-26T10:00:35.0333323Z IN
+2026-10-26T10:00:35.0333652Z INCREDIBLE MENLYN ON MAINE
+2026-10-26T10:00:35.0334007Z Nearby
+2026-10-26T10:00:35.0334277Z 6.6 km
+2026-10-26T10:00:35.0334960Z ✅ Sony WH-1000XM5: relevant retailer search path exists — IN
+2026-10-26T10:00:35.0335531Z INCREDIBLE BROOKLYN
+2026-10-26T10:00:35.0335844Z Nearby
+2026-10-26T10:00:35.0336116Z 2.8 km
+2026-10-26T10:00:35.0336401Z HI
+2026-10-26T10:00:35.0336770Z HiFiCorp Menlyn
+2026-10-26T10:00:35.0337090Z Nearby
+2026-10-26T10:00:35.0337385Z 5.8 km
+2026-10-26T10:00:35.0337679Z IN
+2026-10-26T10:00:35.0337995Z INCREDIBLE MENLYN
+2026-10-26T10:00:35.0338525Z Nearby
+2026-10-26T10:00:35.0338838Z 6.1 km
+2026-10-26T10:00:35.0339140Z IN
+2026-10-26T10:00:35.0339500Z INCREDIBLE MENLYN ON MAINE
+2026-10-26T10:00:35.0339884Z Nearby
+2026-10-26T10:00:35.0340177Z 6.6 km
+2026-10-26T10:00:35.0340828Z ✅ Sony WH-1000XM5: duplicate stat strip removed
+2026-10-26T10:00:35.0341595Z ✅ Sony WH-1000XM5: duplicate seller stats removed
+2026-10-26T10:00:35.0343384Z ✅ Sony WH-1000XM5: unverified branches disclose unknown stock — unverifiedCards=7, undisclosed=0
+2026-10-26T10:00:35.0344595Z ✅ Sony WH-1000XM5: no unsafe Directions — unsafeDirections=0
+2026-10-26T10:00:35.0345419Z ✅ Sony WH-1000XM5: no useless disabled Closest directions
+2026-10-26T10:00:35.0346376Z ✅ Sony WH-1000XM5: honest search fallback or nearby-only results — IN
+2026-10-26T10:00:35.0346980Z INCREDIBLE BROOKLYN
+2026-10-26T10:00:35.0347316Z Nearby
+2026-10-26T10:00:35.0347597Z 2.8 km
+2026-10-26T10:00:35.0347881Z HI
+2026-10-26T10:00:35.0348333Z HiFiCorp Menlyn
+2026-10-26T10:00:35.0348667Z Nearby
+2026-10-26T10:00:35.0348971Z 5.8 km
+2026-10-26T10:00:35.0349250Z IN
+2026-10-26T10:00:35.0349558Z INCREDIBLE MENLYN
+2026-10-26T10:00:35.0349872Z Nearby
+2026-10-26T10:00:35.0350169Z 6.1 km
+2026-10-26T10:00:35.0350453Z IN
+2026-10-26T10:00:35.0350789Z INCREDIBLE MENLYN ON MAINE
+2026-10-26T10:00:35.0351154Z Nearby
+2026-10-26T10:00:35.0351433Z 6.6 km
+2026-10-26T10:00:35.0352541Z ✅ Sony WH-1000XM5: scroll layout stable — heights=3828,3828,3828,3828,3828,3828
+2026-10-26T10:00:35.0353505Z ✅ Sony WH-1000XM5: no page JavaScript errors
+2026-10-26T10:00:35.0354291Z ✅ Bosch cordless drill: identification returned — Bosch drill
+2026-10-26T10:00:35.0355337Z ✅ Bosch cordless drill: exact-seller section exists — Builders Express Cherry Lane
+2026-10-26T10:00:35.0355996Z Nearby
+2026-10-26T10:00:35.0356284Z 2.4 km
+2026-10-26T10:00:35.0356625Z Builders Express Lynnwood
+2026-10-26T10:00:35.0356982Z Nearby
+2026-10-26T10:00:35.0357277Z 7.0 km
+2026-10-26T10:00:35.0357663Z Builders Warehouse Erasmus Prk
+2026-10-26T10:00:35.0358223Z Nearby
+2026-10-26T10:00:35.0358779Z 7.8 km
+2026-10-26T10:00:35.0359127Z Builders Warehouse Zam
+2026-10-26T10:00:35.0360172Z ✅ Bosch cordless drill: relevant retailer search path exists — Builders Express Cherry Lane
+2026-10-26T10:00:35.0360922Z Nearby
+2026-10-26T10:00:35.0361191Z 2.4 km
+2026-10-26T10:00:35.0361515Z Builders Express Lynnwood
+2026-10-26T10:00:35.0361896Z Nearby
+2026-10-26T10:00:35.0362194Z 7.0 km
+2026-10-26T10:00:35.0362611Z Builders Warehouse Erasmus Prk
+2026-10-26T10:00:35.0363019Z Nearby
+2026-10-26T10:00:35.0363334Z 7.8 km
+2026-10-26T10:00:35.0363725Z Builders Warehouse Zambezi
+2026-10-26T10:00:35.0364120Z Nearby
+2026-10-26T10:00:35.0364440Z 8.4 km
+2026-10-26T10:00:35.0365077Z ✅ Bosch cordless drill: duplicate stat strip removed
+2026-10-26T10:00:35.0365808Z ✅ Bosch cordless drill: duplicate seller stats removed
+2026-10-26T10:00:35.0367031Z ✅ Bosch cordless drill: unverified branches disclose unknown stock — unverifiedCards=5, undisclosed=0
+2026-10-26T10:00:35.0368420Z ✅ Bosch cordless drill: no unsafe Directions — unsafeDirections=0
+2026-10-26T10:00:35.0369754Z ✅ Bosch cordless drill: no useless disabled Closest directions
+2026-10-26T10:00:35.0370896Z ✅ Bosch cordless drill: honest search fallback or nearby-only results — Builders Express Cherry Lane
+2026-10-26T10:00:35.0371648Z Nearby
+2026-10-26T10:00:35.0371924Z 2.4 km
+2026-10-26T10:00:35.0372261Z Builders Express Lynnwood
+2026-10-26T10:00:35.0372620Z Nearby
+2026-10-26T10:00:35.0372921Z 7.0 km
+2026-10-26T10:00:35.0373305Z Builders Warehouse Erasmus Prk
+2026-10-26T10:00:35.0373685Z Nearby
+2026-10-26T10:00:35.0373962Z 7.8 km
+2026-10-26T10:00:35.0374291Z Builders Warehouse Zambezi
+2026-10-26T10:00:35.0374664Z Nearby
+2026-10-26T10:00:35.0374939Z 8.4 km
+2026-10-26T10:00:35.0375774Z ✅ Bosch cordless drill: scroll layout stable — heights=3572,3572,3572,3572,3572,3572
+2026-10-26T10:00:35.0376705Z ✅ Bosch cordless drill: no page JavaScript errors
+2026-10-26T10:00:35.0377084Z 
+2026-10-26T10:00:35.0377222Z Passed: 44/44
+2026-10-26T10:00:35.0377544Z Failed: 0
+2026-10-26T10:00:35.0451164Z ##[group]Run actions/upload-artifact@v4
+2026-10-26T10:00:35.0451446Z with:
+2026-10-26T10:00:35.0451662Z   name: trust-results-qa-report
+2026-10-26T10:00:35.0451903Z   path: qa-results/
+2026-10-26T10:00:35.0452111Z   if-no-files-found: warn
+2026-10-26T10:00:35.0452332Z   compression-level: 6
+2026-10-26T10:00:35.0452534Z   overwrite: false
+2026-10-26T10:00:35.0452737Z   include-hidden-files: false
+2026-10-26T10:00:35.0452963Z ##[endgroup]
+2026-10-26T10:00:35.0456323Z ##[command]/usr/bin/docker exec  53d51845795fbb09fe1f2e6ca1a60c7c4a34eb426d9fee524bb326872a27d4cf sh -c "cat /etc/*release | grep ^ID"
+2026-10-26T10:00:35.3040386Z (node:446) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-26T10:00:35.3041122Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-26T10:00:35.3113255Z With the provided path, there will be 5 files uploaded
+2026-10-26T10:00:35.3119829Z Artifact name is valid!
+2026-10-26T10:00:35.3120392Z Root directory input is valid!
+2026-10-26T10:00:35.6486426Z Beginning upload of artifact content to blob storage
+2026-10-26T10:00:35.6765084Z (node:446) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-26T10:00:35.8968738Z Uploaded bytes 5754
+2026-10-26T10:00:35.9603151Z Finished uploading artifact content to blob storage!
+2026-10-26T10:00:35.9604643Z SHA256 digest of uploaded artifact zip is c8a202228aab4598773c330d40129a86a296f3894869266182631af271351ec6
+2026-10-26T10:00:35.9605728Z Finalizing artifact upload
+2026-10-26T10:00:36.3950242Z Artifact trust-results-qa-report.zip successfully finalized. Artifact ID 12641148927
+2026-10-26T10:00:36.3951385Z Artifact trust-results-qa-report has been successfully uploaded! Final size is 5754 bytes. Artifact ID is 12641148927
+2026-10-26T10:00:36.3957954Z Artifact download URL: https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/40303619070/artifacts/12641148927
+2026-10-26T10:00:36.4098544Z ##[group]Run if [ -f qa-results/trust-results-latest.md ]; then
+2026-10-26T10:00:36.4099002Z [36;1mif [ -f qa-results/trust-results-latest.md ]; then[0m
+2026-10-26T10:00:36.4099435Z [36;1m  cat qa-results/trust-results-latest.md >> "$GITHUB_STEP_SUMMARY"[0m
+2026-10-26T10:00:36.4099792Z [36;1mfi[0m
+2026-10-26T10:00:36.4100582Z shell: bash --noprofile --norc -e -o pipefail {0}
+2026-10-26T10:00:36.4100879Z ##[endgroup]
+2026-10-26T10:00:36.4731769Z Post job cleanup.
+2026-10-26T10:00:36.4737774Z ##[command]/usr/bin/docker exec  53d51845795fbb09fe1f2e6ca1a60c7c4a34eb426d9fee524bb326872a27d4cf sh -c "cat /etc/*release | grep ^ID"
+2026-10-26T10:00:36.6789364Z (node:478) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-26T10:00:36.6790589Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-26T10:00:36.7042144Z Post job cleanup.
+2026-10-26T10:00:36.7050099Z ##[command]/usr/bin/docker exec  53d51845795fbb09fe1f2e6ca1a60c7c4a34eb426d9fee524bb326872a27d4cf sh -c "cat /etc/*release | grep ^ID"
+2026-10-26T10:00:36.8829119Z [command]/usr/bin/git version
+2026-10-26T10:00:36.8869017Z git version 2.43.0
+2026-10-26T10:00:36.8913881Z Temporarily overriding HOME='/__w/_temp/95ecc795-5241-46a3-861f-98dcb13378cc' before making global git config changes
+2026-10-26T10:00:36.8915637Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-26T10:00:36.8921433Z [command]/usr/bin/git config --global --add safe.directory /__w/Findit-nearby/Findit-nearby
+2026-10-26T10:00:36.8959353Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-26T10:00:36.9000700Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-26T10:00:36.9247585Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-26T10:00:36.9275916Z http.https://github.com/.extraheader
+2026-10-26T10:00:36.9289103Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-26T10:00:36.9334365Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-26T10:00:36.9666422Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-26T10:00:36.9695667Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-26T10:00:37.0150749Z Stop and remove container: 1b4f3a5914bf434681987fd83898be93_mcrmicrosoftcomplaywrightv1550noble_d71c6f
+2026-10-26T10:00:37.0155155Z ##[command]/usr/bin/docker rm --force 53d51845795fbb09fe1f2e6ca1a60c7c4a34eb426d9fee524bb326872a27d4cf
+2026-10-26T10:00:37.1208660Z 53d51845795fbb09fe1f2e6ca1a60c7c4a34eb426d9fee524bb326872a27d4cf
+2026-10-26T10:00:37.1231108Z Remove container network: github_network_d8ec7bbf3f1b40948ae157dc1d5c9a98
+2026-10-26T10:00:37.1235373Z ##[command]/usr/bin/docker network rm github_network_d8ec7bbf3f1b40948ae157dc1d5c9a98
+2026-10-26T10:00:37.2108921Z github_network_d8ec7bbf3f1b40948ae157dc1d5c9a98
+2026-10-26T10:00:37.2180194Z Cleaning up orphan processes
+2026-10-26T10:00:37.2536839Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-node@v4, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
