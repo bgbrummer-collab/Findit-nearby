@@ -7,7 +7,7 @@ on:
   pull_request:
     paths: ['.github/workflows/product-flow-qa.yml']
 permissions:
-  contents: write
+  contents: read
 jobs:
   qa:
     runs-on: ubuntu-latest
@@ -78,11 +78,9 @@ jobs:
           name: product-flow-qa-report
           path: qa-results/
           if-no-files-found: warn
-      - name: Publish report
-        if: github.event_name == 'push'
+      - name: Publish report summary
+        if: always()
         run: |
-          git config user.name "FindIt Product QA Bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add qa-results/product-flow-latest.md .github/workflows/product-flow-qa.yml
-          git commit -m "Publish multi-product FindIt production QA report"
-          git push
+          if [ -f qa-results/product-flow-latest.md ]; then
+            cat qa-results/product-flow-latest.md >> "$GITHUB_STEP_SUMMARY"
+          fi

@@ -6,7 +6,7 @@ on:
   pull_request:
     paths: ['.github/workflows/trust-results-qa.yml']
 permissions:
-  contents: write
+  contents: read
 jobs:
   qa:
     runs-on: ubuntu-latest
@@ -85,11 +85,9 @@ jobs:
           name: trust-results-qa-report
           path: qa-results/
           if-no-files-found: warn
-      - name: Publish report
-        if: github.event_name == 'push'
+      - name: Publish report summary
+        if: always()
         run: |
-          git config user.name 'FindIt Trust QA Bot'
-          git config user.email 'actions@users.noreply.github.com'
-          git add qa-results/trust-results-latest.md .github/workflows/trust-results-qa.yml
-          git commit -m 'Publish trust-first production QA report [skip ci]'
-          git push
+          if [ -f qa-results/trust-results-latest.md ]; then
+            cat qa-results/trust-results-latest.md >> "$GITHUB_STEP_SUMMARY"
+          fi
