@@ -3,6 +3,8 @@ on:
   push:
     branches: [main]
     paths: ['.github/workflows/trust-results-qa.yml']
+  pull_request:
+    paths: ['.github/workflows/trust-results-qa.yml']
 permissions:
   contents: write
 jobs:
@@ -43,8 +45,8 @@ jobs:
               await p.goto(base,{waitUntil:'domcontentloaded',timeout:35000});await p.waitForTimeout(1500);
               const img=`/tmp/trust-${n}.png`;const g=await ctx.newPage();
               await g.setContent(`<canvas id=c width=1200 height=800></canvas><script>const c=document.querySelector('#c'),z=c.getContext('2d');z.fillStyle='#fff';z.fillRect(0,0,1200,800);z.fillStyle='#111';z.font='bold 70px Arial';z.fillText(${JSON.stringify(x.a)},70,260);z.font='bold 52px Arial';z.fillText(${JSON.stringify(x.b)},70,370);z.strokeStyle='#222';z.lineWidth=8;z.strokeRect(50,120,1100,390)</script>`);await g.locator('#c').screenshot({path:img});await g.close();
-              await p.locator('#photo').setInputFiles(img);await p.locator('#location').click();await p.waitForTimeout(500);await p.locator('#search').click();
-              await p.waitForSelector('#results:not(.hidden)',{timeout:55000});await p.waitForTimeout(6500);
+              await p.locator('#fxVisiblePhotoPicker').setInputFiles(img);await p.locator('#finditExactShell [data-location-direct]').click();await p.waitForTimeout(500);await p.locator('#fxSearchNow').click();
+              await p.waitForFunction(()=>{const s=window.finditState||{};return !s.photoSearchPending&&!!s.result?.identification;},null,{timeout:55000});await p.waitForTimeout(6500);
               const result=(await p.locator('#resultName').innerText()).trim();
               const seller=await p.locator('#exactSellerResults').innerText().catch(()=> '');
               const nearby=await p.locator('#nearbyPanel').innerText().catch(()=> '');
@@ -77,7 +79,14 @@ jobs:
           if(failed.length)process.exitCode=1;
           NODE
           node trust-qa.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: trust-results-qa-report
+          path: qa-results/
+          if-no-files-found: warn
       - name: Publish report
+        if: github.event_name == 'push'
         run: |
           git config user.name 'FindIt Trust QA Bot'
           git config user.email 'actions@users.noreply.github.com'
