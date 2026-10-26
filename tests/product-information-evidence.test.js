@@ -15,14 +15,17 @@ test('quantity formatting cannot obstruct label discovery or silently confirm a 
   assert.equal(candidateLabelMatches('Example Curl Conditioner '+given,{...base,suggestedLabel:'Example Curl Conditioner '+wanted}),expected);
  }
  assert.equal(candidateLabelMatches('Example Curl Shampoo 250ml',base),false);
+ assert.equal(candidateLabelMatches('Example Curl Conditioner 1250ml',{brand:'Example',object:'conditioner',suggestedLabel:'Example Curl Conditioner',size:'250 ml'}),false);
+ assert.equal(candidateLabelMatches('Example Curl Conditioner 1000ml',{brand:'Example',object:'conditioner',suggestedLabel:'Example Curl Conditioner',size:'1 l'}),true);
+ assert.equal(candidateLabelMatches('Example Shoes UK19',{brand:'Example',object:'shoes',suggestedLabel:'Example Style Shoes',size:'UK9'}),false);
 });
 
 test('cross-unit label candidates retain uncertainty and never become confirmed photo identity',async t=>{
  const name='Example Curl Triple Blend Conditioner 250ml',url='https://retailer.example/product/curl';
  const page='<script type="application/ld+json">'+JSON.stringify({'@type':'Product',name,brand:'Example',description:'Designed to condition curly hair.'})+'</script>';
  const queries=[];t.mock.method(globalThis,'fetch',async u=>{if(String(u).includes('bing.com')){queries.push(new URL(u).searchParams.get('q'));return new Response('<rss><item><title>'+name+'</title><link>'+url+'</link></item></rss>');}return new Response(String(u)===url?page:'<rss/>');});
- const i={name:'Example conditioner',brand:'Example',object:'conditioner',requiresModelConfirmation:true,suggestedLabel:'Example Curl Triple Blend Conditioner 8.4 fl oz'};
- const rows=await visualProductCandidates(i);assert.equal(rows.length,1);assert.equal(rows[0].photoMatchConfirmed,false);assert.equal(rows[0].identity.userConfirmed,false);assert.match(rows[0].quantityNote,/no unit conversion or size match/);assert.ok(queries.every(q=>!q.includes('8.4')));assert.equal(i.requiresModelConfirmation,true);
+ const i={name:'Example conditioner',brand:'Example',object:'conditioner',requiresModelConfirmation:true,suggestedLabel:'Example Curl Triple Blend Conditioner 8.4 fl oz',labelCandidates:[{name:'Example Curl Triple Blend Conditioner 8.4 fl oz',brand:'Example',size:'8.4 fl oz',confirmed:false,source:'printed-label-hypothesis'}]};
+ const rows=await visualProductCandidates(i);assert.equal(rows.length,1);assert.equal(rows[0].photoMatchConfirmed,false);assert.equal(rows[0].identity.userConfirmed,false);assert.equal(rows[0].identity.size,'');assert.match(rows[0].quantityNote,/no unit conversion or size match/);assert.ok(queries.every(q=>!q.includes('8.4')));assert.equal(i.requiresModelConfirmation,true);
 });
 
 test('scoped definition lists preserve units and label instructions without contact or payment content',()=>{
