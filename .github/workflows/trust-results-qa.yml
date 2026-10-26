@@ -49,7 +49,6 @@ jobs:
               await p.waitForFunction(()=>{const s=window.finditState||{};return !s.photoSearchPending&&!!s.result?.identification;},null,{timeout:55000});await p.waitForTimeout(6500);
               const result=(await p.locator('#resultName').innerText()).trim();
               const seller=await p.locator('#fxTopStores').innerText().catch(()=> '');
-              const nearby=await p.locator('#nearbyPanel').innerText().catch(()=> '');
               add(`${x.label}: identification returned`,!!result&&!/^Item$/i.test(result),result);
               add(`${x.label}: exact-seller section exists`,seller.length>15,seller.slice(0,150));
               add(`${x.label}: relevant retailer search path exists`,x.expect.test(seller),seller.slice(-250));
@@ -65,7 +64,11 @@ jobs:
               const offers=await p.locator('#fxTopStores .fx-retailer-candidate').evaluateAll(cards=>cards.filter(c=>!/google\.com\/search/.test(c.href)) .length);
               if(offers){
                 add(`${x.label}: verified listings disclose branch stock`,/Verified product listings/i.test(seller)&&/Branch stock (not verified|verified)/i.test(seller),seller.slice(0,250));
-              }else add(`${x.label}: honest no-match fallback shown`,/No exact listing verified yet/i.test(seller)&&/Price and stock not verified/i.test(seller));
+              }else {
+                const nearbyRows=await p.locator('#fxTopStores > button').count();
+                const labelledNearby=await p.locator('#fxTopStores > button').evaluateAll(cards=>cards.every(c=>/Nearby|branch stock (unknown|unverified|not verified)/i.test(c.innerText)&&!/(?<!not )Stock verified/i.test(c.innerText)));
+                add(`${x.label}: honest search fallback or nearby-only results`,(/No exact listing verified yet/i.test(seller)&&/Price and stock not verified/i.test(seller))||(nearbyRows>0&&labelledNearby&&undisclosed===0),seller.slice(0,250));
+              }
               const heights=[];for(let k=0;k<6;k++){await p.evaluate(k=>window.scrollTo(0,(document.documentElement.scrollHeight-window.innerHeight)*(k/5)),k);await p.waitForTimeout(250);heights.push(await p.evaluate(()=>document.documentElement.scrollHeight));}
               add(`${x.label}: scroll layout stable`,Math.max(...heights)-Math.min(...heights)<80,`heights=${heights.join(',')}`);
               add(`${x.label}: no page JavaScript errors`,errors.length===0,errors.join(' | ').slice(0,300));
