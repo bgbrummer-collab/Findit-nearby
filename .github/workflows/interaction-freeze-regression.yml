@@ -51,6 +51,7 @@ jobs:
           timeout --signal=TERM --kill-after=5s 120s node tests/current-find-relevance-regression.mjs
           timeout --signal=TERM --kill-after=5s 60s node tests/upload-button-user-regression.mjs
           timeout --signal=TERM --kill-after=5s 90s node tests/label-confirmation-regression.mjs
+          timeout --signal=TERM --kill-after=5s 90s node tests/product-information-user-regression.mjs
       - name: Wait for production deployment
         if: github.event_name != 'pull_request'
         run: |
@@ -77,6 +78,7 @@ jobs:
           timeout --signal=TERM --kill-after=5s 120s node tests/current-find-relevance-regression.mjs
           timeout --signal=TERM --kill-after=5s 45s node tests/upload-button-user-regression.mjs
           timeout --signal=TERM --kill-after=5s 90s node tests/label-confirmation-regression.mjs
+          timeout --signal=TERM --kill-after=5s 90s node tests/product-information-user-regression.mjs
           # Photo/provider production coverage runs in the dedicated live-photo and
           # five-image matrix workflows. Keep this suite focused on interaction
           # responsiveness so it does not duplicate vision traffic and trigger
