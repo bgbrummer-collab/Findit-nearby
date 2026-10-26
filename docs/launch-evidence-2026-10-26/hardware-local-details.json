@@ -1,0 +1,120 @@
+{
+  "hours": {
+    "status": 200,
+    "data": {
+      "ok": true,
+      "researchMode": "published-branch-hours",
+      "retryable": false,
+      "checkedAt": "2026-10-26T09:19:57.674Z",
+      "stores": [
+        {
+          "name": "Builders Express Lynnwood",
+          "address": "Shop 1 Gift Acres Shopping Centre, 118 Lynnwood Road, Gauteng, Pretoria, 0081",
+          "lat": -25.767488,
+          "lon": 28.296105,
+          "publishedAddress": "Shop 1 Gift Acres Shopping Centre, 118 Lynnwood Road, Gauteng, Pretoria, 0081",
+          "phone": "0860008985",
+          "website": "https://www.builders.co.za/store-finder",
+          "branchDetailsVerified": true,
+          "timeZone": "Africa/Johannesburg",
+          "status": "open",
+          "opensAt": "",
+          "closesAt": "18:00",
+          "todayHours": "Mo 08:00-18:00; Tu 08:00-18:00; We 08:00-18:00; Th 08:00-18:00; Fr 08:00-18:00; Sa 08:00-16:00; Su 08:00-15:00; PH unknown",
+          "sourceLabel": "Official retailer locator",
+          "sourceUrl": "https://www.builders.co.za/web/v2/builders/channel/web/zone/B14/stores?latitude=-25.7821&longitude=28.2752&fields=FULL",
+          "hoursVerified": true
+        },
+        {
+          "name": "Builders Warehouse Faerie Glen",
+          "address": "Atterbury road, Atterbury Value Mart, Gauteng, Pretoria, 0043",
+          "lat": -25.787304,
+          "lon": 28.305989,
+          "publishedAddress": "Atterbury road, Atterbury Value Mart, Gauteng, Pretoria, 0043",
+          "phone": "0120032200",
+          "website": "https://www.builders.co.za/store-finder",
+          "branchDetailsVerified": true,
+          "timeZone": "Africa/Johannesburg",
+          "status": "open",
+          "opensAt": "",
+          "closesAt": "18:00",
+          "todayHours": "Mo 07:00-18:00; Tu 07:00-18:00; We 07:00-18:00; Th 07:00-18:00; Fr 07:00-18:00; Sa 07:00-17:00; Su 08:00-16:00; PH unknown",
+          "sourceLabel": "Official retailer locator",
+          "sourceUrl": "https://www.builders.co.za/web/v2/builders/channel/web/zone/B14/stores?latitude=-25.7821&longitude=28.2752&fields=FULL",
+          "hoursVerified": true
+        },
+        {
+          "name": "Builders Express Cherry Lane",
+          "address": "114 Fehrsen Street, Gauteng, Pretoria, 0181",
+          "lat": -25.76922803,
+          "lon": 28.23420599,
+          "publishedAddress": "114 Fehrsen Street, Gauteng, Pretoria, 0181",
+          "phone": "0120076235",
+          "website": "https://www.builders.co.za/store-finder",
+          "branchDetailsVerified": true,
+          "timeZone": "Africa/Johannesburg",
+          "status": "open",
+          "opensAt": "",
+          "closesAt": "18:00",
+          "todayHours": "Mo 08:00-18:00; Tu 08:00-18:00; We 08:00-18:00; Th 08:00-18:00; Fr 08:00-18:00; Sa 08:00-16:00; Su 08:00-16:00; PH unknown",
+          "sourceLabel": "Official retailer locator",
+          "sourceUrl": "https://www.builders.co.za/web/v2/builders/channel/web/zone/B14/stores?latitude=-25.7821&longitude=28.2752&fields=FULL",
+          "hoursVerified": true
+        },
+        {
+          "name": "Builders Warehouse Erasmus Prk",
+          "address": "Erasmus Park, Castle Gate Cres, Gauteng, Pretoria, 0181",
+          "lat": -25.81682,
+          "lon": 28.242733,
+          "publishedAddress": "Erasmus Park, Castle Gate Cres, Gauteng, Pretoria, 0181",
+          "phone": "0120036770",
+          "website": "https://www.builders.co.za/store-finder",
+          "branchDetailsVerified": true,
+          "timeZone": "Africa/Johannesburg",
+          "status": "open",
+          "opensAt": "",
+          "closesAt": "18:00",
+          "todayHours": "Mo 07:00-18:00; Tu 07:00-18:00; We 07:00-18:00; Th 07:00-18:00; Fr 07:00-18:00; Sa 07:00-17:00; Su 08:00-16:00; PH unknown",
+          "sourceLabel": "Official retailer locator",
+          "sourceUrl": "https://www.builders.co.za/web/v2/builders/channel/web/zone/B14/stores?latitude=-25.7821&longitude=28.2752&fields=FULL",
+          "hoursVerified": true
+        }
+      ],
+      "sources": [
+        {
+          "title": "Builders Express Lynnwood",
+          "url": "https://www.builders.co.za/web/v2/builders/channel/web/zone/B14/stores?latitude=-25.7821&longitude=28.2752&fields=FULL"
+        },
+        {
+          "title": "Builders Warehouse Faerie Glen",
+          "url": "https://www.builders.co.za/web/v2/builders/channel/web/zone/B14/stores?latitude=-25.7821&longitude=28.2752&fields=FULL"
+        },
+        {
+          "title": "Builders Express Cherry Lane",
+          "url": "https://www.builders.co.za/web/v2/builders/channel/web/zone/B14/stores?latitude=-25.7821&longitude=28.2752&fields=FULL"
+        },
+        {
+          "title": "Builders Warehouse Erasmus Prk",
+          "url": "https://www.builders.co.za/web/v2/builders/channel/web/zone/B14/stores?latitude=-25.7821&longitude=28.2752&fields=FULL"
+        }
+      ]
+    }
+  },
+  "website": {
+    "status": 200,
+    "data": {
+      "ok": true,
+      "checked": true,
+      "website": "https://www.builders.co.za/store-finder",
+      "verifiedFields": {
+        "phone": "0860008985",
+        "address": "Shop 1 Gift Acres Shopping Centre, 118 Lynnwood Road, Gauteng, Pretoria, 0081",
+        "openingHours": "Mo 08:00-18:00; Tu 08:00-18:00; We 08:00-18:00; Th 08:00-18:00; Fr 08:00-18:00; Sa 08:00-16:00; Su 08:00-15:00; PH unknown"
+      },
+      "source": "Official retailer locator",
+      "sourceUrl": "https://www.builders.co.za/web/v2/builders/channel/web/zone/B14/stores?latitude=-25.7821&longitude=28.2752&fields=FULL",
+      "checkedAt": "2026-10-26T09:19:57.678Z",
+      "message": "Published details verified for this exact branch. Product stock and branch prices remain unverified."
+    }
+  }
+}

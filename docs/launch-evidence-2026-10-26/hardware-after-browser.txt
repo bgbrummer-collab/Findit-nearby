@@ -1,0 +1,472 @@
+- complementary:
+  - generic: F
+  - generic: FindIt
+  - generic: Find it. Compare it. Get it.
+  - navigation:
+    - button "⌂ Home"
+    - button "⌕ Search"
+    - button "⌖ Nearby"
+    - button "⇄ Compare ★ PREMIUM":
+      - text: ⇄ Compare
+      - generic: ★ PREMIUM
+    - button "◇ Deals ★ PREMIUM":
+      - text: ◇ Deals
+      - generic: ★ PREMIUM
+    - button "♡ Saved ★ PREMIUM":
+      - text: ♡ Saved
+      - generic: ★ PREMIUM
+    - button "◷ History"
+    - button "♧ Alerts ★ PREMIUM":
+      - text: ♧ Alerts
+      - generic: ★ PREMIUM
+    - button "▣ Feedback"
+    - button "✦ Suggest a Feature"
+    - button "ⓘ How to use FindIt"
+  - generic: 🚀
+  - heading "Go Premium" [level=3]
+  - paragraph: Unlock wider search, saved finds, comparisons & more.
+  - button "Upgrade Now"
+  - generic: Recent Searches
+  - button "View all"
+  - generic: Bosch GSB 18V-50 with batteries and charger
+- main:
+  - text: ⌕
+  - generic: Search or upload an image to find anything...
+  - text: ⌖
+  - generic: Selected location
+  - button "Settings": ⚙
+  - button "Alerts":
+    - text: ♧
+    - generic: ★ PREMIUM
+  - button "Premium tools": F
+  - generic: ✦ AI powered product search
+  - heading "Find anything nearby." [level=1]:
+    - text: Find anything
+    - text: nearby.
+  - paragraph: Take a photo, upload an image, or search by text and we’ll find where to buy it near you.
+  - button "Upload Photo"
+  - button "⌕ Search Product"
+  - button "▥ Scan / Camera"
+  - button "▧ Drag & drop an image here or click to browse":
+    - generic: ▧
+    - generic: Drag & drop an image here
+    - text: or click to
+    - emphasis: browse
+  - button "⌖ Use my location"
+  - button "✦ Identify & Find" [disabled]
+  - status: Product search complete. Prices and stock require verified retailer evidence.
+  - generic "Choose location on map / enter coordinates"
+  - paragraph: Select your search area on the map, or enter its latitude and longitude. Distances use this point. Your selection lasts for this visit.
+  - button "Open location map"
+  - status
+  - text: Latitude
+  - spinbutton "Latitude": "-25.7821"
+  - text: Longitude
+  - spinbutton "Longitude": "28.2752"
+  - button "Use selected location"
+  - status: Search location set to -25.7821, 28.2752. Distances are measured from your selected point.
+  - article:
+    - generic: ✓
+    - generic: Exact match
+    - generic: See the identified product and only supported identity details.
+  - article:
+    - generic: R
+    - generic: Real prices
+    - generic: Compare retailer prices only when FindIt can verify them.
+    - generic: ★ PREMIUM
+  - article:
+    - generic: ⌖
+    - generic: Nearby stores
+    - generic: See relevant stores around your selected location.
+  - article:
+    - generic: ▣
+    - generic: Live stock
+    - generic: Branch stock appears only when retailer evidence confirms it.
+    - generic: ★ PREMIUM
+  - article:
+    - generic: ⇄
+    - generic: Compare
+    - generic: Compare verified offers without invented prices or availability.
+    - generic: ★ PREMIUM
+  - article:
+    - generic: ＋
+    - generic: Shopping Tools
+    - generic: Lists, watchlist, budget, links & preferences.
+  - generic: Image confidence identifies what the object appears to be. Store, price and stock recommendations remain separate and are only shown when their evidence matches this Find.
+  - text: FindIt Smart Choice
+  - heading "Best options from this Find" [level=2]
+  - paragraph: Ranked from verified/current evidence. Missing prices, stock or opening hours are never guessed.
+  - generic: Search confirmed
+  - article:
+    - generic: BEST OVERALL
+    - strong: TMB Supplies
+    - generic: Bosch Professional | Cordless Drill GSB 18V-50 + 2 X 2,0Ah Batteries + Charger · R 4 999,00 · Online offer · branch price and stock unverified
+  - article:
+    - generic: CHEAPEST
+    - strong: TMB Supplies
+    - generic: R 4 999,00 · online offer; branch price unverified
+  - article:
+    - generic: CLOSEST
+    - strong: Builders Express Lynnwood
+    - generic: 2.6 km away · Open now
+  - button "+ Shopping List"
+  - button "Save Find"
+  - button "Open Now"
+  - generic: 4 of 4 stores with published hours are open now.
+  - text: LIVE STORE HOURS
+  - heading "Open, closed & next hours" [level=3]
+  - button "Check again"
+  - paragraph: FindIt checks published information for the named branch. Open or closed status follows its published schedule. Complex schedules, holiday exceptions and missing hours are marked unconfirmed.
+  - strong: Builders Express Lynnwood
+  - generic: Shop 1 Gift Acres Shopping Centre, 118 Lynnwood Road, Gauteng, Pretoria, 0081
+  - text: Scheduled open
+  - generic: Closes 18:00
+  - emphasis: Hours checked 11:36 SAST
+  - strong: Builders Warehouse Faerie Glen
+  - generic: Atterbury road, Atterbury Value Mart, Gauteng, Pretoria, 0043
+  - text: Scheduled open
+  - generic: Closes 18:00
+  - emphasis: Hours checked 11:36 SAST
+  - strong: Builders Express Cherry Lane
+  - generic: 114 Fehrsen Street, Gauteng, Pretoria, 0181
+  - text: Scheduled open
+  - generic: Closes 18:00
+  - emphasis: Hours checked 11:36 SAST
+  - strong: Builders Warehouse Erasmus Prk
+  - generic: Erasmus Park, Castle Gate Cres, Gauteng, Pretoria, 0181
+  - text: Scheduled open
+  - generic: Closes 18:00
+  - emphasis: Hours checked 11:36 SAST
+  - text: FINDIT SHOPPING ASSISTANT
+  - heading "Plan, verify and track your shopping" [level=2]
+  - paragraph: Verified data first. FindIt does not guess prices, stock, phone numbers or opening hours.
+  - button "+ Add current item"
+  - button "Watch item"
+  - button "Scan barcode"
+  - generic "Check nearby stores"
+  - strong: Builders Express Lynnwood
+  - generic: 2.6 km · Open now
+  - button "Check Store"
+  - strong: Builders Warehouse Faerie Glen
+  - generic: 3.1 km · Open now
+  - button "Check Store"
+  - strong: Builders Express Cherry Lane
+  - generic: 4.3 km · Open now
+  - button "Check Store"
+  - strong: Builders Warehouse Erasmus Prk
+  - generic: 5.0 km · Open now
+  - button "Check Store"
+  - generic "Shopping List + Trip Planner"
+  - paragraph: Your shopping list is empty. Add the current Find to start planning.
+  - generic "Watch List + Price History"
+  - generic: Results for your image
+  - generic: Bosch GSB 18V-50 with batteries and charger
+  - generic: product
+  - button "♡ Save ★ PREMIUM":
+    - text: ♡ Save
+    - generic: ★ PREMIUM
+  - button "⇄ Compare ★ PREMIUM":
+    - text: ⇄ Compare
+    - generic: ★ PREMIUM
+  - heading "Nearby Stores" [level=2]
+  - button "☷ Filter"
+  - button "View all"
+  - generic: ●
+  - generic: ●
+  - generic: ●
+  - generic: ●
+  - generic: ●
+  - generic: ●
+  - button "Builders Express Lynnwood logo Builders Express Lynnwood 2.6 km • Shop 1 Gift Acres Shopping Centre, 118 Lynnwood Road, Gauteng, Pretoria, 0081 Branch availability unknown →":
+    - img "Builders Express Lynnwood logo"
+    - generic: Builders Express Lynnwood
+    - generic: 2.6 km • Shop 1 Gift Acres Shopping Centre, 118 Lynnwood Road, Gauteng, Pretoria, 0081
+    - emphasis: Relevant nearby retailer • exact item not confirmedBranch availability unknown
+    - strong: →
+  - button "Builders Warehouse Faerie Glen logo Builders Warehouse Faerie Glen 3.1 km • Atterbury road, Atterbury Value Mart, Gauteng, Pretoria, 0043 Branch availability unknown →":
+    - img "Builders Warehouse Faerie Glen logo"
+    - generic: Builders Warehouse Faerie Glen
+    - generic: 3.1 km • Atterbury road, Atterbury Value Mart, Gauteng, Pretoria, 0043
+    - emphasis: Relevant nearby retailer • exact item not confirmedBranch availability unknown
+    - strong: →
+  - button "Builders Express Cherry Lane logo Builders Express Cherry Lane 4.3 km • 114 Fehrsen Street, Gauteng, Pretoria, 0181 Branch availability unknown →":
+    - img "Builders Express Cherry Lane logo"
+    - generic: Builders Express Cherry Lane
+    - generic: 4.3 km • 114 Fehrsen Street, Gauteng, Pretoria, 0181
+    - emphasis: Relevant nearby retailer • exact item not confirmedBranch availability unknown
+    - strong: →
+  - button "Builders Warehouse Erasmus Prk logo Builders Warehouse Erasmus Prk 5.0 km • Erasmus Park, Castle Gate Cres, Gauteng, Pretoria, 0181 Branch availability unknown →":
+    - img "Builders Warehouse Erasmus Prk logo"
+    - generic: Builders Warehouse Erasmus Prk
+    - generic: 5.0 km • Erasmus Park, Castle Gate Cres, Gauteng, Pretoria, 0181
+    - emphasis: Relevant nearby retailer • exact item not confirmedBranch availability unknown
+    - strong: →
+  - article:
+    - generic: ◇
+    - generic: Deals Near You
+    - generic: See verified retailer offers when available.
+    - button "View Deals → ★ PREMIUM":
+      - text: View Deals →
+      - generic: ★ PREMIUM
+    - generic: ★ PREMIUM
+  - article:
+    - generic: ♡
+    - generic: Saved Items
+    - generic: Open the Finds you saved on this device.
+    - button "View Saved → ★ PREMIUM":
+      - text: View Saved →
+      - generic: ★ PREMIUM
+    - generic: ★ PREMIUM
+  - article:
+    - generic: ↗
+    - generic: Price History
+    - generic: See verified price observations when available.
+    - button "View History → ★ PREMIUM":
+      - text: View History →
+      - generic: ★ PREMIUM
+    - generic: ★ PREMIUM
+  - article:
+    - generic: ✦
+    - generic: Suggest a Feature
+    - generic: Tell us what FindIt should build next.
+    - button "Send Idea →"
+- complementary:
+  - generic: ▧
+  - generic: Product confirmed by search
+  - heading "Bosch GSB 18V-50 with batteries and charger" [level=2]
+  - paragraph: product
+  - paragraph: GSB18V-50 Cordless Impact Drill - Robust brushless motor for durability and flexibility.
+  - generic: Search confirmed
+  - generic: Best verified price
+  - strong: R 4 999,00
+  - generic: FindIt won’t guess a price.
+  - generic: What we found
+  - generic: 1 retailer listing found
+  - button "ⓘ Product Info":
+    - text: ⓘ
+    - generic: Product Info
+  - button "⇄ Compare Prices ★ PREMIUM":
+    - text: ⇄
+    - generic: Compare Prices
+    - generic: ★ PREMIUM
+  - button "⌖ Nearby Stores":
+    - text: ⌖
+    - generic: Nearby Stores
+  - button "✦ Ask FindIt ★ PREMIUM":
+    - text: ✦
+    - generic: Ask FindIt
+    - generic: ★ PREMIUM
+  - heading "Top Stores" [level=2]
+  - button "View all"
+  - button "Builders Express Lynnwood logo Builders Express Lynnwood Nearby 2.6 km":
+    - img "Builders Express Lynnwood logo"
+    - generic: Builders Express Lynnwood
+    - generic: Nearby
+    - generic: 2.6 km
+  - button "Builders Warehouse Faerie Glen logo Builders Warehouse Faerie Glen Nearby 3.1 km":
+    - img "Builders Warehouse Faerie Glen logo"
+    - generic: Builders Warehouse Faerie Glen
+    - generic: Nearby
+    - generic: 3.1 km
+  - button "Builders Express Cherry Lane logo Builders Express Cherry Lane Nearby 4.3 km":
+    - img "Builders Express Cherry Lane logo"
+    - generic: Builders Express Cherry Lane
+    - generic: Nearby
+    - generic: 4.3 km
+  - button "Builders Warehouse Erasmus Prk logo Builders Warehouse Erasmus Prk Nearby 5.0 km":
+    - img "Builders Warehouse Erasmus Prk logo"
+    - generic: Builders Warehouse Erasmus Prk
+    - generic: Nearby
+    - generic: 5.0 km
+- banner:
+  - link "F FindIt Nearby":
+    - /url: "#home"
+    - generic: F
+    - generic: FindIt Nearby
+  - navigation:
+    - link "Find":
+      - /url: "#finder"
+    - link "How it works":
+      - /url: "#how"
+    - link "Examples":
+      - /url: "#examples"
+    - link "Feedback":
+      - /url: "#feedback"
+  - button "☰"
+- complementary:
+  - generic: F
+  - generic: FindIt Nearby
+  - button: ×
+  - navigation:
+    - link:
+      - /url: "#home"
+      - text: ⌂ Home
+    - link:
+      - /url: "#finder"
+      - text: 📸 Find an item
+    - link:
+      - /url: "#how"
+      - text: ✨ How it works
+    - button: 🕘 Recent finds
+    - button: ✦ Ask FindIt
+    - button: ★ Premium
+    - link:
+      - /url: "#feedback"
+      - text: 💬 Feedback
+    - button: ⚙ Settings
+- main:
+  - paragraph: SEARCH → VERIFY → FIND NEARBY
+  - heading "You saw it. You want it. You found it with FindIt." [level=1]:
+    - text: You saw it.
+    - text: You want it.
+    - text: You found it with FindIt.
+  - paragraph: Upload a photo, search by product name or scan a barcode. FindIt helps you discover relevant retailers without inventing missing product, price or stock details.
+  - link "📸 Find my item":
+    - /url: "#finder"
+  - button "🎲 Challenge FindIt"
+  - generic: 🎯 Exact-item first
+  - generic: 📍 Nearby first
+  - generic: 🛍️ Consumer retailers
+  - generic: 🧠 Specialist-aware
+  - generic: 📸
+  - generic: Take Photo
+  - generic: Upload Image
+  - generic: START SEARCHING
+  - heading "What are you looking for?" [level=2]
+  - paragraph: Use a clear photo. Logos, labels and model text help FindIt be more precise.
+  - generic: Radius
+  - combobox "Radius":
+    - option "3 km"
+    - option "5 km"
+    - option "10 km" [selected]
+    - option "15 km ★ Premium" [disabled]
+    - option "25 km ★ Premium" [disabled]
+  - generic: 📸
+  - strong: Drop or choose a photo
+  - generic: Gallery • Camera • Files
+  - generic: No need to know the name. Just show us.
+  - button "Upload product photo"
+  - button "Choose File"
+  - button "🖼️ Gallery / Files"
+  - button "📷 Take photo"
+  - button "📍 Use my location"
+  - button "✨ Identify & Find" [disabled]
+  - paragraph: Product search complete. Prices and stock require verified retailer evidence.
+  - paragraph: TRY FINDIT WITH…
+  - heading "Ordinary. Unusual. Anything in-between." [level=2]
+  - button "Shuffle ↻"
+  - button "🦻 Hearing aid Try something like this":
+    - generic: 🦻
+    - strong: Hearing aid
+    - generic: Try something like this
+  - button "🚗 Car part Try something like this":
+    - generic: 🚗
+    - strong: Car part
+    - generic: Try something like this
+  - button "🧸 Toy Try something like this":
+    - generic: 🧸
+    - strong: Toy
+    - generic: Try something like this
+  - button "🖱️ Mouse Try something like this":
+    - generic: 🖱️
+    - strong: Mouse
+    - generic: Try something like this
+  - button "👕 Clothing Try something like this":
+    - generic: 👕
+    - strong: Clothing
+    - generic: Try something like this
+  - button "🔬 Microscope Try something like this":
+    - generic: 🔬
+    - strong: Microscope
+    - generic: Try something like this
+  - paragraph: HOW IT WORKS
+  - heading "Three simple steps." [level=2]
+  - article:
+    - text: "01"
+    - generic: 📸
+    - heading "Show It" [level=3]
+    - paragraph: Take or upload a photo of the item you want.
+  - article:
+    - text: "02"
+    - generic: ✨
+    - heading "Find It" [level=3]
+    - paragraph: FindIt checks visible product details. Clear labels and model text improve identification.
+  - article:
+    - text: "03"
+    - generic: 📍
+    - heading "Get It" [level=3]
+    - paragraph: FindIt looks for relevant consumer retailers close to you.
+  - paragraph: FINDIT CHALLENGE
+  - heading "Think FindIt can’t identify it? 👀" [level=2]
+  - paragraph: Find the weirdest object around you and put FindIt to the test.
+  - button "🎲 Give me a challenge"
+  - paragraph: RECENT
+  - heading "Recent finds" [level=2]
+  - button "Clear"
+  - paragraph: FEEDBACK
+  - heading "Help make FindIt better." [level=2]
+  - generic: Have an idea for FindIt?
+  - generic: Send a feature request separately from normal feedback.
+  - button "✦ Suggest a Feature"
+  - generic: Tell us what worked, report a problem, or suggest what FindIt should build next.
+  - text: Feedback type
+  - combobox "Feedback type":
+    - option "General feedback" [selected]
+    - option "Wrong identification"
+    - option "Nearby store / location problem"
+    - option "Price or stock problem"
+    - option "💡 Suggest a feature"
+  - strong: 💡 Have an idea for FindIt?
+  - generic: Suggest a feature and tell us what would make FindIt more useful.
+  - button "Suggest a feature"
+  - group "Rating":
+    - generic: Rating
+    - generic "Choose a rating from 1 to 5 stars":
+      - button "1 star": ★
+      - button "2 stars": ★
+      - button "3 stars": ★
+      - button "4 stars": ★
+      - button "5 stars": ★
+    - combobox
+  - text: Message
+  - textbox "Message":
+    - /placeholder: What worked? What should improve?
+  - checkbox "Include basic technical details to help us fix bugs" [checked]
+  - text: Include basic technical details to help us fix bugs
+  - button "Send feedback"
+  - button "Copy"
+  - paragraph
+- contentinfo:
+  - generic: F
+  - generic: FindIt Nearby
+  - paragraph: © 2026 Bernard Brummer — FindIt Nearby. All rights reserved.
+  - text: Nearby retailer ≠ verified exact-item stock.
+- button "★ Premium"
+- button "✦ Ask FindIt"
+- dialog "Nearby Stores":
+  - button "Close" [active]: ×
+  - heading "Nearby Stores" [level=2]
+  - heading "Bosch GSB 18V-50 with batteries and charger" [level=3]
+  - generic: Brand
+  - text: Bosch
+  - heading "Nearby retailers" [level=3]
+  - text: Builders Express Lynnwood
+  - generic: 2.6 km · Shop 1 Gift Acres Shopping Centre, 118 Lynnwood Road, Gauteng, Pretoria, 0081
+  - emphasis: Branch stock not verified
+  - link "Website":
+    - /url: https://www.builders.co.za/store-finder
+  - text: Builders Warehouse Faerie Glen
+  - generic: 3.1 km · Atterbury road, Atterbury Value Mart, Gauteng, Pretoria, 0043
+  - emphasis: Branch stock not verified
+  - link "Website":
+    - /url: https://www.builders.co.za/store-finder
+  - text: Builders Express Cherry Lane
+  - generic: 4.3 km · 114 Fehrsen Street, Gauteng, Pretoria, 0181
+  - emphasis: Branch stock not verified
+  - link "Website":
+    - /url: https://www.builders.co.za/store-finder
+  - text: Builders Warehouse Erasmus Prk
+  - generic: 5.0 km · Erasmus Park, Castle Gate Cres, Gauteng, Pretoria, 0181
+  - emphasis: Branch stock not verified
+  - link "Website":
+    - /url: https://www.builders.co.za/store-finder

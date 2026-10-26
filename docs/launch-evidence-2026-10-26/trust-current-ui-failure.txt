@@ -1,0 +1,186 @@
+code` module is deprecated. Please use a userland alternative instead.
+2026-10-26T09:45:10.4082494Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-26T09:45:10.4084827Z ##[group]Environment details
+2026-10-26T09:45:10.8344743Z node: v22.23.3
+2026-10-26T09:45:10.8345247Z npm: 10.9.9
+2026-10-26T09:45:10.8345528Z yarn: 1.22.22
+2026-10-26T09:45:10.8346412Z ##[endgroup]
+2026-10-26T09:45:10.8524202Z ##[group]Run npm init -y >/dev/null 2>&1
+2026-10-26T09:45:10.8524641Z [36;1mnpm init -y >/dev/null 2>&1[0m
+2026-10-26T09:45:10.8524926Z [36;1mnpm i -D playwright@1.55.0[0m
+2026-10-26T09:45:10.8529277Z shell: bash --noprofile --norc -e -o pipefail {0}
+2026-10-26T09:45:10.8529617Z ##[endgroup]
+2026-10-26T09:45:13.8577410Z 
+2026-10-26T09:45:13.8583650Z added 2 packages, and audited 3 packages in 2s
+2026-10-26T09:45:13.9012213Z 
+2026-10-26T09:45:13.9012913Z 1 high severity vulnerability
+2026-10-26T09:45:13.9013302Z 
+2026-10-26T09:45:13.9013531Z To address all issues, run:
+2026-10-26T09:45:13.9013982Z   npm audit fix --force
+2026-10-26T09:45:13.9014245Z 
+2026-10-26T09:45:13.9014470Z Run `npm audit` for details.
+2026-10-26T09:45:13.9272245Z ##[group]Run sleep 20
+2026-10-26T09:45:13.9272535Z [36;1msleep 20[0m
+2026-10-26T09:45:13.9272935Z shell: bash --noprofile --norc -e -o pipefail {0}
+2026-10-26T09:45:13.9273247Z ##[endgroup]
+2026-10-26T09:45:33.9888925Z ##[group]Run cat >trust-qa.mjs <<'NODE'
+2026-10-26T09:45:33.9889351Z [36;1mcat >trust-qa.mjs <<'NODE'[0m
+2026-10-26T09:45:33.9889655Z [36;1mimport {chromium} from 'playwright';[0m
+2026-10-26T09:45:33.9889960Z [36;1mimport fs from 'node:fs';[0m
+2026-10-26T09:45:33.9890321Z [36;1mconst base='https://findit-nearby.bgbrummer.workers.dev/';[0m
+2026-10-26T09:45:33.9890712Z [36;1mconst products=[[0m
+2026-10-26T09:45:33.9891622Z [36;1m  {label:'Nike Air Force 1 Low',a:'NIKE AIR FORCE 1 LOW',b:'WHITE BLUE SNEAKER',expect:/Nike|Takealot|Makro|Bash|Sportscene|Totalsports/i},[0m
+2026-10-26T09:45:33.9892771Z [36;1m  {label:'Twinsaver Twin Ply 18 Rolls',a:'TWINSAVER TWIN PLY 18 ROLLS',b:'TOILET PAPER',expect:/Checkers|Pick n Pay|Woolworths|Shoprite|Takealot|Makro/i},[0m
+2026-10-26T09:45:33.9893621Z [36;1m  {label:'Sony WH-1000XM5',a:'SONY WH-1000XM5',b:'HEADPHONES',expect:/Incredible|Game|Takealot|Makro|HiFi/i},[0m
+2026-10-26T09:45:33.9894379Z [36;1m  {label:'Bosch cordless drill',a:'BOSCH CORDLESS DRILL',b:'POWER TOOL',expect:/Builders|Takealot|Makro|Leroy/i}[0m
+2026-10-26T09:45:33.9894868Z [36;1m];[0m
+2026-10-26T09:45:33.9895131Z [36;1mconst browser=await chromium.launch({headless:true});[0m
+2026-10-26T09:45:33.9895950Z [36;1mconst ctx=await browser.newContext({viewport:{width:1280,height:900},geolocation:{latitude:-25.7479,longitude:28.2293},permissions:['geolocation','clipboard-read','clipboard-write']});[0m
+2026-10-26T09:45:33.9896831Z [36;1mconst checks=[];const add=(label,ok,detail='')=>checks.push({label,ok,detail});[0m
+2026-10-26T09:45:33.9897264Z [36;1mfor(let n=0;n<products.length;n++){[0m
+2026-10-26T09:45:33.9897748Z [36;1m  const x=products[n],p=await ctx.newPage(),errors=[];p.on('pageerror',e=>errors.push(String(e)));[0m
+2026-10-26T09:45:33.9898195Z [36;1m  try{[0m
+2026-10-26T09:45:33.9898592Z [36;1m    await p.goto(base,{waitUntil:'domcontentloaded',timeout:35000});await p.waitForTimeout(1500);[0m
+2026-10-26T09:45:33.9899138Z [36;1m    const img=`/tmp/trust-${n}.png`;const g=await ctx.newPage();[0m
+2026-10-26T09:45:33.9900762Z [36;1m    await g.setContent(`<canvas id=c width=1200 height=800></canvas><script>const c=document.querySelector('#c'),z=c.getContext('2d');z.fillStyle='#fff';z.fillRect(0,0,1200,800);z.fillStyle='#111';z.font='bold 70px Arial';z.fillText(${JSON.stringify(x.a)},70,260);z.font='bold 52px Arial';z.fillText(${JSON.stringify(x.b)},70,370);z.strokeStyle='#222';z.lineWidth=8;z.strokeRect(50,120,1100,390)</script>`);await g.locator('#c').screenshot({path:img});await g.close();[0m
+2026-10-26T09:45:33.9903414Z [36;1m    await p.locator('#fxVisiblePhotoPicker').setInputFiles(img);await p.locator('#finditExactShell [data-location-direct]').click();await p.waitForTimeout(500);await p.locator('#fxSearchNow').click();[0m
+2026-10-26T09:45:33.9904672Z [36;1m    await p.waitForFunction(()=>{const s=window.finditState||{};return !s.photoSearchPending&&!!s.result?.identification;},null,{timeout:55000});await p.waitForTimeout(6500);[0m
+2026-10-26T09:45:33.9905490Z [36;1m    const result=(await p.locator('#resultName').innerText()).trim();[0m
+2026-10-26T09:45:33.9906009Z [36;1m    const seller=await p.locator('#exactSellerResults').innerText().catch(()=> '');[0m
+2026-10-26T09:45:33.9906550Z [36;1m    const nearby=await p.locator('#nearbyPanel').innerText().catch(()=> '');[0m
+2026-10-26T09:45:33.9907100Z [36;1m    add(`${x.label}: identification returned`,!!result&&!/^Item$/i.test(result),result);[0m
+2026-10-26T09:45:33.9907679Z [36;1m    add(`${x.label}: exact-seller section exists`,seller.length>15,seller.slice(0,150));[0m
+2026-10-26T09:45:33.9908299Z [36;1m    add(`${x.label}: relevant retailer search path exists`,x.expect.test(seller),seller.slice(-250));[0m
+2026-10-26T09:45:33.9908952Z [36;1m    add(`${x.label}: duplicate stat strip removed`,await p.locator('#finditV3Strip').count()===0);[0m
+2026-10-26T09:45:33.9909855Z [36;1m    add(`${x.label}: duplicate seller stats removed`,await p.locator('#exactSellerResults .premium-insights').count()===0);[0m
+2026-10-26T09:45:33.9910755Z [36;1m    const unsafeCards=await p.locator('#nearbyStores [data-exact-branch="0"],#nearbyStores .store-card:not([data-exact-branch="1"])').count();[0m
+2026-10-26T09:45:33.9912064Z [36;1m    add(`${x.label}: no unverified trip cards`,unsafeCards===0,`unsafeCards=${unsafeCards}`);[0m
+2026-10-26T09:45:33.9912974Z [36;1m    const unsafeDir=await p.locator('#nearbyStores [data-exact-branch="0"] a:has-text("Directions"),#nearbyStores [data-exact-branch="0"] button:has-text("Directions")').count();[0m
+2026-10-26T09:45:33.9914010Z [36;1m    add(`${x.label}: no unsafe Directions`,unsafeDir===0,`unsafeDirections=${unsafeDir}`);[0m
+2026-10-26T09:45:33.9914729Z [36;1m    const disabledClosest=await p.locator('#finditV3Actions [aria-disabled="true"]:has-text("Closest directions")').count();[0m
+2026-10-26T09:45:33.9915448Z [36;1m    add(`${x.label}: no useless disabled Closest directions`,disabledClosest===0);[0m
+2026-10-26T09:45:33.9915994Z [36;1m    const offers=await p.locator('#exactSellerResults .offer-card').count();[0m
+2026-10-26T09:45:33.9916390Z [36;1m    if(offers){[0m
+2026-10-26T09:45:33.9917018Z [36;1m      add(`${x.label}: exact offers have match badge`,await p.locator('#exactSellerResults .offer-card .findit-exact-badge').count()===offers,`offers=${offers}`);[0m
+2026-10-26T09:45:33.9918006Z [36;1m      add(`${x.label}: exact offers show checked time`,await p.locator('#exactSellerResults .offer-card .findit-checked').count()===offers);[0m
+2026-10-26T09:45:33.9918874Z [36;1m    }else add(`${x.label}: honest no-match fallback shown`,/No exact seller verified yet|SEARCH MORE RETAILERS/i.test(seller));[0m
+2026-10-26T09:45:33.9920167Z [36;1m    const heights=[];for(let k=0;k<6;k++){await p.evaluate(k=>window.scrollTo(0,(document.documentElement.scrollHeight-window.innerHeight)*(k/5)),k);await p.waitForTimeout(250);heights.push(await p.evaluate(()=>document.documentElement.scrollHeight));}[0m
+2026-10-26T09:45:33.9921989Z [36;1m    add(`${x.label}: scroll layout stable`,Math.max(...heights)-Math.min(...heights)<80,`heights=${heights.join(',')}`);[0m
+2026-10-26T09:45:33.9922701Z [36;1m    add(`${x.label}: no page JavaScript errors`,errors.length===0,errors.join(' | ').slice(0,300));[0m
+2026-10-26T09:45:33.9923650Z [36;1m    const copy=p.locator('[data-fi3="copy"]');if(await copy.count()){await copy.click();await p.waitForTimeout(150);add(`${x.label}: Copy product name works`,/Copied/i.test(await copy.innerText()));}[0m
+2026-10-26T09:45:33.9924562Z [36;1m  }catch(e){add(`${x.label}: flow completed`,false,e.message+' | '+errors.join(' | '));}[0m
+2026-10-26T09:45:33.9924997Z [36;1m  await p.close();[0m
+2026-10-26T09:45:33.9925226Z [36;1m}[0m
+2026-10-26T09:45:33.9925427Z [36;1mawait browser.close();[0m
+2026-10-26T09:45:33.9926489Z [36;1mconst failed=checks.filter(c=>!c.ok);const out=['# FindIt trust-first production QA','',`Generated: ${new Date().toISOString()}`,'',...checks.map(c=>`${c.ok?'✅':'❌'} ${c.label}${c.detail?' — '+c.detail:''}`),'',`Passed: ${checks.length-failed.length}/${checks.length}`,`Failed: ${failed.length}`].join('\n');[0m
+2026-10-26T09:45:33.9927855Z [36;1mfs.mkdirSync('qa-results',{recursive:true});fs.writeFileSync('qa-results/trust-results-latest.md',out);console.log(out);[0m
+2026-10-26T09:45:33.9928438Z [36;1mif(failed.length)process.exitCode=1;[0m
+2026-10-26T09:45:33.9928733Z [36;1mNODE[0m
+2026-10-26T09:45:33.9928931Z [36;1mnode trust-qa.mjs[0m
+2026-10-26T09:45:33.9929397Z shell: bash --noprofile --norc -e -o pipefail {0}
+2026-10-26T09:45:33.9929693Z ##[endgroup]
+2026-10-26T09:49:48.2632384Z # FindIt trust-first production QA
+2026-10-26T09:49:48.2632994Z 
+2026-10-26T09:49:48.2633334Z Generated: 2026-10-26T09:49:48.261Z
+2026-10-26T09:49:48.2633654Z 
+2026-10-26T09:49:48.2634698Z ✅ Nike Air Force 1 Low: identification returned — Nike Air Force 1 Low
+2026-10-26T09:49:48.2635685Z ❌ Nike Air Force 1 Low: exact-seller section exists
+2026-10-26T09:49:48.2637172Z ❌ Nike Air Force 1 Low: relevant retailer search path exists
+2026-10-26T09:49:48.2638113Z ✅ Nike Air Force 1 Low: duplicate stat strip removed
+2026-10-26T09:49:48.2639117Z ✅ Nike Air Force 1 Low: duplicate seller stats removed
+2026-10-26T09:49:48.2640233Z ✅ Nike Air Force 1 Low: no unverified trip cards — unsafeCards=0
+2026-10-26T09:49:48.2641852Z ✅ Nike Air Force 1 Low: no unsafe Directions — unsafeDirections=0
+2026-10-26T09:49:48.2642841Z ✅ Nike Air Force 1 Low: no useless disabled Closest directions
+2026-10-26T09:49:48.2644189Z ❌ Nike Air Force 1 Low: honest no-match fallback shown
+2026-10-26T09:49:48.2645364Z ✅ Nike Air Force 1 Low: scroll layout stable — heights=2620,2620,2620,2620,2620,2620
+2026-10-26T09:49:48.2646863Z ✅ Nike Air Force 1 Low: no page JavaScript errors
+2026-10-26T09:49:48.2647594Z ✅ Twinsaver Twin Ply 18 Rolls: identification returned — Twinsaver toilet paper
+2026-10-26T09:49:48.2648267Z ❌ Twinsaver Twin Ply 18 Rolls: exact-seller section exists
+2026-10-26T09:49:48.2648886Z ❌ Twinsaver Twin Ply 18 Rolls: relevant retailer search path exists
+2026-10-26T09:49:48.2649484Z ✅ Twinsaver Twin Ply 18 Rolls: duplicate stat strip removed
+2026-10-26T09:49:48.2650034Z ✅ Twinsaver Twin Ply 18 Rolls: duplicate seller stats removed
+2026-10-26T09:49:48.2650629Z ✅ Twinsaver Twin Ply 18 Rolls: no unverified trip cards — unsafeCards=0
+2026-10-26T09:49:48.2651613Z ✅ Twinsaver Twin Ply 18 Rolls: no unsafe Directions — unsafeDirections=0
+2026-10-26T09:49:48.2652252Z ✅ Twinsaver Twin Ply 18 Rolls: no useless disabled Closest directions
+2026-10-26T09:49:48.2652827Z ❌ Twinsaver Twin Ply 18 Rolls: honest no-match fallback shown
+2026-10-26T09:49:48.2653546Z ✅ Twinsaver Twin Ply 18 Rolls: scroll layout stable — heights=2721,2721,2721,2721,2721,2721
+2026-10-26T09:49:48.2654177Z ✅ Twinsaver Twin Ply 18 Rolls: no page JavaScript errors
+2026-10-26T09:49:48.2654775Z ✅ Sony WH-1000XM5: identification returned — SONY WH-1000XM5 HEADPHONES
+2026-10-26T09:49:48.2655302Z ❌ Sony WH-1000XM5: exact-seller section exists
+2026-10-26T09:49:48.2655785Z ❌ Sony WH-1000XM5: relevant retailer search path exists
+2026-10-26T09:49:48.2656251Z ✅ Sony WH-1000XM5: duplicate stat strip removed
+2026-10-26T09:49:48.2656692Z ✅ Sony WH-1000XM5: duplicate seller stats removed
+2026-10-26T09:49:48.2657243Z ❌ Sony WH-1000XM5: no unverified trip cards — unsafeCards=7
+2026-10-26T09:49:48.2657776Z ✅ Sony WH-1000XM5: no unsafe Directions — unsafeDirections=0
+2026-10-26T09:49:48.2658304Z ✅ Sony WH-1000XM5: no useless disabled Closest directions
+2026-10-26T09:49:48.2658781Z ❌ Sony WH-1000XM5: honest no-match fallback shown
+2026-10-26T09:49:48.2659355Z ✅ Sony WH-1000XM5: scroll layout stable — heights=3855,3855,3855,3855,3855,3855
+2026-10-26T09:49:48.2659890Z ✅ Sony WH-1000XM5: no page JavaScript errors
+2026-10-26T09:49:48.2660380Z ✅ Bosch cordless drill: identification returned — Bosch drill
+2026-10-26T09:49:48.2660872Z ❌ Bosch cordless drill: exact-seller section exists
+2026-10-26T09:49:48.2661842Z ❌ Bosch cordless drill: relevant retailer search path exists
+2026-10-26T09:49:48.2662362Z ✅ Bosch cordless drill: duplicate stat strip removed
+2026-10-26T09:49:48.2662865Z ✅ Bosch cordless drill: duplicate seller stats removed
+2026-10-26T09:49:48.2663404Z ❌ Bosch cordless drill: no unverified trip cards — unsafeCards=5
+2026-10-26T09:49:48.2663988Z ✅ Bosch cordless drill: no unsafe Directions — unsafeDirections=0
+2026-10-26T09:49:48.2664557Z ✅ Bosch cordless drill: no useless disabled Closest directions
+2026-10-26T09:49:48.2665067Z ❌ Bosch cordless drill: honest no-match fallback shown
+2026-10-26T09:49:48.2665672Z ✅ Bosch cordless drill: scroll layout stable — heights=3569,3569,3569,3569,3569,3569
+2026-10-26T09:49:48.2666245Z ✅ Bosch cordless drill: no page JavaScript errors
+2026-10-26T09:49:48.2666485Z 
+2026-10-26T09:49:48.2666579Z Passed: 30/44
+2026-10-26T09:49:48.2666777Z Failed: 14
+2026-10-26T09:49:48.2816293Z ##[error]Process completed with exit code 1.
+2026-10-26T09:49:48.2885742Z ##[group]Run actions/upload-artifact@v4
+2026-10-26T09:49:48.2886039Z with:
+2026-10-26T09:49:48.2886247Z   name: trust-results-qa-report
+2026-10-26T09:49:48.2886490Z   path: qa-results/
+2026-10-26T09:49:48.2886693Z   if-no-files-found: warn
+2026-10-26T09:49:48.2886913Z   compression-level: 6
+2026-10-26T09:49:48.2887117Z   overwrite: false
+2026-10-26T09:49:48.2887324Z   include-hidden-files: false
+2026-10-26T09:49:48.2887550Z ##[endgroup]
+2026-10-26T09:49:48.2891233Z ##[command]/usr/bin/docker exec  b91c35340ecd77e8031c68a1d53e8e40dabcd33c344f36b3d69d2891e3d4ceb3 sh -c "cat /etc/*release | grep ^ID"
+2026-10-26T09:49:48.5589424Z (node:446) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-26T09:49:48.5591862Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-26T09:49:48.5714716Z With the provided path, there will be 5 files uploaded
+2026-10-26T09:49:48.5716056Z Artifact name is valid!
+2026-10-26T09:49:48.5716709Z Root directory input is valid!
+2026-10-26T09:49:48.8627696Z Beginning upload of artifact content to blob storage
+2026-10-26T09:49:48.8904413Z (node:446) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-26T09:49:49.0400650Z Uploaded bytes 5434
+2026-10-26T09:49:49.0875472Z Finished uploading artifact content to blob storage!
+2026-10-26T09:49:49.0878699Z SHA256 digest of uploaded artifact zip is 24ed515de37e2e6fbef10a9d193807bb01356a0cf5bbd072977e2767df275b74
+2026-10-26T09:49:49.0879624Z Finalizing artifact upload
+2026-10-26T09:49:49.5316234Z Artifact trust-results-qa-report.zip successfully finalized. Artifact ID 12641565662
+2026-10-26T09:49:49.5317530Z Artifact trust-results-qa-report has been successfully uploaded! Final size is 5434 bytes. Artifact ID is 12641565662
+2026-10-26T09:49:49.5322057Z Artifact download URL: https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/40301911142/artifacts/12641565662
+2026-10-26T09:49:49.5481704Z ##[group]Run if [ -f qa-results/trust-results-latest.md ]; then
+2026-10-26T09:49:49.5482229Z [36;1mif [ -f qa-results/trust-results-latest.md ]; then[0m
+2026-10-26T09:49:49.5482686Z [36;1m  cat qa-results/trust-results-latest.md >> "$GITHUB_STEP_SUMMARY"[0m
+2026-10-26T09:49:49.5483056Z [36;1mfi[0m
+2026-10-26T09:49:49.5483587Z shell: bash --noprofile --norc -e -o pipefail {0}
+2026-10-26T09:49:49.5483886Z ##[endgroup]
+2026-10-26T09:49:49.6194937Z Post job cleanup.
+2026-10-26T09:49:49.6202720Z ##[command]/usr/bin/docker exec  b91c35340ecd77e8031c68a1d53e8e40dabcd33c344f36b3d69d2891e3d4ceb3 sh -c "cat /etc/*release | grep ^ID"
+2026-10-26T09:49:49.8126698Z [command]/usr/bin/git version
+2026-10-26T09:49:49.8177594Z git version 2.43.0
+2026-10-26T09:49:49.8240379Z Temporarily overriding HOME='/__w/_temp/c14683f5-72ab-4403-b269-8a506e94ba7a' before making global git config changes
+2026-10-26T09:49:49.8244438Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-26T09:49:49.8256155Z [command]/usr/bin/git config --global --add safe.directory /__w/Findit-nearby/Findit-nearby
+2026-10-26T09:49:49.8306337Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-26T09:49:49.8360653Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-26T09:49:49.8724986Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-26T09:49:49.8770017Z http.https://github.com/.extraheader
+2026-10-26T09:49:49.8787087Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-26T09:49:49.8834726Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-26T09:49:49.9130306Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-26T09:49:49.9173524Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-26T09:49:49.9575632Z Stop and remove container: 74010b3e933a432abf48719700761fee_mcrmicrosoftcomplaywrightv1550noble_1fe48e
+2026-10-26T09:49:49.9580703Z ##[command]/usr/bin/docker rm --force b91c35340ecd77e8031c68a1d53e8e40dabcd33c344f36b3d69d2891e3d4ceb3
+2026-10-26T09:49:50.1030064Z b91c35340ecd77e8031c68a1d53e8e40dabcd33c344f36b3d69d2891e3d4ceb3
+2026-10-26T09:49:50.1063143Z Remove container network: github_network_c3fc938be81244458e2907e166614a42
+2026-10-26T09:49:50.1067679Z ##[command]/usr/bin/docker network rm github_network_c3fc938be81244458e2907e166614a42
+2026-10-26T09:49:50.2006753Z github_network_c3fc938be81244458e2907e166614a42
+2026-10-26T09:49:50.2079100Z Cleaning up orphan processes
+2026-10-26T09:49:50.2498363Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-node@v4, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
