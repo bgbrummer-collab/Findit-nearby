@@ -274,3 +274,8 @@ test('failed source checks survive refresh without becoming verified product fac
  const r=runtime();r.context.URL=URL;r.context.window.testInfo();await r.finish({researched:false,sourceChecks:[{url:'https://shop.example/product',status:'http-error',httpStatus:403},{url:'javascript:alert(1)',status:'fetch-error'},{url:'https://wrong.example/product',status:'identity-mismatch'}]});r.context.window.testInfo();
  assert.match(r.body.innerHTML,/Sources unavailable/);assert.match(r.body.innerHTML,/https:\/\/shop.example\/product/);assert.match(r.body.innerHTML,/not verified product facts or prices/);assert.doesNotMatch(r.body.innerHTML,/javascript:|wrong.example/);
 });
+
+test('a manufacturer document mismatch keeps a useful source link without publishing its facts',async()=>{
+ const r=runtime();r.context.URL=URL;r.context.window.testInfo();await r.finish({researched:false,sourceChecks:[{url:'https://manufacturer.example/guide/A2',status:'identity-mismatch',resource:'manufacturer-document',stage:'metadata'}]});r.context.window.testInfo();
+ assert.match(r.body.innerHTML,/Sources unavailable/);assert.match(r.body.innerHTML,/https:\/\/manufacturer.example\/guide\/A2/);assert.match(r.body.innerHTML,/not verified product facts or prices/);
+});
