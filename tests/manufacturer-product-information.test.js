@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import worker from '../cloudflare/worker.js';
-import {manufacturerResearchUrls,shureGuideMetadata,shureGuideProduct,expandedPrimaryProduct} from '../lib/manufacturer-product-information.js';
+import {manufacturerResearchUrls,shureGuideMetadata,shureGuideProduct,expandedPrimaryProduct,manufacturerProductData} from '../lib/manufacturer-product-information.js';
 import {reconcileVision} from '../lib/vision-consensus.js';
 import {visualProductCandidates} from '../lib/visual-product-candidates.js';
 
@@ -72,4 +72,21 @@ test('the product definition takes priority over a mounting feature as its purpo
  t.mock.method(globalThis,'fetch',async u=>new Response(String(u)===url?'<script type="application/ld+json">'+JSON.stringify({'@type':'Product',name,description})+'</script>':'<rss/>'));
  const d=await(await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:{name},offers:[{product_url:url,sourcePageVerified:true,exactProductMatch:true}]})}),{})).json();
  assert.equal(d.whatItDoes,'The Example V4 is a dynamic microphone for recording speech.');assert.equal(d.claimEvidence.whatItDoes.sourceUrl,url);
+});
+
+test('public document metadata retrieves the guide without relying on the website shell',async t=>{
+ let websiteFetched=false;
+ t.mock.method(globalThis,'fetch',async (u,options)=>{
+  if(String(u)===guide)websiteFetched=true;
+  if(String(u).endsWith('/documents/public/product')){assert.deepEqual(JSON.parse(options.body),{docTypeShortCode:'guide',prodId:'EX12',lang:'en-US'});return Response.json({status:'success',data:{id:42,model:'EX12',product_id:'EX12',public:true,language:1,document_type:1,pub_name:'Podcast Microphone'}});}
+  return new Response(String(u).includes('/render/42.html.twig')?manual:'');
+ });
+ const data=await manufacturerProductData(guide,identity);assert.match(data,/Output Impedance/);assert.equal(websiteFetched,false);
+});
+
+test('private, mismatched or non-English document lookups cannot supply product facts',async t=>{
+ for(const changed of [{public:false},{model:'EX13'},{product_id:'EX13'},{language:2},{document_type:2},{id:'42'}]){
+  let rendered=false;t.mock.method(globalThis,'fetch',async u=>{if(String(u).includes('/render/'))rendered=true;return Response.json({status:'success',data:{id:42,model:'EX12',product_id:'EX12',public:true,language:1,document_type:1,...changed}});});
+  assert.equal(await manufacturerProductData(guide,identity),null);assert.equal(rendered,false);t.mock.restoreAll();
+ }
 });
