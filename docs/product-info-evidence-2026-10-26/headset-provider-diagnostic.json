@@ -1,0 +1,47 @@
+{
+  "code": "PHOTO_PARTIALLY_IDENTIFIED",
+  "message": "Product type identified. Confirm the exact model for specific information, prices and stock.",
+  "provider": "cloudflare-consensus",
+  "providerStatus": null,
+  "cloudflareReason": null,
+  "diagnostics": [
+    {
+      "provider": "cloudflare-gemma",
+      "model": null,
+      "status": null,
+      "errorType": null,
+      "reason": null
+    },
+    {
+      "provider": "google-gemini",
+      "model": null,
+      "status": null,
+      "errorType": null,
+      "reason": null
+    },
+    {
+      "provider": "cloudflare-workers-ai",
+      "model": null,
+      "status": null,
+      "errorType": null,
+      "reason": null
+    },
+    {
+      "provider": "huggingface",
+      "model": null,
+      "status": null,
+      "errorType": "credits",
+      "reason": null
+    }
+  ],
+  "identification": {
+    "name": "headphones",
+    "brand": "",
+    "object": "headphones",
+    "model": "",
+    "color": "",
+    "identityScope": "product-family",
+    "requiresModelConfirmation": true,
+    "suggestedModels": []
+  }
+}

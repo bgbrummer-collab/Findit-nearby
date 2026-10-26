@@ -1,0 +1,289 @@
+﻿2026-10-26T16:05:26.3269632Z Current runner version: '2.338.0'
+2026-10-26T16:05:26.3291156Z ##[group]Runner Image Provisioner
+2026-10-26T16:05:26.3291749Z Hosted Compute Agent
+2026-10-26T16:05:26.3292197Z Version: 20261021.618
+2026-10-26T16:05:26.3292586Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+2026-10-26T16:05:26.3293050Z Build Date: 2026-10-21T00:45:21Z
+2026-10-26T16:05:26.3293487Z Worker ID: {4dfeb3a1-5c9e-40cd-b5a8-9611c912d08f}
+2026-10-26T16:05:26.3293950Z Region: westus3
+2026-10-26T16:05:26.3294330Z Cloud: Azure
+2026-10-26T16:05:26.3294669Z ##[endgroup]
+2026-10-26T16:05:26.3295544Z ##[group]Operating System
+2026-10-26T16:05:26.3295929Z Ubuntu
+2026-10-26T16:05:26.3296284Z 24.04.5
+2026-10-26T16:05:26.3296649Z LTS
+2026-10-26T16:05:26.3296968Z ##[endgroup]
+2026-10-26T16:05:26.3297300Z ##[group]Runner Image
+2026-10-26T16:05:26.3297727Z Image: ubuntu-24.04
+2026-10-26T16:05:26.3298109Z Version: 20261012.334.1
+2026-10-26T16:05:26.3298955Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261012.334/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-26T16:05:26.3299838Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261012.334
+2026-10-26T16:05:26.3300695Z ##[endgroup]
+2026-10-26T16:05:26.3301416Z ##[group]GITHUB_TOKEN Permissions
+2026-10-26T16:05:26.3302749Z Contents: read
+2026-10-26T16:05:26.3303108Z Metadata: read
+2026-10-26T16:05:26.3303536Z ##[endgroup]
+2026-10-26T16:05:26.3305026Z Secret source: Actions
+2026-10-26T16:05:26.3305612Z Cache mode: write
+2026-10-26T16:05:26.3306072Z Prepare workflow directory
+2026-10-26T16:05:26.4190516Z Prepare all required actions
+2026-10-26T16:05:26.4231182Z Getting action download info
+2026-10-26T16:05:26.7912144Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-10-26T16:05:27.1613300Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2026-10-26T16:05:27.3587256Z Complete job name: interaction
+2026-10-26T16:05:27.4032364Z ##[group]Checking docker version
+2026-10-26T16:05:27.4041522Z ##[command]/usr/bin/docker version --format '{{.Server.APIVersion}}'
+2026-10-26T16:05:27.4961789Z '1.48'
+2026-10-26T16:05:27.4971902Z Docker daemon API version: '1.48'
+2026-10-26T16:05:27.4972695Z ##[command]/usr/bin/docker version --format '{{.Client.APIVersion}}'
+2026-10-26T16:05:27.5115990Z '1.48'
+2026-10-26T16:05:27.5132931Z Docker client API version: '1.48'
+2026-10-26T16:05:27.5137996Z ##[endgroup]
+2026-10-26T16:05:27.5140381Z ##[group]Clean up resources from previous jobs
+2026-10-26T16:05:27.5144862Z ##[command]/usr/bin/docker ps --all --quiet --no-trunc --filter "label=3033b3"
+2026-10-26T16:05:27.5272409Z ##[command]/usr/bin/docker network prune --force --filter "label=3033b3"
+2026-10-26T16:05:27.5389445Z ##[endgroup]
+2026-10-26T16:05:27.5390060Z ##[group]Create local container network
+2026-10-26T16:05:27.5398616Z ##[command]/usr/bin/docker network create --label 3033b3 github_network_c7237a77657a41339bc761b089fc9354
+2026-10-26T16:05:27.5897970Z a5899adf6cec3120dc4ca184e8b59228b5c8cb51b3049779ef6c12216abb5613
+2026-10-26T16:05:27.5911911Z ##[endgroup]
+2026-10-26T16:05:27.5931933Z ##[group]Starting job container
+2026-10-26T16:05:27.5948265Z ##[command]/usr/bin/docker pull mcr.microsoft.com/playwright:v1.55.0-noble
+2026-10-26T16:05:27.9115408Z v1.55.0-noble: Pulling from playwright
+2026-10-26T16:05:28.0174102Z baa9e71a063a: Pulling fs layer
+2026-10-26T16:05:28.0175786Z 4df6c7922c65: Pulling fs layer
+2026-10-26T16:05:28.0176857Z 157d08cc08a2: Pulling fs layer
+2026-10-26T16:05:28.0177784Z 8e5806a1ca0c: Pulling fs layer
+2026-10-26T16:05:28.0178843Z 8e5806a1ca0c: Waiting
+2026-10-26T16:05:28.2337321Z 157d08cc08a2: Verifying Checksum
+2026-10-26T16:05:28.2338431Z 157d08cc08a2: Download complete
+2026-10-26T16:05:28.6155110Z 4df6c7922c65: Verifying Checksum
+2026-10-26T16:05:28.6156476Z 4df6c7922c65: Download complete
+2026-10-26T16:05:28.8266578Z baa9e71a063a: Verifying Checksum
+2026-10-26T16:05:28.8267536Z baa9e71a063a: Download complete
+2026-10-26T16:05:29.6495229Z baa9e71a063a: Pull complete
+2026-10-26T16:05:31.6113619Z 8e5806a1ca0c: Download complete
+2026-10-26T16:05:42.7785418Z 4df6c7922c65: Pull complete
+2026-10-26T16:05:42.7981328Z 157d08cc08a2: Pull complete
+2026-10-26T16:06:02.1565136Z 8e5806a1ca0c: Pull complete
+2026-10-26T16:06:02.1604186Z Digest: sha256:b27e719ecbfef153e13fd24e8341736733bf2658b229677eb21ff57ff5d7fb29
+2026-10-26T16:06:02.1615560Z Status: Downloaded newer image for mcr.microsoft.com/playwright:v1.55.0-noble
+2026-10-26T16:06:02.1623275Z mcr.microsoft.com/playwright:v1.55.0-noble
+2026-10-26T16:06:02.1688210Z ##[command]/usr/bin/docker create --name 13b46730fc934f25b6a54653d5ce3450_mcrmicrosoftcomplaywrightv1550noble_e56b70 --label 3033b3 --workdir /__w/Findit-nearby/Findit-nearby --network github_network_c7237a77657a41339bc761b089fc9354  -e "HOME=/github/home" -e GITHUB_ACTIONS=true -e CI=true -v "/var/run/docker.sock":"/var/run/docker.sock" -v "/home/runner/work":"/__w" -v "/home/runner/actions-runner/cached/2.338.0/externals":"/__e":ro -v "/home/runner/work/_temp":"/__w/_temp" -v "/home/runner/work/_actions":"/__w/_actions" -v "/opt/hostedtoolcache":"/__t" -v "/home/runner/work/_temp/_github_home":"/github/home" -v "/home/runner/work/_temp/_github_workflow":"/github/workflow" --entrypoint "tail" mcr.microsoft.com/playwright:v1.55.0-noble "-f" "/dev/null"
+2026-10-26T16:06:02.1934380Z 282a93c9067006371a7894a451a7087db1b9620eb4f7dd89ee31b4d1cc6b2e57
+2026-10-26T16:06:02.1956401Z ##[command]/usr/bin/docker start 282a93c9067006371a7894a451a7087db1b9620eb4f7dd89ee31b4d1cc6b2e57
+2026-10-26T16:06:02.3677066Z 282a93c9067006371a7894a451a7087db1b9620eb4f7dd89ee31b4d1cc6b2e57
+2026-10-26T16:06:02.3696504Z ##[command]/usr/bin/docker ps --all --filter id=282a93c9067006371a7894a451a7087db1b9620eb4f7dd89ee31b4d1cc6b2e57 --filter status=running --no-trunc --format "{{.ID}} {{.Status}}"
+2026-10-26T16:06:02.3798218Z 282a93c9067006371a7894a451a7087db1b9620eb4f7dd89ee31b4d1cc6b2e57 Up Less than a second
+2026-10-26T16:06:02.3819903Z ##[command]/usr/bin/docker inspect --format "{{range .Config.Env}}{{println .}}{{end}}" 282a93c9067006371a7894a451a7087db1b9620eb4f7dd89ee31b4d1cc6b2e57
+2026-10-26T16:06:02.3924909Z HOME=/github/home
+2026-10-26T16:06:02.3925213Z GITHUB_ACTIONS=true
+2026-10-26T16:06:02.3925340Z CI=true
+2026-10-26T16:06:02.3925525Z PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+2026-10-26T16:06:02.3925772Z LANG=C.UTF-8
+2026-10-26T16:06:02.3925912Z LC_ALL=C.UTF-8
+2026-10-26T16:06:02.3926068Z PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
+2026-10-26T16:06:02.3946386Z ##[endgroup]
+2026-10-26T16:06:02.3954475Z ##[group]Waiting for all services to be ready
+2026-10-26T16:06:02.3955836Z ##[endgroup]
+2026-10-26T16:06:02.4246174Z ##[group]Run actions/checkout@v4
+2026-10-26T16:06:02.4246644Z with:
+2026-10-26T16:06:02.4246803Z   repository: bgbrummer-collab/Findit-nearby
+2026-10-26T16:06:02.4248543Z   token: ***
+2026-10-26T16:06:02.4248704Z   ssh-strict: true
+2026-10-26T16:06:02.4248874Z   ssh-user: git
+2026-10-26T16:06:02.4249008Z   persist-credentials: true
+2026-10-26T16:06:02.4249168Z   clean: true
+2026-10-26T16:06:02.4249304Z   sparse-checkout-cone-mode: true
+2026-10-26T16:06:02.4249462Z   fetch-depth: 1
+2026-10-26T16:06:02.4249588Z   fetch-tags: false
+2026-10-26T16:06:02.4249715Z   show-progress: true
+2026-10-26T16:06:02.4249849Z   lfs: false
+2026-10-26T16:06:02.4249969Z   submodules: false
+2026-10-26T16:06:02.4250098Z   set-safe-directory: true
+2026-10-26T16:06:02.4250446Z   allow-unsafe-pr-checkout: false
+2026-10-26T16:06:02.4250711Z ##[endgroup]
+2026-10-26T16:06:02.4297190Z ##[command]/usr/bin/docker exec  282a93c9067006371a7894a451a7087db1b9620eb4f7dd89ee31b4d1cc6b2e57 sh -c "cat /etc/*release | grep ^ID"
+2026-10-26T16:06:02.5845242Z Syncing repository: bgbrummer-collab/Findit-nearby
+2026-10-26T16:06:02.5847006Z ##[group]Getting Git version info
+2026-10-26T16:06:02.5847424Z Working directory is '/__w/Findit-nearby/Findit-nearby'
+2026-10-26T16:06:02.5847798Z [command]/usr/bin/git version
+2026-10-26T16:06:02.5848023Z git version 2.43.0
+2026-10-26T16:06:02.5848701Z ##[endgroup]
+2026-10-26T16:06:02.5855491Z Temporarily overriding HOME='/__w/_temp/0a86296f-3327-43bd-938a-0c4fe1b310b5' before making global git config changes
+2026-10-26T16:06:02.5856288Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-26T16:06:02.5861143Z [command]/usr/bin/git config --global --add safe.directory /__w/Findit-nearby/Findit-nearby
+2026-10-26T16:06:02.5921971Z Deleting the contents of '/__w/Findit-nearby/Findit-nearby'
+2026-10-26T16:06:02.5923383Z ##[group]Initializing the repository
+2026-10-26T16:06:02.5925760Z [command]/usr/bin/git init /__w/Findit-nearby/Findit-nearby
+2026-10-26T16:06:02.5966221Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-26T16:06:02.5966887Z hint: is subject to change. To configure the initial branch name to use in all
+2026-10-26T16:06:02.5967373Z hint: of your new repositories, which will suppress this warning, call:
+2026-10-26T16:06:02.5968093Z hint: 
+2026-10-26T16:06:02.5968569Z hint: 	git config --global init.defaultBranch <name>
+2026-10-26T16:06:02.5968967Z hint: 
+2026-10-26T16:06:02.5969193Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-26T16:06:02.5969577Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-26T16:06:02.5969911Z hint: 
+2026-10-26T16:06:02.5970273Z hint: 	git branch -m <name>
+2026-10-26T16:06:02.5975298Z Initialized empty Git repository in /__w/Findit-nearby/Findit-nearby/.git/
+2026-10-26T16:06:02.5985786Z [command]/usr/bin/git remote add origin https://github.com/bgbrummer-collab/Findit-nearby
+2026-10-26T16:06:02.6023180Z ##[endgroup]
+2026-10-26T16:06:02.6023675Z ##[group]Disabling automatic garbage collection
+2026-10-26T16:06:02.6025779Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-26T16:06:02.6067821Z ##[endgroup]
+2026-10-26T16:06:02.6068091Z ##[group]Setting up auth
+2026-10-26T16:06:02.6070860Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-26T16:06:02.6102515Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-26T16:06:02.6359231Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-26T16:06:02.6395306Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-26T16:06:02.6610034Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-26T16:06:02.6645070Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-26T16:06:02.6865243Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-26T16:06:02.6907524Z ##[endgroup]
+2026-10-26T16:06:02.6908041Z ##[group]Fetching the repository
+2026-10-26T16:06:02.6914570Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +665638daaf4dfdb622efa326e3e89f5dcd9a1eeb:refs/remotes/pull/328/merge
+2026-10-26T16:06:03.9571507Z From https://github.com/bgbrummer-collab/Findit-nearby
+2026-10-26T16:06:03.9572077Z  * [new ref]         665638daaf4dfdb622efa326e3e89f5dcd9a1eeb -> pull/328/merge
+2026-10-26T16:06:03.9589204Z ##[endgroup]
+2026-10-26T16:06:03.9589576Z ##[group]Determining the checkout info
+2026-10-26T16:06:03.9591341Z ##[endgroup]
+2026-10-26T16:06:03.9596105Z [command]/usr/bin/git sparse-checkout disable
+2026-10-26T16:06:03.9637859Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-26T16:06:03.9668729Z ##[group]Checking out the ref
+2026-10-26T16:06:03.9672259Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/328/merge
+2026-10-26T16:06:04.0253390Z Note: switching to 'refs/remotes/pull/328/merge'.
+2026-10-26T16:06:04.0253961Z 
+2026-10-26T16:06:04.0254142Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-26T16:06:04.0254571Z changes and commit them, and you can discard any commits you make in this
+2026-10-26T16:06:04.0254964Z state without impacting any branches by switching back to a branch.
+2026-10-26T16:06:04.0255202Z 
+2026-10-26T16:06:04.0255377Z If you want to create a new branch to retain commits you create, you may
+2026-10-26T16:06:04.0255709Z do so (now or later) by using -c with the switch command. Example:
+2026-10-26T16:06:04.0255876Z 
+2026-10-26T16:06:04.0256017Z   git switch -c <new-branch-name>
+2026-10-26T16:06:04.0256180Z 
+2026-10-26T16:06:04.0256249Z Or undo this operation with:
+2026-10-26T16:06:04.0256344Z 
+2026-10-26T16:06:04.0256402Z   git switch -
+2026-10-26T16:06:04.0256511Z 
+2026-10-26T16:06:04.0256663Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-26T16:06:04.0256843Z 
+2026-10-26T16:06:04.0257045Z HEAD is now at 665638d Merge e8bb77f11dbb644e178ceb7ac82d6f67f447fac3 into 82a78f81950a802a0b1459d1157ede6a80c04715
+2026-10-26T16:06:04.0266630Z ##[endgroup]
+2026-10-26T16:06:04.0305874Z [command]/usr/bin/git log -1 --format=%H
+2026-10-26T16:06:04.0334385Z 665638daaf4dfdb622efa326e3e89f5dcd9a1eeb
+2026-10-26T16:06:04.0573027Z ##[group]Run actions/setup-node@v4
+2026-10-26T16:06:04.0573199Z with:
+2026-10-26T16:06:04.0573324Z   node-version: 22
+2026-10-26T16:06:04.0573453Z   always-auth: false
+2026-10-26T16:06:04.0573582Z   check-latest: false
+2026-10-26T16:06:04.0575022Z   token: ***
+2026-10-26T16:06:04.0575145Z ##[endgroup]
+2026-10-26T16:06:04.0579473Z ##[command]/usr/bin/docker exec  282a93c9067006371a7894a451a7087db1b9620eb4f7dd89ee31b4d1cc6b2e57 sh -c "cat /etc/*release | grep ^ID"
+2026-10-26T16:06:04.2346654Z Found in cache @ /__t/node/22.23.3/x64
+2026-10-26T16:06:04.2350792Z (node:146) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-26T16:06:04.2351502Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-26T16:06:04.2353633Z ##[group]Environment details
+2026-10-26T16:06:04.5505242Z node: v22.23.3
+2026-10-26T16:06:04.5505460Z npm: 10.9.9
+2026-10-26T16:06:04.5505592Z yarn: 1.22.22
+2026-10-26T16:06:04.5506146Z ##[endgroup]
+2026-10-26T16:06:04.5654456Z ##[group]Run npm init -y >/dev/null 2>&1
+2026-10-26T16:06:04.5654721Z [36;1mnpm init -y >/dev/null 2>&1[0m
+2026-10-26T16:06:04.5654891Z [36;1mnpm pkg set type=module[0m
+2026-10-26T16:06:04.5655094Z [36;1mnpm install --save-dev playwright@1.55.0[0m
+2026-10-26T16:06:04.5658390Z shell: bash --noprofile --norc -e -o pipefail {0}
+2026-10-26T16:06:04.5658585Z ##[endgroup]
+2026-10-26T16:06:07.2440984Z 
+2026-10-26T16:06:07.2448228Z added 2 packages, and audited 3 packages in 2s
+2026-10-26T16:06:07.2734580Z 
+2026-10-26T16:06:07.2735421Z 1 high severity vulnerability
+2026-10-26T16:06:07.2735692Z 
+2026-10-26T16:06:07.2735830Z To address all issues, run:
+2026-10-26T16:06:07.2736091Z   npm audit fix
+2026-10-26T16:06:07.2736256Z 
+2026-10-26T16:06:07.2736373Z Run `npm audit` for details.
+2026-10-26T16:06:07.2982142Z ##[group]Run python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/findit-http.log 2>&1 &
+2026-10-26T16:06:07.2982523Z [36;1mpython3 -m http.server 4173 --bind 127.0.0.1 >/tmp/findit-http.log 2>&1 &[0m
+2026-10-26T16:06:07.2982757Z [36;1msleep 2[0m
+2026-10-26T16:06:07.2983069Z shell: bash --noprofile --norc -e -o pipefail {0}
+2026-10-26T16:06:07.2983253Z ##[endgroup]
+2026-10-26T16:06:09.3484187Z ##[group]Run timeout --signal=TERM --kill-after=5s 120s node tests/user-experience-guard-regression.mjs
+2026-10-26T16:06:09.3484665Z [36;1mtimeout --signal=TERM --kill-after=5s 120s node tests/user-experience-guard-regression.mjs[0m
+2026-10-26T16:06:09.3485067Z [36;1mtimeout --signal=TERM --kill-after=5s 60s node tests/retailer-candidates-user-regression.mjs[0m
+2026-10-26T16:06:09.3485448Z [36;1mtimeout --signal=TERM --kill-after=5s 120s node tests/dashboard-tools-regression.mjs[0m
+2026-10-26T16:06:09.3485933Z [36;1mtimeout --signal=TERM --kill-after=5s 120s node tests/feedback-feature-regression.mjs[0m
+2026-10-26T16:06:09.3486286Z [36;1mtimeout --signal=TERM --kill-after=5s 120s node tests/smart-choice-regression.mjs[0m
+2026-10-26T16:06:09.3486641Z [36;1mtimeout --signal=TERM --kill-after=5s 120s node tests/shopping-assistant-regression.mjs[0m
+2026-10-26T16:06:09.3487047Z [36;1mtimeout --signal=TERM --kill-after=5s 120s node tests/find-actions-hours-regression.mjs[0m
+2026-10-26T16:06:09.3487410Z [36;1mtimeout --signal=TERM --kill-after=5s 120s node tests/user-first-polish-regression.mjs[0m
+2026-10-26T16:06:09.3487769Z [36;1mtimeout --signal=TERM --kill-after=5s 120s node tests/user-pov-hardening-regression.mjs[0m
+2026-10-26T16:06:09.3488140Z [36;1mtimeout --signal=TERM --kill-after=5s 120s node tests/current-find-relevance-regression.mjs[0m
+2026-10-26T16:06:09.3488512Z [36;1mtimeout --signal=TERM --kill-after=5s 60s node tests/upload-button-user-regression.mjs[0m
+2026-10-26T16:06:09.3488877Z [36;1mtimeout --signal=TERM --kill-after=5s 90s node tests/label-confirmation-regression.mjs[0m
+2026-10-26T16:06:09.3489248Z [36;1mtimeout --signal=TERM --kill-after=5s 90s node tests/product-information-user-regression.mjs[0m
+2026-10-26T16:06:09.3489742Z shell: bash --noprofile --norc -e -o pipefail {0}
+2026-10-26T16:06:09.3489921Z env:
+2026-10-26T16:06:09.3490060Z   FINDIT_URL: http://127.0.0.1:4173/
+2026-10-26T16:06:09.3490541Z ##[endgroup]
+2026-10-26T16:06:09.4149351Z FINDIT_USER_EXPERIENCE_GUARD_PASS
+2026-10-26T16:06:13.8096359Z RETAILER_CANDIDATES_DESKTOP_MOBILE_PASS
+2026-10-26T16:06:13.8097094Z VERIFIED_PRODUCT_RETAILER_CARD_PASS
+2026-10-26T16:06:15.1183621Z [PASS] settings restores multiple working controls
+2026-10-26T16:06:15.2578021Z [PASS] Product Information opens and renders researched content
+2026-10-26T16:06:15.4882252Z [PASS] closing Product Information during slow research leaves dashboard responsive
+2026-10-26T16:06:15.6833596Z [PASS] reopening Product Information after cancellation starts fresh research
+2026-10-26T16:06:15.9406629Z [PASS] Compare Prices renders verified exact commerce evidence and stays in-app
+2026-10-26T16:06:16.0458064Z [PASS] Live Stock renders verified online stock separately from branch stock
+2026-10-26T16:06:16.2172459Z [PASS] Ask FindIt uses the polished primary action and returns an answer
+2026-10-26T16:06:16.2530077Z FINDIT_DASHBOARD_TOOLS_REGRESSION_PASS
+2026-10-26T16:06:20.0663583Z FEEDBACK_PASS
+2026-10-26T16:06:20.2702524Z FEATURE_SUGGESTION_PASS
+2026-10-26T16:06:20.4483733Z FEEDBACK_FAILURE_PRESERVES_DRAFT_PASS
+2026-10-26T16:06:20.5714245Z FEEDBACK_FEATURE_REGRESSION_PASS {"url":"http://127.0.0.1:4173/","posts":3}
+2026-10-26T16:06:21.5464856Z SMART_CHOICE_OPEN_NOW_PASS
+2026-10-26T16:06:23.2012270Z SHOPPING_ASSISTANT_COMPLETE_PASS
+2026-10-26T16:06:24.4993033Z FIND_ACTIONS_HOURS_PASS
+2026-10-26T16:07:01.5008103Z USER_FIRST_POLISH_PASS
+2026-10-26T16:07:43.6253492Z USER_POV_HARDENING_PASS
+2026-10-26T16:07:44.4825907Z Current Find relevance regression passed.
+2026-10-26T16:07:49.0598698Z NEW_PHOTO_CLEARS_OLD_RETAILER_COUNT_PASS
+2026-10-26T16:07:49.0602500Z RESPONSIVE_PHOTO_RECOVERY_PASS
+2026-10-26T16:07:49.0602826Z UPLOAD_PRIMARY_ACTION_PASS
+2026-10-26T16:07:49.0603179Z PHOTO_QUOTA_RECOVERY_PASS
+2026-10-26T16:07:50.0095545Z LABEL_CONFIRMATION_PASS 1440 manual label
+2026-10-26T16:07:50.6343966Z LABEL_CONFIRMATION_PASS 1440 retailer candidate
+2026-10-26T16:07:51.1894539Z LABEL_CONFIRMATION_PASS 390 manual label
+2026-10-26T16:07:51.7286912Z LABEL_CONFIRMATION_PASS 390 retailer candidate
+2026-10-26T16:07:52.6203351Z PRODUCT_INFORMATION_USER_PASS 1440 Example A2 Headset
+2026-10-26T16:07:53.1413945Z PRODUCT_INFORMATION_USER_PASS 1440 Example D1 Drill Kit
+2026-10-26T16:07:53.6327034Z PRODUCT_INFORMATION_USER_PASS 390 Example A2 Headset
+2026-10-26T16:07:54.1077760Z PRODUCT_INFORMATION_USER_PASS 390 Example D1 Drill Kit
+2026-10-26T16:07:54.1509262Z Post job cleanup.
+2026-10-26T16:07:54.1513567Z ##[command]/usr/bin/docker exec  282a93c9067006371a7894a451a7087db1b9620eb4f7dd89ee31b4d1cc6b2e57 sh -c "cat /etc/*release | grep ^ID"
+2026-10-26T16:07:54.3129940Z (node:2363) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-26T16:07:54.3130832Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-26T16:07:54.3331963Z Post job cleanup.
+2026-10-26T16:07:54.3338902Z ##[command]/usr/bin/docker exec  282a93c9067006371a7894a451a7087db1b9620eb4f7dd89ee31b4d1cc6b2e57 sh -c "cat /etc/*release | grep ^ID"
+2026-10-26T16:07:54.4653571Z [command]/usr/bin/git version
+2026-10-26T16:07:54.4692197Z git version 2.43.0
+2026-10-26T16:07:54.4723639Z Temporarily overriding HOME='/__w/_temp/1bb841df-f8f2-4241-b65a-01a179a19021' before making global git config changes
+2026-10-26T16:07:54.4724726Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-26T16:07:54.4728681Z [command]/usr/bin/git config --global --add safe.directory /__w/Findit-nearby/Findit-nearby
+2026-10-26T16:07:54.4765061Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-26T16:07:54.4799650Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-26T16:07:54.5036737Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-26T16:07:54.5062032Z http.https://github.com/.extraheader
+2026-10-26T16:07:54.5075865Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-26T16:07:54.5110838Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-26T16:07:54.5341151Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-26T16:07:54.5370948Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-26T16:07:54.5734890Z Stop and remove container: 13b46730fc934f25b6a54653d5ce3450_mcrmicrosoftcomplaywrightv1550noble_e56b70
+2026-10-26T16:07:54.5737815Z ##[command]/usr/bin/docker rm --force 282a93c9067006371a7894a451a7087db1b9620eb4f7dd89ee31b4d1cc6b2e57
+2026-10-26T16:07:54.7593477Z 282a93c9067006371a7894a451a7087db1b9620eb4f7dd89ee31b4d1cc6b2e57
+2026-10-26T16:07:54.7619989Z Remove container network: github_network_c7237a77657a41339bc761b089fc9354
+2026-10-26T16:07:54.7623209Z ##[command]/usr/bin/docker network rm github_network_c7237a77657a41339bc761b089fc9354
+2026-10-26T16:07:54.8483492Z github_network_c7237a77657a41339bc761b089fc9354
+2026-10-26T16:07:54.8549473Z Cleaning up orphan processes
+2026-10-26T16:07:54.8853287Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-node@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

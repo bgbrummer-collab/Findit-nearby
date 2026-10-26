@@ -1,0 +1,326 @@
+[
+  {
+    "query": "Shure MV7X microphone",
+    "status": 200,
+    "response": {
+      "researched": false,
+      "whatItDoes": "",
+      "pros": [],
+      "cons": [],
+      "specifications": [],
+      "compatibility": [],
+      "claimEvidence": {
+        "whatItDoes": null,
+        "pros": [],
+        "cons": [],
+        "compatibility": [],
+        "includedItems": []
+      },
+      "includedItems": [],
+      "variants": [],
+      "bestFor": "",
+      "standOut": "",
+      "valueVerdict": "",
+      "sources": [],
+      "sourceChecks": [],
+      "researchMethod": "Fetched exact-product page descriptions",
+      "checkedAt": "2026-10-26T16:06:51.182Z",
+      "message": "No trustworthy exact-product description was found. FindIt will not guess."
+    }
+  },
+  {
+    "query": "Bosch GSB 18V-50 with batteries and charger",
+    "status": 200,
+    "response": {
+      "researched": true,
+      "whatItDoes": "GSB18V-50 Cordless Impact Drill - Robust brushless motor for durability and flexibility.",
+      "pros": [
+        "Intelligent brushless motor for efficiency, endurance, and compactness.",
+        "Robust metal chuck and compact ergonomic design ideal for heavy-duty jobs.",
+        "Professional 18V System works with Bosch batteries and chargers of the same voltage.",
+        "2 x battery GBA 18V 2.0Ah."
+      ],
+      "cons": [],
+      "specifications": [
+        {
+          "name": "Brand",
+          "value": "Bosch",
+          "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger"
+        },
+        {
+          "name": "Retailer product code",
+          "value": "SKU 06019H5100",
+          "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger"
+        },
+        {
+          "name": "Battery voltage",
+          "value": "18V",
+          "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger"
+        },
+        {
+          "name": "Torque (soft/hard/max.)",
+          "value": "28/50/50 Nm",
+          "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger"
+        },
+        {
+          "name": "No-load speed (1st gear / 2nd gear)",
+          "value": "0 – 460 / 0 – 1,800 rpm",
+          "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger"
+        },
+        {
+          "name": "Battery type",
+          "value": "Lithium-ion",
+          "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger"
+        },
+        {
+          "name": "Max. impact rate",
+          "value": "27,000 bpm",
+          "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger"
+        },
+        {
+          "name": "Chuck capacity, min./max.",
+          "value": "1,5/13 mm",
+          "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger"
+        },
+        {
+          "name": "Weight excl. battery",
+          "value": "1,1 kg",
+          "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger"
+        },
+        {
+          "name": "Torque settings",
+          "value": "20+2",
+          "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger"
+        },
+        {
+          "name": "Max. drilling diameter in aluminium",
+          "value": "13 mm",
+          "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger"
+        },
+        {
+          "name": "Max. drilling diameter in wood",
+          "value": "35 mm",
+          "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger"
+        },
+        {
+          "name": "Max. drilling diameter in steel",
+          "value": "13 mm",
+          "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger"
+        },
+        {
+          "name": "Max. drilling diameter in masonry",
+          "value": "13mm",
+          "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger"
+        },
+        {
+          "name": "Max. screw diameter",
+          "value": "10mm",
+          "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger"
+        }
+      ],
+      "compatibility": [
+        "Professional 18V System works with Bosch batteries and chargers of the same voltage."
+      ],
+      "claimEvidence": {
+        "whatItDoes": {
+          "text": "GSB18V-50 Cordless Impact Drill - Robust brushless motor for durability and flexibility.",
+          "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger",
+          "sourceTitle": "Bosch Professional | Cordless Drill GSB 18V-50 + 2 X 2,0Ah Batteries + Charger"
+        },
+        "pros": [
+          {
+            "text": "Intelligent brushless motor for efficiency, endurance, and compactness.",
+            "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger",
+            "sourceTitle": "Bosch Professional | Cordless Drill GSB 18V-50 + 2 X 2,0Ah Batteries + Charger"
+          },
+          {
+            "text": "Robust metal chuck and compact ergonomic design ideal for heavy-duty jobs.",
+            "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger",
+            "sourceTitle": "Bosch Professional | Cordless Drill GSB 18V-50 + 2 X 2,0Ah Batteries + Charger"
+          },
+          {
+            "text": "Professional 18V System works with Bosch batteries and chargers of the same voltage.",
+            "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger",
+            "sourceTitle": "Bosch Professional | Cordless Drill GSB 18V-50 + 2 X 2,0Ah Batteries + Charger"
+          },
+          {
+            "text": "2 x battery GBA 18V 2.0Ah.",
+            "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger",
+            "sourceTitle": "Bosch Professional | Cordless Drill GSB 18V-50 + 2 X 2,0Ah Batteries + Charger"
+          }
+        ],
+        "cons": [],
+        "compatibility": [
+          {
+            "text": "Professional 18V System works with Bosch batteries and chargers of the same voltage.",
+            "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger",
+            "sourceTitle": "Bosch Professional | Cordless Drill GSB 18V-50 + 2 X 2,0Ah Batteries + Charger"
+          }
+        ],
+        "includedItems": [
+          {
+            "text": "2 x battery GBA 18V 2.0Ah.",
+            "sourceUrl": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger",
+            "sourceTitle": "Bosch Professional | Cordless Drill GSB 18V-50 + 2 X 2,0Ah Batteries + Charger"
+          }
+        ]
+      },
+      "includedItems": [
+        "2 x battery GBA 18V 2.0Ah."
+      ],
+      "variants": [],
+      "bestFor": "",
+      "standOut": "",
+      "valueVerdict": "",
+      "sources": [
+        {
+          "title": "Bosch Professional | Cordless Drill GSB 18V-50 + 2 X 2,0Ah Batteries + Charger",
+          "url": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger",
+          "status": "product-facts-verified"
+        }
+      ],
+      "researchMethod": "Fetched exact-product page descriptions",
+      "checkedAt": "2026-10-26T16:06:45.100Z",
+      "message": "Product facts are quoted from matching product-page descriptions."
+    }
+  },
+  {
+    "query": "Levis 501 Original Jeans",
+    "status": 200,
+    "response": {
+      "researched": true,
+      "whatItDoes": "A classic straight leg and iconic styling.",
+      "pros": [],
+      "cons": [],
+      "specifications": [
+        {
+          "name": "Brand",
+          "value": "Levi’s ®",
+          "sourceUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown"
+        }
+      ],
+      "compatibility": [],
+      "claimEvidence": {
+        "whatItDoes": {
+          "text": "A classic straight leg and iconic styling.",
+          "sourceUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2",
+          "sourceTitle": "LEVI'S® MEN'S 501® ORIGINAL JEANS - MEDIUM WASH"
+        },
+        "pros": [],
+        "cons": [],
+        "compatibility": [],
+        "includedItems": []
+      },
+      "includedItems": [],
+      "variants": [
+        {
+          "name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - MEDIUM WASH",
+          "productUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2",
+          "specifications": [
+            {
+              "name": "Brand",
+              "value": "Levi’s ®"
+            },
+            {
+              "name": "Retailer product code",
+              "value": "0050135983632",
+              "sourceAlsoListsAsMpn": true
+            }
+          ]
+        },
+        {
+          "name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - MED INDIGO - WORN IN",
+          "productUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-med-indigo-worn-in",
+          "specifications": [
+            {
+              "name": "Brand",
+              "value": "Levi’s ®"
+            },
+            {
+              "name": "Retailer product code",
+              "value": "A544700404032",
+              "sourceAlsoListsAsMpn": true
+            }
+          ]
+        },
+        {
+          "name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - GREY",
+          "productUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-grey-1",
+          "specifications": [
+            {
+              "name": "Brand",
+              "value": "Levi’s ®"
+            },
+            {
+              "name": "Retailer product code",
+              "value": "A544700413032",
+              "sourceAlsoListsAsMpn": true
+            }
+          ]
+        },
+        {
+          "name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - BROWN",
+          "productUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown",
+          "specifications": [
+            {
+              "name": "Brand",
+              "value": "Levi’s ®"
+            },
+            {
+              "name": "Retailer product code",
+              "value": "A544700422832",
+              "sourceAlsoListsAsMpn": true
+            }
+          ]
+        }
+      ],
+      "bestFor": "",
+      "standOut": "",
+      "valueVerdict": "",
+      "sources": [
+        {
+          "title": "LEVI'S® MEN'S 501® ORIGINAL JEANS - MEDIUM WASH",
+          "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2"
+        },
+        {
+          "title": "LEVI'S® MEN'S 501® ORIGINAL JEANS - MED INDIGO - WORN IN",
+          "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-med-indigo-worn-in"
+        },
+        {
+          "title": "LEVI'S® MEN'S 501® ORIGINAL JEANS - GREY",
+          "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-grey-1"
+        },
+        {
+          "title": "LEVI'S® MEN'S 501® ORIGINAL JEANS - BROWN",
+          "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-med-indigo-worn-in",
+          "status": "product-facts-verified"
+        },
+        {
+          "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-grey-1",
+          "status": "product-facts-verified"
+        },
+        {
+          "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown",
+          "status": "product-facts-verified"
+        },
+        {
+          "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2",
+          "status": "product-facts-verified"
+        }
+      ],
+      "researchMethod": "Fetched exact-product page descriptions",
+      "checkedAt": "2026-10-26T16:06:51.311Z",
+      "message": "Product facts are quoted from matching product-page descriptions."
+    }
+  }
+]

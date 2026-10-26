@@ -1,0 +1,369 @@
+- complementary:
+  - generic: F
+  - generic: FindIt
+  - generic: Find it. Compare it. Get it.
+  - navigation:
+    - button "⌂ Home"
+    - button "⌕ Search"
+    - button "⌖ Nearby"
+    - button "⇄ Compare ★ PREMIUM":
+      - text: ⇄ Compare
+      - generic: ★ PREMIUM
+    - button "◇ Deals ★ PREMIUM":
+      - text: ◇ Deals
+      - generic: ★ PREMIUM
+    - button "♡ Saved ★ PREMIUM":
+      - text: ♡ Saved
+      - generic: ★ PREMIUM
+    - button "◷ History"
+    - button "♧ Alerts ★ PREMIUM":
+      - text: ♧ Alerts
+      - generic: ★ PREMIUM
+    - button "▣ Feedback"
+    - button "✦ Suggest a Feature"
+    - button "ⓘ How to use FindIt"
+  - generic: 🚀
+  - heading "Go Premium" [level=3]
+  - paragraph: Unlock wider search, saved finds, comparisons & more.
+  - button "Upgrade Now"
+  - generic: Recent Searches
+  - button "View all"
+  - generic: Nike shoes
+  - generic: Marc Anthony conditioner
+- main:
+  - text: ⌕
+  - generic: Search or upload an image to find anything...
+  - text: ⌖
+  - generic: Nearby
+  - button "Settings": ⚙
+  - button "Alerts":
+    - text: ♧
+    - generic: ★ PREMIUM
+  - button "Premium tools": F
+  - generic: ✦ AI powered product search
+  - heading "Find anything nearby." [level=1]:
+    - text: Find anything
+    - text: nearby.
+  - paragraph: Take a photo, upload an image, or search by text and we’ll find where to buy it near you.
+  - button "Upload Photo"
+  - button "⌕ Search Product"
+  - button "▥ Scan / Camera"
+  - button "▧ Drag & drop an image here or click to browse":
+    - generic: ▧
+    - generic: Drag & drop an image here
+    - text: or click to
+    - emphasis: browse
+  - button "⌖ Use my location"
+  - button "✦ Identify & Find"
+  - status: The image service could not complete identification. Try again or enter the product name or barcode.
+  - generic "Choose location on map / enter coordinates"
+  - paragraph: You can still search. Type the brand, product name and size printed on the label, or enter its barcode.
+  - button "Search by name or barcode"
+  - article:
+    - generic: ✓
+    - generic: Exact match
+    - generic: See the identified product and only supported identity details.
+  - article:
+    - generic: R
+    - generic: Real prices
+    - generic: Compare retailer prices only when FindIt can verify them.
+    - generic: ★ PREMIUM
+  - article:
+    - generic: ⌖
+    - generic: Nearby stores
+    - generic: See relevant stores around your selected location.
+  - article:
+    - generic: ▣
+    - generic: Live stock
+    - generic: Branch stock appears only when retailer evidence confirms it.
+    - generic: ★ PREMIUM
+  - article:
+    - generic: ⇄
+    - generic: Compare
+    - generic: Compare verified offers without invented prices or availability.
+    - generic: ★ PREMIUM
+  - article:
+    - generic: ＋
+    - generic: Shopping Tools
+    - generic: Lists, watchlist, budget, links & preferences.
+  - text: FindIt Smart Choice
+  - heading "Best options from this Find" [level=2]
+  - paragraph: Ranked from verified/current evidence. Missing prices, stock or opening hours are never guessed.
+  - generic: Confidence not supplied
+  - article:
+    - generic: BEST OVERALL
+    - strong: Need verified retailer evidence
+    - generic: FindIt will rank a best option only after an exact retailer result is verified.
+  - article:
+    - generic: CHEAPEST
+    - strong: No verified price yet
+    - generic: Missing prices are never guessed.
+  - article:
+    - generic: CLOSEST
+    - strong: No relevant nearby store yet
+    - generic: Use location after selecting a product to find relevant retailers.
+  - button "+ Shopping List"
+  - button "Save Find"
+  - button "Open Now" [disabled]
+  - generic: Opening hours are not published for these nearby results yet.
+  - paragraph: Nearby stores have not loaded yet.
+  - text: FINDIT SHOPPING ASSISTANT
+  - heading "Plan, verify and track your shopping" [level=2]
+  - paragraph: Verified data first. FindIt does not guess prices, stock, phone numbers or opening hours.
+  - button "+ Add current item"
+  - button "Watch item"
+  - button "Scan barcode"
+  - generic "Check nearby stores"
+  - paragraph: Nearby store details will appear after FindIt locates retailers.
+  - generic "Shopping List + Trip Planner"
+  - paragraph: Your shopping list is empty. Add the current Find to start planning.
+  - generic "Watch List + Price History"
+  - generic: Results for your image
+  - generic: No item selected
+  - generic: Upload a photo or search by product name to start.
+  - button "♡ Save ★ PREMIUM":
+    - text: ♡ Save
+    - generic: ★ PREMIUM
+  - button "⇄ Compare ★ PREMIUM":
+    - text: ⇄ Compare
+    - generic: ★ PREMIUM
+  - heading "Nearby Stores" [level=2]
+  - button "☷ Filter"
+  - button "View all"
+  - generic: ●
+  - generic: Real store pins appear after relevant nearby results are found.
+  - generic: No verified exact-product store found yet. FindIt will not list unrelated shops as sellers.
+  - article:
+    - generic: ◇
+    - generic: Deals Near You
+    - generic: See verified retailer offers when available.
+    - button "View Deals → ★ PREMIUM":
+      - text: View Deals →
+      - generic: ★ PREMIUM
+    - generic: ★ PREMIUM
+  - article:
+    - generic: ♡
+    - generic: Saved Items
+    - generic: Open the Finds you saved on this device.
+    - button "View Saved → ★ PREMIUM":
+      - text: View Saved →
+      - generic: ★ PREMIUM
+    - generic: ★ PREMIUM
+  - article:
+    - generic: ↗
+    - generic: Price History
+    - generic: See verified price observations when available.
+    - button "View History → ★ PREMIUM":
+      - text: View History →
+      - generic: ★ PREMIUM
+    - generic: ★ PREMIUM
+  - article:
+    - generic: ✦
+    - generic: Suggest a Feature
+    - generic: Tell us what FindIt should build next.
+    - button "Send Idea →"
+- complementary:
+  - img "Selected product"
+  - generic: Photo needs product details
+  - heading "Product not identified" [level=2]
+  - paragraph
+  - paragraph: The image service could not complete identification. Try again or enter the product name or barcode.
+  - generic: — Match
+  - generic: Best verified price
+  - strong: Not verified yet
+  - generic: FindIt won’t guess a price.
+  - button "ⓘ Product Info":
+    - text: ⓘ
+    - generic: Product Info
+  - button "⇄ Compare Prices ★ PREMIUM":
+    - text: ⇄
+    - generic: Compare Prices
+    - generic: ★ PREMIUM
+  - button "⌖ Nearby Stores":
+    - text: ⌖
+    - generic: Nearby Stores
+  - button "✦ Ask FindIt ★ PREMIUM":
+    - text: ✦
+    - generic: Ask FindIt
+    - generic: ★ PREMIUM
+  - heading "Top Stores" [level=2]
+  - button "View all"
+  - generic: Only retailers with verified exact-product evidence appear here.
+- banner:
+  - link "F FindIt Nearby":
+    - /url: "#home"
+    - generic: F
+    - generic: FindIt Nearby
+  - navigation:
+    - link "Find":
+      - /url: "#finder"
+    - link "How it works":
+      - /url: "#how"
+    - link "Examples":
+      - /url: "#examples"
+    - link "Feedback":
+      - /url: "#feedback"
+  - button "☰"
+- complementary:
+  - generic: F
+  - generic: FindIt Nearby
+  - button: ×
+  - navigation:
+    - link:
+      - /url: "#home"
+      - text: ⌂ Home
+    - link:
+      - /url: "#finder"
+      - text: 📸 Find an item
+    - link:
+      - /url: "#how"
+      - text: ✨ How it works
+    - button: 🕘 Recent finds
+    - button: ✦ Ask FindIt
+    - button: ★ Premium
+    - link:
+      - /url: "#feedback"
+      - text: 💬 Feedback
+    - button: ⚙ Settings
+- main:
+  - paragraph: SEARCH → VERIFY → FIND NEARBY
+  - heading "You saw it. You want it. You found it with FindIt." [level=1]:
+    - text: You saw it.
+    - text: You want it.
+    - text: You found it with FindIt.
+  - paragraph: Upload a photo, search by product name or scan a barcode. FindIt helps you discover relevant retailers without inventing missing product, price or stock details.
+  - link "📸 Find my item":
+    - /url: "#finder"
+  - button "🎲 Challenge FindIt"
+  - generic: 🎯 Exact-item first
+  - generic: 📍 Nearby first
+  - generic: 🛍️ Consumer retailers
+  - generic: 🧠 Specialist-aware
+  - generic: 📸
+  - generic: Take Photo
+  - generic: Upload Image
+  - generic: START SEARCHING
+  - heading "What are you looking for?" [level=2]
+  - paragraph: Use a clear photo. Logos, labels and model text help FindIt be more precise.
+  - generic: Radius
+  - combobox "Radius":
+    - option "3 km"
+    - option "5 km"
+    - option "10 km" [selected]
+    - option "15 km ★ Premium" [disabled]
+    - option "25 km ★ Premium" [disabled]
+  - img "Selected item preview"
+  - button "Upload product photo"
+  - button "Choose File"
+  - button "🖼️ Gallery / Files"
+  - button "📷 Take photo"
+  - button "📍 Use my location"
+  - button "✨ Identify & Find"
+  - paragraph: The image service could not complete identification. Try again or enter the product name or barcode.
+  - paragraph: TRY FINDIT WITH…
+  - heading "Ordinary. Unusual. Anything in-between." [level=2]
+  - button "Shuffle ↻"
+  - button "🎮 Controller Try something like this":
+    - generic: 🎮
+    - strong: Controller
+    - generic: Try something like this
+  - button "🔧 Tool Try something like this":
+    - generic: 🔧
+    - strong: Tool
+    - generic: Try something like this
+  - button "💄 Makeup Try something like this":
+    - generic: 💄
+    - strong: Makeup
+    - generic: Try something like this
+  - button "🎒 Backpack Try something like this":
+    - generic: 🎒
+    - strong: Backpack
+    - generic: Try something like this
+  - button "🔌 Charger Try something like this":
+    - generic: 🔌
+    - strong: Charger
+    - generic: Try something like this
+  - button "☕ Hot chocolate Try something like this":
+    - generic: ☕
+    - strong: Hot chocolate
+    - generic: Try something like this
+  - paragraph: HOW IT WORKS
+  - heading "Three simple steps." [level=2]
+  - article:
+    - text: "01"
+    - generic: 📸
+    - heading "Show It" [level=3]
+    - paragraph: Take or upload a photo of the item you want.
+  - article:
+    - text: "02"
+    - generic: ✨
+    - heading "Find It" [level=3]
+    - paragraph: FindIt checks visible product details. Clear labels and model text improve identification.
+  - article:
+    - text: "03"
+    - generic: 📍
+    - heading "Get It" [level=3]
+    - paragraph: FindIt looks for relevant consumer retailers close to you.
+  - paragraph: FINDIT CHALLENGE
+  - heading "Think FindIt can’t identify it? 👀" [level=2]
+  - paragraph: Find the weirdest object around you and put FindIt to the test.
+  - button "🎲 Give me a challenge"
+  - generic: ✨
+  - paragraph: You saw it. You want it.
+  - strong: You FoundIt.
+  - paragraph: IDENTIFIED ITEM
+  - heading "Item" [level=2]
+  - paragraph
+  - strong: —
+  - text: confidence
+  - paragraph: NEARBY
+  - heading "Relevant retailers" [level=3]
+  - paragraph
+  - button "Map view"
+  - button "♡ Save ★"
+  - button "↗ Share"
+  - paragraph: RECENT
+  - heading "Recent finds" [level=2]
+  - button "Clear"
+  - paragraph: FEEDBACK
+  - heading "Help make FindIt better." [level=2]
+  - generic: Have an idea for FindIt?
+  - generic: Send a feature request separately from normal feedback.
+  - button "✦ Suggest a Feature"
+  - generic: Tell us what worked, report a problem, or suggest what FindIt should build next.
+  - text: Feedback type
+  - combobox "Feedback type":
+    - option "General feedback" [selected]
+    - option "Wrong identification"
+    - option "Nearby store / location problem"
+    - option "Price or stock problem"
+    - option "💡 Suggest a feature"
+  - strong: 💡 Have an idea for FindIt?
+  - generic: Suggest a feature and tell us what would make FindIt more useful.
+  - button "Suggest a feature"
+  - group "Rating":
+    - generic: Rating
+    - generic "Choose a rating from 1 to 5 stars":
+      - button "1 star": ★
+      - button "2 stars": ★
+      - button "3 stars": ★
+      - button "4 stars": ★
+      - button "5 stars": ★
+    - combobox
+  - text: Message
+  - textbox "Message":
+    - /placeholder: What worked? What should improve?
+  - checkbox "Include basic technical details to help us fix bugs" [checked]
+  - text: Include basic technical details to help us fix bugs
+  - button "Send feedback"
+  - button "Copy"
+  - paragraph
+- contentinfo:
+  - generic: F
+  - generic: FindIt Nearby
+  - paragraph: © 2026 Bernard Brummer — FindIt Nearby. All rights reserved.
+  - text: Nearby retailer ≠ verified exact-item stock.
+- button "★ Premium"
+- button "✦ Ask FindIt"
+- generic: The image service could not complete identification. Try again or enter the product name or barcode.
+- paragraph: FindIt needs a product identity before it can show relevant nearby retailers.

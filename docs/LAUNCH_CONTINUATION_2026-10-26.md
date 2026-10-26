@@ -43,3 +43,7 @@ PR #326 changes the audits to the current visible picker/location/Identify contr
 The October 25 recognition and product-coverage limits remain: no broad automatic exact-photo success, incomplete retailer listings, no authoritative product-by-branch inventory/prices, uncertified physical phone/camera/GPS behavior, and unconfigured durable notifications/central analytics. This branch does not resolve those limitations.
 
 Photo fixture uploads remain blocked by automatic approval review pending explicit permission to share the conditioner test image with FindIt and its vision providers. No upload workaround was used. The new hardware checks use public text/product and public Menlyn coordinates.
+
+## Later Product Info focus
+
+The user then narrowed work to precise Product Info and identification using three newly supplied images. PRs #328 and #329 are merged, final application commit `4005afdcccfea4a39f64001682a474d87ec5c7c9` is deployed, and all ten associated workflows passed. See [Product Info audit](PRODUCT_INFORMATION_AUDIT_2026-10-26.md) for actual photo outcomes, general improvements, source evidence and remaining exact-recognition limits. No further upload permission is pending for these specifically supplied test images.
