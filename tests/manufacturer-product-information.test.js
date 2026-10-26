@@ -90,3 +90,9 @@ test('private, mismatched or non-English document lookups cannot supply product 
   assert.equal(await manufacturerProductData(guide,identity),null);assert.equal(rendered,false);t.mock.restoreAll();
  }
 });
+
+test('unavailable manufacturer documents report source status without exposing response bodies',async t=>{
+ const checks=[];t.mock.method(globalThis,'fetch',async()=>new Response('Private upstream diagnostic',{status:403}));
+ assert.equal(await manufacturerProductData(guide,identity,undefined,x=>checks.push(x)),null);
+ assert.deepEqual(checks,[{url:guide,status:'http-error',resource:'manufacturer-document',stage:'metadata',httpStatus:403}]);assert.doesNotMatch(JSON.stringify(checks),/Private upstream/);
+});
