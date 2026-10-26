@@ -3,8 +3,10 @@ on:
   push:
     branches: [main]
     paths: ['.github/workflows/trust-results-qa.yml']
+  pull_request:
+    paths: ['.github/workflows/trust-results-qa.yml']
 permissions:
-  contents: write
+  contents: read
 jobs:
   qa:
     runs-on: ubuntu-latest
@@ -43,27 +45,30 @@ jobs:
               await p.goto(base,{waitUntil:'domcontentloaded',timeout:35000});await p.waitForTimeout(1500);
               const img=`/tmp/trust-${n}.png`;const g=await ctx.newPage();
               await g.setContent(`<canvas id=c width=1200 height=800></canvas><script>const c=document.querySelector('#c'),z=c.getContext('2d');z.fillStyle='#fff';z.fillRect(0,0,1200,800);z.fillStyle='#111';z.font='bold 70px Arial';z.fillText(${JSON.stringify(x.a)},70,260);z.font='bold 52px Arial';z.fillText(${JSON.stringify(x.b)},70,370);z.strokeStyle='#222';z.lineWidth=8;z.strokeRect(50,120,1100,390)</script>`);await g.locator('#c').screenshot({path:img});await g.close();
-              await p.locator('#photo').setInputFiles(img);await p.locator('#location').click();await p.waitForTimeout(500);await p.locator('#search').click();
-              await p.waitForSelector('#results:not(.hidden)',{timeout:55000});await p.waitForTimeout(6500);
+              await p.locator('#fxVisiblePhotoPicker').setInputFiles(img);await p.locator('#finditExactShell [data-location-direct]').click();await p.waitForTimeout(500);await p.locator('#fxSearchNow').click();
+              await p.waitForFunction(()=>{const s=window.finditState||{};return !s.photoSearchPending&&!!s.result?.identification;},null,{timeout:55000});await p.waitForTimeout(6500);
               const result=(await p.locator('#resultName').innerText()).trim();
-              const seller=await p.locator('#exactSellerResults').innerText().catch(()=> '');
-              const nearby=await p.locator('#nearbyPanel').innerText().catch(()=> '');
+              const seller=await p.locator('#fxTopStores').innerText().catch(()=> '');
               add(`${x.label}: identification returned`,!!result&&!/^Item$/i.test(result),result);
               add(`${x.label}: exact-seller section exists`,seller.length>15,seller.slice(0,150));
               add(`${x.label}: relevant retailer search path exists`,x.expect.test(seller),seller.slice(-250));
               add(`${x.label}: duplicate stat strip removed`,await p.locator('#finditV3Strip').count()===0);
               add(`${x.label}: duplicate seller stats removed`,await p.locator('#exactSellerResults .premium-insights').count()===0);
               const unsafeCards=await p.locator('#nearbyStores [data-exact-branch="0"],#nearbyStores .store-card:not([data-exact-branch="1"])').count();
-              add(`${x.label}: no unverified trip cards`,unsafeCards===0,`unsafeCards=${unsafeCards}`);
+              const undisclosed=await p.locator('#nearbyStores .store-card:not([data-exact-branch="1"])').evaluateAll(cards=>cards.filter(c=>!/stock not verified|stock unknown/i.test(c.innerText)).length);
+              add(`${x.label}: unverified branches disclose unknown stock`,undisclosed===0,`unverifiedCards=${unsafeCards}, undisclosed=${undisclosed}`);
               const unsafeDir=await p.locator('#nearbyStores [data-exact-branch="0"] a:has-text("Directions"),#nearbyStores [data-exact-branch="0"] button:has-text("Directions")').count();
               add(`${x.label}: no unsafe Directions`,unsafeDir===0,`unsafeDirections=${unsafeDir}`);
               const disabledClosest=await p.locator('#finditV3Actions [aria-disabled="true"]:has-text("Closest directions")').count();
               add(`${x.label}: no useless disabled Closest directions`,disabledClosest===0);
-              const offers=await p.locator('#exactSellerResults .offer-card').count();
+              const offers=await p.locator('#fxTopStores .fx-retailer-candidate').evaluateAll(cards=>cards.filter(c=>!/google\.com\/search/.test(c.href)) .length);
               if(offers){
-                add(`${x.label}: exact offers have match badge`,await p.locator('#exactSellerResults .offer-card .findit-exact-badge').count()===offers,`offers=${offers}`);
-                add(`${x.label}: exact offers show checked time`,await p.locator('#exactSellerResults .offer-card .findit-checked').count()===offers);
-              }else add(`${x.label}: honest no-match fallback shown`,/No exact seller verified yet|SEARCH MORE RETAILERS/i.test(seller));
+                add(`${x.label}: verified listings disclose branch stock`,/Verified product listings/i.test(seller)&&/Branch stock (not verified|verified)/i.test(seller),seller.slice(0,250));
+              }else {
+                const nearbyRows=await p.locator('#fxTopStores > button').count();
+                const labelledNearby=await p.locator('#fxTopStores > button').evaluateAll(cards=>cards.every(c=>/Nearby|branch stock (unknown|unverified|not verified)/i.test(c.innerText)&&!/(?<!not )Stock verified/i.test(c.innerText)));
+                add(`${x.label}: honest search fallback or nearby-only results`,(/No exact listing verified yet/i.test(seller)&&/Price and stock not verified/i.test(seller))||(nearbyRows>0&&labelledNearby&&undisclosed===0),seller.slice(0,250));
+              }
               const heights=[];for(let k=0;k<6;k++){await p.evaluate(k=>window.scrollTo(0,(document.documentElement.scrollHeight-window.innerHeight)*(k/5)),k);await p.waitForTimeout(250);heights.push(await p.evaluate(()=>document.documentElement.scrollHeight));}
               add(`${x.label}: scroll layout stable`,Math.max(...heights)-Math.min(...heights)<80,`heights=${heights.join(',')}`);
               add(`${x.label}: no page JavaScript errors`,errors.length===0,errors.join(' | ').slice(0,300));
@@ -77,10 +82,15 @@ jobs:
           if(failed.length)process.exitCode=1;
           NODE
           node trust-qa.mjs
-      - name: Publish report
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: trust-results-qa-report
+          path: qa-results/
+          if-no-files-found: warn
+      - name: Publish report summary
+        if: always()
         run: |
-          git config user.name 'FindIt Trust QA Bot'
-          git config user.email 'actions@users.noreply.github.com'
-          git add qa-results/trust-results-latest.md .github/workflows/trust-results-qa.yml
-          git commit -m 'Publish trust-first production QA report [skip ci]'
-          git push
+          if [ -f qa-results/trust-results-latest.md ]; then
+            cat qa-results/trust-results-latest.md >> "$GITHUB_STEP_SUMMARY"
+          fi

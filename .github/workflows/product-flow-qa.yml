@@ -4,8 +4,10 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/product-flow-qa.yml'
+  pull_request:
+    paths: ['.github/workflows/product-flow-qa.yml']
 permissions:
-  contents: write
+  contents: read
 jobs:
   qa:
     runs-on: ubuntu-latest
@@ -47,10 +49,10 @@ jobs:
             const g=await ctx.newPage();await g.setContent(`<canvas id=c width=1200 height=800></canvas><script>const c=document.querySelector('#c'),x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,1200,800);x.fillStyle='#111';x.font='bold 72px Arial';x.fillText(${JSON.stringify(line1)},90,250);x.font='bold 54px Arial';x.fillText(${JSON.stringify(line2)},90,360);x.strokeStyle='#333';x.lineWidth=8;x.strokeRect(70,120,1060,420);</script>`);await g.locator('#c').screenshot({path:img});await g.close();
             let result='';let sellers='';let nearby='';let badDirections=0;let ok=true;let detail='';
             try{
-              await p.locator('#photo').setInputFiles(img);
-              await p.locator('#location').click();await p.waitForTimeout(500);
-              await p.locator('#search').click();
-              await p.waitForSelector('#results:not(.hidden)',{timeout:55000});await p.waitForTimeout(5000);
+              await p.locator('#fxVisiblePhotoPicker').setInputFiles(img);
+              await p.locator('#finditExactShell [data-location-direct]').click();await p.waitForTimeout(500);
+              await p.locator('#fxSearchNow').click();
+              await p.waitForFunction(()=>{const s=window.finditState||{};return !s.photoSearchPending&&!!s.result?.identification;},null,{timeout:55000});await p.waitForTimeout(5000);
               result=(await p.locator('#resultName').innerText()).trim();
               sellers=await p.locator('#exactSellerResults').innerText().catch(()=> 'seller section missing');
               nearby=await p.locator('#nearbyStores').innerText().catch(()=> 'nearby section missing');
@@ -70,10 +72,15 @@ jobs:
           if(rows.some(r=>!r.ok))process.exitCode=1;
           NODE
           node product-qa.mjs
-      - name: Publish report
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: product-flow-qa-report
+          path: qa-results/
+          if-no-files-found: warn
+      - name: Publish report summary
+        if: always()
         run: |
-          git config user.name "FindIt Product QA Bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add qa-results/product-flow-latest.md .github/workflows/product-flow-qa.yml
-          git commit -m "Publish multi-product FindIt production QA report"
-          git push
+          if [ -f qa-results/product-flow-latest.md ]; then
+            cat qa-results/product-flow-latest.md >> "$GITHUB_STEP_SUMMARY"
+          fi

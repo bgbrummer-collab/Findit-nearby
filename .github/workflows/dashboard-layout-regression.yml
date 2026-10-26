@@ -4,6 +4,8 @@ on:
     branches: [main]
     paths: ['manual-location.js', 'upload-validation.js', 'tests/upload-location-browser.mjs', 'user-first-polish.js', 'user-pov-hardening.js', 'information-runtime.js', 'dashboard-audit-controls.js', 'redesign-v4.js', 'redesign-v4.css', 'tests/dashboard-layout-regression.mjs', 'tests/saved-product-journey.mjs', '.github/workflows/dashboard-layout-regression.yml', '.github/workflows/deploy-cloudflare.yml']
   workflow_dispatch:
+  pull_request:
+    paths: ['.github/workflows/dashboard-layout-regression.yml']
 jobs:
   layout:
     runs-on: ubuntu-latest
@@ -28,32 +30,37 @@ jobs:
           sleep 2
           node tests/dashboard-layout-regression.mjs
       - name: Wait for this production deployment
+        if: github.event_name != 'pull_request'
         env:
           EXPECTED_COMMIT: ${{ github.sha }}
         run: |
           for attempt in $(seq 1 40); do
             current=$(curl -fsS --max-time 10 https://findit-nearby.bgbrummer.workers.dev/api/version || true)
             frontend=$(curl -fsS --max-time 10 https://findit-nearby.bgbrummer.workers.dev/ || true)
-            if echo "$current" | jq -e --arg expected "$EXPECTED_COMMIT" '.commit == $expected' >/dev/null 2>&1 && echo "$frontend" | grep -Fq "<meta name=\"findit-build\" content=\"$EXPECTED_COMMIT\">"; then exit 0; fi
+            if CURRENT_VERSION="$current" node -e 'try { process.exit(JSON.parse(process.env.CURRENT_VERSION || "{}").commit === process.env.EXPECTED_COMMIT ? 0 : 1); } catch { process.exit(1); }' && [[ "$frontend" == *"<meta name=\"findit-build\" content=\"$EXPECTED_COMMIT\">"* ]]; then exit 0; fi
             sleep 3
           done
           echo 'Production did not report the expected commit'; exit 1
       - name: Test eight production viewport sizes
+        if: github.event_name != 'pull_request'
         env:
           FINDIT_URL: https://findit-nearby.bgbrummer.workers.dev/
           LAYOUT_SCREENSHOTS: layout-evidence
           FINDIT_EXPECTED_COMMIT: ${{ github.sha }}
         run: node tests/dashboard-layout-regression.mjs
       - name: Verify production upload inputs and manual location at three viewport sizes
+        if: github.event_name != 'pull_request'
         env:
           FINDIT_URL: https://findit-nearby.bgbrummer.workers.dev/
           FINDIT_EXPECTED_COMMIT: ${{ github.sha }}
         run: node tests/upload-location-browser.mjs
       - name: Verify real saved-product persistence and reopen journey
+        if: github.event_name != 'pull_request'
         env:
           FINDIT_URL: https://findit-nearby.bgbrummer.workers.dev/
         run: node tests/saved-product-journey.mjs
       - name: Verify feedback consent and draft recovery with simulated delivery
+        if: github.event_name != 'pull_request'
         env:
           FINDIT_URL: https://findit-nearby.bgbrummer.workers.dev/
         run: node tests/feedback-feature-regression.mjs
