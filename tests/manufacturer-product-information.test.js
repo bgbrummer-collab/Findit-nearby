@@ -65,3 +65,11 @@ test('primary manufacturer names can supply possible product facts with no price
  const i=reconcileVision([{name:'headphones',object:'headphones'},{name:'Logitech G Pro Gaming Headset',brand:'Logitech',model:'G Pro',object:'headset'}]);
  const rows=await visualProductCandidates(i);assert.equal(rows.length,1);assert.equal(rows[0].price,null);assert.equal(rows[0].name,name);assert.equal(rows[0].photoMatchConfirmed,false);assert.match(rows[0].hypothesisNote,/one image reader/);assert.equal(i.brand,'');
 });
+
+test('the product definition takes priority over a mounting feature as its purpose',async t=>{
+ const url='https://retailer.example/products/example-v4';
+ const name='Example V4 Microphone',description='The Example V4 is a dynamic microphone for recording speech. Its adjustable yoke features flexible mounting on stands. Connects to an XLR interface.';
+ t.mock.method(globalThis,'fetch',async u=>new Response(String(u)===url?'<script type="application/ld+json">'+JSON.stringify({'@type':'Product',name,description})+'</script>':'<rss/>'));
+ const d=await(await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:{name},offers:[{product_url:url,sourcePageVerified:true,exactProductMatch:true}]})}),{})).json();
+ assert.equal(d.whatItDoes,'The Example V4 is a dynamic microphone for recording speech.');assert.equal(d.claimEvidence.whatItDoes.sourceUrl,url);
+});
