@@ -1,0 +1,137 @@
+{
+  "identification": {
+    "name": "headphones",
+    "brand": "",
+    "model": "",
+    "object": "headphones",
+    "size": "",
+    "color": "",
+    "visibleText": [],
+    "visualHypotheses": [
+      {
+        "name": "Logitech G Pro",
+        "brand": "Logitech",
+        "model": "G Pro",
+        "object": "headphones",
+        "confirmed": false,
+        "source": "single-visual-model-hypothesis"
+      }
+    ],
+    "labelCandidates": [],
+    "suggestedLabel": "",
+    "suggestedModels": [],
+    "barcode": null,
+    "searchQuery": "headphones",
+    "confidence": 0.65,
+    "userConfirmed": false,
+    "identificationMethod": "independent-vision-consensus",
+    "identityScope": "product-family",
+    "requiresModelConfirmation": true,
+    "unverifiedDetails": [
+      "exact model",
+      "variant",
+      "specifications"
+    ],
+    "features": []
+  },
+  "response": {
+    "researched": false,
+    "identityScope": "product-family",
+    "whatItDoes": "",
+    "pros": [],
+    "cons": [],
+    "sources": [],
+    "possibleProducts": [
+      {
+        "name": "Logitech G PRO Gaming Headset Designed for Esports Players",
+        "identity": {
+          "requiresModelConfirmation": false,
+          "brand": "Logitech",
+          "model": "",
+          "name": "Logitech G PRO Gaming Headset Designed for Esports Players",
+          "object": "headphones",
+          "category": "",
+          "barcode": "",
+          "size": "",
+          "color": "",
+          "searchQuery": "Logitech G PRO Gaming Headset Designed for Esports Players",
+          "visibleText": [],
+          "features": [],
+          "suggestedLabel": "",
+          "printedLabelOnly": false,
+          "userConfirmed": false
+        },
+        "productUrl": "https://www.logitechg.com/en-sg/shop/p/pro-gaming-headset",
+        "photoMatchConfirmed": false,
+        "price": null,
+        "currency": "SGD",
+        "availability": "in_stock",
+        "priceConditions": "",
+        "whatItDoes": "Logitech G Pro Gaming Headset is built to provide esports-quality audio performance with noise isolation, comfortable ear pads, and pro-grade condenser mic.",
+        "pros": [
+          "Pro-G Drivers",
+          "Surround Sound Audio",
+          "Passive Noise Isolation",
+          "Pro-Grade Condenser Microphone"
+        ],
+        "cons": [],
+        "specifications": [
+          {
+            "name": "Brand",
+            "value": "Logitech G",
+            "sourceUrl": "https://www.logitechg.com/en-sg/shop/p/pro-gaming-headset"
+          }
+        ],
+        "compatibility": [],
+        "includedItems": [],
+        "claimEvidence": {
+          "whatItDoes": {
+            "text": "Logitech G Pro Gaming Headset is built to provide esports-quality audio performance with noise isolation, comfortable ear pads, and pro-grade condenser mic.",
+            "sourceUrl": "https://www.logitechg.com/en-sg/shop/p/pro-gaming-headset",
+            "sourceTitle": "Logitech G PRO Gaming Headset Designed for Esports Players"
+          },
+          "pros": [
+            {
+              "text": "Pro-G Drivers",
+              "sourceUrl": "https://www.logitechg.com/en-sg/shop/p/pro-gaming-headset",
+              "sourceTitle": "Logitech G PRO Gaming Headset Designed for Esports Players"
+            },
+            {
+              "text": "Surround Sound Audio",
+              "sourceUrl": "https://www.logitechg.com/en-sg/shop/p/pro-gaming-headset",
+              "sourceTitle": "Logitech G PRO Gaming Headset Designed for Esports Players"
+            },
+            {
+              "text": "Passive Noise Isolation",
+              "sourceUrl": "https://www.logitechg.com/en-sg/shop/p/pro-gaming-headset",
+              "sourceTitle": "Logitech G PRO Gaming Headset Designed for Esports Players"
+            },
+            {
+              "text": "Pro-Grade Condenser Microphone",
+              "sourceUrl": "https://www.logitechg.com/en-sg/shop/p/pro-gaming-headset",
+              "sourceTitle": "Logitech G PRO Gaming Headset Designed for Esports Players"
+            }
+          ],
+          "cons": [],
+          "compatibility": [],
+          "includedItems": []
+        },
+        "quantityNote": "",
+        "hypothesisNote": "This possible product comes from one image reader’s suggestion. Its brand and model are not independently confirmed in your photo.",
+        "sources": [
+          {
+            "title": "Logitech G PRO Gaming Headset Designed for Esports Players",
+            "url": "https://www.logitechg.com/en-sg/shop/p/pro-gaming-headset"
+          }
+        ]
+      }
+    ],
+    "candidateChecks": [
+      {
+        "host": "www.logitechg.com",
+        "status": 200
+      }
+    ],
+    "message": "A retailer product matches the possible label reading. Check its name against your photo before confirming."
+  }
+}
