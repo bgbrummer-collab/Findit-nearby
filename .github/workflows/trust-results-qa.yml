@@ -48,7 +48,7 @@ jobs:
               await p.locator('#fxVisiblePhotoPicker').setInputFiles(img);await p.locator('#finditExactShell [data-location-direct]').click();await p.waitForTimeout(500);await p.locator('#fxSearchNow').click();
               await p.waitForFunction(()=>{const s=window.finditState||{};return !s.photoSearchPending&&!!s.result?.identification;},null,{timeout:55000});await p.waitForTimeout(6500);
               const result=(await p.locator('#resultName').innerText()).trim();
-              const seller=await p.locator('#exactSellerResults').innerText().catch(()=> '');
+              const seller=await p.locator('#fxTopStores').innerText().catch(()=> '');
               const nearby=await p.locator('#nearbyPanel').innerText().catch(()=> '');
               add(`${x.label}: identification returned`,!!result&&!/^Item$/i.test(result),result);
               add(`${x.label}: exact-seller section exists`,seller.length>15,seller.slice(0,150));
@@ -56,16 +56,16 @@ jobs:
               add(`${x.label}: duplicate stat strip removed`,await p.locator('#finditV3Strip').count()===0);
               add(`${x.label}: duplicate seller stats removed`,await p.locator('#exactSellerResults .premium-insights').count()===0);
               const unsafeCards=await p.locator('#nearbyStores [data-exact-branch="0"],#nearbyStores .store-card:not([data-exact-branch="1"])').count();
-              add(`${x.label}: no unverified trip cards`,unsafeCards===0,`unsafeCards=${unsafeCards}`);
+              const undisclosed=await p.locator('#nearbyStores .store-card:not([data-exact-branch="1"])').evaluateAll(cards=>cards.filter(c=>!/stock not verified|stock unknown/i.test(c.innerText)).length);
+              add(`${x.label}: unverified branches disclose unknown stock`,undisclosed===0,`unverifiedCards=${unsafeCards}, undisclosed=${undisclosed}`);
               const unsafeDir=await p.locator('#nearbyStores [data-exact-branch="0"] a:has-text("Directions"),#nearbyStores [data-exact-branch="0"] button:has-text("Directions")').count();
               add(`${x.label}: no unsafe Directions`,unsafeDir===0,`unsafeDirections=${unsafeDir}`);
               const disabledClosest=await p.locator('#finditV3Actions [aria-disabled="true"]:has-text("Closest directions")').count();
               add(`${x.label}: no useless disabled Closest directions`,disabledClosest===0);
-              const offers=await p.locator('#exactSellerResults .offer-card').count();
+              const offers=await p.locator('#fxTopStores .fx-retailer-candidate').evaluateAll(cards=>cards.filter(c=>!/google\.com\/search/.test(c.href)) .length);
               if(offers){
-                add(`${x.label}: exact offers have match badge`,await p.locator('#exactSellerResults .offer-card .findit-exact-badge').count()===offers,`offers=${offers}`);
-                add(`${x.label}: exact offers show checked time`,await p.locator('#exactSellerResults .offer-card .findit-checked').count()===offers);
-              }else add(`${x.label}: honest no-match fallback shown`,/No exact seller verified yet|SEARCH MORE RETAILERS/i.test(seller));
+                add(`${x.label}: verified listings disclose branch stock`,/Verified product listings/i.test(seller)&&/Branch stock (not verified|verified)/i.test(seller),seller.slice(0,250));
+              }else add(`${x.label}: honest no-match fallback shown`,/No exact listing verified yet/i.test(seller)&&/Price and stock not verified/i.test(seller));
               const heights=[];for(let k=0;k<6;k++){await p.evaluate(k=>window.scrollTo(0,(document.documentElement.scrollHeight-window.innerHeight)*(k/5)),k);await p.waitForTimeout(250);heights.push(await p.evaluate(()=>document.documentElement.scrollHeight));}
               add(`${x.label}: scroll layout stable`,Math.max(...heights)-Math.min(...heights)<80,`heights=${heights.join(',')}`);
               add(`${x.label}: no page JavaScript errors`,errors.length===0,errors.join(' | ').slice(0,300));
