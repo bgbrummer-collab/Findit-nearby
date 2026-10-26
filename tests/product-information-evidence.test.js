@@ -15,6 +15,9 @@ test('quantity formatting cannot obstruct label discovery or silently confirm a 
   assert.equal(candidateLabelMatches('Example Curl Conditioner '+given,{...base,suggestedLabel:'Example Curl Conditioner '+wanted}),expected);
  }
  assert.equal(candidateLabelMatches('Example Curl Shampoo 250ml',base),false);
+ assert.equal(candidateLabelMatches('Example Curl Conditioner 1250ml',{brand:'Example',object:'conditioner',suggestedLabel:'Example Curl Conditioner',size:'250 ml'}),false);
+ assert.equal(candidateLabelMatches('Example Curl Conditioner 1000ml',{brand:'Example',object:'conditioner',suggestedLabel:'Example Curl Conditioner',size:'1 l'}),true);
+ assert.equal(candidateLabelMatches('Example Shoes UK19',{brand:'Example',object:'shoes',suggestedLabel:'Example Style Shoes',size:'UK9'}),false);
 });
 
 test('cross-unit label candidates retain uncertainty and never become confirmed photo identity',async t=>{
