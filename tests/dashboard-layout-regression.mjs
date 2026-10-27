@@ -28,6 +28,10 @@ try{
   assert.ok(geometry.badgesClear,`${width}: Premium badge obscures a feature name`);
   assert.ok(geometry.cards.length>=6,`${width}: a feature disappeared`);
   assert.ok(geometry.cards.every(c=>c.visible&&c.width>=110&&c.textWidth>=55),`${width}: unreadable feature cards ${JSON.stringify(geometry.cards)}`);
+  const settings=page.locator('#finditExactShell .fx-topbar [data-fx="settings"]');
+  assert.ok(await settings.isVisible(),`${width}: Settings is unavailable`);
+  await settings.click();
+  await page.locator('#fxSettingsModal:not(.hidden), #fxStableModal:not(.hidden)').first().waitFor({state:'visible',timeout:5000});
   if(process.env.LAYOUT_SCREENSHOTS){await fs.mkdir(process.env.LAYOUT_SCREENSHOTS,{recursive:true});await page.screenshot({path:`${process.env.LAYOUT_SCREENSHOTS}/layout-${width}.png`});}
   console.log('DASHBOARD_LAYOUT_PASS',width,JSON.stringify(geometry));await page.close();
  }

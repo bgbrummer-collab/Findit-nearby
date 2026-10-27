@@ -187,3 +187,10 @@ body.findit-exact-dashboard{position:relative;left:0!important;right:auto!import
 #finditExactShell .fx-feature-row article{padding-bottom:27px!important}
 #finditExactShell .fx-feature-row .fx-plan-lock{top:auto!important;bottom:6px!important;right:7px!important}
 @media(min-width:901px){#finditExactShell .fx-feature-row{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))!important}}
+
+/* Keep the desktop utility controls available on smaller screens. */
+@media(max-width:900px){
+ #finditExactShell .fx-topbar{display:flex;justify-content:flex-end;height:auto;padding:0 2px 6px}
+ #finditExactShell .fx-topbar .fx-global-search,#finditExactShell .fx-topbar .fx-top-location{display:none}
+ #finditExactShell .fx-topbar>button{width:44px;height:44px;flex:0 0 44px}
+}

@@ -5,7 +5,7 @@ on:
     paths: ['manual-location.js', 'upload-validation.js', 'tests/upload-location-browser.mjs', 'user-first-polish.js', 'user-pov-hardening.js', 'information-runtime.js', 'dashboard-audit-controls.js', 'redesign-v4.js', 'redesign-v4.css', 'tests/dashboard-layout-regression.mjs', 'tests/saved-product-journey.mjs', '.github/workflows/dashboard-layout-regression.yml', '.github/workflows/deploy-cloudflare.yml']
   workflow_dispatch:
   pull_request:
-    paths: ['.github/workflows/dashboard-layout-regression.yml']
+    paths: ['.github/workflows/dashboard-layout-regression.yml', 'redesign-v4.css', 'index.html', 'tests/dashboard-layout-regression.mjs']
 jobs:
   layout:
     runs-on: ubuntu-latest
