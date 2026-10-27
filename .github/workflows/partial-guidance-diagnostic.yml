@@ -1,0 +1,28 @@
+name: Partial product guidance diagnostic
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/partial-guidance-diagnostic.yml'
+      - 'tests/label-confirmation-regression.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:v1.55.0-noble
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-save playwright@1.55.0
+      - name: Repeat desktop and mobile production checks
+        env:
+          FINDIT_URL: https://findit-nearby.bgbrummer.workers.dev/
+        run: |
+          for attempt in $(seq 1 12); do
+            echo "Diagnostic attempt $attempt"
+            timeout 60s node tests/label-confirmation-regression.mjs
+          done
