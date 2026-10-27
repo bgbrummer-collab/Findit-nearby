@@ -43,7 +43,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: findit-final-production-audit
@@ -105,8 +105,8 @@ jobs:
             echo; echo "--- current dashboard real-user audit ---"; tail -n 240 /tmp/realuser.log
           } > AUDIT_LATEST.txt
           cat AUDIT_LATEST.txt
-          git config user.name "findit-audit-bot"; git config user.email "actions@users.noreply.github.com"
-          git add AUDIT_LATEST.txt; git commit -m "Record latest production audit [skip ci]" || true; git push || true
+          # The uploaded workflow artifact is the audit record for this exact run.
+          # Do not push a separate commit that can diverge from the deployed SHA.
           if [ "$RELEASE" -ne 0 ] || [ "$READY" -ne 0 ] || [ "$FUNCTIONS" -ne 0 ] || [ "$REALUSER" -ne 0 ]; then exit 1; fi
       - name: Upload audit output
         if: always()
