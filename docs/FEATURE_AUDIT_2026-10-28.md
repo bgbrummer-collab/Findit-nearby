@@ -68,13 +68,13 @@ Free Premium Beta was activated only in the test browser, with user authorizatio
 | Feature | Observed result / coverage |
 |---|---|
 | Settings open, save/apply | Changed radius to 5 km, sorting to Closest first and auto-verification off. Success message shown, visible radius updated; values persisted after reload. |
-| 25 km / alphabetical sorting | Selected and applied 25 km and A–Z. Result ordering with populated nearby data remains unverified. |
+| 25 km / alphabetical sorting | Selected and applied 25 km and A–Z. Later populated test reordered the branches alphabetically, then Closest first restored the 0.1 / 0.6 / 0.7 km ordering. |
 | Reset settings | Restored 10 km, Best match and automatic verification on. |
-| Settings Refresh / location-permission controls | Not separately certified end-to-end in this pass; manual location was tested. Actual GPS/device accuracy unverified. |
+| Settings Refresh / location-permission controls | Refresh current results completed while preserving the current product and 12 branch results. Browser location refresh failed with an explicit permission/error message; the manual test area remained available. Actual GPS/device accuracy remains unverified. |
 | Nearby Filter | Opened Settings containing radius and sort controls. |
 | Premium Workspace | Opened and displayed its tools. |
 | Collections | Created `QA audit 2026-10-28`, added Nivea and observed count/name. No removal control was exposed in that view. |
-| Favourite Stores | Initially asked for nearby search first. Populated branch saving is checked separately below if exercised. |
+| Favourite Stores | Initially asked for nearby search first. After branches loaded, saved Menlyn Park and observed Saved ✓ plus its address in Saved retailers. |
 | Exact Match | Ran the current product; returned no verified listing with the correct warning. Useful retrieval failed. |
 | AI Retailer Search | Opened assistant prefilled with the current product; submitted and checked the answer. |
 | Premium Stats | Showed four recent finds, one saved item, zero watchlist and zero favourite stores, consistent with the state after audit cleanup. Stats disclose device-local Beta storage. |
@@ -87,8 +87,8 @@ Free Premium Beta was activated only in the test browser, with user authorizatio
 - PR #339: same aliases in native catalogue discovery; shopping-list state synchronization; original photo identity retained by all history writers. Includes unit coverage and desktop removal / phone-sized clear-list browser regression.
 - PR #339 merged and the live page's build stamp confirmed `f06a5e97bc3a9bf41018fb2151b38f7812996245`. Re-uploaded the same G435 image, identified it, removed its shopping-list entry and checked the separate control returned to `+ Shopping List` / `aria-pressed=false`. Reopening the newly created photo history retained Logitech / G435 / electronics and 85% instead of the older-entry warning.
 - Re-uploaded the Nivea image on that build: category now beauty, pharmacy suggestions and appropriate label checklist appeared. Correction form retained `NIVEA MEN DEEP ANTI-PERSPIRANT 150 ml` without submitting automatically. Submitting that identity still returned no verified retailer facts or offer. The quality gap remains.
-- Additional capacity review found two history writers capped Premium at 20 and the history dialog displayed at most 30 despite the advertised 50. The follow-up preserves 50 Premium entries and exposes all 50 in the dialog; Free uses the existing 30-entry limit. Tests cover both limits.
-- Local suite after the original-identity fixes: **521 tests passed**, zero failures. The capacity follow-up passed **522 tests**, zero failures.
+- Additional capacity review found two history writers capped Premium at 20 and the history dialog displayed at most 30 despite the advertised 50. The follow-up preserves 50 Premium entries and exposes all 50 in the dialog; The Free history dialog retains its 30-row cap. Tests cover both display limits.
+- Local suite after the original-identity fixes: **521 tests passed**, zero failures. The capacity follow-up passed **522 tests**, zero failures; the map stability test brought the final local suite to **523 tests**, zero failures.
 - The four PR #339 workflows passed: regression, Full Production Audit, Release Smoke and Interaction Freeze. Main production deployment, smoke, dashboard commerce and Final Production Audit also passed when checked. Main **Uncommon Commerce Regression failed**: no verified exact retailer page for its tuner fixture. Its live discovery failure is not hidden or relaxed.
 
 ![Current live Nivea result, showing the remaining missing exact information](audit-2026-10-28-live-result.jpg)
@@ -99,7 +99,9 @@ After the final pharmacy routing fix and a fresh exact-label search with the Men
 
 The populated dashboard revealed its map panel was still decorative and its old Map view target was hidden. The follow-up replaces those decorative pins with real Leaflet markers for returned branch coordinates, a separately labelled selected search point, accessible Check Store popups and tile-error guidance. Existing map assets and tile service are reused. No branch product stock is inferred from a marker.
 
-The main `f06a5e9` Interaction Freeze run timed out while navigating production before the shopping test started; the relevant local test passed. It was rerun rather than silently classified as an application pass. PR #340's capacity-only head passed all four PR suites before adding the map repair.
+The main `f06a5e9` Interaction Freeze run timed out while navigating production before the shopping test started; the relevant local test passed. A bounded rerun passed. The first failure is retained in the run history. PR #340's capacity-only head passed all four PR suites before adding the map repair.
+
+The map repair's source head `5a210e682cd37cea1aabb3fc50f494acfae1b9e6` passed all five PR suites: Node regression, Full Production Audit, Release Smoke, Interaction Freeze and Responsive Layout. The layout suite checks widths 390, 768, 901, 1024, 1180, 1273, 1440 and 1920. The interaction test requires three real Leaflet markers from its fixture coordinates and checks desktop list removal plus phone-sized list clearing. Provider data in those interaction tests is mocked; it does not establish every live branch's correctness.
 
 ## Remaining release blockers
 
