@@ -10,7 +10,7 @@ const saveKey=p=>norm([p.brand,p.model,p.name,p.query].filter(Boolean).join(' ')
 function sync(){const p=product(),a=document.querySelector('#fxQuickAddShopping'),b=document.querySelector('#fxQuickSaveFind');if(a){const list=read('findit.shoppingList.v2',[]),has=Array.isArray(list)&&list.some(x=>x?.key===shoppingKey(p));a.textContent=has?'✓ In Shopping List':'+ Shopping List';a.setAttribute('aria-pressed',has?'true':'false')}if(b){const rows=read('finditSaved',[]),k=saveKey(p),has=Array.isArray(rows)&&rows.some(x=>(x?.key||saveKey(x||{}))===k);b.textContent=has?'✓ Find Saved':'Save Find';b.setAttribute('aria-pressed',has?'true':'false')}}
 function settle(times=[0,40,100,220,450]){for(const ms of times)setTimeout(sync,ms)}
 document.addEventListener('click',e=>{if(e.target?.closest?.('#fxQuickAddShopping,#fxQuickSaveFind'))settle()},true);
-for(const ev of ['findit:results-rendered','findit:nearby-updated','findit:dashboard-sync'])document.addEventListener(ev,()=>settle([0,80,250]));
+for(const ev of ['findit:results-rendered','findit:nearby-updated','findit:dashboard-sync','findit:shopping-list-updated'])document.addEventListener(ev,()=>settle([0,80,250]));
 window.addEventListener('storage',sync);
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>settle(),{once:true});else settle();
 })();
