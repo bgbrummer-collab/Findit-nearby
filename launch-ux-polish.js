@@ -38,6 +38,7 @@ function truthfulHours(){
  });
 }
 function mapTruth(){
+ if(window.finditRenderNearbyMap){window.finditRenderNearbyMap();return}
  const art=$('#finditExactShell .fx-map-art');if(!art)return;
  const stores=Array.isArray(state().stores)?state().stores.filter(s=>Number.isFinite(Number(s.lat??s.latitude))&&Number.isFinite(Number(s.lon??s.longitude))):[];
  $$('.p',art).forEach(p=>p.style.display=stores.length?'':'none');

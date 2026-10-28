@@ -136,7 +136,7 @@
     }catch(e){if(id===runId){renderStores([],false);if($('#nearbySummary'))$('#nearbySummary').textContent='Nearby lookup is temporarily unavailable.'}}
   }
 
-  function saveRecent(i){try{const key='finditRecent',q=clean(i?.searchQuery||i?.name||i?.object);let a=JSON.parse(localStorage.getItem(key)||'[]');a=[{id:Date.now(),name:i?.name||i?.object||'Item',brand:i?.brand||'',identification:{...i},query:q,date:new Date().toISOString()},...a.filter(x=>x.query!==q)].slice(0,20);localStorage.setItem(key,JSON.stringify(a))}catch{}}
+  function saveRecent(i){try{const key='finditRecent',q=clean(i?.searchQuery||i?.name||i?.object);let a=JSON.parse(localStorage.getItem(key)||'[]');a=[{id:Date.now(),name:i?.name||i?.object||'Item',brand:i?.brand||'',identification:{...i},query:q,date:new Date().toISOString()},...a.filter(x=>x.query!==q)].slice(0,window.premiumHistoryLimit?.()===50?50:30);localStorage.setItem(key,JSON.stringify(a))}catch{}}
 
   async function runSearch(e){
     const target=e.target?.closest?.('#search');if(!target)return;

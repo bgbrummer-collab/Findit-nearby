@@ -43,6 +43,8 @@ await page.evaluate(()=>{
   document.dispatchEvent(new CustomEvent('findit:dashboard-sync'));
   setTimeout(()=>window.finditRefreshStoreHours?.(),80);
 });
+await page.waitForSelector('#fxNearbyMap .fx-live-branch-pin',{state:'visible'});
+if(await page.locator('#fxNearbyMap .fx-live-branch-pin').count()!==3)fail('Nearby map must show the returned branch coordinates, not decorative pins');
 await page.waitForSelector('#fxQuickAddShopping',{state:'visible'});
 await page.waitForSelector('#fxQuickSaveFind',{state:'visible'});
 await page.locator('#fxQuickAddShopping').click();
