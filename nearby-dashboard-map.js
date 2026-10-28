@@ -1,18 +1,19 @@
 /* Show returned branch coordinates in the existing dashboard map panel. */
 (() => {
   'use strict';
-  let map, markers, panel, notice, pending, lastKey = '', generation = 0;
+  let map, markers, panel, notice, pending, lastKey = '', failedKey = '', generation = 0;
   const point = s => {
     const lat = s?.lat ?? s?.latitude, lon = s?.lon ?? s?.lng ?? s?.longitude;
     if (lat === null || lat === undefined || lat === '' || lon === null || lon === undefined || lon === '') return null;
     const p = [Number(lat), Number(lon)];
     return p.every(Number.isFinite) && Math.abs(p[0]) <= 90 && Math.abs(p[1]) <= 180 && (p[0] !== 0 || p[1] !== 0) ? p : null;
   };
+  const setNotice = message => { if (notice.textContent !== message) notice.textContent = message; };
   function host() {
     const art = document.querySelector('#finditExactShell .fx-map-art');
     if (!art) return null;
     if (!panel || !art.contains(panel)) {
-      map?.remove(); map = null; markers = null; lastKey = ''; generation++;
+      map?.remove(); map = null; markers = null; lastKey = ''; failedKey = ''; generation++;
       art.replaceChildren(); art.dataset.liveMap = '1';
       panel = document.createElement('div'); panel.id = 'fxNearbyMap';
       panel.setAttribute('aria-label', 'Map of nearby retailer branches');
@@ -26,17 +27,17 @@
     const state = window.finditState || window.state || {};
     const rows = (Array.isArray(state.stores) ? state.stores : []).map(store => ({store, point: point(store)})).filter(x => x.point);
     if (!rows.length) {
-      generation++; lastKey = ''; markers?.clearLayers(); panel.hidden = true;
-      notice.textContent = 'Real store pins appear after relevant nearby results are found.';
+      if (!panel.hidden || lastKey) { generation++; lastKey = ''; markers?.clearLayers(); panel.hidden = true; }
+      setNotice('Real store pins appear after relevant nearby results are found.');
       return;
     }
-    panel.hidden = false;
+    if (panel.hidden) panel.hidden = false;
     const origin = point(state.coords);
     const key = JSON.stringify([origin, rows.map(x => [x.store.name, x.point])]);
-    if (key === lastKey && map) { map.invalidateSize(); return; }
+    if (key === lastKey && map || key === failedKey) return;
     if (pending) return;
     const current = ++generation;
-    notice.textContent = 'Loading nearby branch map…';
+    setNotice('Loading nearby branch map…');
     pending = true;
     try {
       const L = await window.finditLoadLeaflet();
@@ -44,7 +45,7 @@
       if (!map) {
         map = L.map(panel, {scrollWheelZoom: false});
         markers = L.layerGroup().addTo(map);
-        window.finditAddMapTiles(L, map, message => { notice.textContent = message || 'Branch locations shown. Exact item stock is not confirmed by a map pin.'; });
+        window.finditAddMapTiles(L, map, message => setNotice(message || 'Branch locations shown. Exact item stock is not confirmed by a map pin.'));
       }
       markers.clearLayers();
       const bounds = [];
@@ -62,9 +63,9 @@
         bounds.push(origin);
       }
       map.invalidateSize(); map.fitBounds(bounds, {padding: [26, 26], maxZoom: 15}); lastKey = key;
-      notice.textContent = 'Branch locations shown. Exact item stock is not confirmed by a map pin.';
+      setNotice('Branch locations shown. Exact item stock is not confirmed by a map pin.');
     } catch {
-      lastKey = ''; notice.textContent = 'Map unavailable. Nearby store details remain available. Select the map to retry.';
+      lastKey = ''; failedKey = key; setNotice('Map unavailable. Nearby store details remain available. Select the map to retry.');
     } finally { pending = false; }
   }
   const style = document.createElement('style');
@@ -72,7 +73,7 @@
   document.head.appendChild(style);
   window.finditRenderNearbyMap = render;
   for (const name of ['findit:nearby-updated', 'findit:results-rendered', 'findit:dashboard-sync', 'findit:new-photo-selected']) document.addEventListener(name, render);
-  document.addEventListener('click', e => { if (e.target.closest?.('.fx-map-art') && !lastKey) render(); });
+  document.addEventListener('click', e => { if (e.target.closest?.('.fx-map-art') && !lastKey) { failedKey = ''; render(); } });
   window.addEventListener('resize', () => map?.invalidateSize());
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', render, {once: true}); else render();
 })();
