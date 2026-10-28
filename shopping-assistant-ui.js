@@ -12,7 +12,7 @@
   const app=()=>window.finditState||window.state||{};
   const LS={list:'findit.shoppingList.v2',watch:'findit_v10_watchlist',alerts:'findit.watchAlerts.v1',history:'findit.priceHistory.v1',mode:'findit.shoppingPlanMode.v1'};
   const read=(k,f)=>{if(k===LS.watch&&window.finditWatchStorage)return window.finditWatchStorage.read();try{const v=JSON.parse(localStorage.getItem(k)||'null');return v??f}catch{return f}};
-  const write=(k,v)=>{if(k===LS.watch&&window.finditWatchStorage){window.finditWatchStorage.write(v);return;}try{localStorage.setItem(k,JSON.stringify(v))}catch{}};
+  const write=(k,v)=>{if(k===LS.watch&&window.finditWatchStorage){window.finditWatchStorage.write(v);return;}try{localStorage.setItem(k,JSON.stringify(v));if(k===LS.list)document.dispatchEvent(new CustomEvent('findit:shopping-list-updated'))}catch{}};
   const money=(v,c)=>window.finditOfferEvidence?.format({price:v,currency:c})||'Price not verified';
   const listingKey=o=>(typeof window!=='undefined'&&window.finditOfferEvidence?.listingComparisonKey(o))||String(o?.product_url||o?.url||'');
   const priceConditions=o=>String(o?.priceConditions||'').replace(/\s+/g,' ').trim().slice(0,1000);
