@@ -17,7 +17,7 @@ Google Images showed an unusual-traffic verification challenge in this browser. 
 | Typed `Nivea Men Deep Anti-Perspirant 150ml` | Same product identity as the photograph | Search completed and pharmacy suggestions appeared after the category fix. Exact source research remained empty in the observed search. |
 | Manual barcode `5449000000996` | [Open Food Facts record](https://world.openfoodfacts.org/product/5449000000996) | Returned Coca-Cola 330 ml with catalogue attribution and linked barcode/brand/pack fields. No invented retail price or branch stock. Catalogue information is not independently measured label accuracy. |
 | Invalid barcode `123`; empty text search | Validation inputs | Rejected with numeric-barcode validation / required-field message. |
-| Test location `-25.7821, 28.2752` | Public Menlyn-area test coordinates; not the user's location | Manual location accepted; Leaflet loaded, zoom controls worked and clicking the map changed the pending coordinate fields. Useful nearby product results were not obtained. |
+| Test location `-25.7821, 28.2752` | Public Menlyn-area test coordinates; not the user's location | Manual location accepted; Leaflet loaded, zoom controls worked and clicking the map changed the pending coordinate fields. On the final retest, 12 Clicks branches loaded. Menlyn Park displayed 0.1 km; independently recomputed straight-line distance was 0.086 km (rounds to 0.1). Branch stock remained unknown. |
 
 For an external cross-check, [Clicks product 307992](https://clicks.co.za/nivea-men_deodorant-spray-deep-150ml/p/307992) displayed Nivea Men Deep 150 ml, R52.99 and online “In Stock” during this audit. Promotional conditions were separate. This is timestamped retailer-page evidence, not a guaranteed future price or branch-stock claim. FindIt did not retrieve that listing during the observed search.
 
@@ -30,7 +30,7 @@ Official [Nivea](https://www.nivea.co.za/products/nivea-men-deep-aerosol-150ml-6
 | Feature/control | Result and limit |
 |---|---|
 | Home / Search navigation | Navigation controls exercised; Search Product opens the named-product form. |
-| Nearby navigation / product Nearby action | Entry points exercised. No populated live branch result was obtained, so positive branch navigation is unverified. |
+| Nearby navigation / product Nearby action | Entry points exercised. Final retest returned 12 Clicks branches; Check Store opened Menlyn Park details. Exact item availability remained unknown. |
 | Compare / Compare Prices / Product Info comparison action | Comparison opens with the current product, and explicitly says no verified price. Populated price ranking is unverified live. |
 | Deals | Opened the retailer/price view. No actual deal was returned; cannot certify deal quality. |
 | Saved / Save Find | Saved Nivea, checked the success state, reloaded and reopened it. Product research refreshes separately. Storage is local to this browser, not cross-device sync. |
@@ -51,13 +51,13 @@ Official [Nivea](https://www.nivea.co.za/products/nivea-men-deep-aerosol-150ml-6
 | Correct model / label | Form worked. Fixed its prefill to preserve an available label hypothesis, without automatically confirming it. |
 | Ask FindIt product modal | Asked a G435 Bluetooth/weight/battery question. Response admitted missing exact information but did not answer with available official specifications. Quality gap. |
 | AI retailer assistant / Send / No stores? | Current Nivea context retained; answered honestly about missing price/availability and distinguished online from branch stock. No-stores chip supplied location guidance. |
-| Best overall / Cheapest / Closest cards | Missing-evidence states shown. Positive ranking, currency comparison and distances were not verified against populated live data. |
+| Best overall / Cheapest / Closest cards | Missing-evidence states shown. Best overall/cheapest remain unpopulated without prices. Closest correctly displayed Menlyn Park at 0.1 km after branches loaded; cross-currency ranking remains unverified live. |
 | Shopping List quick action / Add current item | Added the current product; duplicates updated the same item. List persisted after reload. |
 | Shopping list Remove / Clear list | Both removed audit entries. Found separate quick-action label remained selected; added a list-mutation event and synchronization fix. |
 | Shopping plan Best overall / Cheapest | Both controls exercised with no prices; no total or driving route invented. One numeric automation target detached during dynamic rendering; re-targeting the visible control succeeded. |
 | Shopping plan title | Fixed unconditional “Online-only plan” wording when there were zero verified retailers. No-offer state now retains “No verified shopping route yet”. |
-| Check nearby stores disclosure | Opened; correctly showed that branch details were not available. Calls/directions/branch stock require a populated result and remain unverified live. |
-| Open Now | Disabled when published branch hours were absent. Positive filtering by accurate current hours was not verified live. |
+| Check nearby stores disclosure | Final retest showed populated branch controls. Menlyn Park modal address, phone and Wednesday closing time matched the official branch page. Call and directions destinations were inspected; no telephone call was placed. Exact branch stock remains unknown. |
+| Open Now | Disabled before hours loaded; became enabled for 12 published schedules and toggled on. All 12 were scheduled open, so filtering out a closed live branch was not demonstrated. Menlyn Park Wednesday closing time matched its official page. |
 | Shopping barcode button / manual entry | Invalid and real barcode paths tested; camera-detection fallback shown. |
 | Retailer suggestions | Relevant pharmacy suggestions restored for deodorant/anti-perspirant aliases. These are explicitly unverified search links, not offers. Google destinations could not be fully followed because of the browser's verification block. |
 
@@ -74,7 +74,7 @@ Free Premium Beta was activated only in the test browser, with user authorizatio
 | Nearby Filter | Opened Settings containing radius and sort controls. |
 | Premium Workspace | Opened and displayed its tools. |
 | Collections | Created `QA audit 2026-10-28`, added Nivea and observed count/name. No removal control was exposed in that view. |
-| Favourite Stores | Opened; asks for nearby search first. Saving a populated live branch remains unverified. |
+| Favourite Stores | Initially asked for nearby search first. Populated branch saving is checked separately below if exercised. |
 | Exact Match | Ran the current product; returned no verified listing with the correct warning. Useful retrieval failed. |
 | AI Retailer Search | Opened assistant prefilled with the current product; submitted and checked the answer. |
 | Premium Stats | Showed four recent finds, one saved item, zero watchlist and zero favourite stores, consistent with the state after audit cleanup. Stats disclose device-local Beta storage. |
@@ -93,11 +93,19 @@ Free Premium Beta was activated only in the test browser, with user authorizatio
 
 ![Current live Nivea result, showing the remaining missing exact information](audit-2026-10-28-live-result.jpg)
 
+## Final populated nearby retest
+
+After the final pharmacy routing fix and a fresh exact-label search with the Menlyn test location, 12 Clicks branches appeared. [Clicks Menlyn Park's official branch page](https://clicks.co.za/store/Menlyn-Park/365) matched the app's address, telephone and Wednesday 09:00–20:00 schedule. Its selected-point-to-branch straight-line distance independently recomputed to 0.086 km, matching the displayed 0.1 km. This is a straight-line estimate, not a driving distance.
+
+The populated dashboard revealed its map panel was still decorative and its old Map view target was hidden. The follow-up replaces those decorative pins with real Leaflet markers for returned branch coordinates, a separately labelled selected search point, accessible Check Store popups and tile-error guidance. Existing map assets and tile service are reused. No branch product stock is inferred from a marker.
+
+The main `f06a5e9` Interaction Freeze run timed out while navigating production before the shopping test started; the relevant local test passed. It was rerun rather than silently classified as an application pass. PR #340's capacity-only head passed all four PR suites before adding the map repair.
+
 ## Remaining release blockers
 
 1. Clear-label Nivea photograph was reduced to a generic object. Label hypotheses are not confirmed identities.
 2. Exact research and retailer discovery returned no useful verified offers for Nivea or G435 despite external product pages. Generic pros/cons and Ask answers are insufficient for the desired product experience.
-3. Positive live branch stock, branch prices, current opening hours, distances, route planning, favourite stores and deal comparisons were not established by the tested live results. Mocked regression passes cannot validate third-party data truth.
+3. Exact live branch stock, branch prices, price-based route planning and deals were not established. Relevant branch discovery did work on the final Nivea retest. One branch address/phone/schedule and rounded straight-line distance were independently cross-checked; that is not verification of every branch or exceptional opening day.
 4. Native phone camera/gallery, actual GPS, notification receipt and background operation were not available for verification.
 5. Independent AI calls are nondeterministic; local browser storage does not synchronize devices. Identical independent answers and shared saved state have not been demonstrated.
 
