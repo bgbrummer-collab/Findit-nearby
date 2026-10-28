@@ -279,3 +279,12 @@ test('a manufacturer document mismatch keeps a useful source link without publis
  const r=runtime();r.context.URL=URL;r.context.window.testInfo();await r.finish({researched:false,sourceChecks:[{url:'https://manufacturer.example/guide/A2',status:'identity-mismatch',resource:'manufacturer-document',stage:'metadata'}]});r.context.window.testInfo();
  assert.match(r.body.innerHTML,/Sources unavailable/);assert.match(r.body.innerHTML,/https:\/\/manufacturer.example\/guide\/A2/);assert.match(r.body.innerHTML,/not verified product facts or prices/);
 });
+
+test('correcting a partial photo retains its single unconfirmed printed label',async()=>{
+ const r=runtime();r.elements.set('#fxRetryCandidate',{});r.elements.set('#fxConfirmModel',{});r.elements.set('#fxRealQuery',{});r.elements.set('#fxRealSearch',{});
+ const label='Example Men Deep Anti-Perspirant 150 ml';
+ r.context.window.finditState.result.identification={name:'anti perspirant',object:'anti perspirant',requiresModelConfirmation:true,labelCandidates:[{name:label,confirmed:false,source:'printed-label-hypothesis'}]};
+ r.context.window.testInfo();r.elements.get('#fxConfirmModel').onclick();
+ assert.equal(r.elements.get('#fxRealQuery').value,label);assert.equal(r.context.window.finditState.result.identification.userConfirmed,undefined);
+ await r.finish({possibleProducts:[]});
+});
