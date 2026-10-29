@@ -96,3 +96,27 @@ test('unavailable manufacturer documents report source status without exposing r
  assert.equal(await manufacturerProductData(guide,identity,undefined,x=>checks.push(x)),null);
  assert.deepEqual(checks,[{url:guide,status:'http-error',resource:'manufacturer-document',stage:'metadata',httpStatus:403}]);assert.doesNotMatch(JSON.stringify(checks),/Private upstream/);
 });
+
+test('confirmed product research retains the canonical manufacturer record when search fills the page budget',async t=>{
+ const name='Logitech G PRO Gaming Headset Designed for Esports Players',url='https://www.logitechg.com/en-sg/shop/p/pro-gaming-headset';
+ const raw='<title>'+name+'</title><script type="application/ld+json">'+JSON.stringify({'@type':'Product',name:'PRO',brand:'Logitech G',url,description:'The Logitech G PRO gaming headset isolates background noise for audio listening.',additionalProperty:[{name:'Connection',value:'3.5 mm audio'}]})+'</script>';
+ const fetched=[];
+ t.mock.method(globalThis,'fetch',async u=>{
+  fetched.push(String(u));
+  if(String(u).includes('bing.com'))return new Response('<rss>'+Array.from({length:4},(_,n)=>'<item><title>'+name+'</title><link>https://retailer'+n+'.example/products/pro-headset</link></item>').join('')+'</rss>');
+  return new Response(String(u)===url?raw:'<title>Unavailable</title>');
+ });
+ const identification={name:'Logitech G PRO Gaming Headset',brand:'Logitech',model:'G PRO',object:'headset',userConfirmed:true};
+ const d=await(await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification})}),{})).json();
+ assert.ok(fetched.includes(url),'manufacturer must remain within the four-page budget');
+ assert.equal(d.researched,true);assert.match(d.whatItDoes,/isolates background noise/);
+ assert.ok(d.specifications.some(s=>s.name==='Connection'&&s.value==='3.5 mm audio'&&s.sourceUrl===url));
+});
+
+test('confirmed research rejects abbreviated recommendation records on another canonical page',async t=>{
+ const name='Logitech G PRO Gaming Headset',url='https://www.logitechg.com/en-sg/shop/p/pro-gaming-headset';
+ const raw='<title>'+name+'</title><script type="application/ld+json">'+JSON.stringify({'@type':'Product',name:'PRO',brand:'Logitech G',url:url+'-other',description:'Unrelated recommendation provides 999 hours of listening.',additionalProperty:[{name:'Battery',value:'999 hours'}]})+'</script>';
+ t.mock.method(globalThis,'fetch',async u=>new Response(String(u)===url?raw:'<rss/>'));
+ const d=await(await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:{name,brand:'Logitech',model:'G PRO',object:'headset',userConfirmed:true}})}),{})).json();
+ assert.doesNotMatch(JSON.stringify(d.specifications),/999 hours/);
+});
