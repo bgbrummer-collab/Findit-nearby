@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {nativeRetailerUrls} from '../lib/native-retailer-discovery.js';
 for(const [name,expected,productUrl] of [
  ['Sony WH-1000XM5 black','https://www.incredible.co.za/catalogsearch/result/?q=Sony%20WH-1000XM5%20black','https://www.incredible.co.za/sony-wh-1000xm5-wireless-noise-cancelling-headphones-black'],
- ['Nivea Rich Nourishing Body Lotion 250ml','https://clicks.co.za/search?text=Nivea%20Rich%20Nourishing%20Body%20Lotion%20250ml','https://clicks.co.za/nivea_rich-nourishing-body-lotion-250ml/p/129748']
+ ['Nivea Rich Nourishing Body Lotion 250ml','https://clicks.co.za/search?q=Nivea%20Rich%20Nourishing%20Body%20Lotion%20250ml%3Arelevance&text=Nivea%20Rich%20Nourishing%20Body%20Lotion%20250ml&count=100','https://clicks.co.za/nivea_rich-nourishing-body-lotion-250ml/p/129748']
 ])test(`retailer adapter discovers ${name} with the retailer's actual search route`,async t=>{
  const requested=[];
  t.mock.method(globalThis,'fetch',async u=>{const url=String(u);requested.push(url);return new Response(url.endsWith(expected)?`${' '.repeat(900000)}${Array.from({length:125},(_,n)=>'<a href="https://www.incredible.co.za/navigation-section-'+n+'">Browse</a>').join('')}<a href="https://www.incredible.co.za/static/Sony-WH-1000XM5-black.css">Styles</a><a href="https://www.incredible.co.za/catalogsearch/result/?q=Sony&amp;type=product">Search</a><a href="${productUrl}">${name}</a>`:'')});
@@ -60,4 +60,20 @@ test('product name anchor wins over earlier duplicate image anchor containing in
  t.mock.method(globalThis,'fetch',async u=>new Response(String(u)===page?html:''));
  const urls=await nativeRetailerUrls({brand:'Example Relief',name:'Example Relief Cream 25g',object:'topical cream',category:'beauty',searchQuery:'Example Relief Cream 25g'});
  assert.equal(urls.filter(u=>u===url).length,1);
+});
+
+test('large personal-care catalogue pages retain later exact products instead of truncating them',async t=>{
+ const name='Example Men Deep Anti-Perspirant 150ml',url='https://clicks.co.za/example-men_deep-anti-perspirant-150ml/p/123456';
+ const requested=[];
+ t.mock.method(globalThis,'fetch',async u=>{requested.push(String(u));return new Response(String(u).includes('clicks.co.za/search?')&&new URL(String(u)).searchParams.get('text')===name?' '.repeat(1900000)+'<a href="'+url+'">'+name+'</a>':'');});
+ const urls=await nativeRetailerUrls({name,searchQuery:name},{maxSearchPages:2,timeoutMs:3500,readerFallback:false});
+ assert.ok(urls.includes(url));assert.ok(requested.some(u=>new URL(u).searchParams.get('count')==='100'));
+ assert.ok(requested.every(u=>!u.startsWith('https://r.jina.ai/')));
+});
+
+test('electronics catalogue discovery includes FirstShop and excludes different colourways',async t=>{
+ const name='Logitech G435 headset black',right='/products/logitech-g435-headset-black',wrong='/products/logitech-g435-headset-blue';
+ t.mock.method(globalThis,'fetch',async u=>new Response(String(u).startsWith('https://www.firstshop.co.za/search/suggest.json')?JSON.stringify({resources:{results:{products:[{title:name,url:right},{title:'Logitech G435 headset blue',url:wrong},{title:'Logitech G522 headset black',url:'/products/g522'}]}}}):''));
+ const urls=await nativeRetailerUrls({name,brand:'Logitech',model:'G435',object:'headset',color:'black'});
+ assert.ok(urls.includes('https://www.firstshop.co.za'+right));assert.ok(!urls.includes('https://www.firstshop.co.za'+wrong));assert.ok(!urls.some(u=>u.endsWith('/g522')));
 });

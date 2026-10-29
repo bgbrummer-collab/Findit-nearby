@@ -87,3 +87,10 @@ test('barcode questions distinguish the current identity, retailer evidence and 
  const r=answerFromEvidence('What is its barcode?',{identification:i},research);assert.match(r.answer,/Retailer source lists barcode: 6009712390007/);assert.match(r.answer,/not read from your photo/);assert.ok(r.sources.some(s=>s.url==='https://retailer.example/product'));
  const p=answerFromEvidence('barcode',{identification:{...i,requiresModelConfirmation:true}},research);assert.doesNotMatch(p.answer,/6009712390007/);assert.match(p.answer,/No barcode has been independently verified/);
 });
+
+test('specific questions prioritize relevant published fields beyond the first eight specifications',()=>{
+ const research={researched:true,whatItDoes:'A wireless gaming headset.',specifications:[...Array.from({length:10},(_,n)=>({name:'Other field '+n,value:'Published value'})),{name:'Weight',value:'165 g'},{name:'Battery Play time',value:'18 hrs'},{name:'Bluetooth',value:'Devices with Bluetooth audio connectivity'}],sources:[{url:'https://manufacturer.example/headset'}]};
+ const r=answerFromEvidence('Does it have Bluetooth, how heavy is it and how long does its battery last?',{identification:{name:'Example X1'}},research);
+ assert.match(r.answer,/Weight: 165 g/);assert.match(r.answer,/Battery Play time: 18 hrs/);assert.match(r.answer,/Bluetooth: Devices/);
+ assert.doesNotMatch(r.answer,/do not establish the included batteries|Box contents/);
+});
