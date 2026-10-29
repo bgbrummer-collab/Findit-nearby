@@ -182,3 +182,9 @@ test('deodorant aliases and independently transcribed label subsets preserve the
  const i=reconcileVision([a,b]);assert.equal(i.object,'deodorant');assert.equal(i.requiresModelConfirmation,false);assert.equal(i.name,a.name);assert.equal(i.size,'150 ml');assert.equal(i.color,'');assert.equal(i.barcode,null);assert.equal(i.identificationMethod,'independent-printed-label-consensus');
  for(const wrong of [{...b,visibleText:[]},{...b,visibleText:visibleText.filter(x=>x!=='150 ml')},{...b,model:b.model+' espresso',name:b.name+' Espresso',visibleText:[...visibleText,'ESPRESSO']},{...b,size:'250 ml'}])assert.notEqual(reconcileVision([a,wrong])?.requiresModelConfirmation,false);
 });
+
+test('printed deodorant search keeps the scent and quantity while separating an anti-germ label claim',()=>{
+ const a={name:'Example Men Deep Dark Wood Anti-Perspirant Anti-Germ 150ml',brand:'Example',model:'Men Deep Dark Wood Anti-Perspirant Anti-Germ',object:'deodorant spray',size:'150ml',visibleText:['Example Men Deep Dark Wood Anti-Perspirant Anti-Germ','150ml']};
+ const i=reconcileVision([a,{...a,object:'aerosol deodorant spray'}]);
+ assert.equal(i.requiresModelConfirmation,false);assert.match(i.name,/Anti-Germ/);assert.doesNotMatch(i.searchQuery,/anti.germ/i);assert.match(i.searchQuery,/Dark Wood/);assert.match(i.searchQuery,/150ml/);assert.ok(i.visibleText.some(s=>/Anti-Germ/.test(s)));
+});

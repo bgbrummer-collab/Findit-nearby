@@ -151,3 +151,32 @@ test('consumer contact lines are not product purpose, strengths or specification
  const d=await(await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:{name},offers:[{product_url:url,sourcePageVerified:true,exactProductMatch:true}]})}),{})).json();
  assert.match(d.whatItDoes,/reduce perspiration/);assert.ok(d.pros.some(p=>/48h/.test(p)));assert.doesNotMatch(JSON.stringify([d.whatItDoes,d.pros,d.cons]),/0860|0800|consumer care|Customer support/);
 });
+
+test('manufacturer lookup preserves the printed personal-care scent and excludes other variants and sizes',async t=>{
+ const url='https://www.nivea.co.za/products/nivea-men-deep-aerosol-150ml-60010510028870147.html';
+ const i={name:'Nivea Men Deep Black Carbon Dark Wood Anti-Perspirant Anti-Germ 150ml',brand:'Nivea',object:'deodorant',size:'150ml',searchQuery:'Nivea Men Deep Black Carbon Dark Wood Anti-Perspirant 150ml'};
+ assert.ok(manufacturerResearchUrls(i).includes(url));
+ for(const suffix of [' Espresso',' Extreme',' Roll-on'])assert.ok(!manufacturerResearchUrls({...i,name:i.name+suffix}).includes(url));
+ assert.ok(!manufacturerResearchUrls({...i,name:'Nivea Men Deep Anti-Perspirant 200ml',size:'200ml',searchQuery:'Nivea Men Deep Anti-Perspirant 200ml'}).includes(url));
+ t.mock.method(globalThis,'fetch',async u=>new Response(String(u)===url?'<script type="application/ld+json">'+JSON.stringify({'@type':'Product',name:'NIVEA MEN DEEP AEROSOL 150ML',brand:'Nivea',size:'150 ML',description:'Reliable anti-perspirant protection for Nivea Men Deep 150ml. The formula with Black Carbon provides protection against odour-causing germs and a dark wood fragrance.'})+'</script>':'<rss/>'));
+ const d=await(await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:i})}),{})).json();
+ assert.equal(d.researched,true);assert.match(d.whatItDoes,/dark wood/);assert.equal(d.sources[0].url,url);
+});
+
+test('manufacturer primary SEO description survives empty display copy and unknown photo brand',async()=>{
+ const {logitechPublishedProduct}=await import('../lib/manufacturer-product-information.js');
+ const url='https://www.logitechg.com/en-eu/shop/p/example-headset',raw='productData:{baseData:{productIdentifier:"example-headset",c_url:"'+url+'",brand:"Logitech G",title:"EX77",subtitle:"Gaming Headset",description:"",seo:{description:"The EX77 gaming headset is designed for listening with noise isolation."}},specsAndRequirements:{productDimensions:{specs:{spec:[{facet:"Weight",value:"170 g"}]}}}}';
+ const i={name:'EX77 headphones',brand:'',model:'EX77',object:'headphones'};
+ const d=logitechPublishedProduct(raw,i,url);assert.match(d,/designed for listening/);assert.match(d,/Logitech G/);
+ assert.equal(logitechPublishedProduct(raw,{...i,brand:'Other Brand'},url),null);
+ assert.ok(manufacturerResearchUrls({name:'G435 headphones',model:'G435',object:'headphones',brand:''}).some(u=>u.includes('/g435-')));
+ assert.ok(!manufacturerResearchUrls({name:'G435 headphones',model:'G435',object:'headphones',brand:'Other Brand'}).some(u=>u.includes('/g435-')));
+});
+
+test('published technical strengths remain attributed when a manufacturer gives one overview sentence',async t=>{
+ const name='Example Pro Headset',url='https://manufacturer.example/products/pro';
+ const node={'@type':'Product',name,description:'The Example Pro Headset is designed for audio listening.',additionalProperty:[{name:'Noise Isolation',value:'up to 16 dB'},{name:'Driver',value:'Hybrid mesh driver'}]};
+ t.mock.method(globalThis,'fetch',async u=>new Response(String(u)===url?'<title>'+name+'</title><script type="application/ld+json">'+JSON.stringify(node)+'</script>':'<rss/>'));
+ const d=await(await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:{name},offers:[{product_url:url,sourcePageVerified:true,exactProductMatch:true}]})}),{})).json();
+ assert.match(d.whatItDoes,/audio listening/);assert.ok(d.pros.includes('Noise Isolation: up to 16 dB.'));assert.ok(d.pros.includes('Driver: Hybrid mesh driver.'));assert.ok(d.claimEvidence.pros.every(p=>p.sourceUrl===url));
+});
