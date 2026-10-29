@@ -209,3 +209,11 @@ test('photo GTINs require a checksum and independent agreement, including printe
   assert.equal(data.identification.barcode,expected);assert.equal(data.identification.model,'X1');
  }
 });
+
+for(const variant of ['Deep Extreme Anti-Perspirant 150ml','Deep Black Carbon Espresso Scent 150ml','Deep Anti-Perspirant Roll On 150ml'])test('personal-care research and offers reject adjacent variant '+variant,async t=>{
+ const i=product('Nivea Men Deep Anti-Perspirant 150ml',{brand:'Nivea',model:'Men Deep',object:'anti-perspirant'}),name='Nivea Men '+variant,url='https://retailer.example/products/deep';
+ t.mock.method(globalThis,'fetch',async()=>new Response(html(name),{headers:{'content-type':'text/html'}}));
+ assert.equal(structuredProduct(html(name),i),null);assert.equal(await verify(url,i),null);
+ const d=await(await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:i,offers:[{product_url:url,sourcePageVerified:true,exactProductMatch:true}]})}),{})).json();
+ assert.equal(d.researched,false);assert.equal(d.sources.length,0);
+});

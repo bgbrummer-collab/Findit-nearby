@@ -174,3 +174,11 @@ test('independently transcribed labels differing only in quantity spacing are on
  const i=reconcileVision([a,b,third]);assert.equal(i.identificationMethod,'independent-printed-label-consensus');assert.equal(i.requiresModelConfirmation,false);assert.equal(i.size,'25 g');assert.equal(i.labelCompany,'Maker');assert.equal(i.brand,'');assert.equal(i.barcode,null);
  const different=reconcileVision([a,{...b,name:'Example Relief Cream 250g',model:'Example Relief Cream 250g',object:'Example Relief Cream 250g',visibleText:['Example Relief CREAM','250 g','MAKER']},third]);assert.notEqual(different?.requiresModelConfirmation,false);
 });
+
+test('deodorant aliases and independently transcribed label subsets preserve the complete printed identity',()=>{
+ const visibleText=['EXAMPLE','MEN','DEEP','BLACK CARBON','DARK WOOD','48H','ANTI-PERSPIRANT','ANTI-GERM','150 ml'];
+ const a={name:'Example Men Deep Black Carbon Dark Wood Anti-Perspirant Anti-Germ 150 ml',brand:'Example',model:'men deep black carbon dark wood anti perspirant anti germ',object:'deodorant spray',size:'150 ml',color:'black',visibleText};
+ const b={name:'Example Men Deep Black Carbon Dark Wood Anti-Perspirant',brand:'Example',model:'men deep black carbon dark wood anti perspirant',object:'aerosol deodorant spray',size:'',color:'',visibleText};
+ const i=reconcileVision([a,b]);assert.equal(i.object,'deodorant');assert.equal(i.requiresModelConfirmation,false);assert.equal(i.name,a.name);assert.equal(i.size,'150 ml');assert.equal(i.color,'');assert.equal(i.barcode,null);assert.equal(i.identificationMethod,'independent-printed-label-consensus');
+ for(const wrong of [{...b,visibleText:[]},{...b,visibleText:visibleText.filter(x=>x!=='150 ml')},{...b,model:b.model+' espresso',name:b.name+' Espresso',visibleText:[...visibleText,'ESPRESSO']},{...b,size:'250 ml'}])assert.notEqual(reconcileVision([a,wrong])?.requiresModelConfirmation,false);
+});

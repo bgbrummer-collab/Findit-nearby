@@ -120,3 +120,34 @@ test('confirmed research rejects abbreviated recommendation records on another c
  const d=await(await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:{name,brand:'Logitech',model:'G PRO',object:'headset',userConfirmed:true}})}),{})).json();
  assert.doesNotMatch(JSON.stringify(d.specifications),/999 hours/);
 });
+
+test('manufacturer serialized product data supplies live facts without evaluating scripts or reading recommendations',async()=>{
+ const {logitechPublishedProduct}=await import('../lib/manufacturer-product-information.js');
+ const url='https://www.logitechg.com/en-eu/shop/p/example-wireless-headset',i={name:'Logitech EX77 headset',brand:'Logitech',model:'EX77'};
+ const base='productData:{baseData:{productIdentifier:"example-wireless-headset",c_url:"'+url+'",brand:"Logitech G",title:"EX77",subtitle:"Wireless Headset",description:"The EX77 headset connects using Bluetooth."},specsAndRequirements:{productDimensions:{specs:{spec:[{facet:"Weight",value:"170 g"}]}}},packageContents:{row:[{item:"EX77 headset"},{item:"USB cable"}]},inRiverTechSpecs:{battery:[{facet:"Play time",values:[{value:"20 hrs",variants:[],universal:true}]}],microphone:[{facet:"Frequency Response",values:[{value:"100Hz-8KHz",variants:[],universal:true}]}],headphone:[{facet:"Frequency Response",values:[{value:"20Hz-20KHz",variants:[],universal:true}]},{facet:"Variant only",values:[{value:"999 hours",variants:["other"],universal:false}]}]}},recommendations:[{facet:"Weight",value:"1 g"}];throw new Error("never execute");';
+ const raw=logitechPublishedProduct(base,i,url);assert.ok(raw);
+ const node=JSON.parse(raw.match(/<script[^>]*>([\s\S]*?)<\/script>/)[1]);
+ assert.ok(node.additionalProperty.some(p=>p.name==='Weight'&&p.value==='170 g'));
+ assert.ok(node.additionalProperty.some(p=>p.name==='Battery Play time'&&p.value==='20 hrs'));
+ assert.ok(node.additionalProperty.some(p=>p.name==='Microphone Frequency Response'));
+ assert.ok(node.additionalProperty.some(p=>p.name==='Headphone Frequency Response'));
+ assert.match(node.description,/Package includes EX77 headset; USB cable/);
+ assert.doesNotMatch(raw,/999 hours|"1 g"|never execute/);assert.equal(node.offers,undefined);
+ for(const wrong of [base.replace('title:"EX77"','title:"EX78"'),base.replace('productIdentifier:"example-wireless-headset"','productIdentifier:"other-headset"'),base.replace('c_url:"'+url+'"','c_url:"https://www.logitechg.com/other"')])assert.equal(logitechPublishedProduct(wrong,i,url),null);
+ assert.equal(logitechPublishedProduct(base,i,'https://other.example/shop/p/example-wireless-headset'),null);
+});
+
+test('exact information falls back to public retailer catalogues when web search returns no candidates',async t=>{
+ const name='Example Men Deep Anti-Perspirant 150ml',url='https://clicks.co.za/example-men_deep-anti-perspirant-150ml/p/123456';
+ t.mock.method(globalThis,'fetch',async u=>new Response(String(u).startsWith('https://clicks.co.za/search?')?'<a href="'+url+'">'+name+'</a>':String(u)===url?'<title>'+name+'</title><script type="application/ld+json">'+JSON.stringify({'@type':'Product',name,description:'Example Men Deep anti-perspirant helps reduce perspiration.',brand:'Example'})+'</script>':'<rss/>'));
+ const d=await(await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:{name,brand:'Example',model:'Men Deep',object:'anti-perspirant'}})}),{})).json();
+ assert.equal(d.researched,true);assert.match(d.whatItDoes,/reduce perspiration/);assert.equal(d.sources[0].url,url);
+});
+
+test('consumer contact lines are not product purpose, strengths or specifications',async t=>{
+ const name='Example Men Anti-Perspirant 150ml',url='https://retailer.example/product/spray';
+ const raw='<title>'+name+'</title><script type="application/ld+json">'+JSON.stringify({'@type':'Product',name,description:'Helps reduce perspiration. Reliable 48h protection. RSA consumer care line: 0860 102091. Customer support: 0800 123456.'})+'</script>';
+ t.mock.method(globalThis,'fetch',async u=>new Response(String(u)===url?raw:'<rss/>'));
+ const d=await(await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:{name},offers:[{product_url:url,sourcePageVerified:true,exactProductMatch:true}]})}),{})).json();
+ assert.match(d.whatItDoes,/reduce perspiration/);assert.ok(d.pros.some(p=>/48h/.test(p)));assert.doesNotMatch(JSON.stringify([d.whatItDoes,d.pros,d.cons]),/0860|0800|consumer care|Customer support/);
+});
