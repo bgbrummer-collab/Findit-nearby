@@ -36,6 +36,7 @@ test('strong exact candidates from later searches outrank partial matches before
 for(const [name,route] of [
  ['Nivea Rich Nourishing Body Lotion 250ml','https://www.dischem.co.za/catalogsearch/result/?q='],
  ['Bosch GSB 185 LI drill','https://www.buco.co.za/catalogsearch/result/?q='],
+ ['Bosch GSB 18V-50 drill','https://leroymerlin.co.za/catalogsearch/result/?q='],
  ['LEGO Classic 10698','https://www.toysrus.co.za/catalogsearch/result/?q='],
  ['Sony smart speaker','https://www.geewiz.co.za/jolisearch?controller=search&s='],
  ['Sony WH-1000XM5 black','https://www.hificorp.co.za/catalogsearch/result/?q='],
