@@ -1,0 +1,157 @@
+{
+  "note": "Recorded production API readings of the same uploaded primary Clicks photograph, followed by reconciliation with the new code. This is not a post-deployment UI retest.",
+  "originalCode": "PHOTO_PARTIALLY_IDENTIFIED",
+  "originalIdentification": {
+    "name": "NIVEA deodorant",
+    "brand": "NIVEA",
+    "model": "",
+    "object": "deodorant",
+    "category": "beauty",
+    "retailCategory": "beauty",
+    "searchQuery": "NIVEA deodorant",
+    "barcode": null,
+    "size": "",
+    "color": "",
+    "visibleText": [],
+    "confidence": 0.65,
+    "identificationMethod": "independent-vision-consensus",
+    "userConfirmed": false,
+    "visualHypotheses": [],
+    "labelCandidates": [
+      {
+        "name": "Nivea Men Deep Black Carbon Dark Wood Anti-Perspirant",
+        "brand": "Nivea",
+        "size": "",
+        "confirmed": false,
+        "source": "printed-label-hypothesis"
+      }
+    ],
+    "suggestedLabel": "NIVEA men deep black carbon dark wood",
+    "suggestedModels": [
+      {
+        "name": "NIVEA men deep black carbon dark wood anti perspirant",
+        "confirmed": false,
+        "source": "visual-model-hypothesis"
+      }
+    ],
+    "identityScope": "product-family",
+    "requiresModelConfirmation": true,
+    "unverifiedDetails": [
+      "exact model",
+      "variant",
+      "specifications"
+    ],
+    "features": []
+  },
+  "visionDiagnostics": [
+    {
+      "provider": "cloudflare-gemma",
+      "code": "IDENTIFIED",
+      "providerStatus": null,
+      "providerErrorCode": null,
+      "identityClaim": {
+        "name": "NIVEA MEN DEEP BLACK CARBON DARK WOOD 150 ml",
+        "brand": "NIVEA",
+        "model": "men deep black carbon dark wood",
+        "object": "Deodorant Spray",
+        "size": "150 ml",
+        "color": "",
+        "visibleText": [
+          "NIVEA MEN",
+          "DEEP",
+          "BLACK CARBON",
+          "DARK WOOD",
+          "48H",
+          "ANTI-PERSPIRANT",
+          "ANTI-GERM",
+          "150 ml"
+        ]
+      },
+      "errorType": null
+    },
+    {
+      "provider": "google-gemini",
+      "code": "IDENTIFIED",
+      "providerStatus": null,
+      "providerErrorCode": null,
+      "identityClaim": {
+        "name": "Nivea Men Deep Black Carbon Dark Wood Anti-Perspirant",
+        "brand": "Nivea",
+        "model": "men deep black carbon dark wood anti perspirant",
+        "object": "aerosol deodorant spray",
+        "size": "",
+        "color": "",
+        "visibleText": [
+          "NIVEA",
+          "MEN",
+          "DEEP",
+          "BLACK CARBON",
+          "DARK WOOD",
+          "48H",
+          "ANTI-PERSPIRANT",
+          "ANTI-GERM",
+          "150 ml"
+        ]
+      },
+      "errorType": null
+    },
+    {
+      "provider": "cloudflare-workers-ai",
+      "code": "IDENTIFIED",
+      "providerStatus": null,
+      "providerErrorCode": null,
+      "identityClaim": {
+        "name": "DEEP BLACK CARBON DARK WOOD",
+        "brand": "NIVEA MEN",
+        "model": "",
+        "object": "DEODANT",
+        "size": "150 ml",
+        "color": "BLACK",
+        "visibleText": [
+          "DEEP",
+          "BLACK CARBON",
+          "DARK WOOD",
+          "48H",
+          "ANTI-PERSPIRANT",
+          "ANTI-GERM"
+        ]
+      },
+      "errorType": null
+    },
+    {
+      "provider": "huggingface",
+      "code": "HF_INFERENCE_FAILED",
+      "providerStatus": 402,
+      "providerErrorCode": null,
+      "identityClaim": null,
+      "errorType": "credits"
+    }
+  ],
+  "reconciledWithNewCode": {
+    "name": "Nivea Men Deep Black Carbon Dark Wood Anti-Perspirant 150 ml",
+    "brand": "Nivea",
+    "model": "",
+    "object": "deodorant",
+    "size": "150 ml",
+    "color": "",
+    "visibleText": [
+      "Nivea Men Deep Black Carbon Dark Wood Anti-Perspirant 150 ml"
+    ],
+    "labelCompany": "",
+    "barcode": null,
+    "searchQuery": "Nivea Men Deep Black Carbon Dark Wood Anti-Perspirant 150 ml",
+    "confidence": 0.85,
+    "userConfirmed": false,
+    "identificationMethod": "independent-printed-label-consensus",
+    "identityScope": "printed-product-label",
+    "requiresModelConfirmation": false,
+    "labelCandidates": [],
+    "suggestedLabel": "",
+    "suggestedModels": [],
+    "features": [],
+    "unverifiedDetails": [
+      "unprinted strength or formula",
+      "barcode unless independently read"
+    ]
+  }
+}
