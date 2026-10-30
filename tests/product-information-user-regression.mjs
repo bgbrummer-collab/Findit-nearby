@@ -75,4 +75,24 @@ try{
   await page.waitForFunction(()=>window.finditState?.result?.identification?.userConfirmed===true);
   console.log('PHOTO_VARIANT_REVIEW_USER_PASS',width);await page.close();
  }
+ for(const width of [1440,390]){
+  const page=await browser.newPage({viewport:{width,height:950}}),name='Example A42 Headset',url='https://retailer.example/products/a42';
+  const partial={name:'Example headphones',brand:'Example',object:'headphones',requiresModelConfirmation:true};
+  const candidate={name,identity:{name,brand:'Example',object:'headphones'},photoMatchConfirmed:false,researched:true,checkedAt:new Date().toISOString(),whatItDoes:'Designed for listening to game audio.',pros:['Adjustable headband.'],cons:[],sources:[{title:name,url}],price:750,currency:'ZAR'};
+  await page.route('**/api/**',async route=>{
+   const path=new URL(route.request().url()).pathname;let input={};try{input=route.request().postDataJSON()||{};}catch{}
+   if(path==='/api/search')return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({identification:input.query?{name,searchQuery:name,brand:'Example',object:'headphones',userConfirmed:true}:partial})});
+   if(path==='/api/product-insights'&&input.identification?.requiresModelConfirmation)return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({researched:false,possibleProducts:[candidate]})});
+   if(path==='/api/product-insights'||path==='/api/product-intelligence-v2'||path==='/api/product-intelligence')return route.fulfill({status:503,contentType:'application/json',body:JSON.stringify({error:'Source temporarily unavailable'})});
+   return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({offers:[],stores:[]})});
+  });
+  await page.goto(base,{waitUntil:'domcontentloaded',timeout:45000});
+  await page.locator('#fxVisiblePhotoPicker').setInputFiles({name:'ui-only.png',mimeType:'image/png',buffer:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAKUlEQVR4nO3NMQEAAAjDMED5pGMCvlRA00nqs3m9AwAAAAAAAAAAgMMWvj0BwDVKG0sAAAAASUVORK5CYII=','base64')});
+  await page.locator('#fxSearchNow').click();await page.locator('#fxPhotoRecovery').waitFor({state:'visible',timeout:15000});await page.getByRole('button',{name:'ⓘ Product Info',exact:true}).click();
+  await page.getByRole('button',{name:'Yes, this is my product',exact:true}).click();
+  await page.getByText('The latest source refresh is temporarily unavailable.',{exact:false}).waitFor({state:'visible',timeout:20000});
+  const text=await page.locator('#fxInformationBody').innerText();if(!text.includes(candidate.whatItDoes)||!text.includes('Prices and stock still need a fresh check'))throw Error('Confirmation discarded checked facts or hid the failed refresh');
+  if(/750/.test(text)||/750/.test(await page.locator('#fxBestPrice').innerText()))throw Error('Candidate price became a verified price after a failed refresh');
+  console.log('CONFIRMED_CANDIDATE_SOURCE_RECOVERY_PASS',width);await page.close();
+ }
 }finally{await browser.close();}

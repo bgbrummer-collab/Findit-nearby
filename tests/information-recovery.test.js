@@ -8,13 +8,20 @@ function runtime(){
  for(const id of ['#fxInfoCompare','#fxInfoRetry','#fxInfoCorrect'])elements.set(id,{});
  let finish;const context={window:{finditState:{result:{identification:{name:'Product A'}}}},document:{querySelector:s=>elements.get(s)||null,querySelectorAll:()=>[],addEventListener(){},createElement:()=>({}),head:{appendChild(){} }},fetch:()=>new Promise(r=>finish=r),AbortController,setTimeout,clearTimeout,Intl,console};
  context.window.addEventListener=()=>{};
- let source=readFileSync(new URL('../information-runtime.js',import.meta.url),'utf8').replace('window.finditRunProductSearch=runSearch;','window.finditRunProductSearch=runSearch;window.testInfo=showProductInfo;');
+ let source=readFileSync(new URL('../information-runtime.js',import.meta.url),'utf8').replace('window.finditRunProductSearch=runSearch;','window.finditRunProductSearch=runSearch;window.testInfo=showProductInfo;window.testJson=json;');
  vm.runInNewContext(source,context);
  return {context,body,elements,finish:async(data)=>{finish({ok:true,json:async()=>data});await new Promise(r=>setImmediate(r));}};
 }
 test('delayed product research never reopens a closed Product Info panel',async()=>{const r=runtime();r.context.window.testInfo();const original=r.body.innerHTML;await r.finish({researched:true,whatItDoes:'A verified description'});assert.equal(r.body.innerHTML,original);r.context.window.testInfo();assert.match(r.body.innerHTML,/A verified description/)});
 test('research for an old product cannot overwrite the next product',async()=>{const r=runtime();r.context.window.testInfo();r.context.window.finditState.result.identification={name:'Product B'};await r.finish({researched:true,whatItDoes:'Old product description'});r.context.window.testInfo();assert.doesNotMatch(r.body.innerHTML,/Old product description/);assert.match(r.body.innerHTML,/Product B/);await r.finish({researched:false})});
 test('a failed research request settles the retry control',async()=>{const r=runtime();r.elements.set('#fxInformationModal.open #fxInfoRetry',r.elements.get('#fxInfoRetry'));r.context.window.testInfo();await r.finish({researched:false});assert.equal(r.elements.get('#fxInfoRetry').disabled,false);assert.equal(r.elements.get('#fxInfoRetry').textContent,'Refresh product information')});
+test('a transient read-only source 503 gets one bounded retry without repeating identification',async()=>{
+ const r=runtime();let calls=0;r.context.fetch=async()=>++calls===1?{ok:false,status:503,json:async()=>({})}:{ok:true,json:async()=>({researched:true,whatItDoes:'Checked source facts.'})};
+ const d=await r.context.window.testJson('/api/product-insights',{});assert.equal(calls,2);assert.equal(d.researched,true);
+ for(const [url,status,expected] of [['/api/product-insights',503,2],['/api/search',503,1],['/api/product-insights',400,1]]){
+  calls=0;r.context.fetch=async()=>{calls++;return {ok:false,status,json:async()=>({error:'Unavailable'})};};await assert.rejects(r.context.window.testJson(url,{}),/Unavailable/);assert.equal(calls,expected);
+ }
+});
 test('saved items merge storage sources and flatten collection products',()=>{
  const values={finditSaved:[{name:'Soap',query:'Soap'}],findit_v10_collections:[{name:'Collection title',items:[{name:'Shampoo'}]}],findit_favourites:[{item:'Comb'}]};const body={innerHTML:''},modal={style:{},removeAttribute(){},classList:{add(){},remove(){}},setAttribute(){}};
  const context={window:{addEventListener(){}},document:{querySelector:s=>s==='#fxStableModal'?modal:s==='#fxStableBody'?body:null,querySelectorAll:()=>[]},localStorage:{getItem:k=>JSON.stringify(values[k]||[])},Intl,console};
@@ -273,6 +280,23 @@ test('Product Info separates independently read label facts and maker from exter
 test('failed source checks survive refresh without becoming verified product facts',async()=>{
  const r=runtime();r.context.URL=URL;r.context.window.testInfo();await r.finish({researched:false,sourceChecks:[{url:'https://shop.example/product',status:'http-error',httpStatus:403},{url:'javascript:alert(1)',status:'fetch-error'},{url:'https://wrong.example/product',status:'identity-mismatch'}]});r.context.window.testInfo();
  assert.match(r.body.innerHTML,/Sources unavailable/);assert.match(r.body.innerHTML,/https:\/\/shop.example\/product/);assert.match(r.body.innerHTML,/not verified product facts or prices/);assert.doesNotMatch(r.body.innerHTML,/javascript:|wrong.example/);
+});
+
+test('explicit candidate confirmation retains recently checked facts through a failed refresh without retaining its price',async()=>{
+ const r=runtime(),name='Example A2 Headset';r.context.URL=URL;r.context.navigator={};r.context.localStorage={getItem:()=>null,setItem(){}};r.context.document.dispatchEvent=()=>{};r.context.CustomEvent=class{};
+ r.context.window.finditState.result={identification:{name:'headphones',object:'headphones',requiresModelConfirmation:true}};
+ r.context.fetch=async url=>url==='/api/search'?{ok:true,json:async()=>({identification:{name,searchQuery:name,userConfirmed:true}})}:{ok:false,json:async()=>({error:'Source temporarily unavailable'})};
+ const candidate={name,researched:true,checkedAt:new Date().toISOString(),whatItDoes:'Designed for listening to audio.',pros:['Adjustable headband.'],sources:[{title:name,url:'https://shop.example/a2'}],price:750,currency:'ZAR',availability:'in_stock'};
+ await r.context.window.finditRunProductSearch(name,candidate);r.context.window.testInfo();
+ assert.match(r.body.innerHTML,/Designed for listening to audio/);assert.match(r.body.innerHTML,/latest source refresh is temporarily unavailable/);assert.match(r.body.innerHTML,/Prices and stock still need a fresh check/);assert.doesNotMatch(r.body.innerHTML,/750|in_stock/);assert.equal(r.context.window.finditState.offers.length,0);
+});
+
+test('expired or differently named candidate evidence cannot fill a failed confirmation refresh',async()=>{
+ for(const mismatch of [{checkedAt:new Date(Date.now()-600000).toISOString()},{name:'Different product'},{researched:false}]){
+  const r=runtime(),name='Example A2 Headset';r.context.URL=URL;r.context.navigator={};r.context.localStorage={getItem:()=>null,setItem(){}};r.context.document.dispatchEvent=()=>{};r.context.CustomEvent=class{};
+  r.context.fetch=async url=>url==='/api/search'?{ok:true,json:async()=>({identification:{name,searchQuery:name,userConfirmed:true}})}:{ok:false,json:async()=>({error:'Unavailable'})};
+  await r.context.window.finditRunProductSearch(name,{name,researched:true,checkedAt:new Date().toISOString(),whatItDoes:'Old candidate facts.',sources:[{url:'https://shop.example/a2'}],...mismatch});r.context.window.testInfo();assert.doesNotMatch(r.body.innerHTML,/Old candidate facts/);assert.match(r.body.innerHTML,/Product sources are temporarily unavailable/);assert.doesNotMatch(r.body.innerHTML,/facts were checked at the time shown above/);
+ }
 });
 
 test('a manufacturer document mismatch keeps a useful source link without publishing its facts',async()=>{
