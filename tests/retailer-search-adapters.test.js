@@ -77,3 +77,16 @@ test('electronics catalogue discovery includes FirstShop and excludes different 
  const urls=await nativeRetailerUrls({name,brand:'Logitech',model:'G435',object:'headset',color:'black'});
  assert.ok(urls.includes('https://www.firstshop.co.za'+right));assert.ok(!urls.includes('https://www.firstshop.co.za'+wrong));assert.ok(!urls.some(u=>u.endsWith('/g522')));
 });
+
+test('catalogue model fallback handles headset wording without dropping separate colour or size constraints',async t=>{
+ const requests=[],right='https://www.firstshop.co.za/products/example-a42-headset-black';
+ t.mock.method(globalThis,'fetch',async u=>{
+  const url=new URL(String(u));requests.push(url.href);
+  if(url.hostname==='www.firstshop.co.za'&&url.pathname==='/search/suggest.json')return Response.json({resources:{results:{products:url.searchParams.get('q')==='Example A42'?[{title:'Example A42 headset black',url:right},{title:'Example A42 headset blue',url:'/products/example-a42-headset-blue'},{title:'Example A43 headset black',url:'/products/example-a43-headset-black'}]:[]}}});
+  return new Response('');
+ });
+ const i={name:'Example A42 headphones',brand:'Example',model:'A42',object:'headphones',color:'black',category:'electronics',searchQuery:'Example A42 headphones'};
+ const urls=await nativeRetailerUrls(i);
+ assert.ok(urls.includes(right));assert.ok(!urls.some(u=>/headset-blue|a43/.test(u)));assert.ok(requests.some(u=>new URL(u).searchParams.get('q')==='Example A42 headphones'));assert.ok(requests.some(u=>new URL(u).searchParams.get('q')==='Example A42'));
+ requests.length=0;const wrongSize=await nativeRetailerUrls({...i,size:'XL'});assert.ok(!wrongSize.includes(right));
+});
