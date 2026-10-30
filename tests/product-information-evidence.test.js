@@ -45,3 +45,13 @@ test('verification guidance covers different product families without inventing 
  const cases=[['headset',/Connector|supported devices/],['shoes',/Style|colourway/],['conditioner',/rinse-out|leave-in/],['drill',/Battery/],['paint',/surfaces/],['cereal',/allergens/],['jeans',/Fabric/],['building blocks',/Set|model/],['unusual object',/Exact model/]];
  for(const [object,expected] of cases){const r=productInformationChecklist({object});assert.match(r.checks.join(' '),expected);assert.match(r.nextPhoto,/Photograph/);assert.doesNotMatch(JSON.stringify(r),/250ml|50 mm|30 hours|waterproof|Strictly Curls|Logitech/);}
 });
+
+test('box contents stay attributed as included items rather than strengths or connection compatibility',async t=>{
+ const name='Example A2 Headset',url='https://retailer.example/product/a2';
+ const description='The Example A2 Headset is designed for listening to audio. Package includes A2 headset; wireless USB-A receiver; USB-C charging cable; documentation. Connects to computers using Bluetooth. Adjustable headband improves comfort.';
+ t.mock.method(globalThis,'fetch',async u=>new Response(String(u)===url?'<script type="application/ld+json">'+JSON.stringify({'@type':'Product',name,description})+'</script>':'<rss/>'));
+ const d=await(await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:{name},offers:[{product_url:url,sourcePageVerified:true,exactProductMatch:true}]})}),{})).json();
+ assert.equal(d.researched,true);assert.ok(d.includedItems.some(s=>s.startsWith('Package includes')));assert.ok(d.claimEvidence.includedItems.every(s=>s.sourceUrl===url));
+ assert.ok(d.compatibility.some(s=>/Connects.*Bluetooth/.test(s)));assert.ok(d.pros.some(s=>/Adjustable headband/.test(s)));
+ assert.doesNotMatch(d.compatibility.join(' '),/Package includes|charging cable/);assert.doesNotMatch(d.pros.join(' '),/Package includes|documentation/);
+});
