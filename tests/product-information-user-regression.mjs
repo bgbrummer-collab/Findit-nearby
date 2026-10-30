@@ -47,4 +47,32 @@ try{
   if(selected.brand||selected.model||!selected.requiresModelConfirmation)throw Error('A suggestion became a confirmed identity');
   console.log('UNCONFIRMED_MODEL_INFORMATION_USER_PASS',width);await page.close();
  }
+ for(const width of [1440,390]){
+  const page=await browser.newPage({viewport:{width,height:950}}),name='Example A42 headset Blue and Raspberry',url='https://retailer.example/products/a42-blue';
+  const photo={name:'A42 headphones',model:'A42',object:'headphones',category:'electronics',identificationMethod:'independent-vision-consensus',userConfirmed:false};
+  const exact={product_name:name,product_url:url,retailer:{name:'Example Shop'},price:750,currency:'ZAR',availability:'in_stock',sourcePageVerified:true,exactProductMatch:true,verified:true,branchStockVerified:false};
+  await page.route('**/api/**',async route=>{
+   const path=new URL(route.request().url()).pathname;let input={};try{input=route.request().postDataJSON()||{};}catch{}let body={offers:[],stores:[],researched:false};
+   if(path==='/api/search')body={identification:input.query?{...photo,name:input.query,searchQuery:input.query,color:'Blue and Raspberry',userConfirmed:true,identificationMethod:'typed-user-input'}:photo};
+   if(path==='/api/product-intelligence-v2'||path==='/api/product-intelligence')body=(input.identification||input).userConfirmed?{ok:true,offers:[exact]}:{ok:true,offers:[],variantConfirmationRequired:true,possibleOffers:[{...exact,exactProductMatch:false,photoVariantConfirmed:false}]};
+   if(path==='/api/product-insights')body={researched:true,whatItDoes:'Designed for listening to audio.',pros:[],cons:[],sources:[{title:name,url}]};
+   await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(body)});
+  });
+  await page.goto(base,{waitUntil:'domcontentloaded',timeout:45000});
+  await page.locator('#fxVisiblePhotoPicker').setInputFiles({name:'ui-only.png',mimeType:'image/png',buffer:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAKUlEQVR4nO3NMQEAAAjDMED5pGMCvlRA00nqs3m9AwAAAAAAAAAAgMMWvj0BwDVKG0sAAAAASUVORK5CYII=','base64')});
+  await page.locator('#fxSearchNow').click();await page.waitForFunction(()=>window.finditState?.result?.identification?.model==='A42');await page.getByRole('button',{name:'ⓘ Product Info',exact:true}).click();
+  await page.getByRole('heading',{name:'Model listings — confirm your variant',exact:true}).waitFor({state:'visible',timeout:20000});
+  const text=await page.locator('#fxInformationBody').innerText();if(!text.includes(name)||!text.includes('Listing price:')||!text.includes('not used for your best price'))throw Error('Variant review lost its useful listing evidence');
+  if(/750/.test(await page.locator('#fxBestPrice').innerText()))throw Error('Unconfirmed photo colour supplied the best price');
+  if(await page.locator('#fxInformationModal .fx-info-card').evaluate(el=>el.scrollWidth-el.clientWidth)>3)throw Error('Variant review overflows at '+width);
+  const current=await page.evaluate(()=>window.finditState.result.identification);if(current.color||current.userConfirmed)throw Error('Listing colour was silently promoted to the photo');
+  await page.getByRole('button',{name:'Check this variant',exact:true}).click();
+  // Filling through the visible form is deliberate user confirmation; no request
+  // may be sent merely by opening the review form.
+  const before=await page.evaluate(()=>window.finditState.result.identification.userConfirmed);if(before)throw Error('Opening variant review confirmed it automatically');
+  await page.getByRole('textbox',{name:'Product name, brand + model, or barcode',exact:true}).fill(name);
+  await page.getByRole('button',{name:'Find product information',exact:true}).click();
+  await page.waitForFunction(()=>window.finditState?.result?.identification?.userConfirmed===true);
+  console.log('PHOTO_VARIANT_REVIEW_USER_PASS',width);await page.close();
+ }
 }finally{await browser.close();}

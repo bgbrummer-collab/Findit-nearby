@@ -28,3 +28,17 @@ test('GET product research never fetches specifications for an uncertain variant
  const r=await worker.fetch(new Request('https://findit.test/api/product-insights?name=Beats%20headphones&requiresModelConfirmation=true'),{}),d=await r.json();
  assert.equal(d.researched,false);assert.equal(d.identityScope,'product-family');assert.deepEqual(d.sources,[]);
 });
+
+test('GET commerce retries retain photo origin and separate variant fields',()=>{
+ const i={name:'A42 headphones',identificationMethod:'independent-vision-consensus',userConfirmed:false,color:'black',size:'UK 8',barcode:'5449000000996'};
+ const source=readFileSync(new URL('../dashboard-commerce-status.js',import.meta.url),'utf8'),line=source.split('\n').find(x=>x.startsWith('function getUrl(b)'));
+ const url=vm.runInNewContext(line+';getUrl(b)',{URLSearchParams,b:{identification:i,name:i.name}}),query=new URL(url,'https://findit.test').searchParams;
+ for(const field of ['identificationMethod','userConfirmed','color','size','barcode'])assert.equal(query.get(field),String(i[field]));
+});
+
+test('retailer fallback cache cannot reuse typed confirmation for an unconfirmed photo variant',()=>{
+ const source=readFileSync(new URL('../offer-stability-fix.js',import.meta.url),'utf8'),line=source.split('\n').find(x=>x.trim().startsWith('const keyFor='));
+ const i={name:'A42 headphones',model:'A42',identificationMethod:'independent-vision-consensus'};
+ const key=identity=>vm.runInNewContext(line+";keyFor('/api/product-intelligence-v2',b)",{norm:v=>String(v??'').toLowerCase(),b:{identification:identity}});
+ assert.notEqual(key(i),key({...i,userConfirmed:true}));assert.notEqual(key(i),key({...i,color:'blue'}));assert.notEqual(key(i),key({...i,size:'UK 8'}));
+});

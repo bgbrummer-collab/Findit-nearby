@@ -117,7 +117,7 @@
   }
 
   async function loadCommerce(i,id){
-    const body={query:i?.searchQuery||i?.name||i?.object||'',name:i?.name||i?.object||'',object:i?.object||'',brand:i?.brand||'',model:i?.model||'',category:i?.category||'',retailCategory:i?.retailCategory||''};
+    const body={identification:i,query:i?.searchQuery||i?.name||i?.object||'',name:i?.name||i?.object||'',object:i?.object||'',brand:i?.brand||'',model:i?.model||'',category:i?.category||'',retailCategory:i?.retailCategory||''};
     const root=ensureSellerRoot();if(root)root.innerHTML='<div class="empty-state">Checking current product listings, prices and stock…</div>';
     const [a,b]=await Promise.allSettled([postJson('/api/product-intelligence-v2',body,18000),postJson('/api/product-intelligence',body,12000)]);
     if(id!==runId)return;
