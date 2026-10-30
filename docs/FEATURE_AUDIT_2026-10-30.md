@@ -46,3 +46,19 @@ After the partial cache expired, fresh diagnostics for the same Nivea photo show
 The repair accepts a single distinct metric quantity in a reader's printed-text transcription when its size field is empty, appends that observed quantity to its printed candidate name, and checks product-family words against the same printed text. Confirmation still requires independent support for the complete label and quantity. Conflicting sizes, ambiguous multiple quantities without a selected size, missing independent text, and conflicting scent/model remain unconfirmed in regression tests. No size is inferred from packaging appearance. Replaying the recorded readings now retains the full Nivea label and 150 ml without a guessed barcode or can-colour-as-product-colour. Evidence: `launch-evidence-2026-10-30/nivea-photo-diagnostics.json`.
 
 All **544 local Node tests pass**, with syntax and diff checks passing. This replay is not a successful post-deployment photo UI retest; that remains pending rollout. The original failed production observation remains above.
+
+## PR #344 deployment and actual UI retests
+
+All four PR suites passed. PR #344 merged as `58a1a2e69cd508e3bfde7985dab3c4b48df04bfe`; production API and browser build stamp confirm it. Node regression, Full Production Audit, Final Production Audit, Dashboard Commerce, Release Smoke, production smoke and live-photo probe passed when inspected. The uncommon tuner discovery test still failed because no verified source was retrieved; it is not waived. Interaction checks were still running at that inspection.
+
+The same Clicks Nivea primary front photo was selected through Upload Photo and Identify & Find on the deployed build. It now returns the full DEEP / Black Carbon / Dark Wood / anti-perspirant / anti-germ label and 150 ml. Product Info provides the matching manufacturer's purpose, 48-hour protection claim and source links. No retailer listing is promoted to an exact scented variant without supporting evidence.
+
+The same primary G435 photo returns its model and useful manufacturer specifications. Product Info correctly separates package contents from strengths/connections. However, its only discovered FirstShop result is blue/raspberry while the photographed headset is black. The readers did not corroborate colour, leaving the field blank; the site then displayed that model listing as a best price. This is an unresolved variant-matching defect exposed by the post-deployment UI test, not a successful exact-photo shopping match.
+
+## Follow-up: distinguish model listings from confirmed photo variants
+
+Keep source-verified model listings as reviewable candidates when the photo has not established their retail colour or clothing/shoe size. Such candidates must not supply the exact-match offers array, best price, verified seller stock, watch baseline or shopping route. A reviewed exact product code, supported variant fields or an explicit typed confirmation still allow normal exact matching. Preserve candidate names, source prices and retailer links in Product Info and Compare, with a visible review step before the identity changes.
+
+Carry photo/typed provenance and variant fields through existing POST/GET retry paths, and separate offer-cache keys by that provenance and variant, so a typed or different-colour cached result cannot bypass the guard. New backend and cache/round-trip tests pass; the added browser case checks both 1440px and 390px, usable candidate evidence, no wrong best price and no automatic confirmation. Its hosted execution remains pending this follow-up's PR checks.
+
+Local follow-up suite: **548 tests passed**, zero failures; syntax/diff checks passed. The ten-category live matrix on #344 remains 5/10 complete useful-offer/information journeys; the remaining exact retailer coverage gaps and physical-phone/branch-inventory limits remain open.
