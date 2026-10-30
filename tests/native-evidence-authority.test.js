@@ -5,6 +5,14 @@ import {verify,ident} from '../lib/product-intelligence-core.js';
 const name='Sony WH-1000XM5 black',url='https://www.incredible.co.za/sony-wh-1000xm5-black';
 const page=(body)=>'<title>'+name+'</title>'+body;
 const search='<a href="'+url+'">'+name+'</a>';
+test('a confirmed headphone model matches retailer headset wording without accepting another model or accessory',async t=>{
+ const productUrl='https://retailer.example/products/a42',i=ident({name:'A42 headphones',model:'A42',object:'headphones',category:'electronics'});
+ let title='Example A42 wireless gaming headset';
+ t.mock.method(globalThis,'fetch',async()=>new Response('<title>'+title+'</title><script type="application/ld+json">'+JSON.stringify({'@type':'Product',name:title,offers:{price:750,priceCurrency:'ZAR',availability:'https://schema.org/InStock'}})+'</script>',{headers:{'content-type':'text/html'}}));
+ const offer=await verify(productUrl,i);assert.equal(offer.price,750);assert.equal(offer.branchStockVerified,false);
+ for(const wrong of ['Example A43 wireless gaming headset','Example A42 replacement headphone ear pads','Example A42 mouse']){title=wrong;assert.equal(await verify(productUrl,i),null);}
+ title='Example A42 wireless gaming headset blue';assert.equal(await verify(productUrl,{...i,color:'black'}),null);
+});
 test('specialist hardware search keeps exact models and distinguishes bundle separators from Plus models',async t=>{
  const {nativeRetailerUrls}=await import('../lib/native-retailer-discovery.js');
  t.mock.method(globalThis,'fetch',async u=>String(u).includes('tmbsupplies.co.za/search/suggest.json')?new Response(JSON.stringify({resources:{results:{products:[{title:'Bosch Professional Cordless Drill GSB 18V-50 + 2 X 2.0Ah Batteries + Charger',url:'/products/bosch-gsb-18v-50-batteries-charger'},{title:'Bosch Professional GSB 185-LI',url:'/products/gsb-185-li'}]}}})):new Response('',{status:404}));

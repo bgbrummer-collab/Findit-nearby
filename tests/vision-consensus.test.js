@@ -188,3 +188,12 @@ test('printed deodorant search keeps the scent and quantity while separating an 
  const i=reconcileVision([a,{...a,object:'aerosol deodorant spray'}]);
  assert.equal(i.requiresModelConfirmation,false);assert.match(i.name,/Anti-Germ/);assert.doesNotMatch(i.searchQuery,/anti.germ/i);assert.match(i.searchQuery,/Dark Wood/);assert.match(i.searchQuery,/150ml/);assert.ok(i.visibleText.some(s=>/Anti-Germ/.test(s)));
 });
+
+test('independent printed quantity survives omitted size fields and product-type words outside the chosen name',()=>{
+ const visibleText=['EXAMPLE MEN','DEEP','BLACK CARBON','DARK WOOD','48H','ANTI-PERSPIRANT','ANTI-GERM','150 ml'];
+ const a={name:'Example Men Deep Black Carbon Dark Wood 150 ml',brand:'Example',model:'men deep black carbon dark wood',object:'deodorant spray',size:'150 ml',visibleText};
+ const b={name:'Example Men Deep Black Carbon Dark Wood Anti-Perspirant',brand:'Example',model:'men deep black carbon dark wood anti perspirant',object:'aerosol deodorant spray',size:'',visibleText};
+ const i=reconcileVision([a,b]);assert.equal(i.requiresModelConfirmation,false);assert.equal(i.name,b.name+' 150 ml');assert.equal(i.size,'150 ml');assert.equal(i.barcode,null);assert.equal(i.color,'');
+ for(const wrong of [{...b,visibleText:visibleText.filter(s=>s!=='150 ml')},{...b,visibleText:[...visibleText,'250 ml']},{...b,size:'250 ml'},{...b,model:b.model+' espresso',visibleText:[...visibleText,'ESPRESSO']}])assert.notEqual(reconcileVision([a,wrong])?.requiresModelConfirmation,false);
+ const neitherHasSize=reconcileVision([{...a,name:a.name.replace(' 150 ml',''),size:''},b]);assert.equal(neitherHasSize.size,'150 ml');assert.equal(neitherHasSize.requiresModelConfirmation,false);
+});

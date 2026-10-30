@@ -180,3 +180,15 @@ test('published technical strengths remain attributed when a manufacturer gives 
  const d=await(await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:{name},offers:[{product_url:url,sourcePageVerified:true,exactProductMatch:true}]})}),{})).json();
  assert.match(d.whatItDoes,/audio listening/);assert.ok(d.pros.includes('Noise Isolation: up to 16 dB.'));assert.ok(d.pros.includes('Driver: Hybrid mesh driver.'));assert.ok(d.claimEvidence.pros.every(p=>p.sourceUrl===url));
 });
+
+test('brand and model text search researches manufacturer facts without requiring a product-type word',async t=>{
+ const url='https://www.logitechg.com/en-eu/shop/p/g435-wireless-bluetooth-gaming-headset';
+ const raw='productData:{baseData:{productIdentifier:"g435-wireless-bluetooth-gaming-headset",c_url:"'+url+'",brand:"Logitech G",title:"G435",subtitle:"Wireless Gaming Headset",description:"The G435 headset is designed for wireless audio listening."},specsAndRequirements:{productDimensions:{specs:{spec:[{facet:"Weight",value:"165 g"}]}}}}';
+ t.mock.method(globalThis,'fetch',async u=>new Response(String(u)===url?raw:'<rss/>'));
+ for(const i of [{name:'Logitech G435',searchQuery:'Logitech G435',userConfirmed:true},{name:'G435',brand:'Logitech',model:'G435'}]){
+  assert.ok(manufacturerResearchUrls(i).includes(url));
+  const d=await(await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:i})}),{})).json();
+  assert.equal(d.researched,true);assert.match(d.whatItDoes,/wireless audio/);assert.ok(d.specifications.some(p=>p.name==='Weight'&&p.value==='165 g'&&p.sourceUrl===url));
+ }
+ for(const i of [{name:'G435'},{name:'Logitech G435',brand:'Other Brand'},{name:'Logitech G435 replacement earpads'},{name:'Logitech G435',object:'mouse'}])assert.ok(!manufacturerResearchUrls(i).includes(url));
+});

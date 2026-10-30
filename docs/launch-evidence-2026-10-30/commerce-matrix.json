@@ -1,0 +1,305 @@
+{
+  "checkedAt": "2026-10-30T17:53:23.151Z",
+  "base": "https://findit-nearby.bgbrummer.workers.dev/",
+  "version": {
+    "commit": "055f77b163c3ba373aac48378832c5192ca63004",
+    "platform": "cloudflare"
+  },
+  "endVersion": {
+    "commit": "055f77b163c3ba373aac48378832c5192ca63004",
+    "platform": "cloudflare"
+  },
+  "versionStable": true,
+  "passed": 5,
+  "total": 10,
+  "results": [
+    {
+      "category": "electronics",
+      "query": "Logitech PRO X Gaming Headset 981-000818",
+      "status": "passed",
+      "error": null,
+      "offers": [
+        {
+          "product_name": "Logitech PRO X Gaming Headset With BLUE VO!CE Microphone Technology",
+          "product_url": "https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology",
+          "price": 2299,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "branchStockVerified": false
+        },
+        {
+          "product_name": "Logitech Pro X Gaming Headset 981-000818",
+          "product_url": "https://www.firstshop.co.za/products/logitech-pro-x-gaming-headset-981-000818-100731",
+          "price": 2199,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "branchStockVerified": false
+        }
+      ],
+      "researched": true,
+      "sources": [
+        {
+          "title": "Logitech PRO X Gaming Headset With BLUE VO!CE Microphone Technology",
+          "url": "https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology"
+        },
+        {
+          "title": "Logitech Pro X Gaming Headset 981-000818",
+          "url": "https://www.firstshop.co.za/products/logitech-pro-x-gaming-headset-981-000818-100731"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.firstshop.co.za/products/logitech-pro-x-gaming-headset-981-000818-100731",
+          "status": "product-facts-verified"
+        },
+        {
+          "url": "https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology",
+          "status": "product-facts-verified"
+        }
+      ]
+    },
+    {
+      "category": "clothing",
+      "query": "Levis 501 Original Jeans",
+      "status": "passed",
+      "error": null,
+      "offers": [
+        {
+          "product_name": "LEVI'S\u00ae MEN'S 501\u00ae ORIGINAL JEANS - BROWN",
+          "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown",
+          "price": 1399,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "branchStockVerified": false
+        },
+        {
+          "product_name": "LEVI'S\u00ae MEN'S 501\u00ae ORIGINAL JEANS - DARK INDIGO - FLAT FINISH",
+          "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-flat-finish",
+          "price": 1199,
+          "currency": "ZAR",
+          "availability": null,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "branchStockVerified": false
+        }
+      ],
+      "researched": true,
+      "sources": [
+        {
+          "title": "LEVI'S\u00ae MEN'S 501\u00ae ORIGINAL JEANS - BROWN",
+          "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown"
+        },
+        {
+          "title": "LEVI'S\u00ae MEN'S 501\u00ae ORIGINAL JEANS - DARK INDIGO - FLAT FINISH",
+          "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-flat-finish"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-flat-finish",
+          "status": "product-facts-verified"
+        },
+        {
+          "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown",
+          "status": "product-facts-verified"
+        }
+      ]
+    },
+    {
+      "category": "groceries",
+      "query": "Coca-Cola Original Taste 2L",
+      "status": "failed",
+      "error": null,
+      "offers": [],
+      "researched": false,
+      "sources": [],
+      "sourceChecks": []
+    },
+    {
+      "category": "shoes",
+      "query": "Nike Air Force 1 Low White Blue",
+      "status": "failed",
+      "error": null,
+      "offers": [],
+      "researched": false,
+      "sources": [],
+      "sourceChecks": [
+        {
+          "url": "https://www.sportscene.co.za/nike-men-s-air-force-1-07-lv8-multicolour-sneaker-060601ahid6/p",
+          "status": "fetch-error"
+        },
+        {
+          "url": "https://www.sportscene.co.za/champion-men-s-main-street-airforce-blue-polo-060601ailh0/p",
+          "status": "fetch-error"
+        },
+        {
+          "url": "https://www.sportscene.co.za/nike-men-s-tennis-classic-white-sneaker-060601ahpq0/p",
+          "status": "fetch-error"
+        },
+        {
+          "url": "https://www.sportscene.co.za/nike-men-s-air-max-phoenix-black-orange-sneaker-060601ahpr9/p",
+          "status": "fetch-error"
+        }
+      ]
+    },
+    {
+      "category": "beauty",
+      "query": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
+      "status": "passed",
+      "error": null,
+      "offers": [
+        {
+          "product_name": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
+          "product_url": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689",
+          "price": 230,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "branchStockVerified": false
+        }
+      ],
+      "researched": true,
+      "sources": [
+        {
+          "title": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
+          "url": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.dischem.co.za/marc-anthony-3x-moist-conditioner-250ml-818",
+          "status": "http-error",
+          "httpStatus": 403
+        },
+        {
+          "url": "https://www.takealot.com/marc-anthony-strictly-curls-3xmoisture-nourishing-curl-condition/PLID72198666",
+          "status": "identity-mismatch"
+        },
+        {
+          "url": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689",
+          "status": "product-facts-verified"
+        }
+      ]
+    },
+    {
+      "category": "tools",
+      "query": "Bosch GSB 18V-50",
+      "status": "failed",
+      "error": null,
+      "offers": [],
+      "researched": true,
+      "sources": [
+        {
+          "title": "Bosch Professional | Cordless Drill GSB 18V-50 + 2 X 2,0Ah Batteries + &ndash; TMB SUPPLIES",
+          "url": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger",
+          "status": "product-facts-verified"
+        }
+      ]
+    },
+    {
+      "category": "furniture",
+      "query": "IKEA BILLY bookcase 80x28x202 white",
+      "status": "failed",
+      "error": null,
+      "offers": [],
+      "researched": false,
+      "sources": [],
+      "sourceChecks": []
+    },
+    {
+      "category": "toys",
+      "query": "LEGO Classic 10696",
+      "status": "passed",
+      "error": null,
+      "offers": [
+        {
+          "product_name": "10696 | LEGO\u00ae Classic Medium Creative Brick Box",
+          "product_url": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696",
+          "price": 559,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "branchStockVerified": false
+        }
+      ],
+      "researched": true,
+      "sources": [
+        {
+          "title": "10696 | LEGO\u00ae Classic Medium Creative Brick Box",
+          "url": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696",
+          "status": "product-facts-verified"
+        }
+      ]
+    },
+    {
+      "category": "household",
+      "query": "Twinsaver Comfort 3 Ply Tissues 120",
+      "status": "failed",
+      "error": null,
+      "offers": [],
+      "researched": false,
+      "sources": [],
+      "sourceChecks": []
+    },
+    {
+      "category": "music",
+      "query": "Shure MV7+ microphone",
+      "status": "passed",
+      "error": null,
+      "offers": [
+        {
+          "product_name": "Shure MV7+ Hybrid Podcast Microphone \u2013 Black",
+          "product_url": "https://bothners.co.za/shop/microphones-and-wireless/shure-mv7-hybrid-podcast-microphone-black/",
+          "price": 7095,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "branchStockVerified": false
+        }
+      ],
+      "researched": true,
+      "sources": [
+        {
+          "title": "Shure MV7+ Hybrid Podcast Microphone \u2013 Black",
+          "url": "https://bothners.co.za/shop/microphones-and-wireless/shure-mv7-hybrid-podcast-microphone-black/"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.shure.com/en-US/docs/guide/MV7",
+          "status": "http-error",
+          "resource": "manufacturer-document",
+          "stage": "metadata",
+          "httpStatus": 403
+        },
+        {
+          "url": "https://www.shure.com/en-US/docs/guide/MV7",
+          "status": "identity-mismatch"
+        },
+        {
+          "url": "https://bothners.co.za/shop/microphones-and-wireless/shure-mv7-hybrid-podcast-microphone-black/",
+          "status": "product-facts-verified"
+        }
+      ]
+    }
+  ]
+}
