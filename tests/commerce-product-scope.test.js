@@ -41,3 +41,8 @@ test('published name entities are decoded without changing requested variants',(
  const result=structuredProduct(html(encoded),ident({name:"Example Men's Classic White Blue Sneaker"}),url);assert.equal(result.name,"Example Men's Classic White/Blue Sneaker");
  assert.equal(structuredProduct(html(encoded),ident({name:"Example Men's Classic White Red Sneaker"}),url),null);
 });
+
+test('aggregate offers without variant codes cannot imply a confirmed shoe size',()=>{
+ const product={...node,offers:{'@type':'AggregateOffer',offers:[offer(''),offer('')]}};
+ const result=structuredProduct(html(product),ident({name}),url);assert.equal(result.price,1200);assert.equal(result.comparisonAmbiguous,true);assert.equal(result.sku,'');
+});
