@@ -23,3 +23,14 @@ The unchanged ten-category matrix on #347 fell to 4/10: the prior Levi's clothin
 The actual Bash dialog also exposed a literal `&apos;` and dropped a complete material sentence when a trailing `(Supplier Style:...)` lacked terminal punctuation. Decode the entity, retain the complete sentence, and expose the explicitly published supplier style separately with source attribution. A worker regression first reproduced the lost sentence, then verifies its recovery and code attribution. No style code is guessed.
 
 Local follow-up: 570 tests pass, with syntax/diff checks. Hosted checks and post-deployment confirmation of this correction remain pending. The 4/10 deployed observation above remains recorded until a new run verifies recovery.
+
+
+## Correction deployed and verified
+
+PR #348 passed all four source suites and merged as `cf51ae8ea04c7b2c56c0074692565d231930673a`; `/api/version` confirms this production commit. The ten-category live matrix uses that same commit at start and finish and returns to 5/10. Levi's clothing recovers two verified listings (R1199 dark indigo and R1399 brown); this does not imply comparable variants or selected-size stock. The original five unresolved cases remain failed. Compact evidence: `launch-evidence-2026-10-31/post-url-correction-matrix.json`.
+
+Actual website search for Nike Air Force 1 White Blue Sneaker shows the source-attributed synthetic-leather description and supplier style IV5732-100. The apostrophe displays normally. Compare Prices retains the matching Bash R2399.95 listing and explicitly says branch stock is not verified. The best-price field says to confirm the listing variant before comparing prices. This is a successful journey for this separate typed query, not a passed result for the matrix's more specific Low query.
+
+Production Node checks, release smoke, final/full production audits, dashboard commerce, photo probe, production smoke and deployment complete successfully when inspected. The production interaction suite subsequently completed successfully, including both local and deployed behavior checks (run 41198754274). The PR interaction/browser suites also passed before merging, including desktop and 390px runs.
+
+Full launch/parity remains unsigned: exact retailer coverage, restricted tuner discovery, physical Samsung camera/gallery/GPS/notifications and cross-device synchronization remain open. Source facts and listing prices are separate from selected-size availability and physical branch inventory.
