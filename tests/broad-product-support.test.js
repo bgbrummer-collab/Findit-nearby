@@ -1,6 +1,6 @@
 import test from 'node:test';import assert from 'node:assert/strict';
 import {specializedProductFamily,specializedShopTags} from '../lib/specialized-product-routing.js';
-import {productFamily,ident,verify} from '../lib/product-intelligence-core.js';
+import {productFamily,productVariantConflict,ident,verify} from '../lib/product-intelligence-core.js';
 import {reconcileVision} from '../lib/vision-consensus.js';
 import worker from '../cloudflare/worker.js';
 for(const [name,family,tags]of [['Example upper arm blood pressure monitor','medical',['medical_supply','chemist']],['Example rowing machine','fitness',['sports']],['Toyota Corolla Cross 1.8 Xi','vehicle',['car']]])test('one category decision drives product and nearby routing: '+name,async t=>{
@@ -47,3 +47,6 @@ test('typed model spacing and object synonyms do not hide an otherwise exact pub
  assert.equal(await verify('https://shop.example/products/ex42',ident({name:'Example3 EX42 rowing machine'})),null);
  assert.equal(await verify('https://shop.example/products/ex42',ident({name:'Example2 EX420 rowing machine'})),null);
 });
+
+for(const title of ['Example Q42 mouse pad XXL','Example Q42 mouse pad XL','Example Q42 mouse pad Small','Example Q42 mouse pad M'])test('named purchase size rejects incompatible pad: '+title,()=>{assert.equal(productVariantConflict(title,ident({name:'Example Q42 Large mouse pad'})),true);});
+for(const title of ['Example Q42 mouse pad L','Example Q42 Large mouse pad'])test('named purchase size preserves equivalent large pad: '+title,()=>{assert.equal(productVariantConflict(title,ident({name:'Example Q42 Large mouse pad'})),false);});
