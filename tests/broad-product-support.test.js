@@ -75,3 +75,16 @@ test('an explicitly requested vehicle manufacturer remains a relevant source',as
  t.mock.method(globalThis,'fetch',async()=>new Response('<rss><channel></channel></rss>'));
  for(const identification of [{name:'Ford Mustang car'},{brand:'Ford',name:'Mustang car',searchQuery:'Mustang car'}]){let data;await commerce({method:'POST',body:{identification}},{setHeader(){},status(){return this},json(value){data=value;return this;}});assert.ok(data.retailerStatus.some(r=>r.name==='Ford South Africa'));}
 });
+
+for(const name of ['Example adult dog food 2kg','Example cat litter','Example pet carrier'])test('pet products share pet retailers and nearby categories: '+name,async t=>{
+ assert.equal(specializedProductFamily({name}),'pet');assert.equal(productFamily(ident({name})),'pet');assert.deepEqual(specializedShopTags({name}),['pet']);let data;const urls=[];
+ t.mock.method(globalThis,'fetch',async url=>{urls.push(String(url));return new Response('<rss><channel></channel></rss>');});
+ await commerce({method:'POST',body:{identification:{name}}},{setHeader(){},status(){return this},json(value){data=value;return this;}});
+ assert.ok(data.retailerStatus.some(r=>r.name==='Petworld'));assert.ok(data.retailerStatus.some(r=>r.name==='Absolute Pets'&&r.searchUrl==='https://www.absolutepets.com/'));assert.ok(!data.retailerStatus.some(r=>/Checkers|Shoprite/.test(r.name)));assert.ok(urls.some(u=>u.includes('petworld.co.za')));assert.ok(!urls.some(u=>u.includes('absolute-pets.co.za')));
+});
+for(const name of ['CAT drill','Cat ear headphones','Carpet cleaner','Fish eye camera lens'])test('pet routing does not hijack animal words in other products: '+name,()=>assert.notEqual(specializedProductFamily({name}),'pet'));
+
+test('fitness discovery searches another published catalogue without fixed product URLs',async t=>{
+ const {nativeRetailerUrls}=await import('../lib/native-retailer-discovery.js'),seen=[];t.mock.method(globalThis,'fetch',async url=>{seen.push(String(url));return new Response('');});
+ await nativeRetailerUrls({name:'Example EX42 rowing machine'});assert.ok(seen.some(u=>u.startsWith('https://gymgear.co.za/search/suggest.json?')));assert.ok(!seen.some(u=>/gymgear\.co\.za\/products\//.test(u)));
+});
