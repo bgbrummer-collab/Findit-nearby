@@ -1,0 +1,192 @@
+{
+  "checkedAt": "2026-10-31T16:07:41.469Z",
+  "version": {
+    "commit": "cf51ae8ea04c7b2c56c0074692565d231930673a",
+    "platform": "cloudflare"
+  },
+  "typedQueriesNotPhotoTests": true,
+  "originalMetricPasses": 1,
+  "validCompletePasses": 0,
+  "reason": "The only original metric pass (camera) included a compatible cage and lens kit, so it is not a valid exact-body shopping pass.",
+  "results": [
+    {
+      "category": "gym",
+      "query": "Concept2 RowErg rowing machine",
+      "originalMetric": "failed",
+      "researched": true,
+      "offers": [
+        {
+          "title": "Amazon.com : Concept2 RowErg Indoor Rowing Machine - PM5 Monitor, Device Holder, Adjustable Air Resistance, Easy Storage : Sports &amp; Outdoors",
+          "price": null,
+          "currency": null,
+          "url": "https://www.amazon.com/Concept2-RowErg-Indoor-Rowing-Machine/dp/B00OUGNUO8"
+        },
+        {
+          "title": "Amazon.com: Concept2 RowErg Model D Indoor Rowing Machine with PM5 Monitor, Device Holder, Adjustable Air Resistance, Easy Storage (Gray) : Sports &amp; Outdoors",
+          "price": null,
+          "currency": null,
+          "url": "https://www.amazon.com/Concept2-Machine-Monitor-Adjustable-Resistance/dp/B097C61Z5P"
+        },
+        {
+          "title": "Concept2 RowErg Rowing Machine",
+          "price": null,
+          "currency": null,
+          "url": "https://www.concept2.com/ergs/rowerg"
+        }
+      ],
+      "error": null
+    },
+    {
+      "category": "car",
+      "query": "Toyota Corolla Cross 1.8 Xi",
+      "originalMetric": "failed",
+      "researched": false,
+      "offers": [],
+      "error": null
+    },
+    {
+      "category": "mousepad",
+      "query": "SteelSeries QcK Heavy Large mouse pad",
+      "originalMetric": "failed",
+      "researched": false,
+      "offers": [],
+      "error": null
+    },
+    {
+      "category": "mouse",
+      "query": "Logitech G502 HERO mouse",
+      "originalMetric": "failed",
+      "researched": true,
+      "offers": [
+        {
+          "title": "G502 HERO High Performance Gaming Mouse | Logitech G",
+          "price": null,
+          "currency": null,
+          "url": "https://www.logitechg.com/en-us/shop/p/g502-hero-gaming-mouse"
+        },
+        {
+          "title": "Logitech Gaming Mouse G502 (Hero) - mouse - USB - 910-005469 - Mice - CDW.com",
+          "price": null,
+          "currency": null,
+          "url": "https://www.cdw.com/product/logitech-gaming-mouse-g502-hero-mouse-usb/5260089"
+        }
+      ],
+      "error": null
+    },
+    {
+      "category": "headphones",
+      "query": "Sony WH-1000XM5 black",
+      "originalMetric": "failed",
+      "researched": false,
+      "offers": [],
+      "error": null
+    },
+    {
+      "category": "keyboard",
+      "query": "Keychron K2 wireless mechanical keyboard",
+      "originalMetric": "failed",
+      "researched": false,
+      "offers": [],
+      "error": null
+    },
+    {
+      "category": "medical-device",
+      "query": "Omron M2 Basic upper arm blood pressure monitor",
+      "originalMetric": "failed",
+      "researched": false,
+      "offers": [],
+      "error": null
+    },
+    {
+      "category": "medical-device",
+      "query": "Accu-Chek Instant blood glucose meter",
+      "originalMetric": "failed",
+      "researched": false,
+      "offers": [],
+      "error": null
+    },
+    {
+      "category": "appliance",
+      "query": "Philips NA230/00 air fryer",
+      "originalMetric": "failed",
+      "researched": false,
+      "offers": [],
+      "error": null
+    },
+    {
+      "category": "printer",
+      "query": "HP DeskJet 2820 All-in-One printer",
+      "originalMetric": "failed",
+      "researched": false,
+      "offers": [],
+      "error": null
+    },
+    {
+      "category": "pet",
+      "query": "Royal Canin Mini Adult dog food 2kg",
+      "originalMetric": "failed",
+      "researched": false,
+      "offers": [],
+      "error": null
+    },
+    {
+      "category": "garden",
+      "query": "Gardena Classic pruning shears",
+      "originalMetric": "failed",
+      "researched": false,
+      "offers": [],
+      "error": null
+    },
+    {
+      "category": "lighting",
+      "query": "Philips Hue White E27 bulb",
+      "originalMetric": "failed",
+      "researched": false,
+      "offers": [],
+      "error": null
+    },
+    {
+      "category": "stationery",
+      "query": "Casio fx-82ZA Plus II calculator",
+      "originalMetric": "failed",
+      "researched": false,
+      "offers": [],
+      "error": null
+    },
+    {
+      "category": "bag",
+      "query": "JanSport SuperBreak Plus backpack",
+      "originalMetric": "failed",
+      "researched": false,
+      "offers": [],
+      "error": null
+    },
+    {
+      "category": "camera",
+      "query": "Canon EOS R50 camera body",
+      "originalMetric": "passed",
+      "researched": true,
+      "offers": [
+        {
+          "title": "Tilta Full Camera Cage for Canon EOS R50 V (Black)",
+          "price": 995,
+          "currency": "ZAR",
+          "url": "https://www.outdoorphoto.co.za/products/tilta-full-camera-cage-for-canon-eos-r50-v-black?_pos=10&_sid=d7269b251&_ss=r"
+        },
+        {
+          "title": "Canon EOS R50 Camera + 18-45mm + 55-210mm Lens",
+          "price": 19895,
+          "currency": "ZAR",
+          "url": "https://www.outdoorphoto.co.za/products/canon-eos-r50-camera-18-45mm-55-210mm-lens?_pos=4&_sid=d7269b251&_ss=r"
+        },
+        {
+          "title": "Canon EOS R50 Mirrorless Camera Body",
+          "price": 14895,
+          "currency": "ZAR",
+          "url": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body?_pos=1&_sid=d3b6f1ca8&_ss=r"
+        }
+      ],
+      "error": null
+    }
+  ]
+}
