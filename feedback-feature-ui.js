@@ -55,8 +55,8 @@ function featureModal(){
  $('#fxFeatureBackToFeedback',m)?.addEventListener('click',()=>{closeModal(m);openFeedback()});
  return m;
 }
-function openFeedback(){document.querySelector('#fxInformationModal')?.classList.remove('open');const m=feedbackModal();m.style.pointerEvents='auto';m.classList.remove('hidden');m.setAttribute('aria-hidden','false');window.finditAccessibleDialog?.(m,'Send Feedback');setTimeout(()=>$('#fxFeedbackMessage')?.focus(),50)}
-function openFeature(){document.querySelector('#fxInformationModal')?.classList.remove('open');const m=featureModal();m.style.pointerEvents='auto';m.classList.remove('hidden');m.setAttribute('aria-hidden','false');window.finditAccessibleDialog?.(m,'Suggest a Feature');setTimeout(()=>$('#fxFeatureTitle')?.focus(),50)}
+function openFeedback(){document.querySelector('#fxInformationModal')?.classList.remove('open');const m=feedbackModal();m.style.pointerEvents='auto';m.classList.remove('hidden');m.setAttribute('aria-hidden','false');window.finditAccessibleDialog?.(m,'Send Feedback');$('#fxFeedbackMessage',m)?.focus()}
+function openFeature(){document.querySelector('#fxInformationModal')?.classList.remove('open');const m=featureModal();m.style.pointerEvents='auto';m.classList.remove('hidden');m.setAttribute('aria-hidden','false');window.finditAccessibleDialog?.(m,'Suggest a Feature');$('#fxFeatureTitle',m)?.focus()}
 function injectDashboard(){
  const shell=$('#finditExactShell');if(!shell)return false;
  const nav=shell.querySelector('.fx-nav');

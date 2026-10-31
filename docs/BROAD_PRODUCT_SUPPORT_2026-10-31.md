@@ -1,0 +1,23 @@
+# Broad product support and specific identification
+
+The new live baseline uses 16 previously untested queries: gym machine, car, mouse, mouse pad, keyboard, headphones, two medical devices, appliance, printer, garden equipment, pet food, lighting, calculator, backpack and camera. It is a typed-search baseline, not a photo-identification claim. The original numeric metric reported 1/16, but that camera result included a cage and lens kit beside a body listing. Consequently there are zero complete valid shopping passes in this baseline. Manufacturer information without a usable price is not a complete commerce pass. Evidence: `launch-evidence-2026-10-31/broad-before.json`.
+
+## Shared repairs
+
+- Independently agreeing brand/model claims no longer lose specificity solely because one reader says gaming mouse and another says computer mouse. The object vocabulary now covers peripherals, cameras versus lenses/cages, rowing machines, treadmills, exercise bikes, medical-device types, printers, appliances and vehicles. Conflicting models/brands remain unconfirmed. Corroborated size and colour are retained in confirmed titles without duplication. Photo prompts explicitly request readable model/generation/style codes; hidden codes and medical strengths are not inferred.
+- Generic typed queries, including brand plus type, no longer claim an exact product. They enter the existing model-confirmation flow. Model-coded queries remain unchanged.
+- A shared specialist decision now drives medical, fitness and whole-vehicle commerce/nearby routing. Medical monitors go to medical-supply shops and pharmacies rather than computer retailers; gym machines go to sports-equipment retailers rather than general shops; whole cars go to car sellers rather than parts/repair shops. Pharmacy amenities and official Clicks locations are included. These remain relevant retailers, never proof of branch stock.
+- Keyboard, mouse, mouse pad, printer and appliance names now reach electronics catalogues instead of falling through to unrelated general sources. Fitness Network's published GET `/search?q=` form and MiFitness's published Shopify search are used for gym equipment. Existing medical retailer adapters are reused.
+- Exact alphanumeric identifiers tolerate spacing within the same full token (EX42 versus EX 42) and recognized object synonyms, while adjacent codes EX420 and unrelated brands remain rejected.
+- Shorter catalogue queries are retrieval only, within a shared request deadline. The original model, colour, size and quantity still verify each candidate. Search/category pages and wrong variants do not become offers.
+- Camera-body searches reject compatible cages and unrequested lens packages. Mouse searches reject pads and keyboard searches reject keycap/cover accessories. These checks are general type constraints, not product-specific URLs.
+- Commerce/research fallback namespaces and the photo-cache version are rotated so earlier generic identities or incompatible accessory results are not reused.
+
+The OpenStreetMap category decisions follow its published shop=sports, shop=medical_supply and amenity=pharmacy documentation. No private retailer API, credentials, paid service, CAPTCHA bypass or fabricated price is introduced.
+
+Local validation: 616 Node tests and syntax/diff checks pass. The broader matrix now checks accessory/type conflicts as well as positive prices and attributed research. Production rollout, new photo uploads and the same broader matrix must still be verified separately. This is not a promise that every product/photo or every branch's inventory is covered.
+
+
+Hosted browser diagnostics exposed the earlier intermittent feature-suggestion failure: the 50 ms initial-focus timer could move focus back to the title during rapid details entry. The logged title contained both fields while the required details field was empty. Focus the initial field synchronously instead, and add a deterministic regression that moves focus immediately after opening and verifies it stays in the chosen field. Delivery success assertions remain unchanged; no real feedback is sent by this mocked test.
+
+The live broad matrix exposed Large mouse pad searches accepting XXL listings. A shared named-size comparison now rejects conflicting Small/Medium/Large/XL/XXL/XXXL sizes, including the single-letter pad labels, while preserving Large/L equivalence. This is a verification constraint, not a relaxed discovery score.
