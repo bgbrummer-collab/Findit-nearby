@@ -39,3 +39,11 @@ for(const query of ['headphones','headphones black','black headphones','wireless
 for(const query of ['Logitech G502 HERO mouse','Sony WH-1000XM5 headphones','Keychron K2 keyboard'])test('specific typed model is preserved: '+query,async()=>{
  const d=await(await worker.fetch(new Request('https://findit.test/api/search',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({query})}),{})).json();assert.equal(d.identification.name,query);assert.equal(d.identification.userConfirmed,true);
 });
+
+test('typed model spacing and object synonyms do not hide an otherwise exact published product',async t=>{
+ const source={"@type":"Product",name:'Example 2 EX42 Rower',description:'An indoor rower with adjustable resistance.',offers:{price:2000,priceCurrency:'ZAR'}};
+ t.mock.method(globalThis,'fetch',async()=>new Response('<script type="application/ld+json">'+JSON.stringify(source)+'</script>',{headers:{'content-type':'text/html'}}));
+ assert.equal((await verify('https://shop.example/products/ex42',ident({name:'Example2 EX42 rowing machine'})))?.price,2000);
+ assert.equal(await verify('https://shop.example/products/ex42',ident({name:'Example3 EX42 rowing machine'})),null);
+ assert.equal(await verify('https://shop.example/products/ex42',ident({name:'Example2 EX420 rowing machine'})),null);
+});
