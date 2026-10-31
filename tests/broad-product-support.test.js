@@ -53,3 +53,10 @@ for(const title of ['Example Q42 mouse pad L','Example Q42 Large mouse pad'])tes
 
 for(const title of ['Example EX42 rower 10 Pack','Example EX42 rower pack of 10','Example EX42 rower set of 2','Example EX42 rower 4-piece'])test('single product rejects an unrequested multi-unit purchase: '+title,()=>{assert.equal(productVariantConflict(title,ident({name:'Example EX42 rower'})),true);});
 test('matching explicit purchase quantity remains valid',()=>{assert.equal(productVariantConflict('Example EX42 rower pack of 10',ident({name:'Example EX42 rower 10 pack'})),false);});
+
+test('gym equipment retains official sports branches when map providers fail',async t=>{
+ const row={id:712,status:'active',title:'Example Mall',lat:-25.75,lng:28.23,contact_number:'012 123 4567',street_address:'Shop 2 Example Mall',city:'Pretoria',trading_hours:{Monday:'9:00 to 18:00'}};
+ t.mock.method(globalThis,'fetch',async url=>String(url)==='https://www.sportsmanswarehouse.co.za/store-locator/'?new Response("<store-selector :stores='"+JSON.stringify([row])+"'>"):new Response('',{status:503}));
+ const d=await(await worker.fetch(new Request('https://findit.test/api/nearby',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({lat:-25.75,lon:28.23,identification:{name:'Example rowing machine'}})}),{})).json();
+ assert.equal(d.stores.length,1);assert.equal(d.stores[0].name,'Sportsmans Warehouse Example Mall');assert.equal(d.stores[0].phone,'012 123 4567');assert.equal(d.stores[0].source,'Official retailer locator');assert.equal(d.stores[0].branchStockVerified,false);assert.equal(d.stores[0].exactProductMatch,false);assert.equal(d.discoveryAvailable,true);
+});
