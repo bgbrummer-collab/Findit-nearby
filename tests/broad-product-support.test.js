@@ -70,3 +70,8 @@ test('whole-vehicle retailer suggestions do not recommend an unrelated manufactu
  await commerce({method:'POST',body:{identification:{name:'Toyota Corolla Cross 1.8 Xi'}}},{setHeader(){},status(){return this},json(value){data=value;return this;}});
  assert.ok(data.retailerStatus.some(r=>r.name==='AutoTrader'));assert.ok(!data.retailerStatus.some(r=>/Ford/i.test(r.name)));
 });
+
+test('an explicitly requested vehicle manufacturer remains a relevant source',async t=>{
+ t.mock.method(globalThis,'fetch',async()=>new Response('<rss><channel></channel></rss>'));
+ for(const identification of [{name:'Ford Mustang car'},{brand:'Ford',name:'Mustang car',searchQuery:'Mustang car'}]){let data;await commerce({method:'POST',body:{identification}},{setHeader(){},status(){return this},json(value){data=value;return this;}});assert.ok(data.retailerStatus.some(r=>r.name==='Ford South Africa'));}
+});

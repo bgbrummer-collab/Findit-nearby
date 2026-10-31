@@ -45,3 +45,9 @@ A fresh download of the official Sportsmans Warehouse locator parsed 52 publishe
 A repeated deployed vehicle upload returned only Toyota car, showing inconsistent model recognition across repeated reads. The earlier Hilux result must not be counted as a stable exact-photo pass. Free image-provider disagreement and credit-limited fallback, incomplete car-locator coverage, and the 13/16 incomplete commerce journeys remain release limitations.
 
 The actual vehicle UI also exposed a Ford manufacturer link in every car search, including Toyota. Remove that unrelated manufacturer from shared vehicle defaults; brand-neutral vehicle marketplaces remain candidates, while an actually discovered manufacturer page still requires identity verification.
+
+## Final deployment checks and manufacturer context correction
+
+Production `9c3054f9b1ff9476319ab7f167fc8822e1cfef52` returned three published Sportsmans Warehouse branches within 10 km of the public Pretoria test point (6.0/8.1/9.2 km). Each retained its checked date and false exact-product/branch-stock flags. The actual UI displayed all three map pins and branch availability unknown. Toyota source suggestions contained only AutoTrader, Cars.co.za and WeBuyCars.
+
+Production smoke exposed a regression in removing Ford globally: its explicit Ford Mustang test still requires the correct manufacturer. Restore Ford only when Ford is actually present in the supplied brand/name/query; Toyota continues to exclude it. Keep the smoke assertion intact and add a positive manufacturer-context regression alongside the Toyota exclusion. Validation: 637 Node tests and syntax/diff checks pass. The correction requires a separate verified rollout.
