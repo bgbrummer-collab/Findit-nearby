@@ -13,7 +13,7 @@
   const endpoint=input=>requestUrl(input)?.pathname||'';
   const bodyFromInit=init=>{if(!init?.body||typeof init.body!=='string')return null;return safeParse(init.body)};
   const isExactAction=input=>requestUrl(input)?.searchParams?.get('action')==='exact';
-  const keyFor=(path,b)=>{if(!b)return'';const i=b.identification||b,q=[i.searchQuery||i.query||b.query,i.name,i.object,i.brand,i.model,i.category,i.retailCategory,i.identificationMethod,i.userConfirmed===true||i.userConfirmed==='true'?'confirmed':'unconfirmed',i.color,i.size,i.barcode].map(norm).join('|');return q.replace(/\|/g,'')?`findit_offer_cache_v7:${path}:${q}`:''};
+  const keyFor=(path,b)=>{if(!b)return'';const i=b.identification||b,q=[i.searchQuery||i.query||b.query,i.name,i.object,i.brand,i.model,i.category,i.retailCategory,i.identificationMethod,i.userConfirmed===true||i.userConfirmed==='true'?'confirmed':'unconfirmed',i.color,i.size,i.barcode].map(norm).join('|');return q.replace(/\|/g,'')?`findit_offer_cache_v8:${path}:${q}`:''};
   const useful=(path,d,exactAction=false)=>{
     if(!d||typeof d!=='object')return false;
     if(path==='/api/product-intelligence-v2')return Array.isArray(d.offers)&&d.offers.some(o=>o&&o.verified===true&&(Number.isFinite(Number(o.price))||o.availability));
