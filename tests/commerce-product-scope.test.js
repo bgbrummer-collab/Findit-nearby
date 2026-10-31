@@ -52,3 +52,11 @@ test('one incomplete aggregate variant cannot inherit another variant price or s
  t.mock.method(globalThis,'fetch',async()=>new Response(html(incomplete)+'<meta property="product:price:amount" content="1200"><meta property="product:price:currency" content="ZAR">',{headers:{'content-type':'text/html'}}));
  const result=await verify(url,ident({name}));assert.equal(result.price,null);assert.equal(result.availability,null);assert.equal(result.comparisonAmbiguous,true);
 });
+
+test('percent-escape hex case is equivalent while ordinary product path case stays exact',async t=>{
+ const address='https://store.example/products/Levis%C2%AE-501',record={...node,url:'https://store.example/products/Levis%c2%ae-501',offers:{...offer('one'),url:'https://store.example/products/Levis%c2%ae-501?variant=one'}};
+ t.mock.method(globalThis,'fetch',async()=>new Response(html(record),{headers:{'content-type':'text/html'}}));
+ assert.equal((await verify(address,ident({name})))?.price,1200);
+ record.url='https://store.example/products/levis%c2%ae-501';assert.equal(await verify(address,ident({name})),null);
+ record.url='https://store.example/products/Levis%c2%ae-502';assert.equal(await verify(address,ident({name})),null);
+});

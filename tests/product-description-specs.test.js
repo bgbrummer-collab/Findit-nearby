@@ -112,3 +112,12 @@ test('verified offers preserve the member-price qualification through the existi
 
 test('retailer layout with the primary price outside its metadata-only main block retains the badge',()=>{assert.match(productPagePriceConditions('<div class="product-info-right-row-shop">'+memberPrice+'</div><div class="product-info-main"><div>Product metadata</div></div>'),/\+more price/);});
 test('the same primary member price is recognised when the retailer uses a textual +more label',()=>{const alternate=memberPrice.replace('<div class="plusmore-text"><span>more</span></div>','<span class="plusmore-label">with +more</span>');assert.match(productPagePriceConditions('<div class="product-info-right-row-shop">'+alternate+'</div>'),/\+more price/);assert.equal(productPagePriceConditions('<div class="product-info-main"><div class="price-box">R 123</div></div><aside>'+alternate+'</aside>'),'');});
+
+test('a trailing published supplier style retains the complete useful sentence and source code',async t=>{
+ const name="Example Classic White Blue Sneaker",url='https://retailer.example/products/classic';
+ const description="Comfortable and timeless, it&apos;s number one for a reason. Made with synthetic leather for a durable upper.(Supplier Style:EX1234-100)";
+ const raw='<script type="application/ld+json">'+JSON.stringify({'@type':'Product',name,url,description})+'</script>';
+ t.mock.method(globalThis,'fetch',async u=>String(u)===url?new Response(raw):new Response('<rss/>'));
+ const d=await(await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:{name},offers:[{product_url:url,sourcePageVerified:true,exactProductMatch:true}]})}),{})).json();
+ assert.equal(d.whatItDoes,'Made with synthetic leather for a durable upper.');assert.ok(d.specifications.some(x=>x.name==='Supplier style'&&x.value==='EX1234-100'&&x.sourceUrl===url));assert.doesNotMatch(JSON.stringify(d),/&apos;/);
+});
