@@ -46,3 +46,9 @@ test('aggregate offers without variant codes cannot imply a confirmed shoe size'
  const product={...node,offers:{'@type':'AggregateOffer',offers:[offer(''),offer('')]}};
  const result=structuredProduct(html(product),ident({name}),url);assert.equal(result.price,1200);assert.equal(result.comparisonAmbiguous,true);assert.equal(result.sku,'');
 });
+
+test('one incomplete aggregate variant cannot inherit another variant price or stock',async t=>{
+ const incomplete={...node,offers:{'@type':'AggregateOffer',offers:[offer('eight'),{'@type':'Offer',sku:'nine'}]}};
+ t.mock.method(globalThis,'fetch',async()=>new Response(html(incomplete)+'<meta property="product:price:amount" content="1200"><meta property="product:price:currency" content="ZAR">',{headers:{'content-type':'text/html'}}));
+ const result=await verify(url,ident({name}));assert.equal(result.price,null);assert.equal(result.availability,null);assert.equal(result.comparisonAmbiguous,true);
+});
