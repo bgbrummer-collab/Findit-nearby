@@ -29,3 +29,10 @@ test('unconfirmed photo variants remain reviewable but cannot supply best price 
  const confirmed=await invoke({...i,color:'Blue and Raspberry'});assert.equal(confirmed.offers.length,1);assert.equal(confirmed.possibleOffers.length,0);assert.equal(confirmed.bestPrice.price,750);
  const wrong=await invoke({...i,color:'black'});assert.equal(wrong.offers.length,0);assert.equal(wrong.possibleOffers.length,0);
 });
+
+test('an ambiguous multi-size listing needs review when photo colour is known but size is not',()=>{
+ const listing={product_name:'Example Classic White Blue Sneaker',sku:'',comparisonAmbiguous:true,comparisonAttributes:{size:'',color:''}};
+ const photo={name:'Example Classic White Blue Sneaker',identificationMethod:'independent-vision-consensus',color:'White Blue',userConfirmed:false};
+ assert.equal(photoVariantNeedsConfirmation(listing,photo,'footwear'),true);
+ assert.equal(photoVariantNeedsConfirmation(listing,{...photo,userConfirmed:true},'footwear'),false);
+});

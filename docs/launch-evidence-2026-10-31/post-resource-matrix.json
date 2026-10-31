@@ -1,0 +1,96 @@
+{
+  "checkedAt": "2026-10-31T11:04:38.181Z",
+  "version": {
+    "commit": "5b3be356d19ad1e462561878e444214eb3569268",
+    "platform": "cloudflare"
+  },
+  "endVersion": {
+    "commit": "5b3be356d19ad1e462561878e444214eb3569268",
+    "platform": "cloudflare"
+  },
+  "versionStable": true,
+  "passed": 5,
+  "total": 10,
+  "results": [
+    {
+      "category": "groceries",
+      "query": "Coca-Cola Original Taste 2L",
+      "status": "failed",
+      "offers": 0,
+      "researched": false,
+      "error": null
+    },
+    {
+      "category": "electronics",
+      "query": "Logitech PRO X Gaming Headset 981-000818",
+      "status": "passed",
+      "offers": 2,
+      "researched": true,
+      "error": null
+    },
+    {
+      "category": "shoes",
+      "query": "Nike Air Force 1 Low White Blue",
+      "status": "failed",
+      "offers": 0,
+      "researched": false,
+      "error": null
+    },
+    {
+      "category": "beauty",
+      "query": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
+      "status": "passed",
+      "offers": 1,
+      "researched": true,
+      "error": null
+    },
+    {
+      "category": "clothing",
+      "query": "Levis 501 Original Jeans",
+      "status": "passed",
+      "offers": 2,
+      "researched": true,
+      "error": null
+    },
+    {
+      "category": "tools",
+      "query": "Bosch GSB 18V-50",
+      "status": "failed",
+      "offers": 0,
+      "researched": true,
+      "error": null
+    },
+    {
+      "category": "toys",
+      "query": "LEGO Classic 10696",
+      "status": "passed",
+      "offers": 1,
+      "researched": true,
+      "error": null
+    },
+    {
+      "category": "furniture",
+      "query": "IKEA BILLY bookcase 80x28x202 white",
+      "status": "failed",
+      "offers": 0,
+      "researched": false,
+      "error": null
+    },
+    {
+      "category": "household",
+      "query": "Twinsaver Comfort 3 Ply Tissues 120",
+      "status": "failed",
+      "offers": 0,
+      "researched": false,
+      "error": null
+    },
+    {
+      "category": "music",
+      "query": "Shure MV7+ microphone",
+      "status": "passed",
+      "offers": 1,
+      "researched": true,
+      "error": null
+    }
+  ]
+}
