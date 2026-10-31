@@ -50,3 +50,6 @@ test('typed model spacing and object synonyms do not hide an otherwise exact pub
 
 for(const title of ['Example Q42 mouse pad XXL','Example Q42 mouse pad XL','Example Q42 mouse pad Small','Example Q42 mouse pad M'])test('named purchase size rejects incompatible pad: '+title,()=>{assert.equal(productVariantConflict(title,ident({name:'Example Q42 Large mouse pad'})),true);});
 for(const title of ['Example Q42 mouse pad L','Example Q42 Large mouse pad'])test('named purchase size preserves equivalent large pad: '+title,()=>{assert.equal(productVariantConflict(title,ident({name:'Example Q42 Large mouse pad'})),false);});
+
+for(const title of ['Example EX42 rower 10 Pack','Example EX42 rower pack of 10','Example EX42 rower set of 2','Example EX42 rower 4-piece'])test('single product rejects an unrequested multi-unit purchase: '+title,()=>{assert.equal(productVariantConflict(title,ident({name:'Example EX42 rower'})),true);});
+test('matching explicit purchase quantity remains valid',()=>{assert.equal(productVariantConflict('Example EX42 rower pack of 10',ident({name:'Example EX42 rower 10 pack'})),false);});
