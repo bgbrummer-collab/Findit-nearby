@@ -98,3 +98,16 @@ test('full HTML catalogue extraction retains later named anchors while excluding
  t.mock.method(globalThis,'fetch',async u=>new Response(String(u).includes('clicks.co.za/search?')?html:''));
  const urls=await nativeRetailerUrls({name,brand:'Example',object:'deodorant',category:'beauty'},{maxSearchPages:2,readerFallback:false});assert.deepEqual(urls,[url]);
 });
+
+for(const name of ['Example Classic Low White Blue Sneaker','Example Original Jeans'])test('Bash uses its published search route for '+name,async t=>{
+ const route='https://bash.com/s?search='+encodeURIComponent(name),product='https://bash.com/example-product-123/p',seen=[];
+ t.mock.method(globalThis,'fetch',async u=>{seen.push(String(u));return new Response(String(u)===route?'<!DOCTYPE html><html><body><a href="'+product+'">'+name+'</a></body></html>':'')});
+ const urls=await nativeRetailerUrls({name,searchQuery:name});assert.ok(seen.includes(route));assert.ok(urls.includes(product));assert.ok(!seen.some(u=>u.startsWith('https://bash.com/search?')));assert.ok(!urls.includes(route));
+});
+
+test('Bash discovery leaves exact colour and size decisions to product-page verification',async t=>{
+ const {verify,ident}=await import('../lib/product-intelligence-core.js');
+ const wanted='Example Classic Low White Blue Sneaker',url='https://bash.com/example-classic-white-red-123/p';
+ t.mock.method(globalThis,'fetch',async u=>new Response(String(u).includes('/s?search=')?'<!DOCTYPE html><html><body><a href="'+url+'">Example Classic Low White Red Sneaker</a></body></html>':'<script type="application/ld+json">'+JSON.stringify({'@type':'Product',name:'Example Classic Low White Red Sneaker',color:'White Red',size:'9',offers:{price:1200,priceCurrency:'ZAR',availability:'https://schema.org/InStock'}})+'</script>'));
+ const i=ident({name:wanted,color:'White Blue',size:'8'}),urls=await nativeRetailerUrls(i,{maxSearchPages:1});assert.ok(urls.includes(url));assert.equal(await verify(url,i),null);
+});
