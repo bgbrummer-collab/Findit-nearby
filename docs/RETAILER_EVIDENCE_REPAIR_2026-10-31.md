@@ -13,3 +13,13 @@ The drill stock investigation found conditional Alpine templates containing both
 Rotate only the commerce and research fallback cache namespaces so earlier evidence cannot reappear after this validation change. Saved items/history are not deleted.
 
 Validation before PR: 568 Node tests pass with syntax/diff checks. New regressions were first observed failing for recommendation leakage and ignored aggregate prices, then pass after the repair. Deployment and hosted browser validation are pending; existing source restrictions, physical-phone checks, synchronization and 5/10 matrix limits remain open.
+
+## Deployed verification and URL-equivalence correction
+
+PR #347 passed all four source suites and merged as `3243ac00fa9c7d4ca0e69219fb71971fdfb530bd`; production confirms this commit. Actual UI search for Nike Air Force 1 White Blue Sneaker now finds Bash product facts and one listing, where the pre-deployment journey found neither. Live information API checks retain G435 manufacturer facts (15 specifications) and retrieve the matching Bash source. This query is distinct from the matrix's more specific Low query.
+
+The unchanged ten-category matrix on #347 fell to 4/10: the prior Levi's clothing pass returned no offers. This is a discovered regression, not a waived source gap. Captured primary Levi's HTML reproduces the cause: its Product URL uses lowercase `%c2%ae` while Offer/request paths use uppercase `%C2%AE`. Percent-escape hex case is equivalent; ordinary product-path character case is not. Normalize only percent-escape hex case before comparing source paths. A regression test first fails, then passes while rejecting genuinely different paths. The captured listing then verifies at R1399 ZAR, with mixed size availability unknown and variant ambiguity retained.
+
+The actual Bash dialog also exposed a literal `&apos;` and dropped a complete material sentence when a trailing `(Supplier Style:...)` lacked terminal punctuation. Decode the entity, retain the complete sentence, and expose the explicitly published supplier style separately with source attribution. A worker regression first reproduced the lost sentence, then verifies its recovery and code attribution. No style code is guessed.
+
+Local follow-up: 570 tests pass, with syntax/diff checks. Hosted checks and post-deployment confirmation of this correction remain pending. The 4/10 deployed observation above remains recorded until a new run verifies recovery.
