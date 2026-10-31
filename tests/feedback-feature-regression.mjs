@@ -36,6 +36,13 @@ console.log('FEEDBACK_PASS');
 
 await page.locator('#fxFeedbackModal .fx-stable-close').click();
 await page.waitForSelector('#fxFeedbackModal',{state:'hidden'});
+// Opening a dialog must not asynchronously take focus back after a user has
+// moved to another field. This reproduces the observed fast-entry failure.
+await page.evaluate(()=>{window.finditOpenFeatureSuggestion();document.querySelector('#fxFeatureDetails').focus();});
+await page.waitForTimeout(80);
+if(await page.evaluate(()=>document.activeElement?.id)!=='fxFeatureDetails')fail('Feature dialog stole focus after the user moved to details');
+await page.locator('#fxFeatureSuggestionModal .fx-stable-close').click();
+console.log('FEATURE_FORM_FOCUS_STABLE_PASS');
 const suggestNav=page.locator('#finditExactShell [data-fx="suggest-feature"]').first();
 if(!await suggestNav.isVisible())fail('Suggest a Feature dashboard option is not visible');
 await suggestNav.click();

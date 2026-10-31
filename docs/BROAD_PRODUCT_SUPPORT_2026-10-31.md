@@ -16,3 +16,6 @@ The new live baseline uses 16 previously untested queries: gym machine, car, mou
 The OpenStreetMap category decisions follow its published shop=sports, shop=medical_supply and amenity=pharmacy documentation. No private retailer API, credentials, paid service, CAPTCHA bypass or fabricated price is introduced.
 
 Local validation: 610 Node tests and syntax/diff checks pass. The broader matrix now checks accessory/type conflicts as well as positive prices and attributed research. Production rollout, new photo uploads and the same broader matrix must still be verified separately. This is not a promise that every product/photo or every branch's inventory is covered.
+
+
+Hosted browser diagnostics exposed the earlier intermittent feature-suggestion failure: the 50 ms initial-focus timer could move focus back to the title during rapid details entry. The logged title contained both fields while the required details field was empty. Focus the initial field synchronously instead, and add a deterministic regression that moves focus immediately after opening and verifies it stays in the chosen field. Delivery success assertions remain unchanged; no real feedback is sent by this mocked test.
