@@ -1,6 +1,6 @@
 import test from 'node:test';import assert from 'node:assert/strict';
 import {specializedProductFamily,specializedShopTags} from '../lib/specialized-product-routing.js';
-import {productFamily,productVariantConflict,identityMatches,ident,verify} from '../lib/product-intelligence-core.js';
+import commerce,{productFamily,productVariantConflict,identityMatches,ident,verify} from '../lib/product-intelligence-core.js';
 import {reconcileVision} from '../lib/vision-consensus.js';
 import worker from '../cloudflare/worker.js';
 for(const [name,family,tags]of [['Example upper arm blood pressure monitor','medical',['medical_supply','chemist']],['Example rowing machine','fitness',['sports']],['Toyota Corolla Cross 1.8 Xi','vehicle',['car']]])test('one category decision drives product and nearby routing: '+name,async t=>{
@@ -64,3 +64,9 @@ test('gym equipment retains official sports branches when map providers fail',as
 for(const [query,title]of [['Example WH-1000XM5 black','Example WH1000XM5 headphones black'],['Example FX-82ZA Plus II calculator','Example FX82ZA Plus II calculator'],['Example MF-752Cdw printer','Example MF752Cdw printer']])test('typed technical code accepts punctuation-only differences: '+query,()=>{assert.equal(identityMatches(title,ident({name:query})),true);});
 for(const title of ['Example WH1000XM4 headphones black','Example WH1000XM5B headphones black','Example WH1000XM5 headphones white'])test('typed technical-code formatting never changes model or colour: '+title,()=>{assert.equal(identityMatches(title,ident({name:'Example WH-1000XM5 black'})),false);});
 test('technical-code formatting retains generation identity',()=>{assert.equal(identityMatches('Example FX82ZA Plus III calculator',ident({name:'Example FX-82ZA Plus II calculator'})),false);});
+
+test('whole-vehicle retailer suggestions do not recommend an unrelated manufacturer',async t=>{
+ t.mock.method(globalThis,'fetch',async()=>new Response('<rss><channel></channel></rss>'));let data;
+ await commerce({method:'POST',body:{identification:{name:'Toyota Corolla Cross 1.8 Xi'}}},{setHeader(){},status(){return this},json(value){data=value;return this;}});
+ assert.ok(data.retailerStatus.some(r=>r.name==='AutoTrader'));assert.ok(!data.retailerStatus.some(r=>/Ford/i.test(r.name)));
+});

@@ -1,0 +1,200 @@
+{
+  "checkedAt": "2026-10-31T16:59:17.097Z",
+  "version": {
+    "commit": "6c80d4817aa390cff361eeb453c29e29c7a7daa5",
+    "platform": "cloudflare"
+  },
+  "endVersion": {
+    "commit": "6c80d4817aa390cff361eeb453c29e29c7a7daa5",
+    "platform": "cloudflare"
+  },
+  "versionStable": true,
+  "results": [
+    {
+      "category": "car",
+      "query": "Toyota Corolla Cross 1.8 Xi",
+      "status": "failed",
+      "offers": [],
+      "researched": false,
+      "error": null
+    },
+    {
+      "category": "mouse",
+      "query": "Logitech G502 HERO mouse",
+      "status": "passed",
+      "offers": [
+        {
+          "product_name": "Logitech G502 Hero Lightspeed Wired Gaming Mouse 910-005471",
+          "product_url": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225",
+          "price": 699,
+          "currency": "ZAR"
+        }
+      ],
+      "researched": true,
+      "error": null
+    },
+    {
+      "category": "gym",
+      "query": "Concept2 RowErg rowing machine",
+      "status": "failed",
+      "offers": [
+        {
+          "product_name": "Amazon.com : Concept2 RowErg Indoor Rowing Machine - PM5 Monitor, Device Holder, Adjustable Air Resistance, Easy Storage : Sports &amp; Outdoors",
+          "product_url": "https://www.amazon.com/Concept2-RowErg-Indoor-Rowing-Machine/dp/B00OUGNUO8",
+          "price": null,
+          "currency": null
+        },
+        {
+          "product_name": "Amazon.com: Concept2 RowErg Model D Indoor Rowing Machine with PM5 Monitor, Device Holder, Adjustable Air Resistance, Easy Storage (Gray) : Sports &amp; Outdoors",
+          "product_url": "https://www.amazon.com/Concept2-Machine-Monitor-Adjustable-Resistance/dp/B097C61Z5P",
+          "price": null,
+          "currency": null
+        },
+        {
+          "product_name": "Black Concept2 RowErg Rower - PM5 with Tall Legs",
+          "product_url": "https://www.roguefitness.com/black-concept-2-rowerg-rower-pm5-black",
+          "price": 1155,
+          "currency": "USD"
+        },
+        {
+          "product_name": "Concept2 RowErg Indoor Rower w/PM5 Console (New)",
+          "product_url": "https://www.fitnesssuperstore.com/products/concept2-rowerg-indoor-rower-w-pm5-console-new",
+          "price": 1200,
+          "currency": "USD"
+        },
+        {
+          "product_name": "Concept2 RowErg Rowing Machine",
+          "product_url": "https://www.concept2.com/ergs/rowerg",
+          "price": null,
+          "currency": null
+        }
+      ],
+      "researched": true,
+      "error": null
+    },
+    {
+      "category": "mousepad",
+      "query": "SteelSeries QcK Heavy Large mouse pad",
+      "status": "passed",
+      "offers": [
+        {
+          "product_name": "SteelSeries QcK Heavy Gaming Mouse Pad - L White SS-63480",
+          "product_url": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-white-ss-63480-407887?_pos=2&_sid=7c57701d3&_ss=r",
+          "price": 1199,
+          "currency": "ZAR"
+        },
+        {
+          "product_name": "SteelSeries QcK Heavy Gaming Mouse Pad - L Magenta SS-63479",
+          "product_url": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-magenta-ss-63479-407886?_pos=4&_sid=7c57701d3&_ss=r",
+          "price": 1199,
+          "currency": "ZAR"
+        }
+      ],
+      "researched": true,
+      "error": null
+    },
+    {
+      "category": "headphones",
+      "query": "Sony WH-1000XM5 black",
+      "status": "failed",
+      "offers": [],
+      "researched": false,
+      "error": null
+    },
+    {
+      "category": "medical-device",
+      "query": "Omron M2 Basic upper arm blood pressure monitor",
+      "status": "failed",
+      "offers": [],
+      "researched": false,
+      "error": null
+    },
+    {
+      "category": "keyboard",
+      "query": "Keychron K2 wireless mechanical keyboard",
+      "status": "failed",
+      "offers": [],
+      "researched": false,
+      "error": null
+    },
+    {
+      "category": "appliance",
+      "query": "Philips NA230/00 air fryer",
+      "status": "failed",
+      "offers": [],
+      "researched": false,
+      "error": null
+    },
+    {
+      "category": "medical-device",
+      "query": "Accu-Chek Instant blood glucose meter",
+      "status": "failed",
+      "offers": [],
+      "researched": false,
+      "error": null
+    },
+    {
+      "category": "printer",
+      "query": "HP DeskJet 2820 All-in-One printer",
+      "status": "failed",
+      "offers": [],
+      "researched": false,
+      "error": null
+    },
+    {
+      "category": "pet",
+      "query": "Royal Canin Mini Adult dog food 2kg",
+      "status": "failed",
+      "offers": [],
+      "researched": false,
+      "error": null
+    },
+    {
+      "category": "garden",
+      "query": "Gardena Classic pruning shears",
+      "status": "failed",
+      "offers": [],
+      "researched": false,
+      "error": null
+    },
+    {
+      "category": "lighting",
+      "query": "Philips Hue White E27 bulb",
+      "status": "failed",
+      "offers": [],
+      "researched": false,
+      "error": null
+    },
+    {
+      "category": "stationery",
+      "query": "Casio fx-82ZA Plus II calculator",
+      "status": "failed",
+      "offers": [],
+      "researched": false,
+      "error": null
+    },
+    {
+      "category": "camera",
+      "query": "Canon EOS R50 camera body",
+      "status": "passed",
+      "offers": [
+        {
+          "product_name": "Canon EOS R50 Mirrorless Camera Body",
+          "product_url": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body?_pos=1&_sid=dd78e5975&_ss=r",
+          "price": 14895,
+          "currency": "ZAR"
+        }
+      ],
+      "researched": true,
+      "error": null
+    },
+    {
+      "category": "bag",
+      "query": "JanSport SuperBreak Plus backpack",
+      "status": "failed",
+      "offers": [],
+      "researched": false,
+      "error": null
+    }
+  ]
+}
