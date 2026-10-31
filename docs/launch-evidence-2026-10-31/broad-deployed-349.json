@@ -1,0 +1,659 @@
+{
+  "unfamiliar": {
+    "checkedAt": "2026-10-31T16:47:48.233Z",
+    "version": {
+      "commit": "1743f167f2f419ded61c9ad638311137e14a2405",
+      "platform": "cloudflare"
+    },
+    "endVersion": {
+      "commit": "1743f167f2f419ded61c9ad638311137e14a2405",
+      "platform": "cloudflare"
+    },
+    "versionStable": true,
+    "results": [
+      {
+        "category": "car",
+        "query": "Toyota Corolla Cross 1.8 Xi",
+        "status": "failed",
+        "offers": [],
+        "researched": false,
+        "sourceChecks": [],
+        "error": null
+      },
+      {
+        "category": "mouse",
+        "query": "Logitech G502 HERO mouse",
+        "status": "passed",
+        "offers": [
+          {
+            "product_name": "Logitech G502 Hero Lightspeed Wired Gaming Mouse 910-005471",
+            "product_url": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225",
+            "price": 699,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "exactProductMatch": true,
+            "branchStockVerified": false
+          }
+        ],
+        "researched": true,
+        "sourceChecks": [
+          {
+            "url": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225",
+            "status": "product-facts-verified"
+          }
+        ],
+        "error": null
+      },
+      {
+        "category": "gym",
+        "query": "Concept2 RowErg rowing machine",
+        "status": "failed",
+        "offers": [
+          {
+            "product_name": "Amazon.com : Concept2 RowErg Indoor Rowing Machine - PM5 Monitor, Device Holder, Adjustable Air Resistance, Easy Storage : Sports &amp; Outdoors",
+            "product_url": "https://www.amazon.com/Concept2-RowErg-Indoor-Rowing-Machine/dp/B00OUGNUO8",
+            "price": null,
+            "currency": null,
+            "availability": null,
+            "exactProductMatch": true,
+            "branchStockVerified": false
+          },
+          {
+            "product_name": "Amazon.com: Concept2 RowErg Model D Indoor Rowing Machine with PM5 Monitor, Device Holder, Adjustable Air Resistance, Easy Storage (Gray) : Sports &amp; Outdoors",
+            "product_url": "https://www.amazon.com/Concept2-Machine-Monitor-Adjustable-Resistance/dp/B097C61Z5P",
+            "price": null,
+            "currency": null,
+            "availability": null,
+            "exactProductMatch": true,
+            "branchStockVerified": false
+          },
+          {
+            "product_name": "Black Concept2 RowErg Rower - PM5 with Tall Legs",
+            "product_url": "https://www.roguefitness.com/black-concept-2-rowerg-rower-pm5-black",
+            "price": 1155,
+            "currency": "USD",
+            "availability": "in_stock",
+            "exactProductMatch": true,
+            "branchStockVerified": false
+          },
+          {
+            "product_name": "Concept2 RowErg Indoor Rower w/PM5 Console (New)",
+            "product_url": "https://www.fitnesssuperstore.com/products/concept2-rowerg-indoor-rower-w-pm5-console-new",
+            "price": 1200,
+            "currency": "USD",
+            "availability": "in_stock",
+            "exactProductMatch": true,
+            "branchStockVerified": false
+          },
+          {
+            "product_name": "Black Concept2 RowErg Rower - PM5 - 10-Pack",
+            "product_url": "https://www.roguefitness.com/black-concept-2-rowerg-rower-pm5-10-pack",
+            "price": 9900,
+            "currency": "USD",
+            "availability": "in_stock",
+            "exactProductMatch": true,
+            "branchStockVerified": false
+          },
+          {
+            "product_name": "Concept2 RowErg Rowing Machine",
+            "product_url": "https://www.concept2.com/ergs/rowerg",
+            "price": null,
+            "currency": null,
+            "availability": null,
+            "exactProductMatch": true,
+            "branchStockVerified": false
+          }
+        ],
+        "researched": true,
+        "sourceChecks": [
+          {
+            "url": "https://www.roguefitness.com/black-concept-2-rowerg-rower-pm5-black",
+            "status": "product-facts-verified"
+          },
+          {
+            "url": "https://www.fitnesssuperstore.com/products/concept2-rowerg-indoor-rower-w-pm5-console-new",
+            "status": "product-facts-verified"
+          },
+          {
+            "url": "https://www.amazon.com/Concept2-RowErg-Indoor-Rowing-Machine/dp/B00OUGNUO8",
+            "status": "product-facts-verified"
+          },
+          {
+            "url": "https://www.amazon.com/Concept2-Machine-Monitor-Adjustable-Resistance/dp/B097C61Z5P",
+            "status": "product-facts-verified"
+          }
+        ],
+        "error": null
+      },
+      {
+        "category": "mousepad",
+        "query": "SteelSeries QcK Heavy Large mouse pad",
+        "status": "passed",
+        "offers": [
+          {
+            "product_name": "SteelSeries QcK Heavy Gaming Mouse Pad - L White SS-63480",
+            "product_url": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-white-ss-63480-407887?_pos=1&_sid=b9dd70960&_ss=r",
+            "price": 1199,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "exactProductMatch": true,
+            "branchStockVerified": false
+          },
+          {
+            "product_name": "SteelSeries QcK Heavy Gaming Mouse Pad - L Magenta SS-63479",
+            "product_url": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-magenta-ss-63479-407886?_pos=3&_sid=b9dd70960&_ss=r",
+            "price": 1199,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "exactProductMatch": true,
+            "branchStockVerified": false
+          }
+        ],
+        "researched": true,
+        "sourceChecks": [
+          {
+            "url": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-white-ss-63480-407887?_pos=1&_sid=b9dd70960&_ss=r",
+            "status": "product-facts-verified"
+          },
+          {
+            "url": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-magenta-ss-63479-407886?_pos=3&_sid=b9dd70960&_ss=r",
+            "status": "product-facts-verified"
+          }
+        ],
+        "error": null
+      },
+      {
+        "category": "keyboard",
+        "query": "Keychron K2 wireless mechanical keyboard",
+        "status": "failed",
+        "offers": [],
+        "researched": false,
+        "sourceChecks": [],
+        "error": null
+      },
+      {
+        "category": "headphones",
+        "query": "Sony WH-1000XM5 black",
+        "status": "failed",
+        "offers": [],
+        "researched": false,
+        "sourceChecks": [],
+        "error": null
+      },
+      {
+        "category": "medical-device",
+        "query": "Accu-Chek Instant blood glucose meter",
+        "status": "failed",
+        "offers": [],
+        "researched": false,
+        "sourceChecks": [
+          {
+            "url": "https://clicks.co.za/clicks_biomine-blood-glucose-monitoring-system/p/269476",
+            "status": "identity-mismatch"
+          },
+          {
+            "url": "https://clicks.co.za/accu-check_instant-meter/p/291471",
+            "status": "identity-mismatch"
+          },
+          {
+            "url": "https://clicks.co.za/clicks_blood-glucose-lancets-50-lancets/p/327404",
+            "status": "identity-mismatch"
+          },
+          {
+            "url": "https://clicks.co.za/accu-check_active-blood-glucose-monitoring-system/p/129543",
+            "status": "identity-mismatch"
+          }
+        ],
+        "error": null
+      },
+      {
+        "category": "medical-device",
+        "query": "Omron M2 Basic upper arm blood pressure monitor",
+        "status": "failed",
+        "offers": [],
+        "researched": false,
+        "sourceChecks": [
+          {
+            "url": "https://clicks.co.za/clicks_clicks-upper-arm-blood-pressure-monitor/p/300481",
+            "status": "identity-mismatch"
+          },
+          {
+            "url": "https://clicks.co.za/braun_bua4050-exactfit-2-upper-arm-blood-pressure-monitor/p/394321",
+            "status": "identity-mismatch"
+          },
+          {
+            "url": "https://clicks.co.za/braun_bua6150-upper-arm-blood-pressure-monitor/p/323839",
+            "status": "identity-mismatch"
+          },
+          {
+            "url": "https://clicks.co.za/braun_exactfit-5-connect-upper-arm-blood-pressure-monitor/p/352470",
+            "status": "identity-mismatch"
+          }
+        ],
+        "error": null
+      },
+      {
+        "category": "appliance",
+        "query": "Philips NA230/00 air fryer",
+        "status": "failed",
+        "offers": [],
+        "researched": false,
+        "sourceChecks": [],
+        "error": null
+      },
+      {
+        "category": "printer",
+        "query": "HP DeskJet 2820 All-in-One printer",
+        "status": "failed",
+        "offers": [],
+        "researched": false,
+        "sourceChecks": [],
+        "error": null
+      },
+      {
+        "category": "pet",
+        "query": "Royal Canin Mini Adult dog food 2kg",
+        "status": "failed",
+        "offers": [],
+        "researched": false,
+        "sourceChecks": [],
+        "error": null
+      },
+      {
+        "category": "garden",
+        "query": "Gardena Classic pruning shears",
+        "status": "failed",
+        "offers": [],
+        "researched": false,
+        "sourceChecks": [],
+        "error": null
+      },
+      {
+        "category": "lighting",
+        "query": "Philips Hue White E27 bulb",
+        "status": "failed",
+        "offers": [],
+        "researched": false,
+        "sourceChecks": [],
+        "error": null
+      },
+      {
+        "category": "stationery",
+        "query": "Casio fx-82ZA Plus II calculator",
+        "status": "failed",
+        "offers": [],
+        "researched": false,
+        "sourceChecks": [
+          {
+            "url": "https://www.waltons.co.za/buy/casio-plus-new-generation-scientific-calculator-fx82za-plus-ll-each",
+            "status": "identity-mismatch"
+          },
+          {
+            "url": "https://www.waltons.co.za/buy/casio-calculator-scientific-fx-991za",
+            "status": "identity-mismatch"
+          },
+          {
+            "url": "https://www.waltons.co.za/buy/casio-plus-new-generation-scientific-calculator-pink-fx82za-plus-ll-each",
+            "status": "identity-mismatch"
+          },
+          {
+            "url": "https://www.waltons.co.za/buy/casio-plus-new-generation-scientific-calculator-blue-fx82za-plus-ll-each",
+            "status": "identity-mismatch"
+          }
+        ],
+        "error": null
+      },
+      {
+        "category": "camera",
+        "query": "Canon EOS R50 camera body",
+        "status": "passed",
+        "offers": [
+          {
+            "product_name": "Canon EOS R50 Mirrorless Camera Body",
+            "product_url": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body?_pos=1&_sid=1ec558a50&_ss=r",
+            "price": 14895,
+            "currency": "ZAR",
+            "availability": "out_of_stock",
+            "exactProductMatch": true,
+            "branchStockVerified": false
+          }
+        ],
+        "researched": true,
+        "sourceChecks": [
+          {
+            "url": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body?_pos=1&_sid=1ec558a50&_ss=r",
+            "status": "product-facts-verified"
+          }
+        ],
+        "error": null
+      },
+      {
+        "category": "bag",
+        "query": "JanSport SuperBreak Plus backpack",
+        "status": "failed",
+        "offers": [],
+        "researched": false,
+        "sourceChecks": [],
+        "error": null
+      }
+    ]
+  },
+  "established": {
+    "checkedAt": "2026-10-31T16:47:42.288Z",
+    "version": {
+      "commit": "1743f167f2f419ded61c9ad638311137e14a2405",
+      "platform": "cloudflare"
+    },
+    "endVersion": {
+      "commit": "1743f167f2f419ded61c9ad638311137e14a2405",
+      "platform": "cloudflare"
+    },
+    "versionStable": true,
+    "results": [
+      {
+        "category": "electronics",
+        "query": "Logitech PRO X Gaming Headset 981-000818",
+        "status": "passed",
+        "offers": [
+          {
+            "product_name": "Logitech PRO X Gaming Headset With BLUE VO!CE Microphone Technology",
+            "product_url": "https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology",
+            "price": 2299,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "exactProductMatch": true,
+            "branchStockVerified": false
+          },
+          {
+            "product_name": "Logitech Pro X Gaming Headset 981-000818",
+            "product_url": "https://www.firstshop.co.za/products/logitech-pro-x-gaming-headset-981-000818-100731",
+            "price": 2199,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "exactProductMatch": true,
+            "branchStockVerified": false
+          }
+        ],
+        "researched": true,
+        "sourceChecks": [
+          {
+            "url": "https://www.firstshop.co.za/products/logitech-pro-x-gaming-headset-981-000818-100731",
+            "status": "product-facts-verified"
+          },
+          {
+            "url": "https://computermania.co.za/products/new-logitech-pro-x-gaming-headset-with-blue-vo-ce-microphone-technology",
+            "status": "product-facts-verified"
+          }
+        ],
+        "error": null
+      },
+      {
+        "category": "groceries",
+        "query": "Coca-Cola Original Taste 2L",
+        "status": "failed",
+        "offers": [],
+        "researched": false,
+        "sourceChecks": [],
+        "error": null
+      },
+      {
+        "category": "clothing",
+        "query": "Levis 501 Original Jeans",
+        "status": "failed",
+        "offers": [
+          {
+            "product_name": "501\u00ae original za night hours za - blue Levi\u2019s\u00ae Jeans | Superbalist",
+            "product_url": "https://superbalist.com/men/jeans-pants-shorts/jeans/501-original-za-night-hours-za-blue/1130663?clickRef=search_listing&searchTerm=Levis+501+Original+Jeans",
+            "price": null,
+            "currency": null,
+            "availability": null,
+            "exactProductMatch": true,
+            "branchStockVerified": false
+          },
+          {
+            "product_name": "LEVI'S\u00ae MEN'S 501\u00ae ORIGINAL JEANS - DARK INDIGO - FLAT FINISH",
+            "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-flat-finish",
+            "price": 1199,
+            "currency": "ZAR",
+            "availability": null,
+            "exactProductMatch": true,
+            "branchStockVerified": false
+          },
+          {
+            "product_name": "LEVI'S\u00ae MEN'S 501\u00ae ORIGINAL JEANS - DARK INDIGO - WORN IN",
+            "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-worn-in",
+            "price": 1199,
+            "currency": "ZAR",
+            "availability": null,
+            "exactProductMatch": true,
+            "branchStockVerified": false
+          },
+          {
+            "product_name": "LEVI'S\u00ae MEN'S 501\u00ae ORIGINAL JEANS - DARK INDIGO - FLAT FINISH",
+            "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-flat-finish-1",
+            "price": 1199,
+            "currency": "ZAR",
+            "availability": null,
+            "exactProductMatch": true,
+            "branchStockVerified": false
+          },
+          {
+            "product_name": "LEVI'S\u00ae MEN'S 501\u00ae ORIGINAL JEANS - GREY",
+            "product_url": "https://www.levi.co.za/products/levis-r-mens-501-r-original-jeans-grey-1",
+            "price": 1299,
+            "currency": "ZAR",
+            "availability": null,
+            "exactProductMatch": true,
+            "branchStockVerified": false
+          },
+          {
+            "product_name": "LEVI'S\u00ae MEN'S 501\u00ae ORIGINAL JEANS - MEDIUM WASH",
+            "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2",
+            "price": 1299,
+            "currency": "ZAR",
+            "availability": null,
+            "exactProductMatch": true,
+            "branchStockVerified": false
+          },
+          {
+            "product_name": "LEVI'S\u00ae MEN'S 501\u00ae ORIGINAL JEANS - MED INDIGO - WORN IN",
+            "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-med-indigo-worn-in",
+            "price": 1299,
+            "currency": "ZAR",
+            "availability": null,
+            "exactProductMatch": true,
+            "branchStockVerified": false
+          },
+          {
+            "product_name": "LEVI'S\u00ae MEN'S 501\u00ae ORIGINAL JEANS - GREY",
+            "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-grey-1",
+            "price": 1299,
+            "currency": "ZAR",
+            "availability": null,
+            "exactProductMatch": true,
+            "branchStockVerified": false
+          },
+          {
+            "product_name": "LEVI'S\u00ae MEN'S 501\u00ae ORIGINAL JEANS - BROWN",
+            "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown",
+            "price": 1399,
+            "currency": "ZAR",
+            "availability": null,
+            "exactProductMatch": true,
+            "branchStockVerified": false
+          }
+        ],
+        "researched": true,
+        "sourceChecks": [
+          {
+            "url": "https://superbalist.com/men/jeans-pants-shorts/jeans/501-original-za-night-hours-za-blue/1130663?clickRef=search_listing&searchTerm=Levis+501+Original+Jeans",
+            "status": "product-facts-verified"
+          },
+          {
+            "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-worn-in",
+            "status": "product-facts-verified"
+          },
+          {
+            "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-flat-finish",
+            "status": "product-facts-verified"
+          },
+          {
+            "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-dark-indigo-flat-finish-1",
+            "status": "product-facts-verified"
+          }
+        ],
+        "error": null
+      },
+      {
+        "category": "beauty",
+        "query": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
+        "status": "passed",
+        "offers": [
+          {
+            "product_name": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner 250ml",
+            "product_url": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689",
+            "price": 230,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "exactProductMatch": true,
+            "branchStockVerified": false
+          }
+        ],
+        "researched": true,
+        "sourceChecks": [
+          {
+            "url": "https://www.dischem.co.za/marc-anthony-3x-moist-conditioner-250ml-818",
+            "status": "http-error",
+            "httpStatus": 403
+          },
+          {
+            "url": "https://www.takealot.com/marc-anthony-strictly-curls-3xmoisture-nourishing-curl-condition/PLID72198666",
+            "status": "identity-mismatch"
+          },
+          {
+            "url": "https://clicks.co.za/marc-anthony_3x-moisture-conditioner-250-ml/p/335689",
+            "status": "product-facts-verified"
+          }
+        ],
+        "error": null
+      },
+      {
+        "category": "shoes",
+        "query": "Nike Air Force 1 Low White Blue",
+        "status": "failed",
+        "offers": [],
+        "researched": false,
+        "sourceChecks": [
+          {
+            "url": "https://bash.com/nike-kids-air-force-1-low-lace-white-sneaker-060601ahbi0/p",
+            "status": "identity-mismatch"
+          },
+          {
+            "url": "https://bash.com/nike-men-s-air-force-1-white-blue-sneaker-060601ahxd9/p",
+            "status": "identity-mismatch"
+          },
+          {
+            "url": "https://bash.com/nike-junior-air-force-1-low-grey-work-blue-sneaker-060601ahpl9/p",
+            "status": "identity-mismatch"
+          },
+          {
+            "url": "https://bash.com/mens-nike-white-air-force-1-07-lv8-cd-060602abyo6/p",
+            "status": "identity-mismatch"
+          }
+        ],
+        "error": null
+      },
+      {
+        "category": "tools",
+        "query": "Bosch GSB 18V-50",
+        "status": "failed",
+        "offers": [],
+        "researched": true,
+        "sourceChecks": [
+          {
+            "url": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger",
+            "status": "product-facts-verified"
+          }
+        ],
+        "error": null
+      },
+      {
+        "category": "furniture",
+        "query": "IKEA BILLY bookcase 80x28x202 white",
+        "status": "failed",
+        "offers": [],
+        "researched": false,
+        "sourceChecks": [],
+        "error": null
+      },
+      {
+        "category": "toys",
+        "query": "LEGO Classic 10696",
+        "status": "passed",
+        "offers": [
+          {
+            "product_name": "10696 | LEGO\u00ae Classic Medium Creative Brick Box",
+            "product_url": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696",
+            "price": 559,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "exactProductMatch": true,
+            "branchStockVerified": false
+          }
+        ],
+        "researched": true,
+        "sourceChecks": [
+          {
+            "url": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696",
+            "status": "product-facts-verified"
+          }
+        ],
+        "error": null
+      },
+      {
+        "category": "household",
+        "query": "Twinsaver Comfort 3 Ply Tissues 120",
+        "status": "failed",
+        "offers": [],
+        "researched": false,
+        "sourceChecks": [],
+        "error": null
+      },
+      {
+        "category": "music",
+        "query": "Shure MV7+ microphone",
+        "status": "passed",
+        "offers": [
+          {
+            "product_name": "Shure MV7+ Hybrid Podcast Microphone \u2013 Black",
+            "product_url": "https://bothners.co.za/shop/microphones-and-wireless/shure-mv7-hybrid-podcast-microphone-black/",
+            "price": 7095,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "exactProductMatch": true,
+            "branchStockVerified": false
+          }
+        ],
+        "researched": true,
+        "sourceChecks": [
+          {
+            "url": "https://www.shure.com/en-US/docs/guide/MV7",
+            "status": "http-error",
+            "resource": "manufacturer-document",
+            "stage": "metadata",
+            "httpStatus": 403
+          },
+          {
+            "url": "https://www.shure.com/en-US/docs/guide/MV7",
+            "status": "identity-mismatch"
+          },
+          {
+            "url": "https://bothners.co.za/shop/microphones-and-wireless/shure-mv7-hybrid-podcast-microphone-black/",
+            "status": "product-facts-verified"
+          }
+        ],
+        "error": null
+      }
+    ]
+  }
+}

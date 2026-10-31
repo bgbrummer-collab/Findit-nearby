@@ -1,6 +1,6 @@
 import test from 'node:test';import assert from 'node:assert/strict';
 import {specializedProductFamily,specializedShopTags} from '../lib/specialized-product-routing.js';
-import {productFamily,productVariantConflict,ident,verify} from '../lib/product-intelligence-core.js';
+import {productFamily,productVariantConflict,identityMatches,ident,verify} from '../lib/product-intelligence-core.js';
 import {reconcileVision} from '../lib/vision-consensus.js';
 import worker from '../cloudflare/worker.js';
 for(const [name,family,tags]of [['Example upper arm blood pressure monitor','medical',['medical_supply','chemist']],['Example rowing machine','fitness',['sports']],['Toyota Corolla Cross 1.8 Xi','vehicle',['car']]])test('one category decision drives product and nearby routing: '+name,async t=>{
@@ -50,3 +50,17 @@ test('typed model spacing and object synonyms do not hide an otherwise exact pub
 
 for(const title of ['Example Q42 mouse pad XXL','Example Q42 mouse pad XL','Example Q42 mouse pad Small','Example Q42 mouse pad M'])test('named purchase size rejects incompatible pad: '+title,()=>{assert.equal(productVariantConflict(title,ident({name:'Example Q42 Large mouse pad'})),true);});
 for(const title of ['Example Q42 mouse pad L','Example Q42 Large mouse pad'])test('named purchase size preserves equivalent large pad: '+title,()=>{assert.equal(productVariantConflict(title,ident({name:'Example Q42 Large mouse pad'})),false);});
+
+for(const title of ['Example EX42 rower 10 Pack','Example EX42 rower pack of 10','Example EX42 rower set of 2','Example EX42 rower 4-piece'])test('single product rejects an unrequested multi-unit purchase: '+title,()=>{assert.equal(productVariantConflict(title,ident({name:'Example EX42 rower'})),true);});
+test('matching explicit purchase quantity remains valid',()=>{assert.equal(productVariantConflict('Example EX42 rower pack of 10',ident({name:'Example EX42 rower 10 pack'})),false);});
+
+test('gym equipment retains official sports branches when map providers fail',async t=>{
+ const row={id:712,status:'active',title:'Example Mall',lat:-25.75,lng:28.23,contact_number:'012 123 4567',street_address:'Shop 2 Example Mall',city:'Pretoria',trading_hours:{Monday:'9:00 to 18:00'}};
+ t.mock.method(globalThis,'fetch',async url=>String(url)==='https://www.sportsmanswarehouse.co.za/store-locator/'?new Response("<store-selector :stores='"+JSON.stringify([row])+"'>"):new Response('',{status:503}));
+ const d=await(await worker.fetch(new Request('https://findit.test/api/nearby',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({lat:-25.75,lon:28.23,identification:{name:'Example rowing machine'}})}),{})).json();
+ assert.equal(d.stores.length,1);assert.equal(d.stores[0].name,'Sportsmans Warehouse Example Mall');assert.equal(d.stores[0].phone,'012 123 4567');assert.equal(d.stores[0].source,'Official retailer locator');assert.equal(d.stores[0].branchStockVerified,false);assert.equal(d.stores[0].exactProductMatch,false);assert.equal(d.discoveryAvailable,true);
+});
+
+for(const [query,title]of [['Example WH-1000XM5 black','Example WH1000XM5 headphones black'],['Example FX-82ZA Plus II calculator','Example FX82ZA Plus II calculator'],['Example MF-752Cdw printer','Example MF752Cdw printer']])test('typed technical code accepts punctuation-only differences: '+query,()=>{assert.equal(identityMatches(title,ident({name:query})),true);});
+for(const title of ['Example WH1000XM4 headphones black','Example WH1000XM5B headphones black','Example WH1000XM5 headphones white'])test('typed technical-code formatting never changes model or colour: '+title,()=>{assert.equal(identityMatches(title,ident({name:'Example WH-1000XM5 black'})),false);});
+test('technical-code formatting retains generation identity',()=>{assert.equal(identityMatches('Example FX82ZA Plus III calculator',ident({name:'Example FX-82ZA Plus II calculator'})),false);});
