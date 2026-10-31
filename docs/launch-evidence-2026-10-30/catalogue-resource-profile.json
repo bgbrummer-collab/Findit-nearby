@@ -1,0 +1,25 @@
+{
+  "scope": "Local Node benchmark of native retailer URL discovery with the same captured live catalogue; not a Cloudflare CPU guarantee.",
+  "inputSha256": "2a7ad2bbfd202ea8010f38b4d36107ac8c83148727e833337af6cb206db15232",
+  "inputCharacters": 1021570,
+  "iterations": 10,
+  "candidateUrlsUnchanged": true,
+  "candidateCount": 8,
+  "before": {
+    "wallMs": 341.459474,
+    "userCpuMicroseconds": 343670,
+    "systemCpuMicroseconds": 22657
+  },
+  "after": {
+    "wallMs": 166.899454,
+    "userCpuMicroseconds": 181982,
+    "systemCpuMicroseconds": 26754
+  },
+  "observedLiveFailure": {
+    "endpoint": "/api/product-intelligence-v2",
+    "status": 503,
+    "body": "error code: 1102",
+    "journey": "Explicitly confirming the source-verified conditioner candidate"
+  },
+  "limits": "The live error was intermittent. Both name-only and branded product-insights API retests later succeeded. Post-deployment source and full browser journey retesting is required."
+}

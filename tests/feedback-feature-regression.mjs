@@ -5,6 +5,7 @@ const browser=await chromium.launch({headless:true});
 const page=await browser.newPage({viewport:{width:1440,height:900}});
 page.setDefaultTimeout(30000);
 const posts=[];let deliveryFails=false;
+const pageErrors=[];page.on("pageerror",error=>pageErrors.push(error.message));
 await page.route('**/api/feedback',async route=>{
   const req=route.request();
   let body={};
@@ -43,8 +44,12 @@ await page.fill('#fxFeatureTitle','Store opening-hours filter');
 await page.fill('#fxFeatureDetails','Let me only show nearby stores that are open when I want to go shopping.');
 await page.selectOption('#fxFeatureRating','5');
 await page.locator('#fxFeatureSuggestionForm button[type="submit"]').click();
-await page.waitForFunction(()=>window.__finditFeaturePostCount=(window.__finditFeaturePostCount||0)+0||/Feature suggestion sent/i.test(document.querySelector('#fxFeatureStatus')?.textContent||''),null,{timeout:30000}).catch(()=>{});
-await page.waitForFunction(()=>document.querySelector('#fxFeatureStatus')?.dataset.sent==='1'||/Feature suggestion sent/i.test(document.querySelector('#fxFeatureStatus')?.textContent||''),null,{timeout:10000});
+try{
+ await page.waitForFunction(()=>document.querySelector('#fxFeatureStatus')?.dataset.sent==='1'||/Feature suggestion sent/i.test(document.querySelector('#fxFeatureStatus')?.textContent||''),null,{timeout:30000});
+}catch(error){
+ console.error('FEATURE_FAILURE_DIAGNOSTICS',JSON.stringify({posts,pageErrors,form:await page.locator('#fxFeatureSuggestionForm').evaluate(form=>({text:form.innerText,valid:form.checkValidity(),fields:[...form.elements].map(el=>({id:el.id,value:el.value,valid:el.validity?.valid,message:el.validationMessage}))}))}));
+ throw error;
+}
 if(posts.length<2)fail('Feature suggestion did not call the feedback endpoint');
 const idea=posts.at(-1);
 if(idea?.topic!=='idea')fail(`Feature suggestion used wrong topic: ${idea?.topic}`);

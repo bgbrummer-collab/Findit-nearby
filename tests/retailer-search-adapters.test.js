@@ -91,3 +91,10 @@ test('catalogue model fallback handles headset wording without dropping separate
  assert.ok(urls.includes(right));assert.ok(!urls.some(u=>/headset-blue|a43/.test(u)));assert.ok(requests.some(u=>new URL(u).searchParams.get('q')==='Example A42 headphones'));assert.ok(requests.some(u=>new URL(u).searchParams.get('q')==='Example A42'));
  requests.length=0;const wrongSize=await nativeRetailerUrls({...i,size:'XL'});assert.ok(!wrongSize.includes(right));
 });
+
+test('full HTML catalogue extraction retains later named anchors while excluding unrelated navigation',async t=>{
+ const name='Example Men Deep Anti-Perspirant 150ml',url='https://clicks.co.za/example_men-deep-150ml/p/123456';
+ const html='<!doctype html><html><body>'+Array.from({length:180},(_,n)=>'<a href="/navigation-'+n+'">Shop department</a>').join('')+'<a href="'+url+'"><img alt="'+name+'"></a>'+' '.repeat(100000)+'<a href="'+url+'">'+name+'</a></body></html>';
+ t.mock.method(globalThis,'fetch',async u=>new Response(String(u).includes('clicks.co.za/search?')?html:''));
+ const urls=await nativeRetailerUrls({name,brand:'Example',object:'deodorant',category:'beauty'},{maxSearchPages:2,readerFallback:false});assert.deepEqual(urls,[url]);
+});

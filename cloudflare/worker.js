@@ -188,7 +188,7 @@ async function handleProductInfo(request,preparedPages=null){
  if(!q)return json({researched:false,whatItDoes:'',pros:[],cons:[],sources:[]});
  if(i.requiresModelConfirmation){
   const candidates=await visualProductCandidates({...i,suggestedLabel:body.identification?.suggestedLabel||body.suggestedLabel||'',suggestedModels:body.identification?.suggestedModels||[],visualHypotheses:body.identification?.visualHypotheses||[],labelCandidates:body.identification?.labelCandidates||[]});
-  const possibleProducts=await Promise.all(candidates.map(async p=>{const response=await handleProductInfo(new Request('https://findit.internal/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:p.identity,offers:[{product_url:p.url,sourcePageVerified:true,exactProductMatch:true}]})}),new Map([[p.url,p.raw]]));const facts=await response.json();return {name:p.name,identity:p.identity,productUrl:p.url,photoMatchConfirmed:false,price:p.price,currency:p.currency,availability:p.availability,priceConditions:p.priceConditions,whatItDoes:facts.whatItDoes,pros:facts.pros,cons:facts.cons,specifications:facts.specifications,compatibility:facts.compatibility,includedItems:facts.includedItems,claimEvidence:facts.claimEvidence,quantityNote:p.quantityNote,hypothesisNote:p.hypothesisNote,sources:facts.sources};}));
+  const possibleProducts=await Promise.all(candidates.map(async p=>{const response=await handleProductInfo(new Request('https://findit.internal/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:p.identity,offers:[{product_url:p.url,sourcePageVerified:true,exactProductMatch:true}]})}),new Map([[p.url,p.raw]]));const facts=await response.json();return {name:p.name,identity:p.identity,productUrl:p.url,photoMatchConfirmed:false,price:p.price,currency:p.currency,availability:p.availability,priceConditions:p.priceConditions,researched:facts.researched===true,checkedAt:facts.checkedAt,whatItDoes:facts.whatItDoes,pros:facts.pros,cons:facts.cons,specifications:facts.specifications,compatibility:facts.compatibility,includedItems:facts.includedItems,claimEvidence:facts.claimEvidence,quantityNote:p.quantityNote,hypothesisNote:p.hypothesisNote,sources:facts.sources};}));
   return json({researched:false,identityScope:'product-family',whatItDoes:'',pros:[],cons:[],sources:[],possibleProducts,candidateChecks:candidates.checks||[],message:possibleProducts.length?'A retailer product matches the possible label reading. Check its name against your photo before confirming.':'Recognised '+i.name+'. Confirm the exact model or label for product-specific facts; no specifications have been guessed.'});
  }
  if(BLOCKED.test(q))return json({error:'Unsupported product type',researched:false,pros:[],cons:[],sources:[]},403);
@@ -231,11 +231,17 @@ async function handleProductInfo(request,preparedPages=null){
  return json({researched:Boolean(whatItDoes||specifications.length),whatItDoes,pros,cons,specifications,compatibility,claimEvidence,includedItems,variants,bestFor:'',standOut:'',valueVerdict:'',sources:evidence.map(p=>p.source),sourceChecks,researchMethod:'Fetched exact-product page descriptions',checkedAt:new Date().toISOString(),message:whatItDoes?'Product facts are quoted from matching product-page descriptions.':'No trustworthy exact-product description was found. FindIt will not guess.'});
 }
 
+const inFlightCommerce=new Map();
 async function handleRealProductIntelligence(request){
-  const url=new URL(request.url);
-  let body={};
-  if(request.method==='POST')body=await request.json().catch(()=>({}));
-  const query=Object.fromEntries(url.searchParams.entries());
+ const parsed=request.method==='POST'?await request.json().catch(()=>({})):{};
+ const body=parsed&&typeof parsed==='object'&&!Array.isArray(parsed)?parsed:{};
+ const query=Object.fromEntries(new URL(request.url).searchParams),input=request.method==='GET'?query:body;
+ const key=JSON.stringify([request.method,commerceIdent(input),input.lat??null,input.lon??input.lng??null,input.radius??input.radiusKm??null,input.country??null,request.headers.get('cf-ipcountry')]);
+ let job=inFlightCommerce.get(key);
+ if(!job){job=computeProductIntelligence(request,body,query);inFlightCommerce.set(key,job);}
+ try{return (await job).clone();}finally{if(inFlightCommerce.get(key)===job)inFlightCommerce.delete(key);}
+}
+async function computeProductIntelligence(request,body,query){
   let status=200,payload=null,headers={};
   const req={method:request.method,body,query,headers:Object.fromEntries(request.headers.entries())};
   const res={
