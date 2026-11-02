@@ -1,0 +1,3559 @@
+{
+  "checkedAt": "2026-11-02T12:05:54.500Z",
+  "base": "https://findit-nearby.bgbrummer.workers.dev/",
+  "version": {
+    "commit": "77da27cdcb04daa3f42a17b8b3f7755809dda1e6",
+    "platform": "cloudflare"
+  },
+  "endVersion": {
+    "commit": "77da27cdcb04daa3f42a17b8b3f7755809dda1e6",
+    "platform": "cloudflare"
+  },
+  "versionStable": true,
+  "results": [
+    {
+      "category": "car",
+      "query": "Toyota Corolla Cross 1.8 Xi",
+      "status": "failed",
+      "durationMs": 6369,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Toyota Corolla Cross 1.8 Xi",
+            "object": "Toyota Corolla Cross 1.8 Xi",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Toyota Corolla Cross 1.8 Xi",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "Toyota Corolla Cross 1.8 Xi",
+          "bestProduct": null,
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "AutoTrader",
+              "searchUrl": "https://www.autotrader.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Cars.co.za",
+              "searchUrl": "https://www.cars.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "WeBuyCars",
+              "searchUrl": "https://www.webuycars.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "AutoTrader",
+              "searchUrl": "https://www.autotrader.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Cars.co.za",
+              "searchUrl": "https://www.cars.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "WeBuyCars",
+              "searchUrl": "https://www.webuycars.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": null,
+          "checkedAt": "2026-11-02T12:05:08.520Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": null,
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "sourceChecks": [],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-02T12:05:08.727Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "mouse",
+      "query": "Logitech G502 HERO mouse",
+      "status": "passed",
+      "durationMs": 1377,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Logitech G502 HERO mouse",
+            "object": "Logitech G502 HERO mouse",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Logitech G502 HERO mouse",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": true,
+          "exactMatchVerified": true,
+          "searchQuery": "Logitech G502 HERO mouse",
+          "bestProduct": {
+            "name": "Logitech G502 Hero Lightspeed Wired Gaming Mouse 910-005471"
+          },
+          "bestPrice": {
+            "product_name": "Logitech G502 Hero Lightspeed Wired Gaming Mouse 910-005471",
+            "product_url": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225",
+            "sku": "910-005471",
+            "comparisonAttributes": {
+              "size": "",
+              "color": ""
+            },
+            "comparisonAmbiguous": false,
+            "retailer": {
+              "name": "FirstShop"
+            },
+            "price": 699,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "priceConditions": "",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 92,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-11-02T12:05:09.717Z",
+            "retailerDomain": "firstshop.co.za",
+            "trustedRetailerDomain": false
+          },
+          "priceComparisonIssue": null,
+          "priceComparisonNote": "",
+          "offers": [
+            {
+              "product_name": "Logitech G502 Hero Lightspeed Wired Gaming Mouse 910-005471",
+              "product_url": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225",
+              "sku": "910-005471",
+              "comparisonAttributes": {
+                "size": "",
+                "color": ""
+              },
+              "comparisonAmbiguous": false,
+              "retailer": {
+                "name": "FirstShop"
+              },
+              "price": 699,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-02T12:05:09.717Z",
+              "retailerDomain": "firstshop.co.za",
+              "trustedRetailerDomain": false
+            }
+          ],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "FirstShop",
+              "searchUrl": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "FirstShop",
+              "searchUrl": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 1,
+          "verifiedSellerCount": 1,
+          "inStockOfferCount": 1,
+          "priceVerifiedCount": 1,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Logitech%20G502%20HERO%20mouse",
+          "checkedAt": "2026-11-02T12:05:09.717Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": true,
+          "whatItDoes": "In addition to the core performance and personalization features, many details were thoughtfully engineered and designed.",
+          "pros": [
+            "Logitech G502 Hero Lightspeed Wired Gaming Mouse 910-005471.",
+            "Hero 16K Sensor.",
+            "With the fastest frame rate processing yet, HERO is capable of 400+ IPS across the 100 - 16,000 DPI range with zero smoothing, filtering or acceleration.",
+            "11 Programmable Buttons."
+          ],
+          "cons": [],
+          "specifications": [
+            {
+              "name": "Brand",
+              "value": "Logitech G",
+              "sourceUrl": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225"
+            },
+            {
+              "name": "Retailer product code",
+              "value": "910-005471",
+              "sourceAlsoListsAsMpn": true,
+              "sourceUrl": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225"
+            },
+            {
+              "name": "product_type",
+              "value": "Mice",
+              "sourceUrl": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225"
+            }
+          ],
+          "compatibility": [
+            "Device interface: USB Type-A."
+          ],
+          "claimEvidence": {
+            "whatItDoes": {
+              "text": "In addition to the core performance and personalization features, many details were thoughtfully engineered and designed.",
+              "sourceUrl": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225",
+              "sourceTitle": "Logitech G502 Hero Lightspeed Wired Gaming Mouse 910-005471"
+            },
+            "pros": [
+              {
+                "text": "Logitech G502 Hero Lightspeed Wired Gaming Mouse 910-005471.",
+                "sourceUrl": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225",
+                "sourceTitle": "Logitech G502 Hero Lightspeed Wired Gaming Mouse 910-005471"
+              },
+              {
+                "text": "Hero 16K Sensor.",
+                "sourceUrl": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225",
+                "sourceTitle": "Logitech G502 Hero Lightspeed Wired Gaming Mouse 910-005471"
+              },
+              {
+                "text": "With the fastest frame rate processing yet, HERO is capable of 400+ IPS across the 100 - 16,000 DPI range with zero smoothing, filtering or acceleration.",
+                "sourceUrl": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225",
+                "sourceTitle": "Logitech G502 Hero Lightspeed Wired Gaming Mouse 910-005471"
+              },
+              {
+                "text": "11 Programmable Buttons.",
+                "sourceUrl": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225",
+                "sourceTitle": "Logitech G502 Hero Lightspeed Wired Gaming Mouse 910-005471"
+              }
+            ],
+            "cons": [],
+            "compatibility": [
+              {
+                "text": "Device interface: USB Type-A.",
+                "sourceUrl": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225",
+                "sourceTitle": "Logitech G502 Hero Lightspeed Wired Gaming Mouse 910-005471"
+              }
+            ],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [
+            {
+              "title": "Logitech G502 Hero Lightspeed Wired Gaming Mouse 910-005471",
+              "url": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225"
+            }
+          ],
+          "sourceChecks": [
+            {
+              "url": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225",
+              "status": "product-facts-verified"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-02T12:05:10.084Z",
+          "message": "Product facts are quoted from matching product-page descriptions."
+        }
+      }
+    },
+    {
+      "category": "mousepad",
+      "query": "SteelSeries QcK Heavy Large mouse pad",
+      "status": "passed",
+      "durationMs": 3505,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "SteelSeries QcK Heavy Large mouse pad",
+            "object": "SteelSeries QcK Heavy Large mouse pad",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "SteelSeries QcK Heavy Large mouse pad",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": true,
+          "exactMatchVerified": true,
+          "searchQuery": "SteelSeries QcK Heavy Large mouse pad",
+          "bestProduct": {
+            "name": "SteelSeries QcK Heavy Gaming Mouse Pad - L White SS-63480"
+          },
+          "bestPrice": null,
+          "priceComparisonIssue": "variants",
+          "priceComparisonNote": "Listing variants, currencies or price conditions differ. Compare each listing separately.",
+          "offers": [
+            {
+              "product_name": "SteelSeries QcK Heavy Gaming Mouse Pad - L White SS-63480",
+              "product_url": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-white-ss-63480-407887?_pos=1&_sid=c236ab946&_ss=r",
+              "sku": "SS-63480",
+              "comparisonAttributes": {
+                "size": "",
+                "color": ""
+              },
+              "comparisonAmbiguous": false,
+              "retailer": {
+                "name": "FirstShop"
+              },
+              "price": 1199,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 80,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-02T12:05:11.265Z",
+              "retailerDomain": "firstshop.co.za",
+              "trustedRetailerDomain": false
+            },
+            {
+              "product_name": "SteelSeries QcK Heavy Gaming Mouse Pad - L Magenta SS-63479",
+              "product_url": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-magenta-ss-63479-407886?_pos=3&_sid=c236ab946&_ss=r",
+              "sku": "SS-63479",
+              "comparisonAttributes": {
+                "size": "",
+                "color": ""
+              },
+              "comparisonAmbiguous": false,
+              "retailer": {
+                "name": "FirstShop"
+              },
+              "price": 1199,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 80,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-02T12:05:11.286Z",
+              "retailerDomain": "firstshop.co.za",
+              "trustedRetailerDomain": false
+            }
+          ],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "FirstShop",
+              "searchUrl": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-white-ss-63480-407887?_pos=1&_sid=c236ab946&_ss=r",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "FirstShop",
+              "searchUrl": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-magenta-ss-63479-407886?_pos=3&_sid=c236ab946&_ss=r",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "FirstShop",
+              "searchUrl": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-white-ss-63480-407887?_pos=1&_sid=c236ab946&_ss=r",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "FirstShop",
+              "searchUrl": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-magenta-ss-63479-407886?_pos=3&_sid=c236ab946&_ss=r",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 2,
+          "verifiedSellerCount": 1,
+          "inStockOfferCount": 2,
+          "priceVerifiedCount": 2,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=SteelSeries%20QcK%20Heavy%20Large%20mouse%20pad",
+          "checkedAt": "2026-11-02T12:05:13.211Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": true,
+          "whatItDoes": "The SteelSeries QcK Heavy SS-63480 is a large gaming mouse pad designed to provide a stable, comfortable and consistent surface for precise mouse control.",
+          "pros": [
+            "SteelSeries QcK Heavy Gaming Mouse Pad - L White SS-63480.",
+            "Featuring SteelSeries' exclusive micro-woven cloth surface, an extra-thick 6mm non-slip rubber base and a spacious 450 x 400mm format, it delivers reliable tracking and added cushioning in a clean White finish.",
+            "Extra-thick 6mm construction.",
+            "Durable non-slip rubber base."
+          ],
+          "cons": [],
+          "specifications": [
+            {
+              "name": "Brand",
+              "value": "SteelSeries",
+              "sourceUrl": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-magenta-ss-63479-407886?_pos=3&_sid=c236ab946&_ss=r"
+            },
+            {
+              "name": "product_type",
+              "value": "Mouse Pads",
+              "sourceUrl": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-magenta-ss-63479-407886?_pos=3&_sid=c236ab946&_ss=r"
+            }
+          ],
+          "compatibility": [
+            "Sensor Compatibility."
+          ],
+          "claimEvidence": {
+            "whatItDoes": {
+              "text": "The SteelSeries QcK Heavy SS-63480 is a large gaming mouse pad designed to provide a stable, comfortable and consistent surface for precise mouse control.",
+              "sourceUrl": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-white-ss-63480-407887?_pos=1&_sid=c236ab946&_ss=r",
+              "sourceTitle": "SteelSeries QcK Heavy Gaming Mouse Pad - L White SS-63480"
+            },
+            "pros": [
+              {
+                "text": "SteelSeries QcK Heavy Gaming Mouse Pad - L White SS-63480.",
+                "sourceUrl": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-white-ss-63480-407887?_pos=1&_sid=c236ab946&_ss=r",
+                "sourceTitle": "SteelSeries QcK Heavy Gaming Mouse Pad - L White SS-63480"
+              },
+              {
+                "text": "Featuring SteelSeries' exclusive micro-woven cloth surface, an extra-thick 6mm non-slip rubber base and a spacious 450 x 400mm format, it delivers reliable tracking and added cushioning in a clean White finish.",
+                "sourceUrl": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-white-ss-63480-407887?_pos=1&_sid=c236ab946&_ss=r",
+                "sourceTitle": "SteelSeries QcK Heavy Gaming Mouse Pad - L White SS-63480"
+              },
+              {
+                "text": "Extra-thick 6mm construction.",
+                "sourceUrl": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-white-ss-63480-407887?_pos=1&_sid=c236ab946&_ss=r",
+                "sourceTitle": "SteelSeries QcK Heavy Gaming Mouse Pad - L White SS-63480"
+              },
+              {
+                "text": "Durable non-slip rubber base.",
+                "sourceUrl": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-white-ss-63480-407887?_pos=1&_sid=c236ab946&_ss=r",
+                "sourceTitle": "SteelSeries QcK Heavy Gaming Mouse Pad - L White SS-63480"
+              }
+            ],
+            "cons": [],
+            "compatibility": [
+              {
+                "text": "Sensor Compatibility.",
+                "sourceUrl": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-white-ss-63480-407887?_pos=1&_sid=c236ab946&_ss=r",
+                "sourceTitle": "SteelSeries QcK Heavy Gaming Mouse Pad - L White SS-63480"
+              }
+            ],
+            "includedItems": [
+              {
+                "text": "The mouse pad does not include RGB lighting or electronic components.",
+                "sourceUrl": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-white-ss-63480-407887?_pos=1&_sid=c236ab946&_ss=r",
+                "sourceTitle": "SteelSeries QcK Heavy Gaming Mouse Pad - L White SS-63480"
+              }
+            ]
+          },
+          "includedItems": [
+            "The mouse pad does not include RGB lighting or electronic components."
+          ],
+          "variants": [
+            {
+              "name": "SteelSeries QcK Heavy Gaming Mouse Pad - L White SS-63480",
+              "productUrl": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-white-ss-63480-407887?_pos=1&_sid=c236ab946&_ss=r",
+              "specifications": [
+                {
+                  "name": "Brand",
+                  "value": "SteelSeries"
+                },
+                {
+                  "name": "Retailer product code",
+                  "value": "SS-63480",
+                  "sourceAlsoListsAsMpn": true
+                },
+                {
+                  "name": "product_type",
+                  "value": "Mouse Pads"
+                }
+              ]
+            },
+            {
+              "name": "SteelSeries QcK Heavy Gaming Mouse Pad - L Magenta SS-63479",
+              "productUrl": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-magenta-ss-63479-407886?_pos=3&_sid=c236ab946&_ss=r",
+              "specifications": [
+                {
+                  "name": "Brand",
+                  "value": "SteelSeries"
+                },
+                {
+                  "name": "Retailer product code",
+                  "value": "SS-63479",
+                  "sourceAlsoListsAsMpn": true
+                },
+                {
+                  "name": "product_type",
+                  "value": "Mouse Pads"
+                }
+              ]
+            }
+          ],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [
+            {
+              "title": "SteelSeries QcK Heavy Gaming Mouse Pad - L White SS-63480",
+              "url": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-white-ss-63480-407887?_pos=1&_sid=c236ab946&_ss=r"
+            },
+            {
+              "title": "SteelSeries QcK Heavy Gaming Mouse Pad - L Magenta SS-63479",
+              "url": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-magenta-ss-63479-407886?_pos=3&_sid=c236ab946&_ss=r"
+            }
+          ],
+          "sourceChecks": [
+            {
+              "url": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-magenta-ss-63479-407886?_pos=3&_sid=c236ab946&_ss=r",
+              "status": "product-facts-verified"
+            },
+            {
+              "url": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-white-ss-63480-407887?_pos=1&_sid=c236ab946&_ss=r",
+              "status": "product-facts-verified"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-02T12:05:13.583Z",
+          "message": "Product facts are quoted from matching product-page descriptions."
+        }
+      }
+    },
+    {
+      "category": "gym",
+      "query": "Concept2 RowErg rowing machine",
+      "status": "failed",
+      "durationMs": 17844,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Concept2 RowErg rowing machine",
+            "object": "Concept2 RowErg rowing machine",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Concept2 RowErg rowing machine",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": true,
+          "exactMatchVerified": true,
+          "searchQuery": "Concept2 RowErg rowing machine",
+          "bestProduct": {
+            "name": "Amazon.com: Concept2 RowErg Model D Indoor Rowing Machine with PM5 Monitor, Device Holder, Adjustable Air Resistance, Easy Storage (Gray) : Sports & Outdoors"
+          },
+          "bestPrice": {
+            "product_name": "Black Concept2 RowErg Rower - PM5 with Tall Legs",
+            "product_url": "https://www.roguefitness.com/black-concept-2-rowerg-rower-pm5-black",
+            "sku": "C22775",
+            "comparisonAttributes": {
+              "size": "",
+              "color": "Black"
+            },
+            "comparisonAmbiguous": false,
+            "retailer": {
+              "name": "roguefitness.com"
+            },
+            "price": 1155,
+            "currency": "USD",
+            "availability": "in_stock",
+            "priceConditions": "",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 91,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-11-02T12:05:08.716Z",
+            "retailerDomain": "roguefitness.com",
+            "trustedRetailerDomain": false
+          },
+          "priceComparisonIssue": null,
+          "priceComparisonNote": "",
+          "offers": [
+            {
+              "product_name": "Amazon.com: Concept2 RowErg Model D Indoor Rowing Machine with PM5 Monitor, Device Holder, Adjustable Air Resistance, Easy Storage (Gray) : Sports & Outdoors",
+              "product_url": "https://www.amazon.com/Concept2-Machine-Monitor-Adjustable-Resistance/dp/B097C61Z5P",
+              "sku": "",
+              "comparisonAttributes": null,
+              "comparisonAmbiguous": false,
+              "retailer": {
+                "name": "Amazon"
+              },
+              "price": null,
+              "currency": null,
+              "availability": null,
+              "priceConditions": "",
+              "verified": false,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Exact retailer product page verified; price not published",
+              "matchScore": 91,
+              "stockScope": "not supplied",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-02T12:05:16.899Z",
+              "retailerDomain": "amazon.com",
+              "trustedRetailerDomain": true,
+              "branchPriceVerified": false
+            },
+            {
+              "product_name": "Amazon.com : Concept2 RowErg Indoor Rowing Machine - PM5 Monitor, Device Holder, Adjustable Air Resistance, Easy Storage : Sports &amp; Outdoors",
+              "product_url": "https://www.amazon.com/Concept2-RowErg-Indoor-Rowing-Machine/dp/B00OUGNUO8",
+              "sku": "",
+              "comparisonAttributes": null,
+              "comparisonAmbiguous": false,
+              "retailer": {
+                "name": "Amazon"
+              },
+              "price": null,
+              "currency": null,
+              "availability": null,
+              "priceConditions": "",
+              "verified": false,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Exact retailer product page verified; price not published",
+              "matchScore": 91,
+              "stockScope": "not supplied",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-02T12:05:09.963Z",
+              "retailerDomain": "amazon.com",
+              "trustedRetailerDomain": true,
+              "branchPriceVerified": false
+            },
+            {
+              "product_name": "Black Concept2 RowErg Rower - PM5 with Tall Legs",
+              "product_url": "https://www.roguefitness.com/black-concept-2-rowerg-rower-pm5-black",
+              "sku": "C22775",
+              "comparisonAttributes": {
+                "size": "",
+                "color": "Black"
+              },
+              "comparisonAmbiguous": false,
+              "retailer": {
+                "name": "roguefitness.com"
+              },
+              "price": 1155,
+              "currency": "USD",
+              "availability": "in_stock",
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 91,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-02T12:05:08.716Z",
+              "retailerDomain": "roguefitness.com",
+              "trustedRetailerDomain": false
+            },
+            {
+              "product_name": "Concept2 RowErg Rowing Machine",
+              "product_url": "https://www.concept2.com/ergs/rowerg",
+              "sku": "",
+              "comparisonAttributes": null,
+              "comparisonAmbiguous": false,
+              "retailer": {
+                "name": "concept2.com"
+              },
+              "price": null,
+              "currency": null,
+              "availability": null,
+              "priceConditions": "",
+              "verified": false,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Exact retailer product page verified; price not published",
+              "matchScore": 91,
+              "stockScope": "not supplied",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-02T12:05:08.775Z",
+              "retailerDomain": "concept2.com",
+              "trustedRetailerDomain": false,
+              "branchPriceVerified": false
+            }
+          ],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Amazon",
+              "searchUrl": "https://www.amazon.com/Concept2-Machine-Monitor-Adjustable-Resistance/dp/B097C61Z5P",
+              "exactProductMatch": true,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Amazon",
+              "searchUrl": "https://www.amazon.com/Concept2-RowErg-Indoor-Rowing-Machine/dp/B00OUGNUO8",
+              "exactProductMatch": true,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "roguefitness.com",
+              "searchUrl": "https://www.roguefitness.com/black-concept-2-rowerg-rower-pm5-black",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "concept2.com",
+              "searchUrl": "https://www.concept2.com/ergs/rowerg",
+              "exactProductMatch": true,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Fitness Network",
+              "searchUrl": "https://www.fitnessnetwork.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "MiFitness",
+              "searchUrl": "https://mifitness.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Amazon",
+              "searchUrl": "https://www.amazon.com/Concept2-Machine-Monitor-Adjustable-Resistance/dp/B097C61Z5P",
+              "exactProductMatch": true,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Amazon",
+              "searchUrl": "https://www.amazon.com/Concept2-RowErg-Indoor-Rowing-Machine/dp/B00OUGNUO8",
+              "exactProductMatch": true,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "roguefitness.com",
+              "searchUrl": "https://www.roguefitness.com/black-concept-2-rowerg-rower-pm5-black",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "concept2.com",
+              "searchUrl": "https://www.concept2.com/ergs/rowerg",
+              "exactProductMatch": true,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Fitness Network",
+              "searchUrl": "https://www.fitnessnetwork.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "MiFitness",
+              "searchUrl": "https://mifitness.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 4,
+          "verifiedSellerCount": 3,
+          "inStockOfferCount": 1,
+          "priceVerifiedCount": 1,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Concept2%20RowErg%20rowing%20machine",
+          "checkedAt": "2026-11-02T12:05:18.226Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": true,
+          "whatItDoes": "Amazon.com: Concept2 RowErg Model D Indoor Rowing Machine with PM5 Monitor, Device Holder, Adjustable Air Resistance, Easy Storage (Gray) : Sports & Outdoors",
+          "pros": [
+            "Amazon.com : Concept2 RowErg Indoor Rowing Machine - PM5 Monitor, Device Holder, Adjustable Air Resistance, Easy Storage : Sports & Outdoors",
+            "The Black Concept 2 RowErg PM5 / Model D Rower is made in the USA and includes a PM5 performance monitor.",
+            "The Concept2 RowErg is for anyone who wants an effective full-body, low impact workout."
+          ],
+          "cons": [],
+          "specifications": [
+            {
+              "name": "Colour",
+              "value": "Black",
+              "sourceUrl": "https://www.roguefitness.com/black-concept-2-rowerg-rower-pm5-black"
+            }
+          ],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": {
+              "text": "Amazon.com: Concept2 RowErg Model D Indoor Rowing Machine with PM5 Monitor, Device Holder, Adjustable Air Resistance, Easy Storage (Gray) : Sports & Outdoors",
+              "sourceUrl": "https://www.amazon.com/Concept2-Machine-Monitor-Adjustable-Resistance/dp/B097C61Z5P",
+              "sourceTitle": "Amazon.com: Concept2 RowErg Model D Indoor Rowing Machine with PM5 Monitor, Device Holder, Adjustable Air Resistance, Easy Storage (Gray) : Sports & Outdoors"
+            },
+            "pros": [
+              {
+                "text": "Amazon.com : Concept2 RowErg Indoor Rowing Machine - PM5 Monitor, Device Holder, Adjustable Air Resistance, Easy Storage : Sports & Outdoors",
+                "sourceUrl": "https://www.amazon.com/Concept2-RowErg-Indoor-Rowing-Machine/dp/B00OUGNUO8",
+                "sourceTitle": "Amazon.com : Concept2 RowErg Indoor Rowing Machine - PM5 Monitor, Device Holder, Adjustable Air Resistance, Easy Storage : Sports & Outdoors"
+              },
+              {
+                "text": "The Black Concept 2 RowErg PM5 / Model D Rower is made in the USA and includes a PM5 performance monitor.",
+                "sourceUrl": "https://www.roguefitness.com/black-concept-2-rowerg-rower-pm5-black",
+                "sourceTitle": "Black Concept2 RowErg Rower - PM5 with Tall Legs"
+              },
+              {
+                "text": "The Concept2 RowErg is for anyone who wants an effective full-body, low impact workout.",
+                "sourceUrl": "https://www.concept2.com/ergs/rowerg",
+                "sourceTitle": "Concept2 RowErg Rowing Machine"
+              }
+            ],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": [
+              {
+                "text": "The Black Concept 2 RowErg PM5 / Model D Rower is made in the USA and includes a PM5 performance monitor.",
+                "sourceUrl": "https://www.roguefitness.com/black-concept-2-rowerg-rower-pm5-black",
+                "sourceTitle": "Black Concept2 RowErg Rower - PM5 with Tall Legs"
+              }
+            ]
+          },
+          "includedItems": [
+            "The Black Concept 2 RowErg PM5 / Model D Rower is made in the USA and includes a PM5 performance monitor."
+          ],
+          "variants": [
+            {
+              "name": "Amazon.com: Concept2 RowErg Model D Indoor Rowing Machine with PM5 Monitor, Device Holder, Adjustable Air Resistance, Easy Storage (Gray) : Sports & Outdoors",
+              "productUrl": "https://www.amazon.com/Concept2-Machine-Monitor-Adjustable-Resistance/dp/B097C61Z5P",
+              "specifications": []
+            },
+            {
+              "name": "Amazon.com : Concept2 RowErg Indoor Rowing Machine - PM5 Monitor, Device Holder, Adjustable Air Resistance, Easy Storage : Sports & Outdoors",
+              "productUrl": "https://www.amazon.com/Concept2-RowErg-Indoor-Rowing-Machine/dp/B00OUGNUO8",
+              "specifications": []
+            },
+            {
+              "name": "Black Concept2 RowErg Rower - PM5 with Tall Legs",
+              "productUrl": "https://www.roguefitness.com/black-concept-2-rowerg-rower-pm5-black",
+              "specifications": [
+                {
+                  "name": "Retailer product code",
+                  "value": "C22775"
+                },
+                {
+                  "name": "Colour",
+                  "value": "Black"
+                },
+                {
+                  "name": "Retailer product code",
+                  "value": "C20003-5"
+                }
+              ]
+            },
+            {
+              "name": "Concept2 RowErg Rowing Machine",
+              "productUrl": "https://www.concept2.com/ergs/rowerg",
+              "specifications": []
+            }
+          ],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [
+            {
+              "title": "Amazon.com: Concept2 RowErg Model D Indoor Rowing Machine with PM5 Monitor, Device Holder, Adjustable Air Resistance, Easy Storage (Gray) : Sports & Outdoors",
+              "url": "https://www.amazon.com/Concept2-Machine-Monitor-Adjustable-Resistance/dp/B097C61Z5P"
+            },
+            {
+              "title": "Amazon.com : Concept2 RowErg Indoor Rowing Machine - PM5 Monitor, Device Holder, Adjustable Air Resistance, Easy Storage : Sports & Outdoors",
+              "url": "https://www.amazon.com/Concept2-RowErg-Indoor-Rowing-Machine/dp/B00OUGNUO8"
+            },
+            {
+              "title": "Black Concept2 RowErg Rower - PM5 with Tall Legs",
+              "url": "https://www.roguefitness.com/black-concept-2-rowerg-rower-pm5-black"
+            },
+            {
+              "title": "Concept2 RowErg Rowing Machine",
+              "url": "https://www.concept2.com/ergs/rowerg"
+            }
+          ],
+          "sourceChecks": [
+            {
+              "url": "https://www.concept2.com/ergs/rowerg",
+              "status": "product-facts-verified"
+            },
+            {
+              "url": "https://www.roguefitness.com/black-concept-2-rowerg-rower-pm5-black",
+              "status": "product-facts-verified"
+            },
+            {
+              "url": "https://www.amazon.com/Concept2-Machine-Monitor-Adjustable-Resistance/dp/B097C61Z5P",
+              "status": "product-facts-verified"
+            },
+            {
+              "url": "https://www.amazon.com/Concept2-RowErg-Indoor-Rowing-Machine/dp/B00OUGNUO8",
+              "status": "product-facts-verified"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-02T12:05:20.152Z",
+          "message": "Product facts are quoted from matching product-page descriptions."
+        }
+      }
+    },
+    {
+      "category": "headphones",
+      "query": "Sony WH-1000XM5 black",
+      "status": "passed",
+      "durationMs": 884,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Sony WH-1000XM5 black",
+            "object": "Sony WH-1000XM5 black",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Sony WH-1000XM5 black",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": true,
+          "exactMatchVerified": true,
+          "searchQuery": "Sony WH-1000XM5 black",
+          "bestProduct": {
+            "name": "Sony WH1000XM5 Wireless Noise Cancelling Headphones - Black WH1000XM5/BME"
+          },
+          "bestPrice": {
+            "product_name": "Sony WH1000XM5 Wireless Noise Cancelling Headphones - Black WH1000XM5/BME",
+            "product_url": "https://www.firstshop.co.za/products/sony-wh1000xm5-wireless-noise-cancelling-headphones-black-wh1000xm5-bme-309288",
+            "sku": "WH1000XM5/BME",
+            "comparisonAttributes": {
+              "size": "",
+              "color": ""
+            },
+            "comparisonAmbiguous": false,
+            "retailer": {
+              "name": "FirstShop"
+            },
+            "price": 8399,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "priceConditions": "",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 90,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-11-02T12:05:20.749Z",
+            "retailerDomain": "firstshop.co.za",
+            "trustedRetailerDomain": false
+          },
+          "priceComparisonIssue": null,
+          "priceComparisonNote": "",
+          "offers": [
+            {
+              "product_name": "Sony WH1000XM5 Wireless Noise Cancelling Headphones - Black WH1000XM5/BME",
+              "product_url": "https://www.firstshop.co.za/products/sony-wh1000xm5-wireless-noise-cancelling-headphones-black-wh1000xm5-bme-309288",
+              "sku": "WH1000XM5/BME",
+              "comparisonAttributes": {
+                "size": "",
+                "color": ""
+              },
+              "comparisonAmbiguous": false,
+              "retailer": {
+                "name": "FirstShop"
+              },
+              "price": 8399,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 90,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-02T12:05:20.749Z",
+              "retailerDomain": "firstshop.co.za",
+              "trustedRetailerDomain": false
+            }
+          ],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "FirstShop",
+              "searchUrl": "https://www.firstshop.co.za/products/sony-wh1000xm5-wireless-noise-cancelling-headphones-black-wh1000xm5-bme-309288",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "FirstShop",
+              "searchUrl": "https://www.firstshop.co.za/products/sony-wh1000xm5-wireless-noise-cancelling-headphones-black-wh1000xm5-bme-309288",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 1,
+          "verifiedSellerCount": 1,
+          "inStockOfferCount": 1,
+          "priceVerifiedCount": 1,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Sony%20WH-1000XM5%20black",
+          "checkedAt": "2026-11-02T12:05:20.749Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": true,
+          "whatItDoes": "Sony WH1000XM5 Wireless Noise Cancelling Headphones - Black WH1000XM5/BME.",
+          "pros": [
+            "With two processors controlling eight microphones, Auto NC Optimizer for automatically optimising noise cancelling based on your wearing conditions and environment, and a specially designed driver unit, WH-1000XM5 headphones with industry-leading noise cancelling1 rewrite the rules for distraction-free listening and call clarity.",
+            "From airplane noise to people’s voices, our WH-1000XM5 wireless headphones with multiple microphone noise cancelling keep out more high and mid frequency sounds than ever.",
+            "And with Auto NC Optimizer, noise cancelling is automatically optimised based on your wearing conditions and environment.",
+            "Multi Noise Sensor technology."
+          ],
+          "cons": [],
+          "specifications": [
+            {
+              "name": "Brand",
+              "value": "Sony",
+              "sourceUrl": "https://www.firstshop.co.za/products/sony-wh1000xm5-wireless-noise-cancelling-headphones-black-wh1000xm5-bme-309288"
+            },
+            {
+              "name": "Retailer product code",
+              "value": "WH1000XM5/BME",
+              "sourceAlsoListsAsMpn": true,
+              "sourceUrl": "https://www.firstshop.co.za/products/sony-wh1000xm5-wireless-noise-cancelling-headphones-black-wh1000xm5-bme-309288"
+            },
+            {
+              "name": "product_type",
+              "value": "Headphones & Earbuds",
+              "sourceUrl": "https://www.firstshop.co.za/products/sony-wh1000xm5-wireless-noise-cancelling-headphones-black-wh1000xm5-bme-309288"
+            }
+          ],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": {
+              "text": "Sony WH1000XM5 Wireless Noise Cancelling Headphones - Black WH1000XM5/BME.",
+              "sourceUrl": "https://www.firstshop.co.za/products/sony-wh1000xm5-wireless-noise-cancelling-headphones-black-wh1000xm5-bme-309288",
+              "sourceTitle": "Sony WH1000XM5 Wireless Noise Cancelling Headphones - Black WH1000XM5/BME"
+            },
+            "pros": [
+              {
+                "text": "With two processors controlling eight microphones, Auto NC Optimizer for automatically optimising noise cancelling based on your wearing conditions and environment, and a specially designed driver unit, WH-1000XM5 headphones with industry-leading noise cancelling1 rewrite the rules for distraction-free listening and call clarity.",
+                "sourceUrl": "https://www.firstshop.co.za/products/sony-wh1000xm5-wireless-noise-cancelling-headphones-black-wh1000xm5-bme-309288",
+                "sourceTitle": "Sony WH1000XM5 Wireless Noise Cancelling Headphones - Black WH1000XM5/BME"
+              },
+              {
+                "text": "From airplane noise to people’s voices, our WH-1000XM5 wireless headphones with multiple microphone noise cancelling keep out more high and mid frequency sounds than ever.",
+                "sourceUrl": "https://www.firstshop.co.za/products/sony-wh1000xm5-wireless-noise-cancelling-headphones-black-wh1000xm5-bme-309288",
+                "sourceTitle": "Sony WH1000XM5 Wireless Noise Cancelling Headphones - Black WH1000XM5/BME"
+              },
+              {
+                "text": "And with Auto NC Optimizer, noise cancelling is automatically optimised based on your wearing conditions and environment.",
+                "sourceUrl": "https://www.firstshop.co.za/products/sony-wh1000xm5-wireless-noise-cancelling-headphones-black-wh1000xm5-bme-309288",
+                "sourceTitle": "Sony WH1000XM5 Wireless Noise Cancelling Headphones - Black WH1000XM5/BME"
+              },
+              {
+                "text": "Multi Noise Sensor technology.",
+                "sourceUrl": "https://www.firstshop.co.za/products/sony-wh1000xm5-wireless-noise-cancelling-headphones-black-wh1000xm5-bme-309288",
+                "sourceTitle": "Sony WH1000XM5 Wireless Noise Cancelling Headphones - Black WH1000XM5/BME"
+              }
+            ],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [
+            {
+              "title": "Sony WH1000XM5 Wireless Noise Cancelling Headphones - Black WH1000XM5/BME",
+              "url": "https://www.firstshop.co.za/products/sony-wh1000xm5-wireless-noise-cancelling-headphones-black-wh1000xm5-bme-309288"
+            }
+          ],
+          "sourceChecks": [
+            {
+              "url": "https://www.firstshop.co.za/products/sony-wh1000xm5-wireless-noise-cancelling-headphones-black-wh1000xm5-bme-309288",
+              "status": "product-facts-verified"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-02T12:05:21.079Z",
+          "message": "Product facts are quoted from matching product-page descriptions."
+        }
+      }
+    },
+    {
+      "category": "keyboard",
+      "query": "Keychron K2 wireless mechanical keyboard",
+      "status": "failed",
+      "durationMs": 9093,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Keychron K2 wireless mechanical keyboard",
+            "object": "Keychron K2 wireless mechanical keyboard",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Keychron K2 wireless mechanical keyboard",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "Keychron K2 wireless mechanical keyboard",
+          "bestProduct": null,
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Keychron%20K2%20wireless%20mechanical%20keyboard",
+          "checkedAt": "2026-11-02T12:05:22.548Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": null,
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "sourceChecks": [],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-02T12:05:22.705Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "medical-device",
+      "query": "Omron M2 Basic upper arm blood pressure monitor",
+      "status": "failed",
+      "durationMs": 8207,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Omron M2 Basic upper arm blood pressure monitor",
+            "object": "Omron M2 Basic upper arm blood pressure monitor",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Omron M2 Basic upper arm blood pressure monitor",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "Omron M2 Basic upper arm blood pressure monitor",
+          "bestProduct": null,
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Clicks",
+              "searchUrl": "https://clicks.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Dis-Chem",
+              "searchUrl": "https://www.dischem.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Clicks",
+              "searchUrl": "https://clicks.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Dis-Chem",
+              "searchUrl": "https://www.dischem.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Omron%20M2%20Basic%20upper%20arm%20blood%20pressure%20monitor",
+          "checkedAt": "2026-11-02T12:05:28.417Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": null,
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "sourceChecks": [
+            {
+              "url": "https://clicks.co.za/clicks_clicks-upper-arm-blood-pressure-monitor/p/300481",
+              "status": "identity-mismatch"
+            },
+            {
+              "url": "https://clicks.co.za/braun_bua6150-upper-arm-blood-pressure-monitor/p/323839",
+              "status": "identity-mismatch"
+            },
+            {
+              "url": "https://clicks.co.za/braun_bua4050-exactfit-2-upper-arm-blood-pressure-monitor/p/394321",
+              "status": "identity-mismatch"
+            },
+            {
+              "url": "https://clicks.co.za/braun_exactfit-5-connect-upper-arm-blood-pressure-monitor/p/352470",
+              "status": "identity-mismatch"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-02T12:05:29.263Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "appliance",
+      "query": "Philips NA230/00 air fryer",
+      "status": "failed",
+      "durationMs": 1317,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Philips NA230/00 air fryer",
+            "object": "Philips NA230/00 air fryer",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Philips NA230/00 air fryer",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "Philips NA230/00 air fryer",
+          "bestProduct": null,
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Philips%20NA230%2F00%20air%20fryer",
+          "checkedAt": "2026-11-02T12:05:30.442Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": null,
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "sourceChecks": [],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-02T12:05:30.612Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "medical-device",
+      "query": "Accu-Chek Instant blood glucose meter",
+      "status": "failed",
+      "durationMs": 9398,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Accu-Chek Instant blood glucose meter",
+            "object": "Accu-Chek Instant blood glucose meter",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Accu-Chek Instant blood glucose meter",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "Accu-Chek Instant blood glucose meter",
+          "bestProduct": null,
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Clicks",
+              "searchUrl": "https://clicks.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Dis-Chem",
+              "searchUrl": "https://www.dischem.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Clicks",
+              "searchUrl": "https://clicks.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Dis-Chem",
+              "searchUrl": "https://www.dischem.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Accu-Chek%20Instant%20blood%20glucose%20meter",
+          "checkedAt": "2026-11-02T12:05:30.547Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": null,
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "sourceChecks": [
+            {
+              "url": "https://clicks.co.za/clicks_blood-glucose-lancets-50-lancets/p/327404",
+              "status": "identity-mismatch"
+            },
+            {
+              "url": "https://clicks.co.za/clicks_biomine-blood-glucose-monitoring-system/p/269476",
+              "status": "identity-mismatch"
+            },
+            {
+              "url": "https://clicks.co.za/accu-check_instant-meter/p/291471",
+              "status": "identity-mismatch"
+            },
+            {
+              "url": "https://clicks.co.za/accu-check_active-blood-glucose-monitoring-system/p/129543",
+              "status": "identity-mismatch"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-02T12:05:32.077Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "printer",
+      "query": "HP DeskJet 2820 All-in-One printer",
+      "status": "failed",
+      "durationMs": 7417,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "HP DeskJet 2820 All-in-One printer",
+            "object": "HP DeskJet 2820 All-in-One printer",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "HP DeskJet 2820 All-in-One printer",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "HP DeskJet 2820 All-in-One printer",
+          "bestProduct": null,
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=HP%20DeskJet%202820%20All-in-One%20printer",
+          "checkedAt": "2026-11-02T12:05:37.877Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": null,
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "sourceChecks": [],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-02T12:05:38.029Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "garden",
+      "query": "Gardena Classic pruning shears",
+      "status": "failed",
+      "durationMs": 7245,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Gardena Classic pruning shears",
+            "object": "Gardena Classic pruning shears",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Gardena Classic pruning shears",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "Gardena Classic pruning shears",
+          "bestProduct": null,
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Builders",
+              "searchUrl": "https://www.builders.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Leroy Merlin",
+              "searchUrl": "https://www.leroymerlin.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "BUCO",
+              "searchUrl": "https://www.buco.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Mica",
+              "searchUrl": "https://www.mica.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Builders",
+              "searchUrl": "https://www.builders.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Leroy Merlin",
+              "searchUrl": "https://www.leroymerlin.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "BUCO",
+              "searchUrl": "https://www.buco.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Mica",
+              "searchUrl": "https://www.mica.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Gardena%20Classic%20pruning%20shears",
+          "checkedAt": "2026-11-02T12:05:38.675Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": null,
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "sourceChecks": [],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-02T12:05:39.329Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "pet",
+      "query": "Royal Canin Mini Adult dog food 2kg",
+      "status": "failed",
+      "durationMs": 1527,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Royal Canin Mini Adult dog food 2kg",
+            "object": "Royal Canin Mini Adult dog food 2kg",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Royal Canin Mini Adult dog food 2kg",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "Royal Canin Mini Adult dog food 2kg",
+          "bestProduct": null,
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Checkers",
+              "searchUrl": "https://www.checkers.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Pick n Pay",
+              "searchUrl": "https://www.pnp.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Shoprite",
+              "searchUrl": "https://www.shoprite.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Woolworths",
+              "searchUrl": "https://www.woolworths.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Checkers",
+              "searchUrl": "https://www.checkers.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Pick n Pay",
+              "searchUrl": "https://www.pnp.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Shoprite",
+              "searchUrl": "https://www.shoprite.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Woolworths",
+              "searchUrl": "https://www.woolworths.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Royal%20Canin%20Mini%20Adult%20dog%20food%202kg",
+          "checkedAt": "2026-11-02T12:05:39.046Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": null,
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "sourceChecks": [],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-02T12:05:39.555Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "lighting",
+      "query": "Philips Hue White E27 bulb",
+      "status": "failed",
+      "durationMs": 7680,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Philips Hue White E27 bulb",
+            "object": "Philips Hue White E27 bulb",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Philips Hue White E27 bulb",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "Philips Hue White E27 bulb",
+          "bestProduct": null,
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Builders",
+              "searchUrl": "https://www.builders.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Leroy Merlin",
+              "searchUrl": "https://www.leroymerlin.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "BUCO",
+              "searchUrl": "https://www.buco.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Mica",
+              "searchUrl": "https://www.mica.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Builders",
+              "searchUrl": "https://www.builders.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Leroy Merlin",
+              "searchUrl": "https://www.leroymerlin.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "BUCO",
+              "searchUrl": "https://www.buco.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Mica",
+              "searchUrl": "https://www.mica.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Philips%20Hue%20White%20E27%20bulb",
+          "checkedAt": "2026-11-02T12:05:45.920Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": null,
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "sourceChecks": [],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-02T12:05:47.006Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "stationery",
+      "query": "Casio fx-82ZA Plus II calculator",
+      "status": "failed",
+      "durationMs": 11021,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Casio fx-82ZA Plus II calculator",
+            "object": "Casio fx-82ZA Plus II calculator",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Casio fx-82ZA Plus II calculator",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "Casio fx-82ZA Plus II calculator",
+          "bestProduct": null,
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "PNA",
+              "searchUrl": "https://www.pna.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Waltons",
+              "searchUrl": "https://www.waltons.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "PNA",
+              "searchUrl": "https://www.pna.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Waltons",
+              "searchUrl": "https://www.waltons.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Casio%20fx-82ZA%20Plus%20II%20calculator",
+          "checkedAt": "2026-11-02T12:05:49.164Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": null,
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "sourceChecks": [
+            {
+              "url": "https://www.waltons.co.za/buy/casio-plus-new-generation-scientific-calculator-pink-fx82za-plus-ll-each",
+              "status": "identity-mismatch"
+            },
+            {
+              "url": "https://www.waltons.co.za/buy/casio-plus-new-generation-scientific-calculator-fx82za-plus-ll-each",
+              "status": "identity-mismatch"
+            },
+            {
+              "url": "https://www.waltons.co.za/buy/casio-calculator-scientific-fx-991za",
+              "status": "identity-mismatch"
+            },
+            {
+              "url": "https://www.waltons.co.za/buy/casio-plus-new-generation-scientific-calculator-blue-fx82za-plus-ll-each",
+              "status": "identity-mismatch"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-02T12:05:50.564Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "camera",
+      "query": "Canon EOS R50 camera body",
+      "status": "passed",
+      "durationMs": 2494,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Canon EOS R50 camera body",
+            "object": "Canon EOS R50 camera body",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Canon EOS R50 camera body",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": true,
+          "exactMatchVerified": true,
+          "searchQuery": "Canon EOS R50 camera body",
+          "bestProduct": {
+            "name": "Canon EOS R50 Mirrorless Camera Body"
+          },
+          "bestPrice": null,
+          "priceComparisonIssue": "variants",
+          "priceComparisonNote": "Listing variants, currencies or price conditions differ. Compare each listing separately.",
+          "offers": [
+            {
+              "product_name": "Canon EOS R50 Mirrorless Camera Body",
+              "product_url": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body?_pos=1&_sid=0755df1e8&_ss=r",
+              "sku": "5811C052AA",
+              "comparisonAttributes": {
+                "size": "",
+                "color": ""
+              },
+              "comparisonAmbiguous": false,
+              "retailer": {
+                "name": "ormsdirect.co.za"
+              },
+              "price": 14895,
+              "currency": "ZAR",
+              "availability": "out_of_stock",
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-02T12:05:51.874Z",
+              "retailerDomain": "ormsdirect.co.za",
+              "trustedRetailerDomain": false
+            },
+            {
+              "product_name": "Canon EOS R50 Mirrorless Camera Body (White)",
+              "product_url": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body-white?_pos=4&_sid=0755df1e8&_ss=r",
+              "sku": "",
+              "comparisonAttributes": {
+                "size": "",
+                "color": ""
+              },
+              "comparisonAmbiguous": false,
+              "retailer": {
+                "name": "ormsdirect.co.za"
+              },
+              "price": 16995,
+              "currency": "ZAR",
+              "availability": "out_of_stock",
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-02T12:05:51.920Z",
+              "retailerDomain": "ormsdirect.co.za",
+              "trustedRetailerDomain": false
+            }
+          ],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "ormsdirect.co.za",
+              "searchUrl": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body?_pos=1&_sid=0755df1e8&_ss=r",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "ormsdirect.co.za",
+              "searchUrl": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body-white?_pos=4&_sid=0755df1e8&_ss=r",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "ormsdirect.co.za",
+              "searchUrl": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body?_pos=1&_sid=0755df1e8&_ss=r",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "ormsdirect.co.za",
+              "searchUrl": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body-white?_pos=4&_sid=0755df1e8&_ss=r",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 2,
+          "verifiedSellerCount": 1,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 2,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Canon%20EOS%20R50%20camera%20body",
+          "checkedAt": "2026-11-02T12:05:52.432Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": true,
+          "whatItDoes": "The Canon EOS R50 Mirrorless Camera Body features a 24 megapixel APS-C sensor and Canon's powerful DIGIC X image processor, enabling the Canon EOS R50 Mirrorless Camera Body to punch well above its ultra-compact nature.",
+          "pros": [],
+          "cons": [],
+          "specifications": [
+            {
+              "name": "Retailer product code",
+              "value": "5811C052AA",
+              "sourceUrl": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body?_pos=1&_sid=0755df1e8&_ss=r"
+            },
+            {
+              "name": "Barcode",
+              "value": "4549292205015",
+              "sourceUrl": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body?_pos=1&_sid=0755df1e8&_ss=r"
+            }
+          ],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": {
+              "text": "The Canon EOS R50 Mirrorless Camera Body features a 24 megapixel APS-C sensor and Canon's powerful DIGIC X image processor, enabling the Canon EOS R50 Mirrorless Camera Body to punch well above its ultra-compact nature.",
+              "sourceUrl": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body?_pos=1&_sid=0755df1e8&_ss=r",
+              "sourceTitle": "Canon EOS R50 Mirrorless Camera Body"
+            },
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [
+            {
+              "title": "Canon EOS R50 Mirrorless Camera Body",
+              "url": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body?_pos=1&_sid=0755df1e8&_ss=r"
+            },
+            {
+              "title": "Canon EOS R50 Mirrorless Camera Body (White)",
+              "url": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body-white?_pos=4&_sid=0755df1e8&_ss=r"
+            }
+          ],
+          "sourceChecks": [
+            {
+              "url": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body?_pos=1&_sid=0755df1e8&_ss=r",
+              "status": "product-facts-verified"
+            },
+            {
+              "url": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body-white?_pos=4&_sid=0755df1e8&_ss=r",
+              "status": "product-facts-verified"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-02T12:05:53.044Z",
+          "message": "Product facts are quoted from matching product-page descriptions."
+        }
+      }
+    },
+    {
+      "category": "bag",
+      "query": "JanSport SuperBreak Plus backpack",
+      "status": "failed",
+      "durationMs": 7421,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "JanSport SuperBreak Plus backpack",
+            "object": "JanSport SuperBreak Plus backpack",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "JanSport SuperBreak Plus backpack",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "JanSport SuperBreak Plus backpack",
+          "bestProduct": null,
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Bash",
+              "searchUrl": "https://bash.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Superbalist",
+              "searchUrl": "https://www.superbalist.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Bash",
+              "searchUrl": "https://bash.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Superbalist",
+              "searchUrl": "https://www.superbalist.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=JanSport%20SuperBreak%20Plus%20backpack",
+          "checkedAt": "2026-11-02T12:05:53.610Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": null,
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "sourceChecks": [],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-02T12:05:54.452Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    }
+  ]
+}
