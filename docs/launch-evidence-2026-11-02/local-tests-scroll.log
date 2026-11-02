@@ -1,0 +1,1168 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> test
+> node --test tests/*.test.js
+
+✔ assistant answers combined price and location questions instead of hiding prices behind where intent (22.874274ms)
+✔ assistant separates currencies and rejects null, unverified and partial-identity prices (1.103014ms)
+✔ assistant returns researched purpose, specifications and sources, without fabricating cons (0.660567ms)
+✔ live worker assistant obtains exact-product research rather than canned product redirect (32.713796ms)
+✔ typed conditioner name discovers and researches retailer candidates without parsed brand or search-engine results (38.197004ms)
+✔ partial photos answer practical buying questions without inventing specifications (1.331208ms)
+✔ microphone questions do not accidentally trigger phone-number or location intent (0.316774ms)
+✔ uncertain visual model choices and observed colours are not asserted as an exact SKU or price (0.326067ms)
+✔ compatibility questions answer published connections and explicitly leave unsupported devices unverified (0.643071ms)
+✔ assistant answers kit contents from the published package instead of omitting charger evidence (1.010629ms)
+✔ nearest branches keep zero distance first and do not confuse closest with closing hours (0.798319ms)
+✔ assistant uses corroborated photo purpose when external sources only have catalogue metadata (1.55029ms)
+✔ assistant does not promote single-reader, partial or warning text into a photo purpose (0.439003ms)
+✔ barcode questions distinguish the current identity, retailer evidence and missing evidence (0.433365ms)
+✔ specific questions prioritize relevant published fields beyond the first eight specifications (1.036427ms)
+✔ verified branch details replace a shortened locator address only for the matching branch (5.412488ms)
+✔ published branch hours notify every dashboard consumer without changing a different branch (2.887908ms)
+✔ selecting a replacement photo immediately clears old branch schedules before identification finishes (1.458485ms)
+✔ dashboard-commerce-status.js labels online prices on physical branch cards explicitly (3.47723ms)
+✔ local-market-commerce-fix.js labels online prices on physical branch cards explicitly (1.34532ms)
+✔ Clicks branch HTML selects the shop phone and excludes the corporate footer (7.474626ms)
+✔ official branch evidence supplies actual contact details and a published schedule (0.692284ms)
+✔ corporate data, another branch and a single shared address token are rejected (0.459162ms)
+✔ published coordinates can corroborate a branch despite address formatting differences (0.56071ms)
+✔ branch search reads only matching official domains, then checks the actual branch (7.53477ms)
+✔ missing map address does not prevent coordinate-matched branch research (2.52421ms)
+✔ missing address still rejects a different branch with the same chain name (0.282593ms)
+✔ locator cards keep branch phone and address inside the coordinate-matched card (0.590414ms)
+✔ scoped published hours convert AM/PM without inventing unsupported schedules (0.920858ms)
+✔ concurrent branches share the official locator request and keep their own details (13.091388ms)
+✔ Magento locator JSON matches Incredible Connection by branch coordinates and scopes contact fields (1.042035ms)
+✔ attribute locator cards select iStore branch details without leaking another branch (1.261747ms)
+✔ an explicitly closed official branch cannot be scheduled open from old regular hours (0.250427ms)
+✔ Clicks store schedule excludes the clinic and retains published country for holiday evaluation (34.681973ms)
+✔ a nearby Clicks Baby concept is not attached to a regular Clicks branch (0.692914ms)
+✔ one category decision drives product and nearby routing: Example upper arm blood pressure monitor (15.288224ms)
+✔ one category decision drives product and nearby routing: Example rowing machine (3.680568ms)
+✔ one category decision drives product and nearby routing: Toyota Corolla Cross 1.8 Xi (1.657196ms)
+✔ specialist routing does not hijack Coffee capsules (0.299388ms)
+✔ specialist routing does not hijack Graphics tablet (0.240422ms)
+✔ specialist routing does not hijack Keyboard monitor stand (0.084894ms)
+✔ specialist routing does not hijack Honda generator (0.349317ms)
+✔ specialist routing does not hijack Toyota car cover (0.107768ms)
+✔ specific model survives object synonyms: mouse (12.977808ms)
+✔ specific model survives object synonyms: keyboard (0.77871ms)
+✔ specific model survives object synonyms: mouse pad (0.349262ms)
+✔ specific model survives object synonyms: rowing machine (0.704621ms)
+✔ specific model survives object synonyms: blood pressure monitor (0.687186ms)
+✔ specific model survives object synonyms: camera (0.269795ms)
+✔ exact retailer matching rejects compatible accessories: Tilta Full Camera Cage for Canon EOS R50 V Black (7.181001ms)
+✔ exact retailer matching rejects compatible accessories: Canon EOS R50 camera 18-45mm 55-210mm lens (5.252509ms)
+✔ exact retailer matching rejects compatible accessories: Example EX42 mouse pad (2.988594ms)
+✔ exact retailer matching rejects compatible accessories: Replacement keycaps for Example EX42 keyboard (1.310308ms)
+✔ camera model generation stays exact: Canon EOS R50 camera body / Used Canon EOS R50 V Mirrorless Camera Body (1.11355ms)
+✔ camera model generation stays exact: Canon EOS R50 camera body / Canon EOS R50V camera body (0.92912ms)
+✔ camera model generation stays exact: Example C80 camera body / Example C80 Mark II camera body (0.741986ms)
+✔ camera model generation stays exact: Example C80 Mark II camera body / Example C80 Mark III camera body (1.153609ms)
+✔ camera model generation stays exact: Example C80 Mark II camera body / Example C80 camera body (1.173187ms)
+✔ camera model generation stays exact: Canon EOS R50 V camera body / Canon EOS R50V mirrorless camera body (5.108718ms)
+✔ camera model generation stays exact: Canon EOS R50 camera body / Canon EOS R50 mirrorless camera body white (2.414264ms)
+✔ confirmed photo titles retain independently supported exact colour and size (3.294933ms)
+✔ medical searches include pharmacy amenities without searching computer shops (5.48541ms)
+✔ computer peripherals and appliances reach electronics catalogues: Example EX42 mechanical keyboard (9.490293ms)
+✔ computer peripherals and appliances reach electronics catalogues: Example EX42 gaming mouse (2.24776ms)
+✔ computer peripherals and appliances reach electronics catalogues: Example mouse pad (1.081863ms)
+✔ computer peripherals and appliances reach electronics catalogues: Example EX42 printer (1.972207ms)
+✔ computer peripherals and appliances reach electronics catalogues: Example NA23 air fryer (1.023858ms)
+✔ generic typed searches cannot claim an exact product: headphones (2.18604ms)
+✔ generic typed searches cannot claim an exact product: headphones black (0.759001ms)
+✔ generic typed searches cannot claim an exact product: black headphones (0.817006ms)
+✔ generic typed searches cannot claim an exact product: wireless headphones (0.418082ms)
+✔ generic typed searches cannot claim an exact product: Logitech headphones (0.582082ms)
+✔ generic typed searches cannot claim an exact product: Keychron keyboard (1.093861ms)
+✔ generic typed searches cannot claim an exact product: rowing machine (0.399294ms)
+✔ generic typed searches cannot claim an exact product: blood pressure monitor (0.339227ms)
+✔ generic typed searches cannot claim an exact product: car (0.379386ms)
+✔ specific typed model is preserved: Logitech G502 HERO mouse (0.497909ms)
+✔ specific typed model is preserved: Sony WH-1000XM5 headphones (0.435047ms)
+✔ specific typed model is preserved: Keychron K2 keyboard (0.378965ms)
+✔ typed model spacing and object synonyms do not hide an otherwise exact published product (3.203319ms)
+✔ named purchase size rejects incompatible pad: Example Q42 mouse pad XXL (0.197299ms)
+✔ named purchase size rejects incompatible pad: Example Q42 mouse pad XL (0.160335ms)
+✔ named purchase size rejects incompatible pad: Example Q42 mouse pad Small (0.155257ms)
+✔ named purchase size rejects incompatible pad: Example Q42 mouse pad M (0.112454ms)
+✔ named purchase size preserves equivalent large pad: Example Q42 mouse pad L (0.162408ms)
+✔ named purchase size preserves equivalent large pad: Example Q42 Large mouse pad (0.122319ms)
+✔ single product rejects an unrequested multi-unit purchase: Example EX42 rower 10 Pack (0.158732ms)
+✔ single product rejects an unrequested multi-unit purchase: Example EX42 rower pack of 10 (0.079216ms)
+✔ single product rejects an unrequested multi-unit purchase: Example EX42 rower set of 2 (0.256275ms)
+✔ single product rejects an unrequested multi-unit purchase: Example EX42 rower 4-piece (0.073938ms)
+✔ matching explicit purchase quantity remains valid (0.141477ms)
+✔ gym equipment retains official sports branches when map providers fail (1.617137ms)
+✔ typed technical code accepts punctuation-only differences: Example WH-1000XM5 black (2.355517ms)
+✔ typed technical code accepts punctuation-only differences: Example FX-82ZA Plus II calculator (0.176829ms)
+✔ typed technical code accepts punctuation-only differences: Example MF-752Cdw printer (0.154256ms)
+✔ typed technical-code formatting never changes model or colour: Example WH1000XM4 headphones black (0.294331ms)
+✔ typed technical-code formatting never changes model or colour: Example WH1000XM5B headphones black (0.195296ms)
+✔ typed technical-code formatting never changes model or colour: Example WH1000XM5 headphones white (0.115369ms)
+✔ technical-code formatting retains generation identity (0.230137ms)
+✔ whole-vehicle retailer suggestions do not recommend an unrelated manufacturer (3.663693ms)
+✔ an explicitly requested vehicle manufacturer remains a relevant source (7.112261ms)
+✔ discovery removes generic wording without mutating requested identity (28.06017ms)
+✔ published catalogue query parameters preserve route and Hybris relevance syntax (0.486382ms)
+✔ category words do not match inside another product word: Office chair (25.103046ms)
+✔ category words do not match inside another product word: IKEA POANG armchair (3.502968ms)
+✔ category words do not match inside another product word: Dressing table (1.287214ms)
+✔ category words do not match inside another product word: Coffee table (5.239955ms)
+✔ category words do not match inside another product word: Moleskine notebook (3.713305ms)
+✔ a vehicle model containing tuner is not a musical tuner (0.573339ms)
+✔ whole category words retain their intended route: Hair conditioner (0.434526ms)
+✔ whole category words retain their intended route: Skin care lotion (0.329242ms)
+✔ whole category words retain their intended route: Summer dresses (2.570928ms)
+✔ whole category words retain their intended route: Korg guitar tuner (6.713687ms)
+✔ synthetic material does not turn furniture into a synthesizer search (7.7634ms)
+✔ a baby bassinet is not a bass instrument (0.747344ms)
+✔ nearby search uses the same whole-word categories as retailer discovery (23.880697ms)
+✔ category cue matches complete words: /bass|synth/ (1.351368ms)
+✔ category cue matches complete words: /headphone|earphone|smartphone/ (0.462977ms)
+✔ category cue matches complete words: /pen|dress|pan/ (0.295683ms)
+✔ word matching supports phrases, punctuation and safe reuse of global expressions (0.589794ms)
+✔ electronics: exact retailer evidence retains price/currency/online stock (24.468738ms)
+✔ groceries: exact retailer evidence retains price/currency/online stock (3.238471ms)
+✔ clothing: exact retailer evidence retains price/currency/online stock (1.893762ms)
+✔ shoes: exact retailer evidence retains price/currency/online stock (1.630727ms)
+✔ beauty: exact retailer evidence retains price/currency/online stock (5.111057ms)
+✔ tools: exact retailer evidence retains price/currency/online stock (1.622155ms)
+✔ toys: exact retailer evidence retains price/currency/online stock (1.918668ms)
+✔ furniture: exact retailer evidence retains price/currency/online stock (2.016892ms)
+✔ household: exact retailer evidence retains price/currency/online stock (1.915604ms)
+✔ search retains model, colour and capacity qualifiers (0.351324ms)
+✔ reject adjacent variant: Sony WH-1000XM50 (0.49193ms)
+✔ reject adjacent variant: Bosch GSB 130 RE drill (0.27994ms)
+✔ reject adjacent variant: Nike Air Force 1 black white (0.131873ms)
+✔ reject adjacent variant: Nivea lotion 500ml (0.168847ms)
+✔ reject adjacent variant: Twinsaver 9 rolls (0.319928ms)
+✔ reject adjacent variant: Samsung phone 256GB (0.124302ms)
+✔ Product type arrays and later valid offers are supported (0.73814ms)
+✔ barcode must match product-scoped GTIN (2.69158ms)
+✔ no prices from recommendation JSON or catalogue text (0.629361ms)
+✔ currency is explicit evidence, never inferred from retailer country (2.58953ms)
+✔ product price meta supports reversed attribute order (1.637888ms)
+✔ end-to-end discovery rejects wrong variants and mixed-currency cheapest (28.307161ms)
+✔ worker validates missing and invalid input without remote calls (7.948195ms)
+✔ typed search is user input, never a claimed visual identification (1.047593ms)
+✔ barcode-only lookup resolves product name by matching GTIN (0.942289ms)
+✔ explicit shoe size must be present in the product title (1.244983ms)
+✔ feedback delivery failure is not a successful save (0.477438ms)
+✔ health reports configuration and version identifies the deployed commit (0.947827ms)
+✔ nearby uses category-specific shops and never implies branch inventory (19.806784ms)
+✔ photo flow accepts corroborated visible identity and rejects conflicting models (55.615452ms)
+✔ invalid image upload is rejected (1.563363ms)
+✔ reject accessories and bundles: Sony WH-1000XM5 replacement ear pads (0.287631ms)
+✔ reject accessories and bundles: Sony WH-1000XM5 protective case (0.126946ms)
+✔ reject accessories and bundles: Sony WH-1000XM5 bundle (0.08859ms)
+✔ worker research fetches the exact page and rejects neighbouring model snippets (12.939356ms)
+✔ worker research does not treat a search snippet as verified product evidence (1.635174ms)
+✔ verified manufacturer feature headings support headset strengths (3.65517ms)
+✔ native retailer links are independently checked, never accepted as search-page offers (29.25873ms)
+✔ uncorroborated Gemma identity asks for input without claiming visual verification (7.160282ms)
+✔ fallback retains corroborated object but clears unsupported brand and model (4.537121ms)
+✔ photo eyewear category is normalized across provider capitalization (3.446075ms)
+✔ corroborated eyewear synonyms retain generic identification (2.91729ms)
+✔ nested provider response objects preserve structured visual identity (7.064315ms)
+✔ primary brand and model need a witness when the second vision provider fails (2.749215ms)
+✔ daily AI allowance exhaustion stops further inference and explains the actual limit (2.457287ms)
+✔ discovery accepts reordered exact product titles without requiring quoted search phrases (6.317588ms)
+✔ research does not present a truncated meta description tail as a product strength (1.569627ms)
+✔ corroborated photo variant is preserved rather than replaced by a product-specific heuristic (2.687514ms)
+✔ conflicting photo brand/model claims stay unverified and provide diagnostic evidence (2.122677ms)
+✔ verified toy retailer retains its actual name and unknown sellers retain their hostname (2.340856ms)
+✔ research reads complete product-scoped descriptions and excludes recommendations (8.175427ms)
+✔ research rejects conflicting colour in scoped retailer copy and uses matching structured facts (2.771547ms)
+✔ uncertain model cannot publish a different models price or researched specifications (1.442592ms)
+✔ product information exposes source-scoped structured specifications (2.927505ms)
+✔ Cloudflare text-completion envelope is parsed as transport metadata, not a product (6.284449ms)
+✔ flat legacy commerce input also preserves model uncertainty (0.575012ms)
+✔ Gemma receives the image in a multimodal message instead of a text-only prompt (2.621968ms)
+✔ photo identity preserves independently read size colour and barcode (3.320821ms)
+✔ elapsed photo budget keeps corroborated partial identity and stops further inference attempts (2.900095ms)
+✔ published product feature lines remain separate facts instead of one unreadable description (1.980089ms)
+✔ HTML encoded feature line breaks decode without adding neighbouring product claims (1.757933ms)
+✔ separate printed product-line and variant fields combine only when all words were independently read (3.157231ms)
+✔ generated retailer Product JSON-LD also enables exact description research on abbreviated titles (7.537569ms)
+✔ technical model formatting is equivalent without accepting another model suffix (0.840526ms)
+✔ furniture dimensions match typography while rejecting a different measurement (0.767919ms)
+✔ household objects do not become vehicles or eyewear because of partial words (16.358635ms)
+✔ published VO!CE technology name stays within one complete product sentence (1.66065ms)
+✔ large retailer navigation cannot truncate later exact product price and stock evidence (5.86559ms)
+✔ published SKU corroborates a typed model code while a different SKU remains rejected (1.114527ms)
+✔ redirected pages cannot attribute another publisher or a home-page recommendation to a retailer (1.314291ms)
+✔ duplicate retailer SKUs do not inflate listings or pick a conflicting price (0.420809ms)
+✔ multi-colour photo descriptions match retailer separators without accepting a missing colour (3.822808ms)
+✔ photo GTINs require a checksum and independent agreement, including printed spacing (9.034076ms)
+✔ personal-care research and offers reject adjacent variant Deep Extreme Anti-Perspirant 150ml (4.02826ms)
+✔ personal-care research and offers reject adjacent variant Deep Black Carbon Espresso Scent 150ml (2.376863ms)
+✔ personal-care research and offers reject adjacent variant Deep Anti-Perspirant Roll On 150ml (1.710143ms)
+✔ a drill and added batteries plus charger cannot become an exact bare model price (19.976312ms)
+✔ explicitly requested package retains verified product price (7.880776ms)
+✔ an ordinary standalone drill remains eligible (2.285195ms)
+✔ requested drill kit can match a title spelling out its included batteries and charger (2.214602ms)
+✔ requested kit cannot silently become a standalone tool (10.902619ms)
+✔ requested bundle cannot silently become a standalone camera (3.153436ms)
+✔ a bare model cannot silently become a named kit even without component words (2.119537ms)
+✔ component exclusions do not establish requested kit: without battery or charger (1.102684ms)
+✔ component exclusions do not establish requested kit: battery and charger not included (1.231823ms)
+✔ component exclusions do not establish requested kit: battery and charger sold separately (0.93598ms)
+✔ component exclusions do not establish requested kit: tool only - battery and charger (0.47783ms)
+✔ a requested kit still rejects the wrong model even when components agree (0.864356ms)
+✔ parsed brand/model identities also recognize explicitly requested kit components (0.930782ms)
+✔ parsed kit model retains wrong-model rejection (0.680707ms)
+✔ a product page cannot borrow price or availability from recommendation lists (16.415589ms)
+✔ primary graph and webpage entities retain product evidence (2.142877ms)
+✔ aggregate variant offers retain one common price without choosing stock or a size (6.67401ms)
+✔ explicit product and offer URLs must belong to the checked product page (30.009053ms)
+✔ explicit product variants remain available without recommendation traversal (0.958844ms)
+✔ published name entities are decoded without changing requested variants (0.859598ms)
+✔ aggregate offers without variant codes cannot imply a confirmed shoe size (0.561552ms)
+✔ one incomplete aggregate variant cannot inherit another variant price or stock (1.70819ms)
+✔ percent-escape hex case is equivalent while ordinary product path case stays exact (3.804909ms)
+✔ late retailer rendering respects explicit A–Z and closest order, including zero distance (17.011121ms)
+✔ dialog keyboard journey enters, wraps focus, closes with Escape and restores its opener (3.734666ms)
+✔ legacy Premium close buttons receive a name and work with Escape (1.192105ms)
+✔ feedback validates rating and size and excludes location coordinates and arbitrary technical fields (1.927943ms)
+✔ worker delivers only validated feedback fields when its endpoint is configured (6.946798ms)
+✔ existing feedback service requires an explicit Formspree delivery receipt and preserves opt-out (6.120669ms)
+✔ shopping mutations refresh the separate quick-action label and pressed state (3.416742ms)
+✔ Gemini is optional and sends image bytes and credentials only to the fixed provider endpoint (5.661467ms)
+✔ configured Gemini still requires independent corroboration before exact photo identification (26.54014ms)
+✔ existing project service contributes one claim and still needs independent agreement (11.182389ms)
+✔ printed pack count is corroborated separately from the model family (6.533314ms)
+✔ model-only tool package keeps hardware routing: Bosch GSB 18V-50 with batteries and charger (39.815428ms)
+✔ model-only tool package keeps hardware routing: Bosch Professional GSR 18V-50 with charger (9.670466ms)
+✔ a charger without tool identity retains electronics routing: Samsung phone charger (1.239354ms)
+✔ a charger without tool identity retains electronics routing: Bosch USB phone charger (0.516426ms)
+✔ hardware priority does not turn cosmetic face paint into a hardware search (3.370077ms)
+✔ a hardware package charger does not route its drill to electronics stores (4.816398ms)
+✔ legacy health recognizes configured Gemini without asserting a successful inference (1.681361ms)
+✔ active reliability client retains uncertainty through the commerce API (13.284386ms)
+✔ GET retry preserves uncertainty rather than publishing another variant (4.641905ms)
+✔ GET product research never fetches specifications for an uncertain variant (59.667614ms)
+✔ GET commerce retries retain photo origin and separate variant fields (5.342511ms)
+✔ retailer fallback cache cannot reuse typed confirmation for an unconfirmed photo variant (4.815257ms)
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:15:93)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1402:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:16:88)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1402:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:17:78)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1402:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:19:10)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1402:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+✔ delayed product research never reopens a closed Product Info panel (18.212759ms)
+✔ research for an old product cannot overwrite the next product (4.004245ms)
+✔ a failed research request settles the retry control (3.074838ms)
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:64:10)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1402:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:66:273)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1402:25)
+    at Test.processPendingSubtests (node:internal/test_runner/test:974:18) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:77:11)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1402:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+FindIt nearby search needs location permission
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:77:11)
+    at async Test.run (node:internal/test_runner/test:1409:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+FindIt nearby search needs location permission
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:91:11)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1402:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:95:6)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1402:25)
+    at Test.processPendingSubtests (node:internal/test_runner/test:974:18) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+✔ a transient read-only source 503 gets one bounded retry without repeating identification (509.941746ms)
+✔ saved items merge storage sources and flatten collection products (2.462989ms)
+✔ shopping snapshots reject old offers and uncertain product identities (5.245958ms)
+✔ saved shopping item gains late verified offers without losing its saved date (1.849207ms)
+✔ abbreviated retailer title uses its own Product description without changing variants (18.251931ms)
+✔ product information extracts item-specific structured specifications across categories (97.216489ms)
+✔ partial photo identities load nearby category stores without claiming exact stock (7.506631ms)
+✔ typing a brand and product type does not confirm an exact model (13.255819ms)
+✔ a new typed family search clears the previous photo, while explicit candidate confirmation retains it (5.703676ms)
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:91:11)
+    at async Test.run (node:internal/test_runner/test:1409:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:95:6)
+    at async Test.run (node:internal/test_runner/test:1409:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:117:10)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1402:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+FindIt nearby search needs location permission
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:169:10)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1402:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:171:5)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1402:25)
+    at Test.processPendingSubtests (node:internal/test_runner/test:974:18) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+✔ a delayed product-family nearby lookup cannot overwrite a newly selected location or radius (12.153625ms)
+✔ product research prefers drill facts over corporate marketing on the same product page (5.726384ms)
+✔ history entries reopen their stored query for fresh product research (1.766626ms)
+✔ catalogue identities are labelled as barcode matches rather than AI or user confirmations (2.185041ms)
+✔ product strengths discard popularity slogans and keep published microphone features (3.343473ms)
+✔ a toilet-paper photo gets paper buying guidance rather than food instructions (0.955654ms)
+✔ empty photo research settles the dashboard loading status (2.069431ms)
+✔ nearby outage messages follow only the selected product, radius and location (1.213022ms)
+✔ typed product research preserves the advertised fifty Premium history entries (1.610616ms)
+✔ barcode tool reuses maintained search and replaces the previous photo identity (2.131272ms)
+✔ brand-only photo evidence cannot claim a recognised product type (1.815899ms)
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:182:10)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1402:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+✔ a newly selected photo immediately invalidates pending typed research (11.864704ms)
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:188:10)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1402:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:196:5)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1402:25)
+    at Test.processPendingSubtests (node:internal/test_runner/test:974:18) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+✔ partial Product Info does not claim a brand absent from the identity (2.835417ms)
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:227:10)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1402:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+✔ partial photo history is persisted with its uncertainty and reopens without a typed identification request (6.909553ms)
+✔ saved and collection snapshots retain photo uncertainty independently of history (2.40231ms)
+✔ Premium capture save handler preserves uncertain identity even when only maintained window state exists (2.36829ms)
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:234:10)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1402:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+✔ older saved entries without original identity evidence cannot silently become confirmed typed products (3.032957ms)
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:242:10)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1402:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:248:10)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1402:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+✔ refreshing a restored uncertain Find needs no photo and never sends its guess to typed identification (3.520012ms)
+✔ refreshing a restored exact Find rechecks commerce and research with the existing identity (2.19128ms)
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:258:10)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1402:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+FindIt nearby search needs location permission
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:267:10)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1402:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:267:10)
+    at async Test.run (node:internal/test_runner/test:1409:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:267:10)
+    at async Test.run (node:internal/test_runner/test:1409:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+FindIt nearby search needs location permission
+FindIt nearby search needs location permission
+FindIt nearby search needs location permission
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:275:10)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1402:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+✔ reopening a confirmed history item preserves brand, category and variant instead of reparsing its name (4.101637ms)
+✔ explicit candidate confirmation uses the reviewed listing brand rather than an earlier manufacturer guess (2.374068ms)
+✔ older candidate payload preserves a supported brand only when the reviewed product name contains it (4.962172ms)
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:281:10)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1402:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+✔ Product Info separates independently read label facts and maker from external specifications (11.170204ms)
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:286:10)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1402:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+FindIt commerce request failed Error: Source temporarily unavailable
+    at json (evalmachine.<anonymous>:28:527)
+    at async Promise.all (index 0)
+    at async Object.runSearch [as finditRunProductSearch] (evalmachine.<anonymous>:47:14)
+    at async TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:290:2)
+    at async Test.run (node:internal/test_runner/test:1409:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+FindIt product insights failed Error: Source temporarily unavailable
+    at json (evalmachine.<anonymous>:28:527)
+    at async Object.runSearch [as finditRunProductSearch] (evalmachine.<anonymous>:49:10)
+    at async TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:290:2)
+    at async Test.run (node:internal/test_runner/test:1409:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+FindIt commerce response has no offer list
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:296:11)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1402:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+FindIt commerce request failed Error: Unavailable
+    at json (evalmachine.<anonymous>:28:527)
+    at async Promise.all (index 0)
+    at async Object.runSearch [as finditRunProductSearch] (evalmachine.<anonymous>:47:14)
+    at async TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:298:3)
+    at async Test.run (node:internal/test_runner/test:1409:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+FindIt product insights failed Error: Unavailable
+    at json (evalmachine.<anonymous>:28:527)
+    at async Object.runSearch [as finditRunProductSearch] (evalmachine.<anonymous>:49:10)
+    at async TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:298:3)
+    at async Test.run (node:internal/test_runner/test:1409:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+FindIt commerce response has no offer list
+FindIt nearby search needs location permission
+FindIt nearby search needs location permission
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:296:11)
+    at async Test.run (node:internal/test_runner/test:1409:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+FindIt commerce request failed Error: Unavailable
+    at json (evalmachine.<anonymous>:28:527)
+    at async Promise.all (index 0)
+    at async Object.runSearch [as finditRunProductSearch] (evalmachine.<anonymous>:47:14)
+    at async TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:298:3)
+    at async Test.run (node:internal/test_runner/test:1409:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+FindIt product insights failed Error: Unavailable
+    at json (evalmachine.<anonymous>:28:527)
+    at async Object.runSearch [as finditRunProductSearch] (evalmachine.<anonymous>:49:10)
+    at async TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:298:3)
+    at async Test.run (node:internal/test_runner/test:1409:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+FindIt commerce response has no offer list
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:296:11)
+    at async Test.run (node:internal/test_runner/test:1409:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+FindIt commerce request failed Error: Unavailable
+    at json (evalmachine.<anonymous>:28:527)
+    at async Promise.all (index 0)
+    at async Object.runSearch [as finditRunProductSearch] (evalmachine.<anonymous>:47:14)
+    at async TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:298:3)
+    at async Test.run (node:internal/test_runner/test:1409:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+FindIt product insights failed Error: Unavailable
+    at json (evalmachine.<anonymous>:28:527)
+    at async Object.runSearch [as finditRunProductSearch] (evalmachine.<anonymous>:49:10)
+    at async TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:298:3)
+    at async Test.run (node:internal/test_runner/test:1409:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+FindIt commerce response has no offer list
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:303:10)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1402:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+Product guidance unavailable TypeError [ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING]: A dynamic import callback was not specified.
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:280:9)
+    at evalmachine.<anonymous>:7:52
+    at evalmachine.<anonymous>:199:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at Object.runInNewContext (node:vm:310:38)
+    at runtime (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:12:5)
+    at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/information-recovery.test.js:308:10)
+    at Test.runInAsyncScope (node:async_hooks:227:14)
+    at Test.run (node:internal/test_runner/test:1402:25) {
+  code: 'ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING'
+}
+FindIt nearby search needs location permission
+FindIt nearby search needs location permission
+✔ failed source checks survive refresh without becoming verified product facts (2.721139ms)
+✔ explicit candidate confirmation retains recently checked facts through a failed refresh without retaining its price (22.929453ms)
+✔ expired or differently named candidate evidence cannot fill a failed confirmation refresh (6.438631ms)
+✔ a manufacturer document mismatch keeps a useful source link without publishing its facts (2.189727ms)
+✔ correcting a partial photo retains its single unconfirmed printed label (1.845923ms)
+✔ invalid chooser and dropped files are stopped before upload bridges mutate the current Find (4.284201ms)
+✔ changing location cannot publish an old location response, including errors (2.250134ms)
+✔ changing radius rejects a slower previous nearby request for the same product and coordinates (1.415963ms)
+✔ toy windows are not labelled as Windows operating-system compatibility (52.418431ms)
+✔ retailer suggestions follow the product category and never claim unverified stock (7.419663ms)
+✔ native discovery actually visits category retailers instead of the general fallback (31.126361ms)
+✔ an Original jeans search does not accept adjacent shrink-to-fit, Thermadapt or loose variants (5.769669ms)
+✔ legacy Premium dialogs move outside the nearly transparent legacy page before opening (3.89907ms)
+✔ collections show their saved products and adding the same Find twice does not duplicate it (2.145413ms)
+✔ History+ reopens the selected stored query inside FindIt and supports filtering and removal (1.889076ms)
+✔ Premium workspace navigation is installed eagerly and loader does not install a second copy (0.53082ms)
+✔ Premium saved-item counts include collection contents without counting collection headings or duplicates (2.034069ms)
+✔ Saved, Compare and Filter workspace dialogs move outside the hidden legacy page (2.473054ms)
+✔ store comparison highlights the closest branch even after alphabetical sorting (1.586351ms)
+✔ malformed search inputs return actionable input errors without invoking providers (12.921589ms)
+✔ unsupported search payload and broken multipart data are not reported as photo-service outages (5.399946ms)
+✔ valid aliases remain usable and an overlong search never silently loses its size qualifier (2.19796ms)
+✔ null and array payloads cannot crash product information, assistant or feedback routes (15.824565ms)
+✔ manufacturer adapters use requested models rather than stored specifications or guessed variants (12.958211ms)
+✔ matching manufacturer documents provide attributed specifications without requiring an offer (64.764067ms)
+✔ a single branded model reading remains separate from a corroborated object (5.505891ms)
+✔ possible model research cannot promote an unconfirmed brand, price or stock onto the photo (23.344173ms)
+✔ ambiguous, mismatched and untagged brand hypotheses cannot silently select a product (0.389112ms)
+✔ abbreviated names expand only for the same canonical product and a matching page title (1.176088ms)
+✔ primary manufacturer names can supply possible product facts with no price or confirmed photo brand (3.470309ms)
+✔ the product definition takes priority over a mounting feature as its purpose (3.15098ms)
+✔ public document metadata retrieves the guide without relying on the website shell (1.297857ms)
+✔ private, mismatched or non-English document lookups cannot supply product facts (1.970486ms)
+✔ unavailable manufacturer documents report source status without exposing response bodies (1.462829ms)
+✔ confirmed product research retains the canonical manufacturer record when search fills the page budget (7.457789ms)
+✔ confirmed research rejects abbreviated recommendation records on another canonical page (2.201074ms)
+✔ manufacturer serialized product data supplies live facts without evaluating scripts or reading recommendations (1.822097ms)
+✔ exact information falls back to public retailer catalogues when web search returns no candidates (6.706114ms)
+✔ consumer contact lines are not product purpose, strengths or specifications (2.233903ms)
+✔ manufacturer lookup preserves the printed personal-care scent and excludes other variants and sizes (3.629293ms)
+✔ manufacturer primary SEO description survives empty display copy and unknown photo brand (0.604218ms)
+✔ published technical strengths remain attributed when a manufacturer gives one overview sentence (2.179923ms)
+✔ brand and model text search researches manufacturer facts without requiring a product-type word (3.607161ms)
+✔ map requests share a load, use local assets, and wait for both CSS and JS (3.593832ms)
+✔ failed script is removed and next user attempt can recover without a reload (1.57211ms)
+✔ CSS failure retries styling even when JavaScript has loaded (1.257178ms)
+✔ hung downloads time out and permit a later attempt (1.301863ms)
+✔ tile errors and stalls report uncertainty; recovered imagery clears it; teardown cancels timer (1.056993ms)
+✔ vendored Leaflet includes license and every CSS/marker image dependency (0.750272ms)
+✔ a failed map reopen preserves an already initialized map and its controls (1.346138ms)
+✔ a confirmed headphone model matches retailer headset wording without accepting another model or accessory (23.881134ms)
+✔ specialist hardware search keeps exact models and distinguishes bundle separators from Plus models (18.581906ms)
+✔ a page is parsed once for identity, price and stock within a verification request (3.586691ms)
+✔ legacy native retailer path uses authoritative evidence: explicit USD remains USD (11.906034ms)
+✔ legacy native retailer path uses authoritative evidence: recommendation prices and cart buttons cannot verify product price or stock (3.25986ms)
+✔ gaming headset discovery uses the current Computer Mania catalogue and verifies the exact listing (2.591548ms)
+✔ predictive catalogue finds product URLs without treating suggestions as commerce evidence (3.240111ms)
+✔ a published SKU omitted from suggestion titles can still reach strict page verification (1.955784ms)
+✔ unavailable retailer search does not skip independently verified product candidates (9.161673ms)
+✔ a Plus title cannot override its contradictory base-model product code (2.138853ms)
+✔ retailer trust requires a complete host boundary (9.067724ms)
+✔ exact structured retailer evidence avoids reader fetch and full-page text work (7.138148ms)
+✔ unstructured pages retain reader fallback without promoting unrelated data (0.846805ms)
+✔ empty nearby map is stable under repeated dashboard mutation refreshes (3.819002ms)
+✔ provider outages are distinguished from a successful empty nearby search (16.609948ms)
+✔ final-product-experience-fix.js ranks a branch at the selected point before farther branches (3.690253ms)
+✔ dashboard-retailer-relevance-fix.js ranks a branch at the selected point before farther branches (1.298047ms)
+✔ dashboard-runtime-fix.js ranks a branch at the selected point before farther branches (1.758234ms)
+✔ different colour/wash listings cannot be called the cheapest exact item (3.491671ms)
+✔ a published member price cannot silently compete with an unconditional price (0.29954ms)
+✔ different source variant attributes and ambiguous multi-variant pages prevent ranking (0.260032ms)
+✔ equivalent listing labels and matching conditions retain useful comparisons (0.470101ms)
+✔ multiple nameless offers are not evidence of the same variant (0.247554ms)
+✔ browser and server reject the same variant and eligibility mismatches (2.414448ms)
+✔ the full commerce response preserves listings while withholding a mixed-variant best price (41.146442ms)
+✔ Ask FindIt lists the variants and conditions without declaring one the cheapest (20.229165ms)
+✔ structured variant attributes survive actual verification and expose multi-variant ambiguity (2.015702ms)
+✔ Smart Choice does not make an arbitrary best-overall recommendation across different variants (4.789187ms)
+✔ the quick shopping/watch selector cannot bypass a single ambiguous product-page result (1.74885ms)
+✔ quantity and multiplier spacing compares equivalent published labels without merging amounts (1.138103ms)
+✔ missing, blank, zero, negative and invalid prices never become free offers (2.047318ms)
+✔ USD and EUR remain their retailer currencies (18.392376ms)
+✔ unknown currency is labelled and not ranked as cheapest (0.29253ms)
+✔ different currencies are not compared without conversion evidence (0.23819ms)
+✔ cheapest uses only positive exact offers in one currency (0.704415ms)
+✔ typed confirmation and missing photo confidence never show zero percent (0.224009ms)
+✔ headline formatter keeps conditional pricing visible instead of displaying an unconditional amount (0.674872ms)
+✔ exact-retailer-fix.js preserves source, currency and branch evidence through normalization (2.942414ms)
+✔ results-core-v3.js preserves source, currency and branch evidence through normalization (1.115018ms)
+✔ exact-retailer-fix.js formats unknown currency without guessing rand (21.255714ms)
+✔ results-core-v3.js formats unknown currency without guessing rand (1.721319ms)
+✔ official locator parsing preserves the real branch and excludes different concepts and unsafe links (3.019006ms)
+✔ beauty nearby discovery retains official branches during map-provider outages and filters by radius (21.459523ms)
+✔ published electronics branches retain exact contact/coordinate provenance and never claim inventory (2.766075ms)
+✔ inactive, closed, virtual, foreign, malformed and duplicate locator records do not become physical stores (1.724404ms)
+✔ published schedules retain holidays and keep missing, conflicting or exceptional hours unknown (25.103969ms)
+✔ nearby electronics discovery survives failed map providers and independently verifies branch schedules (39.323082ms)
+✔ branch fields require independent name and coordinate/address evidence (0.498663ms)
+✔ authoritative locator records replace nearby generic map duplicates without inheriting stock or price (0.394259ms)
+✔ unavailable official locators do not manufacture branch details (1.351766ms)
+✔ official hardware branches retain published provenance without converting collection capability into stock (2.369923ms)
+✔ foreign, closed, nonphysical, malformed, redirected and duplicate branches are rejected (1.296966ms)
+✔ warehouse and superstore IDs work while contradictory source coordinates cannot create a nearby pin (0.66003ms)
+✔ hardware schedule reads AM/PM and leaves missing, malformed, conflicting and exceptional days unknown (23.68948ms)
+✔ hardware branch verification requires the name and independent location evidence (3.052265ms)
+✔ both nearby routes recover official hardware branches when maps fail and independently verify details (31.029886ms)
+✔ hardware locator coalesces callers and handles invalid JSON and provider outages without fake stores (5.694607ms)
+✔ official sports locator keeps active coordinate-backed branches and published contact details (2.543507ms)
+✔ official locator schedules retain weekday and public-holiday rules without guessing missing days (20.836123ms)
+✔ an older photo cannot overwrite a later photo result (4.711694ms)
+✔ a photo response cannot overwrite a typed search (1.084123ms)
+✔ uncertain photos finish once with manual-input guidance, without repeated inference calls (1.695962ms)
+✔ service limits are explained instead of blaming photo clarity (1.057825ms)
+✔ overlay cleanup immediately releases the page without a delayed timer racing a new search (1.037745ms)
+✔ repeat activation while the same photo is pending starts only one inference request (1.773656ms)
+✔ photo warning retains the backend explanation: PHOTO_IDENTIFICATION_TEMPORARILY_UNAVAILABLE (1.015933ms)
+✔ photo warning retains the backend explanation: PHOTO_IDENTITY_UNCERTAIN (0.942034ms)
+✔ photo model agreement does not confirm a retailer colour or clothing size (1.868846ms)
+✔ unconfirmed photo variants remain reviewable but cannot supply best price or verified seller stock (89.666821ms)
+✔ an ambiguous multi-size listing needs review when photo colour is known but size is not (0.196709ms)
+✔ Premium manual search routes its new query through the maintained search journey (5.974269ms)
+✔ legacy exact lookup preserves uncertainty while a fresh search clears the prior identity (2.562215ms)
+✔ workspace search tools use maintained actions even after legacy globals are overwritten (3.725905ms)
+✔ Exact Match on a partial photo opens evidence review without researching an assumed model (1.215596ms)
+✔ maintained Premium actions load on the initial page without depending on a research response (0.499844ms)
+✔ shopping and watch snapshots preserve the exact source price conditions (2.992327ms)
+✔ shopping subtotal retains selected-offer caveats and their price sources (1.802499ms)
+✔ history counts observations and compares only prices with the same conditions (28.814912ms)
+✔ quick watch does not announce a price drop when fee conditions change (2.984235ms)
+✔ Premium checks rebase changed fee conditions without false price or target alerts (5.580701ms)
+✔ watch rendering escapes retailer price conditions rather than treating them as markup (3.621386ms)
+✔ quick watch cannot compare a cheaper different variant from the same retailer (1.437292ms)
+✔ Premium watch cannot issue a price or restock alert for a different listing variant (1.757413ms)
+✔ ui-cleanup.js keeps source price conditions beside the listing and escapes markup (6.377741ms)
+✔ dashboard-audit-controls.js keeps source price conditions beside the listing and escapes markup (1.882116ms)
+✔ primary price eligibility survives publisher label names, class order and whitespace (3.44337ms)
+✔ eligibility badges in recommendations cannot qualify an unrelated primary price (0.297387ms)
+✔ actual verification keeps the membership condition with the exact online offer (17.10855ms)
+✔ dashboard-commerce-status.js headline uses one shared currency/evidence rule (24.470548ms)
+✔ nearby-results-fix.js headline uses one shared currency/evidence rule (9.078841ms)
+✔ dashboard-retailer-relevance-fix.js headline uses one shared currency/evidence rule (4.611406ms)
+✔ South African headline rejects foreign currency even when the retailer has a local domain (2.096601ms)
+✔ information renderer delegates Smart Choice to its existing owner without rewriting cards (1.582756ms)
+✔ legacy value fallback leaves owned Smart Choice cards unchanged (1.166294ms)
+✔ dashboard-commerce-status.js headline retains member-price qualification (1.576427ms)
+✔ nearby-results-fix.js headline retains member-price qualification (1.230117ms)
+✔ dashboard-retailer-relevance-fix.js headline retains member-price qualification (3.830709ms)
+✔ local-market-commerce-fix.js headline retains member-price qualification (1.362332ms)
+✔ product specification tables keep exact units and deduplicate repeated tables (3.366027ms)
+✔ labelled technical paragraphs retain exact source units and exclude unrelated prose (2.351636ms)
+✔ Shopify description specifications are scoped to the verified product, excluding footer tables (28.110877ms)
+✔ verified structured descriptions expose technical paragraph specs with attribution (35.481968ms)
+✔ short Woo catalogue descriptions are enriched only from an independently matching product content block (12.04219ms)
+✔ retailer product attributes and price caveats remain scoped and do not turn a link into purpose (29.589869ms)
+✔ catalogue aliases collapse without claiming an independently verified manufacturer code or units (0.663054ms)
+✔ different manufacturer codes, quantities and source provenance remain separate (0.175027ms)
+✔ product research distinguishes unavailable sources from product mismatches (2.130621ms)
+✔ product purpose prefers a sourced function over an earlier material or fit fragment (3.290115ms)
+✔ product-specific member-price badge is retained as a price condition (0.518111ms)
+✔ member-price badges in recommendations, headers or script templates do not qualify this product (0.233122ms)
+✔ verified offers preserve the member-price qualification through the existing price-condition field (2.549427ms)
+✔ retailer layout with the primary price outside its metadata-only main block retains the badge (0.146725ms)
+✔ the same primary member price is recognised when the retailer uses a textual +more label (0.334101ms)
+✔ a trailing published supplier style retains the complete useful sentence and source code (2.4904ms)
+✔ quantity formatting cannot obstruct label discovery or silently confirm a different pack (3.528134ms)
+✔ cross-unit label candidates retain uncertainty and never become confirmed photo identity (29.448243ms)
+✔ scoped definition lists preserve units and label instructions without contact or payment content (2.541504ms)
+✔ product research attributes individual facts and included items to the actual matched source (19.883412ms)
+✔ verification guidance covers different product families without inventing model specifications (3.538545ms)
+✔ box contents stay attributed as included items rather than strengths or connection compatibility (29.115203ms)
+✔ advertising slogans and social connection claims are not technical product evidence (8.858337ms)
+✔ reject unsafe product source https://user:password@shop.example/item (2.661501ms)
+✔ reject unsafe product source https://shop.example:8443/item (0.186024ms)
+✔ reject unsafe product source https://metadata.google.internal/item (0.200254ms)
+✔ reject unsafe product source https://printer.local/item (0.254404ms)
+✔ reject unsafe product source https://localhost/item (0.183951ms)
+✔ reject unsafe product source https://127.0.0.1/item (0.100978ms)
+✔ reject unsafe product source https://2130706433/item (0.202788ms)
+✔ reject unsafe product source https://[::1]/item (0.21149ms)
+✔ reject unsafe product source http://shop.example/item (0.198051ms)
+✔ offer verifier rejects redirect before requesting its invalid destination: https://127.0.0.1/secret (5.852951ms)
+✔ offer verifier rejects redirect before requesting its invalid destination: https://metadata.google.internal/secret (1.638227ms)
+✔ offer verifier rejects redirect before requesting its invalid destination: https://other.example/item (1.61936ms)
+✔ offer verifier rejects redirect before requesting its invalid destination: https://user:password@shop.example/item (2.432685ms)
+✔ offer verifier rejects redirect before requesting its invalid destination: / (0.463191ms)
+✔ same-publisher canonical redirects are followed with a bounded request budget (8.541581ms)
+✔ product-information input cannot request a credential-bearing or redirected private source (7.933348ms)
+✔ food catalogue requires a valid GTIN and an identical returned barcode (4.571908ms)
+✔ barcode search returns sourced catalogue identity without inventing retailer evidence (11.550242ms)
+✔ unknown barcode preserves the code and does not substitute a different product (2.023294ms)
+✔ public catalogue price uses published currency and minor units, with online stock only (24.11493ms)
+✔ different permalinks and protected catalogue entries are not used (7.436728ms)
+✔ price ranges or absent currency units do not become an invented exact price (2.20437ms)
+✔ a public catalogue cannot substitute an adjacent Plus model (2.574533ms)
+✔ native public catalogue discovery validates publisher and protected records (2.090752ms)
+✔ nested official WooCommerce product permalinks are discovered and independently verified (7.474984ms)
+✔ published catalogue names decode HTML entities before display and matching (0.663535ms)
+✔ published fallback contains dated coordinate-backed official retailer locations (1.526283ms)
+✔ published fallback expires instead of presenting stale locations as current (0.865562ms)
+✔ future-dated and invalid publication dates cannot create locations (0.135218ms)
+✔ untrusted source or malformed coordinates cannot create fallback pins (1.366888ms)
+✔ fallback strips live hours, inventory and prices even if present in input (0.38835ms)
+✔ gym nearby search returns published official locations when all upstream sources fail (8.815323ms)
+✔ fractional volumes and weights never accept the integer suffix as an exact variant (10.375766ms)
+✔ metric spelling, spacing and equivalent units preserve exact quantity identity (4.013047ms)
+✔ equivalent size cannot bypass model, colour, product type or explicit size constraints (0.638228ms)
+✔ the page verifier rejects wrong quantities and retains the published equivalent size (47.117957ms)
+✔ EAN and zero-padded GTIN14 match only the same valid barcode (1.303746ms)
+✔ script.js retains photo identity evidence in history (8.013826ms)
+✔ results-core-v3.js retains photo identity evidence in history (11.475993ms)
+✔ exact-retailer-fix.js retains photo identity evidence in history (8.480352ms)
+✔ history dialog exposes all 50 Premium finds and applies the Free limit (2.65378ms)
+✔ typed beauty searches provide real retailer domains without claiming price or stock (4.631907ms)
+✔ typed footwear searches route to footwear retailers (1.758484ms)
+✔ retailer suggestions do not replace populated store results (3.611857ms)
+✔ no product means no retailer suggestions (1.345317ms)
+✔ verified listings retain product links and distinguish online stock from branch stock (24.586168ms)
+✔ unverified offers cannot become verified retailer cards (1.345337ms)
+✔ fallback uses product-scoped price and stock rather than recommendation text (20.789058ms)
+✔ fallback preserves published foreign currency instead of assuming ZAR (3.823008ms)
+✔ fallback cannot promote an unconfirmed photo to an exact seller (0.355452ms)
+✔ fallback cannot use recommendations as the requested product (2.96048ms)
+✔ failed retailer requests do not fabricate an offer from rendered snippets (0.684746ms)
+✔ coverage never ranks incomparable currencies as the cheapest offer (2.097282ms)
+✔ retailer generated JSON-LD yields only exact product-scoped price and stock (12.212636ms)
+✔ generated JSON-LD parser handles escaped strings without executing expressions (0.915526ms)
+✔ Clicks brand-only JSON-LD name requires exact description and ignores an unevaluated image identifier (1.353559ms)
+✔ an unpriced duplicate Product node does not hide a priced node for the same exact product (0.997526ms)
+✔ conflicting prices or stock in duplicate exact Product nodes stay unverified (0.901034ms)
+✔ retailer adapter discovers Sony WH-1000XM5 black with the retailer's actual search route (37.400217ms)
+✔ retailer adapter discovers Nivea Rich Nourishing Body Lotion 250ml with the retailer's actual search route (14.74752ms)
+✔ broader retailer discovery preserves exact identity and size for subsequent verification (4.133825ms)
+✔ strong exact candidates from later searches outrank partial matches before the verification budget (1.340279ms)
+✔ retailer platform and category adapter: Nivea Rich Nourishing Body Lotion 250ml (0.955294ms)
+✔ retailer platform and category adapter: Bosch GSB 185 LI drill (1.066778ms)
+✔ retailer platform and category adapter: Bosch GSB 18V-50 drill (1.360109ms)
+✔ retailer platform and category adapter: LEGO Classic 10698 (2.38852ms)
+✔ retailer platform and category adapter: Sony smart speaker (1.649363ms)
+✔ retailer platform and category adapter: Sony WH-1000XM5 black (1.095029ms)
+✔ retailer platform and category adapter: Faber Castell pencil (1.291327ms)
+✔ retailer platform and category adapter: Caterpillar cordless drill (1.044004ms)
+✔ apostrophe spelling is equivalent while size and brand remain exact (1.482498ms)
+✔ product name anchor wins over earlier duplicate image anchor containing inline styles (1.192312ms)
+✔ large personal-care catalogue pages retain later exact products instead of truncating them (16.499936ms)
+✔ electronics catalogue discovery includes FirstShop and excludes different colourways (2.764071ms)
+✔ catalogue model fallback handles headset wording without dropping separate colour or size constraints (6.355579ms)
+✔ full HTML catalogue extraction retains later named anchors while excluding unrelated navigation (8.686404ms)
+✔ Bash uses its published search route for Example Classic Low White Blue Sneaker (1.447007ms)
+✔ Bash uses its published search route for Example Original Jeans (0.958419ms)
+✔ Bash discovery leaves exact colour and size decisions to product-page verification (7.911906ms)
+✔ scanner puts focus inside and restores its opener on close (3.897136ms)
+✔ closing while camera permission is pending stops late media without playing it (6.645986ms)
+✔ a camera request from a closed dialog cannot attach to a reopened scanner (2.08286ms)
+✔ invalid explicit and numeric barcode inputs are rejected before external catalogue or model calls (12.294977ms)
+✔ formatted valid explicit barcode keeps the canonical digits when catalogue is unavailable (2.398664ms)
+✔ an empty photo is rejected without invoking an AI provider (5.911987ms)
+✔ native Shopify product JSON produces a product-scoped price, availability and research description (10.90981ms)
+✔ unscoped recommendations, multiple variants, invalid currency and price are rejected (0.476791ms)
+✔ Shopify SKU is never silently converted into a barcode (1.403623ms)
+✔ shopping plan retains USD rather than assuming rand (6.106663ms)
+✔ mixed or missing currencies cannot be summed into a shopping total (6.59433ms)
+✔ saved online offers do not turn matching retailer coordinates into verified trips (1.757051ms)
+✔ branch-specific price and stock can support a physical trip (1.371335ms)
+✔ missing prices are not zero-cost shopping totals (1.093226ms)
+✔ shopping plans retain the item but do not choose an arbitrary colour or eligibility condition (2.989152ms)
+✔ chain online price never inherits nearest branch distance or opening state (2.984216ms)
+✔ branch evidence must name the matching branch, not just the chain (1.880763ms)
+✔ explicit branch price evidence retains verified distance and opening state (0.703613ms)
+✔ Smart Choice requires exact identity and independent source evidence (3.099584ms)
+✔ branch stock evidence alone does not turn an online price into a branch price (1.649634ms)
+✔ core files parse as JavaScript (271.635827ms)
+✔ retailer listings require exact identity and page evidence (0.261024ms)
+✔ product prices never rely on page-wide text scanning (0.109551ms)
+✔ photo updates reject stale responses (0.236317ms)
+✔ critical product endpoints are wired (2.738415ms)
+✔ published branch schedule uses the branch time zone (18.681812ms)
+✔ closing time is exclusive and unknown/complex schedules are not guessed (0.791633ms)
+✔ always-open schedule requires no time-zone inference (0.153646ms)
+✔ branch enrichment covers all twelve retailers and keeps same-chain branches separate (10.595069ms)
+✔ hours are fetched for the correct named branch; client hours are not evidence (1.44222ms)
+✔ store-hours route does not fall through to Message required (1.747668ms)
+✔ published ZA holiday exceptions apply only with a known country and supported calendar (1.333059ms)
+✔ store website checks reject local, encoded IP, IPv6 and credential-bearing destinations before fetching (14.15493ms)
+✔ topical cream selects pharmacy sources despite Health category wording (23.63527ms)
+✔ topical cream selects pharmacy sources despite Skin Care category wording (5.701808ms)
+✔ topical cream selects pharmacy sources despite general category wording (8.372889ms)
+✔ ice cream remains a food search rather than a pharmacy search (4.150719ms)
+✔ deodorant and antiperspirant aliases use personal-care retailers and guidance (21.009992ms)
+✔ photo selection brings its primary action into view (6.493331ms)
+✔ delayed upload scrolling cannot steal the viewport after search starts (1.345016ms)
+✔ new photo clears every old product/count label and repeated renders do not rewrite the value strip (4.295521ms)
+✔ replacement photo clears the previous Smart Choice confidence before identification completes (1.873663ms)
+✔ Smart Choice rerender preserves the existing quick-action node and its handlers (1.5449ms)
+✔ Open Now keeps an unconfirmed backend schedule unknown instead of recalculating it in browser time (1.247333ms)
+✔ Open Now filters real dashboard and quick-store cards by branch identity after sorting (3.38912ms)
+✔ Open Now closest recommendation skips closed and unknown branches while retaining truthful counts (2.220082ms)
+✔ the existing Hobby deployment stays within twelve functions and keeps every configured API destination (1.973911ms)
+✔ configuring the optional provider cannot reuse the old provider profile identity (45.554169ms)
+✔ uncertain photo identities expire quickly instead of blocking a better retry for a day (9.443486ms)
+✔ retains Beats headphones when exact models conflict, without leaking guessed model in query (6.622551ms)
+✔ retains exact corroborated model with fewer calls (0.412727ms)
+✔ different objects cannot confirm an exact product even when the brand agrees (3.111091ms)
+✔ one confident model cannot independently verify itself (0.288454ms)
+✔ a surviving complete printed shoe-family name is a reviewable candidate, not a confirmed model (1.125384ms)
+✔ different brands cannot corroborate an identically named model (0.60603ms)
+✔ headset and headphones are recognised as the same broad object (0.604278ms)
+✔ container descriptions retain the independently recognised labelled product (0.534275ms)
+✔ two agreeing brands retain the brand when a third model misreads the logo (0.679158ms)
+✔ model punctuation and size spacing preserve exact identity (1.475347ms)
+✔ conflicting colour or size cannot publish an exact variant (0.998818ms)
+✔ a complete single-model label reading is retained only for human confirmation (0.747588ms)
+✔ shape guesses and incompletely read labels are never suggested as a model (0.68708ms)
+✔ a common printed metric size survives disagreement on an unverified secondary unit (0.189648ms)
+✔ different metric pack sizes still require confirmation (0.214335ms)
+✔ a generic object label recovers the corroborated sneaker family without accepting conflicting models (2.689502ms)
+✔ conflicting product types preserve only a corroborated brand (0.580673ms)
+✔ independent descriptive label agreement proposes paint family without inferring size or colour (0.956425ms)
+✔ a surviving complete printed label can propose a reviewed candidate when other providers fail (0.249086ms)
+✔ container graphics cannot become a paint colour or conditioner variant (1.369433ms)
+✔ conflicting shoe models remain reviewable hypotheses without confirming the photographed SKU (1.135168ms)
+✔ model hypotheses prefer the complete family name and discard isolated numeric fragments (0.399997ms)
+✔ bookcase and bookshelf readings preserve useful family evidence without inventing IKEA identity (0.382693ms)
+✔ generic object fields preserve a corroborated headset family from the other observed fields (0.416933ms)
+✔ toilet rolls and toilet paper are the same family without asserting an uncertain pack size (0.171593ms)
+✔ soft drink and beverage readings preserve supported family without translating a variant guess (0.155969ms)
+✔ missing object fields can recover a family from two independent names (0.160916ms)
+✔ construction toy synonyms keep family guidance without inventing a LEGO set number (0.436572ms)
+✔ provider template placeholders cannot veto corroborated size or confirm a fake product name (0.576598ms)
+✔ unbranded shirt descriptions retain a supported family without guessing a brand or style (0.430893ms)
+✔ a fully printed label remains a possible match when product-type readings disagree (0.19033ms)
+✔ a cream package colour is not the cream colour without independently printed evidence (0.535898ms)
+✔ complete printed consumer label and quantity corroborated by another reader resolve manufacturer field splitting (0.362302ms)
+✔ a separately printed manufacturer does not replace a complete consumer label or invent its retail brand (0.416452ms)
+✔ topical cream descriptions corroborate only their broad family without treating ice cream as the same product (0.95319ms)
+✔ brand-only consensus still retains a fully printed label as an unconfirmed candidate (0.257769ms)
+✔ printed identity reconciliation still rejects uncorroborated labels and conflicting variants (2.291057ms)
+✔ label statements need two independent transcriptions and never become formula facts (1.202076ms)
+✔ a reader using the complete printed label as its object still corroborates the independent cream family (0.429992ms)
+✔ Logitech G and Logitech retain the shared brand while conflicting unprinted models remain unconfirmed (0.410933ms)
+✔ independently transcribed labels differing only in quantity spacing are one candidate (0.638558ms)
+✔ deodorant aliases and independently transcribed label subsets preserve the complete printed identity (3.761518ms)
+✔ printed deodorant search keeps the scent and quantity while separating an anti-germ label claim (1.217749ms)
+✔ independent printed quantity survives omitted size fields and product-type words outside the chosen name (2.918408ms)
+✔ independent photo readings start together so a slow first model does not starve corroboration (223.939851ms)
+✔ an unconfirmed family reading still asks the configured alternate provider for corroboration (6.109654ms)
+✔ vision corroboration does not send unsupported capacity options to the legacy image model (2.950112ms)
+✔ bounded Gemma output spends its token budget on JSON rather than hidden reasoning (2.199509ms)
+✔ an empty JSON template is never converted into a literal product name (2.098711ms)
+✔ a single small OCR letter error can propose a source-backed product, without changing numeric models (2.181716ms)
+✔ candidate page evidence stays separate from an exact photo identity and is researched without refetching (45.08552ms)
+✔ bare brands, incorrect sizes and guessed shape models do not discover candidates (8.75902ms)
+✔ published usage, ingredients and warnings stay scoped to verified product tabs (4.160654ms)
+✔ candidate research follows only same-retailer HTTPS redirects (1.397694ms)
+✔ known brand and product family can offer an explicitly unconfirmed catalogue choice (9.526363ms)
+✔ visual model hypotheses can research matching listings without becoming confirmed photo offers (2.121554ms)
+✔ short complete model names can propose matches without accepting a bare brand or number (0.194666ms)
+✔ a second model hypothesis is researched when the first has no retailer result (3.976168ms)
+✔ published headset connection facts survive research for compatibility questions (3.545676ms)
+✔ research removes rhetorical marketing and keeps differing variant codes scoped to their listings (5.674971ms)
+✔ alternate printed brand is used only for an unconfirmed retailer page and retains exact size checks (2.899477ms)
+✔ a complete printed name and quantity can research a retailer brand without promoting a manufacturer guess (2.944783ms)
+✔ generic visual phrases cannot admit a different numbered headset model beside a specific hypothesis (3.740852ms)
+✔ both watchlists migrate without duplicates, losing target prices, or inventing zero prices or out-of-stock claims (3.493053ms)
+✔ watch migration retains more than fifty existing records and gives legacy records stable keys (2.175576ms)
+✔ missing watch prices and unknown currencies never render as a free ZAR offer (17.273623ms)
+✔ a different-currency watch offer cannot overwrite a saved baseline or trigger a price drop (1.683404ms)
+✔ new Premium watches retain unknown currency instead of inventing a rand baseline (2.467496ms)
+✔ simultaneous identical read-only commerce requests share verification and receive independent response bodies (69.259811ms)
+✔ photo uncertainty and typed confirmation never share a verification result (22.930636ms)
+✔ distinct selected locations do not coalesce commerce requests (17.269213ms)
+ℹ tests 647
+ℹ suites 0
+ℹ pass 647
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2545.07736

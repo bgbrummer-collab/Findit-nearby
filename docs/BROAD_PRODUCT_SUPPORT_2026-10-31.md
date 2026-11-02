@@ -61,3 +61,10 @@ Pet food exposed a shared taxonomy mismatch: core treated it as household grocer
 The reused primary image API lacked structured size, colour and barcode output properties even though its prompt referred to them. Add nullable fields to its schema and explicitly request full readable model/generation/style/article codes in primary and checker prompts. Do not add image passes or change billing/model configuration. Unknown fields remain null, unprinted medical strength is not inferred, and Cloudflare still requires independent corroboration. Rotate the photo cache to v43 and commerce/research generations to avoid stale partial identities or grocery routing. A service regression verifies a full model and supported variant fields survive the real response pipeline in a single existing request. Validation: 647 Node tests and syntax/diff checks pass. Production source/photo checks are still required after rollout; no universal-coverage claim is made.
 
 The model-focused local probe found the exact Gym Gear RowErg page while rejecting other rowing machines. That source probe did not verify a price or availability, so it remains partial evidence, not a complete shopping pass.
+
+
+## 2 November review on current main
+
+Reconciled this existing PR with deployed camera-generation and product-fact repairs, plus upload-scroll ownership. The staged live adult dog-food query returned Central Vet's **Royal Canin Mini Puppy Food2kg** because its description mentions adult food. This is a failed exact match, not a catalogue success. Added a primary-name life-stage conflict guard for pet food (adult/puppy/kitten/senior/junior/starter), retaining matching stages and leaving accessories unchanged. Four negative regressions first failed, then passed. No wrong-stage listing may be rescued by requested words in its description.
+
+The staged fitness lookup found the correct Gym Gear RowErg page but no published price. That is partial discovery, not a complete shopping pass. Current-base validation:662 Node tests pass. Hosted amended-PR checks, production rollout, actual photo uploads and final source verification remain required. No broad launch sign-off.
