@@ -1,0 +1,97 @@
+{
+  "code": "d219c95889332543b578a1b2bfa028c8a207c5e9",
+  "workflowRuns": [
+    {
+      "id": 41445345228,
+      "name": "FindIt smoke checks",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/41445345228"
+    },
+    {
+      "id": 41445345171,
+      "name": "Deploy FindIt to Cloudflare",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/41445345171"
+    },
+    {
+      "id": 41445345183,
+      "name": "FindIt regression checks",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/41445345183"
+    },
+    {
+      "id": 41445345136,
+      "name": "FindIt Dashboard Commerce Regression",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/41445345136"
+    },
+    {
+      "id": 41445345074,
+      "name": "pages build and deployment",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/41445345074"
+    },
+    {
+      "id": 41445345442,
+      "name": "FindIt Full Production Audit",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/41445345442"
+    },
+    {
+      "id": 41445345196,
+      "name": "FindIt Production Smoke Test",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/41445345196"
+    },
+    {
+      "id": 41445345146,
+      "name": "FindIt Release Smoke",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/41445345146"
+    },
+    {
+      "id": 41445345156,
+      "name": "FindIt Final Production Audit",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/41445345156"
+    },
+    {
+      "id": 41445345181,
+      "name": "FindIt Interaction Freeze Regression",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/bgbrummer-collab/Findit-nearby/actions/runs/41445345181"
+    }
+  ],
+  "vercel": [
+    {
+      "context": "Vercel",
+      "state": "success",
+      "url": "https://vercel.com/findit-nearby1/findit-nearby/E7PZVvmiK1CiD5SLtQzBKCsC5wiR"
+    }
+  ],
+  "localTests": {
+    "passed": 668,
+    "failed": 0
+  },
+  "latestMatrix": {
+    "code": "7cb393d0e4122554e6523be31bc0c7368fa7d329",
+    "metricPassed": 5,
+    "total": 16,
+    "limitation": "researched:true can mean only an attributed SKU; final pet UI lacks a useful product description and is not a complete information pass"
+  },
+  "unresolvedUncommonCheck": {
+    "run": 41443879329,
+    "product": "Korg Pitchclip 2",
+    "result": "No verified exact retailer page discovered"
+  }
+}
