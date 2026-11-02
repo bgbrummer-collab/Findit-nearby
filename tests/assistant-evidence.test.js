@@ -3,6 +3,14 @@ import assert from 'node:assert/strict';
 import {answerFromEvidence} from '../lib/assistant-answer.js';
 import worker from '../cloudflare/worker.js';
 const offer=(name,price,currency='ZAR')=>({product_name:'Example X1 headphones',retailer:{name},price,currency,availability:'in_stock',sourcePageVerified:true,exactProductMatch:true,product_url:'https://example.com/'+name});
+test('a source listing quantity is never presented as a quantity read from the photo',()=>{
+ const identification={name:'Example EX42 conditioner',model:'EX42',identificationMethod:'independent-vision-consensus',userConfirmed:false};
+ const research={researched:true,whatItDoes:'Example EX42 conditioner 250 ml conditions hair.',specifications:[{name:'Size',value:'250 ml'}],sources:[{url:'https://example.com/conditioner'}]};
+ const response=answerFromEvidence('What size is my photographed bottle and what is its price?',{identification,offers:[]},research);
+ assert.match(response.answer,/photo does not confirm the purchase size or pack quantity/i);
+ assert.match(response.answer,/belongs to that listing/i);assert.match(response.answer,/No exact, verified price/);assert.match(response.answer,/250 ml/);
+ const confirmed=answerFromEvidence('What size is it?',{identification:{...identification,size:'250 ml'}},research);assert.doesNotMatch(confirmed.answer,/photo does not confirm/i);
+});
 test('assistant answers combined price and location questions instead of hiding prices behind where intent',()=>{
  const r=answerFromEvidence('Where nearby is cheapest and is it in stock?',{identification:{name:'Headphones'},offers:[offer('Expensive',200),offer('Cheap',100)],stores:[{name:'Branch',distanceKm:2,address:'123 Test Road'}]});
  assert.match(r.answer,/Cheap:.*100/);assert.match(r.answer,/Lowest comparable listed ZAR price: Cheap/);assert.match(r.answer,/2.0 km/);assert.match(r.answer,/does not confirm stock at a nearby branch/);assert.equal(r.sources.length,2);
