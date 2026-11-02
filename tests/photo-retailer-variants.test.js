@@ -36,3 +36,21 @@ test('an ambiguous multi-size listing needs review when photo colour is known bu
  assert.equal(photoVariantNeedsConfirmation(listing,photo,'footwear'),true);
  assert.equal(photoVariantNeedsConfirmation(listing,{...photo,userConfirmed:true},'footwear'),false);
 });
+
+for(const [family,title] of [['beauty','Example EX42 conditioner 250ml'],['household','Example EX42 toilet paper 18 rolls'],['pet','Example EX42 adult dog food 2kg'],['medical','Example EX42 tablets 20 pack']])test('photographed packaged product needs its published purchase quantity confirmed: '+family,()=>{
+ const photo={name:'Example EX42',brand:'Example',model:'EX42',identificationMethod:'independent-vision-consensus',userConfirmed:false};
+ const listing={product_name:title};
+ assert.equal(photoVariantNeedsConfirmation(listing,photo,family),true);
+ assert.equal(photoVariantNeedsConfirmation(listing,{...photo,size:'published quantity'},family),false);
+ assert.equal(photoVariantNeedsConfirmation(listing,{...photo,userConfirmed:true},family),false);
+ assert.equal(photoVariantNeedsConfirmation(listing,{...photo,barcode:'1234567890128'},family),false);
+});
+
+test('unread photo volume stays a reviewable listing rather than an exact best price',async t=>{
+ const url='https://retailer.example/products/conditioner',title='Example EX42 conditioner 250ml';
+ const photo={name:'Example EX42 conditioner',brand:'Example',model:'EX42',object:'conditioner',identificationMethod:'independent-vision-consensus',userConfirmed:false};
+ t.mock.method(globalThis,'fetch',async u=>new Response(String(u).includes('bing.com')?'<rss><item><title>'+title+'</title><link>'+url+'</link></item></rss>':String(u)===url?'<script type="application/ld+json">'+JSON.stringify({'@type':'Product',name:title,offers:{price:100,priceCurrency:'ZAR',availability:'https://schema.org/InStock'}})+'</script>':'',{headers:{'content-type':'text/html'}}));
+ const invoke=async identification=>{let d;await handler({method:'POST',body:{identification}},{setHeader(){},status(){return this},json(v){d=v;return this}});return d};
+ const unknown=await invoke(photo);assert.equal(unknown.offers.length,0);assert.equal(unknown.bestPrice,null);assert.equal(unknown.inStockOfferCount,0);assert.equal(unknown.possibleOffers[0].price,100);assert.equal(unknown.possibleOffers[0].exactProductMatch,false);
+ const known=await invoke({...photo,size:'250ml'});assert.equal(known.offers.length,1);assert.equal(known.bestPrice.price,100);
+});
