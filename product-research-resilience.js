@@ -4,7 +4,7 @@
 if(window.__finditResearchResilienceV2)return;window.__finditResearchResilienceV2=true;
 const nativeFetch=window.fetch.bind(window);
 const norm=v=>String(v||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim();
-const keyFor=i=>'findit_web_research_v4_'+norm([i?.brand,i?.model,i?.searchQuery||i?.name||i?.object].filter(Boolean).join(' ')).slice(0,160);
+const keyFor=i=>'findit_web_research_v5_'+norm([i?.brand,i?.model,i?.searchQuery||i?.name||i?.object].filter(Boolean).join(' ')).slice(0,160);
 const inflight=new Map();
 function getCached(i){try{const x=JSON.parse(localStorage.getItem(keyFor(i))||'null');return x?.researched?x:null}catch{return null}}
 function saveCached(i,d){try{if(d?.researched)localStorage.setItem(keyFor(i),JSON.stringify({...d,clientCachedAt:new Date().toISOString()}))}catch{}}

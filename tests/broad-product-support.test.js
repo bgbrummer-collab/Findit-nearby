@@ -17,6 +17,20 @@ for(const [wanted,wrong]of [['Canon EOS R50 camera body','Tilta Full Camera Cage
  t.mock.method(globalThis,'fetch',async()=>new Response('<title>'+wrong+'</title><script type="application/ld+json">'+JSON.stringify({'@type':'Product',name:wrong,description:wanted,offers:{price:100,priceCurrency:'ZAR',availability:'https://schema.org/InStock'}})+'</script>',{headers:{'content-type':'text/html'}}));assert.equal(await verify('https://shop.example/products/ex42',ident({name:wanted})),null);
 });
 
+for(const [query,title,conflict] of [
+ ['Canon EOS R50 camera body','Used Canon EOS R50 V Mirrorless Camera Body',true],
+ ['Canon EOS R50 camera body','Canon EOS R50V camera body',true],
+ ['Example C80 camera body','Example C80 Mark II camera body',true],
+ ['Example C80 Mark II camera body','Example C80 Mark III camera body',true],
+ ['Example C80 Mark II camera body','Example C80 camera body',true],
+ ['Canon EOS R50 V camera body','Canon EOS R50V mirrorless camera body',false],
+ ['Canon EOS R50 camera body','Canon EOS R50 mirrorless camera body white',false]
+])test('camera model generation stays exact: '+query+' / '+title,async t=>{
+ const i=ident({name:query});assert.equal(productVariantConflict(title,i),conflict);
+ t.mock.method(globalThis,'fetch',async()=>new Response('<script type="application/ld+json">'+JSON.stringify({'@type':'Product',name:title,offers:{price:100,priceCurrency:'ZAR'}})+'</script>',{headers:{'content-type':'text/html'}}));
+ assert.equal(Boolean(await verify('https://shop.example/products/camera',i)),!conflict);
+});
+
 test('confirmed photo titles retain independently supported exact colour and size',()=>{
  const row={name:'Example EX42 headphones',brand:'Example',model:'EX42',object:'headphones',color:'Black',size:'Large'};
  const result=reconcileVision([row,{...row,object:'headset'}]);assert.equal(result.name,'Example EX42 headphones Large Black');assert.equal(result.searchQuery,result.name);
