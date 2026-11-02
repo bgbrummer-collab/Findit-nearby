@@ -55,3 +55,17 @@ test('box contents stay attributed as included items rather than strengths or co
  assert.ok(d.compatibility.some(s=>/Connects.*Bluetooth/.test(s)));assert.ok(d.pros.some(s=>/Adjustable headband/.test(s)));
  assert.doesNotMatch(d.compatibility.join(' '),/Package includes|charging cable/);assert.doesNotMatch(d.pros.join(' '),/Package includes|documentation/);
 });
+
+test('advertising slogans and social connection claims are not technical product evidence',async t=>{
+ const name='Example N5 Headphones',url='https://retailer.example/product/n5';
+ const description='Example N5 Headphones are designed for listening to audio. Our best noise cancelling gets even better. See how these headphones combine our best ever noise cancelling technology with superlative sound for a truly remarkable listening experience. The best noise cancelling. Listen to music, connect with friends, get notifications, set reminders, and more. Two processors control eight microphones for noise cancellation. Connects to computers using Bluetooth. Works with Android phones. Requires a separately sold adapter for wired USB audio.';
+ t.mock.method(globalThis,'fetch',async u=>new Response(String(u)===url?'<script type="application/ld+json">'+JSON.stringify({'@type':'Product',name,description})+'</script>':'<rss/>'));
+ const d=await(await worker.fetch(new Request('https://findit.test/api/product-insights',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({identification:{name},offers:[{product_url:url,sourcePageVerified:true,exactProductMatch:true}]})}),{})).json();
+ assert.doesNotMatch(d.pros.join(' '),/our best|the best|superlative|remarkable|connect with friends/i);
+ assert.doesNotMatch(d.compatibility.join(' '),/connect with friends|set reminders/i);
+ assert.ok(d.pros.some(s=>/eight microphones/.test(s)));
+ assert.ok(d.compatibility.some(s=>/Bluetooth/.test(s)));
+ assert.ok(d.compatibility.some(s=>/Android/.test(s)));
+ assert.ok(d.cons.some(s=>/separately sold adapter/.test(s)));
+ assert.ok(d.claimEvidence.pros.every(s=>s.sourceUrl===url));
+});
