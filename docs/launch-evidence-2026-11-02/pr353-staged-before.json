@@ -1,0 +1,327 @@
+[
+  {
+    "query": "Royal Canin Mini Adult dog food 2kg",
+    "search": {
+      "identification": {
+        "name": "Royal Canin Mini Adult dog food 2kg",
+        "object": "Royal Canin Mini Adult dog food 2kg",
+        "brand": "",
+        "model": "",
+        "category": "product",
+        "retailCategory": "general",
+        "searchQuery": "Royal Canin Mini Adult dog food 2kg",
+        "barcode": null,
+        "confidence": null,
+        "identificationMethod": "typed-user-input",
+        "userConfirmed": true
+      },
+      "offers": [],
+      "blocked": false,
+      "verified": false,
+      "userConfirmed": true,
+      "identitySource": "user-confirmed",
+      "visualVerification": false,
+      "provider": "user-input",
+      "imageAccepted": false,
+      "needsVision": false,
+      "needsRetailerVerification": true,
+      "code": "USER_CONFIRMED_PRODUCT",
+      "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+    },
+    "commerce": {
+      "ok": true,
+      "matched": true,
+      "exactMatchVerified": true,
+      "searchQuery": "Royal Canin Mini Adult dog food 2kg",
+      "bestProduct": {
+        "name": "Royal Canin Mini Puppy Food 2kg"
+      },
+      "bestPrice": {
+        "product_name": "Royal Canin Mini Puppy Food 2kg",
+        "product_url": "https://centralvet.co.za/products/royal-canin-mini-puppy-food-2kg?_pos=5&_sid=a339f5f1a&_ss=r",
+        "sku": "",
+        "comparisonAttributes": {
+          "size": "",
+          "color": ""
+        },
+        "comparisonAmbiguous": false,
+        "retailer": {
+          "name": "centralvet.co.za"
+        },
+        "price": 371,
+        "currency": "ZAR",
+        "availability": "in_stock",
+        "priceConditions": "",
+        "verified": true,
+        "exactProductMatch": true,
+        "sourcePageVerified": true,
+        "source": "Verified directly on exact retailer product page",
+        "matchScore": 80,
+        "stockScope": "online/general retailer availability only",
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "checkedAt": "2026-11-02T12:13:15.554Z",
+        "retailerDomain": "centralvet.co.za",
+        "trustedRetailerDomain": false
+      },
+      "priceComparisonIssue": null,
+      "priceComparisonNote": "",
+      "offers": [
+        {
+          "product_name": "Royal Canin Mini Puppy Food 2kg",
+          "product_url": "https://centralvet.co.za/products/royal-canin-mini-puppy-food-2kg?_pos=5&_sid=a339f5f1a&_ss=r",
+          "sku": "",
+          "comparisonAttributes": {
+            "size": "",
+            "color": ""
+          },
+          "comparisonAmbiguous": false,
+          "retailer": {
+            "name": "centralvet.co.za"
+          },
+          "price": 371,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "priceConditions": "",
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Verified directly on exact retailer product page",
+          "matchScore": 80,
+          "stockScope": "online/general retailer availability only",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-11-02T12:13:15.554Z",
+          "retailerDomain": "centralvet.co.za",
+          "trustedRetailerDomain": false
+        }
+      ],
+      "possibleOffers": [],
+      "variantConfirmationRequired": false,
+      "retailerStatus": [
+        {
+          "name": "centralvet.co.za",
+          "searchUrl": "https://centralvet.co.za/products/royal-canin-mini-puppy-food-2kg?_pos=5&_sid=a339f5f1a&_ss=r",
+          "exactProductMatch": true,
+          "stockVerified": true,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "verified_exact_online_listing"
+        },
+        {
+          "name": "Petworld",
+          "searchUrl": "https://petworld.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        },
+        {
+          "name": "Central Vet Midwater",
+          "searchUrl": "https://centralvet.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        },
+        {
+          "name": "Absolute Pets",
+          "searchUrl": "https://www.absolutepets.com/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        }
+      ],
+      "webRetailers": [
+        {
+          "name": "centralvet.co.za",
+          "searchUrl": "https://centralvet.co.za/products/royal-canin-mini-puppy-food-2kg?_pos=5&_sid=a339f5f1a&_ss=r",
+          "exactProductMatch": true,
+          "stockVerified": true,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "verified_exact_online_listing"
+        },
+        {
+          "name": "Petworld",
+          "searchUrl": "https://petworld.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        },
+        {
+          "name": "Central Vet Midwater",
+          "searchUrl": "https://centralvet.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        },
+        {
+          "name": "Absolute Pets",
+          "searchUrl": "https://www.absolutepets.com/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        }
+      ],
+      "verifiedOfferCount": 1,
+      "verifiedSellerCount": 1,
+      "inStockOfferCount": 1,
+      "priceVerifiedCount": 1,
+      "nearbyBranchStockVerified": false,
+      "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+      "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+      "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Royal%20Canin%20Mini%20Adult%20dog%20food%202kg",
+      "checkedAt": "2026-11-02T12:13:23.108Z"
+    }
+  },
+  {
+    "query": "Concept2 RowErg rowing machine",
+    "search": {
+      "identification": {
+        "name": "Concept2 RowErg rowing machine",
+        "object": "Concept2 RowErg rowing machine",
+        "brand": "",
+        "model": "",
+        "category": "product",
+        "retailCategory": "general",
+        "searchQuery": "Concept2 RowErg rowing machine",
+        "barcode": null,
+        "confidence": null,
+        "identificationMethod": "typed-user-input",
+        "userConfirmed": true
+      },
+      "offers": [],
+      "blocked": false,
+      "verified": false,
+      "userConfirmed": true,
+      "identitySource": "user-confirmed",
+      "visualVerification": false,
+      "provider": "user-input",
+      "imageAccepted": false,
+      "needsVision": false,
+      "needsRetailerVerification": true,
+      "code": "USER_CONFIRMED_PRODUCT",
+      "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+    },
+    "commerce": {
+      "ok": true,
+      "matched": true,
+      "exactMatchVerified": true,
+      "searchQuery": "Concept2 RowErg rowing machine",
+      "bestProduct": {
+        "name": "Concept 2 Air Rower - RowErg &ndash; Gym Gear"
+      },
+      "bestPrice": null,
+      "priceComparisonIssue": "no-prices",
+      "priceComparisonNote": "",
+      "offers": [
+        {
+          "product_name": "Concept 2 Air Rower - RowErg &ndash; Gym Gear",
+          "product_url": "https://gymgear.co.za/products/concept-2-air-rower-rowerg?_pos=17&_sid=aad525865&_ss=r",
+          "sku": "",
+          "comparisonAttributes": null,
+          "comparisonAmbiguous": false,
+          "retailer": {
+            "name": "gymgear.co.za"
+          },
+          "price": null,
+          "currency": null,
+          "availability": null,
+          "priceConditions": "",
+          "verified": false,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Exact retailer product page verified; price not published",
+          "matchScore": 90,
+          "stockScope": "not supplied",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-11-02T12:13:44.048Z",
+          "retailerDomain": "gymgear.co.za",
+          "trustedRetailerDomain": false,
+          "branchPriceVerified": false
+        }
+      ],
+      "possibleOffers": [],
+      "variantConfirmationRequired": false,
+      "retailerStatus": [
+        {
+          "name": "gymgear.co.za",
+          "searchUrl": "https://gymgear.co.za/products/concept-2-air-rower-rowerg?_pos=17&_sid=aad525865&_ss=r",
+          "exactProductMatch": true,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "verified_exact_online_listing"
+        },
+        {
+          "name": "Fitness Network",
+          "searchUrl": "https://www.fitnessnetwork.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        },
+        {
+          "name": "MiFitness",
+          "searchUrl": "https://mifitness.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        }
+      ],
+      "webRetailers": [
+        {
+          "name": "gymgear.co.za",
+          "searchUrl": "https://gymgear.co.za/products/concept-2-air-rower-rowerg?_pos=17&_sid=aad525865&_ss=r",
+          "exactProductMatch": true,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "verified_exact_online_listing"
+        },
+        {
+          "name": "Fitness Network",
+          "searchUrl": "https://www.fitnessnetwork.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        },
+        {
+          "name": "MiFitness",
+          "searchUrl": "https://mifitness.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        }
+      ],
+      "verifiedOfferCount": 1,
+      "verifiedSellerCount": 1,
+      "inStockOfferCount": 0,
+      "priceVerifiedCount": 0,
+      "nearbyBranchStockVerified": false,
+      "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+      "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+      "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Concept2%20RowErg%20rowing%20machine",
+      "checkedAt": "2026-11-02T12:13:44.048Z"
+    }
+  }
+]
