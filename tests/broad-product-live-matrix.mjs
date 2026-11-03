@@ -3,6 +3,7 @@
 // offer list is a failed discovery example, even when the endpoint returns 200.
 import fs from 'node:fs/promises';
 import worker from '../cloudflare/worker.js';
+import {hasUsefulProductResearch} from './live-research-quality.mjs';
 import {productVariantConflict,ident as coreIdent} from '../lib/product-intelligence-core.js';
 const local=process.env.FINDIT_LOCAL_WORKER==='true';
 const versionInfo=async()=>local?{commit:'local-working-tree',platform:'local-worker-live-sources'}:await(await fetch(new URL('/api/version',base))).json();
@@ -88,9 +89,10 @@ await Promise.all(Array.from({length:2},async()=>{
    const commerce=await post('/api/product-intelligence-v2',{identification});
    const offers=commerce.data.offers||[];
    const research=await post('/api/product-insights',{identification,offers});
-   const passed=search.status===200&&commerce.status===200&&offers.length>0&&offers.every(o=>!productVariantConflict(o.product_name,coreIdent(identification))&&o.exactProductMatch===true&&o.sourcePageVerified===true&&Number(o.price)>0&&/^[A-Z]{3}$/.test(o.currency||''))&&research.data.researched===true;
+   const usefulResearch=hasUsefulProductResearch(research.data);
+   const passed=search.status===200&&commerce.status===200&&offers.length>0&&offers.every(o=>!productVariantConflict(o.product_name,coreIdent(identification))&&o.exactProductMatch===true&&o.sourcePageVerified===true&&Number(o.price)>0&&/^[A-Z]{3}$/.test(o.currency||''))&&usefulResearch;
    results.push({category,query,status:passed?'passed':'failed',durationMs:Date.now()-started,search,commerce,research});
-   console.log(JSON.stringify({category,status:passed?'passed':'failed',offers:offers.length,researched:research.data.researched===true,prices:offers.map(o=>({retailer:o.retailer?.name,price:o.price,currency:o.currency,url:o.product_url}))}));
+   console.log(JSON.stringify({category,status:passed?'passed':'failed',offers:offers.length,researched:research.data.researched===true,usefulResearch,prices:offers.map(o=>({retailer:o.retailer?.name,price:o.price,currency:o.currency,url:o.product_url}))}));
   }catch(error){results.push({category,query,status:'failed',error:error.message,durationMs:Date.now()-started});console.log(JSON.stringify({category,status:'failed',error:error.message}));}
  }
 }));
