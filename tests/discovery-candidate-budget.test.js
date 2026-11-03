@@ -34,4 +34,7 @@ test('a full web-search batch cannot starve an exact native catalogue candidate'
  let result;await handler({method:'POST',body:{identification:{name,brand:'Example',model:'E42',object:'headphones'}}},{setHeader(){},status(){return this},json(d){result=d;return this}});
  assert.ok(seen.includes(native));assert.equal(result.offers.length,1);assert.equal(result.offers[0].product_url,native);assert.equal(result.offers[0].price,100);
  assert.ok(result.offers.every(o=>o.exactProductMatch===true&&o.sourcePageVerified===true));
+ assert.equal(result.discoveryDiagnostics.candidates.web,12);assert.equal(result.discoveryDiagnostics.candidates.native,1);assert.equal(result.discoveryDiagnostics.candidates.selected,12);assert.equal(result.discoveryDiagnostics.candidates.accepted,1);
+ assert.ok(result.discoveryDiagnostics.sourceReads.some(r=>r.host==='www.firstshop.co.za'&&r.status===200&&r.outcome==='read'));
+ assert.ok(result.discoveryDiagnostics.sourceReads.every(r=>!('url' in r)&&!('query' in r)&&!('body' in r)));
 });

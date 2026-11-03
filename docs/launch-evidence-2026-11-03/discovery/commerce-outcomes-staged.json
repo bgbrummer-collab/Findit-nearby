@@ -1,0 +1,553 @@
+[
+  {
+    "query": "Accu-Chek Instant blood glucose meter",
+    "status": 200,
+    "data": {
+      "ok": true,
+      "matched": true,
+      "exactMatchVerified": true,
+      "searchQuery": "Accu-Chek Instant blood glucose meter",
+      "bestProduct": {
+        "name": "Accu-chek Instant Meter"
+      },
+      "bestPrice": {
+        "product_name": "Accu-chek Instant Meter",
+        "product_url": "https://www.dischem.co.za/accu-chek-instant-meter-596",
+        "sku": "000000000000332596",
+        "comparisonAttributes": {
+          "size": "",
+          "color": ""
+        },
+        "comparisonAmbiguous": false,
+        "retailer": {
+          "name": "Dis-Chem"
+        },
+        "price": 284.99,
+        "currency": "ZAR",
+        "availability": "in_stock",
+        "priceConditions": "Price shown is the Single Exit Price (SEP), a cash-only price that excludes the dispensing fee.",
+        "verified": true,
+        "exactProductMatch": true,
+        "sourcePageVerified": true,
+        "source": "Verified directly on exact retailer product page",
+        "matchScore": 80,
+        "stockScope": "online/general retailer availability only",
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "checkedAt": "2026-11-03T12:49:56.986Z",
+        "retailerDomain": "dischem.co.za",
+        "trustedRetailerDomain": true
+      },
+      "priceComparisonIssue": null,
+      "priceComparisonNote": "",
+      "offers": [
+        {
+          "product_name": "Accu-chek Instant Meter",
+          "product_url": "https://www.dischem.co.za/accu-chek-instant-meter-596",
+          "sku": "000000000000332596",
+          "comparisonAttributes": {
+            "size": "",
+            "color": ""
+          },
+          "comparisonAmbiguous": false,
+          "retailer": {
+            "name": "Dis-Chem"
+          },
+          "price": 284.99,
+          "currency": "ZAR",
+          "availability": "in_stock",
+          "priceConditions": "Price shown is the Single Exit Price (SEP), a cash-only price that excludes the dispensing fee.",
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Verified directly on exact retailer product page",
+          "matchScore": 80,
+          "stockScope": "online/general retailer availability only",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-11-03T12:49:56.986Z",
+          "retailerDomain": "dischem.co.za",
+          "trustedRetailerDomain": true
+        }
+      ],
+      "possibleOffers": [],
+      "variantConfirmationRequired": false,
+      "retailerStatus": [
+        {
+          "name": "Dis-Chem",
+          "searchUrl": "https://www.dischem.co.za/accu-chek-instant-meter-596",
+          "exactProductMatch": true,
+          "stockVerified": true,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "verified_exact_online_listing"
+        },
+        {
+          "name": "Clicks",
+          "searchUrl": "https://clicks.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        }
+      ],
+      "webRetailers": [
+        {
+          "name": "Dis-Chem",
+          "searchUrl": "https://www.dischem.co.za/accu-chek-instant-meter-596",
+          "exactProductMatch": true,
+          "stockVerified": true,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "verified_exact_online_listing"
+        },
+        {
+          "name": "Clicks",
+          "searchUrl": "https://clicks.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        }
+      ],
+      "verifiedOfferCount": 1,
+      "verifiedSellerCount": 1,
+      "inStockOfferCount": 1,
+      "priceVerifiedCount": 1,
+      "discoveryDiagnostics": {
+        "sourceReads": [
+          {
+            "phase": "catalogue",
+            "host": "clicks.co.za",
+            "status": 200,
+            "outcome": "read",
+            "characters": 454231
+          },
+          {
+            "phase": "catalogue",
+            "host": "clicks.co.za",
+            "status": 200,
+            "outcome": "read",
+            "characters": 2957691
+          },
+          {
+            "phase": "catalogue",
+            "host": "www.dischem.co.za",
+            "status": 200,
+            "outcome": "read",
+            "characters": 453050
+          },
+          {
+            "host": "clicks.co.za",
+            "phase": "product",
+            "status": 200,
+            "outcome": "read",
+            "characters": 294477
+          },
+          {
+            "host": "clicks.co.za",
+            "phase": "product",
+            "status": 200,
+            "outcome": "read",
+            "characters": 295715
+          },
+          {
+            "host": "dischem.co.za",
+            "phase": "product",
+            "status": 200,
+            "outcome": "read",
+            "characters": 476398
+          },
+          {
+            "host": "clicks.co.za",
+            "phase": "product",
+            "status": 200,
+            "outcome": "read",
+            "characters": 296599
+          },
+          {
+            "host": "clicks.co.za",
+            "phase": "product",
+            "status": 200,
+            "outcome": "read",
+            "characters": 296163
+          },
+          {
+            "host": "clicks.co.za",
+            "phase": "product",
+            "status": 200,
+            "outcome": "read",
+            "characters": 294332
+          },
+          {
+            "host": "clicks.co.za",
+            "phase": "product",
+            "status": 200,
+            "outcome": "read",
+            "characters": 296111
+          },
+          {
+            "host": "clicks.co.za",
+            "phase": "product",
+            "status": 200,
+            "outcome": "read",
+            "characters": 298917
+          },
+          {
+            "host": "clicks.co.za",
+            "phase": "product",
+            "status": 200,
+            "outcome": "read",
+            "characters": 296353
+          },
+          {
+            "host": "clicks.co.za",
+            "phase": "product",
+            "status": 200,
+            "outcome": "read",
+            "characters": 299369
+          },
+          {
+            "host": "clicks.co.za",
+            "phase": "product",
+            "status": 200,
+            "outcome": "read",
+            "characters": 297752
+          },
+          {
+            "host": "clicks.co.za",
+            "phase": "product",
+            "status": 200,
+            "outcome": "read",
+            "characters": 299880
+          }
+        ],
+        "candidates": {
+          "known": 0,
+          "web": 0,
+          "native": 13,
+          "selected": 12,
+          "accepted": 1
+        }
+      },
+      "nearbyBranchStockVerified": false,
+      "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+      "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+      "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Accu-Chek%20Instant%20blood%20glucose%20meter",
+      "checkedAt": "2026-11-03T12:50:06.914Z"
+    }
+  },
+  {
+    "query": "Royal Canin Mini Adult dog food 8kg",
+    "status": 200,
+    "data": {
+      "ok": true,
+      "matched": true,
+      "exactMatchVerified": true,
+      "searchQuery": "Royal Canin Mini Adult dog food 8kg",
+      "bestProduct": {
+        "name": "Royal Canin Size Health Nutrition Mini Adult Dry Dog Food - 8kg"
+      },
+      "bestPrice": {
+        "product_name": "Royal Canin Size Health Nutrition Mini Adult Dry Dog Food - 8kg",
+        "product_url": "https://petworld.co.za/products/royal-canin-size-health-nutrition-mini-adult-dry-dog-food?_pos=1&_sid=a38a87ab4&_ss=r&variant=40612055580707",
+        "sku": "3182550716888",
+        "comparisonAttributes": {
+          "size": "",
+          "color": ""
+        },
+        "comparisonAmbiguous": false,
+        "retailer": {
+          "name": "petworld.co.za"
+        },
+        "price": 1229.9,
+        "currency": "ZAR",
+        "availability": "backorder",
+        "priceConditions": "",
+        "verified": true,
+        "exactProductMatch": true,
+        "sourcePageVerified": true,
+        "source": "Verified directly on exact retailer product page",
+        "matchScore": 92,
+        "stockScope": "online/general retailer availability only",
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "checkedAt": "2026-11-03T12:49:55.805Z",
+        "retailerDomain": "petworld.co.za",
+        "trustedRetailerDomain": false
+      },
+      "priceComparisonIssue": null,
+      "priceComparisonNote": "",
+      "offers": [
+        {
+          "product_name": "Royal Canin Size Health Nutrition Mini Adult Dry Dog Food - 8kg",
+          "product_url": "https://petworld.co.za/products/royal-canin-size-health-nutrition-mini-adult-dry-dog-food?_pos=1&_sid=a38a87ab4&_ss=r&variant=40612055580707",
+          "sku": "3182550716888",
+          "comparisonAttributes": {
+            "size": "",
+            "color": ""
+          },
+          "comparisonAmbiguous": false,
+          "retailer": {
+            "name": "petworld.co.za"
+          },
+          "price": 1229.9,
+          "currency": "ZAR",
+          "availability": "backorder",
+          "priceConditions": "",
+          "verified": true,
+          "exactProductMatch": true,
+          "sourcePageVerified": true,
+          "source": "Verified directly on exact retailer product page",
+          "matchScore": 92,
+          "stockScope": "online/general retailer availability only",
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "checkedAt": "2026-11-03T12:49:55.805Z",
+          "retailerDomain": "petworld.co.za",
+          "trustedRetailerDomain": false
+        }
+      ],
+      "possibleOffers": [],
+      "variantConfirmationRequired": false,
+      "retailerStatus": [
+        {
+          "name": "petworld.co.za",
+          "searchUrl": "https://petworld.co.za/products/royal-canin-size-health-nutrition-mini-adult-dry-dog-food?_pos=1&_sid=a38a87ab4&_ss=r&variant=40612055580707",
+          "exactProductMatch": true,
+          "stockVerified": true,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "verified_exact_online_listing"
+        },
+        {
+          "name": "Petworld",
+          "searchUrl": "https://petworld.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        },
+        {
+          "name": "Central Vet Midwater",
+          "searchUrl": "https://centralvet.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        },
+        {
+          "name": "Absolute Pets",
+          "searchUrl": "https://www.absolutepets.com/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        }
+      ],
+      "webRetailers": [
+        {
+          "name": "petworld.co.za",
+          "searchUrl": "https://petworld.co.za/products/royal-canin-size-health-nutrition-mini-adult-dry-dog-food?_pos=1&_sid=a38a87ab4&_ss=r&variant=40612055580707",
+          "exactProductMatch": true,
+          "stockVerified": true,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "verified_exact_online_listing"
+        },
+        {
+          "name": "Petworld",
+          "searchUrl": "https://petworld.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        },
+        {
+          "name": "Central Vet Midwater",
+          "searchUrl": "https://centralvet.co.za/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        },
+        {
+          "name": "Absolute Pets",
+          "searchUrl": "https://www.absolutepets.com/",
+          "exactProductMatch": false,
+          "stockVerified": false,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "status": "candidate_retailer"
+        }
+      ],
+      "verifiedOfferCount": 1,
+      "verifiedSellerCount": 1,
+      "inStockOfferCount": 0,
+      "priceVerifiedCount": 1,
+      "discoveryDiagnostics": {
+        "sourceReads": [
+          {
+            "phase": "catalogue",
+            "host": "petworld.co.za",
+            "status": 200,
+            "outcome": "read",
+            "characters": 31659
+          },
+          {
+            "phase": "catalogue",
+            "host": "petworld.co.za",
+            "status": 200,
+            "outcome": "read",
+            "characters": 33671
+          },
+          {
+            "phase": "catalogue",
+            "host": "petworld.co.za",
+            "status": 200,
+            "outcome": "read",
+            "characters": 33611
+          },
+          {
+            "phase": "catalogue",
+            "host": "centralvet.co.za",
+            "status": 200,
+            "outcome": "read",
+            "characters": 23345
+          },
+          {
+            "phase": "catalogue",
+            "host": "centralvet.co.za",
+            "status": 200,
+            "outcome": "read",
+            "characters": 23165
+          },
+          {
+            "phase": "catalogue",
+            "host": "petworld.co.za",
+            "status": 200,
+            "outcome": "read",
+            "characters": 946585
+          },
+          {
+            "phase": "catalogue",
+            "host": "centralvet.co.za",
+            "status": 200,
+            "outcome": "read",
+            "characters": 23746
+          },
+          {
+            "phase": "catalogue",
+            "host": "centralvet.co.za",
+            "status": 200,
+            "outcome": "read",
+            "characters": 315362
+          },
+          {
+            "host": "centralvet.co.za",
+            "phase": "product",
+            "status": 200,
+            "outcome": "read",
+            "characters": 214527
+          },
+          {
+            "host": "petworld.co.za",
+            "phase": "product",
+            "status": 200,
+            "outcome": "read",
+            "characters": 774017
+          },
+          {
+            "host": "petworld.co.za",
+            "phase": "product",
+            "status": 200,
+            "outcome": "read",
+            "characters": 778960
+          },
+          {
+            "host": "petworld.co.za",
+            "phase": "product",
+            "status": 200,
+            "outcome": "read",
+            "characters": 776042
+          },
+          {
+            "host": "petworld.co.za",
+            "phase": "product",
+            "status": 200,
+            "outcome": "read",
+            "characters": 776294
+          },
+          {
+            "host": "petworld.co.za",
+            "phase": "product",
+            "status": 200,
+            "outcome": "read",
+            "characters": 771061
+          },
+          {
+            "host": "petworld.co.za",
+            "phase": "product",
+            "status": 200,
+            "outcome": "read",
+            "characters": 759513
+          },
+          {
+            "host": "petworld.co.za",
+            "phase": "product",
+            "status": 200,
+            "outcome": "read",
+            "characters": 770393
+          },
+          {
+            "host": "petworld.co.za",
+            "phase": "product",
+            "status": 200,
+            "outcome": "read",
+            "characters": 769063
+          },
+          {
+            "host": "petworld.co.za",
+            "phase": "product",
+            "status": 200,
+            "outcome": "read",
+            "characters": 787472
+          },
+          {
+            "host": "petworld.co.za",
+            "phase": "product",
+            "status": 200,
+            "outcome": "read",
+            "characters": 772226
+          },
+          {
+            "host": "centralvet.co.za",
+            "phase": "product",
+            "status": 200,
+            "outcome": "read",
+            "characters": 215885
+          }
+        ],
+        "candidates": {
+          "known": 0,
+          "web": 0,
+          "native": 16,
+          "selected": 12,
+          "accepted": 1
+        }
+      },
+      "nearbyBranchStockVerified": false,
+      "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+      "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+      "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Royal%20Canin%20Mini%20Adult%20dog%20food%208kg",
+      "checkedAt": "2026-11-03T12:50:05.698Z"
+    }
+  }
+]

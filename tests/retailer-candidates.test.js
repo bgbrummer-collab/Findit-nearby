@@ -11,3 +11,10 @@ test('no product means no retailer suggestions',()=>assert.equal(render(''),''))
 
 test('verified listings retain product links and distinguish online stock from branch stock',()=>{const html=render('Sony WH-1000XM5 black',false,[{retailer:{name:'Incredible Connection'},product_url:'https://www.incredible.co.za/product',price:5999,currency:'ZAR',availability:'in_stock',exactProductMatch:true,sourcePageVerified:true}]);assert.match(html,/Verified product listings/);assert.match(html,/href="https:\/\/www.incredible.co.za\/product"/);assert.match(html,/Online in stock/);assert.match(html,/Branch stock not verified/);assert.doesNotMatch(html,/No exact listing verified|google.com/)});
 test('unverified offers cannot become verified retailer cards',()=>assert.doesNotMatch(render('Sony WH-1000XM5 black',false,[{retailer:'Invented',url:'https://example.com',price:1,currency:'ZAR',exactProductMatch:true}]),/Verified product listings|Invented/));
+
+test('known online backorders and preorders stay visible without implying branch stock',()=>{
+ for(const availability of ['backorder','preorder']){
+  const html=render('Example product',false,[{retailer:{name:'Example'},product_url:'https://shop.example/products/one',price:100,currency:'ZAR',availability,exactProductMatch:true,sourcePageVerified:true}]);
+  assert.match(html,new RegExp('Online '+availability));assert.match(html,/Branch stock not verified/);assert.doesNotMatch(html,/Online in stock|Online stock not verified/);
+ }
+});
