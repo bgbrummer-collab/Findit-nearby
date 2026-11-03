@@ -1,0 +1,2013 @@
+{
+  "checkedAt": "2026-11-03T12:40:02.253Z",
+  "base": "https://findit-nearby.bgbrummer.workers.dev/",
+  "version": {
+    "commit": "local-working-tree",
+    "platform": "local-worker-live-sources"
+  },
+  "endVersion": {
+    "commit": "local-working-tree",
+    "platform": "local-worker-live-sources"
+  },
+  "versionStable": true,
+  "holdout": [
+    {
+      "category": "mouse",
+      "query": "Logitech M185 wireless mouse grey",
+      "referenceUrl": "https://www.firstshop.co.za/products/logitech-m185-wireless-mouse-grey-910-002235-100154",
+      "expectedIdentity": "Logitech M185, grey, retailer code 910-002235"
+    },
+    {
+      "category": "headphones",
+      "query": "JBL Tune 520BT headphones black",
+      "referenceUrl": "https://computermania.co.za/products/jbl-520bt-bluetooth-on-ear-headphones-blk",
+      "expectedIdentity": "JBL Tune 520BT, black; no 525BT substitution"
+    },
+    {
+      "category": "toy",
+      "query": "LEGO Creator 3 in 1 Exotic Parrot 31136",
+      "referenceUrl": "https://lego-gybc.co.za/products/lego-creator-3-in-1-exotic-parrot-31136",
+      "expectedIdentity": "LEGO set 31136; primary source publishes 253 pieces; branch stock needs separate proof"
+    },
+    {
+      "category": "beauty",
+      "query": "Clinique Moisture Surge Serum 50ml",
+      "referenceUrl": "https://www.dischem.co.za/clinique-moisture-surge-serum-50ml-094",
+      "expectedIdentity": "Serum, 50 ml; not the hydrator or intense cream"
+    },
+    {
+      "category": "phone",
+      "query": "Samsung Galaxy A16 128GB black",
+      "referenceUrl": "https://www.hificorp.co.za/samsung-galaxy-a16-128gb-black",
+      "expectedIdentity": "Galaxy A16, 128 GB, black; do not infer an unspecified network generation"
+    },
+    {
+      "category": "clothing",
+      "query": "Levis 511 Slim Jeans Multi Colour",
+      "referenceUrl": "https://www.levi.co.za/products/levis-r-mens-511-tm-slim-jeans-multi-colour-6",
+      "expectedIdentity": "511 Slim, Multi Colour; individual waist and length availability unconfirmed"
+    },
+    {
+      "category": "stationery",
+      "query": "Casio FX-991ZA+ scientific calculator",
+      "referenceUrl": "https://www.waltons.co.za/buy/casio-calculator-scientific-fx-991za",
+      "expectedIdentity": "FX-991ZA+, not FX-82 or an unestablished generation"
+    },
+    {
+      "category": "garden",
+      "query": "Gardena energy cut 750 B pruning lopper",
+      "referenceUrl": "https://leroymerlin.co.za/pruning-lopper-energy-cut-gardena-750-b-81485225",
+      "expectedIdentity": "Gardena EnergyCut 750 B, source SKU 81485225; not generic shears"
+    }
+  ],
+  "results": [
+    {
+      "category": "mouse",
+      "query": "Logitech M185 wireless mouse grey",
+      "status": "passed",
+      "durationMs": 7281,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Logitech M185 wireless mouse grey",
+            "object": "Logitech M185 wireless mouse grey",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Logitech M185 wireless mouse grey",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": true,
+          "exactMatchVerified": true,
+          "searchQuery": "Logitech M185 wireless mouse grey",
+          "bestProduct": {
+            "name": "Logitech M185 Wireless Mouse Grey 910-002235"
+          },
+          "bestPrice": {
+            "product_name": "Logitech M185 Wireless Mouse Grey 910-002235",
+            "product_url": "https://www.firstshop.co.za/products/logitech-m185-wireless-mouse-grey-910-002235-100154",
+            "sku": "910-002235",
+            "comparisonAttributes": {
+              "size": "",
+              "color": ""
+            },
+            "comparisonAmbiguous": false,
+            "retailer": {
+              "name": "FirstShop"
+            },
+            "price": 160,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "priceConditions": "",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 92,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-11-03T12:38:50.106Z",
+            "retailerDomain": "firstshop.co.za",
+            "trustedRetailerDomain": false
+          },
+          "priceComparisonIssue": null,
+          "priceComparisonNote": "",
+          "offers": [
+            {
+              "product_name": "Logitech M185 Wireless Mouse Grey 910-002235",
+              "product_url": "https://www.firstshop.co.za/products/logitech-m185-wireless-mouse-grey-910-002235-100154",
+              "sku": "910-002235",
+              "comparisonAttributes": {
+                "size": "",
+                "color": ""
+              },
+              "comparisonAmbiguous": false,
+              "retailer": {
+                "name": "FirstShop"
+              },
+              "price": 160,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-03T12:38:50.106Z",
+              "retailerDomain": "firstshop.co.za",
+              "trustedRetailerDomain": false
+            }
+          ],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "FirstShop",
+              "searchUrl": "https://www.firstshop.co.za/products/logitech-m185-wireless-mouse-grey-910-002235-100154",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "FirstShop",
+              "searchUrl": "https://www.firstshop.co.za/products/logitech-m185-wireless-mouse-grey-910-002235-100154",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 1,
+          "verifiedSellerCount": 1,
+          "inStockOfferCount": 1,
+          "priceVerifiedCount": 1,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Logitech%20M185%20wireless%20mouse%20grey",
+          "checkedAt": "2026-11-03T12:38:50.108Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": true,
+          "whatItDoes": "M185 is designed to be equally comfortable for both left- and right-handed users.",
+          "pros": [
+            "Logitech M185 Wireless Mouse Grey 910-002235.",
+            "Comfortable, compact, and easy to use, the Wireless Mouse M185 enables you to work anywhere.",
+            "M185 is ready when you are.",
+            "Simply plug the receiver into a USB port on your device to start working in seconds."
+          ],
+          "cons": [],
+          "specifications": [
+            {
+              "name": "Brand",
+              "value": "Logitech",
+              "sourceUrl": "https://www.firstshop.co.za/products/logitech-m185-wireless-mouse-grey-910-002235-100154"
+            },
+            {
+              "name": "Retailer product code",
+              "value": "910-002235",
+              "sourceAlsoListsAsMpn": true,
+              "sourceUrl": "https://www.firstshop.co.za/products/logitech-m185-wireless-mouse-grey-910-002235-100154"
+            },
+            {
+              "name": "product_type",
+              "value": "Mice",
+              "sourceUrl": "https://www.firstshop.co.za/products/logitech-m185-wireless-mouse-grey-910-002235-100154"
+            }
+          ],
+          "compatibility": [
+            "Simply plug the receiver into a USB port on your device to start working in seconds.",
+            "M185 is compatible with Windows, macOS, Chrome OS and Linux and works instantly when you plug the USB receiver into your computer or laptop.",
+            "Connection Type: 2.4 GHz wireless connection."
+          ],
+          "claimEvidence": {
+            "whatItDoes": {
+              "text": "M185 is designed to be equally comfortable for both left- and right-handed users.",
+              "sourceUrl": "https://www.firstshop.co.za/products/logitech-m185-wireless-mouse-grey-910-002235-100154",
+              "sourceTitle": "Logitech M185 Wireless Mouse Grey 910-002235"
+            },
+            "pros": [
+              {
+                "text": "Logitech M185 Wireless Mouse Grey 910-002235.",
+                "sourceUrl": "https://www.firstshop.co.za/products/logitech-m185-wireless-mouse-grey-910-002235-100154",
+                "sourceTitle": "Logitech M185 Wireless Mouse Grey 910-002235"
+              },
+              {
+                "text": "Comfortable, compact, and easy to use, the Wireless Mouse M185 enables you to work anywhere.",
+                "sourceUrl": "https://www.firstshop.co.za/products/logitech-m185-wireless-mouse-grey-910-002235-100154",
+                "sourceTitle": "Logitech M185 Wireless Mouse Grey 910-002235"
+              },
+              {
+                "text": "M185 is ready when you are.",
+                "sourceUrl": "https://www.firstshop.co.za/products/logitech-m185-wireless-mouse-grey-910-002235-100154",
+                "sourceTitle": "Logitech M185 Wireless Mouse Grey 910-002235"
+              },
+              {
+                "text": "Simply plug the receiver into a USB port on your device to start working in seconds.",
+                "sourceUrl": "https://www.firstshop.co.za/products/logitech-m185-wireless-mouse-grey-910-002235-100154",
+                "sourceTitle": "Logitech M185 Wireless Mouse Grey 910-002235"
+              }
+            ],
+            "cons": [],
+            "compatibility": [
+              {
+                "text": "Simply plug the receiver into a USB port on your device to start working in seconds.",
+                "sourceUrl": "https://www.firstshop.co.za/products/logitech-m185-wireless-mouse-grey-910-002235-100154",
+                "sourceTitle": "Logitech M185 Wireless Mouse Grey 910-002235"
+              },
+              {
+                "text": "M185 is compatible with Windows, macOS, Chrome OS and Linux and works instantly when you plug the USB receiver into your computer or laptop.",
+                "sourceUrl": "https://www.firstshop.co.za/products/logitech-m185-wireless-mouse-grey-910-002235-100154",
+                "sourceTitle": "Logitech M185 Wireless Mouse Grey 910-002235"
+              },
+              {
+                "text": "Connection Type: 2.4 GHz wireless connection.",
+                "sourceUrl": "https://www.firstshop.co.za/products/logitech-m185-wireless-mouse-grey-910-002235-100154",
+                "sourceTitle": "Logitech M185 Wireless Mouse Grey 910-002235"
+              }
+            ],
+            "includedItems": [
+              {
+                "text": "Battery Details: 1 x AA (included).",
+                "sourceUrl": "https://www.firstshop.co.za/products/logitech-m185-wireless-mouse-grey-910-002235-100154",
+                "sourceTitle": "Logitech M185 Wireless Mouse Grey 910-002235"
+              }
+            ]
+          },
+          "includedItems": [
+            "Battery Details: 1 x AA (included)."
+          ],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [
+            {
+              "title": "Logitech M185 Wireless Mouse Grey 910-002235",
+              "url": "https://www.firstshop.co.za/products/logitech-m185-wireless-mouse-grey-910-002235-100154"
+            }
+          ],
+          "sourceChecks": [
+            {
+              "url": "https://www.firstshop.co.za/products/logitech-m185-wireless-mouse-grey-910-002235-100154",
+              "status": "product-facts-verified"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-03T12:38:50.545Z",
+          "message": "Product facts are quoted from matching product-page descriptions."
+        }
+      }
+    },
+    {
+      "category": "toy",
+      "query": "LEGO Creator 3 in 1 Exotic Parrot 31136",
+      "status": "passed",
+      "durationMs": 9558,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "LEGO Creator 3 in 1 Exotic Parrot 31136",
+            "object": "LEGO Creator 3 in 1 Exotic Parrot 31136",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "LEGO Creator 3 in 1 Exotic Parrot 31136",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": true,
+          "exactMatchVerified": true,
+          "searchQuery": "LEGO Creator 3 in 1 Exotic Parrot 31136",
+          "bestProduct": {
+            "name": "31136 | LEGO® Creator 3-in-1 Exotic Parrot"
+          },
+          "bestPrice": {
+            "product_name": "31136 | LEGO® Creator 3-in-1 Exotic Parrot",
+            "product_url": "https://lego-gybc.co.za/products/lego-creator-3-in-1-exotic-parrot-31136",
+            "sku": "5702017415895",
+            "comparisonAttributes": {
+              "size": "",
+              "color": ""
+            },
+            "comparisonAmbiguous": false,
+            "retailer": {
+              "name": "LEGO Certified Stores"
+            },
+            "price": 449,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "priceConditions": "",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 92,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-11-03T12:38:57.481Z",
+            "retailerDomain": "lego-gybc.co.za",
+            "trustedRetailerDomain": false
+          },
+          "priceComparisonIssue": null,
+          "priceComparisonNote": "",
+          "offers": [
+            {
+              "product_name": "31136 | LEGO® Creator 3-in-1 Exotic Parrot",
+              "product_url": "https://lego-gybc.co.za/products/lego-creator-3-in-1-exotic-parrot-31136",
+              "sku": "5702017415895",
+              "comparisonAttributes": {
+                "size": "",
+                "color": ""
+              },
+              "comparisonAmbiguous": false,
+              "retailer": {
+                "name": "LEGO Certified Stores"
+              },
+              "price": 449,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-03T12:38:57.481Z",
+              "retailerDomain": "lego-gybc.co.za",
+              "trustedRetailerDomain": false
+            }
+          ],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "LEGO Certified Stores",
+              "searchUrl": "https://lego-gybc.co.za/products/lego-creator-3-in-1-exotic-parrot-31136",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Toys R Us",
+              "searchUrl": "https://www.toysrus.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "LEGO Certified Stores",
+              "searchUrl": "https://lego-gybc.co.za/products/lego-creator-3-in-1-exotic-parrot-31136",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Toys R Us",
+              "searchUrl": "https://www.toysrus.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 1,
+          "verifiedSellerCount": 1,
+          "inStockOfferCount": 1,
+          "priceVerifiedCount": 1,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=LEGO%20Creator%203%20in%201%20Exotic%20Parrot%2031136",
+          "checkedAt": "2026-11-03T12:38:57.481Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": true,
+          "whatItDoes": "It features a colorful parrot that can fully rotate its body while sitting on a tree branch and move its wings and tail.",
+          "pros": [
+            "3in1 toys kick-start creative fun.",
+            "Kids have the chance to build 3 different exotic animal toys with this fantastic LEGO 3in1 set.",
+            "Download the LEGO Builder app and step into a new world of building fun where kids can zoom in and rotate models in 3D, save sets and track their progress.",
+            "Play on the go – Measuring over 8.5 in."
+          ],
+          "cons": [
+            "Little builders and passionate animal fans aged 7+ can travel deep into the rainforest for action-packed stories with this LEGO® Creator 3in1 Exotic Parrot (31136) building set.",
+            "3in1 exotic animal toys – Kids aged 7+ can step into a rainforest with the LEGO® Creator 3in1 Exotic Parrot (31136) playset, featuring a parrot, a fish and a frog.",
+            "A simple build – This 253-piece playset lets little builders aged 7+ enjoy a rewarding build-and-play experience and can be given as a reward or a birthday present."
+          ],
+          "specifications": [
+            {
+              "name": "Retailer product code",
+              "value": "5702017415895",
+              "sourceUrl": "https://lego-gybc.co.za/products/lego-creator-3-in-1-exotic-parrot-31136"
+            }
+          ],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": {
+              "text": "It features a colorful parrot that can fully rotate its body while sitting on a tree branch and move its wings and tail.",
+              "sourceUrl": "https://lego-gybc.co.za/products/lego-creator-3-in-1-exotic-parrot-31136",
+              "sourceTitle": "31136 | LEGO® Creator 3-in-1 Exotic Parrot"
+            },
+            "pros": [
+              {
+                "text": "3in1 toys kick-start creative fun.",
+                "sourceUrl": "https://lego-gybc.co.za/products/lego-creator-3-in-1-exotic-parrot-31136",
+                "sourceTitle": "31136 | LEGO® Creator 3-in-1 Exotic Parrot"
+              },
+              {
+                "text": "Kids have the chance to build 3 different exotic animal toys with this fantastic LEGO 3in1 set.",
+                "sourceUrl": "https://lego-gybc.co.za/products/lego-creator-3-in-1-exotic-parrot-31136",
+                "sourceTitle": "31136 | LEGO® Creator 3-in-1 Exotic Parrot"
+              },
+              {
+                "text": "Download the LEGO Builder app and step into a new world of building fun where kids can zoom in and rotate models in 3D, save sets and track their progress.",
+                "sourceUrl": "https://lego-gybc.co.za/products/lego-creator-3-in-1-exotic-parrot-31136",
+                "sourceTitle": "31136 | LEGO® Creator 3-in-1 Exotic Parrot"
+              },
+              {
+                "text": "Play on the go – Measuring over 8.5 in.",
+                "sourceUrl": "https://lego-gybc.co.za/products/lego-creator-3-in-1-exotic-parrot-31136",
+                "sourceTitle": "31136 | LEGO® Creator 3-in-1 Exotic Parrot"
+              }
+            ],
+            "cons": [
+              {
+                "text": "Little builders and passionate animal fans aged 7+ can travel deep into the rainforest for action-packed stories with this LEGO® Creator 3in1 Exotic Parrot (31136) building set.",
+                "sourceUrl": "https://lego-gybc.co.za/products/lego-creator-3-in-1-exotic-parrot-31136",
+                "sourceTitle": "31136 | LEGO® Creator 3-in-1 Exotic Parrot"
+              },
+              {
+                "text": "3in1 exotic animal toys – Kids aged 7+ can step into a rainforest with the LEGO® Creator 3in1 Exotic Parrot (31136) playset, featuring a parrot, a fish and a frog.",
+                "sourceUrl": "https://lego-gybc.co.za/products/lego-creator-3-in-1-exotic-parrot-31136",
+                "sourceTitle": "31136 | LEGO® Creator 3-in-1 Exotic Parrot"
+              },
+              {
+                "text": "A simple build – This 253-piece playset lets little builders aged 7+ enjoy a rewarding build-and-play experience and can be given as a reward or a birthday present.",
+                "sourceUrl": "https://lego-gybc.co.za/products/lego-creator-3-in-1-exotic-parrot-31136",
+                "sourceTitle": "31136 | LEGO® Creator 3-in-1 Exotic Parrot"
+              }
+            ],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [
+            {
+              "title": "31136 | LEGO® Creator 3-in-1 Exotic Parrot",
+              "url": "https://lego-gybc.co.za/products/lego-creator-3-in-1-exotic-parrot-31136"
+            }
+          ],
+          "sourceChecks": [
+            {
+              "url": "https://lego-gybc.co.za/products/lego-creator-3-in-1-exotic-parrot-31136",
+              "status": "product-facts-verified"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-03T12:39:00.102Z",
+          "message": "Product facts are quoted from matching product-page descriptions."
+        }
+      }
+    },
+    {
+      "category": "headphones",
+      "query": "JBL Tune 520BT headphones black",
+      "status": "failed",
+      "durationMs": 29488,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "JBL Tune 520BT headphones black",
+            "object": "JBL Tune 520BT headphones black",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "JBL Tune 520BT headphones black",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "JBL Tune 520BT headphones black",
+          "bestProduct": null,
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=JBL%20Tune%20520BT%20headphones%20black",
+          "checkedAt": "2026-11-03T12:39:00.545Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": null,
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "sourceChecks": [
+            {
+              "url": "https://www.hificorp.co.za/jbl-t520-on-ear-bluetooth-headphones-black",
+              "status": "identity-mismatch"
+            },
+            {
+              "url": "https://www.incredible.co.za/jbl-t520-on-ear-bluetooth-headphones-black",
+              "status": "identity-mismatch"
+            },
+            {
+              "url": "https://www.hificorp.co.za/jbl-t520-on-ear-bluetooth-headphones-white",
+              "status": "timeout"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-03T12:39:12.759Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "beauty",
+      "query": "Clinique Moisture Surge Serum 50ml",
+      "status": "failed",
+      "durationMs": 17232,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Clinique Moisture Surge Serum 50ml",
+            "object": "Clinique Moisture Surge Serum 50ml",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Clinique Moisture Surge Serum 50ml",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "Clinique Moisture Surge Serum 50ml",
+          "bestProduct": null,
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "PriceCheck",
+              "searchUrl": "https://www.pricecheck.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "PriceCheck",
+              "searchUrl": "https://www.pricecheck.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Clinique%20Moisture%20Surge%20Serum%2050ml",
+          "checkedAt": "2026-11-03T12:39:12.624Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": null,
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "sourceChecks": [
+            {
+              "url": "https://www.makro.co.za/osdd.xml?v=2",
+              "status": "http-error",
+              "httpStatus": 404
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-03T12:39:17.337Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "clothing",
+      "query": "Levis 511 Slim Jeans Multi Colour",
+      "status": "passed",
+      "durationMs": 21955,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Levis 511 Slim Jeans Multi Colour",
+            "object": "Levis 511 Slim Jeans Multi Colour",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Levis 511 Slim Jeans Multi Colour",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": true,
+          "exactMatchVerified": true,
+          "searchQuery": "Levis 511 Slim Jeans Multi Colour",
+          "bestProduct": {
+            "name": "LEVI'S® MEN'S 511™ SLIM JEANS - MULTI COLOUR"
+          },
+          "bestPrice": null,
+          "priceComparisonIssue": "variants",
+          "priceComparisonNote": "Listing variants, currencies or price conditions differ. Compare each listing separately.",
+          "offers": [
+            {
+              "product_name": "LEVI'S® MEN'S 511™ SLIM JEANS - MULTI COLOUR",
+              "product_url": "https://www.levi.co.za/products/levis-r-mens-511-tm-slim-jeans-multi-colour-6",
+              "sku": "",
+              "comparisonAttributes": {
+                "size": "",
+                "color": ""
+              },
+              "comparisonAmbiguous": true,
+              "retailer": {
+                "name": "Levi’s South Africa"
+              },
+              "price": 909,
+              "currency": "ZAR",
+              "availability": null,
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "not supplied",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-03T12:39:26.530Z",
+              "retailerDomain": "levi.co.za",
+              "trustedRetailerDomain": false
+            },
+            {
+              "product_name": "LEVI'S® MEN'S 511™ SLIM JEANS - MULTI COLOUR",
+              "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-511%E2%84%A2-slim-jeans-multi-colour-8",
+              "sku": "",
+              "comparisonAttributes": {
+                "size": "",
+                "color": ""
+              },
+              "comparisonAmbiguous": true,
+              "retailer": {
+                "name": "Levi’s South Africa"
+              },
+              "price": 909,
+              "currency": "ZAR",
+              "availability": null,
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "not supplied",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-03T12:39:26.189Z",
+              "retailerDomain": "levi.co.za",
+              "trustedRetailerDomain": false
+            },
+            {
+              "product_name": "LEVI'S® MEN'S 511™ SLIM JEANS - MULTI COLOUR",
+              "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-511%E2%84%A2-slim-jeans-multi-colour-2",
+              "sku": "",
+              "comparisonAttributes": {
+                "size": "",
+                "color": ""
+              },
+              "comparisonAmbiguous": true,
+              "retailer": {
+                "name": "Levi’s South Africa"
+              },
+              "price": 959,
+              "currency": "ZAR",
+              "availability": null,
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "not supplied",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-03T12:39:24.234Z",
+              "retailerDomain": "levi.co.za",
+              "trustedRetailerDomain": false
+            },
+            {
+              "product_name": "LEVI'S® MEN'S 511™ SLIM JEANS - MULTI COLOUR",
+              "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-511%E2%84%A2-slim-jeans-multi-colour-5",
+              "sku": "",
+              "comparisonAttributes": {
+                "size": "",
+                "color": ""
+              },
+              "comparisonAmbiguous": true,
+              "retailer": {
+                "name": "Levi’s South Africa"
+              },
+              "price": 1049,
+              "currency": "ZAR",
+              "availability": null,
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "not supplied",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-03T12:39:26.693Z",
+              "retailerDomain": "levi.co.za",
+              "trustedRetailerDomain": false
+            },
+            {
+              "product_name": "LEVI'S® MEN'S LINEN 511™ SLIM JEANS - MULTI COLOUR",
+              "product_url": "https://www.levi.co.za/products/levis-r-mens-511-tm-slim-jeans-multi-colour-1",
+              "sku": "",
+              "comparisonAttributes": {
+                "size": "",
+                "color": ""
+              },
+              "comparisonAmbiguous": true,
+              "retailer": {
+                "name": "Levi’s South Africa"
+              },
+              "price": 1119,
+              "currency": "ZAR",
+              "availability": null,
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "not supplied",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-03T12:39:26.504Z",
+              "retailerDomain": "levi.co.za",
+              "trustedRetailerDomain": false
+            },
+            {
+              "product_name": "LEVI'S® MEN'S 511™ SLIM JEANS - MULTI COLOUR",
+              "product_url": "https://www.levi.co.za/products/levis%C2%AE-mens-511%E2%84%A2-slim-jeans-multi-colour-4",
+              "sku": "",
+              "comparisonAttributes": {
+                "size": "",
+                "color": ""
+              },
+              "comparisonAmbiguous": true,
+              "retailer": {
+                "name": "Levi’s South Africa"
+              },
+              "price": 1439,
+              "currency": "ZAR",
+              "availability": null,
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "not supplied",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-03T12:39:26.564Z",
+              "retailerDomain": "levi.co.za",
+              "trustedRetailerDomain": false
+            }
+          ],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Levi’s South Africa",
+              "searchUrl": "https://www.levi.co.za/products/levis-r-mens-511-tm-slim-jeans-multi-colour-6",
+              "exactProductMatch": true,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Levi’s South Africa",
+              "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-511%E2%84%A2-slim-jeans-multi-colour-8",
+              "exactProductMatch": true,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Levi’s South Africa",
+              "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-511%E2%84%A2-slim-jeans-multi-colour-2",
+              "exactProductMatch": true,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Levi’s South Africa",
+              "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-511%E2%84%A2-slim-jeans-multi-colour-5",
+              "exactProductMatch": true,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Levi’s South Africa",
+              "searchUrl": "https://www.levi.co.za/products/levis-r-mens-511-tm-slim-jeans-multi-colour-1",
+              "exactProductMatch": true,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Levi’s South Africa",
+              "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-511%E2%84%A2-slim-jeans-multi-colour-4",
+              "exactProductMatch": true,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Bash",
+              "searchUrl": "https://bash.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Superbalist",
+              "searchUrl": "https://www.superbalist.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Levi’s South Africa",
+              "searchUrl": "https://www.levi.co.za/products/levis-r-mens-511-tm-slim-jeans-multi-colour-6",
+              "exactProductMatch": true,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Levi’s South Africa",
+              "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-511%E2%84%A2-slim-jeans-multi-colour-8",
+              "exactProductMatch": true,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Levi’s South Africa",
+              "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-511%E2%84%A2-slim-jeans-multi-colour-2",
+              "exactProductMatch": true,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Levi’s South Africa",
+              "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-511%E2%84%A2-slim-jeans-multi-colour-5",
+              "exactProductMatch": true,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Levi’s South Africa",
+              "searchUrl": "https://www.levi.co.za/products/levis-r-mens-511-tm-slim-jeans-multi-colour-1",
+              "exactProductMatch": true,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Levi’s South Africa",
+              "searchUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-511%E2%84%A2-slim-jeans-multi-colour-4",
+              "exactProductMatch": true,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Bash",
+              "searchUrl": "https://bash.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Superbalist",
+              "searchUrl": "https://www.superbalist.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 6,
+          "verifiedSellerCount": 1,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 6,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Levis%20511%20Slim%20Jeans%20Multi%20Colour",
+          "checkedAt": "2026-11-03T12:39:36.122Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": true,
+          "whatItDoes": "Think of this modern slim as not-so-skinny skinny jeans.",
+          "pros": [],
+          "cons": [
+            "(If you want the style, but not the feeling, this is a great alternative.) With a streamlined fit that’s narrow through the seat and thigh, our 511™ Slim is perfectly calibrated to look good with everything—without looking like you’re trying too hard."
+          ],
+          "specifications": [
+            {
+              "name": "Brand",
+              "value": "Levi’s ®",
+              "sourceUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-511%E2%84%A2-slim-jeans-multi-colour-5"
+            }
+          ],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": {
+              "text": "Think of this modern slim as not-so-skinny skinny jeans.",
+              "sourceUrl": "https://www.levi.co.za/products/levis-r-mens-511-tm-slim-jeans-multi-colour-6",
+              "sourceTitle": "LEVI'S® MEN'S 511™ SLIM JEANS - MULTI COLOUR"
+            },
+            "pros": [],
+            "cons": [
+              {
+                "text": "(If you want the style, but not the feeling, this is a great alternative.) With a streamlined fit that’s narrow through the seat and thigh, our 511™ Slim is perfectly calibrated to look good with everything—without looking like you’re trying too hard.",
+                "sourceUrl": "https://www.levi.co.za/products/levis-r-mens-511-tm-slim-jeans-multi-colour-6",
+                "sourceTitle": "LEVI'S® MEN'S 511™ SLIM JEANS - MULTI COLOUR"
+              }
+            ],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [
+            {
+              "name": "LEVI'S® MEN'S 511™ SLIM JEANS - MULTI COLOUR",
+              "productUrl": "https://www.levi.co.za/products/levis-r-mens-511-tm-slim-jeans-multi-colour-6",
+              "specifications": [
+                {
+                  "name": "Brand",
+                  "value": "Levi’s ®"
+                },
+                {
+                  "name": "Retailer product code",
+                  "value": "A405400903832",
+                  "sourceAlsoListsAsMpn": true
+                }
+              ]
+            },
+            {
+              "name": "LEVI'S® MEN'S 511™ SLIM JEANS - MULTI COLOUR",
+              "productUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-511%E2%84%A2-slim-jeans-multi-colour-8",
+              "specifications": [
+                {
+                  "name": "Brand",
+                  "value": "Levi’s ®"
+                },
+                {
+                  "name": "Retailer product code",
+                  "value": "A405400893032",
+                  "sourceAlsoListsAsMpn": true
+                }
+              ]
+            },
+            {
+              "name": "LEVI'S® MEN'S 511™ SLIM JEANS - MULTI COLOUR",
+              "productUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-511%E2%84%A2-slim-jeans-multi-colour-2",
+              "specifications": [
+                {
+                  "name": "Brand",
+                  "value": "Levi’s ®"
+                },
+                {
+                  "name": "Retailer product code",
+                  "value": "0451163213032",
+                  "sourceAlsoListsAsMpn": true
+                }
+              ]
+            },
+            {
+              "name": "LEVI'S® MEN'S 511™ SLIM JEANS - MULTI COLOUR",
+              "productUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-511%E2%84%A2-slim-jeans-multi-colour-5",
+              "specifications": [
+                {
+                  "name": "Brand",
+                  "value": "Levi’s ®"
+                },
+                {
+                  "name": "Retailer product code",
+                  "value": "0451163283832",
+                  "sourceAlsoListsAsMpn": true
+                }
+              ]
+            }
+          ],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [
+            {
+              "title": "LEVI'S® MEN'S 511™ SLIM JEANS - MULTI COLOUR",
+              "url": "https://www.levi.co.za/products/levis-r-mens-511-tm-slim-jeans-multi-colour-6"
+            },
+            {
+              "title": "LEVI'S® MEN'S 511™ SLIM JEANS - MULTI COLOUR",
+              "url": "https://www.levi.co.za/products/levis%C2%AE-mens-511%E2%84%A2-slim-jeans-multi-colour-8"
+            },
+            {
+              "title": "LEVI'S® MEN'S 511™ SLIM JEANS - MULTI COLOUR",
+              "url": "https://www.levi.co.za/products/levis%C2%AE-mens-511%E2%84%A2-slim-jeans-multi-colour-2"
+            },
+            {
+              "title": "LEVI'S® MEN'S 511™ SLIM JEANS - MULTI COLOUR",
+              "url": "https://www.levi.co.za/products/levis%C2%AE-mens-511%E2%84%A2-slim-jeans-multi-colour-5"
+            }
+          ],
+          "sourceChecks": [
+            {
+              "url": "https://www.levi.co.za/products/levis%C2%AE-mens-511%E2%84%A2-slim-jeans-multi-colour-5",
+              "status": "product-facts-verified"
+            },
+            {
+              "url": "https://www.levi.co.za/products/levis-r-mens-511-tm-slim-jeans-multi-colour-6",
+              "status": "product-facts-verified"
+            },
+            {
+              "url": "https://www.levi.co.za/products/levis%C2%AE-mens-511%E2%84%A2-slim-jeans-multi-colour-8",
+              "status": "product-facts-verified"
+            },
+            {
+              "url": "https://www.levi.co.za/products/levis%C2%AE-mens-511%E2%84%A2-slim-jeans-multi-colour-2",
+              "status": "product-facts-verified"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-03T12:39:39.291Z",
+          "message": "Product facts are quoted from matching product-page descriptions."
+        }
+      }
+    },
+    {
+      "category": "phone",
+      "query": "Samsung Galaxy A16 128GB black",
+      "status": "failed",
+      "durationMs": 29388,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Samsung Galaxy A16 128GB black",
+            "object": "Samsung Galaxy A16 128GB black",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Samsung Galaxy A16 128GB black",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "Samsung Galaxy A16 128GB black",
+          "bestProduct": null,
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "PriceCheck",
+              "searchUrl": "https://www.pricecheck.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "PriceCheck",
+              "searchUrl": "https://www.pricecheck.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Samsung%20Galaxy%20A16%20128GB%20black",
+          "checkedAt": "2026-11-03T12:39:30.903Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": null,
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "sourceChecks": [
+            {
+              "url": "https://www.makro.co.za/osdd.xml?v=2",
+              "status": "http-error",
+              "httpStatus": 404
+            },
+            {
+              "url": "https://www.makro.co.za/samsung-galaxy-a36-5g-black-128-gb/p/itmda09a86005e63?pid=MOBHBB3SZYFHHEVF&marketplace=FLIPKART",
+              "status": "identity-mismatch"
+            },
+            {
+              "url": "https://www.makro.co.za/samsung-galaxy-a26-5g-dual-sim-128gb-black-128-gb/p/itm5ef6135f0767f?pid=MOBHA59NCEQQHX4J&marketplace=FLIPKART",
+              "status": "identity-mismatch"
+            },
+            {
+              "url": "https://www.makro.co.za/samsung-galaxy-a17-black-128-gb/p/itm804e5232883e9?pid=MOBHGY8RQ734YXWH&marketplace=FLIPKART",
+              "status": "identity-mismatch"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-03T12:39:42.148Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "stationery",
+      "query": "Casio FX-991ZA+ scientific calculator",
+      "status": "failed",
+      "durationMs": 20798,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Casio FX-991ZA+ scientific calculator",
+            "object": "Casio FX-991ZA+ scientific calculator",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Casio FX-991ZA+ scientific calculator",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": true,
+          "exactMatchVerified": true,
+          "searchQuery": "Casio FX-991ZA+ scientific calculator",
+          "bestProduct": {
+            "name": "Casio Calculator Scientific FX-991ZA+ | Waltons"
+          },
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [
+            {
+              "product_name": "Casio Calculator Scientific FX-991ZA+ | Waltons",
+              "product_url": "https://www.waltons.co.za/buy/casio-calculator-scientific-fx-991za",
+              "sku": "",
+              "comparisonAttributes": null,
+              "comparisonAmbiguous": false,
+              "retailer": {
+                "name": "Waltons"
+              },
+              "price": null,
+              "currency": null,
+              "availability": null,
+              "priceConditions": "",
+              "verified": false,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Exact retailer product page verified; price not published",
+              "matchScore": 92,
+              "stockScope": "not supplied",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-03T12:39:49.358Z",
+              "retailerDomain": "waltons.co.za",
+              "trustedRetailerDomain": false,
+              "branchPriceVerified": false
+            }
+          ],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Waltons",
+              "searchUrl": "https://www.waltons.co.za/buy/casio-calculator-scientific-fx-991za",
+              "exactProductMatch": true,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "PNA",
+              "searchUrl": "https://www.pna.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Waltons",
+              "searchUrl": "https://www.waltons.co.za/buy/casio-calculator-scientific-fx-991za",
+              "exactProductMatch": true,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "PNA",
+              "searchUrl": "https://www.pna.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 1,
+          "verifiedSellerCount": 1,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Casio%20FX-991ZA%2B%20scientific%20calculator",
+          "checkedAt": "2026-11-03T12:39:55.711Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": null,
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "sourceChecks": [
+            {
+              "url": "https://www.waltons.co.za/buy/casio-calculator-scientific-fx-991za",
+              "status": "identity-mismatch"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-03T12:40:00.090Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "garden",
+      "query": "Gardena energy cut 750 B pruning lopper",
+      "status": "failed",
+      "durationMs": 20105,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Gardena energy cut 750 B pruning lopper",
+            "object": "Gardena energy cut 750 B pruning lopper",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Gardena energy cut 750 B pruning lopper",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "Gardena energy cut 750 B pruning lopper",
+          "bestProduct": null,
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "PriceCheck",
+              "searchUrl": "https://www.pricecheck.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "PriceCheck",
+              "searchUrl": "https://www.pricecheck.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Gardena%20energy%20cut%20750%20B%20pruning%20lopper",
+          "checkedAt": "2026-11-03T12:39:54.535Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": null,
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "sourceChecks": [
+            {
+              "url": "https://www.makro.co.za/osdd.xml?v=2",
+              "status": "http-error",
+              "httpStatus": 404
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-03T12:40:02.252Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    }
+  ]
+}

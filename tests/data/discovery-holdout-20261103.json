@@ -1,0 +1,10 @@
+[
+ {"category":"mouse","query":"Logitech M185 wireless mouse grey","referenceUrl":"https://www.firstshop.co.za/products/logitech-m185-wireless-mouse-grey-910-002235-100154","expectedIdentity":"Logitech M185, grey, retailer code 910-002235"},
+ {"category":"headphones","query":"JBL Tune 520BT headphones black","referenceUrl":"https://computermania.co.za/products/jbl-520bt-bluetooth-on-ear-headphones-blk","expectedIdentity":"JBL Tune 520BT, black; no 525BT substitution"},
+ {"category":"toy","query":"LEGO Creator 3 in 1 Exotic Parrot 31136","referenceUrl":"https://lego-gybc.co.za/products/lego-creator-3-in-1-exotic-parrot-31136","expectedIdentity":"LEGO set 31136; primary source publishes 253 pieces; branch stock needs separate proof"},
+ {"category":"beauty","query":"Clinique Moisture Surge Serum 50ml","referenceUrl":"https://www.dischem.co.za/clinique-moisture-surge-serum-50ml-094","expectedIdentity":"Serum, 50 ml; not the hydrator or intense cream"},
+ {"category":"phone","query":"Samsung Galaxy A16 128GB black","referenceUrl":"https://www.hificorp.co.za/samsung-galaxy-a16-128gb-black","expectedIdentity":"Galaxy A16, 128 GB, black; do not infer an unspecified network generation"},
+ {"category":"clothing","query":"Levis 511 Slim Jeans Multi Colour","referenceUrl":"https://www.levi.co.za/products/levis-r-mens-511-tm-slim-jeans-multi-colour-6","expectedIdentity":"511 Slim, Multi Colour; individual waist and length availability unconfirmed"},
+ {"category":"stationery","query":"Casio FX-991ZA+ scientific calculator","referenceUrl":"https://www.waltons.co.za/buy/casio-calculator-scientific-fx-991za","expectedIdentity":"FX-991ZA+, not FX-82 or an unestablished generation"},
+ {"category":"garden","query":"Gardena energy cut 750 B pruning lopper","referenceUrl":"https://leroymerlin.co.za/pruning-lopper-energy-cut-gardena-750-b-81485225","expectedIdentity":"Gardena EnergyCut 750 B, source SKU 81485225; not generic shears"}
+]
