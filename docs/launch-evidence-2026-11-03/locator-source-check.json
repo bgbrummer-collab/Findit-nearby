@@ -1,0 +1,15 @@
+{
+  "date": "2026-11-03",
+  "method": "Public locator HTML fetched without a search location; parsed locally using existing application parser",
+  "sources": [
+    {
+      "url": "https://www.incredible.co.za/storelocator/",
+      "branchesParsed": 93
+    },
+    {
+      "url": "https://www.hificorp.co.za/storelocator",
+      "branchesParsed": 58
+    }
+  ],
+  "limitation": "Not a production nearby test; no distances, map pins or branch stock verified"
+}

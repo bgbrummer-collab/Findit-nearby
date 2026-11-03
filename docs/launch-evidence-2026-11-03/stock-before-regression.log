@@ -1,0 +1,32 @@
+✔ selected zero-stock variant allowing continued orders is backordered, not in stock (2.785289ms)
+✔ sibling variants, unrelated SKU, quick-add widgets and missing provenance cannot override stock (0.963308ms)
+✖ actual page verification downgrades conflicting JSON-LD InStock and retains price (17.893768ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 2
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 145.415674
+
+✖ failing tests:
+
+test at tests/selected-variant-inventory.test.js:17:1
+✖ actual page verification downgrades conflicting JSON-LD InStock and retains price (17.893768ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'in_stock'
+  - 'backorder'
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/2d7055ba285d/Findit-nearby/tests/selected-variant-inventory.test.js:22:9)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'in_stock',
+    expected: 'backorder',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
