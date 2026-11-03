@@ -8,7 +8,8 @@ import {productVariantConflict,ident as coreIdent} from '../lib/product-intellig
 const local=process.env.FINDIT_LOCAL_WORKER==='true';
 const versionInfo=async()=>local?{commit:'local-working-tree',platform:'local-worker-live-sources'}:await(await fetch(new URL('/api/version',base))).json();
 const base=process.env.FINDIT_URL||'https://findit-nearby.bgbrummer.workers.dev/';
-const cases=[
+const holdout=process.env.FINDIT_CASES?JSON.parse(await fs.readFile(process.env.FINDIT_CASES,'utf8')):null;
+const cases=holdout?holdout.map(row=>[row.category,row.query]):[
  [
   "gym",
   "Concept2 RowErg rowing machine"
@@ -97,7 +98,7 @@ await Promise.all(Array.from({length:2},async()=>{
  }
 }));
 const endVersion=await versionInfo();
-const report={checkedAt:new Date().toISOString(),base,version,endVersion,versionStable:version.commit===endVersion.commit,results};
+const report={checkedAt:new Date().toISOString(),base,version,endVersion,versionStable:version.commit===endVersion.commit,...(holdout?{holdout}:{}),results};
 const output=process.env.FINDIT_EVIDENCE_PATH||'/workspace/scratch/findit-broad-product-matrix.json';
 await fs.writeFile(output,JSON.stringify(report,null,2));
 console.log('LIVE_DATA_MATRIX',JSON.stringify({passed:results.filter(x=>x.status==='passed').length,total:results.length,output}));

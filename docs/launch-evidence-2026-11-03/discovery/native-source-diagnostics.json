@@ -1,0 +1,2437 @@
+{
+  "checkedAt": "2026-11-03T12:32:08.858Z",
+  "results": [
+    {
+      "query": "Toyota Corolla Cross 1.8 Xi",
+      "requests": [],
+      "candidates": [],
+      "verified": []
+    },
+    {
+      "query": "Keychron K2 wireless mechanical keyboard",
+      "requests": [
+        {
+          "url": "https://www.firstshop.co.za/search/suggest.json?q=Keychron+K2+wireless+mechanical+keyboard&resources%5Btype%5D=product&resources%5Blimit%5D=10",
+          "status": 200,
+          "ms": 3483,
+          "characters": 80232,
+          "title": "",
+          "challenge": false,
+          "productTitles": [
+            "Keychron K2 HE Wireless Special Edition Magnetic Custom Keyboard Black with NEBULA Switch",
+            "Keychron K2 HE Wireless Special Edition Magnetic Custom Keyboard White with NEBULA Switch",
+            "KeyChron K1 Max QMK/VIA Wireless Custom Mechanical Keyboard Brown Switches K1M-H3",
+            "Keychron K8 QMK 80 RGB Black Wireless Mechanical Keyboard K8X-H1",
+            "Keychron K10 QMK RGB Wireless Custom Mechanical Keyboard V.2 Super Red Switch Black K10X-H1",
+            "Keychron K7 Max QMK/VIA Wireless Custom Mechanical Keyboard Red Switches K7M-H1",
+            "Keychron Q6 HE QMK Full-size Wireless Custom Mechanical Keyboard Carbon Black Q6H-M1",
+            "Keychron K1 Max QMK/VIA Wireless Custom Mechanical Keyboard Red Switches K1M-H1",
+            "Keychron V3 Max QMK/VIA Wireless Custom Mechanical Keyboard Carbon Black V3M-D4",
+            "KeyChron V6 Ultra 100 8K Red Switch Gateron Jupiter RGB Wireless Mechanical Keyboard V6U-D1"
+          ]
+        },
+        {
+          "url": "https://www.firstshop.co.za/search/suggest.json?q=Keychron+K2&resources%5Btype%5D=product&resources%5Blimit%5D=10",
+          "status": 200,
+          "ms": 281,
+          "characters": 85573,
+          "title": "",
+          "challenge": false,
+          "productTitles": [
+            "Keychron K2 HE Wireless Special Edition Magnetic Custom Keyboard Black with NEBULA Switch",
+            "Keychron K2 HE Wireless Special Edition Magnetic Custom Keyboard White with NEBULA Switch",
+            "Keychron C2 Pro 100 8K Super Red Switch RGB Wired Custom Mechanical Keyboard C2PX-M1",
+            "Keychron Double-Shot PBT OSA Profile Keycap Set Grey PBT-51",
+            "Keychron Double-Shot PBT OSA Profile Keycap Set Blue and White PBT-53",
+            "Keychron K8 QMK 80 RGB Black Wireless Mechanical Keyboard K8X-H1",
+            "Keychron K4 HE Wireless Magnetic Switch Keyboard K4H-F1",
+            "Keychron K10 QMK RGB Wireless Custom Mechanical Keyboard V.2 Super Red Switch Black K10X-H1",
+            "KeyChron K10 HE Wireless Magnetic Switch Custom Keyboard - White Wood K10H-Q1",
+            "Keychron C3 Pro 8K QMK RGB Wired Keyboard C3PX-H1"
+          ]
+        },
+        {
+          "url": "https://www.firstshop.co.za/search/suggest.json?q=K2&resources%5Btype%5D=product&resources%5Blimit%5D=10",
+          "status": 200,
+          "ms": 295,
+          "characters": 74800,
+          "title": "",
+          "challenge": false,
+          "productTitles": [
+            "Creality 3D K2 Plus CFS Combo 3D Printer CR-K2PLUS-COMBO",
+            "Creality 3D K2 Plus 3D Printer CREALITY-K2PLUS",
+            "Creality Buffer Kit for CFS 4004010263",
+            "Creality K2 3D Printer",
+            "Creality K2 Plus AI Chamber Camera 4004010260",
+            "Creality K2/K2 Pro/K2 Plus Activated Carbon Air Filter 4004010287",
+            "Creality 3D Functional Printhead Module for K2 Plus 3102080077",
+            "Creality K2/K2 Pro/K2 Plus Hotend Adapter Board 4004010288",
+            "Creality K2 Plus Nozzle Camera 4004010272",
+            "Creality K2 Plus Extrusion Gear Kit 4004120025"
+          ]
+        },
+        {
+          "url": "https://www.firstshop.co.za/search?q=Keychron%20K2%20wireless%20mechanical%20keyboard&type=product",
+          "status": 200,
+          "ms": 409,
+          "characters": 396861,
+          "title": "Search: 748 results found for &quot;Keychron K2 wireless mechanical keyboard&quot; &ndash; FirstShop",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.incredible.co.za/catalogsearch/result/?q=Keychron%20K2%20wireless%20mechanical%20keyboard",
+          "ms": 6499,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://www.hificorp.co.za/catalogsearch/result/?q=Keychron%20K2%20wireless%20mechanical%20keyboard",
+          "ms": 6498,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://www.geewiz.co.za/jolisearch?controller=search&s=Keychron%20K2%20wireless%20mechanical%20keyboard",
+          "ms": 6502,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/keychron-k1-max-qmk-via-wireless-custom-mechanical-keyboard-brown-switches-k1m-h3-373298?_pos=3&_sid=185305d8e&_ss=r",
+          "status": 200,
+          "ms": 313,
+          "characters": 242035,
+          "title": "KeyChron K1 Max QMK/VIA Wireless Custom Mechanical Keyboard Brown Switches K1M-H3 &ndash; FirstShop",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/keychron-k7-max-qmk-via-wireless-custom-mechanical-keyboard-red-switches-k7m-h1-373302?_pos=7&_sid=185305d8e&_ss=r",
+          "status": 200,
+          "ms": 2233,
+          "characters": 244759,
+          "title": "Keychron K7 Max QMK/VIA Wireless Custom Mechanical Keyboard Red Switches K7M-H1 &ndash; FirstShop",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/keychron-k1-max-qmk-via-wireless-custom-mechanical-keyboard-red-switches-k1m-h1-373297?_pos=6&_sid=185305d8e&_ss=r",
+          "status": 200,
+          "ms": 2245,
+          "characters": 244833,
+          "title": "Keychron K1 Max QMK/VIA Wireless Custom Mechanical Keyboard Red Switches K1M-H1 &ndash; FirstShop",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/keychron-v3-max-qmk-via-wireless-custom-mechanical-keyboard-carbon-black-v3m-d4-373765?_pos=8&_sid=185305d8e&_ss=r",
+          "status": 200,
+          "ms": 2254,
+          "characters": 240856,
+          "title": "Keychron V3 Max QMK/VIA Wireless Custom Mechanical Keyboard Carbon Black V3M-D4 &ndash; FirstShop",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/keychron-v3-max-qmk-via-80-wireless-custom-brown-switch-mechanical-keyboard-carbon-black-v3m-d3-403699?_pos=12&_sid=185305d8e&_ss=r",
+          "status": 200,
+          "ms": 2255,
+          "characters": 268677,
+          "title": "Keychron V3 Max QMK/VIA 80 Wireless Custom Brown Switch Mechanical Keyboard - Carbon Black V3M-D3 &ndash; FirstShop",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/keychron-v6-ultra-100-8k-red-switch-gateron-jupiter-rgb-wireless-mechanical-keyboard-v6u-d1-396520?_pos=16&_sid=185305d8e&_ss=r",
+          "status": 200,
+          "ms": 2260,
+          "characters": 245407,
+          "title": "KeyChron V6 Ultra 100 8K Red Switch Gateron Jupiter RGB Wireless Mechanical Keyboard V6U-D1 &ndash; FirstShop",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/keychron-v3-max-wireless-custom-mechanical-keyboard-red-switch-carbon-black-v3m-d1-374573?_pos=11&_sid=185305d8e&_ss=r",
+          "status": 200,
+          "ms": 2269,
+          "characters": 234148,
+          "title": "Keychron V3 Max Wireless Custom Mechanical Keyboard Red Switch Carbon Black V3M-D1 &ndash; FirstShop",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/keychron-q3-max-qmk-via-wireless-custom-mechanical-keyboard-shell-white-q3m-p1-399293?_pos=10&_sid=185305d8e&_ss=r",
+          "status": 200,
+          "ms": 2294,
+          "characters": 253668,
+          "title": "KeyChron Q3 Max QMK/VIA Wireless Custom Mechanical Keyboard - Shell White Q3M-P1 &ndash; FirstShop",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/keychron-k10-qmk-rgb-wireless-custom-mechanical-keyboard-v-2-super-red-switch-black-k10x-h1-374572?_pos=5&_sid=185305d8e&_ss=r",
+          "status": 200,
+          "ms": 2302,
+          "characters": 231087,
+          "title": "Keychron K10 QMK RGB Wireless Custom Mechanical Keyboard V.2 Super Red Switch Black K10X-H1 &ndash; FirstShop",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/keychron-v3-ultra-80-8k-red-switch-rgb-wireless-mechanical-keyboard-black-v3u-d1-396519?_pos=13&_sid=185305d8e&_ss=r",
+          "status": 200,
+          "ms": 2325,
+          "characters": 244337,
+          "title": "Keychron V3 Ultra 80 8K Red Switch RGB Wireless Mechanical Keyboard - Black V3U-D1 &ndash; FirstShop",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/keychron-k8-qmk-80-rgb-black-wireless-mechanical-keyboard-k8x-h1-388191?_pos=4&_sid=185305d8e&_ss=r",
+          "status": 200,
+          "ms": 2346,
+          "characters": 247825,
+          "title": "Keychron K8 QMK 80 RGB Black Wireless Mechanical Keyboard K8X-H1 &ndash; FirstShop",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/keychron-q6-he-qmk-full-size-wireless-custom-mechanical-keyboard-carbon-black-q6h-m1-373764?_pos=15&_sid=185305d8e&_ss=r",
+          "status": 200,
+          "ms": 2376,
+          "characters": 242264,
+          "title": "Keychron Q6 HE QMK Full-size Wireless Custom Mechanical Keyboard Carbon Black Q6H-M1 &ndash; FirstShop",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://www.firstshop.co.za/products/keychron-k1-max-qmk-via-wireless-custom-mechanical-keyboard-brown-switches-k1m-h3-373298?_pos=3&_sid=185305d8e&_ss=r",
+          "ms": 7501,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://r.jina.ai/https://www.firstshop.co.za/products/keychron-k7-max-qmk-via-wireless-custom-mechanical-keyboard-red-switches-k7m-h1-373302?_pos=7&_sid=185305d8e&_ss=r",
+          "ms": 7500,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://r.jina.ai/https://www.firstshop.co.za/products/keychron-k1-max-qmk-via-wireless-custom-mechanical-keyboard-red-switches-k1m-h1-373297?_pos=6&_sid=185305d8e&_ss=r",
+          "ms": 7500,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://r.jina.ai/https://www.firstshop.co.za/products/keychron-v3-max-qmk-via-wireless-custom-mechanical-keyboard-carbon-black-v3m-d4-373765?_pos=8&_sid=185305d8e&_ss=r",
+          "ms": 7500,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://r.jina.ai/https://www.firstshop.co.za/products/keychron-v3-max-qmk-via-80-wireless-custom-brown-switch-mechanical-keyboard-carbon-black-v3m-d3-403699?_pos=12&_sid=185305d8e&_ss=r",
+          "ms": 7500,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://r.jina.ai/https://www.firstshop.co.za/products/keychron-v6-ultra-100-8k-red-switch-gateron-jupiter-rgb-wireless-mechanical-keyboard-v6u-d1-396520?_pos=16&_sid=185305d8e&_ss=r",
+          "ms": 7500,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://r.jina.ai/https://www.firstshop.co.za/products/keychron-v3-max-wireless-custom-mechanical-keyboard-red-switch-carbon-black-v3m-d1-374573?_pos=11&_sid=185305d8e&_ss=r",
+          "ms": 7501,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://r.jina.ai/https://www.firstshop.co.za/products/keychron-q3-max-qmk-via-wireless-custom-mechanical-keyboard-shell-white-q3m-p1-399293?_pos=10&_sid=185305d8e&_ss=r",
+          "ms": 7501,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://r.jina.ai/https://www.firstshop.co.za/products/keychron-k10-qmk-rgb-wireless-custom-mechanical-keyboard-v-2-super-red-switch-black-k10x-h1-374572?_pos=5&_sid=185305d8e&_ss=r",
+          "ms": 7500,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://r.jina.ai/https://www.firstshop.co.za/products/keychron-v3-ultra-80-8k-red-switch-rgb-wireless-mechanical-keyboard-black-v3u-d1-396519?_pos=13&_sid=185305d8e&_ss=r",
+          "ms": 7501,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://r.jina.ai/https://www.firstshop.co.za/products/keychron-k8-qmk-80-rgb-black-wireless-mechanical-keyboard-k8x-h1-388191?_pos=4&_sid=185305d8e&_ss=r",
+          "ms": 7500,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://r.jina.ai/https://www.firstshop.co.za/products/keychron-q6-he-qmk-full-size-wireless-custom-mechanical-keyboard-carbon-black-q6h-m1-373764?_pos=15&_sid=185305d8e&_ss=r",
+          "ms": 7502,
+          "error": "TimeoutError"
+        }
+      ],
+      "candidates": [
+        "https://www.firstshop.co.za/products/keychron-k1-max-qmk-via-wireless-custom-mechanical-keyboard-brown-switches-k1m-h3-373298?_pos=3&_sid=185305d8e&_ss=r",
+        "https://www.firstshop.co.za/products/keychron-k8-qmk-80-rgb-black-wireless-mechanical-keyboard-k8x-h1-388191?_pos=4&_sid=185305d8e&_ss=r",
+        "https://www.firstshop.co.za/products/keychron-k10-qmk-rgb-wireless-custom-mechanical-keyboard-v-2-super-red-switch-black-k10x-h1-374572?_pos=5&_sid=185305d8e&_ss=r",
+        "https://www.firstshop.co.za/products/keychron-k1-max-qmk-via-wireless-custom-mechanical-keyboard-red-switches-k1m-h1-373297?_pos=6&_sid=185305d8e&_ss=r",
+        "https://www.firstshop.co.za/products/keychron-k7-max-qmk-via-wireless-custom-mechanical-keyboard-red-switches-k7m-h1-373302?_pos=7&_sid=185305d8e&_ss=r",
+        "https://www.firstshop.co.za/products/keychron-v3-max-qmk-via-wireless-custom-mechanical-keyboard-carbon-black-v3m-d4-373765?_pos=8&_sid=185305d8e&_ss=r",
+        "https://www.firstshop.co.za/products/keychron-q3-max-qmk-via-wireless-custom-mechanical-keyboard-shell-white-q3m-p1-399293?_pos=10&_sid=185305d8e&_ss=r",
+        "https://www.firstshop.co.za/products/keychron-v3-max-wireless-custom-mechanical-keyboard-red-switch-carbon-black-v3m-d1-374573?_pos=11&_sid=185305d8e&_ss=r",
+        "https://www.firstshop.co.za/products/keychron-v3-max-qmk-via-80-wireless-custom-brown-switch-mechanical-keyboard-carbon-black-v3m-d3-403699?_pos=12&_sid=185305d8e&_ss=r",
+        "https://www.firstshop.co.za/products/keychron-v3-ultra-80-8k-red-switch-rgb-wireless-mechanical-keyboard-black-v3u-d1-396519?_pos=13&_sid=185305d8e&_ss=r",
+        "https://www.firstshop.co.za/products/keychron-q6-he-qmk-full-size-wireless-custom-mechanical-keyboard-carbon-black-q6h-m1-373764?_pos=15&_sid=185305d8e&_ss=r",
+        "https://www.firstshop.co.za/products/keychron-v6-ultra-100-8k-red-switch-gateron-jupiter-rgb-wireless-mechanical-keyboard-v6u-d1-396520?_pos=16&_sid=185305d8e&_ss=r",
+        "https://www.firstshop.co.za/products/keychron-k2-he-wireless-special-edition-magnetic-custom-keyboard-black-with-nebula-switch-324147?_pos=1&_sid=185305d8e&_ss=r",
+        "https://www.firstshop.co.za/products/keychron-k2-he-wireless-special-edition-magnetic-custom-keyboard-white-with-nebula-switch-324145?_pos=2&_sid=185305d8e&_ss=r",
+        "https://www.firstshop.co.za/products/keychron-v1-max-qmk-via-wireless-keyboard-with-banana-switches-v1m-d4-406282?_pos=9&_sid=185305d8e&_ss=r",
+        "https://www.firstshop.co.za/products/keychron-v1-max-qmk-via-wireless-custom-keyboard-black-with-brown-switches-v1m-d3-323777?_pos=14&_sid=185305d8e&_ss=r"
+      ],
+      "verified": [
+        {
+          "url": "https://www.firstshop.co.za/products/keychron-k1-max-qmk-via-wireless-custom-mechanical-keyboard-brown-switches-k1m-h3-373298?_pos=3&_sid=185305d8e&_ss=r",
+          "offer": null
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/keychron-k8-qmk-80-rgb-black-wireless-mechanical-keyboard-k8x-h1-388191?_pos=4&_sid=185305d8e&_ss=r",
+          "offer": null
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/keychron-k10-qmk-rgb-wireless-custom-mechanical-keyboard-v-2-super-red-switch-black-k10x-h1-374572?_pos=5&_sid=185305d8e&_ss=r",
+          "offer": null
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/keychron-k1-max-qmk-via-wireless-custom-mechanical-keyboard-red-switches-k1m-h1-373297?_pos=6&_sid=185305d8e&_ss=r",
+          "offer": null
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/keychron-k7-max-qmk-via-wireless-custom-mechanical-keyboard-red-switches-k7m-h1-373302?_pos=7&_sid=185305d8e&_ss=r",
+          "offer": null
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/keychron-v3-max-qmk-via-wireless-custom-mechanical-keyboard-carbon-black-v3m-d4-373765?_pos=8&_sid=185305d8e&_ss=r",
+          "offer": null
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/keychron-q3-max-qmk-via-wireless-custom-mechanical-keyboard-shell-white-q3m-p1-399293?_pos=10&_sid=185305d8e&_ss=r",
+          "offer": null
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/keychron-v3-max-wireless-custom-mechanical-keyboard-red-switch-carbon-black-v3m-d1-374573?_pos=11&_sid=185305d8e&_ss=r",
+          "offer": null
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/keychron-v3-max-qmk-via-80-wireless-custom-brown-switch-mechanical-keyboard-carbon-black-v3m-d3-403699?_pos=12&_sid=185305d8e&_ss=r",
+          "offer": null
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/keychron-v3-ultra-80-8k-red-switch-rgb-wireless-mechanical-keyboard-black-v3u-d1-396519?_pos=13&_sid=185305d8e&_ss=r",
+          "offer": null
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/keychron-q6-he-qmk-full-size-wireless-custom-mechanical-keyboard-carbon-black-q6h-m1-373764?_pos=15&_sid=185305d8e&_ss=r",
+          "offer": null
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/keychron-v6-ultra-100-8k-red-switch-gateron-jupiter-rgb-wireless-mechanical-keyboard-v6u-d1-396520?_pos=16&_sid=185305d8e&_ss=r",
+          "offer": null
+        }
+      ]
+    },
+    {
+      "query": "Concept2 RowErg rowing machine",
+      "requests": [
+        {
+          "url": "https://mifitness.co.za/search/suggest.json?q=Concept2+RowErg+rowing+machine&resources%5Btype%5D=product&resources%5Blimit%5D=10",
+          "status": 200,
+          "ms": 3927,
+          "characters": 28924,
+          "title": "",
+          "challenge": false,
+          "productTitles": [
+            "Powercore Air Rower Pro (3 Year Warranty)",
+            "Powercore Water Rower (3 Year Warranty)",
+            "Shua R8100 Commercial Rowing Machine (7 Year Warranty)",
+            "Plae Air Rower (5 Year Warranty)",
+            "Wall Storage - Rower And Benches*",
+            "Kids Equipment: Rower (Zy-Cfe009)"
+          ]
+        },
+        {
+          "url": "https://mifitness.co.za/search/suggest.json?q=Concept2+RowErg&resources%5Btype%5D=product&resources%5Blimit%5D=10",
+          "status": 200,
+          "ms": 261,
+          "characters": 3600,
+          "title": "",
+          "challenge": false,
+          "productTitles": [
+            "Wall Storage - Rower And Benches*"
+          ]
+        },
+        {
+          "url": "https://mifitness.co.za/search/suggest.json?q=RowErg&resources%5Btype%5D=product&resources%5Blimit%5D=10",
+          "status": 200,
+          "ms": 298,
+          "characters": 44185,
+          "title": "",
+          "challenge": false,
+          "productTitles": [
+            "Powercore Air Rower Pro (3 Year Warranty)",
+            "Powercore Water Rower (3 Year Warranty)",
+            "Plae Air Rower (5 Year Warranty)",
+            "Shua R8100 Commercial Rowing Machine (7 Year Warranty)",
+            "Kids Equipment: Rower (Zy-Cfe009)",
+            "Powercore Rotating Smith Back Row",
+            "Kids Equipment: Infant Rower (ZY-CFE005)",
+            "Powercore Instinct Standing T Bar Row*",
+            "Powercore Bent Over Back Row",
+            "Wall Storage - Rower And Benches*"
+          ]
+        },
+        {
+          "url": "https://mifitness.co.za/search?q=Concept2%20RowErg%20rowing%20machine&type=product",
+          "status": 200,
+          "ms": 381,
+          "characters": 459734,
+          "title": "Search results: 15 results for “Concept2 RowErg rowing machine”\n&ndash; MiFitness",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://gymgear.co.za/search/suggest.json?q=Concept2+RowErg+rowing+machine&resources%5Btype%5D=product&resources%5Blimit%5D=10",
+          "status": 200,
+          "ms": 5776,
+          "characters": 101185,
+          "title": "",
+          "challenge": false,
+          "productTitles": [
+            "R1M Plus Rowing Machine",
+            "R30 Rowing Machine",
+            "Neon Plus Fluid Rower",
+            "R20 Rowing Machine",
+            "AR9 Air Rower",
+            "R6 Air Rower",
+            "R8 Air Rower Pro",
+            "Apollo Pro V Fluid Water Rower",
+            "Platinum Seated Row - Plate Loaded",
+            "Apollo Plus Commercial Water Rower"
+          ]
+        },
+        {
+          "url": "https://gymgear.co.za/search/suggest.json?q=Concept2+RowErg&resources%5Btype%5D=product&resources%5Blimit%5D=10",
+          "status": 200,
+          "ms": 268,
+          "characters": 6678,
+          "title": "",
+          "challenge": false,
+          "productTitles": [
+            "Air Rower - RowErg"
+          ]
+        },
+        {
+          "url": "https://www.fitnessnetwork.co.za/search?q=Concept2%20RowErg%20rowing%20machine",
+          "ms": 6501,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://gymgear.co.za/search?q=Concept2%20RowErg%20rowing%20machine&type=product",
+          "ms": 442,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://mifitness.co.za/products/shua-commercial-rowing-machine?_pos=3&_sid=223c9afcd&_ss=r",
+          "status": 200,
+          "ms": 594,
+          "characters": 441799,
+          "title": "Shua R8100 Commercial Rowing Machine | MiFitness",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://mifitness.co.za/products/torque-skier-relentless-ripper",
+          "status": 404,
+          "ms": 2545,
+          "characters": 315908,
+          "title": "404 Not Found\n&ndash; MiFitness",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://mifitness.co.za/products/powercore-instinct-t-bar-arm-machine?_pos=6&_sid=223c9afcd&_ss=r",
+          "status": 200,
+          "ms": 2638,
+          "characters": 433900,
+          "title": "Powercore Instinct Standing T Bar Row | MiFitness",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://mifitness.co.za/products/powercore-t-back-row-machine-2-in-1?_pos=7&_sid=223c9afcd&_ss=r",
+          "status": 200,
+          "ms": 2662,
+          "characters": 459713,
+          "title": "Powercore Rotating Smith Back Row Machine | MiFitness",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://mifitness.co.za/products/shua-commercial-rowing-machine?_pos=3&_sid=223c9afcd&_ss=r",
+          "status": 200,
+          "ms": 2702,
+          "characters": 441799,
+          "title": "Shua R8100 Commercial Rowing Machine | MiFitness",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://mifitness.co.za/products/shua-commercial-rowing-machine?_pos=3&_sid=223c9afcd&_ss=r",
+          "ms": 7501,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://r.jina.ai/https://mifitness.co.za/products/torque-skier-relentless-ripper",
+          "ms": 7500,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://r.jina.ai/https://mifitness.co.za/products/powercore-instinct-t-bar-arm-machine?_pos=6&_sid=223c9afcd&_ss=r#product-reviews",
+          "ms": 7502,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://r.jina.ai/https://mifitness.co.za/products/powercore-t-back-row-machine-2-in-1?_pos=7&_sid=223c9afcd&_ss=r#product-reviews",
+          "ms": 7500,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://r.jina.ai/https://mifitness.co.za/products/shua-commercial-rowing-machine?_pos=3&_sid=223c9afcd&_ss=r#product-reviews",
+          "ms": 7501,
+          "error": "TimeoutError"
+        }
+      ],
+      "candidates": [
+        "https://mifitness.co.za/products/shua-commercial-rowing-machine?_pos=3&_sid=223c9afcd&_ss=r",
+        "https://mifitness.co.za/products/shua-commercial-rowing-machine?_pos=3&_sid=223c9afcd&_ss=r#product-reviews",
+        "https://mifitness.co.za/products/torque-skier-relentless-ripper",
+        "https://mifitness.co.za/products/powercore-instinct-t-bar-arm-machine?_pos=6&_sid=223c9afcd&_ss=r#product-reviews",
+        "https://mifitness.co.za/products/powercore-t-back-row-machine-2-in-1?_pos=7&_sid=223c9afcd&_ss=r#product-reviews"
+      ],
+      "verified": [
+        {
+          "url": "https://mifitness.co.za/products/shua-commercial-rowing-machine?_pos=3&_sid=223c9afcd&_ss=r",
+          "offer": null
+        },
+        {
+          "url": "https://mifitness.co.za/products/shua-commercial-rowing-machine?_pos=3&_sid=223c9afcd&_ss=r#product-reviews",
+          "offer": null
+        },
+        {
+          "url": "https://mifitness.co.za/products/torque-skier-relentless-ripper",
+          "offer": null
+        },
+        {
+          "url": "https://mifitness.co.za/products/powercore-instinct-t-bar-arm-machine?_pos=6&_sid=223c9afcd&_ss=r#product-reviews",
+          "offer": null
+        },
+        {
+          "url": "https://mifitness.co.za/products/powercore-t-back-row-machine-2-in-1?_pos=7&_sid=223c9afcd&_ss=r#product-reviews",
+          "offer": null
+        }
+      ]
+    },
+    {
+      "query": "Omron M2 Basic upper arm blood pressure monitor",
+      "requests": [
+        {
+          "url": "https://clicks.co.za/search?q=Omron%3Arelevance&text=Omron&count=100",
+          "status": 200,
+          "ms": 2143,
+          "characters": 246991,
+          "title": "\n\t\tClicks",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://clicks.co.za/search?q=Omron+M2+Basic%3Arelevance&text=Omron+M2+Basic&count=100",
+          "status": 200,
+          "ms": 337,
+          "characters": 636131,
+          "title": "\n\t\tClicks",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://clicks.co.za/search?q=Omron%20M2%20Basic%20upper%20arm%20blood%20pressure%20monitor%3Arelevance&text=Omron%20M2%20Basic%20upper%20arm%20blood%20pressure%20monitor&count=100",
+          "status": 200,
+          "ms": 2505,
+          "characters": 2591676,
+          "title": "\n\t\tClicks",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.dischem.co.za/catalogsearch/result/?q=Omron%20M2%20Basic%20upper%20arm%20blood%20pressure%20monitor",
+          "status": 200,
+          "ms": 3684,
+          "characters": 435559,
+          "title": "Search results for: &#039;Omron M2 Basic upper arm blood pressure monitor&#039;  | Dis-Chem",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://clicks.co.za/clicks_clicks-upper-arm-blood-pressure-monitor/p/300481",
+          "status": 200,
+          "ms": 259,
+          "characters": 302688,
+          "title": "\n\t\tClicks Clicks Upper Arm Blood Pressure Monitor - Clicks",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://clicks.co.za/braun_bua6150-upper-arm-blood-pressure-monitor/p/323839",
+          "status": 200,
+          "ms": 792,
+          "characters": 297136,
+          "title": "\n\t\tBraun BUA6150 Upper Arm Blood Pressure Monitor - Clicks",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.dischem.co.za/shop-by-department/health-and-wellness/diagnostics-monitors-and-testers/blood-pressure-monitors",
+          "status": 200,
+          "ms": 2319,
+          "characters": 527429,
+          "title": "Blood Pressure Monitors - Diagnostics, Monitors and Testers - Health and Wellness - Shop  | Dis-Chem",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://clicks.co.za/braun_bua4050-exactfit-2-upper-arm-blood-pressure-monitor/p/394321",
+          "status": 200,
+          "ms": 2467,
+          "characters": 292977,
+          "title": "\n\t\tBraun BUA4050 ExactFit 2 Upper Arm Blood Pressure Monitor - Clicks",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://clicks.co.za/medinox_econocare-blood-pressure-monitor/p/397690",
+          "status": 200,
+          "ms": 2494,
+          "characters": 294229,
+          "title": "\n\t\tMedinox Econocare Blood Pressure Monitor - Clicks",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://clicks.co.za/fora_6-connect-blood-glucose-monitor-wireless/p/332535",
+          "status": 200,
+          "ms": 2541,
+          "characters": 298917,
+          "title": "\n\t\tFora 6 Connect Blood Glucose Monitor Wireless - Clicks",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://clicks.co.za/clicks_large-screen-arm-blood-pressure-monitor/p/300191",
+          "status": 200,
+          "ms": 2625,
+          "characters": 298907,
+          "title": "\n\t\tClicks Large Screen Arm Blood Pressure Monitor - Clicks",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://clicks.co.za/veroval_compact-connect-blood-pressure-monitor-bu26/p/398054",
+          "status": 200,
+          "ms": 2644,
+          "characters": 293170,
+          "title": "\n\t\tVeroval Compact Connect Blood Pressure Monitor BU26 - Clicks",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://clicks.co.za/braun_exactfit-5-connect-upper-arm-blood-pressure-monitor/p/352470",
+          "status": 200,
+          "ms": 2711,
+          "characters": 299203,
+          "title": "\n\t\tBraun ExactFit 5 Connect Upper Arm Blood Pressure Monitor - Clicks",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://clicks.co.za/clicks_biomine-blood-glucose-monitoring-system/p/269476",
+          "status": 200,
+          "ms": 2723,
+          "characters": 299369,
+          "title": "\n\t\tClicks Biomine Blood Glucose Monitoring System - Clicks",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://clicks.co.za/b-well_blood-pressure-monitor-pro-25/p/401934",
+          "status": 200,
+          "ms": 2751,
+          "characters": 294500,
+          "title": "\n\t\tB Well Blood Pressure Monitor Pro-25 - Clicks",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://clicks.co.za/b-well_med-120-blood-pressure-monitor/p/401936",
+          "status": 200,
+          "ms": 2759,
+          "characters": 293968,
+          "title": "\n\t\tB.Well MED-120 Blood Pressure Monitor - Clicks",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://clicks.co.za/b-well_med-120-blood-pressure-monitor/p/401936",
+          "status": 429,
+          "ms": 2109,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://clicks.co.za/veroval_compact-connect-blood-pressure-monitor-bu26/p/398054",
+          "status": 429,
+          "ms": 2232,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://clicks.co.za/braun_exactfit-5-connect-upper-arm-blood-pressure-monitor/p/352470",
+          "status": 429,
+          "ms": 2438,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://www.dischem.co.za/shop-by-department/health-and-wellness/diagnostics-monitors-and-testers/blood-pressure-monitors",
+          "status": 200,
+          "ms": 4490,
+          "characters": 559,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://clicks.co.za/clicks_clicks-upper-arm-blood-pressure-monitor/p/300481",
+          "ms": 7501,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://r.jina.ai/https://clicks.co.za/braun_bua6150-upper-arm-blood-pressure-monitor/p/323839",
+          "ms": 7501,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://r.jina.ai/https://clicks.co.za/b-well_blood-pressure-monitor-pro-25/p/401934",
+          "status": 200,
+          "ms": 5852,
+          "characters": 138198,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://clicks.co.za/clicks_large-screen-arm-blood-pressure-monitor/p/300191",
+          "status": 200,
+          "ms": 6958,
+          "characters": 228334,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://clicks.co.za/braun_bua4050-exactfit-2-upper-arm-blood-pressure-monitor/p/394321",
+          "status": 200,
+          "ms": 7134,
+          "characters": 226856,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://clicks.co.za/medinox_econocare-blood-pressure-monitor/p/397690",
+          "ms": 7502,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://r.jina.ai/https://clicks.co.za/fora_6-connect-blood-glucose-monitor-wireless/p/332535",
+          "ms": 7500,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://r.jina.ai/https://clicks.co.za/clicks_biomine-blood-glucose-monitoring-system/p/269476",
+          "status": 200,
+          "ms": 7371,
+          "characters": 138337,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        }
+      ],
+      "candidates": [
+        "https://clicks.co.za/clicks_clicks-upper-arm-blood-pressure-monitor/p/300481",
+        "https://clicks.co.za/braun_bua6150-upper-arm-blood-pressure-monitor/p/323839",
+        "https://clicks.co.za/braun_exactfit-5-connect-upper-arm-blood-pressure-monitor/p/352470",
+        "https://clicks.co.za/braun_bua4050-exactfit-2-upper-arm-blood-pressure-monitor/p/394321",
+        "https://clicks.co.za/clicks_large-screen-arm-blood-pressure-monitor/p/300191",
+        "https://clicks.co.za/medinox_econocare-blood-pressure-monitor/p/397690",
+        "https://clicks.co.za/b-well_med-120-blood-pressure-monitor/p/401936",
+        "https://clicks.co.za/veroval_compact-connect-blood-pressure-monitor-bu26/p/398054",
+        "https://clicks.co.za/b-well_blood-pressure-monitor-pro-25/p/401934",
+        "https://www.dischem.co.za/shop-by-department/health-and-wellness/diagnostics-monitors-and-testers/blood-pressure-monitors",
+        "https://clicks.co.za/clicks_biomine-blood-glucose-monitoring-system/p/269476",
+        "https://clicks.co.za/fora_6-connect-blood-glucose-monitor-wireless/p/332535",
+        "https://clicks.co.za/contour_plus-blood-glucose-monitoring-system/p/218799",
+        "https://clicks.co.za/accu-check_active-blood-glucose-monitoring-system/p/129543",
+        "https://clicks.co.za/prai-beauty_ageless-upper-arm-creme-caffeine-and-coconut-fruit-extract-110ml/p/381476"
+      ],
+      "verified": [
+        {
+          "url": "https://clicks.co.za/clicks_clicks-upper-arm-blood-pressure-monitor/p/300481",
+          "offer": null
+        },
+        {
+          "url": "https://clicks.co.za/braun_bua6150-upper-arm-blood-pressure-monitor/p/323839",
+          "offer": null
+        },
+        {
+          "url": "https://clicks.co.za/braun_exactfit-5-connect-upper-arm-blood-pressure-monitor/p/352470",
+          "offer": null
+        },
+        {
+          "url": "https://clicks.co.za/braun_bua4050-exactfit-2-upper-arm-blood-pressure-monitor/p/394321",
+          "offer": null
+        },
+        {
+          "url": "https://clicks.co.za/clicks_large-screen-arm-blood-pressure-monitor/p/300191",
+          "offer": null
+        },
+        {
+          "url": "https://clicks.co.za/medinox_econocare-blood-pressure-monitor/p/397690",
+          "offer": null
+        },
+        {
+          "url": "https://clicks.co.za/b-well_med-120-blood-pressure-monitor/p/401936",
+          "offer": null
+        },
+        {
+          "url": "https://clicks.co.za/veroval_compact-connect-blood-pressure-monitor-bu26/p/398054",
+          "offer": null
+        },
+        {
+          "url": "https://clicks.co.za/b-well_blood-pressure-monitor-pro-25/p/401934",
+          "offer": null
+        },
+        {
+          "url": "https://www.dischem.co.za/shop-by-department/health-and-wellness/diagnostics-monitors-and-testers/blood-pressure-monitors",
+          "offer": null
+        },
+        {
+          "url": "https://clicks.co.za/clicks_biomine-blood-glucose-monitoring-system/p/269476",
+          "offer": null
+        },
+        {
+          "url": "https://clicks.co.za/fora_6-connect-blood-glucose-monitor-wireless/p/332535",
+          "offer": null
+        }
+      ]
+    },
+    {
+      "query": "Philips NA230/00 air fryer",
+      "requests": [
+        {
+          "url": "https://www.firstshop.co.za/search/suggest.json?q=Philips+NA230%2F00+air+fryer&resources%5Btype%5D=product&resources%5Blimit%5D=10",
+          "status": 200,
+          "ms": 2795,
+          "characters": 2392,
+          "title": "",
+          "challenge": false,
+          "productTitles": [
+            "Hisense 6.3L Double Basket Air Fryer H06AFBS1S3"
+          ]
+        },
+        {
+          "url": "https://www.firstshop.co.za/search/suggest.json?q=Philips+NA230%2F00&resources%5Btype%5D=product&resources%5Blimit%5D=10",
+          "status": 200,
+          "ms": 192,
+          "characters": 41,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.firstshop.co.za/search/suggest.json?q=NA230%2F00&resources%5Btype%5D=product&resources%5Blimit%5D=10",
+          "status": 200,
+          "ms": 168,
+          "characters": 41,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.firstshop.co.za/search?q=Philips%20NA230%2F00%20air%20fryer&type=product",
+          "status": 200,
+          "ms": 345,
+          "characters": 211852,
+          "title": "Search: 2 results found for &quot;Philips NA230/00 air fryer&quot; &ndash; FirstShop",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.incredible.co.za/catalogsearch/result/?q=Philips%20NA230%2F00%20air%20fryer",
+          "status": 200,
+          "ms": 5088,
+          "characters": 490809,
+          "title": "Search results for: &#039;Philips NA230/00 air fryer&#039;",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.hificorp.co.za/catalogsearch/result/?q=Philips%20NA230%2F00%20air%20fryer",
+          "status": 200,
+          "ms": 5692,
+          "characters": 481290,
+          "title": "Search results for: &#039;Philips NA230/00 air fryer&#039; - HiFiCorp",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.geewiz.co.za/jolisearch?controller=search&s=Philips%20NA230%2F00%20air%20fryer",
+          "ms": 6500,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/hisense-6-3l-double-basket-air-fryer-h06afbs1s3-166910?_pos=1&_sid=fc7122e3e&_ss=r",
+          "status": 200,
+          "ms": 328,
+          "characters": 221210,
+          "title": "Hisense 6.3L Double Basket Air Fryer H06AFBS1S3 &ndash; FirstShop",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://www.firstshop.co.za/products/hisense-6-3l-double-basket-air-fryer-h06afbs1s3-166910?_pos=1&_sid=fc7122e3e&_ss=r",
+          "status": 429,
+          "ms": 1450,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/xiaomi-3-5l-smart-air-fryer-white-bhr4849eu-166944?_pos=2&_sid=fc7122e3e&_ss=r",
+          "status": 200,
+          "ms": 2301,
+          "characters": 233952,
+          "title": "Xiaomi 3.5L Smart Air Fryer White BHR4849EU &ndash; FirstShop",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://www.firstshop.co.za/products/xiaomi-3-5l-smart-air-fryer-white-bhr4849eu-166944?_pos=2&_sid=fc7122e3e&_ss=r",
+          "status": 429,
+          "ms": 73,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.incredible.co.za/philips-6-2l-manual-airfryer-na130-00",
+          "status": 200,
+          "ms": 3020,
+          "characters": 685080,
+          "title": "Philips 6.2L Manual Airfryer - NA130/00",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.hificorp.co.za/philips-6-2l-manual-airfryer-na130-00",
+          "status": 200,
+          "ms": 3110,
+          "characters": 626576,
+          "title": "Philips 6.2L Manual Airfryer - NA130/00 - HiFiCorp",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://www.incredible.co.za/philips-6-2l-manual-airfryer-na130-00",
+          "status": 429,
+          "ms": 159,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://www.hificorp.co.za/philips-6-2l-manual-airfryer-na130-00",
+          "status": 429,
+          "ms": 123,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.incredible.co.za/philips-6-2l-digital-airfryer-na231-00",
+          "status": 200,
+          "ms": 4689,
+          "characters": 687822,
+          "title": "Philips 6.2L Digital Airfryer NA231/00",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.hificorp.co.za/philips-6-2l-digital-airfryer-na231-00",
+          "status": 200,
+          "ms": 5377,
+          "characters": 631192,
+          "title": "Philips 6.2L Digital Airfryer NA231/00 - HiFiCorp",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://www.hificorp.co.za/philips-6-2l-digital-airfryer-na231-00",
+          "status": 429,
+          "ms": 132,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://www.incredible.co.za/philips-6-2l-digital-airfryer-na231-00",
+          "ms": 7502,
+          "error": "TimeoutError"
+        }
+      ],
+      "candidates": [
+        "https://www.incredible.co.za/philips-6-2l-manual-airfryer-na130-00",
+        "https://www.incredible.co.za/philips-6-2l-digital-airfryer-na231-00",
+        "https://www.hificorp.co.za/philips-6-2l-manual-airfryer-na130-00",
+        "https://www.hificorp.co.za/philips-6-2l-digital-airfryer-na231-00",
+        "https://www.firstshop.co.za/products/hisense-6-3l-double-basket-air-fryer-h06afbs1s3-166910?_pos=1&_sid=fc7122e3e&_ss=r",
+        "https://www.firstshop.co.za/products/xiaomi-3-5l-smart-air-fryer-white-bhr4849eu-166944?_pos=2&_sid=fc7122e3e&_ss=r"
+      ],
+      "verified": [
+        {
+          "url": "https://www.incredible.co.za/philips-6-2l-manual-airfryer-na130-00",
+          "offer": null
+        },
+        {
+          "url": "https://www.incredible.co.za/philips-6-2l-digital-airfryer-na231-00",
+          "offer": null
+        },
+        {
+          "url": "https://www.hificorp.co.za/philips-6-2l-manual-airfryer-na130-00",
+          "offer": null
+        },
+        {
+          "url": "https://www.hificorp.co.za/philips-6-2l-digital-airfryer-na231-00",
+          "offer": null
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/hisense-6-3l-double-basket-air-fryer-h06afbs1s3-166910?_pos=1&_sid=fc7122e3e&_ss=r",
+          "offer": null
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/xiaomi-3-5l-smart-air-fryer-white-bhr4849eu-166944?_pos=2&_sid=fc7122e3e&_ss=r",
+          "offer": null
+        }
+      ]
+    },
+    {
+      "query": "Accu-Chek Instant blood glucose meter",
+      "requests": [
+        {
+          "url": "https://clicks.co.za/search?q=Accu-Chek%3Arelevance&text=Accu-Chek&count=100",
+          "status": 200,
+          "ms": 2051,
+          "characters": 454231,
+          "title": "\n\t\tClicks",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://clicks.co.za/search?q=Accu-Chek%20Instant%20blood%20glucose%20meter%3Arelevance&text=Accu-Chek%20Instant%20blood%20glucose%20meter&count=100",
+          "status": 200,
+          "ms": 2408,
+          "characters": 2957691,
+          "title": "\n\t\tClicks",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.dischem.co.za/catalogsearch/result/?q=Accu-Chek%20Instant%20blood%20glucose%20meter",
+          "status": 200,
+          "ms": 4100,
+          "characters": 453051,
+          "title": "Search results for: &#039;Accu-Chek Instant blood glucose meter&#039;  | Dis-Chem",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://clicks.co.za/accu-check_active-blood-glucose-monitoring-system/p/129543",
+          "status": 200,
+          "ms": 339,
+          "characters": 295715,
+          "title": "\n\t\tAccu-Check Active Blood Glucose Monitoring System - Clicks",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://clicks.co.za/accu-check_instant-meter/p/291471",
+          "status": 200,
+          "ms": 492,
+          "characters": 294477,
+          "title": "\n\t\tAccu-Check Instant Meter - Clicks",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.dischem.co.za/accu-chek-instant-meter-596",
+          "status": 200,
+          "ms": 868,
+          "characters": 476398,
+          "title": "Accu-chek Instant Meter  | Dis-Chem",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://clicks.co.za/clicks_biomine-blood-glucose-monitoring-system/p/269476",
+          "status": 200,
+          "ms": 2379,
+          "characters": 299369,
+          "title": "\n\t\tClicks Biomine Blood Glucose Monitoring System - Clicks",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://clicks.co.za/clicks_biomine-blood-glucose-test-strips-2-25-strips/p/269479",
+          "status": 200,
+          "ms": 2411,
+          "characters": 296163,
+          "title": "\n\t\tClicks Biomine Blood Glucose Test Strips 2 25 Strips - Clicks",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://clicks.co.za/fora_6-connect-3-in-1-blood-glucose-and-hemtocrit-and-hemoglobi-strips-25s/p/404920",
+          "status": 200,
+          "ms": 2414,
+          "characters": 297752,
+          "title": "\n\t\tFora 6 Connect 3-In-1 Blood Glucose &amp; Hemtocrit &amp; Hemoglobi Strips 25s - Clicks",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://clicks.co.za/fora_6-connect-blood-glucose-monitor-wireless/p/332535",
+          "status": 200,
+          "ms": 2442,
+          "characters": 298917,
+          "title": "\n\t\tFora 6 Connect Blood Glucose Monitor Wireless - Clicks",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://clicks.co.za/fora_6-blood-glucose-strips-50s/p/332538",
+          "status": 200,
+          "ms": 2463,
+          "characters": 296353,
+          "title": "\n\t\tFora 6 Blood Glucose Strips 50s - Clicks",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://clicks.co.za/contour_plus-blood-glucose-monitoring-system/p/218799",
+          "status": 200,
+          "ms": 2466,
+          "characters": 299880,
+          "title": "\n\t\tContour Plus Blood Glucose Monitoring System - Clicks",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://clicks.co.za/contour_plus-blood-glucose-test-strips-25-strips/p/217446",
+          "status": 200,
+          "ms": 2535,
+          "characters": 296111,
+          "title": "\n\t\tContour Plus Blood Glucose Test Strips 25 Strips - Clicks",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://clicks.co.za/contour_ts-blood-glucose-test-strips-50-strips/p/191716",
+          "status": 200,
+          "ms": 2542,
+          "characters": 296599,
+          "title": "\n\t\tContour TS Blood Glucose Test Strips 50 Strips - Clicks",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://clicks.co.za/clicks_blood-glucose-lancets-50-lancets/p/327404",
+          "status": 200,
+          "ms": 2742,
+          "characters": 294332,
+          "title": "\n\t\tClicks Blood Glucose Lancets 50 Lancets - Clicks",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://clicks.co.za/fora_6-connect-blood-glucose-monitor-wireless/p/332535",
+          "status": 429,
+          "ms": 2063,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://clicks.co.za/clicks_biomine-blood-glucose-test-strips-2-25-strips/p/269479",
+          "status": 429,
+          "ms": 2141,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://clicks.co.za/contour_plus-blood-glucose-monitoring-system/p/218799",
+          "status": 429,
+          "ms": 2094,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://clicks.co.za/clicks_biomine-blood-glucose-monitoring-system/p/269476",
+          "status": 429,
+          "ms": 2347,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://clicks.co.za/fora_6-connect-3-in-1-blood-glucose-and-hemtocrit-and-hemoglobi-strips-25s/p/404920",
+          "status": 429,
+          "ms": 2313,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://clicks.co.za/fora_6-blood-glucose-strips-50s/p/332538",
+          "status": 429,
+          "ms": 2267,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://clicks.co.za/clicks_blood-glucose-lancets-50-lancets/p/327404",
+          "status": 429,
+          "ms": 2011,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://clicks.co.za/accu-check_instant-meter/p/291471",
+          "status": 200,
+          "ms": 5634,
+          "characters": 224879,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://clicks.co.za/accu-check_active-blood-glucose-monitoring-system/p/129543",
+          "status": 200,
+          "ms": 7189,
+          "characters": 231825,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://clicks.co.za/contour_ts-blood-glucose-test-strips-50-strips/p/191716",
+          "status": 200,
+          "ms": 7257,
+          "characters": 227421,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://clicks.co.za/contour_plus-blood-glucose-test-strips-25-strips/p/217446",
+          "ms": 7501,
+          "error": "TimeoutError"
+        }
+      ],
+      "candidates": [
+        "https://www.dischem.co.za/accu-chek-instant-meter-596",
+        "https://clicks.co.za/accu-check_instant-meter/p/291471",
+        "https://clicks.co.za/accu-check_active-blood-glucose-monitoring-system/p/129543",
+        "https://clicks.co.za/clicks_blood-glucose-lancets-50-lancets/p/327404",
+        "https://clicks.co.za/clicks_biomine-blood-glucose-monitoring-system/p/269476",
+        "https://clicks.co.za/clicks_biomine-blood-glucose-test-strips-2-25-strips/p/269479",
+        "https://clicks.co.za/contour_plus-blood-glucose-monitoring-system/p/218799",
+        "https://clicks.co.za/fora_6-blood-glucose-strips-50s/p/332538",
+        "https://clicks.co.za/fora_6-connect-blood-glucose-monitor-wireless/p/332535",
+        "https://clicks.co.za/contour_plus-blood-glucose-test-strips-25-strips/p/217446",
+        "https://clicks.co.za/contour_ts-blood-glucose-test-strips-50-strips/p/191716",
+        "https://clicks.co.za/fora_6-connect-3-in-1-blood-glucose-and-hemtocrit-and-hemoglobi-strips-25s/p/404920",
+        "https://clicks.co.za/accu-check_instant-test-strips-50-strips/p/292951"
+      ],
+      "verified": [
+        {
+          "url": "https://www.dischem.co.za/accu-chek-instant-meter-596",
+          "offer": {
+            "product_name": "Accu-chek Instant Meter",
+            "product_url": "https://www.dischem.co.za/accu-chek-instant-meter-596",
+            "sku": "000000000000332596",
+            "comparisonAttributes": {
+              "size": "",
+              "color": ""
+            },
+            "comparisonAmbiguous": false,
+            "retailer": {
+              "name": "Dis-Chem"
+            },
+            "price": 284.99,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "priceConditions": "Price shown is the Single Exit Price (SEP), a cash-only price that excludes the dispensing fee.",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 80,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-11-03T12:31:31.268Z",
+            "retailerDomain": "dischem.co.za",
+            "trustedRetailerDomain": true
+          }
+        },
+        {
+          "url": "https://clicks.co.za/accu-check_instant-meter/p/291471",
+          "offer": null
+        },
+        {
+          "url": "https://clicks.co.za/accu-check_active-blood-glucose-monitoring-system/p/129543",
+          "offer": null
+        },
+        {
+          "url": "https://clicks.co.za/clicks_blood-glucose-lancets-50-lancets/p/327404",
+          "offer": null
+        },
+        {
+          "url": "https://clicks.co.za/clicks_biomine-blood-glucose-monitoring-system/p/269476",
+          "offer": null
+        },
+        {
+          "url": "https://clicks.co.za/clicks_biomine-blood-glucose-test-strips-2-25-strips/p/269479",
+          "offer": null
+        },
+        {
+          "url": "https://clicks.co.za/contour_plus-blood-glucose-monitoring-system/p/218799",
+          "offer": null
+        },
+        {
+          "url": "https://clicks.co.za/fora_6-blood-glucose-strips-50s/p/332538",
+          "offer": null
+        },
+        {
+          "url": "https://clicks.co.za/fora_6-connect-blood-glucose-monitor-wireless/p/332535",
+          "offer": null
+        },
+        {
+          "url": "https://clicks.co.za/contour_plus-blood-glucose-test-strips-25-strips/p/217446",
+          "offer": null
+        },
+        {
+          "url": "https://clicks.co.za/contour_ts-blood-glucose-test-strips-50-strips/p/191716",
+          "offer": null
+        },
+        {
+          "url": "https://clicks.co.za/fora_6-connect-3-in-1-blood-glucose-and-hemtocrit-and-hemoglobi-strips-25s/p/404920",
+          "offer": null
+        }
+      ]
+    },
+    {
+      "query": "HP DeskJet 2820 All-in-One printer",
+      "requests": [
+        {
+          "url": "https://www.firstshop.co.za/search/suggest.json?q=HP+DeskJet+2820+All-in-One+printer&resources%5Btype%5D=product&resources%5Blimit%5D=10",
+          "status": 200,
+          "ms": 2231,
+          "characters": 100020,
+          "title": "",
+          "challenge": false,
+          "productTitles": [
+            "HP DeskJet 2320 All-in-One Printer 7WN42B",
+            "HP OfficeJet Pro 9120 Multifunction All-in-One Wireless Colour Printer 4V2M9C",
+            "HP OfficeJet Pro 8123 Multifunction All-in-One Wireless Colour Printer 405W0C",
+            "HP DeskJet Ink Advantage 4376 A4 Wi-Fi Multifunction Inkjet Colour Printer 89G05C",
+            "HP OfficeJet Pro 9730 A3 Wide Format Multifunction Colour Inkjet Business Printer 537P5C",
+            "HP OfficeJet Pro 9130 A4 Multifunction Colour Inkjet Printer 404K9C",
+            "HP LaserJet Enterprise MFP X53052dn A4 Multifunction Mono Laser Printer 675S6A",
+            "HP Smart Tank 580 All-in-One Multifunction Printer 1F3Y2A",
+            "HP Color LaserJet Enterprise Flow 6800zf A4 Multifunction Printer 6QN36A",
+            "HP Smart Tank 581 All-in-One Multifunction Printer 4A8D4A"
+          ]
+        },
+        {
+          "url": "https://www.firstshop.co.za/search/suggest.json?q=HP+DeskJet+2820+All-in-One&resources%5Btype%5D=product&resources%5Blimit%5D=10",
+          "status": 200,
+          "ms": 302,
+          "characters": 100722,
+          "title": "",
+          "challenge": false,
+          "productTitles": [
+            "HP DeskJet 2320 All-in-One Printer 7WN42B",
+            "HP OfficeJet Pro 9120 Multifunction All-in-One Wireless Colour Printer 4V2M9C",
+            "HP OfficeJet Pro 8123 Multifunction All-in-One Wireless Colour Printer 405W0C",
+            "HP ProStudio 4 G1i 23.8-inch FHD All-in-One AI PC - Intel Core Ultra 7 265T 512GB SSD 16GB RAM Win 11 Pro",
+            "HP LaserJet Tank MFP 2602sdw Mono A4 Duplex Laser Printer 2R7F5A",
+            "HP OfficeJet Pro 9730 A3 Wide Format Multifunction Colour Inkjet Business Printer 537P5C",
+            "HP DeskJet Ink Advantage 4376 A4 Wi-Fi Multifunction Inkjet Colour Printer 89G05C",
+            "HP OfficeJet Pro 9130 A4 Multifunction Colour Inkjet Printer 404K9C",
+            "HP ProOne 440 G9 23.8-inch FHD All-in-One PC - Intel Core i7-14700T 512GB SSD 16GB RAM Win 11 Pro",
+            "HP ProOne 240 G10 23.8-inch FHD All-in-One PC - Intel Core Ultra 7 155U 512GB SSD 8GB RAM Win 11 Pro"
+          ]
+        },
+        {
+          "url": "https://www.firstshop.co.za/search/suggest.json?q=DeskJet+2820+All-in-One&resources%5Btype%5D=product&resources%5Blimit%5D=10",
+          "status": 200,
+          "ms": 448,
+          "characters": 87795,
+          "title": "",
+          "challenge": false,
+          "productTitles": [
+            "HP DeskJet 2320 All-in-One Printer 7WN42B",
+            "Lenovo ThinkSmart View Plus 27-inch FHD Conference All-in-One PC - Qualcomm QCS8250 128GB UFS 8GB RAM Android 10",
+            "Dell 27 EC27250 27-inch FHD All-in-One PC - Intel Core 7 150U 2TB SSD 32GB RAM Win 11 Home",
+            "Dell 27 EC27250 27-inch FHD All-in-One PC - Intel Core 7 150U 1TB SSD 16GB RAM GeForce MX 570A Win 11 Pro",
+            "ONERugged P18J 18.5-inch Rugged Panel All-in-one PC - Intel Celeron N5100 128GB ROM 8GB RAM Win 11 Pro",
+            "HP DeskJet Ink Advantage Ultra 4927 All-in-One Multifunction Printer 6W7G3B",
+            "HP DeskJet 2710 All-in-One Printer 5AR83B",
+            "HP DeskJet Ink Advantage 4276 A4 All-in-One Printer 60K49C",
+            "HP DeskJet Plus 4120 A4 Multifunction Colour Inkjet Home & Office Printer 3XV14B",
+            "Dell OptiPlex 7420 23.8-inch FHD All-In-One PC - Intel Core i5-14500T 256GB SSD 8GB RAM Win 11 Pro"
+          ]
+        },
+        {
+          "url": "https://www.firstshop.co.za/search?q=HP%20DeskJet%202820%20All-in-One%20printer&type=product",
+          "status": 200,
+          "ms": 627,
+          "characters": 367827,
+          "title": "Search: 381 results found for &quot;HP DeskJet 2820 All-in-One printer&quot; &ndash; FirstShop",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.hificorp.co.za/catalogsearch/result/?q=HP%20DeskJet%202820%20All-in-One%20printer",
+          "status": 200,
+          "ms": 5457,
+          "characters": 488246,
+          "title": "Search results for: &#039;HP DeskJet 2820 All-in-One printer&#039; - HiFiCorp",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.incredible.co.za/catalogsearch/result/?q=HP%20DeskJet%202820%20All-in-One%20printer",
+          "ms": 6502,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://www.geewiz.co.za/jolisearch?controller=search&s=HP%20DeskJet%202820%20All-in-One%20printer",
+          "ms": 6502,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/hp-deskjet-2320-all-in-one-printer-7wn42b-139537?_pos=1&_sid=9bf574b96&_ss=r",
+          "status": 200,
+          "ms": 271,
+          "characters": 247994,
+          "title": "HP DeskJet 2320 All-in-One Printer 7WN42B &ndash; FirstShop",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/hp-deskjet-ink-advantage-4376-a4-wi-fi-multifunction-inkjet-colour-printer-89g05c-378584?_pos=4&_sid=9bf574b96&_ss=r",
+          "status": 200,
+          "ms": 1841,
+          "characters": 272123,
+          "title": "HP DeskJet Ink Advantage 4376 A4 Wi-Fi Multifunction Inkjet Colour Printer 89G05C &ndash; FirstShop",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/hp-officejet-pro-8123-multifunction-all-in-one-wireless-colour-printer-405w0c-185815?_pos=3&_sid=9bf574b96&_ss=r",
+          "status": 200,
+          "ms": 1859,
+          "characters": 270781,
+          "title": "HP OfficeJet Pro 8123 Multifunction All-in-One Wireless Colour Printer 405W0C &ndash; FirstShop",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/hp-officejet-pro-9120-multifunction-all-in-one-wireless-colour-printer-4v2m9c-187932?_pos=2&_sid=9bf574b96&_ss=r",
+          "status": 200,
+          "ms": 1881,
+          "characters": 262086,
+          "title": "HP OfficeJet Pro 9120 Multifunction All-in-One Wireless Colour Printer 4V2M9C &ndash; FirstShop",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/hp-smart-tank-581-all-in-one-multifunction-printer-4a8d4a-169603?_pos=14&_sid=9bf574b96&_ss=r",
+          "status": 200,
+          "ms": 1886,
+          "characters": 267371,
+          "title": "HP Smart Tank 581 All-in-One Multifunction Printer 4A8D4A &ndash; FirstShop",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/hp-smart-tank-580-all-in-one-multifunction-printer-1f3y2a-167528?_pos=16&_sid=9bf574b96&_ss=r",
+          "status": 200,
+          "ms": 1901,
+          "characters": 275286,
+          "title": "HP Smart Tank 580 All-in-One Multifunction Printer 1F3Y2A &ndash; FirstShop",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.hificorp.co.za/hp-deskjet-2320-all-in-one-printer",
+          "status": 200,
+          "ms": 3169,
+          "characters": 629636,
+          "title": "HP DeskJet 2320 All-in-One Printer - HiFiCorp",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://www.firstshop.co.za/products/hp-officejet-pro-8123-multifunction-all-in-one-wireless-colour-printer-405w0c-185815?_pos=3&_sid=9bf574b96&_ss=r",
+          "status": 429,
+          "ms": 1677,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://www.firstshop.co.za/products/hp-deskjet-ink-advantage-4376-a4-wi-fi-multifunction-inkjet-colour-printer-89g05c-378584?_pos=4&_sid=9bf574b96&_ss=r",
+          "status": 429,
+          "ms": 2020,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://www.firstshop.co.za/products/hp-officejet-pro-9120-multifunction-all-in-one-wireless-colour-printer-4v2m9c-187932?_pos=2&_sid=9bf574b96&_ss=r",
+          "status": 429,
+          "ms": 1983,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://www.firstshop.co.za/products/hp-smart-tank-581-all-in-one-multifunction-printer-4a8d4a-169603?_pos=14&_sid=9bf574b96&_ss=r",
+          "status": 429,
+          "ms": 2149,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://www.firstshop.co.za/products/hp-deskjet-2320-all-in-one-printer-7wn42b-139537?_pos=1&_sid=9bf574b96&_ss=r",
+          "status": 200,
+          "ms": 7133,
+          "characters": 57697,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://www.firstshop.co.za/products/hp-smart-tank-580-all-in-one-multifunction-printer-1f3y2a-167528?_pos=16&_sid=9bf574b96&_ss=r",
+          "ms": 7502,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://r.jina.ai/https://www.hificorp.co.za/hp-deskjet-2320-all-in-one-printer",
+          "ms": 7501,
+          "error": "TimeoutError"
+        }
+      ],
+      "candidates": [
+        "https://www.hificorp.co.za/hp-deskjet-2320-all-in-one-printer",
+        "https://www.firstshop.co.za/products/hp-deskjet-2320-all-in-one-printer-7wn42b-139537?_pos=1&_sid=9bf574b96&_ss=r",
+        "https://www.firstshop.co.za/products/hp-officejet-pro-9120-multifunction-all-in-one-wireless-colour-printer-4v2m9c-187932?_pos=2&_sid=9bf574b96&_ss=r",
+        "https://www.firstshop.co.za/products/hp-officejet-pro-8123-multifunction-all-in-one-wireless-colour-printer-405w0c-185815?_pos=3&_sid=9bf574b96&_ss=r",
+        "https://www.firstshop.co.za/products/hp-smart-tank-581-all-in-one-multifunction-printer-4a8d4a-169603?_pos=14&_sid=9bf574b96&_ss=r",
+        "https://www.firstshop.co.za/products/hp-smart-tank-580-all-in-one-multifunction-printer-1f3y2a-167528?_pos=16&_sid=9bf574b96&_ss=r",
+        "https://www.firstshop.co.za/products/hp-deskjet-ink-advantage-4376-a4-wi-fi-multifunction-inkjet-colour-printer-89g05c-378584?_pos=4&_sid=9bf574b96&_ss=r"
+      ],
+      "verified": [
+        {
+          "url": "https://www.hificorp.co.za/hp-deskjet-2320-all-in-one-printer",
+          "offer": null
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/hp-deskjet-2320-all-in-one-printer-7wn42b-139537?_pos=1&_sid=9bf574b96&_ss=r",
+          "offer": null
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/hp-officejet-pro-9120-multifunction-all-in-one-wireless-colour-printer-4v2m9c-187932?_pos=2&_sid=9bf574b96&_ss=r",
+          "offer": null
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/hp-officejet-pro-8123-multifunction-all-in-one-wireless-colour-printer-405w0c-185815?_pos=3&_sid=9bf574b96&_ss=r",
+          "offer": null
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/hp-smart-tank-581-all-in-one-multifunction-printer-4a8d4a-169603?_pos=14&_sid=9bf574b96&_ss=r",
+          "offer": null
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/hp-smart-tank-580-all-in-one-multifunction-printer-1f3y2a-167528?_pos=16&_sid=9bf574b96&_ss=r",
+          "offer": null
+        },
+        {
+          "url": "https://www.firstshop.co.za/products/hp-deskjet-ink-advantage-4376-a4-wi-fi-multifunction-inkjet-colour-printer-89g05c-378584?_pos=4&_sid=9bf574b96&_ss=r",
+          "offer": null
+        }
+      ]
+    },
+    {
+      "query": "Philips Hue White E27 bulb",
+      "requests": [
+        {
+          "url": "https://www.tmbsupplies.co.za/search/suggest.json?q=Philips+Hue+White+E27+bulb&resources%5Btype%5D=product&resources%5Blimit%5D=10",
+          "status": 200,
+          "ms": 2121,
+          "characters": 41,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.tmbsupplies.co.za/search/suggest.json?q=Philips+Hue+E27+bulb&resources%5Btype%5D=product&resources%5Blimit%5D=10",
+          "status": 200,
+          "ms": 187,
+          "characters": 41,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.builders.co.za/search?q=Philips%20Hue%20White%20E27%20bulb&type=product",
+          "status": 200,
+          "ms": 2360,
+          "characters": 32731,
+          "title": "Builders | Shop DIY, Paint and Building Materials Online",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.tmbsupplies.co.za/search/suggest.json?q=Hue+E27+bulb&resources%5Btype%5D=product&resources%5Blimit%5D=10",
+          "status": 200,
+          "ms": 188,
+          "characters": 41,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.builders.co.za/search?q=Philips+Hue+E27+bulb&type=product",
+          "status": 200,
+          "ms": 173,
+          "characters": 32731,
+          "title": "Builders | Shop DIY, Paint and Building Materials Online",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.tmbsupplies.co.za/search?q=Philips%20Hue%20White%20E27%20bulb&type=product",
+          "status": 200,
+          "ms": 415,
+          "characters": 1272856,
+          "title": "\n      Search: 5 results found for &quot;Philips Hue White E27 bulb&quot;\n &ndash; TMB SUPPLIES",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.tmbsupplies.co.za/search?q=Philips+Hue+E27+bulb&type=product",
+          "status": 200,
+          "ms": 549,
+          "characters": 1278412,
+          "title": "\n      Search: 6 results found for &quot;Philips Hue E27 bulb&quot;\n &ndash; TMB SUPPLIES",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://leroymerlin.co.za/catalogsearch/result/?q=Philips%20Hue%20White%20E27%20bulb",
+          "ms": 6501,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://www.buco.co.za/catalogsearch/result/?q=Philips%20Hue%20White%20E27%20bulb",
+          "ms": 6501,
+          "error": "TimeoutError"
+        }
+      ],
+      "candidates": [],
+      "verified": []
+    },
+    {
+      "query": "Gardena Classic pruning shears",
+      "requests": [
+        {
+          "url": "https://www.tmbsupplies.co.za/search/suggest.json?q=Gardena+Classic+pruning+shears&resources%5Btype%5D=product&resources%5Blimit%5D=10",
+          "status": 200,
+          "ms": 2691,
+          "characters": 41,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.builders.co.za/search?q=Gardena%20Classic%20pruning%20shears&type=product",
+          "status": 200,
+          "ms": 2866,
+          "characters": 32731,
+          "title": "Builders | Shop DIY, Paint and Building Materials Online",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.tmbsupplies.co.za/search/suggest.json?q=Classic+pruning+shears&resources%5Btype%5D=product&resources%5Blimit%5D=10",
+          "status": 200,
+          "ms": 221,
+          "characters": 5449,
+          "title": "",
+          "challenge": false,
+          "productTitles": [
+            "MAC-AFRIC DOMESTIC 45cc PETROL 2-STROKE CHAIN SAW"
+          ]
+        },
+        {
+          "url": "https://www.tmbsupplies.co.za/search?q=Gardena%20Classic%20pruning%20shears&type=product",
+          "status": 200,
+          "ms": 656,
+          "characters": 1336958,
+          "title": "\n      Search: 16 results found for &quot;Gardena Classic pruning shears&quot;\n &ndash; TMB SUPPLIES",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://leroymerlin.co.za/catalogsearch/result/?q=Gardena%20Classic%20pruning%20shears",
+          "status": 200,
+          "ms": 4945,
+          "characters": 675844,
+          "title": "Search results for: &#039;Gardena Classic pruning shears&#039;",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.buco.co.za/catalogsearch/result/?q=Gardena%20Classic%20pruning%20shears",
+          "ms": 6500,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://leroymerlin.co.za/classic-front-flush-cistern-l-l-siso",
+          "status": 200,
+          "ms": 460,
+          "characters": 684565,
+          "title": "Wirquin Toilet cistern classic front flush low level",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://leroymerlin.co.za/classic-sleeper-couch-black-leather-376e481d",
+          "status": 200,
+          "ms": 3437,
+          "characters": 667644,
+          "title": "Madiega Furniture - Classic Sleeper Couch (Black leather)",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://leroymerlin.co.za/gardena-hose-pipe-comfort-high-flex-13mm-x-50-meter-18039-20-81434234",
+          "status": 200,
+          "ms": 3472,
+          "characters": 687008,
+          "title": "Gardena hose pipe comfort 13mm x 50 meter 18039-20",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://leroymerlin.co.za/artens-mosaic-white-metro-classic-matt-300x300mm-81490025",
+          "status": 200,
+          "ms": 3496,
+          "characters": 685219,
+          "title": "ARTENS Mosaic White Metro Classic Matt 300X300MM",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://leroymerlin.co.za/karcher-hd-6-15-4-m-classic-eu-professional-high-pressure-washer-600-l-h-190-bar-ccc50a49",
+          "status": 200,
+          "ms": 3744,
+          "characters": 675891,
+          "title": "Kärcher HD 6/15-4 M Classic *EU Professional High-Pressure Washer 600 l/h 190 bar",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://leroymerlin.co.za/karcher-bds-43-150-c-classic-professional-single-disc-machine-incl-pad-drive-1ff4ef3e",
+          "status": 200,
+          "ms": 3775,
+          "characters": 670451,
+          "title": "Kärcher BDS 43/150 C Classic Professional Single-Disc Machine (Excluding Brushes)",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://leroymerlin.co.za/gardena-hose-pipe-box-roll-up-wall-mounted-35-meter-81467689",
+          "status": 200,
+          "ms": 3785,
+          "characters": 690212,
+          "title": "Gardena hose pipe box roll up wall mounted 35 meter",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://leroymerlin.co.za/wall-tile-ceramic-cararo-classico-300x600mm-81498898",
+          "status": 200,
+          "ms": 3794,
+          "characters": 716293,
+          "title": "Wall tile ceramic cararo classico 300x600mm",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://leroymerlin.co.za/gardena-solar-powered-drip-irrigation-set-20-meter-81467675",
+          "status": 200,
+          "ms": 3841,
+          "characters": 700429,
+          "title": "Gardena solar powered drip irrigation set 20 meter",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://leroymerlin.co.za/pool-chlorine-classic-granular-hth-15kg-81434088",
+          "status": 200,
+          "ms": 3893,
+          "characters": 684836,
+          "title": "Pool chlorine classic granular HTH 15kg",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://leroymerlin.co.za/geolia-hose-geoclassic-12-5mm-25m-81493610",
+          "status": 200,
+          "ms": 4106,
+          "characters": 686034,
+          "title": "Geolia hose geoclassic 12 5mm 25m",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://leroymerlin.co.za/classic-kitchen-cabinet-set-2950mm-high-gloss-doors-oak-tone-panels-and-chrome-handles-57f73e95",
+          "status": 200,
+          "ms": 4136,
+          "characters": 668906,
+          "title": "Classic Kitchen Cabinet Set 2950mm – High-Gloss Doors, Oak-Tone Panels and Chrome Handles",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://leroymerlin.co.za/artens-mosaic-white-metro-classic-matt-300x300mm-81490025",
+          "status": 429,
+          "ms": 772,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://leroymerlin.co.za/wall-tile-ceramic-cararo-classico-300x600mm-81498898",
+          "status": 429,
+          "ms": 490,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://leroymerlin.co.za/karcher-bds-43-150-c-classic-professional-single-disc-machine-incl-pad-drive-1ff4ef3e",
+          "status": 429,
+          "ms": 537,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://leroymerlin.co.za/karcher-hd-6-15-4-m-classic-eu-professional-high-pressure-washer-600-l-h-190-bar-ccc50a49",
+          "status": 429,
+          "ms": 645,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://leroymerlin.co.za/classic-sleeper-couch-black-leather-376e481d",
+          "status": 429,
+          "ms": 957,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://leroymerlin.co.za/pool-chlorine-classic-granular-hth-15kg-81434088",
+          "status": 429,
+          "ms": 2115,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://leroymerlin.co.za/geolia-hose-geoclassic-12-5mm-25m-81493610",
+          "status": 429,
+          "ms": 1935,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://leroymerlin.co.za/classic-kitchen-cabinet-set-2950mm-high-gloss-doors-oak-tone-panels-and-chrome-handles-57f73e95",
+          "status": 429,
+          "ms": 1940,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://leroymerlin.co.za/gardena-solar-powered-drip-irrigation-set-20-meter-81467675",
+          "status": 429,
+          "ms": 2253,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://leroymerlin.co.za/classic-front-flush-cistern-l-l-siso",
+          "ms": 7501,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://r.jina.ai/https://leroymerlin.co.za/gardena-hose-pipe-comfort-high-flex-13mm-x-50-meter-18039-20-81434234",
+          "status": 200,
+          "ms": 6819,
+          "characters": 56594,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://leroymerlin.co.za/gardena-hose-pipe-box-roll-up-wall-mounted-35-meter-81467689",
+          "status": 200,
+          "ms": 6789,
+          "characters": 60460,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        }
+      ],
+      "candidates": [
+        "https://leroymerlin.co.za/classic-front-flush-cistern-l-l-siso",
+        "https://leroymerlin.co.za/classic-sleeper-couch-black-leather-376e481d",
+        "https://leroymerlin.co.za/pool-chlorine-classic-granular-hth-15kg-81434088",
+        "https://leroymerlin.co.za/gardena-hose-pipe-comfort-high-flex-13mm-x-50-meter-18039-20-81434234",
+        "https://leroymerlin.co.za/gardena-solar-powered-drip-irrigation-set-20-meter-81467675",
+        "https://leroymerlin.co.za/gardena-hose-pipe-box-roll-up-wall-mounted-35-meter-81467689",
+        "https://leroymerlin.co.za/classic-kitchen-cabinet-set-2950mm-high-gloss-doors-oak-tone-panels-and-chrome-handles-57f73e95",
+        "https://leroymerlin.co.za/karcher-bds-43-150-c-classic-professional-single-disc-machine-incl-pad-drive-1ff4ef3e",
+        "https://leroymerlin.co.za/karcher-hd-6-15-4-m-classic-eu-professional-high-pressure-washer-600-l-h-190-bar-ccc50a49",
+        "https://leroymerlin.co.za/wall-tile-ceramic-cararo-classico-300x600mm-81498898",
+        "https://leroymerlin.co.za/geolia-hose-geoclassic-12-5mm-25m-81493610",
+        "https://leroymerlin.co.za/artens-mosaic-white-metro-classic-matt-300x300mm-81490025",
+        "https://leroymerlin.co.za/classic-plastic-stackable-dining-chair-set-2pcs-color-options-57efab42",
+        "https://leroymerlin.co.za/gardena-electric-lawnmower-powermax-1200-81500099",
+        "https://leroymerlin.co.za/classical-light-weight-wall-mounted-water-feature-cement-049d7915",
+        "https://leroymerlin.co.za/gardena-battery-handy-mower-22-18-p4a-81467600"
+      ],
+      "verified": [
+        {
+          "url": "https://leroymerlin.co.za/classic-front-flush-cistern-l-l-siso",
+          "offer": null
+        },
+        {
+          "url": "https://leroymerlin.co.za/classic-sleeper-couch-black-leather-376e481d",
+          "offer": null
+        },
+        {
+          "url": "https://leroymerlin.co.za/pool-chlorine-classic-granular-hth-15kg-81434088",
+          "offer": null
+        },
+        {
+          "url": "https://leroymerlin.co.za/gardena-hose-pipe-comfort-high-flex-13mm-x-50-meter-18039-20-81434234",
+          "offer": null
+        },
+        {
+          "url": "https://leroymerlin.co.za/gardena-solar-powered-drip-irrigation-set-20-meter-81467675",
+          "offer": null
+        },
+        {
+          "url": "https://leroymerlin.co.za/gardena-hose-pipe-box-roll-up-wall-mounted-35-meter-81467689",
+          "offer": null
+        },
+        {
+          "url": "https://leroymerlin.co.za/classic-kitchen-cabinet-set-2950mm-high-gloss-doors-oak-tone-panels-and-chrome-handles-57f73e95",
+          "offer": null
+        },
+        {
+          "url": "https://leroymerlin.co.za/karcher-bds-43-150-c-classic-professional-single-disc-machine-incl-pad-drive-1ff4ef3e",
+          "offer": null
+        },
+        {
+          "url": "https://leroymerlin.co.za/karcher-hd-6-15-4-m-classic-eu-professional-high-pressure-washer-600-l-h-190-bar-ccc50a49",
+          "offer": null
+        },
+        {
+          "url": "https://leroymerlin.co.za/wall-tile-ceramic-cararo-classico-300x600mm-81498898",
+          "offer": null
+        },
+        {
+          "url": "https://leroymerlin.co.za/geolia-hose-geoclassic-12-5mm-25m-81493610",
+          "offer": null
+        },
+        {
+          "url": "https://leroymerlin.co.za/artens-mosaic-white-metro-classic-matt-300x300mm-81490025",
+          "offer": null
+        }
+      ]
+    },
+    {
+      "query": "JanSport SuperBreak Plus backpack",
+      "requests": [
+        {
+          "url": "https://www.makro.co.za/search?q=JanSport%20SuperBreak%20Plus%20backpack&type=product",
+          "status": 200,
+          "ms": 2933,
+          "characters": 345233,
+          "title": "JanSport SuperBreak Plus Backpack- Buy Products Online at Best Price - Free Home Delivery - All Categories | makro.co.za",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.game.co.za/search?q=JanSport%20SuperBreak%20Plus%20backpack&type=product",
+          "status": 200,
+          "ms": 3227,
+          "characters": 21087,
+          "title": "Game South Africa | Unbeatable Deals",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.game.co.za/search?q=JanSport+SuperBreak+Plus&type=product",
+          "status": 200,
+          "ms": 156,
+          "characters": 21087,
+          "title": "Game South Africa | Unbeatable Deals",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.takealot.com/search?q=JanSport%20SuperBreak%20Plus%20backpack&type=product",
+          "status": 200,
+          "ms": 4011,
+          "characters": 18486,
+          "title": "Takealot.com: Online Shopping | SA&#x27;s leading online store",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.takealot.com/search?q=JanSport+SuperBreak+Plus&type=product",
+          "status": 200,
+          "ms": 253,
+          "characters": 18457,
+          "title": "Takealot.com: Online Shopping | SA&#x27;s leading online store",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.loot.co.za/search?q=JanSport%20SuperBreak%20Plus%20backpack&type=product",
+          "ms": 6501,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://www.makro.co.za/osdd.xml?v=2",
+          "status": 404,
+          "ms": 382,
+          "characters": 3882,
+          "title": "The Makro Online Shopping Experience",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://www.makro.co.za/osdd.xml?v=2",
+          "status": 429,
+          "ms": 163,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        }
+      ],
+      "candidates": [
+        "https://www.makro.co.za/osdd.xml?v=2"
+      ],
+      "verified": [
+        {
+          "url": "https://www.makro.co.za/osdd.xml?v=2",
+          "offer": null
+        }
+      ]
+    },
+    {
+      "query": "Casio fx-82ZA Plus II calculator",
+      "requests": [
+        {
+          "url": "https://www.pna.co.za/wp-json/wc/store/v1/products?search=Casio+fx-82ZA+Plus+II+calculator&per_page=10",
+          "status": 200,
+          "ms": 3597,
+          "characters": 2,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.waltons.co.za/search?q=Casio%20fx-82ZA%20Plus%20II%20calculator&type=product",
+          "status": 200,
+          "ms": 4188,
+          "characters": 300628,
+          "title": "Search: Casio fx-82ZA Plus II calculator | Waltons",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.pna.co.za/?s=Casio%20fx-82ZA%20Plus%20II%20calculator&post_type=product",
+          "ms": 2904,
+          "error": "TimeoutError"
+        },
+        {
+          "url": "https://www.waltons.co.za/buy/casio-plus-new-generation-scientific-calculator-fx82za-plus-ll-each",
+          "status": 202,
+          "ms": 40,
+          "characters": 2027,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.waltons.co.za/buy/hp-plus-business-calculator-nw239aa-10b11",
+          "status": 202,
+          "ms": 1776,
+          "characters": 2027,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.waltons.co.za/buy/sharp-scientific-calculator-422-function-writeview-el-w535sa",
+          "status": 202,
+          "ms": 1778,
+          "characters": 2027,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.waltons.co.za/buy/casio-plus-new-generation-scientific-calculator-pink-fx82za-plus-ll-each",
+          "status": 202,
+          "ms": 1780,
+          "characters": 2027,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.waltons.co.za/buy/casio-calculator-practical-desk-top-16-digits-dm-1600b",
+          "status": 202,
+          "ms": 1784,
+          "characters": 2027,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.waltons.co.za/buy/casio-scientific-calculator-8-digit-fx82ms",
+          "status": 202,
+          "ms": 1786,
+          "characters": 2027,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.waltons.co.za/buy/casio-plus-new-generation-scientific-calculator-blue-fx82za-plus-ll-each",
+          "status": 202,
+          "ms": 1788,
+          "characters": 2027,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.waltons.co.za/buy/sharp-calculator-el387r",
+          "status": 202,
+          "ms": 1830,
+          "characters": 2027,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.waltons.co.za/buy/casio-financial-calculator-fc-100v-2nd-edition",
+          "status": 202,
+          "ms": 1835,
+          "characters": 2027,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.waltons.co.za/buy/casio-calculator-scientific-fx-991za",
+          "status": 202,
+          "ms": 1836,
+          "characters": 2027,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.waltons.co.za/buy/casio-calculator-8-digit-hl-815l-bk-s-dp",
+          "status": 202,
+          "ms": 1836,
+          "characters": 2027,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://www.waltons.co.za/buy/sharp-el-331f-10-digit-calculator",
+          "status": 202,
+          "ms": 1836,
+          "characters": 2027,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://www.waltons.co.za/buy/sharp-calculator-el387r",
+          "status": 429,
+          "ms": 535,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://www.waltons.co.za/buy/casio-plus-new-generation-scientific-calculator-blue-fx82za-plus-ll-each",
+          "status": 429,
+          "ms": 697,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://www.waltons.co.za/buy/casio-plus-new-generation-scientific-calculator-fx82za-plus-ll-each",
+          "status": 429,
+          "ms": 2456,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://www.waltons.co.za/buy/casio-calculator-8-digit-hl-815l-bk-s-dp",
+          "status": 429,
+          "ms": 715,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://www.waltons.co.za/buy/casio-calculator-practical-desk-top-16-digits-dm-1600b",
+          "status": 429,
+          "ms": 926,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://www.waltons.co.za/buy/casio-plus-new-generation-scientific-calculator-pink-fx82za-plus-ll-each",
+          "status": 429,
+          "ms": 1022,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://www.waltons.co.za/buy/casio-scientific-calculator-8-digit-fx82ms",
+          "status": 429,
+          "ms": 1578,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://www.waltons.co.za/buy/casio-financial-calculator-fc-100v-2nd-edition",
+          "status": 429,
+          "ms": 1543,
+          "characters": 242,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://www.waltons.co.za/buy/hp-plus-business-calculator-nw239aa-10b11",
+          "status": 200,
+          "ms": 4775,
+          "characters": 15998,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://www.waltons.co.za/buy/sharp-el-331f-10-digit-calculator",
+          "status": 200,
+          "ms": 4759,
+          "characters": 11391,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://www.waltons.co.za/buy/sharp-scientific-calculator-422-function-writeview-el-w535sa",
+          "status": 200,
+          "ms": 5114,
+          "characters": 13946,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        },
+        {
+          "url": "https://r.jina.ai/https://www.waltons.co.za/buy/casio-calculator-scientific-fx-991za",
+          "status": 200,
+          "ms": 5345,
+          "characters": 13299,
+          "title": "",
+          "challenge": false,
+          "productTitles": []
+        }
+      ],
+      "candidates": [
+        "https://www.waltons.co.za/buy/casio-plus-new-generation-scientific-calculator-fx82za-plus-ll-each",
+        "https://www.waltons.co.za/buy/casio-plus-new-generation-scientific-calculator-blue-fx82za-plus-ll-each",
+        "https://www.waltons.co.za/buy/casio-plus-new-generation-scientific-calculator-pink-fx82za-plus-ll-each",
+        "https://www.waltons.co.za/buy/casio-calculator-scientific-fx-991za",
+        "https://www.waltons.co.za/buy/casio-scientific-calculator-8-digit-fx82ms",
+        "https://www.waltons.co.za/buy/casio-financial-calculator-fc-100v-2nd-edition",
+        "https://www.waltons.co.za/buy/casio-calculator-8-digit-hl-815l-bk-s-dp",
+        "https://www.waltons.co.za/buy/casio-calculator-practical-desk-top-16-digits-dm-1600b",
+        "https://www.waltons.co.za/buy/hp-plus-business-calculator-nw239aa-10b11",
+        "https://www.waltons.co.za/buy/sharp-calculator-el387r",
+        "https://www.waltons.co.za/buy/sharp-scientific-calculator-422-function-writeview-el-w535sa",
+        "https://www.waltons.co.za/buy/sharp-el-331f-10-digit-calculator",
+        "https://www.waltons.co.za/buy/sharp-kick-stand-12-digit-calculator-el-334el1334",
+        "https://www.waltons.co.za/buy/sharp-calculator-8-digit-el-231l",
+        "https://www.waltons.co.za/buy/sharp-basic-8-digit-calculator-twin-power-el-330el1330",
+        "https://www.waltons.co.za/buy/croxley-ccx285sa-scientific-calculator-black-each"
+      ],
+      "verified": [
+        {
+          "url": "https://www.waltons.co.za/buy/casio-plus-new-generation-scientific-calculator-fx82za-plus-ll-each",
+          "offer": null
+        },
+        {
+          "url": "https://www.waltons.co.za/buy/casio-plus-new-generation-scientific-calculator-blue-fx82za-plus-ll-each",
+          "offer": null
+        },
+        {
+          "url": "https://www.waltons.co.za/buy/casio-plus-new-generation-scientific-calculator-pink-fx82za-plus-ll-each",
+          "offer": null
+        },
+        {
+          "url": "https://www.waltons.co.za/buy/casio-calculator-scientific-fx-991za",
+          "offer": null
+        },
+        {
+          "url": "https://www.waltons.co.za/buy/casio-scientific-calculator-8-digit-fx82ms",
+          "offer": null
+        },
+        {
+          "url": "https://www.waltons.co.za/buy/casio-financial-calculator-fc-100v-2nd-edition",
+          "offer": null
+        },
+        {
+          "url": "https://www.waltons.co.za/buy/casio-calculator-8-digit-hl-815l-bk-s-dp",
+          "offer": null
+        },
+        {
+          "url": "https://www.waltons.co.za/buy/casio-calculator-practical-desk-top-16-digits-dm-1600b",
+          "offer": null
+        },
+        {
+          "url": "https://www.waltons.co.za/buy/hp-plus-business-calculator-nw239aa-10b11",
+          "offer": null
+        },
+        {
+          "url": "https://www.waltons.co.za/buy/sharp-calculator-el387r",
+          "offer": null
+        },
+        {
+          "url": "https://www.waltons.co.za/buy/sharp-scientific-calculator-422-function-writeview-el-w535sa",
+          "offer": null
+        },
+        {
+          "url": "https://www.waltons.co.za/buy/sharp-el-331f-10-digit-calculator",
+          "offer": null
+        }
+      ]
+    }
+  ]
+}
