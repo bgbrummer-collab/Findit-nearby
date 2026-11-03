@@ -1,0 +1,9 @@
+✔ distinct selected locations do not coalesce commerce requests (19.168063ms)
+ℹ tests 688
+ℹ suites 0
+ℹ pass 688
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2661.246487

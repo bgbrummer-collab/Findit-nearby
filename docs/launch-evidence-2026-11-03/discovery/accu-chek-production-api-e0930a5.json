@@ -1,0 +1,93 @@
+{
+  "ms": 4491,
+  "status": 200,
+  "search": {
+    "identification": {
+      "name": "Accu-Chek Instant blood glucose meter",
+      "object": "Accu-Chek Instant blood glucose meter",
+      "brand": "",
+      "model": "",
+      "category": "product",
+      "retailCategory": "general",
+      "searchQuery": "Accu-Chek Instant blood glucose meter",
+      "barcode": null,
+      "confidence": null,
+      "identificationMethod": "typed-user-input",
+      "userConfirmed": true
+    },
+    "offers": [],
+    "blocked": false,
+    "verified": false,
+    "userConfirmed": true,
+    "identitySource": "user-confirmed",
+    "visualVerification": false,
+    "provider": "user-input",
+    "imageAccepted": false,
+    "needsVision": false,
+    "needsRetailerVerification": true,
+    "code": "USER_CONFIRMED_PRODUCT",
+    "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+  },
+  "data": {
+    "ok": true,
+    "matched": false,
+    "exactMatchVerified": false,
+    "searchQuery": "Accu-Chek Instant blood glucose meter",
+    "bestProduct": null,
+    "bestPrice": null,
+    "priceComparisonIssue": "no-prices",
+    "priceComparisonNote": "",
+    "offers": [],
+    "possibleOffers": [],
+    "variantConfirmationRequired": false,
+    "retailerStatus": [
+      {
+        "name": "Clicks",
+        "searchUrl": "https://clicks.co.za/",
+        "exactProductMatch": false,
+        "stockVerified": false,
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "status": "candidate_retailer"
+      },
+      {
+        "name": "Dis-Chem",
+        "searchUrl": "https://www.dischem.co.za/",
+        "exactProductMatch": false,
+        "stockVerified": false,
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "status": "candidate_retailer"
+      }
+    ],
+    "webRetailers": [
+      {
+        "name": "Clicks",
+        "searchUrl": "https://clicks.co.za/",
+        "exactProductMatch": false,
+        "stockVerified": false,
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "status": "candidate_retailer"
+      },
+      {
+        "name": "Dis-Chem",
+        "searchUrl": "https://www.dischem.co.za/",
+        "exactProductMatch": false,
+        "stockVerified": false,
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "status": "candidate_retailer"
+      }
+    ],
+    "verifiedOfferCount": 0,
+    "verifiedSellerCount": 0,
+    "inStockOfferCount": 0,
+    "priceVerifiedCount": 0,
+    "nearbyBranchStockVerified": false,
+    "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+    "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+    "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Accu-Chek%20Instant%20blood%20glucose%20meter",
+    "checkedAt": "2026-11-03T12:47:25.231Z"
+  }
+}
