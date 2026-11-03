@@ -1,0 +1,7 @@
+2026-11-03T12:55:41.8092591Z NATIVE_SEARCH_PROBE {"chars":529,"containsPitchclip":false,"containsProduct":true}
+2026-11-03T12:56:01.2045565Z NATIVE_DISCOVERY_RESULT []
+2026-11-03T12:56:01.2048146Z file:///home/runner/work/Findit-nearby/Findit-nearby/tests/uncommon-commerce-regression.mjs:12
+2026-11-03T12:56:01.2048584Z if(!exact.length)throw new Error('uncommon product: no verified exact retailer page discovered');
+2026-11-03T12:56:01.2049496Z Error: uncommon product: no verified exact retailer page discovered
+2026-11-03T12:56:01.2050145Z     at file:///home/runner/work/Findit-nearby/Findit-nearby/tests/uncommon-commerce-regression.mjs:12:24
+2026-11-03T12:56:01.2133285Z ##[error]Process completed with exit code 1.

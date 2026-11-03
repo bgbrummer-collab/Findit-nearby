@@ -1,0 +1,289 @@
+- link "Skip to content":
+  - /url: "#main-content"
+- paragraph:
+  - link "Free Delivery":
+    - /url: /policies/shipping-policy
+    - strong: Free Delivery
+  - strong: over R800 - R3999
+- paragraph:
+  - strong: Delivery in 2–3 days
+- banner:
+  - link "Petworld":
+    - /url: /
+    - img "Petworld"
+  - search:
+    - generic: Search
+    - combobox "Search"
+    - button "Search":
+      - generic: Search
+    - generic "Search by voice":
+    - status
+  - link "Log in":
+    - /url: https://petworld.co.za/customer_authentication/redirect?locale=en&region_country=ZA
+    - generic: Log in
+  - button "Basket":
+    - generic: Basket
+  - navigation "Primary":
+    - list:
+      - generic "Dogs":
+        - link "Dogs":
+          - /url: /collections/dogs
+          - text: Dogs
+      - generic "Cats":
+        - link "Cats":
+          - /url: /collections/cats
+          - text: Cats
+      - generic "Other Pets":
+        - link "Other Pets":
+          - /url: "#"
+          - text: Other Pets
+      - link "Shop Brands":
+        - /url: /pages/brands
+      - link "Grooming":
+        - /url: /pages/grooming
+      - link "Find Your Store":
+        - /url: /pages/stores
+      - generic "About":
+        - link "About":
+          - /url: /pages/about
+          - text: About
+      - link "Specials":
+        - /url: /collections/specials
+      - link "Welfare Worx":
+        - /url: /pages/welfareworx
+  - navigation "Secondary":
+    - list:
+      - link "My Account":
+        - /url: https://petworld.co.za/account/
+      - link "Rewards":
+        - /url: "#smile-home"
+      - link "Contact":
+        - /url: /pages/contact
+        - generic: Contact
+- main:
+  - region "Gallery Viewer":
+    - link "Skip to product information":
+      - /url: "#product-info-template--22437136334883__main"
+    - status: Image 2 is now available in gallery view
+    - list:
+      - link "Royal Canin Size Health Nutrition Mini Adult Dry Dog Food - Petworld":
+        - /url: //petworld.co.za/cdn/shop/files/royalcaninsizehealthnutritionminiadultfrom10months2kg.jpg?v=1747158778&width=1500
+        - img "Royal Canin Size Health Nutrition Mini Adult Dry Dog Food - Petworld"
+      - link "Royal Canin Size Health Nutrition Mini Adult Dry Dog Food - Petworld Royal Canin Size Health Nutrition Mini Adult Dry Dog Food - Petworld":
+        - /url: //petworld.co.za/cdn/shop/files/royalcaninsizehealthnutritionminiadultfrom10months8kg_681148ef-2ffd-45d5-b6bd-b5c6767ce2d6.jpg?v=1747158779&width=1500
+        - img "Royal Canin Size Health Nutrition Mini Adult Dry Dog Food - Petworld"
+        - img "Royal Canin Size Health Nutrition Mini Adult Dry Dog Food - Petworld"
+    - button "Previous":
+      - generic: Previous
+    - text: 2 /
+    - generic: of
+    - text: "2"
+    - button "Next" [disabled]:
+      - generic: Next
+    - status:
+      - generic: Loading...
+    - list:
+      - button "Load image 1 in gallery view Royal Canin Size Health Nutrition Mini Adult Dry Dog Food - Petworld":
+        - generic: Load image 1 in gallery view
+        - img "Royal Canin Size Health Nutrition Mini Adult Dry Dog Food - Petworld"
+      - button "Load image 2 in gallery view Royal Canin Size Health Nutrition Mini Adult Dry Dog Food - Petworld":
+        - generic: Load image 2 in gallery view
+        - img "Royal Canin Size Health Nutrition Mini Adult Dry Dog Food - Petworld"
+  - link "Royal Canin":
+    - /url: /collections/royal-canin
+  - generic: "| SKU: 3182550716888"
+  - heading "Royal Canin Size Health Nutrition Mini Adult Dry Dog Food" [level=1]
+  - generic: "4.9"
+  - generic: "4.9"
+  - generic: ★
+  - generic: ★
+  - generic: ★
+  - generic: ★
+  - generic: ★
+  - generic: (16)
+  - generic: "16"
+  - generic: Regular price
+  - text: R 1,229.90
+  - text: ( )
+  - separator
+  - img "4.9 out of 5.0 stars": ★★★★★
+  - generic: (16)
+  - group "Size":
+    - generic: Size
+    - radio "2kg"
+    - generic: 2kg
+    - radio "8kg" [checked]
+    - generic: 8kg
+  - text: Backordered
+  - heading "Oops! This item's *so popular* it's currently on backorder." [level=6]:
+    - strong: Oops! This item's *so popular* it's currently on backorder.
+  - paragraph: Free delivery over R800
+  - paragraph: Get it in 2-3 days
+  - paragraph: Open the magic
+  - separator
+  - radio [checked]
+  - generic: One-time purchase
+  - radio
+  - text: Subscribe and deliver every
+  - combobox:
+    - option "week" [selected]
+    - option "2 weeks"
+    - option "3 weeks"
+    - option "4 weeks"
+    - option "5 weeks"
+    - option "6 weeks"
+    - option "7 weeks"
+    - option "8 weeks"
+    - option "9 weeks"
+    - option "10 weeks"
+    - option "11 weeks"
+    - option "12 weeks"
+  - generic: You will get a 10% discount on every recurring order.
+  - generic: See details
+  - generic: You will receive a payment link and won't be charged automatically.
+  - button "Add to cart"
+  - button "Buy it now"
+  - text: Split your purchase with interest-free payments from
+  - strong: R 65.81/m
+  - paragraph: Make your first payment today, then monthly over 2–6 months.
+  - paragraph: Pay with
+  - img "Visa"
+  - img "Mastercard"
+  - img "Apple Pay"
+  - img "Google Pay"
+  - img "Capitec Pay"
+  - paragraph: Real pet parents. Real results.
+  - paragraph: Frequently Bought Together
+  - paragraph: Complete their real food routine
+  - checkbox "Royal Canin Size Health Nutrition Mini Adult Dry Dog Food - Petworld Royal Canin Size Health Nutrition Mini Adult Dry Dog Food R 1,229.90" [checked]
+  - img "Royal Canin Size Health Nutrition Mini Adult Dry Dog Food - Petworld"
+  - generic: Royal Canin Size Health Nutrition Mini Adult Dry Dog Food
+  - generic: R 1,229.90
+  - generic: +
+  - checkbox "Acana Duck and Pear Freeze Dried Dog Treats R 199.00" [checked]
+  - generic: Acana Duck and Pear Freeze Dried Dog Treats
+  - generic: R 199.00
+  - generic: +
+  - checkbox "Flamingo Poop Bags Lavender 4 X 15Pcs R 84.90" [checked]
+  - generic: Flamingo Poop Bags Lavender 4 X 15Pcs
+  - generic: R 84.90
+  - paragraph: Total price
+  - paragraph: R 1,513.80
+  - button "Add bundle to cart"
+  - generic "Description":
+    - heading "Description" [level=3]
+- link "Back to top":
+  - /url: "#"
+- contentinfo:
+  - heading "Your One-Stop Shop Petstore" [level=2]
+  - paragraph: Petworld is your one-stop shop for pet supplies and expert care, fostering a community of passionate pet parents. Connect with us and join the family!
+  - paragraph:
+    - link "Reviews":
+      - /url: /pages/reviews
+  - paragraph:
+    - link "About Us":
+      - /url: /pages/about
+  - paragraph:
+    - link "Careers":
+      - /url: /pages/careers
+  - link "Shop Now":
+    - /url: https://petworld.co.za/collections/pet-shop
+  - list:
+    - link "Facebook":
+      - /url: https://www.facebook.com/PetworldSA/
+      - generic: Facebook
+    - link "YouTube":
+      - /url: https://www.youtube.com/@PetworldSouthAfrica
+      - generic: YouTube
+    - link "Instagram":
+      - /url: https://www.instagram.com/petworld_za/
+      - generic: Instagram
+    - link "TikTok":
+      - /url: https://www.tiktok.com/@petworld.sa
+      - generic: TikTok
+  - generic "Shop Online":
+    - heading "Shop Online" [level=2]
+  - list:
+    - link "Shop All Products":
+      - /url: https://petworld.co.za/collections/pet-shop
+    - link "Specials":
+      - /url: /collections/specials
+    - link "Dog Shop":
+      - /url: /collections/dogs
+    - link "Cat Shop":
+      - /url: /collections/cats
+    - link "Fish Shop":
+      - /url: /collections/fish
+    - link "Bird Shop":
+      - /url: /collections/birds
+    - link "Reptile Shop":
+      - /url: /collections/reptiles
+    - link "Small Pet Shop":
+      - /url: /collections/small-pets
+  - generic "Our Stores":
+    - heading "Our Stores" [level=2]
+  - list:
+    - link "See All Stores":
+      - /url: https://petworld.co.za/pages/stores
+    - link "Petworld XXL Diep Rivier":
+      - /url: /pages/petworld-xxl-diep-river
+    - link "Petworld XXL Cape Gate":
+      - /url: /pages/petworld-xxl-cape-gate
+    - link "Petworld XXL N1 City":
+      - /url: /pages/petworld-xxl-n1-city
+    - link "Petworld XXL Somerset West":
+      - /url: /pages/petworld-xxl-somerset-west
+    - link "Petworld XXL Fourways":
+      - /url: /pages/petworld-xxl-fourways
+    - link "Petworld XXL Roodepoort":
+      - /url: /pages/petworld-xxl-roodepoort
+  - generic "My Petworld":
+    - heading "My Petworld" [level=2]
+  - list:
+    - link "My Account":
+      - /url: https://petworld.co.za/account/
+    - link "Track My Order":
+      - /url: https://www.ram.co.za/Track
+    - link "Rewards":
+      - /url: "#smile-home"
+    - link "Book a Grooming":
+      - /url: /pages/grooming
+    - link "Contact":
+      - /url: /pages/contact
+  - generic: Payment methods accepted
+  - list
+  - separator
+  - text: © 2026
+  - link "Petworld":
+    - /url: /
+  - text: .
+  - link "Powered by Shopify":
+    - /url: https://www.shopify.com?utm_campaign=poweredby&utm_medium=shopify&utm_source=onlinestore
+  - list:
+    - link "Terms":
+      - /url: /policies/terms-of-service
+    - link "Privacy Policy":
+      - /url: /policies/privacy-policy
+    - link "Refund & Returns":
+      - /url: /policies/refund-policy
+    - link "Shipping":
+      - /url: /policies/shipping-policy
+    - link "Contact":
+      - /url: /policies/contact-information
+    - link "Sitemap":
+      - /url: /pages/page-sitemap
+- dialog:
+  - button:
+  - link:
+    - /url: "#"
+    - text: View full details
+  - generic: Size
+  - generic: Quantity
+  - button: −
+  - generic: "1"
+  - button: +
+  - button:
+    - generic: Add to Cart
+- iframe:
+  - paragraph:
+    - strong: Birthday Club 10% Off

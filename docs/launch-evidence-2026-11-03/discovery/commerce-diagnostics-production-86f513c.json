@@ -1,0 +1,218 @@
+{
+  "version": {
+    "commit": "86f513cf4e0121634a5963efceb7174721615787",
+    "platform": "cloudflare"
+  },
+  "status": 200,
+  "ms": 2346,
+  "search": {
+    "identification": {
+      "name": "Accu-Chek Instant blood glucose meter",
+      "object": "Accu-Chek Instant blood glucose meter",
+      "brand": "",
+      "model": "",
+      "category": "product",
+      "retailCategory": "general",
+      "searchQuery": "Accu-Chek Instant blood glucose meter",
+      "barcode": null,
+      "confidence": null,
+      "identificationMethod": "typed-user-input",
+      "userConfirmed": true
+    },
+    "offers": [],
+    "blocked": false,
+    "verified": false,
+    "userConfirmed": true,
+    "identitySource": "user-confirmed",
+    "visualVerification": false,
+    "provider": "user-input",
+    "imageAccepted": false,
+    "needsVision": false,
+    "needsRetailerVerification": true,
+    "code": "USER_CONFIRMED_PRODUCT",
+    "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+  },
+  "data": {
+    "ok": true,
+    "matched": false,
+    "exactMatchVerified": false,
+    "searchQuery": "Accu-Chek Instant blood glucose meter",
+    "bestProduct": null,
+    "bestPrice": null,
+    "priceComparisonIssue": "no-prices",
+    "priceComparisonNote": "",
+    "offers": [],
+    "possibleOffers": [],
+    "variantConfirmationRequired": false,
+    "retailerStatus": [
+      {
+        "name": "Clicks",
+        "searchUrl": "https://clicks.co.za/",
+        "exactProductMatch": false,
+        "stockVerified": false,
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "status": "candidate_retailer"
+      },
+      {
+        "name": "Dis-Chem",
+        "searchUrl": "https://www.dischem.co.za/",
+        "exactProductMatch": false,
+        "stockVerified": false,
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "status": "candidate_retailer"
+      }
+    ],
+    "webRetailers": [
+      {
+        "name": "Clicks",
+        "searchUrl": "https://clicks.co.za/",
+        "exactProductMatch": false,
+        "stockVerified": false,
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "status": "candidate_retailer"
+      },
+      {
+        "name": "Dis-Chem",
+        "searchUrl": "https://www.dischem.co.za/",
+        "exactProductMatch": false,
+        "stockVerified": false,
+        "branchStockVerified": false,
+        "directionsAvailable": false,
+        "status": "candidate_retailer"
+      }
+    ],
+    "verifiedOfferCount": 0,
+    "verifiedSellerCount": 0,
+    "inStockOfferCount": 0,
+    "priceVerifiedCount": 0,
+    "discoveryDiagnostics": {
+      "sourceReads": [
+        {
+          "phase": "catalogue",
+          "host": "www.dischem.co.za",
+          "status": 403,
+          "outcome": "http-error"
+        },
+        {
+          "phase": "catalogue",
+          "host": "clicks.co.za",
+          "status": 200,
+          "outcome": "read",
+          "characters": 454231
+        },
+        {
+          "phase": "catalogue",
+          "host": "www.dischem.co.za",
+          "status": 429,
+          "outcome": "http-error"
+        },
+        {
+          "phase": "catalogue",
+          "host": "clicks.co.za",
+          "status": 200,
+          "outcome": "read",
+          "characters": 2957691
+        },
+        {
+          "host": "clicks.co.za",
+          "phase": "product",
+          "status": 200,
+          "outcome": "read",
+          "characters": 293971
+        },
+        {
+          "host": "clicks.co.za",
+          "phase": "product",
+          "status": 200,
+          "outcome": "read",
+          "characters": 295354
+        },
+        {
+          "host": "clicks.co.za",
+          "phase": "product",
+          "status": 200,
+          "outcome": "read",
+          "characters": 294116
+        },
+        {
+          "host": "clicks.co.za",
+          "phase": "product",
+          "status": 200,
+          "outcome": "read",
+          "characters": 295802
+        },
+        {
+          "host": "clicks.co.za",
+          "phase": "product",
+          "status": 200,
+          "outcome": "read",
+          "characters": 299519
+        },
+        {
+          "host": "clicks.co.za",
+          "phase": "product",
+          "status": 200,
+          "outcome": "read",
+          "characters": 295992
+        },
+        {
+          "host": "clicks.co.za",
+          "phase": "product",
+          "status": 200,
+          "outcome": "read",
+          "characters": 298556
+        },
+        {
+          "host": "clicks.co.za",
+          "phase": "product",
+          "status": 200,
+          "outcome": "read",
+          "characters": 297391
+        },
+        {
+          "host": "clicks.co.za",
+          "phase": "product",
+          "status": 200,
+          "outcome": "read",
+          "characters": 295750
+        },
+        {
+          "host": "clicks.co.za",
+          "phase": "product",
+          "status": 200,
+          "outcome": "read",
+          "characters": 299008
+        },
+        {
+          "host": "clicks.co.za",
+          "phase": "product",
+          "status": 200,
+          "outcome": "read",
+          "characters": 296668
+        },
+        {
+          "host": "clicks.co.za",
+          "phase": "product",
+          "status": 200,
+          "outcome": "read",
+          "characters": 296238
+        }
+      ],
+      "candidates": {
+        "known": 0,
+        "web": 0,
+        "native": 12,
+        "selected": 12,
+        "accepted": 0
+      }
+    },
+    "nearbyBranchStockVerified": false,
+    "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+    "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+    "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Accu-Chek%20Instant%20blood%20glucose%20meter",
+    "checkedAt": "2026-11-03T12:56:57.360Z"
+  }
+}

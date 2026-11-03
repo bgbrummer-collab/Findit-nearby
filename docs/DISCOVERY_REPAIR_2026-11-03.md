@@ -37,3 +37,7 @@ No identity threshold was relaxed; no product URL, SKU, model or fact was added 
 | Mobile hardware | P1 | Desktop browser evidence does not prove physical phone camera/permissions | Test real mobile device | Photo, gallery, camera, maps and navigation evidence |
 
 Prior fixes #353–#358 were reviewed and retained. This repair neither changes entitlements nor introduces a paid provider, credentials or deployment infrastructure.
+
+## Final production result
+
+The queue repair alone did not recover the production Accu-Chek search. On86f513c the new source outcomes show Dis-Chem catalogue403/429; Clicks is readable but12candidates yield0accepted exact products. The deterministic starvation defect is repaired; the customer issue remains FAIL. Do not promote6/16staging to a production success rate. Backorder/preorder display follow-up is separately verified for the selected8kg actual UI. All final status/evidence is in LAUNCH_VERIFICATION_2026-11-03.md.

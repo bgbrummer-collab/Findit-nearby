@@ -11,3 +11,9 @@ The real 8kg search on e0930a5 shows Petworld's matching variant at R1229.90 as 
 Local validation: 688 tests passed, zero failed; syntax and diff checks passed. Real-source staging returns Accu-Chek R284.99/online in_stock and the selected 8kg Petworld page R1229.90/backorder. Production diagnostics and actual repaired label remain pending deployment.
 
 Additional actual production evidence on e0930a5/predecessor: a new neutrally named real Logitech mouse photograph produces Logitech mouse,65%, exact model unconfirmed, no price. This is an honest partial identification; the photo does not show a model code. Shopping-list add survives reload; the test item was removed afterwards. Manual barcode5449000000996 retrieves attributed Coca-Cola330ml catalogue data; no exact retailer listing is verified. Camera barcode detection is unsupported in this browser. Premium entitlements were preserved; no premium feature was unlocked to test it.
+
+## Final production follow-up
+
+PR360 merged/deployed as86f513cf4e0121634a5963efceb7174721615787 after four PR checks passed. Final production API and actual frontend metadata agree. Top Stores displays Online backorder and Branch stock not verified for the selected8kg; primary retailer URL selects8kg/SKU3182550716888/R1229.90 and renders Backordered. Fresh API agrees. Card click automation timed out; direct destination verification does not certify click activation.
+
+Accu-Chek remains failed. New production diagnostics establish catalogue HTTP403/429 from Dis-Chem; Clicks returns200 but no accepted candidate. Source access differs from staging. No retry around this restriction was attempted. Final11workflows:10success,1failure (existing Korg exact-discovery check). Do not call all CI green. Full current acceptance matrix:LAUNCH_VERIFICATION_2026-11-03.md.
