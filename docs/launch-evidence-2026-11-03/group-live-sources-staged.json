@@ -1,0 +1,98 @@
+[
+  {
+    "size": "2kg",
+    "status": 200,
+    "data": {
+      "researched": true,
+      "whatItDoes": "This dog food provides the high energy needs required by small breeds while maintaining the ideal weight.",
+      "pros": [],
+      "cons": [],
+      "specifications": [
+        {
+          "name": "Retailer product code",
+          "value": "3182550402170",
+          "sourceUrl": "https://petworld.co.za/products/royal-canin-size-health-nutrition-mini-adult-dry-dog-food?variant=40612055547939"
+        }
+      ],
+      "compatibility": [],
+      "claimEvidence": {
+        "whatItDoes": {
+          "text": "This dog food provides the high energy needs required by small breeds while maintaining the ideal weight.",
+          "sourceUrl": "https://petworld.co.za/products/royal-canin-size-health-nutrition-mini-adult-dry-dog-food?variant=40612055547939",
+          "sourceTitle": "Royal Canin Size Health Nutrition Mini Adult Dry Dog Food - 2kg"
+        },
+        "pros": [],
+        "cons": [],
+        "compatibility": [],
+        "includedItems": []
+      },
+      "includedItems": [],
+      "variants": [],
+      "bestFor": "",
+      "standOut": "",
+      "valueVerdict": "",
+      "sources": [
+        {
+          "title": "Royal Canin Size Health Nutrition Mini Adult Dry Dog Food - 2kg",
+          "url": "https://petworld.co.za/products/royal-canin-size-health-nutrition-mini-adult-dry-dog-food?variant=40612055547939"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://petworld.co.za/products/royal-canin-size-health-nutrition-mini-adult-dry-dog-food?variant=40612055547939",
+          "status": "product-facts-verified"
+        }
+      ],
+      "researchMethod": "Fetched exact-product page descriptions",
+      "checkedAt": "2026-11-03T11:50:07.790Z",
+      "message": "Product facts are quoted from matching product-page descriptions."
+    },
+    "useful": true
+  },
+  {
+    "size": "8kg",
+    "status": 200,
+    "data": {
+      "researched": true,
+      "whatItDoes": "",
+      "pros": [],
+      "cons": [],
+      "specifications": [
+        {
+          "name": "Retailer product code",
+          "value": "3182550716888",
+          "sourceUrl": "https://petworld.co.za/products/royal-canin-size-health-nutrition-mini-adult-dry-dog-food?variant=40612055580707"
+        }
+      ],
+      "compatibility": [],
+      "claimEvidence": {
+        "whatItDoes": null,
+        "pros": [],
+        "cons": [],
+        "compatibility": [],
+        "includedItems": []
+      },
+      "includedItems": [],
+      "variants": [],
+      "bestFor": "",
+      "standOut": "",
+      "valueVerdict": "",
+      "sources": [
+        {
+          "title": "Royal Canin Size Health Nutrition Mini Adult Dry Dog Food - 8kg",
+          "url": "https://petworld.co.za/products/royal-canin-size-health-nutrition-mini-adult-dry-dog-food?variant=40612055580707"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://petworld.co.za/products/royal-canin-size-health-nutrition-mini-adult-dry-dog-food?variant=40612055580707",
+          "status": "product-facts-verified"
+        }
+      ],
+      "researchMethod": "Fetched exact-product page descriptions",
+      "checkedAt": "2026-11-03T11:50:18.121Z",
+      "message": "No trustworthy exact-product description was found. FindIt will not guess."
+    },
+    "useful": false
+  }
+]

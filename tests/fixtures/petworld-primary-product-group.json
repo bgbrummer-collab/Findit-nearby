@@ -1,0 +1,48 @@
+{
+  "@context": "http://schema.org/",
+  "@id": "/products/royal-canin-size-health-nutrition-mini-adult-dry-dog-food#product",
+  "@type": "ProductGroup",
+  "brand": {
+    "@type": "Brand",
+    "name": "Royal Canin"
+  },
+  "category": "Non-Prescription Dog Food",
+  "description": "Formulated to give your mature miniature breed dog a full nutritional diet and long-lasting vitality. This dog food provides the high energy needs required by small breeds while maintaining the ideal weight. Mini Adult also contains enriched EPA-DHA for encouraging healthy skin.| * Weight: 2kg",
+  "hasVariant": [
+    {
+      "@id": "/products/royal-canin-size-health-nutrition-mini-adult-dry-dog-food?variant=40612055547939#variant",
+      "@type": "Product",
+      "gtin": "3182550402170",
+      "image": "https://petworld.co.za/cdn/shop/files/royalcaninsizehealthnutritionminiadultfrom10months2kg.jpg?v=1747158778&width=1920",
+      "name": "Royal Canin Size Health Nutrition Mini Adult Dry Dog Food - 2kg",
+      "offers": {
+        "@id": "/products/royal-canin-size-health-nutrition-mini-adult-dry-dog-food?variant=40612055547939#offer",
+        "@type": "Offer",
+        "availability": "http://schema.org/InStock",
+        "price": "370.00",
+        "priceCurrency": "ZAR",
+        "url": "https://petworld.co.za/products/royal-canin-size-health-nutrition-mini-adult-dry-dog-food?variant=40612055547939"
+      },
+      "sku": "3182550402170"
+    },
+    {
+      "@id": "/products/royal-canin-size-health-nutrition-mini-adult-dry-dog-food?variant=40612055580707#variant",
+      "@type": "Product",
+      "gtin": "3182550716888",
+      "image": "https://petworld.co.za/cdn/shop/files/royalcaninsizehealthnutritionminiadultfrom10months8kg_681148ef-2ffd-45d5-b6bd-b5c6767ce2d6.jpg?v=1747158779&width=1920",
+      "name": "Royal Canin Size Health Nutrition Mini Adult Dry Dog Food - 8kg",
+      "offers": {
+        "@id": "/products/royal-canin-size-health-nutrition-mini-adult-dry-dog-food?variant=40612055580707#offer",
+        "@type": "Offer",
+        "availability": "http://schema.org/InStock",
+        "price": "1160.00",
+        "priceCurrency": "ZAR",
+        "url": "https://petworld.co.za/products/royal-canin-size-health-nutrition-mini-adult-dry-dog-food?variant=40612055580707"
+      },
+      "sku": "3182550716888"
+    }
+  ],
+  "name": "Royal Canin Size Health Nutrition Mini Adult Dry Dog Food",
+  "productGroupID": "7058535677987",
+  "url": "https://petworld.co.za/products/royal-canin-size-health-nutrition-mini-adult-dry-dog-food"
+}
