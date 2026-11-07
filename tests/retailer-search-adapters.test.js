@@ -139,3 +139,14 @@ test('marketplace and grocery adapters use their published search parameters',as
  const {catalogueQueryUrl}=await import('../lib/catalogue-discovery-terms.js');
  assert.equal(new URL(catalogueQueryUrl('https://www.takealot.com/all?qsearch=long','short')).searchParams.get('qsearch'),'short');
 });
+
+test('a readable predictive catalogue miss does not parse a recommendation-heavy HTML shell',async t=>{
+ const seen=[];t.mock.method(globalThis,'fetch',async url=>{seen.push(String(url));return String(url).includes('/search/suggest.json')?Response.json({resources:{results:{products:[]}}}):new Response('');});
+ await nativeRetailerUrls({name:'Example EX42 keyboard'});assert.ok(seen.some(u=>u.startsWith('https://www.firstshop.co.za/search/suggest.json')));assert.ok(!seen.some(u=>u.startsWith('https://www.firstshop.co.za/search?')));
+});
+test('discovery can retrieve abbreviated catalogue names through model codes without certifying them',async t=>{
+ const exact='https://lego-gybc.co.za/products/example-plants-10329';
+ t.mock.method(globalThis,'fetch',async url=>String(url).startsWith('https://lego-gybc.co.za/search/suggest.json')?Response.json({resources:{results:{products:[{title:'Tiny Plants',handle:'example-plants-10329',url:'/products/example-plants-10329',vendor:'LEGO'}]}}}):new Response(''));
+ const urls=await nativeRetailerUrls({name:'LEGO Icons 10329 Tiny Plants'});assert.ok(urls.includes(exact));
+ const {structuredProduct,ident}=await import('../lib/product-intelligence-core.js');assert.equal(structuredProduct('<script type="application/ld+json">'+JSON.stringify({'@type':'Product',name:'LEGO Different Plants 10328',offers:{price:1,priceCurrency:'ZAR'}})+'</script>',ident({name:'LEGO Icons 10329 Tiny Plants'})),null);
+});
