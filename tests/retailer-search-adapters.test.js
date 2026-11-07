@@ -150,3 +150,13 @@ test('discovery can retrieve abbreviated catalogue names through model codes wit
  const urls=await nativeRetailerUrls({name:'LEGO Icons 10329 Tiny Plants'});assert.ok(urls.includes(exact));
  const {structuredProduct,ident}=await import('../lib/product-intelligence-core.js');assert.equal(structuredProduct('<script type="application/ld+json">'+JSON.stringify({'@type':'Product',name:'LEGO Different Plants 10328',offers:{price:1,priceCurrency:'ZAR'}})+'</script>',ident({name:'LEGO Icons 10329 Tiny Plants'})),null);
 });
+
+test('a complete photo-catalogue result avoids fetching related lens kits and accessories',async t=>{
+ const seen=[];t.mock.method(globalThis,'fetch',async url=>{seen.push(String(url));return String(url).startsWith('https://www.ormsdirect.co.za/search/suggest.json')?Response.json({resources:{results:{products:[{title:'Canon EOS R50 Mirrorless Camera Body',url:'/products/canon-r50-body'},{title:'Canon EOS R50 with 18-45mm Lens Kit',url:'/products/canon-r50-lens-kit'}]}}}):new Response('');});
+ const urls=await nativeRetailerUrls({name:'Canon EOS R50 camera body'});assert.deepEqual(urls,['https://www.ormsdirect.co.za/products/canon-r50-body']);assert.ok(!seen.some(u=>u.startsWith('https://www.ormsdirect.co.za/search?')));
+});
+
+test('HTML discovery does not spend product verification on a missing Plus variant',async t=>{
+ t.mock.method(globalThis,'fetch',async url=>new Response(String(url).startsWith('https://www.takealot.com/all?')?'<a href="/products/example-carry-backpack">Example Carry backpack</a>':''));
+ assert.deepEqual(await nativeRetailerUrls({name:'Example Carry Plus backpack'}),[]);
+});
