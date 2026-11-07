@@ -19,3 +19,10 @@ test('technical codes may be formatted with spaces without losing identity',()=>
  const i=ident({name:'Sony WH-1000XM5 headphones black'});
  assert.equal(structuredProduct(html('Sony WH 1000 XM5 headphones black',''),i).price,1200);
 });
+
+test('a separately published structured brand remains identity evidence',()=>{
+ const node={'@type':'Product',name:'EX42 keyboard',brand:{'@type':'Brand',name:'Example'},offers:{price:1200,priceCurrency:'ZAR'}};
+ const raw='<script type="application/ld+json">'+JSON.stringify(node)+'</script>';
+ assert.equal(structuredProduct(raw,ident({name:'Example EX42 keyboard'})).price,1200);
+ assert.equal(structuredProduct(raw,ident({name:'Different EX42 keyboard'})),null);
+});
