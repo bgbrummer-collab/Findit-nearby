@@ -35,7 +35,7 @@ const pause=signal=>new Promise((resolve,reject)=>{if(signal.aborted)return reje
   for(let attempt=0;attempt<2;attempt++){
    let response,data,parseFailed=false;
    try{
-    response=await fetch(url,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body),signal:controller.signal});
+    response=await fetch(url,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body),signal:controller.signal,finditRetryManaged:true});
     try{data=await response.json();if(!data||typeof data!=='object'||Array.isArray(data))parseFailed=true;}catch{parseFailed=true;}
    }catch(error){
     if(controller.signal.aborted||!retryAllowed||attempt||!(error instanceof TypeError))throw error;
