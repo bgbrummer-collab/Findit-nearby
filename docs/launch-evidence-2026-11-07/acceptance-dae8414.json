@@ -1,0 +1,931 @@
+{
+  "checkedAt": "2026-11-07T09:00:17.294Z",
+  "version": {
+    "commit": "dae84142580f59bb8cd50723071eaa2466c37972",
+    "platform": "cloudflare"
+  },
+  "health": {
+    "ok": true,
+    "status": "ok",
+    "service": "core",
+    "platform": "cloudflare",
+    "photoIdentification": true,
+    "nearby": true,
+    "commerce": true,
+    "authorizedCatalogueConfigured": false,
+    "feedbackEndpoint": true,
+    "checksAreConfigurationOnly": true,
+    "checkedAt": "2026-11-07T09:00:25.355Z"
+  },
+  "checks": [
+    {
+      "name": "Unresolved barcode stays unconfirmed",
+      "passed": true,
+      "result": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Barcode 4959112179103",
+            "object": "product",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "4959112179103",
+            "barcode": "4959112179103",
+            "confidence": null,
+            "identificationMethod": "barcode-user-input",
+            "userConfirmed": false,
+            "barcodeUserEntered": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": false,
+          "identitySource": "barcode-user-input",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "BARCODE_NOT_RESOLVED",
+          "message": "Barcode accepted. No product identity has been confirmed. Enter the product name or model."
+        }
+      }
+    },
+    {
+      "name": "Unresolved barcode yields no unrelated product facts",
+      "passed": true,
+      "result": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "barcodeUnresolved": true,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "sources": [],
+          "message": "No product identity has been verified for this barcode. Enter the product name or model."
+        }
+      }
+    },
+    {
+      "name": "Ask FindIt answers the battery question from sources",
+      "passed": true,
+      "result": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "answer": "Sony WH-CH520 black headphones:\n\nPublished details relevant to your question:\n\n\u2022 Enjoy stunning audio quality and long battery life on-the-go with the WH-CH520 Wireless Headphones from Sony, a pair of on-ear, closed-back headphones with powerful 30mm drivers for realistic sound reproduction.\n\n\u2022 And, if your headphones battery is running low, a 3-minute quick-charge with the included USB-C cable can give you 1.5 hours of listening time.\n\n\u2022 The onboard battery lasts up to 50 hours with a three-hour charge time, and you can get 1.5 hours of use out of only a 3-minute fast charge via the included USB-C charging cable.\n\n\u2022 Includes USB-C Charging Cable.\n\nSources:\n\nhttps://www.firstshop.co.za/products/sony-wh-ch520-wireless-bluetooth-on-ear-headphones-black-wh-ch520-182783",
+          "sources": [
+            {
+              "url": "https://www.firstshop.co.za/products/sony-wh-ch520-wireless-bluetooth-on-ear-headphones-black-wh-ch520-182783"
+            }
+          ],
+          "modelUsed": "findit-sourced-evidence"
+        }
+      }
+    },
+    {
+      "name": "Clothing substitutions excluded: Classic Black Denim Jeans",
+      "passed": true,
+      "result": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "Classic Black Denim Jeans",
+          "bestProduct": null,
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Bash",
+              "searchUrl": "https://bash.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Superbalist",
+              "searchUrl": "https://www.superbalist.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Bash",
+              "searchUrl": "https://bash.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Superbalist",
+              "searchUrl": "https://www.superbalist.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "discoveryDiagnostics": {
+            "sourceReads": [
+              {
+                "phase": "catalogue",
+                "host": "www.ackermans.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 17811
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.ackermans.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 18829
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.ackermans.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 18115
+              },
+              {
+                "phase": "catalogue",
+                "host": "bash.com",
+                "status": 200,
+                "outcome": "read",
+                "characters": 612379
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.pepstores.com",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1800000
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.superbalist.com",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1112412
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.ackermans.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 2201501
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.ackermans.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 2209882
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 464316
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 432433
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 452806
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 454926
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 463880
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 434201
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 453712
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 461118
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 469314
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 465270
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 472385
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 475499
+              }
+            ],
+            "candidates": {
+              "known": 0,
+              "web": 0,
+              "native": 16,
+              "selected": 12,
+              "accepted": 0
+            },
+            "authorizedOffers": 0
+          },
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Classic%20Black%20Denim%20Jeans",
+          "checkedAt": "2026-11-07T09:00:30.791Z"
+        }
+      }
+    },
+    {
+      "name": "Clothing substitutions excluded: Black Barrel Leg Jeans",
+      "passed": true,
+      "result": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "Black Barrel Leg Jeans",
+          "bestProduct": null,
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Bash",
+              "searchUrl": "https://bash.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Superbalist",
+              "searchUrl": "https://www.superbalist.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Bash",
+              "searchUrl": "https://bash.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Superbalist",
+              "searchUrl": "https://www.superbalist.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "discoveryDiagnostics": {
+            "sourceReads": [
+              {
+                "phase": "catalogue",
+                "host": "www.ackermans.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 18445
+              },
+              {
+                "phase": "catalogue",
+                "host": "bash.com",
+                "status": 200,
+                "outcome": "read",
+                "characters": 597671
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.superbalist.com",
+                "status": 200,
+                "outcome": "read",
+                "characters": 999714
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.pepstores.com",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1727557
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 467232
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 442094
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 455213
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 462088
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 488975
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 444282
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 444543
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 464652
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 456550
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 439383
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 468859
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 473975
+              }
+            ],
+            "candidates": {
+              "known": 0,
+              "web": 0,
+              "native": 16,
+              "selected": 12,
+              "accepted": 0
+            },
+            "authorizedOffers": 0
+          },
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Black%20Barrel%20Leg%20Jeans",
+          "checkedAt": "2026-11-07T09:00:33.733Z"
+        }
+      }
+    },
+    {
+      "name": "Uncommon product has an exact live ZAR listing",
+      "passed": true,
+      "result": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": true,
+          "exactMatchVerified": true,
+          "searchQuery": "Korg Pitchclip 2 clip-on tuner",
+          "bestProduct": {
+            "name": "KORG PITCHCLIP 2 PC2"
+          },
+          "bestPrice": null,
+          "priceComparisonIssue": "variants",
+          "priceComparisonNote": "Listing variants, currencies or price conditions differ. Compare each listing separately.",
+          "offers": [
+            {
+              "product_name": "KORG PITCHCLIP 2 PC2",
+              "product_url": "https://onestopmusic.co.za/product/osm-xtmt-kat002",
+              "sku": "osm-xtmt-kat002",
+              "comparisonAttributes": {
+                "size": "",
+                "color": ""
+              },
+              "comparisonAmbiguous": false,
+              "retailer": {
+                "name": "OneStopMusic"
+              },
+              "price": 345,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-07T09:00:36.079Z",
+              "retailerDomain": "onestopmusic.co.za",
+              "trustedRetailerDomain": false
+            },
+            {
+              "product_name": "Korg Pitchclip 2 Clip-On Tuner Black",
+              "product_url": "https://distrinode.co.za/korg-pitchclip-2-clip-on-tuner-black",
+              "sku": "2906540",
+              "comparisonAttributes": {
+                "size": "",
+                "color": ""
+              },
+              "comparisonAmbiguous": false,
+              "retailer": {
+                "name": "DistriNode"
+              },
+              "price": 408,
+              "currency": "ZAR",
+              "availability": "out_of_stock",
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-07T09:00:34.362Z",
+              "retailerDomain": "distrinode.co.za",
+              "trustedRetailerDomain": false
+            }
+          ],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "OneStopMusic",
+              "searchUrl": "https://onestopmusic.co.za/product/osm-xtmt-kat002",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "DistriNode",
+              "searchUrl": "https://distrinode.co.za/korg-pitchclip-2-clip-on-tuner-black",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Marshall Music",
+              "searchUrl": "https://www.marshallmusic.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Bothners",
+              "searchUrl": "https://bothners.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Music Connection",
+              "searchUrl": "https://musicconnection.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "OneStopMusic",
+              "searchUrl": "https://onestopmusic.co.za/product/osm-xtmt-kat002",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "DistriNode",
+              "searchUrl": "https://distrinode.co.za/korg-pitchclip-2-clip-on-tuner-black",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Marshall Music",
+              "searchUrl": "https://www.marshallmusic.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Bothners",
+              "searchUrl": "https://bothners.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Music Connection",
+              "searchUrl": "https://musicconnection.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 2,
+          "verifiedSellerCount": 2,
+          "inStockOfferCount": 1,
+          "priceVerifiedCount": 2,
+          "discoveryDiagnostics": {
+            "sourceReads": [
+              {
+                "phase": "catalogue",
+                "host": "www.marshallmusic.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "host": "distrinode.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 773668
+              },
+              {
+                "phase": "catalogue",
+                "host": "musicconnection.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 77404
+              },
+              {
+                "phase": "catalogue",
+                "host": "distrinode.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1013038
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.toms.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 177243
+              },
+              {
+                "host": "onestopmusic.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 352374
+              },
+              {
+                "phase": "catalogue",
+                "host": "bothners.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 307315
+              },
+              {
+                "host": "marshallmusic.co.za",
+                "phase": "product",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "host": "marshallmusic.co.za",
+                "phase": "product",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "host": "musicconnection.co.za",
+                "phase": "product",
+                "outcome": "invalid-destination"
+              },
+              {
+                "host": "musicconnection.co.za",
+                "phase": "product",
+                "outcome": "invalid-destination"
+              },
+              {
+                "host": "distrinode.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1213996
+              },
+              {
+                "host": "distrinode.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1175229
+              },
+              {
+                "host": "bothners.co.za",
+                "phase": "product",
+                "status": 404,
+                "outcome": "http-error"
+              },
+              {
+                "host": "bothners.co.za",
+                "phase": "product",
+                "status": 404,
+                "outcome": "http-error"
+              }
+            ],
+            "candidates": {
+              "known": 2,
+              "web": 0,
+              "native": 8,
+              "selected": 10,
+              "accepted": 2
+            },
+            "authorizedOffers": 0
+          },
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Korg%20Pitchclip%202%20clip-on%20tuner",
+          "checkedAt": "2026-11-07T09:00:40.974Z"
+        }
+      }
+    },
+    {
+      "name": "Electronics branches stay within selected radius without stock claims",
+      "passed": true,
+      "result": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "radiusKm": 5,
+          "stores": [
+            {
+              "id": "incredible-61",
+              "name": "INCREDIBLE MENLYN",
+              "lat": -25.782677,
+              "lon": 28.276191,
+              "address": "Shop 34A, Menlyn Shopping Mall, Cnr Atterbury & C/O Atterbury Road and Lois Ave, Menlo Park, Pretoria, 0047",
+              "phone": "(012) 369 6480",
+              "source": "Official retailer locator",
+              "sourceUrl": "https://www.incredible.co.za/storelocator/",
+              "website": "https://www.incredible.co.za/storelocator/",
+              "countryCode": "ZA",
+              "locatorDataStatus": "published_snapshot",
+              "locatorCheckedAt": "2026-11-07T08:58:36.848Z",
+              "openingHours": "",
+              "schedule": "",
+              "openNow": null,
+              "price": null,
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "branchPriceVerified": false,
+              "directionsAvailable": false,
+              "branchDetailsVerified": true,
+              "type": "Published retailer location \u2014 details checked 2026-11-07; exact item stock not verified",
+              "distanceKm": 0.05102800805153291
+            },
+            {
+              "id": "hificorp-1293",
+              "name": "HiFiCorp Menlyn",
+              "lat": -25.78021823,
+              "lon": 28.27530038,
+              "address": "Shop LF141, Atterbury Road And, Lois Ave, Menlyn, Pretoria, 0063",
+              "phone": "012 133 0032",
+              "source": "Official retailer locator",
+              "sourceUrl": "https://www.hificorp.co.za/storelocator",
+              "website": "https://www.hificorp.co.za/storelocator",
+              "countryCode": "ZA",
+              "locatorDataStatus": "published_snapshot",
+              "locatorCheckedAt": "2026-11-07T08:58:36.841Z",
+              "openingHours": "",
+              "schedule": "",
+              "openNow": null,
+              "price": null,
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "branchPriceVerified": false,
+              "directionsAvailable": false,
+              "branchDetailsVerified": true,
+              "type": "Published retailer location \u2014 details checked 2026-11-07; exact item stock not verified",
+              "distanceKm": 0.30950447162023176
+            },
+            {
+              "id": "incredible-782",
+              "name": "INCREDIBLE MENLYN ON MAINE",
+              "lat": -25.78481869,
+              "lon": 28.2811688,
+              "address": "Shop 37, Menlyn on Maine, Cnr January Masilela Rd and Aramist Ave, Waterkloof Glen, Extension 2, Pretoria, 0063",
+              "phone": "(012) 348 2674",
+              "source": "Official retailer locator",
+              "sourceUrl": "https://www.incredible.co.za/storelocator/",
+              "website": "https://www.incredible.co.za/storelocator/",
+              "countryCode": "ZA",
+              "locatorDataStatus": "published_snapshot",
+              "locatorCheckedAt": "2026-11-07T08:58:36.848Z",
+              "openingHours": "",
+              "schedule": "",
+              "openNow": null,
+              "price": null,
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "branchPriceVerified": false,
+              "directionsAvailable": false,
+              "branchDetailsVerified": true,
+              "type": "Published retailer location \u2014 details checked 2026-11-07; exact item stock not verified",
+              "distanceKm": 0.5056690447360412
+            },
+            {
+              "id": "incredible-1254",
+              "name": "INCREDIBLE BROOKLYN",
+              "lat": -25.772083,
+              "lon": 28.235257,
+              "address": "Shop no. 60, Building/Centre Brooklyn Mall, Street 338 Bronkhorst Str. & Nieuw Muckleneuk, Erf No 450, Pretoria, 0181",
+              "phone": "(010) 133 1868",
+              "source": "Official retailer locator",
+              "sourceUrl": "https://www.incredible.co.za/storelocator/",
+              "website": "https://www.incredible.co.za/storelocator/",
+              "countryCode": "ZA",
+              "locatorDataStatus": "published_snapshot",
+              "locatorCheckedAt": "2026-11-07T08:58:36.848Z",
+              "openingHours": "",
+              "schedule": "",
+              "openNow": null,
+              "price": null,
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "branchPriceVerified": false,
+              "directionsAvailable": false,
+              "branchDetailsVerified": true,
+              "type": "Published retailer location \u2014 details checked 2026-11-07; exact item stock not verified",
+              "distanceKm": 4.314349285274007
+            }
+          ],
+          "reliable": true,
+          "discoveryAvailable": true,
+          "exactProductOnly": false,
+          "exactVerifiedCount": 0,
+          "branchStockVerified": false,
+          "directionsAvailable": false,
+          "message": "Found 4 relevant nearby retailers. Exact item stock is not claimed until retailer evidence verifies it.",
+          "searchedShopTags": [
+            "electronics",
+            "hifi",
+            "music",
+            "computer"
+          ],
+          "disclaimer": "These are real nearby retailers for the product type. FindIt does not guess exact branch stock or prices."
+        }
+      }
+    }
+  ],
+  "endVersion": {
+    "commit": "dae84142580f59bb8cd50723071eaa2466c37972",
+    "platform": "cloudflare"
+  },
+  "versionStable": true
+}

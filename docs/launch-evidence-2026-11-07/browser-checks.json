@@ -1,0 +1,30 @@
+{
+  "applicationCommit": "dae84142580f59bb8cd50723071eaa2466c37972",
+  "actualBrowserChecks": [
+    "text search",
+    "gallery and camera file chooser",
+    "partial photo recovery",
+    "unresolved barcode recovery",
+    "specific sourced assistant answer",
+    "source-attributed product facts",
+    "saved items retained after reload",
+    "shopping list retained after reload",
+    "watchlist confirmation",
+    "radius retained after reload",
+    "manual coordinates",
+    "nearby map pins and relevance",
+    "shared dialog fixed in viewport"
+  ],
+  "layout": {
+    "position": "fixed",
+    "display": "grid",
+    "overlayTop": 0,
+    "overlayBottom": 936,
+    "viewportHeight": 936
+  },
+  "limits": [
+    "Cloud browser live barcode detector unsupported; manual entry tested",
+    "Physical phone-camera capture remains a device check",
+    "Premium access used the existing free beta action"
+  ]
+}

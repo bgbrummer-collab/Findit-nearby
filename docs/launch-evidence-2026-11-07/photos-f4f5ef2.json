@@ -1,0 +1,561 @@
+{
+  "checkedAt": "2026-11-07T08:53:01.328Z",
+  "version": "f4f5ef2613a724fd368e07627a5d5ae346fc49ca",
+  "results": [
+    {
+      "file": "marc-anthony.jpg",
+      "status": 200,
+      "data": {
+        "identification": {
+          "name": "Marc Anthony conditioner",
+          "brand": "Marc Anthony",
+          "model": "",
+          "object": "conditioner",
+          "category": "beauty",
+          "retailCategory": "beauty",
+          "searchQuery": "Marc Anthony conditioner",
+          "barcode": null,
+          "size": "",
+          "color": "",
+          "visibleText": [],
+          "confidence": 0.65,
+          "identificationMethod": "independent-vision-consensus",
+          "userConfirmed": false,
+          "visualHypotheses": [],
+          "labelCandidates": [
+            {
+              "name": "MARC ANTHONY STRICTLY CURLS 3X Moisture Jungle Blend CONDITIONER",
+              "brand": "Marc Anthony",
+              "size": "",
+              "confirmed": false,
+              "source": "printed-label-hypothesis"
+            },
+            {
+              "name": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner",
+              "brand": "Marc Anthony",
+              "size": "",
+              "confirmed": false,
+              "source": "printed-label-hypothesis"
+            }
+          ],
+          "suggestedLabel": "Marc Anthony strictly curls 3x moisture jungle blend conditioner",
+          "suggestedModels": [
+            {
+              "name": "Marc Anthony strictly curls 3x moisture jungle blend conditioner",
+              "confirmed": false,
+              "source": "visual-model-hypothesis"
+            },
+            {
+              "name": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner",
+              "confirmed": false,
+              "source": "visual-model-hypothesis"
+            }
+          ],
+          "identityScope": "product-family",
+          "requiresModelConfirmation": true,
+          "unverifiedDetails": [
+            "exact model",
+            "variant",
+            "specifications"
+          ],
+          "features": []
+        },
+        "offers": [],
+        "blocked": false,
+        "verified": false,
+        "userConfirmed": false,
+        "identitySource": "cloudflare-consensus",
+        "visionDiagnostics": [
+          {
+            "provider": "cloudflare-gemma",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "MARC ANTHONY STRICTLY CURLS 3X Moisture Jungle Blend CONDITIONER",
+              "brand": "Marc Anthony",
+              "model": "strictly curls 3x moisture jungle blend conditioner",
+              "object": "conditioner",
+              "size": "",
+              "color": "yellow",
+              "visibleText": [
+                "MARC ANTHONY.",
+                "PRO PROFESSIONAL",
+                "STRICTLY CURLS",
+                "3X Moisture",
+                "Jungle Blend",
+                "CONDITIONER",
+                "Intense hydration",
+                "Detangles with",
+                "Smoothing capabilities",
+                "Monoi, Coconut",
+                "+ Shea"
+              ]
+            },
+            "errorType": null
+          },
+          {
+            "provider": "google-gemini",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner",
+              "brand": "Marc Anthony",
+              "model": "Strictly Curls 3X Moisture Triple Blend Conditioner",
+              "object": "hair conditioner",
+              "size": "",
+              "color": "yellow",
+              "visibleText": [
+                "MARC ANTHONY",
+                "TRUE PROFESSIONAL",
+                "STRICTLY CURLS",
+                "3X Moisture",
+                "Triple Blend",
+                "CONDITIONER",
+                "Marula, Coconut",
+                "+ Shea",
+                "Removes frizz",
+                "Detangles with",
+                "lasting hydration"
+              ]
+            },
+            "errorType": null
+          },
+          {
+            "provider": "cloudflare-workers-ai",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "STRICTLY CURLS",
+              "brand": "MARC ANTHONY",
+              "model": "XTREME",
+              "object": "product",
+              "size": "",
+              "color": "YELLOW",
+              "visibleText": [
+                "STRICTLY CURLS",
+                "XTREME"
+              ]
+            },
+            "errorType": null
+          },
+          {
+            "provider": "huggingface",
+            "code": "HF_INFERENCE_FAILED",
+            "providerStatus": 402,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": "credits"
+          }
+        ],
+        "visualVerification": true,
+        "provider": "cloudflare-consensus",
+        "imageAccepted": true,
+        "needsVision": false,
+        "needsRetailerVerification": true,
+        "confidence": 0.65,
+        "code": "PHOTO_PARTIALLY_IDENTIFIED",
+        "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+      }
+    },
+    {
+      "file": "twinsaver.webp",
+      "status": 200,
+      "data": {
+        "identification": {
+          "name": "TWINSAVER twin ply toilet paper 18 Rolls white",
+          "brand": "TWINSAVER",
+          "model": "twin ply",
+          "object": "toilet paper",
+          "category": "grocery/household",
+          "retailCategory": "grocery/household",
+          "searchQuery": "TWINSAVER twin ply toilet paper 18 Rolls white",
+          "barcode": null,
+          "size": "18 Rolls",
+          "color": "white",
+          "visibleText": [],
+          "confidence": 0.85,
+          "identificationMethod": "independent-vision-consensus",
+          "userConfirmed": false,
+          "visualHypotheses": [],
+          "labelCandidates": [],
+          "suggestedLabel": "",
+          "suggestedModels": [],
+          "identityScope": "model",
+          "requiresModelConfirmation": false,
+          "unverifiedDetails": [],
+          "features": []
+        },
+        "offers": [],
+        "blocked": false,
+        "verified": false,
+        "userConfirmed": false,
+        "identitySource": "cloudflare-consensus",
+        "visionDiagnostics": [
+          {
+            "provider": "cloudflare-gemma",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "TWINSAVER TWIN PLY 18 Rolls",
+              "brand": "TWINSAVER",
+              "model": "twin ply",
+              "object": "toilet paper",
+              "size": "18 Rolls",
+              "color": "white",
+              "visibleText": [
+                "TWINSAVER",
+                "TWIN PLY",
+                "18 Rolls",
+                "Soft & Touch"
+              ]
+            },
+            "errorType": null
+          },
+          {
+            "provider": "google-gemini",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "Twinsaver Twin Ply Toilet Paper 18 Rolls",
+              "brand": "Twinsaver",
+              "model": "Twin Ply",
+              "object": "toilet paper",
+              "size": "18 Rolls",
+              "color": "white",
+              "visibleText": [
+                "TWINSAVER",
+                "TWIN PLY",
+                "18 Rolls",
+                "Classic"
+              ]
+            },
+            "errorType": null
+          }
+        ],
+        "visualVerification": true,
+        "provider": "cloudflare-consensus",
+        "imageAccepted": true,
+        "needsVision": false,
+        "needsRetailerVerification": true,
+        "confidence": 0.85,
+        "code": "PHOTO_IDENTIFIED",
+        "message": "Photo identified. FindIt can now verify retailer pages, prices and availability for this product."
+      }
+    },
+    {
+      "file": "nike.jpg",
+      "status": 200,
+      "data": {
+        "identification": {
+          "name": "Nike shoes",
+          "brand": "Nike",
+          "model": "",
+          "object": "shoes",
+          "category": "footwear",
+          "retailCategory": "footwear",
+          "searchQuery": "Nike shoes",
+          "barcode": null,
+          "size": "",
+          "color": "",
+          "visibleText": [],
+          "confidence": 0.65,
+          "identificationMethod": "independent-vision-consensus",
+          "userConfirmed": false,
+          "visualHypotheses": [],
+          "labelCandidates": [],
+          "suggestedLabel": "Nike air force 1",
+          "suggestedModels": [
+            {
+              "name": "Nike Air Force 1 Low",
+              "confirmed": false,
+              "source": "visual-model-hypothesis"
+            }
+          ],
+          "identityScope": "product-family",
+          "requiresModelConfirmation": true,
+          "unverifiedDetails": [
+            "exact model",
+            "variant",
+            "specifications"
+          ],
+          "features": []
+        },
+        "offers": [],
+        "blocked": false,
+        "verified": false,
+        "userConfirmed": false,
+        "identitySource": "cloudflare-consensus",
+        "visionDiagnostics": [
+          {
+            "provider": "cloudflare-gemma",
+            "code": "CF_GEMMA_FAILED",
+            "providerStatus": null,
+            "providerErrorCode": "8007",
+            "identityClaim": null,
+            "errorType": null
+          },
+          {
+            "provider": "google-gemini",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "Nike Air Force 1 Low",
+              "brand": "Nike",
+              "model": "Air Force 1 Low",
+              "object": "sneaker",
+              "size": "",
+              "color": "white and royal blue",
+              "visibleText": [
+                "AIR"
+              ]
+            },
+            "errorType": null
+          },
+          {
+            "provider": "cloudflare-workers-ai",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "AIR FORCE 1",
+              "brand": "NIKE",
+              "model": "1",
+              "object": "sneaker",
+              "size": "US",
+              "color": "white",
+              "visibleText": [
+                "AIR",
+                "FORCE",
+                "1"
+              ]
+            },
+            "errorType": null
+          },
+          {
+            "provider": "huggingface",
+            "code": "HF_INFERENCE_FAILED",
+            "providerStatus": 402,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": "credits"
+          }
+        ],
+        "visualVerification": true,
+        "provider": "cloudflare-consensus",
+        "imageAccepted": true,
+        "needsVision": false,
+        "needsRetailerVerification": true,
+        "confidence": 0.65,
+        "code": "PHOTO_PARTIALLY_IDENTIFIED",
+        "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+      }
+    },
+    {
+      "file": "mic.jpg",
+      "status": 200,
+      "data": {
+        "identification": {
+          "name": "microphone",
+          "brand": "",
+          "model": "",
+          "object": "microphone",
+          "category": "electronics",
+          "retailCategory": "electronics",
+          "searchQuery": "microphone",
+          "barcode": null,
+          "size": "",
+          "color": "black",
+          "visibleText": [],
+          "confidence": 0.65,
+          "identificationMethod": "independent-vision-consensus",
+          "userConfirmed": false,
+          "visualHypotheses": [],
+          "labelCandidates": [],
+          "suggestedLabel": "",
+          "suggestedModels": [],
+          "identityScope": "product-family",
+          "requiresModelConfirmation": true,
+          "unverifiedDetails": [
+            "exact model",
+            "variant",
+            "specifications"
+          ],
+          "features": []
+        },
+        "offers": [],
+        "blocked": false,
+        "verified": false,
+        "userConfirmed": false,
+        "identitySource": "cloudflare-consensus",
+        "visionDiagnostics": [
+          {
+            "provider": "cloudflare-gemma",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "microphone",
+              "brand": "",
+              "model": "",
+              "object": "microphone",
+              "size": "",
+              "color": "black",
+              "visibleText": [
+                "VOL"
+              ]
+            },
+            "errorType": null
+          },
+          {
+            "provider": "google-gemini",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "USB desktop microphone with stand",
+              "brand": "",
+              "model": "",
+              "object": "USB microphone",
+              "size": "",
+              "color": "black",
+              "visibleText": [
+                "VOL"
+              ]
+            },
+            "errorType": null
+          },
+          {
+            "provider": "cloudflare-workers-ai",
+            "code": "CF_AI_NO_JSON",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": null
+          },
+          {
+            "provider": "huggingface",
+            "code": "HF_INFERENCE_FAILED",
+            "providerStatus": 402,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": "credits"
+          }
+        ],
+        "visualVerification": true,
+        "provider": "cloudflare-consensus",
+        "imageAccepted": true,
+        "needsVision": false,
+        "needsRetailerVerification": true,
+        "confidence": 0.65,
+        "code": "PHOTO_PARTIALLY_IDENTIFIED",
+        "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+      }
+    },
+    {
+      "file": "glasses.jpg",
+      "status": 200,
+      "data": {
+        "identification": {
+          "name": "eyeglasses",
+          "brand": "",
+          "model": "",
+          "object": "eyeglasses",
+          "category": "eyewear",
+          "retailCategory": "eyewear",
+          "searchQuery": "eyeglasses",
+          "barcode": null,
+          "size": "",
+          "color": "",
+          "visibleText": [],
+          "confidence": 0.65,
+          "identificationMethod": "independent-vision-consensus",
+          "userConfirmed": false,
+          "visualHypotheses": [],
+          "labelCandidates": [],
+          "suggestedLabel": "",
+          "suggestedModels": [],
+          "identityScope": "product-family",
+          "requiresModelConfirmation": true,
+          "unverifiedDetails": [
+            "exact model",
+            "variant",
+            "specifications"
+          ],
+          "features": []
+        },
+        "offers": [],
+        "blocked": false,
+        "verified": false,
+        "userConfirmed": false,
+        "identitySource": "cloudflare-consensus",
+        "visionDiagnostics": [
+          {
+            "provider": "cloudflare-gemma",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "eyeglasses",
+              "brand": "",
+              "model": "",
+              "object": "eyeglasses",
+              "size": "",
+              "color": "clear",
+              "visibleText": []
+            },
+            "errorType": null
+          },
+          {
+            "provider": "google-gemini",
+            "code": "GEMINI_TIMEOUT",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": null
+          },
+          {
+            "provider": "cloudflare-workers-ai",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "LENS",
+              "brand": "OAKLEY",
+              "model": "PROFIT",
+              "object": "GLASSES",
+              "size": "MEDIUM",
+              "color": "TRUE",
+              "visibleText": [
+                "OAKLEY",
+                "PROFIT"
+              ]
+            },
+            "errorType": null
+          },
+          {
+            "provider": "huggingface",
+            "code": "HF_INFERENCE_FAILED",
+            "providerStatus": 402,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": "credits"
+          }
+        ],
+        "visualVerification": true,
+        "provider": "cloudflare-consensus",
+        "imageAccepted": true,
+        "needsVision": false,
+        "needsRetailerVerification": true,
+        "confidence": 0.65,
+        "code": "PHOTO_PARTIALLY_IDENTIFIED",
+        "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+      }
+    }
+  ]
+}
