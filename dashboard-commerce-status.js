@@ -13,7 +13,8 @@ const stock=v=>{const x=String(v||'').toLowerCase();if(x==='in_stock')return'In 
 const knownAvailability=v=>/^(in_stock|out_of_stock|preorder|backorder)$/i.test(String(v||''));
 function key(v){const n=norm(v);if(/\bdis chem\b|\bdischem\b/.test(n))return'dischem';if(/\bpick n pay\b|\bpnp\b/.test(n))return'pick n pay';if(/\bincredible connection\b/.test(n))return'incredible connection';if(/\bhifi corp\b|\bhificorp\b/.test(n))return'hifi corp';return n}
 function currentIdentity(){return state()?.result?.identification||{}}
-function currentIdentityKey(){const i=currentIdentity();return norm([i.brand,i.model,i.name,i.object,i.searchQuery].filter(Boolean).join('|'))}
+function shoppingCountry(){try{return window.finditShoppingMarket?.()||localStorage.getItem('finditShoppingCountry')||'';}catch{return '';}}
+function currentIdentityKey(){const i=currentIdentity();return norm([i.brand,i.model,i.name,i.object,i.searchQuery,shoppingCountry()].filter(Boolean).join('|'))}
 function validOffer(o){const verified=!!(o&&(o.verified===true||o.sourcePageVerified===true||o.searchGroundedVerified===true));if(!verified||o.exactProductMatch===false)return false;return o.exactProductMatch===true||positive(o.price)||knownAvailability(o.availability);}
 function evidenceScore(o){return(o?.sourcePageVerified===true?1000:0)+(o?.exactProductMatch===true?300:0)+(o?.verified===true?100:0)+(o?.searchGroundedVerified===true?80:0)+(positive(o?.price)?70:0)+(knownAvailability(o?.availability)?40:0)+Math.min(100,Number(o?.matchScore||0));}
 function offerKey(o){const retailer=key(o?.retailer?.name||o?.retailer||o?.store||o?.seller||'');const url=String(o?.product_url||o?.url||'').trim().toLowerCase();const title=norm(o?.product_name||o?.title||o?.name||'');return `${retailer}|${url||title}`;}
@@ -21,7 +22,7 @@ function mergeOffers(...groups){const map=new Map();for(const group of groups){f
 const stop=new Set(['the','and','for','with','from','this','that','product','item','online','white','black','new','original','classic','professional','low','high']);
 function tokens(v){return norm(v).split(' ').filter(x=>x.length>2&&!stop.has(x))}
 function offerMatchesIdentity(o,i=currentIdentity()){
-  if(!validOffer(o))return false;
+  if(!validOffer(o))return false;const market=shoppingCountry();if(market&&o.customerCountry&&o.customerCountry!==market)return false;
   const hay=norm([o?.product_name,o?.title,o?.name,o?.product_url,o?.url].filter(Boolean).join(' '));if(!hay)return false;
   const brand=norm(i.brand);if(brand&&brand.length>2&&!hay.includes(brand))return false;
   const model=tokens(i.model),name=tokens(i.name),object=tokens(i.object),query=tokens(i.searchQuery);
@@ -35,9 +36,10 @@ function offerMatchesIdentity(o,i=currentIdentity()){
   return false;
 }
 function matchingIncoming(rows,i=currentIdentity()){return (Array.isArray(rows)?rows:[]).filter(o=>offerMatchesIdentity(o,i))}
+let activeMarket='';
 let retainedOffers=[],activeIdentityKey='',prefetchKey='',prefetchPromise=null,prefetchGeneration=0;
 function writeOffers(rows){const s=state();try{s.offers=rows}catch{}try{if(window.finditState)window.finditState.offers=rows}catch{}try{if(window.state&&window.state!==window.finditState)window.state.offers=rows}catch{}}
-function resetForIdentity(nextKey,incoming=[]){activeIdentityKey=nextKey||'';retainedOffers=mergeOffers(matchingIncoming(incoming));prefetchKey='';prefetchPromise=null;prefetchGeneration++;writeOffers(retainedOffers);try{window.productIntelligence={offers:retainedOffers,identityKey:activeIdentityKey}}catch{}const best=$('#fxBestPrice');if(best)best.textContent='Not verified yet';}
+function resetForIdentity(nextKey,incoming=[]){const market=shoppingCountry();if(activeMarket!==market)incoming=[];activeMarket=market;activeIdentityKey=nextKey||'';retainedOffers=mergeOffers(matchingIncoming(incoming));prefetchKey='';prefetchPromise=null;prefetchGeneration++;writeOffers(retainedOffers);try{window.productIntelligence={offers:retainedOffers,identityKey:activeIdentityKey}}catch{}const best=$('#fxBestPrice');if(best)best.textContent='Not verified yet';}
 function ensureIdentityScope(){const k=currentIdentityKey();if(k!==activeIdentityKey){const incoming=[...(state()?.offers||[]),...(window.productIntelligence?.offers||[])];resetForIdentity(k,incoming)}return k}
 function persistOffers(extra=[]){ensureIdentityScope();retainedOffers=mergeOffers(retainedOffers,state()?.offers,window.productIntelligence?.offers,extra);writeOffers(retainedOffers);return retainedOffers;}
 function offers(){const merged=persistOffers();const m=new Map();for(const o of merged){const k=key(o?.retailer?.name||o?.retailer);if(!k)continue;const old=m.get(k);if(!old||evidenceScore(o)>evidenceScore(old))m.set(k,o)}return m}
