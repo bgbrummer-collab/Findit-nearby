@@ -25,7 +25,29 @@ function ensureModal(){let m=$('#fxInformationModal');if(!m){m=document.createEl
 function openModal(html){let m=ensureModal();$('#fxInformationBody',m).innerHTML=html;m.style.pointerEvents='auto';m.removeAttribute('aria-hidden');m.classList.add('open');window.finditAccessibleDialog?.(m,$('#fxInformationBody h2',m)?.textContent||'Product information')}
 function loading(title){openModal('<h2>'+esc(title)+'</h2><div class="fx-info-loading">Checking current product and retailer information…</div>')}
 function searchModal(note='',initial=''){openModal('<h2>Search a product</h2>'+(note?'<p class="fx-info-note">'+esc(note)+'</p>':'')+'<form id="fxRealSearch"><label for="fxRealQuery">Product name, brand + model, or barcode</label><input id="fxRealQuery" required autofocus placeholder="e.g. Marc Anthony Strictly Curls 3X Moisture Conditioner 250ml"><button type="submit">Find product information</button></form><p class="fx-info-help">More detail gives FindIt a better exact-product match. Prices and stock are only shown when retailer evidence supports them.</p>');$('#fxRealQuery').value=clean(initial);$('#fxRealSearch').onsubmit=e=>{e.preventDefault();runSearch($('#fxRealQuery').value)}}
-async function json(url,body,timeout=26000){const c=new AbortController(),t=setTimeout(()=>c.abort(),timeout);try{for(let attempt=0;attempt<2;attempt++){let r=await fetch(url,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body),signal:c.signal}),d=await r.json().catch(()=>({}));if(!r.ok){if(attempt===0&&r.status===503&&['/api/product-intelligence-v2','/api/product-insights','/api/nearby'].includes(url)&&!c.signal.aborted){await new Promise(resolve=>setTimeout(resolve,250));continue;}throw Error(d.message||d.error||'Request failed');}return d}}finally{clearTimeout(t)}}
+async function json(url,body,timeout=26000){
+ const READ_ROUTES=new Set(['/api/product-intelligence-v2','/api/product-insights','/api/nearby']);
+const pause=signal=>new Promise((resolve,reject)=>{if(signal.aborted)return reject(signal.reason);const finish=()=>{signal.removeEventListener('abort',abort);resolve();},timer=setTimeout(finish,250),abort=()=>{clearTimeout(timer);reject(signal.reason);};signal.addEventListener('abort',abort,{once:true});});
+
+ const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeout),retryAllowed=READ_ROUTES.has(url);
+ try{
+  for(let attempt=0;attempt<2;attempt++){
+   let response,data,parseFailed=false;
+   try{
+    response=await fetch(url,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body),signal:controller.signal});
+    try{data=await response.json();if(!data||typeof data!=='object'||Array.isArray(data))parseFailed=true;}catch{parseFailed=true;}
+   }catch(error){
+    if(controller.signal.aborted||!retryAllowed||attempt||!(error instanceof TypeError))throw error;
+   }
+   const temporary=!response||[500,502,503,504].includes(response.status)||response.ok&&parseFailed;
+   if(retryAllowed&&!attempt&&temporary&&!controller.signal.aborted){await pause(controller.signal);continue;}
+   if(!response)throw Error('The connection failed. Please try again.');
+   if(!response.ok)throw Error(data?.message||data?.error||'The request failed. Please try again.');
+   if(parseFailed)throw Error('The service returned an unreadable response. Please try again.');
+   return data;
+  }
+ }finally{clearTimeout(timer);}
+}
 async function getLocationIfAlreadyAllowed(){if(st()?.coords)return st().coords;if(!navigator.geolocation)return null;try{if(navigator.permissions){const permission=await navigator.permissions.query({name:'geolocation'});if(permission.state!=='granted')return null;}else return null;const p=await new Promise((ok,no)=>navigator.geolocation.getCurrentPosition(ok,no,{timeout:12000,maximumAge:300000}));const coords={lat:p.coords.latitude,lon:p.coords.longitude};if(st())st().coords=coords;return coords}catch(e){console.warn('Location not available',e);return null}}
 function reviewedCandidateFacts(candidate,q){
  const checked=Date.parse(candidate?.checkedAt||'');
