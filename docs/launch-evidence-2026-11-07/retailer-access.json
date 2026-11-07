@@ -1,0 +1,160 @@
+[
+  {
+    "name": "Takealot",
+    "url": "https://www.takealot.com/all?_sb=1&_r=1&qsearch=Logitech%20G502",
+    "status": 200,
+    "finalUrl": "https://www.takealot.com/all?_sb=1&_r=1&qsearch=Logitech%20G502",
+    "characters": 19242,
+    "title": "Takealot.com: Online Shopping | SA&#x27;s leading online store",
+    "challenge": false,
+    "shopify": false,
+    "storeData": false
+  },
+  {
+    "name": "Makro",
+    "url": "https://www.makro.co.za/search/?text=Logitech%20G502",
+    "status": 200,
+    "finalUrl": "https://www.makro.co.za/search/?text=Logitech%20G502",
+    "characters": 714576,
+    "title": "All Categories- Buy Products Online at Best Price - Free Home Delivery - All Categories | makro.co.za",
+    "challenge": false,
+    "shopify": false,
+    "storeData": false
+  },
+  {
+    "name": "Game",
+    "url": "https://www.game.co.za/search?text=Logitech%20G502",
+    "status": 200,
+    "finalUrl": "https://www.game.co.za/search?text=Logitech%20G502",
+    "characters": 21087,
+    "title": "Game South Africa | Unbeatable Deals",
+    "challenge": false,
+    "shopify": false,
+    "storeData": false
+  },
+  {
+    "name": "Checkers",
+    "url": "https://www.checkers.co.za/search?text=Coca-Cola",
+    "status": 403,
+    "finalUrl": "https://www.checkers.co.za/search?text=Coca-Cola",
+    "characters": 919,
+    "title": "ERROR: The request could not be satisfied",
+    "challenge": false,
+    "shopify": false,
+    "storeData": false
+  },
+  {
+    "name": "Pick n Pay",
+    "url": "https://www.pnp.co.za/search?q=Coca-Cola",
+    "status": 200,
+    "finalUrl": "https://www.pnp.co.za/search?q=Coca-Cola",
+    "characters": 34256,
+    "title": "Pick n Pay Online Shopping",
+    "challenge": false,
+    "shopify": false,
+    "storeData": false
+  },
+  {
+    "name": "Sportsmans Warehouse",
+    "url": "https://www.sportsmanswarehouse.co.za/search?q=adidas",
+    "status": 404,
+    "finalUrl": "https://www.sportsmanswarehouse.co.za/search?q=adidas",
+    "characters": 815852,
+    "title": "\n        Error | Sportsmans Warehouse    ",
+    "challenge": false,
+    "shopify": false,
+    "storeData": false
+  },
+  {
+    "name": "Incredible Connection",
+    "url": "https://www.incredible.co.za/catalogsearch/result/?q=Logitech+G502",
+    "status": 200,
+    "finalUrl": "https://www.incredible.co.za/catalogsearch/result/?q=Logitech+G502",
+    "characters": 505377,
+    "title": "Search results for: &#039;Logitech G502&#039;",
+    "challenge": false,
+    "shopify": false,
+    "storeData": false
+  },
+  {
+    "name": "HiFi Corp",
+    "url": "https://www.hificorp.co.za/catalogsearch/result/?q=Sony",
+    "status": 200,
+    "finalUrl": "https://www.hificorp.co.za/catalogsearch/result/?q=Sony",
+    "characters": 739334,
+    "title": "Search results for: &#039;Sony&#039; - HiFiCorp",
+    "challenge": false,
+    "shopify": false,
+    "storeData": false
+  },
+  {
+    "name": "Dis-Chem",
+    "url": "https://www.dischem.co.za/catalogsearch/result/?q=Omron",
+    "status": 200,
+    "finalUrl": "https://www.dischem.co.za/catalogsearch/result/?q=Omron",
+    "characters": 435868,
+    "title": "Search results for: &#039;Omron&#039;  | Dis-Chem",
+    "challenge": false,
+    "shopify": false,
+    "storeData": false
+  },
+  {
+    "name": "Clicks",
+    "url": "https://clicks.co.za/search?text=Omron",
+    "status": 200,
+    "finalUrl": "https://clicks.co.za/search?cat=&text=Omron&nsr=1",
+    "characters": 246318,
+    "title": "\n\t\tSearch Omron | Clicks",
+    "challenge": false,
+    "shopify": false,
+    "storeData": false
+  },
+  {
+    "name": "Woolworths",
+    "url": "https://www.woolworths.co.za/search?searchTerm=Coca-Cola",
+    "error": "The operation was aborted due to timeout"
+  },
+  {
+    "name": "Mr Price",
+    "url": "https://www.mrprice.com/en_za/search?q=jeans",
+    "error": "The operation was aborted due to timeout"
+  },
+  {
+    "name": "PEP",
+    "url": "https://www.pepstores.com/search?q=shirt",
+    "status": 200,
+    "finalUrl": "https://www.pepstores.com/search?q=shirt",
+    "characters": 1759269,
+    "title": "\r\n    Search: 1002 results found for &amp;quot;shirt&amp;quot;\r",
+    "challenge": false,
+    "shopify": true,
+    "storeData": false
+  },
+  {
+    "name": "Ackermans",
+    "url": "https://www.ackermans.co.za/search?q=shirt",
+    "status": 200,
+    "finalUrl": "https://www.ackermans.co.za/search?q=shirt",
+    "characters": 2208689,
+    "title": "shirt - 1002 Results | Ackermans",
+    "challenge": false,
+    "shopify": true,
+    "storeData": false
+  },
+  {
+    "name": "HiFi locator",
+    "url": "https://www.hificorp.co.za/storelocator",
+    "status": 200,
+    "finalUrl": "https://www.hificorp.co.za/storelocator",
+    "characters": 556052,
+    "title": "Find a Store - HiFiCorp",
+    "challenge": false,
+    "shopify": false,
+    "storeData": true
+  },
+  {
+    "name": "Incredible locator",
+    "url": "https://www.incredible.co.za/storelocator/",
+    "error": "The operation was aborted due to timeout"
+  }
+]
