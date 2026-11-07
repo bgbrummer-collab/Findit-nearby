@@ -135,6 +135,7 @@ test('marketplace and grocery adapters use their published search parameters',as
  assert.ok(seen.includes('https://www.game.co.za/search?text=Example%20unusual%20product'));
  seen.length=0;await nativeRetailerUrls({name:'Example cereal 500g'});
  assert.ok(seen.includes('https://www.pnp.co.za/search?q=Example%20cereal%20500g'));
+ assert.ok(seen.includes('https://www.makro.co.za/search?q=Example%20cereal%20500g'));
  const {catalogueQueryUrl}=await import('../lib/catalogue-discovery-terms.js');
  assert.equal(new URL(catalogueQueryUrl('https://www.takealot.com/all?qsearch=long','short')).searchParams.get('qsearch'),'short');
 });
