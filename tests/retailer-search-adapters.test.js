@@ -111,3 +111,19 @@ test('Bash discovery leaves exact colour and size decisions to product-page veri
  t.mock.method(globalThis,'fetch',async u=>new Response(String(u).includes('/s?search=')?'<!DOCTYPE html><html><body><a href="'+url+'">Example Classic Low White Red Sneaker</a></body></html>':'<script type="application/ld+json">'+JSON.stringify({'@type':'Product',name:'Example Classic Low White Red Sneaker',color:'White Red',size:'9',offers:{price:1200,priceCurrency:'ZAR',availability:'https://schema.org/InStock'}})+'</script>'));
  const i=ident({name:wanted,color:'White Blue',size:'8'}),urls=await nativeRetailerUrls(i,{maxSearchPages:1});assert.ok(urls.includes(url));assert.equal(await verify(url,i),null);
 });
+
+for(const [domain,title,slug] of [
+ ['www.pepstores.com','Classic Black Denim Jeans','classic-black-denim-jeans-sku-eqz84'],
+ ['www.ackermans.co.za','Black Barrel Leg Jeans','black-barrel-leg-jeans-sku-230740']
+])test('public clothing catalogue discovers exact items at '+domain,async t=>{
+ const endpoint='https://'+domain+'/search?';
+ t.mock.method(globalThis,'fetch',async input=>new Response(String(input).startsWith(endpoint)?'<a href="/products/'+slug+'">'+title+'</a>':''));
+ const urls=await nativeRetailerUrls({name:title,category:'clothing',object:'jeans'});
+ assert.ok(urls.includes('https://'+domain+'/products/'+slug));
+});
+test('Makro catalogue uses the published search form and retains product selection parameters',async t=>{
+ const path='/logitech-g502-hero-mouse/p/itm123abc';
+ t.mock.method(globalThis,'fetch',async input=>new Response(String(input)==='https://www.makro.co.za/search?q=Logitech%20G502%20HERO%20mouse'?'<a href="'+path+'?pid=SKU1&amp;lid=LIST1&amp;q=Logitech+G502">Logitech G502 HERO mouse</a>':''));
+ const urls=await nativeRetailerUrls({name:'Logitech G502 HERO mouse'});
+ assert.ok(urls.includes('https://www.makro.co.za'+path+'?pid=SKU1&lid=LIST1'));
+});

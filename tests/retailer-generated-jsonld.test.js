@@ -26,3 +26,13 @@ test('Clicks brand-only JSON-LD name requires exact description and ignores an u
 
 test('an unpriced duplicate Product node does not hide a priced node for the same exact product',()=>{const incomplete={...product,offers:{'@type':'Offer',availability:'http://schema.org/InStock',priceSpecification:[{'@type':'UnitPriceSpecification',priceType:'https://schema.org/MSRP',price:79.99,priceCurrency:'ZAR'}]}};const found=structuredProduct(page(JSON.stringify(incomplete))+page(JSON.stringify(product)),i);assert.equal(found.price,59.99);assert.equal(found.currency,'ZAR');assert.equal(found.availability,'in_stock')});
 test('conflicting prices or stock in duplicate exact Product nodes stay unverified',()=>{const conflict={...product,offers:{...product.offers,price:'79.99',availability:'http://schema.org/OutOfStock'}};const found=structuredProduct(page(JSON.stringify(product))+page(JSON.stringify(conflict)),i);assert.equal(found.price,null);assert.equal(found.priceConflict,true);assert.equal(found.availability,null)});
+
+test('unselected clothing sizes cannot acquire a price or stock from the first matching variant',async()=>{
+ const {structuredProduct,ident}=await import('../lib/product-intelligence-core.js');
+ const nodes=['6/7','8/9'].map((size,index)=>({'@type':'Product',name:size+' / Black Classic Denim Jeans',size,color:'Black',sku:'SKU'+index,offers:{'@type':'Offer',price:index?120:100,priceCurrency:'ZAR',availability:'https://schema.org/'+(index?'OutOfStock':'InStock')}}));
+ const raw='<script type="application/ld+json">'+JSON.stringify(nodes)+'</script>';
+ const unresolved=structuredProduct(raw,ident({name:'Classic Denim Jeans black'}));
+ assert.equal(unresolved.comparisonAmbiguous,true);assert.equal(unresolved.price,null);assert.equal(unresolved.availability,null);
+ const selected=structuredProduct(raw,ident({name:'Classic Denim Jeans black',size:'8/9'}));
+ assert.equal(selected.price,120);assert.equal(selected.availability,'out_of_stock');assert.equal(selected.comparisonAmbiguous,false);
+});

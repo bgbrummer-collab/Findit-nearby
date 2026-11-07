@@ -35,4 +35,11 @@ test('branch fields require independent name and coordinate/address evidence',()
 
 test('authoritative locator records replace nearby generic map duplicates without inheriting stock or price',()=>{const official=parseElectronicsBranches(html({a:record}),source)[0],duplicate={name:'Incredible Connection',lat:official.lat,lon:official.lon,source:'OpenStreetMap',phone:'wrong number',price:10,stockVerified:true},distinct={name:'Other electronics shop',lat:official.lat,lon:official.lon,source:'OpenStreetMap'};const rows=preferOfficialElectronics([duplicate,distinct,official]);assert.equal(rows.length,2);assert.ok(rows.includes(distinct));assert.ok(rows.includes(official));assert.equal(rows.find(s=>s.name===official.name).phone,record.phone);assert.equal(rows.find(s=>s.name===official.name).stockVerified,false);});
 
-test('unavailable official locators do not manufacture branch details',async t=>{t.mock.method(globalThis,'fetch',async()=>new Response('Unavailable',{status:503}));const fresh=await import('../lib/official-electronics-branches.js?unavailable');assert.deepEqual(await fresh.officialElectronicsBranches(),[]);});
+test('unavailable official locators use dated published locations without live hours or inventory',async t=>{
+ t.mock.method(globalThis,'fetch',async()=>new Response('Unavailable',{status:503}));
+ const fresh=await import('../lib/official-electronics-branches.js?unavailable');
+ const rows=await fresh.officialElectronicsBranches();
+ const {publishedElectronicsBranches}=await import('../lib/published-electronics-locator.js');
+ assert.deepEqual(rows,[...publishedElectronicsBranches(source),...publishedElectronicsBranches('https://www.hificorp.co.za/storelocator')]);
+ assert.ok(rows.every(row=>row.locatorDataStatus==='published_snapshot'&&row.openNow===null&&!row.schedule&&!row.branchStockVerified&&!row.stockVerified&&row.price===null&&!row.directionsAvailable));
+});

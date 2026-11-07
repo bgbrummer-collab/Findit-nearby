@@ -21,7 +21,9 @@ jobs:
         with:
           node-version: 22
       - name: Refresh dated public retailer locator fallback
-        run: node scripts/refresh-sports-locator.mjs
+        run: |
+          node scripts/refresh-sports-locator.mjs
+          node scripts/refresh-electronics-locator.mjs
       - name: Prepare Cloudflare static site
         shell: bash
         run: |
