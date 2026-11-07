@@ -197,3 +197,10 @@ test('independent printed quantity survives omitted size fields and product-type
  for(const wrong of [{...b,visibleText:visibleText.filter(s=>s!=='150 ml')},{...b,visibleText:[...visibleText,'250 ml']},{...b,size:'250 ml'},{...b,model:b.model+' espresso',visibleText:[...visibleText,'ESPRESSO']}])assert.notEqual(reconcileVision([a,wrong])?.requiresModelConfirmation,false);
  const neitherHasSize=reconcileVision([{...a,name:a.name.replace(' 150 ml',''),size:''},b]);assert.equal(neitherHasSize.size,'150 ml');assert.equal(neitherHasSize.requiresModelConfirmation,false);
 });
+
+for(const [object,size] of [['toilet paper','18 rolls'],['conditioner','250ml'],['shoes','UK 8']])test('partial identity retains independently supported size for '+object,()=>{
+ const a={name:'Example Alpha '+object,brand:'Example',model:'Alpha',object,size};
+ const d=reconcileVision([a,{...a,name:'Example Beta '+object,model:'Beta'}]);
+ assert.equal(d.requiresModelConfirmation,true);assert.equal(d.model,'');assert.ok(d.name.replace(/\s/g,'').includes(size.replace(/\s/g,'')));assert.equal(d.searchQuery,d.name);
+ const disputed=reconcileVision([a,{...a,model:'Beta',size:'other'}]);assert.equal(disputed.size,'');assert.ok(!disputed.name.includes(size));
+});

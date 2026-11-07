@@ -24,3 +24,10 @@ test('transport recovery stays within the original deadline',async t=>{
  let calls=0;t.mock.method(globalThis,'fetch',async(_,opts)=>{calls++;if(opts.signal.aborted)throw opts.signal.reason;throw new TypeError('Network failed');});
  await assert.rejects(requestDiscoveryJson('/api/nearby',{},20));assert.ok(calls<=2);
 });
+
+test('explicit shopping-country preference reaches the commerce request',async t=>{
+ const helper=vm.runInNewContext('('+source.slice(source.indexOf('async function json('),source.indexOf('async function getLocationIfAlreadyAllowed(')).trim()+')',{fetch:(...args)=>globalThis.fetch(...args),AbortController,setTimeout,clearTimeout,TypeError,localStorage:{getItem:key=>key==='finditShoppingCountry'?'ZA':null}});
+ const bodies=[];t.mock.method(globalThis,'fetch',async(_,opts)=>{bodies.push(JSON.parse(opts.body));return Response.json({offers:[]});});
+ await helper('/api/product-intelligence-v2',{identification:{name:'Example EX42'}});assert.equal(bodies[0].country,'ZA');assert.equal(bodies[0].identification.name,'Example EX42');
+ await helper('/api/product-intelligence-v2',{country:'GB'});assert.equal(bodies[1].country,'GB');
+});

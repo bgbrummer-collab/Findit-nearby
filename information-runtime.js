@@ -26,6 +26,7 @@ function openModal(html){let m=ensureModal();$('#fxInformationBody',m).innerHTML
 function loading(title){openModal('<h2>'+esc(title)+'</h2><div class="fx-info-loading">Checking current product and retailer information…</div>')}
 function searchModal(note='',initial=''){openModal('<h2>Search a product</h2>'+(note?'<p class="fx-info-note">'+esc(note)+'</p>':'')+'<form id="fxRealSearch"><label for="fxRealQuery">Product name, brand + model, or barcode</label><input id="fxRealQuery" required autofocus placeholder="e.g. Marc Anthony Strictly Curls 3X Moisture Conditioner 250ml"><button type="submit">Find product information</button></form><p class="fx-info-help">More detail gives FindIt a better exact-product match. Prices and stock are only shown when retailer evidence supports them.</p>');$('#fxRealQuery').value=clean(initial);$('#fxRealSearch').onsubmit=e=>{e.preventDefault();runSearch($('#fxRealQuery').value)}}
 async function json(url,body,timeout=26000){
+ if(url==='/api/product-intelligence-v2'&&!body?.country){let country='';try{country=localStorage.getItem('finditShoppingCountry')||'';}catch{}if(/^[A-Z]{2}$/.test(country))body={...body,country};}
  const READ_ROUTES=new Set(['/api/product-intelligence-v2','/api/product-insights','/api/nearby']);
 const pause=signal=>new Promise((resolve,reject)=>{if(signal.aborted)return reject(signal.reason);const finish=()=>{signal.removeEventListener('abort',abort);resolve();},timer=setTimeout(finish,250),abort=()=>{clearTimeout(timer);reject(signal.reason);};signal.addEventListener('abort',abort,{once:true});});
 
