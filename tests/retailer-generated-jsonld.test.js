@@ -36,3 +36,13 @@ test('unselected clothing sizes cannot acquire a price or stock from the first m
  const selected=structuredProduct(raw,ident({name:'Classic Denim Jeans black',size:'8/9'}));
  assert.equal(selected.price,120);assert.equal(selected.availability,'out_of_stock');assert.equal(selected.comparisonAmbiguous,false);
 });
+
+for(const [requested,title] of [['Classic Black Denim Jeans','Puglia Denim Jeans - Black'],['Black Barrel Leg Jeans','Baggy Balloon Jean - Pleat Shutter Black']])test('clothing descriptions and echoed search terms do not prove an exact garment match: '+requested,async t=>{
+ const {verify}=await import('../lib/product-intelligence-core.js');
+ const url='https://retailer.example/products/different-garment?searchTerm='+encodeURIComponent(requested);
+ const raw='<title>'+title+'</title><script type="application/ld+json">'+JSON.stringify({'@type':'Product',name:title,description:'Designed as '+requested+'.',offers:{price:899,priceCurrency:'ZAR',availability:'https://schema.org/InStock'}})+'</script>';
+ t.mock.method(globalThis,'fetch',async()=>new Response(raw,{headers:{'content-type':'text/html'}}));
+ assert.equal(await verify(url,ident({name:requested})),null);
+ const exact=raw.replaceAll(title,requested);
+ assert.ok(structuredProduct(exact,ident({name:requested})));
+});
