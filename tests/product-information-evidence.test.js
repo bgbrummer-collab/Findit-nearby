@@ -69,3 +69,9 @@ test('advertising slogans and social connection claims are not technical product
  assert.ok(d.cons.some(s=>/separately sold adapter/.test(s)));
  assert.ok(d.claimEvidence.pros.every(s=>s.sourceUrl===url));
 });
+
+test('household paper and cleaning labels do not inherit food guidance',()=>{
+ for(const object of ['toilet paper','facial tissues','paper towel','laundry detergent','surface cleaner']){const d=productInformationChecklist({object,category:'grocery/household'});assert.doesNotMatch(JSON.stringify(d),/recipe|nutrition|allergen|ingredients|expiry/);assert.match(d.nextPhoto,/Photograph/);}
+ assert.match(productInformationChecklist({object:'toilet paper',category:'grocery/household'}).checks.join(' '),/plies/);
+ assert.match(productInformationChecklist({object:'surface cleaner'}).checks.join(' '),/safety/);
+});
