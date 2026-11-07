@@ -127,3 +127,14 @@ test('Makro catalogue uses the published search form and retains product selecti
  const urls=await nativeRetailerUrls({name:'Logitech G502 HERO mouse'});
  assert.ok(urls.includes('https://www.makro.co.za'+path+'?pid=SKU1&lid=LIST1'));
 });
+
+test('marketplace and grocery adapters use their published search parameters',async t=>{
+ const seen=[];t.mock.method(globalThis,'fetch',async url=>{seen.push(String(url));return new Response('');});
+ await nativeRetailerUrls({name:'Example unusual product'});
+ assert.ok(seen.includes('https://www.takealot.com/all?_sb=1&_r=1&qsearch=Example%20unusual%20product'));
+ assert.ok(seen.includes('https://www.game.co.za/search?text=Example%20unusual%20product'));
+ seen.length=0;await nativeRetailerUrls({name:'Example cereal 500g'});
+ assert.ok(seen.includes('https://www.pnp.co.za/search?q=Example%20cereal%20500g'));
+ const {catalogueQueryUrl}=await import('../lib/catalogue-discovery-terms.js');
+ assert.equal(new URL(catalogueQueryUrl('https://www.takealot.com/all?qsearch=long','short')).searchParams.get('qsearch'),'short');
+});
