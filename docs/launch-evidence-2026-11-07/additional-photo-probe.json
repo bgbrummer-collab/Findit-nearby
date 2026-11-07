@@ -1,0 +1,144 @@
+{
+  "checkedAt": "2026-11-07T08:26:09.126Z",
+  "results": [
+    {
+      "product": "Logitech G502 HERO mouse",
+      "sourceUrl": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225",
+      "error": "fetch failed"
+    },
+    {
+      "product": "Canon EOS R50 camera body",
+      "sourceUrl": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body",
+      "error": "fetch failed"
+    },
+    {
+      "product": "LEGO Classic 10696",
+      "sourceUrl": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696",
+      "error": "fetch failed"
+    },
+    {
+      "product": "Sony WH-CH520 headphones",
+      "sourceUrl": "https://www.hificorp.co.za/sony-wh-ch520-bluetooth-on-ear-headphones-black",
+      "imageUrl": "https://www.hificorp.co.za/api/catalog/product/w/h/wh_ch520_black_standard_large_ecommerce_68b2.png?width=265&height=265&store=hificorporation&image-type=image",
+      "sha256": "f15a0773877d73b58ef1320347c991e2b7384dbdc8ad86ebe1f3b3cbd7278d8e",
+      "status": 200,
+      "data": {
+        "identification": {
+          "name": "Sony headphones",
+          "brand": "Sony",
+          "model": "",
+          "object": "headphones",
+          "category": "electronics",
+          "retailCategory": "electronics",
+          "searchQuery": "Sony headphones",
+          "barcode": null,
+          "size": "",
+          "color": "black",
+          "visibleText": [],
+          "confidence": 0.65,
+          "identificationMethod": "independent-vision-consensus",
+          "userConfirmed": false,
+          "visualHypotheses": [],
+          "labelCandidates": [],
+          "suggestedLabel": "",
+          "suggestedModels": [
+            {
+              "name": "Sony earphones",
+              "confirmed": false,
+              "source": "visual-model-hypothesis"
+            }
+          ],
+          "identityScope": "product-family",
+          "requiresModelConfirmation": true,
+          "unverifiedDetails": [
+            "exact model",
+            "variant",
+            "specifications"
+          ],
+          "features": []
+        },
+        "offers": [],
+        "blocked": false,
+        "verified": false,
+        "userConfirmed": false,
+        "identitySource": "cloudflare-consensus",
+        "visionDiagnostics": [
+          {
+            "provider": "cloudflare-gemma",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "headphones",
+              "brand": "Sony",
+              "model": "",
+              "object": "headphones",
+              "size": "",
+              "color": "black",
+              "visibleText": [
+                "SONY"
+              ]
+            },
+            "errorType": null
+          },
+          {
+            "provider": "google-gemini",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "Sony Wireless Headphones",
+              "brand": "Sony",
+              "model": "",
+              "object": "headphones",
+              "size": "",
+              "color": "black",
+              "visibleText": [
+                "SONY"
+              ]
+            },
+            "errorType": null
+          },
+          {
+            "provider": "cloudflare-workers-ai",
+            "code": "IDENTIFIED",
+            "providerStatus": null,
+            "providerErrorCode": null,
+            "identityClaim": {
+              "name": "SONY",
+              "brand": "SONY",
+              "model": "earphones",
+              "object": "headphones",
+              "size": "printed size",
+              "color": "black",
+              "visibleText": [
+                "SONY",
+                "earphones"
+              ]
+            },
+            "errorType": null
+          },
+          {
+            "provider": "huggingface",
+            "code": "HF_INFERENCE_FAILED",
+            "providerStatus": 402,
+            "providerErrorCode": null,
+            "identityClaim": null,
+            "errorType": "credits"
+          }
+        ],
+        "visualVerification": true,
+        "provider": "cloudflare-consensus",
+        "imageAccepted": true,
+        "needsVision": false,
+        "needsRetailerVerification": true,
+        "confidence": 0.65,
+        "code": "PHOTO_PARTIALLY_IDENTIFIED",
+        "message": "Product type identified. Confirm the exact model for specific information, prices and stock."
+      },
+      "brandCorrect": true,
+      "modelCorrect": false,
+      "exactSupported": false
+    }
+  ]
+}

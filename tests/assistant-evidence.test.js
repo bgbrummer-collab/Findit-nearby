@@ -102,3 +102,12 @@ test('specific questions prioritize relevant published fields beyond the first e
  assert.match(r.answer,/Weight: 165 g/);assert.match(r.answer,/Battery Play time: 18 hrs/);assert.match(r.answer,/Bluetooth: Devices/);
  assert.doesNotMatch(r.answer,/do not establish the included batteries|Box contents/);
 });
+
+test('specific battery questions use sourced prose instead of unrelated product summaries',()=>{
+ const context={identification:{name:'Example M42 headphones',userConfirmed:true}};
+ const research={researched:true,whatItDoes:'Designed for comfortable listening.',pros:['Bluetooth wireless headphones.'],cons:[],specifications:[{name:'Brand',value:'Example'}],compatibility:['The battery lasts up to 50 hours and charges in three hours.'],sources:[{url:'https://retailer.example/products/m42'}]};
+ const answer=answerFromEvidence('What is the battery life?',context,research);
+ assert.match(answer.answer,/50 hours/);assert.doesNotMatch(answer.answer,/comfortable listening|Brand: Example/);assert.equal(answer.sources.length,1);
+ const missing=answerFromEvidence('How heavy are these headphones?',context,research);
+ assert.match(missing.answer,/do not establish this detail/);assert.doesNotMatch(missing.answer,/50 hours/);
+});

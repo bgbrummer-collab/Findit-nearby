@@ -1,0 +1,2947 @@
+{
+  "checkedAt": "2026-11-07T08:32:30.631Z",
+  "base": "https://findit-nearby.bgbrummer.workers.dev/",
+  "version": {
+    "commit": "5fb11c3f8a0992b50fded0b1f1af5a393a446a00",
+    "platform": "cloudflare"
+  },
+  "endVersion": {
+    "commit": "5fb11c3f8a0992b50fded0b1f1af5a393a446a00",
+    "platform": "cloudflare"
+  },
+  "versionStable": true,
+  "holdout": [
+    {
+      "category": "clothing",
+      "query": "Classic Black Denim Jeans"
+    },
+    {
+      "category": "clothing",
+      "query": "Black Barrel Leg Jeans"
+    },
+    {
+      "category": "audio",
+      "query": "Sony WH-CH520 black headphones"
+    },
+    {
+      "category": "electronics",
+      "query": "Logitech G502 HERO mouse"
+    },
+    {
+      "category": "music",
+      "query": "Korg Pitchclip 2 clip-on tuner"
+    },
+    {
+      "category": "toys",
+      "query": "LEGO Classic 10696"
+    },
+    {
+      "category": "medical",
+      "query": "Omron M2 Basic upper arm blood pressure monitor"
+    },
+    {
+      "category": "appliance",
+      "query": "Philips NA230/00 air fryer"
+    }
+  ],
+  "results": [
+    {
+      "category": "clothing",
+      "query": "Classic Black Denim Jeans",
+      "status": "failed",
+      "durationMs": 6786,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Classic Black Denim Jeans",
+            "object": "Classic Black Denim Jeans",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Classic Black Denim Jeans",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": true,
+          "exactMatchVerified": true,
+          "searchQuery": "Classic Black Denim Jeans",
+          "bestProduct": {
+            "name": "Puglia Denim Jeans - Black"
+          },
+          "bestPrice": {
+            "product_name": "Puglia Denim Jeans - Black",
+            "product_url": "https://superbalist.com/men/jeans-pants-shorts/jeans/puglia-denim-jeans-black/1750624?clickRef=search_listing&searchTerm=Classic+Black+Denim+Jeans",
+            "sku": "1750624",
+            "comparisonAttributes": {
+              "size": "",
+              "color": ""
+            },
+            "comparisonAmbiguous": false,
+            "retailer": {
+              "name": "Superbalist"
+            },
+            "price": 639,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "priceConditions": "",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 92,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-11-07T08:32:10.724Z",
+            "retailerDomain": "superbalist.com",
+            "trustedRetailerDomain": true
+          },
+          "priceComparisonIssue": null,
+          "priceComparisonNote": "",
+          "offers": [
+            {
+              "product_name": "Puglia Denim Jeans - Black",
+              "product_url": "https://superbalist.com/men/jeans-pants-shorts/jeans/puglia-denim-jeans-black/1750624?clickRef=search_listing&searchTerm=Classic+Black+Denim+Jeans",
+              "sku": "1750624",
+              "comparisonAttributes": {
+                "size": "",
+                "color": ""
+              },
+              "comparisonAmbiguous": false,
+              "retailer": {
+                "name": "Superbalist"
+              },
+              "price": 639,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-07T08:32:10.724Z",
+              "retailerDomain": "superbalist.com",
+              "trustedRetailerDomain": true
+            }
+          ],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Superbalist",
+              "searchUrl": "https://superbalist.com/men/jeans-pants-shorts/jeans/puglia-denim-jeans-black/1750624?clickRef=search_listing&searchTerm=Classic+Black+Denim+Jeans",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Bash",
+              "searchUrl": "https://bash.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Superbalist",
+              "searchUrl": "https://superbalist.com/men/jeans-pants-shorts/jeans/puglia-denim-jeans-black/1750624?clickRef=search_listing&searchTerm=Classic+Black+Denim+Jeans",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Bash",
+              "searchUrl": "https://bash.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 1,
+          "verifiedSellerCount": 1,
+          "inStockOfferCount": 1,
+          "priceVerifiedCount": 1,
+          "discoveryDiagnostics": {
+            "sourceReads": [
+              {
+                "phase": "catalogue",
+                "host": "bash.com",
+                "status": 200,
+                "outcome": "read",
+                "characters": 614828
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.ackermans.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 17811
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.ackermans.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 18829
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.ackermans.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 18115
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.superbalist.com",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1098415
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.pepstores.com",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1800000
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.ackermans.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 2201501
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.ackermans.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 2209882
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 434201
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 454926
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 463880
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 432433
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 464316
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 461118
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 452806
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 475499
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 465270
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 453712
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 439383
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 472385
+              }
+            ],
+            "candidates": {
+              "known": 0,
+              "web": 0,
+              "native": 16,
+              "selected": 12,
+              "accepted": 1
+            },
+            "authorizedOffers": 0
+          },
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Classic%20Black%20Denim%20Jeans",
+          "checkedAt": "2026-11-07T08:32:12.017Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": true,
+          "whatItDoes": "Button & fly closure.",
+          "pros": [
+            "Classic 5-pocket styling."
+          ],
+          "cons": [],
+          "specifications": [
+            {
+              "name": "Brand",
+              "value": "Jonathan D",
+              "sourceUrl": "https://superbalist.com/men/jeans-pants-shorts/jeans/puglia-denim-jeans-black/1750624?clickRef=search_listing&searchTerm=Classic+Black+Denim+Jeans"
+            },
+            {
+              "name": "Retailer product code",
+              "value": "1750624",
+              "sourceUrl": "https://superbalist.com/men/jeans-pants-shorts/jeans/puglia-denim-jeans-black/1750624?clickRef=search_listing&searchTerm=Classic+Black+Denim+Jeans"
+            }
+          ],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": {
+              "text": "Button & fly closure.",
+              "sourceUrl": "https://superbalist.com/men/jeans-pants-shorts/jeans/puglia-denim-jeans-black/1750624?clickRef=search_listing&searchTerm=Classic+Black+Denim+Jeans",
+              "sourceTitle": "Puglia Denim Jeans - Black"
+            },
+            "pros": [
+              {
+                "text": "Classic 5-pocket styling.",
+                "sourceUrl": "https://superbalist.com/men/jeans-pants-shorts/jeans/puglia-denim-jeans-black/1750624?clickRef=search_listing&searchTerm=Classic+Black+Denim+Jeans",
+                "sourceTitle": "Puglia Denim Jeans - Black"
+              }
+            ],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [
+            {
+              "title": "Puglia Denim Jeans - Black",
+              "url": "https://superbalist.com/men/jeans-pants-shorts/jeans/puglia-denim-jeans-black/1750624?clickRef=search_listing&searchTerm=Classic+Black+Denim+Jeans"
+            }
+          ],
+          "sourceChecks": [
+            {
+              "url": "https://superbalist.com/men/jeans-pants-shorts/jeans/puglia-denim-jeans-black/1750624?clickRef=search_listing&searchTerm=Classic+Black+Denim+Jeans",
+              "status": "product-facts-verified"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-07T08:32:12.324Z",
+          "message": "Product facts are quoted from matching product-page descriptions."
+        }
+      }
+    },
+    {
+      "category": "audio",
+      "query": "Sony WH-CH520 black headphones",
+      "status": "passed",
+      "durationMs": 2951,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Sony WH-CH520 black headphones",
+            "object": "Sony WH-CH520 black headphones",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Sony WH-CH520 black headphones",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": true,
+          "exactMatchVerified": true,
+          "searchQuery": "Sony WH-CH520 black headphones",
+          "bestProduct": {
+            "name": "Sony WH-CH520 Wireless Bluetooth On-Ear Headphones - Black WH-CH520"
+          },
+          "bestPrice": {
+            "product_name": "Sony WH-CH520 Wireless Bluetooth On-Ear Headphones - Black WH-CH520",
+            "product_url": "https://www.firstshop.co.za/products/sony-wh-ch520-wireless-bluetooth-on-ear-headphones-black-wh-ch520-182783",
+            "sku": "WH-CH520",
+            "comparisonAttributes": {
+              "size": "",
+              "color": ""
+            },
+            "comparisonAmbiguous": false,
+            "retailer": {
+              "name": "FirstShop"
+            },
+            "price": 930,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "priceConditions": "",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 92,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-11-07T08:32:14.685Z",
+            "retailerDomain": "firstshop.co.za",
+            "trustedRetailerDomain": false
+          },
+          "priceComparisonIssue": null,
+          "priceComparisonNote": "",
+          "offers": [
+            {
+              "product_name": "Sony WH-CH520 Wireless Bluetooth On-Ear Headphones - Black WH-CH520",
+              "product_url": "https://www.firstshop.co.za/products/sony-wh-ch520-wireless-bluetooth-on-ear-headphones-black-wh-ch520-182783",
+              "sku": "WH-CH520",
+              "comparisonAttributes": {
+                "size": "",
+                "color": ""
+              },
+              "comparisonAmbiguous": false,
+              "retailer": {
+                "name": "FirstShop"
+              },
+              "price": 930,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-07T08:32:14.685Z",
+              "retailerDomain": "firstshop.co.za",
+              "trustedRetailerDomain": false
+            }
+          ],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "FirstShop",
+              "searchUrl": "https://www.firstshop.co.za/products/sony-wh-ch520-wireless-bluetooth-on-ear-headphones-black-wh-ch520-182783",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "FirstShop",
+              "searchUrl": "https://www.firstshop.co.za/products/sony-wh-ch520-wireless-bluetooth-on-ear-headphones-black-wh-ch520-182783",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 1,
+          "verifiedSellerCount": 1,
+          "inStockOfferCount": 1,
+          "priceVerifiedCount": 1,
+          "discoveryDiagnostics": {
+            "sourceReads": [
+              {
+                "phase": "catalogue",
+                "host": "www.incredible.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.hificorp.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.geewiz.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.firstshop.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 57941
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.makro.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 15571
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.makro.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 15571
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 226143
+              }
+            ],
+            "candidates": {
+              "known": 0,
+              "web": 0,
+              "native": 1,
+              "selected": 1,
+              "accepted": 1
+            },
+            "authorizedOffers": 0
+          },
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Sony%20WH-CH520%20black%20headphones",
+          "checkedAt": "2026-11-07T08:32:14.685Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": true,
+          "whatItDoes": "Designed for All-Day Comfort.",
+          "pros": [
+            "Sony WH-CH520 Wireless Bluetooth On-Ear Headphones - Black WH-CH520.",
+            "Enjoy stunning audio quality and long battery life on-the-go with the WH-CH520 Wireless Headphones from Sony, a pair of on-ear, closed-back headphones with powerful 30mm drivers for realistic sound reproduction.",
+            "These swiveling headphones sport a convenient microphone for making calls and support voice command control via Siri or Google Assistant.",
+            "Bluetooth 5.2 is on board for easy pairing with devices and supports a range of useful features such as Google Fast Pair, allowing you to find your missing headphones by sound, and multipoint connections for pairing to up to two devices."
+          ],
+          "cons": [
+            "Not only is the design stylish, but it's also crafted with ease-of-use in mind."
+          ],
+          "specifications": [
+            {
+              "name": "Brand",
+              "value": "Sony",
+              "sourceUrl": "https://www.firstshop.co.za/products/sony-wh-ch520-wireless-bluetooth-on-ear-headphones-black-wh-ch520-182783"
+            },
+            {
+              "name": "Retailer product code",
+              "value": "WH-CH520",
+              "sourceAlsoListsAsMpn": true,
+              "sourceUrl": "https://www.firstshop.co.za/products/sony-wh-ch520-wireless-bluetooth-on-ear-headphones-black-wh-ch520-182783"
+            },
+            {
+              "name": "product_type",
+              "value": "Headphones & Earbuds",
+              "sourceUrl": "https://www.firstshop.co.za/products/sony-wh-ch520-wireless-bluetooth-on-ear-headphones-black-wh-ch520-182783"
+            }
+          ],
+          "compatibility": [
+            "Bluetooth 5.2 is on board for easy pairing with devices and supports a range of useful features such as Google Fast Pair, allowing you to find your missing headphones by sound, and multipoint connections for pairing to up to two devices.",
+            "Compatibility with Sony's Headphones Connect app and 360 Reality Audio technology allow you to enjoy an incredibly immersive and highly personalized listening experience that suits your individual tastes and ear shape.",
+            "The onboard battery lasts up to 50 hours with a three-hour charge time, and you can get 1.5 hours of use out of only a 3-minute fast charge via the included USB-C charging cable.",
+            "And, if your headphones battery is running low, a 3-minute quick-charge with the included USB-C cable can give you 1.5 hours of listening time.",
+            "Includes USB-C Charging Cable."
+          ],
+          "claimEvidence": {
+            "whatItDoes": {
+              "text": "Designed for All-Day Comfort.",
+              "sourceUrl": "https://www.firstshop.co.za/products/sony-wh-ch520-wireless-bluetooth-on-ear-headphones-black-wh-ch520-182783",
+              "sourceTitle": "Sony WH-CH520 Wireless Bluetooth On-Ear Headphones - Black WH-CH520"
+            },
+            "pros": [
+              {
+                "text": "Sony WH-CH520 Wireless Bluetooth On-Ear Headphones - Black WH-CH520.",
+                "sourceUrl": "https://www.firstshop.co.za/products/sony-wh-ch520-wireless-bluetooth-on-ear-headphones-black-wh-ch520-182783",
+                "sourceTitle": "Sony WH-CH520 Wireless Bluetooth On-Ear Headphones - Black WH-CH520"
+              },
+              {
+                "text": "Enjoy stunning audio quality and long battery life on-the-go with the WH-CH520 Wireless Headphones from Sony, a pair of on-ear, closed-back headphones with powerful 30mm drivers for realistic sound reproduction.",
+                "sourceUrl": "https://www.firstshop.co.za/products/sony-wh-ch520-wireless-bluetooth-on-ear-headphones-black-wh-ch520-182783",
+                "sourceTitle": "Sony WH-CH520 Wireless Bluetooth On-Ear Headphones - Black WH-CH520"
+              },
+              {
+                "text": "These swiveling headphones sport a convenient microphone for making calls and support voice command control via Siri or Google Assistant.",
+                "sourceUrl": "https://www.firstshop.co.za/products/sony-wh-ch520-wireless-bluetooth-on-ear-headphones-black-wh-ch520-182783",
+                "sourceTitle": "Sony WH-CH520 Wireless Bluetooth On-Ear Headphones - Black WH-CH520"
+              },
+              {
+                "text": "Bluetooth 5.2 is on board for easy pairing with devices and supports a range of useful features such as Google Fast Pair, allowing you to find your missing headphones by sound, and multipoint connections for pairing to up to two devices.",
+                "sourceUrl": "https://www.firstshop.co.za/products/sony-wh-ch520-wireless-bluetooth-on-ear-headphones-black-wh-ch520-182783",
+                "sourceTitle": "Sony WH-CH520 Wireless Bluetooth On-Ear Headphones - Black WH-CH520"
+              }
+            ],
+            "cons": [
+              {
+                "text": "Not only is the design stylish, but it's also crafted with ease-of-use in mind.",
+                "sourceUrl": "https://www.firstshop.co.za/products/sony-wh-ch520-wireless-bluetooth-on-ear-headphones-black-wh-ch520-182783",
+                "sourceTitle": "Sony WH-CH520 Wireless Bluetooth On-Ear Headphones - Black WH-CH520"
+              }
+            ],
+            "compatibility": [
+              {
+                "text": "Bluetooth 5.2 is on board for easy pairing with devices and supports a range of useful features such as Google Fast Pair, allowing you to find your missing headphones by sound, and multipoint connections for pairing to up to two devices.",
+                "sourceUrl": "https://www.firstshop.co.za/products/sony-wh-ch520-wireless-bluetooth-on-ear-headphones-black-wh-ch520-182783",
+                "sourceTitle": "Sony WH-CH520 Wireless Bluetooth On-Ear Headphones - Black WH-CH520"
+              },
+              {
+                "text": "Compatibility with Sony's Headphones Connect app and 360 Reality Audio technology allow you to enjoy an incredibly immersive and highly personalized listening experience that suits your individual tastes and ear shape.",
+                "sourceUrl": "https://www.firstshop.co.za/products/sony-wh-ch520-wireless-bluetooth-on-ear-headphones-black-wh-ch520-182783",
+                "sourceTitle": "Sony WH-CH520 Wireless Bluetooth On-Ear Headphones - Black WH-CH520"
+              },
+              {
+                "text": "The onboard battery lasts up to 50 hours with a three-hour charge time, and you can get 1.5 hours of use out of only a 3-minute fast charge via the included USB-C charging cable.",
+                "sourceUrl": "https://www.firstshop.co.za/products/sony-wh-ch520-wireless-bluetooth-on-ear-headphones-black-wh-ch520-182783",
+                "sourceTitle": "Sony WH-CH520 Wireless Bluetooth On-Ear Headphones - Black WH-CH520"
+              },
+              {
+                "text": "And, if your headphones battery is running low, a 3-minute quick-charge with the included USB-C cable can give you 1.5 hours of listening time.",
+                "sourceUrl": "https://www.firstshop.co.za/products/sony-wh-ch520-wireless-bluetooth-on-ear-headphones-black-wh-ch520-182783",
+                "sourceTitle": "Sony WH-CH520 Wireless Bluetooth On-Ear Headphones - Black WH-CH520"
+              },
+              {
+                "text": "Includes USB-C Charging Cable.",
+                "sourceUrl": "https://www.firstshop.co.za/products/sony-wh-ch520-wireless-bluetooth-on-ear-headphones-black-wh-ch520-182783",
+                "sourceTitle": "Sony WH-CH520 Wireless Bluetooth On-Ear Headphones - Black WH-CH520"
+              }
+            ],
+            "includedItems": [
+              {
+                "text": "The onboard battery lasts up to 50 hours with a three-hour charge time, and you can get 1.5 hours of use out of only a 3-minute fast charge via the included USB-C charging cable.",
+                "sourceUrl": "https://www.firstshop.co.za/products/sony-wh-ch520-wireless-bluetooth-on-ear-headphones-black-wh-ch520-182783",
+                "sourceTitle": "Sony WH-CH520 Wireless Bluetooth On-Ear Headphones - Black WH-CH520"
+              },
+              {
+                "text": "And, if your headphones battery is running low, a 3-minute quick-charge with the included USB-C cable can give you 1.5 hours of listening time.",
+                "sourceUrl": "https://www.firstshop.co.za/products/sony-wh-ch520-wireless-bluetooth-on-ear-headphones-black-wh-ch520-182783",
+                "sourceTitle": "Sony WH-CH520 Wireless Bluetooth On-Ear Headphones - Black WH-CH520"
+              },
+              {
+                "text": "Includes USB-C Charging Cable.",
+                "sourceUrl": "https://www.firstshop.co.za/products/sony-wh-ch520-wireless-bluetooth-on-ear-headphones-black-wh-ch520-182783",
+                "sourceTitle": "Sony WH-CH520 Wireless Bluetooth On-Ear Headphones - Black WH-CH520"
+              }
+            ]
+          },
+          "includedItems": [
+            "The onboard battery lasts up to 50 hours with a three-hour charge time, and you can get 1.5 hours of use out of only a 3-minute fast charge via the included USB-C charging cable.",
+            "And, if your headphones battery is running low, a 3-minute quick-charge with the included USB-C cable can give you 1.5 hours of listening time.",
+            "Includes USB-C Charging Cable."
+          ],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [
+            {
+              "title": "Sony WH-CH520 Wireless Bluetooth On-Ear Headphones - Black WH-CH520",
+              "url": "https://www.firstshop.co.za/products/sony-wh-ch520-wireless-bluetooth-on-ear-headphones-black-wh-ch520-182783"
+            }
+          ],
+          "sourceChecks": [
+            {
+              "url": "https://www.firstshop.co.za/products/sony-wh-ch520-wireless-bluetooth-on-ear-headphones-black-wh-ch520-182783",
+              "status": "product-facts-verified"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-07T08:32:15.314Z",
+          "message": "Product facts are quoted from matching product-page descriptions."
+        }
+      }
+    },
+    {
+      "category": "clothing",
+      "query": "Black Barrel Leg Jeans",
+      "status": "passed",
+      "durationMs": 10732,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Black Barrel Leg Jeans",
+            "object": "Black Barrel Leg Jeans",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Black Barrel Leg Jeans",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": true,
+          "exactMatchVerified": true,
+          "searchQuery": "Black Barrel Leg Jeans",
+          "bestProduct": {
+            "name": "Baggy Balloon Jean - Pleat Shutter Black"
+          },
+          "bestPrice": {
+            "product_name": "Baggy Balloon Jean - Pleat Shutter Black",
+            "product_url": "https://superbalist.com/men/jeans-pants-shorts/jeans/baggy-balloon-jean-pleat-shutter-black/1724483?clickRef=search_listing&searchTerm=Black+Barrel+Leg+Jeans",
+            "sku": "1724483",
+            "comparisonAttributes": {
+              "size": "",
+              "color": ""
+            },
+            "comparisonAmbiguous": false,
+            "retailer": {
+              "name": "Superbalist"
+            },
+            "price": 899,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "priceConditions": "",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 92,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-11-07T08:32:13.847Z",
+            "retailerDomain": "superbalist.com",
+            "trustedRetailerDomain": true
+          },
+          "priceComparisonIssue": null,
+          "priceComparisonNote": "",
+          "offers": [
+            {
+              "product_name": "Baggy Balloon Jean - Pleat Shutter Black",
+              "product_url": "https://superbalist.com/men/jeans-pants-shorts/jeans/baggy-balloon-jean-pleat-shutter-black/1724483?clickRef=search_listing&searchTerm=Black+Barrel+Leg+Jeans",
+              "sku": "1724483",
+              "comparisonAttributes": {
+                "size": "",
+                "color": ""
+              },
+              "comparisonAmbiguous": false,
+              "retailer": {
+                "name": "Superbalist"
+              },
+              "price": 899,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-07T08:32:13.847Z",
+              "retailerDomain": "superbalist.com",
+              "trustedRetailerDomain": true
+            }
+          ],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Superbalist",
+              "searchUrl": "https://superbalist.com/men/jeans-pants-shorts/jeans/baggy-balloon-jean-pleat-shutter-black/1724483?clickRef=search_listing&searchTerm=Black+Barrel+Leg+Jeans",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Bash",
+              "searchUrl": "https://bash.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Superbalist",
+              "searchUrl": "https://superbalist.com/men/jeans-pants-shorts/jeans/baggy-balloon-jean-pleat-shutter-black/1724483?clickRef=search_listing&searchTerm=Black+Barrel+Leg+Jeans",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Bash",
+              "searchUrl": "https://bash.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 1,
+          "verifiedSellerCount": 1,
+          "inStockOfferCount": 1,
+          "priceVerifiedCount": 1,
+          "discoveryDiagnostics": {
+            "sourceReads": [
+              {
+                "phase": "catalogue",
+                "host": "bash.com",
+                "status": 200,
+                "outcome": "read",
+                "characters": 600120
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.ackermans.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 18445
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.pepstores.com",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1731409
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.superbalist.com",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1000320
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 488975
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 442094
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 455213
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 444282
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 462088
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 464652
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 467232
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 439383
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 444543
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 456550
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 468859
+              },
+              {
+                "host": "superbalist.com",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 473975
+              }
+            ],
+            "candidates": {
+              "known": 0,
+              "web": 0,
+              "native": 16,
+              "selected": 12,
+              "accepted": 1
+            },
+            "authorizedOffers": 0
+          },
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Black%20Barrel%20Leg%20Jeans",
+          "checkedAt": "2026-11-07T08:32:15.901Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": true,
+          "whatItDoes": "Designed with a relaxed waist and rise, the balloon cropped leg gives this silhouette its signature volume.",
+          "pros": [
+            "A classic pair of baggy barrel jeans cut from rigid dark-wash denim."
+          ],
+          "cons": [],
+          "specifications": [
+            {
+              "name": "Brand",
+              "value": "Cotton On",
+              "sourceUrl": "https://superbalist.com/men/jeans-pants-shorts/jeans/baggy-balloon-jean-pleat-shutter-black/1724483?clickRef=search_listing&searchTerm=Black+Barrel+Leg+Jeans"
+            },
+            {
+              "name": "Retailer product code",
+              "value": "1724483",
+              "sourceUrl": "https://superbalist.com/men/jeans-pants-shorts/jeans/baggy-balloon-jean-pleat-shutter-black/1724483?clickRef=search_listing&searchTerm=Black+Barrel+Leg+Jeans"
+            }
+          ],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": {
+              "text": "Designed with a relaxed waist and rise, the balloon cropped leg gives this silhouette its signature volume.",
+              "sourceUrl": "https://superbalist.com/men/jeans-pants-shorts/jeans/baggy-balloon-jean-pleat-shutter-black/1724483?clickRef=search_listing&searchTerm=Black+Barrel+Leg+Jeans",
+              "sourceTitle": "Baggy Balloon Jean - Pleat Shutter Black"
+            },
+            "pros": [
+              {
+                "text": "A classic pair of baggy barrel jeans cut from rigid dark-wash denim.",
+                "sourceUrl": "https://superbalist.com/men/jeans-pants-shorts/jeans/baggy-balloon-jean-pleat-shutter-black/1724483?clickRef=search_listing&searchTerm=Black+Barrel+Leg+Jeans",
+                "sourceTitle": "Baggy Balloon Jean - Pleat Shutter Black"
+              }
+            ],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [
+            {
+              "title": "Baggy Balloon Jean - Pleat Shutter Black",
+              "url": "https://superbalist.com/men/jeans-pants-shorts/jeans/baggy-balloon-jean-pleat-shutter-black/1724483?clickRef=search_listing&searchTerm=Black+Barrel+Leg+Jeans"
+            }
+          ],
+          "sourceChecks": [
+            {
+              "url": "https://superbalist.com/men/jeans-pants-shorts/jeans/baggy-balloon-jean-pleat-shutter-black/1724483?clickRef=search_listing&searchTerm=Black+Barrel+Leg+Jeans",
+              "status": "product-facts-verified"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-07T08:32:16.311Z",
+          "message": "Product facts are quoted from matching product-page descriptions."
+        }
+      }
+    },
+    {
+      "category": "electronics",
+      "query": "Logitech G502 HERO mouse",
+      "status": "passed",
+      "durationMs": 3798,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Logitech G502 HERO mouse",
+            "object": "Logitech G502 HERO mouse",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Logitech G502 HERO mouse",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": true,
+          "exactMatchVerified": true,
+          "searchQuery": "Logitech G502 HERO mouse",
+          "bestProduct": {
+            "name": "Logitech G502 Hero Lightspeed Wired Gaming Mouse 910-005471"
+          },
+          "bestPrice": {
+            "product_name": "Logitech G502 Hero Lightspeed Wired Gaming Mouse 910-005471",
+            "product_url": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225",
+            "sku": "910-005471",
+            "comparisonAttributes": {
+              "size": "",
+              "color": ""
+            },
+            "comparisonAmbiguous": false,
+            "retailer": {
+              "name": "FirstShop"
+            },
+            "price": 699,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "priceConditions": "",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 92,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-11-07T08:32:18.665Z",
+            "retailerDomain": "firstshop.co.za",
+            "trustedRetailerDomain": false
+          },
+          "priceComparisonIssue": null,
+          "priceComparisonNote": "",
+          "offers": [
+            {
+              "product_name": "Logitech G502 Hero Lightspeed Wired Gaming Mouse 910-005471",
+              "product_url": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225",
+              "sku": "910-005471",
+              "comparisonAttributes": {
+                "size": "",
+                "color": ""
+              },
+              "comparisonAmbiguous": false,
+              "retailer": {
+                "name": "FirstShop"
+              },
+              "price": 699,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-07T08:32:18.665Z",
+              "retailerDomain": "firstshop.co.za",
+              "trustedRetailerDomain": false
+            }
+          ],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "FirstShop",
+              "searchUrl": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "FirstShop",
+              "searchUrl": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 1,
+          "verifiedSellerCount": 1,
+          "inStockOfferCount": 1,
+          "priceVerifiedCount": 1,
+          "discoveryDiagnostics": {
+            "sourceReads": [
+              {
+                "phase": "catalogue",
+                "host": "www.incredible.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.hificorp.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.geewiz.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.firstshop.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 70514
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.makro.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 15571
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.makro.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 15571
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 234373
+              }
+            ],
+            "candidates": {
+              "known": 0,
+              "web": 0,
+              "native": 1,
+              "selected": 1,
+              "accepted": 1
+            },
+            "authorizedOffers": 0
+          },
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Logitech%20G502%20HERO%20mouse",
+          "checkedAt": "2026-11-07T08:32:18.665Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": true,
+          "whatItDoes": "In addition to the core performance and personalization features, many details were thoughtfully engineered and designed.",
+          "pros": [
+            "Logitech G502 Hero Lightspeed Wired Gaming Mouse 910-005471.",
+            "Hero 16K Sensor.",
+            "With the fastest frame rate processing yet, HERO is capable of 400+ IPS across the 100 - 16,000 DPI range with zero smoothing, filtering or acceleration.",
+            "11 Programmable Buttons."
+          ],
+          "cons": [],
+          "specifications": [
+            {
+              "name": "Brand",
+              "value": "Logitech G",
+              "sourceUrl": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225"
+            },
+            {
+              "name": "Retailer product code",
+              "value": "910-005471",
+              "sourceAlsoListsAsMpn": true,
+              "sourceUrl": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225"
+            },
+            {
+              "name": "product_type",
+              "value": "Mice",
+              "sourceUrl": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225"
+            }
+          ],
+          "compatibility": [
+            "Device interface: USB Type-A."
+          ],
+          "claimEvidence": {
+            "whatItDoes": {
+              "text": "In addition to the core performance and personalization features, many details were thoughtfully engineered and designed.",
+              "sourceUrl": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225",
+              "sourceTitle": "Logitech G502 Hero Lightspeed Wired Gaming Mouse 910-005471"
+            },
+            "pros": [
+              {
+                "text": "Logitech G502 Hero Lightspeed Wired Gaming Mouse 910-005471.",
+                "sourceUrl": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225",
+                "sourceTitle": "Logitech G502 Hero Lightspeed Wired Gaming Mouse 910-005471"
+              },
+              {
+                "text": "Hero 16K Sensor.",
+                "sourceUrl": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225",
+                "sourceTitle": "Logitech G502 Hero Lightspeed Wired Gaming Mouse 910-005471"
+              },
+              {
+                "text": "With the fastest frame rate processing yet, HERO is capable of 400+ IPS across the 100 - 16,000 DPI range with zero smoothing, filtering or acceleration.",
+                "sourceUrl": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225",
+                "sourceTitle": "Logitech G502 Hero Lightspeed Wired Gaming Mouse 910-005471"
+              },
+              {
+                "text": "11 Programmable Buttons.",
+                "sourceUrl": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225",
+                "sourceTitle": "Logitech G502 Hero Lightspeed Wired Gaming Mouse 910-005471"
+              }
+            ],
+            "cons": [],
+            "compatibility": [
+              {
+                "text": "Device interface: USB Type-A.",
+                "sourceUrl": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225",
+                "sourceTitle": "Logitech G502 Hero Lightspeed Wired Gaming Mouse 910-005471"
+              }
+            ],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [
+            {
+              "title": "Logitech G502 Hero Lightspeed Wired Gaming Mouse 910-005471",
+              "url": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225"
+            }
+          ],
+          "sourceChecks": [
+            {
+              "url": "https://www.firstshop.co.za/products/logitech-g502-hero-lightspeed-wired-gaming-mouse-910-005471-100225",
+              "status": "product-facts-verified"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-07T08:32:19.097Z",
+          "message": "Product facts are quoted from matching product-page descriptions."
+        }
+      }
+    },
+    {
+      "category": "music",
+      "query": "Korg Pitchclip 2 clip-on tuner",
+      "status": "passed",
+      "durationMs": 7372,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Korg Pitchclip 2 clip-on tuner",
+            "object": "Korg Pitchclip 2 clip-on tuner",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Korg Pitchclip 2 clip-on tuner",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": true,
+          "exactMatchVerified": true,
+          "searchQuery": "Korg Pitchclip 2 clip-on tuner",
+          "bestProduct": {
+            "name": "KORG PITCHCLIP 2 PC2"
+          },
+          "bestPrice": null,
+          "priceComparisonIssue": "variants",
+          "priceComparisonNote": "Listing variants, currencies or price conditions differ. Compare each listing separately.",
+          "offers": [
+            {
+              "product_name": "KORG PITCHCLIP 2 PC2",
+              "product_url": "https://onestopmusic.co.za/product/osm-xtmt-kat002",
+              "sku": "osm-xtmt-kat002",
+              "comparisonAttributes": {
+                "size": "",
+                "color": ""
+              },
+              "comparisonAmbiguous": false,
+              "retailer": {
+                "name": "OneStopMusic"
+              },
+              "price": 345,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-07T08:32:19.118Z",
+              "retailerDomain": "onestopmusic.co.za",
+              "trustedRetailerDomain": false
+            },
+            {
+              "product_name": "Korg Pitchclip 2 Clip-On Tuner Black",
+              "product_url": "https://distrinode.co.za/korg-pitchclip-2-clip-on-tuner-black",
+              "sku": "2906540",
+              "comparisonAttributes": {
+                "size": "",
+                "color": ""
+              },
+              "comparisonAmbiguous": false,
+              "retailer": {
+                "name": "DistriNode"
+              },
+              "price": 408,
+              "currency": "ZAR",
+              "availability": "out_of_stock",
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-07T08:32:17.245Z",
+              "retailerDomain": "distrinode.co.za",
+              "trustedRetailerDomain": false
+            }
+          ],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "OneStopMusic",
+              "searchUrl": "https://onestopmusic.co.za/product/osm-xtmt-kat002",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "DistriNode",
+              "searchUrl": "https://distrinode.co.za/korg-pitchclip-2-clip-on-tuner-black",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Marshall Music",
+              "searchUrl": "https://www.marshallmusic.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Bothners",
+              "searchUrl": "https://bothners.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Music Connection",
+              "searchUrl": "https://musicconnection.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "OneStopMusic",
+              "searchUrl": "https://onestopmusic.co.za/product/osm-xtmt-kat002",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "DistriNode",
+              "searchUrl": "https://distrinode.co.za/korg-pitchclip-2-clip-on-tuner-black",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Marshall Music",
+              "searchUrl": "https://www.marshallmusic.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Bothners",
+              "searchUrl": "https://bothners.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Music Connection",
+              "searchUrl": "https://musicconnection.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 2,
+          "verifiedSellerCount": 2,
+          "inStockOfferCount": 1,
+          "priceVerifiedCount": 2,
+          "discoveryDiagnostics": {
+            "sourceReads": [
+              {
+                "phase": "catalogue",
+                "host": "www.marshallmusic.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "host": "distrinode.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 773668
+              },
+              {
+                "phase": "catalogue",
+                "host": "musicconnection.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 77404
+              },
+              {
+                "host": "onestopmusic.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 352374
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.toms.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 177243
+              },
+              {
+                "phase": "catalogue",
+                "host": "distrinode.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1013038
+              },
+              {
+                "phase": "catalogue",
+                "host": "bothners.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 307311
+              },
+              {
+                "host": "marshallmusic.co.za",
+                "phase": "product",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "host": "marshallmusic.co.za",
+                "phase": "product",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "host": "musicconnection.co.za",
+                "phase": "product",
+                "outcome": "invalid-destination"
+              },
+              {
+                "host": "musicconnection.co.za",
+                "phase": "product",
+                "outcome": "invalid-destination"
+              },
+              {
+                "host": "distrinode.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1213996
+              },
+              {
+                "host": "distrinode.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1175229
+              },
+              {
+                "host": "bothners.co.za",
+                "phase": "product",
+                "status": 404,
+                "outcome": "http-error"
+              },
+              {
+                "host": "bothners.co.za",
+                "phase": "product",
+                "status": 404,
+                "outcome": "http-error"
+              }
+            ],
+            "candidates": {
+              "known": 2,
+              "web": 0,
+              "native": 8,
+              "selected": 10,
+              "accepted": 2
+            },
+            "authorizedOffers": 0
+          },
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Korg%20Pitchclip%202%20clip-on%20tuner",
+          "checkedAt": "2026-11-07T08:32:22.741Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": true,
+          "whatItDoes": "The Korg Pitch clip 2 is a compact clip-on tuner designed to deliver accurate and convenient instrument tuning for musicians in the studio, onstage, or at…",
+          "pros": [
+            "The Korg Pitchclip 2 is a clip-on tuner in black, identified by the model code TUPC2."
+          ],
+          "cons": [],
+          "specifications": [
+            {
+              "name": "Brand",
+              "value": "Korg",
+              "sourceUrl": "https://distrinode.co.za/korg-pitchclip-2-clip-on-tuner-black"
+            },
+            {
+              "name": "Brand",
+              "value": "KORG",
+              "sourceUrl": "https://distrinode.co.za/korg-pitchclip-2-clip-on-tuner-black"
+            },
+            {
+              "name": "Barcode",
+              "value": "4959112179103",
+              "sourceUrl": "https://distrinode.co.za/korg-pitchclip-2-clip-on-tuner-black"
+            },
+            {
+              "name": "Category",
+              "value": "Guitar Accessories",
+              "sourceUrl": "https://distrinode.co.za/korg-pitchclip-2-clip-on-tuner-black"
+            },
+            {
+              "name": "EAN",
+              "value": "4959112179103",
+              "sourceUrl": "https://distrinode.co.za/korg-pitchclip-2-clip-on-tuner-black"
+            },
+            {
+              "name": "MPN",
+              "value": "TUPC2",
+              "sourceUrl": "https://distrinode.co.za/korg-pitchclip-2-clip-on-tuner-black"
+            }
+          ],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": {
+              "text": "The Korg Pitch clip 2 is a compact clip-on tuner designed to deliver accurate and convenient instrument tuning for musicians in the studio, onstage, or at…",
+              "sourceUrl": "https://onestopmusic.co.za/product/osm-xtmt-kat002",
+              "sourceTitle": "KORG PITCHCLIP 2 PC2"
+            },
+            "pros": [
+              {
+                "text": "The Korg Pitchclip 2 is a clip-on tuner in black, identified by the model code TUPC2.",
+                "sourceUrl": "https://distrinode.co.za/korg-pitchclip-2-clip-on-tuner-black",
+                "sourceTitle": "Korg Pitchclip 2 Clip-On Tuner Black"
+              }
+            ],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [
+            {
+              "name": "KORG PITCHCLIP 2 PC2",
+              "productUrl": "https://onestopmusic.co.za/product/osm-xtmt-kat002",
+              "specifications": [
+                {
+                  "name": "Brand",
+                  "value": "Korg"
+                },
+                {
+                  "name": "Retailer product code",
+                  "value": "osm-xtmt-kat002"
+                },
+                {
+                  "name": "Manufacturer part number",
+                  "value": "xtmt-kat002"
+                }
+              ]
+            },
+            {
+              "name": "Korg Pitchclip 2 Clip-On Tuner Black",
+              "productUrl": "https://distrinode.co.za/korg-pitchclip-2-clip-on-tuner-black",
+              "specifications": [
+                {
+                  "name": "Brand",
+                  "value": "KORG"
+                },
+                {
+                  "name": "Model",
+                  "value": "C1280280325"
+                },
+                {
+                  "name": "Retailer product code",
+                  "value": "2906540"
+                },
+                {
+                  "name": "Manufacturer part number",
+                  "value": "Pitchclip 2"
+                },
+                {
+                  "name": "Barcode",
+                  "value": "4959112179103"
+                },
+                {
+                  "name": "Brand",
+                  "value": "Korg"
+                },
+                {
+                  "name": "Category",
+                  "value": "Guitar Accessories"
+                },
+                {
+                  "name": "EAN",
+                  "value": "4959112179103"
+                },
+                {
+                  "name": "Model",
+                  "value": "TUPC2"
+                },
+                {
+                  "name": "MPN",
+                  "value": "TUPC2"
+                }
+              ]
+            }
+          ],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [
+            {
+              "title": "KORG PITCHCLIP 2 PC2",
+              "url": "https://onestopmusic.co.za/product/osm-xtmt-kat002"
+            },
+            {
+              "title": "Korg Pitchclip 2 Clip-On Tuner Black",
+              "url": "https://distrinode.co.za/korg-pitchclip-2-clip-on-tuner-black"
+            }
+          ],
+          "sourceChecks": [
+            {
+              "url": "https://distrinode.co.za/korg-pitchclip-2-clip-on-tuner-black",
+              "status": "product-facts-verified"
+            },
+            {
+              "url": "https://onestopmusic.co.za/product/osm-xtmt-kat002",
+              "status": "product-facts-verified"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-07T08:32:23.679Z",
+          "message": "Product facts are quoted from matching product-page descriptions."
+        }
+      }
+    },
+    {
+      "category": "medical",
+      "query": "Omron M2 Basic upper arm blood pressure monitor",
+      "status": "failed",
+      "durationMs": 3491,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Omron M2 Basic upper arm blood pressure monitor",
+            "object": "Omron M2 Basic upper arm blood pressure monitor",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Omron M2 Basic upper arm blood pressure monitor",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "Omron M2 Basic upper arm blood pressure monitor",
+          "bestProduct": null,
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Clicks",
+              "searchUrl": "https://clicks.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Dis-Chem",
+              "searchUrl": "https://www.dischem.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Clicks",
+              "searchUrl": "https://clicks.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Dis-Chem",
+              "searchUrl": "https://www.dischem.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "discoveryDiagnostics": {
+            "sourceReads": [
+              {
+                "phase": "catalogue",
+                "host": "www.dischem.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "clicks.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 245755
+              },
+              {
+                "phase": "catalogue",
+                "host": "clicks.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 634895
+              },
+              {
+                "phase": "catalogue",
+                "host": "clicks.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 2561491
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 301364
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 297550
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 291589
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 295772
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 292715
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 297689
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 297981
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 297529
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 293112
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 298538
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 291782
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 292580
+              }
+            ],
+            "candidates": {
+              "known": 0,
+              "web": 0,
+              "native": 13,
+              "selected": 12,
+              "accepted": 0
+            },
+            "authorizedOffers": 0
+          },
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Omron%20M2%20Basic%20upper%20arm%20blood%20pressure%20monitor",
+          "checkedAt": "2026-11-07T08:32:25.943Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": null,
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "sourceChecks": [
+            {
+              "url": "https://clicks.co.za/clicks_clicks-upper-arm-blood-pressure-monitor/p/300481",
+              "status": "identity-mismatch"
+            },
+            {
+              "url": "https://clicks.co.za/braun_bua6150-upper-arm-blood-pressure-monitor/p/323839",
+              "status": "identity-mismatch"
+            },
+            {
+              "url": "https://clicks.co.za/braun_exactfit-5-connect-upper-arm-blood-pressure-monitor/p/352470",
+              "status": "identity-mismatch"
+            },
+            {
+              "url": "https://clicks.co.za/braun_bua4050-exactfit-2-upper-arm-blood-pressure-monitor/p/394321",
+              "status": "identity-mismatch"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-07T08:32:27.150Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "toys",
+      "query": "LEGO Classic 10696",
+      "status": "passed",
+      "durationMs": 9090,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "LEGO Classic 10696",
+            "object": "LEGO Classic 10696",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "LEGO Classic 10696",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": true,
+          "exactMatchVerified": true,
+          "searchQuery": "LEGO Classic 10696",
+          "bestProduct": {
+            "name": "10696 | LEGO® Classic Medium Creative Brick Box"
+          },
+          "bestPrice": {
+            "product_name": "10696 | LEGO® Classic Medium Creative Brick Box",
+            "product_url": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696",
+            "sku": "5702015357180",
+            "comparisonAttributes": {
+              "size": "",
+              "color": ""
+            },
+            "comparisonAmbiguous": false,
+            "retailer": {
+              "name": "LEGO Certified Stores"
+            },
+            "price": 559,
+            "currency": "ZAR",
+            "availability": "in_stock",
+            "priceConditions": "",
+            "verified": true,
+            "exactProductMatch": true,
+            "sourcePageVerified": true,
+            "source": "Verified directly on exact retailer product page",
+            "matchScore": 91,
+            "stockScope": "online/general retailer availability only",
+            "branchStockVerified": false,
+            "directionsAvailable": false,
+            "checkedAt": "2026-11-07T08:32:25.993Z",
+            "retailerDomain": "lego-gybc.co.za",
+            "trustedRetailerDomain": false
+          },
+          "priceComparisonIssue": null,
+          "priceComparisonNote": "",
+          "offers": [
+            {
+              "product_name": "10696 | LEGO® Classic Medium Creative Brick Box",
+              "product_url": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696",
+              "sku": "5702015357180",
+              "comparisonAttributes": {
+                "size": "",
+                "color": ""
+              },
+              "comparisonAmbiguous": false,
+              "retailer": {
+                "name": "LEGO Certified Stores"
+              },
+              "price": 559,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 91,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-07T08:32:25.993Z",
+              "retailerDomain": "lego-gybc.co.za",
+              "trustedRetailerDomain": false
+            }
+          ],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "LEGO Certified Stores",
+              "searchUrl": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Toys R Us",
+              "searchUrl": "https://www.toysrus.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "LEGO Certified Stores",
+              "searchUrl": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Toys R Us",
+              "searchUrl": "https://www.toysrus.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 1,
+          "verifiedSellerCount": 1,
+          "inStockOfferCount": 1,
+          "priceVerifiedCount": 1,
+          "discoveryDiagnostics": {
+            "sourceReads": [
+              {
+                "phase": "catalogue",
+                "host": "www.takealot.com",
+                "status": 200,
+                "outcome": "read",
+                "characters": 18439
+              },
+              {
+                "phase": "catalogue",
+                "host": "lego-gybc.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 32010
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.toykingdom.co.za",
+                "status": 404,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.toykingdom.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 281907
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.toysrus.co.za",
+                "outcome": "timeout"
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.loot.co.za",
+                "outcome": "timeout"
+              },
+              {
+                "host": "lego-gybc.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 523385
+              },
+              {
+                "host": "toykingdom.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 324814
+              },
+              {
+                "host": "toykingdom.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 318296
+              },
+              {
+                "host": "toykingdom.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 328378
+              },
+              {
+                "host": "toykingdom.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 352612
+              },
+              {
+                "host": "toykingdom.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 308299
+              },
+              {
+                "host": "toykingdom.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 330144
+              },
+              {
+                "host": "toykingdom.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 329757
+              },
+              {
+                "host": "toykingdom.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 314943
+              },
+              {
+                "host": "toykingdom.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 325926
+              },
+              {
+                "host": "toykingdom.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 318234
+              },
+              {
+                "host": "toykingdom.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 327297
+              }
+            ],
+            "candidates": {
+              "known": 0,
+              "web": 0,
+              "native": 16,
+              "selected": 12,
+              "accepted": 1
+            },
+            "authorizedOffers": 0
+          },
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=LEGO%20Classic%2010696",
+          "checkedAt": "2026-11-07T08:32:27.593Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": true,
+          "whatItDoes": "Designed with builders of all ages in mind, this 10696 collection of LEGO® bricks in 35 different colors will encourage open-ended building play, and inspire any imagination.",
+          "pros": [
+            "A great supplement set to any existing LEGO collection, this set comes in a convenient plastic storage box and includes ideas to get the building started.",
+            "Build your own vehicles and much more with this classic collection of LEGO bricks in 35 different colors.",
+            "Includes windows, eyes, 18 tires and wheel rims, green baseplate and more.",
+            "Green baseplate measures over 3” long and 6” wide."
+          ],
+          "cons": [],
+          "specifications": [
+            {
+              "name": "Retailer product code",
+              "value": "5702015357180",
+              "sourceUrl": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696"
+            }
+          ],
+          "compatibility": [
+            "LEGO Creative Brick building toys are compatible with all LEGO construction sets for creative building."
+          ],
+          "claimEvidence": {
+            "whatItDoes": {
+              "text": "Designed with builders of all ages in mind, this 10696 collection of LEGO® bricks in 35 different colors will encourage open-ended building play, and inspire any imagination.",
+              "sourceUrl": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696",
+              "sourceTitle": "10696 | LEGO® Classic Medium Creative Brick Box"
+            },
+            "pros": [
+              {
+                "text": "A great supplement set to any existing LEGO collection, this set comes in a convenient plastic storage box and includes ideas to get the building started.",
+                "sourceUrl": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696",
+                "sourceTitle": "10696 | LEGO® Classic Medium Creative Brick Box"
+              },
+              {
+                "text": "Build your own vehicles and much more with this classic collection of LEGO bricks in 35 different colors.",
+                "sourceUrl": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696",
+                "sourceTitle": "10696 | LEGO® Classic Medium Creative Brick Box"
+              },
+              {
+                "text": "Includes windows, eyes, 18 tires and wheel rims, green baseplate and more.",
+                "sourceUrl": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696",
+                "sourceTitle": "10696 | LEGO® Classic Medium Creative Brick Box"
+              },
+              {
+                "text": "Green baseplate measures over 3” long and 6” wide.",
+                "sourceUrl": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696",
+                "sourceTitle": "10696 | LEGO® Classic Medium Creative Brick Box"
+              }
+            ],
+            "cons": [],
+            "compatibility": [
+              {
+                "text": "LEGO Creative Brick building toys are compatible with all LEGO construction sets for creative building.",
+                "sourceUrl": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696",
+                "sourceTitle": "10696 | LEGO® Classic Medium Creative Brick Box"
+              }
+            ],
+            "includedItems": [
+              {
+                "text": "A great supplement set to any existing LEGO collection, this set comes in a convenient plastic storage box and includes ideas to get the building started.",
+                "sourceUrl": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696",
+                "sourceTitle": "10696 | LEGO® Classic Medium Creative Brick Box"
+              },
+              {
+                "text": "Includes windows, eyes, 18 tires and wheel rims, green baseplate and more.",
+                "sourceUrl": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696",
+                "sourceTitle": "10696 | LEGO® Classic Medium Creative Brick Box"
+              }
+            ]
+          },
+          "includedItems": [
+            "A great supplement set to any existing LEGO collection, this set comes in a convenient plastic storage box and includes ideas to get the building started.",
+            "Includes windows, eyes, 18 tires and wheel rims, green baseplate and more."
+          ],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [
+            {
+              "title": "10696 | LEGO® Classic Medium Creative Brick Box",
+              "url": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696"
+            }
+          ],
+          "sourceChecks": [
+            {
+              "url": "https://lego-gybc.co.za/products/lego-classic-medium-creative-brick-box-10696",
+              "status": "product-facts-verified"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-07T08:32:28.196Z",
+          "message": "Product facts are quoted from matching product-page descriptions."
+        }
+      }
+    },
+    {
+      "category": "appliance",
+      "query": "Philips NA230/00 air fryer",
+      "status": "failed",
+      "durationMs": 3375,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Philips NA230/00 air fryer",
+            "object": "Philips NA230/00 air fryer",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Philips NA230/00 air fryer",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "Philips NA230/00 air fryer",
+          "bestProduct": null,
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "discoveryDiagnostics": {
+            "sourceReads": [
+              {
+                "phase": "catalogue",
+                "host": "www.incredible.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.hificorp.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.geewiz.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.firstshop.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 7466
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.firstshop.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 41
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.firstshop.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 41
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.makro.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 15571
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.firstshop.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 214508
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.makro.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 15571
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 223862
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 236604
+              }
+            ],
+            "candidates": {
+              "known": 0,
+              "web": 0,
+              "native": 2,
+              "selected": 2,
+              "accepted": 0
+            },
+            "authorizedOffers": 0
+          },
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Philips%20NA230%2F00%20air%20fryer",
+          "checkedAt": "2026-11-07T08:32:30.291Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": null,
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "sourceChecks": [],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-07T08:32:30.535Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    }
+  ]
+}
