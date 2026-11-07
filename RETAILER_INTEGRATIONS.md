@@ -82,3 +82,26 @@ A product-level `price` is treated as retailer/online price. A store-level `pric
 ## Next integration step when branch data is available
 
 Add the retailer/partner feed to `RETAILER_FEEDS_JSON`. The existing product-intelligence and nearby endpoints will then use the feed for exact product matching and will promote a physical branch only when its stock is verified. If the feed also supplies a store-specific price, FindIt can label it `Verified branch price`; otherwise the branch can still be verified in stock while the price remains `Branch price not published`.
+
+## Authorized online catalogues on Cloudflare
+
+FindIt's production commerce endpoint can query one authorized catalogue gateway per market. The gateway normalizes approved retailer APIs or feeds into a common contract. It can index feeds out of band, so search does not issue a separate request for each participating retailer.
+
+- Configure the Worker secret `RETAILER_CATALOGUES_JSON` as an object keyed by country, for example `{"ZA":{"endpoint":"https://catalogue.example.com/search","currency":"ZAR","retailers":[{"domain":"takealot.com","name":"Takealot"}]}}`.
+- Set the Worker secret `RETAILER_CATALOGUE_TOKEN` to the gateway bearer token. Keep retailer credentials on the gateway. Add a retailer to a market only once its source is authorized for FindIt's use. A domain entry alone does not connect a retailer.
+- The gateway receives a POST with `country`, `query`, optional `barcode`, and `limit`. It returns `{"products":[...]}`. Each row represents a specific online listing and includes `title`, `sku`, `url`, `country`, and the original source observation timestamp `checkedAt`. Optional fields include `model`, `size`, `color`, `gtin`, numeric `price`, `currency`, `priceConditions`, and `availability` (`in_stock`, `out_of_stock`, `backorder`, or `preorder`). Use source timestamps, including when reading a cached feed. Apply provider-specific freshness or display restrictions before returning a row.
+- FindIt accepts up to 50 rows within 256 KiB and five seconds. It checks the exact retailer domain and variant, requires a matching GTIN for barcode searches, rejects rows older than one hour, and drops prices in a currency other than the configured market currency. The gateway receives no coordinates or photos. Physical branch evidence remains separate.
+- The request country takes precedence over Cloudflare's country, with ZA as fallback. The existing public discovery paths remain available. This connection does not implement a market selector in the UI.
+
+| Market | Source onboarding |
+| --- | --- |
+| ZA | Takealot, Makro, Game, Checkers, Pick n Pay, Incredible Connection, HiFi Corp, Sportsmans Warehouse, Woolworths, Clicks, Dis-Chem, Mr Price, PEP and Ackermans can be added through an approved source. Takealot's [Marketplace API](https://marketplace-api.takealot.com/v1/docs) is for seller operations and does not establish permission for storefront-wide discovery. |
+| US and other supported markets | Evaluate the [Amazon Creators API](https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction) per marketplace and [Best Buy Products API](https://developers.bestbuy.com/apis) for US catalogue access. For [Walmart](https://affiliates.walmart.com/page/faqs) and [Target](https://partners.target.com/), verify access to suitable data and the applicable rights through their partner programmes before connecting. |
+
+### Production baseline on 6 November 2026
+
+Production reported commit `86f513c` throughout the 16-case typed matrix. Six cases returned an exact listing. Four cases passed the strict journey check, including useful product research and verified priced offers. Five cases had a verified price, four in ZAR and one in USD. FirstShop, Central Vet, Petworld and Orms returned ZAR prices. Tillys returned the USD backpack offer. Amazon returned rowing machine listings without a verified price. All four sampled ZAR prices matched a separate direct source read. These measurements cover the sampled listing prices, before checkout.
+
+Five existing photo fixtures were uploaded to production. Four returned partial identities and one (Twinsaver 18-roll toilet paper) returned a variant and pack count without requesting confirmation. The Menlyn-area nearby check returned relevant candidate branches for two of six categories (Sportsmans Warehouse for running shoes and Builders for drills). Music, groceries, clothing and computer accessories returned no branches on this run. Zero results claimed exact branch stock.
+
+The deployed Korg Pitchclip 2 search returned no verified offer. Marshall Music's exact listing and public Store API returned HTTP 403. The staged Worker returned exact listings with live ZAR prices from OneStopMusic (in stock online) and DistriNode (out of stock online), without making branch claims. The regression asserts exact product, direct retailer evidence, a positive ZAR price, exclusion of the adjacent Plus variant and no unsupported physical-store claims. It can be rerun against the deployed Worker using `FINDIT_URL`.

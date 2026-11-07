@@ -38,3 +38,9 @@ test('a full web-search batch cannot starve an exact native catalogue candidate'
  assert.ok(result.discoveryDiagnostics.sourceReads.some(r=>r.host==='www.firstshop.co.za'&&r.status===200&&r.outcome==='read'));
  assert.ok(result.discoveryDiagnostics.sourceReads.every(r=>!('url' in r)&&!('query' in r)&&!('body' in r)));
 });
+
+test('the verification budget samples distinct retailers before checking additional variants',()=>{
+ const crowded=Array.from({length:12},(_,n)=>'https://www.firstshop.co.za/products/'+n);
+ const independent='https://makro.co.za/products/exact-model';
+ assert.deepEqual(selectDiscoveryCandidates([],[],[...crowded,independent],2),[crowded[0],independent]);
+});
