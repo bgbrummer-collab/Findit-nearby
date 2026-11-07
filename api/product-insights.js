@@ -638,6 +638,7 @@ export default async function handler(req, res) {
   if (req.method !== 'POST' && req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
   const body = req.method === 'POST' ? (req.body || {}) : (req.query || {}), i = identity(body), id = exactName(i);
   if (!id) return res.status(200).json({ researched: false, whatItDoes: '', pros: [], cons: [], sources: [] });
+  if (/^(?:barcode\s+)?\d{8,14}$/i.test(i.name||i.searchQuery)) return res.status(200).json({researched:false,barcodeUnresolved:true,whatItDoes:'',pros:[],cons:[],sources:[],message:'Enter the product name or model to resolve this barcode.'});
   if (BLOCKED.test(id)) return res.status(403).json({ error: 'Unsupported product type' });
   try {
     const pages = await discoverPages(i, offerSources(body));

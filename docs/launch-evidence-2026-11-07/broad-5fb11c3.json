@@ -1,0 +1,4113 @@
+{
+  "checkedAt": "2026-11-07T08:33:05.857Z",
+  "base": "https://findit-nearby.bgbrummer.workers.dev/",
+  "version": {
+    "commit": "5fb11c3f8a0992b50fded0b1f1af5a393a446a00",
+    "platform": "cloudflare"
+  },
+  "endVersion": {
+    "commit": "5fb11c3f8a0992b50fded0b1f1af5a393a446a00",
+    "platform": "cloudflare"
+  },
+  "versionStable": true,
+  "results": [
+    {
+      "category": "car",
+      "query": "Toyota Corolla Cross 1.8 Xi",
+      "status": "failed",
+      "durationMs": 9995,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Toyota Corolla Cross 1.8 Xi",
+            "object": "Toyota Corolla Cross 1.8 Xi",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Toyota Corolla Cross 1.8 Xi",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "Toyota Corolla Cross 1.8 Xi",
+          "bestProduct": null,
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "AutoTrader",
+              "searchUrl": "https://www.autotrader.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Cars.co.za",
+              "searchUrl": "https://www.cars.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "WeBuyCars",
+              "searchUrl": "https://www.webuycars.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "AutoTrader",
+              "searchUrl": "https://www.autotrader.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Cars.co.za",
+              "searchUrl": "https://www.cars.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "WeBuyCars",
+              "searchUrl": "https://www.webuycars.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "discoveryDiagnostics": {
+            "sourceReads": [],
+            "candidates": {
+              "known": 0,
+              "web": 0,
+              "native": 0,
+              "selected": 0,
+              "accepted": 0
+            },
+            "authorizedOffers": 0
+          },
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": null,
+          "checkedAt": "2026-11-07T08:32:16.099Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": null,
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "sourceChecks": [],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-07T08:32:16.426Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "mouse",
+      "query": "Logitech G502 HERO mouse",
+      "status": "failed",
+      "error": "Non-JSON response: HTTP 500 text/html; charset=UTF-8 <!DOCTYPE html>\n<!--[if lt IE 7]> <html class=\"no-js ie6 oldie\" lang=\"en-US\"> <![endif]-->\n<!--[if IE 7]>    <html class=\"no-js ie7 oldie\" lang=\"en-US\"> <![endi",
+      "durationMs": 2240
+    },
+    {
+      "category": "gym",
+      "query": "Concept2 RowErg rowing machine",
+      "status": "failed",
+      "durationMs": 15651,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Concept2 RowErg rowing machine",
+            "object": "Concept2 RowErg rowing machine",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Concept2 RowErg rowing machine",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "Concept2 RowErg rowing machine",
+          "bestProduct": null,
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Fitness Network",
+              "searchUrl": "https://www.fitnessnetwork.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "MiFitness",
+              "searchUrl": "https://mifitness.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Fitness Network",
+              "searchUrl": "https://www.fitnessnetwork.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "MiFitness",
+              "searchUrl": "https://mifitness.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "discoveryDiagnostics": {
+            "sourceReads": [
+              {
+                "phase": "catalogue",
+                "host": "gymgear.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 101192
+              },
+              {
+                "phase": "catalogue",
+                "host": "gymgear.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 35135
+              },
+              {
+                "phase": "catalogue",
+                "host": "gymgear.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 101188
+              },
+              {
+                "phase": "catalogue",
+                "host": "mifitness.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 49423
+              },
+              {
+                "phase": "catalogue",
+                "host": "mifitness.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 23307
+              },
+              {
+                "phase": "catalogue",
+                "host": "mifitness.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 46540
+              },
+              {
+                "phase": "catalogue",
+                "host": "gymgear.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 520177
+              },
+              {
+                "phase": "catalogue",
+                "host": "mifitness.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 463655
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.fitnessnetwork.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 119981
+              },
+              {
+                "host": "mifitness.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 444360
+              },
+              {
+                "host": "mifitness.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 444360
+              },
+              {
+                "host": "gymgear.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 523086
+              },
+              {
+                "host": "gymgear.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 606687
+              },
+              {
+                "host": "gymgear.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 530250
+              },
+              {
+                "host": "fitnessnetwork.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 135385
+              },
+              {
+                "host": "fitnessnetwork.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 134707
+              },
+              {
+                "host": "fitnessnetwork.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 160079
+              },
+              {
+                "host": "fitnessnetwork.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 140145
+              },
+              {
+                "host": "fitnessnetwork.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 129551
+              },
+              {
+                "host": "fitnessnetwork.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 138840
+              },
+              {
+                "host": "fitnessnetwork.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 143782
+              }
+            ],
+            "candidates": {
+              "known": 0,
+              "web": 0,
+              "native": 16,
+              "selected": 12,
+              "accepted": 0
+            },
+            "authorizedOffers": 0
+          },
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Concept2%20RowErg%20rowing%20machine",
+          "checkedAt": "2026-11-07T08:32:16.877Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": null,
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "sourceChecks": [
+            {
+              "url": "https://mifitness.co.za/products/shua-commercial-rowing-machine?_pos=4&_sid=e4330243f&_ss=r",
+              "status": "identity-mismatch"
+            },
+            {
+              "url": "https://www.fitnessnetwork.co.za/commercial-gym-solutions-south-africa/commercial-cardio-equipment/commercial-rowing-machines",
+              "status": "identity-mismatch"
+            },
+            {
+              "url": "https://www.fitnessnetwork.co.za/fitness-equipment/rowing-machines-for-sale-in-south-africa",
+              "status": "identity-mismatch"
+            },
+            {
+              "url": "https://www.fitnessnetwork.co.za/fitness-equipment/rowing-machines-for-sale-in-south-africa/air-rowing-machines",
+              "status": "identity-mismatch"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-07T08:32:22.079Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "keyboard",
+      "query": "Keychron K2 wireless mechanical keyboard",
+      "status": "failed",
+      "durationMs": 7601,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Keychron K2 wireless mechanical keyboard",
+            "object": "Keychron K2 wireless mechanical keyboard",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Keychron K2 wireless mechanical keyboard",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "Keychron K2 wireless mechanical keyboard",
+          "bestProduct": null,
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "discoveryDiagnostics": {
+            "sourceReads": [
+              {
+                "phase": "catalogue",
+                "host": "www.incredible.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.hificorp.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.geewiz.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.firstshop.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 90220
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.firstshop.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 78132
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.makro.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 15571
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.firstshop.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 79063
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.firstshop.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 402508
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.makro.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 15571
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 233739
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 244915
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 247485
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 243508
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 247411
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 236799
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 271329
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 246989
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 244513
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 256319
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 248059
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 242443
+              }
+            ],
+            "candidates": {
+              "known": 0,
+              "web": 0,
+              "native": 16,
+              "selected": 12,
+              "accepted": 0
+            },
+            "authorizedOffers": 0
+          },
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Keychron%20K2%20wireless%20mechanical%20keyboard",
+          "checkedAt": "2026-11-07T08:32:29.433Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": null,
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "sourceChecks": [],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-07T08:32:29.664Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "headphones",
+      "query": "Sony WH-1000XM5 black",
+      "status": "failed",
+      "durationMs": 4296,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Sony WH-1000XM5 black",
+            "object": "Sony WH-1000XM5 black",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Sony WH-1000XM5 black",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "Sony WH-1000XM5 black",
+          "bestProduct": null,
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "discoveryDiagnostics": {
+            "sourceReads": [
+              {
+                "phase": "catalogue",
+                "host": "www.incredible.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.hificorp.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.geewiz.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.firstshop.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 71794
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.firstshop.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 75818
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.makro.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 15571
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.firstshop.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 77655
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.firstshop.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 346306
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.makro.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 15571
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 242628
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 237786
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 281921
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 231527
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 233353
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 233507
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 266017
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 225650
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 232328
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 236185
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 247764
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 225910
+              }
+            ],
+            "candidates": {
+              "known": 0,
+              "web": 0,
+              "native": 15,
+              "selected": 12,
+              "accepted": 0
+            },
+            "authorizedOffers": 0
+          },
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Sony%20WH-1000XM5%20black",
+          "checkedAt": "2026-11-07T08:32:33.614Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": null,
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "sourceChecks": [],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-07T08:32:33.975Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "medical-device",
+      "query": "Omron M2 Basic upper arm blood pressure monitor",
+      "status": "failed",
+      "durationMs": 3508,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Omron M2 Basic upper arm blood pressure monitor",
+            "object": "Omron M2 Basic upper arm blood pressure monitor",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Omron M2 Basic upper arm blood pressure monitor",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "Omron M2 Basic upper arm blood pressure monitor",
+          "bestProduct": null,
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Clicks",
+              "searchUrl": "https://clicks.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Dis-Chem",
+              "searchUrl": "https://www.dischem.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Clicks",
+              "searchUrl": "https://clicks.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Dis-Chem",
+              "searchUrl": "https://www.dischem.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "discoveryDiagnostics": {
+            "sourceReads": [
+              {
+                "phase": "catalogue",
+                "host": "www.dischem.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "clicks.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 245755
+              },
+              {
+                "phase": "catalogue",
+                "host": "clicks.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 2561491
+              },
+              {
+                "phase": "catalogue",
+                "host": "clicks.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 634895
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 292715
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 291589
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 295772
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 301364
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 297550
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 297815
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 293112
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 291782
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 297981
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 298538
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 292580
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 297529
+              }
+            ],
+            "candidates": {
+              "known": 0,
+              "web": 0,
+              "native": 13,
+              "selected": 12,
+              "accepted": 0
+            },
+            "authorizedOffers": 0
+          },
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Omron%20M2%20Basic%20upper%20arm%20blood%20pressure%20monitor",
+          "checkedAt": "2026-11-07T08:32:36.113Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": null,
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "sourceChecks": [
+            {
+              "url": "https://clicks.co.za/braun_bua4050-exactfit-2-upper-arm-blood-pressure-monitor/p/394321",
+              "status": "identity-mismatch"
+            },
+            {
+              "url": "https://clicks.co.za/braun_exactfit-5-connect-upper-arm-blood-pressure-monitor/p/352470",
+              "status": "identity-mismatch"
+            },
+            {
+              "url": "https://clicks.co.za/braun_bua6150-upper-arm-blood-pressure-monitor/p/323839",
+              "status": "identity-mismatch"
+            },
+            {
+              "url": "https://clicks.co.za/clicks_clicks-upper-arm-blood-pressure-monitor/p/300481",
+              "status": "identity-mismatch"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-07T08:32:37.470Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "medical-device",
+      "query": "Accu-Chek Instant blood glucose meter",
+      "status": "failed",
+      "durationMs": 3343,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Accu-Chek Instant blood glucose meter",
+            "object": "Accu-Chek Instant blood glucose meter",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Accu-Chek Instant blood glucose meter",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "Accu-Chek Instant blood glucose meter",
+          "bestProduct": null,
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Clicks",
+              "searchUrl": "https://clicks.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Dis-Chem",
+              "searchUrl": "https://www.dischem.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Clicks",
+              "searchUrl": "https://clicks.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Dis-Chem",
+              "searchUrl": "https://www.dischem.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "discoveryDiagnostics": {
+            "sourceReads": [
+              {
+                "phase": "catalogue",
+                "host": "www.dischem.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "clicks.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 452995
+              },
+              {
+                "phase": "catalogue",
+                "host": "clicks.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 2956011
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 297981
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 293089
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 298538
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 292944
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 294775
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 294327
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 297529
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 295644
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 294965
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 295211
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 294723
+              },
+              {
+                "host": "clicks.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 296364
+              }
+            ],
+            "candidates": {
+              "known": 0,
+              "web": 0,
+              "native": 12,
+              "selected": 12,
+              "accepted": 0
+            },
+            "authorizedOffers": 0
+          },
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Accu-Chek%20Instant%20blood%20glucose%20meter",
+          "checkedAt": "2026-11-07T08:32:39.575Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": null,
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "sourceChecks": [
+            {
+              "url": "https://clicks.co.za/accu-check_active-blood-glucose-monitoring-system/p/129543",
+              "status": "identity-mismatch"
+            },
+            {
+              "url": "https://clicks.co.za/clicks_biomine-blood-glucose-monitoring-system/p/269476",
+              "status": "identity-mismatch"
+            },
+            {
+              "url": "https://clicks.co.za/clicks_blood-glucose-lancets-50-lancets/p/327404",
+              "status": "identity-mismatch"
+            },
+            {
+              "url": "https://clicks.co.za/accu-check_instant-meter/p/291471",
+              "status": "identity-mismatch"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-07T08:32:40.804Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "mousepad",
+      "query": "SteelSeries QcK Heavy Large mouse pad",
+      "status": "passed",
+      "durationMs": 23071,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "SteelSeries QcK Heavy Large mouse pad",
+            "object": "SteelSeries QcK Heavy Large mouse pad",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "SteelSeries QcK Heavy Large mouse pad",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": true,
+          "exactMatchVerified": true,
+          "searchQuery": "SteelSeries QcK Heavy Large mouse pad",
+          "bestProduct": {
+            "name": "SteelSeries QcK Heavy Gaming Mouse Pad - L White SS-63480"
+          },
+          "bestPrice": null,
+          "priceComparisonIssue": "variants",
+          "priceComparisonNote": "Listing variants, currencies or price conditions differ. Compare each listing separately.",
+          "offers": [
+            {
+              "product_name": "SteelSeries QcK Heavy Gaming Mouse Pad - L White SS-63480",
+              "product_url": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-white-ss-63480-407887?_pos=1&_sid=e4d2f37df&_ss=r",
+              "sku": "SS-63480",
+              "comparisonAttributes": {
+                "size": "",
+                "color": ""
+              },
+              "comparisonAmbiguous": false,
+              "retailer": {
+                "name": "FirstShop"
+              },
+              "price": 1199,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 80,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-07T08:32:39.200Z",
+              "retailerDomain": "firstshop.co.za",
+              "trustedRetailerDomain": false
+            },
+            {
+              "product_name": "SteelSeries QcK Heavy Gaming Mouse Pad - L Magenta SS-63479",
+              "product_url": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-magenta-ss-63479-407886?_pos=3&_sid=e4d2f37df&_ss=r",
+              "sku": "SS-63479",
+              "comparisonAttributes": {
+                "size": "",
+                "color": ""
+              },
+              "comparisonAmbiguous": false,
+              "retailer": {
+                "name": "FirstShop"
+              },
+              "price": 1199,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 80,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-07T08:32:39.335Z",
+              "retailerDomain": "firstshop.co.za",
+              "trustedRetailerDomain": false
+            }
+          ],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "FirstShop",
+              "searchUrl": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-white-ss-63480-407887?_pos=1&_sid=e4d2f37df&_ss=r",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "FirstShop",
+              "searchUrl": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-magenta-ss-63479-407886?_pos=3&_sid=e4d2f37df&_ss=r",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "FirstShop",
+              "searchUrl": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-white-ss-63480-407887?_pos=1&_sid=e4d2f37df&_ss=r",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "FirstShop",
+              "searchUrl": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-magenta-ss-63479-407886?_pos=3&_sid=e4d2f37df&_ss=r",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 2,
+          "verifiedSellerCount": 1,
+          "inStockOfferCount": 2,
+          "priceVerifiedCount": 2,
+          "discoveryDiagnostics": {
+            "sourceReads": [
+              {
+                "phase": "catalogue",
+                "host": "www.incredible.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.hificorp.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.geewiz.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.firstshop.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 95955
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.firstshop.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 95855
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.makro.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 15571
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.firstshop.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 81603
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.firstshop.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 400445
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.makro.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 15571
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 252812
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 253911
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 261546
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 253533
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 254321
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 238478
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 246011
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 238226
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 254103
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 234058
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 246467
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 244917
+              }
+            ],
+            "candidates": {
+              "known": 0,
+              "web": 0,
+              "native": 15,
+              "selected": 12,
+              "accepted": 2
+            },
+            "authorizedOffers": 0
+          },
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=SteelSeries%20QcK%20Heavy%20Large%20mouse%20pad",
+          "checkedAt": "2026-11-07T08:32:40.574Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": true,
+          "whatItDoes": "The SteelSeries QcK Heavy SS-63480 is a large gaming mouse pad designed to provide a stable, comfortable and consistent surface for precise mouse control.",
+          "pros": [
+            "SteelSeries QcK Heavy Gaming Mouse Pad - L White SS-63480.",
+            "Featuring SteelSeries' exclusive micro-woven cloth surface, an extra-thick 6mm non-slip rubber base and a spacious 450 x 400mm format, it delivers reliable tracking and added cushioning in a clean White finish.",
+            "Extra-thick 6mm construction.",
+            "Durable non-slip rubber base."
+          ],
+          "cons": [],
+          "specifications": [
+            {
+              "name": "Brand",
+              "value": "SteelSeries",
+              "sourceUrl": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-magenta-ss-63479-407886?_pos=3&_sid=e4d2f37df&_ss=r"
+            },
+            {
+              "name": "product_type",
+              "value": "Mouse Pads",
+              "sourceUrl": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-magenta-ss-63479-407886?_pos=3&_sid=e4d2f37df&_ss=r"
+            }
+          ],
+          "compatibility": [
+            "Sensor Compatibility."
+          ],
+          "claimEvidence": {
+            "whatItDoes": {
+              "text": "The SteelSeries QcK Heavy SS-63480 is a large gaming mouse pad designed to provide a stable, comfortable and consistent surface for precise mouse control.",
+              "sourceUrl": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-white-ss-63480-407887?_pos=1&_sid=e4d2f37df&_ss=r",
+              "sourceTitle": "SteelSeries QcK Heavy Gaming Mouse Pad - L White SS-63480"
+            },
+            "pros": [
+              {
+                "text": "SteelSeries QcK Heavy Gaming Mouse Pad - L White SS-63480.",
+                "sourceUrl": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-white-ss-63480-407887?_pos=1&_sid=e4d2f37df&_ss=r",
+                "sourceTitle": "SteelSeries QcK Heavy Gaming Mouse Pad - L White SS-63480"
+              },
+              {
+                "text": "Featuring SteelSeries' exclusive micro-woven cloth surface, an extra-thick 6mm non-slip rubber base and a spacious 450 x 400mm format, it delivers reliable tracking and added cushioning in a clean White finish.",
+                "sourceUrl": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-white-ss-63480-407887?_pos=1&_sid=e4d2f37df&_ss=r",
+                "sourceTitle": "SteelSeries QcK Heavy Gaming Mouse Pad - L White SS-63480"
+              },
+              {
+                "text": "Extra-thick 6mm construction.",
+                "sourceUrl": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-white-ss-63480-407887?_pos=1&_sid=e4d2f37df&_ss=r",
+                "sourceTitle": "SteelSeries QcK Heavy Gaming Mouse Pad - L White SS-63480"
+              },
+              {
+                "text": "Durable non-slip rubber base.",
+                "sourceUrl": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-white-ss-63480-407887?_pos=1&_sid=e4d2f37df&_ss=r",
+                "sourceTitle": "SteelSeries QcK Heavy Gaming Mouse Pad - L White SS-63480"
+              }
+            ],
+            "cons": [],
+            "compatibility": [
+              {
+                "text": "Sensor Compatibility.",
+                "sourceUrl": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-white-ss-63480-407887?_pos=1&_sid=e4d2f37df&_ss=r",
+                "sourceTitle": "SteelSeries QcK Heavy Gaming Mouse Pad - L White SS-63480"
+              }
+            ],
+            "includedItems": [
+              {
+                "text": "The mouse pad does not include RGB lighting or electronic components.",
+                "sourceUrl": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-white-ss-63480-407887?_pos=1&_sid=e4d2f37df&_ss=r",
+                "sourceTitle": "SteelSeries QcK Heavy Gaming Mouse Pad - L White SS-63480"
+              }
+            ]
+          },
+          "includedItems": [
+            "The mouse pad does not include RGB lighting or electronic components."
+          ],
+          "variants": [
+            {
+              "name": "SteelSeries QcK Heavy Gaming Mouse Pad - L White SS-63480",
+              "productUrl": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-white-ss-63480-407887?_pos=1&_sid=e4d2f37df&_ss=r",
+              "specifications": [
+                {
+                  "name": "Brand",
+                  "value": "SteelSeries"
+                },
+                {
+                  "name": "Retailer product code",
+                  "value": "SS-63480",
+                  "sourceAlsoListsAsMpn": true
+                },
+                {
+                  "name": "product_type",
+                  "value": "Mouse Pads"
+                }
+              ]
+            },
+            {
+              "name": "SteelSeries QcK Heavy Gaming Mouse Pad - L Magenta SS-63479",
+              "productUrl": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-magenta-ss-63479-407886?_pos=3&_sid=e4d2f37df&_ss=r",
+              "specifications": [
+                {
+                  "name": "Brand",
+                  "value": "SteelSeries"
+                },
+                {
+                  "name": "Retailer product code",
+                  "value": "SS-63479",
+                  "sourceAlsoListsAsMpn": true
+                },
+                {
+                  "name": "product_type",
+                  "value": "Mouse Pads"
+                }
+              ]
+            }
+          ],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [
+            {
+              "title": "SteelSeries QcK Heavy Gaming Mouse Pad - L White SS-63480",
+              "url": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-white-ss-63480-407887?_pos=1&_sid=e4d2f37df&_ss=r"
+            },
+            {
+              "title": "SteelSeries QcK Heavy Gaming Mouse Pad - L Magenta SS-63479",
+              "url": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-magenta-ss-63479-407886?_pos=3&_sid=e4d2f37df&_ss=r"
+            }
+          ],
+          "sourceChecks": [
+            {
+              "url": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-magenta-ss-63479-407886?_pos=3&_sid=e4d2f37df&_ss=r",
+              "status": "product-facts-verified"
+            },
+            {
+              "url": "https://www.firstshop.co.za/products/steelseries-qck-heavy-gaming-mouse-pad-l-white-ss-63480-407887?_pos=1&_sid=e4d2f37df&_ss=r",
+              "status": "product-facts-verified"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-07T08:32:41.724Z",
+          "message": "Product facts are quoted from matching product-page descriptions."
+        }
+      }
+    },
+    {
+      "category": "appliance",
+      "query": "Philips NA230/00 air fryer",
+      "status": "failed",
+      "durationMs": 3153,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Philips NA230/00 air fryer",
+            "object": "Philips NA230/00 air fryer",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Philips NA230/00 air fryer",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "Philips NA230/00 air fryer",
+          "bestProduct": null,
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "discoveryDiagnostics": {
+            "sourceReads": [
+              {
+                "phase": "catalogue",
+                "host": "www.incredible.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.hificorp.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.geewiz.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.firstshop.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 7466
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.firstshop.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 41
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.firstshop.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 41
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.makro.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 15571
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.firstshop.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 214508
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.makro.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 15571
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 223862
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 236604
+              }
+            ],
+            "candidates": {
+              "known": 0,
+              "web": 0,
+              "native": 2,
+              "selected": 2,
+              "accepted": 0
+            },
+            "authorizedOffers": 0
+          },
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Philips%20NA230%2F00%20air%20fryer",
+          "checkedAt": "2026-11-07T08:32:43.691Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": null,
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "sourceChecks": [],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-07T08:32:43.984Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "printer",
+      "query": "HP DeskJet 2820 All-in-One printer",
+      "status": "failed",
+      "durationMs": 4122,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "HP DeskJet 2820 All-in-One printer",
+            "object": "HP DeskJet 2820 All-in-One printer",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "HP DeskJet 2820 All-in-One printer",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "HP DeskJet 2820 All-in-One printer",
+          "bestProduct": null,
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "discoveryDiagnostics": {
+            "sourceReads": [
+              {
+                "phase": "catalogue",
+                "host": "www.incredible.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.hificorp.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.geewiz.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.firstshop.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 109406
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.firstshop.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 105935
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.firstshop.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 87630
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.makro.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 15571
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.firstshop.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 365968
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.makro.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 15571
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 249304
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 277938
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 250797
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 250091
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 272620
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 264139
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 270023
+              },
+              {
+                "host": "firstshop.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 274262
+              }
+            ],
+            "candidates": {
+              "known": 0,
+              "web": 0,
+              "native": 8,
+              "selected": 8,
+              "accepted": 0
+            },
+            "authorizedOffers": 0
+          },
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=HP%20DeskJet%202820%20All-in-One%20printer",
+          "checkedAt": "2026-11-07T08:32:45.454Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": null,
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "sourceChecks": [],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-07T08:32:45.860Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "garden",
+      "query": "Gardena Classic pruning shears",
+      "status": "failed",
+      "durationMs": 7927,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Gardena Classic pruning shears",
+            "object": "Gardena Classic pruning shears",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Gardena Classic pruning shears",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "Gardena Classic pruning shears",
+          "bestProduct": null,
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Builders",
+              "searchUrl": "https://www.builders.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Leroy Merlin",
+              "searchUrl": "https://www.leroymerlin.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "BUCO",
+              "searchUrl": "https://www.buco.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Mica",
+              "searchUrl": "https://www.mica.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Builders",
+              "searchUrl": "https://www.builders.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Leroy Merlin",
+              "searchUrl": "https://www.leroymerlin.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "BUCO",
+              "searchUrl": "https://www.buco.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Mica",
+              "searchUrl": "https://www.mica.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "discoveryDiagnostics": {
+            "sourceReads": [
+              {
+                "phase": "catalogue",
+                "host": "leroymerlin.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.tmbsupplies.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 98571
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.builders.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 32731
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.tmbsupplies.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 6233
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.tmbsupplies.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1208359
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.buco.co.za",
+                "outcome": "timeout"
+              }
+            ],
+            "candidates": {
+              "known": 0,
+              "web": 0,
+              "native": 0,
+              "selected": 0,
+              "accepted": 0
+            },
+            "authorizedOffers": 0
+          },
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Gardena%20Classic%20pruning%20shears",
+          "checkedAt": "2026-11-07T08:32:50.531Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": null,
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "sourceChecks": [],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-07T08:32:51.900Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "pet",
+      "query": "Royal Canin Mini Adult dog food 2kg",
+      "status": "passed",
+      "durationMs": 6290,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Royal Canin Mini Adult dog food 2kg",
+            "object": "Royal Canin Mini Adult dog food 2kg",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Royal Canin Mini Adult dog food 2kg",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": true,
+          "exactMatchVerified": true,
+          "searchQuery": "Royal Canin Mini Adult dog food 2kg",
+          "bestProduct": {
+            "name": "Royal Canin Mini Adult Dog Food 2kg"
+          },
+          "bestPrice": null,
+          "priceComparisonIssue": "variants",
+          "priceComparisonNote": "Listing variants, currencies or price conditions differ. Compare each listing separately.",
+          "offers": [
+            {
+              "product_name": "Royal Canin Mini Adult Dog Food 2kg",
+              "product_url": "https://centralvet.co.za/products/royal-canin-mini-adult-dog-food-2kg",
+              "sku": "",
+              "comparisonAttributes": {
+                "size": "",
+                "color": ""
+              },
+              "comparisonAmbiguous": false,
+              "retailer": {
+                "name": "centralvet.co.za"
+              },
+              "price": 348,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-07T08:32:48.451Z",
+              "retailerDomain": "centralvet.co.za",
+              "trustedRetailerDomain": false
+            },
+            {
+              "product_name": "Royal Canin Size Health Nutrition Mini Adult Dry Dog Food - 2kg",
+              "product_url": "https://petworld.co.za/products/royal-canin-size-health-nutrition-mini-adult-dry-dog-food?_pos=1&_sid=12da2c928&_ss=r&variant=40612055547939",
+              "sku": "3182550402170",
+              "comparisonAttributes": {
+                "size": "",
+                "color": ""
+              },
+              "comparisonAmbiguous": false,
+              "retailer": {
+                "name": "petworld.co.za"
+              },
+              "price": 394.9,
+              "currency": "ZAR",
+              "availability": "in_stock",
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-07T08:32:49.140Z",
+              "retailerDomain": "petworld.co.za",
+              "trustedRetailerDomain": false
+            }
+          ],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "centralvet.co.za",
+              "searchUrl": "https://centralvet.co.za/products/royal-canin-mini-adult-dog-food-2kg",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "petworld.co.za",
+              "searchUrl": "https://petworld.co.za/products/royal-canin-size-health-nutrition-mini-adult-dry-dog-food?_pos=1&_sid=12da2c928&_ss=r&variant=40612055547939",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Petworld",
+              "searchUrl": "https://petworld.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Central Vet Midwater",
+              "searchUrl": "https://centralvet.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Absolute Pets",
+              "searchUrl": "https://www.absolutepets.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "centralvet.co.za",
+              "searchUrl": "https://centralvet.co.za/products/royal-canin-mini-adult-dog-food-2kg",
+              "exactProductMatch": true,
+              "stockVerified": true,
+…4820 tokens truncated…come": "read",
+                "characters": 2028
+              }
+            ],
+            "candidates": {
+              "known": 0,
+              "web": 0,
+              "native": 16,
+              "selected": 12,
+              "accepted": 0
+            },
+            "authorizedOffers": 0
+          },
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Casio%20fx-82ZA%20Plus%20II%20calculator",
+          "checkedAt": "2026-11-07T08:32:57.085Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": null,
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "sourceChecks": [
+            {
+              "url": "https://www.waltons.co.za/buy/casio-calculator-scientific-fx-991za",
+              "status": "identity-mismatch"
+            },
+            {
+              "url": "https://www.waltons.co.za/buy/casio-plus-new-generation-scientific-calculator-pink-fx82za-plus-ll-each",
+              "status": "identity-mismatch"
+            },
+            {
+              "url": "https://www.waltons.co.za/buy/casio-plus-new-generation-scientific-calculator-fx82za-plus-ll-each",
+              "status": "identity-mismatch"
+            },
+            {
+              "url": "https://www.waltons.co.za/buy/casio-plus-new-generation-scientific-calculator-blue-fx82za-plus-ll-each",
+              "status": "identity-mismatch"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-07T08:32:57.829Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "lighting",
+      "query": "Philips Hue White E27 bulb",
+      "status": "failed",
+      "durationMs": 7523,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Philips Hue White E27 bulb",
+            "object": "Philips Hue White E27 bulb",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Philips Hue White E27 bulb",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "Philips Hue White E27 bulb",
+          "bestProduct": null,
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Builders",
+              "searchUrl": "https://www.builders.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Leroy Merlin",
+              "searchUrl": "https://www.leroymerlin.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "BUCO",
+              "searchUrl": "https://www.buco.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Mica",
+              "searchUrl": "https://www.mica.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Builders",
+              "searchUrl": "https://www.builders.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Leroy Merlin",
+              "searchUrl": "https://www.leroymerlin.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "BUCO",
+              "searchUrl": "https://www.buco.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Mica",
+              "searchUrl": "https://www.mica.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "discoveryDiagnostics": {
+            "sourceReads": [
+              {
+                "phase": "catalogue",
+                "host": "leroymerlin.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.builders.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 32731
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.tmbsupplies.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1715
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.tmbsupplies.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 4541
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.builders.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 32731
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.tmbsupplies.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 5311
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.tmbsupplies.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1257594
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.tmbsupplies.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1275200
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.buco.co.za",
+                "outcome": "timeout"
+              }
+            ],
+            "candidates": {
+              "known": 0,
+              "web": 0,
+              "native": 0,
+              "selected": 0,
+              "accepted": 0
+            },
+            "authorizedOffers": 0
+          },
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Philips%20Hue%20White%20E27%20bulb",
+          "checkedAt": "2026-11-07T08:32:58.461Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": null,
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "sourceChecks": [],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-07T08:32:59.415Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    },
+    {
+      "category": "camera",
+      "query": "Canon EOS R50 camera body",
+      "status": "passed",
+      "durationMs": 6179,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "Canon EOS R50 camera body",
+            "object": "Canon EOS R50 camera body",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "Canon EOS R50 camera body",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": true,
+          "exactMatchVerified": true,
+          "searchQuery": "Canon EOS R50 camera body",
+          "bestProduct": {
+            "name": "Canon EOS R50 Mirrorless Camera Body"
+          },
+          "bestPrice": null,
+          "priceComparisonIssue": "variants",
+          "priceComparisonNote": "Listing variants, currencies or price conditions differ. Compare each listing separately.",
+          "offers": [
+            {
+              "product_name": "Canon EOS R50 Mirrorless Camera Body",
+              "product_url": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body?_pos=1&_sid=861d89ca3&_ss=r",
+              "sku": "5811C052AA",
+              "comparisonAttributes": {
+                "size": "",
+                "color": ""
+              },
+              "comparisonAmbiguous": false,
+              "retailer": {
+                "name": "ormsdirect.co.za"
+              },
+              "price": 14895,
+              "currency": "ZAR",
+              "availability": "out_of_stock",
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-07T08:33:02.371Z",
+              "retailerDomain": "ormsdirect.co.za",
+              "trustedRetailerDomain": false
+            },
+            {
+              "product_name": "Canon EOS R50 Mirrorless Camera Body (White)",
+              "product_url": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body-white?_pos=4&_sid=861d89ca3&_ss=r",
+              "sku": "",
+              "comparisonAttributes": {
+                "size": "",
+                "color": ""
+              },
+              "comparisonAmbiguous": false,
+              "retailer": {
+                "name": "ormsdirect.co.za"
+              },
+              "price": 16995,
+              "currency": "ZAR",
+              "availability": "out_of_stock",
+              "priceConditions": "",
+              "verified": true,
+              "exactProductMatch": true,
+              "sourcePageVerified": true,
+              "source": "Verified directly on exact retailer product page",
+              "matchScore": 92,
+              "stockScope": "online/general retailer availability only",
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "checkedAt": "2026-11-07T08:33:02.355Z",
+              "retailerDomain": "ormsdirect.co.za",
+              "trustedRetailerDomain": false
+            }
+          ],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "ormsdirect.co.za",
+              "searchUrl": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body?_pos=1&_sid=861d89ca3&_ss=r",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "ormsdirect.co.za",
+              "searchUrl": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body-white?_pos=4&_sid=861d89ca3&_ss=r",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "ormsdirect.co.za",
+              "searchUrl": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body?_pos=1&_sid=861d89ca3&_ss=r",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "ormsdirect.co.za",
+              "searchUrl": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body-white?_pos=4&_sid=861d89ca3&_ss=r",
+              "exactProductMatch": true,
+              "stockVerified": true,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "verified_exact_online_listing"
+            },
+            {
+              "name": "Incredible Connection",
+              "searchUrl": "https://www.incredible.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Game",
+              "searchUrl": "https://www.game.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Makro",
+              "searchUrl": "https://www.makro.co.za/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 2,
+          "verifiedSellerCount": 1,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 2,
+          "discoveryDiagnostics": {
+            "sourceReads": [
+              {
+                "phase": "catalogue",
+                "host": "www.ormsdirect.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1800000
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.outdoorphoto.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1483287
+              },
+              {
+                "host": "ormsdirect.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1668823
+              },
+              {
+                "host": "ormsdirect.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1657332
+              },
+              {
+                "host": "ormsdirect.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1592665
+              },
+              {
+                "host": "outdoorphoto.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1149574
+              },
+              {
+                "host": "outdoorphoto.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1202957
+              },
+              {
+                "host": "outdoorphoto.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1184306
+              },
+              {
+                "host": "outdoorphoto.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1172734
+              },
+              {
+                "host": "ormsdirect.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1708369
+              },
+              {
+                "host": "ormsdirect.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1679629
+              },
+              {
+                "host": "outdoorphoto.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1112941
+              },
+              {
+                "host": "ormsdirect.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1667171
+              },
+              {
+                "host": "outdoorphoto.co.za",
+                "phase": "product",
+                "status": 200,
+                "outcome": "read",
+                "characters": 1171283
+              }
+            ],
+            "candidates": {
+              "known": 0,
+              "web": 0,
+              "native": 16,
+              "selected": 12,
+              "accepted": 2
+            },
+            "authorizedOffers": 0
+          },
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=Canon%20EOS%20R50%20camera%20body",
+          "checkedAt": "2026-11-07T08:33:04.252Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": true,
+          "whatItDoes": "The Canon EOS R50 Mirrorless Camera Body features a 24 megapixel APS-C sensor and Canon's powerful DIGIC X image processor, enabling the Canon EOS R50 Mirrorless Camera Body to punch well above its ultra-compact nature.",
+          "pros": [
+            "Aimed squarely at content creators and vloggers.The Canon EOS R50 Mirrorless Camera Body's impressive technology delivers high-resolution stills and 4K 30p video.",
+            "Compact and versatile, the Canon EOS R50 Mirrorless Camera Body is the camera content creators have been waiting for."
+          ],
+          "cons": [],
+          "specifications": [
+            {
+              "name": "Retailer product code",
+              "value": "5811C052AA",
+              "sourceUrl": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body?_pos=1&_sid=861d89ca3&_ss=r"
+            },
+            {
+              "name": "Barcode",
+              "value": "4549292205015",
+              "sourceUrl": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body?_pos=1&_sid=861d89ca3&_ss=r"
+            }
+          ],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": {
+              "text": "The Canon EOS R50 Mirrorless Camera Body features a 24 megapixel APS-C sensor and Canon's powerful DIGIC X image processor, enabling the Canon EOS R50 Mirrorless Camera Body to punch well above its ultra-compact nature.",
+              "sourceUrl": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body?_pos=1&_sid=861d89ca3&_ss=r",
+              "sourceTitle": "Canon EOS R50 Mirrorless Camera Body"
+            },
+            "pros": [
+              {
+                "text": "Aimed squarely at content creators and vloggers.The Canon EOS R50 Mirrorless Camera Body's impressive technology delivers high-resolution stills and 4K 30p video.",
+                "sourceUrl": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body?_pos=1&_sid=861d89ca3&_ss=r",
+                "sourceTitle": "Canon EOS R50 Mirrorless Camera Body"
+              },
+              {
+                "text": "Compact and versatile, the Canon EOS R50 Mirrorless Camera Body is the camera content creators have been waiting for.",
+                "sourceUrl": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body?_pos=1&_sid=861d89ca3&_ss=r",
+                "sourceTitle": "Canon EOS R50 Mirrorless Camera Body"
+              }
+            ],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [
+            {
+              "title": "Canon EOS R50 Mirrorless Camera Body",
+              "url": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body?_pos=1&_sid=861d89ca3&_ss=r"
+            },
+            {
+              "title": "Canon EOS R50 Mirrorless Camera Body (White)",
+              "url": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body-white?_pos=4&_sid=861d89ca3&_ss=r"
+            }
+          ],
+          "sourceChecks": [
+            {
+              "url": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body?_pos=1&_sid=861d89ca3&_ss=r",
+              "status": "product-facts-verified"
+            },
+            {
+              "url": "https://www.ormsdirect.co.za/products/canon-eos-r50-mirrorless-camera-body-white?_pos=4&_sid=861d89ca3&_ss=r",
+              "status": "product-facts-verified"
+            }
+          ],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-07T08:33:05.584Z",
+          "message": "Product facts are quoted from matching product-page descriptions."
+        }
+      }
+    },
+    {
+      "category": "bag",
+      "query": "JanSport SuperBreak Plus backpack",
+      "status": "failed",
+      "durationMs": 7980,
+      "search": {
+        "status": 200,
+        "data": {
+          "identification": {
+            "name": "JanSport SuperBreak Plus backpack",
+            "object": "JanSport SuperBreak Plus backpack",
+            "brand": "",
+            "model": "",
+            "category": "product",
+            "retailCategory": "general",
+            "searchQuery": "JanSport SuperBreak Plus backpack",
+            "barcode": null,
+            "confidence": null,
+            "identificationMethod": "typed-user-input",
+            "userConfirmed": true
+          },
+          "offers": [],
+          "blocked": false,
+          "verified": false,
+          "userConfirmed": true,
+          "identitySource": "user-confirmed",
+          "visualVerification": false,
+          "provider": "user-input",
+          "imageAccepted": false,
+          "needsVision": false,
+          "needsRetailerVerification": true,
+          "code": "USER_CONFIRMED_PRODUCT",
+          "message": "Product accepted. FindIt can now verify retailer pages, prices and availability for this exact search."
+        }
+      },
+      "commerce": {
+        "status": 200,
+        "data": {
+          "ok": true,
+          "matched": false,
+          "exactMatchVerified": false,
+          "searchQuery": "JanSport SuperBreak Plus backpack",
+          "bestProduct": null,
+          "bestPrice": null,
+          "priceComparisonIssue": "no-prices",
+          "priceComparisonNote": "",
+          "offers": [],
+          "possibleOffers": [],
+          "variantConfirmationRequired": false,
+          "retailerStatus": [
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Bash",
+              "searchUrl": "https://bash.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Superbalist",
+              "searchUrl": "https://www.superbalist.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "webRetailers": [
+            {
+              "name": "Takealot",
+              "searchUrl": "https://www.takealot.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Bash",
+              "searchUrl": "https://bash.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            },
+            {
+              "name": "Superbalist",
+              "searchUrl": "https://www.superbalist.com/",
+              "exactProductMatch": false,
+              "stockVerified": false,
+              "branchStockVerified": false,
+              "directionsAvailable": false,
+              "status": "candidate_retailer"
+            }
+          ],
+          "verifiedOfferCount": 0,
+          "verifiedSellerCount": 0,
+          "inStockOfferCount": 0,
+          "priceVerifiedCount": 0,
+          "discoveryDiagnostics": {
+            "sourceReads": [
+              {
+                "phase": "catalogue",
+                "host": "www.geewiz.co.za",
+                "status": 403,
+                "outcome": "http-error"
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.takealot.com",
+                "status": 200,
+                "outcome": "read",
+                "characters": 18486
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.takealot.com",
+                "status": 200,
+                "outcome": "read",
+                "characters": 18457
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.makro.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 15571
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.makro.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 15571
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.game.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 15571
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.game.co.za",
+                "status": 200,
+                "outcome": "read",
+                "characters": 15571
+              },
+              {
+                "phase": "catalogue",
+                "host": "www.loot.co.za",
+                "outcome": "timeout"
+              }
+            ],
+            "candidates": {
+              "known": 0,
+              "web": 0,
+              "native": 0,
+              "selected": 0,
+              "accepted": 0
+            },
+            "authorizedOffers": 0
+          },
+          "nearbyBranchStockVerified": false,
+          "branchStockNote": "Nearby branches are only marked in stock when branch-specific inventory evidence is available.",
+          "discoveryMethod": "FindIt searches both known retailers and the wider web, then accepts only exact product pages that pass identity and commerce verification. This allows uncommon products and niche retailers without inventing price or stock.",
+          "providerSearchUrl": "https://www.pricecheck.co.za/search?search=JanSport%20SuperBreak%20Plus%20backpack",
+          "checkedAt": "2026-11-07T08:33:04.383Z"
+        }
+      },
+      "research": {
+        "status": 200,
+        "data": {
+          "researched": false,
+          "whatItDoes": "",
+          "pros": [],
+          "cons": [],
+          "specifications": [],
+          "compatibility": [],
+          "claimEvidence": {
+            "whatItDoes": null,
+            "pros": [],
+            "cons": [],
+            "compatibility": [],
+            "includedItems": []
+          },
+          "includedItems": [],
+          "variants": [],
+          "bestFor": "",
+          "standOut": "",
+          "valueVerdict": "",
+          "sources": [],
+          "sourceChecks": [],
+          "researchMethod": "Fetched exact-product page descriptions",
+          "checkedAt": "2026-11-07T08:33:05.814Z",
+          "message": "No trustworthy exact-product description was found. FindIt will not guess."
+        }
+      }
+    }
+  ]
+}
