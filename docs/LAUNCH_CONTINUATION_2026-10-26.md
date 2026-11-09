@@ -2,6 +2,10 @@
 
 Launch readiness remains withheld. Preserved the existing application design and features; no paid services or credentials were added.
 
+## Latest Product Info continuation
+
+PRs #331–#333 improve useful tentative-model research and manufacturer-source validation. Current application commit: `36eb14a24481b7996b17a2e24a0a4c10b09343f8`. See [the coverage report](PRODUCT_INFORMATION_COVERAGE_2026-10-26.md) for actual photo evidence, 515 tests, source failures and remaining limits. Exact photo recognition is not universally solved; the live Shure source returned HTTP 403 and is shown as unavailable.
+
 ## Baseline and repair
 
 Continued from main `b99eb817` and deployed runtime `cc140f2e`, after reviewing the October 25 audit. PRs #321–#324 are already merged and are preserved.
