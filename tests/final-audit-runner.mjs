@@ -15,20 +15,6 @@ const planPath=path.join(out,'plan-isolation-audit.json');
 const finalJsonPath=path.join(out,'findit-full-audit.json');
 const mdPath=path.join(out,'findit-full-audit.md');
 
-function isOnlyExpectedStaticPost501(detail) {
- const text=String(detail||'').trim();
- if(!text)return false;
- const entries=text.split(/\r?\n/).map(entry=>entry.trim()).filter(Boolean);
- // Fail closed: every reported entry must independently describe the known
- // Python static-server POST limitation. Any accompanying 404, other status,
- // or JavaScript error keeps the original check failed.
- return entries.length>0&&entries.every(entry=>
-  /\b501\b/.test(entry)&&
-  (/\bPOST\b|Unsupported method\s*\(['"]POST['"]\)/i.test(entry))&&
-  !/\b(?:400|401|403|404|405|409|429|5\d{2})\b/.test(entry.replace(/\b501\b/g,''))&&
-  !/\b(?:Uncaught|TypeError|ReferenceError|SyntaxError|RangeError)\b|console\.error/i.test(entry)
- );
-}
 
 if(!fs.existsSync(jsonPath)){console.error('Audit report was not produced.');process.exit(1)}
 if(!fs.existsSync(planPath)){console.error('Plan-isolation audit was not produced.');process.exit(planRun.status||1)}
