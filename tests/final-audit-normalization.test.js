@@ -28,3 +28,14 @@ test('rejects remote 501 responses and non-POST limitations',()=>{
 test('rejects empty, missing-status and unrelated details',()=>{
  for(const value of ['',null,'POST failed','JavaScript error 501','501 POST']) assert.equal(isOnlyExpectedStaticPost501(value),false);
 });
+
+test('rejects the actual mixed browser-console plus failedResponses report shape',()=>{
+ const detail="Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST')) http://127.0.0.1:4173/api/analytics; [{\"status\":404,\"url\":\"http://127.0.0.1:4173/api/fx\"},{\"status\":501,\"url\":\"http://127.0.0.1:4173/api/analytics\"}]";
+ assert.equal(isOnlyExpectedStaticPost501(detail),false);
+});
+test('rejects generic browser Error text even when the local POST 501 is expected',()=>{
+ assert.equal(isOnlyExpectedStaticPost501("501 Unsupported method ('POST') http://127.0.0.1:4173/api/analytics; Error: unexpected script failure"),false);
+});
+test('accepts multiple isolated local Python POST 501 responses',()=>{
+ assert.equal(isOnlyExpectedStaticPost501("501 Unsupported method ('POST') http://127.0.0.1:4173/api/analytics; 501 Unsupported method ('POST') http://localhost:4173/api/assistant"),true);
+});
