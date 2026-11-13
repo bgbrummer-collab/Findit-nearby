@@ -13,6 +13,22 @@ const jsonPath=fs.existsSync(currentPath)?currentPath:legacyPath;
 const planPath=path.join(out,'plan-isolation-audit.json');
 const finalJsonPath=path.join(out,'findit-full-audit.json');
 const mdPath=path.join(out,'findit-full-audit.md');
+
+function isOnlyExpectedStaticPost501(detail) {
+ const text=String(detail||'').trim();
+ if(!text)return false;
+ const entries=text.split(/\r?\n/).map(entry=>entry.trim()).filter(Boolean);
+ // Fail closed: every reported entry must independently describe the known
+ // Python static-server POST limitation. Any accompanying 404, other status,
+ // or JavaScript error keeps the original check failed.
+ return entries.length>0&&entries.every(entry=>
+  /\b501\b/.test(entry)&&
+  (/\bPOST\b|Unsupported method\s*\(['"]POST['"]\)/i.test(entry))&&
+  !/\b(?:400|401|403|404|405|409|429|5\d{2})\b/.test(entry.replace(/\b501\b/g,''))&&
+  !/\b(?:Uncaught|TypeError|ReferenceError|SyntaxError|RangeError)\b|console\.error/i.test(entry)
+ );
+}
+
 if(!fs.existsSync(jsonPath)){console.error('Audit report was not produced.');process.exit(1)}
 if(!fs.existsSync(planPath)){console.error('Plan-isolation audit was not produced.');process.exit(planRun.status||1)}
 const report=JSON.parse(fs.readFileSync(jsonPath,'utf8'));
@@ -36,11 +52,11 @@ if(!planFailures.length){
     :'Current dashboard behavior verified by the plan-aware audit; the legacy assertion expects the previous label/modal contract.';
    continue;
   }
-  // python http.server cannot service POST /api/*; those 501s are a limitation of the local
-  // static audit harness, not browser/runtime console failures. Never suppress other console errors.
-  if(x.name==='No critical console errors'&&/501|Unsupported method \('POST'\)/i.test(String(x.detail||''))){
+  // Suppress only entries that consist entirely of the known Python static-server
+  // response to POST requests. A mixed 404/501 result or any JS error remains a failure.
+  if(x.name==='No critical console errors'&&isOnlyExpectedStaticPost501(x.detail)){
    x.status='PASS';
-   x.detail='Only expected local static-server POST 501 responses were observed; no browser JavaScript errors were present.';
+   x.detail='Only the explicitly recognized local static-server POST 501 limitation was observed; mixed HTTP failures and browser JavaScript errors are never normalized.';
   }
  }
 }
