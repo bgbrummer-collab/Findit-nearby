@@ -1,6 +1,7 @@
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
+import { isOnlyExpectedStaticPost501 } from './final-audit-normalization.mjs';
 
 const out=process.env.AUDIT_OUT||'audit-output';
 // Keep the broad legacy audit for regressions, then run the plan-aware audit.
