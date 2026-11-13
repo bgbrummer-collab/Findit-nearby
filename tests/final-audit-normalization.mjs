@@ -5,8 +5,8 @@ export function isOnlyExpectedStaticPost501(detail) {
  if(!text)return false;
  if(!/Unsupported method\s*\(['"]POST['"]\)/i.test(text))return false;
  if(!/https?:\/\/(?:127\.0\.0\.1|localhost)(?::\d+)?\//i.test(text))return false;
- if(/\b(?:Uncaught|TypeError|ReferenceError|SyntaxError|RangeError|console\.error|Failed to fetch|net::ERR_)\b/i.test(text))return false;
- const statuses=[...text.matchAll(/\b(?:status(?: of)?\s*[:=]?\s*|HTTP(?:\/\d(?:\.\d)?)?\s*)([45]\d{2})\b/gi)].map(m=>Number(m[1]));
+ if(/\b(?:Uncaught|Error|TypeError|ReferenceError|SyntaxError|RangeError|console\.error|Failed to fetch|net::ERR_)\b/i.test(text))return false;
+ const statuses=[...text.matchAll(/\b([45]\d{2})\b/g)].map(m=>Number(m[1]));
  if(!statuses.length||statuses.some(status=>status!==501))return false;
  return true;
 }
