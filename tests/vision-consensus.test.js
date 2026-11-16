@@ -220,7 +220,7 @@ test('partial model identity retains OCR independently repeated by separate visi
 
 test('one reader cannot promote its OCR text by repeating it within the same response',()=>{
  const a={name:'Example headphones',brand:'Example',model:'A2',object:'headphones',visibleText:['EXAMPLE A2','EXAMPLE A2','Model: A2']};
- const b={...a,visibleText:['EXAMPLE headphones']};
+ const b={...a,name:'Example A3 headphones',model:'A3',visibleText:['EXAMPLE headphones']};
  const d=reconcileVision([a,b]);
  assert.equal(d.requiresModelConfirmation,true);
  assert.ok(!d.visibleText.includes('EXAMPLE A2'));
@@ -229,7 +229,7 @@ test('one reader cannot promote its OCR text by repeating it within the same res
 
 test('corroborated OCR matching is insensitive to punctuation and case but keeps source wording',()=>{
  const a={name:'Example A2 headset',brand:'Example',model:'A2',object:'headset',visibleText:['MODEL: A2-X','SKU 12345']};
- const b={...a,visibleText:['model A2 X','sku: 12345']};
+ const b={...a,name:'Example A3 headset',model:'A3',visibleText:['model A2 X','sku: 12345']};
  const d=reconcileVision([a,b]);
  assert.ok(d.visibleText.some(text=>/MODEL: A2-X/i.test(text)));
  assert.ok(d.visibleText.some(text=>/SKU 12345/i.test(text)));
