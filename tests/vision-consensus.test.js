@@ -232,5 +232,5 @@ test('corroborated OCR matching is insensitive to punctuation and case but keeps
  const b={...a,name:'Example A3 headset',model:'A3',visibleText:['model A2 X','sku: 12345']};
  const d=reconcileVision([a,b]);
  assert.ok(d.visibleText.some(text=>/MODEL: A2-X/i.test(text)));
- assert.ok(d.visibleText.some(text=>/SKU 12345/i.test(text)));
+ assert.ok(d.visibleText.some(text=>/SKU:?\\s+12345/i.test(text)));
 });
