@@ -204,3 +204,33 @@ for(const [object,size] of [['toilet paper','18 rolls'],['conditioner','250ml'],
  assert.equal(d.requiresModelConfirmation,true);assert.equal(d.model,'');assert.ok(d.name.replace(/\s/g,'').includes(size.replace(/\s/g,'')));assert.equal(d.searchQuery,d.name);
  const disputed=reconcileVision([a,{...a,model:'Beta',size:'other'}]);assert.equal(disputed.size,'');assert.ok(!disputed.name.includes(size));
 });
+
+
+test('partial model identity retains OCR independently repeated by separate vision readers',()=>{
+ const a={name:'Logitech G Pro X gaming headset',brand:'Logitech',model:'G Pro X',object:'headset',visibleText:['LOGITECH G PRO X','Model: 981-000817','Black']};
+ const b={...a,name:'Logitech G Pro Wireless headset',model:'G Pro Wireless',object:'headphones',visibleText:['Logitech G Pro X','MODEL 981 000817','Black','single-reader guess']};
+ const d=reconcileVision([a,b]);
+ assert.equal(d.requiresModelConfirmation,true);
+ assert.equal(d.model,'');
+ assert.ok(d.visibleText.includes('LOGITECH G PRO X'));
+ assert.ok(d.visibleText.some(text=>/981.?000817/i.test(text)));
+ assert.ok(d.visibleText.includes('Black'));
+ assert.ok(!d.visibleText.includes('single-reader guess'));
+});
+
+test('one reader cannot promote its OCR text by repeating it within the same response',()=>{
+ const a={name:'Example headphones',brand:'Example',model:'A2',object:'headphones',visibleText:['EXAMPLE A2','EXAMPLE A2','Model: A2']};
+ const b={...a,visibleText:['EXAMPLE headphones']};
+ const d=reconcileVision([a,b]);
+ assert.equal(d.requiresModelConfirmation,true);
+ assert.ok(!d.visibleText.includes('EXAMPLE A2'));
+ assert.ok(!d.visibleText.includes('Model: A2'));
+});
+
+test('corroborated OCR matching is insensitive to punctuation and case but keeps source wording',()=>{
+ const a={name:'Example A2 headset',brand:'Example',model:'A2',object:'headset',visibleText:['MODEL: A2-X','SKU 12345']};
+ const b={...a,visibleText:['model A2 X','sku: 12345']};
+ const d=reconcileVision([a,b]);
+ assert.ok(d.visibleText.some(text=>/MODEL: A2-X/i.test(text)));
+ assert.ok(d.visibleText.some(text=>/SKU 12345/i.test(text)));
+});
