@@ -38,7 +38,7 @@ async function research(i,{force=false,session=productSession,render=true}={}){i
 
 window.addEventListener('click',e=>{const t=e.target?.closest?.('#finditExactShell [data-fx="product"],#finditExactShell [data-stable-action="product"]');if(!t)return;e.preventDefault();e.stopImmediatePropagation();const opened=openNow();if(opened&&!opened.i.requiresModelConfirmation)setTimeout(()=>research(opened.i,{force:true,session:opened.session,render:true}),0)},true);
 window.addEventListener('click',e=>{if(!productModalOpen())return;const m=$('#fxStableModal');if(e.target===m||e.target?.closest?.('#fxStableModal .fx-stable-close'))cancelProductWork()},true);
-window.addEventListener('keydown',e=>{if(e.key==='Escape'&&productModalOpen())cancelProductWork()},true);
+window.addEventListener('keydown',e=>{if(e.key!=='Escape')return;const m=$('#fxStableModal');if(!m||m.classList.contains('hidden'))return;if(productModalOpen())cancelProductWork();m.classList.add('hidden');m.setAttribute('aria-hidden','true')},true);
 document.addEventListener('findit:results-rendered',()=>{const i=id();if(clean(i.name||i.object))setTimeout(()=>research(i,{render:false,session:productSession}),100)});
 window.__finditProductInfoClickFixReady=true;
 })();
