@@ -1,1 +1,2 @@
 Loader activation prepared.
+Historical release-gate probe before Smart Choice exactness revision: 2026-09-14.
