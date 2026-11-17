@@ -5,6 +5,12 @@ concurrency:
   cancel-in-progress: true
 on:
   workflow_dispatch:
+  # Run once when this workflow itself is updated on main, so the production
+  # five-photo matrix can be verified after the partial-identity fix ships.
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/live-user-image-production-matrix.yml
 permissions:
   contents: read
 jobs:
