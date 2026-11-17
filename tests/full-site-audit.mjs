@@ -25,6 +25,9 @@ const page=await context.newPage(),pageErrors=[],consoleErrors=[],failedResponse
 page.on('pageerror',e=>pageErrors.push(String(e)));
 page.on('console',m=>{if(m.type()==='error')consoleErrors.push(m.text())});
 page.on('dialog',async d=>{try{if(d.type()==='prompt')await d.accept('Nike Air Force 1 Low');else await d.accept()}catch{}});
+// Faithful local-preview fixture for the Worker’s same-currency identity response.
+// Do not mock cross-currency conversion or any production API response here.
+await page.route(url=>{const u=new URL(url);return u.pathname==='/api/fx'&&u.searchParams.get('base')==='ZAR'&&u.searchParams.get('symbols')==='ZAR'},async r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({base:'ZAR',rates:{ZAR:1},date:new Date().toISOString().slice(0,10),provider:'identity'})}));
 
 await page.route('**/api/search',async r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({identification:{object:'sneaker',name:'Nike Air Force 1 Low',brand:'Nike',model:'Air Force 1 Low',category:'footwear',retailCategory:'footwear',searchQuery:'Nike Air Force 1 Low',confidence:.98,visibleText:['NIKE','AIR','AIR FORCE 1'],features:['white leather low-top','blue swoosh'],summary:'A white low-top Nike Air Force 1 sneaker with blue accents.'}})}));
 await page.route('**/api/official-brand-intelligence?action=exact',async r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({exactFound:true,confidence:.97,productName:'Nike Air Force 1 Low',brand:'Nike',model:'Air Force 1 Low',searchQuery:'Nike Air Force 1 Low',evidence:['photo silhouette','visible Nike/AIR text']})}));
