@@ -40,4 +40,5 @@ window.addEventListener('click',e=>{const t=e.target?.closest?.('#finditExactShe
 window.addEventListener('click',e=>{if(!productModalOpen())return;const m=$('#fxStableModal');if(e.target===m||e.target?.closest?.('#fxStableModal .fx-stable-close'))cancelProductWork()},true);
 window.addEventListener('keydown',e=>{if(e.key==='Escape'&&productModalOpen())cancelProductWork()},true);
 document.addEventListener('findit:results-rendered',()=>{const i=id();if(clean(i.name||i.object))setTimeout(()=>research(i,{render:false,session:productSession}),100)});
+window.__finditProductInfoClickFixReady=true;
 })();
