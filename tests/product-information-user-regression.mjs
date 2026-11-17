@@ -39,7 +39,7 @@ try{
   await page.goto(base,{waitUntil:'domcontentloaded',timeout:45000});
   await page.locator('#fxVisiblePhotoPicker').setInputFiles({name:'ui-only.png',mimeType:'image/png',buffer:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAKUlEQVR4nO3NMQEAAAjDMED5pGMCvlRA00nqs3m9AwAAAAAAAAAAgMMWvj0BwDVKG0sAAAAASUVORK5CYII=','base64')});
   await page.locator('#fxSearchNow').click();await page.locator('#fxPhotoRecovery').waitFor({state:'visible',timeout:15000});
-  await page.getByRole('button',{name:'ⓘ Product Info',exact:true}).click();
+  await page.waitForFunction(()=>window.__finditProductInfoClickFixReady===true,null,{timeout:15000});await page.getByRole('button',{name:'ⓘ Product Info',exact:true}).click();
   await page.getByRole('heading',{name:'Possible product: '+name,exact:true}).waitFor({state:'visible',timeout:15000});
   const text=await page.locator('#fxInformationBody').innerText();
   for(const wanted of ['Possible model from the photo','One image reader suggested','not independently confirmed','Designed for game audio.','brand is not confirmed'])if(!text.includes(wanted))throw Error('Uncertain model lost '+wanted);
@@ -60,7 +60,7 @@ try{
   });
   await page.goto(base,{waitUntil:'domcontentloaded',timeout:45000});
   await page.locator('#fxVisiblePhotoPicker').setInputFiles({name:'ui-only.png',mimeType:'image/png',buffer:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAKUlEQVR4nO3NMQEAAAjDMED5pGMCvlRA00nqs3m9AwAAAAAAAAAAgMMWvj0BwDVKG0sAAAAASUVORK5CYII=','base64')});
-  await page.locator('#fxSearchNow').click();await page.waitForFunction(()=>window.finditState?.result?.identification?.model==='A42');await page.getByRole('button',{name:'ⓘ Product Info',exact:true}).click();
+  await page.locator('#fxSearchNow').click();await page.waitForFunction(()=>window.finditState?.result?.identification?.model==='A42');await page.waitForFunction(()=>window.__finditProductInfoClickFixReady===true,null,{timeout:15000});await page.getByRole('button',{name:'ⓘ Product Info',exact:true}).click();
   await page.getByRole('heading',{name:'Model listings — confirm your variant',exact:true}).waitFor({state:'visible',timeout:20000});
   const text=await page.locator('#fxInformationBody').innerText();if(!text.includes(name)||!text.includes('Listing price:')||!text.includes('not used for your best price'))throw Error('Variant review lost its useful listing evidence');
   if(/750/.test(await page.locator('#fxBestPrice').innerText()))throw Error('Unconfirmed photo colour supplied the best price');
@@ -88,7 +88,7 @@ try{
   });
   await page.goto(base,{waitUntil:'domcontentloaded',timeout:45000});
   await page.locator('#fxVisiblePhotoPicker').setInputFiles({name:'ui-only.png',mimeType:'image/png',buffer:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAKUlEQVR4nO3NMQEAAAjDMED5pGMCvlRA00nqs3m9AwAAAAAAAAAAgMMWvj0BwDVKG0sAAAAASUVORK5CYII=','base64')});
-  await page.locator('#fxSearchNow').click();await page.locator('#fxPhotoRecovery').waitFor({state:'visible',timeout:15000});await page.getByRole('button',{name:'ⓘ Product Info',exact:true}).click();
+  await page.locator('#fxSearchNow').click();await page.locator('#fxPhotoRecovery').waitFor({state:'visible',timeout:15000});await page.waitForFunction(()=>window.__finditProductInfoClickFixReady===true,null,{timeout:15000});await page.getByRole('button',{name:'ⓘ Product Info',exact:true}).click();
   await page.getByRole('button',{name:'Yes, this is my product',exact:true}).click();
   await page.getByText('The latest source refresh is temporarily unavailable.',{exact:false}).waitFor({state:'visible',timeout:20000});
   const text=await page.locator('#fxInformationBody').innerText();if(!text.includes(candidate.whatItDoes)||!text.includes('Prices and stock still need a fresh check'))throw Error('Confirmation discarded checked facts or hid the failed refresh');
