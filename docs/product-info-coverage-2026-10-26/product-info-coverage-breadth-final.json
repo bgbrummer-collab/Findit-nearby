@@ -1,0 +1,308 @@
+[
+  {
+    "query": "Shure MV7X microphone",
+    "status": 200,
+    "response": {
+      "researched": true,
+      "whatItDoes": "The Shure MV7X is a professional-quality dynamic microphone, ideal for close mic applications that require vocal intelligibility with a balanced tone.",
+      "pros": [
+        "The attractive and durable all-metal design features an adjustable yoke that can be mounted onto a variety of microphone stands for flexible placement options.",
+        "Highly directional cardioid pattern isolates your voice and removes unwanted background noise.",
+        "Durable, Versatile Design.",
+        "The MV7X features a dynamic capsule with a cardioid pattern, which uses Voice Isolation Technology to pick up sound directly in front of the microphone."
+      ],
+      "cons": [],
+      "specifications": [
+        {
+          "name": "Brand",
+          "value": "Shure",
+          "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X"
+        },
+        {
+          "name": "Model",
+          "value": "MV7X",
+          "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X"
+        },
+        {
+          "name": "Transducer Type",
+          "value": "Dynamic (moving coil)",
+          "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X"
+        },
+        {
+          "name": "Polar Pattern",
+          "value": "Unidirectional (Cardioid)",
+          "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X"
+        },
+        {
+          "name": "Output Impedance",
+          "value": "252 Ω",
+          "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X"
+        },
+        {
+          "name": "Frequency Response",
+          "value": "50 Hz to 16,000 Hz",
+          "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X"
+        },
+        {
+          "name": "Sensitivity",
+          "value": "-55 dBV/Pa [1] (1.78 mV) (@ 1 kHz, open circuit voltage)",
+          "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X"
+        },
+        {
+          "name": "Polarity",
+          "value": "Positive pressure on diaphragm produces positive voltage on pin 2 with respect to pin 3",
+          "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X"
+        },
+        {
+          "name": "Housing",
+          "value": "All metal construction",
+          "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X"
+        },
+        {
+          "name": "Mounting Type",
+          "value": "5/8-27 thread mount",
+          "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X"
+        },
+        {
+          "name": "Net Weight",
+          "value": "0.55 kg (1.21 lbs)",
+          "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X"
+        },
+        {
+          "name": "Specification notes",
+          "value": "[1] 1 Pa=94 dB SPL",
+          "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X"
+        }
+      ],
+      "compatibility": [
+        "Passive XLR output: Connect to XLR mixers and interfaces."
+      ],
+      "claimEvidence": {
+        "whatItDoes": {
+          "text": "The Shure MV7X is a professional-quality dynamic microphone, ideal for close mic applications that require vocal intelligibility with a balanced tone.",
+          "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X",
+          "sourceTitle": "Shure MV7X Podcast Microphone"
+        },
+        "pros": [
+          {
+            "text": "The attractive and durable all-metal design features an adjustable yoke that can be mounted onto a variety of microphone stands for flexible placement options.",
+            "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X",
+            "sourceTitle": "Shure MV7X Podcast Microphone"
+          },
+          {
+            "text": "Highly directional cardioid pattern isolates your voice and removes unwanted background noise.",
+            "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X",
+            "sourceTitle": "Shure MV7X Podcast Microphone"
+          },
+          {
+            "text": "Durable, Versatile Design.",
+            "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X",
+            "sourceTitle": "Shure MV7X Podcast Microphone"
+          },
+          {
+            "text": "The MV7X features a dynamic capsule with a cardioid pattern, which uses Voice Isolation Technology to pick up sound directly in front of the microphone.",
+            "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X",
+            "sourceTitle": "Shure MV7X Podcast Microphone"
+          }
+        ],
+        "cons": [],
+        "compatibility": [
+          {
+            "text": "Passive XLR output: Connect to XLR mixers and interfaces.",
+            "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X",
+            "sourceTitle": "Shure MV7X Podcast Microphone"
+          }
+        ],
+        "includedItems": []
+      },
+      "includedItems": [],
+      "variants": [],
+      "bestFor": "",
+      "standOut": "",
+      "valueVerdict": "",
+      "sources": [
+        {
+          "title": "Shure MV7X Podcast Microphone",
+          "url": "https://www.shure.com/en-US/docs/guide/MV7X"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.shure.com/en-US/docs/guide/MV7X",
+          "status": "product-facts-verified"
+        }
+      ],
+      "researchMethod": "Fetched exact-product page descriptions",
+      "checkedAt": "2026-10-26T16:55:02.937Z",
+      "message": "Product facts are quoted from matching product-page descriptions."
+    }
+  },
+  {
+    "query": "Bosch GSB 18V-50 with batteries and charger",
+    "status": 200,
+    "response": {
+      "researched": false,
+      "whatItDoes": "",
+      "pros": [],
+      "cons": [],
+      "specifications": [],
+      "compatibility": [],
+      "claimEvidence": {
+        "whatItDoes": null,
+        "pros": [],
+        "cons": [],
+        "compatibility": [],
+        "includedItems": []
+      },
+      "includedItems": [],
+      "variants": [],
+      "bestFor": "",
+      "standOut": "",
+      "valueVerdict": "",
+      "sources": [],
+      "sourceChecks": [
+        {
+          "url": "https://www.tmbsupplies.co.za/products/bosch-professional-cordless-drill-gsb-18v-50-2-x-2-0ah-batteries-charger",
+          "status": "timeout"
+        }
+      ],
+      "researchMethod": "Fetched exact-product page descriptions",
+      "checkedAt": "2026-10-26T16:54:46.955Z",
+      "message": "No trustworthy exact-product description was found. FindIt will not guess."
+    }
+  },
+  {
+    "query": "Levis 501 Original Jeans",
+    "status": 200,
+    "response": {
+      "researched": true,
+      "whatItDoes": "A classic straight leg and iconic styling.",
+      "pros": [],
+      "cons": [],
+      "specifications": [
+        {
+          "name": "Brand",
+          "value": "Levi’s ®",
+          "sourceUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown"
+        }
+      ],
+      "compatibility": [],
+      "claimEvidence": {
+        "whatItDoes": {
+          "text": "A classic straight leg and iconic styling.",
+          "sourceUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2",
+          "sourceTitle": "LEVI'S® MEN'S 501® ORIGINAL JEANS - MEDIUM WASH"
+        },
+        "pros": [],
+        "cons": [],
+        "compatibility": [],
+        "includedItems": []
+      },
+      "includedItems": [],
+      "variants": [
+        {
+          "name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - MEDIUM WASH",
+          "productUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2",
+          "specifications": [
+            {
+              "name": "Brand",
+              "value": "Levi’s ®"
+            },
+            {
+              "name": "Retailer product code",
+              "value": "0050135983632",
+              "sourceAlsoListsAsMpn": true
+            }
+          ]
+        },
+        {
+          "name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - MED INDIGO - WORN IN",
+          "productUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-med-indigo-worn-in",
+          "specifications": [
+            {
+              "name": "Brand",
+              "value": "Levi’s ®"
+            },
+            {
+              "name": "Retailer product code",
+              "value": "A544700404032",
+              "sourceAlsoListsAsMpn": true
+            }
+          ]
+        },
+        {
+          "name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - GREY",
+          "productUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-grey-1",
+          "specifications": [
+            {
+              "name": "Brand",
+              "value": "Levi’s ®"
+            },
+            {
+              "name": "Retailer product code",
+              "value": "A544700413032",
+              "sourceAlsoListsAsMpn": true
+            }
+          ]
+        },
+        {
+          "name": "LEVI'S® MEN'S 501® ORIGINAL JEANS - BROWN",
+          "productUrl": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown",
+          "specifications": [
+            {
+              "name": "Brand",
+              "value": "Levi’s ®"
+            },
+            {
+              "name": "Retailer product code",
+              "value": "A544700422832",
+              "sourceAlsoListsAsMpn": true
+            }
+          ]
+        }
+      ],
+      "bestFor": "",
+      "standOut": "",
+      "valueVerdict": "",
+      "sources": [
+        {
+          "title": "LEVI'S® MEN'S 501® ORIGINAL JEANS - MEDIUM WASH",
+          "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2"
+        },
+        {
+          "title": "LEVI'S® MEN'S 501® ORIGINAL JEANS - MED INDIGO - WORN IN",
+          "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-med-indigo-worn-in"
+        },
+        {
+          "title": "LEVI'S® MEN'S 501® ORIGINAL JEANS - GREY",
+          "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-grey-1"
+        },
+        {
+          "title": "LEVI'S® MEN'S 501® ORIGINAL JEANS - BROWN",
+          "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-medium-wash-2",
+          "status": "product-facts-verified"
+        },
+        {
+          "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-brown",
+          "status": "product-facts-verified"
+        },
+        {
+          "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-med-indigo-worn-in",
+          "status": "product-facts-verified"
+        },
+        {
+          "url": "https://www.levi.co.za/products/levis%C2%AE-mens-501%C2%AE-original-jeans-grey-1",
+          "status": "product-facts-verified"
+        }
+      ],
+      "researchMethod": "Fetched exact-product page descriptions",
+      "checkedAt": "2026-10-26T16:54:44.171Z",
+      "message": "Product facts are quoted from matching product-page descriptions."
+    }
+  }
+]

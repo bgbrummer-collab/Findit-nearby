@@ -1,0 +1,134 @@
+{
+  "researched": true,
+  "whatItDoes": "The Shure MV7X is a professional-quality dynamic microphone, ideal for close mic applications that require vocal intelligibility with a balanced tone.",
+  "pros": [
+    "The attractive and durable all-metal design features an adjustable yoke that can be mounted onto a variety of microphone stands for flexible placement options.",
+    "Highly directional cardioid pattern isolates your voice and removes unwanted background noise.",
+    "Durable, Versatile Design.",
+    "The MV7X features a dynamic capsule with a cardioid pattern, which uses Voice Isolation Technology to pick up sound directly in front of the microphone."
+  ],
+  "cons": [],
+  "specifications": [
+    {
+      "name": "Brand",
+      "value": "Shure",
+      "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X"
+    },
+    {
+      "name": "Model",
+      "value": "MV7X",
+      "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X"
+    },
+    {
+      "name": "Transducer Type",
+      "value": "Dynamic (moving coil)",
+      "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X"
+    },
+    {
+      "name": "Polar Pattern",
+      "value": "Unidirectional (Cardioid)",
+      "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X"
+    },
+    {
+      "name": "Output Impedance",
+      "value": "252 Ω",
+      "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X"
+    },
+    {
+      "name": "Frequency Response",
+      "value": "50 Hz to 16,000 Hz",
+      "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X"
+    },
+    {
+      "name": "Sensitivity",
+      "value": "-55 dBV/Pa [1] (1.78 mV) (@ 1 kHz, open circuit voltage)",
+      "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X"
+    },
+    {
+      "name": "Polarity",
+      "value": "Positive pressure on diaphragm produces positive voltage on pin 2 with respect to pin 3",
+      "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X"
+    },
+    {
+      "name": "Housing",
+      "value": "All metal construction",
+      "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X"
+    },
+    {
+      "name": "Mounting Type",
+      "value": "5/8-27 thread mount",
+      "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X"
+    },
+    {
+      "name": "Net Weight",
+      "value": "0.55 kg (1.21 lbs)",
+      "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X"
+    },
+    {
+      "name": "Specification notes",
+      "value": "[1] 1 Pa=94 dB SPL",
+      "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X"
+    }
+  ],
+  "compatibility": [
+    "Passive XLR output: Connect to XLR mixers and interfaces."
+  ],
+  "claimEvidence": {
+    "whatItDoes": {
+      "text": "The Shure MV7X is a professional-quality dynamic microphone, ideal for close mic applications that require vocal intelligibility with a balanced tone.",
+      "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X",
+      "sourceTitle": "Shure MV7X Podcast Microphone"
+    },
+    "pros": [
+      {
+        "text": "The attractive and durable all-metal design features an adjustable yoke that can be mounted onto a variety of microphone stands for flexible placement options.",
+        "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X",
+        "sourceTitle": "Shure MV7X Podcast Microphone"
+      },
+      {
+        "text": "Highly directional cardioid pattern isolates your voice and removes unwanted background noise.",
+        "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X",
+        "sourceTitle": "Shure MV7X Podcast Microphone"
+      },
+      {
+        "text": "Durable, Versatile Design.",
+        "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X",
+        "sourceTitle": "Shure MV7X Podcast Microphone"
+      },
+      {
+        "text": "The MV7X features a dynamic capsule with a cardioid pattern, which uses Voice Isolation Technology to pick up sound directly in front of the microphone.",
+        "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X",
+        "sourceTitle": "Shure MV7X Podcast Microphone"
+      }
+    ],
+    "cons": [],
+    "compatibility": [
+      {
+        "text": "Passive XLR output: Connect to XLR mixers and interfaces.",
+        "sourceUrl": "https://www.shure.com/en-US/docs/guide/MV7X",
+        "sourceTitle": "Shure MV7X Podcast Microphone"
+      }
+    ],
+    "includedItems": []
+  },
+  "includedItems": [],
+  "variants": [],
+  "bestFor": "",
+  "standOut": "",
+  "valueVerdict": "",
+  "sources": [
+    {
+      "title": "Shure MV7X Podcast Microphone",
+      "url": "https://www.shure.com/en-US/docs/guide/MV7X"
+    }
+  ],
+  "sourceChecks": [
+    {
+      "url": "https://www.shure.com/en-US/docs/guide/MV7X",
+      "status": "product-facts-verified"
+    }
+  ],
+  "researchMethod": "Fetched exact-product page descriptions",
+  "checkedAt": "2026-10-26T17:06:34.953Z",
+  "message": "Product facts are quoted from matching product-page descriptions."
+}
