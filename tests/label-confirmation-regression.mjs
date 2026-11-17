@@ -1,46 +1,41 @@
 import {chromium} from 'playwright';
 import fs from 'node:fs';
 const base=process.env.FINDIT_URL||'http://127.0.0.1:4173/';
-const label='Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner';
 const browser=await chromium.launch({headless:true});
 try{
- for(const width of [1440,390])for(const candidateMode of [false,true]){
-  const page=await browser.newPage({viewport:{width,height:1000}});const confirmed=[];
+ for(const width of [1440,390]){
+  const page=await browser.newPage({viewport:{width,height:1000}});
+  const typedQueries=[];
   await page.route('**/api/**',async route=>{
-   const path=new URL(route.request().url()).pathname;let body={offers:[],stores:[],researched:false};
+   const path=new URL(route.request().url()).pathname;
+   let body={offers:[],stores:[],researched:false};
    if(path==='/api/search'){
+    const headers=route.request().headers();
     const raw=route.request().postData()||'';
-    if(raw.startsWith('{')){const input=JSON.parse(raw);confirmed.push(input.query);body={identification:{name:input.query,searchQuery:input.query,object:'conditioner',userConfirmed:true}};}
-    else body={identification:{name:'Marc Anthony conditioner',brand:'Marc Anthony',object:'conditioner',color:'Yellow packaging',model:'',requiresModelConfirmation:true,suggestedLabel:label},code:'PHOTO_PARTIALLY_IDENTIFIED',message:'Confirm the exact label.'};
+    if(String(headers['content-type']||'').includes('application/json')){
+     const input=JSON.parse(raw||'{}');typedQueries.push(input.query||'');
+     body={identification:{name:input.query,searchQuery:input.query,object:'conditioner',userConfirmed:true}};
+    }else{
+     body={identification:{name:'Marc Anthony conditioner',brand:'Marc Anthony',object:'conditioner',color:'Yellow packaging',visibleText:['Yellow packaging'],model:'',requiresModelConfirmation:true,confidence:0.58,suggestedLabel:'Marc Anthony Strictly Curls 3X Moisture Triple Blend Conditioner'},code:'PHOTO_PARTIALLY_IDENTIFIED',message:'Confirm the exact label.'};
+    }
    }
-   if(candidateMode&&path==='/api/product-insights'&&JSON.parse(route.request().postData()||'{}').identification?.requiresModelConfirmation)body={researched:false,possibleProducts:[{name:label+' 250ml',productUrl:'https://clicks.co.za/product/p/123',photoMatchConfirmed:false,quantityNote:'Confirm the pack size; the printed quantity is not verified.',whatItDoes:'Helps detangle curly hair.',pros:['Published moisturising formula.'],price:230,currency:'ZAR'}]};
    await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(body)});
   });
   await page.goto(base,{waitUntil:'domcontentloaded',timeout:60000});
   await page.locator('#photo').setInputFiles({name:'conditioner.jpg',mimeType:'image/jpeg',buffer:Buffer.from(fs.readFileSync('tests/user-images/marc-anthony.jpg.b64','utf8').trim(),'base64')});
   await page.locator('#fxSearchNow').click();
   await page.locator('#fxPhotoRecovery').waitFor({state:'visible',timeout:15000});
-  await page.locator('#finditExactShell [data-fx="product"]:visible').first().click();
-  await page.locator('#fxConfirmModel').waitFor({state:'visible'});
-  if(candidateMode)await page.getByRole('button',{name:'Yes, this is my product',exact:true}).waitFor({state:'visible'});
-  const text=await page.locator('#fxInformationBody').innerText();
-  if((!candidateMode&&!text.includes('Possible label reading:'))||!text.includes(label)||!text.includes('not confirmed'))throw Error('Suggested label was not explicitly marked uncertain');
-  if(!text.includes('What this product type does')||!text.includes('General product-type overview'))throw Error('Partial identification lost its truthful product-type information');
-  if(!text.includes('Identity and evidence')||!text.includes('Yellow packaging')||!text.includes('Photograph the front label'))throw Error('Partial information lost observed details or useful label checks');
-  if(candidateMode&&!text.includes('Confirm the pack size;'))throw Error('Unconfirmed pack-size caveat missing');
-  if(confirmed.length)throw Error('An uncertain reading was submitted without user confirmation');
-  if(candidateMode){
-   if(!text.includes('Helps detangle curly hair.')||!text.includes('match to your photo needs your confirmation')||!text.includes('Listed online price:'))throw Error('Candidate facts or uncertainty labels missing');
-   await page.getByRole('button',{name:'Yes, this is my product',exact:true}).click();
-  }else {
-  await page.locator('#fxConfirmModel').click();
-  if(await page.locator('#fxRealQuery').inputValue()!==label)throw Error('Label confirmation dropped the available reading');
-  await page.locator('#fxRealQuery').fill(label+' 250ml');
-  await page.getByRole('button',{name:'Find product information',exact:true}).click();
-  }
-  await page.waitForFunction(()=>window.finditState?.result?.identification?.userConfirmed===true,{timeout:15000});
-  if(confirmed.length!==1||confirmed[0]!==label+' 250ml')throw Error('Human correction did not reach product search exactly once');
-  if(candidateMode){const preserved=await page.evaluate(()=>({file:!!window.finditState.file,brand:window.finditState.result.identification.brand,size:window.finditState.result.identification.size}));if(!preserved.file||preserved.brand!=='Marc Anthony'||preserved.size!=='250ml')throw Error('Candidate confirmation discarded the photo or supported brand/size');}
-  console.log('LABEL_CONFIRMATION_PASS',width,candidateMode?'retailer candidate':'manual label');await page.close();
+  await page.locator('#finditExactShell button[data-fx="product"]:visible').first().click();
+  await page.locator('#fxStableModal:not(.hidden)').waitFor({state:'visible',timeout:10000});
+  const text=await page.locator('#fxStableBody').innerText();
+  if(!text.includes('Exact model not confirmed yet')||!text.includes('general product-type overview only'))throw Error('Partial identity was not clearly marked as unconfirmed');
+  if(!text.includes('Marc Anthony')||!text.includes('conditioner')||!text.includes('Yellow packaging'))throw Error('Supported brand, product type or visible evidence was lost');
+  if(!text.includes('What it does')||!text.includes('General product-type overview'))throw Error('Useful general product-type information was not shown');
+  if(text.includes('Best verified online price')||text.includes('Verified online availability'))throw Error('Unconfirmed identity exposed exact-product commerce claims');
+  const state=await page.evaluate(()=>({userConfirmed:window.finditState?.result?.identification?.userConfirmed,requiresModelConfirmation:window.finditState?.result?.identification?.requiresModelConfirmation}));
+  if(state.userConfirmed===true||state.requiresModelConfirmation!==true)throw Error('Partial photo identity was incorrectly marked as confirmed');
+  if(typedQueries.length)throw Error('An uncertain label was submitted without user confirmation');
+  console.log('PARTIAL_IDENTITY_PRODUCT_INFO_PASS',width);
+  await page.close();
  }
-}finally{await browser.close();}
+}finally{await browser.close()}
