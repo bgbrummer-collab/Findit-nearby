@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import worker from '../cloudflare/worker.js';
+import {mergeRetailerStatusRows} from '../lib/product-intelligence-core.js';
 import {candidateLabelMatches,labelSearchName,visualProductCandidates} from '../lib/visual-product-candidates.js';
 import {descriptionTableSpecifications} from '../lib/product-description-specs.js';
 import {productInformationChecklist} from '../lib/product-type-information.js';
@@ -74,4 +75,15 @@ test('household paper and cleaning labels do not inherit food guidance',()=>{
  for(const object of ['toilet paper','facial tissues','paper towel','laundry detergent','surface cleaner']){const d=productInformationChecklist({object,category:'grocery/household'});assert.doesNotMatch(JSON.stringify(d),/recipe|nutrition|allergen|ingredients|expiry/);assert.match(d.nextPhoto,/Photograph/);}
  assert.match(productInformationChecklist({object:'toilet paper',category:'grocery/household'}).checks.join(' '),/plies/);
  assert.match(productInformationChecklist({object:'surface cleaner'}).checks.join(' '),/safety/);
+});
+
+
+test('retailer candidates remain visible when many exact seller listings are found',()=>{
+ const exact=Array.from({length:12},(_,i)=>({name:'Verified retailer '+(i+1),status:'verified_exact_online_listing'}));
+ const candidates=['Nike','Sportscene','Totalsports','JD Sports','Bash'].map(name=>({name,status:'candidate_retailer',exactProductMatch:false}));
+ const rows=mergeRetailerStatusRows(exact,candidates,20),names=rows.map(x=>x.name);
+ for(const name of ['Nike','Sportscene','Totalsports','JD Sports','Bash'])assert.ok(names.includes(name),name+' should not be hidden by the result limit');
+ assert.equal(rows.length,17);
+ assert.equal(rows.find(x=>x.name==='Sportscene').exactProductMatch,false);
+ assert.equal(rows.find(x=>x.name==='Totalsports').status,'candidate_retailer');
 });
