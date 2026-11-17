@@ -11,6 +11,7 @@ on:
     branches: [main]
     paths:
       - .github/workflows/live-user-image-production-matrix.yml
+      - tests/live-user-image-production-matrix.mjs
 permissions:
   contents: read
 jobs:
