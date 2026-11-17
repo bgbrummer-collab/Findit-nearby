@@ -16,6 +16,7 @@ on:
       - index.html
       - product-info-click-fix.js
       - product-info-enhance.js
+      - dashboard-runtime-v8.js
 permissions:
   contents: read
 jobs:
