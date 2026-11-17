@@ -12,6 +12,7 @@ on:
     paths:
       - .github/workflows/live-user-image-production-matrix.yml
       - tests/live-user-image-production-matrix.mjs
+      - lib/product-intelligence-core.js
 permissions:
   contents: read
 jobs:
