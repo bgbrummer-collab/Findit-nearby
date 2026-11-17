@@ -26,7 +26,7 @@ try{
   const text=await page.locator('#fxInformationBody').innerText();
   if((!candidateMode&&!text.includes('Possible label reading:'))||!text.includes(label)||!text.includes('not confirmed'))throw Error('Suggested label was not explicitly marked uncertain');
   if(!text.includes('What this product type does')||!text.includes('General product-type overview'))throw Error('Partial identification lost its truthful product-type information');
-  if(!text.includes('Identity and evidence')||!text.includes('Yellow packaging')||!text.includes('Photograph the front label'))throw Error('Partial information lost observed details or useful label checks');
+  if(!text.includes('Identity and evidence')||!text.includes('Yellow packaging')||!text.includes('Photograph the front label'))throw Error('Partial information lost observed details or useful label checks: '+JSON.stringify({width,candidateMode,missing:['Identity and evidence','Yellow packaging','Photograph the front label'].filter(value=>!text.includes(value)),text}));
   if(candidateMode&&!text.includes('Confirm the pack size;'))throw Error('Unconfirmed pack-size caveat missing');
   if(confirmed.length)throw Error('An uncertain reading was submitted without user confirmation');
   if(candidateMode){
