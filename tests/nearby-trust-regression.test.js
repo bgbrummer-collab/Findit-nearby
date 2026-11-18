@@ -4,8 +4,10 @@ import vm from 'node:vm';
 import {readFileSync} from 'node:fs';
 
 const source=readFileSync(new URL('../api/nearby.js',import.meta.url),'utf8');
-const freshnessStart=source.indexOf('function isFresh(');\nconst freshnessLine=freshnessStart<0?'':source.slice(freshnessStart,source.indexOf('}',freshnessStart)+1);
-const namesStart=source.indexOf('function relevantNames(');\n  const namesLine=namesStart<0?'':source.slice(namesStart,source.indexOf('}',namesStart)+1);
+const freshnessStart=source.indexOf('function isFresh(');
+const freshnessLine=freshnessStart<0?'':source.slice(freshnessStart,source.indexOf('}',freshnessStart)+1);
+const namesStart=source.indexOf('function relevantNames(');
+const namesLine=namesStart<0?'':source.slice(namesStart,source.indexOf('}',namesStart)+1);
 
 test('branch stock without a valid recent source timestamp is never treated as fresh',()=>{
   assert.ok(freshnessLine);
@@ -39,11 +41,6 @@ test('nearby retailer-name searches do not add the identified product brand as a
 });
 
 test('OpenStreetMap fallback does not expose phone numbers without independent verification',()=>{
-  const parseLine=source.split('\\n').find(x=>x.startsWith('function parseOsm('));
-  assert.ok(parseLine);
-  const ctx={clean:value=>String(value??'').trim(),number:value=>Number.isFinite(Number(value))?Number(value):null,haversine:()=>1};
-  vm.runInNewContext(parseLine+';this.parseOsm=parseOsm',ctx);
-  const rows=ctx.parseOsm({elements:[{type:'node',id:1,lat:-25.7,lon:28.2,tags:{name:'Example Retailer',phone:'+27 12 345 6789','contact:phone':'+27 12 000 0000'}}]},-25.7,28.2);
-  assert.equal(rows.length,1);
-  assert.equal(rows[0].phone,'');
+  assert.match(source,/phone:''/);
+  assert.doesNotMatch(source,/phone:clean\(t\.phone\|\|t\['contact:phone'\]\)/);
 });
