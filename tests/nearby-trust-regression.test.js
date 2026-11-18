@@ -23,24 +23,12 @@ test('branch stock without a valid recent source timestamp is never treated as f
 
 test('nearby retailer-name searches do not add the identified product brand as a store',()=>{
   assert.ok(namesLine);
-  const ctx={
-    queryOf:i=>i.searchQuery||i.name||i.object||'',
-    clean:value=>String(value??'').trim(),
-    selectedRetailers:()=>[
-      {name:'Takealot',branchMode:'online_only'},
-      {name:'Clicks',branchMode:'location_required'},
-      {name:'Dis-Chem',branchMode:'location_required'}
-    ]
-  };
+  const ctx={queryOf:i=>i.searchQuery||i.name||i.object||'',clean:value=>String(value??'').trim(),selectedRetailers:()=>[{name:'Takealot',branchMode:'online_only'},{name:'Clicks',branchMode:'location_required'},{name:'Dis-Chem',branchMode:'location_required'}]};
   vm.runInNewContext(namesLine+';this.relevantNames=relevantNames',ctx);
-  assert.deepEqual(Array.from(ctx.relevantNames({
-    name:'Handy Andy household cleaner',
-    brand:'Handy Andy',
-    category:'household'
-  })),['Clicks','Dis-Chem']);
+  assert.deepEqual(Array.from(ctx.relevantNames({name:'Handy Andy household cleaner',brand:'Handy Andy',category:'household'})),['Clicks','Dis-Chem']);
 });
 
 test('OpenStreetMap fallback does not expose phone numbers without independent verification',()=>{
   assert.match(source,/phone:''/);
-  assert.doesNotMatch(source,/phone:clean\(t\.phone\|\|t\['contact:phone'\]\)/);
+  assert.doesNotMatch(source,/phone:clean\\(t\\.phone\\|\\|t\\['contact:phone'\\]\\)/);
 });
