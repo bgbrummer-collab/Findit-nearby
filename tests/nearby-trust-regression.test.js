@@ -4,8 +4,8 @@ import vm from 'node:vm';
 import {readFileSync} from 'node:fs';
 
 const source=readFileSync(new URL('../api/nearby.js',import.meta.url),'utf8');
-const freshnessLine=source.split('\\n').find(x=>x.startsWith('function isFresh('));
-const namesLine=source.split('\\n').find(x=>x.startsWith('function relevantNames('));
+const freshnessStart=source.indexOf('function isFresh(');\nconst freshnessLine=freshnessStart<0?'':source.slice(freshnessStart,source.indexOf('}',freshnessStart)+1);
+const namesStart=source.indexOf('function relevantNames(');\n  const namesLine=namesStart<0?'':source.slice(namesStart,source.indexOf('}',namesStart)+1);
 
 test('branch stock without a valid recent source timestamp is never treated as fresh',()=>{
   assert.ok(freshnessLine);
