@@ -7,7 +7,7 @@ const source=readFileSync(new URL('../api/nearby.js',import.meta.url),'utf8');
 const freshnessStart=source.indexOf('function isFresh(');
 const freshnessLine=freshnessStart<0?'':source.slice(freshnessStart,source.indexOf('}',freshnessStart)+1);
 const namesStart=source.indexOf('function relevantNames(');
-const namesLine=namesStart<0?'':source.slice(namesStart,source.indexOf('}',namesStart)+1);
+const namesLine=namesStart<0?'':source.slice(namesStart,source.indexOf('\n',namesStart));
 
 test('branch stock without a valid recent source timestamp is never treated as fresh',()=>{
   assert.ok(freshnessLine);
