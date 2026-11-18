@@ -32,3 +32,8 @@ test('OpenStreetMap fallback does not expose phone numbers without independent v
   assert.match(source,/phone:''/);
   assert.doesNotMatch(source,/phone:clean\(t\.phone\|\|t\['contact:phone'\]\)/);
 });
+
+test('nearby endpoint applies the product-category safety gate before any lookup',()=>{
+  assert.match(source,/const BLOCKED_NEARBY_QUERY=/);
+  assert.match(source,/BLOCKED_NEARBY_QUERY\\.test\\(productText\\)/);
+});
