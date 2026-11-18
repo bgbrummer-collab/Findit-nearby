@@ -37,3 +37,13 @@ test('nearby retailer-name searches do not add the identified product brand as a
     category:'household'
   })),['Clicks','Dis-Chem']);
 });
+
+test('OpenStreetMap fallback does not expose phone numbers without independent verification',()=>{
+  const parseLine=source.split('\\n').find(x=>x.startsWith('function parseOsm('));
+  assert.ok(parseLine);
+  const ctx={clean:value=>String(value??'').trim(),number:value=>Number.isFinite(Number(value))?Number(value):null,haversine:()=>1};
+  vm.runInNewContext(parseLine+';this.parseOsm=parseOsm',ctx);
+  const rows=ctx.parseOsm({elements:[{type:'node',id:1,lat:-25.7,lon:28.2,tags:{name:'Example Retailer',phone:'+27 12 345 6789','contact:phone':'+27 12 000 0000'}}]},-25.7,28.2);
+  assert.equal(rows.length,1);
+  assert.equal(rows[0].phone,'');
+});
