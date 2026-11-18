@@ -6,6 +6,7 @@ import {officialElectronicsBranches,preferOfficialElectronics} from '../lib/offi
 import {categoryWords} from '../lib/category-words.js';
 import {RETAILERS,retailerByName,capabilitySummary,selectedRetailers} from '../lib/retailers.js';
 
+const BLOCKED_NEARBY_QUERY=/\b(firearm|gun|rifle|pistol|ammunition|ammo|weapon|knife|knives|machete|sword|switchblade|taser|stun gun|pepper spray|mace|brass knuckles|fireworks|explosive|vape|nicotine|cigarette|cigar|alcohol|beer|wine|liquor|cannabis|marijuana|thc|cbd|psilocybin|magic mushroom|gambling|sports betting|casino|pornography|adult sex toy)\b/i;
 const clean=v=>String(v??'').trim();
 const norm=v=>clean(v).toLowerCase().replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim();
 const toks=v=>[...new Set(norm(v).replace(/(\d+)\s+(ml|mg|g|kg|l|gb|tb|cm|mm|inch|in|pack|rolls?|ply)\b/g,'$1$2').split(/\s+/).filter(x=>x.length>1&&!['the','and','for','with','from','this','that','product','item'].includes(x)))];
@@ -44,7 +45,7 @@ async function likelyNearby(a,b,radiusKm,identification){const tags=likelyTags(i
 export default async function handler(req,res){
  res.setHeader('Cache-Control','no-store');if(req.method!=='POST')return res.status(405).json({error:'Method not allowed'});
  try{
-  const {lat,lon,identification={},radiusKm:requested,mode}=req.body||{},a=number(lat),b=number(lon);if(a==null||b==null)return res.status(400).json({error:'Valid location required'});const radiusKm=Math.min(25,Math.max(3,number(requested)||10));
+  const {lat,lon,identification={},radiusKm:requested,mode}=req.body||{},a=number(lat),b=number(lon),productText=[identification.name,identification.object,identification.brand,identification.model,identification.category,identification.retailCategory,identification.searchQuery,identification.query].filter(Boolean).join(' ');if(BLOCKED_NEARBY_QUERY.test(productText))return res.status(403).json({ok:false,stores:[],message:'Nearby lookup is unavailable for this product category.'});if(a==null||b==null)return res.status(400).json({error:'Valid location required'});const radiusKm=Math.min(25,Math.max(3,number(requested)||10));
   if(mode==='likely'){const d=await likelyNearby(a,b,radiusKm,identification);return res.status(200).json({ok:true,stores:d.stores,reliable:d.reliable,exactProductOnly:false,branchStockVerified:false,directionsAvailable:false,message:d.stores.length?`Found ${d.stores.length} relevant nearby retailer${d.stores.length===1?'':'s'} (closest relevant retailers first, nearest branch per retailer).`:'No relevant nearby retailers were found in this radius.',searchedRetailers:d.names,searchedShopTags:d.tags,disclaimer:'These are real nearby retailers for the product type. FindIt does not claim exact branch stock or unlock turn-by-turn directions until exact product and branch stock are verified.'})}
 
   const feeds=await loadFeeds(),rows=[],feedStatus=[];
