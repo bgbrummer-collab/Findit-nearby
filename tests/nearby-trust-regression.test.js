@@ -30,5 +30,5 @@ test('nearby retailer-name searches do not add the identified product brand as a
 
 test('OpenStreetMap fallback does not expose phone numbers without independent verification',()=>{
   assert.match(source,/phone:''/);
-  assert.doesNotMatch(source,/phone:clean\\(t\\.phone\\|\\|t\\['contact:phone'\\]\\)/);
+  assert.doesNotMatch(source,/phone:clean\(t\.phone\|\|t\['contact:phone'\]\)/);
 });
