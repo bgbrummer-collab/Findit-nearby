@@ -8,7 +8,8 @@ const identity={
  name:'TP-Link TL-WA850RE 300Mbps Wi-Fi Range Extender',
  object:'Wi-Fi range extender',
  category:'electronics',
- searchQuery:'TP-Link TL-WA850RE 300Mbps Wi-Fi Range Extender'
+ searchQuery:'TP-Link TL-WA850RE 300Mbps Wi-Fi Range Extender',
+ size:'',color:'',visibleText:[],features:[]
 };
 
 test('Google-grounded discovery returns only retailer product-detail URLs for the exact identity',async()=>{
