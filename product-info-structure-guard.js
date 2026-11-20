@@ -25,9 +25,10 @@
   }
 
   function productInfoOpen(){
-    const modal=document.querySelector('#fxStableModal');
     const body=document.querySelector('#fxStableBody');
-    return !!(modal&&body&&!modal.classList.contains('hidden')&&!modal.hasAttribute('inert')&&/Product Information/i.test(body.innerText||''));
+    // The content can be populated before the modal's visibility class is updated.
+    // Guard the actual Product Information content, not a transient animation state.
+    return !!(body&&/Product Information/i.test(body.innerText||''));
   }
 
   function ensureStructure(){
@@ -65,7 +66,7 @@
     return true;
   }
 
-  function scheduleAttach(){if(attach())return;setTimeout(attach,50);setTimeout(attach,250);setTimeout(attach,1000)}
+  function scheduleAttach(){if(attach()){ensureStructure();return}setTimeout(()=>{if(attach())ensureStructure()},50);setTimeout(()=>{if(attach())ensureStructure()},250);setTimeout(()=>{if(attach())ensureStructure()},1000)}
 
   window.addEventListener('click',e=>{
     if(e.target?.closest?.('#finditExactShell [data-fx="product"],#finditExactShell [data-stable-action="product"]')){
