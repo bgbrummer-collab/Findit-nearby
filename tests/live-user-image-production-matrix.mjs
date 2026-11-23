@@ -2,13 +2,33 @@ import { chromium } from 'playwright';
 import fs from 'node:fs';
 const URL=process.env.FINDIT_URL||'https://findit-nearby.vercel.app/';
 const fixtures=[
+ // Public product photos found through image search. These are downloaded at test time,
+ // uploaded through FindIt's real photo input, and are not used as product-name prompts.
+ {id:'google-tplink-wa850re',url:'https://oechsle.vteximg.com.br/arquivos/ids/16080545-1000-1000/image-a11f474bf14a43f0901634d5ea8a7b5c.jpg?v=638289711837500000',source:'https://www.oechsle.pe/extensor-de-cobertura-tl-wa850re-tp-link-24-ghz-300mbps-1000649066/p',ext:'jpg',category:'electronics',brand:'TP-Link',model:/wa850re/i,expect:/tp.?link|wa850re|wifi|range extender/i},
+ {id:'google-logitech-m185',url:'https://techlifebd.com/public/uploads/products/meta/WOnZksWeh1duLIzeNpojJbJMhrJTzpCWTPY1vQ9X.jpeg',source:'https://www.techlifebd.com/product/Logitech-M185-Wireless-Swift-Gray-Mouse-7S0Fi',ext:'jpeg',category:'electronics',brand:'Logitech',model:/m185/i,expect:/logitech|m185|mouse/i},
+ {id:'google-nivea-soft-200ml',url:'https://d3pllp7nz3wmw5.cloudfront.net/product_images/6498-1_stock_XL.jpg',source:'https://www.cosmeticsnow.com.au/iteminfo/nivea-soft-moisturising-cream-200ml',ext:'jpg',category:'beauty',brand:'NIVEA',expect:/nivea|soft|moisturising|cream/i},
  {id:'marc',src:'tests/user-images/marc-anthony.jpg.b64',ext:'jpg',category:'beauty',brand:'Marc Anthony',expect:/marc|anthony|curl|hair|lotion|condition/i},
  {id:'twinsaver',src:'tests/user-images/twinsaver.webp.b64',ext:'webp',category:'grocery/household',expect:/twinsaver|toilet|tissue|paper|roll/i},
  {id:'nike',src:'tests/user-images/nike.jpg.b64',ext:'jpg',category:'footwear',brand:'Nike',expect:/nike|air force|sneaker|shoe|footwear/i},
  {id:'mic',src:'tests/user-images/mic.jpg.b64',ext:'jpg',category:'electronics',expect:/proar|microphone|mic|usb|audio/i},
  {id:'glasses',src:'tests/user-images/glasses.jpg.b64',ext:'jpg',category:'eyewear',expect:/glass|eyeglass|spectacle|frame|optical|eyewear/i}
 ];
-for(const f of fixtures){f.file=`/tmp/findit-${f.id}.${f.ext}`;fs.writeFileSync(f.file,Buffer.from(fs.readFileSync(f.src,'utf8').trim(),'base64'))}
+for(const f of fixtures){
+ f.file=`/tmp/findit-${f.id}.${f.ext}`;
+ if(f.url){
+  const ctl=new AbortController(),timer=setTimeout(()=>ctl.abort(),20000);
+  try{
+   const response=await fetch(f.url,{signal:ctl.signal,headers:{'user-agent':'FindIt-Nearby-Production-QA/1.0'}});
+   if(!response.ok)throw new Error(`image download HTTP ${response.status}`);
+   const type=response.headers.get('content-type')||'';
+   if(!/^image\\//i.test(type))throw new Error(`not an image content-type: ${type}`);
+   const bytes=Buffer.from(await response.arrayBuffer());
+   if(!bytes.length||bytes.length>8*1024*1024)throw new Error(`invalid image size ${bytes.length}`);
+   fs.writeFileSync(f.file,bytes);
+   console.log('IMAGE_SEARCH_FIXTURE_READY',JSON.stringify({id:f.id,bytes:bytes.length,source:f.source}));
+  }finally{clearTimeout(timer)}
+ }else fs.writeFileSync(f.file,Buffer.from(fs.readFileSync(f.src,'utf8').trim(),'base64'));
+}
 console.log('FIXTURE_SHA256_REQUESTED');
 const browser=await chromium.launch({headless:true});
 const ctx=await browser.newContext({viewport:{width:1440,height:900},geolocation:{latitude:-25.7479,longitude:28.2293},permissions:['geolocation','clipboard-read','clipboard-write']});
@@ -35,7 +55,7 @@ for(const f of fixtures){try{
  try{await page.waitForFunction(prev=>{const i=window.finditState?.result?.identification;const n=i?.name||i?.object||'';const t=(document.querySelector('#fxStatus')?.textContent||'').trim();return (!!n&&n!==prev)||/Search failed\.|Try a clearer photo\.|daily service limit/i.test(t)},before,{timeout:90000})}catch(e){const dbg=await page.evaluate(()=>({result:window.finditState?.result||null,fxStatus:document.querySelector('#fxStatus')?.textContent||'',nativeStatus:document.querySelector('#status')?.textContent||'',warning:document.querySelector('#warning')?.textContent||''}));console.log('IDENTIFY_STALL_DEBUG',JSON.stringify({id:f.id,...dbg,reqs:reqs.slice(-12)}));throw e}
  await waitForSearchComplete(f.id);await page.waitForTimeout(250);
  let snap=await snapshot();console.log('USER_IMAGE_IDENTIFIED',JSON.stringify({id:f.id,name:snap.name,object:snap.object,brand:snap.brand,model:snap.model,category:snap.category,query:snap.query,offers:snap.offers}));
- const label=[snap.name,snap.object,snap.brand,snap.model,snap.category,snap.query].join(' ');if(!f.expect.test(label))fail(`${f.id}: implausible identification ${label}`);if(f.brand&&snap.brand.toLowerCase()!==f.brand.toLowerCase())fail(`${f.id}: wrong or missing visible brand ${snap.brand}; expected ${f.brand}`);if(snap.category!==f.category)fail(`${f.id}: wrong retail category ${snap.category}; expected ${f.category}`);if(!snap.fxName||/No item selected/i.test(snap.fxName))fail(`${f.id}: dashboard stale`);if(snap.requiresModelConfirmation&&snap.offers.length)fail(`${f.id}: partial identity exposed exact offers before model confirmation`);
+ const label=[snap.name,snap.object,snap.brand,snap.model,snap.category,snap.query].join(' ');if(!f.expect.test(label))fail(`${f.id}: implausible identification ${label}`);if(f.brand&&snap.brand.toLowerCase()!==f.brand.toLowerCase())fail(`${f.id}: wrong or missing visible brand ${snap.brand}; expected ${f.brand}`);if(f.model&&!f.model.test([snap.model,snap.query,snap.name].join(' ')))fail(`${f.id}: exact model was not identified; model=${snap.model} query=${snap.query} name=${snap.name}`);if(snap.category!==f.category)fail(`${f.id}: wrong retail category ${snap.category}; expected ${f.category}`);if(!snap.fxName||/No item selected/i.test(snap.fxName))fail(`${f.id}: dashboard stale`);if(snap.requiresModelConfirmation&&snap.offers.length)fail(`${f.id}: partial identity exposed exact offers before model confirmation`);
  if(snap.offers.some(o=>o.price!=null&&(!Number.isFinite(Number(o.price))||Number(o.price)<=0)))fail(`${f.id}: invalid or zero price`);if(snap.offers.some(o=>!o.verified))fail(`${f.id}: unverified offer leaked`);if(snap.offers.some(o=>o.url&&!/^https?:\/\//.test(o.url)))fail(`${f.id}: invalid retailer URL`);
  if(snap.stores.some(s=>Number.isFinite(s.distance)&&(s.distance<0||s.distance>snap.radius+1.1)))fail(`${f.id}: store outside radius`);
  if(snap.stores.some(s=>s.branchPriceVerified&&(!Number.isFinite(Number(s.price))||Number(s.price)<=0)))fail(`${f.id}: invalid verified branch price`);
