@@ -39,7 +39,9 @@ test('Google-grounded discovery safely skips when the Google API key is unavaila
  const original=globalThis.fetch;
  globalThis.fetch=async()=>{throw new Error('fetch should not run without a key')};
  try{
-  const observations=[];\n  assert.deepEqual(await googleSearchRetailerUrls(identity,{},'ZA',row=>observations.push(row)),[]);\n  assert.ok(observations.some(row=>row.phase==='google-search'&&row.outcome==='missing-api-key'));
+  const observations=[];
+  assert.deepEqual(await googleSearchRetailerUrls(identity,{},'ZA',row=>observations.push(row)),[]);
+  assert.ok(observations.some(row=>row.phase==='google-search'&&row.outcome==='missing-api-key'));
  }finally{globalThis.fetch=original;}
 });
 
