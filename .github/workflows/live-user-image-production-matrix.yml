@@ -16,6 +16,7 @@ on:
       - index.html
       - product-info-click-fix.js
       - product-info-enhance.js
+      - product-info-structure-guard.js
       - dashboard-runtime-v8.js
       - api/nearby.js
 permissions:
