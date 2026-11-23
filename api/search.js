@@ -135,7 +135,22 @@ function postProcess(i,draft={}){
  if(i.brand&&!i.brandEvidence){i.brand=null;i.confidence=Math.min(i.confidence,.72);i.brandRemovedForEvidence=true}
  if(i.model&&!i.modelEvidence){i.model=null;i.confidence=Math.min(i.confidence,.68);i.modelRemovedForEvidence=true}
 
- const labelFamily=norm([i.category,i.retailCategory,i.object].join(' ')),labelDriven=/grocery|food|bread|beverage|beauty|personal care|conditioner|shampoo|hair care|skincare|cosmetic|toiletr|household|cleaner|detergent|tissue|toilet paper/.test(labelFamily),readableLabel=norm(i.visibleText.join(' '));
+ const labelFamily=norm([i.category,i.retailCategory,i.object].join(' ')),labelDriven=/grocery|food|bread|beverage|beauty|personal care|conditioner|shampoo|hair care|skincare|cosmetic|toiletr|household|cleaner|detergent|tissue|toilet paper/.test(labelFamily),rawVisibleLabel=i.visibleText.join(' '),readableLabel=norm(rawVisibleLabel);
+ // Promote only text that the vision model actually transcribed from the product label.
+ // This repairs readable model codes that were left in visibleText but omitted from model.
+ const technicalCategory=/electronics|computer|hardware|tools|machinery/.test(labelFamily);
+ if(!i.model&&i.brandEvidence&&technicalCategory){
+  const code=rawVisibleLabel.match(/\b(?:[A-Z]{1,4}-[A-Z]{1,4}\d{2,5}[A-Z0-9]*|[A-Z]\d{3,4})\b/i);
+  if(code){i.model=code[0].toUpperCase();i.modelEvidence=true;i.modelEvidenceFromVisibleText=true;delete i.modelRemovedForEvidence;}
+ }
+ // NIVEA's Soft line is a visible product variant, not a guessed formulation.
+ if(!i.model&&i.brandEvidence&&norm(i.brand)==='nivea'&&/\bsoft\b/i.test(rawVisibleLabel)){
+  i.model='Soft';i.modelEvidence=true;i.modelEvidenceFromVisibleText=true;delete i.modelRemovedForEvidence;
+ }
+ if(!i.size){
+  const size=rawVisibleLabel.match(/\b\d+(?:\.\d+)?\s?(?:ml|l|g|kg|mg|gb|tb|cm|mm|inch|in|pack|packs|rolls?|ply)\b/i);
+  if(size){i.size=size[0].replace(/\s+/g,' ').trim();i.sizeEvidenceFromVisibleText=true;}
+ }
  if(labelDriven&&i.name){const brandText=norm(i.brand),objectText=norm(i.object),generic=new Set(['product','item','pack','bottle','tube','loaf','hair','care','beauty','personal','food','white','black','conditioner','shampoo','bread','toilet','paper','rolls','twin','ply']);const unsupported=terms(i.name).filter(t=>t.length>3&&!generic.has(t)&&!readableLabel.includes(t)&&!brandText.includes(t)&&!objectText.includes(t));if(unsupported.length>1){i.name=[i.brand,i.object].filter(Boolean).join(' ')||i.object||i.name;i.searchQuery=i.name;i.model=null;i.modelEvidence=false;i.confidence=Math.min(i.confidence,.80);i.labelVariantReduced=true}}
 
  const draftName=norm([draft.object,draft.name,draft.brand,draft.model].join(' ')),finalName=norm([i.object,i.name,i.brand,i.model].join(' ')),agreement=draftName&&finalName?overlap(draftName,finalName):0;
