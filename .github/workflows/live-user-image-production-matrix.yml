@@ -57,7 +57,7 @@ jobs:
         run: |
           expected="$GITHUB_SHA"
           if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
-            expected="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
+            expected="$(git ls-remote "https://github.com/${GITHUB_REPOSITORY}.git" refs/heads/main | awk '{print $1}')"
           fi
           if [ -z "$expected" ]; then
             echo "Could not determine deployed main commit"
