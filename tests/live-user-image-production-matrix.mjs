@@ -21,7 +21,7 @@ for(const f of fixtures){
    const response=await fetch(f.url,{signal:ctl.signal,headers:{'user-agent':'FindIt-Nearby-Production-QA/1.0'}});
    if(!response.ok)throw new Error(`image download HTTP ${response.status}`);
    const type=response.headers.get('content-type')||'';
-   if(!/^image\\//i.test(type))throw new Error(`not an image content-type: ${type}`);
+   if(!/^image\//i.test(type))throw new Error(`not an image content-type: ${type}`);
    const bytes=Buffer.from(await response.arrayBuffer());
    if(!bytes.length||bytes.length>8*1024*1024)throw new Error(`invalid image size ${bytes.length}`);
    fs.writeFileSync(f.file,bytes);
