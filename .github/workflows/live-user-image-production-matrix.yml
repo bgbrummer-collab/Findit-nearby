@@ -5,6 +5,18 @@ concurrency:
   cancel-in-progress: true
 on:
   workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - .github/workflows/live-user-image-production-matrix.yml
+      - tests/live-user-image-production-matrix.mjs
+      - lib/product-intelligence-core.js
+      - index.html
+      - product-info-click-fix.js
+      - product-info-enhance.js
+      - product-info-structure-guard.js
+      - dashboard-runtime-v8.js
+      - api/nearby.js
   # Run once when this workflow itself is updated on main, so the production
   # five-photo matrix can be verified after the partial-identity fix ships.
   push:
@@ -16,6 +28,7 @@ on:
       - index.html
       - product-info-click-fix.js
       - product-info-enhance.js
+      - product-info-structure-guard.js
       - dashboard-runtime-v8.js
       - api/nearby.js
 permissions:
@@ -42,16 +55,25 @@ jobs:
         env:
           FINDIT_URL: https://findit-nearby.bgbrummer.workers.dev
         run: |
+          expected="$GITHUB_SHA"
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+            expected="$(git ls-remote "https://github.com/${GITHUB_REPOSITORY}.git" refs/heads/main | awk '{print $1}')"
+          fi
+          if [ -z "$expected" ]; then
+            echo "Could not determine deployed main commit"
+            exit 1
+          fi
+          echo "EXPECTED_PRODUCTION_COMMIT $expected"
           for attempt in $(seq 1 60); do
             actual="$(curl -fsS "$FINDIT_URL/api/version" | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{try{process.stdout.write(JSON.parse(s).commit||"")}catch{}})' 2>/dev/null || true)"
-            if [ "$actual" = "$GITHUB_SHA" ]; then
+            if [ "$actual" = "$expected" ]; then
               echo "PRODUCTION_COMMIT_PASS $actual"
               exit 0
             fi
-            echo "Waiting for production commit: expected=$GITHUB_SHA actual=${actual:-unavailable}"
+            echo "Waiting for production base commit: expected=$expected actual=${actual:-unavailable}"
             sleep 10
           done
-          echo "Production did not serve expected commit $GITHUB_SHA within 10 minutes"
+          echo "Production did not serve expected main commit $expected within 10 minutes"
           exit 1
       - name: Test five real user images against production
         env:

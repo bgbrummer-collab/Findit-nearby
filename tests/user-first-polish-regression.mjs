@@ -48,7 +48,7 @@ await page.locator('.fx-commerce-safe-close').click();
 
 await page.evaluate(()=>{
   window.finditShoppingAssistantRefresh?.();
-  const m=document.createElement('div');m.id='fxStableModal';m.className='fx-stable-modal';m.innerHTML='<div id="fxStableBody"><h2 class="fx-stable-title">Product Information</h2><h4>Pros</h4><ul><li>Offers low top, mid top, and high top style variations depending on user preference</li><li>Nike Air Force 1 &amp;#x27;07 Patent Leather</li></ul><h4>Cons / considerations</h4><small>No trustworthy product-specific downsides were found in the sources checked.</small></div>';document.body.appendChild(m);window.finditUserFirstPolish?.();
+  let m=document.querySelector('#fxStableModal');if(!m){m=document.createElement('div');m.id='fxStableModal';document.body.appendChild(m)}m.className='fx-stable-modal';let b=m.querySelector('#fxStableBody');if(!b){b=document.createElement('div');b.id='fxStableBody';m.appendChild(b)}b.innerHTML='<h2 class="fx-stable-title">Product Information</h2><h4>Pros</h4><ul><li>Offers low top, mid top, and high top style variations depending on user preference</li><li>Nike Air Force 1 &amp;#x27;07 Patent Leather</li></ul><h4>Cons / considerations</h4><small>No trustworthy product-specific downsides were found in the sources checked.</small>';m.classList.remove('hidden');window.finditUserFirstPolish?.();
 });
 await page.waitForTimeout(100);
 const productInfo=await page.locator('#fxStableBody').innerText();
