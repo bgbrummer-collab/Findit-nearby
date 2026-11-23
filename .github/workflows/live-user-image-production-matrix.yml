@@ -54,17 +54,18 @@ jobs:
       - name: Wait for Cloudflare to serve this exact commit
         env:
           FINDIT_URL: https://findit-nearby.bgbrummer.workers.dev
+          EXPECTED_COMMIT: ${{ github.event.pull_request.base.sha || github.sha }}
         run: |
           for attempt in $(seq 1 60); do
             actual="$(curl -fsS "$FINDIT_URL/api/version" | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{try{process.stdout.write(JSON.parse(s).commit||"")}catch{}})' 2>/dev/null || true)"
-            if [ "$actual" = "$GITHUB_SHA" ]; then
+            if [ "$actual" = "$EXPECTED_COMMIT" ]; then
               echo "PRODUCTION_COMMIT_PASS $actual"
               exit 0
             fi
-            echo "Waiting for production commit: expected=$GITHUB_SHA actual=${actual:-unavailable}"
+            echo "Waiting for production base commit: expected=$EXPECTED_COMMIT actual=${actual:-unavailable}"
             sleep 10
           done
-          echo "Production did not serve expected commit $GITHUB_SHA within 10 minutes"
+          echo "Production did not serve expected base commit $EXPECTED_COMMIT within 10 minutes"
           exit 1
       - name: Test five real user images against production
         env:
