@@ -29,6 +29,6 @@ if(!/bodyObserver\.observe\(body/.test(structureGuard))fail('Product Information
 if(!/#fxStableResearch/.test(modalPolish))fail('product research layout must have an explicit single-column readability guard');
 if(!/word-break:normal/.test(modalPolish))fail('modal text must not be forced into character-by-character wrapping');
 if(!/shellObserver\?\.disconnect\(\)/.test(bootstrap))fail('dashboard bootstrap observer must disconnect after runtime loads');
-if(!/product-info-structure-guard\.js\?v=20260913-structure2/.test(bootstrap))fail('bootstrap must load the scoped Product Information structure guard version');
+if(!/product-info-structure-guard\.js\?v=20261123-cons-layout1/.test(bootstrap))fail('bootstrap must load the scoped Product Information structure guard version');
 
 console.log('FINDIT_USER_EXPERIENCE_GUARD_PASS');
