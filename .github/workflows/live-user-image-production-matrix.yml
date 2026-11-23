@@ -5,6 +5,18 @@ concurrency:
   cancel-in-progress: true
 on:
   workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - .github/workflows/live-user-image-production-matrix.yml
+      - tests/live-user-image-production-matrix.mjs
+      - lib/product-intelligence-core.js
+      - index.html
+      - product-info-click-fix.js
+      - product-info-enhance.js
+      - product-info-structure-guard.js
+      - dashboard-runtime-v8.js
+      - api/nearby.js
   # Run once when this workflow itself is updated on main, so the production
   # five-photo matrix can be verified after the partial-identity fix ships.
   push:
