@@ -140,16 +140,16 @@ function postProcess(i,draft={}){
  // This repairs readable model codes that were left in visibleText but omitted from model.
  const technicalCategory=/electronics|computer|hardware|tools|machinery/.test(labelFamily);
  if(!i.model&&i.brandEvidence&&technicalCategory){
-  const code=rawVisibleLabel.match(/\\b(?:[A-Z]{1,4}-[A-Z]{1,4}\\d{2,5}[A-Z0-9]*|[A-Z]\\d{3,4})\\b/i);
+  const code=rawVisibleLabel.match(/\b(?:[A-Z]{1,4}-[A-Z]{1,4}\d{2,5}[A-Z0-9]*|[A-Z]\d{3,4})\b/i);
   if(code){i.model=code[0].toUpperCase();i.modelEvidence=true;i.modelEvidenceFromVisibleText=true;delete i.modelRemovedForEvidence;}
  }
  // NIVEA's Soft line is a visible product variant, not a guessed formulation.
- if(!i.model&&i.brandEvidence&&norm(i.brand)==='nivea'&&/\\bsoft\\b/i.test(rawVisibleLabel)){
+ if(!i.model&&i.brandEvidence&&norm(i.brand)==='nivea'&&/\bsoft\b/i.test(rawVisibleLabel)){
   i.model='Soft';i.modelEvidence=true;i.modelEvidenceFromVisibleText=true;delete i.modelRemovedForEvidence;
  }
  if(!i.size){
-  const size=rawVisibleLabel.match(/\\b\\d+(?:\\.\\d+)?\\s?(?:ml|l|g|kg|mg|gb|tb|cm|mm|inch|in|pack|packs|rolls?|ply)\\b/i);
-  if(size){i.size=size[0].replace(/\\s+/g,' ').trim();i.sizeEvidenceFromVisibleText=true;}
+  const size=rawVisibleLabel.match(/\b\d+(?:\.\d+)?\s?(?:ml|l|g|kg|mg|gb|tb|cm|mm|inch|in|pack|packs|rolls?|ply)\b/i);
+  if(size){i.size=size[0].replace(/\s+/g,' ').trim();i.sizeEvidenceFromVisibleText=true;}
  }
  if(labelDriven&&i.name){const brandText=norm(i.brand),objectText=norm(i.object),generic=new Set(['product','item','pack','bottle','tube','loaf','hair','care','beauty','personal','food','white','black','conditioner','shampoo','bread','toilet','paper','rolls','twin','ply']);const unsupported=terms(i.name).filter(t=>t.length>3&&!generic.has(t)&&!readableLabel.includes(t)&&!brandText.includes(t)&&!objectText.includes(t));if(unsupported.length>1){i.name=[i.brand,i.object].filter(Boolean).join(' ')||i.object||i.name;i.searchQuery=i.name;i.model=null;i.modelEvidence=false;i.confidence=Math.min(i.confidence,.80);i.labelVariantReduced=true}}
 
