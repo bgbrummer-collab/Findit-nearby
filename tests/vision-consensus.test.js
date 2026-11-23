@@ -234,3 +234,24 @@ test('corroborated OCR matching is insensitive to punctuation and case but keeps
  assert.ok(d.visibleText.some(text=>/MODEL: A2-X/i.test(text)));
  assert.ok(d.visibleText.some(text=>/SKU:?\s+12345/i.test(text)));
 });
+
+test('two independent readers promote a corroborated TP-Link model code from visible label text',()=>{
+ const a={name:'TP-Link product',brand:'TP-Link',model:'',object:'product',category:'electronics',retailCategory:'electronics',searchQuery:'TP-Link product',visibleText:['TL-WA850RE']};
+ const d=reconcileVision([a,{...a}]);
+ assert.equal(d.brand,'TP-Link');assert.equal(d.model,'TL-WA850RE');assert.equal(d.modelEvidence,true);assert.equal(d.requiresModelConfirmation,false);assert.match(d.searchQuery,/TL-WA850RE/);
+});
+test('two independent readers retain a corroborated Logitech M185 model as verified model evidence',()=>{
+ const a={name:'Logitech mouse',brand:'Logitech',model:'M185',object:'mouse',category:'electronics',retailCategory:'electronics',searchQuery:'Logitech mouse',visibleText:['M185','logitech']};
+ const d=reconcileVision([a,{...a}]);
+ assert.equal(d.model,'M185');assert.equal(d.modelEvidence,true);assert.equal(d.requiresModelConfirmation,false);
+});
+test('two independent readers promote the printed NIVEA Soft variant and 200 ml size',()=>{
+ const a={name:'NIVEA product',brand:'NIVEA',model:'',object:'product',category:'beauty',retailCategory:'beauty',searchQuery:'NIVEA product',visibleText:['NIVEA','Soft','200 ml']};
+ const d=reconcileVision([a,{...a}]);
+ assert.equal(d.brand,'NIVEA');assert.equal(d.model,'Soft');assert.equal(d.modelEvidence,true);assert.equal(d.size,'200 ml');assert.equal(d.sizeEvidence,true);assert.equal(d.requiresModelConfirmation,false);assert.match(d.searchQuery,/NIVEA Soft 200 ml/i);
+});
+test('a single uncorroborated label reading cannot confirm an exact model code',()=>{
+ const a={name:'TP-Link product',brand:'TP-Link',model:'',object:'product',category:'electronics',retailCategory:'electronics',searchQuery:'TP-Link product',visibleText:['TL-WA850RE']};
+ const d=reconcileVision([a,{...a,visibleText:[]}]);
+ assert.equal(d.model,'');assert.equal(d.modelEvidence,false);assert.equal(d.requiresModelConfirmation,true);
+});
