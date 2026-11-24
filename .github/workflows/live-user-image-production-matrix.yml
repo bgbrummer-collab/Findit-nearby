@@ -13,6 +13,10 @@ on:
       - .github/workflows/live-user-image-production-matrix.yml
       - tests/live-user-image-production-matrix.mjs
       - lib/product-intelligence-core.js
+      - lib/vision-consensus.js
+      - lib/verified-priced-offers.js
+      - cloudflare/worker.js
+      - api/search.js
       - index.html
       - product-info-click-fix.js
       - product-info-enhance.js
