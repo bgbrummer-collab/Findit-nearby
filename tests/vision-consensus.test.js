@@ -234,3 +234,6 @@ test('corroborated OCR matching is insensitive to punctuation and case but keeps
  assert.ok(d.visibleText.some(text=>/MODEL: A2-X/i.test(text)));
  assert.ok(d.visibleText.some(text=>/SKU:?\s+12345/i.test(text)));
 });
+
+test('one successful vision provider still identifies a broad product family without trusting its brand or model',()=>{const result=reconcileVision([{name:'Logitech G Pro X Gaming Headset',brand:'Logitech',model:'G Pro X',object:'headset',category:'electronics',retailCategory:'electronics',visibleText:['LOGITECH','G PRO X'],confidence:.9}]);assert.equal(result.name,'headphones');assert.equal(result.object,'headphones');assert.equal(result.brand,'');assert.equal(result.model,'');assert.equal(result.searchQuery,'headphones');assert.equal(result.identityScope,'product-family');assert.equal(result.requiresModelConfirmation,true);assert.equal(result.identificationMethod,'single-provider-product-family');assert.deepEqual(result.visibleText,[]);});
+test('a lone vague product claim is still rejected instead of being promoted to a product family',()=>{assert.equal(reconcileVision([{name:'product',brand:'Example',model:'Model X',object:'product',category:'product'}]),null)});
