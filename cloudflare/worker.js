@@ -20,6 +20,7 @@ import { visualProductCandidates } from '../lib/visual-product-candidates.js';
 import { answerFromEvidence } from '../lib/assistant-answer.js';
 import { reconcileVision } from '../lib/vision-consensus.js';
 import { branchHours } from '../lib/store-hours.js';
+import { verifiedPricedOffers } from '../lib/verified-priced-offers.js';
 import productIntelligenceCore, { ident as commerceIdent, productFamily, productVariantConflict, identityMatches, structuredProduct, structuredProductNodes, retailerCandidateUrls, structuredIdentityScore } from '../lib/product-intelligence-core.js';
 const MAX_IMAGE_BYTES = 8 * 1024 * 1024;
 const HF_MODELS = ['CohereLabs/aya-vision-32b:cohere','CohereLabs/command-a-vision-07-2025:cohere'];
@@ -261,7 +262,7 @@ async function computeProductIntelligence(request,body,query,env){
   catch(e){console.error('Cloudflare commerce',e);return json({ok:true,matched:false,offers:[],retailerStatus:[],webRetailers:[],error:'Retailer discovery temporarily unavailable'},200)}
   // A retailer page can confirm the product without confirming a price or branch stock.
   // Never present missing-price listings as verified priced offers.
-  if(Array.isArray(payload?.offers))payload.offers=payload.offers.map(offer=>{if(!offer||typeof offer!=='object')return offer;const price=Number(offer.price),hasPrice=Number.isFinite(price)&&price>0;return hasPrice?offer:{...offer,verified:false,price:null,branchPriceVerified:false,directionsAvailable:false}});
+  if(Array.isArray(payload?.offers))payload.offers=verifiedPricedOffers(payload.offers);
   return new Response(JSON.stringify(payload??{}),{status,headers:{'content-type':'application/json; charset=utf-8','access-control-allow-origin':'*','cache-control':'no-store'}})
 }
 
