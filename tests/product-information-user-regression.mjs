@@ -43,8 +43,8 @@ try{
   await page.locator('#finditExactShell button[data-fx="product"]:visible').first().click();
   await page.locator('#fxStableModal:not(.hidden)').waitFor({state:'visible',timeout:10000});
   const text=await page.locator('#fxStableBody').innerText();
-  for(const wanted of ['Exact model not confirmed yet','general product-type overview only','headphones','Confirm the exact model'])if(!text.includes(wanted))throw Error('Partial identity notice lost '+wanted);
-  if(text.includes('Possible product: Example Audio A2 Headset')||text.includes('Listing price:')||text.includes('750'))throw Error('Unconfirmed visual hypothesis was presented as a product listing');
+  for(const wanted of ['Exact model not confirmed yet','Category overview','headphones','What to check on the exact model','Connection: Bluetooth, USB, 3.5 mm, or a combination','Microphone: built-in, detachable, or not included','Not yet verified from this photo','How to confirm the model','underside of the headband'])if(!text.includes(wanted))throw Error('Partial identity notice lost '+wanted);
+  if(text.includes('Possible product: Example Audio A2 Headset')||text.includes('Listing price:')||text.includes('750')||text.includes('No product-specific advantages have been verified yet.'))throw Error('Unconfirmed visual hypothesis was presented as a product listing');
   const selected=await page.evaluate(()=>window.finditState.result.identification);
   if(selected.brand||selected.model||selected.userConfirmed||!selected.requiresModelConfirmation)throw Error('A visual hypothesis became a confirmed identity');
   console.log('UNCONFIRMED_MODEL_SAFE_FALLBACK_PASS',width);await page.close();
@@ -88,7 +88,7 @@ try{
   await page.locator('#fxStableModal:not(.hidden)').waitFor({state:'visible',timeout:10000});
   const text=await page.locator('#fxStableBody').innerText();
   if(!text.includes('Exact model not confirmed yet')||text.includes('Yes, this is my product')||text.includes('750')||text.includes('The latest source refresh is temporarily unavailable.'))throw Error('Unconfirmed candidate was promoted or exposed stale commerce data');
-  if(!text.includes('general product-type overview only'))throw Error('Safe fallback information was missing');
+  if(!text.includes('What to check on the exact model')||!text.includes('Not yet verified from this photo'))throw Error('Useful category guidance was missing');
   console.log('UNCONFIRMED_CANDIDATE_SAFE_FALLBACK_PASS',width);await page.close();
  }
 }finally{await browser.close();}
